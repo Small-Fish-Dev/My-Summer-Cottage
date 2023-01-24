@@ -14,10 +14,15 @@ public partial class Player
 	/// <summary>
 	/// The collider used for player's movement collisions.
 	/// </summary>
-	public BBox CollisionBox { get; } = new BBox( 
+	public BBox CollisionBox => new BBox( 
 		new Vector3( -16, -16, 0 ), 
-		new Vector3( 16, 16, 72 ) 
-	); 
+		new Vector3( 16, 16, Ducking ? 32 : 64 ) 
+	);
+
+	/// <summary>
+	/// A boolean determining if the player is ducked or not.
+	/// </summary>
+	public bool Ducking { get; private set; } = false;
 
 	// Private fields
 	private float stepSize => 8f;
@@ -31,13 +36,19 @@ public partial class Player
 	/// <param name="cl"></param>
 	protected void MoveSimulate( IClient cl )
 	{
+		// Handle ducking.
+		Ducking = Input.Down( InputButton.Duck );
+
 		// Handle the player's wish velocity.
 		var eyeRotation = ViewAngles.WithPitch( 0 ).ToRotation();
 		WishVelocity = (InputDirection 
 			* eyeRotation).Normal.WithZ( 0 );
 
 		// Calculate velocity.
-		var targetVelocity = WishVelocity * walkSpeed;
+		var targetVelocity = WishVelocity 
+			* walkSpeed 
+			* (Ducking ? 0.5f : 1f);
+
 		Velocity = Vector3.Lerp( Velocity, targetVelocity, 10f * Time.Delta )
 			.WithZ( Velocity.z );
 

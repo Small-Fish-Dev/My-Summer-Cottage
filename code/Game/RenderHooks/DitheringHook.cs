@@ -11,7 +11,6 @@ public class DitheringHook : RenderHook
 		var attributes = new RenderAttributes();
 
 		Graphics.GrabFrameTexture( "ColorBuffer", attributes );
-		Graphics.RenderTarget = null;
 		Graphics.Blit( mat, attributes );
 	}
 }
