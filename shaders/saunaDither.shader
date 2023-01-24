@@ -67,9 +67,9 @@ PS
 
     float4 MainPs( PS_INPUT i ) : SV_Target0
     { 	
-        float2 amount = g_vViewportSize.xy / 4;
-        float2 coords = round( i.vPositionSs.xy / g_vViewportSize.xy * amount ) / amount;
-        float4 col = Tex2D( g_tColorBuffer, coords.xy ).rgba;
+        //float2 amount = g_vViewportSize.xy / 1;
+        //float2 coords = round( i.vPositionSs.xy / g_vViewportSize.xy * amount ) / amount;
+        float4 col = Tex2D( g_tColorBuffer, i.vPositionSs.xy / g_vViewportSize.xy ).rgba;
 
         return dither( col, i.vPositionSs.x / 2, i.vPositionSs.y / 2, 64 );
     }
