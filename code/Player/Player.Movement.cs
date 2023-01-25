@@ -1,6 +1,6 @@
 ﻿namespace Sauna;
 
-public partial class Player
+partial class Player
 {
 	// Client Inputs
 	[ClientInput] public Vector3 InputDirection { get; protected set; }
@@ -94,6 +94,10 @@ public partial class Player
 	{
 		// Handle the client's inputs.
 		InputDirection = Input.AnalogMove;
-		ViewAngles = (ViewAngles + Input.AnalogLook).Normal;
+
+		var ang = (ViewAngles + Input.AnalogLook);
+		ViewAngles = ang
+			.WithPitch( MathX.Clamp( ang.pitch, -90, 90 ) )
+			.Normal;
 	}
 }
