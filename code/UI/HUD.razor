@@ -1,0 +1,52 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits RootPanel
+
+<style>
+	HUD {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+		color: white;
+		font-family: Retro-Gaming;
+		text-shadow: 2px 2px 2px black;
+		text-stroke: 2px black;
+	}
+
+	.wip {
+		position: absolute;
+		width: 100%;
+		bottom: 20px;
+		justify-content: center;
+		font-size: 18px;
+		opacity: 0.5;
+	}
+</style>
+
+<root>
+	<experienceDisplay />
+	<panel class="wip">
+		This gamemode is still a work in progress.
+	</panel>
+</root>
+
+@code {
+	public static HUD Instance { get; private set; }
+
+	public HUD()
+	{
+		Instance?.Delete( true );
+		Instance = this;
+	}
+
+	[Event.Hotload]
+	private static void Refresh()
+	{
+		if ( Game.IsClient )
+			new HUD();
+	}
+}

@@ -16,6 +16,9 @@ public partial class Sauna : BaseGameManager
 	public Sauna()
 	{
 		Instance = this;
+
+		if ( Game.IsClient )
+			_ = new HUD();
 	}
 
 	public override void ClientJoined( IClient client )

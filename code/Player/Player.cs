@@ -1,6 +1,6 @@
 ﻿namespace Sauna;
 
-partial class Player : AnimatedEntity
+public partial class Player : AnimatedEntity
 {
 	public override void Spawn()
 	{
@@ -16,6 +16,11 @@ partial class Player : AnimatedEntity
 	{
 		// Simulate the player's movement.
 		MoveSimulate( cl );
+
+		if ( Game.IsServer && Input.Pressed( InputButton.PrimaryAttack ) )
+		{
+			Experience = Game.Random.Int( 100 );
+		}
 	}
 
 	public override void FrameSimulate( IClient cl )

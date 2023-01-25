@@ -1,0 +1,78 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Panel
+
+<style>
+	$height: 226px;
+	$ratio: 0.221;
+
+	.experience-display {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		height: $height;
+		aspect-ratio: $ratio;
+		transition: right 0.3s ease-in-out;
+
+		&.hidden {
+			right: -100%;
+		}
+
+		.background {
+			width: 100%;
+			height: 100%;
+			background-size: 100% $height;
+			background-repeat: no-repeat;
+			image-rendering: point;
+			background-position-x: left;
+            background-position-y: bottom;
+		}
+
+		.thermometer {
+			position: absolute;
+			background-image: url(ui/thermometer.png);
+
+			.mercury {
+				position: absolute;
+				bottom: 0px;
+				transition: height 0.5s bounce-in-out;
+				background-image: url(ui/thermometer_mercury.png);
+			}
+		}
+	}
+</style>
+
+<root class="experience-display @(!Active ? "hidden" : "")">
+	<panel class="thermometer background">
+		<panel class="mercury background"
+			   style="height: @(MathF.Floor( ((Game.LocalPawn as Player)?.Progress ?? 0f) * 100f))%;" 
+		/>
+	</panel>
+</root>
+
+@code {
+	private static ExperienceDisplay instance;
+
+	private float delay => 3f;
+	private TimeSince lastActive;
+	public bool Active => lastActive < delay;
+
+	public ExperienceDisplay()
+	{
+		instance = this;
+	}
+
+	public static void OnChange( int amount )
+	{
+		instance.lastActive = 0f;
+
+		// TODO: maybe add xp text popup?
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Active ? lastActive.ToString() : "" );
+	}
+}
