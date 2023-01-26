@@ -17,5 +17,5 @@ partial class Player
 	public float Progress => experience / 100f;
 
 	void onExperience( int previous, int current )
-		=> ExperienceDisplay.OnChange( current - previous );
+		=> Thermometer.OnChange( current - previous );
 }

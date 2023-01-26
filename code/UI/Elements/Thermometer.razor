@@ -53,13 +53,13 @@
 </root>
 
 @code {
-	private static ExperienceDisplay instance;
+	private static Thermometer instance;
 
 	private float delay => 3f;
 	private TimeSince lastActive;
 	public bool Active => lastActive < delay;
 
-	public ExperienceDisplay()
+	public Thermometer()
 	{
 		instance = this;
 	}
