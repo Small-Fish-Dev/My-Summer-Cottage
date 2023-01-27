@@ -10,20 +10,57 @@
 		width: 100%;
 		top: 10px;
 		justify-content: center;
+		opacity: 0.75;
 
 		.container {
-			width: 500px;
-			height: 40px;
-			background-color: red;
+			width: 600px;
+			height: 50px;
+			justify-content: center;
+			align-items: center;
+
+			.background {
+				position: absolute;
+				left: 0px;
+				top: 10px;
+				width: 100%;
+				height: 30px;
+				background-size: 2400px 100%;
+				background-repeat: repeat-x;
+				background-image: url(ui/compass.png);
+				image-rendering: point;
+			}
+
+			.center {
+				width: 30px;
+				height: 100%;
+				background-image: url(ui/compass_center.png);
+				background-size: 100%;
+				background-repeat: no-repeat;
+				opacity: 0.5;
+			}
 		}
 	}
 </style>
 
 <root class="compass">
 	<panel class="container">
+		@{
+			var ang = ((Game.LocalPawn as Player)?.ViewAngles.yaw + 180f) ?? 0f; // Convert the angle to 0 - 360 format.
+			var width = 2400f * ScaleToScreen;
 
+			<panel 
+				class="background" 
+				style="background-position-x: @(-width + width * ang / 360f)px" 
+			/>
+		}
+
+		<panel class="center" />
 	</panel>
 </root>
 
 @code {
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Time.Now.ToString() );
+	}
 }
