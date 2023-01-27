@@ -10,6 +10,8 @@ public partial class Player : AnimatedEntity
 		EnableDrawing = true;
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
+
+		Sound.FromScreen( "sounds/music/finnish_boomer_music.sound" );
 	}	
 
 	public override void Simulate( IClient cl )
