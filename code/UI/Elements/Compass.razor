@@ -61,6 +61,6 @@
 @code {
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( Time.Now.ToString() );
+		return HashCode.Combine( (Game.LocalPawn as Player)?.ViewAngles.yaw );
 	}
 }
