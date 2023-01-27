@@ -1,4 +1,5 @@
 ﻿global using Sandbox;
+global using Sandbox.Internal;
 global using Sandbox.UI;
 global using Sandbox.UI.Construct;
 global using System;

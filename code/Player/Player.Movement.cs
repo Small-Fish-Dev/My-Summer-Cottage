@@ -27,7 +27,7 @@ partial class Player
 	// Private fields
 	private float stepSize => 8f;
 	private float walkSpeed => 150f;
-	private float maxStandableAngle => 60f;
+	private float maxStandableAngle => 45f;
 	private Vector3 gravity => Vector3.Down * 650f;
 
 	/// <summary>
@@ -38,6 +38,11 @@ partial class Player
 	{
 		// Handle ducking.
 		Ducking = Input.Down( InputButton.Duck );
+
+		// Handle rotation.
+		var yawAngles = new Angles( 0, ViewAngles.yaw, 0 );
+		Rotation = Angles.Lerp( Rotation.Angles(), yawAngles, 10f * Time.Delta )
+			.ToRotation();
 
 		// Handle the player's wish velocity.
 		var eyeRotation = ViewAngles.WithPitch( 0 ).ToRotation();
@@ -68,13 +73,16 @@ partial class Player
 		helper.TryUnstuck();
 		helper.TryMoveWithStep( Time.Delta, stepSize );
 
+		if ( helper.HitWall )
+			helper.ApplyFriction( 5f, Time.Delta );
+
 		Position = helper.Position;
 		Velocity = helper.Velocity;
 
 		// Check for ground collision.
 		if ( Velocity.z <= stepSize )
 		{
-			var tr = helper.TraceDirection( Vector3.Down );
+			var tr = helper.TraceDirection( Vector3.Down * 2f );
 			GroundEntity = tr.Entity;
 
 			// Move to the ground if there is something.

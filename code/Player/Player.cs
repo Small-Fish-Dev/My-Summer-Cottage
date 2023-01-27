@@ -4,14 +4,14 @@ public partial class Player : AnimatedEntity
 {
 	public override void Spawn()
 	{
-		SetModel( "models/sbox_props/watermelon/watermelon.vmdl" );
+		SetModel( "models/guy/guy.vmdl" );
 		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, CollisionBox.Mins, CollisionBox.Maxs );
 
 		EnableDrawing = true;
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
 
-		Sound.FromScreen( "sounds/music/finnish_boomer_music.sound" );
+		//Sound.FromScreen( "sounds/music/finnish_boomer_music.sound" );
 	}	
 
 	public override void Simulate( IClient cl )
