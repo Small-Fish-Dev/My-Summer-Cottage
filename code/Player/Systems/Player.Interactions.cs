@@ -61,14 +61,14 @@ partial class Player : IInteractable
 				var list = interaction.Value;
 
 				foreach ( var info in list )
-					if ( interactions.ContainsKey( button ) )
-						break;
-					else if ( info.Predicate( this ) )
+					if ( info.Predicate( this ) )
 					{
 						interactions.Add( button, info );
 
 						if ( Input.Pressed( button ) )
 							info.Function( this );
+
+						break;
 					}
 			}
 		}
