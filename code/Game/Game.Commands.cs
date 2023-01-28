@@ -9,7 +9,7 @@ partial class Sauna
 			return;
 
 		var model = Model.Load( path );
-		if ( model.Name == "models/dev/error.vmdl" )
+		if ( model == null || model.Name == "models/dev/error.vmdl" )
 		{
 			Log.Error( $"Couldn't load the model: {path}" );
 			return;
@@ -28,5 +28,14 @@ partial class Sauna
 		entity.Model = model;
 		entity.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 		entity.Position = trace.EndPosition;
+	}
+
+	[ConCmd.Server( "give_exp" )]
+	public static void GiveExperience( int amount )
+	{
+		if ( ConsoleSystem.Caller?.Pawn is not Player pawn )
+			return;
+
+		pawn.Experience += amount;
 	}
 }
