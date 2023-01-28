@@ -2,6 +2,8 @@
 
 partial class Player : IInteractable
 {
+	string IInteractable.DisplayTitle => (Client)?.Name ?? "Unknown";
+
 	public Player()
 	{
 		var interactable = this as IInteractable;

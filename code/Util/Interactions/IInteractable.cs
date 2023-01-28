@@ -5,6 +5,11 @@ public interface IInteractable
 	private readonly static Dictionary<IInteractable, Dictionary<InputButton, List<InteractionInfo>>> all = new();
 
 	/// <summary>
+	/// The displayed title of this interactable.
+	/// </summary>
+	public string DisplayTitle => "";
+
+	/// <summary>
 	/// All interactions of this interactable
 	/// </summary>
 	public Dictionary<InputButton, List<InteractionInfo>> All => Get( this );

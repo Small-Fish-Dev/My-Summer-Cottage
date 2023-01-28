@@ -1,0 +1,40 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Panel
+
+<style>
+	.interaction-hint {
+		
+	}
+</style>
+
+<root></root>
+
+@code {
+	public override void Tick()
+	{
+		if ( Game.LocalPawn is not Player pawn ) 
+			return;
+
+		var interactable = pawn.Interactable;
+		if ( interactable is not ModelEntity entity ) 
+			return;
+
+		var pos3 = entity.CollisionWorldSpaceCenter.ToScreen();
+		var pos = new Vector2( pos3.x, pos3.y ) * Screen.Size;
+		var line = 1;
+
+		DebugOverlay.ScreenText( $"{interactable.DisplayTitle} ->", pos, 0, Color.Orange );
+
+		foreach ( var interaction in pawn.Interactions )
+		{
+			var button = interaction.Key;
+			var info = interaction.Value;
+
+			DebugOverlay.ScreenText($"  {Input.GetButtonOrigin(interaction.Key)} -> {info.Text}", pos, line, Color.White );
+			line++;
+		}
+	}
+}
