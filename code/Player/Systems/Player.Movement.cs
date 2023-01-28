@@ -16,7 +16,7 @@ partial class Player
 	/// </summary>
 	public BBox CollisionBox => new BBox( 
 		new Vector3( -16, -16, 0 ), 
-		new Vector3( 16, 16, Ducking ? 32 : 64 ) 
+		new Vector3( 16, 16, Ducking ? 40 : 68 ) 
 	);
 
 	/// <summary>
