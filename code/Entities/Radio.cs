@@ -2,8 +2,6 @@
 
 public partial class Radio : ModelEntity, IInteractable
 {
-	string IInteractable.DisplayTitle => "Mankka";
-
 	public struct Song
 	{
 		public string Producer;
@@ -11,28 +9,39 @@ public partial class Radio : ModelEntity, IInteractable
 		public string Path;
 	}
 
+	public TimeSince? ElapsedTime { get; private set; }
+
+	string IInteractable.DisplayTitle => "Mankka";
+
+	private static string[] songFromPath( string path )
+		=> path
+			.Substring( 0, path.Length - 6 )
+			.Replace( '_', ' ' )
+			.Split( "-" );
+
 	List<Song> sounds = FileSystem.Mounted.FindFile( "sounds/music/" )
 		.Where( file => file.EndsWith( ".sound" ) )
 		.Select( path =>
 		{
-			var separate = path
-				.Substring( 0, path.Length - 6 )
-				.Replace( '_', ' ' )
-				.Split( "-" );
+			var name = path.Substring( 0, path.Length - 6 );
+			var separate = songFromPath( path );
 			
 			return new Song 
 			{ 
 				Producer = separate[0],
 				Name = separate[1],
-				Path = $"sounds/music/{path}",
+				Path = $"sounds/music/{name}.vsnd",
 			};
 		} )
 		.ToList();
 
 	Sound? sound;
-	Song? current;
+	SoundStream stream;
+	SoundFile currentFile;
 
-	public bool Playing => sound != null;
+	TimeSince lastWritten;
+	int offset;
+	short[] samples;
 
 	public Radio()
 	{
@@ -45,7 +54,7 @@ public partial class Radio : ModelEntity, IInteractable
 			{
 				if ( Game.IsClient ) return;
 				
-				if ( Playing )
+				if ( ElapsedTime != null )
 				{
 					Stop();
 					return;
@@ -71,31 +80,68 @@ public partial class Radio : ModelEntity, IInteractable
 	{
 		Game.AssertServer();
 
-		sound?.Stop();
-		sound = null;
-		current = null;
+		ElapsedTime = null;
+
+		// Stop playing song on client.
+		playOnClient( To.Everyone, "", 0f );
 	}
 
 	/// <summary>
 	/// Play a song.
 	/// </summary>
 	/// <param name="song"></param>
-	public void Play( Song song )
+	/// <param name="target"></param>
+	public void Play( Song song, To? target = null )
 	{
 		Game.AssertServer();
 
-		Stop();
-		current = song;
-		sound = Sound.FromEntity( song.Path, this );
+		ElapsedTime = 0f;
+
+		// Load file on client and start playing at desired time.
+		playOnClient( target ?? To.Everyone, song.Path, 0f );
 	}
 
-	[Event.Tick.Server]
+	[ClientRpc]
+	private async void playOnClient( string path, float elapsedTime )
+	{
+		sound?.Stop();
+		stream?.Delete();
+
+		if ( path == "" )
+			return;
+
+		sound = Sound.FromEntity( "audiostream.default", this );
+
+		currentFile = SoundFile.Load( path );
+		var loaded = await currentFile.LoadAsync();
+		samples = await currentFile.GetSamplesAsync();
+		stream = sound?.CreateStream(); // TODO: Please.... Work...............
+		offset = (int)(elapsedTime * currentFile.Rate);
+	}
+
+	[Event.Tick]
 	void tick()
 	{
-		if ( sound != null && (sound?.Finished ?? false) )
+		if ( stream == null || sound == null || !stream.IsValid() )
+			return;
+
+		var delay = (float)stream.MaxWriteSampleCount / sizeof( short ) / 44100;
+		if ( lastWritten >= delay )
 		{
-			var random = sounds[Game.Random.Int( sounds.Count - 1 )];
-			Play( random );
+			var buffer = new short[stream.MaxWriteSampleCount];
+			for ( int i = 0; i < buffer.Length; i++ )
+				if ( offset + i > samples.Length - 1 )
+				{
+					break;
+				}
+				else
+				{
+					buffer[i] = samples[i + offset];
+				}
+
+			stream?.WriteData( buffer.AsSpan() );
+			offset += buffer.Length;
+			lastWritten = 0f;
 		}
 	}
 }
