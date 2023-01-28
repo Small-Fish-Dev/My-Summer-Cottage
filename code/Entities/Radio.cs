@@ -40,8 +40,7 @@ public partial class Radio : ModelEntity, IInteractable
 	SoundFile currentFile;
 
 	TimeSince lastWritten;
-	int offset;
-	short[] samples;
+	private MemoryStream currentSongStream;
 
 	public Radio()
 	{
@@ -114,34 +113,51 @@ public partial class Radio : ModelEntity, IInteractable
 
 		currentFile = SoundFile.Load( path );
 		var loaded = await currentFile.LoadAsync();
-		samples = await currentFile.GetSamplesAsync();
-		stream = sound?.CreateStream(); // TODO: Please.... Work...............
-		offset = (int)(elapsedTime * currentFile.Rate);
+
+		stream = sound?.CreateStream(44100, 1); // TODO: Please.... Work...............
+		var songStream = new MemoryStream(stream.MaxWriteSampleCount);
+		var samples = await currentFile.GetSamplesAsync();
+		Log.Error($"{samples.Length}");
+		// TODO: when this shite gets whitelisted
+		//var samplesBytes = new byte[samples.Length * 2];
+		//Buffer.BlockCopy(samples, 0, samplesBytes, 0, samplesBytes.Length);
+		// TODO: or...
+		//await using (var bw = new BinaryWriter(currentSongStream))
+		//	foreach (var sample in samples)
+		//		bw.Write(sample);
+		foreach (var sample in samples)
+		{
+			songStream.WriteByte((byte) (sample & 0xFF));
+			songStream.WriteByte((byte) (sample >> 8));
+		}
+		Log.Error($"{songStream.Length}");
+		songStream.Position = 0;
+		currentSongStream = songStream;
 	}
 
 	[Event.Tick]
 	void tick()
 	{
-		if ( stream == null || sound == null || !stream.IsValid() )
+		if ( stream == null || sound == null || !stream.IsValid() || currentSongStream == null )
 			return;
 
-		var delay = (float)stream.MaxWriteSampleCount / sizeof( short ) / 44100;
-		if ( lastWritten >= delay )
+		var delay = (float)stream.MaxWriteSampleCount / 44100 / 2; // 1 channel and 44100 sample rate, but give the room for two sample writes to avoid hiccups
+		if (lastWritten < delay) return;
+		
+		var buffer = new short[stream.MaxWriteSampleCount - stream.QueuedSampleCount];
+		var br = new BinaryReader(currentSongStream); // WARNING: `using` disposes the stream!
+		try
 		{
-			var buffer = new short[stream.MaxWriteSampleCount];
-			for ( int i = 0; i < buffer.Length; i++ )
-				if ( offset + i > samples.Length - 1 )
-				{
-					break;
-				}
-				else
-				{
-					buffer[i] = samples[i + offset];
-				}
-
-			stream?.WriteData( buffer.AsSpan() );
-			offset += buffer.Length;
-			lastWritten = 0f;
+			for (var i = 0; i < buffer.Length; i++)
+				buffer[i] = br.ReadInt16();
 		}
+		catch (EndOfStreamException e)
+		{
+			Log.Info("The end of song!");
+			currentSongStream = null;
+		}
+
+		stream.WriteData( buffer );
+		lastWritten = 0f;
 	}
 }
