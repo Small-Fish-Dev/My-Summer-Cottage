@@ -51,7 +51,7 @@ partial class Player
 
 		// Calculate velocity.
 		var targetVelocity = WishVelocity 
-			* walkSpeed 
+			* (walkSpeed * (Input.Down( InputButton.Run ) ? 5 : 1) )
 			* (Ducking ? 0.5f : 1f);
 
 		Velocity = Vector3.Lerp( Velocity, targetVelocity, 10f * Time.Delta )

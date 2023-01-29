@@ -17,7 +17,8 @@ FEATURES
 MODES
 {
 	ToolsVis( S_MODE_TOOLS_VIS );
-   	Default();
+	Depth( "depth_only.shader" );  
+	ToolsShadingComplexity( "tools_shading_complexity.shader" );
 	VrForward();
 }
 
@@ -54,15 +55,15 @@ VS
 	{
 		PixelInput o = ProcessVertex( i );
 
-        float3 vPositionWs = o.vPositionWs.xyz;
+        /*float3 vPositionWs = o.vPositionWs.xyz;
         float4 pPos = Position3WsToPs( vPositionWs.xyz );
 		float4 vertex = pPos;
 		vertex.xyz = pPos.xyz / pPos.w;
 		vertex.x = floor( 240 * vertex.x ) / 240;
 		vertex.y = floor( 240 * vertex.y ) / 240;
 		vertex.xyz *= pPos.w;
-        
-        o.vPositionPs = vertex;
+
+		o.vPositionPs = vertex;*/
 
 		return FinalizeVertex( o );
 	}
@@ -86,6 +87,7 @@ PS
 
     CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Material,10/20", Default3( 0.5, 0.5, 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
+
 
 	//
 	// Main
