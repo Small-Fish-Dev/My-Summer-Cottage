@@ -135,6 +135,15 @@ public partial class Radio : ModelEntity, IInteractable
 		currentSongStream = songStream;
 	}
 
+	protected override void OnDestroy()
+	{
+		if ( !Game.IsClient )
+			return;
+
+		sound?.Stop();
+		stream?.Delete();
+	}
+
 	[Event.Tick]
 	void tick()
 	{
