@@ -7,6 +7,8 @@ public class DitheringHook : RenderHook
 	{
 		if ( stage != Stage.AfterUI ) return;
 
+		Order = 1;
+
 		var mat = Material.FromShader( "shaders/saunadither.shader" );
 		var attributes = new RenderAttributes();
 
