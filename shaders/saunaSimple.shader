@@ -16,10 +16,9 @@ FEATURES
 //=========================================================================================================================
 MODES
 {
-	ToolsVis( S_MODE_TOOLS_VIS );
-	Depth( "depth_only.shader" );  
-	ToolsShadingComplexity( "tools_shading_complexity.shader" );
 	VrForward();
+	ToolsVis( S_MODE_TOOLS_VIS );
+	Depth( S_MODE_DEPTH );
 }
 
 //=========================================================================================================================
@@ -55,7 +54,7 @@ VS
 	{
 		PixelInput o = ProcessVertex( i );
 
-        /*float3 vPositionWs = o.vPositionWs.xyz;
+        float3 vPositionWs = o.vPositionWs.xyz;
         float4 pPos = Position3WsToPs( vPositionWs.xyz );
 		float4 vertex = pPos;
 		vertex.xyz = pPos.xyz / pPos.w;
@@ -63,7 +62,7 @@ VS
 		vertex.y = floor( 240 * vertex.y ) / 240;
 		vertex.xyz *= pPos.w;
 
-		o.vPositionPs = vertex;*/
+		o.vPositionPs = vertex;
 
 		return FinalizeVertex( o );
 	}
@@ -73,6 +72,8 @@ VS
 
 PS
 {    
+	StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );
+	
     #include "sbox_pixel.fxc"
 
     #include "common/pixel.config.hlsl"
@@ -88,13 +89,16 @@ PS
     CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Material,10/20", Default3( 0.5, 0.5, 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
 
-
 	//
 	// Main
 	//
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-        float2 UV = i.vTextureCoords.xy;
+		float2 UV = i.vTextureCoords.xy;
+
+ 		#if( S_MODE_DEPTH )
+			return float4( 1, 0, 0, 1 );
+        #endif
 
         Material m;
         m.Albedo = Tex2DS( g_tColor, TextureFiltering, UV.xy ).rgb;
@@ -106,9 +110,8 @@ PS
         m.Opacity = 1;
         m.Emission = 0;
         m.Transmission = 1;
-
+	
 		ShadingModelValveStandard sm;
-
 		return FinalizePixelMaterial( i, m, sm );
 	}
 }
