@@ -4,6 +4,9 @@ Layer0
 {
 	shader "shaders/saunawater.shader"
 
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
 	g_flDirectionalLightmapMinZ "0.050"
 	g_flDirectionalLightmapStrength "1.000"
 
@@ -11,5 +14,5 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	Normal "materials/default/default_normal.tga"
+	Normal "materials/water/water_normal.png"
 }
