@@ -1,29 +1,34 @@
 ﻿namespace Sauna;
 
 [HammerEntity]
-public partial class Water : BaseTrigger
+public partial class SaunaWater : BaseTrigger
 {
-
-	public Water() { }
+	/// <summary>
+	/// Gets the wave offset, same math as shader.
+	/// </summary>
+	/// <param name="position"></param>
+	/// <returns></returns>
+	public float WaveOffset( Vector3 position )
+		=> 4f * MathF.Sin( (Position.x - position.x) * 10f + Time.Now );
 
 	public override void Spawn()
 	{
-		Log.Info( "hiii" );
+		SetupPhysicsFromModel( PhysicsMotionType.Static );
 	}
 
 	public override void StartTouch( Entity other )
 	{
 		base.StartTouch( other );
-		Log.Info( other );
+
 		if ( other is not Player player ) return;
-		player.Swimming = true;
+		player.Water = this;
 	}
 
-	public override void OnTouchEnd( Entity toucher )
+	public override void OnTouchEnd( Entity other )
 	{
-		base.OnTouchEnd( toucher );
+		base.OnTouchEnd( other );
 
-		if ( toucher is not Player player ) return;
-		player.Swimming = false;
+		if ( other is not Player player ) return;
+		player.Water = null;
 	}
 }
