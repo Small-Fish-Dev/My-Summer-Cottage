@@ -110,9 +110,9 @@ PS
 		float2 UV = i.vTextureCoords.xy - float2( time / 2 + sine, sine / 2 );
 
         Material m;
-        m.Albedo = float3( 0.05, 0.1, 0.15 );
+        m.Albedo = float3( 0.01, 0.03, 0.08 );
         m.Normal = TransformNormal( i, DecodeNormal( Tex2DS( g_tNormal, TextureFiltering, UV.xy ).rgb ) );
-        m.Roughness = 0.5;
+        m.Roughness = 0.7;
         m.Metalness = 0;
         m.AmbientOcclusion = 1;
         m.TintMask = 1;
@@ -123,7 +123,7 @@ PS
 		ShadingModelValveStandard sm;
         float4 result = FinalizePixelMaterial( i, m, sm );
 
-        result.a = 0.8;
+        result.a = 0.95;
 
 		return result;
 	}
