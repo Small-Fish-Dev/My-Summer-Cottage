@@ -53,7 +53,7 @@ partial class Player
 		var eyeRotation = ViewAngles.WithPitch( 0 ).ToRotation();
 		WishVelocity = (InputDirection
 			* eyeRotation).Normal.WithZ( 0 );
-		Log.Error( Water != null );
+
 		// Calculate velocity.
 		var targetVelocity = WishVelocity
 			* (walkSpeed * (Input.Down( InputButton.Run ) ? 5 : 1))
@@ -62,7 +62,7 @@ partial class Player
 		Velocity = Vector3.Lerp( Velocity, targetVelocity, 10f * Time.Delta )
 			.WithZ( Velocity.z );
 
-		if ( Water == null && GroundEntity == null )
+		if ( GroundEntity == null )
 			Velocity += gravity * Time.Delta;
 
 		// Initialize MoveHelper.
@@ -81,8 +81,8 @@ partial class Player
 		if ( helper.HitWall )
 			helper.ApplyFriction( 5f, Time.Delta );
 
-		var floatOffset = (Water != null && GroundEntity == null) ? Water.WaveOffset( helper.Position ) * Vector3.Up : 0;
-		Position = helper.Position + floatOffset;
+		Position = helper.Position
+			.WithZ( Water != null ? MathF.Max( Water.Position.z + 80, helper.Position.z ) : helper.Position.z );
 		Velocity = helper.Velocity;
 
 		// Check for ground collision.
