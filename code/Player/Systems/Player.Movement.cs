@@ -24,6 +24,11 @@ partial class Player
 	/// </summary>
 	public bool Ducking { get; private set; } = false;
 
+	/// <summary>
+	/// Is the player in a water entity?
+	/// </summary>
+	public SaunaWater Water { get; set; } = null;
+
 	// Private fields
 	private float stepSize => 8f;
 	private float walkSpeed => 150f;
@@ -37,7 +42,7 @@ partial class Player
 	protected void MoveSimulate( IClient cl )
 	{
 		// Handle ducking.
-		Ducking = Input.Down( InputButton.Duck );
+		Ducking = Water == null && Input.Down( InputButton.Duck );
 
 		// Handle rotation.
 		var yawAngles = new Angles( 0, ViewAngles.yaw, 0 );
@@ -46,12 +51,12 @@ partial class Player
 
 		// Handle the player's wish velocity.
 		var eyeRotation = ViewAngles.WithPitch( 0 ).ToRotation();
-		WishVelocity = (InputDirection 
+		WishVelocity = (InputDirection
 			* eyeRotation).Normal.WithZ( 0 );
 
 		// Calculate velocity.
-		var targetVelocity = WishVelocity 
-			* walkSpeed 
+		var targetVelocity = WishVelocity
+			* (walkSpeed * (Water == null && Input.Down( InputButton.Run ) ? 5 : 1))
 			* (Ducking ? 0.5f : 1f);
 
 		Velocity = Vector3.Lerp( Velocity, targetVelocity, 10f * Time.Delta )
@@ -60,24 +65,26 @@ partial class Player
 		if ( GroundEntity == null )
 			Velocity += gravity * Time.Delta;
 
-		// Move the player using the MoveHelper struct.
-		var helper = new MoveHelper( Position, Velocity ) 
-		{ 
-			MaxStandableAngle = maxStandableAngle 
+		// Initialize MoveHelper.
+		var helper = new MoveHelper( Position, Velocity )
+		{
+			MaxStandableAngle = maxStandableAngle
 		};
 
+		// Move the player using MoveHelper.
 		helper.Trace = helper.Trace
 			.Size( CollisionBox.Mins, CollisionBox.Maxs )
 			.Ignore( this );
-
 		helper.TryUnstuck();
 		helper.TryMoveWithStep( Time.Delta, stepSize );
 
 		if ( helper.HitWall )
 			helper.ApplyFriction( 5f, Time.Delta );
 
-		Position = helper.Position;
-		Velocity = helper.Velocity;
+		Position = helper.Position
+			.WithZ( Water != null ? MathF.Max( Water.Position.z + 75 + Water.WaveOffset( Position ), helper.Position.z ) : helper.Position.z );
+		Velocity = helper.Velocity
+			.WithZ( Water != null ? 0 : Velocity.z );
 
 		// Check for ground collision.
 		if ( Velocity.z <= stepSize )

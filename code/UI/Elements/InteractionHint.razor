@@ -6,35 +6,76 @@
 
 <style>
 	.interaction-hint {
-		
+		position: absolute;
+		opacity: 0;
+		flex-direction: column;
+		transform: translate(-50%, -50%);
+
+
+		.title {
+			color: orange;
+			margin-bottom: 5px;
+			font-size: 22px;
+		}
+
+		.input-hint {
+			flex-direction: row;
+			font-size: 16px;
+			text-align: center;
+			align-items: center;
+
+			.icon {
+				width: 18px;
+				height: 18px;
+				image-rendering: point;
+				background-size: 100%;
+			}
+		}
+
+		&.visible {
+			opacity: 1;
+		}
 	}
 </style>
 
-<root></root>
-
-@code {
-	public override void Tick()
+<root class="interaction-hint @(interactable == null ? "visible" : "")">
+	@if ( Game.LocalPawn is Player pawn )
 	{
-		if ( Game.LocalPawn is not Player pawn ) 
-			return;
-
-		var interactable = pawn.Interactable;
-		if ( interactable is not ModelEntity entity ) 
-			return;
-
-		var pos3 = entity.CollisionWorldSpaceCenter.ToScreen();
-		var pos = new Vector2( pos3.x, pos3.y ) * Screen.Size;
-		var line = 1;
-
-		DebugOverlay.ScreenText( $"{interactable.DisplayTitle} ->", pos, 0, Color.Orange );
+		interactable = pawn.Interactable;
+		if ( pawn.Interactable == null ) return;
+	
+		<label class="title">@interactable.DisplayTitle</label>
 
 		foreach ( var interaction in pawn.Interactions )
 		{
-			var button = interaction.Key;
-			var info = interaction.Value;
-
-			DebugOverlay.ScreenText($"  {Input.GetButtonOrigin(interaction.Key)} -> {info.Text}", pos, line, Color.White );
-			line++;
+			<panel class="input-hint">
+				<inputglyph class="icon" glyphSize=@InputGlyphSize.Small button=@interaction.Key />
+				<label>@interaction.Value.Text</label>
+			</panel>
 		}
+	}
+</root>
+
+@code {
+	IInteractable? interactable;
+
+	public override void Tick()
+	{
+		if ( interactable is not ModelEntity entity )
+			return;
+
+		var position = entity.CollisionWorldSpaceCenter.ToScreen();
+
+		Style.Left = Length.Fraction( position.x );
+		Style.Top = Length.Fraction( position.y );
+	}
+
+	protected override int BuildHash()
+	{
+		if ( Game.LocalPawn is not Player pawn ) 
+			return 0;
+
+		var interactions = String.Join( " ", pawn.Interactions.Select( pair => pair.Key.ToString() ) );
+		return HashCode.Combine( pawn.Interactable?.DisplayTitle ?? "", interactions );
 	}
 }

@@ -6,10 +6,13 @@ public partial class Player : AnimatedEntity
 	{
 		SetModel( "models/guy/guy.vmdl" );
 		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, CollisionBox.Mins, CollisionBox.Maxs );
+		Tags.Add( "player" );
 
 		EnableDrawing = true;
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
+
+		Position = Entity.All.OfType<SpawnPoint>().FirstOrDefault().Position;
 	}
 
 	public override void Simulate( IClient cl )

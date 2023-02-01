@@ -1,0 +1,27 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Oasis.UI
+@inherits Panel
+
+<root>
+	<image @ref=image />
+</root>
+
+@code {
+	private Image image;
+
+	public InputGlyphSize GlyphSize { get; set; }
+	public InputButton Button { get; set; }
+	public GlyphStyle GlyphStyle { get; set; } = GlyphStyle.Light.WithSolidABXY();
+
+	protected override void OnAfterTreeRender( bool firstTime )
+	{
+		image.Texture = Input.GetGlyph( Button, GlyphSize, GlyphStyle );
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Button, GlyphSize, GlyphStyle, Input.UsingController );		
+	}
+}

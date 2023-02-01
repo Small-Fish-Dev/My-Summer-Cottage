@@ -16,9 +16,9 @@ FEATURES
 //=========================================================================================================================
 MODES
 {
-	ToolsVis( S_MODE_TOOLS_VIS );
-   	Default();
 	VrForward();
+	ToolsVis( S_MODE_TOOLS_VIS );
+	Depth( S_MODE_DEPTH );
 }
 
 //=========================================================================================================================
@@ -61,8 +61,8 @@ VS
 		vertex.x = floor( 240 * vertex.x ) / 240;
 		vertex.y = floor( 240 * vertex.y ) / 240;
 		vertex.xyz *= pPos.w;
-        
-        o.vPositionPs = vertex;
+
+		o.vPositionPs = vertex;
 
 		return FinalizeVertex( o );
 	}
@@ -72,6 +72,8 @@ VS
 
 PS
 {    
+	StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );
+	
     #include "sbox_pixel.fxc"
 
     #include "common/pixel.config.hlsl"
@@ -92,7 +94,11 @@ PS
 	//
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-        float2 UV = i.vTextureCoords.xy;
+		float2 UV = i.vTextureCoords.xy;
+
+ 		#if( S_MODE_DEPTH )
+			return float4( 1, 0, 0, 1 );
+        #endif
 
         Material m;
         m.Albedo = Tex2DS( g_tColor, TextureFiltering, UV.xy ).rgb;
@@ -104,9 +110,8 @@ PS
         m.Opacity = 1;
         m.Emission = 0;
         m.Transmission = 1;
-
+	
 		ShadingModelValveStandard sm;
-
 		return FinalizePixelMaterial( i, m, sm );
 	}
 }
