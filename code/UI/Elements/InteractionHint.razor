@@ -42,8 +42,8 @@
 	@if ( Game.LocalPawn is Player pawn )
 	{
 		interactable = pawn.Interactable;
-		if ( interactable == null ) return;
-
+		if ( pawn.Interactable == null ) return;
+	
 		<label class="title">@interactable.DisplayTitle</label>
 
 		foreach ( var interaction in pawn.Interactions )

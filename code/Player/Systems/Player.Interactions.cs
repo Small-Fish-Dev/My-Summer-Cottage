@@ -61,7 +61,8 @@ partial class Player : IInteractable
 				var list = interaction.Value;
 
 				foreach ( var info in list )
-					if ( info.Predicate( this ) )
+					if ( !info.Equals( default( InteractionInfo ) ) 
+						&& info.Predicate( this ) )
 					{
 						interactions.Add( button, info );
 

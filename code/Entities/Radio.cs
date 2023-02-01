@@ -15,7 +15,7 @@ public partial class Radio : ModelEntity, IInteractable
 	public Song? CurrentSong { get; private set; }
 	public TimeSince? ElapsedTime { get; private set; }
 
-	string IInteractable.DisplayTitle => "Mankka";
+	string IInteractable.DisplayTitle => $"Mankka";
 
 	private static string[] songFromPath( string path )
 		=> path
