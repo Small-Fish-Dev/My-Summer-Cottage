@@ -56,7 +56,7 @@ partial class Player
 
 		// Calculate velocity.
 		var targetVelocity = WishVelocity
-			* (walkSpeed * (Input.Down( InputButton.Run ) ? 5 : 1))
+			* (walkSpeed * (Water == null && Input.Down( InputButton.Run ) ? 5 : 1))
 			* (Ducking ? 0.5f : 1f);
 
 		Velocity = Vector3.Lerp( Velocity, targetVelocity, 10f * Time.Delta )
@@ -82,8 +82,9 @@ partial class Player
 			helper.ApplyFriction( 5f, Time.Delta );
 
 		Position = helper.Position
-			.WithZ( Water != null ? MathF.Max( Water.Position.z + 80, helper.Position.z ) : helper.Position.z );
-		Velocity = helper.Velocity;
+			.WithZ( Water != null ? MathF.Max( Water.Position.z + 75 + Water.WaveOffset( Position ), helper.Position.z ) : helper.Position.z );
+		Velocity = helper.Velocity
+			.WithZ( Water != null ? 0 : Velocity.z );
 
 		// Check for ground collision.
 		if ( Velocity.z <= stepSize )

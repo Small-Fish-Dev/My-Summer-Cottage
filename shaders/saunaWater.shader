@@ -96,15 +96,15 @@ PS
 
     BoolAttribute( translucent, true );
 
+    #if ( S_MODE_DEPTH )
+        #define MainPs Disabled
+    #endif
+
 	//
 	// Main
 	//
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-        #if( S_MODE_DEPTH )
-            return 0;
-        #endif
-
         float time = g_flTime * 0.03;
         float sine = 0.2 * sin( i.vTextureCoords.x + time );
 		float2 UV = i.vTextureCoords.xy - float2( time / 2 + sine, sine / 2 );
@@ -123,7 +123,7 @@ PS
 		ShadingModelValveStandard sm;
         float4 result = FinalizePixelMaterial( i, m, sm );
 
-        result.a = 0.95;
+        result.a = 0.85;
 
 		return result;
 	}
