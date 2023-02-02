@@ -41,6 +41,13 @@ partial class Player
 	/// <param name="cl"></param>
 	protected void MoveSimulate( IClient cl )
 	{
+		// Handle jumping.
+		if ( Input.Pressed( InputButton.Jump ) && GroundEntity != null && Water == null )
+		{
+			GroundEntity = null;
+			Velocity += Vector3.Up * 200f;
+		}
+
 		// Handle ducking.
 		Ducking = Water == null && Input.Down( InputButton.Duck );
 
@@ -49,12 +56,15 @@ partial class Player
 		Rotation = Angles.Lerp( Rotation.Angles(), yawAngles, 10f * Time.Delta )
 			.ToRotation();
 
+		SetAnimLookAt( "lookat", EyePosition, EyePosition + ViewAngles.Forward );
+
 		// Handle the player's wish velocity.
 		var eyeRotation = ViewAngles.WithPitch( 0 ).ToRotation();
 		WishVelocity = (InputDirection
 			* eyeRotation).Normal.WithZ( 0 );
 
-		SetAnimParameter( "move_x", MathX.LerpTo( GetAnimParameterFloat( "move_x" ), WishVelocity.Length, 10f * Time.Delta ) );
+		var target = WishVelocity.Length * (Input.Down( InputButton.Run ) ? 2f : 1f);
+		SetAnimParameter( "move_x", MathX.LerpTo( GetAnimParameterFloat( "move_x" ), target, 10f * Time.Delta ) );
 
 		// Calculate velocity.
 		var targetVelocity = WishVelocity
@@ -87,7 +97,7 @@ partial class Player
 		Position = helper.Position
 			.WithZ( Water != null ? MathF.Max( Water.Position.z + 75 + Water.WaveOffset( Position ), helper.Position.z ) : helper.Position.z );
 		Velocity = helper.Velocity
-			.WithZ( Water != null ? 0 : Velocity.z );
+			.WithZ( Water != null ? MathX.Lerp( Velocity.z, 0, 5f * Time.Delta ) : Velocity.z );
 
 		// Check for ground collision.
 		if ( Velocity.z <= stepSize )

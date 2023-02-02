@@ -20,7 +20,7 @@ public partial class Player : AnimatedEntity
 	public Vector3 GetEyePosition()
 	{
 		var bone = GetAttachment( "eyes" );
-		return bone?.Position ?? (Position + CollisionBox.Maxs.z);
+		return (bone?.Position ?? (Position + CollisionBox.Maxs.z)) + Rotation.Forward * 4f;
 	}
 
 	public override void Simulate( IClient cl )
