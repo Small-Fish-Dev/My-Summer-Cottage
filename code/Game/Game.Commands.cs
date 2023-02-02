@@ -46,7 +46,7 @@ partial class Sauna
 			.Ignore( pawn )
 			.Run();
 
-		if ( trace.Entity == null )
+		if ( trace.Entity == null || trace.Entity is WorldEntity )
 		{
 			Log.Error( $"Didn't find any entity to delete." );
 			return;
