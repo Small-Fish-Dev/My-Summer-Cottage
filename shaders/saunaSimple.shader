@@ -72,8 +72,11 @@ VS
 
 PS
 {    
+	#define CUSTOM_TEXTURE_FILTERING
+    SamplerState TextureFiltering < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
+
 	StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );
-	
+
     #include "sbox_pixel.fxc"
 
     #include "common/pixel.config.hlsl"
@@ -89,16 +92,16 @@ PS
     CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Material,10/20", Default3( 0.5, 0.5, 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
 
+	#if ( S_MODE_DEPTH )
+        #define MainPs Disabled
+    #endif
+
 	//
 	// Main
 	//
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		float2 UV = i.vTextureCoords.xy;
-
- 		#if( S_MODE_DEPTH )
-			return float4( 1, 0, 0, 1 );
-        #endif
 
         Material m;
         m.Albedo = Tex2DS( g_tColor, TextureFiltering, UV.xy ).rgb;
