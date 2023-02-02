@@ -43,7 +43,7 @@ partial class Player : IInteractable
 		if ( !Game.IsServer && cl != Game.LocalClient )
 			return;
 
-		var start = Position + Vector3.Up * CollisionBox.Maxs.z;
+		var start = EyePosition;
 		var dir = ViewAngles.ToRotation().Forward;
 		var trace = Trace.Ray( new Ray( start, dir ), InteractionDistance )
 			.Ignore( this )

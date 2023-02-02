@@ -31,7 +31,7 @@ partial class Player
 
 	// Private fields
 	private float stepSize => 8f;
-	private float walkSpeed => 150f;
+	private float walkSpeed => 120f;
 	private float maxStandableAngle => 45f;
 	private Vector3 gravity => Vector3.Down * 650f;
 
@@ -54,6 +54,8 @@ partial class Player
 		WishVelocity = (InputDirection
 			* eyeRotation).Normal.WithZ( 0 );
 
+		SetAnimParameter( "move_x", MathX.LerpTo( GetAnimParameterFloat( "move_x" ), WishVelocity.Length, 10f * Time.Delta ) );
+
 		// Calculate velocity.
 		var targetVelocity = WishVelocity
 			* (walkSpeed * (Water == null && Input.Down( InputButton.Run ) ? 5 : 1))
@@ -75,11 +77,12 @@ partial class Player
 		helper.Trace = helper.Trace
 			.Size( CollisionBox.Mins, CollisionBox.Maxs )
 			.Ignore( this );
-		helper.TryUnstuck();
-		helper.TryMoveWithStep( Time.Delta, stepSize );
 
 		if ( helper.HitWall )
 			helper.ApplyFriction( 5f, Time.Delta );
+
+		helper.TryUnstuck();
+		helper.TryMoveWithStep( Time.Delta, stepSize );
 
 		Position = helper.Position
 			.WithZ( Water != null ? MathF.Max( Water.Position.z + 75 + Water.WaveOffset( Position ), helper.Position.z ) : helper.Position.z );
