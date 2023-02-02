@@ -35,7 +35,7 @@ public partial class Player : AnimatedEntity
 	public override void FrameSimulate( IClient cl )
 	{
 		EyePosition = GetEyePosition();
-		SetAnimParameter( "move_x", WishVelocity.Length );
+
 		Camera.Position = EyePosition;
 		Camera.Rotation = ViewAngles.ToRotation();
 
