@@ -77,11 +77,12 @@ partial class Player
 		helper.Trace = helper.Trace
 			.Size( CollisionBox.Mins, CollisionBox.Maxs )
 			.Ignore( this );
-		helper.TryUnstuck();
-		helper.TryMoveWithStep( Time.Delta, stepSize );
 
 		if ( helper.HitWall )
 			helper.ApplyFriction( 5f, Time.Delta );
+
+		helper.TryUnstuck();
+		helper.TryMoveWithStep( Time.Delta, stepSize );
 
 		Position = helper.Position
 			.WithZ( Water != null ? MathF.Max( Water.Position.z + 75 + Water.WaveOffset( Position ), helper.Position.z ) : helper.Position.z );

@@ -19,8 +19,8 @@ public partial class Player : AnimatedEntity
 
 	public Vector3 GetEyePosition()
 	{
-		var bone = GetBoneTransform( "head", true );
-		return bone.Position;
+		var bone = GetAttachment( "eyes" );
+		return bone?.Position ?? (Position + CollisionBox.Maxs.z);
 	}
 
 	public override void Simulate( IClient cl )
