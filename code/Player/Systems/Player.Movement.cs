@@ -31,7 +31,7 @@ partial class Player
 
 	// Private fields
 	private float stepSize => 8f;
-	private float walkSpeed => 150f;
+	private float walkSpeed => 120f;
 	private float maxStandableAngle => 45f;
 	private Vector3 gravity => Vector3.Down * 650f;
 
@@ -53,6 +53,8 @@ partial class Player
 		var eyeRotation = ViewAngles.WithPitch( 0 ).ToRotation();
 		WishVelocity = (InputDirection
 			* eyeRotation).Normal.WithZ( 0 );
+
+		SetAnimParameter( "move_x", WishVelocity.Length );
 
 		// Calculate velocity.
 		var targetVelocity = WishVelocity
