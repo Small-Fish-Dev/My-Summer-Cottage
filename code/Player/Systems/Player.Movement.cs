@@ -52,8 +52,11 @@ partial class Player
 		Ducking = Water == null && Input.Down( InputButton.Duck );
 
 		// Handle rotation.
-		var yawAngles = new Angles( 0, ViewAngles.yaw, 0 );
-		Rotation = Angles.Lerp( Rotation.Angles(), yawAngles, 10f * Time.Delta )
+		var viewAngles = new Angles( 0, ViewAngles.yaw, 0 );
+		var targetAngles = WishVelocity.Length > 0 && InputDirection.x >= 0
+			? Angles.Lerp( WishVelocity.EulerAngles.WithPitch( 0 ), viewAngles, 0.5f )
+			: viewAngles;
+		Rotation = Angles.Lerp( Rotation.Angles(), targetAngles, 10f * Time.Delta )
 			.ToRotation();
 
 		SetAnimLookAt( "lookat", EyePosition, EyePosition + ViewAngles.Forward );
