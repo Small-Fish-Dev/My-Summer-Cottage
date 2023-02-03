@@ -8,6 +8,7 @@ public partial class Radio : ModelEntity, IInteractable
 		public string Name;
 		public string Path;
 		public SoundFile File;
+		public bool Loaded;
 
 		public float Duration => File.Duration;
 	}
@@ -127,6 +128,7 @@ public partial class Radio : ModelEntity, IInteractable
 			Log.Error( "Something went wrong with the radio." );
 			return;
 		}
+		song.Loaded = true;
 
 		// Turn the samples from a short array to a byte array.
 		var samples = (await song.File.GetSamplesAsync())
@@ -153,7 +155,7 @@ public partial class Radio : ModelEntity, IInteractable
 	void tick()
 	{
 		// Pick a new random song.
-		if ( Game.IsServer && CurrentSong?.File != null && ElapsedTime > CurrentSong?.Duration )
+		if ( Game.IsServer && (CurrentSong?.Loaded ?? false) && ElapsedTime > CurrentSong?.Duration )
 		{
 			var random = sounds[Game.Random.Int( sounds.Count - 1 )];
 			Play( random );
