@@ -153,7 +153,7 @@ public partial class Radio : ModelEntity, IInteractable
 	void tick()
 	{
 		// Pick a new random song.
-		if ( Game.IsServer && CurrentSong != null && ElapsedTime > CurrentSong?.Duration )
+		if ( Game.IsServer && CurrentSong?.File != null && ElapsedTime > CurrentSong?.Duration )
 		{
 			var random = sounds[Game.Random.Int( sounds.Count - 1 )];
 			Play( random );
