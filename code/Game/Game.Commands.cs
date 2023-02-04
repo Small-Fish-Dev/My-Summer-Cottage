@@ -95,4 +95,13 @@ partial class Sauna
 
 		pawn.Experience += amount;
 	}
+
+	[ConCmd.Server( "test_subtitle" )]
+	public static void TestSubtitle( string text, float time = 5f, char wrapper = '"' )
+	{
+		if ( ConsoleSystem.Caller?.Pawn is not Player pawn )
+			return;
+
+		Subtitles.Send( To.Everyone, text, time, wrapper: wrapper );
+	}
 }
