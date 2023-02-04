@@ -66,7 +66,7 @@ partial class Player
 		WishVelocity = (InputDirection
 			* eyeRotation).Normal.WithZ( 0 );
 
-		var target = WishVelocity.Length * (Input.Down( InputButton.Run ) ? 2f : 1f);
+		var target = WishVelocity.Length * (Input.Down( InputButton.Run ) ? 1f : 0.5f);
 		SetAnimParameter( "move_x", MathX.LerpTo( GetAnimParameterFloat( "move_x" ), target, 10f * Time.Delta ) );
 
 		// Calculate velocity.
