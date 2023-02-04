@@ -652,6 +652,28 @@
 								frames_from_start = 1
 								frames_from_end = 1
 							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 7
+								event_keys = 
+								{
+									Attachment = "foot_L"
+									Foot = "0"
+									Volume = 1.0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 21
+								event_keys = 
+								{
+									Attachment = "foot_R"
+									Foot = "0"
+									Volume = 1.0
+								}
+							},
 						]
 						activity_name = ""
 						activity_weight = 1
@@ -691,6 +713,28 @@
 								_class = "AnimSmoothLoop"
 								frames_from_start = 1
 								frames_from_end = 1
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 7
+								event_keys = 
+								{
+									Attachment = "foot_L"
+									Foot = "0"
+									Volume = 1.0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 21
+								event_keys = 
+								{
+									Attachment = "foot_R"
+									Foot = "0"
+									Volume = 1.0
+								}
 							},
 						]
 						activity_name = ""
@@ -736,7 +780,142 @@
 						weight = 1.0
 						ignore_rotation = false
 					},
+					{
+						_class = "Attachment"
+						name = "foot_L"
+						parent_bone = "foot_L"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "foot_R"
+						parent_bone = "foot_R"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
 				]
+			},
+			{
+				_class = "IKData"
+				children = 
+				[
+					{
+						_class = "IKChain"
+						name = "leg_R"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "leg_upper_R"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "leg_lower_R"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "foot_R"
+												bone = "foot_R"
+											},
+										]
+										bone = "leg_lower_R"
+									},
+								]
+								bone = "leg_upper_R"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "IK_R"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
+					{
+						_class = "IKChain"
+						name = "leg_L"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "leg_upper_L"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "leg_lower_L"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "foot_L"
+												bone = "foot_L"
+											},
+										]
+										bone = "leg_lower_L"
+									},
+								]
+								bone = "leg_upper_L"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "IK_L"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
+				]
+			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = "IK_L"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+					{
+						_class = "BoneMarkup"
+						target_bone = "IK_R"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+				]
+				bone_cull_type = "None"
 			},
 		]
 		model_archetype = ""
