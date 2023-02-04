@@ -11,6 +11,7 @@ partial class Player
 		View = new AnimatedEntity();
 		View.SetModel( "models/guy/guy.vmdl" );
 		View.SetParent( this, true );
+		View.EnableShadowInFirstPerson = false;
 	}
 
 	[Event.Client.Frame]

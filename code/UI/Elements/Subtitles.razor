@@ -1,0 +1,101 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Panel
+
+<style>
+	.subtitles {
+		position: absolute;
+		bottom: 5px;
+		left: 50%;
+		justify-content: flex-end;
+		flex-direction: column;
+		align-items: center;
+		transform: translateX(-50%);
+
+		.subtitle {
+			padding: 5px;
+			font-size: 18px;
+			font-family: 'Courier New';
+			background-color: rgba(black, 0.75);
+			text-align: center;
+			margin-top: 5px;
+			transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+			border-radius: 5px;
+			transform-origin: center;
+
+			&:intro {
+				opacity: 0;
+				transform: scale(0);
+			}
+
+			&:outro {
+				opacity: 0;
+				transform: scale(0);
+			}
+
+			.text {
+				color: white;
+			}
+		}
+	}
+</style>
+
+
+<root class="subtitles"></root>
+
+@code {
+	public static int Limit => 5;
+	public static Subtitles Instance { get; private set; }
+
+	private List<Panel> subtitles = new();
+
+	public Subtitles()
+	{
+		Instance = this;
+	}
+
+	/// <summary>
+	/// Shows a subtitle at the bottom of the screen.
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="time"></param>
+	/// <param name="col"></param>
+	/// <param name="wrapper"></param>
+	/// <returns></returns>
+	public static void Show( string text, float time, Color col, char wrapper )
+	{
+		if ( Instance.subtitles.Count >= Limit )
+		{
+			var first = Instance.subtitles.FirstOrDefault();
+			first?.Delete();
+			Instance.subtitles.Remove( first );
+		}
+
+		var panel = Instance.AddChild<Panel>("subtitle");
+
+		var label = panel.AddChild<Label>( "text" );
+		label.Text = $"{wrapper}{text}{wrapper}";
+		label.Style.FontColor = col;
+
+		new Action( async () =>
+		{
+			await GameTask.DelaySeconds( time );
+			panel?.Delete();
+		} ).Invoke();
+
+		Instance.subtitles.Add( panel );
+	}
+
+	/// <summary>
+	/// Sends a subtitle from the server to a To target.
+	/// </summary>
+	/// <param name="target"></param>
+	/// <param name="text"></param>
+	/// <param name="time"></param>
+	/// <param name="col"></param>
+	/// <param name="wrapper"></param>
+	public static void Send( To target, string text, float time = 5f, Color? col = null, char wrapper = '"' )
+		=> Player.SendSubtitle( target, text, col ?? Color.White, time, wrapper );
+}

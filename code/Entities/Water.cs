@@ -22,7 +22,8 @@ public partial class SaunaWater : ModelEntity
 	{
 		base.StartTouch( other );
 
-		if ( other is not Player player ) return;
+		if ( other is not Player player ) 
+			return;
 		player.Water = this;
 	}
 
@@ -30,7 +31,9 @@ public partial class SaunaWater : ModelEntity
 	{
 		base.StartTouch( other );
 
-		if ( other is not Player player ) return;
+		if ( other is not Player player ) 
+			return;
+
 		player.Water = null;
 	}
 }
