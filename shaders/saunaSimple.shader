@@ -92,6 +92,9 @@ PS
     CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Material,10/20", Default3( 0.5, 0.5, 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
 
+	CreateInputTexture2D( Roughness, Linear, 8, "", "_rough", "Material,10/30", Default( 1 ) );
+	CreateTexture2DWithoutSampler( g_tRoughness ) < Channel( R, Box( Roughness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+
 	#if ( S_MODE_DEPTH )
         #define MainPs Disabled
     #endif
@@ -106,7 +109,7 @@ PS
         Material m;
         m.Albedo = Tex2DS( g_tColor, TextureFiltering, UV.xy ).rgb;
         m.Normal = TransformNormal( i, DecodeNormal( Tex2DS( g_tNormal, TextureFiltering, UV.xy ).rgb ) );
-        m.Roughness = 1;
+        m.Roughness = Tex2DS( g_tRoughness, TextureFiltering, UV.xy ).r;
         m.Metalness = 0;
         m.AmbientOcclusion = 1;
         m.TintMask = 0;
