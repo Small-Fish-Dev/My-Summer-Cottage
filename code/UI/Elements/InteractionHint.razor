@@ -4,32 +4,90 @@
 @namespace Sauna
 @inherits Panel
 
-<root></root>
+<style>
+    .interaction-hint {
+        position: absolute;
+        font-family: Superscript;
+        font-weight: bold;
+        flex-direction: column;
+        border-radius: 10px;
+        opacity: 0;
+        transform: scale(0);
+        transform-origin: left top;
+        transition: transform 0.5s ease-in-out;
+
+        .title {
+            font-size: 24px;
+            padding-bottom: 5px;
+            color: orange;
+        }
+
+        .interaction {
+            flex-direction: row;
+            align-items: center;
+            padding-bottom: 5px;
+            margin-left: 10px;
+            font-size: 16px;
+
+            .icon {
+                width: 22px; 
+                background-size: 8px;
+                aspect-ratio: 1;
+                margin-right: 2px;
+            }
+        }
+
+        &.visible {
+            opacity: 1;
+            transform: scale(1) translate(-50% -50%);
+        }
+    }
+</style>
+
+@if ( Game.LocalPawn is Player pawn )
+{
+    var valid = pawn.Interactable is ModelEntity entity;
+    <root class="interaction-hint @(valid ? "visible" : "")">
+        @if (valid)
+        {
+            <label class="title">@pawn.Interactable.DisplayTitle</label>
+
+            foreach ( var interaction in pawn.Interactions )
+            {
+                <panel class="interaction">
+                    <inputglyph class="icon" glyphSize=@InputGlyphSize.Small button=@interaction.Key />
+                    <label>@interaction.Value.Text</label>
+                </panel>
+            }
+        }
+    </root>
+}
 
 @code {
-	public override void Tick()
-	{
+    Vector2 lerpPosition;
+
+    public override void Tick()
+    {
         if ( Game.LocalPawn is not Player pawn )
             return;
 
-        var interactable = pawn.Interactable;
-        if ( interactable is not ModelEntity entity )
+        if ( !HasClass( "visible" ) || pawn.Interactable is not ModelEntity entity ) 
             return;
 
-        var pos3 = entity.CollisionWorldSpaceCenter.ToScreen();
-        var pos = new Vector2( pos3.x, pos3.y ) * Screen.Size;
-        var line = 1;
-        var position = entity.CollisionWorldSpaceCenter.ToScreen();
+        var position = (entity.Position + (pawn.Interactable.Offset ?? entity.CollisionWorldSpaceCenter - entity.Position))
+            .ToScreen();
 
-        DebugOverlay.ScreenText( $"{interactable.DisplayTitle} ->", pos, 0, Color.Orange );
+        lerpPosition = Vector2.Lerp( lerpPosition, new Vector2( position.x, position.y ), 10f * Time.Delta );
 
-        foreach ( var interaction in pawn.Interactions )
-        {
-            var button = interaction.Key;
-            var info = interaction.Value;
+        Style.Left = Length.Fraction( lerpPosition.x );
+        Style.Top = Length.Fraction( lerpPosition.y );
+    }
 
-            DebugOverlay.ScreenText( $"  {Input.GetButtonOrigin(interaction.Key)} : {info.Text}", pos, line, Color.White );
-            line++;
-        }
-	}
+    protected override int BuildHash()
+    {
+        var pawn = Game.LocalPawn as Player;
+        var interactions = String.Join( ',', pawn.Interactions.Select( i => $"{i.Key} {i.Value.Text}" ) );
+
+        return HashCode.Combine( interactions );
+    }
 }
