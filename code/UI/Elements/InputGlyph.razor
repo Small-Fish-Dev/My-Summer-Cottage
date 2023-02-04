@@ -1,11 +1,19 @@
 ﻿@using Sandbox;
 @using Sandbox.UI;
 
-@namespace Oasis.UI
+@namespace Sauna
 @inherits Panel
 
+<style>
+	.input-glyph {
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+</style>
+
 <root>
-	<image @ref=image />
+	<image class="input-glyph" @ref=image />
 </root>
 
 @code {
@@ -13,7 +21,7 @@
 
 	public InputGlyphSize GlyphSize { get; set; }
 	public InputButton Button { get; set; }
-	public GlyphStyle GlyphStyle { get; set; } = GlyphStyle.Light.WithSolidABXY();
+	public GlyphStyle GlyphStyle { get; set; } = GlyphStyle.Dark.WithSolidABXY();
 
 	protected override void OnAfterTreeRender( bool firstTime )
 	{
