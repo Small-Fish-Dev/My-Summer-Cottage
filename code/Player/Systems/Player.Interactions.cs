@@ -11,8 +11,16 @@ partial class Player : IInteractable
 		interactable.AddInteraction( InputButton.Use, new()
 		{
 			Predicate = ( Player ply ) => true,
-			Function = ( Player ply ) => Log.Error( "kisses u mwah" ),
-			Text = "kiss 😘😘😚😚"
+			Function = ( Player ply, IInteractable target ) =>
+			{
+				using ( Prediction.Off() )
+					Subtitles.Send(
+						To.Multiple( new[] { ply.Client, (target as Player)?.Client } ),
+						$"{ply.Client.Name} kisses {target.DisplayTitle}",
+						wrapper: '*'
+					);
+			},
+			Text = "Kiss 😘"
 		} );
 	}
 
@@ -67,7 +75,7 @@ partial class Player : IInteractable
 						interactions.Add( button, info );
 
 						if ( Input.Pressed( button ) )
-							info.Function( this );
+							info.Function( this, interactable );
 
 						break;
 					}
