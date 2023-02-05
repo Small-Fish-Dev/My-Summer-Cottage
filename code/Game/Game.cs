@@ -2,6 +2,7 @@
 global using Sandbox.Internal;
 global using Sandbox.UI;
 global using Sandbox.UI.Construct;
+global using Sandbox.Effects;
 global using Editor;
 global using System;
 global using System.IO;
@@ -13,14 +14,17 @@ namespace Sauna;
 
 public partial class Sauna : BaseGameManager
 {
-	public Sauna Instance { get; private set; }
+	public static Sauna Instance { get; private set; }
 
 	public Sauna()
 	{
 		Instance = this;
 
 		if ( Game.IsClient )
+		{
 			_ = new HUD();
+			LoadRenderHooks();
+		}
 	}
 
 	public override void ClientJoined( IClient client )

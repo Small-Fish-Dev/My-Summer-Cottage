@@ -2,7 +2,19 @@
 
 public partial class Player : AnimatedEntity
 {
-	public Vector3 EyePosition { get; set; }
+	[Net] private int drunkness { get; set; }
+	private TimeSince lastTicked;
+	public int Drunkness
+	{
+		get => drunkness;
+		set
+		{
+			Game.AssertServer();
+
+			drunkness = (int)MathX.Clamp( value, 0, 100 );
+			lastTicked = 0;
+		}
+	}
 
 	public override void Spawn()
 	{
@@ -18,12 +30,6 @@ public partial class Player : AnimatedEntity
 		Position = Entity.All.OfType<SpawnPoint>().FirstOrDefault().Position;
 	}
 
-	public Vector3 GetEyePosition()
-	{
-		var bone = GetAttachment( "eyes" );
-		return (bone?.Position ?? (Position + CollisionBox.Maxs.z)) + Rotation.Forward * 4f;
-	}
-
 	public override void Simulate( IClient cl )
 	{
 		EyePosition = GetEyePosition();
@@ -31,17 +37,18 @@ public partial class Player : AnimatedEntity
 		// Simulate the player's movement.
 		MoveSimulate( cl );
 		InteractionSimulate( cl );
+
+		if ( Game.IsServer )
+		{
+			if ( lastTicked > 5f )
+				Drunkness -= 1;
+		}
 	}
 
 	public override void FrameSimulate( IClient cl )
 	{
-		EyePosition = GetEyePosition();
-
-		Camera.Position = EyePosition;
-		Camera.Rotation = ViewAngles.ToRotation();
-
-		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( 70f );
-		Camera.FirstPersonViewer = this;
+		// Simulate camera.
+		CameraSimulate( cl );
 	}
 
 	/// <summary>

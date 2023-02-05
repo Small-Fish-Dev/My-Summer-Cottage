@@ -1,6 +1,5 @@
 ﻿namespace Sauna;
 
-[SceneCamera.AutomaticRenderHook]
 public class DitheringHook : RenderHook
 {
 	public override void OnStage( SceneCamera target, Stage stage )

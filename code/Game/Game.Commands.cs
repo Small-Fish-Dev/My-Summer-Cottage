@@ -96,6 +96,15 @@ partial class Sauna
 		pawn.Experience += amount;
 	}
 
+	[ConCmd.Server( "set_drunkness" )]
+	public static void SetDrunkness( int amount )
+	{
+		if ( ConsoleSystem.Caller?.Pawn is not Player pawn )
+			return;
+
+		pawn.Drunkness = amount;
+	}
+
 	[ConCmd.Server( "test_subtitle" )]
 	public static void TestSubtitle( string text, float time = 5f, char wrapper = '"' )
 	{

@@ -9,7 +9,7 @@ partial class Player
 		set
 		{
 			if ( Game.IsClient ) return;
-
+			
 			rankUpdate = true;
 			experience = Math.Max( value, 0 );
 		}

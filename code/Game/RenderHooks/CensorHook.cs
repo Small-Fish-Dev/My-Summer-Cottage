@@ -1,4 +1,5 @@
-﻿[SceneCamera.AutomaticRenderHook]
+﻿namespace Sauna;
+
 public class CensorHook : RenderHook
 {
 	public override void OnStage( SceneCamera target, Stage stage )
