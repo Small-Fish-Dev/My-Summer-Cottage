@@ -55,7 +55,7 @@ public partial class Radio : ModelEntity, IInteractable
 		interactable.AddInteraction( InputButton.Use, new()
 		{
 			Predicate = ( Player pawn ) => true,
-			Function = ( Player pawn, IInteractable target ) =>
+			Function = ( Player pawn ) =>
 			{
 				if ( Game.IsClient ) return;
 				
