@@ -87,6 +87,6 @@
         var pawn = Game.LocalPawn as Player;
         var interactions = String.Join( ',', pawn.Interactions.Select( i => $"{i.Key} {i.Value.Text}" ) );
 
-        return HashCode.Combine( interactions );
+        return HashCode.Combine( pawn.Interactable?.DisplayTitle, interactions );
     }
 }
