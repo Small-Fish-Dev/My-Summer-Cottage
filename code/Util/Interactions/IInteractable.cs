@@ -12,15 +12,7 @@ public interface IInteractable
 	/// <summary>
 	/// The offset of this interactable's interaction hint.
 	/// </summary>
-	public Vector3? Offset { 
-		get
-		{
-			var entity = this as ModelEntity;
-			return entity != null 
-				? entity.CollisionWorldSpaceCenter - entity.Position
-				: null;
-		} 
-	}
+	public InteractionOffset Offset => null;
 
 	/// <summary>
 	/// All interactions of this interactable

@@ -55,7 +55,7 @@
             {
                 <panel class="interaction">
                     <inputglyph class="icon" glyphSize=@InputGlyphSize.Small button=@interaction.Key />
-                    <label>@interaction.Value.Text</label>
+                    <label>@interaction.Value.Result</label>
                 </panel>
             }
         }
@@ -85,7 +85,7 @@
     protected override int BuildHash()
     {
         var pawn = Game.LocalPawn as Player;
-        var interactions = String.Join( ',', pawn.Interactions.Select( i => $"{i.Key} {i.Value.Text}" ) );
+        var interactions = String.Join( ',', pawn.Interactions.Select( i => $"{i.Key} {i.Value.Result}" ) );
 
         return HashCode.Combine( pawn.Interactable?.DisplayTitle, interactions );
     }

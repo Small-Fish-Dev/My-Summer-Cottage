@@ -11,12 +11,12 @@ partial class Player : IInteractable
 		interactable.AddInteraction( InputButton.Use, new()
 		{
 			Predicate = ( Player ply ) => true,
-			Function = ( Player ply, IInteractable target ) =>
+			Function = ( Player ply ) =>
 			{
 				using ( Prediction.Off() )
 					Subtitles.Send(
-						To.Multiple( new[] { ply.Client, (target as Player)?.Client } ),
-						$"{ply.Client.Name} kisses {target.DisplayTitle}",
+						To.Multiple( new[] { ply.Client, Client } ),
+						$"{ply.Client.Name} kisses {interactable.DisplayTitle}",
 						wrapper: '*'
 					);
 			},
@@ -75,7 +75,7 @@ partial class Player : IInteractable
 						interactions.Add( button, info );
 
 						if ( Input.Pressed( button ) )
-							info.Function( this, interactable );
+							info.Function( this );
 
 						break;
 					}
