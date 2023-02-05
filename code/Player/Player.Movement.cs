@@ -53,10 +53,7 @@ partial class Player
 
 		// Handle rotation.
 		var viewAngles = new Angles( 0, ViewAngles.yaw, 0 );
-		var targetAngles = WishVelocity.Length > 0 && InputDirection.x >= 0
-			? Angles.Lerp( WishVelocity.EulerAngles.WithPitch( 0 ), viewAngles, 0.5f )
-			: viewAngles;
-		Rotation = Angles.Lerp( Rotation.Angles(), targetAngles, 10f * Time.Delta )
+		Rotation = Angles.Lerp( Rotation.Angles(), viewAngles, 10f * Time.Delta )
 			.ToRotation();
 
 		SetAnimLookAt( "lookat", EyePosition, EyePosition + ViewAngles.Forward );
@@ -66,8 +63,11 @@ partial class Player
 		WishVelocity = (InputDirection
 			* eyeRotation).Normal.WithZ( 0 );
 
-		var target = WishVelocity.Length * (Input.Down( InputButton.Run ) ? 1f : 0.5f);
-		SetAnimParameter( "move_x", MathX.LerpTo( GetAnimParameterFloat( "move_x" ), target, 10f * Time.Delta ) );
+		var mult = Water == null && Input.Down( InputButton.Run ) 
+			? 1f 
+			: 0.5f;
+		SetAnimParameter( "move_x", MathX.LerpTo( GetAnimParameterFloat( "move_x" ), InputDirection.x * mult, 10f * Time.Delta ) );
+		SetAnimParameter( "move_y", MathX.LerpTo( GetAnimParameterFloat( "move_y" ), InputDirection.y * mult, 10f * Time.Delta ) );
 
 		// Calculate velocity.
 		var targetVelocity = WishVelocity
