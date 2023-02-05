@@ -10,6 +10,19 @@ public interface IInteractable
 	public string DisplayTitle => "";
 
 	/// <summary>
+	/// The offset of this interactable's interaction hint.
+	/// </summary>
+	public Vector3? Offset { 
+		get
+		{
+			var entity = this as ModelEntity;
+			return entity != null 
+				? entity.CollisionWorldSpaceCenter - entity.Position
+				: null;
+		} 
+	}
+
+	/// <summary>
 	/// All interactions of this interactable
 	/// </summary>
 	public Dictionary<InputButton, List<InteractionInfo>> All => Get( this );
