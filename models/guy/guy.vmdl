@@ -93,6 +93,53 @@
 							]
 						}
 					},
+					{
+						_class = "Feet"
+						children = 
+						[
+							{
+								_class = "Foot"
+								name = "foot_L"
+								anklebone = "foot_L"
+								toebone = ""
+								balloffset = [ 0.333549, 7.299262, -0.994276 ]
+								heeloffset = [ 0.316301, 1.078557, -3.881806 ]
+								autolevel = true
+								traceheight = 40.0
+								traceradius = 0.5
+							},
+							{
+								_class = "Foot"
+								name = "foot_R"
+								anklebone = "foot_R"
+								toebone = ""
+								balloffset = [ -0.333549, 7.29926, -0.994276 ]
+								heeloffset = [ -0.316301, 1.07856, -3.88181 ]
+								autolevel = true
+								traceheight = 40.0
+								traceradius = 0.5
+							},
+						]
+						locktolerance = 0.8
+						heighttolerance = 1.5
+						sanitizetrajectories = true
+					},
+					{
+						_class = "MovementSettings"
+						movementsettings = 
+						{
+							name = ""
+							speeds = [  ]
+							runspeed = 220.0
+							walkspeed = 120.0
+							maxSpringTension = 100.0
+							springConstant = 10.0
+							useSmoothPaths = true
+							useMotionDamping = false
+							sharpStartAngle = 180.0
+							m_vTraceScale = [ 1.0, 1.0, 1.0 ]
+						}
+					},
 				]
 			},
 			{
@@ -751,7 +798,7 @@
 						source_filename = "models/guy/animations/walkN.fbx"
 						start_frame = -1
 						end_frame = -1
-						framerate = 72.0
+						framerate = 120.0
 						take = 0
 						reverse = false
 					},
@@ -937,7 +984,7 @@
 						source_filename = "models/guy/animations/walkE.fbx"
 						start_frame = -1
 						end_frame = -1
-						framerate = 72.0
+						framerate = 120.0
 						take = 0
 						reverse = false
 					},
@@ -999,7 +1046,7 @@
 						source_filename = "models/guy/animations/walkW.fbx"
 						start_frame = -1
 						end_frame = -1
-						framerate = 72.0
+						framerate = 120.0
 						take = 0
 						reverse = false
 					},
