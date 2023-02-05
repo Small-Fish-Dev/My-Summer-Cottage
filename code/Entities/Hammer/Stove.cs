@@ -1,8 +1,7 @@
 ﻿namespace Sauna;
 
 [HammerEntity]
-[Solid]
-[Model( Model = "models/sauna stove/sauna_stove.vmdl" )]
+[EditorModel( "models/stove/stove.vmdl" )]
 public partial class Stove : AnimatedEntity, IInteractable
 {
 	string IInteractable.DisplayTitle => "Kiuas";
@@ -14,6 +13,7 @@ public partial class Stove : AnimatedEntity, IInteractable
 
 	public override void Spawn()
 	{
+		SetModel( "models/stove/stove.vmdl" );
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
 	}
 }

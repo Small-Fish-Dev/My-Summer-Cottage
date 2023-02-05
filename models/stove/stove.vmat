@@ -4,6 +4,9 @@ Layer0
 {
 	shader "shaders/saunasimple.shader"
 
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 3 // Point Sample
+
 	g_flDirectionalLightmapMinZ "0.050"
 	g_flDirectionalLightmapStrength "1.000"
 
@@ -11,6 +14,7 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	Color "models/sauna stove/stones.png"
-	Normal "materials/default/default_normal.tga"
+	Color "models/stove/stove_color.tga"
+	Normal "models/stove/stove_normal.tga"
+	Roughness "models/stove/stove_rough.tga"
 }
