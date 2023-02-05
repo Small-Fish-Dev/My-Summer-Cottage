@@ -4,6 +4,8 @@ public partial class Player : AnimatedEntity
 {
 	[Net] private int drunkness { get; set; }
 	private TimeSince lastTicked;
+	private TimeSince lastStepped;
+
 	public int Drunkness
 	{
 		get => drunkness;
@@ -49,6 +51,25 @@ public partial class Player : AnimatedEntity
 	{
 		// Simulate camera.
 		CameraSimulate( cl );
+	}
+
+	public override void OnAnimEventFootstep( Vector3 pos, int foot, float volume )
+	{
+		if ( !Game.IsClient || lastStepped < 0.2f )
+			return;
+
+		volume *= Velocity.WithZ( 0 ).Length.LerpInverse( 0.0f, 200.0f ) * 0.2f;
+		lastStepped = 0;
+
+		var tr = Trace.Ray( pos, pos + Vector3.Down * 20 )
+			.Radius( 1 )
+			.Ignore( this )
+			.Run();
+
+		if ( !tr.Hit ) 
+			return;
+
+		tr.Surface.DoFootstep( this, tr, foot, volume );
 	}
 
 	/// <summary>
