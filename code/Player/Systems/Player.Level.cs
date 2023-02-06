@@ -8,7 +8,7 @@ partial class Player
 		get => experience; 
 		set
 		{
-			if ( Game.IsClient ) return;
+			Game.AssertServer();
 			
 			rankUpdate = true;
 			experience = Math.Max( value, 0 );
@@ -22,26 +22,17 @@ partial class Player
 	private bool rankUpdate = true;
 	private int rankIndex;
 
-	public Rank Rank
-	{
-		get
-		{
-			if ( rankUpdate )
-				for ( int i = 0; i < Rank.All.Count; i++ )
-					if ( Experience >= Rank.All[i].Requirement )
-						rankIndex = i;
-					else
-						break;
-
-			rankUpdate = false;
-			return Rank.All[rankIndex];
-		}
-	}
+	public Rank Rank => Rank.All[rankIndex];
 
 	void onExperience( int previous, int current )
 	{
 		var difference = current - previous;
-		rankUpdate = true;
+
+		for ( int i = 0; i < Rank.All.Count; i++ )
+			if ( Experience >= Rank.All[i].Requirement )
+				rankIndex = i;
+			else
+				break;
 
 		// Send update to UI.
 		Thermometer.OnChange( difference );

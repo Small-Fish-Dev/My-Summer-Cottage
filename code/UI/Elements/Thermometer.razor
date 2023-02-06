@@ -27,7 +27,7 @@
 			background-repeat: no-repeat;
 			image-rendering: point;
 			background-position-x: left;
-            background-position-y: bottom;
+			background-position-y: bottom;
 		}
 
 		.thermometer {
@@ -47,15 +47,14 @@
 <root class="experience-display @(!Active ? "hidden" : "")">
 	<panel class="thermometer background">
 		<panel class="mercury background"
-			   style="height: @(MathF.Floor( ((Game.LocalPawn as Player)?.Progress ?? 0f) * 100f))%;" 
-		/>
+			   style="height: @(MathF.Floor( ((Game.LocalPawn as Player)?.Progress ?? 0f) * 100f))%;" />
 	</panel>
 </root>
 
 @code {
 	private static Thermometer instance;
 
-	private float delay => 3f;
+	private float delay => 5f;
 	private TimeSince lastActive;
 	public bool Active => lastActive < delay;
 
@@ -67,12 +66,11 @@
 	public static void OnChange( int amount )
 	{
 		instance.lastActive = 0f;
-
 		// TODO: maybe add xp text popup?
 	}
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( Active ? lastActive.ToString() : "" );
+		return HashCode.Combine( Active ? lastActive.ToString() : "", (Game.LocalPawn as Player)?.Experience.ToString() );
 	}
 }
