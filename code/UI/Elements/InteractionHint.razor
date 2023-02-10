@@ -25,7 +25,7 @@
             flex-direction: row;
             align-items: center;
             padding-bottom: 5px;
-            margin-left: 10px;
+            padding-left: 10px;
             font-size: 16px;
 
             .icon {
@@ -49,7 +49,7 @@
     <root class="interaction-hint @(valid ? "visible" : "")">
         @if (valid)
         {
-            <label class="title">@pawn.Interactable.DisplayTitle</label>
+            <label class="title" style="color:@(pawn.Interactable.DisplayColor.ToString( true, false ))">@pawn.Interactable.DisplayTitle</label>
 
             foreach ( var interaction in pawn.Interactions )
             {

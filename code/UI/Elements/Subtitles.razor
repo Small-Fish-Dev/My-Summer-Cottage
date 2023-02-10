@@ -72,17 +72,17 @@
 			Instance.subtitles.Remove( first );
 		}
 
-		var panel = Instance.AddChild<Panel>("subtitle");
+		var panel = Instance.AddChild<Panel>( "subtitle" );
 
 		var label = panel.AddChild<Label>( "text" );
 		label.Text = $"{wrapper}{text}{wrapper}";
 		label.Style.FontColor = col;
 
-		new Action( async () =>
+		GameTask.RunInThreadAsync( async () =>
 		{
 			await GameTask.DelaySeconds( time );
 			panel?.Delete();
-		} ).Invoke();
+		} );
 
 		Instance.subtitles.Add( panel );
 	}
