@@ -121,7 +121,7 @@ PS
         m.Normal = TransformNormal( i, DecodeNormal( Tex2DS( g_tNormal, TextureFiltering, UV.xy ).rgb ) );
         m.Roughness = Tex2DS( g_tRoughness, TextureFiltering, UV.xy ).r;
         m.Metalness = 0;
-        m.AmbientOcclusion = 1;
+        m.AmbientOcclusion = 0.1;
         m.TintMask = 0;
         m.Opacity = 1;
         m.Emission = 0;
