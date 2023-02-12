@@ -17,6 +17,7 @@
 			height: 60px;
 			justify-content: center;
 			align-items: center;
+			overflow: hidden;
 
 			.background {
 				position: absolute;
@@ -39,6 +40,14 @@
 				image-rendering: point;
 				bottom: 8px;
 			}
+
+			.marker {
+				position: absolute;
+				width: 30px;
+				height: 30px;
+				background-color: red;
+				opacity: 2;
+			}
 		}
 	}
 </style>
@@ -46,14 +55,28 @@
 <root class="compass">
 	<panel class="container">
 		@{
-			var ang = ((Game.LocalPawn as Player)?.ViewAngles.yaw + 180f) ?? 0f; // Convert the angle to 0 - 360 format.
+			if ( Game.LocalPawn is not Player pawn )
+				return;
+
+			var yaw = pawn.ViewAngles.yaw;
 			var width = 2400f * ScaleToScreen;
 
 			<panel 
-				class="background" 
-				style="background-position-x: @(-width + width * ang / 360f)px" 
-			/>
-		}
+				class="background"
+			   	style="background-position-x: @(-width + width * (yaw + 180f) / 360f)px">
+
+				@foreach( var marker in Marker.All )
+				{
+					var angDiff = 180f + Rotation.LookAt( pawn.Position - marker.Position ).Yaw(); // Angle between player and marker.
+
+					DebugOverlay.ScreenText( yaw.ToString(), 1);
+					DebugOverlay.ScreenText( angDiff.ToString(), 3 );
+
+					<panel class="marker" style="left: @(0)px" />
+				}
+
+			</panel>
+		}	
 
 		<panel class="center" />
 	</panel>
@@ -62,6 +85,7 @@
 @code {
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( (Game.LocalPawn as Player)?.ViewAngles.yaw );
+		var pawn = Game.LocalPawn as Player;
+		return HashCode.Combine( pawn?.ViewAngles.yaw, pawn?.Position );
 	}
 }
