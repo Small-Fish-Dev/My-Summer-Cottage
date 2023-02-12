@@ -744,7 +744,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_FOOTSTEP"
-								event_frame = 7
+								event_frame = 21
 								event_keys = 
 								{
 									Attachment = "foot_L"
@@ -755,7 +755,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_FOOTSTEP"
-								event_frame = 21
+								event_frame = 7
 								event_keys = 
 								{
 									Attachment = "foot_R"
@@ -806,7 +806,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_FOOTSTEP"
-								event_frame = 7
+								event_frame = 21
 								event_keys = 
 								{
 									Attachment = "foot_L"
@@ -817,7 +817,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_FOOTSTEP"
-								event_frame = 21
+								event_frame = 7
 								event_keys = 
 								{
 									Attachment = "foot_R"
@@ -868,7 +868,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_FOOTSTEP"
-								event_frame = 7
+								event_frame = 6
 								event_keys = 
 								{
 									Attachment = "foot_L"
@@ -879,7 +879,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_FOOTSTEP"
-								event_frame = 21
+								event_frame = 20
 								event_keys = 
 								{
 									Attachment = "foot_R"
@@ -1054,7 +1054,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_FOOTSTEP"
-								event_frame = 7
+								event_frame = 6
 								event_keys = 
 								{
 									Attachment = "foot_L"
@@ -1065,7 +1065,7 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_FOOTSTEP"
-								event_frame = 21
+								event_frame = 20
 								event_keys = 
 								{
 									Attachment = "foot_R"
@@ -1086,6 +1086,98 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						source_filename = "models/guy/animations/walkW.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 120.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "walkS"
+						children = 
+						[
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								root_bone_name = ""
+								motion_type = "Single"
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 21
+								event_keys = 
+								{
+									Attachment = "foot_L"
+									Foot = "0"
+									Volume = 1.0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 7
+								event_keys = 
+								{
+									Attachment = "foot_R"
+									Foot = "0"
+									Volume = 1.0
+								}
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/guy/animations/walkS.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "runS"
+						children = 
+						[
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								root_bone_name = ""
+								motion_type = "Single"
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/guy/animations/walkS.fbx"
 						start_frame = -1
 						end_frame = -1
 						framerate = 120.0
