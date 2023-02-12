@@ -24,6 +24,7 @@ public partial class SaunaWater : ModelEntity
 
 		if ( other is not Player player ) 
 			return;
+
 		player.Water = this;
 	}
 

@@ -39,7 +39,7 @@ public partial class Player : AnimatedEntity
 		// Simulate the player's movement.
 		MoveSimulate( cl );
 		InteractionSimulate( cl );
-
+		
 		if ( Game.IsServer )
 		{
 			if ( lastTicked > 5f )

@@ -76,6 +76,7 @@ VS
 PS
 { 
     StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );
+
     
     #define BLEND_MODE_ALREADY_SET
     RenderState( BlendEnable, true );
@@ -90,6 +91,9 @@ PS
     #include "common/pixel.shading.hlsl"
 
     #include "common/pixel.material.helpers.hlsl"
+
+    CreateInputTexture2D( Color, Srgb, 8, "", "_color", "Material,10/10", Default3( 1.0, 1.0, 1.0 ) );
+	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); Filter( POINT ); >;
 
     CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Material,10/20", Default3( 0.5, 0.5, 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
@@ -110,7 +114,7 @@ PS
 		float2 UV = i.vTextureCoords.xy - float2( time / 2 + sine, sine / 2 );
 
         Material m;
-        m.Albedo = float3( 0.01, 0.03, 0.08 );
+        m.Albedo = Tex2DS( g_tColor, TextureFiltering, UV.xy ).rgb;
         m.Normal = TransformNormal( i, DecodeNormal( Tex2DS( g_tNormal, TextureFiltering, UV.xy ).rgb ) );
         m.Roughness = 0.7;
         m.Metalness = 0;
@@ -123,7 +127,7 @@ PS
 		ShadingModelValveStandard sm;
         float4 result = FinalizePixelMaterial( i, m, sm );
 
-        result.a = 0.85;
+        result.a = 0.65;
 
 		return result;
 	}
