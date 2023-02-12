@@ -4,7 +4,8 @@ public class CensorHook : RenderHook
 {
 	public override void OnStage( SceneCamera target, Stage stage )
 	{
-		if ( stage != Stage.AfterTransparent ) return;
+		if ( stage != Stage.AfterTransparent ) 
+			return;
 
 		Enabled = false; // Enable when penice.
 		Order = 0;

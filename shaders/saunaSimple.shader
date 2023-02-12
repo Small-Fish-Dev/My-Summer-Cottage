@@ -9,6 +9,7 @@ HEADER
 FEATURES
 {
     #include "common/features.hlsl"
+	Feature( F_ALPHA_TEST, 0..1, "Rendering" );
 }
 
 //=========================================================================================================================
@@ -71,7 +72,9 @@ VS
 //=========================================================================================================================
 
 PS
-{    
+{ 
+	StaticCombo( S_ALPHA_TEST, F_ALPHA_TEST, Sys( ALL ) );
+	   
 	#define CUSTOM_TEXTURE_FILTERING
     SamplerState TextureFiltering < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
 
@@ -95,9 +98,16 @@ PS
 	CreateInputTexture2D( Roughness, Linear, 8, "", "_rough", "Material,10/30", Default( 1 ) );
 	CreateTexture2DWithoutSampler( g_tRoughness ) < Channel( R, Box( Roughness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 
-	#if ( S_MODE_DEPTH )
+	#if ( S_MODE_DEPTH && !S_ALPHA_TEST )
         #define MainPs Disabled
     #endif
+	
+	#if ( S_ALPHA_TEST )
+		CreateInputTexture2D( AlphaMask, Linear, 8, "", "_alpha", "Material,10/30", Default( 1 ) );
+		CreateTexture2DWithoutSampler( g_tAlphaMask ) < Channel( R, Box( AlphaMask ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+	#endif
+
+	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
 
 	//
 	// Main
@@ -111,13 +121,19 @@ PS
         m.Normal = TransformNormal( i, DecodeNormal( Tex2DS( g_tNormal, TextureFiltering, UV.xy ).rgb ) );
         m.Roughness = Tex2DS( g_tRoughness, TextureFiltering, UV.xy ).r;
         m.Metalness = 0;
-        m.AmbientOcclusion = 1;
+        m.AmbientOcclusion = 0.1;
         m.TintMask = 0;
         m.Opacity = 1;
         m.Emission = 0;
         m.Transmission = 1;
 	
 		ShadingModelValveStandard sm;
-		return FinalizePixelMaterial( i, m, sm );
+		float4 result = FinalizePixelMaterial( i, m, sm );
+
+		#if( S_ALPHA_TEST )
+			result.a = Tex2DS( g_tAlphaMask, TextureFiltering, UV.xy ).r;
+		#endif
+
+		return result;
 	}
 }

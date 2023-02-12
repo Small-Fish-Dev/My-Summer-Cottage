@@ -10,6 +10,11 @@ public interface IInteractable
 	public string DisplayTitle => "";
 
 	/// <summary>
+	/// The color used for the displayed text of this interactable.
+	/// </summary>
+	public Color DisplayColor => Color.Orange;
+
+	/// <summary>
 	/// The offset of this interactable's interaction hint.
 	/// </summary>
 	public InteractionOffset Offset => null;

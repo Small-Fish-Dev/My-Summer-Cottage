@@ -4,7 +4,8 @@ public class DitheringHook : RenderHook
 {
 	public override void OnStage( SceneCamera target, Stage stage )
 	{
-		if ( stage != Stage.AfterUI ) return;
+		if ( stage != Stage.AfterUI ) 
+			return;
 
 		Order = 1;
 
