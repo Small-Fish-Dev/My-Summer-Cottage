@@ -85,18 +85,22 @@
 				class="background"
 		   		style="background-position-x: @(-width + width * (yaw + 180f) / 360f)px">
 
+				// TODO: If UI starts getting too slow, lots of optimizing to be done here.
+
 				@foreach ( var marker in Marker.All )
 				{
+					var center = containerWidth / 2f;
 					var diff = Rotation.LookAt( marker.Position - pawn.Position ).Yaw();
 					var angle = (yaw - diff) / 45f;
-					var dirtyLen = containerWidth / 2f + angle * containerWidth / 2f;
+					var dirtyLen = center + angle * center;
 					var len = dirtyLen > 0 
 						? dirtyLen % textureWidth 
 						: dirtyLen + textureWidth;
 
 					<panel class="marker" style="left: @(len)px" />
 
-					if ( len <= 340f && len >= 260f )
+					// Draw name of marker if near the center. 
+					if ( len <= center + 40f && len >= center - 40f ) 
 					{
 						<label class="markerName" style="left: @(len)px; color: @(marker.Color.ToString( true, false ))">@marker.Name</label>
 					}
