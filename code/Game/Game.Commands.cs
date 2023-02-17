@@ -96,13 +96,20 @@ partial class Sauna
 		pawn.Experience += amount;
 	}
 
-	[ConCmd.Server( "set_drunkness" )]
-	public static void SetDrunkness( int amount )
+	[ConCmd.Server( "add_effect" )]
+	public static void AddEffect( string effect, float duration = 5f, int stacks = 1 )
 	{
 		if ( ConsoleSystem.Caller?.Pawn is not Player pawn )
 			return;
 
-		pawn.Drunkness = amount;
+		var effectType = GlobalGameNamespace.TypeLibrary.GetType( effect );
+		if ( effectType == null || !effectType.TargetType.IsSubclassOf( typeof ( BaseEffect ) ) )
+		{
+			Log.Error( $"Failed to find the effect: {effect}" );
+			return;
+		}
+
+		pawn.Effects.Apply( effectType.TargetType, duration, stacks );
 	}
 
 	[ConCmd.Server( "test_subtitle" )]
