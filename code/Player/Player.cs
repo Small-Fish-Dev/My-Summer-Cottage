@@ -2,21 +2,7 @@
 
 public partial class Player : AnimatedEntity
 {
-	[Net] private int drunkness { get; set; }
-	private TimeSince lastTicked;
 	private TimeSince lastStepped;
-
-	public int Drunkness
-	{
-		get => drunkness;
-		set
-		{
-			Game.AssertServer();
-
-			drunkness = (int)MathX.Clamp( value, 0, 100 );
-			lastTicked = 0;
-		}
-	}
 
 	public override void Spawn()
 	{
@@ -42,12 +28,6 @@ public partial class Player : AnimatedEntity
 		MoveSimulate( cl );
 		InteractionSimulate( cl );
 		EffectSimulate( cl );
-		
-		if ( Game.IsServer )
-		{
-			if ( lastTicked > 5f )
-				Drunkness -= 1;
-		}
 	}
 
 	public override void FrameSimulate( IClient cl )

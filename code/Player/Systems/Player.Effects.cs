@@ -104,6 +104,11 @@ public class EffectManager
 	/// <typeparam name="T"></typeparam>
 	public void Apply<T>( float duration = 1f, int stackAmount = 1 ) where T : BaseEffect
 	{
+		Apply( typeof( T ), duration, stackAmount );
+	}
+
+	public void Apply( Type type, float duration = 1f, int stackAmount = 1 )
+	{
 		Game.AssertServer();
 
 		using var stream = new MemoryStream();
@@ -113,7 +118,7 @@ public class EffectManager
 		while ( true ) // Just loop.
 		{
 			// Check for stacking.
-			var existing = All.FirstOrDefault( effect => effect?.GetType() == typeof( T ) );
+			var existing = All.FirstOrDefault( effect => effect?.GetType() == type );
 
 			if ( existing != null )
 			{
@@ -129,7 +134,7 @@ public class EffectManager
 			}
 
 			// Create new effect.
-			var effect = GlobalGameNamespace.TypeLibrary.Create<T>( typeof( T ) );
+			var effect = GlobalGameNamespace.TypeLibrary.Create( type.FullName, type ) as BaseEffect;
 			effect.Duration = Math.Min( duration, effect.MaxDuration );
 			effect.Stacks = stackAmount;
 

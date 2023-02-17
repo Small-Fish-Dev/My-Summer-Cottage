@@ -29,21 +29,11 @@ partial class Player
 		EyePosition = GetEyePosition();
 
 		Camera.Position = EyePosition;
+		Camera.Rotation = ViewAngles.ToRotation();
 
-		var ang = Drunkness >= 25
-			? Drunkness / 10f * MathF.Sin( Time.Now )
-			: 0f;
-		Camera.Rotation = ViewAngles.WithRoll( ang ).ToRotation();
-
-		var fov = Drunkness >= 40
-			? Drunkness / 10f * MathF.Sin( Time.Now )
-			: 0f;
-		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( 70f + fov );
+		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( 70f );
 		Camera.FirstPersonViewer = this;
 		Camera.ZNear = 3f;
-
-		Sauna.Effects.MotionBlur.Scale = 0.2f * (Drunkness / 100f);
-		Sauna.Effects.MotionBlur.Samples = 4;
 	}
 
 	[Event.Client.Frame]
