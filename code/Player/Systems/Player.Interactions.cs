@@ -2,7 +2,7 @@
 
 partial class Player : IInteractable
 {
-	InteractionOffset IInteractable.Offset => EyePosition + Camera.Rotation.Right * 25f;
+	InteractionOffset IInteractable.Offset => (GetEyePosition() - Position).z * Vector3.Up + Camera.Rotation.Right * 15f;
 	string IInteractable.DisplayTitle => (Client)?.Name ?? "Unknown";
 
 	public Player()
