@@ -56,6 +56,7 @@ partial class Player : IInteractable
 		var dir = ViewAngles.ToRotation().Forward;
 		var trace = Trace.Ray( new Ray( start, dir ), InteractionDistance )
 			.Ignore( this )
+			.WithoutTags( "trigger" )
 			.Radius( InteractionRadius )
 			.Run();
 

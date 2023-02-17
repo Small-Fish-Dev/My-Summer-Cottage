@@ -14,7 +14,7 @@ public partial class SaunaWater : ModelEntity
 
 	public override void Spawn()
 	{
-		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+		SetupPhysicsFromModel( PhysicsMotionType.Static );
 		Tags.Add( "trigger" );
 	}
 

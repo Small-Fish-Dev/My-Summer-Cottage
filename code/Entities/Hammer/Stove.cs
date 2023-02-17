@@ -4,7 +4,28 @@
 [EditorModel( "models/stove/stove.vmdl" )]
 public partial class Stove : AnimatedEntity, IInteractable
 {
-	[Net, Predicted] public bool Open { get; set; } = false;
+	/// <summary>
+	/// Determines if the stove is open or not.
+	/// </summary>
+	[Net, Predicted] 
+	public bool Open { get; set; } = false;
+
+	/// <summary>
+	/// The temperature volume this stove is closest to.
+	/// </summary>
+	public TemperatureVolume Volume
+	{
+		get
+		{
+			if ( volume == null || !volume.IsValid() )
+				volume = Entity.All
+					.OfType<TemperatureVolume>()
+					.FirstOrDefault( volume => volume.WorldSpaceBounds.Contains( Position ) );
+
+			return volume;
+		}
+	}
+	private TemperatureVolume volume;
 
 	string IInteractable.DisplayTitle => "Kiuas";
 	InteractionOffset IInteractable.Offset => Rotation.Backward * 15f + Vector3.Up * 30f;
