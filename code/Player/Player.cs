@@ -30,15 +30,18 @@ public partial class Player : AnimatedEntity
 		EnableShadowCasting = true;
 
 		Position = Entity.All.OfType<SpawnPoint>().FirstOrDefault().Position;
+
+		Event.Run( "onSpawn", this );
 	}
 
 	public override void Simulate( IClient cl )
 	{
 		EyePosition = GetEyePosition();
 
-		// Simulate the player's movement.
+		// Simulate the player.
 		MoveSimulate( cl );
 		InteractionSimulate( cl );
+		EffectSimulate( cl );
 		
 		if ( Game.IsServer )
 		{

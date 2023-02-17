@@ -7,12 +7,15 @@ partial class Player
 
 	public override void ClientSpawn()
 	{
-		if ( Game.LocalPawn != this ) return;
+		if ( Game.LocalPawn != this ) 
+			return;
 
 		View = new AnimatedEntity();
 		View.SetModel( "models/guy/guy.vmdl" );
 		View.SetParent( this, true );
 		View.EnableShadowInFirstPerson = false;
+
+		Event.Run( "onSpawn", this );
 	}
 
 	public Vector3 GetEyePosition()
