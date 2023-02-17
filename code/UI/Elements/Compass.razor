@@ -43,10 +43,11 @@
 
 			.marker {
 				position: absolute;
-				width: 30px;
-				height: 30px;
+				width: 15px;
+				height: 15px;
+				border-radius: 50%;
 				background-color: white;
-				transform: translateX(-50%);
+				transform: translate(-50% 50%);
 			}
 
 			.markerName {
@@ -96,13 +97,14 @@
 					var len = dirtyLen > 0 
 						? dirtyLen % textureWidth 
 						: dirtyLen + textureWidth;
+					var color = marker.Color.ToString( true, false );
 
-					<panel class="marker" style="left: @(len)px" />
+					<panel class="marker" style="left: @(len)px; background-color: @(color)" />
 
 					// Draw name of marker if near the center. 
 					if ( len <= center + 40f && len >= center - 40f ) 
 					{
-						<label class="markerName" style="left: @(len)px; color: @(marker.Color.ToString( true, false ))">@marker.Name</label>
+						<label class="markerName" style="left: @(len)px; color: @(color)">@marker.Name</label>
 					}
 				}
 
