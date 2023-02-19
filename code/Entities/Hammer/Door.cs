@@ -19,7 +19,6 @@ public partial class Door : ModelEntity, IInteractable
 
 	private Vector3? hinge;
 	private Rotation? rotation;
-	private int index = 0;
 
 	/// <summary>
 	/// The position of this door's hinge in worldspace.
@@ -49,6 +48,11 @@ public partial class Door : ModelEntity, IInteractable
 		}
 	}
 
+	/// <summary>
+	/// The original position of this door.
+	/// </summary>
+	public Vector3 DefaultPosition { get; private set; }
+
 	string IInteractable.DisplayTitle => "Ovi";
 
 	public Door()
@@ -74,6 +78,7 @@ public partial class Door : ModelEntity, IInteractable
 	public override void Spawn()
 	{
 		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+		DefaultPosition = Position;
 	}
 
 	[Event.Tick.Server]
@@ -83,40 +88,48 @@ public partial class Door : ModelEntity, IInteractable
 		if ( State == DoorState.Open || State == DoorState.Close )
 			return;
 
-		var time = 2f; // In seconds.
-		var amount = 90f;
+		var time = 0.75f; // In seconds.
+		var amount = 100f;
 		var defaultYaw = DefaultRotation.Yaw();
-		var targetYaw = State == DoorState.Opening
+		var direction = State == DoorState.Opening
+			? 1
+			: -1;
+		var targetYaw = direction == 1
 			? amount
 			: 0;
-		var direction = targetYaw > 0 
-			? 1 : 
-			-1;
 
 		// Check if we're already at the desired yaw.
-		var yaw = Rotation.Yaw(); 
-		if ( yaw.AlmostEqual( defaultYaw + targetYaw, 0.1f ) )
+		var targetRotation = DefaultRotation.Angles()
+			.WithYaw( (defaultYaw + targetYaw) )
+			.ToRotation();
+		var difference = Rotation.Distance( targetRotation );
+
+		if ( difference.AlmostEqual( 0, 5f ) )
 		{
 			State = State == DoorState.Opening
 				? DoorState.Open
 				: DoorState.Close;
-			
+
+			Rotation = Transform.Zero.Rotation;
+			Position = DefaultPosition;
+
+			Transform = Transform.RotateAround( Hinge, targetRotation );
+
 			return;
 		}
 
 		// Prevent colliding with players.
 		// TODO: Fix (very shit way of doing this)
 		var trace = Trace.Box( Model.Bounds, Position, Position + Rotation.Forward * 5f * direction )
-			.WithAllTags( "player" )
+			.WithAnyTags( "player" )
 			.Run();
 		if ( trace.Hit )
 			return;
 
 		// Rotate around the hinge by a tiny amount every tick.
 		var length = DefaultRotation.Angles()
-			.WithYaw( defaultYaw + direction * amount )
-			.ToRotation()
-			* (Game.TickInterval * time);
+			.WithYaw( (defaultYaw + direction * amount) * Time.Delta / time )
+			.ToRotation();
 		Transform = Transform.RotateAround( Hinge, length );
 	}
 }
