@@ -45,7 +45,7 @@ partial class Player : IInteractable
 	/// <summary>
 	/// The radius of the trace that is used for getting player's interactions.
 	/// </summary>
-	public float InteractionRadius => 15f;
+	public float InteractionRadius => 7.5f;
 
 	protected void InteractionSimulate( IClient cl )
 	{
