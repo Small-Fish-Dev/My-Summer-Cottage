@@ -46,7 +46,7 @@ public partial class Radio : ModelEntity, IInteractable
 	private SoundStream stream;
 
 	private TimeSince lastWritten;
-	private MemoryStream songStream;
+	private QOA.Decoder decoder;
 
 	public Radio()
 	{
@@ -121,25 +121,15 @@ public partial class Radio : ModelEntity, IInteractable
 		var song = sounds.ElementAtOrDefault( index );
 		CurrentSong = song;
 		sound = Sound.FromEntity( "audiostream.default", this );
+		var bytes = await FileSystem.Mounted.ReadAllBytesAsync( "/sounds/music/result.qoa" );
 
-		var loaded = await song.File.LoadAsync();
-		if( !loaded )
+		decoder = new QOA.Decoder( bytes );
+		if ( !decoder.Valid )
 		{
-			Log.Error( "Something went wrong with the radio." );
+			Log.Error( "QOA Decoder has an invalid haeder." );
 			return;
 		}
-		song.Loaded = true;
-
-		// Turn the samples from a short array to a byte array.
-		var samples = (await song.File.GetSamplesAsync())
-			.SelectMany( sample => new byte[2] { 
-				(byte)(sample & 0xFF), 
-				(byte)(sample >> 8)
-			} )
-			.ToArray();
-
-		stream = sound?.CreateStream( 44100, 1 );
-		songStream = new MemoryStream( samples );
+		stream = sound?.CreateStream( decoder.SampleRate, decoder.Channels );
 	}
 
 	protected override void OnDestroy()
@@ -150,37 +140,37 @@ public partial class Radio : ModelEntity, IInteractable
 		sound?.Stop();
 		stream?.Delete();
 	}
-
+	int totalRead;
 	[Event.Tick]
 	void tick()
 	{
-		// Pick a new random song.
+		/*// Pick a new random song.
 		if ( Game.IsServer && (CurrentSong?.Loaded ?? false) && ElapsedTime > CurrentSong?.Duration )
 		{
 			var random = sounds[Game.Random.Int( sounds.Count - 1 )];
 			Play( random );
 
 			return;
-		}
+		}*/
 
-		if ( stream == null || sound == null || !stream.IsValid() || songStream == null )
+		if ( stream == null || sound == null || !stream.IsValid() || decoder == null )
 			return;
 
 		// Handle getting the samples and writing them to the SoundStream.
-		var delay = (float)stream.MaxWriteSampleCount / 44100 / 2; // 1 channel and 44100 sample rate, but give the room for two sample writes to avoid hiccups
+		var amount = stream.MaxWriteSampleCount;
+		var delay = (float)amount / decoder.SampleRate / 2; // 1 channel and 44100 sample rate, but give the room for two sample writes to avoid hiccups
 		if ( lastWritten < delay ) 
 			return;
-		
-		var buffer = new short[stream.MaxWriteSampleCount - stream.QueuedSampleCount];
-		var reader = new BinaryReader( songStream ); // WARNING: `using` disposes the stream!
-		try
+
+		var buffer = new short[amount];
+		var read = decoder.ReadSamples( buffer );
+
+		if ( read == -1 )
 		{
-			for ( var i = 0; i < buffer.Length; i++ )
-				buffer[i] = reader.ReadInt16();
-		}
-		catch ( EndOfStreamException e )
-		{
-			songStream = null;
+			stream.Delete();
+			stream = null;
+
+			return;
 		}
 
 		stream.WriteData( buffer );
