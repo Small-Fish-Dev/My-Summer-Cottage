@@ -5,6 +5,7 @@ public struct Marker
 	private static List<Marker> all = new List<Marker>
 	{
 		new( "Home", Vector3.Zero, Color.Red ),
+		new( "Hello this is long text", 10000f * Vector3.Random, Color.Random ),
 	};
 	public static IReadOnlyList<Marker> All => all;
 
