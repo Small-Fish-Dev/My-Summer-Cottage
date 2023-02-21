@@ -140,7 +140,7 @@ public partial class Radio : ModelEntity, IInteractable
 		sound?.Stop();
 		stream?.Delete();
 	}
-	int totalRead;
+
 	[Event.Tick]
 	void tick()
 	{
@@ -157,14 +157,13 @@ public partial class Radio : ModelEntity, IInteractable
 			return;
 
 		// Handle getting the samples and writing them to the SoundStream.
-		var amount = stream.MaxWriteSampleCount;
+		var amount = QOA.Base.MaxFrameSamples;
 		var delay = (float)amount / decoder.SampleRate / 2; // 1 channel and 44100 sample rate, but give the room for two sample writes to avoid hiccups
 		if ( lastWritten < delay ) 
 			return;
 
 		var buffer = new short[amount];
 		var read = decoder.ReadSamples( buffer );
-
 		if ( read == -1 )
 		{
 			stream.Delete();
