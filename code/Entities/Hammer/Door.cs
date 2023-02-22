@@ -81,9 +81,10 @@ public partial class Door : ModelEntity, IInteractable
 
 		// Check if we're already at the desired yaw.
 		var targetRotation = defaultAngles
-			.WithYaw( (defaultAngles.yaw + targetYaw) )
+			.WithYaw( targetYaw )
 			.ToRotation();
-		var difference = Rotation.Distance( targetRotation );
+		var inversed = Rotation * DefaultTransfrom.Rotation.Inverse;
+		var difference = inversed.Distance( targetRotation );
 
 		if ( difference.AlmostEqual( 0, 1f ) )
 		{
@@ -98,15 +99,17 @@ public partial class Door : ModelEntity, IInteractable
 		}
 
 		// Prevent colliding with players.
-		var trace = Trace.Box( Model.Bounds, Position, Position + Rotation.Forward * 16f * direction )
+		var trace = Trace.Body( PhysicsBody, Position + Rotation.Right * 2f * direction )
 			.WithAnyTags( "player" )
 			.Run();
+
+		DebugOverlay.TraceResult( trace );
 
 		if ( trace.Hit )
 			return;
 
 		// Rotate around the hinge by a tiny amount every tick.
-		var rot = Rotation.Lerp( Rotation, targetRotation, 1f / time * Time.Delta );
+		var rot = Rotation.Lerp( inversed, targetRotation, 1f / time * Time.Delta );
 		Transform = DefaultTransfrom;
 		Transform = Transform.RotateAround( Hinge, rot );
 	}
