@@ -120,15 +120,15 @@ public partial class Radio : ModelEntity, IInteractable
 
 		var song = sounds.ElementAtOrDefault( index );
 		CurrentSong = song;
-		sound = Sound.FromEntity( "audiostream.default", this );
-		var bytes = await FileSystem.Mounted.ReadAllBytesAsync( "/sounds/music/result.qoa" );
 
-		decoder = new QOA.Decoder( bytes );
+		sound = Sound.FromEntity( "audiostream.default", this );
+		decoder = new QOA.Decoder( await FileSystem.Mounted.ReadAllBytesAsync( "/sounds/out.qoa" ) );
 		if ( !decoder.Valid )
 		{
 			Log.Error( "QOA Decoder has an invalid haeder." );
 			return;
 		}
+
 		stream = sound?.CreateStream( decoder.SampleRate, decoder.Channels );
 	}
 
@@ -161,9 +161,10 @@ public partial class Radio : ModelEntity, IInteractable
 		var delay = (float)amount / decoder.SampleRate / 2; // 1 channel and 44100 sample rate, but give the room for two sample writes to avoid hiccups
 		if ( lastWritten < delay ) 
 			return;
-
+		
 		var buffer = new short[amount];
 		var read = decoder.ReadSamples( buffer );
+
 		if ( read == -1 )
 		{
 			stream.Delete();
