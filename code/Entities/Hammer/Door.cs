@@ -9,7 +9,7 @@ public enum DoorState
 }
 
 [HammerEntity]
-[Solid]
+[Model]
 public partial class Door : ModelEntity, IInteractable
 {
 	/// <summary>

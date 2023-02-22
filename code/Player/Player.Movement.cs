@@ -98,7 +98,7 @@ partial class Player
 		helper.TryMoveWithStep( Time.Delta, stepSize );
 
 		Position = helper.Position
-			.WithZ( Water != null ? MathF.Max( Water.Position.z - 85 + Water.WaveOffset( Position ), helper.Position.z ) : helper.Position.z );
+			.WithZ( Water != null ? MathF.Max( Water.Position.z - 95 + Water.WaveOffset( Position ), helper.Position.z ) : helper.Position.z );
 		Velocity = helper.Velocity
 			.WithZ( Water != null ? MathX.Lerp( Velocity.z, 0, 5f * Time.Delta ) : Velocity.z );
 
