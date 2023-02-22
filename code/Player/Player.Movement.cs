@@ -63,17 +63,17 @@ partial class Player
 		WishVelocity = (InputDirection
 			* eyeRotation).Normal.WithZ( 0 );
 
-		var mult = Water == null && Input.Down( InputButton.Run ) 
-			? 1f 
-			: 0.5f;
+		var mult = (Water == null && Input.Down( InputButton.Run ) ? 1f : 0.5f)
+			 * MathF.Min( MathF.Abs( Velocity.WithZ( 0 ).Length ) / walkSpeed, 1f );
+
 		SetAnimParameter( "move_x", MathX.LerpTo( GetAnimParameterFloat( "move_x" ), InputDirection.x * mult, 10f * Time.Delta ) );
-		SetAnimParameter( "move_y", MathX.LerpTo( GetAnimParameterFloat( "move_y" ), InputDirection.y * mult, 10f * Time.Delta ) );
+		SetAnimParameter( "move_y", MathX.LerpTo( GetAnimParameterFloat( "move_y" ), -InputDirection.y * mult, 10f * Time.Delta ) );
 
 		// Calculate velocity.
 		var targetVelocity = WishVelocity
-			* (walkSpeed * (Water == null && Input.Down( InputButton.Run ) ? 5 : 1))
+			* (walkSpeed * (Water == null && Input.Down( InputButton.Run ) ? 1.3f : 1))
 			* (Ducking ? 0.5f : 1f);
-
+		
 		Velocity = Vector3.Lerp( Velocity, targetVelocity, 10f * Time.Delta )
 			.WithZ( Velocity.z );
 

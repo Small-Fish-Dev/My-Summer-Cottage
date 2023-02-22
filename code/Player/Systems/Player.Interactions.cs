@@ -14,12 +14,11 @@ partial class Player : IInteractable
 			Predicate = ( Player ply ) => true,
 			Function = ( Player ply ) =>
 			{
-				using ( Prediction.Off() )
-					Subtitles.Send(
-						To.Multiple( new[] { ply.Client, Client } ),
-						$"{ply.Client.Name} kisses {interactable.DisplayTitle}",
-						wrapper: '*'
-					);
+				Subtitles.Send(
+					To.Multiple( new[] { ply.Client, Client } ),
+					$"{ply.Client.Name} kisses {Client.Name}",
+					wrapper: '*'
+				);
 			},
 			Text = "Kiss 😘"
 		} );
