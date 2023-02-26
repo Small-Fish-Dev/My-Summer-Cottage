@@ -1,0 +1,22 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader"
+
+	//---- Rendering ----
+	F_ALPHA_TEST 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	AlphaMask "[0.827451 0.827451 0.827451 0.000000]"
+	Color "[0.596078 0.654902 0.180392 0.000000]"
+	Normal "materials/default/default_normal.tga"
+	Roughness "[0.228000 0.228000 0.228000 0.000000]"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+}
