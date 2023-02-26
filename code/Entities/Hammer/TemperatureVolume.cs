@@ -14,6 +14,7 @@ public partial class TemperatureVolume : ModelEntity
 	public override void Spawn()
 	{
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
+		EnableSolidCollisions = false;
 		Tags.Add( "trigger" );
 	}
 
