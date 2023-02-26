@@ -6,6 +6,8 @@ partial class Player
 	public AnimatedEntity View { get; private set; }
 	public Ray ViewRay => new Ray( EyePosition, ViewAngles.ToRotation().Forward );
 
+	private float fov;
+
 	public override void ClientSpawn()
 	{
 		if ( Game.LocalPawn != this ) 
@@ -32,7 +34,8 @@ partial class Player
 		Camera.Position = EyePosition;
 		Camera.Rotation = ViewAngles.ToRotation();
 
-		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( 70f );
+		fov = MathX.LerpTo( fov, Input.Down( InputButton.View ) ? 20f : 70f, 5f * Time.Delta );
+		Camera.FieldOfView = Screen.CreateVerticalFieldOfView( fov );
 		Camera.FirstPersonViewer = this;
 		Camera.ZNear = 3f;
 	}
