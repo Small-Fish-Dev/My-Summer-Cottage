@@ -3,6 +3,7 @@
 public partial class Player : AnimatedEntity
 {
 	private TimeSince lastStepped;
+	Particles PeeParticle;
 
 	public override void Spawn()
 	{
@@ -18,6 +19,8 @@ public partial class Player : AnimatedEntity
 		Position = Entity.All.OfType<SpawnPoint>().FirstOrDefault().Position;
 
 		Event.Run( "onSpawn", this );
+
+		PeeParticle = Particles.Create( "particles/piss.vpcf" );
 	}
 
 	public override void Simulate( IClient cl )
@@ -28,6 +31,9 @@ public partial class Player : AnimatedEntity
 		MoveSimulate( cl );
 		InteractionSimulate( cl );
 		EffectSimulate( cl );
+
+		PeeParticle?.SetPosition( 0, Position + Vector3.Up * 40f );
+		PeeParticle?.SetPosition( 1, Position + Vector3.Up * 40f + Rotation.Forward * 25 );
 	}
 
 	public override void FrameSimulate( IClient cl )
