@@ -4,6 +4,7 @@ partial class Player
 {
 	public Vector3 EyePosition { get; set; }
 	public AnimatedEntity View { get; private set; }
+	public Ray ViewRay => new Ray( EyePosition, ViewAngles.ToRotation().Forward );
 
 	public override void ClientSpawn()
 	{

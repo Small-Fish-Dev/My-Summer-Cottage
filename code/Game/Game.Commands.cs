@@ -17,12 +17,9 @@ partial class Sauna
 			return;
 		}
 
-		var ray = new Ray(
-			pawn.Position + Vector3.Up * pawn.CollisionBox.Maxs.z,
-			pawn.ViewAngles.ToRotation().Forward );
-
-		var trace = Trace.Ray( ray, 500f )
+		var trace = Trace.Ray( pawn.ViewRay, 500f )
 			.Ignore( pawn )
+			.WithoutTags( "trigger" )
 			.Size( model.Bounds )
 			.Run();
 
@@ -38,12 +35,9 @@ partial class Sauna
 		if ( ConsoleSystem.Caller?.Pawn is not Player pawn )
 			return;
 
-		var ray = new Ray(
-			pawn.Position + Vector3.Up * pawn.CollisionBox.Maxs.z,
-			pawn.ViewAngles.ToRotation().Forward );
-
-		var trace = Trace.Ray( ray, 500f )
+		var trace = Trace.Ray( pawn.ViewRay, 500f )
 			.Ignore( pawn )
+			.WithoutTags( "trigger" )
 			.Run();
 
 		if ( trace.Entity == null || trace.Entity is WorldEntity )
@@ -69,12 +63,9 @@ partial class Sauna
 			return;
 		}
 
-		var ray = new Ray(
-			pawn.Position + Vector3.Up * pawn.CollisionBox.Maxs.z,
-			pawn.ViewAngles.ToRotation().Forward );
-
-		var trace = Trace.Ray( ray, 500f )
+		var trace = Trace.Ray( pawn.ViewRay, 500f )
 			.Ignore( pawn )
+			.WithoutTags( "trigger" )
 			.Run();
 
 		var entity = type.Create<Entity>();
