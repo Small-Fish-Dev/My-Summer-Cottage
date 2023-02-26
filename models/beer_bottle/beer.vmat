@@ -1,0 +1,26 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader"
+
+	//---- Rendering ----
+	F_ALPHA_TEST 1
+	F_RENDER_BACKFACES 1
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 3 // Point Sample
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	AlphaMask "models/beer_bottle/beer_alpha.png"
+	Color "models/beer_bottle/beer_color.png"
+	Normal "models/beer_bottle/beer_normal.png"
+	Roughness "models/beer_bottle/beer_rough.png"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+}
