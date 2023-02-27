@@ -44,6 +44,26 @@
 						]
 						hidden_in_tools = false
 					},
+					{
+						_class = "BodyGroup"
+						name = "liquid"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"liquid",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "no_liquid"
+								meshes = [  ]
+							},
+						]
+						hidden_in_tools = false
+					},
 				]
 			},
 			{
@@ -57,6 +77,10 @@
 							{
 								from = "beer.vmat"
 								to = "models/beer_bottle/beer.vmat"
+							},
+							{
+								from = "beer_mesh.vmat"
+								to = "models/beer_bottle/beer_liquid.vmat"
 							},
 						]
 						use_global_default = false
@@ -136,6 +160,28 @@
 							exclude_by_default = true
 							exception_list = 
 							[
+								"beer_cap",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "liquid"
+						filename = "models/beer_bottle/beer.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = 
+							[
+								"beer",
+								"beer_hull",
 								"beer_cap",
 							]
 						}
