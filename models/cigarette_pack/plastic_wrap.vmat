@@ -5,18 +5,14 @@ Layer0
 	shader "shaders/saunasimple.shader"
 
 	//---- Rendering ----
-	F_ALPHA_TEST 1
+	F_TRANSPARENCY 1
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	AlphaMask "[0.168627 0.168627 0.168627 0.000000]"
 	Color "models/cigarette_pack/plastic_wrap_color.png"
 	Normal "models/cigarette_pack/plastic_wrap_normal.png"
-	Roughness "[0.128000 0.128000 0.128000 0.000000]"
-
-	//---- Translucent ----
-	g_flAlphaTestReference "0.500"
-	g_flAntiAliasedEdgeStrength "1.000"
+	Roughness "[0.000000 0.000000 0.000000 0.000000]"
+	TransparencyMask "[0.638000 0.638000 0.638000 0.000000]"
 }

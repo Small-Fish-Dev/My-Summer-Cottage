@@ -9,7 +9,7 @@ HEADER
 FEATURES
 {
     #include "common/features.hlsl"
-	Feature( F_ALPHA_TEST, 0..1, "Rendering" );
+	Feature( F_TRANSPARENCY, 0..1, "Rendering" );
 }
 
 //=========================================================================================================================
@@ -25,6 +25,7 @@ MODES
 //=========================================================================================================================
 COMMON
 {
+	#define S_TRANSLUCENT 0
 	#include "common/shared.hlsl"
 }
 
@@ -71,7 +72,7 @@ VS
 
 PS
 { 
-	StaticCombo( S_ALPHA_TEST, F_ALPHA_TEST, Sys( ALL ) );
+	StaticCombo( S_TRANSPARENCY, F_TRANSPARENCY, Sys( ALL ) );
 	   
 	#define CUSTOM_TEXTURE_FILTERING
     SamplerState TextureFiltering < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
@@ -96,13 +97,20 @@ PS
 	CreateInputTexture2D( Roughness, Linear, 8, "", "_rough", "Material,10/30", Default( 1 ) );
 	CreateTexture2DWithoutSampler( g_tRoughness ) < Channel( R, Box( Roughness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 
-	#if ( S_MODE_DEPTH && !S_ALPHA_TEST )
+	#if ( S_MODE_DEPTH && !S_TRANSPARENCY )
         #define MainPs Disabled
     #endif
 	
-	#if ( S_ALPHA_TEST )
-		CreateInputTexture2D( AlphaMask, Linear, 8, "", "_alpha", "Material,10/30", Default( 1 ) );
-		CreateTexture2DWithoutSampler( g_tAlphaMask ) < Channel( R, Box( AlphaMask ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+	#if ( S_TRANSPARENCY )
+		#define BLEND_MODE_ALREADY_SET
+		RenderState( BlendEnable, true );
+		RenderState( SrcBlend, SRC_ALPHA );
+		RenderState( DstBlend, INV_SRC_ALPHA);
+
+		BoolAttribute( translucent, true );
+
+		CreateInputTexture2D( TransparencyMask, Linear, 8, "", "_trans", "Material,10/30", Default( 1 ) );
+		CreateTexture2DWithoutSampler( g_tTransparencyMask ) < Channel( R, Box( TransparencyMask ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 	#endif
 
 	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
@@ -127,8 +135,8 @@ PS
 
 		ShadingModelValveStandard sm;
 		float4 result = FinalizePixelMaterial( i, m, sm );
-		#if( S_ALPHA_TEST )
-			result.a = Tex2DS( g_tAlphaMask, TextureFiltering, UV.xy ).r;
+		#if( S_TRANSPARENCY )
+			result.a = Tex2DS( g_tTransparencyMask, TextureFiltering, UV.xy ).r;
 		#endif
 
 		return result;

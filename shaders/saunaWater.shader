@@ -75,7 +75,6 @@ PS
 { 
     StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );
 
-    
     #define BLEND_MODE_ALREADY_SET
     RenderState( BlendEnable, true );
     RenderState( SrcBlend, SRC_ALPHA );
