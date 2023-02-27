@@ -56,12 +56,10 @@ VS
 		PixelInput o = ProcessVertex( i );
 
         float3 vPositionWs = o.vPositionWs.xyz;
-        float4 pPos = Position3WsToPs( vPositionWs.xyz );
-		float4 vertex = pPos;
-		vertex.xyz = pPos.xyz / pPos.w;
-		vertex.x = floor( 240 * vertex.x ) / 240;
-		vertex.y = floor( 240 * vertex.y ) / 240;
-		vertex.xyz *= pPos.w;
+        float4 vertex = Position3WsToPs( vPositionWs.xyz );
+		vertex.xyz = vertex.xyz / vertex.w;
+		vertex.xy = floor( 240 * vertex.xy ) / 240;
+		vertex.xyz *= vertex.w;
 
 		o.vPositionPs = vertex;
 
@@ -126,10 +124,9 @@ PS
         m.Opacity = 1;
         m.Emission = 0;
         m.Transmission = 1;
-	
+
 		ShadingModelValveStandard sm;
 		float4 result = FinalizePixelMaterial( i, m, sm );
-
 		#if( S_ALPHA_TEST )
 			result.a = Tex2DS( g_tAlphaMask, TextureFiltering, UV.xy ).r;
 		#endif

@@ -75,14 +75,13 @@ VS
 		PS_INPUT o = ProcessVertex( i );
 
         float3 vPositionWs = o.vPositionWs.xyz;
-        float4 pPos = Position3WsToPs( vPositionWs.xyz );
-		float4 vertex = pPos;
-		vertex.xyz = pPos.xyz / pPos.w;
-		vertex.x = floor( 240 * vertex.x ) / 240;
-		vertex.y = floor( 240 * vertex.y ) / 240;
-		vertex.xyz *= pPos.w;
-        
-        o.vPositionPs = vertex;
+        float4 vertex = Position3WsToPs( vPositionWs.xyz );
+		vertex.xyz = vertex.xyz / vertex.w;
+		vertex.xy = floor( 240 * vertex.xy ) / 240;
+		vertex.xyz *= vertex.w;
+
+		o.vPositionPs = vertex;
+
 		o.vBlendValues = i.vColorBlendValues;
         o.vPaintValues = i.vColorPaintValues;
 
