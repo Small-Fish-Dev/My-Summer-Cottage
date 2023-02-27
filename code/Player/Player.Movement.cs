@@ -31,7 +31,7 @@ partial class Player
 
 	// Private fields
 	private float stepSize => 8f;
-	private float walkSpeed => 120f;
+	private float walkSpeed => 60f;
 	private float maxStandableAngle => 45f;
 	private Vector3 gravity => Vector3.Down * 650f;
 
@@ -71,7 +71,7 @@ partial class Player
 
 		// Calculate velocity.
 		var targetVelocity = WishVelocity
-			* (walkSpeed * (Water == null && Input.Down( InputButton.Run ) ? 1.3f : 1))
+			* (walkSpeed * (Water == null && Input.Down( InputButton.Run ) ? 3f : 1))
 			* (Ducking ? 0.5f : 1f);
 		
 		Velocity = Vector3.Lerp( Velocity, targetVelocity, 10f * Time.Delta )

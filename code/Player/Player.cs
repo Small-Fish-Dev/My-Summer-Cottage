@@ -57,7 +57,7 @@ public partial class Player : AnimatedEntity
 
 		if ( !tr.Hit ) 
 			return;
-
+		Log.Info( "hi" );
 		tr.Surface.DoFootstep( this, tr, foot, volume );
 	}
 
