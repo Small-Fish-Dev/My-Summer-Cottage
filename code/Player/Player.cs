@@ -47,7 +47,7 @@ public partial class Player : AnimatedEntity
 		if ( !Game.IsClient || lastStepped < 0.2f )
 			return;
 
-		volume *= Velocity.WithZ( 0 ).Length.LerpInverse( 0.0f, 200.0f ) * 0.2f;
+		volume *= Velocity.WithZ( 0 ).Length.LerpInverse( 0.0f, 200.0f ) * 2f;
 		lastStepped = 0;
 
 		var tr = Trace.Ray( pos, pos + Vector3.Down * 20 )
@@ -57,7 +57,7 @@ public partial class Player : AnimatedEntity
 
 		if ( !tr.Hit ) 
 			return;
-		Log.Info( "hi" );
+
 		tr.Surface.DoFootstep( this, tr, foot, volume );
 	}
 
