@@ -100,20 +100,22 @@ PS
 	#if ( S_MODE_DEPTH && !S_TRANSPARENCY )
         #define MainPs Disabled
     #endif
+
+	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
 	
 	#if ( S_TRANSPARENCY )
-		#define BLEND_MODE_ALREADY_SET
-		RenderState( BlendEnable, true );
-		RenderState( SrcBlend, SRC_ALPHA );
-		RenderState( DstBlend, INV_SRC_ALPHA);
+		#if( !F_RENDER_BACKFACES )
+			#define BLEND_MODE_ALREADY_SET
+			RenderState( BlendEnable, true );
+			RenderState( SrcBlend, SRC_ALPHA );
+			RenderState( DstBlend, INV_SRC_ALPHA);
+		#endif
 
 		BoolAttribute( translucent, true );
 
 		CreateInputTexture2D( TransparencyMask, Linear, 8, "", "_trans", "Material,10/30", Default( 1 ) );
 		CreateTexture2DWithoutSampler( g_tTransparencyMask ) < Channel( R, Box( TransparencyMask ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 	#endif
-
-	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
 
 	//
 	// Main
