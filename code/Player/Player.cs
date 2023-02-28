@@ -34,6 +34,7 @@ public partial class Player : AnimatedEntity
 
 		PeeParticle?.SetPosition( 0, Position + Vector3.Up * 40f );
 		PeeParticle?.SetPosition( 1, Position + Vector3.Up * 40f + Rotation.Forward * 25 );
+		PeeParticle?.SetPosition( 2, Velocity );
 	}
 
 	public override void FrameSimulate( IClient cl )
