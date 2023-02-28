@@ -167,8 +167,8 @@ public class Decoder : Base
 	/// </summary>
 	public void SeekToSample( int position )
 	{
-		var frame = position / 5120;
-		stream.Position = frame == 0 ? 12 : 8 + frame * maxFrameBytes;
+		var frame = position * 2 / 5120;
+		stream.Seek( frame == 0 ? 12 : 8 + frame * maxFrameBytes, SeekOrigin.Begin );
 		positionSamples = frame * 5120;
 	}
 }
