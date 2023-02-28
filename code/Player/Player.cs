@@ -34,7 +34,7 @@ public partial class Player : AnimatedEntity
 
 		PeeParticle?.SetPosition( 0, Position + Vector3.Up * 40f );
 		PeeParticle?.SetPosition( 1, Position + Vector3.Up * 40f + Rotation.Forward * 25 );
-		PeeParticle?.SetPosition( 2, Velocity );
+		PeeParticle?.SetPosition( 2, Velocity.WithZ( 0 ) );
 	}
 
 	public override void FrameSimulate( IClient cl )
@@ -53,6 +53,7 @@ public partial class Player : AnimatedEntity
 
 		var tr = Trace.Ray( pos, pos + Vector3.Down * 20 )
 			.Radius( 1 )
+			.WithoutTags( "trigger" )
 			.Ignore( this )
 			.Run();
 

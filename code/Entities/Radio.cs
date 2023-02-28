@@ -7,37 +7,32 @@ public partial class Radio : ModelEntity, IInteractable
 		public string Producer;
 		public string Name;
 		public string Path;
-		public SoundFile File;
-		public bool Loaded;
-
-		public float Duration => File.Duration;
 	}
 
 	public Song? CurrentSong { get; private set; }
 	public TimeSince? ElapsedTime { get; private set; }
+	public float? StartTime { get; private set; }
 
 	string IInteractable.DisplayTitle => $"Mankka";
 
 	private static string[] songFromPath( string path )
 		=> path
-			.Substring( 0, path.Length - 6 )
+			.Substring( 0, path.Length - 4 )
 			.Replace( '_', ' ' )
 			.Split( "-" );
 
-	List<Song> sounds = FileSystem.Mounted.FindFile( "sounds/music/" )
-		.Where( file => file.EndsWith( ".sound" ) )
+	List<Song> sounds = FileSystem.Mounted.FindFile( "sounds/qoa/" )
+		.Where( file => file.EndsWith( ".qoa" ) )
 		.Select( path =>
 		{
-			var name = path.Substring( 0, path.Length - 6 );
+			var name = path.Substring( 0, path.Length - 4 );
 			var separate = songFromPath( path );
-			var vsnd = $"sounds/music/{name}.vsnd";
 
 			return new Song 
 			{ 
 				Producer = separate[0],
 				Name = separate[1],
-				Path = vsnd,
-				File = SoundFile.Load( vsnd )
+				Path = $"sounds/qoa/{name}.qoa",
 			};
 		} )
 		.ToList();
@@ -66,7 +61,7 @@ public partial class Radio : ModelEntity, IInteractable
 				}
 
 				var random = sounds[Game.Random.Int( sounds.Count - 1 )];
-				Play( random );
+				Play( song: random );
 			},
 			Text = "Toggle"
 		} );
@@ -95,21 +90,25 @@ public partial class Radio : ModelEntity, IInteractable
 	/// <summary>
 	/// Play a song.
 	/// </summary>
-	/// <param name="song"></param>
 	/// <param name="target"></param>
-	public void Play( Song song, To? target = null )
+	/// <param name="song"></param>
+	public void Play( To? target = null, Song? song = null )
 	{
 		Game.AssertServer();
-		
-		ElapsedTime = 0f;
-		CurrentSong = song;
 
+		if ( song != null )
+		{
+			ElapsedTime = 0f;
+			CurrentSong = song;
+			StartTime = Time.Now;
+		}
+		
 		// Load file on client and start playing at desired time.
-		playOnClient( target ?? To.Everyone, sounds.IndexOf( song ), 0f );
+		playOnClient( target ?? To.Everyone, sounds.IndexOf( CurrentSong.Value ), StartTime.Value );
 	}
 
 	[ClientRpc]
-	private async void playOnClient( int index, float elapsedTime )
+	private async void playOnClient( int index, float startTime )
 	{
 		sound?.Stop();
 		stream?.Delete();
@@ -121,15 +120,18 @@ public partial class Radio : ModelEntity, IInteractable
 		var song = sounds.ElementAtOrDefault( index );
 		CurrentSong = song;
 
-		sound = Sound.FromEntity( "audiostream.default", this );
-		decoder = new QOA.Decoder( await FileSystem.Mounted.ReadAllBytesAsync( "/sounds/out.qoa" ) );
+		decoder = new QOA.Decoder( await FileSystem.Mounted.ReadAllBytesAsync( song.Path ) );
 		if ( !decoder.Valid )
 		{
 			Log.Error( "QOA Decoder has an invalid haeder." );
 			return;
 		}
-
+		
+		sound = Sound.FromEntity( "audiostream.default", this );
 		stream = sound?.CreateStream( decoder.SampleRate, decoder.Channels );
+
+		var elapsedTime = Time.Now - startTime;
+		decoder.SeekToSample( (int)(decoder.SampleRate * elapsedTime) );
 	}
 
 	protected override void OnDestroy()
@@ -173,7 +175,14 @@ public partial class Radio : ModelEntity, IInteractable
 			return;
 		}
 
-		stream.WriteData( buffer );
+		stream.WriteData( buffer.AsSpan() );
 		lastWritten = 0f;
+	}
+
+	[Event( "ClientConnect" )]
+	static void onConnect( IClient client )
+	{
+		foreach ( var radio in Entity.All.OfType<Radio>() )
+			radio.Play( To.Single( client ) );
 	}
 }

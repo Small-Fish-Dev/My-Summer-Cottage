@@ -60,6 +60,7 @@ public partial class Door : ModelEntity, IInteractable
 	{
 		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 		DefaultTransfrom = Transform;
+		Tags.Add( "solid" );
 	}
 
 	[Event.Tick.Server]

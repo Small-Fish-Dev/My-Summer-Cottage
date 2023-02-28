@@ -32,6 +32,8 @@ public partial class Sauna : BaseGameManager
 		// Create new pawn for new client.
 		var player = new Player();
 		client.Pawn = player;
+
+		Event.Run( "ClientConnect", client );
 	}
 
 	public override void ClientDisconnect( IClient cl, NetworkDisconnectionReason reason )

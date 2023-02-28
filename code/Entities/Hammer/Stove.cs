@@ -50,5 +50,7 @@ public partial class Stove : AnimatedEntity, IInteractable
 	{
 		SetModel( "models/stove/stove.vmdl" );
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
+		
+		Tags.Add( "solid" );
 	}
 }
