@@ -21,7 +21,7 @@ public partial class Radio : ModelEntity, IInteractable
 			.Replace( '_', ' ' )
 			.Split( "-" );
 
-	List<Song> sounds = FileSystem.Mounted.FindFile( "sounds/qoa/" )
+	List<Song> sounds = FileSystem.Mounted.FindFile( "qoa/" )
 		.Where( file => file.EndsWith( ".qoa" ) )
 		.Select( path =>
 		{
@@ -32,7 +32,7 @@ public partial class Radio : ModelEntity, IInteractable
 			{ 
 				Producer = separate[0],
 				Name = separate[1],
-				Path = $"sounds/qoa/{name}.qoa",
+				Path = $"qoa/{name}.qoa",
 			};
 		} )
 		.ToList();
