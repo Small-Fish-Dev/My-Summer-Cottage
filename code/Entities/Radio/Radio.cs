@@ -1,5 +1,7 @@
 ﻿namespace Sauna;
 
+[HammerEntity]
+[Model]
 public partial class Radio : ModelEntity, IInteractable
 {
 	public struct Song
