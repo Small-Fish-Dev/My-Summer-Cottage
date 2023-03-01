@@ -28,7 +28,9 @@ public partial class Radio : ModelEntity, IInteractable
 	public TimeSince? ElapsedTime { get; private set; }
 	public float StartTime { get; private set; }
 
-	string IInteractable.DisplayTitle => $"Mankka";
+	string IInteractable.DisplayTitle => CurrentSong != null 
+		? $"{CurrentSong.Value.Producer} - {CurrentSong.Value.Name}"
+		: "Mankka";
 
 	private static string[] songFromPath( string path )
 		=> path
