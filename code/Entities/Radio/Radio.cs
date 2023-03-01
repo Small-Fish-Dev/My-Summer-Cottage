@@ -28,9 +28,8 @@ public partial class Radio : ModelEntity, IInteractable
 	public TimeSince? ElapsedTime { get; private set; }
 	public float StartTime { get; private set; }
 
-	string IInteractable.DisplayTitle => CurrentSong != null 
-		? $"{CurrentSong.Value.Producer} - {CurrentSong.Value.Name}"
-		: "Mankka";
+	InteractionOffset IInteractable.Offset => Vector3.Up * 10f;
+	string IInteractable.DisplayTitle => "Mankka";
 
 	private static string[] songFromPath( string path )
 		=> path
@@ -61,6 +60,8 @@ public partial class Radio : ModelEntity, IInteractable
 	private TimeSince lastWritten;
 	private QOA.Decoder decoder;
 
+	private RadioDisplay display;
+
 	public Radio()
 	{
 		var interactable = this as IInteractable;
@@ -81,13 +82,13 @@ public partial class Radio : ModelEntity, IInteractable
 				var random = sounds[Game.Random.Int( sounds.Count - 1 )];
 				Play( song: random );
 			},
-			Text = "Toggle"
+			TextFunction = () => CurrentSong != null ? "Turn off" : "Turn on"
 		} );
 	}
 
 	public override void Spawn()
 	{
-		SetModel( "models/arrow.vmdl" );
+		SetModel( "models/radio/radio.vmdl" );
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 	}
 
@@ -173,6 +174,9 @@ public partial class Radio : ModelEntity, IInteractable
 
 			return;
 		}
+
+		if ( Game.IsClient && display == null )
+			display = new( this );
 
 		if ( stream == null || sound == null || !stream.IsValid() || decoder == null )
 			return;
