@@ -7,32 +7,50 @@ public partial class Radio : ModelEntity, IInteractable
 		public string Producer;
 		public string Name;
 		public string Path;
+		public float Duration;
+
+		public Song( string path )
+		{
+			Path = path;
+
+			// Get song duration from QOA header.
+			var stream = FileSystem.Mounted.OpenRead( path );
+			var buffer = new byte[64];
+			stream.Read( buffer, 0, buffer.Length );
+			stream.Close();
+
+			var decoder = new QOA.Decoder( buffer );
+			Duration = (float)decoder.SampleCount / decoder.SampleRate;
+		}
 	}
 
 	public Song? CurrentSong { get; private set; }
 	public TimeSince? ElapsedTime { get; private set; }
-	public float? StartTime { get; private set; }
+	public float StartTime { get; private set; }
 
-	string IInteractable.DisplayTitle => $"Mankka";
+	string IInteractable.DisplayTitle => CurrentSong != null 
+		? $"{CurrentSong.Value.Producer} - {CurrentSong.Value.Name}"
+		: "Mankka";
 
 	private static string[] songFromPath( string path )
 		=> path
-			.Substring( 0, path.Length - 4 )
+			.Substring( 0, path.Length - 5 )
 			.Replace( '_', ' ' )
 			.Split( "-" );
 
-	List<Song> sounds = FileSystem.Mounted.FindFile( "qoa/" )
-		.Where( file => file.EndsWith( ".qoa" ) )
+	List<Song> sounds = FileSystem.Mounted.FindFile( "sounds/qoa/" )
+		.Where( file => file.EndsWith( ".json" ) ) // This .qoa file is on an undercover mission to infiltrate JSON headquarters.
 		.Select( path =>
 		{
-			var name = path.Substring( 0, path.Length - 4 );
+			var name = path.Substring( 0, path.Length - 5 );
 			var separate = songFromPath( path );
+			var fullPath = $"sounds/qoa/{name}.json";
 
-			return new Song 
-			{ 
+			// Return all of the song data.
+			return new Song( fullPath )
+			{
 				Producer = separate[0],
-				Name = separate[1],
-				Path = $"qoa/{name}.qoa",
+				Name = separate[1]
 			};
 		} )
 		.ToList();
@@ -102,9 +120,9 @@ public partial class Radio : ModelEntity, IInteractable
 			CurrentSong = song;
 			StartTime = Time.Now;
 		}
-		
+
 		// Load file on client and start playing at desired time.
-		playOnClient( target ?? To.Everyone, sounds.IndexOf( CurrentSong.Value ), StartTime.Value );
+		playOnClient( target ?? To.Everyone, sounds.IndexOf( CurrentSong.Value ), StartTime );
 	}
 
 	[ClientRpc]
@@ -113,6 +131,7 @@ public partial class Radio : ModelEntity, IInteractable
 		sound?.Stop();
 		stream?.Delete();
 		CurrentSong = null;
+		ElapsedTime = null;
 
 		if ( index > sounds.Count - 1 || index < 0 ) 
 			return;
@@ -130,8 +149,8 @@ public partial class Radio : ModelEntity, IInteractable
 		sound = Sound.FromEntity( "audiostream.default", this );
 		stream = sound?.CreateStream( decoder.SampleRate, decoder.Channels );
 
-		var elapsedTime = Time.Now - startTime;
-		decoder.SeekToSample( (int)(decoder.SampleRate * elapsedTime) );
+		ElapsedTime = MathF.Max( Time.Now - startTime, 0 );
+		decoder.SeekToSample( (int)(decoder.SampleRate * ElapsedTime) );
 	}
 
 	protected override void OnDestroy()
@@ -146,25 +165,24 @@ public partial class Radio : ModelEntity, IInteractable
 	[Event.Tick]
 	void tick()
 	{
-		/*// Pick a new random song.
-		if ( Game.IsServer && (CurrentSong?.Loaded ?? false) && ElapsedTime > CurrentSong?.Duration )
+		// Pick a new random song.
+		if ( Game.IsServer && ElapsedTime > CurrentSong?.Duration + 1f )
 		{
 			var random = sounds[Game.Random.Int( sounds.Count - 1 )];
-			Play( random );
+			Play( song: random );
 
 			return;
-		}*/
+		}
 
 		if ( stream == null || sound == null || !stream.IsValid() || decoder == null )
 			return;
 
-		// Handle getting the samples and writing them to the SoundStream.
-		var amount = QOA.Base.MaxFrameSamples;
-		var delay = (float)amount / decoder.SampleRate / 2; // 1 channel and 44100 sample rate, but give the room for two sample writes to avoid hiccups
+		// Handle reading the samples and writing them to the SoundStream.
+		var delay = (float)QOA.Base.MaxFrameSamples / decoder.SampleRate; // Give room for sample writes.
 		if ( lastWritten < delay ) 
 			return;
 		
-		var buffer = new short[amount];
+		var buffer = new short[QOA.Base.MaxFrameSamples];
 		var read = decoder.ReadSamples( buffer );
 
 		if ( read == -1 )

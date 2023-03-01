@@ -14,8 +14,12 @@
 						remaps = 
 						[
 							{
-								from = "cigarette.vmat"
-								to = "models/cigarette/cigarette.vmat"
+								from = "radio.vmat"
+								to = "models/radio/radio.vmat"
+							},
+							{
+								from = "screen.vmat"
+								to = "materials/dev/gray_25.vmat"
 							},
 						]
 						use_global_default = false
@@ -28,13 +32,12 @@
 				children = 
 				[
 					{
-						_class = "PhysicsShapeCylinder"
+						_class = "PhysicsHullFromRender"
 						parent_bone = ""
-						surface_prop = "default"
+						surface_prop = "metal.sheet"
 						collision_tags = "solid"
-						radius = 0.158734
-						point0 = [ 0.0, -1.761137, 0.0 ]
-						point1 = [ 0.0, 1.883471, 0.0 ]
+						faceMergeAngle = 20.0
+						maxHullVertices = 32
 					},
 				]
 			},
@@ -44,8 +47,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						name = "cigarette_pack"
-						filename = "models/cigarette/cigarette.fbx"
+						filename = "models/radio/radio.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -55,8 +57,12 @@
 						parent_bone = ""
 						import_filter = 
 						{
-							exclude_by_default = false
-							exception_list = [  ]
+							exclude_by_default = true
+							exception_list = 
+							[
+								"radio",
+								"radio_handle",
+							]
 						}
 					},
 				]
