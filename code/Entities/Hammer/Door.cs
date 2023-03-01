@@ -51,6 +51,8 @@ public partial class Door : ModelEntity, IInteractable
 				State = State == DoorState.Open || State == DoorState.Opening
 					? DoorState.Closing
 					: DoorState.Opening;
+
+				Sound.FromEntity( "sounds/door/door_creak.sound", this );
 			},
 			TextFunction = () => State == DoorState.Open || State == DoorState.Opening ? "Close" : "Open"
 		} );
@@ -95,6 +97,11 @@ public partial class Door : ModelEntity, IInteractable
 
 			Transform = DefaultTransfrom;
 			Transform = Transform.RotateAround( Hinge, targetRotation );
+
+			if ( State == DoorState.Close )
+			{
+				Sound.FromEntity( "sounds/wood/wooden_impact.sound", this );
+			}
 
 			return;
 		}
