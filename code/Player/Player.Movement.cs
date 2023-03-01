@@ -5,6 +5,8 @@ partial class Player
 	// Client Inputs
 	[ClientInput] public Vector3 InputDirection { get; protected set; }
 	[ClientInput] public Angles ViewAngles { get; set; }
+	private TimeSince lastWaterSound = 0f;
+	private Vector3 lastPosition;
 
 	/// <summary>
 	/// Normalized vector of the direction the player wishes to move towards.
@@ -97,6 +99,7 @@ partial class Player
 		helper.TryUnstuck();
 		helper.TryMoveWithStep( Time.Delta, stepSize );
 
+		lastPosition = Position;
 		Position = helper.Position
 			.WithZ( Water != null ? MathF.Max( Water.Position.z - 95 + Water.WaveOffset( Position ), helper.Position.z ) : helper.Position.z );
 		Velocity = helper.Velocity
@@ -119,6 +122,19 @@ partial class Player
 		}
 		else
 			GroundEntity = null;
+
+		if ( Water != null )
+		{
+			if ( lastWaterSound >= 1f )
+			{
+				float splashLoudness = Math.Min( (0.4f + lastPosition - Position).z, 1.3f ); // Louder if you're coming in, quieter if you're coming out
+
+				Sound.FromEntity( "sounds/water/water_splash.sound", this )
+					.SetVolume( splashLoudness );
+
+				lastWaterSound = 0f;
+			}
+		}
 	}
 
 	public override void BuildInput()
