@@ -9,7 +9,6 @@
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background-color: darken(#5E7C34, 0.9);
 		flex-direction: column;
 		flex-wrap: wrap;
 		
@@ -25,7 +24,7 @@
 	}
 </style>
 
-<root>
+<root style="background-color: darken(#5E7C34, @(Radio.CurrentSong != null ? 0.7 : 0.9));">
 	@if( Radio.CurrentSong != null )
 	{
 		var song = Radio.CurrentSong.Value;
