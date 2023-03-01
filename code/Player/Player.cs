@@ -19,8 +19,6 @@ public partial class Player : AnimatedEntity
 		Position = Entity.All.OfType<SpawnPoint>().FirstOrDefault().Position;
 
 		Event.Run( "onSpawn", this );
-
-		// peeParticle = Particles.Create( "particles/piss.vpcf" );
 	}
 
 	public override void Simulate( IClient cl )
@@ -32,9 +30,20 @@ public partial class Player : AnimatedEntity
 		InteractionSimulate( cl );
 		EffectSimulate( cl );
 
-		/*peeParticle?.SetPosition( 0, Position + Vector3.Up * 40f );
-		peeParticle?.SetPosition( 1, Position + Vector3.Up * 40f + Rotation.Forward * 25 );
-		peeParticle?.SetPosition( 2, Velocity.WithZ( 0 ) );*/
+		// Pissing
+		if ( Input.Down( InputButton.PrimaryAttack ) )
+		{
+			peeParticle ??= Particles.Create( "particles/piss.vpcf" );
+
+			peeParticle?.SetPosition( 0, Position + Vector3.Up * 40f );
+			peeParticle?.SetPosition( 1, Position + Vector3.Up * 40f + Rotation.Forward * 25 );
+			peeParticle?.SetPosition( 2, Velocity.WithZ( 0 ) );
+		}
+		else
+		{
+			peeParticle?.Destroy();
+			peeParticle = null;
+		}
 	}
 
 	public override void FrameSimulate( IClient cl )
