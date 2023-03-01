@@ -38,11 +38,9 @@ public partial class Player : AnimatedEntity
 		if ( Input.Down( InputButton.PrimaryAttack ) )
 		{
 			peeParticle ??= Particles.Create( "particles/piss.vpcf" );
-			if ( !peeSound.IsPlaying )
-			{
-				peeSound = Sound.FromEntity( "sounds/water/water_stream.sound", this );
 
-			}
+			if ( !peeSound.IsPlaying )
+				peeSound = Sound.FromEntity( "sounds/water/water_stream.sound", this );
 
 			peeParticle?.SetPosition( 0, Position + Vector3.Up * 40f );
 			peeParticle?.SetPosition( 1, Position + Vector3.Up * 40f + Rotation.Forward * 25f );
@@ -52,10 +50,10 @@ public partial class Player : AnimatedEntity
 			{
 				// Cheese the piss sounds until I find a way to get them to play when the particle hits
 				var pissTrace = Trace.Ray( Position + Vector3.Up * 40f, Position + Rotation.Forward * 50f )
-				.Radius( 1 )
-				.WithoutTags( "trigger" )
-				.Ignore( this )
-				.Run();
+					.Radius( 1 )
+					.WithoutTags( "trigger" )
+					.Ignore( this )
+					.Run();
 
 				Sound.FromWorld( "sounds/water/water_splat.sound", pissTrace.HitPosition );
 				lastPeeSound = 0f;
@@ -66,6 +64,7 @@ public partial class Player : AnimatedEntity
 		{
 			peeParticle?.Destroy();
 			peeParticle = null;
+			
 			peeSound.Stop();
 		}
 	}

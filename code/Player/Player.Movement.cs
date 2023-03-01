@@ -123,11 +123,12 @@ partial class Player
 		else
 			GroundEntity = null;
 
+		// Water movement sounds.
 		if ( Water != null )
 		{
-			if ( lastWaterSound >= 1f )
+			if ( lastWaterSound >= 0.75f && !WishVelocity.IsNearZeroLength )
 			{
-				float splashLoudness = Math.Min( (0.4f + lastPosition - Position).z, 1.3f ); // Louder if you're coming in, quieter if you're coming out
+				var splashLoudness = Math.Min( (0.4f + lastPosition - Position).z, 1.3f ); // Louder if you're coming in, quieter if you're coming out
 
 				Sound.FromEntity( "sounds/water/water_splash.sound", this )
 					.SetVolume( splashLoudness );
