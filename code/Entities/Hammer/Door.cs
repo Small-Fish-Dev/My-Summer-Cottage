@@ -16,7 +16,7 @@ public partial class Door : ModelEntity, IInteractable
 	/// The state this door is currently in.
 	/// </summary>
 	[Net] public DoorState State { get; set; }
-	public Transform DefaultTransfrom { get; private set; }
+	public Transform DefaultTransform { get; private set; }
 
 	private Vector3? hinge;
 
@@ -61,7 +61,7 @@ public partial class Door : ModelEntity, IInteractable
 	public override void Spawn()
 	{
 		SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
-		DefaultTransfrom = Transform;
+		DefaultTransform = Transform;
 		Tags.Add( "solid" );
 	}
 
@@ -74,7 +74,7 @@ public partial class Door : ModelEntity, IInteractable
 
 		var time = 0.25f; // In seconds.
 		var amount = 100f;
-		var defaultAngles = DefaultTransfrom.Rotation.Angles();
+		var defaultAngles = DefaultTransform.Rotation.Angles();
 		var direction = State == DoorState.Opening
 			? 1
 			: -1;
@@ -86,7 +86,7 @@ public partial class Door : ModelEntity, IInteractable
 		var targetRotation = defaultAngles
 			.WithYaw( targetYaw )
 			.ToRotation();
-		var inversed = Rotation * DefaultTransfrom.Rotation.Inverse;
+		var inversed = Rotation * DefaultTransform.Rotation.Inverse;
 		var difference = inversed.Distance( targetRotation );
 
 		if ( difference.AlmostEqual( 0, 1f ) )
@@ -95,7 +95,7 @@ public partial class Door : ModelEntity, IInteractable
 				? DoorState.Open
 				: DoorState.Close;
 
-			Transform = DefaultTransfrom;
+			Transform = DefaultTransform;
 			Transform = Transform.RotateAround( Hinge, targetRotation );
 
 			if ( State == DoorState.Close )
@@ -116,7 +116,7 @@ public partial class Door : ModelEntity, IInteractable
 
 		// Rotate around the hinge by a tiny amount every tick.
 		var rot = Rotation.Lerp( inversed, targetRotation, 1f / time * Time.Delta );
-		Transform = DefaultTransfrom;
+		Transform = DefaultTransform;
 		Transform = Transform.RotateAround( Hinge, rot );
 	}
 }
