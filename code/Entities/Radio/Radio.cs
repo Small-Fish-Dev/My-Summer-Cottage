@@ -111,10 +111,6 @@ public partial class Radio : ModelEntity, IInteractable
 	{
 		SetModel( "models/radio/radio.vmdl" );
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
-
-		// Start playing a random song at 30 seconds when spawned.
-		var random = sounds[Game.Random.Int( sounds.Count - 1 )];
-		Play( song: random, skipTime: 30f );
 	}
 
 	/// <summary>
