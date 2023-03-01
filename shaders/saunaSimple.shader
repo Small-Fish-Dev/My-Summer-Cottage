@@ -97,12 +97,6 @@ PS
 	CreateInputTexture2D( Roughness, Linear, 8, "", "_rough", "Material,10/30", Default( 1 ) );
 	CreateTexture2DWithoutSampler( g_tRoughness ) < Channel( R, Box( Roughness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 
-	#if ( S_MODE_DEPTH && !S_TRANSPARENCY )
-        #define MainPs Disabled
-    #endif
-
-	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
-	
 	#if ( S_TRANSPARENCY )
 		#if( !F_RENDER_BACKFACES )
 			#define BLEND_MODE_ALREADY_SET
@@ -113,9 +107,17 @@ PS
 
 		BoolAttribute( translucent, true );
 
-		CreateInputTexture2D( TransparencyMask, Linear, 8, "", "_trans", "Material,10/30", Default( 1 ) );
+		CreateInputTexture2D( TransparencyMask, Linear, 8, "", "_trans", "Transparency,10/20", Default( 1 ) );
 		CreateTexture2DWithoutSampler( g_tTransparencyMask ) < Channel( R, Box( TransparencyMask ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+	
+		float TransparencyRounding< Default( 0.0f ); Range( 0.0f, 1.0f ); UiGroup( "Transparency,10/20" ); >;
 	#endif
+
+	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
+
+	#if ( S_MODE_DEPTH )
+        #define MainPs Disabled
+    #endif
 
 	//
 	// Main
@@ -138,7 +140,8 @@ PS
 		ShadingModelValveStandard sm;
 		float4 result = FinalizePixelMaterial( i, m, sm );
 		#if( S_TRANSPARENCY )
-			result.a = Tex2DS( g_tTransparencyMask, TextureFiltering, UV.xy ).r;
+			float alpha = Tex2DS( g_tTransparencyMask, TextureFiltering, UV.xy ).r;
+			result.a = max( alpha, floor( alpha + TransparencyRounding ) );
 		#endif
 
 		return result;
