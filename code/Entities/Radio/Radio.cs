@@ -142,13 +142,13 @@ public partial class Radio : ModelEntity, IInteractable
 
 		if ( song != null )
 		{
-			ElapsedTime = 0f;
+			ElapsedTime = skipTime;
 			CurrentSong = song;
-			StartTime = Time.Now;
+			StartTime = Time.Now - skipTime;
 		}
 
 		// Load file on client and start playing at desired time.
-		playOnClient( target ?? To.Everyone, sounds.IndexOf( CurrentSong.Value ), StartTime - skipTime );
+		playOnClient( target ?? To.Everyone, sounds.IndexOf( CurrentSong.Value ), StartTime );
 	}
 
 	[ClientRpc]
