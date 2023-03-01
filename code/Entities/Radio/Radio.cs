@@ -111,6 +111,10 @@ public partial class Radio : ModelEntity, IInteractable
 	{
 		SetModel( "models/radio/radio.vmdl" );
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+
+		// Start playing a random song at 30 seconds when spawned.
+		var random = sounds[Game.Random.Int( sounds.Count - 1 )];
+		Play( song: random, skipTime: 30f );
 	}
 
 	/// <summary>
@@ -132,7 +136,7 @@ public partial class Radio : ModelEntity, IInteractable
 	/// </summary>
 	/// <param name="target"></param>
 	/// <param name="song"></param>
-	public void Play( To? target = null, Song? song = null )
+	public void Play( To? target = null, Song? song = null, float skipTime = 0f )
 	{
 		Game.AssertServer();
 
@@ -144,7 +148,7 @@ public partial class Radio : ModelEntity, IInteractable
 		}
 
 		// Load file on client and start playing at desired time.
-		playOnClient( target ?? To.Everyone, sounds.IndexOf( CurrentSong.Value ), StartTime );
+		playOnClient( target ?? To.Everyone, sounds.IndexOf( CurrentSong.Value ), StartTime - skipTime );
 	}
 
 	[ClientRpc]
