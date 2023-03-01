@@ -66,12 +66,14 @@ public partial class Radio : ModelEntity, IInteractable
 	{
 		var interactable = this as IInteractable;
 
+		// Turn radio on.
 		interactable.AddInteraction( InputButton.Use, new()
 		{
 			Predicate = ( Player pawn ) => true,
 			Function = ( Player pawn ) =>
 			{
-				if ( Game.IsClient ) return;
+				if ( Game.IsClient ) 
+					return;
 				
 				if ( ElapsedTime != null )
 				{
@@ -83,6 +85,23 @@ public partial class Radio : ModelEntity, IInteractable
 				Play( song: random );
 			},
 			TextFunction = () => CurrentSong != null ? "Turn off" : "Turn on"
+		} );
+
+		// Play random song.
+		interactable.AddInteraction( InputButton.Reload, new()
+		{
+			Predicate = ( Player pawn ) => CurrentSong != null,
+			Function = ( Player pawn ) =>
+			{
+				if ( Game.IsClient ) 
+					return;
+
+				var array = sounds.Where( song => song.Path != CurrentSong?.Path )
+					.ToArray();
+				var random = array[Game.Random.Int( array.Length - 1 )];
+				Play( song: random );
+			},
+			Text = "Play random"
 		} );
 	}
 
