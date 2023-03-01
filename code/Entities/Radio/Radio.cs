@@ -226,6 +226,7 @@ public partial class Radio : ModelEntity, IInteractable
 	static void onConnect( IClient client )
 	{
 		foreach ( var radio in Entity.All.OfType<Radio>() )
-			radio.Play( To.Single( client ) );
+			if ( radio.CurrentSong != null )
+				radio.Play( To.Single( client ) );
 	}
 }
