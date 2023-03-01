@@ -4,7 +4,7 @@ public struct Marker
 {
 	private static List<Marker> all = new List<Marker>
 	{
-		new( "Home", Vector3.Zero, Color.Red ),
+		new( "The Sauna", new Vector3( 1040f, -840f, 89f ), Color.Red ),
 	};
 	public static IReadOnlyList<Marker> All => all;
 
