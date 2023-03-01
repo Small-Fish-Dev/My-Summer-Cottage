@@ -70,7 +70,7 @@
         if ( Game.LocalPawn is not Player pawn )
             return;
 
-        if ( !HasClass( "visible" ) || pawn.Interactable is not ModelEntity entity ) 
+        if ( !HasClass( "visible" ) || pawn.Interactable is not ModelEntity entity || !entity.IsValid ) 
             return;
 
         var position = (entity.Position + (pawn.Interactable.Offset ?? entity.CollisionWorldSpaceCenter - entity.Position))
