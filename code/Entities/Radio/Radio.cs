@@ -132,6 +132,7 @@ public partial class Radio : ModelEntity, IInteractable
 	/// </summary>
 	/// <param name="target"></param>
 	/// <param name="song"></param>
+	/// <param name="skipTime"></param>
 	public void Play( To? target = null, Song? song = null, float skipTime = 0f )
 	{
 		Game.AssertServer();
@@ -171,7 +172,7 @@ public partial class Radio : ModelEntity, IInteractable
 		sound = Sound.FromEntity( "audiostream.default", this );
 		stream = sound?.CreateStream( decoder.SampleRate, decoder.Channels );
 
-		ElapsedTime = MathF.Max( Time.Now - startTime, 0 );
+		ElapsedTime = MathF.Max( Time.Now - startTime, 0f );
 		decoder.SeekToSample( (int)(decoder.SampleRate * ElapsedTime) );
 	}
 
@@ -203,8 +204,8 @@ public partial class Radio : ModelEntity, IInteractable
 			return;
 
 		// Handle reading the samples and writing them to the SoundStream.
-		var delay = (float)QOA.Base.MaxFrameSamples / decoder.SampleRate; // Give room for sample writes.
-		if ( lastWritten < delay ) 
+		var delay = (float)stream.MaxWriteSampleCount / decoder.SampleRate / 2f; // Give room for sample writes.
+		if ( lastWritten < delay || stream.QueuedSampleCount > 0 ) 
 			return;
 		
 		var buffer = new short[QOA.Base.MaxFrameSamples];
