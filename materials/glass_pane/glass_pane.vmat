@@ -1,0 +1,22 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader"
+
+	//---- Rendering ----
+	F_RENDER_BACKFACES 1
+	F_TRANSPARENCY 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/glass_pane/glass_pane_color.png"
+	Normal "materials/glass_pane/glass_pane_normal.png"
+	Roughness "materials/glass_pane/glass_pane_trans.png"
+
+	//---- Transparency ----
+	TransparencyMask "materials/glass_pane/glass_pane_trans.png"
+	TransparencyRounding "0.000"
+}
