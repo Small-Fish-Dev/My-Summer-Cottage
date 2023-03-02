@@ -3,17 +3,27 @@ RadioDisplay {
     width: 100%;
     height: 100%;
     flex-direction: column;
-
+    
     .text {
+        position: absolute;
+        
+        .background {
+            z-index: 0;
+        }
+        
+        .foreground {
+            z-index: 1;
+            color: darken(#5E7C34, 0.95);
+            text-shadow: 0px 2px 0px rgba(black, 0.95);
+        }
+        
         top: 6px;
         left: 2px;
         width: 100%;
-        text-overflow: ellipsis;
-        font-size: 24px;
-        color: darken(#5E7C34, 0.95);
-        font-family: DS-DIGIB;
-        max-height: 50%;
-        text-shadow: 0px 2px 0px rgba(black, 0.95);
+
+        font-size: 23px;
+        font-family: "DSEG14 Modern";
+        max-height: 100%;
     }
 
     .timeline {
@@ -29,7 +39,7 @@ RadioDisplay {
             top: 0px;
             left: 0px;
             height: 6px;
-            max-width: 190px;
+            max-width: 188px;
             background-color: black;
         }
     }
