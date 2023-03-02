@@ -32,8 +32,7 @@ public class BaseEffect
 	/// </summary>
 	public virtual int MaxStacks { get; } = 1;
 
-	public virtual void Simulate( IClient cl )
-	{
+	public virtual void Simulate( IClient cl ) { }
 
-	}	
+	public virtual void OnEnd( IClient cl ) { }
 }

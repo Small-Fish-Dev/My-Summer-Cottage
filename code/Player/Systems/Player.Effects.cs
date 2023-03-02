@@ -170,6 +170,8 @@ partial class Player
 
 			if ( effect.Duration <= 0 )
 			{
+				effect.OnEnd( cl );
+
 				if ( Game.IsServer )
 					Effects.Remove( effect );
 
