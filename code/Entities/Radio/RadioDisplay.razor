@@ -87,7 +87,7 @@
 			StateHasChanged();
 		}
 		
-		if ( Radio.CurrentSong != null && Radio.ElapsedTime != null )
+		if ( Radio.CurrentSong != null && Radio.ElapsedTime != null && timeline?.Style != null )
 			timeline.Style.Width = Length.Fraction( Radio.ElapsedTime.Value / Radio.CurrentSong.Value.Duration );
 	}
 
