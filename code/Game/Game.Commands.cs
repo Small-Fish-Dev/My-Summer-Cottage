@@ -111,4 +111,23 @@ partial class Sauna
 
 		Subtitles.Send( To.Everyone, text, time, wrapper: wrapper );
 	}
+
+	[ConCmd.Admin( "devcam" )]
+	public static void DeveloperCamera()
+	{
+		var cl = ConsoleSystem.Caller;
+		if ( !cl.IsValid )
+			return;
+
+		var camera = cl.Components.Get<DevCamera>( true );
+		if ( camera == null )
+		{
+			camera = new DevCamera();
+			cl.Components.Add( camera );
+
+			return;
+		}
+
+		camera.Enabled = !camera.Enabled;
+	}
 }

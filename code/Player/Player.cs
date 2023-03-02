@@ -4,7 +4,7 @@ public partial class Player : AnimatedEntity
 {
 	private TimeSince lastStepped;
 	private Particles peeParticle;
-	private Sound peeSound;
+	private Sound? peeSound;
 	private TimeSince lastPeeSound = 0f;
 
 	public override void Spawn()
@@ -39,7 +39,7 @@ public partial class Player : AnimatedEntity
 		{
 			peeParticle ??= Particles.Create( "particles/piss.vpcf" );
 
-			if ( !peeSound.IsPlaying )
+			if ( peeSound == null )
 				peeSound = Sound.FromEntity( "sounds/water/water_stream.sound", this );
 
 			peeParticle?.SetPosition( 0, Position + Vector3.Up * 40f );
@@ -65,7 +65,8 @@ public partial class Player : AnimatedEntity
 			peeParticle?.Destroy();
 			peeParticle = null;
 			
-			peeSound.Stop();
+			peeSound?.Stop();
+			peeSound = null;
 		}
 	}
 
