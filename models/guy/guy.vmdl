@@ -1427,7 +1427,6 @@
 								meshes = 
 								[
 									"legs",
-									"penoid",
 								]
 							},
 							{
@@ -1456,6 +1455,25 @@
 						]
 						hidden_in_tools = false
 					},
+					{
+						_class = "BodyGroup"
+						name = "penoid"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"penoid",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
 				]
 			},
 			{
@@ -1465,6 +1483,7 @@
 					{
 						_class = "JiggleBone"
 						name = "balls"
+						disabled = true
 						jiggle_root_bone = "balls"
 						jiggle_type = 0
 						has_yaw_constraint = true
