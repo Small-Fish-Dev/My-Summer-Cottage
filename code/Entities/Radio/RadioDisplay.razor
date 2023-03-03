@@ -53,13 +53,11 @@
 <root style="background-color: darken(#5E7C34, @(Radio.CurrentSong != null ? 0.7 : 0.9));">
 	@if( Radio.CurrentSong != null )
 	{
-		<label class="text background" style="color: rgba(0,0,0,0.1)">
-			@BackgroundText
-		</label>
+		timeUntilScroll = 0;
+		textOffset = -1;
 
-		<label class="text foreground">
-			@ActualText
-		</label>
+		<label class="text background" style="color: rgba(0,0,0,0.1)">@BackgroundText</label>
+		<label class="text foreground" @ref=displayLabel />
 
 		<panel class="timeline">
 			<panel class="inner" @ref=timeline />
@@ -72,7 +70,7 @@
 
 	/// <summary> Time to wait after each character </summary>
 	public const float ScrollWait = 0.5f;
-	
+
 	/// <summary> Time to wait after returning to start of text </summary>
 	public const float ScrollPostWait = 1.2f;
 
@@ -80,16 +78,17 @@
 	public const int MaxScreenCharacters = 10;
 
 	private Panel timeline;
+	private Label displayLabel;
 	private int textOffset;
 	private TimeUntil timeUntilScroll = ScrollPostWait;
-	
+
 	public string VirtualText => Radio.CurrentSong == null ? null : $"{Radio.CurrentSong.Value.Producer} - {Radio.CurrentSong.Value.Name}";
 	public string ActualText => new string( (VirtualText ?? "")
 		.Skip( textOffset )
 		.Take( MaxScreenCharacters ).ToArray() )
 		.Replace( " ", "!" ); // '!' == All-off character for DSEG font
 	public string BackgroundText => new( '8', MaxScreenCharacters );
-	
+
 	public RadioDisplay( Radio radio )
 	{
 		Radio = radio;
@@ -116,7 +115,7 @@
 		Position = transform.Position + transform.Rotation.Forward * 0.1f;
 		Rotation = transform.Rotation;
 
-		if ( timeUntilScroll )
+		if ( timeUntilScroll && displayLabel != null )
 		{
 			timeUntilScroll = ScrollWait;
 			textOffset++;
@@ -126,8 +125,8 @@
 				textOffset = 0;
 				timeUntilScroll = ScrollPostWait;
 			}
-			
-			StateHasChanged();
+
+			displayLabel.Text = ActualText;
 		}
 		
 		if ( Radio.CurrentSong != null && Radio.ElapsedTime != null && timeline?.Style != null )
