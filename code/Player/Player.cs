@@ -21,28 +21,7 @@ public partial class Player : AnimatedEntity
 		Position = Entity.All.OfType<SpawnPoint>().FirstOrDefault().Position;
 	}
 
-	/// <summary>
-	/// Get the transform of the penoid.
-	/// </summary>
-	/// <returns></returns>
-	public Transform GetPenoidTransform()
-	{
-		// Size of penice.
-		var morph = Morphs.Get( "size" );
-
-		// Size of smallest possible penice.
-		var smallAttachment = GetAttachment( "penoid_min" );
-		if ( smallAttachment == null )
-			return default;
-
-		// Size of biggest possible penice.
-		var bigAttachment = GetAttachment( "penoid_max" );
-		if ( bigAttachment == null )
-			return default;
-
-		// Lerp between the two values to get actual position of penice tip.
-		return Transform.Lerp( smallAttachment.Value, bigAttachment.Value, morph, true );
-	}
+	
 
 	public override void Simulate( IClient cl )
 	{
@@ -128,15 +107,5 @@ public partial class Player : AnimatedEntity
 	public static void SendSubtitle( string text, Color col, float time = 5f, char wrapper = '"' )
 	{
 		Subtitles.Show( text, time, col, wrapper );
-	}
-
-	[Event( "OnSpawn" )]
-	private static void assignMorphs( Player player )
-	{
-		if ( !Game.IsServer )
-			return;
-
-		var rand = new Random( (int)(player.Client.SteamId % int.MaxValue) );
-		player.Morphs.Set( "size", rand.Next( -20, 100 ) / 100f );
 	}
 }

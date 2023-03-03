@@ -2,7 +2,6 @@
 
 partial class Sauna
 {
-	public static CensorHook Censoring { get; private set; }
 	public static DitheringHook Dithering { get; private set; }
 	public static ScreenEffects Effects { get; private set; }
 
@@ -12,7 +11,6 @@ partial class Sauna
 		if ( Game.IsServer )
 			return;
 
-		Censoring = Camera.Main.FindOrCreateHook<CensorHook>();
 		Dithering = Camera.Main.FindOrCreateHook<DitheringHook>();
 
 		Effects = Camera.Main.FindOrCreateHook<ScreenEffects>();
