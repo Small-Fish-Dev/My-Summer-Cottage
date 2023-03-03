@@ -223,11 +223,11 @@ public partial class Radio : ModelEntity, IInteractable
 		lastWritten = 0f;
 	}
 
-	[Event( "ClientConnect" )]
-	static void onConnect( IClient client )
+	[Event( "OnSpawn" )]
+	static void onSpawn( Player player )
 	{
 		foreach ( var radio in Entity.All.OfType<Radio>() )
 			if ( radio.CurrentSong != null )
-				radio.Play( To.Single( client ) );
+				radio.Play( To.Single( player.Client ) );
 	}
 }

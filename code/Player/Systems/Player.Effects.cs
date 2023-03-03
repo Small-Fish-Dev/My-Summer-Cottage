@@ -153,8 +153,8 @@ partial class Player
 {
 	public EffectManager Effects { get; private set; }
 
-	[Event( "onSpawn" )]
-	private static void onSpawn( Player player )
+	[Event( "OnSpawn" )]
+	private static void createEffectManager( Player player )
 	{		
 		if ( Game.IsServer || player == Game.LocalPawn )
 			player.Effects = new( player );

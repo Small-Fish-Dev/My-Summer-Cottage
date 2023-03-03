@@ -19,8 +19,29 @@ public partial class Player : AnimatedEntity
 		EnableShadowCasting = true;
 
 		Position = Entity.All.OfType<SpawnPoint>().FirstOrDefault().Position;
+	}
 
-		Event.Run( "onSpawn", this );
+	/// <summary>
+	/// Get the transform of the penoid.
+	/// </summary>
+	/// <returns></returns>
+	public Transform GetPenoidTransform()
+	{
+		// Size of penice.
+		var morph = Morphs.Get( "size" );
+
+		// Size of smallest possible penice.
+		var smallAttachment = GetAttachment( "penoid_min" );
+		if ( smallAttachment == null )
+			return default;
+
+		// Size of biggest possible penice.
+		var bigAttachment = GetAttachment( "penoid_max" );
+		if ( bigAttachment == null )
+			return default;
+
+		// Lerp between the two values to get actual position of penice tip.
+		return Transform.Lerp( smallAttachment.Value, bigAttachment.Value, morph, true );
 	}
 
 	public override void Simulate( IClient cl )
@@ -32,7 +53,8 @@ public partial class Player : AnimatedEntity
 		InteractionSimulate( cl );
 		EffectSimulate( cl );
 
-		if ( Game.IsClient ) return;
+		if ( Game.IsClient ) 
+			return;
 
 		// Pissing
 		if ( Input.Down( InputButton.PrimaryAttack ) )
@@ -42,14 +64,14 @@ public partial class Player : AnimatedEntity
 			if ( peeSound == null )
 				peeSound = Sound.FromEntity( "sounds/water/water_stream.sound", this );
 
-			peeParticle?.SetPosition( 0, Position + Vector3.Up * 40f );
-			peeParticle?.SetPosition( 1, Position + Vector3.Up * 40f + Rotation.Forward * 25f );
-			peeParticle?.SetPosition( 2, Velocity.WithZ( 0 ) );
+			var transform = GetPenoidTransform();
+			peeParticle?.SetPosition( 0, transform.Position + transform.Rotation.Backward * 2f );
+			peeParticle?.SetPosition( 1, transform.Position + transform.Rotation.Forward * 25f );
 
 			if ( lastPeeSound >= 0.3f )
 			{
 				// Cheese the piss sounds until I find a way to get them to play when the particle hits
-				var pissTrace = Trace.Ray( Position + Vector3.Up * 40f, Position + Rotation.Forward * 50f )
+				var pissTrace = Trace.Ray( transform.Position, transform.Position + transform.Rotation.Forward * 50f )
 					.Radius( 1 )
 					.WithoutTags( "trigger" )
 					.Ignore( this )
@@ -58,7 +80,6 @@ public partial class Player : AnimatedEntity
 				Sound.FromWorld( "sounds/water/water_splat.sound", pissTrace.HitPosition );
 				lastPeeSound = 0f;
 			}
-
 		}
 		else
 		{
@@ -107,5 +128,15 @@ public partial class Player : AnimatedEntity
 	public static void SendSubtitle( string text, Color col, float time = 5f, char wrapper = '"' )
 	{
 		Subtitles.Show( text, time, col, wrapper );
+	}
+
+	[Event( "OnSpawn" )]
+	private static void assignMorphs( Player player )
+	{
+		if ( !Game.IsServer )
+			return;
+
+		var rand = new Random( (int)(player.Client.SteamId % int.MaxValue) );
+		player.Morphs.Set( "size", rand.Next( -20, 100 ) / 100f );
 	}
 }

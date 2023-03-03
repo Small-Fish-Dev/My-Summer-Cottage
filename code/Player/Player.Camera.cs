@@ -18,7 +18,7 @@ partial class Player
 		View.SetParent( this, true );
 		View.EnableShadowInFirstPerson = false;
 
-		Event.Run( "onSpawn", this );
+		Event.Run( "OnSpawn", this );
 	}
 
 	public Vector3 GetEyePosition()
