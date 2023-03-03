@@ -13,9 +13,11 @@ public partial class TemperatureVolume : ModelEntity
 
 	public override void Spawn()
 	{
-		SetupPhysicsFromModel( PhysicsMotionType.Static );
-		EnableSolidCollisions = false;
 		Tags.Add( "trigger" );
+
+		SetupPhysicsFromModel( PhysicsMotionType.Static );
+		EnableAllCollisions = false;
+		EnableTouch = true;
 	}
 
 	public override void StartTouch( Entity other )

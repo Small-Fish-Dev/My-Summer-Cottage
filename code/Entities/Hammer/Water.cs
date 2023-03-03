@@ -14,8 +14,11 @@ public partial class SaunaWater : ModelEntity
 
 	public override void Spawn()
 	{
-		SetupPhysicsFromModel( PhysicsMotionType.Static );
 		Tags.Add( "trigger" );
+
+		SetupPhysicsFromModel( PhysicsMotionType.Static );
+		EnableAllCollisions = false;
+		EnableTouch = true;
 	}
 
 	public override void StartTouch( Entity other )
