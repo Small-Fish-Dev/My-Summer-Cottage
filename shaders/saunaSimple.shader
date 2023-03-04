@@ -135,7 +135,7 @@ PS
         m.TintMask = 0;
         m.Opacity = 1;
         m.Emission = 0;
-        m.Transmission = 1;
+        m.Transmission = 0;
 
 		ShadingModelValveStandard sm;
 		float4 result = FinalizePixelMaterial( i, m, sm );
