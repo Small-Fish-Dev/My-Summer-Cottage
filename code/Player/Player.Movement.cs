@@ -51,7 +51,8 @@ partial class Player
 		}
 
 		// Handle ducking.
-		Ducking = Water == null && Input.Down( InputButton.Duck );
+		Ducking = (Ducking && Trace.Ray( new Ray( Position + CollisionBox.Maxs.z * Vector3.Up, Vector3.Up ), CollisionBox.Maxs.z ).Ignore( this ).WithoutTags( "trigger" ).Run().Hit)
+			|| (Water == null && Input.Down( InputButton.Duck )); // Beautiful.
 
 		// Handle rotation.
 		var viewAngles = new Angles( 0, ViewAngles.yaw, 0 );
@@ -65,7 +66,8 @@ partial class Player
 		WishVelocity = (InputDirection
 			* eyeRotation).Normal.WithZ( 0 );
 
-		var mult = (Water == null && Input.Down( InputButton.Run ) ? 1f : 0.5f)
+		var running = Water == null && !Ducking && Input.Down( InputButton.Run );
+		var mult = (running ? 1f : 0.5f)
 			 * MathF.Min( MathF.Abs( Velocity.WithZ( 0 ).Length ) / walkSpeed, 1f );
 
 		SetAnimParameter( "move_x", MathX.LerpTo( GetAnimParameterFloat( "move_x" ), InputDirection.x * mult, 10f * Time.Delta ) );
@@ -73,7 +75,7 @@ partial class Player
 
 		// Calculate velocity.
 		var targetVelocity = WishVelocity
-			* (walkSpeed * (Water == null && Input.Down( InputButton.Run ) ? 3f : 1))
+			* (walkSpeed * (running ? 3f : 1))
 			* (Ducking ? 0.5f : 1f);
 		
 		Velocity = Vector3.Lerp( Velocity, targetVelocity, 10f * Time.Delta )
@@ -128,7 +130,7 @@ partial class Player
 		{
 			if ( lastWaterSound >= 0.75f && !WishVelocity.IsNearZeroLength )
 			{
-				var splashLoudness = Math.Min( (0.4f + lastPosition - Position).z, 1.3f ); // Louder if you're coming in, quieter if you're coming out
+				var splashLoudness = Math.Min( (0.4f + lastPosition - Position).z, 1.3f ); // Louder if you're coming in, quieter if you're coming out.
 
 				Sound.FromEntity( "sounds/water/water_splash.sound", this )
 					.SetVolume( splashLoudness );
