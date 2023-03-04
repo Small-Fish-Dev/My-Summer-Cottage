@@ -39,6 +39,7 @@ partial class Player
 		var penoid = new ModelEntity();
 		penoid.SetModel( "models/guy/penoid.vmdl" );
 		penoid.SetParent( player, true );
+		penoid.EnableShadowCasting = false;
 		penoid.EnableHideInFirstPerson = false;
 
 		var rand = new Random( (int)(player.Client.SteamId % int.MaxValue) );

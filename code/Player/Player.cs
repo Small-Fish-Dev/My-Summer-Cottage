@@ -15,13 +15,11 @@ public partial class Player : AnimatedEntity
 
 		EnableDrawing = true;
 		EnableHideInFirstPerson = true;
-		EnableShadowInFirstPerson = true;
-		EnableShadowCasting = true;
+		EnableShadowInFirstPerson = false;
+		EnableShadowCasting = false;
 
 		Position = Entity.All.OfType<SpawnPoint>().FirstOrDefault().Position;
 	}
-
-	
 
 	public override void Simulate( IClient cl )
 	{
