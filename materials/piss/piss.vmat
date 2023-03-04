@@ -2,20 +2,12 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader"
-
-	//---- Rendering ----
-	F_TRANSPARENCY 1
+	shader "shaders/saunawater.shader"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	Color "materials/piss/piss_color.png"
-	Normal "materials/default/default_normal.tga"
-	Roughness "materials/default/default_rough.tga"
-
-	//---- Transparency ----
-	TransparencyMask "[0.500000 0.500000 0.500000 0.000000]"
-	TransparencyRounding "0.000"
+	Color "[0.423529 0.356863 0.105882 1.000000]"
+	Normal "materials/water/water_normal.png"
 }
