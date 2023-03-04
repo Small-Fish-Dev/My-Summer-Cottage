@@ -107,7 +107,7 @@ public partial class Door : ModelEntity, IInteractable
 		}
 
 		// Prevent colliding with players.
-		var trace = Trace.Body( PhysicsBody, Position + Rotation.Right * 8f * direction )
+		var trace = Trace.Body( PhysicsBody, Position + Rotation.Right * 4f * direction )
 			.WithAnyTags( "player" )
 			.Run();
 
