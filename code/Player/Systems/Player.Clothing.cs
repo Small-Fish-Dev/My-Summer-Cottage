@@ -1,5 +1,16 @@
 ﻿namespace Sauna;
 
+[Flags]
+public enum ClothingSlot
+{
+	None = 0,
+	Head = 1 << 0,
+	Eyes = 1 << 1,
+	Torso = 1 << 2,
+	Legs = 1 << 3,
+	Feet = 1 << 4,
+}
+
 partial class Player
 {
 	[Net] public ModelEntity Penoid { get; set; }
