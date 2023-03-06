@@ -5,31 +5,68 @@
 @inherits Panel
 
 <style>
-	.input-glyph {
+	InputGlyph {
 		background-size: contain;
 		background-position: center;
 		background-repeat: no-repeat;
 	}
 </style>
 
-<root>
-	<image class="input-glyph" @ref=image />
-</root>
+<root />
 
 @code {
-	private Image image;
-
-	public InputGlyphSize GlyphSize { get; set; }
+	public InputGlyphSize GlyphSize { get; set; } = InputGlyphSize.Small;
 	public InputButton Button { get; set; }
 	public GlyphStyle GlyphStyle { get; set; } = GlyphStyle.Dark.WithSolidABXY();
 
-	protected override void OnAfterTreeRender( bool firstTime )
+	/// <summary>
+	/// Updates the InputGlyph settings.
+	/// </summary>
+	public void Update()
 	{
-		image.Texture = Input.GetGlyph( Button, GlyphSize, GlyphStyle );
+		var glyph = Input.GetGlyph( Button, GlyphSize, GlyphStyle );
+		if ( glyph == null )
+			return;
+
+		Style.BackgroundImage = glyph;
 	}
 
-	protected override int BuildHash()
+	public override void SetProperty( string name, string value )
 	{
-		return HashCode.Combine( Button, GlyphSize, GlyphStyle, Input.UsingController );		
+		// Handle InputGlyphSize, InputButton and GlyphStyle as razor properties.
+		switch ( name )
+		{
+			case "button":
+				if ( !InputButton.TryParse( value, true, out InputButton button ) )
+					break;
+				
+				Button = button;
+				Update();
+
+				break;
+
+			case "size":
+				if ( !InputGlyphSize.TryParse( value, true, out InputGlyphSize glyphSize ) )
+					break;
+
+				GlyphSize = glyphSize;
+				Update();
+
+				break;
+
+			case "style":
+				GlyphStyle = value switch
+				{
+					"knockout" => GlyphStyle.Knockout,
+					"light" => GlyphStyle.Light,
+					"dark" => GlyphStyle.Dark,
+					_ => GlyphStyle
+				};
+				Update();
+
+				break;
+		}
+
+		base.SetProperty( name, value );
 	}
 }
