@@ -13,10 +13,10 @@
 
 		.text {
 			position: absolute;
-			top: 8px;
-			left: 4px;
+			top: 18px;
+			left: 10px;
 			width: 100%;
-			font-size: 24px;
+			font-size: 40px;
 			font-family: "DSEG14 Modern";
 			max-height: 100%;
 
@@ -32,18 +32,18 @@
 
 		.timeline {
 			position: absolute;
-			bottom: 2px;
-			left: 6px;
-			height: 10px;
-			width: 192px;
+			bottom: 5px;
+			left: 15px;
+			height: 20px;
+			width: 380px;
 			border: 1px black;
 
 			.inner {
 				position: absolute;
 				top: 0px;
 				left: 0px;
-				height: 6px;
-				max-width: 188px;
+				height: 15px;
+				max-width: 374px;
 				background-color: black;
 			}
 		}
@@ -53,7 +53,7 @@
 <root style="background-color: darken(#5E7C34, @(Radio.CurrentSong != null ? 0.7 : 0.9));">
 	@if( Radio.CurrentSong != null )
 	{
-		timeUntilScroll = 0;
+		timeUntilScroll = -ScrollPostWait;
 		textOffset = -1;
 
 		<label class="text background" style="color: rgba(0,0,0,0.1)">@BackgroundText</label>
@@ -75,7 +75,7 @@
 	public const float ScrollPostWait = 1.2f;
 
 	/// <summary> Max amount of characters on screen </summary>
-	public const int MaxScreenCharacters = 10;
+	public const int MaxScreenCharacters = 12;
 
 	private Panel timeline;
 	private Label displayLabel;
@@ -93,8 +93,11 @@
 	{
 		Radio = radio;
 
-		var size = new Vector2( 104f, 25f );
-		Scale = 0.5f;
+		var scale = 0.5f;
+		Scale = scale;
+		WorldScale = scale;
+
+		var size = new Vector2( 104f, 25f ) * (1f / scale);
 		PanelBounds = new( -size.x / 2f, -size.y / 2f, size.x, size.y );
 	}
 
