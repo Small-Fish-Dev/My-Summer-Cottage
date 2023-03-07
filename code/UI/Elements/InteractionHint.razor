@@ -5,7 +5,7 @@
 @inherits Panel
 
 <style>
-    .interaction-hint {
+    InteractionHint {
         position: absolute;
         font-weight: bold;
         flex-direction: column;
@@ -45,7 +45,7 @@
 @if ( Game.LocalPawn is Player pawn )
 {
     var valid = pawn.Interactable is ModelEntity entity;
-    <root class="interaction-hint @(valid ? "visible" : "")">
+    <root class="@(valid ? "visible" : "")">
         @if (valid)
         {
             <label class="title" style="color:@(pawn.Interactable.DisplayColor.ToString( true, false ))">@pawn.Interactable.DisplayTitle</label>
@@ -72,10 +72,8 @@
         if ( !HasClass( "visible" ) || pawn.Interactable is not ModelEntity entity || !entity.IsValid ) 
             return;
 
-        var position = (entity.Position + (pawn.Interactable.Offset ?? entity.CollisionWorldSpaceCenter - entity.Position))
-            .ToScreen();
-
-        lerpPosition = Vector2.Lerp( lerpPosition, new Vector2( position.x, position.y ), 10f * Time.Delta );
+        var position = entity.Position + (pawn.Interactable.Offset ?? entity.CollisionWorldSpaceCenter - entity.Position);
+        lerpPosition = Vector2.Lerp( lerpPosition, position.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
 
         Style.Left = Length.Fraction( lerpPosition.x );
         Style.Top = Length.Fraction( lerpPosition.y );

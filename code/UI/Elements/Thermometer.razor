@@ -8,7 +8,7 @@
 	$height: 226px;
 	$ratio: 0.221;
 
-	.experience-display {
+	Thermometer {
 		position: absolute;
 		top: 10px;
 		right: 10px;
@@ -44,7 +44,7 @@
 	}
 </style>
 
-<root class="experience-display @(!Active ? "hidden" : "")">
+<root class="@(!Active ? "hidden" : "")">
 	<panel class="thermometer background">
 		<panel class="mercury background"
 			   style="height: @(MathF.Floor( ((Game.LocalPawn as Player)?.Progress ?? 0f) * 100f))%;" />
