@@ -54,7 +54,7 @@ public partial class Player : AnimatedEntity
 					.Ignore( this )
 					.Run();
 
-				Sound.FromWorld( "sounds/water/water_splat.sound", pissTrace.HitPosition );
+				Sound.FromWorld( "sounds/water/water_splat.sound", pissTrace.EndPosition );
 				lastPeeSound = 0f;
 			}
 		}
