@@ -16,6 +16,13 @@ partial class Player
 	[Net] public ModelEntity Penoid { get; set; }
 
 	/// <summary>
+	/// Size of penoid shaped object in centimeters.
+	/// </summary>
+	public float? Size => Morphs?.Get( "size" )
+		* Penoid.GetAttachment( "penoid_start" )?.Position.Distance( Penoid.GetAttachment( "penoid_max" )?.Position ?? Vector3.Zero )
+		* 2.54f; // Inches to centimeters.
+
+	/// <summary>
 	/// Get the transform of the penoid.
 	/// </summary>
 	/// <returns></returns>

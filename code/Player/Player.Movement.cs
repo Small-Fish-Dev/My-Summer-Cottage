@@ -5,6 +5,7 @@ partial class Player
 	// Client Inputs
 	[ClientInput] public Vector3 InputDirection { get; protected set; }
 	[ClientInput] public Angles ViewAngles { get; set; }
+
 	private TimeSince lastWaterSound = 0f;
 	private Vector3 lastPosition;
 
