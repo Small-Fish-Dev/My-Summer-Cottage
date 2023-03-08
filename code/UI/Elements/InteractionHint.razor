@@ -76,7 +76,7 @@
         lerpPosition = Vector2.Lerp( lerpPosition, position.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
 
         Style.Left = Length.Fraction( MathF.Floor( lerpPosition.x * 200f + 0.5f ) / 200f );
-        Style.Top = Length.Fraction(  MathF.Floor( lerpPosition.y * 200f + 0.5f ) / 200f );
+        Style.Top = Length.Fraction( MathF.Floor( lerpPosition.y * 200f + 0.5f ) / 200f );
     }
 
     protected override int BuildHash()

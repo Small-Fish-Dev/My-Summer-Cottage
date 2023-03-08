@@ -2,7 +2,7 @@
 
 public partial class Ruler : ModelEntity, IInteractable
 {
-	string IInteractable.DisplayTitle => "Viivotin";
+	string IInteractable.DisplayTitle => "Viivain";
 
 	public Ruler()
 	{

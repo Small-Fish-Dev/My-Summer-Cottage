@@ -68,14 +68,14 @@
 	}
 </style>
 
+@if ( Game.LocalPawn is not Player pawn )
+	return;
+
 <root>
 	<panel class="container">	
 		<panel class="center" />
 		
 		@{
-			if ( Game.LocalPawn is not Player pawn )
-				return;
-
 			var yaw = pawn.ViewAngles.yaw;
 			var width = textureWidth * ScaleToScreen;
 

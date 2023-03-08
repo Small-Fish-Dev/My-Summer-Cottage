@@ -1,0 +1,36 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Panel
+
+<style>
+	Crosshair {
+		position: absolute;
+		width: 12px;
+		height: 12px;
+		border: 2px white;
+		border-radius: 50%;
+		transition: opacity 0.5s ease-in-out;
+		transform: translate(-50% -50%)
+	}
+</style>
+
+<root />
+
+@code {
+	private Vector2 lerpPosition;
+
+	public override void Tick()
+	{
+		if ( Game.LocalPawn is not Player pawn )
+			return;
+
+		lerpPosition = Vector2.Lerp( lerpPosition, pawn.InteractionPosition.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
+
+		Style.Left = Length.Fraction( MathF.Floor( lerpPosition.x * 200f + 0.5f ) / 200f );
+        Style.Top = Length.Fraction( MathF.Floor( lerpPosition.y * 200f + 0.5f ) / 200f );
+
+		Style.Opacity = pawn.Interactable == null ? 0.2f : 0.75f;
+	}
+}
