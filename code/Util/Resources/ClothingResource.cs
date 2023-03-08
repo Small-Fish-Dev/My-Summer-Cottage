@@ -1,6 +1,6 @@
 ﻿namespace Sauna;
 
-[GameResource( "Sauna Clothing", "cloth", "Clothing for Sauna!" )]
+[GameResource( "Sauna Clothing", "cloth", "Clothing for Sauna!", Icon = "camera_front" )]
 public class ClothingResource : GameResource
 {
 	/// <summary>
