@@ -46,8 +46,6 @@ partial class Player : IInteractable
 	/// </summary>
 	public float InteractionRadius => 7.5f;
 
-	public Vector3 InteractionPosition { get; private set; }
-
 	protected void InteractionSimulate( IClient cl )
 	{
 		if ( !Game.IsServer && cl != Game.LocalClient )
@@ -57,9 +55,8 @@ partial class Player : IInteractable
 			.Ignore( this )
 			.WithoutTags( "trigger" )
 			.Radius( InteractionRadius )
-			.Run();
-
-		InteractionPosition = trace.EndPosition;
+			.RunAll()
+			.FirstOrDefault( trace => trace.Entity is IInteractable interactable && interactable.Enabled );
 
 		interactions.Clear();
 		if ( trace.Entity is IInteractable interactable )
