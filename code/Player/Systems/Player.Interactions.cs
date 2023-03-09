@@ -56,10 +56,10 @@ partial class Player : IInteractable
 			.WithoutTags( "trigger" )
 			.Radius( InteractionRadius )
 			.RunAll()
-			.FirstOrDefault( trace => trace.Entity is IInteractable interactable && interactable.Enabled );
+			?.FirstOrDefault( trace => trace.Entity is IInteractable interactable && interactable.Enabled );
 
 		interactions.Clear();
-		if ( trace.Entity is IInteractable interactable )
+		if ( trace?.Entity is IInteractable interactable )
 		{
 			Interactable = interactable;
 
