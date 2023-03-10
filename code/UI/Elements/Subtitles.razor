@@ -7,36 +7,33 @@
 <style>
 	Subtitles {
 		position: absolute;
-		bottom: 5px;
-		left: 50%;
-		justify-content: flex-end;
+		top: 25px;
+		left: 25px;
+		justify-content: flex-start;
 		flex-direction: column;
-		align-items: center;
-		transform: translateX(-50%);
+		align-items: flex-start;
 
 		.subtitle {
-			padding: 5px;
-			font-size: 18px;
-			max-width: 600px;
-			background-color: rgba(black, 0.75);
-			text-align: center;
-			margin-top: 5px;
+			text-align: left;
 			transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
-			border-radius: 5px;
-			transform-origin: center;
+			transform: translateX(0px);
 
 			&:intro {
 				opacity: 0;
-				transform: scale(0);
+				transform: translateX(-100%);
 			}
 
 			&:outro {
 				opacity: 0;
-				transform: scale(0);
+				transform: translateX(-100%);
 			}
 
 			.text {
+				padding: 5px;
+				font-size: 16px;
 				color: white;
+				background-color: rgba(black, 0.75);
+				max-width: 600px;
 			}
 		}
 	}
@@ -53,6 +50,7 @@
 
 	public Subtitles()
 	{
+
 		Instance = this;
 	}
 
