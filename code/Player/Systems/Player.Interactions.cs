@@ -14,11 +14,7 @@ partial class Player : IInteractable
 			Predicate = ( Player ply ) => true,
 			Function = ( Player ply ) =>
 			{
-				Subtitles.Send(
-					To.Multiple( new[] { ply.Client, Client } ),
-					$"{ply.Client.Name} kisses {Client.Name}",
-					wrapper: '*'
-				);
+				Eventlogger.Send( To.Multiple( new[] { ply.Client, Client } ), new Eventlogger.Component( $"{ply.Client.Name} kisses {Client.Name}" ) );
 			},
 			Text = "Kiss 😘"
 		} );
@@ -75,7 +71,12 @@ partial class Player : IInteractable
 						interactions.Add( button, info );
 
 						if ( Input.Pressed( button ) )
+						{
 							info.Function( this );
+
+							// Don't let anything interfere with the interaction.
+							Input.ClearButton( button );
+						}
 
 						break;
 					}
