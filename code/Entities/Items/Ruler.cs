@@ -1,6 +1,6 @@
 ﻿namespace Sauna;
 
-public partial class Ruler : ModelEntity, IInteractable
+public partial class Ruler : BaseItem, IInteractable
 {
 	string IInteractable.DisplayTitle => "Viivain";
 
