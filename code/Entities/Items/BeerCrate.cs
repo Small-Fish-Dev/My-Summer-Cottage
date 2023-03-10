@@ -51,7 +51,7 @@ public partial class BeerCrate : BaseItem, IInteractable
 			Function = ( Player player ) => 
 			{
 				if ( Game.IsServer )
-					Count--;
+					Count -= 1;
 			},
 			Text = "Take a beer"
 		} );
@@ -99,10 +99,13 @@ public partial class BeerCrate : BaseItem, IInteractable
 		}
 
 		// Delete the beers that were taken.
-		for ( int i = current; i > current - Math.Abs( previous - current ); i-- )
+		for ( int i = previous; i >= current; i-- )
 		{
 			if ( beers.TryGetValue( i, out var beer ) )
+			{
+				SceneObject.RemoveChild( beer );
 				beer.Delete();
+			}
 		}
 	}
 }
