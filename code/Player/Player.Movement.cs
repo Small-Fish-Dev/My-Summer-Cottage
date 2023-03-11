@@ -94,6 +94,7 @@ partial class Player
 		// Move the player using MoveHelper.
 		helper.Trace = helper.Trace
 			.Size( CollisionBox.Mins, CollisionBox.Maxs )
+			.WithoutTags( "nocollide" )
 			.Ignore( this );
 
 		if ( helper.HitWall )
