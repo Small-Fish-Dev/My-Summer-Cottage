@@ -14,7 +14,10 @@ partial class Player : IInteractable
 			Predicate = ( Player ply ) => true,
 			Function = ( Player ply ) =>
 			{
-				Eventlogger.Send( To.Multiple( new[] { ply.Client, Client } ), new Eventlogger.Component( $"{ply.Client.Name} kisses {Client.Name}" ) );
+				Eventlogger.Send( To.Multiple( new[] { ply.Client, Client } ), new Eventlogger.Component[] 
+				{
+					new ( $"{ply.Client.Name} kisses {Client.Name}" )
+				} );
 			},
 			Text = "Kiss 😘"
 		} );

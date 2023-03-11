@@ -90,7 +90,7 @@
 	/// </summary>
 	/// <param name="time"></param>
 	/// <param name="components"></param>
-	public void Log( float time, params Component[] components )
+	public void Log( float time, IEnumerable<Component> components )
 	{
 		// Handle overflowing.
 		if ( events.Count >= Limit )
@@ -131,7 +131,7 @@
 		} );
 	}
 
-	private static void send( To target, float time, params Component[] components )
+	private static void send( To target, float time, IEnumerable<Component> components )
 	{
 		if ( Game.IsClient )
 			return;
@@ -142,7 +142,7 @@
 
 		// Write the "header".
 		writer.Write( time );
-		writer.Write( components.Length );
+		writer.Write( components.Count() );
 
 		// Write all components.
 		foreach ( var component in components )
@@ -161,7 +161,7 @@
 	/// </summary>
 	/// <param name="target"></param>
 	/// <param name="components"></param>
-	public static void Send( To target, params Component[] components )
+	public static void Send( To target, IEnumerable<Component> components )
 		=> send( target, 5f, components );
 
 	/// <summary>
@@ -170,7 +170,7 @@
 	/// <param name="target"></param>
 	/// <param name="time"></param>
 	/// <param name="components"></param>
-	public static void Send( To target, float time, params Component[] components )
+	public static void Send( To target, float time, IEnumerable<Component> components )
 		=> send(target, time, components);
 
 	/// <summary>
