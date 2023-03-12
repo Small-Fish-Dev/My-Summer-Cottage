@@ -20,6 +20,11 @@ public interface IInteractable
 	public InteractionOffset Offset => null;
 
 	/// <summary>
+	/// If the interaction is enabled or not. Has to match on client & server.
+	/// </summary>
+	public bool Enabled => true;
+
+	/// <summary>
 	/// All interactions of this interactable
 	/// </summary>
 	public Dictionary<InputButton, List<InteractionInfo>> All => Get( this );

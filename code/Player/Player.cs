@@ -26,8 +26,8 @@ public partial class Player : AnimatedEntity
 		EyePosition = GetEyePosition();
 
 		// Simulate the player.
-		MoveSimulate( cl );
 		InteractionSimulate( cl );
+		MoveSimulate( cl );
 		EffectSimulate( cl );
 
 		if ( Game.IsClient ) 
@@ -95,15 +95,13 @@ public partial class Player : AnimatedEntity
 	}
 
 	/// <summary>
-	/// Avoid using this function, use Subtitles.Send(..) instead.
+	/// Please do not use this. 
+	/// Use Eventlogger.Send(...) instead.
 	/// </summary>
-	/// <param name="text"></param>
-	/// <param name="col"></param>
-	/// <param name="time"></param>
-	/// <param name="wrapper"></param>
+	/// <param name="data"></param>
 	[ClientRpc]
-	public static void SendSubtitle( string text, Color col, float time = 5f, char wrapper = '"' )
+	public static void _sendEventlog( byte[] data )
 	{
-		Subtitles.Show( text, time, col, wrapper );
+		Eventlogger.FromBytes( data );
 	}
 }

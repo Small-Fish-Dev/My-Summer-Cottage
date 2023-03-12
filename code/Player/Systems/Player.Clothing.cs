@@ -59,6 +59,7 @@ partial class Player
 		penoid.SetParent( player, true );
 		penoid.EnableShadowCasting = false;
 		penoid.EnableHideInFirstPerson = false;
+		penoid.Transmit = TransmitType.Always;
 
 		var rand = new Random( (int)(player.Client.SteamId % int.MaxValue) );
 		player.Morphs.Set( "size", rand.Next( -20, 100 ) / 100f );

@@ -14,11 +14,10 @@ partial class Player : IInteractable
 			Predicate = ( Player ply ) => true,
 			Function = ( Player ply ) =>
 			{
-				Subtitles.Send(
-					To.Multiple( new[] { ply.Client, Client } ),
-					$"{ply.Client.Name} kisses {Client.Name}",
-					wrapper: '*'
-				);
+				Eventlogger.Send( To.Multiple( new[] { ply.Client, Client } ), new Eventlogger.Component[] 
+				{
+					new ( $"{ply.Client.Name} kisses {Client.Name}" )
+				} );
 			},
 			Text = "Kiss 😘"
 		} );
@@ -46,8 +45,6 @@ partial class Player : IInteractable
 	/// </summary>
 	public float InteractionRadius => 7.5f;
 
-	public Vector3 InteractionPosition { get; private set; }
-
 	protected void InteractionSimulate( IClient cl )
 	{
 		if ( !Game.IsServer && cl != Game.LocalClient )
@@ -57,12 +54,11 @@ partial class Player : IInteractable
 			.Ignore( this )
 			.WithoutTags( "trigger" )
 			.Radius( InteractionRadius )
-			.Run();
-
-		InteractionPosition = trace.EndPosition;
+			.RunAll()
+			?.FirstOrDefault( trace => trace.Entity is IInteractable interactable && interactable.Enabled );
 
 		interactions.Clear();
-		if ( trace.Entity is IInteractable interactable )
+		if ( trace?.Entity is IInteractable interactable )
 		{
 			Interactable = interactable;
 
@@ -78,7 +74,12 @@ partial class Player : IInteractable
 						interactions.Add( button, info );
 
 						if ( Input.Pressed( button ) )
+						{
 							info.Function( this );
+
+							// Don't let anything interfere with the interaction.
+							Input.ClearButton( button );
+						}
 
 						break;
 					}

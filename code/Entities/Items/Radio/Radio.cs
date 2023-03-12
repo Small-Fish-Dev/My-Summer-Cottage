@@ -2,8 +2,11 @@
 
 [HammerEntity]
 [Model]
-public partial class Radio : ModelEntity, IInteractable
+public partial class Radio : BaseItem, IInteractable
 {
+	InteractionOffset IInteractable.Offset => Vector3.Up * 10f;
+	string IInteractable.DisplayTitle => "Mankka";
+
 	public struct Song
 	{
 		public string Producer;
@@ -29,9 +32,6 @@ public partial class Radio : ModelEntity, IInteractable
 	public Song? CurrentSong { get; private set; }
 	public TimeSince? ElapsedTime { get; private set; }
 	public float StartTime { get; private set; }
-
-	InteractionOffset IInteractable.Offset => Vector3.Up * 10f;
-	string IInteractable.DisplayTitle => "Mankka";
 
 	private static string[] songFromPath( string path )
 		=> path
