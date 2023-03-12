@@ -95,6 +95,7 @@ partial class Player
 		helper.Trace = helper.Trace
 			.Size( CollisionBox.Mins, CollisionBox.Maxs )
 			.WithoutTags( "nocollide" )
+			.IncludeClientside()
 			.Ignore( this );
 
 		if ( helper.HitWall )

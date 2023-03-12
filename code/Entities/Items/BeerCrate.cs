@@ -87,11 +87,13 @@ public partial class BeerCrate : BaseItem, IInteractable
 				var row = (int)MathF.Floor( i / Columns ) + 1;
 				var column = i % Columns;
 
-				var rot = Rotation.FromYaw( Game.Random.Int( 0, 360 ) ) * SceneObject.Transform.Rotation;
+				var rot = Rotation.FromYaw( Game.Random.Int( 0, 360 ) );
 				var pos = (row - Rows / 2f - 0.5f) * Offset.Vertical
 					+ (column - Columns / 2f + 0.5f) * Offset.Horizontal
-					+ SceneObject.Transform.Position;
-				var transform = new Transform( pos, rot );
+					+ SceneObject.Position
+					+ Vector3.Up * 0.5f;
+				var transform = new Transform( pos, rot )
+					.RotateAround( SceneObject.Position, SceneObject.Rotation ); // Make sure the beers are properly rotated.
 
 				var sceneObject = new SceneObject( Game.SceneWorld, beerModel, transform );
 				SceneObject.AddChild( $"beer_{i}", sceneObject );

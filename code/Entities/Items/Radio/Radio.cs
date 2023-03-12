@@ -111,6 +111,7 @@ public partial class Radio : BaseItem, IInteractable
 	{
 		SetModel( "models/radio/radio.vmdl" );
 		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+		Transmit = TransmitType.Always;
 	}
 
 	/// <summary>
