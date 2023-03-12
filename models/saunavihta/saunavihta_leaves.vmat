@@ -1,0 +1,22 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader"
+
+	//---- Rendering ----
+	F_RENDER_BACKFACES 1
+	F_TRANSPARENCY 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "models/saunavihta/saunavihta_color.png"
+	Normal "models/saunavihta/saunavihta_normal.png"
+	Roughness "models/saunavihta/saunavihta_rough.png"
+
+	//---- Transparency ----
+	TransparencyMask "models/saunavihta/saunavihta_trans.png"
+	TransparencyRounding "0.500"
+}
