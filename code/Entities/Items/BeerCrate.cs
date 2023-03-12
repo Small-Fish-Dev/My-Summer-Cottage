@@ -88,7 +88,10 @@ public partial class BeerCrate : BaseItem, IInteractable
 				var column = i % Columns;
 
 				var rot = Rotation.FromYaw( Game.Random.Int( 0, 360 ) ) * SceneObject.Transform.Rotation;
-				var transform = new Transform( (row - Rows / 2f - 0.5f) * Offset.Vertical + (column - Columns / 2f + 0.5f) * Offset.Horizontal + SceneObject.Transform.Position, rot );
+				var pos = (row - Rows / 2f - 0.5f) * Offset.Vertical
+					+ (column - Columns / 2f + 0.5f) * Offset.Horizontal
+					+ SceneObject.Transform.Position;
+				var transform = new Transform( pos, rot );
 
 				var sceneObject = new SceneObject( Game.SceneWorld, beerModel, transform );
 				SceneObject.AddChild( $"beer_{i}", sceneObject );
