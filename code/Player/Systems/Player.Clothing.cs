@@ -13,7 +13,7 @@ public enum ClothingSlot
 
 partial class Player
 {
-	[Net] public ModelEntity Penoid { get; set; }
+	[Net] public AnimatedEntity Penoid { get; set; }
 
 	/// <summary>
 	/// Size of penoid shaped object in centimeters.
@@ -54,15 +54,18 @@ partial class Player
 		if ( !Game.IsServer )
 			return;
 
-		var penoid = new ModelEntity();
+		var rand = new Random( (int)(player.Client.SteamId % int.MaxValue) );
+		var size = rand.Next( -20, 100 ) / 100f;
+
+		var penoid = new AnimatedEntity();
 		penoid.SetModel( "models/guy/penoid.vmdl" );
+		penoid.Morphs.Set( "size", size );
 		penoid.SetParent( player, true );
 		penoid.EnableShadowCasting = false;
 		penoid.EnableHideInFirstPerson = false;
 		penoid.Transmit = TransmitType.Always;
 
-		var rand = new Random( (int)(player.Client.SteamId % int.MaxValue) );
-		player.Morphs.Set( "size", rand.Next( -20, 100 ) / 100f );
+		player.Morphs.Set( "size", size );
 		player.Penoid = penoid;
 	}
 }

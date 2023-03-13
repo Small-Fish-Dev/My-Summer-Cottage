@@ -3,6 +3,7 @@
 partial class Sauna
 {
 	public static DitheringHook Dithering { get; private set; }
+	public static EyeProtector Censoring { get; private set; }
 	public static ScreenEffects Effects { get; private set; }
 
 	[Event.Hotload]
@@ -12,6 +13,7 @@ partial class Sauna
 			return;
 
 		Dithering = Camera.Main.FindOrCreateHook<DitheringHook>();
+		Censoring = Camera.Main.FindOrCreateHook<EyeProtector>();
 
 		Effects = Camera.Main.FindOrCreateHook<ScreenEffects>();
 		Effects.Vignette.Smoothness = 0.9f;
