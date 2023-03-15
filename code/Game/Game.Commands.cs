@@ -47,7 +47,6 @@ partial class Sauna
 		}
 
 		trace.Entity?.Delete();
-
 	}
 
 	[ConCmd.Server( "spawn_entity" )]

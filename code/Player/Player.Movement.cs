@@ -149,6 +149,7 @@ partial class Player
 		InputDirection = Input.AnalogMove;
 
 		var ang = (ViewAngles + Input.AnalogLook);
+
 		ViewAngles = ang
 			.WithPitch( MathX.Clamp( ang.pitch, -90, 90 ) )
 			.Normal;

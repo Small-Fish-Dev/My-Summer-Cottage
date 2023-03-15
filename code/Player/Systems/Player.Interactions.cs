@@ -16,10 +16,24 @@ partial class Player : IInteractable
 			{
 				Eventlogger.Send( To.Multiple( new[] { ply.Client, Client } ), new Eventlogger.Component[] 
 				{
-					new ( $"{ply.Client.Name} kisses {Client.Name}" )
+					new ( $"{ply.Client.Name} destroyed {Client.Name}!" )
 				} );
+
+				if ( Game.IsServer )
+				{
+					var normal = (Position - ply.Position).Normal;
+					ToggleRagdoll( normal * 1000f );
+
+					GameTask.RunInThreadAsync( async () =>
+					{
+						await GameTask.Delay( 2000 );
+
+						if ( Ragdoll != null && Ragdoll.IsValid )
+							ToggleRagdoll();
+					} );
+				}
 			},
-			Text = "Kiss 😘"
+			Text = "Destroy 👿"
 		} );
 	}
 

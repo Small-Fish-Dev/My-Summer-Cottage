@@ -17,6 +17,15 @@ partial class Player
 
 	private float fov;
 	private CameraData? overrideCamera = null;
+	private CameraData? ragdollCamera => Ragdoll != null && Ragdoll.IsValid
+		? new CameraData
+		{
+			Position = Ragdoll.GetAttachment( "eyes" ).Value.Position,
+			Rotation = Ragdoll.GetBoneTransform( "head" ).Rotation * Rotation.From( -90, -90, 0 ),
+			FOV = Screen.CreateVerticalFieldOfView( fov = MathX.LerpTo( fov, 70f, 5f * Time.Delta ) ),
+			Viewer = this
+		}
+		: null;
 
 	public override void ClientSpawn()
 	{
@@ -52,7 +61,7 @@ partial class Player
 	{
 		// Assign CameraData
 		EyePosition = GetEyePosition();
-		CameraData = overrideCamera == null
+		CameraData = ragdollCamera ?? (overrideCamera == null
 			? new CameraData
 			{
 				Position = EyePosition,
@@ -60,14 +69,14 @@ partial class Player
 				FOV = Screen.CreateVerticalFieldOfView( fov = MathX.LerpTo( fov, Input.Down( InputButton.View ) ? 20f : 70f, 5f * Time.Delta ) ),
 				Viewer = this
 			}
-			: overrideCamera.Value;
+			: overrideCamera.Value);
 
 		// Set CameraData values.
 		Camera.Position = CameraData.Position;
 		Camera.Rotation = CameraData.Rotation;
 		Camera.FieldOfView = CameraData.FOV;
 		Camera.FirstPersonViewer = CameraData.Viewer;
-		Camera.ZNear = 3f;
+		Camera.ZNear = 2.5f;
 	}
 
 	[Event.Client.Frame]

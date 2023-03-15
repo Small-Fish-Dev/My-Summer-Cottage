@@ -59,7 +59,6 @@ partial class Player
 
 		var penoid = new AnimatedEntity();
 		penoid.SetModel( "models/guy/penoid.vmdl" );
-		penoid.Morphs.Set( "size", size );
 		penoid.SetParent( player, true );
 		penoid.EnableShadowCasting = false;
 		penoid.EnableHideInFirstPerson = false;

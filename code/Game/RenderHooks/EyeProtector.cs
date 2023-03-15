@@ -8,7 +8,6 @@ public class EyeProtector : RenderHook
 			return;
 
 		Order = 1;
-		Enabled = false;
 
 		// Grab textures we're going to need.
 		Graphics.GrabFrameTexture( "ColorTexture" );
@@ -23,7 +22,10 @@ public class EyeProtector : RenderHook
 		var players = Game.Clients.Select( cl => cl.Pawn as Player );
 		foreach ( var player in players )
 		{
-			var penoid = player.Penoid?.SceneObject as SceneModel;
+			var penoid = (player.Ragdoll != null 
+				? (player.Ragdoll.Children.FirstOrDefault( ent => (ent as ModelEntity)?.GetModelName() == "models/guy/penoid.vmdl" ) as ModelEntity)?.SceneObject
+				: player.Penoid?.SceneObject) as SceneModel;
+
 			if ( penoid == null || !penoid.IsValid() )
 				continue;
 
