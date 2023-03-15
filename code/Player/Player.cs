@@ -153,7 +153,6 @@ public partial class Player : AnimatedEntity
 		Ragdoll.Rotation = Rotation;
 		Ragdoll.UsePhysicsCollision = true;
 		Ragdoll.EnableAllCollisions = true;
-		Ragdoll.Transmit = TransmitType.Always;
 
 		Ragdoll.SetModel( GetModelName() );
 		Ragdoll.CopyBonesFrom( this );
