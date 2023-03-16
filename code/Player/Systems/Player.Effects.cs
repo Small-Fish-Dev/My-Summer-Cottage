@@ -161,7 +161,7 @@ public class EffectManager
 			if ( existing != null )
 			{
 				// Add time to existing.
-				existing.Duration = effect.MaxDuration == 0f 
+				existing.Duration = existing.MaxDuration == 0f 
 					? existing.Duration + duration
 					: Math.Min( existing.Duration + duration, existing.MaxDuration );
 				existing.Permanent = permanent;
