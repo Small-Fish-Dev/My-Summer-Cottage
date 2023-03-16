@@ -228,9 +228,6 @@ partial class Player
 			}
 
 			effect.Simulate( this );
-
-			if ( Game.IsClient )
-				DebugOverlay.ScreenText( $"{effect.Text}{(effect.MaxStacks > 1 ? $" {effect.Stacks}x" : "")}{(effect.Permanent ? "" : $" : {effect.Duration:N1}s")}", i );
 		}
 	}
 
