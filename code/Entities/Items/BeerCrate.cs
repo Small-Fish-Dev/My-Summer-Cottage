@@ -1,12 +1,13 @@
 ﻿namespace Sauna;
 
-public partial class BeerCrate : BaseItem, IInteractable
+public partial class BeerCrate : BaseItem
 {
 	public const int Columns = 6;
 	public const int Rows = 4;
 
-	string IInteractable.DisplayTitle => $"Kaljakori ({Count}/{Rows * Columns})";
-	InteractionOffset IInteractable.Offset => Vector3.Up * 25f;
+	public override string Model => "models/beer_crate/beer_crate.vmdl";
+	public override string Title => $"Kaljakori ({Count}/{Rows * Columns})";
+	public override Vector3 TitleOffset => Vector3.Up * 25f;
 
 	/// <summary>
 	/// The amount of beers still in the crate.
@@ -39,7 +40,7 @@ public partial class BeerCrate : BaseItem, IInteractable
 	private (Vector3, Vector3)? offset;
 
 	private Dictionary<int, SceneObject> beers = new();
-	private Model beerModel = Model.Load( "models/beer_bottle/beer.vmdl" );
+	private Model beerModel = Sandbox.Model.Load( "models/beer_bottle/beer.vmdl" );
 
 	public BeerCrate()
 	{
@@ -55,12 +56,6 @@ public partial class BeerCrate : BaseItem, IInteractable
 			},
 			Text = "Take a beer"
 		} );
-	}
-
-	public override void Spawn()
-	{
-		SetModel( "models/beer_crate/beer_crate.vmdl" );
-		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 	}
 
 	public override void OnNewModel( Model model )

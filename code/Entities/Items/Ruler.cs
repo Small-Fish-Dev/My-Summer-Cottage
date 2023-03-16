@@ -1,8 +1,9 @@
 ﻿namespace Sauna;
 
-public partial class Ruler : BaseItem, IInteractable
+public partial class Ruler : BaseItem
 {
-	string IInteractable.DisplayTitle => "Viivain";
+	public override string Model => "models/ruler/ruler.vmdl";
+	public override string Title => "Viivain";
 
 	public Ruler()
 	{
@@ -28,11 +29,5 @@ public partial class Ruler : BaseItem, IInteractable
 			},
 			Text = "Measure"
 		} );
-	}
-
-	public override void Spawn()
-	{
-		SetModel( "models/ruler/ruler.vmdl" );
-		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 	}
 }

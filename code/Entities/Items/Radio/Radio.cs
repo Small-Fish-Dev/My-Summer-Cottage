@@ -2,11 +2,12 @@
 
 [HammerEntity]
 [Model]
-public partial class Radio : BaseItem, IInteractable
+public partial class Radio : BaseItem
 {
-	InteractionOffset IInteractable.Offset => Vector3.Up * 10f;
-	string IInteractable.DisplayTitle => "Mankka";
-
+	public override string Model => "models/radio/radio.vmdl";
+	public override string Title => "Mankka";
+	public override Vector3 TitleOffset => Vector3.Up * 10f;
+	
 	public struct Song
 	{
 		public string Producer;
@@ -109,8 +110,7 @@ public partial class Radio : BaseItem, IInteractable
 
 	public override void Spawn()
 	{
-		SetModel( "models/radio/radio.vmdl" );
-		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+		base.Spawn();
 		Transmit = TransmitType.Always;
 	}
 

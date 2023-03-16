@@ -1,9 +1,10 @@
 ﻿namespace Sauna;
 
-public partial class Mushroom : BaseItem, IInteractable
+public partial class Mushroom : BaseItem
 {
-	string IInteractable.DisplayTitle => "Silokkijak";
-	InteractionOffset IInteractable.Offset => Vector3.Up * 10f;
+	public override string Model => "models/mushroom/mushroom.vmdl";
+	public override string Title => "Silokkijak";
+	public override Vector3 TitleOffset => Vector3.Up * 10f;
 
 	public Mushroom()
 	{
@@ -14,8 +15,7 @@ public partial class Mushroom : BaseItem, IInteractable
 
 	public override void Spawn()
 	{
-		SetModel( "models/mushroom/mushroom.vmdl" );
-		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+		base.Spawn();
 
 		PhysicsEnabled = false;
 		Tags.Add( "nocollide" );
