@@ -10,22 +10,4 @@ public static class SaunaEvent
 	{ 
 		public OnSpawn() : base( nameof( SaunaEvent.OnSpawn ) ) { }
 	}
-
-	/// <summary>
-	/// Ran on player pawn simulate.
-	/// Parameters: IClient cl
-	/// </summary>
-	public class Simulate : EventAttribute
-	{
-		public Simulate() : base( nameof( SaunaEvent.Simulate ) ) { }
-	}
-
-	/// <summary>
-	/// Ran on frame simulate.
-	/// Parameters: IClient cl
-	/// </summary>
-	public class FrameSimulate : EventAttribute
-	{
-		public FrameSimulate() : base( nameof( SaunaEvent.FrameSimulate ) ) { }
-	}
 }

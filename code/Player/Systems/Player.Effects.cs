@@ -206,7 +206,6 @@ partial class Player
 			player.Effects = new( player );
 	}
 
-	[SaunaEvent.Simulate]
 	private void effectSimulate( IClient cl )
 	{
 		for ( int i = 0; i < Effects.All.Count; i++ )

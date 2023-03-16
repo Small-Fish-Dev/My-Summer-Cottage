@@ -33,7 +33,7 @@ public partial class Sauna : BaseGameManager
 		var player = new Player();
 		client.Pawn = player;
 
-		Event.Run( "OnSpawn", player );
+		Event.Run( nameof( SaunaEvent.OnSpawn ), player );
 	}
 
 	public override void ClientDisconnect( IClient cl, NetworkDisconnectionReason reason )

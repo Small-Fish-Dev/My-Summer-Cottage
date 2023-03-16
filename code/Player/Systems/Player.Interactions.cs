@@ -51,7 +51,6 @@ partial class Player : IInteractable
 	/// </summary>
 	public float InteractionRadius => 7.5f;
 
-	[SaunaEvent.Simulate]
 	private void interactionSimulate( IClient cl )
 	{
 		// Don't keep on going if the player is ragdolled.

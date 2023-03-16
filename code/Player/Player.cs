@@ -26,11 +26,16 @@ public partial class Player : AnimatedEntity
 		// Get the position of the player's eyes.
 		EyePosition = GetEyePosition();
 
-		// Simulate event.
-		Event.Run( nameof( SaunaEvent.Simulate ), cl );
+		// Simulate everything.
+		effectSimulate( cl );
+		if ( Ragdoll != null && Ragdoll.IsValid )
+			return;
 
+		interactionSimulate( cl );
+		moveSimulate( cl );
+		
 		// Pissing
-		if ( Game.IsClient || Ragdoll != null ) 
+		if ( Game.IsClient ) 
 			return;
 
 		if ( Input.Down( InputButton.PrimaryAttack ) )
@@ -69,7 +74,8 @@ public partial class Player : AnimatedEntity
 
 	public override void FrameSimulate( IClient cl )
 	{
-		Event.Run( nameof( SaunaEvent.FrameSimulate ), cl );
+		// Simulate camera.
+		cameraSimulate( cl );
 	}
 
 	public override void OnAnimEventFootstep( Vector3 pos, int foot, float volume )

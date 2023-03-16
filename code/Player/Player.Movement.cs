@@ -38,7 +38,6 @@ partial class Player
 	private float maxStandableAngle => 45f;
 	private Vector3 gravity => Vector3.Down * 650f;
 
-	[SaunaEvent.Simulate]
 	private void moveSimulate( IClient cl )
 	{
 		// Don't keep on going if the player is ragdolled.

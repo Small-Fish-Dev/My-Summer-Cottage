@@ -37,7 +37,7 @@ partial class Player
 		View.SetParent( this, true );
 		View.EnableShadowCasting = false;
 
-		Event.Run( "OnSpawn", this );
+		Event.Run( nameof( SaunaEvent.OnSpawn ), this );
 	}
 
 	/// <summary>
@@ -57,7 +57,6 @@ partial class Player
 	public void ApplyCameraOverride( CameraData? data )
 		=> overrideCamera = data;
 
-	[SaunaEvent.FrameSimulate]
 	private void cameraSimulate( IClient cl )
 	{
 		// Assign CameraData
