@@ -224,7 +224,7 @@ public partial class Radio : BaseItem, IInteractable
 		lastWritten = 0f;
 	}
 
-	[Event( "OnSpawn" )]
+	[SaunaEvent.OnSpawn]
 	static void onSpawn( Player player )
 	{
 		foreach ( var radio in Entity.All.OfType<Radio>() )

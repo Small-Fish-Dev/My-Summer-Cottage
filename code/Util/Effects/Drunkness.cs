@@ -6,8 +6,8 @@ public class Drunkness : BaseEffect
 	public override float MaxDuration => 30f;
 	public override int MaxStacks => 5;
 
-	public override void Simulate( IClient cl )
+	public override void Simulate( Player pawn )
 	{
-		base.Simulate( cl );
+		base.Simulate( pawn );
 	}
 }

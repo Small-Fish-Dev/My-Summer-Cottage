@@ -19,18 +19,10 @@ partial class Player : IInteractable
 					new ( $"{ply.Client.Name} destroyed {Client.Name}!" )
 				} );
 
-				if ( Game.IsServer )
+				if ( Game.IsServer && Effects.Get<Unconscious>() == null )
 				{
-					var normal = (Position - ply.Position).Normal;
-					ToggleRagdoll( normal * 1000f );
-
-					GameTask.RunInThreadAsync( async () =>
-					{
-						await GameTask.Delay( 2000 );
-
-						if ( Ragdoll != null && Ragdoll.IsValid )
-							ToggleRagdoll();
-					} );
+					var effect = Effects.Apply<Unconscious>( 2f );
+					effect.Force = 1000f * (Position - ply.Position).Normal;
 				}
 			},
 			Text = "Destroy 👿"
@@ -59,8 +51,13 @@ partial class Player : IInteractable
 	/// </summary>
 	public float InteractionRadius => 7.5f;
 
-	protected void InteractionSimulate( IClient cl )
+	[SaunaEvent.Simulate]
+	private void interactionSimulate( IClient cl )
 	{
+		// Don't keep on going if the player is ragdolled.
+		if ( Ragdoll != null && Ragdoll.IsValid )
+			return;
+
 		if ( !Game.IsServer && cl != Game.LocalClient )
 			return;
 

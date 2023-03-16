@@ -41,6 +41,7 @@ public class EffectManager
 		var index = All.IndexOf( effect );
 		writer.Write( index );
 		writer.Write( effect.Duration );
+		writer.Write( effect.Permanent );
 
 		payloadCount++;
 	}
@@ -54,6 +55,7 @@ public class EffectManager
 		writer.Write( effect.GetType().FullName );
 		writer.Write( effect.Duration );
 		writer.Write( effect.Stacks );
+		writer.Write( effect.Permanent );
 
 		payloadCount++;
 	}
@@ -81,39 +83,75 @@ public class EffectManager
 	}
 
 	/// <summary>
-	/// Removes the effect.
+	/// Removes an effect of specific type.
 	/// Should only be called from server.
 	/// </summary>
 	/// <param name="effect"></param>
-	public void Remove( BaseEffect effect )
+	public void Remove( BaseEffect? effect )
 	{
 		Game.AssertServer();
+
+		if ( effect == null )
+			return;
 
 		using var stream = new MemoryStream();
 		using var writer = new BinaryWriter( stream );
 
-		All.Remove( effect );
 		writeRemove( writer, effect );
 		sendPayload( stream );
+
+		effect.OnEnd( player );
+
+		All.Remove( effect );
+		effect = null;
 	}
+
+	/// <summary>
+	/// Removes an effect of type T.
+	/// </summary>
+	public void Remove<T>() where T : BaseEffect
+		=> Remove( Get<T>() );
+
+	/// <summary>
+	/// Get effect of type T.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <returns></returns>
+	public T? Get<T>() where T : BaseEffect
+		=> All.FirstOrDefault( effect => effect.GetType() == typeof( T ) ) as T;
 
 	/// <summary>
 	/// Applies an effect to the player. 
 	/// Should only be called from server.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public void Apply<T>( float duration = 1f, int stackAmount = 1 ) where T : BaseEffect
+	/// <param name="duration"></param>
+	/// <param name="stacks"></param>
+	/// <param name="permanent"></param>
+	/// <returns></returns>
+	public T Apply<T>( float duration = 1f, int stacks = 1, bool permanent = false ) where T : BaseEffect
 	{
-		Apply( typeof( T ), duration, stackAmount );
+		return Apply( typeof( T ), duration, stacks, permanent ) as T;
 	}
 
-	public void Apply( Type type, float duration = 1f, int stackAmount = 1 )
+	/// <summary>
+	/// Applies an effect of specific type to a player.
+	/// Should only be called from server.
+	/// </summary>
+	/// <param name="type"></param>
+	/// <param name="duration"></param>
+	/// <param name="stacks"></param>
+	/// <param name="permanent"></param>
+	/// <returns></returns>
+	public BaseEffect Apply( Type type, float duration = 1f, int stacks = 1, bool permanent = false )
 	{
 		Game.AssertServer();
 
 		using var stream = new MemoryStream();
 		using var writer = new BinaryWriter( stream );
 		var time = Time.Now;
+
+		BaseEffect effect = null;
 
 		while ( true ) // Just loop.
 		{
@@ -123,20 +161,26 @@ public class EffectManager
 			if ( existing != null )
 			{
 				// Add time to existing.
-				existing.Duration = Math.Min( existing.Duration + duration, existing.MaxDuration );
+				existing.Duration = effect.MaxDuration == 0f 
+					? existing.Duration + duration
+					: Math.Min( existing.Duration + duration, existing.MaxDuration );
+				existing.Permanent = permanent;
 				writeDuration( writer, existing );
 
 				// Add stacks to existing.
-				existing.Stacks = Math.Min( existing.Stacks + stackAmount, existing.MaxStacks );
+				existing.Stacks = Math.Min( existing.Stacks + stacks, existing.MaxStacks );
 				writeStack( writer, existing );
 
 				break;
 			}
 
 			// Create new effect.
-			var effect = GlobalGameNamespace.TypeLibrary.Create( type.FullName, type ) as BaseEffect;
-			effect.Duration = Math.Min( duration, effect.MaxDuration );
-			effect.Stacks = stackAmount;
+			effect = GlobalGameNamespace.TypeLibrary.Create( type.FullName, type ) as BaseEffect;
+			effect.Duration = effect.MaxDuration == 0f
+				? duration
+				: Math.Min( duration, effect.MaxDuration );
+			effect.Stacks = stacks;
+			effect.Permanent = permanent;
 
 			All.Add( effect );
 			writeAdd( writer, effect );
@@ -146,6 +190,7 @@ public class EffectManager
 
 		// Send the payload.
 		sendPayload( stream );
+		return effect;
 	}
 }
 
@@ -153,14 +198,16 @@ partial class Player
 {
 	public EffectManager Effects { get; private set; }
 
-	[Event( "OnSpawn" )]
+	[SaunaEvent.OnSpawn]
 	private static void createEffectManager( Player player )
-	{		
+	{	
+		// Only server and local player need to manage the effects.
 		if ( Game.IsServer || player == Game.LocalPawn )
 			player.Effects = new( player );
 	}
 
-	protected void EffectSimulate( IClient cl )
+	[SaunaEvent.Simulate]
+	private void effectSimulate( IClient cl )
 	{
 		for ( int i = 0; i < Effects.All.Count; i++ )
 		{
@@ -168,20 +215,23 @@ partial class Player
 			if ( effect == null ) 
 				continue;
 
-			if ( effect.Duration <= 0 )
+			if ( !effect.Permanent )
 			{
-				effect.OnEnd( cl );
+				if ( effect.Duration <= 0 )
+				{
+					if ( Game.IsServer )
+						Effects.Remove( effect );
 
-				if ( Game.IsServer )
-					Effects.Remove( effect );
+					continue;
+				}
 
-				continue;
+				effect.Duration -= Time.Delta;
 			}
 
-			effect.Duration -= Time.Delta;
-			effect.Simulate( cl );
-			
-			DebugOverlay.ScreenText( $"{effect.Text}{(effect.MaxStacks > 1 ? $" {effect.Stacks}x" : "")} : {effect.Duration:N1}s", i );
+			effect.Simulate( this );
+
+			if ( Game.IsClient )
+				DebugOverlay.ScreenText( $"{effect.Text}{(effect.MaxStacks > 1 ? $" {effect.Stacks}x" : "")}{(effect.Permanent ? "" : $" : {effect.Duration:N1}s")}", i );
 		}
 	}
 
@@ -201,21 +251,22 @@ partial class Player
 			var index = reader.ReadInt32();
 			var effect = pawn.Effects?.All.ElementAtOrDefault( index );
 
+			if ( effect == null && type != EffectType.Add )
+				continue;
+
 			switch ( type )
 			{
 				case EffectType.Stack:
 					var stacks = reader.ReadInt32();
-
-					if ( effect != null )
-						effect.Stacks = stacks;
+					effect.Stacks = stacks;
 
 					break;
 
 				case EffectType.Duration:
 					var duration = reader.ReadSingle();
-
-					if ( effect != null )
-						effect.Duration = duration;
+					var permanent = reader.ReadBoolean();
+					effect.Duration = duration;
+					effect.Permanent = permanent;
 
 					break;
 
@@ -223,18 +274,20 @@ partial class Player
 					var typeName = reader.ReadString();
 					var newDuration = reader.ReadSingle();
 					var newStacks = reader.ReadInt32();
+					var newPermanent = reader.ReadBoolean();
 
 					var newEffect = GlobalGameNamespace.TypeLibrary.Create( typeName, typeof( BaseEffect ) ) as BaseEffect;
 					newEffect.Duration = newDuration;
 					newEffect.Stacks = newStacks;
+					newEffect.Permanent = newPermanent;
 
 					pawn.Effects?.All.Insert( index, newEffect );
 
 					break;
 
 				case EffectType.Remove:
-					if ( effect != null )
-						pawn.Effects?.All.Remove( effect );
+					effect.OnEnd( pawn );
+					pawn.Effects?.All.Remove( effect );
 
 					break;
 			}

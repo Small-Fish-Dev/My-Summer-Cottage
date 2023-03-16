@@ -48,7 +48,7 @@ partial class Player
 		return Transform.Lerp( smallAttachment.Value, bigAttachment.Value, morph, true );
 	}
 
-	[Event( "OnSpawn" )]
+	[SaunaEvent.OnSpawn]
 	private static void createPenoid( Player player )
 	{
 		if ( !Game.IsServer )

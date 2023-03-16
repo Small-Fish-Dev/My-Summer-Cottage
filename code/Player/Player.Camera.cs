@@ -57,7 +57,8 @@ partial class Player
 	public void ApplyCameraOverride( CameraData? data )
 		=> overrideCamera = data;
 
-	protected void CameraSimulate( IClient cl )
+	[SaunaEvent.FrameSimulate]
+	private void cameraSimulate( IClient cl )
 	{
 		// Assign CameraData
 		EyePosition = GetEyePosition();

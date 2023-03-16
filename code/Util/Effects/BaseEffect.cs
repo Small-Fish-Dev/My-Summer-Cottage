@@ -13,6 +13,11 @@ public class BaseEffect
 	public float Duration { get; set; }
 
 	/// <summary>
+	/// Is the effect permanent or not.
+	/// </summary>
+	public bool Permanent { get; set; }
+
+	/// <summary>
 	/// The text displayed for this effect.
 	/// </summary>
 	public virtual string Text { get; }
@@ -25,14 +30,14 @@ public class BaseEffect
 	/// <summary>
 	/// The maximum duration for this effect in seconds.
 	/// </summary>
-	public virtual float MaxDuration { get; } = 15f;
+	public virtual float MaxDuration { get; } = 0f;
 
 	/// <summary>
 	/// The maximum amount of stacks for this effect.
 	/// </summary>
 	public virtual int MaxStacks { get; } = 1;
 
-	public virtual void Simulate( IClient cl ) { }
+	public virtual void Simulate( Player pawn ) { }
 
-	public virtual void OnEnd( IClient cl ) { }
+	public virtual void OnEnd( Player pawn ) { }
 }

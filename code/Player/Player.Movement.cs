@@ -38,12 +38,13 @@ partial class Player
 	private float maxStandableAngle => 45f;
 	private Vector3 gravity => Vector3.Down * 650f;
 
-	/// <summary>
-	/// Simulates the player's movement.
-	/// </summary>
-	/// <param name="cl"></param>
-	protected void MoveSimulate( IClient cl )
+	[SaunaEvent.Simulate]
+	private void moveSimulate( IClient cl )
 	{
+		// Don't keep on going if the player is ragdolled.
+		if ( Ragdoll != null && Ragdoll.IsValid )
+			return;
+
 		// Handle jumping.
 		if ( Input.Pressed( InputButton.Jump ) && GroundEntity != null && Water == null )
 		{

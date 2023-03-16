@@ -2,11 +2,6 @@
 
 public partial class Player : AnimatedEntity
 {
-	/// <summary>
-	/// The ragdoll entity of this player.
-	/// </summary>
-	[Net] public AnimatedEntity Ragdoll { get; set; }
-
 	private TimeSince lastStepped;
 	private Particles peeParticle;
 	private Sound? peeSound;
@@ -31,21 +26,13 @@ public partial class Player : AnimatedEntity
 		// Get the position of the player's eyes.
 		EyePosition = GetEyePosition();
 
-		// Simulate player's effects.
-		EffectSimulate( cl );
-
-		// Don't do the rest if we're ragdolled.
-		if ( Ragdoll != null && Ragdoll.IsValid )
-			return;
-
-		// Simulate the player.
-		InteractionSimulate( cl );
-		MoveSimulate( cl );
-
-		if ( Game.IsClient ) 
-			return;
+		// Simulate event.
+		Event.Run( nameof( SaunaEvent.Simulate ), cl );
 
 		// Pissing
+		if ( Game.IsClient || Ragdoll != null ) 
+			return;
+
 		if ( Input.Down( InputButton.PrimaryAttack ) )
 		{
 			peeParticle ??= Particles.Create( "particles/piss.vpcf" );
@@ -82,8 +69,7 @@ public partial class Player : AnimatedEntity
 
 	public override void FrameSimulate( IClient cl )
 	{
-		// Simulate camera.
-		CameraSimulate( cl );
+		Event.Run( nameof( SaunaEvent.FrameSimulate ), cl );
 	}
 
 	public override void OnAnimEventFootstep( Vector3 pos, int foot, float volume )
@@ -118,89 +104,5 @@ public partial class Player : AnimatedEntity
 	public static void _sendEventlog( byte[] data )
 	{
 		Eventlogger.FromBytes( data );
-	}
-
-	/// <summary>
-	/// Ragdoll or unragdoll the player.
-	/// </summary>
-	public void ToggleRagdoll( Vector3? force = null, Vector3? forcePosition = null )
-	{
-		Game.AssertServer();
-
-		// Reset the player.
-		EnableDrawing = Ragdoll != null;
-		Position = Ragdoll != null
-			? Ragdoll.Position
-			: Position;
-		EnableAllCollisions = EnableDrawing;
-
-		ResetInterpolation();
-		ResetAnimParameters();
-
-		// Remove ragdoll.
-		if ( Ragdoll != null && Ragdoll.IsValid )
-		{
-			Ragdoll.Delete();
-			return;
-		}
-
-		// Create ragdoll.
-		Ragdoll = new AnimatedEntity();
-		Ragdoll.UseAnimGraph = false;
-		Ragdoll.Tags.Add( "ragdoll", "solid", "debris" );
-
-		Ragdoll.Position = Position;
-		Ragdoll.Rotation = Rotation;
-		Ragdoll.UsePhysicsCollision = true;
-		Ragdoll.EnableAllCollisions = true;
-
-		Ragdoll.SetModel( GetModelName() );
-		Ragdoll.CopyBonesFrom( this );
-		Ragdoll.CopyFrom( this );
-		Ragdoll.CopyMorphs( this );
-
-		Ragdoll.EnableAllCollisions = true;
-		Ragdoll.SurroundingBoundsMode = SurroundingBoundsType.Physics;
-		Ragdoll.PhysicsGroup.Velocity = Velocity;
-		Ragdoll.PhysicsEnabled = true;
-
-		// Copy all children.
-		foreach ( var child in Children )
-		{
-			if ( child is not ModelEntity childEntity ) 
-				continue;
-
-			var copy = new ModelEntity();
-			copy.SetModel( childEntity.GetModelName() );
-			copy.SetParent( Ragdoll, true );
-			copy.CopyBodyGroups( Ragdoll );
-			copy.CopyMaterialGroup( Ragdoll );
-		}
-
-		// Apply force.
-		if ( force != null )
-		{
-			if ( forcePosition != null )
-			{
-				var body = Ragdoll.PhysicsBody;
-
-				if ( body != null )
-				{
-					body.ApplyImpulseAt( forcePosition.Value, force.Value * body.Mass );
-					return;
-				}
-			}
-
-			Ragdoll.PhysicsGroup.ApplyImpulse( force.Value );
-		}
-	}
-
-	[ConCmd.Server("ragdol")]
-	public static void Test()
-	{
-		if ( ConsoleSystem.Caller.Pawn is not Player pawn )
-			return;
-
-		pawn.ToggleRagdoll();
 	}
 }
