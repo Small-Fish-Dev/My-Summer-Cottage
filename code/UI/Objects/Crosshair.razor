@@ -1,0 +1,31 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Panel
+
+<style>
+	Crosshair {
+		position: absolute;
+		width: 8px;
+		height: 8px;
+		border: 2px white;
+		border-radius: 50%;
+		transform: translate(-50% -50%);
+		transition: opacity 0.5s ease-in-out;
+		left: 50%;
+		top: 50%;
+	}
+</style>
+
+@if ( Game.LocalPawn is not Player pawn )
+	return;
+
+<root style="opacity: @(pawn.Interactable == null ? 0.25f : 0.75f)" />
+
+@code {
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( (Game.LocalPawn as Player)?.Interactable == null );
+	}
+}

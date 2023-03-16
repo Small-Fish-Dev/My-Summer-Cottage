@@ -1,0 +1,119 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits WorldPanel
+
+<style>
+	Speechbubble {
+		position: absolute;
+		background-color: rgba(white, 0);
+		flex-direction: column;
+		text-align: left;
+		flex-wrap: wrap;
+		justify-content: flex-end;
+
+		.border {
+			background-color: rgba(white, 0);
+			border-image: url(ui/speechbubble.png) fill;
+			transition: transform 1s ease-in-out;
+			transform: scale(1);
+
+			.label {
+				bottom: 15px;
+				right: 15px;
+				margin-right: -20px;
+				margin-bottom: -15px;
+				font-size: 32px;
+				font-family: Retro-Gaming;
+				font-weight: bold;
+				color: black;
+				text-shadow: 3px 3px 0px rgba(black, 0.75);
+			}
+
+			&:intro {
+				transform: scale(0);
+			}
+
+			&:outro {
+				transform: scale(0);
+			}
+		}
+	}
+</style>
+
+<root>
+	<panel class="border">
+		<label class="label">@Text.Substring( 0, textIndex )</label>
+	</panel>
+</root>
+
+@code {
+	public const float Delay = 0.1f;
+	public const float Time = 4f;
+
+	public string Text { get; set; }
+	public Player From { get; set; }
+
+	private int textIndex = 0;
+	private TimeUntil nextIndex = Delay;
+	private TimeSince sinceCreation;
+	private TimeSince? finished = null;
+
+	protected Speechbubble( string text, Player player )
+	{
+		// This fixes the colors and transparency depth issues.
+		SceneObject.RenderLayer = SceneRenderLayer.OverlayWithDepth;
+
+		Text = text;
+		From = player;
+
+		var size = new Vector2( 1000f, 800f );
+		WorldScale = 0.5f;
+		PanelBounds = new Rect( size.x / 10f, -size.y, size.x, size.y );
+	}
+
+	public override void Tick()
+	{
+		// Check if attached player is valid.
+		if ( From == null || !From.IsValid )
+		{
+			if ( !IsDeleting )
+				Delete();
+
+			return;
+		}
+
+		// Check if displayed for long enough.
+		if ( finished != null && finished > Time )
+		{
+			if ( !IsDeleting )
+				Delete();
+
+			return;
+		}
+
+		// Character adding.
+		if ( textIndex < Text.Length )
+			if ( nextIndex )
+			{
+				nextIndex = Delay;
+				textIndex++;
+			}
+		else if ( finished == null )
+			finished = 0f;
+
+		// Set position and rotation.
+		var targetPosition = From.GetEyePosition() + Vector3.Up * (5f + MathF.Abs( 2f * MathF.Sin( sinceCreation ) ));
+		Position = Vector3Extensions.Round( targetPosition * 4f ) / 4f;
+
+		var rotation = Rotation.LookAt( Camera.Position - Position );
+		var targetRoll = 5f * MathF.Sin( sinceCreation * 1.5f );
+		Rotation = Rotation.From( 0, rotation.Yaw(), MathF.Floor( targetRoll * 2f + 0.5f ) / 2f );
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( textIndex );
+	}
+}
