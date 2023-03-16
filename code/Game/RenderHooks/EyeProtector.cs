@@ -23,7 +23,7 @@ public class EyeProtector : RenderHook
 		foreach ( var player in players )
 		{
 			var penoid = (player.Ragdoll != null 
-				? (player.Ragdoll.Children.FirstOrDefault( ent => (ent as ModelEntity)?.GetModelName() == "models/guy/penoid.vmdl" ) as ModelEntity)?.SceneObject
+				? (player.Ragdoll.Children.FirstOrDefault( ent => (ent as ModelEntity)?.GetModelName() == "models/guy/penoid.vmdl" ) as AnimatedEntity)?.SceneObject
 				: player.Penoid?.SceneObject) as SceneModel;
 
 			if ( penoid == null || !penoid.IsValid() )

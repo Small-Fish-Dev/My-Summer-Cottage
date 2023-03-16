@@ -18,8 +18,8 @@ partial class Player
 	/// <summary>
 	/// Size of penoid shaped object in centimeters.
 	/// </summary>
-	public float? Size => Morphs?.Get( "size" )
-		* Penoid.GetAttachment( "penoid_start" )?.Position.Distance( Penoid.GetAttachment( "penoid_max" )?.Position ?? Vector3.Zero )
+	public float? Size => Morphs.Get( "size" )
+		* GetAttachment( "penoid_start", false )?.Position.Distance( GetAttachment( "penoid_max", false )?.Position ?? Vector3.Zero )
 		* 2.54f; // Inches to centimeters.
 
 	/// <summary>
@@ -35,12 +35,12 @@ partial class Player
 		var morph = Morphs.Get( "size" );
 
 		// Size of smallest possible penice.
-		var smallAttachment = Penoid.GetAttachment( "penoid_min" );
+		var smallAttachment = GetAttachment( "penoid_min" );
 		if ( smallAttachment == null )
 			return default;
 
 		// Size of biggest possible penice.
-		var bigAttachment = Penoid.GetAttachment( "penoid_max" );
+		var bigAttachment = GetAttachment( "penoid_max" );
 		if ( bigAttachment == null )
 			return default;
 
@@ -55,7 +55,7 @@ partial class Player
 			return;
 
 		var rand = new Random( (int)(player.Client.SteamId % int.MaxValue) );
-		var size = rand.Next( -20, 100 ) / 100f;
+		var size = rand.Next( 0, 100 ) / 100f;
 
 		var penoid = new AnimatedEntity();
 		penoid.SetModel( "models/guy/penoid.vmdl" );
