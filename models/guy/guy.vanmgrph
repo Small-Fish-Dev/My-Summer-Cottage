@@ -15,7 +15,7 @@
 				{
 					_class = "CSubtractAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -208.0, 160.0 ]
+					m_vecPosition = [ -448.0, 128.0 ]
 					m_nNodeID = 
 					{
 						m_id = 226310537
@@ -44,7 +44,7 @@
 							m_id = 4294967295
 						}
 					}
-					m_timingBehavior = "UseChild1"
+					m_timingBehavior = "UseChild2"
 					m_flTimingBlend = 0.5
 					m_footMotionTiming = "Child1"
 					m_bResetBase = true
@@ -60,19 +60,19 @@
 				value = 
 				{
 					_class = "CLookAtAnimNode"
-					m_sName = "Unnamed"
-					m_vecPosition = [ 416.0, 32.0 ]
+					m_sName = "Look At [COMMENT INSIDE]"
+					m_vecPosition = [ -32.0, 32.0 ]
 					m_nNodeID = 
 					{
 						m_id = 291461497
 					}
 					m_networkMode = "ServerAuthoritative"
-					m_sNote = ""
+					m_sNote = "Why 2 different Look At\?:\nCurrently there\'s a S&box bug that clips out any mesh related to some lookat bones, namely the head and the arms, to determine the cause.\nAs a workaround, it switched to a lookat with only the neck, which seems to be unaffected."
 					m_inputConnection = 
 					{
 						m_nodeID = 
 						{
-							m_id = 519857794
+							m_id = 2021447584
 						}
 						m_outputID = 
 						{
@@ -116,7 +116,7 @@
 				{
 					_class = "CLookAtAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 624.0, 80.0 ]
+					m_vecPosition = [ 416.0, 80.0 ]
 					m_nNodeID = 
 					{
 						m_id = 436595149
@@ -127,7 +127,7 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 291461497
+							m_id = 519857794
 						}
 						m_outputID = 
 						{
@@ -226,7 +226,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 2021447584
+									m_id = 291461497
 								}
 								m_outputID = 
 								{
@@ -253,9 +253,10 @@
 									m_conditions = 
 									[
 										{
-											_class = "CTimeCondition"
-											m_comparisonOp = 3
-											m_comparisonValue = 0.66
+											_class = "CFinishedCondition"
+											m_comparisonOp = 0
+											m_option = "FinishedConditionOption_OnFinished"
+											m_bIsFinished = true
 										},
 									]
 									m_blendDuration = 0.5
@@ -282,7 +283,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 2106037964
+									m_id = 969115302
 								}
 								m_outputID = 
 								{
@@ -314,7 +315,7 @@
 				{
 					_class = "CGroupAnimNode"
 					m_sName = "penoid_size_delta"
-					m_vecPosition = [ 816.0, 112.0 ]
+					m_vecPosition = [ 608.0, 112.0 ]
 					m_nNodeID = 
 					{
 						m_id = 836967061
@@ -557,13 +558,68 @@
 			{
 				key = 
 				{
+					m_id = 969115302
+				}
+				value = 
+				{
+					_class = "CLookAtAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ -32.0, 112.0 ]
+					m_nNodeID = 
+					{
+						m_id = 969115302
+					}
+					m_networkMode = "ServerAuthoritative"
+					m_sNote = ""
+					m_inputConnection = 
+					{
+						m_nodeID = 
+						{
+							m_id = 2106037964
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_target = "VectorParameter"
+					m_param = 
+					{
+						m_id = 670101641
+					}
+					m_weightParam = 
+					{
+						m_id = 4294967295
+					}
+					m_lookatChainName = "lookatnohead"
+					m_attachmentName = "forward"
+					m_flYawLimit = 90.0
+					m_flPitchLimit = 60.0
+					m_bResetBase = true
+					m_bLockWhenWaning = false
+					m_bUseHysteresis = false
+					m_flHysteresisInnerAngle = 1.0
+					m_flHysteresisOuterAngle = 20.0
+					m_damping = 
+					{
+						_class = "CAnimInputDamping"
+						m_speedFunction = "Spring"
+						m_fSpeedScale = 5.0
+						m_fMinSpeed = 2.0
+						m_fMaxTension = 100.0
+					}
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 1050933204
 				}
 				value = 
 				{
 					_class = "CStateMachineAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 832.0, 32.0 ]
+					m_vecPosition = [ 624.0, 32.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1050933204
@@ -618,7 +674,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 291461497
+									m_id = 519857794
 								}
 								m_outputID = 
 								{
@@ -714,7 +770,7 @@
 				{
 					_class = "CSubtractAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 1056.0, 32.0 ]
+					m_vecPosition = [ 848.0, 32.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1147500083
@@ -754,13 +810,34 @@
 			{
 				key = 
 				{
+					m_id = 1189517016
+				}
+				value = 
+				{
+					_class = "CCommentAnimNode"
+					m_sName = "Field of broken hopes"
+					m_vecPosition = [ 320.0, 352.0 ]
+					m_nNodeID = 
+					{
+						m_id = 1189517016
+					}
+					m_networkMode = "ServerAuthoritative"
+					m_sNote = ""
+					m_commentText = ""
+					m_size = [ 208.0, 208.0 ]
+					m_color = [ 114, 17, 0, 255 ]
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 1244631145
 				}
 				value = 
 				{
 					_class = "CRootAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 1248.0, 32.0 ]
+					m_vecPosition = [ 1040.0, 32.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1244631145
@@ -789,7 +866,7 @@
 				{
 					_class = "CSingleFrameAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -448.0, 160.0 ]
+					m_vecPosition = [ -688.0, 128.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1530354576
@@ -810,7 +887,7 @@
 				{
 					_class = "CGroupAnimNode"
 					m_sName = "breathing delta"
-					m_vecPosition = [ 640.0, -192.0 ]
+					m_vecPosition = [ 352.0, 448.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1943976419
@@ -1075,7 +1152,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -448.0, 208.0 ]
+					m_vecPosition = [ -688.0, 176.0 ]
 					m_nNodeID = 
 					{
 						m_id = 2017836053
@@ -1097,7 +1174,7 @@
 				{
 					_class = "CBlend2DAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -272.0, -32.0 ]
+					m_vecPosition = [ -432.0, 32.0 ]
 					m_nNodeID = 
 					{
 						m_id = 2021447584
@@ -1194,7 +1271,7 @@
 				{
 					_class = "CFootLockAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 640.0, -128.0 ]
+					m_vecPosition = [ 352.0, 496.0 ]
 					m_nNodeID = 
 					{
 						m_id = 2067718303
@@ -1205,7 +1282,7 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 291461497
+							m_id = 4294967295
 						}
 						m_outputID = 
 						{
@@ -1311,7 +1388,7 @@
 				{
 					_class = "CSolveIKChainAnimNode"
 					m_sName = "ikTODO"
-					m_vecPosition = [ 203.852356, 314.992065 ]
+					m_vecPosition = [ 352.0, 400.0 ]
 					m_nNodeID = 
 					{
 						m_id = 2088923697
@@ -1322,7 +1399,7 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 2106037964
+							m_id = 4294967295
 						}
 						m_outputID = 
 						{
@@ -1368,14 +1445,14 @@
 				value = 
 				{
 					_class = "CSubtractAnimNode"
-					m_sName = "Unnamed"
-					m_vecPosition = [ 0.0, 160.0 ]
+					m_sName = "Subtract [COMMENT INSIDE]"
+					m_vecPosition = [ -240.0, 112.0 ]
 					m_nNodeID = 
 					{
 						m_id = 2106037964
 					}
 					m_networkMode = "ServerAuthoritative"
-					m_sNote = ""
+					m_sNote = "Timing control:\nTo let the state machine know which child it checks for the \"On finished\" state condition, both \"Subtract\" nodes use Child2, which lead up to the actual animation clip.\n\nReset Base Child:\nThe base child in this case is the 2d Blend for movement, resetting it would restart the walk cycle every time, yuck!"
 					m_baseInputConnection = 
 					{
 						m_nodeID = 
@@ -1398,7 +1475,7 @@
 							m_id = 4294967295
 						}
 					}
-					m_timingBehavior = "UseChild1"
+					m_timingBehavior = "UseChild2"
 					m_flTimingBlend = 0.5
 					m_footMotionTiming = "Child1"
 					m_bResetBase = false
