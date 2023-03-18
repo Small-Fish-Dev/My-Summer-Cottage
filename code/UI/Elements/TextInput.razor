@@ -1,0 +1,34 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits TextEntry
+
+<style>
+	TextEntry {
+		font-size: 16px;
+		color: white;
+		justify-content: center;
+
+		.ghost-text {
+			opacity: 0.5;
+			text-align: center;
+		}
+	}
+</style>
+
+<root>
+	@if ( Text == "" )
+	{
+		<label class="ghost-text">@Ghost</label>
+	}
+</root>
+
+@code {
+	public string Ghost { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Text );
+	}
+}

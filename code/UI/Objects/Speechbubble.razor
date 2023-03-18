@@ -49,8 +49,10 @@
 </root>
 
 @code {
+	private static Dictionary<Player, Speechbubble> all = new();
+
 	public const float Delay = 0.1f;
-	public const float Time = 4f;
+	public const float Time = 6f;
 
 	public string Text { get; set; }
 	public Player From { get; set; }
@@ -62,6 +64,12 @@
 
 	protected Speechbubble( string text, Player player )
 	{
+		if ( all.TryGetValue( player, out var bubble ) )
+		{
+			bubble.Delete();
+			all.Remove( player );
+		}
+
 		// This fixes the colors and transparency depth issues.
 		SceneObject.RenderLayer = SceneRenderLayer.OverlayWithDepth;
 
@@ -71,6 +79,8 @@
 		var size = new Vector2( 1000f, 800f );
 		WorldScale = 0.5f;
 		PanelBounds = new Rect( size.x / 10f, -size.y, size.x, size.y );
+
+		all.Add( player, this );
 	}
 
 	public override void Tick()
@@ -95,22 +105,32 @@
 
 		// Character adding.
 		if ( textIndex < Text.Length )
+		{
 			if ( nextIndex )
 			{
 				nextIndex = Delay;
 				textIndex++;
 			}
+		}
 		else if ( finished == null )
 			finished = 0f;
 
 		// Set position and rotation.
-		var targetPosition = From.GetEyePosition() + Vector3.Up * (5f + MathF.Abs( 2f * MathF.Sin( sinceCreation ) ));
+		var targetPosition = From.EyePosition + Vector3.Up * (5f + MathF.Abs( 2f * MathF.Sin( sinceCreation ) ));
 		Position = Vector3Extensions.Round( targetPosition * 4f ) / 4f;
 
 		var rotation = Rotation.LookAt( Camera.Position - Position );
 		var targetRoll = 5f * MathF.Sin( sinceCreation * 1.5f );
 		Rotation = Rotation.From( 0, rotation.Yaw(), MathF.Floor( targetRoll * 2f + 0.5f ) / 2f );
 	}
+
+	/// <summary>
+	/// Create a SpeechBubble from a player.
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="from"></param>
+	public static void Create( string text, Player from )
+		=> new Speechbubble( text, from );
 
 	protected override int BuildHash()
 	{
