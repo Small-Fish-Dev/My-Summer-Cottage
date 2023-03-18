@@ -48,8 +48,7 @@ public partial class Player : AnimatedEntity
 			var transform = GetPenoidTransform();
 			peeParticle?.SetPosition( 0, transform.Position + transform.Rotation.Backward * 2f );
 			peeParticle?.SetPosition( 1, transform.Position + Rotation.Forward * 50f + ViewAngles.Forward * 100f );
-			if ( Effects.Get<Drunk>() != null )
-				peeParticle?.SetPosition( 2, ViewAngles.Forward * 15f * Effects.Get<Drunk>().Stacks );
+			peeParticle?.SetPosition( 2, ViewAngles.Forward * 15f * Effects.Get<Drunk>()?.Stacks ?? 0 );
 
 			if ( lastPeeSound >= 0.3f )
 			{
