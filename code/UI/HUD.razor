@@ -63,14 +63,7 @@
 			return;
 
 		if ( input.Text != "" )
-		{
 			Player.SendMessage( input.Text );
-
-			Eventlogger.Instance.Log( 5f, new Eventlogger.Component[] {
-				new( "You said: " ),
-				new( $"\"{input.Text}\"", color: Color.Gray )
-			} );
-		}
 
 		input.Text = "";
 		input.SetClass( "visible", false );
@@ -94,15 +87,14 @@
 
 	public override void Tick()
 	{
-		if ( ChatInput == null || !Input.Pressed( InputButton.Chat ) )
+		if ( ChatInput == null )
 			return;
 
-		var state = ChatInput.HasClass( "visible" );
-		if ( state )
-			return;
-
-		ChatInput.SetClass( "visible", true );
-		ChatInput.Focus();
+		if ( Input.Pressed( InputButton.Chat ) )
+		{
+			ChatInput.Focus();
+			ChatInput.SetClass( "visible", true );
+		}
 	}
 
 	[Event.Hotload]

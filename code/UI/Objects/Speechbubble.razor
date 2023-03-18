@@ -116,7 +116,7 @@
 			finished = 0f;
 
 		// Set position and rotation.
-		var targetPosition = From.EyePosition + Vector3.Up * (5f + MathF.Abs( 2f * MathF.Sin( sinceCreation ) ));
+		var targetPosition = From.GetEyePosition() + Vector3.Up * (5f + MathF.Abs( 2f * MathF.Sin( sinceCreation ) ));
 		Position = Vector3Extensions.Round( targetPosition * 4f ) / 4f;
 
 		var rotation = Rotation.LookAt( Camera.Position - Position );
