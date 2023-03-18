@@ -46,8 +46,10 @@ partial class Player
 	/// <returns></returns>
 	public Vector3 GetEyePosition()
 	{
-		var bone = GetAttachment( "eyes" );
-		return (bone?.Position ?? (Position + CollisionBox.Maxs.z)) + Rotation.Forward * 4f;
+		var attachment = Ragdoll != null
+			? Ragdoll.GetAttachment( "eyes" )
+			: GetAttachment( "eyes" );
+		return (attachment?.Position ?? (Position + CollisionBox.Maxs.z)) + Rotation.Forward * 4f;
 	}
 
 	/// <summary>

@@ -1,4 +1,6 @@
-﻿namespace Sauna;
+﻿using Sandbox;
+
+namespace Sauna;
 
 partial class Player
 {
@@ -13,7 +15,6 @@ partial class Player
 		Eventlogger.FromBytes( data );
 	}
 
-
 	/// <summary>
 	/// Please do not use this.
 	/// </summary>
@@ -25,9 +26,19 @@ partial class Player
 		if ( Entity.FindByIndex( indent ) is not Player player )
 			return;
 
+		if ( player.Position.Distance( Camera.Position ) < 350 )
+			Eventlogger.Instance.Log( 5f, new Eventlogger.Component[] {
+				new( $"{(player == Game.LocalPawn ? "You" : player.Client.Name)} said: " ),
+				new( $"\"{message}\"", color: Color.Gray )
+			} );
+
 		Speechbubble.Create( message, player );
 	}
 
+	/// <summary>
+	/// Send a chat message from client to server.
+	/// </summary>
+	/// <param name="message"></param>
 	[ConCmd.Server]
 	public static void SendMessage( string message )
 	{
