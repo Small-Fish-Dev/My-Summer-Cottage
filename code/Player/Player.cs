@@ -100,15 +100,4 @@ public partial class Player : AnimatedEntity
 
 		tr.Surface.DoFootstep( this, tr, foot, volume );
 	}
-
-	/// <summary>
-	/// Please do not use this. 
-	/// Use Eventlogger.Send(...) instead.
-	/// </summary>
-	/// <param name="data"></param>
-	[ClientRpc]
-	public static void _sendEventlog( byte[] data )
-	{
-		Eventlogger.FromBytes( data );
-	}
 }

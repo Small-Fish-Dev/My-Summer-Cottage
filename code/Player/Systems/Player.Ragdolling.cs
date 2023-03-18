@@ -88,7 +88,7 @@ partial class Player : AnimatedEntity
 			Ragdoll.PhysicsGroup.ApplyImpulse( force.Value );
 		}
 	}
-
+	
 	[ConCmd.Server( "ragdoll" )]
 	public static void RagdollPlayer()
 	{

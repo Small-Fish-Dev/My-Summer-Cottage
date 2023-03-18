@@ -24,6 +24,31 @@
 		font-size: 18px;
 		opacity: 0.25;
 	}
+
+	.chat-input {
+		position: absolute;
+		width: 250px;
+		min-height: 20px;
+		opacity: 0;
+		pointer-events: all;
+		padding: 5px;
+		background-color: black;
+		transition: opacity 0.25s ease-in-out;
+		transform: translateX(-50%);
+		border: 2px white;
+		left: 50%;
+		top: 50%;
+		margin-top: 20px;
+
+		&.visible {
+			opacity: 1;
+		}
+
+		.ghost-text {
+			opacity: 0.5;
+			text-align: center;
+		}
+	}
 </style>
 
 <root>
@@ -33,6 +58,23 @@
 	<interactionHint />
 	<eventlogger />
 	<effects />
+	<textinput ghost="Enter your chat message!" class="chat-input" @ref=ChatInput onsubmit=@(( PanelEvent panelEvent ) => {
+		if ( panelEvent.Target is not TextInput input )
+			return;
+
+		if ( input.Text != "" )
+		{
+			Player.SendMessage( input.Text );
+
+			Eventlogger.Instance.Log( 5f, new Eventlogger.Component[] {
+				new( "You said: " ),
+				new( $"\"{input.Text}\"", color: Color.Gray )
+			} );
+		}
+
+		input.Text = "";
+		input.SetClass( "visible", false );
+	}) />
 	<containerpanel enabled=false />
 	<panel class="wip">
 		This gamemode is still a work in progress.
@@ -42,6 +84,7 @@
 
 @code {
 	public static HUD Instance { get; private set; }
+	public TextInput ChatInput { get; private set; }
 
 	public HUD()
 	{
@@ -49,10 +92,23 @@
 		Instance = this;
 	}
 
+	public override void Tick()
+	{
+		if ( ChatInput == null || !Input.Pressed( InputButton.Chat ) )
+			return;
+
+		var state = ChatInput.HasClass( "visible" );
+		if ( state )
+			return;
+
+		ChatInput.SetClass( "visible", true );
+		ChatInput.Focus();
+	}
+
 	[Event.Hotload]
 	private static void Refresh()
 	{
 		if ( Game.IsClient )
-			new HUD();
+			_ = new HUD();
 	}
 }
