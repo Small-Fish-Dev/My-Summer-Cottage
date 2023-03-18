@@ -143,11 +143,14 @@
 			var len = dirtyLen > 0
 				? dirtyLen % textureWidth
 				: dirtyLen + textureWidth;
+			var opacity = MathX.Clamp( marker.Position.Distance( pawn.Position ) / 200f - 0.75f, 0, 1 );
 
 			panel.Style.Left = len;
+			panel.Style.Opacity = opacity;
 
 			label.Style.Left = len;
 			label.SetClass( "visible", len <= center + 40f && len >= center - 40f );
+			label.Style.Opacity = opacity;
 		}
 	}
 

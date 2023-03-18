@@ -85,6 +85,7 @@ partial class Player : IInteractable
 
 						if ( Input.Pressed( button ) )
 						{
+							SetAnimParameter( "use", true );
 							info.Function( this );
 
 							// Don't let anything interfere with the interaction.
