@@ -154,15 +154,27 @@
 					},
 					{
 						_class = "LookAtChain"
-						name = "lookatnohead"
+						name = "lookat_spine"
 						lookat_chain = 
 						{
 							name = ""
 							bones = 
 							[
 								{
-									name = "neck"
+									name = "head"
 									weight = 1.0
+								},
+								{
+									name = "neck"
+									weight = 0.5
+								},
+								{
+									name = "spine2"
+									weight = 0.5
+								},
+								{
+									name = "spine1"
+									weight = 0.2
 								},
 							]
 						}
@@ -1291,6 +1303,35 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "use_delta"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "use"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/guy/animations/use.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -1747,11 +1788,11 @@
 						[
 							{
 								bone = "arm_upper_R"
-								weight = 0.0
+								weight = 1.0
 							},
 							{
 								bone = "clavicle_R"
-								weight = 0.0
+								weight = 1.0
 							},
 							{
 								bone = "hand_R_IK"
@@ -1759,7 +1800,7 @@
 							},
 							{
 								bone = "root"
-								weight = 1.0
+								weight = 0.0
 							},
 						]
 						master_morph_weight = -1.0
