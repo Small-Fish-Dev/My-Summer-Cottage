@@ -9,23 +9,24 @@ Layer0
 	//---- Texture Filtering ----
 	F_TEXTURE_FILTERING 4 // Nearest Neighbour
 
-	g_flDirectionalLightmapMinZ "0.050"
-	g_flDirectionalLightmapStrength "1.000"
-
 	//---- Fog ----
 	g_bFogEnabled "1"
+
+	//---- Material ----
+	TextureColor "materials/grassy_rock/grassy_rock_color.png"
+	TextureTranslucency "materials/default/default_trans.tga"
 
 	//---- Material A ----
 	g_flTintColorA "[1.000000 1.000000 1.000000 0.000000]"
 	g_flTintColorB "[1.000000 1.000000 1.000000 0.000000]"
 	TextureColorA "materials/grassy_rock/grassy_rock_color.png"
-	TextureNormalA "materials/default/default_normal.tga"
+	TextureNormalA "[0.501961 0.501961 1.000000 0.000000]"
 
 	//---- Material B ----
-	g_flBlendSoftnessB "0.500"
+	g_flBlendSoftnessB "1.000"
 	g_vTexCoordScale2 "[1.000 1.000]"
 	TextureColorB "materials/stone_road/stone_road_color.png"
-	TextureNormalB "materials/default/default_normal.tga"
+	TextureNormalB "[0.501961 0.501961 1.000000 0.000000]"
 
 	//---- Material E ----
 	TextureBlendMaskB "materials/default/default_blend.tga"
