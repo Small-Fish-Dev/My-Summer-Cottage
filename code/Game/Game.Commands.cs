@@ -77,6 +77,36 @@ partial class Sauna
 		entity.Position = trace.EndPosition;
 	}
 
+	[ConCmd.Server( "spawn_prefab" )]
+	public static void SpawnPrefab( string prefabName )
+	{
+		if ( ConsoleSystem.Caller?.Pawn is not Player pawn )
+			return;
+
+		var prefab = GlobalGameNamespace.ResourceLibrary.GetAll<Prefab>()
+			.FirstOrDefault( prefab => prefab.ResourceName.ToLower() == prefabName.ToLower() );
+
+		if ( prefab == null )
+		{
+			Log.Error( $"Couldn't find the prefab: {prefabName}" );
+			return;
+		}
+
+		var trace = Trace.Ray( pawn.ViewRay, 500f )
+			.Ignore( pawn )
+			.WithoutTags( "trigger" )
+			.Run();
+
+		var entity = PrefabLibrary.Spawn<Entity>( prefab );
+		if ( entity == null )
+		{
+			Log.Error( $"Failed to create the entity for: {prefabName}" );
+			return;
+		}
+
+		entity.Position = trace.EndPosition;
+	}
+
 	[ConCmd.Server( "give_exp" )]
 	public static void GiveExperience( int amount )
 	{
