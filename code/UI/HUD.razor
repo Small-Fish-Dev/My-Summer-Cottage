@@ -33,20 +33,16 @@
 		pointer-events: all;
 		padding: 5px;
 		background-color: black;
-		transition: opacity 0.25s ease-in-out;
-		transform: translateX(-50%);
+		transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+		transform: translate(-50% 200px);
 		border: 2px white;
 		left: 50%;
 		top: 50%;
-		margin-top: 20px;
+		margin-top: 40px;
 
 		&.visible {
 			opacity: 1;
-		}
-
-		.ghost-text {
-			opacity: 0.5;
-			text-align: center;
+			transform: translate(-50% 0px);
 		}
 	}
 </style>
@@ -58,7 +54,7 @@
 	<interactionHint />
 	<eventlogger />
 	<effects />
-	<textinput ghost="Enter your chat message!" class="chat-input" @ref=ChatInput onsubmit=@(( PanelEvent panelEvent ) => {
+	<textinput ghost="..." class="chat-input" @ref=ChatInput onsubmit=@(( PanelEvent panelEvent ) => {
 		if ( panelEvent.Target is not TextInput input )
 			return;
 
