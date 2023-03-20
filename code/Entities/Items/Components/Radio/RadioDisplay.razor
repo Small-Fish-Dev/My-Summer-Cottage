@@ -1,0 +1,147 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits WorldPanel
+
+<style>
+	RadioDisplay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		flex-direction: column;
+
+		.text {
+			position: absolute;
+			top: 18px;
+			left: 10px;
+			width: 100%;
+			font-size: 40px;
+			font-family: "DSEG14 Modern";
+			max-height: 100%;
+
+			.background {
+				z-index: 0;
+			}
+
+			.foreground {
+				z-index: 1;
+				color: darken(#5E7C34, 0.95);
+			}
+		}
+
+		.timeline {
+			position: absolute;
+			bottom: 5px;
+			left: 15px;
+			height: 20px;
+			width: 380px;
+			border: 1px black;
+
+			.inner {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				height: 15px;
+				max-width: 374px;
+				background-color: black;
+			}
+		}
+	}
+</style>
+
+<root style="background-color: darken(#5E7C34, @(Radio.CurrentSong != null ? 0.7 : 0.9));">
+	@if( Radio.CurrentSong != null )
+	{
+		timeUntilScroll = -ScrollPostWait;
+		textOffset = -1;
+
+		<label class="text background" style="color: rgba(0,0,0,0.1)">@BackgroundText</label>
+		<label class="text foreground" @ref=displayLabel />
+
+		<panel class="timeline">
+			<panel class="inner" @ref=timeline />
+		</panel>
+	}
+</root>
+
+@code {
+	public RadioComponent Radio { get; private set; }
+
+	/// <summary> Time to wait after each character </summary>
+	public const float ScrollWait = 0.5f;
+
+	/// <summary> Time to wait after returning to start of text </summary>
+	public const float ScrollPostWait = 1.2f;
+
+	/// <summary> Max amount of characters on screen </summary>
+	public const int MaxScreenCharacters = 12;
+
+	private Panel timeline;
+	private Label displayLabel;
+	private int textOffset;
+	private TimeUntil timeUntilScroll = ScrollPostWait;
+
+	public string VirtualText => Radio.CurrentSong == null ? null : $"{Radio.CurrentSong.Value.Producer} - {Radio.CurrentSong.Value.Name}";
+	public string ActualText => new string( (VirtualText ?? "")
+		.Skip( textOffset )
+		.Take( MaxScreenCharacters ).ToArray() )
+		.Replace( " ", "!" ); // '!' == All-off character for DSEG font
+	public string BackgroundText => new( '8', MaxScreenCharacters );
+
+	public RadioDisplay( RadioComponent radio )
+	{
+		Radio = radio;
+
+		var scale = 0.5f;
+		Scale = scale;
+		WorldScale = scale;
+
+		var size = new Vector2( 104f, 25f ) * (1f / scale);
+		PanelBounds = new( -size.x / 2f, -size.y / 2f, size.x, size.y );
+	}
+
+	[Event.Client.Frame]
+	private void frame()
+	{
+		if ( Radio == null )
+		{
+			Delete( true );
+			return;
+		}
+
+		var entity = Radio.Item;
+		if ( entity == null )
+			return;
+
+		var attachment = entity.GetAttachment( "screen" );
+		if ( attachment == null )
+			return;
+
+		var transform = attachment.Value;
+		Position = transform.Position + transform.Rotation.Forward * 0.1f;
+		Rotation = transform.Rotation;
+
+		if ( timeUntilScroll && displayLabel != null )
+		{
+			timeUntilScroll = ScrollWait;
+			textOffset++;
+
+			if ( textOffset > VirtualText?.Length )
+			{
+				textOffset = 0;
+				timeUntilScroll = ScrollPostWait;
+			}
+
+			displayLabel.Text = ActualText;
+		}
+		
+		if ( Radio.CurrentSong != null && Radio.ElapsedTime != null && timeline?.Style != null )
+			timeline.Style.Width = Length.Fraction( Radio.ElapsedTime.Value / Radio.CurrentSong.Value.Duration );
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Radio?.CurrentSong?.Path );
+	}
+}
