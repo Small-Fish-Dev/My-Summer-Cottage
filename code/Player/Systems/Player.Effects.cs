@@ -118,7 +118,15 @@ public class EffectManager
 	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
 	public T? Get<T>() where T : BaseEffect
-		=> All.FirstOrDefault( effect => effect.GetType() == typeof( T ) ) as T;
+		=> Get( typeof( T ) ) as T;
+
+	/// <summary>
+	/// Get effect of specific type.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <returns></returns>
+	public BaseEffect? Get( Type type )
+		=> All.FirstOrDefault( effect => effect.GetType() == type );
 
 	/// <summary>
 	/// Applies an effect to the player. 
