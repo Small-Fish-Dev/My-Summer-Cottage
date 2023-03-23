@@ -52,7 +52,9 @@ partial class Player
 		}
 
 		// Handle ducking.
-		Ducking = (Ducking && Trace.Ray( new Ray( Position + CollisionBox.Maxs.z * Vector3.Up, Vector3.Up ), CollisionBox.Maxs.z ).Ignore( this ).WithoutTags( "trigger" ).Run().Hit)
+		var from = Position;
+		var to = from + Vector3.Up * CollisionBox.Maxs.z;
+		Ducking = (Ducking && Trace.Box( CollisionBox, in from, in to ).Ignore( this ).WithoutTags( "trigger" ).Run().Hit)
 			|| (Water == null && Input.Down( InputButton.Duck )); // Beautiful.
 
 		// Handle rotation.

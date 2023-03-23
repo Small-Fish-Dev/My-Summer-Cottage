@@ -2,6 +2,12 @@
 
 partial class Player
 {
+	/// <summary>
+	/// Please do not use this.
+	/// Use Eventlogger.Send(...) instead.
+	/// </summary>
+	/// <param name="text"></param>
+	/// <param name="time"></param>
 	[ClientRpc]
 	public static void _addEventlog( string text, float time )
 	{
