@@ -1,18 +1,11 @@
-﻿using Sandbox;
-
-namespace Sauna;
+﻿namespace Sauna;
 
 partial class Player
 {
-	/// <summary>
-	/// Please do not use this. 
-	/// Use Eventlogger.Send(...) instead.
-	/// </summary>
-	/// <param name="data"></param>
 	[ClientRpc]
-	public static void _sendEventlog( byte[] data )
+	public static void _addEventlog( string text, float time )
 	{
-		Eventlogger.FromBytes( data );
+		Eventlogger.Instance?.Append( text, time );
 	}
 
 	/// <summary>
@@ -26,11 +19,11 @@ partial class Player
 		if ( Entity.FindByIndex( indent ) is not Player player )
 			return;
 
-		if ( player.Position.Distance( Camera.Position ) < 350 )
+		/*if ( player.Position.Distance( Camera.Position ) < 350 )
 			Eventlogger.Instance.Log( 5f, new Eventlogger.Component[] {
 				new( $"{(player == Game.LocalPawn ? "You" : player.Client.Name)} said: " ),
 				new( $"\"{message}\"", color: Color.Gray )
-			} );
+			} );*/
 
 		Speechbubble.Create( message, player );
 	}

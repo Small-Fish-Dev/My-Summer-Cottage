@@ -51,155 +51,147 @@
 	/// </summary>
 	public const int Limit = 5;
 
-	/// <summary>
-	/// The type of a log component.
-	/// </summary>
-	public enum Type
-	{
-		Label,
-		Image
-	}
-
-	/// <summary>
-	/// Holds basic information of a single log component.
-	/// </summary>
-	public struct Component
-	{
-		public string Content { get; set; }
-		public Type Type { get; set; }
-		public Color Color { get; set; }
-
-		public Component( string content, Type type = Type.Label, Color? color = null )
-		{
-			Content = content;
-			Type = type;
-			Color = color ?? Color.White;
-		}
-	}
-
 	public static Eventlogger Instance { get; private set; }
-	private List<Panel> events = new();
+	private List<(Panel Panel, TimeUntil UntilDelete)?> events = new();
 
 	public Eventlogger()
 	{
 		Instance = this;
 	}
 
+	public override void Tick()
+	{
+		// Tick all events.
+		for ( int i = 0; i < events.Count; i++ )
+		{
+			var current = events.ElementAtOrDefault( i );
+			if ( current == null )
+				continue;
+			var log = current.Value;
+
+			if ( events.First() == log && log.UntilDelete )
+			{
+				log.Panel?.Delete();
+				events.Remove( log );
+			}
+		}
+	}
+
 	/// <summary>
 	/// Create a log on clientside.
 	/// </summary>
+	/// <param name="input"></param>
 	/// <param name="time"></param>
-	/// <param name="components"></param>
-	public void Log( float time, IEnumerable<Component> components )
+	public void Append( string input, float time = 5f )
 	{
 		// Handle overflowing.
 		if ( events.Count >= Limit )
 		{
 			var first = events.FirstOrDefault();
-			first?.Delete();
+			first?.Panel?.Delete();
 			events.Remove( first );
 		}
 
 		// Create eventlog.
 		var container = Instance.AddChild<Panel>( "container" );
 
-		// Create components.
-		foreach ( var component in components )
+		// Parse the input.
+		var isColor = false;
+		var shouldClose = false;
+		var output = "";
+		var color = Color.White;
+
+		for ( int i = 0; i < input.Length; i++ )
 		{
-			switch ( component.Type )
+			var character = input[i];
+
+			switch ( character )
 			{
-				case Type.Label:
-					var label = container.AddChild<Label>( "label" );
-					label.Text = component.Content;
-					label.Style.FontColor = component.Color;
-					container.AddChild( label );
+				// Handle capturing the colors and closing them.
+				case '<':
+					// Do we have input without a color?
+					if ( output != "" )
+					{
+						appendLabel( container, output, color );
+						output = "";
+					}
+
+					// Check if we should capture color or start closing.
+					if ( !isColor )
+					{
+						isColor = true;
+						break;
+					}
+
+					shouldClose = true;
+					break;
+
+				case '>':
+					// Parse color if we should.
+					if ( isColor && !shouldClose )
+					{
+						color = Color.Parse( output ) ?? Color.White;
+						output = "";
+						isColor = false;
+						break;
+					}
+
+					// Append new label.
+					if ( output == "" )
+						break;
+
+					appendLabel( container, output, color );
+
+					// Reset values.
+					output = "";
+					color = Color.White;
+					shouldClose = false;
+					isColor = false;
 
 					break;
 
-				case Type.Image:
+				case '/':
+					if ( !shouldClose )
+					{
+						output += character;
+						break;
+					}
+
+					shouldClose = true;
+					break;
+
+				// Add characters to output.
+				default:
+					output += character;
 					break;
 			}
+
+			// Handle very last input.
+			if ( i == input.Length - 1 && output != "" )
+				appendLabel( container, output, color );
 		}
 
-		events.Add( container );
-
-		// Delete the eventlog.
-		GameTask.RunInThreadAsync( async () =>
-		{
-			await GameTask.DelaySeconds( time );
-			container?.Delete();
-		} );
+		// Register eventlog.
+		events.Add( (container, time) );
 	}
 
-	private static void send( To target, float time, IEnumerable<Component> components )
+	private void appendLabel( Panel parent, string text, Color color )
 	{
-		if ( Game.IsClient )
-			return;
-
-		// Let us write to a MemoryStream.
-		using var stream = new MemoryStream();
-		using var writer = new BinaryWriter( stream );
-
-		// Write the "header".
-		writer.Write( time );
-		writer.Write( components.Count() );
-
-		// Write all components.
-		foreach ( var component in components )
-		{
-			writer.Write( component.Content );
-			writer.Write( (int)component.Type );
-			writer.Write( component.Color.ToString() );
-		}
-
-		// Send to clients.
-		Player._sendEventlog( target, stream.ToArray() );
+		var label = parent.AddChild<Label>( "label" );
+		label.Text = text;
+		label.Style.FontColor = color;
 	}
 
 	/// <summary>
-	/// Send an eventlog to a To target.
+	/// Sends an eventlog to a client.
 	/// </summary>
-	/// <param name="target"></param>
-	/// <param name="components"></param>
-	public static void Send( To target, IEnumerable<Component> components )
-		=> send( target, 5f, components );
-
-	/// <summary>
-	/// Send an eventlog to a To target.
-	/// </summary>
-	/// <param name="target"></param>
+	/// <param name="text"></param>
 	/// <param name="time"></param>
-	/// <param name="components"></param>
-	public static void Send( To target, float time, IEnumerable<Component> components )
-		=> send( target, time, components );
-
-	/// <summary>
-	/// Decodes an eventlog from a BinaryReader.
-	/// </summary>
-	/// <param name="reader"></param>
-	/// <returns></returns>
-	public static void FromBytes( byte[] data )
+	public static void Send( To target, string text, float time = 5f )
 	{
-		// Make a BinaryReader for the byte array.
-		using var stream = new MemoryStream( data );
-		using var reader = new BinaryReader( stream );
-
-		// Read header.
-		var time = reader.ReadSingle();
-		var count = reader.ReadInt32();
-
-		// Read components.
-		var components = new Component[count];
-		for ( int i = 0; i < count; i++ )
-		{
-			var content = reader.ReadString();
-			var type = (Type)reader.ReadInt32();
-			var color = Color.Parse( reader.ReadString() );
-			
-			components[i] = new( content, type, color );
-		}
-
-		// Create eventlog.
-		Instance?.Log( time, components );
+		if ( !Game.IsServer )
+			return;
+		
+		Player._addEventlog( target, text, time );
 	}
 }

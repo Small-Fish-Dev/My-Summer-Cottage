@@ -14,10 +14,8 @@ partial class Player : IInteractable
 			Predicate = ( Player ply ) => true,
 			Function = ( Player ply ) =>
 			{
-				Eventlogger.Send( To.Multiple( new[] { ply.Client, Client } ), new Eventlogger.Component[] 
-				{
-					new ( $"{ply.Client.Name} destroyed {Client.Name}!" )
-				} );
+				Eventlogger.Send( To.Multiple( new[] { ply.Client, Client } ), 
+					$"{ply.Client.Name} destroyed {Client.Name}!" );
 
 				if ( Game.IsServer && Effects.Get<Unconscious>() == null )
 				{
