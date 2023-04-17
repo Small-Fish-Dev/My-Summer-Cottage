@@ -45,6 +45,8 @@ public partial class BeerCrateComponent : ItemComponent
 
 	public override void Initialize()
 	{
+		Item.Title = $"Kaljakori ({Count}/{Columns * Rows})";
+
 		Interactable.AddInteraction( InputButton.Use, new()
 		{
 			Predicate = ( Player player ) => Count > 0,
@@ -52,6 +54,8 @@ public partial class BeerCrateComponent : ItemComponent
 			{
 				if ( Game.IsServer )
 					Count -= 1;
+
+				Item.Title = $"Kaljakori ({Count}/{Columns * Rows})";
 			},
 			Text = "Take a beer"
 		} );

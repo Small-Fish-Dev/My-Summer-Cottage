@@ -63,6 +63,7 @@ partial class Player
 		penoid.EnableShadowCasting = false;
 		penoid.EnableHideInFirstPerson = false;
 		penoid.Transmit = TransmitType.Always;
+		penoid.Tags.Add( "penoid" );
 
 		player.Morphs.Set( "size", size );
 		player.Penoid = penoid;
