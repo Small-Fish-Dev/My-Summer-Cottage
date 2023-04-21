@@ -21,6 +21,11 @@ public partial class BaseItem : AnimatedEntity, IInteractable
 	[Prefab, Category( "Interaction" ), Net]
 	public Vector3 TitleOffset { get; set; } = Vector3.Zero;
 
+	/// <summary>
+	/// Is the entity created in the map or at runtime?
+	/// </summary>
+	public bool FromMap { get; set; }
+
 	string IInteractable.DisplayTitle => Title;
 	Color IInteractable.DisplayColor => Color;
 	InteractionOffset IInteractable.Offset => TitleOffset;
