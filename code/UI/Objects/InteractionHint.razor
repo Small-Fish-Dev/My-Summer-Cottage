@@ -53,7 +53,7 @@
             foreach ( var interaction in pawn.Interactions )
             {
                 <panel class="interaction">
-                    <inputglyph class="icon" glyphSize=@InputGlyphSize.Small button=@interaction.Key />
+                    <inputglyph class="icon" glyphSize=@InputGlyphSize.Small action="@(interaction.Key)" />
                     <label>@interaction.Value.Result</label>
                 </panel>
             }

@@ -16,15 +16,23 @@
 
 @code {
 	public InputGlyphSize GlyphSize { get; set; } = InputGlyphSize.Small;
-	public InputButton Button { get; set; }
+	public string Action { get; set; }
 	public GlyphStyle GlyphStyle { get; set; } = GlyphStyle.Dark.WithSolidABXY();
+
+	protected override void OnAfterTreeRender(bool firstTime)
+	{
+		base.OnAfterTreeRender( firstTime );
+
+		if ( firstTime )
+			Update();
+	}
 
 	/// <summary>
 	/// Updates the InputGlyph settings.
 	/// </summary>
 	public void Update()
 	{
-		var glyph = Input.GetGlyph( Button, GlyphSize, GlyphStyle );
+		var glyph = Input.GetGlyph( Action, GlyphSize, GlyphStyle );
 		if ( glyph == null )
 			return;
 
@@ -37,10 +45,6 @@
 		switch ( name )
 		{
 			case "button":
-				if ( !InputButton.TryParse( value, true, out InputButton button ) )
-					break;
-				
-				Button = button;
 				Update();
 
 				break;
