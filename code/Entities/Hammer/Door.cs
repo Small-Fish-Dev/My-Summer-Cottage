@@ -40,7 +40,7 @@ public partial class Door : ModelEntity, IInteractable
 	{
 		var interactable = this as IInteractable;
 
-		interactable.AddInteraction( InputButton.Use, new()
+		interactable.AddInteraction( "use", new()
 		{
 			Predicate = ( Player pawn ) => true,
 			Function = ( Player pawn ) =>

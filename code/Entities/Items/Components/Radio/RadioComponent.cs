@@ -66,7 +66,7 @@ public partial class RadioComponent : ItemComponent
 			Item.Transmit = TransmitType.Always;
 
 		// Turn radio on.
-		Interactable.AddInteraction( InputButton.Use, new()
+		Interactable.AddInteraction( "use", new()
 		{
 			Predicate = ( Player pawn ) => true,
 			Function = ( Player pawn ) =>
@@ -87,7 +87,7 @@ public partial class RadioComponent : ItemComponent
 		} );
 
 		// Play random song.
-		Interactable.AddInteraction( InputButton.Reload, new()
+		Interactable.AddInteraction( "reload", new()
 		{
 			Predicate = ( Player pawn ) => CurrentSong != null,
 			Function = ( Player pawn ) =>

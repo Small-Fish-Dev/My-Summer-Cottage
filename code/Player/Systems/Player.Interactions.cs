@@ -8,8 +8,8 @@ partial class Player : IInteractable
 	public Player()
 	{
 		var interactable = this as IInteractable;
-
-		interactable.AddInteraction( InputButton.Use, new()
+		
+		interactable.AddInteraction( "use", new()
 		{
 			Predicate = ( Player ply ) => true,
 			Function = ( Player ply ) =>
@@ -27,12 +27,12 @@ partial class Player : IInteractable
 		} );
 	}
 
-	private Dictionary<InputButton, InteractionInfo> interactions = new();
+	private Dictionary<string, InteractionInfo> interactions = new();
 
 	/// <summary>
 	/// List of the current interactions available to the player.
 	/// </summary>
-	public IReadOnlyDictionary<InputButton, InteractionInfo> Interactions => interactions;
+	public IReadOnlyDictionary<string, InteractionInfo> Interactions => interactions;
 
 	/// <summary>
 	/// The current available interactable.
@@ -72,22 +72,22 @@ partial class Player : IInteractable
 
 			foreach ( var interaction in interactable.All )
 			{
-				var button = interaction.Key;
+				var action = interaction.Key;
 				var list = interaction.Value;
 
 				foreach ( var info in list )
 					if ( !info.Equals( default( InteractionInfo ) ) 
 						&& info.Predicate( this ) )
 					{
-						interactions.Add( button, info );
+						interactions.Add( action, info );
 
-						if ( Input.Pressed( button ) )
+						if ( Input.Pressed( action ) )
 						{
 							SetAnimParameter( "use", true );
 							info.Function( this );
 
 							// Don't let anything interfere with the interaction.
-							Input.ClearButton( button );
+							Input.Clear( action );
 						}
 
 						break;
