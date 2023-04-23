@@ -76,22 +76,27 @@ partial class Player : IInteractable
 				var list = interaction.Value;
 
 				foreach ( var info in list )
-					if ( !info.Equals( default( InteractionInfo ) ) 
-						&& info.Predicate( this ) )
+				{
+					var condition = !info.Equals( default( InteractionInfo ) )
+						&& info.Interactability.HasFlag( Interactability.Ground )
+						&& info.Predicate( this );
+
+					if ( !condition )
+						continue;
+
+					interactions.Add( action, info );
+
+					if ( Input.Pressed( action ) )
 					{
-						interactions.Add( action, info );
+						SetAnimParameter( "use", true );
+						info.Function( this );
 
-						if ( Input.Pressed( action ) )
-						{
-							SetAnimParameter( "use", true );
-							info.Function( this );
-
-							// Don't let anything interfere with the interaction.
-							Input.Clear( action );
-						}
-
-						break;
+						// Don't let anything interfere with the interaction.
+						Input.Clear( action );
 					}
+
+					break;
+				}
 			}
 		}
 		else

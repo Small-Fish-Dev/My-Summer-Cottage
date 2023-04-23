@@ -53,9 +53,11 @@ public partial class BeerCrateComponent : ItemComponent
 			Function = ( Player player ) =>
 			{
 				if ( Game.IsServer )
+				{
 					Count -= 1;
 
-				Item.Title = $"Kaljakori ({Count}/{Columns * Rows})";
+					Item.Title = $"Kaljakori ({Count}/{Columns * Rows})";
+				}
 			},
 			Text = "Take a beer"
 		} );
