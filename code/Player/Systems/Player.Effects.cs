@@ -183,7 +183,7 @@ public class EffectManager
 			}
 
 			// Create new effect.
-			effect = GlobalGameNamespace.TypeLibrary.Create( type.FullName, type ) as BaseEffect;
+			effect = TypeLibrary.Create( type.FullName, type ) as BaseEffect;
 			effect.Duration = effect.MaxDuration == 0f
 				? duration
 				: Math.Min( duration, effect.MaxDuration );
@@ -280,7 +280,7 @@ partial class Player
 					var newStacks = reader.ReadInt32();
 					var newPermanent = reader.ReadBoolean();
 
-					var newEffect = GlobalGameNamespace.TypeLibrary.Create( typeName, typeof( BaseEffect ) ) as BaseEffect;
+					var newEffect = TypeLibrary.Create( typeName, typeof( BaseEffect ) ) as BaseEffect;
 					newEffect.Duration = newDuration;
 					newEffect.Stacks = newStacks;
 					newEffect.Permanent = newPermanent;
