@@ -25,11 +25,9 @@ partial class Player
 		if ( Entity.FindByIndex( indent ) is not Player player )
 			return;
 
-		/*if ( player.Position.Distance( Camera.Position ) < 350 )
-			Eventlogger.Instance.Log( 5f, new Eventlogger.Component[] {
-				new( $"{(player == Game.LocalPawn ? "You" : player.Client.Name)} said: " ),
-				new( $"\"{message}\"", color: Color.Gray )
-			} );*/
+		if ( player.Position.Distance( Camera.Position ) < 350 )
+			Eventlogger.Instance.Append( $"{(player == Game.LocalPawn ? "You" : player.Client.Name)} said: " 
+				+ $"<gray>\"{message}\"" );
 
 		Speechbubble.Create( message, player );
 	}

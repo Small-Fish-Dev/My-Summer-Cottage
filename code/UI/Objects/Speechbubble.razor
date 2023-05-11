@@ -85,6 +85,11 @@
 
 	public override void Tick()
 	{
+		// Don't draw if sender is viewing from first person.
+		Style.Opacity = Camera.FirstPersonViewer == Game.LocalPawn 
+			? 0f 
+			: 1f;
+
 		// Check if attached player is valid.
 		if ( From == null || !From.IsValid )
 		{
