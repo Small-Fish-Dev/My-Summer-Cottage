@@ -4,7 +4,7 @@
 /// Workaround entity for spawning prefabs in the map.
 /// </summary>
 [HammerEntity]
-[Text( "Prefab Spawner" )]
+[EditorModel( "models/sbox_props/ceiling_halogen/ceiling_halogen.vmdl" )]
 public partial class PrefabSpawner : Entity
 {
 	/// <summary>
@@ -31,7 +31,54 @@ public partial class PrefabSpawner : Entity
 		entity.Parent = Parent;
 		entity.FromMap = true;
 
+		foreach ( var tag in Tags.List )
+			entity.Tags.Add( tag );
+
 		// Delete spawner, we don't need it to exist.
 		Delete();
 	}
+
+	/*private static Prefab gizmoPrefab;
+	private static string gizmoPath;
+
+	// Render prefab's model.
+	public static void DrawGizmos( EditorContext context )
+	{
+		var path = context.Target.GetProperty( "Prefab" ).As.String;
+		if ( path == null )
+			return;
+		
+		// Hacky prefab reading.
+		if ( path != gizmoPath )
+		{
+			var filepath = $"addons/sauna/{path}";
+			if ( File.Exists( filepath ) )
+			{
+				var json = File.ReadAllText( filepath );
+				gizmoPrefab = System.Text.Json.JsonSerializer.Deserialize<Prefab>( json );
+			}
+			else
+				gizmoPrefab = null;
+
+			gizmoPath = path;
+			return;
+		}
+
+		// Check if prefab is valid.
+		if ( gizmoPrefab == null )
+		{
+			Gizmo.Draw.IgnoreDepth = true;	
+			Gizmo.Draw.Color = Color.Red;
+			Gizmo.Draw.Text( $"Invalid prefab: {path}", Transform.Zero );
+
+			return;
+		}
+
+		// Get model and draw it.
+		var model = gizmoPrefab.Root.GetValue<Model>( "Model" );
+		if ( model == null )
+			return;
+
+		Gizmo.Draw.Model( model );
+	}*/
 }

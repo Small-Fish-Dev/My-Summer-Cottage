@@ -55,7 +55,7 @@ partial class Sauna
 		if ( ConsoleSystem.Caller?.Pawn is not Player pawn )
 			return;
 
-		var type = GlobalGameNamespace.TypeLibrary.GetType( typeName );
+		var type = TypeLibrary.GetType( typeName );
 		if ( !type.IsValid )
 		{
 			Log.Error( $"Couldn't find the type: {typeName}" );
@@ -83,7 +83,7 @@ partial class Sauna
 		if ( ConsoleSystem.Caller?.Pawn is not Player pawn )
 			return;
 
-		var prefab = GlobalGameNamespace.ResourceLibrary.GetAll<Prefab>()
+		var prefab = ResourceLibrary.GetAll<Prefab>()
 			.FirstOrDefault( prefab => prefab.ResourceName.ToLower() == prefabName.ToLower() );
 
 		if ( prefab == null )
@@ -122,7 +122,7 @@ partial class Sauna
 		if ( ConsoleSystem.Caller?.Pawn is not Player pawn )
 			return;
 
-		var effectType = GlobalGameNamespace.TypeLibrary.GetType( effect );
+		var effectType = TypeLibrary.GetType( effect );
 		if ( effectType == null || !effectType.TargetType.IsSubclassOf( typeof ( BaseEffect ) ) )
 		{
 			Log.Error( $"Failed to find the effect: {effect}" );
