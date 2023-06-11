@@ -1,10 +1,16 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/saunawater.shader_c"
-	"F_TEXTURE_FILTERING"		"4"
-	"g_flDirectionalLightmapMinZ"		"0.050000"
-	"g_flDirectionalLightmapStrength"		"1.000000"
-	"g_bFogEnabled"		"1"
-	"Color"		"materials/water/water_color.png"
-	"Normal"		"materials/water/water_normal.png"
+	shader "shaders/saunawater.shader_c"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/water/water_color.png"
+	Normal "materials/water/water_normal.png"
 }

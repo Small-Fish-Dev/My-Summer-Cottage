@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader"
+	shader "shaders/saunasimple.shader_c"
 
 	//---- Rendering ----
 	F_RENDER_BACKFACES 1
@@ -12,9 +12,11 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	Color "materials/glass_pane/glass_pane_color.png"
-	Normal "materials/glass_pane/glass_pane_normal.png"
 	Roughness "materials/glass_pane/glass_pane_trans.png"
+	TextureColor "materials/default/default_color.tga"
+	TextureNormal "materials/default/default_normal.tga"
+	TextureTintMask "materials/default/default.tga"
+	TextureTranslucency "materials/default/default_trans.tga"
 
 	//---- Transparency ----
 	TransparencyMask "materials/glass_pane/glass_pane_trans.png"

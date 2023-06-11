@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader"
+	shader "shaders/saunasimple.shader_c"
 
 	//---- Texture Filtering ----
 	F_TEXTURE_FILTERING 4 // Nearest Neighbour
@@ -12,7 +12,7 @@ Layer0
 
 	//---- Material ----
 	Color "materials/finnish_pine_bark/finnish_pine_bark_color.png"
-	Normal "[0.501961 0.501961 1.000000 0.000000]"
+	Normal "materials/default/default_normal.tga"
 	Roughness "[1.000000 1.000000 1.000000 0.000000]"
 
 	SystemAttributes

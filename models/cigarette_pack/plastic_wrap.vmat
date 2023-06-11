@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader"
+	shader "shaders/saunasimple.shader_c"
 
 	//---- Rendering ----
 	F_TRANSPARENCY 1
@@ -14,5 +14,8 @@ Layer0
 	Color "models/cigarette_pack/plastic_wrap_color.png"
 	Normal "models/cigarette_pack/plastic_wrap_normal.png"
 	Roughness "[0.000000 0.000000 0.000000 0.000000]"
+
+	//---- Transparency ----
 	TransparencyMask "[0.400000 0.400000 0.400000 0.000000]"
+	TransparencyRounding "0.000"
 }

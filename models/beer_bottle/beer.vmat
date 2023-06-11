@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader"
+	shader "shaders/saunasimple.shader_c"
 
 	//---- Rendering ----
 	F_TRANSPARENCY 1
@@ -17,5 +17,8 @@ Layer0
 	Color "models/beer_bottle/beer_color.png"
 	Normal "models/beer_bottle/beer_normal.png"
 	Roughness "models/beer_bottle/beer_rough.png"
+
+	//---- Transparency ----
 	TransparencyMask "models/beer_bottle/beer_trans.png"
+	TransparencyRounding "0.000"
 }
