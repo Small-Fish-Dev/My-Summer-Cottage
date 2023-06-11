@@ -75,25 +75,23 @@ PS
 { 
     StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );
 
+    #define CUSTOM_TEXTURE_FILTERING
+    SamplerState Sampler < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
+
     #define BLEND_MODE_ALREADY_SET
     RenderState( BlendEnable, true );
     RenderState( SrcBlend, SRC_ALPHA );
     RenderState( DstBlend, INV_SRC_ALPHA);
 
-    #include "sbox_pixel.fxc"
-
-    #include "common/pixel.config.hlsl"
-    #include "common/pixel.material.structs.hlsl"
-    #include "common/pixel.lighting.hlsl"
-    #include "common/pixel.shading.hlsl"
-
-    #include "common/pixel.material.helpers.hlsl"
-
-    CreateInputTexture2D( Color, Srgb, 8, "", "_color", "Material,10/10", Default3( 1.0, 1.0, 1.0 ) );
+    #define CUSTOM_MATERIAL_INPUTS
+	CreateInputTexture2D( Color, Srgb, 8, "", "_color", "Material,10/10", Default3( 1.0, 1.0, 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); Filter( POINT ); >;
 
     CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Material,10/20", Default3( 0.5, 0.5, 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
+
+    #include "sbox_pixel.fxc"
+    #include "common/pixel.hlsl"
 
     BoolAttribute( translucent, true );
 
@@ -111,8 +109,8 @@ PS
 		float2 UV = i.vTextureCoords.xy - float2( time / 2 + sine, sine / 2 );
 
         Material m;
-        m.Albedo = Tex2DS( g_tColor, TextureFiltering, UV.xy ).rgb;
-        m.Normal = TransformNormal( i, DecodeNormal( Tex2DS( g_tNormal, TextureFiltering, UV.xy ).rgb ) );
+        m.Albedo = Tex2DS( g_tColor, Sampler, UV.xy ).rgb;
+        m.Normal = TransformNormal( i, DecodeNormal( Tex2DS( g_tNormal, Sampler, UV.xy ).rgb ) );
         m.Roughness = 0.7;
         m.Metalness = 0;
         m.AmbientOcclusion = 1;
@@ -121,9 +119,7 @@ PS
         m.Emission = 0;
         m.Transmission = 1;
 	
-		ShadingModelValveStandard sm;
-        float4 result = FinalizePixelMaterial( i, m, sm );
-
+        float4 result = ShadingModelStandard::Shade( i, m );
         result.a = 0.65;
 
 		return result;

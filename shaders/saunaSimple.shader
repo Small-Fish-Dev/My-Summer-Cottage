@@ -73,21 +73,13 @@ VS
 PS
 { 
 	StaticCombo( S_TRANSPARENCY, F_TRANSPARENCY, Sys( ALL ) );
-	   
+	
 	#define CUSTOM_TEXTURE_FILTERING
-    SamplerState TextureFiltering < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
+    SamplerState Sampler < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
 
 	StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );
 
-    #include "sbox_pixel.fxc"
-
-    #include "common/pixel.config.hlsl"
-    #include "common/pixel.material.structs.hlsl"
-    #include "common/pixel.lighting.hlsl"
-    #include "common/pixel.shading.hlsl"
-
-    #include "common/pixel.material.helpers.hlsl"
-    
+	#define CUSTOM_MATERIAL_INPUTS
 	CreateInputTexture2D( Color, Srgb, 8, "", "_color", "Material,10/10", Default3( 1.0, 1.0, 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); Filter( POINT ); >;
 
@@ -97,6 +89,9 @@ PS
 	CreateInputTexture2D( Roughness, Linear, 8, "", "_rough", "Material,10/30", Default( 1 ) );
 	CreateTexture2DWithoutSampler( g_tRoughness ) < Channel( R, Box( Roughness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 
+    #include "sbox_pixel.fxc"
+    #include "common/pixel.hlsl"
+    
 	#if ( S_TRANSPARENCY )
 		#if( !F_RENDER_BACKFACES )
 			#define BLEND_MODE_ALREADY_SET
@@ -127,9 +122,9 @@ PS
 		float2 UV = i.vTextureCoords.xy;
 
         Material m;
-        m.Albedo = Tex2DS( g_tColor, TextureFiltering, UV.xy ).rgb;
-        m.Normal = TransformNormal( i, DecodeNormal( Tex2DS( g_tNormal, TextureFiltering, UV.xy ).rgb ) );
-        m.Roughness = Tex2DS( g_tRoughness, TextureFiltering, UV.xy ).r;
+        m.Albedo = Tex2DS( g_tColor, Sampler, UV.xy ).rgb;
+        m.Normal = TransformNormal( i, DecodeNormal( Tex2DS( g_tNormal, Sampler, UV.xy ).rgb ) );
+        m.Roughness = Tex2DS( g_tRoughness, Sampler, UV.xy ).r;
         m.Metalness = 0;
         m.AmbientOcclusion = 0.1;
         m.TintMask = 0;
@@ -137,10 +132,9 @@ PS
         m.Emission = 0;
         m.Transmission = 0;
 
-		ShadingModelValveStandard sm;
-		float4 result = FinalizePixelMaterial( i, m, sm );
+		float4 result = ShadingModelStandard::Shade( i, m );
 		#if( S_TRANSPARENCY )
-			float alpha = Tex2DS( g_tTransparencyMask, TextureFiltering, UV.xy ).r;
+			float alpha = Tex2DS( g_tTransparencyMask, Sampler, UV.xy ).r;
 			result.a = max( alpha, floor( alpha + TransparencyRounding ) );
 		#endif
 
