@@ -52,8 +52,7 @@ public partial class RadioComponent : ItemComponent
 		} )
 		.ToList();
 
-	private Sound? sound;
-	private SoundStream stream;
+	private SoundStream? stream;
 
 	private TimeSince lastWritten;
 	private QOA.Decoder decoder;
@@ -142,7 +141,6 @@ public partial class RadioComponent : ItemComponent
 	[ClientRpc]
 	private async void playOnClient( int index, float startTime )
 	{
-		sound?.Stop();
 		stream?.Delete();
 		CurrentSong = null;
 		ElapsedTime = null;
@@ -156,12 +154,12 @@ public partial class RadioComponent : ItemComponent
 		decoder = new QOA.Decoder( await FileSystem.Mounted.ReadAllBytesAsync( song.Path ) );
 		if ( !decoder.Valid )
 		{
-			Log.Error( "QOA Decoder has an invalid haeder." );
+			Log.Error( "QOA Decoder has an invalid header." );
 			return;
 		}
 
-		sound = Sound.FromEntity( "audiostream.default", Item );
-		stream = sound?.CreateStream( decoder.SampleRate, decoder.Channels );
+		stream = new SoundStream( decoder.SampleRate, decoder.Channels );
+		stream.Play( Entity );
 
 		ElapsedTime = MathF.Max( Time.Now - startTime, 0f );
 		decoder.SeekToSample( (int)(decoder.SampleRate * ElapsedTime) );
@@ -172,7 +170,6 @@ public partial class RadioComponent : ItemComponent
 		if ( !Game.IsClient )
 			return;
 
-		sound?.Stop();
 		stream?.Delete();
 		display?.Delete( true );
 	}
@@ -192,7 +189,7 @@ public partial class RadioComponent : ItemComponent
 		if ( Game.IsClient && display == null )
 			display = new( this );
 
-		if ( stream == null || sound == null || !stream.IsValid() || decoder == null )
+		if ( stream == null || !stream.IsValid() || decoder == null )
 			return;
 
 		// Handle reading the samples and writing them to the SoundStream.
