@@ -38,7 +38,7 @@ public partial class Player : AnimatedEntity
 		if ( Game.IsClient ) 
 			return;
 
-		if ( Input.Down( InputButton.PrimaryAttack ) )
+		if ( Input.Down( "attack1" ) )
 		{
 			peeParticle ??= Particles.Create( "particles/piss.vpcf" );
 

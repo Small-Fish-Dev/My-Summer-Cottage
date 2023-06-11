@@ -55,7 +55,7 @@
 
 	public override void Tick()
 	{
-		if ( Input.Pressed( InputButton.Score ) )	
+		if ( Input.Pressed( "score" ) )	
 			SetClass( "visible", !HasClass( "visible" ) );
 	}
 }

@@ -68,7 +68,7 @@ partial class Player
 			{
 				Position = EyePosition,
 				Rotation = ViewAngles.ToRotation(),
-				FOV = Screen.CreateVerticalFieldOfView( fov = MathX.LerpTo( fov, Input.Down( InputButton.View ) ? 20f : 70f, 5f * Time.Delta ) ),
+				FOV = Screen.CreateVerticalFieldOfView( fov = MathX.LerpTo( fov, Input.Down( "view" ) ? 20f : 70f, 5f * Time.Delta ) ),
 				Viewer = this
 			}
 			: overrideCamera.Value);

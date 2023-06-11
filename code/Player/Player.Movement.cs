@@ -45,7 +45,7 @@ partial class Player
 			return;
 
 		// Handle jumping.
-		if ( Input.Pressed( InputButton.Jump ) && GroundEntity != null && Water == null )
+		if ( Input.Pressed( "jump" ) && GroundEntity != null && Water == null )
 		{
 			GroundEntity = null;
 			Velocity += Vector3.Up * 200f;
@@ -55,7 +55,7 @@ partial class Player
 		var from = Position;
 		var to = from + Vector3.Up * CollisionBox.Maxs.z;
 		Ducking = (Ducking && Trace.Box( CollisionBox, in from, in to ).Ignore( this ).WithoutTags( "trigger" ).Run().Hit)
-			|| (Water == null && Input.Down( InputButton.Duck )); // Beautiful.
+			|| (Water == null && Input.Down( "duck" )); // Beautiful.
 
 		// Handle rotation.
 		var viewAngles = new Angles( 0, ViewAngles.yaw, 0 );
@@ -69,7 +69,7 @@ partial class Player
 		WishVelocity = (InputDirection
 			* eyeRotation).Normal.WithZ( 0 );
 
-		var running = Water == null && !Ducking && Input.Down( InputButton.Run );
+		var running = Water == null && !Ducking && Input.Down( "run" );
 		var mult = (running ? 1f : 0.5f)
 			 * MathF.Min( MathF.Abs( Velocity.WithZ( 0 ).Length ) / walkSpeed, 1f );
 
