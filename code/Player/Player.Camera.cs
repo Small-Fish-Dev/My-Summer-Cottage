@@ -81,7 +81,7 @@ partial class Player
 		Camera.ZNear = 2.5f;
 	}
 
-	[Event.Client.Frame]
+	[GameEvent.Client.Frame]
 	private void onFrame()
 	{
 		if ( View == null || !View.IsValid )

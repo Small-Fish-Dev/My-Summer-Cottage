@@ -42,6 +42,9 @@ public partial class Sauna : GameManager
 		// Remove the client's pawn on disconnect.
 		cl.Pawn?.Delete();
 		cl.Pawn = null;
+
+		if ( cl.Pawn is Player ply )
+			ply.Ragdoll?.Delete();
 	}
 
 	public override void Simulate( IClient cl )

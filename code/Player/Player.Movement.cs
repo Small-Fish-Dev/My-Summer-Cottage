@@ -2,6 +2,11 @@
 
 partial class Player
 {
+	/// <summary>
+	/// Should we block the player's inputs?
+	/// </summary>
+	[Net] public bool BlockInput { get; set; }
+
 	// Client Inputs
 	[ClientInput] public Vector3 InputDirection { get; protected set; }
 	[ClientInput] public Angles ViewAngles { get; set; }
@@ -45,7 +50,7 @@ partial class Player
 			return;
 
 		// Handle jumping.
-		if ( Input.Pressed( "jump" ) && GroundEntity != null && Water == null )
+		if ( Input.Pressed( "jump" ) && !BlockInput && GroundEntity != null && Water == null )
 		{
 			GroundEntity = null;
 			Velocity += Vector3.Up * 200f;
@@ -59,15 +64,20 @@ partial class Player
 
 		// Handle rotation.
 		var viewAngles = new Angles( 0, ViewAngles.yaw, 0 );
-		Rotation = Angles.Lerp( Rotation.Angles(), viewAngles, 10f * Time.Delta )
-			.ToRotation();
+		Rotation = BlockInput 
+			? Rotation 
+			: Angles.Lerp( Rotation.Angles(), viewAngles, 10f * Time.Delta )
+				.ToRotation();
 
-		SetAnimLookAt( "lookat", EyePosition, EyePosition + ViewAngles.Forward );
+		if ( !BlockInput )
+			SetAnimLookAt( "lookat", EyePosition, EyePosition + ViewAngles.Forward );
 
 		// Handle the player's wish velocity.
 		var eyeRotation = ViewAngles.WithPitch( 0 ).ToRotation();
-		WishVelocity = (InputDirection
-			* eyeRotation).Normal.WithZ( 0 );
+		WishVelocity = BlockInput 
+			? 0
+			: (InputDirection * eyeRotation).Normal
+				.WithZ( 0 );
 
 		var running = Water == null && !Ducking && Input.Down( "run" );
 		var mult = (running ? 1f : 0.5f)
