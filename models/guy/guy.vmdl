@@ -1174,17 +1174,6 @@
 						children = 
 						[
 							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = "pelvis"
-								motion_type = "Single"
-							},
-							{
 								_class = "AnimEvent"
 								event_class = "AE_FOOTSTEP"
 								event_frame = 21
@@ -1205,6 +1194,37 @@
 									Foot = "0"
 									Volume = 1.0
 								}
+							},
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								root_bone_name = "pelvis"
+								motion_type = "Uniform"
+								motion_samples = [ 0, 26 ]
+							},
+							{
+								_class = "AnimStartLoop"
+								start_loop_frame = 22
+							},
+							{
+								_class = "AnimAlign"
+								align_tx = true
+								align_ty = true
+								align_tz = false
+								align_rx = false
+								align_ry = false
+								align_rz = false
+								align_frame_type = "Number"
+								frame = 0
+								align_to_anim = "walkS"
+								align_to_frame_type = "Number"
+								align_to_frame = 0
+								bone = "pelvis"
 							},
 						]
 						activity_name = ""
