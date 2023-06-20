@@ -23,7 +23,7 @@ public partial class Outhouse : ModelEntity, IInteractable
 			{
 				
 			},
-			TextFunction = () => "Take a piss"
+			Text = "Take a piss"
 		} );
 	}
 

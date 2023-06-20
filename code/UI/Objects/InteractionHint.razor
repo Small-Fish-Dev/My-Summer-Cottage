@@ -52,9 +52,16 @@
 
             foreach ( var interaction in pawn.Interactions )
             {
-                <panel class="interaction">
+                <panel class="interaction" @ref=interactionPanel >
+					@if ( interaction.Value.BuildLabel != null )
+						interactionPanel?.DeleteChildren( true );
+
                     <inputglyph class="icon" glyphSize=@InputGlyphSize.Small action="@(interaction.Key)" />
-                    <label>@interaction.Value.Result</label>
+
+                    @if ( interaction.Value.BuildLabel != null && interactionPanel != null )
+						interaction.Value.BuildLabel.Invoke( interactionPanel );
+					else
+						<label>@interaction.Value.Text</label>
                 </panel>
             }
         }
@@ -62,7 +69,8 @@
 }
 
 @code {
-    private Vector2 lerpPosition;
+	private Vector2 lerpPosition;
+	private Panel interactionPanel;
 
     public override void Tick()
     {
@@ -82,7 +90,7 @@
     protected override int BuildHash()
     {
         var pawn = Game.LocalPawn as Player;
-        var interactions = String.Join( ',', pawn.Interactions.Select( i => $"{i.Key} {i.Value.Result}" ) );
+        var interactions = String.Join( ',', pawn.Interactions.Select( i => $"{i.Key} {i.Value.BuildHash?.Invoke() ?? 0}" ) );
 
         return HashCode.Combine( pawn.Interactable?.DisplayTitle, interactions );
     }

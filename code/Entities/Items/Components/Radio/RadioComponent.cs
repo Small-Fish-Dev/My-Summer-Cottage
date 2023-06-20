@@ -82,7 +82,14 @@ public partial class RadioComponent : ItemComponent
 				var random = sounds[Game.Random.Int( sounds.Count - 1 )];
 				Play( song: random );
 			},
-			TextFunction = () => CurrentSong != null ? "Turn off" : "Turn on"
+			BuildLabel = ( Panel parent ) =>
+			{
+				var label = parent.AddChild<Label>();
+				label.Text = CurrentSong != null 
+					? "Turn off" 
+					: "Turn on";
+			},
+			BuildHash = () => CurrentSong?.GetHashCode() ?? 0
 		} );
 
 		// Play random song.
@@ -116,7 +123,7 @@ public partial class RadioComponent : ItemComponent
 		// Stop playing song on client.
 		playOnClient( To.Everyone, -1, 0f );
 	}
-
+	BinaryReader test;
 	/// <summary>
 	/// Play a song.
 	/// </summary>
@@ -133,7 +140,7 @@ public partial class RadioComponent : ItemComponent
 			CurrentSong = song;
 			StartTime = Time.Now - skipTime;
 		}
-
+		
 		// Load file on client and start playing at desired time.
 		playOnClient( target ?? To.Everyone, sounds.IndexOf( CurrentSong.Value ), StartTime );
 	}
@@ -174,9 +181,14 @@ public partial class RadioComponent : ItemComponent
 		display?.Delete( true );
 	}
 
-	[Event.Tick]
+	[GameEvent.Tick]
 	void tick()
 	{
+		if ( test != null )
+		{
+			Log.Error( $"{test.BaseStream.Length}" );
+		}
+
 		// Pick a new random song.
 		if ( Game.IsServer && ElapsedTime > CurrentSong?.Duration + 1f )
 		{
