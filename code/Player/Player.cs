@@ -35,9 +35,6 @@ public partial class Player : AnimatedEntity
 		moveSimulate( cl );
 		
 		// Pissing
-		if ( Game.IsClient ) 
-			return;
-
 		if ( Input.Down( "attack1" ) )
 		{
 			peeParticle ??= Particles.Create( "particles/piss.vpcf" );
