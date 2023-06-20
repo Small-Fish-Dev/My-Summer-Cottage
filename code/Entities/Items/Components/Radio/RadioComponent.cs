@@ -82,14 +82,9 @@ public partial class RadioComponent : ItemComponent
 				var random = sounds[Game.Random.Int( sounds.Count - 1 )];
 				Play( song: random );
 			},
-			BuildLabel = ( Panel parent ) =>
-			{
-				var label = parent.AddChild<Label>();
-				label.Text = CurrentSong != null 
-					? "Turn off" 
-					: "Turn on";
-			},
-			BuildHash = () => CurrentSong?.GetHashCode() ?? 0
+			TextFunction = () => CurrentSong != null
+				? "Turn off"
+				: "Turn on",
 		} );
 
 		// Play random song.

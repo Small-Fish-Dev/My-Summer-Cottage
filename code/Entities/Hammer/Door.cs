@@ -54,14 +54,9 @@ public partial class Door : ModelEntity, IInteractable
 
 				Sound.FromEntity( "sounds/door/door_creak.sound", this );
 			},
-			BuildLabel = ( Panel parent ) =>
-			{
-				var label = parent.AddChild<Label>();
-				label.Text = State == DoorState.Open || State == DoorState.Opening
-					? "Close"
-					: "Open";
-			},
-			BuildHash = () => (int)State
+			TextFunction = () => State == DoorState.Open || State == DoorState.Opening
+				? "Close"
+				: "Open",
 		} );
 	}
 

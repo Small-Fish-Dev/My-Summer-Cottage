@@ -15,10 +15,11 @@ public struct InteractionInfo
 	public Action<Player> Function;
 #nullable enable
 	public string? Text;
-	public Action<Panel>? BuildLabel;
-	public Func<int>? BuildHash;
+	public Func<string>? TextFunction;
 #nullable disable
 	public Interactability Interactability;
+
+	public string Result => Text ?? TextFunction?.Invoke();
 
 	public InteractionInfo()
 	{

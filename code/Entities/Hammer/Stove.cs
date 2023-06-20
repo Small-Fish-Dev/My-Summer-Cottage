@@ -42,14 +42,9 @@ public partial class Stove : AnimatedEntity, IInteractable
 				Open = !Open;
 				SetAnimParameter( "b_open", Open );
 			},
-			BuildLabel = ( Panel parent ) =>
-			{
-				var label = parent.AddChild<Label>();
-				label.Text = Open
-					? "Close"
-					: "Open";
-			},
-			BuildHash = () => Open.GetHashCode()
+			TextFunction = () => Open
+				? "Close"
+				: "Open",
 		} );
 	}
 
