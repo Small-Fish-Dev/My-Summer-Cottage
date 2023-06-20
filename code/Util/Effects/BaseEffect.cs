@@ -1,6 +1,6 @@
 ﻿namespace Sauna;
 
-public class BaseEffect
+public abstract class BaseEffect
 {
 	/// <summary>
 	/// Amount of stacks currently on this effect.
@@ -16,6 +16,11 @@ public class BaseEffect
 	/// Is the effect permanent or not.
 	/// </summary>
 	public bool Permanent { get; set; }
+
+	/// <summary>
+	/// The target of this effect.
+	/// </summary>
+	public Player Target { get; set; }
 
 	/// <summary>
 	/// The text displayed for this effect.
@@ -37,7 +42,15 @@ public class BaseEffect
 	/// </summary>
 	public virtual int MaxStacks { get; } = 1;
 
-	public virtual void Simulate( Player pawn ) { }
+	public virtual void Simulate() { }
 
-	public virtual void OnEnd( Player pawn ) { }
+	public virtual void OnEnd() { }
+
+	public void Remove()
+	{
+		if ( Target is not Player pawn || !pawn.IsValid )
+			return;
+
+		pawn.Effects.Remove( this );
+	}
 }

@@ -7,14 +7,14 @@ public class Unconscious : BaseEffect
 	public Vector3 Force { get; set; }
 	public bool SelfApplied { get; set; }
 
-	public override void Simulate( Player pawn )
+	public override void Simulate()
 	{
-		if ( pawn.Ragdoll == null || !pawn.Ragdoll.IsValid )
-			pawn.SetRagdoll( true, Force );
+		if ( Target.Ragdoll == null || !Target.Ragdoll.IsValid )
+			Target.SetRagdoll( true, Force );
 	}
 
-	public override void OnEnd( Player pawn )
+	public override void OnEnd()
 	{
-		pawn.SetRagdoll( false );
+		Target.SetRagdoll( false );
 	}
 }

@@ -56,6 +56,7 @@ public class EffectManager
 		writer.Write( effect.Duration );
 		writer.Write( effect.Stacks );
 		writer.Write( effect.Permanent );
+		writer.Write( effect.Target?.NetworkIdent ?? - 1 );
 
 		payloadCount++;
 	}
@@ -100,7 +101,7 @@ public class EffectManager
 		writeRemove( writer, effect );
 		sendPayload( stream );
 
-		effect.OnEnd( player );
+		effect.OnEnd();
 
 		All.Remove( effect );
 		effect = null;
@@ -189,6 +190,7 @@ public class EffectManager
 				: Math.Min( duration, effect.MaxDuration );
 			effect.Stacks = stacks;
 			effect.Permanent = permanent;
+			effect.Target = player;
 
 			All.Add( effect );
 			writeAdd( writer, effect );
@@ -235,7 +237,7 @@ partial class Player
 				effect.Duration -= Time.Delta;
 			}
 
-			effect.Simulate( this );
+			effect.Simulate();
 		}
 	}
 
@@ -279,18 +281,23 @@ partial class Player
 					var newDuration = reader.ReadSingle();
 					var newStacks = reader.ReadInt32();
 					var newPermanent = reader.ReadBoolean();
+					var newTarget = reader.ReadInt32();
+					var newEntity = newTarget == -1 
+						? null 
+						: Entity.FindByIndex( newTarget ) as Player;
 
 					var newEffect = TypeLibrary.Create( typeName, typeof( BaseEffect ) ) as BaseEffect;
 					newEffect.Duration = newDuration;
 					newEffect.Stacks = newStacks;
 					newEffect.Permanent = newPermanent;
+					newEffect.Target = newEntity;
 
 					pawn.Effects?.All.Insert( index, newEffect );
 
 					break;
 
 				case EffectType.Remove:
-					effect.OnEnd( pawn );
+					effect.OnEnd();
 					pawn.Effects?.All.Remove( effect );
 
 					break;
