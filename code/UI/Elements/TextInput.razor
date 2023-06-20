@@ -11,7 +11,14 @@
 		justify-content: center;
 		align-content: center;
 
+		label {
+			word-break: break-all;
+			white-space: normal;
+		}
+
 		.ghost-text {
+			position: absolute;
+			left: 15px;
 			opacity: 0.5;
 		}
 	}
@@ -26,6 +33,11 @@
 
 @code {
 	public string Ghost { get; set; }
+
+	public TextInput()
+	{
+		
+	}
 
 	protected override int BuildHash()
 	{
