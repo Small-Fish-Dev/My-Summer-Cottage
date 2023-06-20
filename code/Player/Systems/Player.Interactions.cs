@@ -58,13 +58,22 @@ partial class Player : IInteractable
 		if ( !Game.IsServer && cl != Game.LocalClient )
 			return;
 
-		var trace = Trace.Ray( ViewRay, InteractionDistance )
+		// Go through all entities hit.
+		var traces = Trace.Ray( ViewRay, InteractionDistance )
 			.Ignore( this )
 			.WithoutTags( "trigger" )
 			.Radius( InteractionRadius )
-			.RunAll()
-			?.FirstOrDefault( trace => trace.Entity is IInteractable interactable && interactable.Enabled );
+			.RunAll();
 
+		// Do we hit world?
+		if ( traces?.FirstOrDefault().Entity == Game.WorldEntity )
+		{
+			Interactable = null;
+			return;
+		}
+
+		// Get nearest interactable.
+		var trace = traces?.FirstOrDefault( trace => trace.Entity is IInteractable interactable && interactable.Enabled );
 		interactions.Clear();
 		if ( trace?.Entity is IInteractable interactable )
 		{

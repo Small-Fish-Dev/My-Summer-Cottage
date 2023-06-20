@@ -71,6 +71,9 @@ public partial class SlotMachine : ModelEntity, IInteractable
 	TimeSince sinceResult;
 	int showCount;
 
+	SlotsDisplay money;
+	SlotsDisplay bet;
+
 	public SlotMachine()
 	{
 		var interactable = this as IInteractable;
@@ -109,6 +112,12 @@ public partial class SlotMachine : ModelEntity, IInteractable
 		Tags.Add( "solid" );
 	}
 
+	public override void ClientSpawn()
+	{
+		money = new( this, "display1", "Money" );
+		bet = new( this, "display2", "Bet" );
+	}
+
 	[GameEvent.Tick]
 	private void Tick()
 	{
@@ -135,6 +144,7 @@ public partial class SlotMachine : ModelEntity, IInteractable
 
 		for ( int i = 1; i <= 3; i++ )
 		{
+			var boneIndex = i + 2;
 			var target = showCount >= i 
 				? RollResult[i] * ANGLE_STEP
 				: sinceResult * 1000f;
@@ -143,10 +153,10 @@ public partial class SlotMachine : ModelEntity, IInteractable
 				* Rotation.FromAxis( Vector3.Right, ANGLE_STEP / 2f + target ) 
 				* Rotation.From( -90f, -90f, 0 );
 
-			var transform = GetBoneTransform( i )
+			var transform = GetBoneTransform( boneIndex )
 				.WithRotation( fixedRotation );
 			
-			SetBoneTransform( i, transform, true );
+			SetBoneTransform( boneIndex, transform, true );
 		}
 	}
 }

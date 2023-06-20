@@ -15,7 +15,7 @@
 						[
 							{
 								from = "glass.vmat"
-								to = "materials/glass_pane/glass_pane.vmat"
+								to = "models/slot_machine/materials/slot_glass.vmat"
 							},
 						]
 						use_global_default = false
@@ -73,6 +73,30 @@
 							exclude_by_default = false
 							exception_list = [  ]
 						}
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "display1"
+						parent_bone = "display1"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "display2"
+						parent_bone = "display2"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
 					},
 				]
 			},

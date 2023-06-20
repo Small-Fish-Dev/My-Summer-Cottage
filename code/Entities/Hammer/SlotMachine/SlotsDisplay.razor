@@ -1,0 +1,92 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits WorldPanel
+
+<style>
+	SlotsDisplay {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		flex-direction: column;
+
+		.text {
+			position: absolute;
+			font-size: 40px;
+			font-family: "DSEG14 Modern";
+			max-height: 100%;
+			right: 15px;
+			bottom: 5px;
+			color: darken(red, 0.9);
+
+			.background {
+				width: 100%;
+				z-index: 0;
+			}
+
+			.foreground {
+				right: 0px;
+				z-index: 1;
+			}
+		}
+	}
+</style>
+
+<root>
+	<label class="text background">@Empty</label>
+	<label class="text foreground" style="color: red">@Value</label>
+</root>
+
+@code {
+	public SlotMachine SlotMachine { get; private set; }
+	public string Attachment { get; private set; }
+	public string PropertyName { get; private set; }
+
+	public string Empty => new string( '8', MaxScreenCharacters );
+	public int Value => (int?)TypeLibrary.GetPropertyValue( SlotMachine, PropertyName ) ?? 0;
+
+	/// <summary>
+	/// Max amount of characters on screen 
+	/// </summary>
+	public const int MaxScreenCharacters = 4;
+
+	public SlotsDisplay( SlotMachine machine, string attachment, string value )
+	{
+		SlotMachine = machine;
+		Attachment = attachment;
+		PropertyName = value;
+
+		var scale = 0.8f;
+		Scale = scale;
+		WorldScale = scale;
+
+		var size = new Vector2( 104f, 45f ) * (1f / scale);
+		PanelBounds = new( -size.x / 2f, -size.y / 2f, size.x, size.y );
+	}
+
+	[Event.Client.Frame]
+	private void frame()
+	{
+		if ( SlotMachine == null || !SlotMachine.IsValid )
+		{
+			Delete( true );
+			return;
+		}
+
+		var attachment = SlotMachine.GetAttachment( Attachment );
+		if ( attachment == null )
+			return;
+
+		var transform = attachment.Value;
+		Rotation = transform.Rotation
+			.RotateAroundAxis( Vector3.Forward, 90f )
+			.RotateAroundAxis( Vector3.Right, -90f );
+		Position = transform.Position + Rotation.Forward * 0.1f;
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Value );
+	}
+}
