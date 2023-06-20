@@ -157,6 +157,9 @@ partial class Player
 
 	public override void BuildInput()
 	{
+		if ( Game.LocalPawn is not Player pawn )
+			return;
+
 		// Handle the client's inputs.
 		InputDirection = Input.AnalogMove;
 

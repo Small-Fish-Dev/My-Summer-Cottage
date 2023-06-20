@@ -42,7 +42,7 @@ public partial class TemperatureVolume : ModelEntity
 			Players.Remove( player );
 	}
 
-	[Event.Tick]
+	[GameEvent.Tick]
 	private void tick()
 	{
 		// TODO: Update

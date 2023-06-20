@@ -1,6 +1,6 @@
 ﻿global using Sandbox;
 //global using Sandbox.Internal;
-global using Sandbox.Internal.Globals;
+//global using Sandbox.Internal.Globals;
 global using Sandbox.UI;
 global using Sandbox.UI.Construct;
 global using Sandbox.Effects;

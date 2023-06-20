@@ -1,6 +1,4 @@
-﻿using Sandbox;
-
-namespace Sauna;
+﻿namespace Sauna;
 
 partial class Sauna
 {
