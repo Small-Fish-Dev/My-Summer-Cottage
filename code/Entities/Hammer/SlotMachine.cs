@@ -1,44 +1,78 @@
 ﻿namespace Sauna;
 
 /// <summary>
-/// Workaround entity for spawning prefabs in the map.
+/// Slot machine entity for awesome gambling entertainment!
 /// </summary>
 [HammerEntity]
 [EditorModel( "models/slot_machine/slot_machine.vmdl" )]
 public partial class SlotMachine : ModelEntity, IInteractable
 {
+	public const float ANGLE_STEP = 22.5f;
+	public const int COUNT = 8;
+	public const float ROLL_TIME = 5f;
+	public const float WAIT_TIME = 1f;
+
+	string IInteractable.DisplayTitle => "Pelikone";
+	InteractionOffset IInteractable.Offset => CollisionWorldSpaceCenter - Position;
+
+	/// <summary>
+	/// Data structure for storing a slot machine roll.
+	/// </summary>
 	public struct Result
 	{
 		public int a;
 		public int b;
 		public int c;
+
+		public int this[int index]
+		{
+			get
+			{
+				return index switch
+				{
+					1 => a,
+					2 => b,
+					3 => c,
+					_ => 0,
+				};
+			}
+		}
+
+		public override string ToString()
+		{
+			return $"{a}, {b}, {c}";
+		}
 	}
 
-	public readonly static Result None = new Result { a = -1 };
-
-	string IInteractable.DisplayTitle => "Pelikone";
-	InteractionOffset IInteractable.Offset => CollisionWorldSpaceCenter - Position;
-
+	/// <summary>
+	/// Are we currently rolling?
+	/// </summary>
 	[Net, Predicted]
 	public bool Rolling { get; set; } = false;
 
+	/// <summary>
+	/// Current money inside of the slot machine.
+	/// </summary>
 	[Net, Predicted]
 	public int Money { get; set; } = 10;
 
+	/// <summary>
+	/// The amount we are betting.
+	/// </summary>
 	[Net, Predicted]
 	public int Bet { get; set; } = 5;
 
+	/// <summary>
+	/// The result of our lastest roll.
+	/// </summary>
 	[Net]
 	public Result RollResult { get; set; }
 
 	TimeSince sinceResult;
-	Transform[] initialTransforms = new Transform[3];
+	int showCount;
 
-	public override void Spawn()
+	public SlotMachine()
 	{
-		SetModel( "models/slot_machine/slot_machine.vmdl" );
-		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
-
 		var interactable = this as IInteractable;
 
 		interactable.AddInteraction( "use", new()
@@ -55,34 +89,35 @@ public partial class SlotMachine : ModelEntity, IInteractable
 				if ( Game.IsServer )
 					RollResult = new Result
 					{
-						a = Game.Random.Int( 0, 7 ),
-						b = Game.Random.Int( 0, 7 ),
-						c = Game.Random.Int( 0, 7 )
+						a = new Random().Next( 0, 7 ),
+						b = new Random().Next( 0, 7 ),
+						c = new Random().Next( 0, 7 )
 					};
 
 				sinceResult = 0;
+				showCount = 0;
 			},
 			Text = "Roll"
 		} );
 	}
 
-	public override void OnNewModel( Model model )
+	public override void Spawn()
 	{
-		base.OnNewModel( model );
+		SetModel( "models/slot_machine/slot_machine.vmdl" );
+		SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
 
-		for ( int i = 1; i <= 3; i++ )
-			initialTransforms[i - 1] = GetBoneTransform( i, false );
+		Tags.Add( "solid" );
 	}
 
 	[GameEvent.Tick]
 	private void Tick()
 	{
-		DebugOverlay.Text( $"Rolling: {Rolling}\nMoney: {Money}", Position );
+		DebugOverlay.Text( $"Rolling: {Rolling}\nMoney: {Money}\nRoll: {RollResult}", Position );
 
 		// Calculate win.
 		if ( Game.IsServer )
 		{
-			if ( !Rolling || sinceResult < 5f )
+			if ( !Rolling || sinceResult < ROLL_TIME + WAIT_TIME )
 				return;
 
 			Rolling = false;
@@ -91,13 +126,26 @@ public partial class SlotMachine : ModelEntity, IInteractable
 			return;
 		}
 
-		if ( !Rolling || initialTransforms == null )
+		// Check if we should be updating at all.
+		if ( !Rolling || sinceResult > ROLL_TIME )
 			return;
+
+		// Which slot results can we show already?
+		showCount = MathX.FloorToInt( sinceResult / (ROLL_TIME / 3) ).Clamp( 0, 3 );
 
 		for ( int i = 1; i <= 3; i++ )
 		{
-			var initial = initialTransforms[i - 1];
-			var transform = initial.RotateAround( 0, Rotation.From( 0, Time.Now, 0 ) );
+			var target = showCount >= i 
+				? RollResult[i] * ANGLE_STEP
+				: sinceResult * 1000f;
+
+			var fixedRotation = Rotation
+				* Rotation.FromAxis( Vector3.Right, ANGLE_STEP / 2f + target ) 
+				* Rotation.From( -90f, -90f, 0 );
+
+			var transform = GetBoneTransform( i )
+				.WithRotation( fixedRotation );
+			
 			SetBoneTransform( i, transform, true );
 		}
 	}
