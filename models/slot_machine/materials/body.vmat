@@ -4,9 +4,6 @@ Layer0
 {
 	shader "shaders/saunasimple.shader_c"
 
-	//---- Rendering ----
-	F_TRANSPARENCY 1
-
 	//---- Fog ----
 	g_bFogEnabled "1"
 
@@ -14,8 +11,4 @@ Layer0
 	Color "models/slot_machine/materials/body_color.png"
 	Normal "materials/default/default_normal.tga"
 	Roughness "models/slot_machine/materials/body_rough.png"
-
-	//---- Transparency ----
-	TransparencyMask "models/slot_machine/materials/body_trans.png"
-	TransparencyRounding "0.621"
 }
