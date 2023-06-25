@@ -12,8 +12,9 @@ public partial class SlotMachine : ModelEntity, IInteractable
 	public const float ROLL_TIME = 5f;
 	public const float WAIT_TIME = 1f;
 
-	string IInteractable.DisplayTitle => "Pelikone";
+	string IInteractable.DisplayTitle => "🎰 Pelikone";
 	InteractionOffset IInteractable.Offset => CollisionWorldSpaceCenter - Position;
+	Color IInteractable.DisplayColor => Color.Green.Darken( 0.25f );
 
 	/// <summary>
 	/// Data structure for storing a slot machine roll.
