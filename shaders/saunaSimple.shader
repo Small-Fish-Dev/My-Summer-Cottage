@@ -87,7 +87,9 @@ PS
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
 
 	CreateInputTexture2D( Roughness, Linear, 8, "", "_rough", "Material,10/30", Default( 1 ) );
-	CreateTexture2DWithoutSampler( g_tRoughness ) < Channel( R, Box( Roughness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+	CreateTexture2DWithoutSampler( g_tRm ) < Channel( R, Box( Roughness ), Linear ); Channel( G, Box( Metalness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+
+	CreateInputTexture2D( Metalness, Linear, 8, "", "_metal",  "Material A,10/40", Default( 1.0 ) );
 
     #include "sbox_pixel.fxc"
     #include "common/pixel.hlsl"
@@ -124,8 +126,10 @@ PS
         Material m;
         m.Albedo = Tex2DS( g_tColor, Sampler, UV.xy ).rgb;
         m.Normal = TransformNormal( i, DecodeNormal( Tex2DS( g_tNormal, Sampler, UV.xy ).rgb ) );
-        m.Roughness = Tex2DS( g_tRoughness, Sampler, UV.xy ).r;
-        m.Metalness = 0;
+
+		float2 rm = Tex2DS( g_tRm, Sampler, UV.xy ).rg;
+        m.Roughness = rm.r;
+        m.Metalness = rm.g;
         m.AmbientOcclusion = 0.1;
         m.TintMask = 0;
         m.Opacity = 1;
