@@ -71,6 +71,7 @@ public partial class SlotMachine : ModelEntity, IInteractable
 
 	TimeSince sinceResult;
 	int showCount;
+	bool rollingPrevious = false;
 
 	SlotsDisplay money;
 	SlotsDisplay bet;
@@ -137,7 +138,7 @@ public partial class SlotMachine : ModelEntity, IInteractable
 		}
 
 		// Check if we should be updating at all.
-		if ( !Rolling || sinceResult > ROLL_TIME )
+		if ( (!Rolling || sinceResult > ROLL_TIME) && rollingPrevious == Rolling )
 			return;
 
 		// Which slot results can we show already?
@@ -159,5 +160,7 @@ public partial class SlotMachine : ModelEntity, IInteractable
 			
 			SetBoneTransform( boneIndex, transform, true );
 		}
+
+		rollingPrevious = Rolling;
 	}
 }

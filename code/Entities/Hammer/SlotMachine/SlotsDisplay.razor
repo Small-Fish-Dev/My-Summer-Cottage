@@ -82,7 +82,9 @@
 		Rotation = transform.Rotation
 			.RotateAroundAxis( Vector3.Forward, 90f )
 			.RotateAroundAxis( Vector3.Right, -90f );
-		Position = transform.Position + Rotation.Forward * 0.1f;
+		Position = transform.Position
+			+ Rotation.Up * 0.15f
+			+ Rotation.Forward * 0.1f;
 	}
 
 	protected override int BuildHash()
