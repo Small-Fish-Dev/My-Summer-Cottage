@@ -1,0 +1,27 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader_c"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/ground/rock/rock_basecolor.png"
+	Normal "materials/ground/rock/rock_normal.png"
+	Roughness "materials/ground/rock/rock_roughness.png"
+
+	//---- Material A ----
+	Metalness "materials/default/default_metal.tga"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "concrete"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}
