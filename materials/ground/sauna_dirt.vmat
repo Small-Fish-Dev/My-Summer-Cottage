@@ -1,0 +1,27 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader_c"
+
+	//---- Texture Filtering ----
+	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/ground/dirt/dirt_basecolor.png"
+	Normal "materials/ground/dirt/dirt_normal.png"
+	Roughness "materials/ground/dirt/dirt_roughness.png"
+
+	//---- Material A ----
+	Metalness "materials/default/default_metal.tga"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "dirt"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}
