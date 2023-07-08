@@ -11,15 +11,43 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
+						name = "off"
 						remaps = 
 						[
 							{
 								from = "glass.vmat"
-								to = "models/slot_machine/materials/slot_glass.vmat"
+								to = "materials/glass_pane/glass_pane.vmat"
+							},
+							{
+								from = "models/slot_machine/materials/displays.vmat"
+								to = "models/slot_machine/materials/displays.vmat"
+							},
+							{
+								from = "models/slot_machine/materials/body.vmat"
+								to = "models/slot_machine/materials/body.vmat"
 							},
 						]
 						use_global_default = false
 						global_default_material = ""
+					},
+					{
+						_class = "MaterialGroup"
+						name = "on"
+						remaps = 
+						[
+							{
+								from = "models/slot_machine/materials/displays.vmat"
+								to = "models/slot_machine/materials/displays_on.vmat"
+							},
+							{
+								from = "materials/glass_pane/glass_pane.vmat"
+								to = "materials/glass_pane/glass_pane.vmat"
+							},
+							{
+								from = "models/slot_machine/materials/body.vmat"
+								to = "models/slot_machine/materials/body_on.vmat"
+							},
+						]
 					},
 				]
 			},
