@@ -4,14 +4,19 @@ Layer0
 {
 	shader "shaders/saunasimple.shader"
 
+	//---- Rendering ----
+	F_EMISSIVE 1
+
+	//---- Emission ----
+	Emission "models/slot_machine/materials/body_selfillum.png"
+	EmissionStrength "1.121"
+
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Material ----
 	Color "models/slot_machine/materials/body_color_on.png"
+	Metalness "models/slot_machine/materials/body_metal.png"
 	Normal "models/slot_machine/materials/body_normal.png"
 	Roughness "models/slot_machine/materials/body_rough.png"
-
-	//---- Material A ----
-	Metalness "models/slot_machine/materials/body_metal.png"
 }

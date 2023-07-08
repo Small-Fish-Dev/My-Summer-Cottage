@@ -4,14 +4,19 @@ Layer0
 {
 	shader "shaders/saunasimple.shader"
 
+	//---- Rendering ----
+	F_EMISSIVE 1
+
+	//---- Emission ----
+	Emission "models/slot_machine/materials/displays_selfillum.png"
+	EmissionStrength "1.000"
+
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	Color "models/slot_machine/materials/displays_color_on.png"
+	Color "models/slot_machine/materials/displays_color.png"
+	Metalness "materials/default/default_metal.tga"
 	Normal "materials/default/default_normal.tga"
 	Roughness "materials/default/default_rough.tga"
-
-	//---- Material A ----
-	Metalness "materials/default/default_metal.tga"
 }

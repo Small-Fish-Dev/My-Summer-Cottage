@@ -19,35 +19,20 @@
 								to = "materials/glass_pane/glass_pane.vmat"
 							},
 							{
-								from = "models/slot_machine/materials/displays.vmat"
-								to = "models/slot_machine/materials/displays.vmat"
-							},
-							{
 								from = "models/slot_machine/materials/body.vmat"
 								to = "models/slot_machine/materials/body.vmat"
+							},
+							{
+								from = "displays_on.vmat"
+								to = "models/slot_machine/materials/displays_on.vmat"
+							},
+							{
+								from = "body_on.vmat"
+								to = "models/slot_machine/materials/body_on.vmat"
 							},
 						]
 						use_global_default = false
 						global_default_material = ""
-					},
-					{
-						_class = "MaterialGroup"
-						name = "on"
-						remaps = 
-						[
-							{
-								from = "models/slot_machine/materials/displays.vmat"
-								to = "models/slot_machine/materials/displays_on.vmat"
-							},
-							{
-								from = "materials/glass_pane/glass_pane.vmat"
-								to = "materials/glass_pane/glass_pane.vmat"
-							},
-							{
-								from = "models/slot_machine/materials/body.vmat"
-								to = "models/slot_machine/materials/body_on.vmat"
-							},
-						]
 					},
 				]
 			},
@@ -57,6 +42,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
+						name = "Slot_machine"
 						filename = "models/slot_machine/slot_machine.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -73,6 +59,448 @@
 								"slot_machine",
 							]
 						}
+					},
+					{
+						_class = "Folder"
+						name = "Buttons_Off"
+						children = 
+						[
+							{
+								_class = "RenderMeshFile"
+								name = "button_1"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"button_1",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "button_2"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"button_2",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "button_3"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"button_3",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "button_go"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"button_go",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "button_cash"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"button_cash",
+									]
+								}
+							},
+						]
+					},
+					{
+						_class = "Folder"
+						name = "Buttons_On"
+						children = 
+						[
+							{
+								_class = "RenderMeshFile"
+								name = "button_1_on"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"button_1_on",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "button_2_on"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"button_2_on",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "button_3_on"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"button_3_on",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "button_go_on"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"button_go_on",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "button_cash_on"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"button_cash_on",
+									]
+								}
+							},
+						]
+					},
+					{
+						_class = "Folder"
+						name = "Screen"
+						children = 
+						[
+							{
+								_class = "RenderMeshFile"
+								name = "screen"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"screen",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "screen_on"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"screen_on",
+									]
+								}
+							},
+						]
+					},
+					{
+						_class = "Folder"
+						name = "Wheel"
+						children = 
+						[
+							{
+								_class = "RenderMeshFile"
+								name = "wheel"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"wheel",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "wheel_on"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"wheel_on",
+									]
+								}
+							},
+						]
+					},
+					{
+						_class = "Folder"
+						name = "Lines_Off"
+						children = 
+						[
+							{
+								_class = "RenderMeshFile"
+								name = "line_1"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"line_1",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "line_2"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"line_2",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "line_3"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"line_3",
+									]
+								}
+							},
+						]
+					},
+					{
+						_class = "Folder"
+						name = "Lines_On"
+						children = 
+						[
+							{
+								_class = "RenderMeshFile"
+								name = "line_1_on"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"line_1_on",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "line_2_on"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"line_2_on",
+									]
+								}
+							},
+							{
+								_class = "RenderMeshFile"
+								name = "line_3_on"
+								filename = "models/slot_machine/slot_machine.fbx"
+								import_translation = [ 0.0, 0.0, 0.0 ]
+								import_rotation = [ 0.0, 0.0, 0.0 ]
+								import_scale = 1.0
+								align_origin_x_type = "None"
+								align_origin_y_type = "None"
+								align_origin_z_type = "None"
+								parent_bone = ""
+								import_filter = 
+								{
+									exclude_by_default = true
+									exception_list = 
+									[
+										"line_3_on",
+									]
+								}
+							},
+						]
 					},
 				]
 			},
@@ -125,6 +553,267 @@
 						relative_angles = [ 0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "BodyGroup"
+						name = "body"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"Slot_machine",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "button_1"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "button_1_on"
+								meshes = 
+								[
+									"button_1",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "button_1_off"
+								meshes = 
+								[
+									"button_1_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "button_2"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "button_2_off"
+								meshes = 
+								[
+									"button_2",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "button_2_on"
+								meshes = 
+								[
+									"button_2_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "button_3"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "button_3_off"
+								meshes = 
+								[
+									"button_3",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "button_3_on"
+								meshes = 
+								[
+									"button_3_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "button_go"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "button_go_off"
+								meshes = 
+								[
+									"button_go",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "button_go_on"
+								meshes = 
+								[
+									"button_go_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "button_cash"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "button_cash_off"
+								meshes = 
+								[
+									"button_cash",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "button_cash_on"
+								meshes = 
+								[
+									"button_cash_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "screen"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "screen_off"
+								meshes = 
+								[
+									"screen",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "screen_on"
+								meshes = 
+								[
+									"screen_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "wheel"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "wheel_off"
+								meshes = 
+								[
+									"wheel",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "wheel_on"
+								meshes = 
+								[
+									"wheel_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "line_1"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "line_1_off"
+								meshes = 
+								[
+									"line_1",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "line_1_on"
+								meshes = 
+								[
+									"line_1_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "line_2"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "line_2_off"
+								meshes = 
+								[
+									"line_2",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "line_2_on"
+								meshes = 
+								[
+									"line_2_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "line_3"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "line_3_off"
+								meshes = 
+								[
+									"line_3",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "line_3_on"
+								meshes = 
+								[
+									"line_3_on",
+								]
+							},
+						]
+						hidden_in_tools = false
 					},
 				]
 			},
