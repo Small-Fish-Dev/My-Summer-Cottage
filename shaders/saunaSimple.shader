@@ -10,6 +10,7 @@ FEATURES
 {
     #include "common/features.hlsl"
 	Feature( F_TRANSPARENCY, 0..1, "Rendering" );
+	Feature( F_EMISSIVE, 0..1, "Rendering" );
 }
 
 //=========================================================================================================================
@@ -78,6 +79,7 @@ PS
     SamplerState Sampler < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
 
 	StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );
+	StaticCombo( S_EMISSIVE, F_EMISSIVE, Sys( ALL ) );
 
 	#define CUSTOM_MATERIAL_INPUTS
 	CreateInputTexture2D( Color, Srgb, 8, "", "_color", "Material,10/10", Default3( 1.0, 1.0, 1.0 ) );
@@ -87,8 +89,11 @@ PS
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
 
 	CreateInputTexture2D( Roughness, Linear, 8, "", "_rough", "Material,10/30", Default( 1 ) );
-	CreateInputTexture2D( Metalness, Linear, 8, "", "_metal",  "Material A,10/40", Default( 1.0 ) );
+	CreateInputTexture2D( Metalness, Linear, 8, "", "_metal",  "Material,10/40", Default( 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tRm ) < Channel( R, Box( Roughness ), Linear ); Channel( G, Box( Metalness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+
+	CreateInputTexture2D( Emission, Linear, 8, "", "", "Material,10/50", Default3( 0, 0, 0 ) );
+	CreateTexture2DWithoutSampler( g_tEmission ) < Channel( RGB, Box( Emission ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
 
     #include "sbox_pixel.fxc"
     #include "common/pixel.hlsl"
@@ -132,7 +137,10 @@ PS
         m.AmbientOcclusion = 0.1;
         m.TintMask = 0;
         m.Opacity = 1;
-        m.Emission = 0;
+		m.Emission = 0;
+		#if( S_EMISSIVE )
+       	 	m.Emission = Tex2DS( g_tEmission, Sampler, UV.xy ).rgb;
+		#endif
         m.Transmission = 0;
 
 		float4 result = ShadingModelStandard::Shade( i, m );
