@@ -93,7 +93,7 @@ PS
 	CreateTexture2DWithoutSampler( g_tRm ) < Channel( R, Box( Roughness ), Linear ); Channel( G, Box( Metalness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 
 	CreateInputTexture2D( Emission, Linear, 8, "", "", "Material,10/50", Default3( 0, 0, 0 ) );
-	CreateTexture2DWithoutSampler( g_tEmission ) < Channel( RGB, Box( Emission ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
+	CreateTexture2DWithoutSampler( g_tEmission ) < Channel( RGB, Box( Emission ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 
     #include "sbox_pixel.fxc"
     #include "common/pixel.hlsl"
