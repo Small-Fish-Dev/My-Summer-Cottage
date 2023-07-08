@@ -92,8 +92,12 @@ PS
 	CreateInputTexture2D( Metalness, Linear, 8, "", "_metal",  "Material,10/40", Default( 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tRm ) < Channel( R, Box( Roughness ), Linear ); Channel( G, Box( Metalness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 
-	CreateInputTexture2D( Emission, Linear, 8, "", "", "Material,10/50", Default3( 0, 0, 0 ) );
-	CreateTexture2DWithoutSampler( g_tEmission ) < Channel( RGB, Box( Emission ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+	#if ( S_EMISSIVE )
+		float EmissionStrength < UiType( Slider ); Default( 1.0f ); Range( 0, 5.0 ); UiGroup( "Emission,20/10" );  >;
+
+		CreateInputTexture2D( Emission, Linear, 8, "", "", "Emission,20/20", Default3( 0, 0, 0 ) );
+		CreateTexture2DWithoutSampler( g_tEmission ) < Channel( RGB, Box( Emission ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+	#endif 
 
     #include "sbox_pixel.fxc"
     #include "common/pixel.hlsl"
@@ -108,7 +112,7 @@ PS
 
 		BoolAttribute( translucent, true );
 
-		CreateInputTexture2D( TransparencyMask, Linear, 8, "", "_trans", "Transparency,10/20", Default( 1 ) );
+		CreateInputTexture2D( TransparencyMask, Linear, 8, "", "_trans", "Transparency,10/10", Default( 1 ) );
 		CreateTexture2DWithoutSampler( g_tTransparencyMask ) < Channel( R, Box( TransparencyMask ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 	
 		float TransparencyRounding< Default( 0.0f ); Range( 0.0f, 1.0f ); UiGroup( "Transparency,10/20" ); >;
@@ -139,7 +143,7 @@ PS
         m.Opacity = 1;
 		m.Emission = 0;
 		#if( S_EMISSIVE )
-       	 	m.Emission = Tex2DS( g_tEmission, Sampler, UV.xy ).rgb;
+       	 	m.Emission = Tex2DS( g_tEmission, Sampler, UV.xy ).rgb * EmissionStrength;
 		#endif
         m.Transmission = 0;
 
