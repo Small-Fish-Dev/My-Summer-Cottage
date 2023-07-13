@@ -43,15 +43,16 @@
 				top: 0px;
 				left: 0px;
 				height: 15px;
-				max-width: 374px;
+				max-width: 376px;
 				background-color: black;
+				width: 100%;
 			}
 		}
 	}
 </style>
 
-<root style="background-color: darken(#5E7C34, @(Radio.CurrentSong != null ? 0.7 : 0.9));">
-	@if( Radio.CurrentSong != null )
+<root style="background-color: darken(#5E7C34, @(Radio.Channel != null ? 0.7 : 0.9));">
+	@if( Radio.Channel != null )
 	{
 		timeUntilScroll = -ScrollPostWait;
 		textOffset = -1;
@@ -82,7 +83,7 @@
 	private int textOffset;
 	private TimeUntil timeUntilScroll = ScrollPostWait;
 
-	public string VirtualText => Radio.CurrentSong == null ? null : $"{Radio.CurrentSong.Value.Producer} - {Radio.CurrentSong.Value.Name}";
+	public string VirtualText => Radio.Title;
 	public string ActualText => new string( (VirtualText ?? "")
 		.Skip( textOffset )
 		.Take( MaxScreenCharacters ).ToArray() )
@@ -135,13 +136,10 @@
 
 			displayLabel.Text = ActualText;
 		}
-		
-		if ( Radio.CurrentSong != null && Radio.ElapsedTime != null && timeline?.Style != null )
-			timeline.Style.Width = Length.Fraction( Radio.ElapsedTime.Value / Radio.CurrentSong.Value.Duration );
 	}
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( Radio?.CurrentSong?.Path );
+		return HashCode.Combine( Radio?.Title, Radio?.Channel );
 	}
 }

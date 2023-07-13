@@ -3,68 +3,27 @@
 [Prefab, Title( "Radio Component" )]
 public partial class RadioComponent : ItemComponent
 {
-	public struct Song
-	{
-		public string Producer;
-		public string Name;
-		public string Path;
-		public float Duration;
-
-		public Song( string path )
-		{
-			Path = path;
-
-			// Get song duration from QOA header.
-			var stream = FileSystem.Mounted.OpenRead( path );
-			var buffer = new byte[64];
-			stream.Read( buffer, 0, buffer.Length );
-			stream.Close();
-
-			var decoder = new QOA.Decoder( buffer );
-			Duration = (float)decoder.SampleCount / decoder.SampleRate;
-		}
-	}
-
-	public Song? CurrentSong { get; private set; }
+	public RadioChannelAsset Channel { get; private set; }
+	public float Time { get; private set; }
 	public TimeSince? ElapsedTime { get; private set; }
-	public float StartTime { get; private set; }
 
-	private static string[] songFromPath( string path )
-		=> path
-			.Substring( 0, path.Length - 5 )
-			.Replace( '_', ' ' )
-			.Split( "-" );
-
-	List<Song> sounds = FileSystem.Mounted.FindFile( "sounds/qoa/" )
-		.Where( file => file.EndsWith( ".json" ) ) // This .qoa file is on an undercover mission to infiltrate JSON headquarters.
-		.Select( path =>
-		{
-			var name = path.Substring( 0, path.Length - 5 );
-			var separate = songFromPath( path );
-			var fullPath = $"sounds/qoa/{name}.json";
-
-			// Return all of the song data.
-			return new Song( fullPath )
-			{
-				Producer = separate[0],
-				Name = separate[1]
-			};
-		} )
-		.ToList();
-
-	private SoundStream? stream;
-
-	private TimeSince lastWritten;
-	private QOA.Decoder decoder;
-
+	private MusicPlayer player;
 	private RadioDisplay display;
+
+	public string Title => player != null
+		? player.Title
+		: Channel?.Name ?? string.Empty;
+
+	public float? Duration => player != null 
+		? player.Duration 
+		: null;
 
 	public override void Initialize()
 	{
 		if ( Game.IsServer )
 			Item.Transmit = TransmitType.Always;
 
-		// Turn radio on.
+		// Toggle the radio.
 		Interactable.AddInteraction( "use", new()
 		{
 			Predicate = ( Player pawn ) => true,
@@ -73,36 +32,53 @@ public partial class RadioComponent : ItemComponent
 				if ( Game.IsClient )
 					return;
 
-				if ( ElapsedTime != null )
+				if ( Channel != null )
 				{
 					Stop();
 					return;
 				}
 
-				var random = sounds[Game.Random.Int( sounds.Count - 1 )];
-				Play( song: random );
+				var first = RadioChannelAsset.All.FirstOrDefault();
+				Play( channel: first );
 			},
-			TextFunction = () => CurrentSong != null
+			TextFunction = () => Channel != null
 				? "Turn off"
 				: "Turn on",
 		} );
 
-		// Play random song.
+		// Switch Channel
 		Interactable.AddInteraction( "reload", new()
 		{
-			Predicate = ( Player pawn ) => CurrentSong != null,
+			Predicate = ( Player pawn ) => Channel != null,
 			Function = ( Player pawn ) =>
 			{
 				if ( Game.IsClient )
 					return;
 
-				var array = sounds.Where( song => song.Path != CurrentSong?.Path )
-					.ToArray();
-				var random = array[Game.Random.Int( array.Length - 1 )];
-				Play( song: random );
+				var index = ((List<RadioChannelAsset>)RadioChannelAsset.All).IndexOf( Channel ) + 1;
+				var next = RadioChannelAsset.All[index % RadioChannelAsset.All.Count];
+				Play( channel: next );
 			},
-			Text = "Play random"
+			Text = "Next"
 		} );
+
+		Interactable.AddInteraction( "menu", new()
+		{
+			Predicate = ( Player pawn ) => Channel != null,
+			Function = ( Player pawn ) =>
+			{
+				if ( Game.IsClient )
+					return;
+
+				var index = ((List<RadioChannelAsset>)RadioChannelAsset.All).IndexOf( Channel ) - 1;
+				var previous = RadioChannelAsset.All[index < 0 ? RadioChannelAsset.All.Count - 1 : index];
+				Play( channel: previous );
+			},
+			Text = "Previous"
+		} );
+
+		if ( Game.IsClient )
+			display = new( this );
 	}
 
 	/// <summary>
@@ -112,59 +88,53 @@ public partial class RadioComponent : ItemComponent
 	{
 		Game.AssertServer();
 
+		Channel = null;
 		ElapsedTime = null;
-		CurrentSong = null;
 
 		// Stop playing song on client.
-		playOnClient( To.Everyone, -1, 0f );
+		playOnClient( To.Everyone, string.Empty );
 	}
-	BinaryReader test;
+
 	/// <summary>
 	/// Play a song.
 	/// </summary>
 	/// <param name="target"></param>
-	/// <param name="song"></param>
+	/// <param name="channel"></param>
 	/// <param name="skipTime"></param>
-	public void Play( To? target = null, Song? song = null, float skipTime = 0f )
+	public void Play( To? target = null, RadioChannelAsset channel = null )
 	{
 		Game.AssertServer();
 
-		if ( song != null )
-		{
-			ElapsedTime = skipTime;
-			CurrentSong = song;
-			StartTime = Time.Now - skipTime;
-		}
+		Channel = channel;
+		/*if ( Channel != null )
+			Time = Sandbox.Time.Now - skipTime;*/
 		
 		// Load file on client and start playing at desired time.
-		playOnClient( target ?? To.Everyone, sounds.IndexOf( CurrentSong.Value ), StartTime );
+		playOnClient( target ?? To.Everyone, Channel?.Name ?? string.Empty );
 	}
 
 	[ClientRpc]
-	private async void playOnClient( int index, float startTime )
+	private async void playOnClient( string name)
 	{
-		stream?.Delete();
-		CurrentSong = null;
+		player?.Stop();
+		player?.Dispose();
+
 		ElapsedTime = null;
 
-		if ( index > sounds.Count - 1 || index < 0 )
+		Channel = name == string.Empty
+			? null 
+			: RadioChannelAsset.All
+				.FirstOrDefault( ch => ch.Name == name );
+
+		if ( Channel == null )
 			return;
 
-		var song = sounds.ElementAtOrDefault( index );
-		CurrentSong = song;
+		player = MusicPlayer.PlayUrl( Channel.URL );
+		player.Entity = Entity;
+		player.Volume = 0.2f;
+		// player.Seek( startTime );
 
-		decoder = new QOA.Decoder( await FileSystem.Mounted.ReadAllBytesAsync( song.Path ) );
-		if ( !decoder.Valid )
-		{
-			Log.Error( "QOA Decoder has an invalid header." );
-			return;
-		}
-
-		stream = new SoundStream( decoder.SampleRate, decoder.Channels );
-		stream.Play( Entity );
-
-		ElapsedTime = MathF.Max( Time.Now - startTime, 0f );
-		decoder.SeekToSample( (int)(decoder.SampleRate * ElapsedTime) );
+		ElapsedTime = 0f;
 	}
 
 	public override void OnDestroy()
@@ -172,18 +142,14 @@ public partial class RadioComponent : ItemComponent
 		if ( !Game.IsClient )
 			return;
 
-		stream?.Delete();
+		player?.Stop();
+		player?.Dispose();
 		display?.Delete( true );
 	}
 
-	[GameEvent.Tick]
+	/*[GameEvent.Tick]
 	void tick()
 	{
-		if ( test != null )
-		{
-			Log.Error( $"{test.BaseStream.Length}" );
-		}
-
 		// Pick a new random song.
 		if ( Game.IsServer && ElapsedTime > CurrentSong?.Duration + 1f )
 		{
@@ -217,13 +183,13 @@ public partial class RadioComponent : ItemComponent
 
 		stream.WriteData( buffer.AsSpan() );
 		lastWritten = 0f;
-	}
+	}*/
 
 	[SaunaEvent.OnSpawn]
 	static void onSpawn( Player player )
 	{
 		foreach ( var radio in GetAllOfType<RadioComponent>() )
-			if ( radio.CurrentSong != null )
+			if ( radio.Channel != null )
 				radio.Play( To.Single( player.Client ) );
 	}
 }
