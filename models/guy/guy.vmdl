@@ -1393,7 +1393,15 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "crouch"
+						name = "crouch_delta"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "idle"
+								frame = 0
+							},
+						]
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
