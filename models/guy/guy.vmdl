@@ -11,13 +11,7 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
-						remaps = 
-						[
-							{
-								from = "body.vmat"
-								to = "models/guy/guy.vmat"
-							},
-						]
+						remaps = [  ]
 						use_global_default = false
 						global_default_material = ""
 					},
@@ -60,38 +54,6 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "legs"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								bone_names = 
-								[
-									"Pole_L",
-									"Pole_R",
-								]
-							},
-						]
-						filename = "models/guy/guy_legs.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = true
-							exception_list = 
-							[
-								"man_001",
-								"man_legs",
-							]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
 						name = "torso"
 						children = 
 						[
@@ -117,7 +79,40 @@
 							exclude_by_default = true
 							exception_list = 
 							[
-								"man_torso",
+								"man",
+								"guy_torso",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "legs"
+						children = 
+						[
+							{
+								_class = "RemoveBoneAndChildren"
+								bone_names = 
+								[
+									"Pole_L",
+									"Pole_R",
+								]
+							},
+						]
+						filename = "models/guy/guy_legs.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"man",
+								"guy_legs",
 							]
 						}
 					},
@@ -1612,7 +1607,7 @@
 						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
 						"m_DefaultTargetSettings.m_Bone" = 
 						{
-							m_Name = "hand_R_IK"
+							m_Name = "Hand_IK_R"
 						}
 						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
 						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
