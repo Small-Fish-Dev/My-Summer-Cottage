@@ -62,6 +62,8 @@ partial class Player
 		Ducking = (Ducking && Trace.Box( CollisionBox, in from, in to ).Ignore( this ).WithoutTags( "trigger" ).Run().Hit)
 			|| (Water == null && Input.Down( "duck" )); // Beautiful.
 
+		SetAnimParameter( "crouching", Ducking );
+
 		// Handle rotation.
 		var viewAngles = new Angles( 0, ViewAngles.yaw, 0 );
 		Rotation = BlockInput 
