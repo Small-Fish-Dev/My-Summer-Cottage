@@ -970,17 +970,6 @@
 						children = 
 						[
 							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = "pelvis"
-								motion_type = "Single"
-							},
-							{
 								_class = "AnimSmoothLoop"
 								frames_from_start = 1
 								frames_from_end = 1
@@ -1006,6 +995,17 @@
 									Foot = "0"
 									Volume = 1.0
 								}
+							},
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								root_bone_name = "pelvis"
+								motion_type = "Single"
 							},
 						]
 						activity_name = ""
@@ -1032,17 +1032,6 @@
 						children = 
 						[
 							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = "pelvis"
-								motion_type = "Single"
-							},
-							{
 								_class = "AnimSmoothLoop"
 								frames_from_start = 1
 								frames_from_end = 1
@@ -1068,6 +1057,36 @@
 									Foot = "0"
 									Volume = 1.0
 								}
+							},
+							{
+								_class = "AnimStartLoop"
+								start_loop_frame = 20
+							},
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								root_bone_name = "pelvis"
+								motion_type = "Uniform"
+							},
+							{
+								_class = "AnimAlign"
+								align_tx = true
+								align_ty = true
+								align_tz = false
+								align_rx = false
+								align_ry = false
+								align_rz = false
+								align_frame_type = "Number"
+								frame = 0
+								align_to_anim = "idle"
+								align_to_frame_type = "Number"
+								align_to_frame = 0
+								bone = "root"
 							},
 						]
 						activity_name = ""
@@ -1532,6 +1551,16 @@
 											{
 												_class = "IKChainJoint"
 												name = "foot_R"
+												children = 
+												[
+													{
+														_class = "IKJointConstraint_Hinge"
+														constrained_joint = ""
+														hinge_axis = "Up"
+														min_radians = -2.094395
+														max_radians = 0.0
+													},
+												]
 												bone = "foot_R"
 											},
 										]
@@ -1577,6 +1606,16 @@
 											{
 												_class = "IKChainJoint"
 												name = "foot_L"
+												children = 
+												[
+													{
+														_class = "IKJointConstraint_Hinge"
+														constrained_joint = ""
+														hinge_axis = "Up"
+														min_radians = -2.094395
+														max_radians = 0.0
+													},
+												]
 												bone = "foot_L"
 											},
 										]
@@ -1649,6 +1688,51 @@
 						}
 						"m_Data.m_bParentJointRequiresAlignment" = true
 					},
+					{
+						_class = "IKChain"
+						name = "arm_L"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "arm_upper_L"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "arm_lower_L"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "hand_L"
+												bone = "hand_L"
+											},
+										]
+										bone = "arm_lower_L"
+									},
+								]
+								bone = "arm_upper_L"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "Hand_IK_L"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
 				]
 			},
 			{
@@ -1672,6 +1756,13 @@
 					{
 						_class = "BoneMarkup"
 						target_bone = "hand_R_IK"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
+					{
+						_class = "BoneMarkup"
+						target_bone = "hand_L_IK"
 						ignore_Translation = false
 						ignore_rotation = false
 						do_not_discard = true
@@ -1889,6 +1980,24 @@
 							{
 								bone = "root"
 								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "only_penoid"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "balls"
+								weight = 1.0
+							},
+							{
+								bone = "penoid"
+								weight = 1.0
 							},
 						]
 						master_morph_weight = -1.0
