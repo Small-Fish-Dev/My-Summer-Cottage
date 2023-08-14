@@ -14,5 +14,7 @@ public class InteractionOffset
 	}
 
 	public static implicit operator InteractionOffset( Vector3 vec ) => new( vec.x, vec.y, vec.z );
-	public static implicit operator Vector3( InteractionOffset offset ) => new( offset.x, offset.y, offset.z );
+	public static implicit operator Vector3( InteractionOffset offset ) => offset == null 
+		? default
+		: new( offset.x, offset.y, offset.z );
 }
