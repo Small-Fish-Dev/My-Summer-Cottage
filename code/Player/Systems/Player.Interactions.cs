@@ -77,13 +77,11 @@ partial class Player : IInteractable
 		interactions.Clear();
 		if ( trace?.Entity is IInteractable interactable )
 		{
+			var entity = trace.Value.Entity as ModelEntity;
 			Interactable = interactable;
 
-			foreach ( var interaction in interactable.All )
+			foreach ( var (action, list) in interactable.All )
 			{
-				var action = interaction.Key;
-				var list = interaction.Value;
-
 				foreach ( var info in list )
 				{
 					var condition = !info.Equals( default( InteractionInfo ) )
@@ -97,7 +95,17 @@ partial class Player : IInteractable
 
 					if ( Input.Pressed( action ) )
 					{
+						var position = interactable.Offset == null
+							? entity.CollisionWorldSpaceCenter
+							: interactable.Offset + entity.Position;
+
+						DebugOverlay.Text( "Interaction", position, 2f );
+
+						SetAnimParameter( "right_ik_rot", Rotation.Identity );
+						SetAnimParameter( "right_ik_pos", new Vector3( 20, -5f, 50f ) );
+
 						SetAnimParameter( "use", true );
+						
 						info.Function( this );
 
 						// Don't let anything interfere with the interaction.
