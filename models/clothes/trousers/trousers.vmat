@@ -2,7 +2,10 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader_c"
+	shader "shaders/saunasimple.shader"
+
+	//---- Animation ----
+	F_MORPH_SUPPORTED 1
 
 	//---- Texture Filtering ----
 	F_TEXTURE_FILTERING 3 // Point Sample
@@ -12,6 +15,7 @@ Layer0
 
 	//---- Material ----
 	Color "models/clothes/trousers/trousers_color.tga"
+	Metalness "materials/default/default_metal.tga"
 	Normal "models/clothes/trousers/trousers_normal.tga"
 	Roughness "[1.000000 1.000000 1.000000 0.000000]"
 }
