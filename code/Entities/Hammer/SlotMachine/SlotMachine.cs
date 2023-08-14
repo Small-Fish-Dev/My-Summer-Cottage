@@ -146,7 +146,7 @@ public partial class SlotMachine : ModelEntity, IInteractable
 
 		for ( int i = 1; i <= 3; i++ )
 		{
-			var boneIndex = i + 2;
+			var boneIndex = i + 1;
 			var target = showCount >= i 
 				? RollResult[i] * ANGLE_STEP
 				: sinceResult * 1000f;
