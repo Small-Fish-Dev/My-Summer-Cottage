@@ -54,6 +54,7 @@ partial class Player
 		{
 			GroundEntity = null;
 			Velocity += Vector3.Up * 200f;
+			SetAnimParameter( "jump", true );
 		}
 
 		// Handle ducking.
@@ -141,6 +142,8 @@ partial class Player
 		}
 		else
 			GroundEntity = null;
+
+		SetAnimParameter( "grounded", GroundEntity != null );
 
 		// Water movement sounds.
 		if ( Water != null )
