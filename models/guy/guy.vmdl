@@ -1458,6 +1458,14 @@
 					{
 						_class = "AnimFile"
 						name = "jump"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "idle"
+								frame = 0
+							},
+						]
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -1472,6 +1480,81 @@
 						enable_scale = false
 						source_filename = "models/guy/animations/jump.fbx"
 						start_frame = -1
+						end_frame = 5
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "falling"
+						children = 
+						[
+							{
+								_class = "AnimSmoothLoop"
+								frames_from_start = 2
+								frames_from_end = 2
+							},
+							{
+								_class = "AnimAlign"
+								align_tx = false
+								align_ty = false
+								align_tz = true
+								align_rx = false
+								align_ry = false
+								align_rz = false
+								align_frame_type = "Number"
+								frame = 0
+								align_to_anim = "idle"
+								align_to_frame_type = "Number"
+								align_to_frame = 0
+								bone = "root"
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/guy/animations/jump.fbx"
+						start_frame = 6
+						end_frame = 11
+						framerate = 4.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "landing"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "idle"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/guy/animations/jump.fbx"
+						start_frame = 13
 						end_frame = -1
 						framerate = -1.0
 						take = 0
