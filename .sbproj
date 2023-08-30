@@ -78,13 +78,23 @@
     "TickRate": 50,
     "LaunchConfigs": [
       {
-        "Name": "dev",
+        "Name": "Sauna DEV",
         "GameIdent": "fish.sauna#local",
-        "MapName": "sauna_forest",
+        "MapName": "sauna_forest.vmap",
         "MaxPlayers": 1,
         "GameSettings": {},
         "Addons": "",
-        "PreLaunchCommand": "",
+        "PreLaunchCommand": "sv_password perkele;",
+        "PostLaunchCommand": ""
+      },
+      {
+        "Name": "Sauna LAN",
+        "GameIdent": "fish.sauna#local",
+        "MapName": "sauna_forest.vmap",
+        "MaxPlayers": 2,
+        "GameSettings": {},
+        "Addons": "",
+        "PreLaunchCommand": "sv_lan 1; sv_password perkele;",
         "PostLaunchCommand": ""
       }
     ]
