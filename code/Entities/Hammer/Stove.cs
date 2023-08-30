@@ -41,6 +41,9 @@ public partial class Stove : AnimatedEntity, IInteractable
 			{
 				Open = !Open;
 				SetAnimParameter( "b_open", Open );
+
+				if(Game.IsServer)
+					pawn.TryUnlockAchievement(AchievementId.SaunaFurnaceFirstTime);
 			},
 			TextFunction = () => Open
 				? "Close"

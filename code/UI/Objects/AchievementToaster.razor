@@ -1,0 +1,49 @@
+@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Panel
+
+<style>
+    AchievementToaster {
+        position: absolute;
+        width: 30%;
+        height: 10%;
+        bottom: 0;
+        opacity: 0.75;
+    }
+
+</style>
+
+@if (Game.LocalPawn is not Player pawn)
+    return;
+
+<root>
+</root>
+
+@code {
+
+    public static AchievementToaster Instance;
+
+    public AchievementToaster()
+    {
+        Instance = this;
+    }
+
+    public void Toast(AchievementResource cheevo)
+    {
+        var toast = new AchievementToast(cheevo);
+        AddChild(toast);
+    }
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+    }
+
+    protected override int BuildHash()
+    {
+        var pawn = Game.LocalPawn as Player;
+        return HashCode.Combine(Time.Delta);
+    }
+}
