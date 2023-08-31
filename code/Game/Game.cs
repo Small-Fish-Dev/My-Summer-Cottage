@@ -21,6 +21,11 @@ public partial class Sauna : GameManager
 	{
 		Instance = this;
 
+		if(Game.IsServer)
+		{
+			LoadAchievements();
+		}
+
 		if ( Game.IsClient )
 		{
 			_ = new HUD();

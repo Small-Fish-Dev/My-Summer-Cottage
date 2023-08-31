@@ -42,6 +42,13 @@
     <div class="cheevo-text">
         <label style="color: gold;">@Cheevo.Name</label>
         <label>@Cheevo.Description</label>
+        @{
+            if(Cheevo.MaxValue > 1)
+            {
+                <div>PROGRESS BAR HERE</div>
+            }
+        }
+
     </div>
 
 </root>
@@ -60,7 +67,6 @@
     protected override void OnAfterTreeRender(bool firstTime)
     {
         base.OnAfterTreeRender(firstTime);
-        Log.Info(Icon);
         if (firstTime)
             Icon.Texture = Cheevo.Icon;
     }

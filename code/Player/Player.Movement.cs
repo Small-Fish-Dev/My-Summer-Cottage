@@ -55,6 +55,8 @@ partial class Player
 			GroundEntity = null;
 			Velocity += Vector3.Up * 200f;
 			SetAnimParameter( "jump", true );
+			if(Game.IsServer)
+				ProgressAchievement(AchievementId.JumpAlot, 1);
 		}
 
 		// Handle ducking.

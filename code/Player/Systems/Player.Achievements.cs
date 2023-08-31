@@ -1,51 +1,106 @@
 ﻿namespace Sauna;
 
-[Flags]
-public enum AchievementId
-{
-    None = 0,
-    SaunaFurnaceFirstTime,
-    ExtinguishFirePiss,
-}
-
 partial class Player
 {
-    [Net] public AchievementId UnlockedAchievements { get; private set; }
+    /// <summary>
+    /// The actual state of the achievements, stored for progression, Server-side.
+    /// </summary>
+    public Dictionary<AchievementId, Achievement> Achievements { get; private set; }
+
+    /// <summary>
+    /// Client-side independent access to the achievement definitions.
+    /// </summary>
     private AchievementList _cheevos;
 
     [SaunaEvent.OnSpawn]
     private void LoadAchievementsClient(Player player)
     {
-        if (Game.IsServer)
-            return;
-
         if (player != this)
             return;
 
+        if (Game.IsServer)
+        {
+            Achievements = new();
+
+            // Load the player's progress and apply it to our player.
+            var file = string.Format("achievements-{0}.json", Client.SteamId);
+            var loadedProgress = FileSystem.Data.ReadJson<Dictionary<AchievementId, Achievement>>(file);
+
+            foreach (var cheevo in Sauna.Instance.AchievementDefinitions.List)
+            {
+                var currentValue = 0f;
+                if (loadedProgress.TryGetValue(cheevo.Id, out var progress))
+                    currentValue = progress.CurrentValue;
+
+                Achievements.Add(cheevo.Id, new Achievement()
+                {
+                    Id = cheevo.Id,
+                    MaxValue = cheevo.MaxValue,
+                    CurrentValue = currentValue
+                });
+            }
+
+            return;
+        }
+
         if (!ResourceLibrary.TryGet("assets/achievements/base_achievements.cheevos", out _cheevos))
-            throw new Exception("Failed to load achievements!");
+            throw new Exception($"Failed to load achievements for client: {Client.SteamId} : {Client.Name} : {this}!");
     }
 
-    public bool TryUnlockAchievement(AchievementId flag)
+    public void ProgressAchievement(AchievementId id, float amount = 1.0f)
     {
         Game.AssertServer();
 
-        if (UnlockedAchievements.HasFlag(flag))
-            return false;
+        var cheevo = Achievements[id];
+        if (cheevo.IsUnlocked)
+            return;
 
-        UnlockedAchievements |= flag;
-        Log.Info($"Player: {this} unlocked achievement: {flag}");
-        UnlockAchievementClient(To.Single(this), (int)flag);
-        return true;
+        var def = Sauna.Instance.AchievementDefinitions.List.Where(x => x.Id == id).FirstOrDefault();
+        if (def is null)
+            throw new Exception("We fucked up bigly.");
+
+        Achievements[id].CurrentValue += amount;
+        SaveAchievements();
+
+        if (Achievements[id].CurrentValue < def.MaxValue)
+        {
+            // TODO: Notify client to show a progress bar toast.
+            return;
+        }
+
+        Log.Info($"Player: {this} unlocked achievement: {id}");
+        UnlockAchievementClient(To.Single(this), (int)id);
     }
 
     [ClientRpc]
-    private void UnlockAchievementClient(int flag)
+    private void UnlockAchievementClient(int id)
     {
-        var cheevoFlag = (AchievementId)flag;
+        var cheevoFlag = (AchievementId)id;
         var cheevo = _cheevos.List.Where(x => x.Id == cheevoFlag).FirstOrDefault();
         if (cheevo is not null)
             AchievementToaster.Instance.Toast(cheevo);
+    }
+
+    public void ResetAchievements()
+    {
+        Game.AssertServer();
+
+        foreach (var kvp in Achievements)
+        {
+            var cheevo = kvp.Value;
+            if (!cheevo.IsUnlocked)
+                continue;
+
+            cheevo.CurrentValue = 0;
+        }
+    }
+
+    private void SaveAchievements()
+    {
+        Game.AssertServer();
+
+        var file = string.Format("achievements-{0}.json", Client.SteamId);
+        FileSystem.Data.WriteJson(file, Achievements);
     }
 
     [ConCmd.Admin("reset_cheevos")]
@@ -54,7 +109,6 @@ partial class Player
         if (ConsoleSystem.Caller.Pawn is not Player pawn)
             return;
 
-        pawn.UnlockedAchievements = AchievementId.None;
+        pawn.ResetAchievements();
     }
-
 }
