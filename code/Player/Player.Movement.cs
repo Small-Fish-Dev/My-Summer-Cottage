@@ -22,9 +22,9 @@ partial class Player
 	/// <summary>
 	/// The collider used for player's movement collisions.
 	/// </summary>
-	public BBox CollisionBox => new BBox( 
-		new Vector3( -16, -16, 0 ), 
-		new Vector3( 16, 16, Ducking ? 40 : 68 ) 
+	public BBox CollisionBox => new BBox(
+		new Vector3( -16, -16, 0 ),
+		new Vector3( 16, 16, Ducking ? 40 : 68 )
 	);
 
 	/// <summary>
@@ -55,8 +55,8 @@ partial class Player
 			GroundEntity = null;
 			Velocity += Vector3.Up * 200f;
 			SetAnimParameter( "jump", true );
-			if(Game.IsServer)
-				ProgressAchievement(AchievementId.JumpAlot, 1);
+			if ( Game.IsServer )
+				ProgressAchievement( AchievementId.JumpAlot, 1 );
 		}
 
 		// Handle ducking.
@@ -69,8 +69,8 @@ partial class Player
 
 		// Handle rotation.
 		var viewAngles = new Angles( 0, ViewAngles.yaw, 0 );
-		Rotation = BlockInput 
-			? Rotation 
+		Rotation = BlockInput
+			? Rotation
 			: Angles.Lerp( Rotation.Angles(), viewAngles, 10f * Time.Delta )
 				.ToRotation();
 
@@ -79,7 +79,7 @@ partial class Player
 
 		// Handle the player's wish velocity.
 		var eyeRotation = ViewAngles.WithPitch( 0 ).ToRotation();
-		WishVelocity = BlockInput 
+		WishVelocity = BlockInput
 			? 0
 			: (InputDirection * eyeRotation).Normal
 				.WithZ( 0 );
@@ -95,7 +95,7 @@ partial class Player
 		var targetVelocity = WishVelocity
 			* (walkSpeed * (running ? 3f : 1))
 			* (Ducking ? 0.5f : 1f);
-		
+
 		Velocity = Vector3.Lerp( Velocity, targetVelocity, 10f * Time.Delta )
 			.WithZ( Velocity.z );
 

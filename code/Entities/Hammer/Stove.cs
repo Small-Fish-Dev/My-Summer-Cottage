@@ -7,7 +7,7 @@ public partial class Stove : AnimatedEntity, IInteractable
 	/// <summary>
 	/// Determines if the stove is open or not.
 	/// </summary>
-	[Net, Predicted] 
+	[Net, Predicted]
 	public bool Open { get; set; } = false;
 
 	/// <summary>
@@ -42,8 +42,8 @@ public partial class Stove : AnimatedEntity, IInteractable
 				Open = !Open;
 				SetAnimParameter( "b_open", Open );
 
-				if(Game.IsServer)
-					pawn.ProgressAchievement(AchievementId.SaunaFurnaceFirstTime);
+				if ( Game.IsServer )
+					pawn.ProgressAchievement( AchievementId.SaunaFurnaceFirstTime );
 			},
 			TextFunction = () => Open
 				? "Close"
@@ -55,7 +55,7 @@ public partial class Stove : AnimatedEntity, IInteractable
 	{
 		SetModel( "models/stove/stove.vmdl" );
 		SetupPhysicsFromModel( PhysicsMotionType.Static );
-		
+
 		Tags.Add( "solid" );
 	}
 }
