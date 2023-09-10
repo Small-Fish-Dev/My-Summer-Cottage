@@ -9,35 +9,13 @@
 			{
 				key = 
 				{
-					m_id = 55663614
-				}
-				value = 
-				{
-					_class = "CSequenceAnimNode"
-					m_sName = "Unnamed"
-					m_vecPosition = [ -1168.0, 208.0 ]
-					m_nNodeID = 
-					{
-						m_id = 55663614
-					}
-					m_networkMode = "ServerAuthoritative"
-					m_sNote = ""
-					m_tagSpans = [  ]
-					m_sequenceName = "landing"
-					m_playbackSpeed = 1.0
-					m_bLoop = false
-				}
-			},
-			{
-				key = 
-				{
 					m_id = 291461497
 				}
 				value = 
 				{
 					_class = "CLookAtAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -320.0, 64.0 ]
+					m_vecPosition = [ -304.0, 64.0 ]
 					m_nNodeID = 
 					{
 						m_id = 291461497
@@ -140,7 +118,7 @@
 				{
 					_class = "CStateMachineAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -736.0, 64.0 ]
+					m_vecPosition = [ -720.0, 64.0 ]
 					m_nNodeID = 
 					{
 						m_id = 441802503
@@ -478,7 +456,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 622177367
+									m_id = 722612607
 								}
 								m_outputID = 
 								{
@@ -556,7 +534,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -960.0, 256.0 ]
+					m_vecPosition = [ -1168.0, 256.0 ]
 					m_nNodeID = 
 					{
 						m_id = 622177367
@@ -572,13 +550,59 @@
 			{
 				key = 
 				{
+					m_id = 722612607
+				}
+				value = 
+				{
+					_class = "CAddAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ -960.0, 256.0 ]
+					m_nNodeID = 
+					{
+						m_id = 722612607
+					}
+					m_networkMode = "ServerAuthoritative"
+					m_sNote = ""
+					m_baseInput = 
+					{
+						m_nodeID = 
+						{
+							m_id = 622177367
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_additiveInput = 
+					{
+						m_nodeID = 
+						{
+							m_id = 937022388
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_timingBehavior = "UseChild2"
+					m_flTimingBlend = 0.5
+					m_footMotionTiming = "Child1"
+					m_bResetBase = true
+					m_bResetAdditive = true
+					m_bApplyChannelsSeparately = true
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 760381483
 				}
 				value = 
 				{
 					_class = "CSolveIKChainAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -528.0, 64.0 ]
+					m_vecPosition = [ -512.0, 64.0 ]
 					m_nNodeID = 
 					{
 						m_id = 760381483
@@ -662,7 +686,7 @@
 				{
 					_class = "CTwoBoneIKAnimNode"
 					m_sName = "VR IK Right Arm"
-					m_vecPosition = [ 80.0, 160.0 ]
+					m_vecPosition = [ 96.0, 160.0 ]
 					m_nNodeID = 
 					{
 						m_id = 770235078
@@ -857,13 +881,35 @@
 			{
 				key = 
 				{
+					m_id = 937022388
+				}
+				value = 
+				{
+					_class = "CSequenceAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ -1168.0, 304.0 ]
+					m_nNodeID = 
+					{
+						m_id = 937022388
+					}
+					m_networkMode = "ServerAuthoritative"
+					m_sNote = ""
+					m_tagSpans = [  ]
+					m_sequenceName = "arms_raise"
+					m_playbackSpeed = 1.0
+					m_bLoop = false
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 1039045679
 				}
 				value = 
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -320.0, 128.0 ]
+					m_vecPosition = [ -304.0, 128.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1039045679
@@ -905,7 +951,7 @@
 				{
 					_class = "CAddAnimNode"
 					m_sName = "Add (Note)"
-					m_vecPosition = [ -112.0, 112.0 ]
+					m_vecPosition = [ -96.0, 112.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1094711725
@@ -973,7 +1019,7 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 55663614
+							m_id = 2146246641
 						}
 						m_outputID = 
 						{
@@ -997,7 +1043,7 @@
 				{
 					_class = "CRootAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 672.0, 64.0 ]
+					m_vecPosition = [ 688.0, 64.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1244631145
@@ -1026,7 +1072,7 @@
 				{
 					_class = "CGroupAnimNode"
 					m_sName = "Penoid"
-					m_vecPosition = [ 496.0, 64.0 ]
+					m_vecPosition = [ 512.0, 64.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1364339869
@@ -1722,7 +1768,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -1168.0, 144.0 ]
+					m_vecPosition = [ -1168.0, 128.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1483154861
@@ -1744,7 +1790,7 @@
 				{
 					_class = "CStateMachineAnimNode"
 					m_sName = "Interact IK Machine"
-					m_vecPosition = [ 272.0, 64.0 ]
+					m_vecPosition = [ 288.0, 64.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1692925706
@@ -2108,6 +2154,63 @@
 					}
 				}
 			},
+			{
+				key = 
+				{
+					m_id = 2146246641
+				}
+				value = 
+				{
+					_class = "CBlend2DAnimNode"
+					m_sName = "Landing Blend"
+					m_vecPosition = [ -1168.0, 192.0 ]
+					m_nNodeID = 
+					{
+						m_id = 2146246641
+					}
+					m_networkMode = "ServerAuthoritative"
+					m_sNote = ""
+					m_items = 
+					[
+						{
+							_class = "CBlend2DItem"
+							m_tagSpans = [  ]
+							m_sequenceName = "landing"
+							m_blendValue = [ 0.0, 0.0 ]
+						},
+						{
+							_class = "CBlend2DItem"
+							m_tagSpans = [  ]
+							m_sequenceName = "land_heavy"
+							m_blendValue = [ 0.0, 2.0 ]
+						},
+					]
+					m_blendSourceX = "Parameter"
+					m_paramX = 
+					{
+						m_id = 432854426
+					}
+					m_blendSourceY = "Parameter"
+					m_paramY = 
+					{
+						m_id = 432854426
+					}
+					m_bLoop = false
+					m_bLockBlendOnReset = false
+					m_bLockWhenWaning = true
+					m_playbackSpeed = 1.0
+					m_damping = 
+					{
+						_class = "CAnimInputDamping"
+						m_speedFunction = "NoDamping"
+						m_fSpeedScale = 1.0
+						m_fMinSpeed = 10.0
+						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
+					}
+				}
+			},
 		]
 	}
 	m_pParameterList = 
@@ -2281,6 +2384,23 @@
 				m_bAutoReset = false
 				m_bPredicted = false
 				m_bDefaultValue = true
+			},
+			{
+				_class = "CFloatAnimParameter"
+				m_name = "time_in_air"
+				m_id = 
+				{
+					m_id = 432854426
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bNetwork = true
+				m_bUseMostRecentValue = false
+				m_bAutoReset = false
+				m_bPredicted = false
+				m_fDefaultValue = 0.0
+				m_fMinValue = 0.0
+				m_fMaxValue = 2.0
+				m_bInterpolate = false
 			},
 		]
 	}
