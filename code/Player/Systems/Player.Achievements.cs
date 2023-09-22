@@ -5,15 +5,23 @@ partial class Player
 	/// <summary>
 	/// The actual state of the achievements, stored for progression, Server-side.
 	/// </summary>
-	public Dictionary<AchievementId, Achievement> Achievements { get; private set; }
+	public Dictionary<AchievementId, Achievement> Achievements { get; private set; } = new();
 
 	/// <summary>
 	/// Client-side independent access to the achievement definitions.
 	/// </summary>
-	private AchievementList _cheevos;
+	private AchievementList _cheevos
+	{
+		get
+		{
+			_ = ResourceLibrary.TryGet<AchievementList>( "assets/achievements/base_achievements.cheevos", out var cheevos );
+			return cheevos;
+		}
+	}
+
 	private string _achievementFile => string.Format( "achievements-{0}.json", Client.SteamId );
 
-	[SaunaEvent.OnSpawn]
+	/*[SaunaEvent.OnSpawn]
 	private void LoadAchievementsClient( Player player )
 	{
 		if ( player != this )
@@ -46,13 +54,23 @@ partial class Player
 
 		if ( !ResourceLibrary.TryGet( "assets/achievements/base_achievements.cheevos", out _cheevos ) )
 			throw new Exception( $"Failed to load achievements for client: {Client.SteamId} : {Client.Name} : {this}!" );
-	}
+	}*/
 
 	public void ProgressAchievement( AchievementId id, float amount = 1.0f )
 	{
 		Game.AssertServer();
 
-		var cheevo = Achievements[id];
+		if ( !Achievements.TryGetValue( id, out var cheevo ) )
+		{
+			var definition = Sauna.Instance.AchievementDefinitions.List.FirstOrDefault( x => x.Id == id );
+			Achievements.Add( id, cheevo = new()
+			{
+				MaxValue = definition.MaxValue,
+				CurrentValue = 0,
+				Id = id
+			} );
+		}
+
 		if ( cheevo.IsUnlocked )
 			return;
 
@@ -81,8 +99,8 @@ partial class Player
 	private void UnlockAchievementClient( int id )
 	{
 		var cheevoFlag = (AchievementId)id;
-		var cheevo = _cheevos.List.Where( x => x.Id == cheevoFlag ).FirstOrDefault();
-		if ( cheevo is not null )
+		var cheevo = _cheevos.List.FirstOrDefault( x => x.Id == cheevoFlag );
+		if ( cheevo != null )
 			AchievementToaster.Instance.Toast( cheevo );
 	}
 
