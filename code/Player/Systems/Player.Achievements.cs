@@ -102,11 +102,12 @@ partial class Player
 		SaveAchievements();
 	}
 
+	// TODO
 	private void SaveAchievements()
 	{
 		Game.AssertServer();
-
-		FileSystem.Data.WriteJson( _achievementFile, Achievements );
+		
+		//FileSystem.Data.WriteJson( _achievementFile, Achievements );
 	}
 
 	[ConCmd.Admin( "reset_achievements" )]
