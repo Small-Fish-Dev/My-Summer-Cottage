@@ -264,6 +264,37 @@
 						heighttolerance = 1.5
 						sanitizetrajectories = true
 					},
+					{
+						_class = "LookAtChain"
+						name = "lookat_torso"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "head"
+									weight = 1.0
+								},
+								{
+									name = "neck"
+									weight = 1.0
+								},
+								{
+									name = "spine2"
+									weight = 1.0
+								},
+								{
+									name = "spine1"
+									weight = 0.5
+								},
+								{
+									name = "spine0"
+									weight = 0.25
+								},
+							]
+						}
+					},
 				]
 			},
 			{
@@ -744,86 +775,6 @@
 				children = 
 				[
 					{
-						_class = "MorphFrame"
-						name = "fit"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						morph_weights = [  ]
-					},
-					{
-						_class = "MorphFrame"
-						name = "fat"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						morph_weights = 
-						[
-							{
-								morph = "fat"
-								weight = 1.0
-							},
-						]
-					},
-					{
-						_class = "MorphFrame"
-						name = "max"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						morph_weights = 
-						[
-							{
-								morph = "size"
-								weight = 1.0
-							},
-						]
-					},
-					{
-						_class = "MorphFrame"
-						name = "min"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						morph_weights = [  ]
-					},
-					{
 						_class = "AnimFile"
 						name = "idle"
 						activity_name = ""
@@ -842,534 +793,6 @@
 						start_frame = -1
 						end_frame = -1
 						framerate = 12.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "walkN"
-						children = 
-						[
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = "pelvis"
-								motion_type = "Single"
-							},
-							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 1
-								frames_from_end = 1
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 21
-								event_keys = 
-								{
-									Attachment = "foot_L"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 7
-								event_keys = 
-								{
-									Attachment = "foot_R"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/walkN.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "walkW"
-						children = 
-						[
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = "pelvis"
-								motion_type = "Single"
-							},
-							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 1
-								frames_from_end = 1
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 6
-								event_keys = 
-								{
-									Attachment = "foot_L"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 20
-								event_keys = 
-								{
-									Attachment = "foot_R"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/walkW.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "walkE"
-						children = 
-						[
-							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 1
-								frames_from_end = 1
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 7
-								event_keys = 
-								{
-									Attachment = "foot_L"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 21
-								event_keys = 
-								{
-									Attachment = "foot_R"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = "pelvis"
-								motion_type = "Single"
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/walkE.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "runE"
-						children = 
-						[
-							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 1
-								frames_from_end = 1
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 7
-								event_keys = 
-								{
-									Attachment = "foot_L"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 21
-								event_keys = 
-								{
-									Attachment = "foot_R"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "AnimStartLoop"
-								start_loop_frame = 20
-							},
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = "pelvis"
-								motion_type = "Uniform"
-							},
-							{
-								_class = "AnimAlign"
-								align_tx = true
-								align_ty = true
-								align_tz = false
-								align_rx = false
-								align_ry = false
-								align_rz = false
-								align_frame_type = "Number"
-								frame = 0
-								align_to_anim = "idle"
-								align_to_frame_type = "Number"
-								align_to_frame = 0
-								bone = "root"
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/runE.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 36.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "runW"
-						children = 
-						[
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = "pelvis"
-								motion_type = "Single"
-							},
-							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 1
-								frames_from_end = 1
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 6
-								event_keys = 
-								{
-									Attachment = "foot_L"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 20
-								event_keys = 
-								{
-									Attachment = "foot_R"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/runW.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 36.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "walkS"
-						children = 
-						[
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = "pelvis"
-								motion_type = "Single"
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 21
-								event_keys = 
-								{
-									Attachment = "foot_L"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 7
-								event_keys = 
-								{
-									Attachment = "foot_R"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/walkS.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "runS"
-						children = 
-						[
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 21
-								event_keys = 
-								{
-									Attachment = "foot_L"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 7
-								event_keys = 
-								{
-									Attachment = "foot_R"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = "pelvis"
-								motion_type = "Uniform"
-								motion_samples = [ 0, 26 ]
-							},
-							{
-								_class = "AnimStartLoop"
-								start_loop_frame = 22
-							},
-							{
-								_class = "AnimAlign"
-								align_tx = true
-								align_ty = true
-								align_tz = false
-								align_rx = false
-								align_ry = false
-								align_rz = false
-								align_frame_type = "Number"
-								frame = 0
-								align_to_anim = "walkS"
-								align_to_frame_type = "Number"
-								align_to_frame = 0
-								bone = "pelvis"
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/runS.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 36.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "runN"
-						children = 
-						[
-							{
-								_class = "ExtractMotion"
-								extract_tx = true
-								extract_ty = true
-								extract_tz = false
-								extract_rz = false
-								linear = false
-								quadratic = false
-								root_bone_name = ""
-								motion_type = "Single"
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 21
-								event_keys = 
-								{
-									Attachment = "foot_L"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 7
-								event_keys = 
-								{
-									Attachment = "foot_R"
-									Foot = "0"
-									Volume = 1.0
-								}
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/runN.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 36.0
 						take = 0
 						reverse = false
 					},
@@ -1427,185 +850,6 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "crouch_delta"
-						children = 
-						[
-							{
-								_class = "AnimSubtract"
-								anim_name = "idle"
-								frame = 0
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/crouch.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "jump"
-						children = 
-						[
-							{
-								_class = "AnimSubtract"
-								anim_name = "idle"
-								frame = 0
-							},
-							{
-								_class = "AnimEvent"
-								name = "jump"
-								event_class = "AE_GENERIC_EVENT"
-								event_frame = 5
-								event_keys = 
-								{
-									TypeName = ""
-									Int = 0
-									Float = 0.0
-									Vector = [ 0.0, 0.0, 0.0 ]
-									StringData = ""
-								}
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/jump.fbx"
-						start_frame = -1
-						end_frame = 5
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "falling"
-						children = 
-						[
-							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 2
-								frames_from_end = 2
-							},
-							{
-								_class = "AnimAlign"
-								align_tx = false
-								align_ty = false
-								align_tz = true
-								align_rx = false
-								align_ry = false
-								align_rz = false
-								align_frame_type = "Number"
-								frame = 0
-								align_to_anim = "idle"
-								align_to_frame_type = "Number"
-								align_to_frame = 0
-								bone = "root"
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = true
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/jump.fbx"
-						start_frame = 6
-						end_frame = 11
-						framerate = 4.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "landing"
-						children = 
-						[
-							{
-								_class = "AnimSubtract"
-								anim_name = "idle"
-								frame = 0
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/jump.fbx"
-						start_frame = 13
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "land_heavy"
-						children = 
-						[
-							{
-								_class = "AnimSubtract"
-								anim_name = "idle"
-								frame = 0
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/land_heavy.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 12.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
 						name = "arms_raise"
 						children = 
 						[
@@ -1655,6 +899,741 @@
 						framerate = -1.0
 						take = 0
 						reverse = false
+					},
+					{
+						_class = "Folder"
+						name = "movement"
+						children = 
+						[
+							{
+								_class = "AnimFile"
+								name = "crouch_delta"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "idle"
+										frame = 0
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/crouch.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "Folder"
+								name = "walk"
+								children = 
+								[
+									{
+										_class = "AnimFile"
+										name = "walkN"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = "pelvis"
+												motion_type = "Single"
+											},
+											{
+												_class = "AnimSmoothLoop"
+												frames_from_start = 1
+												frames_from_end = 1
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 21
+												event_keys = 
+												{
+													Attachment = "foot_L"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 7
+												event_keys = 
+												{
+													Attachment = "foot_R"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/walkN.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "walkW"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = "pelvis"
+												motion_type = "Single"
+											},
+											{
+												_class = "AnimSmoothLoop"
+												frames_from_start = 1
+												frames_from_end = 1
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 6
+												event_keys = 
+												{
+													Attachment = "foot_L"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 20
+												event_keys = 
+												{
+													Attachment = "foot_R"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/walkW.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "walkE"
+										children = 
+										[
+											{
+												_class = "AnimSmoothLoop"
+												frames_from_start = 1
+												frames_from_end = 1
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 7
+												event_keys = 
+												{
+													Attachment = "foot_L"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 21
+												event_keys = 
+												{
+													Attachment = "foot_R"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = "pelvis"
+												motion_type = "Single"
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/walkE.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "walkS"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = "pelvis"
+												motion_type = "Single"
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 21
+												event_keys = 
+												{
+													Attachment = "foot_L"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 7
+												event_keys = 
+												{
+													Attachment = "foot_R"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/walkS.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+								]
+							},
+							{
+								_class = "Folder"
+								name = "run"
+								children = 
+								[
+									{
+										_class = "AnimFile"
+										name = "runE"
+										children = 
+										[
+											{
+												_class = "AnimSmoothLoop"
+												frames_from_start = 1
+												frames_from_end = 1
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 7
+												event_keys = 
+												{
+													Attachment = "foot_L"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 21
+												event_keys = 
+												{
+													Attachment = "foot_R"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 20
+											},
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = "pelvis"
+												motion_type = "Uniform"
+											},
+											{
+												_class = "AnimAlign"
+												align_tx = true
+												align_ty = true
+												align_tz = false
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "idle"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "root"
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/runE.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = 36.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "runW"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = "pelvis"
+												motion_type = "Single"
+											},
+											{
+												_class = "AnimSmoothLoop"
+												frames_from_start = 1
+												frames_from_end = 1
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 6
+												event_keys = 
+												{
+													Attachment = "foot_L"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 20
+												event_keys = 
+												{
+													Attachment = "foot_R"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/runW.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = 36.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "runS"
+										children = 
+										[
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 21
+												event_keys = 
+												{
+													Attachment = "foot_L"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 7
+												event_keys = 
+												{
+													Attachment = "foot_R"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = "pelvis"
+												motion_type = "Uniform"
+												motion_samples = [ 0, 26 ]
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 22
+											},
+											{
+												_class = "AnimAlign"
+												align_tx = true
+												align_ty = true
+												align_tz = false
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "walkS"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "pelvis"
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/runS.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = 36.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "runN"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Single"
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 21
+												event_keys = 
+												{
+													Attachment = "foot_L"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+											{
+												_class = "AnimEvent"
+												event_class = "AE_FOOTSTEP"
+												event_frame = 7
+												event_keys = 
+												{
+													Attachment = "foot_R"
+													Foot = "0"
+													Volume = 1.0
+												}
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/runN.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = 36.0
+										take = 0
+										reverse = false
+									},
+								]
+							},
+							{
+								_class = "Folder"
+								name = "jump1"
+								children = 
+								[
+									{
+										_class = "AnimFile"
+										name = "jump"
+										children = 
+										[
+											{
+												_class = "AnimSubtract"
+												anim_name = "idle"
+												frame = 0
+											},
+											{
+												_class = "AnimEvent"
+												name = "jump"
+												event_class = "AE_GENERIC_EVENT"
+												event_frame = 5
+												event_keys = 
+												{
+													TypeName = ""
+													Int = 0
+													Float = 0.0
+													Vector = [ 0.0, 0.0, 0.0 ]
+													StringData = ""
+												}
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = false
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/jump.fbx"
+										start_frame = -1
+										end_frame = 5
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "falling"
+										children = 
+										[
+											{
+												_class = "AnimSmoothLoop"
+												frames_from_start = 2
+												frames_from_end = 2
+											},
+											{
+												_class = "AnimAlign"
+												align_tx = false
+												align_ty = false
+												align_tz = true
+												align_rx = false
+												align_ry = false
+												align_rz = false
+												align_frame_type = "Number"
+												frame = 0
+												align_to_anim = "idle"
+												align_to_frame_type = "Number"
+												align_to_frame = 0
+												bone = "root"
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = true
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/jump.fbx"
+										start_frame = 6
+										end_frame = 11
+										framerate = 4.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "landing"
+										children = 
+										[
+											{
+												_class = "AnimSubtract"
+												anim_name = "idle"
+												frame = 0
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = false
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/jump.fbx"
+										start_frame = 13
+										end_frame = -1
+										framerate = -1.0
+										take = 0
+										reverse = false
+									},
+									{
+										_class = "AnimFile"
+										name = "land_heavy"
+										children = 
+										[
+											{
+												_class = "AnimSubtract"
+												anim_name = "idle"
+												frame = 0
+											},
+										]
+										activity_name = ""
+										activity_weight = 1
+										weight_list_name = ""
+										fade_in_time = 0.2
+										fade_out_time = 0.2
+										looping = false
+										delta = false
+										worldSpace = false
+										hidden = false
+										anim_markup_ordered = false
+										disable_compression = false
+										enable_scale = false
+										source_filename = "models/guy/animations/land_heavy.fbx"
+										start_frame = -1
+										end_frame = -1
+										framerate = 12.0
+										take = 0
+										reverse = false
+									},
+								]
+							},
+						]
 					},
 				]
 				default_root_bone_name = ""
@@ -1739,8 +1718,17 @@
 						_class = "Attachment"
 						name = "point_forward"
 						parent_bone = "hand_R"
-						relative_origin = [ 0.0, 0.0, 0.0 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
+						relative_origin = [ 7.31348, 0.893859, -0.495262 ]
+						relative_angles = [ -4.177823, -19.306906, 5.60041 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "aim_forward"
+						parent_bone = "hand_R"
+						relative_origin = [ 31.889135, -3.659393, 1.457825 ]
+						relative_angles = [ -7.713576, -13.31436, -113.068787 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -2234,6 +2222,84 @@
 							},
 							{
 								bone = "penoid"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "torso"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "Hand_IK_L"
+								weight = 1.0
+							},
+							{
+								bone = "Hand_IK_R"
+								weight = 1.0
+							},
+							{
+								bone = "arm_lower_L"
+								weight = 1.0
+							},
+							{
+								bone = "arm_lower_R"
+								weight = 1.0
+							},
+							{
+								bone = "arm_upper_L"
+								weight = 1.0
+							},
+							{
+								bone = "arm_upper_R"
+								weight = 1.0
+							},
+							{
+								bone = "clavicle_L"
+								weight = 1.0
+							},
+							{
+								bone = "clavicle_R"
+								weight = 1.0
+							},
+							{
+								bone = "fingers_L"
+								weight = 1.0
+							},
+							{
+								bone = "fingers_R"
+								weight = 1.0
+							},
+							{
+								bone = "hand_L"
+								weight = 1.0
+							},
+							{
+								bone = "hand_R"
+								weight = 1.0
+							},
+							{
+								bone = "head"
+								weight = 1.0
+							},
+							{
+								bone = "neck"
+								weight = 1.0
+							},
+							{
+								bone = "spine0"
+								weight = 0.180995
+							},
+							{
+								bone = "spine1"
+								weight = 0.520362
+							},
+							{
+								bone = "spine2"
 								weight = 1.0
 							},
 						]
