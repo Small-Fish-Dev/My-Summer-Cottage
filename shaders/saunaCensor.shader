@@ -29,7 +29,7 @@ VS
 {
 	#include "common/vertex.hlsl"
 
-	PixelInput MainVs( INSTANCED_SHADER_PARAMS( VertexInput i ) )
+	PixelInput MainVs( VertexInput i )
 	{
 		PixelInput o = ProcessVertex( i );
 		return FinalizeVertex( o );

@@ -70,7 +70,7 @@ VS
 	//
 	// Main
 	//
-	PS_INPUT MainVs( INSTANCED_SHADER_PARAMS( VS_INPUT i ) )
+	PS_INPUT MainVs( VertexInput i )
 	{
 		PS_INPUT o = ProcessVertex( i );
 
@@ -109,7 +109,7 @@ PS
     {
         Material o;
         float fBlendfactor = ComputeBlendWeight( fBlendValue, fSoftness, fBlendMaskB );
-        o = lerp( a, b, fBlendfactor ); 
+        o = Material::lerp( a, b, fBlendfactor ); 
         return o;
     }
 
@@ -197,14 +197,14 @@ PS
     Material ToMaterialMultiblend( float2 vUV, PixelInput i )
     {
         #if S_MULTIBLEND >= 0
-            Material material = ToMaterial( i, 
+            Material material = Material::From( i, 
                     Tex2DS( g_tColorA, TextureFiltering, vUV ), 
                     Tex2DS( g_tNormalA, TextureFiltering, vUV ), 
                     float4( 1, 1, 1, 1 ),
                     g_flTintColorA
                 );
         #if S_MULTIBLEND >= 1
-            Material materialB = ToMaterial( i,
+            Material materialB = Material::From( i,
                 Tex2DS( g_tColorB, TextureFiltering, vUV * g_vTexCoordScale2.xy ), 
                 Tex2DS( g_tNormalB, TextureFiltering, vUV * g_vTexCoordScale2.xy ), 
                 float4( 1, 1, 1, 1 ),
@@ -213,7 +213,7 @@ PS
             const float fBlendMaskB = Tex2DS( g_tBlendMaskB, TextureFiltering, vUV ).a;
             material = MaterialParametersMultiblend( material, materialB, i.vBlendValues.r, fBlendMaskB, g_flBlendSoftnessB );
         #if S_MULTIBLEND >= 2
-            Material materialC = ToMaterial( i,
+            Material materialC = Material::From( i,
                 Tex2DS( g_tColorC, TextureFiltering, vUV * g_vTexCoordScale3.xy ), 
                 Tex2DS( g_tNormalC, TextureFiltering, vUV * g_vTexCoordScale3.xy ), 
                 float4( 1, 1, 1, 1 ),
@@ -222,7 +222,7 @@ PS
             const float fBlendMaskC = Tex2DS( g_tBlendMaskC, TextureFiltering, vUV ).a;
             material = MaterialParametersMultiblend( material, materialC, i.vBlendValues.g, fBlendMaskC, g_flBlendSoftnessC );
         #if S_MULTIBLEND >= 3
-            Material materialD = ToMaterial( i,
+            Material materialD = Material::From( i,
                 Tex2DS( g_tColorD, TextureFiltering, vUV * g_vTexCoordScale4.xy ), 
                 Tex2DS( g_tNormalD, TextureFiltering, vUV * g_vTexCoordScale4.xy ), 
                 float4( 1, 1, 1, 1 ),
@@ -231,7 +231,7 @@ PS
             const float fBlendMaskD = Tex2DS( g_tBlendMaskD, TextureFiltering, vUV ).a;
             material = MaterialParametersMultiblend( material, materialD, i.vBlendValues.b, fBlendMaskD, g_flBlendSoftnessD );
         #if S_MULTIBLEND >= 4
-            Material materialE = ToMaterial( i,
+            Material materialE = Material::From( i,
                 Tex2DS( g_tColorE, TextureFiltering, vUV * g_vTexCoordScale5.xy ), 
                 Tex2DS( g_tNormalE, TextureFiltering, vUV * g_vTexCoordScale5.xy ), 
                 float4( 1, 1, 1, 1 ),
@@ -248,14 +248,7 @@ PS
         return material;
     }
 
-    #ifdef S_MULTIBLEND
-        TextureAttribute( LightSim_DiffuseAlbedoTexture, g_tColorA );
-        TextureAttribute( RepresentativeTexture, g_tColorA );
     #endif
-
-    #endif
-
-	BoolAttribute( SupportsMappingDimensions, true );
 
 	//
 	// Main
@@ -282,11 +275,9 @@ PS
 		}
 		#endif
 
-		ShadingModelValveStandard sm;
-
         //
 		// Write to final combiner
 		//
-		return FinalizePixelMaterial( i, material, sm );
+		return ShadingModelStandard::Shade( i, material );
 	}
 }
