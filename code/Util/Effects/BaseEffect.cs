@@ -18,11 +18,6 @@ public abstract class BaseEffect
 	public bool Permanent { get; set; }
 
 	/// <summary>
-	/// The target of this effect.
-	/// </summary>
-	public Player Target { get; set; }
-
-	/// <summary>
 	/// The text displayed for this effect.
 	/// </summary>
 	public virtual string Text { get; }
@@ -45,12 +40,4 @@ public abstract class BaseEffect
 	public virtual void Simulate() { }
 
 	public virtual void OnEnd() { }
-
-	public void Remove()
-	{
-		if ( Target is not Player pawn || !pawn.IsValid )
-			return;
-
-		pawn.Effects.Remove( this );
-	}
 }

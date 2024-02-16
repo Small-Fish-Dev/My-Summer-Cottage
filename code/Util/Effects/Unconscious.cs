@@ -9,12 +9,11 @@ public class Unconscious : BaseEffect
 
 	public override void Simulate()
 	{
-		if ( Target.Ragdoll == null || !Target.Ragdoll.IsValid )
-			Target.SetRagdoll( true, Force );
+
 	}
 
 	public override void OnEnd()
 	{
-		Target.SetRagdoll( false );
+
 	}
 }

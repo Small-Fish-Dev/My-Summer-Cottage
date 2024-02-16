@@ -53,16 +53,6 @@
 	<interactionHint />
 	<eventlogger />
 	<effects />
-	<textinput ghost="..." class="chat-input" @ref=ChatInput onsubmit=@(( PanelEvent panelEvent ) => {
-		if ( panelEvent.Target is not TextInput input )
-			return;
-
-		if ( input.Text != "" )
-			Player.SendMessage( input.Text );
-
-		input.Text = "";
-		input.SetClass( "visible", false );
-	}) />
 	<containerpanel enabled=false />
 	<panel class="wip">
 		This gamemode is still a work in progress.
@@ -92,12 +82,5 @@
 			ChatInput.Focus();
 			ChatInput.SetClass( "visible", true );
 		}
-	}
-
-	[Event.Hotload]
-	private static void Refresh()
-	{
-		if ( Game.IsClient )
-			_ = new HUD();
 	}
 }

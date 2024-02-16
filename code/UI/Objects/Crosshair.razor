@@ -17,15 +17,3 @@
 		top: 50%;
 	}
 </style>
-
-@if ( Game.LocalPawn is not Player pawn )
-	return;
-
-<root style="opacity: @(pawn.Interactable == null ? 0.25f : 0.75f)" />
-
-@code {
-	protected override int BuildHash()
-	{
-		return HashCode.Combine( (Game.LocalPawn as Player)?.Interactable == null );
-	}
-}

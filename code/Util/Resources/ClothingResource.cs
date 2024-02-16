@@ -1,6 +1,6 @@
 ﻿namespace Sauna;
 
-[GameResource( "Sauna Clothing", "cloth", "Clothing for Sauna!", Icon = "camera_front" )]
+[GameResource("Sauna Clothing", "cloth", "Clothing for Sauna!", Icon = "camera_front")]
 public class ClothingResource : GameResource
 {
 	/// <summary>
@@ -14,23 +14,18 @@ public class ClothingResource : GameResource
 	/// The name of this clothing.
 	/// </summary>
 	public string Name { get; set; }
-	
+
 	/// <summary>
 	/// The path to this clothing's model.
 	/// </summary>
-	[ResourceType( "vmdl" )]
+	[ResourceType("vmdl")]
 	public string Model { get; set; }
-
-	/// <summary>
-	/// The flags for all the slots that this clothing occupies.
-	/// </summary>
-	public ClothingSlot OccupiedSlots { get; set; }
 
 	protected override void PostLoad()
 	{
 		base.PostLoad();
 
-		if ( !all.ContainsKey( ResourceName ) )
-			all.Add( ResourceName, this );
+		if (!all.ContainsKey(ResourceName))
+			all.Add(ResourceName, this);
 	}
 }

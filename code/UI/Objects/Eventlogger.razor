@@ -181,17 +181,4 @@
 		label.Text = text;
 		label.Style.FontColor = color;
 	}
-
-	/// <summary>
-	/// Sends an eventlog to a client.
-	/// </summary>
-	/// <param name="text"></param>
-	/// <param name="time"></param>
-	public static void Send( To target, string text, float time = 5f )
-	{
-		if ( !Game.IsServer )
-			return;
-		
-		Player._addEventlog( target, text, time );
-	}
 }
