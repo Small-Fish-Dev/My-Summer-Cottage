@@ -8,11 +8,15 @@ public partial class Player : Component
 
 	protected override void OnStart()
 	{
+		// Components
 		Camera = Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants );
 		Camera.Enabled = !IsProxy;
 
 		Model = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
 		Collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndDescendants );
+
+		// Footsteps
+		Model.OnFootstepEvent += OnFootstep;
 	}
 
 	protected override void OnUpdate()
@@ -40,5 +44,35 @@ public partial class Player : Component
 			return;
 
 		UpdateCamera();
+	}
+
+	private TimeSince lastStepped;
+	private void OnFootstep( SceneModel.FootstepEvent e )
+	{
+		if ( lastStepped < 0.2f )
+			return;
+
+		var pos = Transform.Position;
+		var tr = Scene.Trace.Ray( pos + Vector3.Up * 10, pos + Vector3.Down * 10 )
+			.Radius( 1 )
+			.WithoutTags( "trigger" )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.Run();
+
+		if ( !tr.Hit || tr.Surface == null )
+			return;
+
+		lastStepped = 0;
+
+		var path = e.FootId == 0 
+			? tr.Surface.Sounds.FootLeft 
+			: tr.Surface.Sounds.FootRight;
+
+		if ( string.IsNullOrEmpty( path ) )
+			return;
+
+		var sound = Sound.Play( path, tr.HitPosition + tr.Normal * 5 );
+		sound.Volume *= e.Volume;
+		sound.Update();
 	}
 }
