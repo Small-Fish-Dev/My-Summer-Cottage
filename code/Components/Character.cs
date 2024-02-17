@@ -93,13 +93,19 @@ public class Character : Component, Component.ExecuteInEditor
 	{
 		if ( GameManager.IsPlaying )
 		{
-			var model = Components.GetOrCreate<SkinnedModelRenderer>();
+			var modelGO = new GameObject( true, "Model" );
+			modelGO.SetParent( GameObject );
+
+			var model = modelGO.Components.Create<SkinnedModelRenderer>();
 			model.Model = Model.Load( "models/guy/guy.vmdl" );
 			model.SceneModel.Morphs.Set( "fat", Fatness );
 
 			foreach ( var piece in Clothes )
 			{
-				var clothing = Components.Create<SkinnedModelRenderer>();
+				var clothingGO = new GameObject( true, piece.Name );
+				clothingGO.SetParent( modelGO );
+
+				var clothing = clothingGO.Components.Create<SkinnedModelRenderer>();
 				clothing.Model = piece;
 				clothing.BoneMergeTarget = model;
 			}

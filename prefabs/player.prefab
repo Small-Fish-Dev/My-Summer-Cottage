@@ -6,7 +6,7 @@
     "Components": [
       {
         "__type": "Player",
-        "Fatness": 0,
+        "Fatness": 1,
         "Gravity": "0,0,-750",
         "JumpVelocity": 220,
         "Money": 0,
@@ -22,6 +22,20 @@
       },
       {
         "__type": "AudioListener"
+      },
+      {
+        "__type": "Character",
+        "Clothes": [
+          "models/clothes/jumper/jumper.vmdl",
+          "models/clothes/trousers/trousers.vmdl"
+        ],
+        "Fatness": 1,
+        "HideBodyGroup": "Torso",
+        "Player": {
+          "_type": "component",
+          "go": "d892a009-95f3-47a4-8f66-fd234b252803",
+          "component_type": "Player"
+        }
       }
     ],
     "Children": [
@@ -57,27 +71,6 @@
         "Id": "ef03704e-2b4a-46b0-bedb-479a408703ac",
         "Name": "Object",
         "Enabled": true
-      },
-      {
-        "Id": "04fe5e59-f0a9-4a19-b8db-be4bf37b46f8",
-        "Name": "Model",
-        "Enabled": true,
-        "Components": [
-          {
-            "__type": "Character",
-            "Clothes": [
-              "models/clothes/jumper/jumper.vmdl",
-              "models/clothes/trousers/trousers.vmdl"
-            ],
-            "Fatness": 0,
-            "HideBodyGroup": "Torso",
-            "Player": {
-              "_type": "component",
-              "go": "d892a009-95f3-47a4-8f66-fd234b252803",
-              "component_type": "Player"
-            }
-          }
-        ]
       }
     ]
   },
