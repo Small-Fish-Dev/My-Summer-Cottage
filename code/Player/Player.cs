@@ -9,6 +9,8 @@ public partial class Player : Component
 	protected override void OnStart()
 	{
 		Camera = Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants );
+		Camera.Enabled = !IsProxy;
+
 		Model = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
 		Collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndDescendants );
 	}

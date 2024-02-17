@@ -2,6 +2,20 @@
   "Id": "00df02be-8e87-4240-95ab-aef22b986af2",
   "GameObjects": [
     {
+      "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
+      "Name": "GameManager",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "NetworkManager",
+          "Prefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/player.prefab"
+          }
+        }
+      ]
+    },
+    {
       "Id": "339226ca-b793-4a15-8131-0cf90a9f4357",
       "Name": "Map",
       "Position": "155.32,241.9772,-76.84572",
@@ -16,13 +30,6 @@
         }
       ],
       "Children": []
-    },
-    {
-      "Id": "92eb98e5-98d1-4707-be87-a94caf417149",
-      "Name": "Player",
-      "Position": "390.8669,-667.6944,45.38077",
-      "Enabled": true,
-      "__Prefab": "prefabs/player.prefab"
     }
   ],
   "SceneProperties": {
@@ -48,6 +55,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-17T14:36:11.9515545\u002B02:00",
+  "LastSaved": "2024-02-17T16:07:08.1319416\u002B02:00",
   "__references": []
 }

@@ -40,7 +40,9 @@ partial class Player
 		var to = from + Vector3.Up * Bounds.Maxs.z;
 		Ducking = (Ducking && Scene.Trace.Box( Bounds, in from, in to ).IgnoreGameObjectHierarchy( GameObject ).WithTag( "solid" ).Run().Hit)
 			|| Input.Down( "duck" ); // Beautiful.
-
+		Velocity = Input.AnalogMove * 25f * EyeAngles.ToRotation();
+		Transform.Position += Velocity;
+		/*
 		// Normal movement
 		var rootMotion = Model.RootMotion.Position;
 		Velocity = (rootMotion * RootMotionSpeed * Transform.Rotation).WithZ( Velocity.z );
@@ -66,7 +68,7 @@ partial class Player
 		// Update Collider
 		var height = Ducking ? DUCK_HEIGHT : HEIGHT;
 		Collider.Scale = Collider.Scale.WithZ( height );
-		Collider.Center = Vector3.Up * height / 2f;
+		Collider.Center = Vector3.Up * height / 2f;*/
 	}
 
 	protected void UpdateAngles()
