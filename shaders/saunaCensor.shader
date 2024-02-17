@@ -36,65 +36,62 @@ VS
 	}
 }
 
-//
-// Creating geometry outside of the model, for more width.
-//
 GS
 {
-	float _Width < UiType( Color ); UiGroup( "Color" ); Attribute( "Width" ); Default( 0.2f ); >;
+#if D_OUTLINE_PASS == OUTLINE_OUTSIDE
+
+	float _LineSize < UiType(Color); UiGroup("Color"); Attribute("Width"); Default(0.2f); > ;
 
 	#include "common/vertex.hlsl"
 
-	void PositionOffset( inout PixelInput input, float2 vOffsetDir, float flOutlineSize )
+	void PositionOffset(inout PixelInput input, float2 vOffsetDir, float flOutlineSize)
 	{
 		float2 vAspectRatio = normalize(g_vInvViewportSize);
 		input.vPositionPs.xy += (vOffsetDir * 2.0) * vAspectRatio * input.vPositionPs.w * flOutlineSize;
+
+		// even though we do -f-vk-invert this is the only shader that does not behave with it
+		#if defined( VULKAN )
+			input.vPositionPs.y = -input.vPositionPs.y;
+		#endif
 	}
-	
+
 	//
-	// Use this one if you want absolute pixel size
+	// Main
 	//
-	void PositionOffsetResolutionDependent( inout PixelInput input, float2 vOffsetDir, float flOutlineSize )
+	[maxvertexcount(3 * 7)]
+	void MainGs(triangle in PixelInput vertices[3], inout TriangleStream<PixelInput> triStream)
 	{
-		input.vPositionPs.xy += (vOffsetDir * 2.0) * g_vInvViewportSize * input.vPositionPs.w * flOutlineSize;
-	}
-	
-    //
-    // Main
-    //
-    [maxvertexcount(3*7)]
-    void MainGs( triangle in PixelInput vertices[3], inout TriangleStream<PixelInput> triStream )
-    {
-		const float flWidthSize = _Width / 64.0f;
-        const float fTwoPi = 6.28318f;
-		const int nNumIterations = clamp( _Width * 10, 3, 6 ); // Thin lines don't need many iterations 
+		const float flOutlineSize = _LineSize / 64.0f;
+		const float fTwoPi = 6.28318f;
+		const int nNumIterations = clamp(_LineSize * 10, 3, 6); // Thin lines don't need many iterations 
 
-        PixelInput v[3];
+		PixelInput v[3];
 
-        [unroll]
-        for( float i = 0; i <= nNumIterations; i += 1 )
+		[unroll]
+		for (float i = 0; i <= nNumIterations; i += 1)
 		{
 			float fCycle = i / nNumIterations;
 
-			float2 vOffset = float2( 
-				( sin( fCycle * fTwoPi ) ),
-				( cos( fCycle * fTwoPi ) )
+			float2 vOffset = float2(
+				(sin(fCycle * fTwoPi)),
+				(cos(fCycle * fTwoPi))
 			);
 
-			for ( int i = 0; i < 3; i++ )
+			for (int i = 0; i < 3; i++)
 			{
 				v[i] = vertices[i];
-				PositionOffset( v[i], vOffset, flWidthSize );
+				PositionOffset(v[i], vOffset, flOutlineSize);
 			}
 
 			triStream.Append(v[2]);
 			triStream.Append(v[0]);
 			triStream.Append(v[1]);
 		}
-		
+
 		// emit the vertices
 		triStream.RestartStrip();
-    }
+	}
+#endif
 }
 
 PS
@@ -108,7 +105,6 @@ PS
 	RenderState( BackStencilFunc, ALWAYS );
 	RenderState( StencilRef, 0x01 );
     
-	CreateTexture2D( _DepthTexture ) < Attribute( "DepthTexture" ); SrgbRead( true ); Filter( POINT ); >;
 	CreateTexture2D( _ColorTexture ) < Attribute( "ColorTexture" ); SrgbRead( true ); Filter( POINT ); >;
 
 	//
@@ -117,22 +113,20 @@ PS
 	float4 MainPs( PixelInput i ): SV_Target
 	{
 		float objectDepth = i.vPositionSs.z;
-		float2 uv = CalculateViewportUv( i.vPositionSs.xy ); 
 
-        float worldDepth = Tex2D( _DepthTexture, uv ).r;
-		worldDepth = RemapValClamped( worldDepth, g_flViewportMinZ, g_flViewportMaxZ, 0.0, 1.0 ); // Remap to 0-1 since we are using the full depth range on our depth viewport
+		float2 screenUv = CalculateViewportUv(i.vPositionSs.xy);
+
+		float worldDepth = Depth::Get(i.vPositionSs.xy - g_vViewportOffset);
+		worldDepth = RemapValClamped(worldDepth, g_flViewportMinZ, g_flViewportMaxZ, 0.0, 1.0); // Remap to 0-1 since we are using the full depth range on our depth viewport
 
 		float diff = (objectDepth - worldDepth);
-		diff = RemapValClamped( diff, 0.001, 0.002f, 0.0, 1.0 );
-		
-        float4 input = Tex2D( _ColorTexture, uv.xy );
 
-        float scaling = 128;
-        float4 pixelated = Tex2D( _ColorTexture, floor( uv.xy * scaling ) / scaling );
-    
-		float4 output = lerp( pixelated, input, diff );
-		output.rgb = lerp( input.rgb, pixelated.rgb, 1 - diff );
+		float2 amount = 128;
+		float2 coords = round(screenUv.xy * amount) / amount;
+		float4 vColor = Tex2D(_ColorTexture, coords.xy);
 
-		return output;
+		vColor.rgb = lerp(vColor.rgb, Tex2D(_ColorTexture, screenUv).rgb, diff > 0.0001);
+
+		return vColor;
 	}
 }

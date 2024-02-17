@@ -9,7 +9,7 @@ public class DitherHook : Component, Component.ExecuteInEditor
 	{
 		var shader = Material.FromShader( "shaders/saunadither.shader" );
 
-		Graphics.GrabFrameTexture( "ColorBuffer", renderAttributes: attributes );
+		Graphics.GrabFrameTexture( "ColorTexture", renderAttributes: attributes );
 		Graphics.Blit( shader, attributes );
 	}
 
@@ -18,7 +18,7 @@ public class DitherHook : Component, Component.ExecuteInEditor
 		hook?.Dispose();
 
 		var camera = Components.Get<CameraComponent>( FindMode.InSelf );
-		hook = camera.AddHookAfterUI( "Dither", 99, Render );
+		hook = camera.AddHookAfterUI( "Dither", 20, Render );
 	}
 
 	protected override void OnDisabled()

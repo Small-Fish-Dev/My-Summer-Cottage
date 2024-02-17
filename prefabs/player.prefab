@@ -19,9 +19,6 @@
         "Scale": "25,25,72",
         "Static": false,
         "Surface": null
-      },
-      {
-        "__type": "AudioListener"
       }
     ],
     "Children": [
@@ -69,13 +66,40 @@
           },
           {
             "__type": "DitherHook"
+          },
+          {
+            "__type": "EyeProtector"
+          },
+          {
+            "__type": "AudioListener"
           }
         ]
       },
       {
         "Id": "c46d9d1a-67b3-44e2-a0f2-848a5ac20d74",
-        "Name": "Object",
-        "Enabled": true
+        "Name": "Penoid",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "AnimationGraph": null,
+            "BodyGroups": 18446744073709551615,
+            "BoneMergeTarget": {
+              "_type": "component",
+              "go": "2ec9ee7d-3f99-4358-b79f-cfb85d3de67a",
+              "component_type": "SkinnedModelRenderer"
+            },
+            "CreateBoneObjects": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/guy/penoid.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "CensorComponent"
+          }
+        ]
       }
     ]
   },

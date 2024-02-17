@@ -46,31 +46,27 @@ PS
 {
     #include "postprocess/common.hlsl"
     
-    CreateTexture2D( g_tColorBuffer ) < Attribute( "ColorBuffer" ); SrgbRead( true ); Filter( MIN_MAG_LINEAR_MIP_POINT ); AddressU( MIRROR ); AddressV( MIRROR ); >;
+    CreateTexture2D( g_ColorTexture ) < Attribute( "ColorTexture" ); SrgbRead( true ); Filter( POINT ); AddressU( MIRROR ); AddressV( MIRROR ); >;
 
-    float4 dither( float4 color, uint x, uint y, int levels = 4)
-    {
-        const float thresholdMap[8][8] = {
-            0/64.0-0.5, 32/64.0-0.5, 8/64.0-0.5, 40/64.0-0.5, 2/64.0-0.5, 34/64.0-0.5, 10/64.0-0.5, 42/64.0-0.5,
-            48/64.0-0.5, 16/64.0-0.5, 56/64.0-0.5, 24/64.0-0.5, 50/64.0-0.5, 18/64.0-0.5, 58/64.0-0.5, 26/64.0-0.5,
-            12/64.0-0.5, 44/64.0-0.5, 4/64.0-0.5, 36/64.0-0.5, 14/64.0-0.5, 46/64.0-0.5, 6/64.0-0.5, 38/64.0-0.5,
-            60/64.0-0.5, 28/64.0-0.5, 52/64.0-0.5, 20/64.0-0.5, 62/64.0-0.5, 30/64.0-0.5, 54/64.0-0.5, 22/64.0-0.5,
-            3/64.0-0.5, 35/64.0-0.5, 11/64.0-0.5, 43/64.0-0.5, 1/64.0-0.5, 33/64.0-0.5, 9/64.0-0.5, 41/64.0-0.5,
-            51/64.0-0.5, 19/64.0-0.5, 59/64.0-0.5, 27/64.0-0.5, 49/64.0-0.5, 17/64.0-0.5, 57/64.0-0.5, 25/64.0-0.5,
-            15/64.0-0.5, 47/64.0-0.5, 7/64.0-0.5, 39/64.0-0.5, 13/64.0-0.5, 45/64.0-0.5, 5/64.0-0.5, 37/64.0-0.5,
-            63/64.0-0.5, 31/64.0-0.5, 55/64.0-0.5, 23/64.0-0.5, 61/64.0-0.5, 29/64.0-0.5, 53/64.0-0.5, 21/64.0-0.5
-        };
-
-        float4 mask = thresholdMap[x % 8][y % 8];
-        return floor( levels * color + mask ) / levels;
-    }
+    static const float bayerMatrix[8][8] = {
+        0 / 64.0, 32 / 64.0, 8 / 64.0, 40 / 64.0, 2 / 64.0, 34 / 64.0, 10 / 64.0, 42 / 64.0,
+        48 / 64.0, 16 / 64.0, 56 / 64.0, 24 / 64.0, 50 / 64.0, 18 / 64.0, 58 / 64.0, 26 / 64.0,
+        12 / 64.0, 44 / 64.0, 4 / 64.0, 36 / 64.0, 14 / 64.0, 46 / 64.0, 6 / 64.0, 38 / 64.0,
+        60 / 64.0, 28 / 64.0, 52 / 64.0, 20 / 64.0, 62 / 64.0, 30 / 64.0, 54 / 64.0, 22 / 64.0,
+        3 / 64.0, 35 / 64.0, 11 / 64.0, 43 / 64.0, 1 / 64.0, 33 / 64.0, 9 / 64.0, 41 / 64.0,
+        51 / 64.0, 19 / 64.0, 59 / 64.0, 27 / 64.0, 49 / 64.0, 17 / 64.0, 57 / 64.0, 25 / 64.0,
+        15 / 64.0, 47 / 64.0, 7 / 64.0, 39 / 64.0, 13 / 64.0, 45 / 64.0, 5 / 64.0, 37 / 64.0,
+        63 / 64.0, 31 / 64.0, 55 / 64.0, 23 / 64.0, 61 / 64.0, 29 / 64.0, 53 / 64.0, 21 / 64.0
+    };
 
     float4 MainPs( PS_INPUT i ) : SV_Target0
     { 	
-        //float2 amount = g_vViewportSize.xy / 1;
-        //float2 coords = round( i.vPositionSs.xy / g_vViewportSize.xy * amount ) / amount;
-        float4 col = Tex2D( g_tColorBuffer, i.vPositionSs.xy / g_vViewportSize.xy ).rgba;
+        const float levels = 32;
 
-        return dither( col, i.vPositionSs.x / 2, i.vPositionSs.y / 2, 64 );
+        float4 color = Tex2D( g_ColorTexture, i.vPositionSs.xy / g_vViewportSize.xy ).rgba;
+        float2 pos = i.vPositionSs.xy / 2;
+        float4 mask = bayerMatrix[pos.x % 8][pos.y % 8] - 0.5;
+
+        return floor( levels * color + mask ) / levels;
     }
 }
