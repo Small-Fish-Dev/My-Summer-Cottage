@@ -6,12 +6,19 @@
     "Components": [
       {
         "__type": "Player",
-        "Fatness": 0.1,
-        "Gravity": "0,0,-750",
+        "DuckSpeed": 60,
+        "Fatness": 0,
         "Height": 0,
-        "JumpVelocity": 220,
+        "JumpStrength": 450,
         "Money": 0,
-        "RootMotionSpeed": 245
+        "MoveHelper": {
+          "_type": "component",
+          "go": "a117766e-5563-45af-8dcf-475062c85079",
+          "component_type": "MoveHelper"
+        },
+        "Speed": 140,
+        "SprintSpeed": 280,
+        "WalkSpeed": 80
       },
       {
         "__type": "Inventory",
@@ -31,6 +38,34 @@
       },
       {
         "__type": "AudioListener"
+      },
+      {
+        "__type": "MoveHelper",
+        "AccelerationCurve": [
+          {
+            "x": 0.5,
+            "y": 0.5053192
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 0.3,
+        "Collider": null,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 2000,
+        "GroundAngle": 45,
+        "GroundFriction": 30,
+        "IgnoreTags": "",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 18,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 72,
+        "TraceRadius": 16,
+        "TraceType": "BBox",
+        "UseCollider": false,
+        "UseSceneGravity": true
       }
     ],
     "Children": [
@@ -73,10 +108,10 @@
           {
             "__type": "Character",
             "Clothes": [
-              "models/clothes/jumper/jumper.vmdl",
-              "models/clothes/trousers/trousers.vmdl"
+              "models/clothes/trousers/trousers.vmdl",
+              "models/clothes/jumper/jumper.vmdl"
             ],
-            "Fatness": 0.1,
+            "Fatness": 0,
             "Height": 0,
             "HideBodyGroup": "Torso",
             "Player": {
