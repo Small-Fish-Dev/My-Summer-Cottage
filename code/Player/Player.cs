@@ -21,6 +21,10 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Range( 0f, 1f, 0.05f )]
 	public float Fatness { get; set; } = 0f;
 
+	[Property, Sync, Category( "Appearance" )]
+	[Range( -100f, 100f, 1f )]
+	public float Height { get; set; } = 0f;
+
 	public WindDirections FacedDirection => (WindDirections)((EyeAngles.Normal.yaw + 45f / 2 + 180) % 360 / 45f);
 	public string StringDirection => FacedDirection.ToString().Replace( '_', ' ' );
 

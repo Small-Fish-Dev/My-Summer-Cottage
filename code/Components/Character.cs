@@ -41,31 +41,45 @@ public class Character : Component, Component.ExecuteInEditor
 		set => _fatness = value; // Who cares if it's set even with a player reference
 	}
 
+	float _height = 0f;
+
+	[Property, Sync, MakeDirty]
+	[ShowIf( "Player", null )]
+	[Range( -100f, 100f, 1f )]
+	public float Height
+	{
+		get
+		{
+			if ( Player != null )
+				return Player.Height;
+			else
+				return _height;
+		}
+		set => _height = value;
+	}
+
 	[Property]
 	public List<Model> Clothes { get; set; }
 
 	[Property]
 	public HiddenBodyGroup HideBodyGroup { get; set; }
 
-	SceneModel _model;
 	Dictionary<int, SceneModel> _clothing = new();
-	bool _init;
 
 	protected override void DrawGizmos()
 	{
 		if ( !GameManager.IsPlaying )
 		{
 			var parent = Components.Get<SkinnedModelRenderer>().SceneModel;
+
 			if ( !parent.IsValid() )
 				return;
 
-			if ( !_init )
-			{
-				CreatePreviewClothing( parent );
-				_init = true;
-			}
+			CreatePreviewClothing( parent );
 
 			parent.Morphs.Set( "fat", Fatness );
+			parent.SetAnimParameter( "height", Height );
+
 			parent.Transform = Transform.World;
 
 			parent.SetBodyGroup( "head", HideBodyGroup.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 ); // Not implemented
@@ -73,18 +87,18 @@ public class Character : Component, Component.ExecuteInEditor
 			parent.SetBodyGroup( "hands", HideBodyGroup.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 ); // Not implemented
 			parent.SetBodyGroup( "legs", HideBodyGroup.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
 			parent.SetBodyGroup( "feet", HideBodyGroup.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 ); // Not implemented
-			
+
 			foreach ( var piece in _clothing.Values )
 			{
-				piece.Morphs.Set( "fat", Fatness );
+				piece.SetAnimParameter( "height", Height ); // Bone mergine doesn't work? Tried it even with a normal skinned model renderer
 				piece.Update( Time.Delta );
-				//piece.MergeBones( _model ); // Interestingly, you need to bonemerge after updating
 			}
+
+			parent.Update( Time.Delta );
 		}
 		else
 		{
 			DeletePreview();
-			_init = false;
 		}
 	}
 
@@ -125,13 +139,6 @@ public class Character : Component, Component.ExecuteInEditor
 
 		foreach ( var model in Components.GetAll<SkinnedModelRenderer>() )
 			model.Destroy();
-	}
-
-	void CreatePreviewModel()
-	{
-		//_model?.Delete();
-		//_model = new SceneModel( Gizmo.World, "models/guy/guy.vmdl", Transform.World );
-		//_model.Batchable = false;
 	}
 
 	void CreatePreviewClothing( SceneModel parent )
@@ -186,8 +193,6 @@ public class Character : Component, Component.ExecuteInEditor
 
 	void DeletePreview()
 	{
-		_model?.Delete();
-
 		foreach ( var piece in _clothing.Values )
 			piece.Delete();
 	}
