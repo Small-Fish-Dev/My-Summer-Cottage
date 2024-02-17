@@ -54,7 +54,7 @@ public class Character : Component, Component.ExecuteInEditor
 
 	protected override void DrawGizmos()
 	{
-		if ( Game.IsEditor && !Components.TryGet<SkinnedModelRenderer>( out var _ ) )
+		if ( !GameManager.IsPlaying )
 		{
 			if ( _model == null || !_model.IsValid() )
 			{
@@ -118,7 +118,7 @@ public class Character : Component, Component.ExecuteInEditor
 	{
 		DeletePreview();
 
-		if ( Components.TryGet<SkinnedModelRenderer>( out var model ) )
+		foreach ( var model in Components.GetAll<SkinnedModelRenderer>() )
 			model.Destroy();
 	}
 
@@ -183,7 +183,7 @@ public class Character : Component, Component.ExecuteInEditor
 	{
 		_model?.Delete();
 
-		foreach ( var piece in _clothing )
-			piece.Value.Delete();
+		foreach ( var piece in _clothing.Values )
+			piece.Delete();
 	}
 }
