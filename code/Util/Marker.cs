@@ -2,7 +2,7 @@
 
 public struct Marker
 {
-	private static List<Marker> all = new List<Marker>
+	private static readonly List<Marker> all = new List<Marker>
 	{
 		new( "The Sauna", new Vector3( 1040f, -840f, 89f ), Color.Red ),
 	};

@@ -1,0 +1,59 @@
+Compass {
+    position: absolute;
+    width: 100%;
+    top: 10px;
+    justify-content: center;
+    opacity: 0.75;
+
+    .container {
+        height: 80px;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        .background {
+            position: absolute;
+            left: 0px;
+            top: 25px;
+            width: 100%;
+            height: 30px;
+            background-repeat: repeat-x;
+            background-image: url(ui/compass.png);
+            image-rendering: point;
+        }
+
+        .center {
+            width: 30px;
+            height: 60px;
+            background-image: url(ui/compass_center.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            image-rendering: point;
+            bottom: 8px;
+        }
+
+        .marker {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: white;
+            transform: translate(-50% 50%);
+        }
+
+        .name {
+            position: absolute;
+            top: -15px;
+            opacity: 0;
+            font-size: 18px;
+            transform: scale(0);
+            transition: transform 0.25s ease-in-out;
+            transform-origin: center;
+            
+            &.visible {
+                opacity: 2;
+                transform: translate(-50% -50%) scale(1);
+            }
+        }
+    }
+}
