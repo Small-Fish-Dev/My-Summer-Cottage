@@ -22,76 +22,7 @@
       "Name": "Player",
       "Position": "390.8669,-667.6944,45.38077",
       "Enabled": true,
-      "Components": [
-        {
-          "__type": "PlayerController",
-          "AnimationHelper": null,
-          "CharacterController": {
-            "_type": "component",
-            "go": "92eb98e5-98d1-4707-be87-a94caf417149",
-            "component_type": "CharacterController"
-          },
-          "CrouchMoveSpeed": 90,
-          "RunMoveSpeed": 190,
-          "SprintMoveSpeed": 320,
-          "WalkMoveSpeed": 190
-        },
-        {
-          "__type": "CharacterController",
-          "Acceleration": 10,
-          "Bounciness": 0.3,
-          "GroundAngle": 45,
-          "Height": 64,
-          "IgnoreLayers": "",
-          "Radius": 16,
-          "StepHeight": 18
-        }
-      ],
-      "Children": [
-        {
-          "Id": "64945d13-0adb-45ae-a545-49db7324a939",
-          "Name": "Camera",
-          "Position": "0,0,63.99992",
-          "Tags": "maincamera",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "CameraComponent",
-              "BackgroundColor": "0.33333,0.46275,0.52157,1",
-              "ClearFlags": "All",
-              "FieldOfView": 78,
-              "IsMainCamera": true,
-              "Orthographic": false,
-              "OrthographicHeight": 1204,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": "",
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 10000,
-              "ZNear": 10
-            }
-          ]
-        },
-        {
-          "Id": "15b5a3d8-b951-499d-a1b6-13f1c39085b2",
-          "Name": "Hud",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "ScreenPanel",
-              "AutoScreenScale": true,
-              "Opacity": 1,
-              "Scale": 1,
-              "ZIndex": 100
-            },
-            {
-              "__type": "Hud"
-            }
-          ]
-        }
-      ]
+      "__Prefab": "prefabs/player.prefab"
     }
   ],
   "SceneProperties": {
@@ -117,6 +48,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-17T00:10:30.5271342-05:00",
+  "LastSaved": "2024-02-17T14:36:11.9515545\u002B02:00",
   "__references": []
 }

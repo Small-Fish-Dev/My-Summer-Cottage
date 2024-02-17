@@ -1,0 +1,99 @@
+{
+  "RootObject": {
+    "Id": "92eb98e5-98d1-4707-be87-a94caf417149",
+    "Name": "Player",
+    "Position": "390.8669,-667.6944,45.38077",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Player",
+        "Gravity": "0,0,-750",
+        "JumpVelocity": 220,
+        "RootMotionSpeed": 245
+      },
+      {
+        "__type": "BoxCollider",
+        "Center": "0,0,36",
+        "IsTrigger": false,
+        "Scale": "25,25,72",
+        "Static": false,
+        "Surface": null
+      }
+    ],
+    "Children": [
+      {
+        "Id": "20c9bfec-aa8c-4b79-835d-ca3805106fb6",
+        "Name": "Model",
+        "Position": "0,0,0",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "AnimationGraph": null,
+            "BodyGroups": 43,
+            "BoneMergeTarget": null,
+            "CreateBoneObjects": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "Id": "64945d13-0adb-45ae-a545-49db7324a939",
+        "Name": "Camera",
+        "Position": "0,0,63.99992",
+        "Tags": "maincamera",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "CameraComponent",
+            "BackgroundColor": "0.33333,0.46275,0.52157,1",
+            "ClearFlags": "All",
+            "FieldOfView": 78,
+            "IsMainCamera": true,
+            "Orthographic": false,
+            "OrthographicHeight": 1204,
+            "Priority": 1,
+            "RenderExcludeTags": "",
+            "RenderTags": "",
+            "TargetEye": "None",
+            "Viewport": "0,0,1,1",
+            "ZFar": 10000,
+            "ZNear": 10
+          }
+        ]
+      },
+      {
+        "Id": "15b5a3d8-b951-499d-a1b6-13f1c39085b2",
+        "Name": "Hud",
+        "Position": "0,0,0",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ScreenPanel",
+            "AutoScreenScale": true,
+            "Opacity": 1,
+            "Scale": 1,
+            "ZIndex": 100
+          },
+          {
+            "__type": "Hud"
+          }
+        ]
+      },
+      {
+        "Id": "0590c625-206d-4870-9a82-49eca2ce94d4",
+        "Name": "Object",
+        "Position": "0,0,0",
+        "Enabled": true
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
