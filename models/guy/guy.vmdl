@@ -11,7 +11,13 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
-						remaps = [  ]
+						remaps = 
+						[
+							{
+								from = "body.vmat"
+								to = "models/guy/guy.vmat"
+							},
+						]
 						use_global_default = false
 						global_default_material = ""
 					},
@@ -116,34 +122,6 @@
 							]
 						}
 					},
-					{
-						_class = "RenderMeshFile"
-						name = "penoid"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								bone_names = 
-								[
-									"Pole_L",
-									"Pole_R",
-								]
-							},
-						]
-						filename = "models/guy/penoid.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
 				]
 			},
 			{
@@ -214,21 +192,6 @@
 								{
 									name = "spine1"
 									weight = 0.2
-								},
-							]
-						}
-					},
-					{
-						_class = "LookAtChain"
-						name = "penoid_lookat"
-						lookat_chain = 
-						{
-							name = ""
-							bones = 
-							[
-								{
-									name = "penoid"
-									weight = 1.0
 								},
 							]
 						}
@@ -879,28 +842,6 @@
 						reverse = false
 					},
 					{
-						_class = "AnimFile"
-						name = "aiming_pose"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/aiming_pose.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
 						_class = "Folder"
 						name = "movement"
 						children = 
@@ -1479,7 +1420,7 @@
 							},
 							{
 								_class = "Folder"
-								name = "jump1"
+								name = "jumping"
 								children = 
 								[
 									{
@@ -1635,6 +1576,58 @@
 							},
 						]
 					},
+					{
+						_class = "AnimFile"
+						name = "aim_matrix_delta"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "aim_matrix"
+								frame = 4
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/guy/animations/aim_matrix.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "aim_matrix"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/guy/animations/aim_matrix.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -1680,55 +1673,19 @@
 					},
 					{
 						_class = "Attachment"
-						name = "penoid_max"
-						parent_bone = "penoid_max"
-						relative_origin = [ 0.0, 0.0, 0.0 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
-						weight = 1.0
-						ignore_rotation = false
-					},
-					{
-						_class = "Attachment"
-						name = "penoid_min"
-						parent_bone = "penoid_min"
-						relative_origin = [ 0.0, 0.0, 0.0 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
-						weight = 1.0
-						ignore_rotation = false
-					},
-					{
-						_class = "Attachment"
-						name = "penoid_forward"
-						parent_bone = "penoid"
-						relative_origin = [ 0.0, 0.0, 0.0 ]
-						relative_angles = [ 0.0, 0.0, -90.0 ]
-						weight = 1.0
-						ignore_rotation = false
-					},
-					{
-						_class = "Attachment"
-						name = "penoid_start"
-						parent_bone = "penoid"
-						relative_origin = [ 0.0, 0.0, 0.0 ]
-						relative_angles = [ 0.0, 0.0, 0.0 ]
-						weight = 1.0
-						ignore_rotation = false
-					},
-					{
-						_class = "Attachment"
-						name = "point_forward"
+						name = "rifle_end"
 						parent_bone = "hand_R"
-						relative_origin = [ 7.31348, 0.893859, -0.495262 ]
-						relative_angles = [ -4.177823, -19.306906, 5.60041 ]
+						relative_origin = [ 31.889135, -3.659393, 1.457825 ]
+						relative_angles = [ -7.713576, -13.31436, -113.068787 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
 					{
 						_class = "Attachment"
 						name = "aim_forward"
-						parent_bone = "hand_R"
-						relative_origin = [ 31.889135, -3.659393, 1.457825 ]
-						relative_angles = [ -7.713576, -13.31436, -113.068787 ]
+						parent_bone = "aim"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -2032,132 +1989,6 @@
 						]
 						hidden_in_tools = false
 					},
-					{
-						_class = "BodyGroup"
-						name = "penoid"
-						children = 
-						[
-							{
-								_class = "BodyGroupChoice"
-								meshes = [  ]
-							},
-							{
-								_class = "BodyGroupChoice"
-								meshes = 
-								[
-									"penoid",
-								]
-							},
-						]
-						hidden_in_tools = false
-					},
-				]
-			},
-			{
-				_class = "JiggleBoneList"
-				children = 
-				[
-					{
-						_class = "JiggleBone"
-						name = "balls"
-						jiggle_root_bone = "balls"
-						jiggle_type = 0
-						has_yaw_constraint = true
-						has_pitch_constraint = true
-						has_angle_constraint = false
-						has_base_spring = false
-						allow_flex_length = false
-						invert_axes = false
-						has_collision = false
-						cloth_collision_layer0 = true
-						cloth_collision_layer1 = true
-						cloth_collision_layer2 = true
-						cloth_collision_layer3 = true
-						length = 3.0
-						tip_mass = 50.0
-						angle_limit = 0.0
-						min_yaw = -15.0
-						max_yaw = 15.0
-						yaw_friction = 1.5
-						yaw_bounce = 0.0
-						min_pitch = -15.0
-						max_pitch = 15.0
-						pitch_friction = 1.5
-						pitch_bounce = 0.0
-						base_mass = 0.0
-						base_stiffness = 0.0
-						base_damping = 0.0
-						base_left_min = 0.0
-						base_left_max = 0.0
-						base_left_friction = 0.0
-						base_up_min = 0.0
-						base_up_max = 0.0
-						base_up_friction = 0.0
-						base_forward_min = 0.0
-						base_forward_max = 0.0
-						base_forward_friction = 0.0
-						yaw_stiffness = 0.0
-						yaw_damping = 0.0
-						pitch_stiffness = 0.0
-						pitch_damping = 0.0
-						along_stiffness = 0.0
-						along_damping = 0.0
-						radius0 = 1.0
-						radius1 = 1.710228
-						point0 = [ 0.0, 0.0, 0.0 ]
-						point1 = [ 2.366369, 0.0, 0.0 ]
-					},
-					{
-						_class = "JiggleBone"
-						name = "penoid"
-						disabled = true
-						jiggle_root_bone = "penoid_jiggle"
-						jiggle_type = 0
-						has_yaw_constraint = true
-						has_pitch_constraint = true
-						has_angle_constraint = false
-						has_base_spring = false
-						allow_flex_length = false
-						invert_axes = false
-						has_collision = false
-						cloth_collision_layer0 = true
-						cloth_collision_layer1 = true
-						cloth_collision_layer2 = true
-						cloth_collision_layer3 = true
-						length = 10.0
-						tip_mass = 50.0
-						angle_limit = 0.0
-						min_yaw = -15.0
-						max_yaw = 75.0
-						yaw_friction = 0.0
-						yaw_bounce = 0.5
-						min_pitch = -30.0
-						max_pitch = 30.0
-						pitch_friction = 0.0
-						pitch_bounce = 0.0
-						base_mass = 0.0
-						base_stiffness = 0.0
-						base_damping = 0.0
-						base_left_min = 0.0
-						base_left_max = 0.0
-						base_left_friction = 0.0
-						base_up_min = 0.0
-						base_up_max = 0.0
-						base_up_friction = 0.0
-						base_forward_min = 0.0
-						base_forward_max = 0.0
-						base_forward_friction = 0.0
-						yaw_stiffness = 0.0
-						yaw_damping = 0.0
-						pitch_stiffness = 0.0
-						pitch_damping = 0.0
-						along_stiffness = 0.0
-						along_damping = 0.0
-						radius0 = 1.0
-						radius1 = 1.12254
-						point0 = [ 0.0, 0.0, 0.0 ]
-						point1 = [ 4.396619, 0.0, 0.0 ]
-					},
 				]
 			},
 			{
@@ -2236,11 +2067,15 @@
 						[
 							{
 								bone = "Hand_IK_L"
-								weight = 1.0
+								weight = 0.0
 							},
 							{
 								bone = "Hand_IK_R"
-								weight = 1.0
+								weight = 0.0
+							},
+							{
+								bone = "aim"
+								weight = 0.0
 							},
 							{
 								bone = "arm_lower_L"

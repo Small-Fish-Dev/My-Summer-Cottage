@@ -2,20 +2,41 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader"
+	shader "shaders/complex.shader"
 
-	//---- Animation ----
-	F_MORPH_SUPPORTED 1
+	//---- PBR ----
+	F_SPECULAR 1
 
-	//---- Texture Filtering ----
-	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+	//---- Ambient Occlusion ----
+	g_flAmbientOcclusionDirectDiffuse "0.000"
+	g_flAmbientOcclusionDirectSpecular "0.000"
+	TextureAmbientOcclusion "materials/default/default_ao.tga"
+
+	//---- Color ----
+	g_flModelTintAmount "1.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColor "models/guy/guy_color.png"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Material ----
-	Color "models/guy/guy_color.png"
-	Metalness "materials/default/default_metal.tga"
-	Normal "models/guy/guy_normal.png"
-	Roughness "[1.000000 1.000000 1.000000 0.000000]"
+	//---- Metalness ----
+	g_flMetalness "0.000"
+
+	//---- Normal ----
+	TextureNormal "models/guy/guy_normal.png"
+
+	//---- Roughness ----
+	g_flRoughnessScaleFactor "1.000"
+	TextureRoughness "materials/default/default_rough.tga"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "0"
+	g_nScaleTexCoordVByModelScaleAxis "0"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
 }
