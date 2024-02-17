@@ -1,0 +1,16 @@
+﻿@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits PanelComponent
+
+<root>
+	<Crosshair />
+</root>
+
+@code {
+	public static Hud Instance { get; private set; }
+
+	public Hud()
+	{
+		Instance = this;
+	}
+}
