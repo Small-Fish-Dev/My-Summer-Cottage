@@ -54,32 +54,58 @@ public class Character : Component, Component.ExecuteInEditor
 
 	protected override void DrawGizmos()
 	{
-		if ( _model == null || !_model.IsValid() )
+		if ( Game.IsEditor && !Components.TryGet<SkinnedModelRenderer>( out var _ ) )
 		{
-			CreatePreviewModel();
+			if ( _model == null || !_model.IsValid() )
+			{
+				CreatePreviewModel();
+			}
+			else
+			{
+				CreatePreviewClothing();
+
+				_model.Morphs.Set( "fat", Fatness );
+				_model.Transform = Transform.World;
+
+				_model.SetBodyGroup( "head", HideBodyGroup.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 ); // Not implemented
+				_model.SetBodyGroup( "torso", HideBodyGroup.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
+				_model.SetBodyGroup( "hands", HideBodyGroup.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 ); // Not implemented
+				_model.SetBodyGroup( "legs", HideBodyGroup.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
+				_model.SetBodyGroup( "feet", HideBodyGroup.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 ); // Not implemented
+
+				_model.Update( Time.Delta );
+
+				foreach ( var piece in _clothing.Values )
+				{
+					piece.Morphs.Set( "fat", Fatness );
+					piece.Update( Time.Delta );
+					piece.MergeBones( _model ); // Interestingly, you need to bonemerge after updating
+				}
+			}
 		}
 		else
 		{
-			CreatePreviewClothing();
-
-			_model.Morphs.Set( "fat", Fatness );
-			_model.Transform = Transform.World;
-
-			_model.SetBodyGroup( "head", HideBodyGroup.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 ); // Not implemented
-			_model.SetBodyGroup( "torso", HideBodyGroup.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
-			_model.SetBodyGroup( "hands", HideBodyGroup.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 ); // Not implemented
-			_model.SetBodyGroup( "legs", HideBodyGroup.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
-			_model.SetBodyGroup( "feet", HideBodyGroup.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 ); // Not implemented
-
-			_model.Update( Time.Delta );
-
-			foreach ( var piece in _clothing.Values )
-			{
-				piece.Morphs.Set( "fat", Fatness );
-				piece.Update( Time.Delta );
-				piece.MergeBones( _model ); // Interestingly, you need to bonemerge after updating
-			}
+			DeletePreview();
 		}
+	}
+
+	protected override void OnStart()
+	{
+		var model = Components.GetOrCreate<SkinnedModelRenderer>();
+		model.Model = Model.Load( "models/guy/guy.vmdl" );
+
+		foreach ( var piece in Clothes )
+		{
+			var clothing = Components.Create<SkinnedModelRenderer>();
+			clothing.Model = piece;
+			clothing.BoneMergeTarget = model;
+		}
+
+		model.SetBodyGroup( "head", HideBodyGroup.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 ); // Not implemented
+		model.SetBodyGroup( "torso", HideBodyGroup.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
+		model.SetBodyGroup( "hands", HideBodyGroup.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 ); // Not implemented
+		model.SetBodyGroup( "legs", HideBodyGroup.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
+		model.SetBodyGroup( "feet", HideBodyGroup.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 ); // Not implemented
 	}
 
 	protected override void OnDisabled()
@@ -90,6 +116,9 @@ public class Character : Component, Component.ExecuteInEditor
 	protected override void OnDestroy()
 	{
 		DeletePreview();
+
+		if ( Components.TryGet<SkinnedModelRenderer>( out var model ) )
+			model.Destroy();
 	}
 
 	void CreatePreviewModel()
