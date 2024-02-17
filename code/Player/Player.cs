@@ -1,9 +1,23 @@
 namespace Sauna;
 
+public enum WindDirections
+{
+	South,
+	South_East,
+	East,
+	North_East,
+	North,
+	North_West,
+	West,
+	South_West
+}
+
 public partial class Player : Component
 {
 	[Property, Sync, Category( "Parameters" )] public float Fatness { get; set; }
 	[Property, Sync, Category( "Parameters" )] public int Money { get; set; }
+
+	public WindDirections FacedDirection => (WindDirections)((EyeAngles.Normal.yaw + 45f / 2 + 180) % 360 / 45f);
 
 	protected CameraComponent Camera;
 	protected SkinnedModelRenderer Model;
