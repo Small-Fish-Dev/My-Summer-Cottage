@@ -14,6 +14,8 @@ public class ItemComponent : Component, IInteractable
 		set => GameObject.Components.Get<ModelRenderer>( true ).Enabled = value;
 	}
 
+	public string DisplayTitle => GameObject.Name;
+
 	protected override void OnStart()
 	{
 		GameObject.Name = Name;

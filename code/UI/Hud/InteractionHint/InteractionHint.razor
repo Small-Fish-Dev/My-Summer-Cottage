@@ -2,10 +2,30 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root>
+@if (!IsInteracting)
+	return;
 
+<root>
+	<text>@Player.Local.Interactable.Name</text>
 </root>
 
 @code {
+	private bool IsInteracting => Player.Local.Interactable is not null;
+	private Vector2 _lerpPosition;
 
+	public override void Tick() 
+	{
+		if (!IsInteracting)
+			return;
+
+		var position = Player.Local.Interactable.Transform.Position;
+        _lerpPosition = Vector2.Lerp( _lerpPosition, position.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
+        Style.Left = Length.Fraction( MathF.Floor( _lerpPosition.x * 200f + 0.5f ) / 200f );
+        Style.Top = Length.Fraction( MathF.Floor( _lerpPosition.y * 200f + 0.5f ) / 200f );
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(IsInteracting);
+	}
 }
