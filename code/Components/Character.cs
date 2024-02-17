@@ -160,7 +160,7 @@ public class Character : Component, Component.ExecuteInEditor
 
 			if ( !_clothing.ContainsKey( modelKey ) )
 			{
-				var piece = new SceneModel( Gizmo.World, model.Name, Transform.World );
+				var piece = new SceneModel( Scene.SceneWorld, model.Name, Transform.World );
 				piece.Batchable = false;
 				parent.AddChild( "clothing", piece );
 				_clothing.Add( modelKey, piece );
