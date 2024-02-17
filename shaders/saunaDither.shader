@@ -61,7 +61,7 @@ PS
 
     float4 MainPs( PS_INPUT i ) : SV_Target0
     { 	
-        const float levels = 32;
+        const float levels = 128;
 
         float4 color = Tex2D( g_ColorTexture, i.vPositionSs.xy / g_vViewportSize.xy ).rgba;
         float2 pos = i.vPositionSs.xy / 2;
