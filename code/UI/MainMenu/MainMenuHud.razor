@@ -1,0 +1,33 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits PanelComponent
+
+<root>
+    <img class="title" src="ui/mainmenu/title.png" />
+
+    <MenuButton
+        Label="New Game"
+        Icon="ui/mainmenu/new_icon.png"
+        onclick=@(() => Log.Info("New Game Clicked"))
+    />
+
+    <MenuButton
+        Label="Load Game"
+        Icon="ui/mainmenu/load_icon.png" 
+    />
+
+    <MenuButton
+        Label="Statistics"
+        Icon="ui/mainmenu/stats_icon.png" 
+    />
+
+    <MenuButton
+        Label="Credits"
+        Icon="ui/mainmenu/credits_icon.png" 
+    />
+
+    <MenuButton
+        Label="Quit"
+        Icon="ui/mainmenu/quit_icon.png" 
+    />
+</root>

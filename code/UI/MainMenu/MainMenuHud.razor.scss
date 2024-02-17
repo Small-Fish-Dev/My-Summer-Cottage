@@ -1,0 +1,38 @@
+MainMenuHud {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    pointer-events: all;
+
+    .title {
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 700px;
+        height: 250px;
+        margin-left: 80px;
+        margin-bottom: 80px;
+
+        animation-name: title-wiggle;
+        animation-duration: 15s;
+        animation-iteration-count: infinite;
+    }
+}
+
+@keyframes title-wiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(3deg);
+    }
+
+    75% {
+        transform: rotate(-3deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
