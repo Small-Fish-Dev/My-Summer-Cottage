@@ -6,11 +6,20 @@
     "Components": [
       {
         "__type": "Player",
-        "Fatness": 1,
+        "Fatness": 0.1,
         "Gravity": "0,0,-750",
+        "Height": 0,
         "JumpVelocity": 220,
         "Money": 0,
         "RootMotionSpeed": 245
+      },
+      {
+        "__type": "Inventory",
+        "Player": {
+          "_type": "component",
+          "go": "a117766e-5563-45af-8dcf-475062c85079",
+          "component_type": "Player"
+        }
       },
       {
         "__type": "BoxCollider",
@@ -57,11 +66,6 @@
         ]
       },
       {
-        "Id": "4608ee9f-35a2-4e56-ac0c-c49d0efc0b11",
-        "Name": "Object",
-        "Enabled": true
-      },
-      {
         "Id": "714a37b8-25b2-4806-b351-fd480fac3dac",
         "Name": "Model",
         "Enabled": true,
@@ -72,7 +76,8 @@
               "models/clothes/jumper/jumper.vmdl",
               "models/clothes/trousers/trousers.vmdl"
             ],
-            "Fatness": 1,
+            "Fatness": 0.1,
+            "Height": 0,
             "HideBodyGroup": "Torso",
             "Player": {
               "_type": "component",

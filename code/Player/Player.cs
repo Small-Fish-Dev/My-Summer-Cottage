@@ -21,10 +21,15 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Range( 0f, 1f, 0.05f )]
 	public float Fatness { get; set; } = 0f;
 
+	[Property, Sync, Category( "Appearance" )]
+	[Range( -100f, 100f, 1f )]
+	public float Height { get; set; } = 0f;
+
 	public WindDirections FacedDirection => (WindDirections)((EyeAngles.Normal.yaw + 45f / 2 + 180) % 360 / 45f);
 	public string StringDirection => FacedDirection.ToString().Replace( '_', ' ' );
 
 	protected CameraComponent Camera;
+	protected Inventory Inventory;
 	protected SkinnedModelRenderer Model;
 	protected BoxCollider Collider;
 
@@ -40,6 +45,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 		// Components
 		Camera = Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants );
 		Camera.Enabled = !IsProxy;
+
+		Inventory = Components.Get<Inventory>( FindMode.EverythingInSelfAndDescendants );
 
 		Model = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
 		Collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndDescendants );
@@ -71,6 +78,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 			return;
 
 		UpdateMovement();
+		UpdateInteractions();
 	}
 
 	protected override void OnPreRender()
