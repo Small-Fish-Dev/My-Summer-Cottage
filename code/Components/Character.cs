@@ -21,7 +21,6 @@ public enum HiddenBodyGroup
 [Icon( "theater_comedy" )]
 public class Character : Component, Component.ExecuteInEditor
 {
-
 	[Property]
 	public Player Player { get; set; }
 
@@ -48,44 +47,44 @@ public class Character : Component, Component.ExecuteInEditor
 	[Property]
 	public HiddenBodyGroup HideBodyGroup { get; set; }
 
-
 	SceneModel _model;
 	Dictionary<int, SceneModel> _clothing = new();
+	bool _init;
 
 	protected override void DrawGizmos()
 	{
 		if ( !GameManager.IsPlaying )
 		{
-			if ( _model == null || !_model.IsValid() )
+			var parent = Components.Get<SkinnedModelRenderer>().SceneModel;
+			if ( !parent.IsValid() )
+				return;
+
+			if ( !_init )
 			{
-				CreatePreviewModel();
+				CreatePreviewClothing( parent );
+				_init = true;
 			}
-			else
+
+			parent.Morphs.Set( "fat", Fatness );
+			parent.Transform = Transform.World;
+
+			parent.SetBodyGroup( "head", HideBodyGroup.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 ); // Not implemented
+			parent.SetBodyGroup( "torso", HideBodyGroup.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
+			parent.SetBodyGroup( "hands", HideBodyGroup.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 ); // Not implemented
+			parent.SetBodyGroup( "legs", HideBodyGroup.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
+			parent.SetBodyGroup( "feet", HideBodyGroup.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 ); // Not implemented
+			
+			foreach ( var piece in _clothing.Values )
 			{
-				CreatePreviewClothing();
-
-				_model.Morphs.Set( "fat", Fatness );
-				_model.Transform = Transform.World;
-
-				_model.SetBodyGroup( "head", HideBodyGroup.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 ); // Not implemented
-				_model.SetBodyGroup( "torso", HideBodyGroup.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
-				_model.SetBodyGroup( "hands", HideBodyGroup.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 ); // Not implemented
-				_model.SetBodyGroup( "legs", HideBodyGroup.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
-				_model.SetBodyGroup( "feet", HideBodyGroup.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 ); // Not implemented
-
-				_model.Update( Time.Delta );
-
-				foreach ( var piece in _clothing.Values )
-				{
-					piece.Morphs.Set( "fat", Fatness );
-					piece.Update( Time.Delta );
-					piece.MergeBones( _model ); // Interestingly, you need to bonemerge after updating
-				}
+				piece.Morphs.Set( "fat", Fatness );
+				piece.Update( Time.Delta );
+				//piece.MergeBones( _model ); // Interestingly, you need to bonemerge after updating
 			}
 		}
 		else
 		{
 			DeletePreview();
+			_init = false;
 		}
 	}
 
@@ -93,17 +92,14 @@ public class Character : Component, Component.ExecuteInEditor
 	{
 		if ( GameManager.IsPlaying )
 		{
-			var modelGO = new GameObject( true, "Model" );
-			modelGO.SetParent( GameObject );
-
-			var model = modelGO.Components.Create<SkinnedModelRenderer>();
+			var model = Components.GetOrCreate<SkinnedModelRenderer>();
 			model.Model = Model.Load( "models/guy/guy.vmdl" );
 			model.SceneModel.Morphs.Set( "fat", Fatness );
 
 			foreach ( var piece in Clothes )
 			{
 				var clothingGO = new GameObject( true, piece.Name );
-				clothingGO.SetParent( modelGO );
+				clothingGO.SetParent( GameObject );
 
 				var clothing = clothingGO.Components.Create<SkinnedModelRenderer>();
 				clothing.Model = piece;
@@ -133,12 +129,12 @@ public class Character : Component, Component.ExecuteInEditor
 
 	void CreatePreviewModel()
 	{
-		_model?.Delete();
-		_model = new SceneModel( Gizmo.World, "models/guy/guy.vmdl", Transform.World );
-		_model.Batchable = false;
+		//_model?.Delete();
+		//_model = new SceneModel( Gizmo.World, "models/guy/guy.vmdl", Transform.World );
+		//_model.Batchable = false;
 	}
 
-	void CreatePreviewClothing()
+	void CreatePreviewClothing( SceneModel parent )
 	{
 		foreach ( var model in Clothes )
 		{
@@ -159,7 +155,7 @@ public class Character : Component, Component.ExecuteInEditor
 			{
 				var piece = new SceneModel( Gizmo.World, model.Name, Transform.World );
 				piece.Batchable = false;
-				piece.MergeBones( _model );
+				parent.AddChild( "clothing", piece );
 				_clothing.Add( modelKey, piece );
 			}
 		}

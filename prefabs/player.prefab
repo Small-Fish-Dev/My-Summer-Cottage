@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "d892a009-95f3-47a4-8f66-fd234b252803",
+    "Id": "a117766e-5563-45af-8dcf-475062c85079",
     "Name": "player",
     "Enabled": true,
     "Components": [
@@ -22,25 +22,11 @@
       },
       {
         "__type": "AudioListener"
-      },
-      {
-        "__type": "Character",
-        "Clothes": [
-          "models/clothes/jumper/jumper.vmdl",
-          "models/clothes/trousers/trousers.vmdl"
-        ],
-        "Fatness": 1,
-        "HideBodyGroup": "Torso",
-        "Player": {
-          "_type": "component",
-          "go": "d892a009-95f3-47a4-8f66-fd234b252803",
-          "component_type": "Player"
-        }
       }
     ],
     "Children": [
       {
-        "Id": "4f802fbe-b595-4f58-989c-b424710b614c",
+        "Id": "600e4a45-31a9-48b7-bd6f-2e33424328ef",
         "Name": "Camera",
         "Position": "0,0,63.99992",
         "Tags": "maincamera",
@@ -64,13 +50,49 @@
           },
           {
             "__type": "DitherHook"
+          },
+          {
+            "__type": "EyeProtector"
           }
         ]
       },
       {
-        "Id": "ef03704e-2b4a-46b0-bedb-479a408703ac",
+        "Id": "4608ee9f-35a2-4e56-ac0c-c49d0efc0b11",
         "Name": "Object",
         "Enabled": true
+      },
+      {
+        "Id": "714a37b8-25b2-4806-b351-fd480fac3dac",
+        "Name": "Model",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Character",
+            "Clothes": [
+              "models/clothes/jumper/jumper.vmdl",
+              "models/clothes/trousers/trousers.vmdl"
+            ],
+            "Fatness": 1,
+            "HideBodyGroup": "Torso",
+            "Player": {
+              "_type": "component",
+              "go": "a117766e-5563-45af-8dcf-475062c85079",
+              "component_type": "Player"
+            }
+          },
+          {
+            "__type": "SkinnedModelRenderer",
+            "AnimationGraph": null,
+            "BodyGroups": 11,
+            "BoneMergeTarget": null,
+            "CreateBoneObjects": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
       }
     ]
   },

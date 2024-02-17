@@ -11,6 +11,7 @@ public enum WindDirections
 	West,
 	South_West
 }
+
 public partial class Player : Component, Component.ExecuteInEditor
 {
 	[Property, Sync, Category( "Parameters" )]
@@ -19,7 +20,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Property, Sync, Category( "Appearance" )]
 	[Range( 0f, 1f, 0.05f )]
 	public float Fatness { get; set; } = 0f;
+
 	public WindDirections FacedDirection => (WindDirections)((EyeAngles.Normal.yaw + 45f / 2 + 180) % 360 / 45f);
+	public string StringDirection => FacedDirection.ToString().Replace( '_', ' ' );
 
 	protected CameraComponent Camera;
 	protected SkinnedModelRenderer Model;
@@ -31,8 +34,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	protected override void OnStart()
 	{
-		if ( Game.IsEditor )
+		if ( !GameManager.IsPlaying )
 			return;
+
 		// Components
 		Camera = Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants );
 		Camera.Enabled = !IsProxy;
@@ -46,7 +50,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	protected override void OnUpdate()
 	{
-		if ( Game.IsEditor )
+		if ( !GameManager.IsPlaying )
 			return;
 
 		if ( !IsProxy )
@@ -60,8 +64,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	protected override void OnFixedUpdate()
 	{
-		if ( Game.IsEditor )
+		if ( !GameManager.IsPlaying )
 			return;
+
 		if ( IsProxy )
 			return;
 
@@ -70,8 +75,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	protected override void OnPreRender()
 	{
-		if ( Game.IsEditor )
+		if ( !GameManager.IsPlaying )
 			return;
+
 		if ( IsProxy )
 			return;
 

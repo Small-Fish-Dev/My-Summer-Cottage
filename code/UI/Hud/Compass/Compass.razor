@@ -5,7 +5,7 @@
 <root>
 	<div @ref=_container class="container">	
 		<div class="time">@(DateTime.Now.ToString( "HH:mm" ))</div>
-		<div class="direction">Facing @(Player.Local.FacedDirection.ToString().Replace( '_', ' ' ))</div>
+		<div class="direction">Facing @(Player.Local.StringDirection)</div>
 		<div @ref=_line class="line" />
 	</div>
 </root>

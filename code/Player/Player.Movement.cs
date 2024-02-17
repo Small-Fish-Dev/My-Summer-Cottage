@@ -81,7 +81,7 @@ partial class Player
 
 	protected void UpdateCamera()
 	{
-		if ( Camera is null )
+		if ( Camera == null )
 			return;
 
 		var eyes = Model.GetAttachment( "eyes" ) ?? Transform.World;
