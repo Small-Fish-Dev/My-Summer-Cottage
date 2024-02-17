@@ -1,12 +1,12 @@
 {
   "RootObject": {
-    "Id": "b467cc31-6b90-4445-966b-443061e581e4",
+    "Id": "193a1501-17c5-462b-a8e2-c30d743ae246",
     "Name": "player",
     "Enabled": true,
     "Components": [
       {
         "__type": "Player",
-        "Fatness": 0,
+        "Fatness": 1,
         "Gravity": "0,0,-750",
         "JumpVelocity": 220,
         "Money": 0,
@@ -19,30 +19,14 @@
         "Scale": "25,25,72",
         "Static": false,
         "Surface": null
+      },
+      {
+        "__type": "AudioListener"
       }
     ],
     "Children": [
       {
-        "Id": "2ec9ee7d-3f99-4358-b79f-cfb85d3de67a",
-        "Name": "Model",
-        "Enabled": true,
-        "Components": [
-          {
-            "__type": "SkinnedModelRenderer",
-            "AnimationGraph": null,
-            "BodyGroups": 43,
-            "BoneMergeTarget": null,
-            "CreateBoneObjects": false,
-            "MaterialGroup": null,
-            "MaterialOverride": null,
-            "Model": "models/guy/guy.vmdl",
-            "RenderType": "On",
-            "Tint": "1,1,1,1"
-          }
-        ]
-      },
-      {
-        "Id": "7f2fb21f-3383-4d77-ad15-460ebbc245e8",
+        "Id": "25ce2c4c-19b0-4b50-b722-0dc660e0d1a5",
         "Name": "Camera",
         "Position": "0,0,63.99992",
         "Tags": "maincamera",
@@ -66,38 +50,33 @@
           },
           {
             "__type": "DitherHook"
-          },
-          {
-            "__type": "EyeProtector"
-          },
-          {
-            "__type": "AudioListener"
           }
         ]
       },
       {
-        "Id": "c46d9d1a-67b3-44e2-a0f2-848a5ac20d74",
-        "Name": "Penoid",
+        "Id": "8f8c2511-75ef-4b51-ab97-52f5203ea3c9",
+        "Name": "Object",
+        "Enabled": true
+      },
+      {
+        "Id": "2b4af516-be8e-4520-b4bb-e08c7e4846ca",
+        "Name": "Model",
+        "Scale": "1,1,0.7599997",
         "Enabled": true,
         "Components": [
           {
-            "__type": "SkinnedModelRenderer",
-            "AnimationGraph": null,
-            "BodyGroups": 18446744073709551615,
-            "BoneMergeTarget": {
+            "__type": "Character",
+            "Clothes": [
+              "models/clothes/jumper/jumper.vmdl",
+              "models/clothes/trousers/trousers.vmdl"
+            ],
+            "Fatness": 1,
+            "HideBodyGroup": "Torso",
+            "Player": {
               "_type": "component",
-              "go": "2ec9ee7d-3f99-4358-b79f-cfb85d3de67a",
-              "component_type": "SkinnedModelRenderer"
-            },
-            "CreateBoneObjects": false,
-            "MaterialGroup": null,
-            "MaterialOverride": null,
-            "Model": "models/guy/penoid.vmdl",
-            "RenderType": "On",
-            "Tint": "1,1,1,1"
-          },
-          {
-            "__type": "CensorComponent"
+              "go": "193a1501-17c5-462b-a8e2-c30d743ae246",
+              "component_type": "Player"
+            }
           }
         ]
       }

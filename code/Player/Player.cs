@@ -1,16 +1,27 @@
 namespace Sauna;
 
-public partial class Player : Component
+
+public partial class Player : Component, Component.ExecuteInEditor
 {
-	[Property, Sync, Category( "Parameters" )] public float Fatness { get; set; }
-	[Property, Sync, Category( "Parameters" )] public int Money { get; set; }
+	[Property, Sync, Category( "Parameters" )]
+	public int Money { get; set; }
+
+	[Property, Sync, Category( "Appearance" )]
+	[Range( 0f, 1f, 0.05f )]
+	public float Fatness { get; set; } = 0f;
 
 	protected CameraComponent Camera;
 	protected SkinnedModelRenderer Model;
 	protected BoxCollider Collider;
 
+	protected override void DrawGizmos()
+	{
+	}
+
 	protected override void OnStart()
 	{
+		if ( Game.IsEditor )
+			return;
 		// Components
 		Camera = Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants );
 		Camera.Enabled = !IsProxy;
@@ -24,6 +35,9 @@ public partial class Player : Component
 
 	protected override void OnUpdate()
 	{
+		if ( Game.IsEditor )
+			return;
+
 		if ( !IsProxy )
 		{
 			UpdateAngles();
@@ -35,6 +49,8 @@ public partial class Player : Component
 
 	protected override void OnFixedUpdate()
 	{
+		if ( Game.IsEditor )
+			return;
 		if ( IsProxy )
 			return;
 
@@ -43,6 +59,8 @@ public partial class Player : Component
 
 	protected override void OnPreRender()
 	{
+		if ( Game.IsEditor )
+			return;
 		if ( IsProxy )
 			return;
 
@@ -67,8 +85,8 @@ public partial class Player : Component
 
 		lastStepped = 0;
 
-		var path = e.FootId == 0 
-			? tr.Surface.Sounds.FootLeft 
+		var path = e.FootId == 0
+			? tr.Surface.Sounds.FootLeft
 			: tr.Surface.Sounds.FootRight;
 
 		if ( string.IsNullOrEmpty( path ) )
