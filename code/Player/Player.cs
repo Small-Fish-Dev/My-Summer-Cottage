@@ -25,6 +25,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	public string StringDirection => FacedDirection.ToString().Replace( '_', ' ' );
 
 	protected CameraComponent Camera;
+	protected Inventory Inventory;
 	protected SkinnedModelRenderer Model;
 	protected BoxCollider Collider;
 
@@ -40,6 +41,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 		// Components
 		Camera = Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants );
 		Camera.Enabled = !IsProxy;
+
+		Inventory = Components.Get<Inventory>( FindMode.EverythingInSelfAndDescendants );
 
 		Model = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
 		Collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndDescendants );
