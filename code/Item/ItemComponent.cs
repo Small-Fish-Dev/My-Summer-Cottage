@@ -1,6 +1,6 @@
 namespace Sauna;
 
-public class ItemComponent : Component
+public class ItemComponent : Component, IInteractable
 {
 	[Property] public string Name { get; set; }
 	[Property] public string Description { get; set; }

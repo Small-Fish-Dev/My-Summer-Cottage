@@ -74,6 +74,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 			return;
 
 		UpdateMovement();
+		UpdateInteractions();
 	}
 
 	protected override void OnPreRender()
