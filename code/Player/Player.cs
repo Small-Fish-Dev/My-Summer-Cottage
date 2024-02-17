@@ -2,6 +2,9 @@ namespace Sauna;
 
 public partial class Player : Component
 {
+	[Property, Sync, Category( "Parameters" )] public float Fatness { get; set; }
+	[Property, Sync, Category( "Parameters" )] public int Money { get; set; }
+
 	protected CameraComponent Camera;
 	protected SkinnedModelRenderer Model;
 	protected BoxCollider Collider;

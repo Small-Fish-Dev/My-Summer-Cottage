@@ -96,7 +96,7 @@ partial class Player
 
 	protected void UpdateAnimation()
 	{
-		if ( Model == null )
+		if ( Model == null || Model.SceneModel == null )
 			return;
 
 		Model.Set( "grounded", Grounded );
@@ -107,6 +107,8 @@ partial class Player
 
 		Model.Set( "move_x", x );
 		Model.Set( "move_y", y );
+
+		Model.SceneModel.Morphs.Set( "fat", Fatness );
 	}
 
 	[Broadcast]
