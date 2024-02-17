@@ -91,22 +91,25 @@ public class Character : Component, Component.ExecuteInEditor
 
 	protected override void OnStart()
 	{
-		var model = Components.GetOrCreate<SkinnedModelRenderer>();
-		model.Model = Model.Load( "models/guy/guy.vmdl" );
-		model.SceneModel.Morphs.Set( "fat", Fatness );
-
-		foreach ( var piece in Clothes )
+		if ( GameManager.IsPlaying )
 		{
-			var clothing = Components.Create<SkinnedModelRenderer>();
-			clothing.Model = piece;
-			clothing.BoneMergeTarget = model;
-		}
+			var model = Components.GetOrCreate<SkinnedModelRenderer>();
+			model.Model = Model.Load( "models/guy/guy.vmdl" );
+			model.SceneModel.Morphs.Set( "fat", Fatness );
 
-		model.SetBodyGroup( "head", HideBodyGroup.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 ); // Not implemented
-		model.SetBodyGroup( "torso", HideBodyGroup.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
-		model.SetBodyGroup( "hands", HideBodyGroup.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 ); // Not implemented
-		model.SetBodyGroup( "legs", HideBodyGroup.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
-		model.SetBodyGroup( "feet", HideBodyGroup.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 ); // Not implemented
+			foreach ( var piece in Clothes )
+			{
+				var clothing = Components.Create<SkinnedModelRenderer>();
+				clothing.Model = piece;
+				clothing.BoneMergeTarget = model;
+			}
+
+			model.SetBodyGroup( "head", HideBodyGroup.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 ); // Not implemented
+			model.SetBodyGroup( "torso", HideBodyGroup.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
+			model.SetBodyGroup( "hands", HideBodyGroup.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 ); // Not implemented
+			model.SetBodyGroup( "legs", HideBodyGroup.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
+			model.SetBodyGroup( "feet", HideBodyGroup.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 ); // Not implemented
+		}
 	}
 
 	protected override void OnDisabled()
