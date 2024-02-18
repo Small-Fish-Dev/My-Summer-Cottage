@@ -1,6 +1,6 @@
 namespace Sauna;
 
-public class Interaction : Component
+public struct Interaction
 {
 	/// <summary>
 	/// The keybind used to trigger this interaction
@@ -27,5 +27,10 @@ public class Interaction : Component
 	/// </summary>
 	[Property]
 	public Func<bool> Disabled { get; set; }
-	public bool IsInteractable => Disabled is null || !Disabled();
+}
+
+public class Interactions : Component
+{
+	[Property]
+	public List<Interaction> ObjectInteractions { get; set; }
 }

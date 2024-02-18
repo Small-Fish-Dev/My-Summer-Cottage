@@ -26,74 +26,145 @@
         "Surface": null
       },
       {
-        "__type": "Interaction",
-        "Action": {
-          "Version": 5,
-          "UserData": {
-            "Title": "Pickup item",
-            "id": "f9e07269-c048-4da1-b87b-ec4420068620",
-            "ReferencedComponentTypes": []
+        "__type": "Interactions",
+        "ObjectInteractions": [
+          {
+            "Keybind": "use",
+            "Description": "Pickup",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Pickup",
+                "id": "ae924be3-cc57-42c9-a38a-4e0be2fba050",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "Player",
+                    "_name": "Inventory"
+                  },
+                  "UserData": {
+                    "Position": "144,-0"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "Inventory",
+                    "_name": "GiveItem",
+                    "_isStatic": false
+                  },
+                  "UserData": {
+                    "Position": "336,-0"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 1,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 2,
+                  "DstName": "item"
+                }
+              ]
+            }
           },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input"
-            },
-            {
-              "Id": 5,
-              "Type": "property.get",
-              "Properties": {
-                "_name": "Inventory",
-                "_type": "Player"
-              },
+          {
+            "Keybind": "reload",
+            "Description": "Drink",
+            "Action": {
+              "Version": 5,
               "UserData": {
-                "Position": "176,-0"
-              }
-            },
-            {
-              "Id": 6,
-              "Type": "call",
-              "Properties": {
-                "_name": "GiveItem",
-                "_type": "Inventory",
-                "_isStatic": false
+                "Title": "Drink",
+                "id": "5dcf169d-4051-44ec-bc70-83924ba6457e",
+                "ReferencedComponentTypes": []
               },
-              "UserData": {
-                "Position": "400,0"
-              }
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "Player",
+                    "_name": "Inventory"
+                  },
+                  "UserData": {
+                    "Position": "160,-0"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "Inventory",
+                    "_name": "GiveItem",
+                    "_isStatic": false
+                  },
+                  "UserData": {
+                    "Position": "368,0"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 1,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 2,
+                  "DstName": "item"
+                }
+              ]
             }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "interactor",
-              "DstId": 5,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 6,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 5,
-              "SrcName": "_result",
-              "DstId": 6,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "obj",
-              "DstId": 6,
-              "DstName": "item"
-            }
-          ]
-        },
-        "Description": "Pickup",
-        "Disabled": null,
-        "Keybind": "use"
+          }
+        ]
       }
     ],
     "Children": []
