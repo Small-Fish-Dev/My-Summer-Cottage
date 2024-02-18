@@ -1,0 +1,69 @@
+{
+  "RootObject": {
+    "Id": "0838c785-16cc-49ce-9481-8dbeb9b07027",
+    "Name": "finnish_guy",
+    "Tags": "npc",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "NPC",
+        "Agent": {
+          "_type": "component",
+          "go": "0838c785-16cc-49ce-9481-8dbeb9b07027",
+          "component_type": "NavMeshAgent"
+        },
+        "Model": {
+          "_type": "component",
+          "go": "4e723424-6bd1-42ae-9c2f-d8e98b9176fb",
+          "component_type": "SkinnedModelRenderer"
+        }
+      },
+      {
+        "__type": "NavMeshAgent",
+        "Acceleration": 1000,
+        "Height": 54,
+        "MaxSpeed": 160,
+        "Radius": 8,
+        "Separation": 0.4,
+        "UpdatePosition": true
+      }
+    ],
+    "Children": [
+      {
+        "Id": "4e723424-6bd1-42ae-9c2f-d8e98b9176fb",
+        "Name": "Model",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Character",
+            "Clothes": [
+              "models/clothes/trousers/trousers.vmdl",
+              "models/clothes/jumper/jumper.vmdl",
+              "models/sauna_boss_hat/sauna_boss.vmdl"
+            ],
+            "Fatness": 0,
+            "Height": 0,
+            "HideBodyGroup": "Torso",
+            "Player": null
+          },
+          {
+            "__type": "SkinnedModelRenderer",
+            "AnimationGraph": null,
+            "BodyGroups": 11,
+            "BoneMergeTarget": null,
+            "CreateBoneObjects": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
