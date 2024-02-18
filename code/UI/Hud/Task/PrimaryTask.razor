@@ -8,20 +8,19 @@
 		<div class="text-container">
 			<div style="flex-direction: row-reverse">
 				<div class="task-type">
-					Primary Task
+					@TaskType
 				</div>
 			</div>
 
 			<div style="flex-direction: row-reverse">
 				<div class="task-title">
-					Dude, Where Is My Car
+					@TaskTitle
 				</div>
 			</div>
 
 			<div style="flex-direction: row-reverse">
 				<div class="task-description">
-					Where the fuck is my car?! Where do I start the investigation?
-					Let's see if my neighbors saw anything weird this night. I don't like them though.
+					@TaskDescription
 				</div>
 			</div>
 		</div>
@@ -30,9 +29,23 @@
 		<div class="text-container">
 			<div style="flex-direction: row-reverse">
 				<div class="instruction">
-					Hold X for all current tasks
+					@FooterInstruction
 				</div>
 			</div>
 		</div>
 	</div>
 </root>
+
+@code {
+
+	public string TaskType => "Primary Task";
+	public string TaskTitle => "Dude, Where Is My Car";
+	public string TaskDescription => "Where the fuck is my car?! Where do I start the investigation?\n\t\t\t\t\tLet's see if my neighbors saw anything weird this night. I don't like them though.";
+	public string FooterInstruction => "Hold X for all current tasks";
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( TaskType, TaskTitle, TaskDescription, FooterInstruction );
+	}
+
+}
