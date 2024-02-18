@@ -6,11 +6,11 @@
 	return;
 
 <root>
-	<text>@Player.Local.TargetedGameObject.Name</text>
+	<text class="title">@Player.Local.TargetedGameObject.Name</text>
 	@foreach(var interaction in _interactions)
 	{
-		<div>
-			<text>[@interaction.Keybind] -</text>
+		<div class="interaction">
+			<inputglyph class="icon" glyphSize=@InputGlyphSize.Small action="@(interaction.Keybind)" />
 			<text>@interaction.Description</text>
 		</div>
 	}
@@ -23,6 +23,8 @@
 
 	public override void Tick() 
 	{
+		SetClass("visible", HasInteractions);
+
 		if (!HasInteractions)
 			return;
 
