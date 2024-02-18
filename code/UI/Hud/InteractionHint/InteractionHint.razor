@@ -28,7 +28,8 @@
 
 		foreach ( var interaction in _interactions )
 		{
-			@* interaction.Action(Player.Local, targetGameObject); *@
+			if (Input.Down(interaction.Keybind))
+				interaction.Action(Player.Local, Player.Local.TargetedGameObject);
 		}
 
 		var position = Player.Local.TargetedGameObject.Transform.Position;
