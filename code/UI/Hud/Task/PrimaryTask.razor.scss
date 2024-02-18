@@ -1,4 +1,4 @@
-﻿$main-text-container-width: 80%;
+$main-text-container-width: 80%;
 $icon-width: 50px;
 $icon-margin: 10px 25px 25px 13px;
 
@@ -12,17 +12,19 @@ PrimaryTask {
     position: absolute;
     right: 0;
 
-    width: 640px;
+    width: 620px;
     height: 230px;
 
     flex-direction: column;
-
+    
     padding: $primary-task-padding;
 
     background-image: url("ui/hud/right.png");
     background-image-tint: rgba(white, 0.85);
     background-repeat: no-repeat;
     background-position: right top;
+    background-size: 70% 130%;
+    image-rendering: pixelated;
     
     .main {
         width: 100%;
