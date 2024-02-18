@@ -36,7 +36,8 @@
         "trigger": "Trigger",
         "ladder": "Ignore",
         "water": "Trigger",
-        "player": "Collide"
+        "player": "Collide",
+        "npc": "Collide"
       },
       "Pairs": [
         {
@@ -67,6 +68,21 @@
         {
           "a": "trigger",
           "b": "player",
+          "r": "Trigger"
+        },
+        {
+          "a": "npc",
+          "b": "npc",
+          "r": "Trigger"
+        },
+        {
+          "a": "player",
+          "b": "player",
+          "r": "Trigger"
+        },
+        {
+          "a": "player",
+          "b": "npc",
           "r": "Trigger"
         }
       ]

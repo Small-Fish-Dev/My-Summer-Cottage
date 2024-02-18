@@ -59,22 +59,69 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
-      "Name": "Sun",
-      "Position": "738.2429,-599.6027,124.8594",
-      "Rotation": "-0.09229597,0.7010576,-0.09229596,0.7010576",
-      "Tags": "light_directional,light",
+      "Id": "b60318fc-dbb8-45c3-b9d4-1347270ab4b5",
+      "Name": "Ambient",
+      "Position": "357.8161,0.0000213275,258.2727",
       "Enabled": true,
-      "Components": [
+      "Children": [
         {
-          "__type": "DirectionalLight",
-          "FogMode": "Enabled",
-          "FogStrength": 1,
-          "LightColor": "0.91373,0.98039,1,1",
-          "Shadows": false,
-          "SkyColor": "0,0,0,1"
+          "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
+          "Name": "Skybox",
+          "Position": "0,0,60",
+          "Tags": "skybox",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkyBox2D",
+              "SkyMaterial": "materials/sky/cloudy_day.vmat",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "74c6edc7-2832-4482-8f0f-c8312c6f4e77",
+          "Name": "Fog",
+          "Position": "0,0,20",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "GradientFog",
+              "Color": "0.33921,0.34504,0.45581,1",
+              "EndDistance": 10000,
+              "FalloffExponent": 1,
+              "Height": 10000,
+              "StartDistance": 0,
+              "VerticalFalloffExponent": 1
+            }
+          ]
+        },
+        {
+          "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
+          "Name": "Sun",
+          "Position": "0,0,40",
+          "Rotation": "-0.113039,0.4957226,-0.0652631,0.8586168",
+          "Tags": "light_directional,light",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "DirectionalLight",
+              "FogMode": "Enabled",
+              "FogStrength": 1,
+              "LightColor": "1,1,1,1",
+              "Shadows": false,
+              "SkyColor": "1,1,1,1"
+            }
+          ]
         }
       ]
+    },
+    {
+      "Id": "dadaaa19-7339-41a1-86e1-963b751116a7",
+      "Name": "finnish_guy",
+      "Position": "1030.104,-1849.768,39.35529",
+      "Rotation": "-0.000003493743,0.00003528595,0.00001048123,1",
+      "Enabled": true,
+      "__Prefab": "prefabs/npcs/finnish_guy.prefab"
     }
   ],
   "SceneProperties": {
@@ -86,20 +133,20 @@
     "TimeScale": 1,
     "UseFixedUpdate": true,
     "NavMesh": {
-      "Enabled": false,
+      "Enabled": true,
       "IncludeStaticBodies": true,
       "IncludeKeyframedBodies": true,
       "EditorAutoUpdate": true,
-      "AgentHeight": 64,
-      "AgentRadius": 16,
-      "AgentStepSize": 18,
-      "AgentMaxSlope": 40,
+      "AgentHeight": 48,
+      "AgentRadius": 10,
+      "AgentStepSize": 24,
+      "AgentMaxSlope": 60,
       "ExcludedBodies": "",
       "IncludedBodies": ""
     }
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-18T20:46:38.5185355\u002B01:00",
+  "LastSaved": "2024-02-18T23:19:01.9175336\u002B01:00",
   "__references": []
 }
