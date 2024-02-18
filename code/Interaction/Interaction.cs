@@ -6,14 +6,14 @@ public class Interaction : Component
 
 	[Property]
 	[InputAction]
-	public string Keybind;
+	public string Keybind { get; set; }
 
 	[Property]
-	public string Description;
+	public string Description { get; set; }
 
 	[Property]
-	public Color Color = Color.Orange;
+	public Color Color { get; set; } = Color.Orange;
 
 	[Property]
-	public InteractionEvent Action;
+	public InteractionEvent Action { get; set; }
 }
