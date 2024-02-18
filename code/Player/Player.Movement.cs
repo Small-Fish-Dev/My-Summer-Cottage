@@ -70,8 +70,9 @@ partial class Player
 
 		if ( Input.Pressed( "Jump" ) && MoveHelper.IsOnGround )
 		{
-			MoveHelper.Punch( Vector3.Up * JumpStrength );
+			Model?.Set( "jump", true );
 			JumpBroadcast();
+			DoJump(); // Needs to be delayed for the animation
 		}
 
 		// Ducking
@@ -110,6 +111,12 @@ partial class Player
 		var height = Ducking ? DUCK_HEIGHT : HEIGHT;
 		Collider.Scale = Collider.Scale.WithZ( height );
 		Collider.Center = Vector3.Up * height / 2f;*/
+	}
+
+	async void DoJump()
+	{
+		await Task.DelaySeconds( Time.Delta );
+		MoveHelper.Punch( Vector3.Up * JumpStrength );
 	}
 
 	protected void UpdateAngles()
