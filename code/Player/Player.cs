@@ -53,6 +53,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		// Footsteps
 		Model.OnFootstepEvent += OnFootstep;
+		Model.OnGenericEvent += OnJumpEvent;
 	}
 
 	protected override void OnUpdate()

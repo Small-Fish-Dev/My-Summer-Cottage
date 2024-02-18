@@ -72,7 +72,6 @@ partial class Player
 		{
 			Model?.Set( "jump", true );
 			JumpBroadcast();
-			DoJump(); // Needs to be delayed for the animation
 		}
 
 		// Ducking
@@ -111,12 +110,6 @@ partial class Player
 		var height = Ducking ? DUCK_HEIGHT : HEIGHT;
 		Collider.Scale = Collider.Scale.WithZ( height );
 		Collider.Center = Vector3.Up * height / 2f;*/
-	}
-
-	async void DoJump()
-	{
-		await Task.DelaySeconds( Time.Delta );
-		MoveHelper.Punch( Vector3.Up * JumpStrength );
 	}
 
 	protected void UpdateAngles()
@@ -162,6 +155,12 @@ partial class Player
 
 		Model.SceneModel.Morphs.Set( "fat", Fatness );
 		Model.Set( "height", Height );
+	}
+
+	private void OnJumpEvent( SceneModel.GenericEvent e )
+	{
+		if ( e.Type == "jump" )
+			MoveHelper.Punch( Vector3.Up * JumpStrength );
 	}
 
 	[Broadcast]
