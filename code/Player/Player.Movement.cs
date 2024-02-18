@@ -76,12 +76,11 @@ partial class Player
 
 		// Ducking
 		var from = Transform.Position;
-		var to = from + Vector3.Up * Bounds.Maxs.z;
-		Ducking = (Ducking && Scene.Trace.Box( Bounds, in from, in to ).IgnoreGameObjectHierarchy( GameObject ).WithTag( "solid" ).Run().Hit)
+		var to = from + Vector3.Up * HEIGHT;
+		Ducking = (Ducking && Scene.Trace.Ray( in from, in to ).Size( Collider.Scale.WithZ( 0f ) ).IgnoreGameObjectHierarchy( GameObject ).WithoutTags( "trigger" ).Run().Hit)
 			|| Input.Down( "duck" ); // Beautiful.
 
 		MoveHelper.Move();
-
 
 		/*
 		// Normal movement
@@ -104,12 +103,15 @@ partial class Player
 		if ( !Grounded )
 			Velocity += Gravity * Time.Delta;
 		else
-			Transform.Position = down.EndPosition;
+			Transform.Position = down.EndPosition;*/
 
 		// Update Collider
 		var height = Ducking ? DUCK_HEIGHT : HEIGHT;
+		var bbox = MoveHelper.CollisionBBox;
+		
+		MoveHelper.CollisionBBox = new BBox( bbox.Mins, bbox.Maxs.WithZ( height ) );
 		Collider.Scale = Collider.Scale.WithZ( height );
-		Collider.Center = Vector3.Up * height / 2f;*/
+		Collider.Center = Vector3.Up * height / 2f;
 	}
 
 	protected void UpdateAngles()

@@ -30,7 +30,7 @@
         "Action": {
           "Version": 5,
           "UserData": {
-            "Title": "Print",
+            "Title": "Pickup",
             "id": "f9e07269-c048-4da1-b87b-ec4420068620",
             "ReferencedComponentTypes": []
           },
@@ -41,10 +41,10 @@
               "Type": "input"
             },
             {
-              "Id": 1,
-              "Type": "log.info",
+              "Id": 4,
+              "Type": "sauna.inventory",
               "UserData": {
-                "Position": "304,48"
+                "Position": "160,0"
               }
             }
           ],
@@ -52,13 +52,25 @@
             {
               "SrcId": 0,
               "SrcName": "_signal",
-              "DstId": 1,
+              "DstId": 4,
               "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "interactor",
+              "DstId": 4,
+              "DstName": "interactor"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "obj",
+              "DstId": 4,
+              "DstName": "obj"
             }
           ]
         },
-        "Color": "1,0.6,0,1",
-        "Description": "Print a message to console",
+        "Color": "1,1,1,1",
+        "Description": "Pickup",
         "Keybind": "use"
       }
     ],

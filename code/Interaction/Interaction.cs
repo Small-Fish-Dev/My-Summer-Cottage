@@ -12,7 +12,7 @@ public class Interaction : Component
 	public string Description { get; set; }
 
 	[Property]
-	public Color Color { get; set; } = Color.Orange;
+	public Color Color { get; set; } = Color.White;
 
 	[Property]
 	public InteractionEvent Action { get; set; }

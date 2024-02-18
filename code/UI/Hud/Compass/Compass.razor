@@ -11,7 +11,7 @@
 </root>
 
 @code {
-	private float ContainerWidth => 600f;
+	private float ContainerWidth => 800f;
 
 	private struct MarkerData
 	{
@@ -29,7 +29,7 @@
 
 		_container.Style.Width = Length.Pixels( ContainerWidth );
 		_line.Style.Width = Length.Pixels( ContainerWidth );
-		
+
 		_markers ??= Marker.All.Select( marker =>
 		{
 			var panel = _line.AddChild<Panel>( "marker" );

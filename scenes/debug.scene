@@ -1,0 +1,107 @@
+{
+  "Id": "e2eae6c8-cd25-4c80-b52f-0714ede89480",
+  "GameObjects": [
+    {
+      "Id": "6809e3a8-ed07-4d51-a3a5-ef75d13cf2fc",
+      "Name": "GameManager",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "NetworkManager",
+          "Prefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/player.prefab"
+          }
+        }
+      ],
+      "Children": [
+        {
+          "Id": "53fb750b-ec0f-48e1-ba82-84e34be317f8",
+          "Name": "HUD",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "ScreenPanel",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ZIndex": 100
+            },
+            {
+              "__type": "Hud"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "77af5088-d8af-45a4-b7a9-8bf2019b4965",
+      "Name": "Plane",
+      "Position": "0,0,-10",
+      "Scale": "20,20,1",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 18446744073709551615,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/dev/plane.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "PlaneCollider",
+          "Center": "0,0,0",
+          "IsTrigger": false,
+          "Scale": "100,100",
+          "Static": false,
+          "Surface": null
+        }
+      ]
+    },
+    {
+      "Id": "beb80d2a-5dca-49d0-bf28-d6b3083c91ed",
+      "Name": "Sun",
+      "Position": "-149.4311,-125.1124,703.4349",
+      "Rotation": "0,0.7933533,0,0.6087615",
+      "Tags": "light_directional,light",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "DirectionalLight",
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.91373,0.98039,1,1",
+          "Shadows": true,
+          "SkyColor": "0.05882,0.07451,0.08235,1"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "Lerping": true,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "debug",
+  "Description": "",
+  "LastSaved": "2024-02-18T15:07:30.1964849\u002B01:00",
+  "__references": []
+}
