@@ -1,4 +1,4 @@
-$transparent: rgba(50, 50, 50, 0);
+$transparent: rgba(10, 10, 10, 0.1);
 
 Compass {
     position: absolute;
@@ -6,18 +6,20 @@ Compass {
     height: 100%;
     justify-content: center;
     background-image: url(ui/hud/top.png);
-    background-image-tint: rgba(white, 0.75);
+    background-image-tint: rgba(white, 0.85);
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: 1244px 136px;
+    background-size: 69% 13%;
     image-rendering: pixelated;
     color: white;
     font-family: BasicHandwriting;
-    font-size: 36px;
-
+    font-size: 33px;
+    
     .container {
+        margin-top: 5px;
+        
         width: 100%;
-        height: 80px;
+        height: 60px;
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -29,7 +31,8 @@ Compass {
 
         .direction {
             font-family: battlenetcopy;
-            font-size: 24px;
+            text-transform: uppercase;
+            font-size: 16px;
             flex-shrink: 0;
             margin-bottom: 15px;
         }
