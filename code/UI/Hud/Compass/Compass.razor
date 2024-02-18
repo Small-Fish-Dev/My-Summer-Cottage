@@ -30,17 +30,19 @@
 		_container.Style.Width = Length.Pixels( ContainerWidth );
 		_line.Style.Width = Length.Pixels( ContainerWidth );
 
-		if ( firstTime )
-			_markers = Marker.All.Select( marker =>
-			{
-				var panel = _line.AddChild<Panel>( "marker" );
+		_markers ??= Marker.All.Select( marker =>
+		{
+			var panel = _line.AddChild<Panel>( "marker" );
 
-				return new MarkerData
-				{
-					Panel = panel,
-					Marker = marker,
-				};
-			} ).ToArray();
+			return new MarkerData
+			{
+				Panel = panel,
+				Marker = marker,
+			};
+		} ).ToArray();
+
+		if ( Player.Local == null || _markers == null )
+			return;
 
 		var yaw = Player.Local.EyeAngles.Normal.yaw;
 		var center = ContainerWidth / 2f;
@@ -49,10 +51,10 @@
 		foreach ( var data in _markers )
 		{
 			var panel = data.Panel;
-			if ( panel.Parent == null )
-				_line.AddChild( panel );
-
 			var marker = data.Marker;
+
+			if ( panel?.Parent == null )
+				_line.AddChild( panel );
 
 			var diff = Rotation.LookAt( marker.Position - Player.Local.Transform.Position ).Yaw();
 			var angle = (yaw - diff) / 45f;
