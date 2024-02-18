@@ -1,16 +1,32 @@
 {
   "RootObject": {
-    "Id": "b467cc31-6b90-4445-966b-443061e581e4",
+    "Id": "3277f08e-bc95-4f2a-8e5a-d578e348a07a",
     "Name": "player",
     "Enabled": true,
     "Components": [
       {
         "__type": "Player",
+        "DuckSpeed": 60,
         "Fatness": 0,
-        "Gravity": "0,0,-750",
-        "JumpVelocity": 220,
+        "Height": 0,
+        "JumpStrength": 280,
         "Money": 0,
-        "RootMotionSpeed": 245
+        "MoveHelper": {
+          "_type": "component",
+          "go": "3277f08e-bc95-4f2a-8e5a-d578e348a07a",
+          "component_type": "MoveHelper"
+        },
+        "Speed": 140,
+        "SprintSpeed": 280,
+        "WalkSpeed": 80
+      },
+      {
+        "__type": "Inventory",
+        "Player": {
+          "_type": "component",
+          "go": "3277f08e-bc95-4f2a-8e5a-d578e348a07a",
+          "component_type": "Player"
+        }
       },
       {
         "__type": "BoxCollider",
@@ -19,30 +35,42 @@
         "Scale": "25,25,72",
         "Static": false,
         "Surface": null
+      },
+      {
+        "__type": "AudioListener"
+      },
+      {
+        "__type": "MoveHelper",
+        "AccelerationCurve": [
+          {
+            "x": 0.5,
+            "y": 0.5053192
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 0.3,
+        "Collider": null,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 2000,
+        "GroundAngle": 45,
+        "GroundFriction": 30,
+        "IgnoreTags": "",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 18,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 72,
+        "TraceRadius": 16,
+        "TraceType": "BBox",
+        "UseCollider": false,
+        "UseSceneGravity": true
       }
     ],
     "Children": [
       {
-        "Id": "2ec9ee7d-3f99-4358-b79f-cfb85d3de67a",
-        "Name": "Model",
-        "Enabled": true,
-        "Components": [
-          {
-            "__type": "SkinnedModelRenderer",
-            "AnimationGraph": null,
-            "BodyGroups": 43,
-            "BoneMergeTarget": null,
-            "CreateBoneObjects": false,
-            "MaterialGroup": null,
-            "MaterialOverride": null,
-            "Model": "models/guy/guy.vmdl",
-            "RenderType": "On",
-            "Tint": "1,1,1,1"
-          }
-        ]
-      },
-      {
-        "Id": "7f2fb21f-3383-4d77-ad15-460ebbc245e8",
+        "Id": "1d4cbeb5-84bb-4a55-b1f3-58d95a348920",
         "Name": "Camera",
         "Position": "0,0,63.99992",
         "Tags": "maincamera",
@@ -69,35 +97,40 @@
           },
           {
             "__type": "EyeProtector"
-          },
-          {
-            "__type": "AudioListener"
           }
         ]
       },
       {
-        "Id": "c46d9d1a-67b3-44e2-a0f2-848a5ac20d74",
-        "Name": "Penoid",
+        "Id": "3d82c938-2989-4c06-8629-3155b4091958",
+        "Name": "Model",
         "Enabled": true,
         "Components": [
           {
+            "__type": "Character",
+            "Clothes": [
+              "models/clothes/trousers/trousers.vmdl",
+              "models/clothes/jumper/jumper.vmdl"
+            ],
+            "Fatness": 0,
+            "Height": 0,
+            "HideBodyGroup": "Torso",
+            "Player": {
+              "_type": "component",
+              "go": "3277f08e-bc95-4f2a-8e5a-d578e348a07a",
+              "component_type": "Player"
+            }
+          },
+          {
             "__type": "SkinnedModelRenderer",
             "AnimationGraph": null,
-            "BodyGroups": 18446744073709551615,
-            "BoneMergeTarget": {
-              "_type": "component",
-              "go": "2ec9ee7d-3f99-4358-b79f-cfb85d3de67a",
-              "component_type": "SkinnedModelRenderer"
-            },
+            "BodyGroups": 11,
+            "BoneMergeTarget": null,
             "CreateBoneObjects": false,
             "MaterialGroup": null,
             "MaterialOverride": null,
-            "Model": "models/guy/penoid.vmdl",
+            "Model": "models/guy/guy.vmdl",
             "RenderType": "On",
             "Tint": "1,1,1,1"
-          },
-          {
-            "__type": "CensorComponent"
           }
         ]
       }

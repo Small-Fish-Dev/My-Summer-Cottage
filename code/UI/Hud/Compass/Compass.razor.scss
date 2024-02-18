@@ -1,59 +1,54 @@
+$transparent: rgba(50, 50, 50, 0);
+
 Compass {
     position: absolute;
     width: 100%;
-    top: 10px;
+    height: 100%;
     justify-content: center;
-    opacity: 0.75;
+    background-image: url(ui/hud/top.png);
+    background-image-tint: rgba(white, 0.75);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 1244px 136px;
+    image-rendering: pixelated;
+    color: white;
+    font-family: BasicHandwriting;
+    font-size: 36px;
 
     .container {
+        width: 100%;
         height: 80px;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
+        flex-direction: column;
 
-        .background {
-            position: absolute;
-            left: 0px;
-            top: 25px;
-            width: 100%;
-            height: 30px;
-            background-repeat: repeat-x;
-            background-image: url(ui/compass.png);
-            image-rendering: point;
+        .time {
+            margin-top: 50px;
+            flex-shrink: 0;
         }
 
-        .center {
-            width: 30px;
-            height: 60px;
-            background-image: url(ui/compass_center.png);
-            background-size: 100%;
-            background-repeat: no-repeat;
-            image-rendering: point;
-            bottom: 8px;
+        .direction {
+            font-family: battlenetcopy;
+            font-size: 24px;
+            flex-shrink: 0;
+            margin-bottom: 15px;
+        }
+
+        .line {
+            height: 3px;
+            background: linear-gradient(to right, $transparent 0%, white 30%, white 70%, $transparent 100%);
+            box-shadow: 0px 4px black;
+            flex-shrink: 0;
         }
 
         .marker {
             position: absolute;
+            top: 2px;
             width: 15px;
             height: 15px;
-            border-radius: 50%;
             background-color: white;
-            transform: translate(-50% 50%);
-        }
-
-        .name {
-            position: absolute;
-            top: -15px;
-            opacity: 0;
-            font-size: 18px;
-            transform: scale(0);
-            transition: transform 0.25s ease-in-out;
-            transform-origin: center;
-            
-            &.visible {
-                opacity: 2;
-                transform: translate(-50% -50%) scale(1);
-            }
+            box-shadow: 2px 2px black;
+            transform: translate(-50% -50%);
         }
     }
 }

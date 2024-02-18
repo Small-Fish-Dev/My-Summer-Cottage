@@ -5,33 +5,72 @@ partial class Player
 	public const float DUCK_HEIGHT = 58f;
 	public const float HEIGHT = 72f;
 
-	[Property, Category( "Movement" )] public float RootMotionSpeed { get; set; } = 245.0f;
-	[Property, Category( "Movement" )] public float JumpVelocity { get; set; } = 220f;
-	[Property, Category( "Movement" )] public Vector3 Gravity { get; set; } = Vector3.Down * 750f;
+	[Property]
+	[Category( "Movement" )]
+	public MoveHelper MoveHelper { get; set; }
+
+	/// <summary>
+	/// How fast you move normally
+	/// </summary>
+	[Property]
+	[Category( "Movement" )]
+	[Range( 0f, 400f, 1f )]
+	public float Speed { get; set; } = 140f;
+
+	/// <summary>
+	/// How fast you move when holding the sprint button
+	/// </summary>
+	[Property]
+	[Category( "Movement" )]
+	[Range( 0f, 800f, 1f )]
+	public float SprintSpeed { get; set; } = 280f;
+
+	/// <summary>
+	/// How fast you move when holding the walk button
+	/// </summary>
+	[Property]
+	[Category( "Movement" )]
+	[Range( 0f, 200f, 1f )]
+	public float WalkSpeed { get; set; } = 80f;
+
+	/// <summary>
+	/// How fast you move when holding the duck button
+	/// </summary>
+	[Property]
+	[Category( "Movement" )]
+	[Range( 0f, 200f, 1f )]
+	public float DuckSpeed { get; set; } = 60f;
+
+	/// <summary>
+	/// How high you can jump
+	/// </summary>
+	[Property]
+	[Category( "Movement" )]
+	[Range( 0f, 800f, 1f )]
+	public float JumpStrength { get; set; } = 200f;
 
 	[Sync] public bool Ducking { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
 	[Sync] public Vector3 Velocity { get; set; }
 
-	public GameObject GroundObject { get; protected set; }
-	public bool Grounded => GroundObject.IsValid();
 	public BBox Bounds => new BBox( Collider.Center - Collider.Scale / 2f, Collider.Center + Collider.Scale / 2f );
-
-	private float animationSpeed
-	{
-		get
-		{
-			if ( Input.Down( "run" ) && !Ducking ) return 1f;
-			return 0.5f;
-		}
-	}
 
 	protected void UpdateMovement()
 	{
-		// Jump
-		if ( Input.Down( "Jump" ) && Grounded )
+		if ( MoveHelper == null ) return;
+
+		var isWalking = Input.Down( "Walk" );
+		var isSprinting = Input.Down( "Run" );
+		var isDucking = Input.Down( "Duck" );
+
+		var wishSpeed = isDucking ? DuckSpeed : (isWalking ? WalkSpeed : (isSprinting ? SprintSpeed : Speed));
+		var wishVelocity = Input.AnalogMove.Normal * wishSpeed * EyeAngles.WithPitch( 0f );
+
+		MoveHelper.WishVelocity = wishVelocity;
+
+		if ( Input.Pressed( "Jump" ) && MoveHelper.IsOnGround )
 		{
-			Velocity += JumpVelocity * Vector3.Up;
+			Model?.Set( "jump", true );
 			JumpBroadcast();
 		}
 
@@ -40,8 +79,10 @@ partial class Player
 		var to = from + Vector3.Up * Bounds.Maxs.z;
 		Ducking = (Ducking && Scene.Trace.Box( Bounds, in from, in to ).IgnoreGameObjectHierarchy( GameObject ).WithTag( "solid" ).Run().Hit)
 			|| Input.Down( "duck" ); // Beautiful.
-		Velocity = Input.AnalogMove * 25f * EyeAngles.ToRotation();
-		Transform.Position += Velocity;
+
+		MoveHelper.Move();
+
+
 		/*
 		// Normal movement
 		var rootMotion = Model.RootMotion.Position;
@@ -81,7 +122,7 @@ partial class Player
 
 	protected void UpdateCamera()
 	{
-		if ( Camera is null )
+		if ( Camera == null )
 			return;
 
 		var eyes = Model.GetAttachment( "eyes" ) ?? Transform.World;
@@ -90,25 +131,36 @@ partial class Player
 		Camera.Transform.Rotation = EyeAngles.ToRotation();
 		Camera.FieldOfView = 90f;
 		Camera.ZNear = 2.5f;
-		
+
 		Model?.SceneModel?.SetBoneWorldTransform( 6, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
 	}
 
 	protected void UpdateAnimation()
 	{
-		if ( Model == null || Model.SceneModel == null )
+		if ( Model == null || Model.SceneModel == null || MoveHelper == null )
 			return;
 
-		Model.Set( "grounded", Grounded );
+		Model.Set( "grounded", MoveHelper.IsOnGround );
 		Model.Set( "crouching", Ducking );
 
-		var x = MathX.LerpTo( Model.GetFloat( "move_x" ), animationSpeed * Input.AnalogMove.x, 5f * Time.Delta );
-		var y = MathX.LerpTo( Model.GetFloat( "move_y" ), -animationSpeed * Input.AnalogMove.y, 5f * Time.Delta );
+		var oldX = Model.GetFloat( "move_x" );
+		var oldY = Model.GetFloat( "move_y" );
+		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 100f;
+		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 100f;
+		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
+		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
 
 		Model.Set( "move_x", x );
 		Model.Set( "move_y", y );
 
 		Model.SceneModel.Morphs.Set( "fat", Fatness );
+		Model.Set( "height", Height );
+	}
+
+	private void OnJumpEvent( SceneModel.GenericEvent e )
+	{
+		if ( e.Type == "jump" )
+			MoveHelper.Punch( Vector3.Up * JumpStrength );
 	}
 
 	[Broadcast]

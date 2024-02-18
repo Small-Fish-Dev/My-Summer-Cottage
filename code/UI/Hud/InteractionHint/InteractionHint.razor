@@ -1,0 +1,45 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+@if (!HasInteractions)
+	return;
+
+<root>
+	<text>@Player.Local.TargetedGameObject.Name</text>
+	@foreach(var interaction in _interactions)
+	{
+		<div>
+			<text>[@interaction.Keybind] -</text>
+			<text>@interaction.Description</text>
+		</div>
+	}
+</root>
+
+@code {
+	private bool HasInteractions => _interactions.Any();
+	private IEnumerable<Interaction> _interactions => Player.Local?.TargetedGameObject?.GetInteractions() ?? new List<Interaction>();
+	private Vector2 _lerpPosition;
+
+	public override void Tick() 
+	{
+		if (!HasInteractions)
+			return;
+
+		foreach ( var interaction in _interactions )
+		{
+			if (Input.Down(interaction.Keybind))
+				interaction.Action(Player.Local, Player.Local.TargetedGameObject);
+		}
+
+		var position = Player.Local.TargetedGameObject.Transform.Position;
+        _lerpPosition = Vector2.Lerp( _lerpPosition, position.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
+        Style.Left = Length.Fraction( MathF.Floor( _lerpPosition.x * 200f + 0.5f ) / 200f );
+        Style.Top = Length.Fraction( MathF.Floor( _lerpPosition.y * 200f + 0.5f ) / 200f );
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(HasInteractions);
+	}
+}

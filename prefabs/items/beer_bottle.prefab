@@ -1,0 +1,71 @@
+{
+  "RootObject": {
+    "Id": "2a69dc49-85ed-46d5-aa07-8e4e02590c92",
+    "Name": "beer_bottle",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ItemComponent",
+        "Description": "Use this to get fucked up like Cyberagent",
+        "Name": "Beer Bottle"
+      },
+      {
+        "__type": "ModelRenderer",
+        "BodyGroups": 11,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/beer_bottle/beer.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ModelCollider",
+        "IsTrigger": false,
+        "Model": "models/beer_bottle/beer.vmdl",
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "Interaction",
+        "Action": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Print",
+            "id": "f9e07269-c048-4da1-b87b-ec4420068620",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "log.info",
+              "UserData": {
+                "Position": "304,48"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            }
+          ]
+        },
+        "Color": "1,0.6,0,1",
+        "Description": "Print a message to console",
+        "Keybind": "use"
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

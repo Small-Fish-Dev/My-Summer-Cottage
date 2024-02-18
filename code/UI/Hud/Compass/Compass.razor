@@ -3,86 +3,74 @@
 @inherits Panel
 
 <root>
-	<panel @ref=_container class="container">	
-		<panel class="center" />
-		@{
-			var yaw = Player.Local.EyeAngles.yaw;
-			var width = TextureWidth * ScaleToScreen;
-
-			<panel 
-				class="background"
-		   		style="background-position-x: @(-width + width * (yaw + 180f) / 360f)px"
-				@ref=_background >
-			</panel>
-		}
-	</panel>
+	<div @ref=_container class="container">	
+		<div class="time">@(DateTime.Now.ToString( "HH:mm" ))</div>
+		<div class="direction">Facing @(Player.Local.StringDirection)</div>
+		<div @ref=_line class="line" />
+	</div>
 </root>
 
 @code {
-	private float ContainerWidth => 600f;
-	private float TextureWidth => 2400f;
+	private float ContainerWidth => 800f;
 
-	private struct MarkerPanel
+	private struct MarkerData
 	{
 		public Panel Panel;
-		public Label Label;
 		public Marker Marker;
 	}
 
 	private Panel _container;
-	private Panel _background;
-	private MarkerPanel[] markers { get; set; }
+	private Panel _line;
+	private MarkerData[] _markers;
 
-	protected override void OnAfterTreeRender(bool firstTime)
+	protected override void OnAfterTreeRender( bool firstTime )
 	{
 		base.OnAfterTreeRender( firstTime );
 
-		_container.Style.Width = Length.Pixels(ContainerWidth);
-		_background.Style.BackgroundSizeX = Length.Pixels(TextureWidth);
-		_background.Style.BackgroundSizeY = Length.Percent(100);
+		_container.Style.Width = Length.Pixels( ContainerWidth );
+		_line.Style.Width = Length.Pixels( ContainerWidth );
 
-		if ( firstTime )
-			markers = Marker.All.Select( marker =>
-			{
-				var color = marker.Color.ToString( true, false );
-				var panel = _background.AddChild<Panel>( "marker" );
-				panel.Style.BackgroundColor = color;
-
-				var label = _background.AddChild<Label>( "name" );
-				label.Style.FontColor = color;
-				label.Text = marker.Name;
-
-				return new MarkerPanel
-				{
-					Panel = panel,
-					Label = label,
-					Marker = marker,
-				};
-			} ).ToArray();
-
-		var yaw = Player.Local.EyeAngles.yaw;
-		var center = ContainerWidth / 2f;
-
-		foreach ( var markerPanel in markers )
+		_markers ??= Marker.All.Select( marker =>
 		{
-			var panel = markerPanel.Panel;
-			var label = markerPanel.Label;
-			var marker = markerPanel.Marker;
+			var panel = _line.AddChild<Panel>( "marker" );
+
+			return new MarkerData
+			{
+				Panel = panel,
+				Marker = marker,
+			};
+		} ).ToArray();
+
+		if ( Player.Local == null || _markers == null )
+			return;
+
+		var yaw = Player.Local.EyeAngles.Normal.yaw;
+		var center = ContainerWidth / 2f;
+		var width = ContainerWidth * 4;
+
+		foreach ( var data in _markers )
+		{
+			var panel = data.Panel;
+			var marker = data.Marker;
+
+			if ( panel?.Parent == null )
+				_line.AddChild( panel );
 
 			var diff = Rotation.LookAt( marker.Position - Player.Local.Transform.Position ).Yaw();
 			var angle = (yaw - diff) / 45f;
 			var dirtyLen = center + angle * center;
 			var len = dirtyLen > 0
-				? dirtyLen % TextureWidth
-				: dirtyLen + TextureWidth;
-			var opacity = MathX.Clamp( marker.Position.Distance( Player.Local.Transform.Position ) / 200f - 0.75f, 0, 1 );
+				? dirtyLen % width
+				: dirtyLen + width;
+
+			var distOpacity = MathX.Clamp( marker.Position.Distance( Player.Local.Transform.Position ) / 300f - 0.75f, 0, 1 );
+			var centerOpacity = len > ContainerWidth / 2f
+				? 1 - (len - ContainerWidth / 2f) / ContainerWidth * 2f
+				: len / ContainerWidth * 2;
+			var opacity = MathX.Lerp( 0, distOpacity, centerOpacity );
 
 			panel.Style.Left = len;
 			panel.Style.Opacity = opacity;
-
-			label.Style.Left = len;
-			label.SetClass( "visible", len <= center + 40f && len >= center - 40f );
-			label.Style.Opacity = opacity;
 		}
 	}
 
