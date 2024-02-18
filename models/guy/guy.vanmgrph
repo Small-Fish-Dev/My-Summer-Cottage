@@ -71,7 +71,7 @@
 				{
 					_class = "CAddAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -1120.0, 128.0 ]
+					m_vecPosition = [ -1104.0, 0.0 ]
 					m_nNodeID = 
 					{
 						m_id = 294656277
@@ -81,7 +81,7 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 884230290
+							m_id = 4294967295
 						}
 						m_outputID = 
 						{
@@ -92,7 +92,7 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 1483154861
+							m_id = 4294967295
 						}
 						m_outputID = 
 						{
@@ -137,27 +137,27 @@
 											m_comparisonOp = 0
 											m_paramID = 
 											{
-												m_id = 1474082
+												m_id = 666457598
 											}
 											m_comparisonValue = 
 											{
 												m_nType = 1
-												m_data = false
+												m_data = true
 											}
 										},
 									]
-									m_blendDuration = 0.3
+									m_blendDuration = 0.2
 									m_destState = 
 									{
-										m_id = 366946870
+										m_id = 1951686158
 									}
 									m_bReset = true
 									m_resetCycleOption = "Beginning"
 									m_flFixedCycleValue = 0.0
 									m_blendCurve = 
 									{
-										m_vControlPoint1 = [ 0.5, 0.0 ]
-										m_vControlPoint2 = [ 0.5, 1.0 ]
+										m_vControlPoint1 = [ 0.0, 0.0 ]
+										m_vControlPoint2 = [ 0.0, 1.0 ]
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
@@ -174,19 +174,19 @@
 											m_comparisonOp = 0
 											m_paramID = 
 											{
-												m_id = 666457598
+												m_id = 1474082
 											}
 											m_comparisonValue = 
 											{
 												m_nType = 1
-												m_data = true
+												m_data = false
 											}
 										},
 									]
-									m_blendDuration = 0.2
+									m_blendDuration = 0.5
 									m_destState = 
 									{
-										m_id = 1951686158
+										m_id = 366946870
 									}
 									m_bReset = true
 									m_resetCycleOption = "Beginning"
@@ -256,7 +256,7 @@
 											}
 										},
 									]
-									m_blendDuration = 0.4
+									m_blendDuration = 1.0
 									m_destState = 
 									{
 										m_id = 366946870
@@ -282,7 +282,7 @@
 										{
 											_class = "CFinishedCondition"
 											m_comparisonOp = 0
-											m_option = "FinishedConditionOption_OnFinished"
+											m_option = "FinishedConditionOption_OnAlmostFinished"
 											m_bIsFinished = true
 										},
 										{
@@ -299,7 +299,7 @@
 											}
 										},
 									]
-									m_blendDuration = 0.1
+									m_blendDuration = 0.18
 									m_destState = 
 									{
 										m_id = 763806148
@@ -309,8 +309,8 @@
 									m_flFixedCycleValue = 0.0
 									m_blendCurve = 
 									{
-										m_vControlPoint1 = [ 0.5, 0.0 ]
-										m_vControlPoint2 = [ 0.5, 1.0 ]
+										m_vControlPoint1 = [ 0.0, 0.0 ]
+										m_vControlPoint2 = [ 0.25, 1.0 ]
 									}
 									m_bForceFootPlant = false
 									m_bDisabled = false
@@ -326,7 +326,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 294656277
+									m_id = 1704343852
 								}
 								m_outputID = 
 								{
@@ -426,7 +426,7 @@
 											}
 										},
 									]
-									m_blendDuration = 0.1
+									m_blendDuration = 0.2
 									m_destState = 
 									{
 										m_id = 763806148
@@ -1376,7 +1376,7 @@
 				{
 					_class = "CSequenceAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -1328.0, 128.0 ]
+					m_vecPosition = [ -1328.0, 144.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1483154861
@@ -1384,7 +1384,7 @@
 					m_sNote = ""
 					m_tagSpans = [  ]
 					m_sequenceName = "jump"
-					m_playbackSpeed = 1.0
+					m_playbackSpeed = 0.6
 					m_bLoop = false
 				}
 			},
@@ -1638,6 +1638,59 @@
 					]
 					m_bBlockWaningTags = false
 					m_bLockStateWhenWaning = false
+				}
+			},
+			{
+				key = 
+				{
+					m_id = 1704343852
+				}
+				value = 
+				{
+					_class = "CBoneMaskAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ -1120.0, 128.0 ]
+					m_nNodeID = 
+					{
+						m_id = 1704343852
+					}
+					m_sNote = ""
+					m_weightListName = "legs"
+					m_inputConnection1 = 
+					{
+						m_nodeID = 
+						{
+							m_id = 884230290
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_inputConnection2 = 
+					{
+						m_nodeID = 
+						{
+							m_id = 1483154861
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_blendSpace = "BlendSpace_Parent"
+					m_bUseBlendScale = false
+					m_blendValueSource = "Parameter"
+					m_blendParameter = 
+					{
+						m_id = 4294967295
+					}
+					m_timingBehavior = "UseChild2"
+					m_flTimingBlend = 0.5
+					m_flRootMotionBlend = 0.0
+					m_footMotionTiming = "Child1"
+					m_bResetChild1 = false
+					m_bResetChild2 = true
 				}
 			},
 			{
@@ -2274,7 +2327,7 @@
 				{
 					_class = "CBlend2DAnimNode"
 					m_sName = "Landing Blend"
-					m_vecPosition = [ -1328.0, 192.0 ]
+					m_vecPosition = [ -1328.0, 208.0 ]
 					m_nNodeID = 
 					{
 						m_id = 2146246641
@@ -2418,7 +2471,7 @@
 			},
 			{
 				_class = "CBoolAnimParameter"
-				m_name = "Jump"
+				m_name = "jump"
 				m_id = 
 				{
 					m_id = 666457598

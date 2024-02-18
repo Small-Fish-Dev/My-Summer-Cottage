@@ -1468,6 +1468,7 @@
 										[
 											{
 												_class = "AnimSubtract"
+												disabled = true
 												anim_name = "idle"
 												frame = 0
 											},
@@ -1475,7 +1476,7 @@
 												_class = "AnimEvent"
 												name = "jump"
 												event_class = "AE_GENERIC_EVENT"
-												event_frame = 5
+												event_frame = 4
 												event_keys = 
 												{
 													TypeName = ""
@@ -1499,8 +1500,8 @@
 										disable_compression = false
 										enable_scale = false
 										source_filename = "models/guy/animations/jump.fbx"
-										start_frame = -1
-										end_frame = 5
+										start_frame = 2
+										end_frame = 6
 										framerate = -1.0
 										take = 0
 										reverse = false
@@ -1510,11 +1511,6 @@
 										name = "falling"
 										children = 
 										[
-											{
-												_class = "AnimSmoothLoop"
-												frames_from_start = 2
-												frames_from_end = 2
-											},
 											{
 												_class = "AnimAlign"
 												align_tx = false
@@ -1530,6 +1526,15 @@
 												align_to_frame = 0
 												bone = "root"
 											},
+											{
+												_class = "AnimSmoothLoop"
+												frames_from_start = 2
+												frames_from_end = 2
+											},
+											{
+												_class = "AnimStartLoop"
+												start_loop_frame = 2
+											},
 										]
 										activity_name = ""
 										activity_weight = 1
@@ -1540,11 +1545,11 @@
 										delta = false
 										worldSpace = false
 										hidden = false
-										anim_markup_ordered = false
+										anim_markup_ordered = true
 										disable_compression = false
 										enable_scale = false
 										source_filename = "models/guy/animations/jump.fbx"
-										start_frame = 6
+										start_frame = 5
 										end_frame = 11
 										framerate = 4.0
 										take = 0
@@ -2234,6 +2239,44 @@
 							{
 								bone = "spine2"
 								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "legs"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "Hand_IK_L"
+								weight = 0.0
+							},
+							{
+								bone = "Hand_IK_R"
+								weight = 0.0
+							},
+							{
+								bone = "IK_L"
+								weight = 1.0
+							},
+							{
+								bone = "IK_R"
+								weight = 1.0
+							},
+							{
+								bone = "aim"
+								weight = 0.0
+							},
+							{
+								bone = "root"
+								weight = 1.0
+							},
+							{
+								bone = "spine0"
+								weight = 0.0
 							},
 						]
 						master_morph_weight = -1.0
