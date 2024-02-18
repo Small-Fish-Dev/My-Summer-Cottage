@@ -30,7 +30,7 @@
         "Action": {
           "Version": 5,
           "UserData": {
-            "Title": "Pickup",
+            "Title": "Pickup item",
             "id": "f9e07269-c048-4da1-b87b-ec4420068620",
             "ReferencedComponentTypes": []
           },
@@ -41,36 +41,58 @@
               "Type": "input"
             },
             {
-              "Id": 4,
-              "Type": "sauna.inventory",
+              "Id": 5,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Inventory",
+                "_type": "Player"
+              },
               "UserData": {
-                "Position": "160,0"
+                "Position": "176,-0"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "call",
+              "Properties": {
+                "_name": "GiveItem",
+                "_type": "Inventory",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "400,0"
               }
             }
           ],
           "Links": [
             {
               "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 4,
-              "DstName": "_signal"
+              "SrcName": "interactor",
+              "DstId": 5,
+              "DstName": "_target"
             },
             {
               "SrcId": 0,
-              "SrcName": "interactor",
-              "DstId": 4,
-              "DstName": "interactor"
+              "SrcName": "_signal",
+              "DstId": 6,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_target"
             },
             {
               "SrcId": 0,
               "SrcName": "obj",
-              "DstId": 4,
-              "DstName": "obj"
+              "DstId": 6,
+              "DstName": "item"
             }
           ]
         },
-        "Color": "1,1,1,1",
         "Description": "Pickup",
+        "Disabled": null,
         "Keybind": "use"
       }
     ],

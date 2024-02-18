@@ -9,10 +9,13 @@
 	<text class="title">@Player.Local.TargetedGameObject.Name</text>
 	@foreach(var interaction in _interactions)
 	{
-		<div class="interaction">
-			<inputglyph class="icon" glyphSize=@InputGlyphSize.Small action="@(interaction.Keybind)" />
-			<text>@interaction.Description</text>
-		</div>
+		@if (interaction.IsInteractable)
+		{
+			<div class="interaction">
+				<inputglyph class="icon" glyphSize=@InputGlyphSize.Small action="@(interaction.Keybind)" />
+				<text>@interaction.Description</text>
+			</div>
+		}
 	}
 </root>
 
@@ -30,8 +33,8 @@
 
 		foreach ( var interaction in _interactions )
 		{
-			if (Input.Down(interaction.Keybind))
-				interaction.Action(Player.Local, Player.Local.TargetedGameObject);
+			if (Input.Down(interaction.Keybind) && interaction.IsInteractable)
+				interaction.Action?.Invoke(Player.Local, Player.Local.TargetedGameObject);
 		}
 
 		var position = Player.Local.TargetedGameObject.Transform.Position;
