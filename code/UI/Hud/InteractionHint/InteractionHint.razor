@@ -2,23 +2,37 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-@if (!IsInteracting)
+@if (!HasTarget)
 	return;
 
 <root>
-	<text>@Player.Local.Interactable.Name</text>
+	<text>@Player.Local.TargetedGameObject.Name</text>
+	@foreach(var interaction in Player.Local.TargetedGameObject.GetInteractions())
+	{
+		<div>
+			<text>[@interaction.Keybind] -</text>
+			<text>@interaction.Description</text>
+		</div>
+	}
 </root>
 
 @code {
-	private bool IsInteracting => Player.Local.Interactable is not null;
+	private bool HasTarget => Player.Local.TargetedGameObject is not null;
 	private Vector2 _lerpPosition;
 
 	public override void Tick() 
 	{
-		if (!IsInteracting)
+		if (!HasTarget)
 			return;
 
-		var position = Player.Local.Interactable.Transform.Position;
+		var targetGameObject = Player.Local.TargetedGameObject;
+
+		foreach ( var interaction in targetGameObject.GetInteractions() )
+		{
+			@* interaction.Action(Player.Local, targetGameObject); *@
+		}
+
+		var position = targetGameObject.Transform.Position;
         _lerpPosition = Vector2.Lerp( _lerpPosition, position.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
         Style.Left = Length.Fraction( MathF.Floor( _lerpPosition.x * 200f + 0.5f ) / 200f );
         Style.Top = Length.Fraction( MathF.Floor( _lerpPosition.y * 200f + 0.5f ) / 200f );
@@ -26,6 +40,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(IsInteracting);
+		return HashCode.Combine(HasTarget);
 	}
 }
