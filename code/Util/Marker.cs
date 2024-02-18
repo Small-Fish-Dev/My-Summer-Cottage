@@ -4,20 +4,18 @@ public struct Marker
 {
 	private static readonly List<Marker> all = new List<Marker>
 	{
-		new( "The Sauna", new Vector3( 1040f, -840f, 89f ), Color.Red ),
+		new( "Sauna", new Vector3( 1040f, -840f, 89f ), "ui/hud/home.png" ),
 	};
 	public static IReadOnlyList<Marker> All => all;
 
 	public string Name;
 	public Vector3 Position;
-	public Color Color;
-	public Texture Texture;
+	public string Texture;
 
-	public Marker( string name, Vector3 position, Color? color = null, Texture? texture = null )
+	public Marker( string name, Vector3 position, string texture = null )
 	{
 		Name = name;
 		Position = position;
-		Color = color ?? Color.White;
 		Texture = texture;
 	}
 }

@@ -2,34 +2,39 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-@if (!HasInteractions)
+@if (!HasTarget)
 	return;
 
 <root>
-	<text>@Player.Local.TargetedGameObject.Name</text>
+	<text class="title">@Player.Local.TargetedGameObject.Name</text>
 	@foreach(var interaction in _interactions)
 	{
-		<div>
-			<text>[@interaction.Keybind] -</text>
-			<text>@interaction.Description</text>
-		</div>
+		@if (interaction.Disabled is null || !interaction.Disabled())
+		{
+			<div class="interaction">
+				<inputglyph class="icon" glyphSize=@InputGlyphSize.Small action="@(interaction.Keybind)" />
+				<text>@interaction.Description</text>
+			</div>
+		}
 	}
 </root>
 
 @code {
-	private bool HasInteractions => _interactions.Any();
+	private bool HasTarget => Player.Local?.TargetedGameObject is not null;
 	private IEnumerable<Interaction> _interactions => Player.Local?.TargetedGameObject?.GetInteractions() ?? new List<Interaction>();
 	private Vector2 _lerpPosition;
 
 	public override void Tick() 
 	{
-		if (!HasInteractions)
+		SetClass("visible", HasTarget);
+
+		if (!HasTarget)
 			return;
 
 		foreach ( var interaction in _interactions )
 		{
-			if (Input.Down(interaction.Keybind))
-				interaction.Action(Player.Local, Player.Local.TargetedGameObject);
+			if (Input.Down(interaction.Keybind) && (interaction.Disabled is null || !interaction.Disabled()))
+				interaction.Action?.Invoke(Player.Local, Player.Local.TargetedGameObject);
 		}
 
 		var position = Player.Local.TargetedGameObject.Transform.Position;
@@ -40,6 +45,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(HasInteractions);
+		return HashCode.Combine(HasTarget, _interactions.HashCombine(i => HashCode.Combine(i.Description)));
 	}
 }

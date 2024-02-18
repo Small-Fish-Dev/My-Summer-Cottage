@@ -11,7 +11,7 @@
 </root>
 
 @code {
-	private float ContainerWidth => 800f;
+	private float ContainerWidth => 650f;
 
 	private struct MarkerData
 	{
@@ -33,6 +33,11 @@
 		_markers ??= Marker.All.Select( marker =>
 		{
 			var panel = _line.AddChild<Panel>( "marker" );
+			if ( !string.IsNullOrEmpty( marker.Texture ) )
+			{
+				var img = panel.AddChild<Image>( "icon" );
+				img.SetTexture( marker.Texture );
+			}
 
 			return new MarkerData
 			{

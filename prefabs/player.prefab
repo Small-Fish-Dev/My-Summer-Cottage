@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3277f08e-bc95-4f2a-8e5a-d578e348a07a",
+    "Id": "0838c785-16cc-49ce-9481-8dbeb9b07027",
     "Name": "player",
     "Enabled": true,
     "Components": [
@@ -13,7 +13,7 @@
         "Money": 0,
         "MoveHelper": {
           "_type": "component",
-          "go": "3277f08e-bc95-4f2a-8e5a-d578e348a07a",
+          "go": "0838c785-16cc-49ce-9481-8dbeb9b07027",
           "component_type": "MoveHelper"
         },
         "Speed": 140,
@@ -24,7 +24,7 @@
         "__type": "Inventory",
         "Player": {
           "_type": "component",
-          "go": "3277f08e-bc95-4f2a-8e5a-d578e348a07a",
+          "go": "0838c785-16cc-49ce-9481-8dbeb9b07027",
           "component_type": "Player"
         }
       },
@@ -35,9 +35,6 @@
         "Scale": "25,25,72",
         "Static": false,
         "Surface": null
-      },
-      {
-        "__type": "AudioListener"
       },
       {
         "__type": "MoveHelper",
@@ -70,7 +67,7 @@
     ],
     "Children": [
       {
-        "Id": "1d4cbeb5-84bb-4a55-b1f3-58d95a348920",
+        "Id": "b60183bc-ce1b-4e1d-abc1-657872157a29",
         "Name": "Camera",
         "Position": "0,0,63.99992",
         "Tags": "maincamera",
@@ -97,11 +94,14 @@
           },
           {
             "__type": "EyeProtector"
+          },
+          {
+            "__type": "AudioListener"
           }
         ]
       },
       {
-        "Id": "3d82c938-2989-4c06-8629-3155b4091958",
+        "Id": "4e723424-6bd1-42ae-9c2f-d8e98b9176fb",
         "Name": "Model",
         "Enabled": true,
         "Components": [
@@ -109,14 +109,15 @@
             "__type": "Character",
             "Clothes": [
               "models/clothes/trousers/trousers.vmdl",
-              "models/clothes/jumper/jumper.vmdl"
+              "models/clothes/jumper/jumper.vmdl",
+              "models/sauna_boss_hat/sauna_boss.vmdl"
             ],
             "Fatness": 0,
             "Height": 0,
             "HideBodyGroup": "Torso",
             "Player": {
               "_type": "component",
-              "go": "3277f08e-bc95-4f2a-8e5a-d578e348a07a",
+              "go": "0838c785-16cc-49ce-9481-8dbeb9b07027",
               "component_type": "Player"
             }
           },

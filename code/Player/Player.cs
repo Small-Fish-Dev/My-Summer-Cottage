@@ -28,8 +28,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	public WindDirections FacedDirection => (WindDirections)((EyeAngles.Normal.yaw + 45f / 2 + 180) % 360 / 45f);
 	public string StringDirection => FacedDirection.ToString().Replace( '_', ' ' );
 
+	public Inventory Inventory { get; private set; }
 	protected CameraComponent Camera;
-	protected Inventory Inventory;
 	protected SkinnedModelRenderer Model;
 	protected BoxCollider Collider;
 
