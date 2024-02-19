@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Sauna.Util.Extensions;
+﻿using Sauna.Util.Extensions;
 
 namespace Sauna;
 
@@ -12,6 +11,8 @@ public class SoundSystem009 : GameObjectSystem
 	/// </summary>
 	[Property] public float SubtitleDelay;
 
+	// TODO: Networking!
+	// TODO: Do not add a sound if it's played far away from the listener
 	public List<SubtitlePopup> Sounds { get; } = new();
 
 	public event Action<SubtitlePopup> OnSoundPlayed;
@@ -49,7 +50,6 @@ public class SoundSystem009 : GameObjectSystem
 		}
 	}
 
-	// TODO: Networking!
 	public void Play( SoundWithSubtitlesResource sound, GameObject source )
 	{
 		SoundHandle soundHandle;

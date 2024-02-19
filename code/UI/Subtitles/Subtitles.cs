@@ -1,4 +1,5 @@
-﻿using Sauna.Util.Extensions;
+﻿using Sauna.Components;
+using Sauna.Util.Extensions;
 
 namespace Sauna.UI.Subtitles;
 
@@ -41,6 +42,8 @@ public class Subtitles : PanelComponent
 	{
 		var panel = _container.AddChild<SubtitlePanel>();
 		panel.Resource = subtitlePopup.Resource;
+		if ( subtitlePopup.Source.IsValid() && subtitlePopup.Source.Components.Get<FancyName>() is FancyName name )
+			panel.Name = name;
 		
 		_subtitlePanelsDictionary[subtitlePopup] = panel;
 
