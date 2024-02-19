@@ -2,13 +2,17 @@ namespace Sauna;
 
 public struct IconSettings : IEquatable<IconSettings>
 {
+	[JsonIgnore]
+	public Texture Texture => Texture.Load( FileSystem.Mounted, $"ui/icons/{Guid}.png" );
+
 	public string Model { get; set; }
 	public Vector3 Position { get; set; }
 	public Rotation Rotation { get; set; }
+	public Guid Guid { get; set; }
 
 	public override int GetHashCode()
 	{
-		return HashCode.Combine( Position, Rotation, Model );
+		return HashCode.Combine( Guid );
 	}
 
 	public override bool Equals( object obj )
@@ -19,8 +23,6 @@ public struct IconSettings : IEquatable<IconSettings>
 
 	public bool Equals( IconSettings other )
 	{
-		return other.Position == Position
-			&& other.Rotation == Rotation
-			&& other.Model == Model;
+		return other.Guid == Guid;
 	}
 }

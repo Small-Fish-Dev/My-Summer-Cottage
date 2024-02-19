@@ -47,7 +47,11 @@ public class IconEditor : GraphicsView
 		_ = new SceneDirectionalLight( world, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
 
 		var property = (parent as IconEditorPopup).Property;
-		var icon = property.GetValue<IconSettings>();
+		var icon = property.GetValue( new IconSettings
+		{
+			Rotation = global::Rotation.Identity,
+			Position = Vector3.Zero
+		} );
 
 		// Layout
 		Layout = Layout.Column();
@@ -100,15 +104,17 @@ public class IconEditor : GraphicsView
 				Text = "Save Icon Settings",
 				Clicked = () =>
 				{
+					var guid = Guid.NewGuid();
 					property.SetValue( new IconSettings()
 					{
 						Model = _model.Value,
 						Position = _position.Value,
-						Rotation = _angles.Value
+						Rotation = _angles.Value,
+						Guid = guid,
 					} );
 
 					var pixmap = new Pixmap( RENDER_RESOLUTION, RENDER_RESOLUTION );
-					var path = $"{Project.Current.GetRootPath().Replace( '\\', '/' )}/ui/icons/{_obj.Model.ResourceName.Replace( '/', '\0' )}.png";
+					var path = $"{Project.Current.GetRootPath().Replace( '\\', '/' )}/ui/icons/{guid}.png";
 					_camera.RenderToPixmap( pixmap );
 					pixmap.SavePng( path );
 
