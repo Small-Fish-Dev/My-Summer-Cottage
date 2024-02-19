@@ -1,0 +1,20 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+@if (Item is null)
+	return;
+
+<root>
+	<img src=@Item.IconTexture />
+	<text class="weight">@Item.WeightInGrams.ToKilograms() kg</text>
+</root>
+
+@code {
+	public ItemComponent Item { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(Item?.GetHashCode());
+	}
+}

@@ -5,7 +5,7 @@ public class Inventory : Component
 	[Property]
 	public Player Player { get; set; }
 
-	public const int MAX_BACKPACK_SLOTS = 10;
+	public const int MAX_BACKPACK_SLOTS = 18;
 
 	public IReadOnlyList<ItemComponent> BackpackItems => _backpackItems;
 	public IReadOnlyList<ItemComponent> EquippedItems => _equippedItems;
