@@ -37,7 +37,7 @@ public class EyeProtector : Component, Component.ExecuteInEditor
 		hook?.Dispose();
 
 		var camera = Components.Get<CameraComponent>( FindMode.InSelf );
-		hook = camera.AddHookAfterUI( "Censoring", 10, Render );
+		hook = camera.AddHookAfterTransparent( "Censoring", 10, Render );
 	}
 
 	protected override void OnDisabled()
