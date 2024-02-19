@@ -14,6 +14,11 @@
 				<InventorySlot Item=@item />
 			}
 		</div>
+		<div style="font-size: 30px; gap: 10px;">
+			<text>TOTAL WEIGHT: </text>
+			<text class="active-weight">@Player.Local.Inventory.GetTotalWeightInGrams().ToKilograms() kg</text>
+			<text class="max">/ @Sauna.Inventory.MAX_WEIGHT_IN_GRAMS.ToKilograms() kg</text>
+		</div>
 	</div>
 </root>
 
