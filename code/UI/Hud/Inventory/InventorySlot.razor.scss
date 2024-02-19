@@ -3,16 +3,37 @@
 InventorySlot {
     width: 100px;
     height: 100px;
-    background-color: black;
-    border: 4px gray;
     margin: 0px 10px 10px 0px;
-    opacity: 0.9;
+    justify-content: center;
+    align-items: center;
 
-    .weight {
+    .border {
         position: absolute;
-        bottom: 0px;
-        right: 2px;
-        font-size: 25px;
-        color: $text-secondary;
+        background-image: linear-gradient(#989898, #4a4a4a);
+        height: 100%;
+        width: 100%;
+        mask-mode: alpha;
+        mask-image: url( '/ui/hud/slot_mask.png' );
+        mask-size: 100%;
+    }
+    
+    .background {
+        position: absolute;
+        background: radial-gradient(#00000000, #000000c0);
+        height: 90%;
+        width: 90%;
+    }
+
+    .item {
+        height: 90%;
+        width: 90%;
+
+        .weight {
+            position: absolute;
+            bottom: 0px;
+            right: 2px;
+            font-size: 25px;
+            color: $orange;
+        }
     }
 }

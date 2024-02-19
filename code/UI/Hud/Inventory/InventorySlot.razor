@@ -2,12 +2,16 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-@if (Item is null)
-	return;
-
 <root>
-	<img src=@Item.IconTexture />
-	<text class="weight">@Item.WeightInGrams.ToKilograms() kg</text>
+	<div class="border" />
+	<div class="background" />
+	@if (Item is not null)
+	{
+		<div class="item">
+				<img src=@Item.IconTexture />
+				<text class="weight">@Item.WeightInGrams.ToKilograms() kg</text>
+		</div>
+	}
 </root>
 
 @code {
