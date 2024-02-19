@@ -2,14 +2,14 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-@if (!HasTarget)
+@if ( !HasTarget )
 	return;
 
 <root>
 	<text class="title">@Player.Local.TargetedGameObject.Name</text>
 	@foreach(var interaction in _interactions)
 	{
-		@if (interaction.Disabled is null || !interaction.Disabled())
+		@if ( CanInteract( interaction ) )
 		{
 			<div class="interaction">
 				<inputglyph class="icon" glyphSize=@InputGlyphSize.Small action="@(interaction.Keybind)" />
@@ -24,6 +24,13 @@
 	private IEnumerable<Interaction> _interactions => Player.Local?.TargetedGameObject?.GetInteractions() ?? new List<Interaction>();
 	private Vector2 _lerpPosition;
 
+	private bool CanInteract( Interaction interaction )
+		=> (interaction.Disabled is null || !interaction.Disabled())
+		&& (!interaction.HasBounds || GetInteractionBounds( interaction ).Contains( Player.Local.InteractionTrace.EndPosition ));
+
+	private BBox GetInteractionBounds( Interaction interaction )
+		=> new BBox(interaction.Position - interaction.Extents / 2, interaction.Position + interaction.Extents / 2).Translate( Player.Local.TargetedGameObject.Transform.Position );
+
 	public override void Tick() 
 	{
 		SetClass("visible", HasTarget);
@@ -33,12 +40,12 @@
 
 		foreach ( var interaction in _interactions )
 		{
-			if (interaction.InputFunction(interaction.Keybind) && (interaction.Disabled is null || !interaction.Disabled()))
+			if ( CanInteract( interaction ) && interaction.InputFunction( interaction.Keybind ) )
 				interaction.Action?.Invoke(Player.Local, Player.Local.TargetedGameObject);
 		}
 
-		var position = Player.Local.TargetedGameObject.Transform.Position;
-        _lerpPosition = Vector2.Lerp( _lerpPosition, position.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
+		var position = Player.Local.InteractionTrace.EndPosition;// Player.Local.TargetedGameObject.Transform.Position;
+		_lerpPosition = Vector2.Lerp( _lerpPosition, position.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
         Style.Left = Length.Fraction( MathF.Floor( _lerpPosition.x * 200f + 0.5f ) / 200f );
         Style.Top = Length.Fraction( MathF.Floor( _lerpPosition.y * 200f + 0.5f ) / 200f );
 	}

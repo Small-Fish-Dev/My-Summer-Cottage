@@ -7,15 +7,19 @@ public partial class Player
 
 	public Ray ViewRay => new( Camera.Transform.Position + Camera.Transform.Rotation.Forward * 25f, Camera.Transform.Rotation.Forward );
 	public GameObject TargetedGameObject { get; private set; }
+	public SceneTraceResult InteractionTrace { get; private set; }
 
 	private void UpdateInteractions()
 	{
-		var trace = Scene.Trace.Ray( ViewRay, INTERACTION_DISTANCE )
+		InteractionTrace = Scene.Trace.Ray( ViewRay, INTERACTION_DISTANCE )
 					.Size( INTERACTION_SIZE )
 					.IgnoreGameObject( GameObject )
 					.WithoutTags( "world" )
 					.Run();
 
-		TargetedGameObject = trace.GameObject;
+		var obj = InteractionTrace.GameObject;
+		obj = obj?.GetInteractions() == null ? null : obj;
+
+		TargetedGameObject = obj;
 	}
 }

@@ -1,0 +1,29 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits PanelComponent
+@attribute [StyleSheet]
+
+<root>
+	<label class="text background">@Empty</label>
+	<label class="text foreground" style="color: red">@Value</label>
+</root>
+
+@code {
+	[Property] public SlotMachine SlotMachine { get; set; }
+	[Property] public string PropertyName { get; private set; }
+
+	public string Empty => new string( '8', MaxScreenCharacters );
+	public int Value => (int?)GlobalGameNamespace.TypeLibrary.GetPropertyValue( SlotMachine, PropertyName ) ?? 0;
+
+	/// <summary>
+	/// Max amount of characters on screen 
+	/// </summary>
+	public const int MaxScreenCharacters = 4;
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Value );
+	}
+}

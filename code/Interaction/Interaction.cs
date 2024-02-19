@@ -53,6 +53,24 @@ public struct Interaction
 	public InputMode InputMode { get; set; }
 
 	/// <summary>
+	/// Does this interaction use bounds?
+	/// </summary>
+	[Property]
+	public bool HasBounds { get; set; }
+
+	/// <summary>
+	/// The position of this interaction, if it even has them
+	/// </summary>
+	[Property, ShowIf( "HasBounds", true )]
+	public Vector3 Position { get; set; }
+
+	/// <summary>
+	/// The extents of this interaction, if it even has them
+	/// </summary>
+	[Property, ShowIf( "HasBounds", true )]
+	public Vector3 Extents { get; set; }
+
+	/// <summary>
 	/// The text that should actually be displayed.
 	/// </summary>
 	[Hide, JsonIgnore]
@@ -98,6 +116,46 @@ public class Interactions : Component
 
 	protected override void DrawGizmos()
 	{
-		
+		var interactions = ObjectInteractions;
+		if ( interactions == null )
+			return;
+
+		for ( int i = 0; i < interactions.Count; i++ )
+		{
+			var interaction = interactions[i];
+			if ( !interaction.HasBounds || !Gizmo.IsSelected )
+				continue;
+
+			var bbox = new BBox( interaction.Position - interaction.Extents / 2, interaction.Position + interaction.Extents / 2 );
+			Gizmo.Draw.Color = Color.Yellow;
+			Gizmo.Draw.LineThickness = 2;
+			Gizmo.Draw.LineBBox( bbox );
+
+			Gizmo.Draw.Color = Color.White;
+			Gizmo.Draw.Text( $"{interaction.Description}", new Transform( interaction.Position ), "Consolas", 24 );
+
+			using ( Gizmo.Scope( $"{interaction.Description}", new Transform( interaction.Position ) ) )
+			{
+				Gizmo.Hitbox.BBox( bbox );
+				Gizmo.Hitbox.DepthBias = 0.01f;
+
+				if ( Gizmo.IsShiftPressed )
+				{
+					if ( Gizmo.Control.Scale( "scale", Vector3.Zero, out var scale ) )
+						ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = interaction with
+						{
+							Extents = interaction.Extents + scale * 50
+						};
+
+					continue;
+				}
+
+				if ( Gizmo.Control.Position( "position", Vector3.Zero, out var pos ) )
+					ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = interaction with
+					{
+						Position = interaction.Position + pos
+					};
+			}
+		}
 	}
 }
