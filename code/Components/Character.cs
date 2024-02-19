@@ -151,7 +151,7 @@ public class Character : Component, Component.ExecuteInEditor
 
 			if ( _clothing.ContainsKey( modelKey ) )
 			{
-				if ( _clothing[modelKey] != null && _clothing[modelKey].Model != model )
+				if ( _clothing[modelKey].IsValid() && _clothing[modelKey].Model != model )
 				{
 					_clothing[modelKey].Delete();
 					_clothing.Remove( modelKey );
