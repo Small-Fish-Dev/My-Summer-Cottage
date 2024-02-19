@@ -4,19 +4,29 @@ Layer0
 {
 	shader "shaders/saunacliff.shader"
 
+	//---- Cliff Settings ----
+	F_SECOND_LAYER_TEXTURE 1
+
 	//---- Cliff Model Data ----
 	CliffDirection "materials/cliffs/cliff_a/cliff_long_c_dir.png"
 	CliffDirt "materials/cliffs/cliff_a/cliff_long_c_dirt.png"
 	CliffPeaks "materials/cliffs/cliff_a/cliff_long_c_peaks.png"
-	DirtStrength "1.000"
-	PeaksStrength "0.250"
+	DirtStrength "1.575"
+	PeaksStrength "0.831"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
+	//---- L2 Texture ----
+	LayerTwoAmbientOcclusion "materials/default/default.tga"
+	LayerTwoColor "materials/ground/grass/new_graph_basecolor.png"
+	LayerTwoMetalness "[0.000000 0.000000 0.000000 0.000000]"
+	LayerTwoNormal "materials/ground/grass/new_graph_normal.png"
+	LayerTwoRoughness "materials/ground/grass/new_graph_roughness.png"
+
 	//---- Material ----
 	AmbientOcclusion "materials/cliffs/cliff_a/cliff_long_c_ao.png"
-	AmbientOcclusionStrength "1.000"
+	AmbientOcclusionStrength "1.096"
 	Color "materials/nature/rock/rock3_basecolor.png"
 	ColorTintMask "[1.000000 1.000000 1.000000 0.000000]"
 	DetailNormal "materials/nature/rock/rock3_normal.png"
@@ -28,7 +38,10 @@ Layer0
 	Roughness "materials/nature/rock/rock3_roughness.png"
 
 	//---- Triplanar Settings ----
-	TextureBlending "1.000"
-	TextureScale "1.000"
+	TextureBlending "10.000"
+	TextureBlendingB "10.000"
+	TextureScale "1.130"
+	TextureScaleB "2.193"
 	TextureTiling "7.801"
+	TextureTilingB "2.000"
 }
