@@ -30,7 +30,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	protected CameraComponent Camera;
 	protected SkinnedModelRenderer Model;
 	protected BoxCollider Collider;
-
+	protected ParticleConeEmitter PissEmitter;
+	protected ParticleEffect PissParticles;
 	protected override void DrawGizmos()
 	{
 	}
@@ -48,6 +49,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		Model = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
 		Collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndDescendants );
+
+		PissEmitter = Components.Get<ParticleConeEmitter>( FindMode.EverythingInSelfAndDescendants );
 
 		// Footsteps
 		Model.OnFootstepEvent += OnFootstep;
@@ -78,6 +81,11 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		UpdateMovement();
 		UpdateInteractions();
+
+		if ( PissEmitter != null )
+		{
+			PissEmitter.Enabled = Input.Down( "Piss" );
+		}
 	}
 
 	protected override void OnPreRender()
