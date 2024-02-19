@@ -4,7 +4,11 @@
   
   opacity: 1;
   
-  transition: opacity 0.25s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
+  
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
   
   &:intro {
     opacity: 0;
@@ -12,6 +16,10 @@
 
   &:outro {
     opacity: 0;
+  }
+  
+  .speaker {
+    font-weight: bold;
   }
   
   .environment {

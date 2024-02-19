@@ -11,6 +11,7 @@ public class SoundWithSubtitlesResource : GameResource
 	
 	[Property] public SoundEvent SoundEvent { get; set; }
 	[Property] public SubtitlePriority Priority { get; set; }
+	[Property] public float MaxDistance { get; set; } = 100;
 	
 	/// <summary>
 	/// A dictionary that maps an ISO 639-1 Country Code to the appropriate translation

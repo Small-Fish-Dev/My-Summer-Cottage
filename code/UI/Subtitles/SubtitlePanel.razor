@@ -1,9 +1,16 @@
 ﻿@namespace Sauna.UI.Subtitles
 @attribute [StyleSheet]
+@using Sauna.Components
 @inherits Panel
 
 <root>
-	<label class="speaker @( Resource.Priority == SoundWithSubtitlesResource.SubtitlePriority.SoundEffect ? "environment" : "" )">
+	@if ( Name != null )
+	{
+		<label class="speaker">@Name.Name</label>
+		<label>: </label>
+	}
+
+	<label class="@( Resource.Priority == SoundWithSubtitlesResource.SubtitlePriority.SoundEffect ? "environment" : "" )">
 		@Resource.GetLocalized()
 	</label>
 </root>
@@ -11,6 +18,7 @@
 @code {
 
 	public SoundWithSubtitlesResource Resource { get; set; }
+	public FancyName Name { get; set; }
 
 	protected override int BuildHash() => HashCode.Combine( GameSettings.GetLanguage );
 
