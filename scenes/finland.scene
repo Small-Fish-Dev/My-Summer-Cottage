@@ -1,5 +1,5 @@
 {
-  "Id": "0c5a8be6-63ee-44b1-a1e6-eaa9f3d60582",
+  "Id": "00df02be-8e87-4240-95ab-aef22b986af2",
   "GameObjects": [
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -29,11 +29,6 @@
             },
             {
               "__type": "Hud"
-            },
-            {
-              "__type": "Subtitles",
-              "ForceRemoveWhenOverLimit": 1,
-              "MaxSubtitlesOnScreen": 3
             }
           ]
         }
@@ -64,69 +59,122 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "b60318fc-dbb8-45c3-b9d4-1347270ab4b5",
-      "Name": "Ambient",
-      "Position": "357.8161,0.0000213275,258.2727",
+      "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
+      "Name": "Sun",
+      "Position": "738.2429,-599.6027,124.8594",
+      "Rotation": "-0.1830127,0.6830127,-0.1830127,0.6830127",
+      "Tags": "light_directional,light",
       "Enabled": true,
-      "Children": [
+      "Components": [
         {
-          "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
-          "Name": "Skybox",
-          "Position": "0,0,60",
-          "Tags": "skybox",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "SkyBox2D",
-              "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "Id": "74c6edc7-2832-4482-8f0f-c8312c6f4e77",
-          "Name": "Fog",
-          "Position": "0,0,20",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "GradientFog",
-              "Color": "0.33921,0.34504,0.45581,1",
-              "EndDistance": 10000,
-              "FalloffExponent": 1,
-              "Height": 10000,
-              "StartDistance": 0,
-              "VerticalFalloffExponent": 1
-            }
-          ]
-        },
-        {
-          "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
-          "Name": "Sun",
-          "Position": "0,0,40",
-          "Rotation": "-0.113039,0.4957226,-0.0652631,0.8586168",
-          "Tags": "light_directional,light",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "DirectionalLight",
-              "FogMode": "Enabled",
-              "FogStrength": 1,
-              "LightColor": "1,1,1,1",
-              "Shadows": false,
-              "SkyColor": "1,1,1,1"
-            }
-          ]
+          "__type": "DirectionalLight",
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.91373,0.98039,1,1",
+          "Shadows": false,
+          "SkyColor": "1,1,1,1"
         }
       ]
     },
     {
-      "Id": "dadaaa19-7339-41a1-86e1-963b751116a7",
-      "Name": "finnish_guy",
-      "Position": "1030.104,-1849.768,39.35529",
-      "Rotation": "-0.000003493743,0.00003528595,0.00001048123,1",
+      "Id": "0c30de5b-24a4-4b11-837e-43ef14e0a674",
+      "Name": "mannequin",
+      "Position": "866.9108,-714.9219,25.39032",
+      "Rotation": "0,0,0.8660254,0.5000001",
       "Enabled": true,
-      "__Prefab": "prefabs/npcs/finnish_guy.prefab"
+      "Components": [
+        {
+          "__type": "Player",
+          "__enabled": false,
+          "DuckSpeed": 60,
+          "Fatness": 0,
+          "Height": 0,
+          "JumpStrength": 200,
+          "Money": 0,
+          "MoveHelper": null,
+          "Speed": 140,
+          "SprintSpeed": 280,
+          "WalkSpeed": 80
+        },
+        {
+          "__type": "Character",
+          "Clothes": [
+            "models/clothes/sauna_boss_hat/sauna_boss.vmdl",
+            "models/clothes/t-shirt/t-shirt.vmdl",
+            "models/clothes/underwear/underwear.vmdl"
+          ],
+          "Fatness": 0,
+          "Height": 0,
+          "HideBodyGroup": "None",
+          "Player": {
+            "_type": "component",
+            "go": "0c30de5b-24a4-4b11-837e-43ef14e0a674",
+            "component_type": "Player"
+          }
+        },
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 11,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/guy/guy.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "Id": "6724ca80-616c-42ec-a322-be28e93e69b8",
+      "Name": "mannequin (1)",
+      "Position": "831.4614,-739.2984,25.39032",
+      "Rotation": "0,0,0.8660254,0.5000001",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Player",
+          "__enabled": false,
+          "DuckSpeed": 60,
+          "Fatness": 1,
+          "Height": 0,
+          "JumpStrength": 200,
+          "Money": 0,
+          "MoveHelper": null,
+          "Speed": 140,
+          "SprintSpeed": 280,
+          "WalkSpeed": 80
+        },
+        {
+          "__type": "Character",
+          "Clothes": [
+            "models/clothes/sauna_boss_hat/sauna_boss.vmdl",
+            "models/clothes/underwear/underwear.vmdl",
+            "models/clothes/t-shirt/t-shirt.vmdl"
+          ],
+          "Fatness": 1,
+          "Height": 0,
+          "HideBodyGroup": "None",
+          "Player": {
+            "_type": "component",
+            "go": "6724ca80-616c-42ec-a322-be28e93e69b8",
+            "component_type": "Player"
+          }
+        },
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 11,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/guy/guy.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -138,20 +186,20 @@
     "TimeScale": 1,
     "UseFixedUpdate": true,
     "NavMesh": {
-      "Enabled": true,
+      "Enabled": false,
       "IncludeStaticBodies": true,
       "IncludeKeyframedBodies": true,
       "EditorAutoUpdate": true,
-      "AgentHeight": 48,
-      "AgentRadius": 10,
-      "AgentStepSize": 24,
-      "AgentMaxSlope": 60,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
       "ExcludedBodies": "",
       "IncludedBodies": ""
     }
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-19T04:57:40.4301719\u002B03:00",
+  "LastSaved": "2024-02-19T13:42:28.0833169\u002B00:00",
   "__references": []
 }
