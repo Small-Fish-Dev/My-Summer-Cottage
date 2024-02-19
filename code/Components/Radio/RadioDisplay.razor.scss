@@ -1,0 +1,46 @@
+﻿RadioDisplay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+
+    .text {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        width: 100%;
+        font-size: 38px;
+        font-family: "DSEG14 Modern";
+        max-height: 100%;
+
+        .background {
+            z-index: 0;
+        }
+
+        .foreground {
+            z-index: 1;
+            color: darken(#5E7C34, 0.95);
+        }
+    }
+
+    .timeline-container {
+        position: absolute;
+        bottom: 5px;
+        left: 0px;
+        padding: 2px 14px 2px 12px;
+        width: 100%;
+        height: 20px;
+
+        .timeline {
+            width: 100%;
+            height: 100%;
+            border: 2px black;
+            padding: 1px;
+
+            .inner {
+                width: 10%;
+                background-color: black;
+            }
+        }
+    }
+}

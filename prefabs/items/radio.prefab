@@ -1,0 +1,74 @@
+{
+  "RootObject": {
+    "Id": "a7c0fab3-3a14-41f7-aad2-6756f95a7f1f",
+    "Name": "Radio",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "SkinnedModelRenderer",
+        "AnimationGraph": null,
+        "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/radio/radio.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "RadioComponent",
+        "On": true
+      },
+      {
+        "__type": "BoxCollider",
+        "Center": "0.5,0,5",
+        "IsTrigger": false,
+        "Scale": "11,11,10",
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      }
+    ],
+    "Children": [
+      {
+        "Id": "d694040a-53f4-4c56-8d50-df5046e1bb5d",
+        "Name": "Panel",
+        "Position": "4.736,0,4.693",
+        "Rotation": "0,-0.2546024,0,0.9670458",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "WorldPanel",
+            "HorizontalAlign": "Center",
+            "LookAtCamera": false,
+            "PanelSize": "104,26",
+            "RenderScale": 0.13,
+            "VerticalAlign": "Center"
+          },
+          {
+            "__type": "RadioDisplay",
+            "Radio": {
+              "_type": "component",
+              "go": "a7c0fab3-3a14-41f7-aad2-6756f95a7f1f",
+              "component_type": "RadioComponent"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
