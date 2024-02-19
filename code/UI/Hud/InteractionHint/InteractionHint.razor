@@ -13,7 +13,7 @@
 		{
 			<div class="interaction">
 				<inputglyph class="icon" glyphSize=@InputGlyphSize.Small action="@(interaction.Keybind)" />
-				<text>@interaction.Description</text>
+				<text>@interaction.Text</text>
 			</div>
 		}
 	}
@@ -45,6 +45,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(HasTarget, _interactions.HashCombine(i => HashCode.Combine(i.Description)));
+		return HashCode.Combine(HasTarget, _interactions.HashCombine(i => HashCode.Combine(i.Text)));
 	}
 }

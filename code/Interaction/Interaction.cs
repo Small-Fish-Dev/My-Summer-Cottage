@@ -27,10 +27,26 @@ public struct Interaction
 	/// </summary>
 	[Property]
 	public Func<bool> Disabled { get; set; }
+
+	/// <summary>
+	/// Whether or not the interaction is able to be performed
+	/// </summary>
+	[Property]
+	public Func<string> DynamicText { get; set; }
+
+	/// <summary>
+	/// The text that should actually be displayed.
+	/// </summary>
+	public string Text => DynamicText?.Invoke() ?? Description;
 }
 
 public class Interactions : Component
 {
 	[Property]
 	public List<Interaction> ObjectInteractions { get; set; }
+
+	protected override void DrawGizmos()
+	{
+		
+	}
 }
