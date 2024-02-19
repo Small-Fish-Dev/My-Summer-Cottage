@@ -20,12 +20,13 @@ public sealed class NPC : Component
 		{
 			_currentTargetPosition = TargetPosition;
 			var closestPoint = Scene.NavMesh.GetClosestPoint( _currentTargetPosition );
-			Log.Info( "MOVING" );
+
 			if ( closestPoint != null )
 				Agent.MoveTo( closestPoint.Value );
 		}
 
-		Model.Transform.Rotation = Rotation.LookAt( Agent.Velocity.WithZ( 0f ), Vector3.Up );
+		if ( Agent.Velocity.Length >= 5f )
+			Model.Transform.Rotation = Rotation.LookAt( Agent.Velocity.WithZ( 0f ), Vector3.Up );
 
 		if ( Model == null ) return;
 
@@ -42,7 +43,11 @@ public sealed class NPC : Component
 
 	protected override void OnFixedUpdate()
 	{
-		if (Scene.GetAllComponents<Player>().FirstOrDefault() is Player player)
-			TargetPosition = player.Transform.Position;
+		if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player )
+		{
+			var diff = Transform.Position - player.Transform.Position;
+			var direction = diff.Normal;
+			TargetPosition = player.Transform.Position + direction * 80f;
+		}
 	}
 }
