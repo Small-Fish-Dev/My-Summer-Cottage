@@ -39,6 +39,10 @@ public class Inventory : Component
 		if ( droppedItem is null )
 			return false;
 
+		droppedItem.DrawingEnabled = true;
+		droppedItem.GameObject.Transform.Position = Player.ViewRay.Position;
+		droppedItem.GameObject.Parent = null;
+
 		return true;
 	}
 
