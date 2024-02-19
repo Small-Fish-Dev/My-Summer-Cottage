@@ -1,6 +1,6 @@
 HEADER
 {
-	Description = "Cliff Shader";
+	Description = "Sauna Cliff Shader";
 	Version = 1;
 	Description = "Simple triplanar-mapped shader by wheatleymf.";
 }
