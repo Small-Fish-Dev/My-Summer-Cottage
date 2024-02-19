@@ -13,6 +13,40 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Range( -100f, 100f, 1f )]
 	public float Height { get; set; } = 0f;
 
+	/// <summary>
+	/// Block both inputs and mouse aiming
+	/// </summary>
+	public bool BlockMovements { get; set; } = false;
+
+	bool _blockMouseAim = false;
+
+	/// <summary>
+	/// Block mouse aiming
+	/// </summary>
+	public bool BlockMouseAim
+	{
+		get => BlockMovements || _blockMouseAim;
+		set => _blockMouseAim = value;
+	}
+
+	bool _blockInputs = false;
+
+	/// <summary>
+	/// Block inputs (Like WASD, Pissing, Left/Right click)
+	/// </summary>
+	public bool BlockInputs
+	{
+		get => BlockMovements || _blockInputs;
+		set => _blockInputs = value;
+	}
+
+	/// <summary>
+	/// Whatever gameobject you're currently pissing on
+	/// </summary>
+	public GameObject PissingOn { get; set; }
+
+	public bool IsPissing => !BlockInputs && Input.Down( "Piss" );
+
 	public string FacedDirection => (int)((EyeAngles.Normal.yaw + 45f / 2 + 180) % 360 / 45f) switch
 	{
 		0 => "South",
@@ -51,6 +85,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		Collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndDescendants );
 
 		PissEmitter = Components.Get<ParticleConeEmitter>( FindMode.EverythingInSelfAndDescendants );
+		PissParticles = Components.Get<ParticleEffect>( FindMode.EverythingInSelfAndDescendants );
 
 		// Footsteps
 		Model.OnFootstepEvent += OnFootstep;
@@ -84,7 +119,18 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		if ( PissEmitter != null )
 		{
-			PissEmitter.Enabled = Input.Down( "Piss" );
+			PissEmitter.Enabled = IsPissing;
+
+			if ( PissParticles != null )
+			{
+				foreach ( var particle in PissParticles.Particles )
+				{
+					if ( particle.HitTime > 0 )
+					{
+						Log.Info( "Particle hit!" );
+					}
+				}
+			}
 		}
 	}
 

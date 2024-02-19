@@ -66,9 +66,9 @@ partial class Player
 		var wishSpeed = isDucking ? DuckSpeed : (isWalking ? WalkSpeed : (isSprinting ? SprintSpeed : Speed));
 		var wishVelocity = Input.AnalogMove.Normal * wishSpeed * EyeAngles.WithPitch( 0f );
 
-		MoveHelper.WishVelocity = wishVelocity;
+		MoveHelper.WishVelocity = BlockInputs ? Vector3.Zero : wishVelocity;
 
-		if ( Input.Pressed( "Jump" ) && MoveHelper.IsOnGround )
+		if ( !BlockInputs && Input.Pressed( "Jump" ) && MoveHelper.IsOnGround )
 		{
 			Model?.Set( "jump", true );
 			JumpBroadcast();
@@ -77,8 +77,13 @@ partial class Player
 		// Ducking
 		var from = Transform.Position;
 		var to = from + Vector3.Up * HEIGHT;
-		Ducking = (Ducking && Scene.Trace.Ray( in from, in to ).Size( Collider.Scale.WithZ( 0f ) ).IgnoreGameObjectHierarchy( GameObject ).WithoutTags( "trigger" ).Run().Hit)
-			|| Input.Down( "duck" ); // Beautiful.
+
+		// If we block inputs let's just keep whatever ducking state you were in
+		if ( !BlockInputs )
+		{
+			Ducking = (Ducking && Scene.Trace.Ray( in from, in to ).Size( Collider.Scale.WithZ( 0f ) ).IgnoreGameObjectHierarchy( GameObject ).WithoutTags( "trigger" ).Run().Hit)
+				|| Input.Down( "duck" ); // Beautiful.
+		}
 
 		MoveHelper.Move();
 
@@ -108,7 +113,7 @@ partial class Player
 		// Update Collider
 		var height = Ducking ? DUCK_HEIGHT : HEIGHT;
 		var bbox = MoveHelper.CollisionBBox;
-		
+
 		MoveHelper.CollisionBBox = new BBox( bbox.Mins, bbox.Maxs.WithZ( height ) );
 		Collider.Scale = Collider.Scale.WithZ( height );
 		Collider.Center = Vector3.Up * height / 2f;
@@ -116,6 +121,8 @@ partial class Player
 
 	protected void UpdateAngles()
 	{
+		if ( BlockMouseAim ) return;
+
 		var ang = EyeAngles;
 		ang += Input.AnalogLook;
 		ang.pitch = ang.pitch.Clamp( -89, 89 );
