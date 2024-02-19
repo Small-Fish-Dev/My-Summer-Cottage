@@ -50,6 +50,7 @@ public class IconEditor : GraphicsView
 
 		var property = (parent as IconEditorPopup).Property;
 		var icon = property.GetValue<IconSettings>();
+		Log.Error( icon.Guid );
 		if ( icon.Guid == Guid.Empty ) // Generate if empty.
 		{
 			property.SetValue( icon = new IconSettings
