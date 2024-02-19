@@ -8,3 +8,7 @@ global using System.Linq;
 global using System.Threading.Tasks;
 global using System.Collections.Generic;
 global using Sandbox.Network;
+global using System.Text.Json;
+global using System.Text.Json.Nodes;
+global using System.Text.Json.Serialization;
+global using Sandbox.Internal;

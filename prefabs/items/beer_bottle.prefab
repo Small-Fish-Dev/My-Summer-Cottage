@@ -7,23 +7,8 @@
       {
         "__type": "ItemComponent",
         "Description": "Use this to get fucked up like Cyberagent",
-        "Name": "Beer Bottle"
-      },
-      {
-        "__type": "ModelRenderer",
-        "BodyGroups": 11,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
-        "Model": "models/beer_bottle/beer.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
-      },
-      {
-        "__type": "ModelCollider",
-        "IsTrigger": false,
-        "Model": "models/beer_bottle/beer.vmdl",
-        "Static": false,
-        "Surface": null
+        "Name": "Beer Bottle",
+        "Weight": 0
       },
       {
         "__type": "Interactions",
@@ -48,8 +33,8 @@
                   "Id": 1,
                   "Type": "property.get",
                   "Properties": {
-                    "_name": "Inventory",
-                    "_type": "Player"
+                    "_type": "Player",
+                    "_name": "Inventory"
                   },
                   "UserData": {
                     "Position": "144,-0"
@@ -59,9 +44,9 @@
                   "Id": 3,
                   "Type": "call",
                   "Properties": {
-                    "_name": "GiveItem",
+                    "_isStatic": false,
                     "_type": "Inventory",
-                    "_isStatic": false
+                    "_name": "GiveItem"
                   },
                   "UserData": {
                     "Position": "336,0"
@@ -97,6 +82,32 @@
             }
           }
         ]
+      },
+      {
+        "__type": "ModelRenderer",
+        "BodyGroups": 11,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/beer_bottle/beer.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ModelCollider",
+        "IsTrigger": false,
+        "Model": "models/beer_bottle/beer.vmdl",
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
       }
     ],
     "Children": []
