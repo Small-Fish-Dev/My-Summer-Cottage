@@ -13,6 +13,7 @@ public class IconEditor : GraphicsView
 	private AnglesProperty _angles;
 	private Vector3Property _position;
 	private SceneCamera _camera;
+	private SceneLight _light;
 
 	private void FitCamera()
 	{
@@ -26,6 +27,7 @@ public class IconEditor : GraphicsView
 
 		_camera.Position = pos;
 		_camera.Rotation = global::Rotation.LookAt( bounds.Center - _camera.Position ).RotateAroundAxis( -viewDirection, 90 );
+		_light.Position = pos + _camera.Rotation.Backward * 20f;
 	}
 
 	public IconEditor( Widget parent ) : base( parent )
@@ -43,15 +45,21 @@ public class IconEditor : GraphicsView
 			ZNear = 2
 		};
 
-		_ = new SceneLight( world, Vector3.Forward * 15f, 1000f, Color.White * 0.7f );
+		_light = new SceneLight( world, Vector3.Forward * 15f, 1000f, Color.White * 0.7f );
 		_ = new SceneDirectionalLight( world, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
 
 		var property = (parent as IconEditorPopup).Property;
-		var icon = property.GetValue( new IconSettings
+		var icon = property.GetValue<IconSettings>();
+		if ( icon.Guid == Guid.Empty ) // Generate if empty.
 		{
-			Rotation = global::Rotation.Identity,
-			Position = Vector3.Zero
-		} );
+			property.SetValue( icon = new IconSettings
+			{
+				Model = icon.Model,
+				Rotation = global::Rotation.Identity,
+				Position = Vector3.Zero,
+				Guid = Guid.NewGuid()
+			} );
+		}
 
 		// Layout
 		Layout = Layout.Column();
@@ -104,17 +112,16 @@ public class IconEditor : GraphicsView
 				Text = "Save Icon Settings",
 				Clicked = () =>
 				{
-					var guid = Guid.NewGuid();
 					property.SetValue( new IconSettings()
 					{
 						Model = _model.Value,
 						Position = _position.Value,
 						Rotation = _angles.Value,
-						Guid = guid,
+						Guid = icon.Guid,
 					} );
 
 					var pixmap = new Pixmap( RENDER_RESOLUTION, RENDER_RESOLUTION );
-					var path = $"{Project.Current.GetRootPath().Replace( '\\', '/' )}/ui/icons/{guid}.png";
+					var path = $"{Project.Current.GetRootPath().Replace( '\\', '/' )}/ui/icons/{icon.Guid}.png";
 					_camera.RenderToPixmap( pixmap );
 					pixmap.SavePng( path );
 
