@@ -2,9 +2,6 @@ namespace Sauna;
 
 public struct IconSettings : IEquatable<IconSettings>
 {
-	[JsonIgnore]
-	public Texture Texture => Texture.Load( FileSystem.Mounted, $"ui/icons/{Guid}.png" );
-
 	public string Model { get; set; }
 	public Vector3 Position { get; set; }
 	public Rotation Rotation { get; set; }
