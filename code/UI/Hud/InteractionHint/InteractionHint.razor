@@ -33,7 +33,7 @@
 
 		foreach ( var interaction in _interactions )
 		{
-			if (Input.Down(interaction.Keybind) && (interaction.Disabled is null || !interaction.Disabled()))
+			if (interaction.InputFunction(interaction.Keybind) && (interaction.Disabled is null || !interaction.Disabled()))
 				interaction.Action?.Invoke(Player.Local, Player.Local.TargetedGameObject);
 		}
 
