@@ -13,6 +13,7 @@ public partial class Player
 		var trace = Scene.Trace.Ray( ViewRay, INTERACTION_DISTANCE )
 					.Size( INTERACTION_SIZE )
 					.IgnoreGameObject( GameObject )
+					.WithoutTags( "world" )
 					.Run();
 
 		TargetedGameObject = trace.GameObject;
