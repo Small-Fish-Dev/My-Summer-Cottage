@@ -1,3 +1,20 @@
 ﻿SubtitlePanel {
+  color: white;
+  font-size: 25px;
   
+  opacity: 1;
+  
+  transition: opacity 0.25s ease-in-out;
+  
+  &:intro {
+    opacity: 0;
+  }
+
+  &:outro {
+    opacity: 0;
+  }
+  
+  .environment {
+    font-style: italic;
+  }
 }

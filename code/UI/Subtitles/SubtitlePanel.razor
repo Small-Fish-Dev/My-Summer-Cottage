@@ -3,7 +3,9 @@
 @inherits Panel
 
 <root>
-	<label class="speaker">@Resource.GetLocalized()</label>
+	<label class="speaker @( Resource.Priority == SoundWithSubtitlesResource.SubtitlePriority.SoundEffect ? "environment" : "" )">
+		@Resource.GetLocalized()
+	</label>
 </root>
 
 @code {
