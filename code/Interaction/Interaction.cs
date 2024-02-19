@@ -2,13 +2,13 @@ namespace Sauna;
 
 public enum InputMode
 {
-	[Icon( "left_click" )]
+	[Icon( "mouse" )]
 	Pressed,
 
-	[Icon( "highlight_mouse_cursor" )]
+	[Icon( "front_hand" )]
 	Released,
 
-	[Icon( "drag_click" )]
+	[Icon( "ads_click" )]
 	Down
 }
 
