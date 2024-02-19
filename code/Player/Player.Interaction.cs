@@ -1,3 +1,5 @@
+using Sandbox;
+
 namespace Sauna;
 
 public partial class Player
@@ -11,15 +13,27 @@ public partial class Player
 
 	private void UpdateInteractions()
 	{
-		InteractionTrace = Scene.Trace.Ray( ViewRay, INTERACTION_DISTANCE )
-					.Size( INTERACTION_SIZE )
+		var thinTrace = Scene.Trace.Ray( ViewRay, INTERACTION_DISTANCE )
 					.IgnoreGameObject( GameObject )
 					.WithoutTags( "world" )
 					.Run();
 
-		var obj = InteractionTrace.GameObject;
-		obj = obj?.GetInteractions() == null ? null : obj;
+		if ( thinTrace.GameObject != null && thinTrace.GameObject.GetInteractions() != null )
+		{
+			InteractionTrace = thinTrace;
+			TargetedGameObject = thinTrace.GameObject;
+		}
+		else
+		{
+			InteractionTrace = Scene.Trace.Ray( ViewRay, INTERACTION_DISTANCE )
+						.Size( INTERACTION_SIZE )
+						.IgnoreGameObject( GameObject )
+						.WithoutTags( "world" )
+						.Run();
+			var obj = InteractionTrace.GameObject;
+			obj = obj?.GetInteractions() == null ? null : obj;
 
-		TargetedGameObject = obj;
+			TargetedGameObject = obj;
+		}
 	}
 }

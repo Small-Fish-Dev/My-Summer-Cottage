@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace Sauna;
 
 public enum InputMode
@@ -103,7 +105,7 @@ public class Interactions : Component
 	public List<Interaction> ObjectInteractions { get; set; }
 
 	private List<Interaction> _queue = new();
-	public void AddInteraction( Interaction	interaction )
+	public void AddInteraction( Interaction interaction )
 	{
 		_queue.Add( interaction );
 	}
@@ -112,6 +114,13 @@ public class Interactions : Component
 	{
 		ObjectInteractions ??= new();
 		ObjectInteractions.AddRange( _queue );
+	}
+
+	protected override void OnUpdate()
+	{
+		var interactions = ObjectInteractions;
+		if ( interactions == null )
+			return;
 	}
 
 	protected override void DrawGizmos()

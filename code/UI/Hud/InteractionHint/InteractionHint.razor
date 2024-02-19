@@ -20,27 +20,30 @@
 </root>
 
 @code {
-	private bool HasTarget => Player.Local?.TargetedGameObject is not null;
-	private IEnumerable<Interaction> _interactions => Player.Local?.TargetedGameObject?.GetInteractions() ?? new List<Interaction>();
-	private Vector2 _lerpPosition;
+    private bool HasTarget => Player.Local?.TargetedGameObject is not null;
+    private IEnumerable<Interaction> _interactions => Player.Local?.TargetedGameObject?.GetInteractions() ?? new List<Interaction>();
+    private Vector2 _lerpPosition;
 
-	private bool CanInteract( Interaction interaction )
-		=> (interaction.Disabled is null || !interaction.Disabled())
-		&& (!interaction.HasBounds || GetInteractionBounds( interaction ).Contains( Player.Local.InteractionTrace.EndPosition ));
+    private bool CanInteract( Interaction interaction )
+        => (interaction.Disabled is null || !interaction.Disabled())
+        && (!interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition));
 
-	private BBox GetInteractionBounds( Interaction interaction )
-		=> new BBox(interaction.Position - interaction.Extents / 2, interaction.Position + interaction.Extents / 2).Translate( Player.Local.TargetedGameObject.Transform.Position );
+    private BBox GetInteractionBounds(Interaction interaction)
+        => new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
+        .Transform(Player.Local.TargetedGameObject.Transform.World);
 
-	public override void Tick() 
-	{
-		SetClass("visible", HasTarget);
+    public override void Tick() 
+    {
+        SetClass("visible", HasTarget);
 
-		if (!HasTarget)
-			return;
+        if (!HasTarget)
+            return;
 
-		foreach ( var interaction in _interactions )
-		{
-			if ( CanInteract( interaction ) && interaction.InputFunction( interaction.Keybind ) )
+        var first = _interactions.First();
+
+        foreach ( var interaction in _interactions )
+        {
+            if ( CanInteract( interaction ) && interaction.InputFunction( interaction.Keybind ) )
 				interaction.Action?.Invoke(Player.Local, Player.Local.TargetedGameObject);
 		}
 

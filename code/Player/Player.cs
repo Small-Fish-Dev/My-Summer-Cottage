@@ -1,3 +1,5 @@
+using Sandbox.Citizen;
+
 namespace Sauna;
 
 public partial class Player : Component, Component.ExecuteInEditor
