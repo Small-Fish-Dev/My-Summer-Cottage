@@ -1,33 +1,53 @@
 using Editor;
 using Sandbox;
+using System;
 
 namespace Sauna;
 
 public class IconEditor : GraphicsView
 {
+	public const int RENDER_RESOLUTION = 128;
+
 	private SceneObject _obj;
 	private StringProperty _model;
 	private AnglesProperty _angles;
 	private Vector3Property _position;
+	private SceneCamera _camera;
+
+	private void FitCamera()
+	{
+		var bounds = _obj.Model.Bounds;
+		var max = bounds.Size;
+		var radius = MathF.Max( max.x, MathF.Max( max.y, max.z ) );
+		var dist = radius / MathF.Sin( _camera.FieldOfView.DegreeToRadian() );
+
+		var viewDirection = Vector3.Forward;
+		var pos = viewDirection * dist + bounds.Center;
+
+		_camera.Position = pos;
+		_camera.Rotation = global::Rotation.LookAt( bounds.Center - _camera.Position ).RotateAroundAxis( -viewDirection, 90 );
+	}
 
 	public IconEditor( Widget parent ) : base( parent )
 	{
-		var property = (parent as IconEditorPopup).Property;
-		var icon = property.GetValue<IconSettings>();
-
 		// Scene
 		var world = new SceneWorld();
-
-		var camera = new SceneCamera()
+		_camera = new SceneCamera()
 		{
 			World = world,
-			AmbientLightColor = Color.Black,
+			AmbientLightColor = Color.White,
 			AntiAliasing = false,
 			BackgroundColor = Color.Transparent,
-			Position = Vector3.Forward * 50f,
-			FieldOfView = 60,
-			Size = 128
+			FieldOfView = 40,
+			ZFar = 5000,
+			ZNear = 2
 		};
+
+		_ = new SceneLight( world, Vector3.Forward * 15f, 1000f, Color.White * 0.7f );
+		_ = new SceneDirectionalLight( world, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
+
+		var property = (parent as IconEditorPopup).Property;
+		var icon = property.GetValue<IconSettings>();
 
 		// Layout
 		Layout = Layout.Column();
@@ -55,7 +75,7 @@ public class IconEditor : GraphicsView
 			_model.TextEdited += ( text ) =>
 			{
 				var mdl = Model.Load( text );
-				_obj.Model = (mdl?.IsError ?? true)
+				_obj.Model = mdl?.ResourcePath == "models/dev/error.vmdl"
 					? Model.Load( "models/dev/box.vmdl" )
 					: mdl;
 			};
@@ -66,12 +86,12 @@ public class IconEditor : GraphicsView
 			// Scene
 			var renderer = Layout.Add( new NativeRenderingWidget( this )
 			{
-				Camera = camera,
+				Camera = _camera,
 				TranslucentBackground = true,
 				RenderEveryFrame = true
 			}, 1 );
 		}
-
+		
 		Layout.AddSpacingCell( 4 );
 		{
 			// Save Button
@@ -86,6 +106,11 @@ public class IconEditor : GraphicsView
 						Position = _position.Value,
 						Rotation = _angles.Value
 					} );
+
+					var pixmap = new Pixmap( RENDER_RESOLUTION, RENDER_RESOLUTION );
+					var path = $"{Project.Current.GetRootPath().Replace( '\\', '/' )}/ui/icons/{_obj.Model.ResourceName.Replace( '/', '\0' )}.png";
+					_camera.RenderToPixmap( pixmap );
+					pixmap.SavePng( path );
 
 					parent.Close();
 				}
@@ -107,6 +132,8 @@ public class IconEditor : GraphicsView
 	{
 		if ( _obj == null )
 			return;
+
+		FitCamera();
 
 		_obj.Position = _position.Value;
 		_obj.Rotation = _angles.Value;

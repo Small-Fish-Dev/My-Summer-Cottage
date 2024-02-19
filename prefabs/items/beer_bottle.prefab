@@ -1,12 +1,17 @@
 {
   "RootObject": {
     "Id": "2a69dc49-85ed-46d5-aa07-8e4e02590c92",
-    "Name": "beer_bottle",
+    "Name": "Beer Bottle",
     "Enabled": true,
     "Components": [
       {
         "__type": "ItemComponent",
         "Description": "Use this to get fucked up like Cyberagent",
+        "Icon": {
+          "Model": "models/beer_bottle/beer.vmdl",
+          "Position": "-0.15,1.5,0.6",
+          "Rotation": "0.09515837,-0.1995907,0.7635149,0.6067564"
+        },
         "Name": "Beer Bottle",
         "Weight": 0
       },
@@ -44,8 +49,8 @@
                   "Id": 3,
                   "Type": "call",
                   "Properties": {
-                    "_isStatic": false,
                     "_type": "Inventory",
+                    "_isStatic": false,
                     "_name": "GiveItem"
                   },
                   "UserData": {
