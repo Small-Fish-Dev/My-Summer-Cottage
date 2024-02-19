@@ -1,0 +1,55 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<div class="section">
+		<text style="font-size: 50px;">Backpack</text>
+		<div style="flex-wrap: wrap;">
+			@foreach(var item in Player.Local.Inventory.BackpackItems)
+			{
+				<div class="item-slot">
+					@if (item is not null)
+					{
+						<text>@item.Name</text>
+					}
+				</div>
+			}
+		</div>
+	</div>
+
+	<div class="section">
+		<text style="font-size: 50px;">Equipped Items</text>
+		<div style="flex-wrap: wrap;">
+			@for(int i = 0; i < Player.Local.Inventory.EquippedItems.Count(); ++i)
+			{
+				var slot = (EquipSlot)i;
+				var equippedItem = Player.Local.Inventory.EquippedItems.ElementAtOrDefault(i);
+				<div class="item-slot">
+					<text>@slot.ToString()</text>
+					<text>@(equippedItem is null ? "none" : equippedItem.Name)</text>
+				</div>
+			}
+		</div>
+	</div>
+</root>
+
+@code {
+	private bool _isOpen = false;
+
+	public override void Tick()
+	{
+		if (Input.Pressed("menu"))
+			_isOpen = !_isOpen;
+
+		SetClass("visible", _isOpen);
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(
+			Player.Local.Inventory.BackpackItems.HashCombine(i => i?.GetHashCode() ?? -1),
+			Player.Local.Inventory.EquippedItems.HashCombine(i => i?.GetHashCode() ?? -1)
+		);
+	}
+}
