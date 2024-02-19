@@ -1,0 +1,28 @@
+Inventory {
+    width: 80%;
+    height: 80%;
+    background-color: #2b2b2bc7;
+    display: none;
+    z-index: 10;
+    padding: 100px;
+
+    .section {
+        flex-direction: column;
+
+        .item-slot {
+            background-color: #000000c2;
+            flex-direction: column;
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+        }
+    }
+
+    &.visible {
+        display: flex;
+    }
+}
