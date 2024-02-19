@@ -1,13 +1,13 @@
-﻿@namespace Sauna.UI
+﻿@namespace Sauna.UI.Subtitles
 @attribute [StyleSheet]
-@inherits PanelComponent
+@inherits Panel
 
 <root>
-	
+	<label class="speaker">@Resource.GetLocalized()</label>
 </root>
 
 @code {
-	
+
 	public SoundWithSubtitlesResource Resource { get; set; }
 
 	protected override int BuildHash() => HashCode.Combine( GameSettings.GetLanguage );

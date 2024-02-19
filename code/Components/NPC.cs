@@ -42,7 +42,7 @@ public sealed class NPC : Component
 
 	protected override void OnFixedUpdate()
 	{
-
-		TargetPosition = Scene.GetAllComponents<Player>().FirstOrDefault().Transform.Position;
+		if (Scene.GetAllComponents<Player>().FirstOrDefault() is Player player)
+			TargetPosition = player.Transform.Position;
 	}
 }

@@ -16,4 +16,18 @@ public class SoundWithSubtitlesResource : GameResource
 	/// A dictionary that maps an ISO 639-1 Country Code to the appropriate translation
 	/// </summary>
 	[Property] public Dictionary<string, string> Text { get; set; }
+
+	public string GetLocalized()
+	{
+		if ( Text.TryGetValue( GameSettings.GetLanguage, out var text ) )
+			return text;
+
+		if ( Text.TryGetValue( "en", out text ) )
+			return text;
+
+		if ( Text.Count == 0 )
+			throw new Exception( $"Invalid sound resource {ResourcePath} has no subtitles" );
+
+		return Text.First().Value;
+	}
 }

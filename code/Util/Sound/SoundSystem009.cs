@@ -1,62 +1,53 @@
-﻿namespace Sauna;
+﻿using System.Threading;
+using Sauna.Util.Extensions;
+
+namespace Sauna;
 
 public class SoundSystem009 : GameObjectSystem
 {
-	public class SubtitlePopup
-	{
-		public SubtitlePopup(SoundWithSubtitlesResource resource, GameObject source, SoundHandle soundHandle)
-		{
-			Resource = resource;
-			Source = source;
-			SoundHandle = soundHandle;
-		}
-
-		public SoundWithSubtitlesResource Resource { get; init; }
-		public GameObject Source { get; init; }
-		public SoundHandle SoundHandle { get; init; }
-	}
-
-	public static SoundSystem009 The => _the.Target as SoundSystem009;
-
-	private static WeakReference _the;
-
-	[Property] public uint MaxSubtitlesOnScreen = 3;
+	public record SubtitlePopup( SoundWithSubtitlesResource Resource, GameObject Source, SoundHandle SoundHandle );
 
 	/// <summary>
 	/// Time in seconds before the subtitle disappears after the sound is done playing
 	/// </summary>
 	[Property] public float SubtitleDelay;
 
-	public List<SubtitlePopup> SubtitleSounds { get; private set; } = new();
+	public List<SubtitlePopup> Sounds { get; } = new();
 
 	public event Action<SubtitlePopup> OnSoundPlayed;
+	public event Action<SubtitlePopup> OnSoundStopped;
 
 	public SoundSystem009( Scene scene ) : base( scene )
 	{
-		_the = new WeakReference( this );
-
 		Listen( Stage.FinishUpdate, 0, UpdateSounds, "UpdateSounds" );
 	}
 
 	private void UpdateSounds()
 	{
-		// Log.Info( $"{SubtitleSounds.Count}" );
-		foreach ( var s in SubtitleSounds )
+		if ( !GameManager.IsPlaying )
+			return;
+		
+		Gizmo.Draw.ScreenText( $"{Sounds.Count}", new Vector2( 100, 100 ) );
+		var validSounds = Sounds.Where( sound => sound.SoundHandle.IsValid() ).Where( sound => sound.Source != null );
+		foreach (var sound in validSounds)
 		{
-			Log.Info( $"test {s}" );
+			if ( !sound.Source.IsValid() )
+				// Stop the sound if the speaker no longer exists
+				sound.SoundHandle.Stop();
+			else
+				sound.SoundHandle.Position = sound.Source.Transform.Position;
 		}
-		// var validSounds = Sounds.Where( sound => sound.SoundHandle.IsValid() ).Where( sound => sound.Source != null );
-		// foreach (var sound in validSounds)
-		// {
-		// 	Log.Info( $"{sound}" );
-		// 	if ( !sound.Source.IsValid() )
-		// 		// Stop the sound if the speaker no longer exists
-		// 		sound.SoundHandle.Stop();
-		// 	else
-		// 		sound.SoundHandle.Position = sound.Source.Transform.Position;
-		// }
 
-		// Sounds.RemoveAll( s => !s.SoundHandle.IsValid() || s.SoundHandle.IsStopped );
+		for ( var i = 0; i < Sounds.Count; i++ )
+		{
+			var s = Sounds[i];
+			if ( !s.SoundHandle.IsValid() || s.SoundHandle.IsStopped )
+			{
+				Sounds.RemoveAt( i-- );
+				
+				OnSoundStopped?.Invoke( s );
+			}
+		}
 	}
 
 	// TODO: Networking!
@@ -70,9 +61,9 @@ public class SoundSystem009 : GameObjectSystem
 			soundHandle = Sound.Play( sound.SoundEvent, source.Transform.Position );
 		
 		var subtitlePopup = new SubtitlePopup( sound, source, soundHandle);
-		SubtitleSounds.Add( subtitlePopup );
+		Sounds.Add( subtitlePopup );
 		OnSoundPlayed?.Invoke( subtitlePopup );
-		Log.Info( $"{SubtitleSounds.Count} {source?.Transform.Position}" );
+		Log.Info( $"{Sounds.Count} {source?.Transform.Position}" );
 	}
 
 	[ConCmd( "test_play_sound" )]
@@ -82,6 +73,6 @@ public class SoundSystem009 : GameObjectSystem
 		if ( soundResource is null )
 			throw new Exception( $"Cannot find a sound with subtitles @ {path}" );
 
-		The.Play( soundResource, Player.Local.GameObject );
+		GameManager.ActiveScene.SoundSystem().Play( soundResource, Player.Local.GameObject );
 	}
 }
