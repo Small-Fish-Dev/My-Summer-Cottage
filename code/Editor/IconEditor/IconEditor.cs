@@ -22,7 +22,6 @@ public class IconEditor : GraphicsView
 		{
 			World = world,
 			AmbientLightColor = Color.Black,
-			OnRenderPostProcess = pp,
 			AntiAliasing = false,
 			BackgroundColor = Color.Transparent,
 			Position = Vector3.Forward * 50f,
@@ -101,16 +100,6 @@ public class IconEditor : GraphicsView
 				? Model.Load( "models/dev/box.vmdl" )
 				: mdl
 		);
-	}
-
-	private void pp()
-	{
-		// Handle shader post processing for the camera.
-		var attributes = new RenderAttributes();
-		Graphics.GrabFrameTexture( "FrameTexture", attributes );
-
-		var shader = Material.FromShader( "shaders/item_icon.shader" );
-		Graphics.Blit( shader, attributes );
 	}
 
 	[EditorEvent.Frame]
