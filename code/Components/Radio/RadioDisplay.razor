@@ -1,0 +1,72 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits PanelComponent
+@attribute [StyleSheet]
+
+<root style="background-color: darken(#5E7C34, @(Radio.On ? 0.5 : 0.7));">
+	@if ( Radio.On )
+	{
+		<label class="text background" style="color: rgba(0,0,0,0.1)">@BackgroundText</label>
+		<label class="text foreground" @ref=displayLabel />
+
+		<div class="timeline-container">
+			<div class="timeline" >
+				<div class="inner" @ref=timeline />
+			</div>
+		</div>
+	}
+</root>
+
+@code {
+	[Property] public RadioComponent Radio { get; private set; }
+
+	/// <summary> Time to wait after each character </summary>
+	public const float ScrollWait = 0.5f;
+
+	/// <summary> Time to wait after returning to start of text </summary>
+	public const float ScrollPostWait = 1.2f;
+
+	/// <summary> Max amount of characters on screen </summary>
+	public const int MaxScreenCharacters = 12;
+
+	private Panel timeline;
+	private Label displayLabel;
+	private int textOffset;
+	private TimeUntil timeUntilScroll = ScrollPostWait;
+
+	public string VirtualText => Radio.Title;
+	public string ActualText => new string( (VirtualText ?? "")
+		.Skip( textOffset )
+		.Take( MaxScreenCharacters ).ToArray() )
+		.Replace( " ", "!" ); // '!' == All-off character for DSEG font
+	public string BackgroundText => new( '8', MaxScreenCharacters );
+
+	protected override void OnStart()
+	{
+	
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( timeUntilScroll && displayLabel != null )
+		{
+			timeUntilScroll = ScrollWait;
+			textOffset++;
+
+			if ( textOffset > VirtualText?.Length )
+			{
+				textOffset = 0;
+				timeUntilScroll = ScrollPostWait;
+			}
+
+			displayLabel.Text = ActualText;
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Radio.Title, Radio.On );
+	}
+}
