@@ -1,17 +1,5 @@
 namespace Sauna;
 
-public enum WindDirections
-{
-	South,
-	South_East,
-	East,
-	North_East,
-	North,
-	North_West,
-	West,
-	South_West
-}
-
 public partial class Player : Component, Component.ExecuteInEditor
 {
 	[Property, Sync, Category( "Parameters" )]
@@ -25,8 +13,18 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Range( -100f, 100f, 1f )]
 	public float Height { get; set; } = 0f;
 
-	public WindDirections FacedDirection => (WindDirections)((EyeAngles.Normal.yaw + 45f / 2 + 180) % 360 / 45f);
-	public string StringDirection => FacedDirection.ToString().Replace( '_', ' ' );
+	public string FacedDirection => (int)((EyeAngles.Normal.yaw + 45f / 2 + 180) % 360 / 45f) switch
+	{
+		0 => "South",
+		1 => "South East",
+		2 => "East",
+		3 => "North East",
+		4 => "North",
+		5 => "North West",
+		6 => "West",
+		7 => "South West",
+		_ => "None"
+	};
 
 	public Inventory Inventory { get; private set; }
 	protected CameraComponent Camera;
