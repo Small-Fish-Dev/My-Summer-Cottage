@@ -10,6 +10,15 @@ public class Subtitles : PanelComponent
 	
 	private Dictionary<SoundSystem009.SubtitlePopup, SubtitlePanel> _subtitlePanelsDictionary = new();
 
+	private Panel _container;
+
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+		
+		_container = Panel.Add.Panel( "container" );
+	}
+
 	protected override void OnAwake()
 	{
 		base.OnAwake();
@@ -30,15 +39,15 @@ public class Subtitles : PanelComponent
 
 	private void OnSoundPlayed( SoundSystem009.SubtitlePopup subtitlePopup )
 	{
-		var panel = Panel.AddChild<SubtitlePanel>();
+		var panel = _container.AddChild<SubtitlePanel>();
 		panel.Resource = subtitlePopup.Resource;
 		
 		_subtitlePanelsDictionary[subtitlePopup] = panel;
 
-		if ( Panel.ChildrenCount <= MaxSubtitlesOnScreen )
+		if ( _container.ChildrenCount <= MaxSubtitlesOnScreen )
 			return;
 
-		var panelToRemove = Panel.Children.LastOrDefault();
+		var panelToRemove = _container.Children.FirstOrDefault();
 		if ( panelToRemove is null )
 			// Huh? That's weird
 			return;
@@ -46,8 +55,15 @@ public class Subtitles : PanelComponent
 		var entry = _subtitlePanelsDictionary.First( kv => kv.Value == panelToRemove ).Key;
 		_subtitlePanelsDictionary.Remove( entry );
 		
-		var forceRemove = Panel.ChildrenCount > MaxSubtitlesOnScreen + ForceRemoveWhenOverLimit;	
+		var forceRemove = _container.ChildrenCount > MaxSubtitlesOnScreen + ForceRemoveWhenOverLimit;	
 		panelToRemove.Delete( forceRemove );
+	}
+
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+		
+		_container.SetClass( "hidden", _container.ChildrenCount == 0 );
 	}
 
 	private void OnSoundStopped( SoundSystem009.SubtitlePopup subtitlePopup )

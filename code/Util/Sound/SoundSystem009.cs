@@ -27,7 +27,6 @@ public class SoundSystem009 : GameObjectSystem
 		if ( !GameManager.IsPlaying )
 			return;
 		
-		Gizmo.Draw.ScreenText( $"{Sounds.Count}", new Vector2( 100, 100 ) );
 		var validSounds = Sounds.Where( sound => sound.SoundHandle.IsValid() ).Where( sound => sound.Source != null );
 		foreach (var sound in validSounds)
 		{
