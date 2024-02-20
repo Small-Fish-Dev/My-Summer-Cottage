@@ -156,10 +156,10 @@ public class MoveHelper : Component
 	public Capsule CollisionCapsule;
 
 	public Vector3 InitialCameraPosition { get; private set; }
-	public Angles EyeAngles { get; private set; }
-	public Vector3 WishVelocity { get; set; }
-	public Vector3 Velocity { get; set; }
-	public bool IsOnGround { get; set; }
+	[Sync] public Angles EyeAngles { get; private set; }
+	[Sync] public Vector3 WishVelocity { get; set; }
+	[Sync] public Vector3 Velocity { get; set; }
+	[Sync] public bool IsOnGround { get; set; }
 	public bool IsCapsuleCollider => UseCollider ? Collider is CapsuleCollider : TraceType == TraceType.Capsule;
 	private int _stuckTries;
 
