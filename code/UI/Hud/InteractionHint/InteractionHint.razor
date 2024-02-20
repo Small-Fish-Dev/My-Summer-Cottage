@@ -30,7 +30,7 @@
 
     private BBox GetInteractionBounds(Interaction interaction)
         => new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
-        .Transform(Player.Local.TargetedGameObject.Transform.World);
+			.Transform(Player.Local.TargetedGameObject.Transform.World);
 
     public override void Tick() 
     {
@@ -55,6 +55,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(HasTarget, _interactions.HashCombine(i => HashCode.Combine(i.Text)));
+		return HashCode.Combine(HasTarget, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i))));
 	}
 }
