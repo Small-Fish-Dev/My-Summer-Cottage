@@ -1,15 +1,25 @@
 using Sandbox;
 
+
 [Icon( "event" )]
 [EditorHandle( "/textures/gizmo/event.png" )]
 [Category( "Events" )]
 public sealed class EventComponent : Component, Component.ExecuteInEditor
 {
+	public struct Reference
+	{
+		public string Name;
+		public GameObject GameObject;
+	}
+
 	[Property]
 	public List<EventTrigger> Triggers { get; set; }
 
 	[Property]
 	public Action<GameObject> Event { get; set; }
+
+	[Property]
+	public List<Reference> References { get; set; } = new();
 
 	protected override void DrawGizmos()
 	{

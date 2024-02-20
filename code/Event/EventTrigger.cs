@@ -3,7 +3,7 @@ using Sandbox;
 [Hide]
 public abstract class EventTrigger : Component
 {
-	public virtual event Action<GameObject> OnTrigger;
+	public event Action<GameObject> OnTrigger;
 
 	protected override void OnStart()
 	{

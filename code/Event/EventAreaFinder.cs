@@ -1,8 +1,8 @@
 using Sandbox;
 
-[Icon( "highlight_alt" )]
+[Icon( "crop_din" )]
 [Category( "Events" )]
-public sealed class EventAreaTrigger : EventTrigger, Component.ITriggerListener
+public sealed class EventAreaFinder : EventTrigger, Component.ITriggerListener
 {
 	[Property]
 	public Vector3 Offset { get; set; }
@@ -12,6 +12,11 @@ public sealed class EventAreaTrigger : EventTrigger, Component.ITriggerListener
 
 	[Property]
 	public TagSet TagSet { get; set; }
+
+	/// <summary>
+	/// Get all objects inside of this area
+	/// </summary>
+	List<GameObject> ObjectsInside { get; set; } = new();
 
 	public BoxCollider Collider { get; private set; }
 
@@ -32,18 +37,19 @@ public sealed class EventAreaTrigger : EventTrigger, Component.ITriggerListener
 	public void OnTriggerEnter( Collider other )
 	{
 		if ( other.Tags.HasAny( TagSet ) )
-		{
-			CallTrigger( other.GameObject );
-		}
+			if ( !ObjectsInside.Contains( other.GameObject ) )
+				ObjectsInside.Add( other.GameObject );
 	}
 
 	public void OnTriggerExit( Collider other )
 	{
+		if ( ObjectsInside.Contains( other.GameObject ) )
+			ObjectsInside.Remove( other.GameObject );
 	}
 
 	protected override void DrawGizmos()
 	{
-		Gizmo.Draw.Color = Color.Cyan.WithAlpha( 0.2f );
+		Gizmo.Draw.Color = Color.Yellow.WithAlpha( 0.2f );
 		Gizmo.Draw.SolidBox( BBox );
 		Gizmo.Draw.Color = Color.White.WithAlpha( 0.3f );
 		Gizmo.Draw.LineBBox( BBox );

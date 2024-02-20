@@ -23,34 +23,34 @@
               }
             },
             {
-              "Id": 7,
-              "Type": "sauna.getplayer",
-              "UserData": {
-                "Position": "64,80"
-              }
-            },
-            {
               "Id": 9,
               "Type": "sauna.localpunchplayer",
               "UserData": {
-                "Position": "416,16"
+                "Position": "560,80"
               }
             },
             {
               "Id": 10,
               "Type": "time.delay",
               "UserData": {
-                "Position": "192,-48"
+                "Position": "256,-48"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "IComponentLister",
+                "_name": "Get",
+                "T": "Player"
+              },
+              "UserData": {
+                "Position": "112,96"
               }
             }
           ],
           "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "obj",
-              "DstId": 7,
-              "DstName": "gameObject"
-            },
             {
               "SrcId": 10,
               "SrcName": "_signal",
@@ -63,7 +63,7 @@
               "DstName": "launchDirection"
             },
             {
-              "SrcId": 7,
+              "SrcId": 12,
               "SrcName": "_result",
               "DstId": 9,
               "DstName": "player"
@@ -83,9 +83,23 @@
               "Value": 0.5,
               "DstId": 10,
               "DstName": "seconds"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "obj",
+              "DstId": 12,
+              "DstName": "_target"
+            },
+            {
+              "Value": "EnabledInSelf, InAncestors",
+              "DstId": 12,
+              "DstName": "search"
             }
           ]
         },
+        "References": [
+          {}
+        ],
         "Triggers": [
           {
             "_type": "component",
@@ -123,6 +137,19 @@
             "__type": "EventAreaTrigger",
             "Extents": "20,20,30",
             "Offset": "0,0,15",
+            "TagSet": "player"
+          }
+        ]
+      },
+      {
+        "Id": "e1c8e099-ec98-4554-a213-e858ad9e0391",
+        "Name": "PlayersInArea",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "EventAreaFinder",
+            "Extents": "400,400,200",
+            "Offset": "0,0,100",
             "TagSet": "player"
           }
         ]
