@@ -6,6 +6,7 @@ public class Inventory : Component
 	public Player Player { get; set; }
 
 	public const int MAX_BACKPACK_SLOTS = 18;
+	public const int MAX_WEIGHT_IN_GRAMS = 30000;
 
 	public IReadOnlyList<ItemComponent> BackpackItems => _backpackItems;
 	public IReadOnlyList<ItemComponent> EquippedItems => _equippedItems;
@@ -37,6 +38,10 @@ public class Inventory : Component
 		var droppedItem = RemoveItem( _backpackItems.IndexOf( item ) );
 		if ( droppedItem is null )
 			return false;
+
+		droppedItem.DrawingEnabled = true;
+		droppedItem.GameObject.Transform.Position = Player.ViewRay.Position;
+		droppedItem.GameObject.Parent = null;
 
 		return true;
 	}
@@ -102,6 +107,11 @@ public class Inventory : Component
 			_backpackItems[endIndex] = _backpackItems[startIndex];
 			RemoveItem( startIndex );
 		}
+	}
+
+	public int GetTotalWeightInGrams()
+	{
+		return _backpackItems.Sum( i => i?.WeightInGrams ?? 0 ) + _equippedItems.Sum( i => i?.WeightInGrams ?? 0 );
 	}
 
 	private ItemComponent RemoveItem( int index )

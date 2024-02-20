@@ -142,6 +142,15 @@ public partial class Player : Component, Component.ExecuteInEditor
 		}
 	}
 
+	public bool TakeMoney( int amount )
+	{
+		if ( Money < amount )
+			return false;
+
+		Money -= amount;
+		return true;
+	}
+
 	protected override void OnPreRender()
 	{
 		if ( !GameManager.IsPlaying )
