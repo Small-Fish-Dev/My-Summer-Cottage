@@ -144,6 +144,106 @@
       "Rotation": "0.00002079736,0.000913322,-0.02251128,0.9997461",
       "Enabled": true,
       "__Prefab": "prefabs/events/banana_peel.prefab"
+    },
+    {
+      "Id": "e515313b-9348-4f73-bb39-cf28f38bb0da",
+      "Name": "Object",
+      "Position": "864,-712.677,25.36256",
+      "Rotation": "0,0,0.9238795,0.3826834",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 11,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/guy/guy.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Player",
+          "__enabled": false,
+          "DuckSpeed": 60,
+          "Fatness": 0,
+          "Height": 0,
+          "JumpStrength": 200,
+          "Money": 0,
+          "MoveHelper": null,
+          "Speed": 140,
+          "SprintSpeed": 280,
+          "WalkSpeed": 80
+        },
+        {
+          "__type": "Character",
+          "Clothes": [
+            "models/clothes/trousers/trousers.vmdl",
+            "models/clothes/flatcap/flatcap.vmdl",
+            "models/clothes/hoodie/hoodie_pocket.vmdl"
+          ],
+          "Fatness": 0,
+          "Height": 0,
+          "HideBodyGroup": "None",
+          "Player": {
+            "_type": "component",
+            "go": "e515313b-9348-4f73-bb39-cf28f38bb0da",
+            "component_type": "Player"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "9c3edec3-a5ae-4b18-b2d4-f44b6018269a",
+      "Name": "Object (1)",
+      "Position": "838.9916,-737.6854,25.36256",
+      "Rotation": "0,0,0.9238795,0.3826834",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 11,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/guy/guy.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Player",
+          "__enabled": false,
+          "DuckSpeed": 60,
+          "Fatness": 1,
+          "Height": 0,
+          "JumpStrength": 200,
+          "Money": 0,
+          "MoveHelper": null,
+          "Speed": 140,
+          "SprintSpeed": 280,
+          "WalkSpeed": 80
+        },
+        {
+          "__type": "Character",
+          "Clothes": [
+            "models/clothes/trousers/trousers.vmdl",
+            "models/clothes/flatcap/flatcap.vmdl",
+            "models/clothes/hoodie/hoodie.vmdl"
+          ],
+          "Fatness": 1,
+          "Height": 0,
+          "HideBodyGroup": "None",
+          "Player": {
+            "_type": "component",
+            "go": "9c3edec3-a5ae-4b18-b2d4-f44b6018269a",
+            "component_type": "Player"
+          }
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -169,6 +269,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-20T02:08:03.2082888\u002B01:00",
+  "LastSaved": "2024-02-20T09:53:33.0411159\u002B00:00",
   "__references": []
 }
