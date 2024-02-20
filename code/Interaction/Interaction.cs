@@ -132,16 +132,19 @@ public class Interactions : Component
 		for ( int i = 0; i < interactions.Count; i++ )
 		{
 			var interaction = interactions[i];
-			if ( !interaction.HasBounds || !Gizmo.IsSelected )
+			if ( !interaction.HasBounds )
 				continue;
 
 			var bbox = new BBox( interaction.Position - interaction.Extents / 2, interaction.Position + interaction.Extents / 2 );
 			Gizmo.Draw.Color = Color.Yellow;
-			Gizmo.Draw.LineThickness = 2;
+			Gizmo.Draw.LineThickness = 0.5f;
 			Gizmo.Draw.LineBBox( bbox );
 
 			Gizmo.Draw.Color = Color.White;
-			Gizmo.Draw.Text( $"{interaction.Description}", new Transform( interaction.Position ), "Consolas", 24 );
+			Gizmo.Draw.Text( $"{interaction.Description}", new Transform( interaction.Position ), "Consolas", 12 );
+
+			if ( !Gizmo.HasSelected || GameObject != GameManager.ActiveScene )
+				continue;
 
 			using ( Gizmo.Scope( $"{interaction.Description}", new Transform( interaction.Position ) ) )
 			{

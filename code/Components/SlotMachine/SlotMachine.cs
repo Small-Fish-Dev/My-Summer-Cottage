@@ -10,13 +10,25 @@ public sealed class SlotMachine : Component
 	public const int DEFAULT_BET = 5;
 
 	[Property] public SkinnedModelRenderer Model { get; set; }
-	[Sync, Property] public BetFlag BetFlags { get; set; }
+	[Sync, Property] public BetFlag BetFlags
+	{
+		get => betflags;
+		set
+		{
+			betflags = value;
+			UpdateBodygroups();
+		}
+	}
 	[Sync, Property] public int Money { get; set; }
 
 	public int Bet => BitOperations.PopCount( (uint)BetFlags ) * DEFAULT_BET;
 
 	[Sync] public bool Rolling { get; set; }
 	[Sync] public Result RollResult { get; set; }
+
+	TimeSince sinceResult;
+	int showCount;
+	BetFlag betflags;
 
 	[Flags]
 	public enum BetFlag : byte
@@ -58,9 +70,6 @@ public sealed class SlotMachine : Component
 		}
 	}
 
-	TimeSince sinceResult;
-	int showCount;
-
 	public void TryRoll()
 	{
 		if ( BetFlags == BetFlag.None || Money < Bet )
@@ -78,6 +87,16 @@ public sealed class SlotMachine : Component
 
 		sinceResult = 0;
 		showCount = 0;
+	}
+
+	private void UpdateBodygroups()
+	{
+		for ( int i = 0; i < 3; i++ )
+		{
+			var val = BetFlags.HasFlag( (BetFlag)(1 << i) ) ? 1 : 0;
+			Model.SetBodyGroup( 8 + i, val );
+			Model.SetBodyGroup( i == 0 ? 2 : i == 1 ? 1 : 1 + i, val ); // THANKS GROD BERT!!
+		}
 	}
 
 	public void InsertCoin( Player player )
@@ -99,9 +118,7 @@ public sealed class SlotMachine : Component
 		var flags = (byte)BetFlags;
 		BetFlags = (BetFlag)(flags ^ (1 << (line - 1)));
 
-		var val = BetFlags.HasFlag( (BetFlag)(1u << (line - 1)) ) ? 1 : 0;
-		Model.SetBodyGroup( 7 + line, val );
-		Model.SetBodyGroup( line, val );
+		UpdateBodygroups();
 	}
 
 	private void CheckForWin()
@@ -114,6 +131,11 @@ public sealed class SlotMachine : Component
 
 		// todo: Actually calculate win based on slot results.
 		// todo: Play sounds on win etc.
+	}
+
+	protected override void OnStart()
+	{
+		UpdateBodygroups();
 	}
 
 	protected override void OnUpdate()
