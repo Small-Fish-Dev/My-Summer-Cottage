@@ -11,6 +11,18 @@ public sealed class EventAreaFinder : EventTrigger
 	[Property]
 	public Vector3 Extents { get; set; }
 
+	/// <summary>
+	/// A list of prefabs that will be included in this area
+	/// Leave empty if you just want to check tags
+	/// Still need to match tags
+	/// DOESN'T WORK IF PREFAB WAS UNLINKED/COLLAPSED
+	/// </summary>
+	[Property]
+	public List<PrefabFile> TriggerPrefab { get; set; } = new List<PrefabFile>();
+
+	/// <summary>
+	/// Tags that are included in this area (Any)
+	/// </summary>
 	[Property]
 	public TagSet TagSet { get; set; }
 
@@ -26,7 +38,9 @@ public sealed class EventAreaFinder : EventTrigger
 
 	public override void PolledMethod()
 	{
-		var find = Scene.FindInPhysics( WorldBBox );
+		var find = Scene.FindInPhysics( WorldBBox )
+			?.Where( x => x.Tags.HasAny( TagSet ) )
+			?.Where( x => TriggerPrefab.Count() == 0 || TriggerPrefab.Any( prefab => prefab.ResourcePath == x.PrefabInstanceSource ) );
 
 		if ( find != null )
 			ObjectsInside = find.ToList();
