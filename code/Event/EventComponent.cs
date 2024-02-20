@@ -1,5 +1,5 @@
 using Sandbox;
-
+using Sauna.Event;
 
 [Icon( "event" )]
 [EditorHandle( "/textures/gizmo/event.png" )]

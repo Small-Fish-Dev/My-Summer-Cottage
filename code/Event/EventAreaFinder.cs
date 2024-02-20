@@ -1,8 +1,9 @@
 using Sandbox;
+using Sauna.Event;
 
 [Icon( "crop_din" )]
 [Category( "Events" )]
-public sealed class EventAreaFinder : EventTrigger, Component.ITriggerListener
+public sealed class EventAreaFinder : EventTrigger
 {
 	[Property]
 	public Vector3 Offset { get; set; }
@@ -13,38 +14,30 @@ public sealed class EventAreaFinder : EventTrigger, Component.ITriggerListener
 	[Property]
 	public TagSet TagSet { get; set; }
 
+	public override bool IsPolled { get; set; } = true;
+
 	/// <summary>
 	/// Get all objects inside of this area
 	/// </summary>
 	List<GameObject> ObjectsInside { get; set; } = new();
 
-	public BoxCollider Collider { get; private set; }
-
 	public BBox BBox => new BBox( Offset - Extents / 2f, Offset + Extents / 2f );
+	public BBox WorldBBox => BBox.Transform( GameObject.Transform.World );
 
 	protected override void OnStart()
 	{
-		Collider = Components.GetOrCreate<BoxCollider>();
-		Collider.Center = Offset;
-		Collider.Scale = Extents;
-		Collider.IsTrigger = true;
 	}
 
 	protected override void OnUpdate()
 	{
 	}
 
-	public void OnTriggerEnter( Collider other )
+	public override void PolledMethod()
 	{
-		if ( other.Tags.HasAny( TagSet ) )
-			if ( !ObjectsInside.Contains( other.GameObject ) )
-				ObjectsInside.Add( other.GameObject );
-	}
+		var find = Scene.FindInPhysics( WorldBBox );
 
-	public void OnTriggerExit( Collider other )
-	{
-		if ( ObjectsInside.Contains( other.GameObject ) )
-			ObjectsInside.Remove( other.GameObject );
+		if ( find != null )
+			ObjectsInside = find.ToList();
 	}
 
 	protected override void DrawGizmos()
