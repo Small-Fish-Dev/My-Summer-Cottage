@@ -34,6 +34,30 @@ Inventory {
         color: $gray;
     }
 
+    .level {
+        font-size: 30px;
+        margin-top: 10px;
+        font-family: 'BasicHandwriting';
+    }
+
+    .exp-text {
+        font-size: 28px;
+        gap: 10px;
+    }
+
+    .exp-bar {
+        border: 2px white;
+        width: 100%;
+        height: 24px;
+        padding: 4px;
+        margin: 10px 0px;
+
+        .progress {
+            height: 100%;
+            background-color: white;
+        }
+    }
+
     &.visible {
         display: flex;
         pointer-events: all;
