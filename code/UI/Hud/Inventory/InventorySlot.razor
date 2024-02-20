@@ -2,7 +2,7 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root onrightclick=@(() => Player.Local.Inventory.DropItem(Item))>
+<root>
 	<div class="border" />
 	<div class="background" />
 	@if (Item is not null)
@@ -12,10 +12,28 @@
 				<text class="weight">@Item.WeightInGrams.ToKilograms() kg</text>
 		</div>
 	}
+	@if (Slot is not null)
+	{
+		<img class="slot" src=@GetSlotIcon() />
+	}
 </root>
 
 @code {
 	public ItemComponent Item { get; set; }
+	public EquipSlot? Slot { get; set; } = null;
+
+	private string GetSlotIcon()
+	{
+		var path = "/ui/hud/" + Slot switch
+		{
+			EquipSlot.Head => "clothes_face.png",
+			EquipSlot.Body => "clothes_torso.png",
+			EquipSlot.Legs => "clothes_legs.png",
+			EquipSlot.Feet => "clothes_boots.png",
+			EquipSlot.Hand => "hand_slot.png",
+		};
+		return path;
+	}
 
 	protected override int BuildHash()
 	{

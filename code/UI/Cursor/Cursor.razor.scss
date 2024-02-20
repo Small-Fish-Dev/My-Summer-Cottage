@@ -1,0 +1,17 @@
+Cursor {
+    position: absolute;
+    z-index: 500;
+    opacity: 0;
+    transition: opacity 100ms ease-out;
+    pointer-events: none;
+
+    img {
+        position: absolute;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    &.visible {
+        opacity: 1;
+    }
+}

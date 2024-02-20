@@ -64,6 +64,23 @@
         "TraceType": "BBox",
         "UseCollider": false,
         "UseSceneGravity": true
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": false,
+        "LinearDamping": 0,
+        "Locking": {
+          "X": true,
+          "Y": true,
+          "Z": true,
+          "Pitch": true,
+          "Yaw": true,
+          "Roll": true
+        },
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
       }
     ],
     "Children": [
@@ -133,77 +150,6 @@
             "Model": "models/guy/guy.vmdl",
             "RenderType": "On",
             "Tint": "1,1,1,1"
-          }
-        ],
-        "Children": [
-          {
-            "Id": "c7abfae8-5a6f-43ee-8d95-7e06c43e9a29",
-            "Name": "models/clothes/jumper/jumper.vmdl",
-            "Enabled": true,
-            "Components": [
-              {
-                "__type": "SkinnedModelRenderer",
-                "AnimationGraph": null,
-                "BodyGroups": 18446744073709551615,
-                "BoneMergeTarget": {
-                  "_type": "component",
-                  "go": "69bcbf4c-f3a9-41db-88fc-830d499164c6",
-                  "component_type": "SkinnedModelRenderer"
-                },
-                "CreateBoneObjects": false,
-                "MaterialGroup": null,
-                "MaterialOverride": null,
-                "Model": "models/clothes/jumper/jumper.vmdl",
-                "RenderType": "On",
-                "Tint": "1,1,1,1"
-              }
-            ]
-          },
-          {
-            "Id": "eb864215-51bc-465d-b6be-3beffecab12d",
-            "Name": "models/clothes/sauna_boss_hat/sauna_boss.vmdl",
-            "Enabled": true,
-            "Components": [
-              {
-                "__type": "SkinnedModelRenderer",
-                "AnimationGraph": null,
-                "BodyGroups": 18446744073709551615,
-                "BoneMergeTarget": {
-                  "_type": "component",
-                  "go": "69bcbf4c-f3a9-41db-88fc-830d499164c6",
-                  "component_type": "SkinnedModelRenderer"
-                },
-                "CreateBoneObjects": false,
-                "MaterialGroup": null,
-                "MaterialOverride": null,
-                "Model": "models/clothes/sauna_boss_hat/sauna_boss.vmdl",
-                "RenderType": "On",
-                "Tint": "1,1,1,1"
-              }
-            ]
-          },
-          {
-            "Id": "3905e2bb-e946-4155-be0f-0d95ca68f433",
-            "Name": "models/clothes/cargo_shorts/cargo_shorts.vmdl",
-            "Enabled": true,
-            "Components": [
-              {
-                "__type": "SkinnedModelRenderer",
-                "AnimationGraph": null,
-                "BodyGroups": 18446744073709551615,
-                "BoneMergeTarget": {
-                  "_type": "component",
-                  "go": "69bcbf4c-f3a9-41db-88fc-830d499164c6",
-                  "component_type": "SkinnedModelRenderer"
-                },
-                "CreateBoneObjects": false,
-                "MaterialGroup": null,
-                "MaterialOverride": null,
-                "Model": "models/clothes/cargo_shorts/cargo_shorts.vmdl",
-                "RenderType": "On",
-                "Tint": "1,1,1,1"
-              }
-            ]
           }
         ]
       },

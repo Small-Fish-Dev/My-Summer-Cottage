@@ -13,24 +13,25 @@ Inventory {
     .section {
         width: 50%;
         flex-direction: column;
+        justify-content: center;
+    }
 
-        .title {
-            font-size: 40px;
-            font-family: 'BasicHandwriting';
-            margin-bottom: 10px;
-        }
+    .title {
+        font-size: 40px;
+        font-family: 'BasicHandwriting';
+        margin-bottom: 10px;
+    }
 
-        .items {
-            flex-wrap: wrap;
-        }
+    .items {
+        flex-wrap: wrap;
+    }
 
-        .active-weight {
-            color: $orange;
-        }
+    .active-weight {
+        color: $orange;
+    }
 
-        .max {
-            color: $gray;
-        }
+    .max {
+        color: $gray;
     }
 
     &.visible {
