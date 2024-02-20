@@ -5,13 +5,76 @@
     "Enabled": true,
     "Components": [
       {
-        "__type": "EventComponent"
+        "__type": "EventComponent",
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "5c9a8853-763a-4b69-87c3-2dee3bc76432",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-96,-16"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "log.info",
+              "UserData": {
+                "Position": "272,0"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Name",
+                "_type": "GameObject"
+              },
+              "UserData": {
+                "Position": "80,64"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "format"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "obj",
+              "DstId": 3,
+              "DstName": "_target"
+            }
+          ]
+        },
+        "Triggers": [
+          {
+            "_type": "component",
+            "go": "8cd0756f-42d9-428d-a8d5-08db583e2a29",
+            "component_type": "EventAreaTrigger"
+          }
+        ]
       }
     ],
     "Children": [
       {
         "Id": "14ced500-a032-45af-b42e-d34891efe4fd",
-        "Name": "Banana",
+        "Name": "Model",
         "Position": "0,0,9.040004",
         "Rotation": "-0.7071068,-0,0,0.7071068",
         "Enabled": true,
@@ -24,6 +87,19 @@
             "Model": "models/ladel/ladel.vmdl",
             "RenderType": "On",
             "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "Id": "8cd0756f-42d9-428d-a8d5-08db583e2a29",
+        "Name": "SlipTrigger",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "EventAreaTrigger",
+            "Extents": "20,20,30",
+            "Offset": "0,0,15",
+            "TagSet": "player"
           }
         ]
       }
