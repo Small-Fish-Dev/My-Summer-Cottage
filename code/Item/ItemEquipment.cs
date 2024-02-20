@@ -5,7 +5,8 @@ public enum EquipSlot : byte
 	Head,
 	Body,
 	Legs,
-	Feet
+	Feet,
+	Hand
 }
 
 public class ItemEquipment : Component
