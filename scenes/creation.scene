@@ -1,0 +1,165 @@
+{
+  "Id": "9155ac50-6b75-4f55-ae23-c654bf42bdab",
+  "GameObjects": [
+    {
+      "Id": "4ae5b3d2-b62c-4688-911d-e1804886c39d",
+      "Name": "First Stage",
+      "Enabled": true,
+      "Children": [
+        {
+          "Id": "c54d44fb-93a6-4493-8c18-5e352f062548",
+          "Name": "Camera",
+          "Position": "-181.0625,77.2503,90.19873",
+          "Rotation": "0,0.3826834,0,0.9238796",
+          "Tags": "maincamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "CameraComponent",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 35,
+              "IsMainCamera": true,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 150,
+              "ZNear": 2
+            },
+            {
+              "__type": "DitherHook"
+            }
+          ]
+        },
+        {
+          "Id": "ea4d3e24-c139-4cdc-be7a-bf87c5954e7c",
+          "Name": "Table",
+          "Position": "-124.2589,75.0193,40.57894",
+          "Rotation": "0,-0.01047024,0,0.9999452",
+          "Scale": "0.5000019,0.4000018,1",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/plane/plane.vmdl",
+              "RenderType": "Off",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "271e1571-5ba0-440c-a814-080931052882",
+          "Name": "Passport",
+          "Position": "-134.2885,77.95493,42.97993",
+          "Rotation": "0.1251347,0.005811766,-0.9879451,0.09095036",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/character_setup/sauna_passport.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "Id": "0cfd5487-0542-4f7e-8681-ad923820784a",
+              "Name": "Panel",
+              "Position": "0,0,0.7518472",
+              "Rotation": "0.0000002831221,-0.6858191,-0.00000008568168,0.7277735",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "WorldPanel",
+                  "HorizontalAlign": "Center",
+                  "LookAtCamera": false,
+                  "PanelSize": "385,256",
+                  "RenderScale": 0.2,
+                  "VerticalAlign": "Center"
+                },
+                {
+                  "__type": "PassportComponent"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "73a308eb-f128-4b79-a7e3-b64264e61292",
+          "Name": "Spot Light",
+          "Position": "-126.3321,-72.16833,115.8145",
+          "Rotation": "-0.08393632,0.2239016,0.6715862,0.7012809",
+          "Tags": "light_spot,light",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SpotLight",
+              "Attenuation": 0,
+              "ConeInner": 15,
+              "ConeOuter": 45,
+              "Cookie": null,
+              "FogMode": "Enabled",
+              "FogStrength": 1,
+              "LightColor": "0.93223,0.98605,0.78425,1",
+              "Radius": 250,
+              "Shadows": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "7b44a720-7db4-49e7-b459-0d500a6e8b3f",
+      "Name": "Sun",
+      "Position": "-120.4919,-0.000006309908,336.8116",
+      "Rotation": "0.258819,-0.00000001131334,-0.9659258,-0.00000004222196",
+      "Tags": "light_directional,light",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "DirectionalLight",
+          "FogMode": "Enabled",
+          "FogStrength": 1,
+          "LightColor": "0.32558,0.32558,0.32558,1",
+          "Shadows": false,
+          "SkyColor": "0,0,0,1"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "Lerping": true,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "creation",
+  "Description": "",
+  "LastSaved": "2024-02-20T20:20:46.0227712\u002B02:00",
+  "__references": []
+}
