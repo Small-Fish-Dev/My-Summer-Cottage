@@ -3,7 +3,7 @@ using Sauna.Event;
 
 [Icon( "highlight_alt" )]
 [Category( "Events" )]
-public sealed class EventAreaTrigger : EventTrigger, Component.ITriggerListener
+public sealed class EventAreaTrigger : EventTrigger
 {
 	[Property]
 	public Vector3 Offset { get; set; }
@@ -14,32 +14,26 @@ public sealed class EventAreaTrigger : EventTrigger, Component.ITriggerListener
 	[Property]
 	public TagSet TagSet { get; set; }
 
-	public BoxCollider Collider { get; private set; }
+	/// <summary>
+	/// Get all objects inside of this area
+	/// </summary>
+	List<GameObject> ObjectsInside { get; set; } = new();
 
 	public BBox BBox => new BBox( Offset - Extents / 2f, Offset + Extents / 2f );
+	public BBox WorldBBox => BBox.Transform( GameObject.Transform.World );
 
-	protected override void OnStart()
-	{
-		Collider = Components.GetOrCreate<BoxCollider>();
-		Collider.Center = Offset;
-		Collider.Scale = Extents;
-		Collider.IsTrigger = true;
-	}
+	public override bool IsPolled { get; set; } = true;
 
-	protected override void OnUpdate()
+	public override void PolledMethod()
 	{
-	}
+		var find = Scene.FindInPhysics( WorldBBox )
+			.Where( x => x.Tags.HasAny( TagSet ) );
 
-	public void OnTriggerEnter( Collider other )
-	{
-		if ( other.Tags.HasAny( TagSet ) )
-		{
-			CallTrigger( other.GameObject );
-		}
-	}
+		foreach ( var found in find )
+			if ( !ObjectsInside.Contains( found ) ) // Has entered just now
+				CallTrigger( found );
 
-	public void OnTriggerExit( Collider other )
-	{
+		ObjectsInside = find.ToList();
 	}
 
 	protected override void DrawGizmos()

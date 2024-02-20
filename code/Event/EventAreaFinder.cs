@@ -14,8 +14,6 @@ public sealed class EventAreaFinder : EventTrigger
 	[Property]
 	public TagSet TagSet { get; set; }
 
-	public override bool IsPolled { get; set; } = true;
-
 	/// <summary>
 	/// Get all objects inside of this area
 	/// </summary>
@@ -24,13 +22,7 @@ public sealed class EventAreaFinder : EventTrigger
 	public BBox BBox => new BBox( Offset - Extents / 2f, Offset + Extents / 2f );
 	public BBox WorldBBox => BBox.Transform( GameObject.Transform.World );
 
-	protected override void OnStart()
-	{
-	}
-
-	protected override void OnUpdate()
-	{
-	}
+	public override bool IsPolled { get; set; } = true;
 
 	public override void PolledMethod()
 	{
