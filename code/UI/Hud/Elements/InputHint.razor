@@ -1,0 +1,18 @@
+﻿@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<text class="text">
+		@(!string.IsNullOrEmpty( Input ) ? Sandbox.Input.GetButtonOrigin( Input ) : "?")
+	</text>
+</root>
+
+@code {
+	public string Input { get; set; }
+
+	protected override int BuildHash()
+	{
+		return Input.GetHashCode();
+	}
+}

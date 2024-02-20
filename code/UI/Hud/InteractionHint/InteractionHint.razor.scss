@@ -1,30 +1,54 @@
 InteractionHint {
-    flex-direction: column;
+    flex-direction: row;
     position: absolute;
-    font-weight: bold;
     border-radius: 10px;
     transform-origin: left top;
     transition: transform 0.5s ease-in-out;
-    transform: scale(1) translate(-50% -50%);
     opacity: 0;
+    font-family: BasicHandwriting;
 
     .title {
+        background: linear-gradient(to right, rgba(black, 0.8) 0%, rgba(black, 0.6) 100%);
         font-size: 24px;
-        padding-bottom: 5px;
-        color: orange;
+        color: white;
+        padding: 10px;
+        padding-left: 20px;
+        min-width: 200px;
+        text-shadow: 2px 2px 0px black;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .icon {
+        width: 30px;
+        aspect-ratio: 1;
+        image-rendering: pixelated;
+        margin-right: 20px;
+        transform: translateX(-50%);
+    }
+
+    .interactions {
+        padding: 5px;
+        background: linear-gradient(to bottom, rgba(black, 0.4) 0%, rgba(black, 0.2) 70%, rgba(black, 0) 100%);
+        gap: 10px;
+        flex-direction: column;
     }
 
     .interaction {
         flex-direction: row;
         align-items: center;
-        padding-bottom: 5px;
-        padding-left: 10px;
-        font-size: 18px;
+        font-size: 28px;
+        font-family: battlenetcopy;
+        margin-left: 10px;
 
-        .icon {
-            width: 22px; 
-            aspect-ratio: 1;
-            margin-right: 2px;
+        .description {
+            text-shadow: 2px 2px 0px black;
+        }
+
+        .hint {
+            margin-right: 12px;
         }
     }
 
