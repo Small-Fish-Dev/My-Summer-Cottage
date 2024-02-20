@@ -1,8 +1,8 @@
 {
   "RootObject": {
-    "Id": "0ef1b0fa-4634-4b51-bee7-c7d60fa7aad9",
+    "Id": "e0845a68-7269-4578-8d63-b4fdb9778078",
     "Name": "player",
-    "Tags": "localplayer,player",
+    "Tags": "player,localplayer",
     "Enabled": true,
     "Components": [
       {
@@ -14,7 +14,7 @@
         "Money": 0,
         "MoveHelper": {
           "_type": "component",
-          "go": "0ef1b0fa-4634-4b51-bee7-c7d60fa7aad9",
+          "go": "e0845a68-7269-4578-8d63-b4fdb9778078",
           "component_type": "MoveHelper"
         },
         "Speed": 140,
@@ -25,7 +25,7 @@
         "__type": "Inventory",
         "Player": {
           "_type": "component",
-          "go": "0ef1b0fa-4634-4b51-bee7-c7d60fa7aad9",
+          "go": "e0845a68-7269-4578-8d63-b4fdb9778078",
           "component_type": "Player"
         }
       },
@@ -68,9 +68,9 @@
     ],
     "Children": [
       {
-        "Id": "4055c5c8-5805-4a90-84ca-2b5b2de17985",
+        "Id": "45e9491c-9275-4691-b9dc-869da457cc69",
         "Name": "Camera",
-        "Position": "0,0,63.99992",
+        "Position": "5.992126,0.00009575188,66.4233",
         "Tags": "maincamera",
         "Enabled": true,
         "Components": [
@@ -78,7 +78,7 @@
             "__type": "CameraComponent",
             "BackgroundColor": "0.33333,0.46275,0.52157,1",
             "ClearFlags": "All",
-            "FieldOfView": 78,
+            "FieldOfView": 90,
             "IsMainCamera": true,
             "Orthographic": false,
             "OrthographicHeight": 1204,
@@ -88,7 +88,7 @@
             "TargetEye": "None",
             "Viewport": "0,0,1,1",
             "ZFar": 10000,
-            "ZNear": 10
+            "ZNear": 2.5
           },
           {
             "__type": "DitherHook"
@@ -102,30 +102,30 @@
         ]
       },
       {
-        "Id": "6fb47b75-489e-46fe-bcd7-0b8fabb7ce9b",
+        "Id": "69bcbf4c-f3a9-41db-88fc-830d499164c6",
         "Name": "Model",
         "Enabled": true,
         "Components": [
           {
             "__type": "Character",
             "Clothes": [
-              "models/clothes/trousers/trousers.vmdl",
+              "models/clothes/cargo_shorts/cargo_shorts.vmdl",
               "models/clothes/jumper/jumper.vmdl",
               "models/clothes/sauna_boss_hat/sauna_boss.vmdl"
             ],
             "Fatness": 0,
             "Height": 0,
-            "HideBodyGroup": "Torso, Legs",
+            "HideBodyGroup": "Torso",
             "Player": {
               "_type": "component",
-              "go": "0ef1b0fa-4634-4b51-bee7-c7d60fa7aad9",
+              "go": "e0845a68-7269-4578-8d63-b4fdb9778078",
               "component_type": "Player"
             }
           },
           {
             "__type": "SkinnedModelRenderer",
             "AnimationGraph": null,
-            "BodyGroups": 11,
+            "BodyGroups": 1,
             "BoneMergeTarget": null,
             "CreateBoneObjects": false,
             "MaterialGroup": null,
@@ -134,10 +134,81 @@
             "RenderType": "On",
             "Tint": "1,1,1,1"
           }
+        ],
+        "Children": [
+          {
+            "Id": "c7abfae8-5a6f-43ee-8d95-7e06c43e9a29",
+            "Name": "models/clothes/jumper/jumper.vmdl",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "AnimationGraph": null,
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "go": "69bcbf4c-f3a9-41db-88fc-830d499164c6",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
+                "Model": "models/clothes/jumper/jumper.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "Id": "eb864215-51bc-465d-b6be-3beffecab12d",
+            "Name": "models/clothes/sauna_boss_hat/sauna_boss.vmdl",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "AnimationGraph": null,
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "go": "69bcbf4c-f3a9-41db-88fc-830d499164c6",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
+                "Model": "models/clothes/sauna_boss_hat/sauna_boss.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "Id": "3905e2bb-e946-4155-be0f-0d95ca68f433",
+            "Name": "models/clothes/cargo_shorts/cargo_shorts.vmdl",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "AnimationGraph": null,
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "go": "69bcbf4c-f3a9-41db-88fc-830d499164c6",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "MaterialGroup": null,
+                "MaterialOverride": null,
+                "Model": "models/clothes/cargo_shorts/cargo_shorts.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          }
         ]
       },
       {
-        "Id": "14cdef71-af42-4bd2-90c6-f1123d9d0670",
+        "Id": "a27db0e5-7bbf-4d0a-abe6-7d8aaf576fa0",
         "Name": "Piss",
         "Position": "1.936967,0.0000001154522,34.7722",
         "Tags": "particles",
