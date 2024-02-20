@@ -23,42 +23,66 @@
               }
             },
             {
-              "Id": 1,
-              "Type": "log.info",
+              "Id": 7,
+              "Type": "sauna.getplayer",
               "UserData": {
-                "Position": "272,0"
+                "Position": "64,80"
               }
             },
             {
-              "Id": 3,
-              "Type": "property.get",
-              "Properties": {
-                "_name": "Name",
-                "_type": "GameObject"
-              },
+              "Id": 9,
+              "Type": "sauna.localpunchplayer",
               "UserData": {
-                "Position": "80,64"
+                "Position": "416,16"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "192,-48"
               }
             }
           ],
           "Links": [
             {
               "SrcId": 0,
+              "SrcName": "obj",
+              "DstId": 7,
+              "DstName": "gameObject"
+            },
+            {
+              "SrcId": 10,
               "SrcName": "_signal",
-              "DstId": 1,
+              "DstId": 9,
               "DstName": "_signal"
             },
             {
-              "SrcId": 3,
+              "Value": "0,0,1",
+              "DstId": 9,
+              "DstName": "launchDirection"
+            },
+            {
+              "SrcId": 7,
               "SrcName": "_result",
-              "DstId": 1,
-              "DstName": "format"
+              "DstId": 9,
+              "DstName": "player"
+            },
+            {
+              "Value": 400,
+              "DstId": 9,
+              "DstName": "strength"
             },
             {
               "SrcId": 0,
-              "SrcName": "obj",
-              "DstId": 3,
-              "DstName": "_target"
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.5,
+              "DstId": 10,
+              "DstName": "seconds"
             }
           ]
         },
