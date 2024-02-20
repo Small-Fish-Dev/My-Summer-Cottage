@@ -21,18 +21,27 @@ public sealed class EventComponent : Component, Component.ExecuteInEditor
 	[Property]
 	public List<Reference> References { get; set; } = new();
 
+	bool _showToggle = false;
+
 	protected override void DrawGizmos()
 	{
+		// It's done inside of here because this is when we can detect if it's been selected
 		if ( Game.IsEditor )
 		{
 			var shouldShow = GameManager.ActiveScene == GameObject || Gizmo.IsSelected;
 			// The components inside are enabled if you're inside of the prefab or you have the prefab selected
 
-			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+			if ( _showToggle != shouldShow )
 			{
-				if ( component != this )
-					component.Enabled = shouldShow;
+				foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+				{
+					if ( component != this )
+						component.Enabled = shouldShow;
+				}
+
+				_showToggle = shouldShow;
 			}
+
 		}
 	}
 

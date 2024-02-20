@@ -51,7 +51,7 @@ public sealed class EventAreaTrigger : EventTrigger
 
 	protected override void DrawGizmos()
 	{
-		Gizmo.Draw.Color = Color.Cyan.WithAlpha( 0.2f );
+		Gizmo.Draw.Color = Color.Cyan.WithAlpha( 0.4f );
 		Gizmo.Draw.SolidBox( BBox );
 		Gizmo.Draw.Color = Color.White.WithAlpha( 0.3f );
 		Gizmo.Draw.LineBBox( BBox );
