@@ -1,0 +1,30 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits PanelComponent
+@attribute [StyleSheet]
+
+<root>
+	<div class="firstname">
+		RIPULI
+	</div>
+
+	<div class="lastname">
+		KATASTROFAALINEN
+	</div>
+
+	<div class="date">
+		06-07-2001
+	</div>
+
+	<div class="footer">
+		@footerText
+	</div>
+</root>
+
+@code {
+	private string footerText => 
+		$"P<FIN {Sandbox.Utility.Steam.PersonaName}> <<XXXXX <<<<<<<<<<<<<<<<<<<<<<<<<<<FX"
+	  + $"<UID {Sandbox.Utility.Steam.SteamId}>>>>>>XX YNGMN<< KLYSF>>>XXXXXXXXXXXXX<<<<<<<<<>>>>>>>0><(((°>";
+}

@@ -94,8 +94,8 @@ public sealed class SlotMachine : Component
 		for ( int i = 0; i < 3; i++ )
 		{
 			var val = BetFlags.HasFlag( (BetFlag)(1 << i) ) ? 1 : 0;
-			Model.SetBodyGroup( 8 + i, val );
-			Model.SetBodyGroup( i == 0 ? 2 : i == 1 ? 1 : 1 + i, val ); // THANKS GROD BERT!!
+			Model?.SetBodyGroup( 8 + i, val );
+			Model?.SetBodyGroup( i == 0 ? 2 : i == 1 ? 1 : 1 + i, val ); // THANKS GROD BERT!!
 		}
 	}
 
