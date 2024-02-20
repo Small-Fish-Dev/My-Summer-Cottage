@@ -1,0 +1,111 @@
+﻿CreatorOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    background-image: url(ui/hud/top.png);
+    background-image-tint: rgba(white, 0.85);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 69% 16%;
+    image-rendering: pixelated;
+    color: white;
+    font-family: BasicHandwriting;
+    text-shadow: 2px 2px 0px black;
+    font-smooth: always;
+    pointer-events: all;
+    image-rendering: pixelated;
+
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        text-shadow: 2px 2px 0px black, 0px 0px 4px black;
+    }
+
+    .title {
+        margin-top: 20px;
+        font-size: 42px;
+    }
+
+    .stage {
+        font-family: HabboExtended;
+        font-size: 22px;
+    }
+
+    .stage-counter {
+        flex-direction: row;
+        gap: 5px;
+        align-items: center;
+
+        .box {
+            border: 3px white;
+            box-shadow: 4px 4px 0px black;
+            background-color: rgba(white, 0.2); // Shouldn't actually need this, but for some reason box-shadow is incorrect.
+            width: 28px;
+            aspect-ratio: 1;
+            padding: 3px;
+        }
+
+        .fill {
+            width: 100%;
+            aspect-ratio: 1;
+            background-color: white;
+        }
+
+        .spacer {
+            width: 18px;
+            height: 3px;
+            background-color: white;
+            box-shadow: 2px 2px 0px black;
+        }
+    }
+
+    .continue {
+        position: absolute;
+        right: 0px;
+        bottom: 50px;
+        background: linear-gradient(to left, rgba(black, 0.8) 0%, rgba(black, 0.4) 70%, rgba(black, 0) 100%);
+        padding: 30px;
+        flex-direction: row;
+        gap: 20px;
+        align-items: center;
+        transition: all 0.5s ease-out;
+
+        .information {
+            flex-direction: column;
+            gap: 10px;
+            color: white;
+            max-width: 600px;
+            align-items: flex-end;
+            font-size: 48px;
+            flex-shrink: 0;
+
+            .text {
+                font-family: HabboExtended;
+                color: darken(white, 0.1);
+                font-size: 18px;
+            }
+        }
+
+        image {
+            height: 75%;
+            aspect-ratio: 1;
+            flex-shrink: 0;
+            background-size: 100%;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+            padding-right: 60px;
+            cursor: pointer;
+        }
+    }
+
+    .textentry {
+        position: absolute;
+        top: -99999px;
+    }
+}

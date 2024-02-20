@@ -1,4 +1,5 @@
-﻿$dark-blue: #273163;
+﻿$dark-blue: #2A3D6C;
+$light-blue: #2A5B8D;
 
 PassportComponent {
     width: 100%;
@@ -8,7 +9,7 @@ PassportComponent {
     font-size: 32px;
     text-transform: uppercase;
     color: $dark-blue;
-    text-shadow: 2px 0px $dark-blue, 2px 2px 2px rgba(black, 0.4);
+    text-shadow: 2px 0px $dark-blue, 2px 2px 0px rgba(black, 0.4);
     letter-spacing: 2px;
     font-weight: bold;
 
@@ -16,12 +17,14 @@ PassportComponent {
         position: absolute;
         left: 276px;
         top: 212px;
+        white-space: pre;
     }
 
     .lastname {
         position: absolute;
         left: 276px;
         top: 280px;
+        white-space: pre;
     }
 
     .date {
@@ -36,5 +39,32 @@ PassportComponent {
         top: 540px;
         width: 100%;
         word-break: break-all;
+        color: $light-blue;
+        text-shadow: 2px 0px $light-blue, 2px 2px 4px rgba(black, 0.4);
+    }
+
+    .caret {
+        top: 20px;
+        width: 25px;
+        height: 5px;
+        background-color: $dark-blue;
+        animation-name: blink;
+        animation-duration: 1s;
+        animation-timing-function: ease;
+        animation-iteration-count: infinite;
+    }
+}
+
+@keyframes blink {
+    0% {
+        background-color: #2A3D6C;
+    }
+
+    50% {
+        background-color: transparent;
+    }
+
+    100% {
+        background-color: #2A3D6C;
     }
 }

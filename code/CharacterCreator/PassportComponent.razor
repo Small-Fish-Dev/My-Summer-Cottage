@@ -7,11 +7,19 @@
 
 <root>
 	<div class="firstname">
-		RIPULI
+		<div>@firstName</div>
+		@if ( onFirstname )
+		{
+			<div class="caret" />
+		}
 	</div>
 
 	<div class="lastname">
-		KATASTROFAALINEN
+		<div>@lastName</div>
+		@if ( !onFirstname )
+		{
+			<div class="caret" />
+		}
 	</div>
 
 	<div class="date">
@@ -24,7 +32,57 @@
 </root>
 
 @code {
+	[Property] public CreatorOverlay Overlay { get; set; }
+
+	private string firstName;
+	private string lastName;
+	private bool onFirstname = true;
+	private TextEntry entry;
+
 	private string footerText => 
-		$"P<FIN {Sandbox.Utility.Steam.PersonaName}> <<XXXXX <<<<<<<<<<<<<<<<<<<<<<<<<<<FX"
-	  + $"<UID {Sandbox.Utility.Steam.SteamId}>>>>>>XX YNGMN<< KLYSF>>>XXXXXXXXXXXXX<<<<<<<<<>>>>>>>0><(((°>";
+		$"P<FIN {Sandbox.Utility.Steam.PersonaName}> <<XXXXX <<<<<<<<<<<<<<<<<<<<<<<<<<FX "
+	  + $"<UID {Sandbox.Utility.Steam.SteamId}> >>>>XX YNGMN<< KLYSF>>>XXXXXXXXXXXXX<<<<<<<<<>>>>>>>0><(((°>";
+
+	private void Initialize()
+	{
+		Overlay.Panel.AddChild( entry = new()
+		{
+			CharacterRegex = "[a-zA-ZäöåÄÖÅ ]",
+			MaxLength = 18
+		} );
+
+		entry.AddEventListener( "onsubmit", () =>
+		{
+			onFirstname = !onFirstname;
+			entry.Text = onFirstname ? firstName : lastName;
+		} );
+
+		entry.AddClass( "textentry" );
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( entry == null )
+		{
+			if ( Overlay.Panel != null )
+				Initialize();
+
+			return;
+		}
+
+		if ( !entry.HasFocus )
+			entry.Focus();
+
+		if ( onFirstname )
+			firstName = entry.Text;
+		else 
+			lastName = entry.Text;
+
+		entry.CaretPosition = entry.Text.Length;
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( firstName, lastName, onFirstname );
+	}
 }

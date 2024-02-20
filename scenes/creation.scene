@@ -5,6 +5,17 @@
       "Id": "4ae5b3d2-b62c-4688-911d-e1804886c39d",
       "Name": "First Stage",
       "Enabled": true,
+      "Components": [
+        {
+          "__type": "CreatorComponent",
+          "Camera": {
+            "_type": "component",
+            "go": "c54d44fb-93a6-4493-8c18-5e352f062548",
+            "component_type": "CameraComponent"
+          },
+          "Stage": "Identification"
+        }
+      ],
       "Children": [
         {
           "Id": "c54d44fb-93a6-4493-8c18-5e352f062548",
@@ -39,7 +50,7 @@
           "Id": "ea4d3e24-c139-4cdc-be7a-bf87c5954e7c",
           "Name": "Table",
           "Position": "-124.2589,75.0193,40.57894",
-          "Rotation": "0,-0.01047024,0,0.9999452",
+          "Rotation": "0,-0,-0.08715574,0.9961947",
           "Scale": "0.5000019,0.4000018,1",
           "Enabled": true,
           "Components": [
@@ -57,8 +68,8 @@
         {
           "Id": "271e1571-5ba0-440c-a814-080931052882",
           "Name": "Passport",
-          "Position": "-134.2885,77.95493,42.97993",
-          "Rotation": "0.1251347,0.005811766,-0.9879451,0.09095036",
+          "Position": "-134.3698,77.94363,43.29971",
+          "Rotation": "0.1246031,0.01156326,-0.9878945,0.09167733",
           "Enabled": true,
           "Components": [
             {
@@ -88,7 +99,12 @@
                   "VerticalAlign": "Center"
                 },
                 {
-                  "__type": "PassportComponent"
+                  "__type": "PassportComponent",
+                  "Overlay": {
+                    "_type": "component",
+                    "go": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
+                    "component_type": "CreatorOverlay"
+                  }
                 }
               ]
             }
@@ -115,6 +131,24 @@
               "Shadows": true
             }
           ]
+        }
+      ]
+    },
+    {
+      "Id": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
+      "Name": "Overlay UI",
+      "Position": "81.6987,83.94941,-148.991",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ScreenPanel",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "CreatorOverlay"
         }
       ]
     },
@@ -160,6 +194,6 @@
   },
   "Title": "creation",
   "Description": "",
-  "LastSaved": "2024-02-20T20:20:46.0227712\u002B02:00",
+  "LastSaved": "2024-02-21T00:22:09.8402156\u002B02:00",
   "__references": []
 }

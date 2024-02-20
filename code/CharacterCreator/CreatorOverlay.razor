@@ -1,0 +1,57 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits PanelComponent
+@attribute [StyleSheet]
+
+<root>
+	@* Header *@
+	<div class="header-content">
+		<div class="title">Character Creation</div>
+		<div class="stage">Stage @stageInteger - @CreatorComponent.Current</div>
+
+		<div class="stage-counter">
+			@for ( int i = 0; i < 3; i++ )
+			{
+				<div class="box">
+					@if ( stageInteger >= i + 1 )
+					{
+						<div class="fill" />
+					}
+				</div>
+
+				if ( i < 2 )
+				{
+					<div class="spacer" />
+				}
+			}
+		</div>
+	</div>
+
+	@* Other related UI element. *@
+	@switch( CreatorComponent.Current )
+	{
+		case CreatorStage.Identification:
+			<div class="continue" @onclick=@CreatorComponent.NextStage>
+				<div class="information">
+					Continue
+					<div class="text">Use the enter key to swap between the fields.</div>
+					<div class="text">Press here to finish selecting your name.</div>
+					
+				</div>
+				<image src="ui/hud/confirm.png" />
+			</div>
+
+			break;
+	}
+</root>
+
+@code {
+	private int stageInteger => (int)CreatorComponent.Current + 1;
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( stageInteger );
+	}
+}
