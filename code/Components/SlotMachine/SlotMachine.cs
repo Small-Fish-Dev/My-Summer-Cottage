@@ -10,7 +10,7 @@ public sealed class SlotMachine : Component
 	public const int DEFAULT_BET = 5;
 
 	[Property] public SkinnedModelRenderer Model { get; set; }
-	[Sync, Property] public BetFlag BetFlags { get; set; } = BetFlag.All;
+	[Sync, Property] public BetFlag BetFlags { get; set; }
 	[Sync, Property] public int Money { get; set; }
 
 	public int Bet => BitOperations.PopCount( (uint)BetFlags ) * DEFAULT_BET;

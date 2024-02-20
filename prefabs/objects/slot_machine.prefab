@@ -150,7 +150,11 @@
                   "DstName": "_target"
                 },
                 {
-                  "Value": 1,
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "Byte",
+                    "Value": 1
+                  },
                   "DstId": 4,
                   "DstName": "line"
                 }
@@ -229,7 +233,11 @@
                   "DstName": "_target"
                 },
                 {
-                  "Value": 2,
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "Byte",
+                    "Value": 2
+                  },
                   "DstId": 3,
                   "DstName": "line"
                 }
@@ -308,7 +316,11 @@
                   "DstName": "_target"
                 },
                 {
-                  "Value": 3,
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "Byte",
+                    "Value": 3
+                  },
                   "DstId": 3,
                   "DstName": "line"
                 }
@@ -484,7 +496,7 @@
       },
       {
         "__type": "SlotMachine",
-        "BetFlags": "All",
+        "BetFlags": "None",
         "Model": {
           "_type": "component",
           "go": "6ec8a614-2c68-4727-a049-9e7cc2e5783c",
