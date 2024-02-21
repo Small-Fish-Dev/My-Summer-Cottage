@@ -116,23 +116,11 @@
               "Id": 11,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.System/Transform",
-                "_name": "Position"
+                "_name": "Position",
+                "_type": "Sandbox.System/Transform"
               },
               "UserData": {
                 "Position": "16,192"
-              }
-            },
-            {
-              "Id": 12,
-              "Type": "call",
-              "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Destroy",
-                "_isStatic": false
-              },
-              "UserData": {
-                "Position": "1376,272"
               }
             },
             {
@@ -177,6 +165,24 @@
               "Type": "event.interpolatescale",
               "UserData": {
                 "Position": "400,-160"
+              }
+            },
+            {
+              "Id": 20,
+              "Type": "sound.playat",
+              "UserData": {
+                "Position": "736,368"
+              }
+            },
+            {
+              "Id": 22,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Volume",
+                "_type": "Sandbox.Engine/Sandbox.SoundHandle"
+              },
+              "UserData": {
+                "Position": "1008,400"
               }
             }
           ],
@@ -249,18 +255,6 @@
               "SrcId": 10,
               "SrcName": "_result",
               "DstId": 11,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_signal",
-              "DstId": 12,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 3,
-              "SrcName": "_result",
-              "DstId": 12,
               "DstName": "_target"
             },
             {
@@ -382,6 +376,40 @@
               "Value": "1,1,1",
               "DstId": 19,
               "DstName": "to"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 20,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 20,
+              "DstName": "position"
+            },
+            {
+              "Value": "sounds/speech/test_drunk.sound",
+              "DstId": 20,
+              "DstName": "soundEvent"
+            },
+            {
+              "SrcId": 20,
+              "SrcName": "_signal",
+              "DstId": 22,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 20,
+              "SrcName": "_result",
+              "DstId": 22,
+              "DstName": "_target"
+            },
+            {
+              "Value": 3,
+              "DstId": 22,
+              "DstName": "_value"
             }
           ]
         },
@@ -389,6 +417,443 @@
           {
             "_type": "component",
             "go": "91a616ec-9d82-43d1-ac36-f0aa9b393b21",
+            "component_type": "EventAreaTrigger"
+          }
+        ]
+      },
+      {
+        "__type": "EventComponent",
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "e3ac510a-4c97-45b8-837a-4e630d8119ed",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-192,-0"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.ref",
+              "Properties": {
+                "value": {
+                  "_type": "component",
+                  "go": "5d8fe712-7689-4089-b21c-dbc5c0ad22d2",
+                  "component_type": "EventComponent"
+                },
+                "T": "package.fish.project_cyber/EventComponent"
+              },
+              "UserData": {
+                "Position": "-160,256"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.Component",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "80,256"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "value": {
+                  "_type": "gameobject",
+                  "go": "ad81ba83-9b0e-45f4-bb37-2673dc189b7c"
+                },
+                "T": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "-192,80"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                "_name": "Get",
+                "_isStatic": false,
+                "T": "package.fish.project_cyber/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "96,-176"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Position": "80,-48"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "World"
+              },
+              "UserData": {
+                "Position": "320,-48"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "Sandbox.System/Transform",
+                "_name": "Position"
+              },
+              "UserData": {
+                "Position": "544,-48"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "event.interpolateposition",
+              "UserData": {
+                "Position": "752,64"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Position": "64,160"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "World"
+              },
+              "UserData": {
+                "Position": "288,160"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.System/Transform"
+              },
+              "UserData": {
+                "Position": "496,160"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "rotation.lookat",
+              "UserData": {
+                "Position": "656,416"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "op.subtract",
+              "UserData": {
+                "Position": "368,384"
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "event.localpunchplayer",
+              "UserData": {
+                "Position": "1408,32"
+              }
+            },
+            {
+              "Id": 23,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Normal",
+                "_type": "Sandbox.System/Vector3"
+              },
+              "UserData": {
+                "Position": "496,432"
+              }
+            },
+            {
+              "Id": 24,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Rotation"
+              },
+              "UserData": {
+                "Position": "864,352"
+              }
+            },
+            {
+              "Id": 26,
+              "Type": "call",
+              "Properties": {
+                "_name": "Destroy",
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "1648,32"
+              }
+            },
+            {
+              "Id": 28,
+              "Type": "sound.playat",
+              "UserData": {
+                "Position": "800,240"
+              }
+            },
+            {
+              "Id": 29,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Volume",
+                "_type": "Sandbox.Engine/Sandbox.SoundHandle"
+              },
+              "UserData": {
+                "Position": "1072,256"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 3,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "obj",
+              "DstId": 6,
+              "DstName": "_target"
+            },
+            {
+              "Value": "EnabledInSelf, InAncestors",
+              "DstId": 6,
+              "DstName": "search"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "obj",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.2,
+              "DstId": 10,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 10,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 12,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "_result",
+              "DstId": 15,
+              "DstName": "forward"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 16,
+              "DstName": "a"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 16,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_signal",
+              "DstId": 21,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "0,0,1",
+              "DstId": 21,
+              "DstName": "launchDirection"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 21,
+              "DstName": "player"
+            },
+            {
+              "Value": 400,
+              "DstId": 21,
+              "DstName": "strength"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_result",
+              "DstId": 23,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 24,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 15,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_signal",
+              "DstId": 26,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 26,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 28,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 28,
+              "DstName": "position"
+            },
+            {
+              "Value": "sounds/speech/test_drunk.sound",
+              "DstId": 28,
+              "DstName": "soundEvent"
+            },
+            {
+              "SrcId": 28,
+              "SrcName": "_signal",
+              "DstId": 29,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 28,
+              "SrcName": "_result",
+              "DstId": 29,
+              "DstName": "_target"
+            },
+            {
+              "Value": 6,
+              "DstId": 29,
+              "DstName": "_value"
+            }
+          ]
+        },
+        "Triggers": [
+          {
+            "_type": "component",
+            "go": "a3794f55-1651-4ecb-b957-c5ea31e0ec47",
             "component_type": "EventAreaTrigger"
           }
         ]
@@ -420,6 +885,22 @@
           {
             "__type": "EventAreaTrigger",
             "Extents": "295.9999,173.4401,100",
+            "MaxPollingRate": 5,
+            "Offset": "0,0,50",
+            "TagSet": "player",
+            "TriggerPrefab": []
+          }
+        ]
+      },
+      {
+        "Id": "a3794f55-1651-4ecb-b957-c5ea31e0ec47",
+        "Name": "Attack Area",
+        "Position": "-189.718,48.40234,-0.00001094096",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "EventAreaTrigger",
+            "Extents": "348.1601,949.3594,100",
             "MaxPollingRate": 5,
             "Offset": "0,0,50",
             "TagSet": "player",
