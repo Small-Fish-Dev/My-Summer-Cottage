@@ -9,36 +9,54 @@
 <root>
 	@* Header *@
 	<div class="header-content">
-		<div class="title">Character Creation</div>
-		<div class="stage">Stage @stageInteger - @CreatorComponent.Current</div>
+		@if( CreatorComponent.Current != CreatorStage.Confirmation )
+		{
+			<div class="title">Character Creation</div>
+			<div class="stage">Stage @stageInteger - @(CreatorComponent.Current.ToString().Replace( '_', ' ' ))</div>
 
-		<div class="stage-counter">
-			@for ( int i = 0; i < 3; i++ )
-			{
-				<div class="box">
-					@if ( stageInteger >= i + 1 )
-					{
-						<div class="fill" />
-					}
-				</div>
-
-				if ( i < 2 )
+			<div class="stage-counter">
+				@for ( int i = 0; i < 3; i++ )
 				{
-					<div class="spacer" />
+					<div class="box">
+						@if ( stageInteger >= i + 1 )
+						{
+							<div class="fill" />
+						}
+					</div>
+
+					if ( i < 2 )
+					{
+						<div class="spacer" />
+					}
 				}
-			}
-		</div>
+			</div>
+		}
+		else
+		{
+			<div class="title">Confirm this Character?</div>
+		}
 	</div>
+
+	@if( stageInteger > 1)
+	{
+		<div class="goback gradient-thing" @onclick=@CreatorComponent.PreviousStage>
+			<image src="ui/hud/goback2.png" />
+			<div class="text-container">
+				Go back
+				<div class="description">to Stage @(stageInteger  - 1)</div>
+			</div>
+		</div>
+	}
 
 	@* Other related UI element. *@
 	@switch( CreatorComponent.Current )
 	{
 		case CreatorStage.Identification:
-			<div class="continue @(disabled ? "disabled" : "")" @onclick=@CreatorComponent.NextStage>
-				<div class="information">
+			<div class="continue gradient-thing @(disabled ? "disabled" : "")" @onclick=@CreatorComponent.NextStage>
+				<div class="text-container">
 					Continue
-					<div class="text">Use the enter key to swap between the fields.</div>
-					<div class="text">Press here to finish selecting your name.</div>
+					<div class="description">Use the enter key to swap between the fields.</div>
+					<div class="description">Press here to finish selecting your name.</div>
 					
 				</div>
 				<image src="ui/hud/confirm.png" />
@@ -50,13 +68,20 @@
 			<TabletPanel />
 
 			break;
+
+		case CreatorStage.Dressing_up:
+			<ClothingPanel />
+
+			break;
 	}
 </root>
 
 @code {
 	private int stageInteger => (int)CreatorComponent.Current + 1;
-	private bool disabled => string.IsNullOrEmpty( PassportComponent.Firstname ) 
-		|| string.IsNullOrEmpty( PassportComponent.Lastname );
+	
+	private bool disabled => 
+		string.IsNullOrEmpty( PassportComponent.Firstname ) 
+	 || string.IsNullOrEmpty( PassportComponent.Lastname );
 
 	protected override int BuildHash()
 	{

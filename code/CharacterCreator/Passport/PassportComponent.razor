@@ -56,6 +56,11 @@
 		return sb.ToString();
 	}
 
+	protected override void OnEnabled()
+	{
+		base.OnEnabled();
+	}
+
 	protected override void OnAwake()
 	{
 		footerText = $"P<FIN {name}> {generateGarbage( 34 - name.Length )}\n"
@@ -71,7 +76,8 @@
 		Overlay.Panel.AddChild( entry = new()
 		{
 			CharacterRegex = "[a-zA-ZäöåÄÖÅ ]",
-			MaxLength = 18
+			MaxLength = 18,
+			Text = Firstname
 		} );
 
 		entry.AddEventListener( "onsubmit", () =>
@@ -79,7 +85,7 @@
 			onFirstname = !onFirstname;
 			entry.Text = onFirstname ? Firstname : Lastname;
 		} );
-		
+
 		entry.AddClass( "textentry" );
 	}
 

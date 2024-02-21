@@ -4,7 +4,7 @@
     {
       "Id": "4ae5b3d2-b62c-4688-911d-e1804886c39d",
       "Name": "First Stage",
-      "Position": "0,318.5648,0",
+      "Position": "0,318.5648,256.7095",
       "Enabled": true,
       "Components": [
         {
@@ -375,6 +375,57 @@
       ]
     },
     {
+      "Id": "c91a005b-5b13-4ce0-b51d-92aefd46ffd6",
+      "Name": "Third Stage",
+      "Position": "0,-462.752,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CreatorComponent",
+          "Camera": {
+            "_type": "component",
+            "go": "47187500-6715-41a6-9313-d3bf6763dc2e",
+            "component_type": "CameraComponent"
+          },
+          "Stage": "Dressing_up"
+        }
+      ],
+      "Children": [
+        {
+          "Id": "47187500-6715-41a6-9313-d3bf6763dc2e",
+          "Name": "Camera",
+          "Position": "-201.8314,132.3047,60.23136",
+          "Rotation": "0.005131484,0.03628263,-0.1399432,0.9894812",
+          "Tags": "maincamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "CameraComponent",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 50,
+              "IsMainCamera": true,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 1000,
+              "ZNear": 2
+            },
+            {
+              "__type": "DitherHook"
+            },
+            {
+              "__type": "EyeProtector"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "Id": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
       "Name": "Overlay UI",
       "Enabled": true,
@@ -415,6 +466,6 @@
   },
   "Title": "creation",
   "Description": "",
-  "LastSaved": "2024-02-21T20:08:07.0177554\u002B02:00",
+  "LastSaved": "2024-02-21T23:10:31.4765486\u002B02:00",
   "__references": []
 }

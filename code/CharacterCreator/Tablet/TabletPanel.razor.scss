@@ -77,7 +77,13 @@ TabletPanel {
 
         &:hover {
             transform: translateX(-50%) scale(1.1);
+            cursor: pointer;
             background-color: lighten($light-brown, 0.2);
         }
+    }
+
+    .textentry {
+        position: absolute;
+        top: -99999px;
     }
 }

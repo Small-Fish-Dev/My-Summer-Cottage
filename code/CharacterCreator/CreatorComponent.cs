@@ -27,22 +27,22 @@ public class CreatorComponent : Component
 	protected override void OnStart()
 	{
 		Current = CreatorStage.Identification; // TODO: Remove this, only needed cuz static shit is fucked.
+		Camera.Enabled = false;
 
-		if ( Current != Stage )
-			DisableStage();
-
+		if ( Current == Stage )
+			EnableStage();
+		
 		initialTransform = Camera.Transform.World;
 	}
 
 	public void DisableStage()
 	{
-		GameObject.Enabled = false;
+		Camera.Enabled = false;
 	}
 
 	public void EnableStage()
 	{
-		GameObject.Enabled = true;
-		Camera.IsMainCamera = true;
+		Camera.Enabled = true;
 	}
 
 	public static void PreviousStage()
