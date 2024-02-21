@@ -116,8 +116,8 @@
               "Id": 11,
               "Type": "property.get",
               "Properties": {
-                "_name": "Position",
-                "_type": "Sandbox.System/Transform"
+                "_type": "Sandbox.System/Transform",
+                "_name": "Position"
               },
               "UserData": {
                 "Position": "16,192"
@@ -178,8 +178,8 @@
               "Id": 22,
               "Type": "property.set",
               "Properties": {
-                "_name": "Volume",
-                "_type": "Sandbox.Engine/Sandbox.SoundHandle"
+                "_type": "Sandbox.Engine/Sandbox.SoundHandle",
+                "_name": "Volume"
               },
               "UserData": {
                 "Position": "1008,400"
@@ -558,8 +558,8 @@
               "Id": 13,
               "Type": "property.get",
               "Properties": {
-                "_name": "Position",
-                "_type": "Sandbox.System/Transform"
+                "_type": "Sandbox.System/Transform",
+                "_name": "Position"
               },
               "UserData": {
                 "Position": "496,160"
@@ -590,8 +590,8 @@
               "Id": 23,
               "Type": "property.get",
               "Properties": {
-                "_name": "Normal",
-                "_type": "Sandbox.System/Vector3"
+                "_type": "Sandbox.System/Vector3",
+                "_name": "Normal"
               },
               "UserData": {
                 "Position": "496,432"
@@ -612,8 +612,8 @@
               "Id": 26,
               "Type": "call",
               "Properties": {
-                "_name": "Destroy",
                 "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Destroy",
                 "_isStatic": false
               },
               "UserData": {
@@ -631,8 +631,8 @@
               "Id": 29,
               "Type": "property.set",
               "Properties": {
-                "_name": "Volume",
-                "_type": "Sandbox.Engine/Sandbox.SoundHandle"
+                "_type": "Sandbox.Engine/Sandbox.SoundHandle",
+                "_name": "Volume"
               },
               "UserData": {
                 "Position": "1072,256"
@@ -857,6 +857,14 @@
             "component_type": "EventAreaTrigger"
           }
         ]
+      },
+      {
+        "__type": "EventDefinition",
+        "EventName": "Peeping Creep",
+        "Frequency": "Repeatable",
+        "Rarity": "Common",
+        "Stackable": true,
+        "Type": "Zone"
       }
     ],
     "Children": [
