@@ -1,0 +1,15 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits ScenePanel
+
+<root />
+
+@code {
+	public CharacterRenderer()
+	{
+		var sceneWorld = new SceneWorld();
+		_ = new SceneDirectionalLight( sceneWorld, Rotation.Identity, Color.White );
+		_ = new SceneModel( sceneWorld, "models/guy/guy.vmdl", new Transform(new Vector3(70, 0, -30), Rotation.From(0, 170, 0)) );
+		World = sceneWorld;
+	}
+}

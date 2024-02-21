@@ -3,14 +3,17 @@
 @inherits Panel
 
 <root>
-	<div class="section">
-		<InventorySlot Slot=@EquipSlot.Head Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Head] />
-		<InventorySlot Slot=@EquipSlot.Body Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Body] />
-		<InventorySlot Slot=@EquipSlot.Legs Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Legs] />
-		<div>
-			<InventorySlot Slot=@EquipSlot.Feet Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Feet] />
-			<InventorySlot Slot=@EquipSlot.Hand Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Hand] />
+	<div class="section" style="flex-direction: row; align-items: center;">
+		<div style="flex-direction: column; flex-shrink: 0;">
+			<InventorySlot Slot=@EquipSlot.Head Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Head] />
+			<InventorySlot Slot=@EquipSlot.Body Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Body] />
+			<InventorySlot Slot=@EquipSlot.Legs Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Legs] />
+			<div>
+				<InventorySlot Slot=@EquipSlot.Feet Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Feet] />
+				<InventorySlot Slot=@EquipSlot.Hand Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Hand] />
+			</div>
 		</div>
+		<CharacterRenderer />
 	</div>
 	<div class="section">
 		<text class="title">INVENTORY</text>
