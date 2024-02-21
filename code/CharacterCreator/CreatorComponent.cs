@@ -45,6 +45,16 @@ public class CreatorComponent : Component
 		Camera.IsMainCamera = true;
 	}
 
+	public static void PreviousStage()
+	{
+		var previous = (int)Current - 1;
+		if ( previous < 0 )
+			return;
+
+		All[Current].DisableStage();
+		All[Current = (CreatorStage)previous].EnableStage();
+	}
+
 	public static void NextStage()
 	{
 		var values = Enum.GetValues<CreatorStage>();

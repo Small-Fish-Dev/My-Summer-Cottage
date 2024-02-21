@@ -36,8 +36,8 @@
 
 	public static string Fullname => $"{Firstname} {Lastname}";
 
-	public static string Firstname { get; private set; } = "";
-	public static string Lastname { get; private set; } = "";
+	public static string Firstname { get; private set; }
+	public static string Lastname { get; private set; }
 
 	private bool onFirstname = true;
 	private TextEntry entry;
@@ -59,12 +59,15 @@
 	protected override void OnAwake()
 	{
 		footerText = $"P<FIN {name}> {generateGarbage( 34 - name.Length )}\n"
-				   + $"P<UID {steamid}> {generateGarbage( 34 - steamid.Length)}\n"
-				   + $"{generateGarbage(52 - steamid.Length)}><(((°>";
+							+ $"P<UID {steamid}> {generateGarbage( 34 - steamid.Length)}\n"
+							+ $"{generateGarbage(52 - steamid.Length)}><(((°>";
 	}
 
 	private void Initialize()
 	{
+		Firstname = ""; // todo: Remove this, only needed due to static shit being fuckeedd!!
+		Lastname = "";
+
 		Overlay.Panel.AddChild( entry = new()
 		{
 			CharacterRegex = "[a-zA-ZäöåÄÖÅ ]",

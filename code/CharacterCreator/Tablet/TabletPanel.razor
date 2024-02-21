@@ -22,6 +22,10 @@
 		minimum=@(60) maximum=@(125) default=@(70) 
 		@onvalueset=@(value => {
 			Weight = (int)value.Value;
+
+			var remapped = MathX.Remap( (float)Weight, 60, 125, 0, 1 );
+			Model.Morphs.Set( "fat", remapped );
+			Model.Update( Time.Delta );
 		} )
 	/>
 
@@ -31,6 +35,10 @@
 		minimum=@(150) maximum=@(195) default=@(178) 
 		@onvalueset=@(value => {
 			Height = (int)value.Value;
+
+			var remapped = MathX.Remap( (float)Height, 150, 195, -90, 80 );
+			Model.SetAnimParameter( "height", remapped );
+			Model.Update( Time.Delta );
 		} )
 	/>
 
@@ -43,6 +51,19 @@
 	public static int Weight { get; set; }
 	public static int Height { get; set; }
 
+	private SceneModel model;
+	public SceneModel Model
+	{
+		get
+		{
+			if (model != null)
+				return model;
+
+			return model = CreatorComponent.All[CreatorComponent.Current].GameObject
+				.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInDescendants )
+				.SceneModel;
+		}
+	}
 
 	protected override int BuildHash()
 	{
