@@ -1,0 +1,26 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Panel
+@attribute [StyleSheet]
+
+<root>
+
+</root>
+
+@code {
+	private SceneModel model;
+	public SceneModel Model
+	{
+		get
+		{
+			if (model != null)
+				return model;
+
+			return model = CreatorComponent.All[CreatorComponent.Current].GameObject
+				.Components.Get<SkinnedModelRenderer>(FindMode.EverythingInDescendants)
+				.SceneModel;
+		}
+	}
+}

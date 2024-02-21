@@ -6,20 +6,12 @@
 @attribute [StyleSheet]
 
 <root>
-	@*<div class="goback">
-		<image src="ui/hud/confirm.png" />
-		<div class="text-container">
-			Go back
-			<div class="description">to Stage 1</div>
-		</div>
-	</div>*@
-
 	<label class="name dark">@PassportComponent.Fullname</label>
 
 	<label class="weight-text dark">@(_weight) KG</label>
 	<slider 
 		class="weight"
-		minimum=@(60) maximum=@(125) default=@(70) 
+		minimum=@(60) maximum=@(125) default=@(_weight) 
 		@onvalueset=@(value => {
 			_weight = (int)value.Value;
 			Weight = MathX.Remap( (float)_weight, 60, 125, 0, 1 );
@@ -31,7 +23,7 @@
 	<label class="height-text dark">@(_height) CM</label>
 	<slider 
 		class="height"
-		minimum=@(150) maximum=@(195) default=@(178) 
+		minimum=@(150) maximum=@(195) default=@(_height) 
 		@onvalueset=@(value => {
 			_height = (int)value.Value;
 			Height = MathX.Remap( (float)_height, 150, 195, -90, 80 );
@@ -40,14 +32,17 @@
 		} )
 	/>
 
-	<div class="confirm">
+	<div class="confirm" @onclick=@CreatorComponent.NextStage>
 		CONFIRM
 	</div>
 </root>
 
 @code {
-	private int _weight;
-	private int _height;
+	public const int DEFAULT_WEIGHT = 70;
+	public const int DEFAULT_HEIGHT = 178;
+
+	private static int _weight = DEFAULT_WEIGHT;
+	private static int _height = DEFAULT_HEIGHT;
 
 	public static float Weight { get; set; }
 	public static float Height { get; set; }
