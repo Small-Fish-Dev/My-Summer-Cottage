@@ -1,5 +1,7 @@
 ﻿using Sandbox;
+using Sandbox.Utility;
 using Sauna;
+using static SaunaActionNodes;
 
 public static partial class SaunaActionNodes
 {
@@ -34,6 +36,62 @@ public static partial class SaunaActionNodes
 
 		if ( player.Components.TryGet<MoveHelper>( out MoveHelper moveHelper ) )
 			moveHelper.Punch( punch );
+	}
+
+	public enum EasingFunction
+	{
+		Linear,
+		EaseIn,
+		EaseOut,
+		EaseInOut,
+		BounceIn,
+		BounceOut,
+		BounceInOut
+	}
+
+	public static Easing.Function GetEasingFunction( EasingFunction easeFunction )
+	{
+		switch ( easeFunction )
+		{
+			case EasingFunction.Linear:
+				return Easing.Linear;
+			case EasingFunction.EaseIn:
+				return Easing.EaseIn;
+			case EasingFunction.EaseOut:
+				return Easing.EaseOut;
+			case EasingFunction.EaseInOut:
+				return Easing.EaseInOut;
+			case EasingFunction.BounceIn:
+				return Easing.BounceIn;
+			case EasingFunction.BounceOut:
+				return Easing.BounceOut;
+			case EasingFunction.BounceInOut:
+				return Easing.BounceInOut;
+			default:
+				return Easing.Linear;
+		}
+	}
+
+	/// <summary>
+	/// Interpolates the position from A to B
+	/// </summary>
+	[ActionGraphNode( "event.interpolateposition" )]
+	[Title( "Interpolate Position" ), Group( "Events" ), Icon( "double_arrow" )]
+	public static async Task InterpolatePosition( GameObject target, Vector3 from, Vector3 to, float duration, EasingFunction easer )
+	{
+		TimeSince timeSince = 0;
+
+		var easingFunction = GetEasingFunction( easer );
+
+		while ( timeSince < duration )
+		{
+			if ( !target.IsValid() ) return;
+
+			var newPos = Vector3.Lerp( from, to, easingFunction( timeSince / duration ) );
+			target.Transform.Position = newPos;
+
+			await Task.Delay( (int)(Time.Delta * 1000) );
+		}
 	}
 
 }
