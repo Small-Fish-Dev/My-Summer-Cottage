@@ -1,4 +1,5 @@
 ﻿@using Sandbox;
+@using Sauna.UI;
 @using Sandbox.UI;
 
 @namespace Sauna
@@ -42,6 +43,11 @@
 				</div>
 				<image src="ui/hud/confirm.png" />
 			</div>
+
+			break;
+
+		case CreatorStage.Appearance:
+			<TabletPanel />
 
 			break;
 	}

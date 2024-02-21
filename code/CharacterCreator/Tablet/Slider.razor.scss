@@ -1,0 +1,37 @@
+﻿$dark-brown: #6A1507;
+
+Slider {
+    background-image: url(ui/slider.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    letter-spacing: 4px;
+
+    .min {
+        position: absolute;
+        top: 100%;
+        margin-top: 20px;
+        color: $dark-brown;
+        text-shadow: 2px 0px $dark-brown;
+    }
+
+    .max {
+        position: absolute;
+        top: 100%;
+        right: 0px;
+        margin-top: 20px;
+        color: $dark-brown;
+        text-shadow: 2px 0px $dark-brown;
+    }
+
+    .knob {
+        position: absolute;
+        width: 24px;
+        height: 48px;
+        background-image: url(ui/slider_knob.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        transform: translate(-50% -12px);
+    }
+}

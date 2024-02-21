@@ -1,0 +1,51 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Panel
+@attribute [StyleSheet]
+
+<root>
+	@*<div class="goback">
+		<image src="ui/hud/confirm.png" />
+		<div class="text-container">
+			Go back
+			<div class="description">to Stage 1</div>
+		</div>
+	</div>*@
+
+	<label class="name dark">@PassportComponent.Fullname</label>
+
+	<label class="weight-text dark">@(Weight) KG</label>
+	<slider 
+		class="weight"
+		minimum=@(60) maximum=@(125) default=@(70) 
+		@onvalueset=@(value => {
+			Weight = (int)value.Value;
+		} )
+	/>
+
+	<label class="height-text dark">@(Height) CM</label>
+	<slider 
+		class="height"
+		minimum=@(150) maximum=@(195) default=@(178) 
+		@onvalueset=@(value => {
+			Height = (int)value.Value;
+		} )
+	/>
+
+	<div class="confirm">
+		CONFIRM
+	</div>
+</root>
+
+@code {
+	public static int Weight { get; set; }
+	public static int Height { get; set; }
+
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Weight, Height );
+	}
+}

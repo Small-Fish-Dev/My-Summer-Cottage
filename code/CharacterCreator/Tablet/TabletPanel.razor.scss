@@ -1,0 +1,83 @@
+﻿$dark-brown: #6A1507;
+$light-brown: #974918;
+$background: #D9C192;
+
+TabletPanel {
+    position: absolute;
+    left: 50px;
+    top: 100px;
+    width: 900px;
+    height: 900px;
+    background-image: url(ui/tablet.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    font-family: HabboExtended;
+    font-weight: bold;
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    filter: drop-shadow(0px 0px 4px black);
+
+    .dark {
+        color: $dark-brown;
+        text-shadow: 2px 0px $dark-brown;
+    }
+
+    .name {
+        position: absolute;
+        top: 350px;
+        left: 245px;
+        max-width: 420px;
+    }
+
+    .weight-text {
+        position: absolute;
+        top: 460px;
+        right: 243px;
+    }
+
+    .height-text {
+        position: absolute;
+        top: 610px;
+        right: 243px;
+    }
+
+    .weight {
+        width: 410px;
+        height: 25px;
+        position: absolute;
+        top: 500px;
+        left: 245px;
+    }
+
+    .height {
+        width: 410px;
+        height: 25px;
+        position: absolute;
+        top: 650px;
+        left: 245px;
+    }
+
+    .confirm {
+        position: absolute;
+        left: 50%;
+        bottom: 100px;
+        transform: translateX(-50%);
+        background-color: $light-brown;
+        color: $background;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 30px 15px 30px;
+        letter-spacing: 6px;
+        text-shadow: 2px 0px $background;
+        filter: drop-shadow(0px 0px 8px black);
+        transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
+
+        &:hover {
+            transform: translateX(-50%) scale(1.1);
+            background-color: lighten($light-brown, 0.2);
+        }
+    }
+}

@@ -1,0 +1,86 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Panel
+@attribute [StyleSheet]
+
+<root>
+	<label class="min">@Minimum</label>
+	<label class="max">@Maximum</label>
+
+	<div @ref=_knob class="knob" />
+</root>
+
+@code {
+	private static Slider _target;
+	private Panel _knob;
+
+	public int Minimum { get; set; } = 0;
+	public int Maximum { get; set; } = 100;
+	public int Value { get; set; }
+
+	private bool _defaultSet;
+	public int Default
+	{
+		set
+		{
+			if ( _defaultSet )
+				return;
+
+			Value = value;
+			CreateEvent( "onvalueset", Value );
+			_defaultSet = true;
+		}
+	}
+
+	protected override void OnMouseDown( MousePanelEvent e )
+	{
+		base.OnMouseDown( e );
+		if ( e.MouseButton != MouseButtons.Left )
+			return;
+
+		_target = this;
+	}
+
+	protected override void OnMouseUp( MousePanelEvent e )
+	{
+		base.OnMouseDown( e );
+		if ( e.MouseButton != MouseButtons.Left )
+			return;
+
+		_target = null;
+	}
+
+	void UpdateKnob()
+	{
+		if ( _knob == null )
+			return;
+
+		var fraction = (float)(Value - Minimum) / (Maximum - Minimum);
+		_knob.Style.Left = Length.Fraction( fraction );
+	}
+
+	public override void Tick()
+	{
+		UpdateKnob();
+
+		if ( _target != this )
+			return;
+
+		var width = Box.Rect.Width;
+		var pos = MousePosition;
+		var fraction = (pos.x / width).Clamp( 0, 1 );
+		var newValue = MathX.FloorToInt( MathX.Lerp( Minimum, Maximum, fraction ) + 0.5f );
+		if ( Value == newValue )
+			return;
+
+		Value = newValue;
+		CreateEvent( "onvalueset", Value );
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Value, Minimum, Maximum );
+	}
+}
