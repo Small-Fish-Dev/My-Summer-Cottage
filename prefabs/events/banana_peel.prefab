@@ -19,60 +19,121 @@
               "Id": 0,
               "Type": "input",
               "UserData": {
-                "Position": "-96,-16"
-              }
-            },
-            {
-              "Id": 9,
-              "Type": "sauna.localpunchplayer",
-              "UserData": {
-                "Position": "560,80"
+                "Position": "-944,-80"
               }
             },
             {
               "Id": 10,
               "Type": "time.delay",
               "UserData": {
-                "Position": "256,-48"
+                "Position": "-656,-80"
               }
             },
             {
-              "Id": 12,
-              "Type": "call",
+              "Id": 42,
+              "Type": "scene.ref",
               "Properties": {
-                "_isStatic": false,
-                "_name": "Get",
-                "T": "package.fish.project_cyber/Sauna.Player",
-                "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                "value": {
+                  "_type": "component",
+                  "go": "e1c8e099-ec98-4554-a213-e858ad9e0391",
+                  "component_type": "EventAreaFinder"
+                },
+                "T": "package.fish.project_cyber/EventAreaFinder"
               },
               "UserData": {
-                "Position": "112,96"
+                "Position": "-928,144"
+              }
+            },
+            {
+              "Id": 43,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "ObjectsInside",
+                "_type": "package.fish.project_cyber/EventAreaFinder"
+              },
+              "UserData": {
+                "Position": "-704,144"
+              }
+            },
+            {
+              "Id": 44,
+              "Type": "foreach",
+              "UserData": {
+                "Position": "-448,16"
+              }
+            },
+            {
+              "Id": 45,
+              "Type": "call",
+              "Properties": {
+                "_name": "TryGet",
+                "T": "package.fish.project_cyber/Sauna.Player",
+                "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "-192,80"
+              }
+            },
+            {
+              "Id": 47,
+              "Type": "if",
+              "UserData": {
+                "Position": "32,-16"
+              }
+            },
+            {
+              "Id": 49,
+              "Type": "scene.ref",
+              "Properties": {
+                "value": {
+                  "_type": "gameobject",
+                  "prefab": "prefabs/events/banana_peel.prefab"
+                },
+                "T": "Sandbox.Game/Sandbox.PrefabScene"
+              },
+              "UserData": {
+                "Position": "-480,224"
+              }
+            },
+            {
+              "Id": 50,
+              "Type": "event.worldpunchplayer",
+              "UserData": {
+                "Position": "368,16"
+              }
+            },
+            {
+              "Id": 51,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "-240,224"
+              }
+            },
+            {
+              "Id": 52,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              },
+              "UserData": {
+                "Position": "-32,224"
+              }
+            },
+            {
+              "Id": 54,
+              "Type": "op.subtract",
+              "UserData": {
+                "Position": "192,240"
               }
             }
           ],
           "Links": [
-            {
-              "SrcId": 10,
-              "SrcName": "_signal",
-              "DstId": 9,
-              "DstName": "_signal"
-            },
-            {
-              "Value": "0,0,1",
-              "DstId": 9,
-              "DstName": "launchDirection"
-            },
-            {
-              "SrcId": 12,
-              "SrcName": "_result",
-              "DstId": 9,
-              "DstName": "player"
-            },
-            {
-              "Value": 400,
-              "DstId": 9,
-              "DstName": "strength"
-            },
             {
               "SrcId": 0,
               "SrcName": "_signal",
@@ -85,21 +146,98 @@
               "DstName": "seconds"
             },
             {
-              "SrcId": 0,
-              "SrcName": "obj",
-              "DstId": 12,
+              "SrcId": 42,
+              "SrcName": "_result",
+              "DstId": 43,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_signal",
+              "DstId": 44,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 43,
+              "SrcName": "_result",
+              "DstId": 44,
+              "DstName": "enumerable"
+            },
+            {
+              "SrcId": 44,
+              "SrcName": "body.value",
+              "DstId": 45,
               "DstName": "_target"
             },
             {
               "Value": "EnabledInSelf, InAncestors",
-              "DstId": 12,
+              "DstId": 45,
               "DstName": "search"
+            },
+            {
+              "SrcId": 44,
+              "SrcName": "body",
+              "DstId": 47,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 45,
+              "SrcName": "_result",
+              "DstId": 47,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 47,
+              "SrcName": "_signal",
+              "DstId": 50,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 45,
+              "SrcName": "component",
+              "DstId": 50,
+              "DstName": "player"
+            },
+            {
+              "Value": 800,
+              "DstId": 50,
+              "DstName": "strength"
+            },
+            {
+              "SrcId": 54,
+              "SrcName": "_result",
+              "DstId": 50,
+              "DstName": "worldSource"
+            },
+            {
+              "SrcId": 49,
+              "SrcName": "_result",
+              "DstId": 51,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 51,
+              "SrcName": "_result",
+              "DstId": 52,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 52,
+              "SrcName": "_result",
+              "DstId": 54,
+              "DstName": "a"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "Sandbox.System/Vector3",
+                "Value": "0,0,500"
+              },
+              "DstId": 54,
+              "DstName": "b"
             }
           ]
         },
-        "References": [
-          {}
-        ],
         "Triggers": [
           {
             "_type": "component",
@@ -151,10 +289,10 @@
           {
             "__type": "EventAreaFinder",
             "Extents": "400,400,200",
-            "MaxPollingRate": 5,
+            "MaxPollingRate": 10,
             "Offset": "0,0,100",
-            "PrefabFiles": [],
-            "TagSet": "player"
+            "TagSet": "player",
+            "TriggerPrefab": []
           }
         ]
       }

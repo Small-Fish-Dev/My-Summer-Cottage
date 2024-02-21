@@ -29,7 +29,7 @@ public sealed class EventAreaTrigger : EventTrigger
 	/// <summary>
 	/// Get all objects inside of this area
 	/// </summary>
-	List<GameObject> ObjectsInside { get; set; } = new();
+	public List<GameObject> ObjectsInside { get; set; } = new();
 
 	public BBox BBox => new BBox( Offset - Extents / 2f, Offset + Extents / 2f );
 	public BBox WorldBBox => BBox.Transform( GameObject.Transform.World );
