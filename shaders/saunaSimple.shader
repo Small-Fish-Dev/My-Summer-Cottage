@@ -83,13 +83,17 @@ PS
 
 	#define CUSTOM_MATERIAL_INPUTS
 	CreateInputTexture2D( Color, Srgb, 8, "", "_color", "Material,10/10", Default3( 1.0, 1.0, 1.0 ) );
-	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); Filter( POINT ); >;
 
-    CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Material,10/20", Default3( 0.5, 0.5, 1.0 ) );
+	CreateInputTexture2D( ColorTintMask, Linear, 8, "", "_tint", "Material,10/20", Default3( 1.0, 1.0, 1.0 ) );	// Tint mask, stored in color map's alpha channel
+	float3 g_flColorTint < UiType( Color ); Default3( 1.0, 1.0, 1.0 ); UiGroup( "Material,10/20" ); >;			// Tint color
+
+	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); Channel( A, Box( ColorTintMask ), Linear ); OutputFormat( BC7 ); SrgbRead( true ); Filter( POINT ); >;
+
+    CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Material,10/30", Default3( 0.5, 0.5, 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
 
-	CreateInputTexture2D( Roughness, Linear, 8, "", "_rough", "Material,10/30", Default( 1 ) );
-	CreateInputTexture2D( Metalness, Linear, 8, "", "_metal",  "Material,10/40", Default( 1.0 ) );
+	CreateInputTexture2D( Roughness, Linear, 8, "", "_rough", "Material,10/40", Default( 1 ) );
+	CreateInputTexture2D( Metalness, Linear, 8, "", "_metal",  "Material,10/50", Default( 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tRm ) < Channel( R, Box( Roughness ), Linear ); Channel( G, Box( Metalness ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 
 	#if ( S_EMISSIVE )
@@ -130,9 +134,10 @@ PS
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		float2 UV = i.vTextureCoords.xy;
+		float4 l_tColor = Tex2DS( g_tColor, Sampler, UV.xy ).rgba;
 
         Material m = Material::Init();
-        m.Albedo = Tex2DS( g_tColor, Sampler, UV.xy ).rgb;
+        m.Albedo = lerp(l_tColor.rgb, l_tColor.rgb * g_flColorTint, l_tColor.a );
         m.Normal = TransformNormal( DecodeNormal( Tex2DS( g_tNormal, Sampler, UV.xy ).rgb ), i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
 
 		float2 rm = Tex2DS( g_tRm, Sampler, UV.xy ).rg;
