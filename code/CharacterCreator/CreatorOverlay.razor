@@ -34,7 +34,7 @@
 	@switch( CreatorComponent.Current )
 	{
 		case CreatorStage.Identification:
-			<div class="continue" @onclick=@CreatorComponent.NextStage>
+			<div class="continue @(disabled ? "disabled" : "")" @onclick=@CreatorComponent.NextStage>
 				<div class="information">
 					Continue
 					<div class="text">Use the enter key to swap between the fields.</div>
@@ -55,9 +55,11 @@
 
 @code {
 	private int stageInteger => (int)CreatorComponent.Current + 1;
+	private bool disabled => string.IsNullOrEmpty( PassportComponent.Firstname ) 
+		|| string.IsNullOrEmpty( PassportComponent.Lastname );
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( stageInteger );
+		return HashCode.Combine( stageInteger, disabled );
 	}
 }

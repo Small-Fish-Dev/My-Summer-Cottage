@@ -16,28 +16,26 @@
 
 	<label class="name dark">@PassportComponent.Fullname</label>
 
-	<label class="weight-text dark">@(Weight) KG</label>
+	<label class="weight-text dark">@(_weight) KG</label>
 	<slider 
 		class="weight"
 		minimum=@(60) maximum=@(125) default=@(70) 
 		@onvalueset=@(value => {
-			Weight = (int)value.Value;
-
-			var remapped = MathX.Remap( (float)Weight, 60, 125, 0, 1 );
-			Model.Morphs.Set( "fat", remapped );
+			_weight = (int)value.Value;
+			Weight = MathX.Remap( (float)_weight, 60, 125, 0, 1 );
+			Model.Morphs.Set( "fat", Weight );
 			Model.Update( Time.Delta );
 		} )
 	/>
 
-	<label class="height-text dark">@(Height) CM</label>
+	<label class="height-text dark">@(_height) CM</label>
 	<slider 
 		class="height"
 		minimum=@(150) maximum=@(195) default=@(178) 
 		@onvalueset=@(value => {
-			Height = (int)value.Value;
-
-			var remapped = MathX.Remap( (float)Height, 150, 195, -90, 80 );
-			Model.SetAnimParameter( "height", remapped );
+			_height = (int)value.Value;
+			Height = MathX.Remap( (float)_height, 150, 195, -90, 80 );
+			Model.SetAnimParameter( "height", Height );
 			Model.Update( Time.Delta );
 		} )
 	/>
@@ -48,15 +46,18 @@
 </root>
 
 @code {
-	public static int Weight { get; set; }
-	public static int Height { get; set; }
+	private int _weight;
+	private int _height;
+
+	public static float Weight { get; set; }
+	public static float Height { get; set; }
 
 	private SceneModel model;
 	public SceneModel Model
 	{
 		get
 		{
-			if (model != null)
+			if ( model != null )
 				return model;
 
 			return model = CreatorComponent.All[CreatorComponent.Current].GameObject
@@ -67,6 +68,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( Weight, Height );
+		return HashCode.Combine( _weight, _height );
 	}
 }
