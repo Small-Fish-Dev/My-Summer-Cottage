@@ -19,7 +19,7 @@
               "Id": 0,
               "Type": "input",
               "UserData": {
-                "Position": "-288,64"
+                "Position": "-208,-224"
               }
             },
             {
@@ -47,11 +47,11 @@
               "Id": 5,
               "Type": "scene.ref",
               "Properties": {
-                "T": "Sandbox.Game/Sandbox.GameObject",
                 "value": {
                   "_type": "gameobject",
                   "go": "5b9573b9-d26c-4cc6-886f-9ddff24c0735"
-                }
+                },
+                "T": "Sandbox.Game/Sandbox.GameObject"
               },
               "UserData": {
                 "Position": "-768,320"
@@ -61,8 +61,8 @@
               "Id": 6,
               "Type": "property.get",
               "Properties": {
-                "_name": "Transform",
-                "_type": "Sandbox.Game/Sandbox.GameObject"
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
               },
               "UserData": {
                 "Position": "-528,336"
@@ -72,8 +72,8 @@
               "Id": 7,
               "Type": "property.get",
               "Properties": {
-                "_name": "World",
-                "_type": "Sandbox.Game/Sandbox.GameTransform"
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "World"
               },
               "UserData": {
                 "Position": "-256,384"
@@ -83,8 +83,8 @@
               "Id": 8,
               "Type": "property.get",
               "Properties": {
-                "_name": "Position",
-                "_type": "Sandbox.System/Transform"
+                "_type": "Sandbox.System/Transform",
+                "_name": "Position"
               },
               "UserData": {
                 "Position": "-48,416"
@@ -94,8 +94,8 @@
               "Id": 9,
               "Type": "property.get",
               "Properties": {
-                "_name": "Transform",
-                "_type": "Sandbox.Game/Sandbox.GameObject"
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
               },
               "UserData": {
                 "Position": "-352,208"
@@ -116,8 +116,8 @@
               "Id": 11,
               "Type": "property.get",
               "Properties": {
-                "_name": "Position",
-                "_type": "Sandbox.System/Transform"
+                "_type": "Sandbox.System/Transform",
+                "_name": "Position"
               },
               "UserData": {
                 "Position": "16,192"
@@ -127,8 +127,8 @@
               "Id": 12,
               "Type": "call",
               "Properties": {
-                "_name": "Destroy",
                 "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Destroy",
                 "_isStatic": false
               },
               "UserData": {
@@ -150,7 +150,7 @@
               "Id": 15,
               "Type": "event.interpolaterotation",
               "UserData": {
-                "Position": "448,112"
+                "Position": "784,-16"
               }
             },
             {
@@ -164,6 +164,20 @@
               "UserData": {
                 "Position": "288,352"
               }
+            },
+            {
+              "Id": 18,
+              "Type": "event.interpolatescale",
+              "UserData": {
+                "Position": "96,-160"
+              }
+            },
+            {
+              "Id": 19,
+              "Type": "event.interpolatescale",
+              "UserData": {
+                "Position": "400,-160"
+              }
             }
           ],
           "Links": [
@@ -174,12 +188,12 @@
               "DstName": "_signal"
             },
             {
-              "Value": 2,
+              "Value": 1,
               "DstId": 1,
               "DstName": "duration"
             },
             {
-              "Value": "EaseInOut",
+              "Value": "EaseOut",
               "DstId": 1,
               "DstName": "easer"
             },
@@ -256,13 +270,13 @@
               "DstName": "_target"
             },
             {
-              "SrcId": 0,
+              "SrcId": 19,
               "SrcName": "_signal",
               "DstId": 15,
               "DstName": "_signal"
             },
             {
-              "Value": 0.5,
+              "Value": 0.3,
               "DstId": 15,
               "DstName": "duration"
             },
@@ -304,6 +318,70 @@
               "Value": 90,
               "DstId": 17,
               "DstName": "degrees"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 18,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.2,
+              "DstId": 18,
+              "DstName": "duration"
+            },
+            {
+              "Value": "EaseIn",
+              "DstId": 18,
+              "DstName": "easer"
+            },
+            {
+              "Value": "1,1,1",
+              "DstId": 18,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 18,
+              "DstName": "target"
+            },
+            {
+              "Value": "1,1.3,1.2",
+              "DstId": 18,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_signal",
+              "DstId": 19,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.2,
+              "DstId": 19,
+              "DstName": "duration"
+            },
+            {
+              "Value": "EaseOut",
+              "DstId": 19,
+              "DstName": "easer"
+            },
+            {
+              "Value": "1,1.3,1.2",
+              "DstId": 19,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 19,
+              "DstName": "target"
+            },
+            {
+              "Value": "1,1,1",
+              "DstId": 19,
+              "DstName": "to"
             }
           ]
         },

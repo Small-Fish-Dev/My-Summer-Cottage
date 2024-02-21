@@ -116,4 +116,26 @@ public static partial class SaunaActionNodes
 		}
 	}
 
+	/// <summary>
+	/// Interpolates the scale from A to B
+	/// </summary>
+	[ActionGraphNode( "event.interpolatescale" )]
+	[Title( "Interpolate Scale" ), Group( "Events" ), Icon( "aspect_ratio" )]
+	public static async Task InterpolateScale( GameObject target, Vector3 from, Vector3 to, float duration, EasingFunction easer )
+	{
+		TimeSince timeSince = 0;
+
+		var easingFunction = GetEasingFunction( easer );
+
+		while ( timeSince < duration )
+		{
+			if ( !target.IsValid() ) return;
+
+			var newScale = Vector3.Lerp( from, to, easingFunction( timeSince / duration ) );
+			target.Transform.Scale = newScale;
+
+			await Task.Delay( (int)(Time.Delta * 1000) );
+		}
+	}
+
 }
