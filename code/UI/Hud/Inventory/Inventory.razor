@@ -3,19 +3,19 @@
 @inherits Panel
 
 <root>
-	<div class="section" style="flex-direction: row; align-items: center;">
-		<div style="flex-direction: column; flex-shrink: 0;">
+	<div class="section" style="flex-direction: row; align-items: center; justify-content: flex-end;">
+		<div style="flex-direction: column; flex-shrink: 0; align-items: flex-end;">
 			<InventorySlot Slot=@EquipSlot.Head Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Head] />
-			<InventorySlot Slot=@EquipSlot.Body Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Body] />
-			<InventorySlot Slot=@EquipSlot.Legs Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Legs] />
 			<div>
-				<InventorySlot Slot=@EquipSlot.Feet Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Feet] />
 				<InventorySlot Slot=@EquipSlot.Hand Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Hand] />
+				<InventorySlot Slot=@EquipSlot.Body Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Body] />
 			</div>
+			<InventorySlot Slot=@EquipSlot.Legs Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Legs] />
+			<InventorySlot Slot=@EquipSlot.Feet Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Feet] />
 		</div>
 		<CharacterRenderer />
 	</div>
-	<div class="section">
+	<div class="section" style="width: 45%;">
 		<text class="title">INVENTORY</text>
 		<div class="items">
 			@foreach(var item in Player.Local.Inventory.BackpackItems)

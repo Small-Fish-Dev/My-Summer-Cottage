@@ -3,10 +3,6 @@
 @inherits ScenePanel
 
 <root>
-	<div class="name">
-		<text>First Name</text>
-		<text>Really long last name</text>
-	</div>
 </root>
 
 @code {
@@ -14,7 +10,7 @@
 	{
 		var sceneWorld = new SceneWorld();
 		_ = new SceneDirectionalLight( sceneWorld, Rotation.Identity, Color.White );
-		_ = new SceneModel( sceneWorld, "models/guy/guy.vmdl", new Transform(new Vector3(70, 0, -30), Rotation.From(0, 170, 0)) );
+		_ = new SceneModel( sceneWorld, "models/guy/guy.vmdl", new Transform(new Vector3(40, 0, -30), Rotation.From(0, 170, 0)) );
 		World = sceneWorld;
 	}
 }
