@@ -1,0 +1,24 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/tiles_a/tiles_a_basecolor.png"
+	ColorTintMask "materials/default/default.tga"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/default/default_metal.tga"
+	Normal "materials/tiles_a/tiles_a_normal.png"
+	Roughness "materials/tiles_a/tiles_a_roughness.png"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "ceramic"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}
