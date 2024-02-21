@@ -29,19 +29,8 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						name = "body"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								bone_names = 
-								[
-									"Pole_L",
-									"Pole_R",
-								]
-							},
-						]
-						filename = "models/guy/guy.fbx"
+						name = "head"
+						filename = "models/guy/player_head.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -55,24 +44,14 @@
 							exception_list = 
 							[
 								"man",
+								"guy_head",
 							]
 						}
 					},
 					{
 						_class = "RenderMeshFile"
 						name = "torso"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								bone_names = 
-								[
-									"Pole_L",
-									"Pole_R",
-								]
-							},
-						]
-						filename = "models/guy/guy_torso.fbx"
+						filename = "models/guy/player_torso.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -92,19 +71,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "legs"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								bone_names = 
-								[
-									"Pole_L",
-									"Pole_R",
-								]
-							},
-						]
-						filename = "models/guy/guy_legs.fbx"
+						name = "hands"
+						filename = "models/guy/player_hands.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -119,6 +87,50 @@
 							[
 								"man",
 								"guy_legs",
+								"guy_hands",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "legs"
+						filename = "models/guy/player_legs.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"man",
+								"guy_legs",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "feet"
+						filename = "models/guy/player_feet.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"man",
+								"guy_legs",
+								"guy_feet",
 							]
 						}
 					},
@@ -2096,15 +2108,57 @@
 				[
 					{
 						_class = "BodyGroup"
-						name = "body"
+						name = "head"
 						children = 
 						[
 							{
 								_class = "BodyGroupChoice"
 								meshes = 
 								[
-									"body",
+									"head",
 								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "torso"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"torso",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "hands"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"hands",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
 							},
 						]
 						hidden_in_tools = false
@@ -2130,14 +2184,14 @@
 					},
 					{
 						_class = "BodyGroup"
-						name = "torso"
+						name = "feet"
 						children = 
 						[
 							{
 								_class = "BodyGroupChoice"
 								meshes = 
 								[
-									"torso",
+									"feet",
 								]
 							},
 							{
@@ -2336,6 +2390,58 @@
 						]
 						master_morph_weight = -1.0
 						morph_weights = [  ]
+					},
+				]
+			},
+			{
+				_class = "AnimConstraintList"
+				children = 
+				[
+					{
+						_class = "AnimConstraintTiltTwist"
+						name = "ulna_L"
+						children = 
+						[
+							{
+								_class = "AnimConstraintBoneInput"
+								parent_bone = "hand_L"
+								relative_origin = [ 0.0, 0.0, 0.0 ]
+								relative_angles = [ 0.0, 0.0, 0.0 ]
+								weight = 1.0
+							},
+							{
+								_class = "AnimConstraintSlave"
+								parent_bone = "arm_helper_L"
+								relative_origin = [ 0.0, 0.0, 0.0 ]
+								relative_angles = [ 0.0, 0.0, 0.0 ]
+								weight = 0.4
+							},
+						]
+						input_axis = 0
+						slave_axis = 0
+					},
+					{
+						_class = "AnimConstraintTiltTwist"
+						name = "ulna_R"
+						children = 
+						[
+							{
+								_class = "AnimConstraintBoneInput"
+								parent_bone = "hand_R"
+								relative_origin = [ 0.0, 0.0, 0.0 ]
+								relative_angles = [ 0.0, 0.0, 0.0 ]
+								weight = 1.0
+							},
+							{
+								_class = "AnimConstraintSlave"
+								parent_bone = "arm_helper_R"
+								relative_origin = [ 0.0, 0.0, 0.0 ]
+								relative_angles = [ 0.0, 0.0, 0.0 ]
+								weight = 0.4
+							},
+						]
+						input_axis = 0
+						slave_axis = 0
 					},
 				]
 			},
