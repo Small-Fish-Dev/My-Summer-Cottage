@@ -1,16 +1,45 @@
 @namespace Sauna.UI
 @attribute [StyleSheet]
-@inherits ScenePanel
+@inherits Panel
 
 <root>
+	<ScenePanel class="scene" @ref=_scene />
 </root>
 
 @code {
-	public CharacterRenderer()
+	private ScenePanel _scene;
+	private SceneModel _character;
+	private float _yaw = 170f;
+
+	protected override void OnAfterTreeRender(bool firstTime)
 	{
+		if (!firstTime)
+			return;
+
 		var sceneWorld = new SceneWorld();
-		_ = new SceneDirectionalLight( sceneWorld, Rotation.Identity, Color.White );
-		_ = new SceneModel( sceneWorld, "models/guy/guy.vmdl", new Transform(new Vector3(40, 0, -30), Rotation.From(0, 170, 0)) );
-		World = sceneWorld;
+		var directionalLight = new SceneDirectionalLight( sceneWorld, Rotation.Identity, Color.White );
+		_character = new SceneModel( sceneWorld, "models/guy/guy.vmdl", new Transform(Vector3.Zero, Rotation.From(0, _yaw, 0)) );
+		_scene.World = sceneWorld;
+		_scene.Camera.Position = new Vector3(-40, 0, 35);
+	}
+
+	public override void OnButtonEvent( ButtonEvent e )
+	{
+		if ( e.Button == "mouseleft" )
+			SetMouseCapture( e.Pressed );
+
+		base.OnButtonEvent( e );
+	}
+	
+	public override void Tick() 
+	{
+		if (_character is null)
+			return;
+
+		if ( HasMouseCapture )
+			_yaw -= Mouse.Delta.x * 0.05f;
+
+		_character.Update(RealTime.Delta);
+		_character.Rotation = Rotation.From(0, _yaw, 0);
 	}
 }
