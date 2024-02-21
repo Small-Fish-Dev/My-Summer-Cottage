@@ -1,0 +1,278 @@
+{
+  "RootObject": {
+    "Id": "5d8fe712-7689-4089-b21c-dbc5c0ad22d2",
+    "Name": "creepy_peeper",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "EventComponent",
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "4d42c8da-113a-431a-9cef-9bd1e59c92d0",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-288,64"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "event.interpolateposition",
+              "UserData": {
+                "Position": "304,80"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.ref",
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.GameObject",
+                "value": {
+                  "_type": "gameobject",
+                  "go": "ad81ba83-9b0e-45f4-bb37-2673dc189b7c"
+                }
+              },
+              "UserData": {
+                "Position": "-608,144"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.GameObject",
+                "value": {
+                  "_type": "gameobject",
+                  "go": "5b9573b9-d26c-4cc6-886f-9ddff24c0735"
+                }
+              },
+              "UserData": {
+                "Position": "-768,320"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "-528,336"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "World",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              },
+              "UserData": {
+                "Position": "-256,384"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.System/Transform"
+              },
+              "UserData": {
+                "Position": "-48,416"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "-352,208"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "World",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              },
+              "UserData": {
+                "Position": "-160,208"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.System/Transform"
+              },
+              "UserData": {
+                "Position": "16,192"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "call",
+              "Properties": {
+                "_name": "Destroy",
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "480,224"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 2,
+              "DstId": 1,
+              "DstName": "duration"
+            },
+            {
+              "Value": "EaseInOut",
+              "DstId": 1,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "_target"
+            }
+          ]
+        },
+        "Triggers": [
+          {
+            "_type": "component",
+            "go": "91a616ec-9d82-43d1-ac36-f0aa9b393b21",
+            "component_type": "EventAreaTrigger"
+          }
+        ]
+      }
+    ],
+    "Children": [
+      {
+        "Id": "ad81ba83-9b0e-45f4-bb37-2673dc189b7c",
+        "Name": "Creeper",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "BodyGroups": 341,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "Id": "91a616ec-9d82-43d1-ac36-f0aa9b393b21",
+        "Name": "TriggerArea",
+        "Position": "123.0409,0,0",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "EventAreaTrigger",
+            "Extents": "295.9999,173.4401,100",
+            "MaxPollingRate": 5,
+            "Offset": "0,0,50",
+            "TagSet": "player",
+            "TriggerPrefab": []
+          }
+        ]
+      },
+      {
+        "Id": "5b9573b9-d26c-4cc6-886f-9ddff24c0735",
+        "Name": "Target",
+        "Position": "0,91.21024,0",
+        "Enabled": true
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
