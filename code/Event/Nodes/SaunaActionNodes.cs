@@ -94,4 +94,26 @@ public static partial class SaunaActionNodes
 		}
 	}
 
+	/// <summary>
+	/// Interpolates the rotation from A to B
+	/// </summary>
+	[ActionGraphNode( "event.interpolaterotation" )]
+	[Title( "Interpolate Rotation" ), Group( "Events" ), Icon( "sync" )]
+	public static async Task InterpolateRotation( GameObject target, Rotation from, Rotation to, float duration, EasingFunction easer )
+	{
+		TimeSince timeSince = 0;
+
+		var easingFunction = GetEasingFunction( easer );
+
+		while ( timeSince < duration )
+		{
+			if ( !target.IsValid() ) return;
+
+			var newRot = Rotation.Lerp( from, to, easingFunction( timeSince / duration ) );
+			target.Transform.Rotation = newRot;
+
+			await Task.Delay( (int)(Time.Delta * 1000) );
+		}
+	}
+
 }
