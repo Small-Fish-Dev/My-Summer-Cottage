@@ -143,7 +143,7 @@ PS
 		float2 rm = Tex2DS( g_tRm, Sampler, UV.xy ).rg;
         m.Roughness = rm.r;
         m.Metalness = rm.g;
-        m.AmbientOcclusion = 0.1;
+        m.AmbientOcclusion = 1;
         m.TintMask = 0;
         m.Opacity = 1;
 		m.Emission = 0;
