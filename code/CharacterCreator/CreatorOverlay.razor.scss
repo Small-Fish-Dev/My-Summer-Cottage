@@ -20,7 +20,6 @@
         flex-direction: column;
         gap: 20px;
         align-items: center;
-        text-shadow: 2px 2px 0px black, 0px 0px 4px black;
     }
 
     .title {
@@ -98,14 +97,27 @@
         }
 
         &:hover {
-            transform: scale(1.1);
-            padding-right: 60px;
             cursor: pointer;
+            animation: bounce 1s ease infinite;
         }
     }
 
     .textentry {
         position: absolute;
         top: -99999px;
+    }
+}
+
+@keyframes bounce {
+    0% {
+        padding-right: 30px;
+    }
+
+    50% {
+        padding-right: 60px;
+    }
+
+    100% {
+        padding-right: 30px;
     }
 }

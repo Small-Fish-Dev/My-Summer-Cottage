@@ -4,6 +4,7 @@
     {
       "Id": "4ae5b3d2-b62c-4688-911d-e1804886c39d",
       "Name": "First Stage",
+      "Position": "0,318.5648,0",
       "Enabled": true,
       "Components": [
         {
@@ -113,22 +114,315 @@
         {
           "Id": "73a308eb-f128-4b79-a7e3-b64264e61292",
           "Name": "Spot Light",
-          "Position": "-75.05352,-72.1684,88.42432",
-          "Rotation": "-0.1390263,0.194548,0.8302073,0.503566",
+          "Position": "-126.3321,-72.16833,115.8145",
+          "Rotation": "-0.08393632,0.2239016,0.6715862,0.7012809",
           "Tags": "light_spot,light",
           "Enabled": true,
           "Components": [
             {
               "__type": "SpotLight",
-              "Attenuation": 1.64,
-              "ConeInner": 0,
-              "ConeOuter": 18.36,
+              "Attenuation": 0,
+              "ConeInner": 15,
+              "ConeOuter": 45,
               "Cookie": null,
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "80,43.68374,34.60468,1",
+              "LightColor": "0.93223,0.98605,0.78425,1",
               "Radius": 250,
               "Shadows": true
+            }
+          ]
+        },
+        {
+          "Id": "7b44a720-7db4-49e7-b459-0d500a6e8b3f",
+          "Name": "Sun",
+          "Position": "-378.0389,46.73956,263.0613",
+          "Rotation": "-0.04849726,0.2542347,0.1809942,0.9488171",
+          "Tags": "light_directional,light",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "DirectionalLight",
+              "FogMode": "Enabled",
+              "FogStrength": 1,
+              "LightColor": "0.32558,0.32558,0.32558,1",
+              "Shadows": false,
+              "SkyColor": "0,0,0,1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "498bf75e-5b94-44c2-8b7f-41d08d9105ea",
+      "Name": "Second Stage",
+      "Position": "0,-462.7515,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CreatorComponent",
+          "Camera": {
+            "_type": "component",
+            "go": "72fd3ea0-f5d5-4070-9878-d7eb46a96d66",
+            "component_type": "CameraComponent"
+          },
+          "Stage": "Appearance"
+        }
+      ],
+      "Children": [
+        {
+          "Id": "72fd3ea0-f5d5-4070-9878-d7eb46a96d66",
+          "Name": "Camera",
+          "Position": "-133.0954,82.71902,55.20046",
+          "Rotation": "0.005131484,0.03628263,-0.1399432,0.9894812",
+          "Tags": "maincamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "CameraComponent",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 50,
+              "IsMainCamera": true,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 1000,
+              "ZNear": 2
+            },
+            {
+              "__type": "DitherHook"
+            },
+            {
+              "__type": "EyeProtector"
+            }
+          ],
+          "Children": [
+            {
+              "Id": "cd319d9f-d4fc-40b6-858a-acb1133c21ab",
+              "Name": "Tablet",
+              "Position": "35.19154,7.488007,-0.4612613",
+              "Rotation": "0.7186304,0.1003432,-0.6796903,0.1073448",
+              "Scale": "0.2,0.2,0.2",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "ModelRenderer",
+                  "BodyGroups": 18446744073709551615,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/character_setup/sauna_tablet.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ],
+              "Children": [
+                {
+                  "Id": "88ef5a9a-d9c2-4b86-a6f4-1aa85d1e11eb",
+                  "Name": "Panel",
+                  "Position": "0.26295,-0.00001558321,2.089771",
+                  "Rotation": "-0.0000000009313226,0.7071068,0.0000000001164153,0.7071068",
+                  "Scale": "5,5,5",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "TabletComponent",
+                      "Character": {
+                        "_type": "component",
+                        "go": "6f3f425b-eec4-40d2-8fd6-b1524721598a",
+                        "component_type": "SkinnedModelRenderer"
+                      },
+                      "Overlay": {
+                        "_type": "component",
+                        "go": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
+                        "component_type": "CreatorOverlay"
+                      }
+                    },
+                    {
+                      "__type": "WorldPanel",
+                      "HorizontalAlign": "Center",
+                      "LookAtCamera": false,
+                      "PanelSize": "165,222",
+                      "RenderScale": 0.3,
+                      "VerticalAlign": "Center"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "a4b0aae7-b636-4e49-9d02-fd61d2958f90",
+          "Name": "Environment",
+          "Position": "-40.15015,42.70851,0",
+          "Rotation": "0,0,-0.1555725,0.9878245",
+          "Scale": "2.800003,2.500002,1",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "MaterialGroup": null,
+              "MaterialOverride": "materials/default/white.vmat",
+              "Model": "models/plane/plane.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "Id": "0cfdb6d2-697b-48ba-81c5-5f3cd09324ff",
+              "Name": "Wall",
+              "Position": "56.98866,-0.08845972,275",
+              "Rotation": "0.7071072,-0.0000003129244,-0.7071072,-0.0000003129244",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "ModelRenderer",
+                  "BodyGroups": 18446744073709551615,
+                  "MaterialGroup": null,
+                  "MaterialOverride": "materials/default/white.vmat",
+                  "Model": "models/plane/plane.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ]
+            },
+            {
+              "Id": "5db3e2e1-332a-44c5-b325-7793c3419cde",
+              "Name": "Fog",
+              "Position": "18.33334,-11.32029,5",
+              "Rotation": "0,0,0.1555725,0.9878245",
+              "Scale": "0.3571425,0.3999997,1",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "GradientFog",
+                  "Color": "0.54895,0.59506,0.94419,0.69",
+                  "EndDistance": 376.301,
+                  "FalloffExponent": 1,
+                  "Height": 323.4002,
+                  "StartDistance": 0,
+                  "VerticalFalloffExponent": 9.400015
+                }
+              ]
+            },
+            {
+              "Id": "646f53a2-1f03-4f35-bbcd-0006f80af232",
+              "Name": "Spot Light",
+              "Position": "32.87394,-9.225643,213.6355",
+              "Rotation": "-0.008042291,0.708966,0.007998899,0.7051539",
+              "Scale": "0.3571425,0.3999997,1",
+              "Tags": "light_spot,light",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SpotLight",
+                  "Attenuation": 0,
+                  "ConeInner": 0,
+                  "ConeOuter": 13.32,
+                  "Cookie": null,
+                  "FogMode": "Enabled",
+                  "FogStrength": 1,
+                  "LightColor": "0.91373,0.98039,1,1",
+                  "Radius": 250,
+                  "Shadows": true
+                }
+              ]
+            },
+            {
+              "Id": "5fb6bf61-0c93-4776-97a5-a083317b7239",
+              "Name": "Point Light",
+              "Position": "-10.55033,-0.5691597,140.1209",
+              "Rotation": "0,0,0.1555725,0.9878245",
+              "Scale": "0.3571425,0.3999997,1",
+              "Tags": "light_point,light",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "PointLight",
+                  "Attenuation": 0.36,
+                  "FogMode": "Enabled",
+                  "FogStrength": 1,
+                  "LightColor": "0.91373,0.98039,1,1",
+                  "Radius": 290.70007,
+                  "Shadows": false
+                }
+              ]
+            },
+            {
+              "Id": "502a285c-6f7a-4cfa-86c0-c733bd89927f",
+              "Name": "Sun",
+              "Position": "-45.78915,54.21962,336.8116",
+              "Rotation": "-0.01760293,0.2582197,0.06569503,0.9636891",
+              "Scale": "0.3571425,0.3999997,1",
+              "Tags": "light_directional,light",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "DirectionalLight",
+                  "FogMode": "Enabled",
+                  "FogStrength": 1,
+                  "LightColor": "0.32558,0.32558,0.32558,1",
+                  "Shadows": false,
+                  "SkyColor": "0,0,0,1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "6f3f425b-eec4-40d2-8fd6-b1524721598a",
+          "Name": "Player",
+          "Position": "40.896,-10.21344,0",
+          "Rotation": "0,0,0.9590671,0.2831789",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "AnimationGraph": null,
+              "BodyGroups": 341,
+              "BoneMergeTarget": null,
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/guy/guy.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "Id": "43f99c1e-650b-4e0a-8989-391177b23261",
+              "Name": "Penoid",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SkinnedModelRenderer",
+                  "AnimationGraph": null,
+                  "BodyGroups": 18446744073709551615,
+                  "BoneMergeTarget": {
+                    "_type": "component",
+                    "go": "6f3f425b-eec4-40d2-8fd6-b1524721598a",
+                    "component_type": "SkinnedModelRenderer"
+                  },
+                  "CreateBoneObjects": false,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/guy/penoid.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                },
+                {
+                  "__type": "CensorComponent"
+                }
+              ]
             }
           ]
         }
@@ -137,7 +431,6 @@
     {
       "Id": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
       "Name": "Overlay UI",
-      "Position": "81.6987,83.94941,-148.991",
       "Enabled": true,
       "Components": [
         {
@@ -149,42 +442,6 @@
         },
         {
           "__type": "CreatorOverlay"
-        }
-      ]
-    },
-    {
-      "Id": "7b44a720-7db4-49e7-b459-0d500a6e8b3f",
-      "Name": "Sun",
-      "Position": "-120.4919,-0.000006309908,336.8116",
-      "Rotation": "0.258819,-0.00000001131334,-0.9659258,-0.00000004222196",
-      "Tags": "light_directional,light",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "DirectionalLight",
-          "FogMode": "Enabled",
-          "FogStrength": 1,
-          "LightColor": "0.32558,0.32558,0.32558,1",
-          "Shadows": false,
-          "SkyColor": "0,0,0,1"
-        }
-      ]
-    },
-    {
-      "Id": "92c7af0c-7b8c-4ee2-94b1-fb51ac25067b",
-      "Name": "pencil",
-      "Position": "-120.2547,61.70224,40.97613",
-      "Rotation": "-0.75,0.4330127,0.4330127,0.25",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Prop",
-          "Health": 0,
-          "IsStatic": false,
-          "Model": "models/props/pencil/pencil.vmdl",
-          "OnPropBreak": null,
-          "OnPropTakeDamage": null,
-          "ShowCreatedComponents": false
         }
       ]
     }
@@ -212,6 +469,6 @@
   },
   "Title": "creation",
   "Description": "",
-  "LastSaved": "2024-02-21T12:31:25.0692441\u002B03:00",
+  "LastSaved": "2024-02-21T16:04:17.6929525\u002B02:00",
   "__references": []
 }

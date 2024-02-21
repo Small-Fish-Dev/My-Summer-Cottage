@@ -10,7 +10,13 @@ public enum CreatorStage : byte
 
 public class CreatorComponent : Component
 {
-	public static Dictionary<CreatorStage, CreatorComponent> All { get; private set; }
+	public static Dictionary<CreatorStage, CreatorComponent> All 
+		=> GameManager.ActiveScene?.GetAllObjects( false )
+			.Select( x => x?.Components.Get<CreatorComponent>( FindMode.InSelf ) )
+			.Where( x => x != null )
+			.OrderBy( stage => (int)stage.Stage )
+			.ToDictionary( stage => stage.Stage, stage => stage );
+
 	public static CreatorStage Current { get; private set; } = CreatorStage.Identification;
 
 	[Property] public CreatorStage Stage { get; set; }
@@ -22,20 +28,20 @@ public class CreatorComponent : Component
 	{
 		Current = CreatorStage.Identification; // TODO: Remove this, only needed cuz static shit is fucked.
 
-		if ( All == null )
-		{
-			All = Scene.GetAllComponents<CreatorComponent>()
-				.OrderBy( stage => (int)stage.Stage )
-				.ToDictionary( stage => stage.Stage, stage => stage );
-
-			All[Current].EnableStage();
-		}
+		if ( Current != Stage )
+			DisableStage();
 
 		initialTransform = Camera.Transform.World;
 	}
 
+	public void DisableStage()
+	{
+		GameObject.Enabled = false;
+	}
+
 	public void EnableStage()
 	{
+		GameObject.Enabled = true;
 		Camera.IsMainCamera = true;
 	}
 
@@ -49,8 +55,8 @@ public class CreatorComponent : Component
 			return;
 		}
 
-		Current = (CreatorStage)next;
-		All[Current].EnableStage();
+		All[Current].DisableStage();
+		All[Current = (CreatorStage)next].EnableStage();
 	}
 
 	protected override void OnUpdate()

@@ -7,7 +7,7 @@
 
 <root>
 	<div class="firstname">
-		<div>@firstName</div>
+		<div>@Firstname</div>
 		@if ( onFirstname )
 		{
 			<div class="caret" />
@@ -15,7 +15,7 @@
 	</div>
 
 	<div class="lastname">
-		<div>@lastName</div>
+		<div>@Lastname</div>
 		@if ( !onFirstname )
 		{
 			<div class="caret" />
@@ -27,21 +27,39 @@
 	</div>
 
 	<div class="footer">
-		@footerText
+		<p>@footerText</p>
 	</div>
 </root>
 
 @code {
 	[Property] public CreatorOverlay Overlay { get; set; }
 
-	private string firstName;
-	private string lastName;
+	public static string Firstname { get; private set; } = "";
+	public static string Lastname { get; private set; } = "";
+
 	private bool onFirstname = true;
 	private TextEntry entry;
 
-	private string footerText => 
-		$"P<FIN {Sandbox.Utility.Steam.PersonaName}> <<XXXXX <<<<<<<<<<<<<<<<<<<<<<<<<<FX "
-	  + $"<UID {Sandbox.Utility.Steam.SteamId}> >>>>XX YNGMN<< KLYSF>>>XXXXXXXXXXXXX<<<<<<<<<>>>>>>>0><(((°>";
+	private string name => Sandbox.Utility.Steam.PersonaName;
+	private string steamid => Sandbox.Utility.Steam.SteamId.ToString();
+	private string footerText = ""; 
+
+	private char[] garbage = new[] { '>', '<', 'X' };
+	private string generateGarbage( int count )
+	{
+		var sb = new StringBuilder();
+		for ( int i = 0; i < count; i++)
+			sb.Append( Game.Random.FromArray( garbage ) );
+
+		return sb.ToString();
+	}
+
+	protected override void OnAwake()
+	{
+		footerText = $"P<FIN {name}> {generateGarbage( 34 - name.Length )}\n"
+				   + $"P<UID {steamid}> {generateGarbage( 34 - steamid.Length)}\n"
+				   + $"{generateGarbage(52 - steamid.Length)}><(((°>";
+	}
 
 	private void Initialize()
 	{
@@ -54,9 +72,9 @@
 		entry.AddEventListener( "onsubmit", () =>
 		{
 			onFirstname = !onFirstname;
-			entry.Text = onFirstname ? firstName : lastName;
+			entry.Text = onFirstname ? Firstname : Lastname;
 		} );
-
+		
 		entry.AddClass( "textentry" );
 	}
 
@@ -74,15 +92,15 @@
 			entry.Focus();
 
 		if ( onFirstname )
-			firstName = entry.Text;
+			Firstname = entry.Text;
 		else 
-			lastName = entry.Text;
+			Lastname = entry.Text;
 
 		entry.CaretPosition = entry.Text.Length;
 	}
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( firstName, lastName, onFirstname );
+		return HashCode.Combine( Firstname, Lastname, onFirstname );
 	}
 }

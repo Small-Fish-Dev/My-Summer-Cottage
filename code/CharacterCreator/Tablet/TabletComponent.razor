@@ -1,0 +1,23 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits PanelComponent
+@attribute [StyleSheet]
+
+<root>
+	
+</root>
+
+@code {
+	[Property] public CreatorOverlay Overlay { get; set; }
+	[Property] public SkinnedModelRenderer Character { get; set; }
+
+	public static float Weight { get; set; } = 0.5f;
+	public static float Height { get; set; } = 0.5f;
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Weight, Height );
+	}
+}
