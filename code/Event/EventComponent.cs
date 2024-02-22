@@ -104,6 +104,5 @@ public sealed class EventComponent : Component
 
 	protected override void OnUpdate()
 	{
-		//Log.Info( IsPlaying );
 	}
 }
