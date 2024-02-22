@@ -46,7 +46,7 @@
 			return;
 
 		var first = _interactions.First();
-		var pos = Player.Local.TargetedGameObject.Transform.Position;
+		var pos = Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
 		foreach ( var interaction in _interactions )
         {
             if ( CanInteract( interaction ) )

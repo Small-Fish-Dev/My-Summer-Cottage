@@ -10,6 +10,7 @@ public partial class Player
 	public Ray ViewRay => new( Camera.Transform.Position + Camera.Transform.Rotation.Forward * 25f, Camera.Transform.Rotation.Forward );
 	public GameObject TargetedGameObject { get; private set; }
 	public SceneTraceResult InteractionTrace { get; private set; }
+	public BBox? InteractionBounds { get; private set; }
 
 	private void UpdateInteractions()
 	{
@@ -21,6 +22,7 @@ public partial class Player
 		if ( thinTrace.GameObject != null && thinTrace.GameObject.GetInteractions() != null )
 		{
 			InteractionTrace = thinTrace;
+			InteractionBounds = thinTrace.GameObject != TargetedGameObject ? null : InteractionBounds;
 			TargetedGameObject = thinTrace.GameObject;
 		}
 		else
@@ -33,7 +35,12 @@ public partial class Player
 			var obj = InteractionTrace.GameObject;
 			obj = obj?.GetInteractions() == null ? null : obj;
 
+			InteractionBounds = InteractionTrace.GameObject != TargetedGameObject ? null : InteractionBounds;
 			TargetedGameObject = obj;
 		}
+
+		// Get bounds again.
+		if ( InteractionBounds == null && TargetedGameObject != null )
+			InteractionBounds = TargetedGameObject.GetBounds().Translate( -TargetedGameObject.Transform.Position );
 	}
 }
