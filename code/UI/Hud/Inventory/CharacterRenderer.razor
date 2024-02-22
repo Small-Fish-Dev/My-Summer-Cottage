@@ -3,11 +3,12 @@
 @inherits Panel
 
 <root>
-	<ScenePanel class="scene" @ref=_scene />
+	<ScenePanel class="scene" @ref=_scenePanel />
 </root>
 
 @code {
-	private ScenePanel _scene;
+	private SceneWorld _sceneWorld;
+	private ScenePanel _scenePanel;
 	private SceneModel _character;
 	private SceneDirectionalLight _light;
 	private float _yaw = 0f;
@@ -17,14 +18,11 @@
 	{
 		base.OnAfterTreeRender(firstTime);
 
-		if (!firstTime)
-			return;
-
-		var sceneWorld = new SceneWorld();
-		_light = new SceneDirectionalLight( sceneWorld, Rotation.Identity, Color.White );
-		_character = new SceneModel( sceneWorld, "models/guy/guy.vmdl", new Transform(Vector3.Zero, Rotation.From(0, _yaw, 0)) );
-		_scene.World = sceneWorld;
-		_scene.Camera.FieldOfView = 5f;
+		_sceneWorld ??= new SceneWorld();
+		_light ??= new SceneDirectionalLight( _sceneWorld, Rotation.Identity, Color.White );
+		_character ??= new SceneModel( _sceneWorld, "models/guy/guy.vmdl", new Transform(Vector3.Zero, Rotation.From(0, _yaw, 0)) );
+		_scenePanel.World = _sceneWorld;
+		_scenePanel.Camera.FieldOfView = 5f;
 
 		FitCamera();
 	}
@@ -34,14 +32,14 @@
 		var bounds = _character.Model.Bounds;
 		var max = bounds.Size;
 		var radius = MathF.Max( max.x, MathF.Max( max.y, max.z ) );
-		var dist = radius / MathF.Sin( _scene.Camera.FieldOfView.DegreeToRadian() );
+		var dist = radius / MathF.Sin( _scenePanel.Camera.FieldOfView.DegreeToRadian() );
 
 		var viewDirection = Vector3.Forward;
 		var pos = viewDirection * dist + bounds.Center;
 
-		_scene.Camera.Position = pos;
-		_scene.Camera.Rotation = global::Rotation.LookAt( bounds.Center - _scene.Camera.Position ).RotateAroundAxis( -viewDirection, 90 );
-		_light.Position = pos + _scene.Camera.Rotation.Backward * 20f;
+		_scenePanel.Camera.Position = pos;
+		_scenePanel.Camera.Rotation = global::Rotation.LookAt( bounds.Center - _scenePanel.Camera.Position ).RotateAroundAxis( -viewDirection, 90 );
+		_light.Position = pos + _scenePanel.Camera.Rotation.Backward * 20f;
 	}
 
 	public override void OnButtonEvent( ButtonEvent e )
