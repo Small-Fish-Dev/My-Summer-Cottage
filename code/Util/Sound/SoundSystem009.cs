@@ -52,6 +52,11 @@ public class SoundSystem009 : GameObjectSystem
 
 	public void Play( SoundWithSubtitlesResource sound, GameObject source )
 	{
+		if ( source.IsValid() && source.Transform.Position.Distance( Player.Local.GameObject.Transform.Position ) >
+		    sound.MaxDistance )
+			// The sound was played too far away
+			return;
+		
 		SoundHandle soundHandle;
 		if ( !source.IsValid() || source == Player.Local.GameObject )
 			// TODO: figure out a proper way to force the sound to be played in 2D mode
