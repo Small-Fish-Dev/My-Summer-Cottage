@@ -1806,6 +1806,36 @@
 						take = 0
 						reverse = true
 					},
+					{
+						_class = "AnimFile"
+						name = "inspect_arms"
+						children = 
+						[
+							{
+								_class = "AnimSmoothLoop"
+								frames_from_start = 3
+								frames_from_end = 3
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/guy/animations/inspect_arms.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -2394,6 +2424,40 @@
 							{
 								bone = "spine0"
 								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "IK_legs"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "IK_L"
+								weight = 1.0
+							},
+							{
+								bone = "IK_R"
+								weight = 1.0
+							},
+							{
+								bone = "aim"
+								weight = 0.0
+							},
+							{
+								bone = "hand_IK_L"
+								weight = 0.0
+							},
+							{
+								bone = "hand_IK_R"
+								weight = 0.0
+							},
+							{
+								bone = "root"
+								weight = 1.0
 							},
 						]
 						master_morph_weight = -1.0
