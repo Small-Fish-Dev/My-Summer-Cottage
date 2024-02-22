@@ -1,10 +1,9 @@
 using Sandbox;
 using Sauna.Event;
 
-[Icon( "event" )]
-[EditorHandle( "/textures/gizmo/event.png" )]
+[Icon( "flash_on" )]
 [Category( "Events" )]
-public sealed class EventComponent : Component, Component.ExecuteInEditor
+public sealed class EventComponent : Component
 {
 	[Property]
 	public List<EventTrigger> Triggers { get; set; }
@@ -12,46 +11,103 @@ public sealed class EventComponent : Component, Component.ExecuteInEditor
 	[Property]
 	public Action<GameObject> Event { get; set; }
 
-	bool _showToggle = false;
+	/// <summary>
+	/// This event component is required to play before the event can be considered finished
+	/// </summary>
+	[Property]
+	public bool RequiredToFinish { get; set; } = true;
 
-	protected override void DrawGizmos()
+	/// <summary>
+	/// When this event component triggers, it disables all of these other ones that are now unnecessary
+	/// </summary>
+	[Property]
+	public List<EventComponent> DisableOnTrigger { get; set; } = new();
+
+	bool _triggered = false;
+
+	/// <summary>
+	/// Has this event component been triggered?
+	/// </summary>
+	public bool Triggered
 	{
-		// It's done inside of here because this is when we can detect if it's been selected
-		if ( Game.IsEditor )
+		get => _triggered;
+		set
 		{
-			var shouldShow = GameManager.ActiveScene == GameObject || Gizmo.IsSelected;
-			// The components inside are enabled if you're inside of the prefab or you have the prefab selected
-
-			if ( _showToggle != shouldShow )
+			if ( value == true )
 			{
-				foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+				foreach ( var trigger in Triggers )
 				{
-					if ( component != this )
-						component.Enabled = shouldShow;
+					trigger.OnTrigger -= Event;
+					trigger.OnTrigger -= HasBeenTriggered;
 				}
-
-				_showToggle = shouldShow;
 			}
 
+			if ( value == false )
+			{
+				foreach ( var trigger in Triggers )
+				{
+					trigger.OnTrigger += Event;
+					trigger.OnTrigger += HasBeenTriggered;
+				}
+			}
+
+			_triggered = value;
 		}
 	}
 
+	/// <summary>
+	/// Is this event component currently playing? Needs an event end node in the actiongraph to end
+	/// </summary>
+	public bool IsPlaying { get; set; } = false;
+
+
 	protected override void OnStart()
 	{
-		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
-		{
-			if ( component != this )
-				component.Enabled = true; // Make sure to enable back all the components in case they were disabled
-		}
-
 		foreach ( var trigger in Triggers )
 		{
 			trigger.OnTrigger += Event;
+			trigger.OnTrigger += HasBeenTriggered;
+		}
+	}
+
+	void HasBeenTriggered( GameObject _ )
+	{
+		Triggered = true;
+		IsPlaying = true;
+
+		foreach ( var eventComponent in DisableOnTrigger )
+		{
+			eventComponent.Triggered = true;
+			eventComponent.Enabled = false;
+		}
+	}
+
+	protected override void OnEnabled()
+	{
+		if ( Triggered )
+			Triggered = false; // Reset if it's reenabled
+		else
+		{
+			foreach ( var trigger in Triggers )
+			{
+				trigger.OnTrigger += Event;
+				trigger.OnTrigger += HasBeenTriggered;
+			}
+		}
+	}
+
+	protected override void OnDisabled()
+	{
+		IsPlaying = false;
+
+		foreach ( var trigger in Triggers )
+		{
+			trigger.OnTrigger -= Event;
+			trigger.OnTrigger -= HasBeenTriggered;
 		}
 	}
 
 	protected override void OnUpdate()
 	{
-
 	}
 }
