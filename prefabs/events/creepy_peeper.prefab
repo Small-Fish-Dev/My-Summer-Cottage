@@ -62,8 +62,8 @@
               "Id": 6,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Transform"
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
               },
               "UserData": {
                 "Position": "-528,336"
@@ -73,8 +73,8 @@
               "Id": 7,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameTransform",
-                "_name": "World"
+                "_name": "World",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
               },
               "UserData": {
                 "Position": "-256,384"
@@ -84,8 +84,8 @@
               "Id": 8,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.System/Transform",
-                "_name": "Position"
+                "_name": "Position",
+                "_type": "Sandbox.System/Transform"
               },
               "UserData": {
                 "Position": "-48,416"
@@ -95,8 +95,8 @@
               "Id": 9,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Transform"
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
               },
               "UserData": {
                 "Position": "-352,208"
@@ -106,8 +106,8 @@
               "Id": 10,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameTransform",
-                "_name": "World"
+                "_name": "World",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
               },
               "UserData": {
                 "Position": "-160,208"
@@ -117,8 +117,8 @@
               "Id": 11,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.System/Transform",
-                "_name": "Position"
+                "_name": "Position",
+                "_type": "Sandbox.System/Transform"
               },
               "UserData": {
                 "Position": "16,192"
@@ -128,8 +128,8 @@
               "Id": 13,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.System/Transform",
-                "_name": "Rotation"
+                "_name": "Rotation",
+                "_type": "Sandbox.System/Transform"
               },
               "UserData": {
                 "Position": "16,288"
@@ -147,8 +147,8 @@
               "Type": "call",
               "Properties": {
                 "_isStatic": false,
-                "_type": "Sandbox.System/Rotation",
-                "_name": "RotateAroundAxis"
+                "_name": "RotateAroundAxis",
+                "_type": "Sandbox.System/Rotation"
               },
               "UserData": {
                 "Position": "288,352"
@@ -179,11 +179,31 @@
               "Id": 22,
               "Type": "property.set",
               "Properties": {
-                "_type": "Sandbox.Engine/Sandbox.SoundHandle",
-                "_name": "Volume"
+                "_name": "Volume",
+                "_type": "Sandbox.Engine/Sandbox.SoundHandle"
               },
               "UserData": {
                 "Position": "1008,400"
+              }
+            },
+            {
+              "Id": 24,
+              "Type": "event.finished",
+              "UserData": {
+                "Position": "1552,144"
+              }
+            },
+            {
+              "Id": 29,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "T": "package.fish.project_cyber/EventComponent",
+                "_name": "Get",
+                "_type": "Sandbox.Game/Sandbox.IComponentLister"
+              },
+              "UserData": {
+                "Position": "1328,384"
               }
             }
           ],
@@ -200,7 +220,15 @@
               "DstName": "duration"
             },
             {
-              "Value": "EaseOut",
+              "Value": {
+                "$type": "Simple",
+                "Type": {
+                  "$type": "Nested",
+                  "DeclaringType": "package.fish.project_cyber/SaunaActionNodes",
+                  "Name": "EasingFunction"
+                },
+                "Value": "EaseOut"
+              },
               "DstId": 1,
               "DstName": "easer"
             },
@@ -276,7 +304,15 @@
               "DstName": "duration"
             },
             {
-              "Value": "EaseIn",
+              "Value": {
+                "$type": "Simple",
+                "Type": {
+                  "$type": "Nested",
+                  "DeclaringType": "package.fish.project_cyber/SaunaActionNodes",
+                  "Name": "EasingFunction"
+                },
+                "Value": "EaseIn"
+              },
               "DstId": 15,
               "DstName": "easer"
             },
@@ -326,7 +362,15 @@
               "DstName": "duration"
             },
             {
-              "Value": "EaseIn",
+              "Value": {
+                "$type": "Simple",
+                "Type": {
+                  "$type": "Nested",
+                  "DeclaringType": "package.fish.project_cyber/SaunaActionNodes",
+                  "Name": "EasingFunction"
+                },
+                "Value": "EaseIn"
+              },
               "DstId": 18,
               "DstName": "easer"
             },
@@ -358,7 +402,15 @@
               "DstName": "duration"
             },
             {
-              "Value": "EaseOut",
+              "Value": {
+                "$type": "Simple",
+                "Type": {
+                  "$type": "Nested",
+                  "DeclaringType": "package.fish.project_cyber/SaunaActionNodes",
+                  "Name": "EasingFunction"
+                },
+                "Value": "EaseOut"
+              },
               "DstId": 19,
               "DstName": "easer"
             },
@@ -411,6 +463,29 @@
               "Value": 3,
               "DstId": 22,
               "DstName": "_value"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 24,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 29,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "component"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 29,
+              "DstName": "_target"
+            },
+            {
+              "Value": "EverythingInSelf",
+              "DstId": 29,
+              "DstName": "search"
             }
           ]
         },
@@ -466,10 +541,10 @@
               "Id": 6,
               "Type": "call",
               "Properties": {
-                "T": "package.fish.project_cyber/Sauna.Player",
                 "_isStatic": false,
-                "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                "_name": "Get"
+                "T": "package.fish.project_cyber/Sauna.Player",
+                "_name": "Get",
+                "_type": "Sandbox.Game/Sandbox.IComponentLister"
               },
               "UserData": {
                 "Position": "96,-176"
@@ -479,8 +554,8 @@
               "Id": 7,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Transform"
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
               },
               "UserData": {
                 "Position": "80,-48"
@@ -490,8 +565,8 @@
               "Id": 8,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameTransform",
-                "_name": "World"
+                "_name": "World",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
               },
               "UserData": {
                 "Position": "320,-48"
@@ -501,8 +576,8 @@
               "Id": 9,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.System/Transform",
-                "_name": "Position"
+                "_name": "Position",
+                "_type": "Sandbox.System/Transform"
               },
               "UserData": {
                 "Position": "544,-48"
@@ -519,8 +594,8 @@
               "Id": 11,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Transform"
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
               },
               "UserData": {
                 "Position": "64,160"
@@ -530,8 +605,8 @@
               "Id": 12,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameTransform",
-                "_name": "World"
+                "_name": "World",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
               },
               "UserData": {
                 "Position": "288,160"
@@ -541,8 +616,8 @@
               "Id": 13,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.System/Transform",
-                "_name": "Position"
+                "_name": "Position",
+                "_type": "Sandbox.System/Transform"
               },
               "UserData": {
                 "Position": "496,160"
@@ -584,8 +659,8 @@
               "Id": 24,
               "Type": "property.set",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameTransform",
-                "_name": "Rotation"
+                "_name": "Rotation",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
               },
               "UserData": {
                 "Position": "864,352"
@@ -602,24 +677,11 @@
               "Id": 29,
               "Type": "property.set",
               "Properties": {
-                "_type": "Sandbox.Engine/Sandbox.SoundHandle",
-                "_name": "Volume"
+                "_name": "Volume",
+                "_type": "Sandbox.Engine/Sandbox.SoundHandle"
               },
               "UserData": {
                 "Position": "1072,256"
-              }
-            },
-            {
-              "Id": 30,
-              "Type": "call",
-              "Properties": {
-                "T": "package.fish.project_cyber/EventComponent",
-                "_isStatic": false,
-                "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                "_name": "Get"
-              },
-              "UserData": {
-                "Position": "1600,176"
               }
             },
             {
@@ -627,6 +689,19 @@
               "Type": "event.finished",
               "UserData": {
                 "Position": "1856,32"
+              }
+            },
+            {
+              "Id": 34,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "T": "package.fish.project_cyber/EventComponent",
+                "_name": "Get",
+                "_type": "Sandbox.Game/Sandbox.IComponentLister"
+              },
+              "UserData": {
+                "Position": "1648,144"
               }
             }
           ],
@@ -672,7 +747,15 @@
               "DstName": "duration"
             },
             {
-              "Value": "Linear",
+              "Value": {
+                "$type": "Simple",
+                "Type": {
+                  "$type": "Nested",
+                  "DeclaringType": "package.fish.project_cyber/SaunaActionNodes",
+                  "Name": "EasingFunction"
+                },
+                "Value": "Linear"
+              },
               "DstId": 10,
               "DstName": "easer"
             },
@@ -811,27 +894,27 @@
               "DstName": "_value"
             },
             {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 30,
-              "DstName": "_target"
-            },
-            {
-              "Value": "EverythingInSelf",
-              "DstId": 30,
-              "DstName": "search"
-            },
-            {
               "SrcId": 21,
               "SrcName": "_signal",
               "DstId": 31,
               "DstName": "_signal"
             },
             {
-              "SrcId": 30,
+              "SrcId": 34,
               "SrcName": "_result",
               "DstId": 31,
               "DstName": "component"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 34,
+              "DstName": "_target"
+            },
+            {
+              "Value": "EverythingInSelf",
+              "DstId": 34,
+              "DstName": "search"
             }
           ]
         },
@@ -849,6 +932,7 @@
         "EventName": "Peeping Creep",
         "Frequency": "Repeatable",
         "Rarity": "Common",
+        "ReinstantiateOnRestart": true,
         "Stackable": true,
         "Type": "Zone"
       }

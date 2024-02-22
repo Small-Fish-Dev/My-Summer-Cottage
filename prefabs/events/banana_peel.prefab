@@ -6,6 +6,9 @@
     "Components": [
       {
         "__type": "EventComponent",
+        "DisableOnTrigger": [],
+        "Event": null,
+        "RequiredToFinish": true,
         "Triggers": [
           {
             "_type": "component",
@@ -13,6 +16,14 @@
             "component_type": "EventAreaTrigger"
           }
         ]
+      },
+      {
+        "__type": "EventDefinition",
+        "EventName": "Banana Peel",
+        "Frequency": "Repeatable",
+        "Rarity": "Common",
+        "Stackable": true,
+        "Type": "Zone"
       }
     ],
     "Children": [
