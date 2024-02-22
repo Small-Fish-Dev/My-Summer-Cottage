@@ -1,24 +1,18 @@
 namespace Sauna;
 
-public sealed class SlotMachine : Component
+public partial class SlotMachine : Component
 {
+	#region Constants
 	public const float ANGLE_STEP = 22.5f;
 	public const int COUNT = 8;
 	public const float ROLL_TIME = 5f;
 	public const float WAIT_TIME = 1f;
 
 	public const int DEFAULT_BET = 5;
+	#endregion
 
 	[Property] public SkinnedModelRenderer Model { get; set; }
-	[Sync, Property] public BetFlag BetFlags
-	{
-		get => betflags;
-		set
-		{
-			betflags = value;
-			UpdateBodygroups();
-		}
-	}
+	[Sync, Property] public BetFlag BetFlags { get; set; }
 	[Sync, Property] public int Money { get; set; }
 
 	public int Bet => BitOperations.PopCount( (uint)BetFlags ) * DEFAULT_BET;
@@ -28,7 +22,6 @@ public sealed class SlotMachine : Component
 
 	TimeSince sinceResult;
 	int showCount;
-	BetFlag betflags;
 
 	[Flags]
 	public enum BetFlag : byte
@@ -127,7 +120,7 @@ public sealed class SlotMachine : Component
 			return;
 
 		Rolling = false;
-		Money += 10;
+		Money += CalculateWin();
 
 		// todo: Actually calculate win based on slot results.
 		// todo: Play sounds on win etc.
