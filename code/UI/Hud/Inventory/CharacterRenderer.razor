@@ -4,13 +4,18 @@
 
 <root>
 	<ScenePanel class="scene" @ref=_scenePanel />
+	<div class="name">
+		<text>First Name</text>
+		<text>Really Long Last Name</text>
+	</div>
 </root>
 
 @code {
 	private SceneWorld _sceneWorld;
 	private ScenePanel _scenePanel;
 	private SceneModel _character;
-	private SceneDirectionalLight _light;
+	private SceneLight _sceneLight;
+	private SceneDirectionalLight _sceneDirectionalLight;
 	private float _yaw = 0f;
 	private bool _isDragging = false;
 
@@ -19,7 +24,8 @@
 		base.OnAfterTreeRender(firstTime);
 
 		_sceneWorld ??= new SceneWorld();
-		_light ??= new SceneDirectionalLight( _sceneWorld, Rotation.Identity, Color.White );
+		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
+        _sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
 		_character ??= new SceneModel( _sceneWorld, "models/guy/guy.vmdl", new Transform(Vector3.Zero, Rotation.From(0, _yaw, 0)) );
 		_scenePanel.World = _sceneWorld;
 		_scenePanel.Camera.FieldOfView = 5f;
@@ -39,7 +45,7 @@
 
 		_scenePanel.Camera.Position = pos;
 		_scenePanel.Camera.Rotation = global::Rotation.LookAt( bounds.Center - _scenePanel.Camera.Position ).RotateAroundAxis( -viewDirection, 90 );
-		_light.Position = pos + _scenePanel.Camera.Rotation.Backward * 20f;
+		_sceneLight.Position = pos + _scenePanel.Camera.Rotation.Forward * 500f;
 	}
 
 	public override void OnButtonEvent( ButtonEvent e )
