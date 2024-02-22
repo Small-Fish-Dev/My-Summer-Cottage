@@ -184,10 +184,16 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		{
 			var substitute = new GameObject( true, GameObject.Name );
 			var timesPlayed = TimesPlayed;
+			var networked = GameObject.Networked;
+			var parent = GameObject.Parent;
+			var worldTransform = Transform.World;
 
 			GameObject.DestroyImmediate();
 
 			substitute.Deserialize( _initialState );
+			substitute.Networked = networked;
+			substitute.SetParent( parent );
+			substitute.Transform.World = worldTransform;
 			substitute.Components.Get<EventDefinition>().TimesPlayed = timesPlayed;
 		}
 		else
