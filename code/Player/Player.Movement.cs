@@ -141,7 +141,7 @@ partial class Player
 		Camera.FieldOfView = 90f;
 		Camera.ZNear = 2.5f;
 
-		Model?.SceneModel?.SetBoneWorldTransform( 6, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
+		Model?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
 	}
 
 	protected void UpdateAnimation()
