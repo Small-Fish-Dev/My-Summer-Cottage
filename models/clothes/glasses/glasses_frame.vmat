@@ -7,12 +7,20 @@ Layer0
 	//---- Animation ----
 	F_MORPH_SUPPORTED 1
 
+	//---- Rendering ----
+	F_RENDER_BACKFACES 1
+	F_TRANSPARENCY 1
+
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	Color "[0.086275 0.086275 0.086275 0.000000]"
+	Color "models/clothes/glasses/glasses_color.png"
 	Metalness "materials/default/default_metal.tga"
-	Normal "materials/default/default_normal.tga"
-	Roughness "[0.837000 0.837000 0.837000 0.000000]"
+	Normal "models/clothes/glasses/glasses_normal.png"
+	Roughness "models/clothes/glasses/glasses_rough.png"
+
+	//---- Transparency ----
+	TransparencyMask "models/clothes/glasses/glasses_trans.png"
+	TransparencyRounding "0.000"
 }
