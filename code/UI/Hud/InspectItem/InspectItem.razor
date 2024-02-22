@@ -6,16 +6,17 @@
 	<ScenePanel class="scene" @ref=_scenePanel />
 	<div class="text-placement">
 		<div class="text-container">
-			<text class="title">@Item.Name</text>
-			<text class="description">@Item.Description</text>
+			<text class="title">@_item.Name</text>
+			<text class="description">@_item.Description</text>
 		</div>
 	</div>
 </root>
 
 @code {
 	private static InspectItem _instance;
-	public ItemComponent Item { get; set; }
+	
 
+	private ItemComponent _item;
 	private SceneWorld _sceneWorld;
 	private ScenePanel _scenePanel;
 	private SceneModel _model;
@@ -25,12 +26,12 @@
 	private Transform _cameraTransform;
 	private float _distance;
 
-	public InspectItem()
+	public InspectItem(ItemComponent item)
 	{
-		if (_instance.IsValid())
-			_instance.Delete();
-
+		_instance?.Delete();
+		_instance = null;
 		_instance = this;
+		_item = item;
 	}
 
 	protected override void OnAfterTreeRender(bool firstTime)
@@ -40,7 +41,7 @@
 		_sceneWorld ??= new SceneWorld();
 		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
         _sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
-		_model ??= new SceneModel( _sceneWorld, Item.Components.Get<ModelRenderer>(FindMode.EverythingInSelfAndDescendants).Model, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)) );
+		_model ??= new SceneModel( _sceneWorld, _item.Components.Get<ModelRenderer>(FindMode.EverythingInSelfAndDescendants).Model, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)) );
 		_scenePanel.World = _sceneWorld;
 		_scenePanel.Camera.FieldOfView = 120f;
 		

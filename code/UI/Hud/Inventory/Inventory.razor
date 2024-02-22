@@ -57,7 +57,7 @@
 	private void OpenInspect(ItemComponent item)
 	{
 		if ( item is not null )
-			AddChild(new InspectItem(){ Item = item });
+			AddChild(new InspectItem(item));
 	}
 
 	public override void Tick()
