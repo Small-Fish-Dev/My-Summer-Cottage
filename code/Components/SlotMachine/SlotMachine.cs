@@ -20,8 +20,8 @@ public partial class SlotMachine : Component
 	[Sync] public bool Rolling { get; set; }
 	[Sync] public Result RollResult { get; set; }
 
-	TimeSince sinceResult;
-	int showCount;
+	[Sync] TimeSince SinceResult { get; set; }
+	[Sync] int ShowCount { get; set; }
 
 	[Flags]
 	public enum BetFlag : byte
@@ -78,8 +78,8 @@ public partial class SlotMachine : Component
 			c = new Random().Next( 0, 7 )
 		};
 
-		sinceResult = 0;
-		showCount = 0;
+		SinceResult = 0;
+		ShowCount = 0;
 	}
 
 	private void UpdateBodygroups()
@@ -116,7 +116,7 @@ public partial class SlotMachine : Component
 
 	private void CheckForWin()
 	{
-		if ( !Rolling || sinceResult < ROLL_TIME + WAIT_TIME )
+		if ( !Rolling || SinceResult < ROLL_TIME + WAIT_TIME )
 			return;
 
 		Rolling = false;
@@ -129,6 +129,7 @@ public partial class SlotMachine : Component
 	protected override void OnStart()
 	{
 		UpdateBodygroups();
+		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 	}
 
 	protected override void OnUpdate()
@@ -140,13 +141,13 @@ public partial class SlotMachine : Component
 	protected override void OnPreRender()
 	{
 		// Which slot results can we show already?
-		showCount = MathX.FloorToInt( sinceResult / (ROLL_TIME / 3) ).Clamp( 0, 3 );
+		ShowCount = MathX.FloorToInt( SinceResult / (ROLL_TIME / 3) ).Clamp( 0, 3 );
 		for ( int i = 1; i <= 3; i++ )
 		{
 			var boneIndex = i + 1;
-			var target = showCount >= i || !Rolling
+			var target = ShowCount >= i || !Rolling
 				? RollResult[i] * ANGLE_STEP
-				: sinceResult * 1000f;
+				: SinceResult * 1000f;
 
 			var fixedRotation = Transform.Rotation
 				* Rotation.FromAxis( Vector3.Right, ANGLE_STEP / 2f + target )
