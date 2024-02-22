@@ -18,6 +18,12 @@ public sealed class EventComponent : Component
 	public bool RequiredToFinish { get; set; } = true;
 
 	/// <summary>
+	/// When this event component is playing, the ones selected will be disabled, then reenabled when done
+	/// </summary>
+	[Property]
+	public List<EventComponent> DisabledWhilePlaying { get; set; } = new();
+
+	/// <summary>
 	/// When this event component triggers, it disables all of these other ones that are now unnecessary
 	/// </summary>
 	[Property]
@@ -65,6 +71,8 @@ public sealed class EventComponent : Component
 	/// </summary>
 	public bool Finished => Triggered && !IsPlaying;
 
+	List<EventComponent> _eventsDisabled = new();
+
 	void HasBeenTriggered( GameObject _ )
 	{
 		Triggered = true;
@@ -75,6 +83,27 @@ public sealed class EventComponent : Component
 			eventComponent.Triggered = true;
 			eventComponent.Enabled = false;
 		}
+
+		foreach ( var eventComponent in DisabledWhilePlaying )
+		{
+			if ( eventComponent.Enabled )
+			{
+				eventComponent.Enabled = false;
+				_eventsDisabled.Add( eventComponent );
+			}
+		}
+	}
+
+	public void Finish()
+	{
+		IsPlaying = false;
+
+		foreach ( var eventToEnable in _eventsDisabled )
+		{
+			eventToEnable.Enabled = true;
+		}
+
+		_eventsDisabled.Clear();
 	}
 
 	protected override void OnEnabled()
@@ -87,6 +116,7 @@ public sealed class EventComponent : Component
 			{
 				trigger.OnTrigger += Event;
 				trigger.OnTrigger += HasBeenTriggered;
+				trigger.Clear();
 			}
 		}
 	}
@@ -99,6 +129,7 @@ public sealed class EventComponent : Component
 		{
 			trigger.OnTrigger -= Event;
 			trigger.OnTrigger -= HasBeenTriggered;
+			trigger.Clear();
 		}
 	}
 

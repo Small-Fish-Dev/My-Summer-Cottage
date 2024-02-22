@@ -145,11 +145,7 @@ public static partial class SaunaActionNodes
 	[Title( "Finish Event" ), Group( "Events" ), Icon( "flash_off" )]
 	public static void EventFinished( EventComponent component )
 	{
-		// TODO: Do it on only the one refernces, stupid bug will reference the wrong one
-		foreach ( var eventComponent in component.GameObject.Components.GetAll<EventComponent>( FindMode.EnabledInSelf ) )
-		{
-			eventComponent.IsPlaying = false;
-		}
+		component.Finish();
 	}
 
 }

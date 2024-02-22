@@ -78,7 +78,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Are any of the event components inside playing?
 	/// </summary>
-	public bool IsPlaying => Components.GetAll<EventComponent>()
+	public bool IsPlaying => Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren )
 		.Any( x => x.IsPlaying );
 
 	/// <summary>
@@ -121,7 +121,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 				component.Enabled = true; // Make sure to enable back all the components in case they were disabled
 		}
 
-		foreach ( var eventComponent in Components.GetAll<EventComponent>() )
+		foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
 		{
 			foreach ( var trigger in eventComponent.Triggers )
 				trigger.OnTrigger += HasBeenTriggered;
@@ -166,7 +166,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 					component.Enabled = false;
 			}
 
-			foreach ( var eventComponent in Components.GetAll<EventComponent>() )
+			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
 			{
 				if ( !eventComponent.Triggered )
 					eventComponent.Triggered = true;
@@ -204,7 +204,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 					component.Enabled = true;
 			}
 
-			foreach ( var eventComponent in Components.GetAll<EventComponent>() )
+			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
 			{
 				if ( eventComponent.Triggered )
 					eventComponent.Triggered = false;

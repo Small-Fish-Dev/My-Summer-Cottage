@@ -46,6 +46,11 @@ public sealed class EventAreaFinder : EventTrigger
 			ObjectsInside = find.ToList();
 	}
 
+	public override void Clear()
+	{
+		ObjectsInside.Clear();
+	}
+
 	protected override void DrawGizmos()
 	{
 		Gizmo.Draw.Color = Color.Yellow.WithAlpha( 0.2f );
