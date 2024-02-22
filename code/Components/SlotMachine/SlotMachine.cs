@@ -129,7 +129,6 @@ public partial class SlotMachine : Component
 	protected override void OnStart()
 	{
 		UpdateBodygroups();
-		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 	}
 
 	protected override void OnUpdate()
