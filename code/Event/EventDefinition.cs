@@ -66,6 +66,12 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 	public bool HasBeenPlayed { get; set; } = false;
 
+	/// <summary>
+	/// Are any of the event components inside playing?
+	/// </summary>
+	public bool IsPlaying => Components.GetAll<EventComponent>()
+		.Any( x => x.IsPlaying );
+
 
 	bool _showToggle = false;
 

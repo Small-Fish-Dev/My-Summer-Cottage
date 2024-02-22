@@ -11,10 +11,6 @@ public sealed class EventComponent : Component
 	[Property]
 	public Action<GameObject> Event { get; set; }
 
-	[Property]
-	[Description( "This event component will only trigger once" )]
-	public bool TriggerOnce { get; set; } = true;
-
 	bool _triggered = false;
 
 	/// <summary>
@@ -25,30 +21,32 @@ public sealed class EventComponent : Component
 		get => _triggered;
 		set
 		{
-			if ( TriggerOnce )
+			if ( value == true )
 			{
-				if ( value == true && Triggered == false )
+				foreach ( var trigger in Triggers )
 				{
-					foreach ( var trigger in Triggers )
-					{
-						trigger.OnTrigger -= Event;
-						trigger.OnTrigger -= HasBeenTriggered;
-					}
+					trigger.OnTrigger -= Event;
+					trigger.OnTrigger -= HasBeenTriggered;
 				}
+			}
 
-				if ( value == false && Triggered == true )
+			if ( value == false )
+			{
+				foreach ( var trigger in Triggers )
 				{
-					foreach ( var trigger in Triggers )
-					{
-						trigger.OnTrigger += Event;
-						trigger.OnTrigger += HasBeenTriggered;
-					}
+					trigger.OnTrigger += Event;
+					trigger.OnTrigger += HasBeenTriggered;
 				}
 			}
 
 			_triggered = value;
 		}
 	}
+
+	/// <summary>
+	/// Is this event component currently playing? Needs an event end node in the actiongraph to end
+	/// </summary>
+	public bool IsPlaying { get; set; } = false;
 
 
 	protected override void OnStart()
@@ -62,14 +60,19 @@ public sealed class EventComponent : Component
 
 	void HasBeenTriggered( GameObject _ )
 	{
-		if ( TriggerOnce )
-			Triggered = true;
+		Triggered = true;
+		IsPlaying = true;
 	}
 
 	protected override void OnEnabled()
 	{
 		if ( Triggered )
 			Triggered = false; // Reset if it's reenabled
+	}
+
+	protected override void OnDisabled()
+	{
+		IsPlaying = false;
 	}
 
 	protected override void OnUpdate()
