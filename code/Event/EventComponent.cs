@@ -18,6 +18,12 @@ public sealed class EventComponent : Component
 	public bool RequiredToFinish { get; set; } = true;
 
 	/// <summary>
+	/// When this event component is playing, the ones selected will be disabled, then reenabled when done
+	/// </summary>
+	[Property]
+	public List<EventComponent> DisabledWhilePlaying { get; set; } = new();
+
+	/// <summary>
 	/// When this event component triggers, it disables all of these other ones that are now unnecessary
 	/// </summary>
 	[Property]
