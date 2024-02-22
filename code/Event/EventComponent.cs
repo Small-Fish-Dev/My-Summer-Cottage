@@ -71,6 +71,8 @@ public sealed class EventComponent : Component
 	/// </summary>
 	public bool Finished => Triggered && !IsPlaying;
 
+	List<EventComponent> _eventsDisabled = new();
+
 	void HasBeenTriggered( GameObject _ )
 	{
 		Triggered = true;
@@ -81,6 +83,27 @@ public sealed class EventComponent : Component
 			eventComponent.Triggered = true;
 			eventComponent.Enabled = false;
 		}
+
+		foreach ( var eventComponent in DisabledWhilePlaying )
+		{
+			if ( eventComponent.Enabled )
+			{
+				eventComponent.Enabled = false;
+				_eventsDisabled.Add( eventComponent );
+			}
+		}
+	}
+
+	public void Finish()
+	{
+		IsPlaying = false;
+
+		foreach ( var eventToEnable in _eventsDisabled )
+		{
+			eventToEnable.Enabled = true;
+		}
+
+		_eventsDisabled.Clear();
 	}
 
 	protected override void OnEnabled()
@@ -93,6 +116,7 @@ public sealed class EventComponent : Component
 			{
 				trigger.OnTrigger += Event;
 				trigger.OnTrigger += HasBeenTriggered;
+				trigger.Clear();
 			}
 		}
 	}
@@ -105,6 +129,7 @@ public sealed class EventComponent : Component
 		{
 			trigger.OnTrigger -= Event;
 			trigger.OnTrigger -= HasBeenTriggered;
+			trigger.Clear();
 		}
 	}
 
