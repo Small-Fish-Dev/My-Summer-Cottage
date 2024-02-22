@@ -3,20 +3,59 @@ InspectItem {
     height: 100%;
     width: 100%;
     z-index: 10;
+    background-color: #1e1e1eb4;
+    transition: all 0.1s ease-out;
+    opacity: 1;
 
     .scene {
         height: 100%;
         width: 100%;
-        background-color: #1e1e1eb4;
+        transition: all 0.2s ease-out;
+        transform: scale(1);
+
+        &:intro {
+            transform: scale(0);
+        }
+
+        &:outro {
+            transform: scale(0);
+        }
     }
 
-    .description {
+    .text-placement {
         position: absolute;
         height: 100%;
         width: 100%;
-        top: 80%;
-        text-align: center;
-        font-size: 28px;
-        font-family: BasicHandwriting;
+        justify-content: center;
+        align-items: center;
+        bottom: -33%;
+        right: -20%;
+        transition: all 0.2s ease-out;
+        opacity: 1;
+
+        .text-container {
+            flex-direction: column;
+            width: 450px;
+            background-color: #00000050;
+            padding: 20px;
+
+            .title {
+                font-size: 26px;
+                font-family: BasicHandwriting;
+            }
+
+            .description {
+                font-size: 16px;
+                font-family: HabboExtended;
+            }
+        }
+        
+        &:intro {
+            opacity: 0;
+        }
+    }
+
+    &:outro {
+        opacity: 0;
     }
 }

@@ -4,10 +4,16 @@
 
 <root>
 	<ScenePanel class="scene" @ref=_scenePanel />
-	<text class="description">@Item.Description</text>
+	<div class="text-placement">
+		<div class="text-container">
+			<text class="title">@Item.Name</text>
+			<text class="description">@Item.Description</text>
+		</div>
+	</div>
 </root>
 
 @code {
+	private static InspectItem _instance;
 	public ItemComponent Item { get; set; }
 
 	private SceneWorld _sceneWorld;
@@ -18,6 +24,14 @@
 	private bool _isDragging = false;
 	private Transform _cameraTransform;
 	private float _distance;
+
+	public InspectItem()
+	{
+		if (_instance.IsValid())
+			_instance.Delete();
+
+		_instance = this;
+	}
 
 	protected override void OnAfterTreeRender(bool firstTime)
 	{
