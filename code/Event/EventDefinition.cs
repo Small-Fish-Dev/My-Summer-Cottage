@@ -72,6 +72,12 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	public bool IsPlaying => Components.GetAll<EventComponent>()
 		.Any( x => x.IsPlaying );
 
+	/// <summary>
+	/// If all required event components have finished playing
+	/// </summary>
+	public bool IsFinished => Components.GetAll<EventComponent>()
+		.All( x => (x.Triggered && !x.IsPlaying) || (!x.RequiredToFinish && !x.IsPlaying) || !x.Enabled );
+
 
 	bool _showToggle = false;
 

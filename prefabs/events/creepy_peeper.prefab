@@ -6,6 +6,7 @@
     "Components": [
       {
         "__type": "EventComponent",
+        "DisableOnTrigger": [],
         "Event": {
           "Version": 5,
           "UserData": {
@@ -33,11 +34,11 @@
               "Id": 3,
               "Type": "scene.ref",
               "Properties": {
+                "T": "Sandbox.Game/Sandbox.GameObject",
                 "value": {
                   "_type": "gameobject",
                   "go": "ad81ba83-9b0e-45f4-bb37-2673dc189b7c"
-                },
-                "T": "Sandbox.Game/Sandbox.GameObject"
+                }
               },
               "UserData": {
                 "Position": "-608,144"
@@ -47,11 +48,11 @@
               "Id": 5,
               "Type": "scene.ref",
               "Properties": {
+                "T": "Sandbox.Game/Sandbox.GameObject",
                 "value": {
                   "_type": "gameobject",
                   "go": "5b9573b9-d26c-4cc6-886f-9ddff24c0735"
-                },
-                "T": "Sandbox.Game/Sandbox.GameObject"
+                }
               },
               "UserData": {
                 "Position": "-768,320"
@@ -145,9 +146,9 @@
               "Id": 17,
               "Type": "call",
               "Properties": {
+                "_isStatic": false,
                 "_type": "Sandbox.System/Rotation",
-                "_name": "RotateAroundAxis",
-                "_isStatic": false
+                "_name": "RotateAroundAxis"
               },
               "UserData": {
                 "Position": "288,352"
@@ -413,7 +414,7 @@
             }
           ]
         },
-        "TriggerOnce": true,
+        "RequiredToFinish": false,
         "Triggers": [
           {
             "_type": "component",
@@ -424,6 +425,13 @@
       },
       {
         "__type": "EventComponent",
+        "DisableOnTrigger": [
+          {
+            "_type": "component",
+            "go": "5d8fe712-7689-4089-b21c-dbc5c0ad22d2",
+            "component_type": "EventComponent"
+          }
+        ],
         "Event": {
           "Version": 5,
           "UserData": {
@@ -441,40 +449,14 @@
               }
             },
             {
-              "Id": 2,
-              "Type": "scene.ref",
-              "Properties": {
-                "value": {
-                  "_type": "component",
-                  "go": "5d8fe712-7689-4089-b21c-dbc5c0ad22d2",
-                  "component_type": "EventComponent"
-                },
-                "T": "package.fish.project_cyber/EventComponent"
-              },
-              "UserData": {
-                "Position": "-160,256"
-              }
-            },
-            {
-              "Id": 3,
-              "Type": "property.set",
-              "Properties": {
-                "_type": "Sandbox.Game/Sandbox.Component",
-                "_name": "Enabled"
-              },
-              "UserData": {
-                "Position": "80,256"
-              }
-            },
-            {
               "Id": 5,
               "Type": "scene.ref",
               "Properties": {
+                "T": "Sandbox.Game/Sandbox.GameObject",
                 "value": {
                   "_type": "gameobject",
                   "go": "ad81ba83-9b0e-45f4-bb37-2673dc189b7c"
-                },
-                "T": "Sandbox.Game/Sandbox.GameObject"
+                }
               },
               "UserData": {
                 "Position": "-192,80"
@@ -484,10 +466,10 @@
               "Id": 6,
               "Type": "call",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                "_name": "Get",
+                "T": "package.fish.project_cyber/Sauna.Player",
                 "_isStatic": false,
-                "T": "package.fish.project_cyber/Sauna.Player"
+                "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                "_name": "Get"
               },
               "UserData": {
                 "Position": "96,-176"
@@ -591,8 +573,8 @@
               "Id": 23,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.System/Vector3",
-                "_name": "Normal"
+                "_name": "Normal",
+                "_type": "Sandbox.System/Vector3"
               },
               "UserData": {
                 "Position": "496,432"
@@ -607,18 +589,6 @@
               },
               "UserData": {
                 "Position": "864,352"
-              }
-            },
-            {
-              "Id": 26,
-              "Type": "call",
-              "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Destroy",
-                "_isStatic": false
-              },
-              "UserData": {
-                "Position": "1648,32"
               }
             },
             {
@@ -638,26 +608,29 @@
               "UserData": {
                 "Position": "1072,256"
               }
+            },
+            {
+              "Id": 30,
+              "Type": "call",
+              "Properties": {
+                "T": "package.fish.project_cyber/EventComponent",
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                "_name": "Get"
+              },
+              "UserData": {
+                "Position": "1600,176"
+              }
+            },
+            {
+              "Id": 31,
+              "Type": "event.finished",
+              "UserData": {
+                "Position": "1856,32"
+              }
             }
           ],
           "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 3,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_result",
-              "DstId": 3,
-              "DstName": "_target"
-            },
-            {
-              "Value": false,
-              "DstId": 3,
-              "DstName": "_value"
-            },
             {
               "SrcId": 0,
               "SrcName": "obj",
@@ -804,18 +777,6 @@
               "DstName": "_value"
             },
             {
-              "SrcId": 21,
-              "SrcName": "_signal",
-              "DstId": 26,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 26,
-              "DstName": "_target"
-            },
-            {
               "SrcId": 0,
               "SrcName": "_signal",
               "DstId": 28,
@@ -848,10 +809,33 @@
               "Value": 6,
               "DstId": 29,
               "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 30,
+              "DstName": "_target"
+            },
+            {
+              "Value": "EverythingInSelf",
+              "DstId": 30,
+              "DstName": "search"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_signal",
+              "DstId": 31,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 30,
+              "SrcName": "_result",
+              "DstId": 31,
+              "DstName": "component"
             }
           ]
         },
-        "TriggerOnce": true,
+        "RequiredToFinish": true,
         "Triggers": [
           {
             "_type": "component",

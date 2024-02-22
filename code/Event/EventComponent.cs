@@ -11,6 +11,18 @@ public sealed class EventComponent : Component
 	[Property]
 	public Action<GameObject> Event { get; set; }
 
+	/// <summary>
+	/// This event component is required to play before the event can be considered finished
+	/// </summary>
+	[Property]
+	public bool RequiredToFinish { get; set; } = true;
+
+	/// <summary>
+	/// When this event component triggers, it disables all of these other ones that are now unnecessary
+	/// </summary>
+	[Property]
+	public List<EventComponent> DisableOnTrigger { get; set; } = new();
+
 	bool _triggered = false;
 
 	/// <summary>
@@ -62,17 +74,37 @@ public sealed class EventComponent : Component
 	{
 		Triggered = true;
 		IsPlaying = true;
+
+		foreach ( var eventComponent in DisableOnTrigger )
+		{
+			eventComponent.Triggered = true;
+			eventComponent.Enabled = false;
+		}
 	}
 
 	protected override void OnEnabled()
 	{
 		if ( Triggered )
 			Triggered = false; // Reset if it's reenabled
+		else
+		{
+			foreach ( var trigger in Triggers )
+			{
+				trigger.OnTrigger += Event;
+				trigger.OnTrigger += HasBeenTriggered;
+			}
+		}
 	}
 
 	protected override void OnDisabled()
 	{
 		IsPlaying = false;
+
+		foreach ( var trigger in Triggers )
+		{
+			trigger.OnTrigger -= Event;
+			trigger.OnTrigger -= HasBeenTriggered;
+		}
 	}
 
 	protected override void OnUpdate()
