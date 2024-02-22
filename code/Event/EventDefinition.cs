@@ -111,8 +111,8 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 	protected override void OnStart()
 	{
-		if ( Game.IsEditor ) return;
-		Log.Info( " HELLO IM NEW :))" );
+		if ( !GameManager.IsPlaying ) return;
+
 		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
 		{
 			if ( component != this )
@@ -128,12 +128,16 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 	protected override void OnFixedUpdate()
 	{
+		if ( !GameManager.IsPlaying ) return;
+
 		var nowFinished = Components.GetAll<EventComponent>()
-			.All( x => (x.Triggered && !x.IsPlaying) || (!x.RequiredToFinish && !x.IsPlaying) || !x.Enabled );
+			.All( x => x.Finished || (!x.RequiredToFinish && !x.IsPlaying) || !x.Enabled );
+
 
 		if ( !IsFinished && nowFinished )
 		{
-
+			GameObject.Enabled = false; // Ok we're done here
+										// TODO: For some reason the last event is not setting IsPlaying so we don't reach this to test the reinsantiate
 		}
 
 		IsFinished = nowFinished;
@@ -142,7 +146,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 	protected override void OnEnabled()
 	{
-		if ( Game.IsEditor ) return;
+		if ( !GameManager.IsPlaying ) return;
 
 		if ( ReinstantiateOnRestart )
 		{
@@ -174,6 +178,13 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 				eventComponent.IsPlaying = false;
 			}
 		}
+	}
+
+	protected override void OnDisabled()
+	{
+		if ( !GameManager.IsPlaying ) return;
+
+		Log.Info( "waaa" );
 	}
 
 	protected override void OnDestroy()
