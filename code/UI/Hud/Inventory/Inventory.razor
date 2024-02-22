@@ -6,6 +6,7 @@
 	<div class="section" style="flex-direction: row; align-items: center; justify-content: flex-end;">
 		<div style="flex-direction: column; flex-shrink: 0; align-items: flex-end;">
 			<InventorySlot Slot=@EquipSlot.Head Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Head] />
+			<InventorySlot Slot=@EquipSlot.Face Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Face] />
 			<div>
 				<InventorySlot Slot=@EquipSlot.Hand Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Hand] />
 				<InventorySlot Slot=@EquipSlot.Body Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Body] />

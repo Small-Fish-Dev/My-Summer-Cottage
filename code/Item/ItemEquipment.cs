@@ -3,6 +3,7 @@ namespace Sauna;
 public enum EquipSlot : byte
 {
 	Head,
+	Face,
 	Body,
 	Legs,
 	Feet,
