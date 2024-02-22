@@ -30,22 +30,8 @@
 		_scenePanel.World = _sceneWorld;
 		_scenePanel.Camera.FieldOfView = 5f;
 
-		FitCamera();
-	}
-
-	private void FitCamera()
-	{
-		var bounds = _character.Model.Bounds;
-		var max = bounds.Size;
-		var radius = MathF.Max( max.x, MathF.Max( max.y, max.z ) );
-		var dist = radius / MathF.Sin( _scenePanel.Camera.FieldOfView.DegreeToRadian() );
-
-		var viewDirection = Vector3.Forward;
-		var pos = viewDirection * dist + bounds.Center;
-
-		_scenePanel.Camera.Position = pos;
-		_scenePanel.Camera.Rotation = global::Rotation.LookAt( bounds.Center - _scenePanel.Camera.Position ).RotateAroundAxis( -viewDirection, 90 );
-		_sceneLight.Position = pos + _scenePanel.Camera.Rotation.Forward * 500f;
+		_scenePanel.Camera.FitModel(_character);
+		_sceneLight.Position = _scenePanel.Camera.Position + _scenePanel.Camera.Rotation.Forward * 500f;
 	}
 
 	public override void OnButtonEvent( ButtonEvent e )

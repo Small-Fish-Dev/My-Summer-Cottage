@@ -1,0 +1,79 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<ScenePanel class="scene" @ref=_scenePanel />
+	<div class="text-placement">
+		<div class="text-container">
+			<text class="title">@Item.Name</text>
+			<text class="description">@Item.Description</text>
+		</div>
+	</div>
+</root>
+
+@code {
+	private static InspectItem _instance;
+	public ItemComponent Item { get; set; }
+
+	private SceneWorld _sceneWorld;
+	private ScenePanel _scenePanel;
+	private SceneModel _model;
+	private SceneLight _sceneLight;
+	private SceneDirectionalLight _sceneDirectionalLight;
+	private bool _isDragging = false;
+	private Transform _cameraTransform;
+	private float _distance;
+
+	public InspectItem()
+	{
+		if (_instance.IsValid())
+			_instance.Delete();
+
+		_instance = this;
+	}
+
+	protected override void OnAfterTreeRender(bool firstTime)
+	{
+		base.OnAfterTreeRender(firstTime);
+
+		_sceneWorld ??= new SceneWorld();
+		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
+        _sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
+		_model ??= new SceneModel( _sceneWorld, Item.Components.Get<ModelRenderer>(FindMode.EverythingInSelfAndDescendants).Model, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)) );
+		_scenePanel.World = _sceneWorld;
+		_scenePanel.Camera.FieldOfView = 120f;
+		
+		if (_cameraTransform.Position == Vector3.Zero)
+		{
+			_scenePanel.Camera.FitModel(_model);
+			_distance = _scenePanel.Camera.Position.Distance(_model.Bounds.Center);
+			_cameraTransform = new Transform(_scenePanel.Camera.Position, _scenePanel.Camera.Rotation);
+		}
+	}
+
+	public override void OnButtonEvent( ButtonEvent e )
+	{
+		if ( e.Button == "mouseleft" )
+			_isDragging = e.Pressed;
+
+		base.OnButtonEvent( e );
+	}
+
+	public override void Tick() 
+	{
+		if (_model is null)
+			return;
+
+		if (_isDragging)
+		{
+			_cameraTransform = _cameraTransform.RotateAround(_model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Up, -Mouse.Delta.x * 0.20f));
+			_cameraTransform = _cameraTransform.RotateAround(_model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Right, -Mouse.Delta.y * 0.20f));
+		}
+
+		_scenePanel.Camera.Position = Vector3.Lerp(_scenePanel.Camera.Position, _cameraTransform.Position, RealTime.Delta * 40.0f);
+		_scenePanel.Camera.Rotation = Rotation.Lerp(_scenePanel.Camera.Rotation, _cameraTransform.Rotation, RealTime.Delta * 50.0f);
+
+		_model.Update(RealTime.Delta);
+	}
+}

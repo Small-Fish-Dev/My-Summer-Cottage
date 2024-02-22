@@ -15,21 +15,6 @@ public class IconEditor : GraphicsView
 	private SceneCamera _camera;
 	private SceneLight _light;
 
-	private void FitCamera()
-	{
-		var bounds = _obj.Model.Bounds;
-		var max = bounds.Size;
-		var radius = MathF.Max( max.x, MathF.Max( max.y, max.z ) );
-		var dist = radius / MathF.Sin( _camera.FieldOfView.DegreeToRadian() );
-
-		var viewDirection = Vector3.Forward;
-		var pos = viewDirection * dist + bounds.Center;
-
-		_camera.Position = pos;
-		_camera.Rotation = global::Rotation.LookAt( bounds.Center - _camera.Position ).RotateAroundAxis( -viewDirection, 90 );
-		_light.Position = pos + _camera.Rotation.Backward * 20f;
-	}
-
 	public IconEditor( Widget parent ) : base( parent )
 	{
 		// Scene
@@ -103,7 +88,7 @@ public class IconEditor : GraphicsView
 				RenderEveryFrame = true
 			}, 1 );
 		}
-		
+
 		Layout.AddSpacingCell( 4 );
 		{
 			// Save Button
@@ -146,8 +131,8 @@ public class IconEditor : GraphicsView
 		if ( _obj == null )
 			return;
 
-		FitCamera();
-
+		_camera.FitModel( _obj );
+		_light.Position = _camera.Position + _camera.Rotation.Backward * 20f;
 		_obj.Position = _position.Value;
 		_obj.Rotation = _angles.Value;
 	}

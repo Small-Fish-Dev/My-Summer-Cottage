@@ -33,7 +33,7 @@ public sealed class EventComponent : Component
 		get => _triggered;
 		set
 		{
-			if ( value == true )
+			if ( value == true && !Triggered )
 			{
 				foreach ( var trigger in Triggers )
 				{
@@ -42,7 +42,7 @@ public sealed class EventComponent : Component
 				}
 			}
 
-			if ( value == false )
+			if ( value == false && Triggered )
 			{
 				foreach ( var trigger in Triggers )
 				{
@@ -60,15 +60,10 @@ public sealed class EventComponent : Component
 	/// </summary>
 	public bool IsPlaying { get; set; } = false;
 
-
-	protected override void OnStart()
-	{
-		foreach ( var trigger in Triggers )
-		{
-			trigger.OnTrigger += Event;
-			trigger.OnTrigger += HasBeenTriggered;
-		}
-	}
+	/// <summary>
+	/// Has this event component both been triggered and done playing
+	/// </summary>
+	public bool Finished => Triggered && !IsPlaying;
 
 	void HasBeenTriggered( GameObject _ )
 	{
@@ -109,5 +104,6 @@ public sealed class EventComponent : Component
 
 	protected override void OnUpdate()
 	{
+		//Log.Info( IsPlaying );
 	}
 }
