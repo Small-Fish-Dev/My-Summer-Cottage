@@ -1,4 +1,5 @@
 using Sandbox.Citizen;
+using Sauna.UI;
 
 namespace Sauna;
 
