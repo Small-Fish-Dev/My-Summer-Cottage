@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "e0845a68-7269-4578-8d63-b4fdb9778078",
+    "Id": "996d740c-98fc-4ef6-8838-193817eea9d0",
     "Name": "player",
     "Tags": "player,localplayer",
     "Enabled": true,
@@ -14,7 +14,7 @@
         "Money": 0,
         "MoveHelper": {
           "_type": "component",
-          "go": "e0845a68-7269-4578-8d63-b4fdb9778078",
+          "go": "996d740c-98fc-4ef6-8838-193817eea9d0",
           "component_type": "MoveHelper"
         },
         "Speed": 140,
@@ -25,7 +25,7 @@
         "__type": "Inventory",
         "Player": {
           "_type": "component",
-          "go": "e0845a68-7269-4578-8d63-b4fdb9778078",
+          "go": "996d740c-98fc-4ef6-8838-193817eea9d0",
           "component_type": "Player"
         }
       },
@@ -85,7 +85,7 @@
     ],
     "Children": [
       {
-        "Id": "45e9491c-9275-4691-b9dc-869da457cc69",
+        "Id": "01266419-a2bb-496f-99c7-920dc07e43f1",
         "Name": "Camera",
         "Position": "5.992126,0.00009575188,66.4233",
         "Tags": "maincamera",
@@ -108,18 +108,29 @@
             "ZNear": 2.5
           },
           {
+            "__type": "Voice",
+            "Loopback": false,
+            "Mode": "PushToTalk",
+            "MorphScale": 3,
+            "MorphSmoothTime": 0.1,
+            "PushToTalkInput": "voice",
+            "Renderer": null,
+            "Volume": 1,
+            "WorldspacePlayback": true
+          },
+          {
+            "__type": "AudioListener"
+          },
+          {
             "__type": "DitherHook"
           },
           {
             "__type": "EyeProtector"
-          },
-          {
-            "__type": "AudioListener"
           }
         ]
       },
       {
-        "Id": "69bcbf4c-f3a9-41db-88fc-830d499164c6",
+        "Id": "6e2e957c-fbe0-4c60-927a-1e696fca2adf",
         "Name": "Model",
         "Enabled": true,
         "Components": [
@@ -135,7 +146,7 @@
             "HideBodyGroup": "Torso",
             "Player": {
               "_type": "component",
-              "go": "e0845a68-7269-4578-8d63-b4fdb9778078",
+              "go": "996d740c-98fc-4ef6-8838-193817eea9d0",
               "component_type": "Player"
             }
           },
@@ -154,7 +165,7 @@
         ]
       },
       {
-        "Id": "a27db0e5-7bbf-4d0a-abe6-7d8aaf576fa0",
+        "Id": "2c335c4e-6c9c-45fb-8290-6035b7c9f1cc",
         "Name": "Piss",
         "Position": "1.936967,0.0000001154522,34.7722",
         "Tags": "particles",

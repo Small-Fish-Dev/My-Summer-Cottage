@@ -56,11 +56,6 @@
 		return sb.ToString();
 	}
 
-	protected override void OnEnabled()
-	{
-		base.OnEnabled();
-	}
-
 	protected override void OnAwake()
 	{
 		footerText = $"P<FIN {name}> {generateGarbage( 34 - name.Length )}\n"
