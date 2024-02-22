@@ -1,4 +1,5 @@
 using Sandbox;
+using Sauna;
 
 public enum EventFrequency
 {
@@ -63,7 +64,13 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	[Description( "Can this event trigger when there's another event going on? And can other events trigger whn this one is going on?" )]
 	public bool Stackable { get; set; } = true;
 
+	[Property]
+	[Description( "Does this event need to be destroyed and recreated for it to restart (Enable if your event has an end state different from the start state)" )]
+	public bool ReinstantiateOnRestart { get; set; } = false;
 
+	/// <summary>
+	/// Has the event been triggered
+	/// </summary>
 	public bool HasBeenPlayed { get; set; } = false;
 
 	/// <summary>
@@ -75,8 +82,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// If all required event components have finished playing
 	/// </summary>
-	public bool IsFinished => Components.GetAll<EventComponent>()
-		.All( x => (x.Triggered && !x.IsPlaying) || (!x.RequiredToFinish && !x.IsPlaying) || !x.Enabled );
+	public bool IsFinished { get; set; } = false;
 
 
 	bool _showToggle = false;
@@ -106,15 +112,77 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	protected override void OnStart()
 	{
 		if ( Game.IsEditor ) return;
-
+		Log.Info( " HELLO IM NEW :))" );
 		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
 		{
 			if ( component != this )
 				component.Enabled = true; // Make sure to enable back all the components in case they were disabled
 		}
+
+		foreach ( var eventComponent in Components.GetAll<EventComponent>() )
+		{
+			foreach ( var trigger in eventComponent.Triggers )
+				trigger.OnTrigger += HasBeenTriggered;
+		}
 	}
 
-	protected override void OnUpdate()
+	protected override void OnFixedUpdate()
 	{
+		var nowFinished = Components.GetAll<EventComponent>()
+			.All( x => (x.Triggered && !x.IsPlaying) || (!x.RequiredToFinish && !x.IsPlaying) || !x.Enabled );
+
+		if ( !IsFinished && nowFinished )
+		{
+
+		}
+
+		IsFinished = nowFinished;
+
+	}
+
+	protected override void OnEnabled()
+	{
+		if ( Game.IsEditor ) return;
+
+		if ( ReinstantiateOnRestart )
+		{
+
+			var allEvents = PrefabLibrary.FindByComponent<EventDefinition>();
+			var thisEventPrefab = allEvents.Where( x => x.Name == GameObject.Name ).FirstOrDefault();
+
+			if ( thisEventPrefab != null )
+			{
+				if ( IsFinished ) // Reset logic
+				{
+					SceneUtility.GetPrefabScene( thisEventPrefab.Prefab ).Clone( GameObject.Transform.World, name: GameObject.Name );
+				}
+			}
+		}
+		else
+		{
+			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+			{
+				if ( component != this )
+					component.Enabled = true;
+			}
+
+			foreach ( var eventComponent in Components.GetAll<EventComponent>() )
+			{
+				if ( !eventComponent.Triggered )
+					eventComponent.Triggered = false;
+
+				eventComponent.IsPlaying = false;
+			}
+		}
+	}
+
+	protected override void OnDestroy()
+	{
+		Log.Info( "im dead" );
+	}
+
+	void HasBeenTriggered( GameObject _ )
+	{
+		HasBeenPlayed = true;
 	}
 }
