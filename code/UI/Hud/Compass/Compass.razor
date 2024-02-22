@@ -11,6 +11,7 @@
 </root>
 
 @code {
+	public static Compass Instance { get; private set; }
 	private float ContainerWidth => 650f;
 
 	private struct MarkerData
@@ -21,7 +22,40 @@
 
 	private Panel _container;
 	private Panel _line;
-	private MarkerData[] _markers;
+	private List<MarkerData> _markers;
+
+	public Compass()
+	{
+		Instance = this;
+	}
+
+	public void InitializeMarker( Marker marker )
+	{
+		var panel = _line.AddChild<Panel>( "marker" );
+		if ( !string.IsNullOrEmpty( marker.Texture ) )
+		{
+			var img = panel.AddChild<Image>( "icon" );
+			img.SetTexture( marker.Texture );
+		}
+		Log.Error(panel);
+		_markers.Add( new MarkerData
+		{
+			Panel = panel,
+			Marker = marker,
+		} );
+	}
+
+	public void RemoveMarker( Marker marker )
+	{
+		var data = _markers?.FirstOrDefault( m => marker == m.Marker );
+		if ( data == null )
+			return;
+
+		data?.Panel?.Delete();
+
+		if ( data.HasValue )
+			_markers.Remove( data.Value );
+	}
 
 	protected override void OnAfterTreeRender( bool firstTime )
 	{
@@ -44,7 +78,7 @@
 				Panel = panel,
 				Marker = marker,
 			};
-		} ).ToArray();
+		} ).ToList();
 
 		if ( Player.Local == null || _markers == null )
 			return;
@@ -53,8 +87,9 @@
 		var center = ContainerWidth / 2f;
 		var width = ContainerWidth * 4;
 
-		foreach ( var data in _markers )
+		for ( int i = 0; i < _markers.Count; i++ )
 		{
+			var data = _markers[i];
 			var panel = data.Panel;
 			var marker = data.Marker;
 
@@ -68,7 +103,7 @@
 				? dirtyLen % width
 				: dirtyLen + width;
 
-			var distOpacity = MathX.Clamp( marker.Position.Distance( Player.Local.Transform.Position ) / 300f - 0.75f, 0, 1 );
+			var distOpacity = MathX.Clamp( marker.Position.Distance( Player.Local.Transform.Position ) / 200f - 0.75f, 0, 1 );
 			var centerOpacity = len > ContainerWidth / 2f
 				? 1 - (len - ContainerWidth / 2f) / ContainerWidth * 2f
 				: len / ContainerWidth * 2;
@@ -81,6 +116,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( Player.Local?.EyeAngles.yaw, Player.Local?.Transform.Position );
+		return HashCode.Combine( Player.Local?.EyeAngles.yaw, Player.Local?.Transform.Position, _markers.Count );
 	}
 }
