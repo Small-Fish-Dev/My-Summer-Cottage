@@ -9,35 +9,56 @@
 @code {
 	private ScenePanel _scene;
 	private SceneModel _character;
-	private float _yaw = 170f;
+	private SceneDirectionalLight _light;
+	private float _yaw = 0f;
+	private bool _isDragging = false;
 
 	protected override void OnAfterTreeRender(bool firstTime)
 	{
+		base.OnAfterTreeRender(firstTime);
+
 		if (!firstTime)
 			return;
 
 		var sceneWorld = new SceneWorld();
-		var directionalLight = new SceneDirectionalLight( sceneWorld, Rotation.Identity, Color.White );
+		_light = new SceneDirectionalLight( sceneWorld, Rotation.Identity, Color.White );
 		_character = new SceneModel( sceneWorld, "models/guy/guy.vmdl", new Transform(Vector3.Zero, Rotation.From(0, _yaw, 0)) );
 		_scene.World = sceneWorld;
-		_scene.Camera.Position = new Vector3(-40, 0, 35);
+		_scene.Camera.FieldOfView = 5f;
+
+		FitCamera();
+	}
+
+	private void FitCamera()
+	{
+		var bounds = _character.Model.Bounds;
+		var max = bounds.Size;
+		var radius = MathF.Max( max.x, MathF.Max( max.y, max.z ) );
+		var dist = radius / MathF.Sin( _scene.Camera.FieldOfView.DegreeToRadian() );
+
+		var viewDirection = Vector3.Forward;
+		var pos = viewDirection * dist + bounds.Center;
+
+		_scene.Camera.Position = pos;
+		_scene.Camera.Rotation = global::Rotation.LookAt( bounds.Center - _scene.Camera.Position ).RotateAroundAxis( -viewDirection, 90 );
+		_light.Position = pos + _scene.Camera.Rotation.Backward * 20f;
 	}
 
 	public override void OnButtonEvent( ButtonEvent e )
 	{
 		if ( e.Button == "mouseleft" )
-			SetMouseCapture( e.Pressed );
+			_isDragging = e.Pressed;
 
 		base.OnButtonEvent( e );
 	}
-	
+
 	public override void Tick() 
 	{
 		if (_character is null)
 			return;
 
-		if ( HasMouseCapture )
-			_yaw -= Mouse.Delta.x * 0.05f;
+		if ( _isDragging )
+			_yaw += Mouse.Delta.x * 0.20f;
 
 		_character.Update(RealTime.Delta);
 		_character.Rotation = Rotation.From(0, _yaw, 0);
