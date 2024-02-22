@@ -85,7 +85,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		// Components
 		Camera = Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants );
-		Camera.Enabled = !IsProxy;
+		Camera.GameObject.Enabled = !IsProxy;
 
 		Inventory = Components.Get<Inventory>( FindMode.EverythingInSelfAndDescendants );
 
