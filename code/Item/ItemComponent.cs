@@ -21,5 +21,6 @@ public class ItemComponent : Component
 	protected override void OnStart()
 	{
 		GameObject.Name = Name;
+		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 	}
 }
