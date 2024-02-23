@@ -34,6 +34,14 @@ public abstract class EventTrigger : Component
 
 	}
 
+	/// <summary>
+	/// Resets the considtions needed to trigger this event
+	/// </summary>
+	public virtual void Clear()
+	{
+
+	}
+
 	// Can't invoke events outside of the class itself even if it derives from this, so we have this method instead
 	protected virtual void CallTrigger( GameObject triggerer )
 	{

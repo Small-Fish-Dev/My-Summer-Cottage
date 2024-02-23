@@ -145,9 +145,7 @@ public static partial class SaunaActionNodes
 	[Title( "Finish Event" ), Group( "Events" ), Icon( "flash_off" )]
 	public static void EventFinished( EventComponent component )
 	{
-		Log.Info( $"Before: {component.IsPlaying}" ); // FALSE???
-		component.IsPlaying = false;
-		Log.Info( $"After: {component.IsPlaying}" ); // STILL FALSE
+		component.Finish();
 	}
 
 }

@@ -7,7 +7,7 @@ public enum EventFrequency
 	[Description( "Events that are run at specific times in the story. Doesn't get added to the daily events pool" )]
 	Story,
 	[Icon( "stars" )]
-	[Description( "Events that are run once and will never happen again. Can get added to the daily events pool" )]
+	[Description( "Events that are run once and will never happen again unless we ran out of uniques. Can get added to the daily events pool" )]
 	Unique,
 	[Icon( "timeline" )]
 	[Description( "Events that can run multiple times. Can get added to the daily events pool" )]
@@ -65,7 +65,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	public bool Stackable { get; set; } = true;
 
 	[Property]
-	[Description( "Does this event need to be destroyed and recreated for it to restart (Enable if your event has an end state different from the start state)" )]
+	[Description( "If your event's end state is different from the start state (Objects moved or removed), reinstantiate everything when restarting. (Only this gameobject and all children on it)" )]
 	public bool ReinstantiateOnRestart { get; set; } = false;
 
 	/// <summary>
@@ -73,10 +73,12 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// </summary>
 	public bool HasBeenPlayed { get; set; } = false;
 
+	public int TimesPlayed = 0;
+
 	/// <summary>
 	/// Are any of the event components inside playing?
 	/// </summary>
-	public bool IsPlaying => Components.GetAll<EventComponent>()
+	public bool IsPlaying => Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren )
 		.Any( x => x.IsPlaying );
 
 	/// <summary>
@@ -86,6 +88,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 
 	bool _showToggle = false;
+	JsonObject _initialState;
 
 	protected override void DrawGizmos()
 	{
@@ -105,7 +108,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 				_showToggle = shouldShow;
 			}
-
 		}
 	}
 
@@ -119,48 +121,80 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 				component.Enabled = true; // Make sure to enable back all the components in case they were disabled
 		}
 
-		foreach ( var eventComponent in Components.GetAll<EventComponent>() )
+		foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
 		{
 			foreach ( var trigger in eventComponent.Triggers )
 				trigger.OnTrigger += HasBeenTriggered;
 		}
+
+		GameObject.BreakFromPrefab();
+
+		if ( ReinstantiateOnRestart )
+			_initialState = GameObject.Serialize();
 	}
 
 	protected override void OnFixedUpdate()
 	{
 		if ( !GameManager.IsPlaying ) return;
 
-		var nowFinished = Components.GetAll<EventComponent>()
+		var nowFinished = Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren )
 			.All( x => x.Finished || (!x.RequiredToFinish && !x.IsPlaying) || !x.Enabled );
-
 
 		if ( !IsFinished && nowFinished )
 		{
-			GameObject.Enabled = false; // Ok we're done here
-										// TODO: For some reason the last event is not setting IsPlaying so we don't reach this to test the reinsantiate
+			IsFinished = nowFinished;
+			TimesPlayed++;
+
+			End();
 		}
-
-		IsFinished = nowFinished;
-
 	}
 
-	protected override void OnEnabled()
+	public void End()
 	{
-		if ( !GameManager.IsPlaying ) return;
+		IsFinished = true;
 
 		if ( ReinstantiateOnRestart )
 		{
-
-			var allEvents = PrefabLibrary.FindByComponent<EventDefinition>();
-			var thisEventPrefab = allEvents.Where( x => x.Name == GameObject.Name ).FirstOrDefault();
-
-			if ( thisEventPrefab != null )
+			foreach ( var child in GameObject.Children )
+				child.Destroy();
+		}
+		else
+		{
+			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
 			{
-				if ( IsFinished ) // Reset logic
-				{
-					SceneUtility.GetPrefabScene( thisEventPrefab.Prefab ).Clone( GameObject.Transform.World, name: GameObject.Name );
-				}
+				if ( component != this )
+					component.Enabled = false;
 			}
+
+			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
+			{
+				if ( !eventComponent.Triggered )
+					eventComponent.Triggered = true;
+
+				eventComponent.IsPlaying = false;
+			}
+		}
+	}
+
+	public void Restart()
+	{
+		IsFinished = false;
+
+		if ( ReinstantiateOnRestart )
+		{
+			var substitute = new GameObject( true, GameObject.Name );
+			var timesPlayed = TimesPlayed;
+			var networked = GameObject.Networked;
+			var parent = GameObject.Parent;
+			var worldTransform = Transform.World;
+
+			GameObject.DestroyImmediate();
+
+			substitute.Deserialize( _initialState );
+			substitute.Networked = networked;
+			substitute.SetParent( parent );
+			substitute.Transform.World = worldTransform;
+			substitute.Components.Get<EventDefinition>().TimesPlayed = timesPlayed;
 		}
 		else
 		{
@@ -170,9 +204,9 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 					component.Enabled = true;
 			}
 
-			foreach ( var eventComponent in Components.GetAll<EventComponent>() )
+			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
 			{
-				if ( !eventComponent.Triggered )
+				if ( eventComponent.Triggered )
 					eventComponent.Triggered = false;
 
 				eventComponent.IsPlaying = false;
@@ -180,16 +214,19 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		}
 	}
 
+	protected override void OnEnabled()
+	{
+		if ( !GameManager.IsPlaying ) return;
+	}
+
 	protected override void OnDisabled()
 	{
 		if ( !GameManager.IsPlaying ) return;
 
-		Log.Info( "waaa" );
 	}
 
 	protected override void OnDestroy()
 	{
-		Log.Info( "im dead" );
 	}
 
 	void HasBeenTriggered( GameObject _ )

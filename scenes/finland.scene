@@ -203,19 +203,6 @@
           "Tint": "1,1,1,1"
         },
         {
-          "__type": "Player",
-          "__enabled": false,
-          "DuckSpeed": 60,
-          "Fatness": 0,
-          "Height": 0,
-          "JumpStrength": 200,
-          "Money": 0,
-          "MoveHelper": null,
-          "Speed": 140,
-          "SprintSpeed": 280,
-          "WalkSpeed": 80
-        },
-        {
           "__type": "Character",
           "Clothes": [
             "models/clothes/wives_undies/wives_panties.vmdl",
@@ -224,11 +211,7 @@
           "Fatness": 0,
           "Height": 0,
           "HideBodyGroup": "None",
-          "Player": {
-            "_type": "component",
-            "go": "e515313b-9348-4f73-bb39-cf28f38bb0da",
-            "component_type": "Player"
-          }
+          "Player": null
         }
       ]
     },
@@ -252,19 +235,6 @@
           "Tint": "1,1,1,1"
         },
         {
-          "__type": "Player",
-          "__enabled": false,
-          "DuckSpeed": 60,
-          "Fatness": 1,
-          "Height": 0,
-          "JumpStrength": 200,
-          "Money": 0,
-          "MoveHelper": null,
-          "Speed": 140,
-          "SprintSpeed": 280,
-          "WalkSpeed": 80
-        },
-        {
           "__type": "Character",
           "Clothes": [
             "models/clothes/wives_undies/wives_bra.vmdl",
@@ -273,22 +243,9 @@
           "Fatness": 1,
           "Height": 0,
           "HideBodyGroup": "None",
-          "Player": {
-            "_type": "component",
-            "go": "9c3edec3-a5ae-4b18-b2d4-f44b6018269a",
-            "component_type": "Player"
-          }
+          "Player": null
         }
       ]
-    },
-    {
-      "Id": "5d8fe712-7689-4089-b21c-dbc5c0ad22d2",
-      "Name": "creepy_peeper",
-      "Position": "1164.284,-673.4206,20.02057",
-      "Rotation": "-0.00000000000000003579115,0.000000000818806,1,-0.00000004371139",
-      "Networked": true,
-      "Enabled": true,
-      "__Prefab": "prefabs/events/creepy_peeper.prefab"
     },
     {
       "Id": "260069fe-c9c2-4409-9da0-ba954d6e9925",
@@ -297,6 +254,23 @@
       "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/objects/slot_machine.prefab"
+    },
+    {
+      "Id": "538efc3e-c012-4428-ba4b-5101879fd994",
+      "Name": "TESTT",
+      "Position": "784.1971,-639.5481,167.1686",
+      "Enabled": true,
+      "Children": [
+        {
+          "Id": "5d8fe712-7689-4089-b21c-dbc5c0ad22d2",
+          "Name": "creepy_peeper",
+          "Position": "380.0869,-33.8725,-147.148",
+          "Rotation": "-0.00000000000000003579115,0.000000000818806,1,-0.00000004371139",
+          "Networked": true,
+          "Enabled": true,
+          "__Prefab": "prefabs/events/creepy_peeper.prefab"
+        }
+      ]
     }
   ],
   "SceneProperties": {
