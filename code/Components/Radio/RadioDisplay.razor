@@ -43,13 +43,20 @@
 
 	private void GenerateBars()
 	{
-		_bars = new Panel[10];
+		const int COUNT = 10;
+		_bars = new Panel[COUNT];
 		for ( int i = 0; i < _bars.Length; i++ )
-			_bars[i] = _visualizer.AddChild<Panel>( "bar" );
+		{
+			var container = _visualizer.AddChild<Panel>( "bar-container" );
+			_bars[i] = container.AddChild<Panel>( "bar" );
+		}
 	}
 
 	protected override void OnUpdate()
 	{
+		if ( !Radio.IsValid() )
+			return;
+
 		if ( timeUntilScroll && displayLabel != null )
 		{
 			timeUntilScroll = ScrollWait;
@@ -62,6 +69,16 @@
 			}
 
 			displayLabel.Text = ActualText;
+		}
+
+		if ( !Radio.On && _bars != null )
+		{
+			foreach ( var bar in _bars )
+				bar?.Delete( true );
+
+			_bars = null;
+
+			return;
 		}
 
 		if ( Radio.IsValid() && Radio.On ) // todo: check if player is even looking at radio lol, no need to do this expensive shit
@@ -82,8 +99,6 @@
 			{
 				var value = (spectrum[i] + spectrum[i + 1] + spectrum[i + 2] + spectrum[i + 3]) / 4f;
 				_bars[i].Style.Height = (value * 3).Clamp( 0, _visualizer.Box.Rect.Height - 30 );
-				if ( _bars[i].Parent != _visualizer )
-					_bars[i].Parent = _visualizer;
 			}
 		}
 	}

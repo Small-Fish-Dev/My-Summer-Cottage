@@ -33,10 +33,18 @@
         gap: 5px;
         flex-wrap: wrap-reverse;
 
-        .bar {
+        .bar-container {
+            height: 100%;
             flex-grow: 1;
-            min-height: 2px;
-            background-color: darken(#5E7C34, 0.7);
+            background-color: darken(#5E7C34, 0.6);
+            padding: 2px;
+            flex-direction: column-reverse;
+
+            .bar {
+                width: 100%;
+                background-color: darken(#5E7C34, 0.2);
+                min-height: 2px;
+            }
         }
     }
 }
