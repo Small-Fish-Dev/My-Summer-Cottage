@@ -1,0 +1,24 @@
+PauseMenu {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: none;
+    background-color: #000000bd;
+    z-index: 10;
+
+    .title {
+        position: absolute;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        width: 550px;
+        height: 200px;
+        margin-left: 100px;
+        margin-top: 130px;
+    }
+
+    &.visible {
+        display: flex;
+        pointer-events: all;
+    }
+}

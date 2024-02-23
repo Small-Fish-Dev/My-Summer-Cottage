@@ -1,0 +1,55 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<div style="width: 50%; flex-direction: column;">
+		<img class="title" src="ui/mainmenu/title.png" />
+		<div style="flex-direction: column; justify-content: center; top: 40%; gap: 5px;">
+			<PauseMenuButton
+				ImagePath="ui/hud/goback.png"
+				Title="Resume"
+				Subtitle="Continue being Finnish"
+				onclick=@(() => { _isOpen = false; })
+			/>
+
+			<div style="height: 10px;" />
+
+			<PauseMenuButton
+				ImagePath="ui/hud/task_completed.png"
+				Title="Tasks"
+				Subtitle="Full history of your tasks"
+			/>
+			<PauseMenuButton
+				ImagePath="ui/hud/inv.png"
+				Title="Inventory"
+				Subtitle="Your inventory and stats"
+			/>
+			<PauseMenuButton
+				ImagePath="ui/hud/fish_collection.png"
+				Title="Fish Collection"
+				Subtitle="All the kinds of fish you collected"
+			/>
+			<PauseMenuButton
+				ImagePath="ui/hud/exit.png"
+				Title="Quit"
+				Subtitle="End this session and go back to the main menu"
+			/>
+		</div>
+	</div>
+	<div style="width: 50%;">
+
+	</div>
+</root>
+
+@code {
+	private bool _isOpen = false;
+
+	public override void Tick()
+	{
+		if (Input.EscapePressed)
+			_isOpen = !_isOpen;
+
+		SetClass("visible", _isOpen);
+	}
+}
