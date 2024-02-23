@@ -11,11 +11,7 @@
 		<label class="text background" style="color: rgba(0,0,0,0.1)">@BackgroundText</label>
 		<label class="text foreground" @ref=displayLabel />
 
-		<div class="timeline-container">
-			<div class="timeline" >
-				<div class="inner" @ref=timeline />
-			</div>
-		</div>
+		<div class="visualizer-container" @ref=_visualizer />
 	}
 </root>
 
@@ -31,7 +27,9 @@
 	/// <summary> Max amount of characters on screen </summary>
 	public const int MaxScreenCharacters = 12;
 
-	private Panel timeline;
+	private Panel _visualizer;
+	private Panel[] _bars;
+
 	private Label displayLabel;
 	private int textOffset;
 	private TimeUntil timeUntilScroll = ScrollPostWait;
@@ -43,9 +41,11 @@
 		.Replace( " ", "!" ); // '!' == All-off character for DSEG font
 	public string BackgroundText => new( '8', MaxScreenCharacters );
 
-	protected override void OnStart()
+	private void GenerateBars()
 	{
-	
+		_bars = new Panel[10];
+		for ( int i = 0; i < _bars.Length; i++ )
+			_bars[i] = _visualizer.AddChild<Panel>( "bar" );
 	}
 
 	protected override void OnUpdate()
@@ -62,6 +62,29 @@
 			}
 
 			displayLabel.Text = ActualText;
+		}
+
+		if ( Radio.IsValid() && Radio.On )
+		{
+			var spectrum = Radio.GetSpectrum();
+			if ( _bars == null )
+			{
+				if ( _visualizer != null )
+					GenerateBars();
+
+				return;
+			}
+
+			if ( spectrum.Length <= 0 )
+				return;
+
+			for ( int i = 0; i < _bars.Length; i++ )
+			{
+				var value = (spectrum[i] + spectrum[i + 1] + spectrum[i + 2] + spectrum[i + 3]) / 4f;
+				_bars[i].Style.Height = (value * 3).Clamp( 0, _visualizer.Box.Rect.Height - 30 );
+				if ( _bars[i].Parent != _visualizer )
+					_bars[i].Parent = _visualizer;
+			}
 		}
 	}
 
