@@ -74,6 +74,7 @@
 
 		_scenePanel.Camera.Position = Vector3.Lerp(_scenePanel.Camera.Position, _cameraTransform.Position, RealTime.Delta * 40.0f);
 		_scenePanel.Camera.Rotation = Rotation.Lerp(_scenePanel.Camera.Rotation, _cameraTransform.Rotation, RealTime.Delta * 50.0f);
+		_sceneLight.Position = _scenePanel.Camera.Position;
 
 		_model.Update(RealTime.Delta);
 	}
