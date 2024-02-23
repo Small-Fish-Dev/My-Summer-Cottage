@@ -43,4 +43,10 @@ public partial class Player
 		if ( InteractionBounds == null && TargetedGameObject != null )
 			InteractionBounds = TargetedGameObject.GetBounds().Translate( -TargetedGameObject.Transform.Position );
 	}
+
+	[Broadcast]
+	public void BroadcastInteraction()
+	{
+		Model.Set( "use", true );
+	}
 }
