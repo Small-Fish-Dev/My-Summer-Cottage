@@ -63,6 +63,9 @@ public class GameTimeManager : Component
 			NewDay();
 
 		Rotation sunRotation;
+		
+		if (SunsetTime <= SunriseTime)
+			Log.Error( "Sunset before the sunrise is not yet supported" );
 
 		var igs = InGameSeconds;
 		var isDayTime = igs > SunriseTime && igs < SunsetTime;
