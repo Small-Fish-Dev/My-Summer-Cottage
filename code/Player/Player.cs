@@ -74,6 +74,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	protected BoxCollider Collider;
 	protected ParticleConeEmitter PissEmitter;
 	protected ParticleEffect PissParticles;
+	
 	protected override void DrawGizmos()
 	{
 	}
@@ -82,9 +83,6 @@ public partial class Player : Component, Component.ExecuteInEditor
 	{
 		if ( !GameManager.IsPlaying )
 			return;
-
-		// Setup connection
-		SetupConnection();
 
 		// Components
 		Camera = Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants );

@@ -16,9 +16,10 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 	void INetworkListener.OnActive( Connection connection )
 	{
-		var obj = Prefab.Clone( transform:global::Transform.Zero, startEnabled:false );
+		var obj = Prefab.Clone();
+		var player = obj.Components.Get<Player>( FindMode.EverythingInSelfAndDescendants );
 		obj.NetworkSpawn( connection );
-		obj.Enabled = true;
+		player.SetupConnection( connection );
 	}
 
 	void INetworkListener.OnDisconnected( Connection connection )
