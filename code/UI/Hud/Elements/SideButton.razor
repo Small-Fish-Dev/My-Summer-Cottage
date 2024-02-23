@@ -2,7 +2,10 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root onclick=@(() => { if (!IsDisabled) OnClick?.Invoke(); }) class="@(IsDisabled ? "disabled" : "")">
+<root 
+	onclick=@(() => { if (!IsDisabled) OnClick?.Invoke(); })
+	class="@(IsDisabled ? "disabled" : "") @(IsInverted ? "ltr" : "")"
+>
 	<image src=@ImagePath />
 	<div class="text-container">
 		<text class="text-title">@Title</text>
@@ -18,20 +21,8 @@
 	public bool IsInverted { get; set; } = false;
 	public Action OnClick { get; set; }
 
-	protected override void OnAfterTreeRender(bool firstTime)
-	{
-		base.OnAfterTreeRender(firstTime);
-
-		if (IsInverted)
-		{
-			Style.FlexDirection = FlexDirection.RowReverse;
-			Style.TextAlign = TextAlign.Right;
-			Style.BackgroundAngle = Length.Pixels(-1.57f);
-		}
-	}
-
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(IsDisabled);
+		return HashCode.Combine(IsDisabled, IsInverted);
 	}
 }

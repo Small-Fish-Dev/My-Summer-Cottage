@@ -2,14 +2,21 @@
 
 SideButton {
     position: absolute;
-    background: linear-gradient(to right, rgba(black, 0.8) 0%, rgba(black, 0.4) 70%, rgba(black, 0) 100%);
     padding: 30px 10px;
     flex-direction: row;
     gap: 20px;
     align-items: center;
-    transition: all 0.5s ease-out;
+    transition: all 0.2s ease-out;
     pointer-events: all;
     z-index: 4;
+    opacity: 0.8;
+    background: linear-gradient(to right, rgba(black, 0.8) 0%, rgba(black, 0.4) 70%, rgba(black, 0) 100%);
+
+    &.ltr {
+        background: linear-gradient(to left, rgba(black, 0.8) 0%, rgba(black, 0.4) 70%, rgba(black, 0) 100%);
+        flex-direction: row-reverse;
+        text-align: right;
+    }
 
     image {
         height: 75%;
@@ -26,6 +33,7 @@ SideButton {
         max-width: 600px;
         flex-shrink: 0;
         gap: 10px;
+        transition: all 0.2s ease-out;
 
         .text-title {
             font-family: BasicHandwriting;
@@ -39,13 +47,16 @@ SideButton {
         }
     }
 
-    &:hover {
-        background: linear-gradient(to right, rgba($dark-gray, 0.8) 0%, rgba($dark-gray, 0.4) 70%, rgba($dark-gray, 0) 100%);
+    &:hover:not(.disabled) {
         cursor: pointer;
+        opacity: 1;
+
+        .text-container {
+            transform: scale(1.01);
+        }
     }
 
     &.disabled {
-        pointer-events: none;
         opacity: 0.5;
     }
 }
