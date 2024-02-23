@@ -102,6 +102,23 @@ public class Character : Component, Component.ExecuteInEditor
 		}
 	}
 
+	protected override void OnUpdate()
+	{
+		var parent = Components.Get<SkinnedModelRenderer>();
+
+		if ( !parent.IsValid() )
+			return;
+
+		var value = MathF.Sin( Time.Now * 5f ) / 2f + 0.5f;
+		var r = 45f + 219f * value;
+		var g = 34f + 172f * value;
+		var b = 30f + 150f * value;
+
+		//Log.Info( $"Red: {r} Green: {g} Blue: {b}" );
+
+		//parent.SceneModel.Attributes.Set( "g_flColorTint", new Vector3( r, g, b ) );
+	}
+
 	protected override void OnStart()
 	{
 		if ( GameManager.IsPlaying )
