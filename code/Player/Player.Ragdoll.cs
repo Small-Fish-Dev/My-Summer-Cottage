@@ -31,8 +31,10 @@ partial class Player
 			newRagdoll.PhysicsGroup.Velocity = MoveHelper.Velocity;
 
 			oldAirFriction = MoveHelper.AirFriction;
-
 			MoveHelper.AirFriction = 0f;
+
+			var collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndAncestors );
+			collider.Enabled = false;
 		}
 		else
 		{
@@ -44,6 +46,9 @@ partial class Player
 				clothing.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Clothing go offset too
 
 			MoveHelper.AirFriction = oldAirFriction;
+
+			var collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndAncestors );
+			collider.Enabled = true;
 		}
 
 		BlockMovements = ragdoll;
@@ -55,7 +60,7 @@ partial class Player
 		if ( !IsRagdolled ) return;
 
 		Renderer.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Model goes offset
-		Transform.Position = Ragdoll.Transform.Position;
+		GameObject.Transform.Position = Ragdoll.Transform.World.Position;
 		Ducking = true;
 	}
 }
