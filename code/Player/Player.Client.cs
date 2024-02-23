@@ -4,7 +4,7 @@ partial class Player
 {
 	public static Player Local { get; private set; }
 
-	public Connection Connection { get; private set; }
+	[HostSync] public Connection Connection { get; set; }
 	public ulong SteamID => Connection.SteamId;
 	public string Name => Connection.DisplayName;
 
@@ -12,8 +12,5 @@ partial class Player
 	{
 		Connection = connection;
 		GameObject.Name = $"{Name} / {SteamID}";
-
-		if ( Connection.Local == connection )
-			Local = this;
 	}
 }
