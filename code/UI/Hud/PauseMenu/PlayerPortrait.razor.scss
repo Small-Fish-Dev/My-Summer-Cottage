@@ -25,10 +25,15 @@ PlayerPortrait {
     .border-img {
         height: 75px;
         width: 75px;
-        background-color: white;
-        border: 2px black;
+        border: 1px black;
         align-items: center;
         justify-content: center;
+        background-color: white;
+        box-shadow: $box-shadow-sm;
+
+        &.host {
+            background-color: $egg-shell;
+        }
     }
 
     .player-img {
@@ -49,9 +54,9 @@ PlayerPortrait {
 
     .host-spacer {
         align-self: flex-end;
-        margin: 15px 0px 0px 0px;
-        background-color: white;
-        height: 2px;
+        margin-top: 10px;
+        height: 1px;
         width: 75px;
+        background-image: radial-gradient(rgba(255,255,255,1) 0%, rgba(255, 255, 255, 0) 65%);
     }
 }
