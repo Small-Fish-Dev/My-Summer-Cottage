@@ -8,29 +8,60 @@
 <root>
 	<label class="name dark">@PassportComponent.Fullname</label>
 
-	<label class="weight-text dark">@(_weight) KG</label>
-	<slider 
-		class="weight"
-		minimum=@(60) maximum=@(125) default=@(_weight) 
-		@onvalueset=@(value => {
-			_weight = (int)value.Value;
-			Weight = MathX.Remap( (float)_weight, 60, 125, 0, 1 );
-			Model.Morphs.Set( "fat", Weight );
-			Model.Update( Time.Delta );
-		} )
-	/>
+	<div class="weight">
+		<div class="text">
+			<label class="light">WEIGHT, KG</label>
+			<label class="dark">@(_weight) KG</label>
+		</div>
+		<slider 
+			class="slider"
+			minimum=@(60) maximum=@(125) default=@(_weight) 
+			@onvalueset=@(value => {
+				_weight = (int)value.Value;
+				Weight = MathX.Remap( (float)_weight, 60, 125, 0, 1 );
+				Model.Morphs.Set( "fat", Weight );
+				Model.Update( Time.Delta );
+			})
+		/>
+	</div>
 
-	<label class="height-text dark">@(_height) CM</label>
-	<slider 
-		class="height"
-		minimum=@(150) maximum=@(195) default=@(_height) 
-		@onvalueset=@(value => {
-			_height = (int)value.Value;
-			Height = MathX.Remap( (float)_height, 150, 195, -90, 80 );
-			Model.SetAnimParameter( "height", Height );
-			Model.Update( Time.Delta );
-		} )
-	/>
+	<div class="skin-color">
+		<div class="text">
+			<label class="light">SKIN COLOR</label>
+		</div>
+
+		<div class="colors">
+			@foreach ( var color in _skinColors )
+			{
+				<div 
+					class="color @(SkinColor == color ? "selected" : "")"
+					onclick=@(() => {
+						SkinColor = color;
+						Model.Attributes.Set( "g_flColorTint", SkinColor );
+					})
+				>
+					<div class="inner" style="background-color: @(color.Hex)" />
+				</div>
+			}
+		</div>
+	</div>
+
+	<div class="height">
+		<div class="text">
+			<label class="light">HEIGHT, CM</label>
+			<label class="dark">@(_height) CM</label>
+		</div>
+		<slider 
+			class="slider"
+			minimum=@(150) maximum=@(195) default=@(_height) 
+			@onvalueset=@(value => {
+				_height = (int)value.Value;
+				Height = MathX.Remap( (float)_height, 150, 195, -90, 80 );
+				Model.SetAnimParameter( "height", Height );
+				Model.Update( Time.Delta );
+			})
+		/>
+	</div>
 
 	<div class="confirm" @onclick=@CreatorComponent.NextStage>
 		CONFIRM
@@ -43,9 +74,18 @@
 
 	private static int _weight = DEFAULT_WEIGHT;
 	private static int _height = DEFAULT_HEIGHT;
+	private static readonly Color[] _skinColors = new[]
+	{
+		Color.White,
+		Color.Gray,
+		Color.FromBytes( 189, 137, 102 ),
+		Color.FromBytes( 87, 64, 34 ),
+		Color.Black
+	};
 
 	public static float Weight { get; set; }
 	public static float Height { get; set; }
+	public static Color SkinColor { get; set; } = _skinColors.FirstOrDefault();
 
 	private SceneModel model;
 	public SceneModel Model
@@ -63,6 +103,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( _weight, _height );
+		return HashCode.Combine( _weight, _height, SkinColor );
 	}
 }
