@@ -164,6 +164,8 @@ partial class Player
 
 		Model.SceneModel.Morphs.Set( "fat", Fatness );
 		Model.Set( "height", Height );
+
+		Model.Set( "lookat", EyeAngles.Forward * 5f );
 	}
 
 	private void OnJumpEvent( SceneModel.GenericEvent e )
