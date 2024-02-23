@@ -3,6 +3,10 @@
 @inherits Panel
 
 <root>
+	@if (IsHost)
+	{
+		<div class="host-title">HOST</div>
+	}
 	<div>
 		<div class="player-info">
 			<div style="flex-direction: column; margin-right: 10px;">
