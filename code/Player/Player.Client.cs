@@ -11,22 +11,20 @@ partial class Player
 		set
 		{
 			_guid = value;
+			Connection = Networking.FindConnection( _guid );
 			if ( _guid == Connection.Local.Id )
 				Local = this;
 		}
 	}
 
-	public Connection Connection { get; set; }
+	public Connection Connection { get; private set; }
 
-	[HostSync] public ulong SteamID { get; set; }
-	[HostSync] public string Name { get; set; }
+	public ulong SteamID => Connection.SteamId;
+	public string Name => Connection.DisplayName;
 
 	public void SetupConnection( Connection connection )
 	{
-		Connection = connection;
 		ConnectionID = connection.Id;
-		Name = connection.DisplayName;
-		SteamID = connection.SteamId;
 		GameObject.Name = $"{Name} / {SteamID}";
 	}
 }
