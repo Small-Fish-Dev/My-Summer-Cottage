@@ -64,7 +64,7 @@
 			displayLabel.Text = ActualText;
 		}
 
-		if ( Radio.IsValid() && Radio.On )
+		if ( Radio.IsValid() && Radio.On ) // todo: check if player is even looking at radio lol, no need to do this expensive shit
 		{
 			var spectrum = Radio.GetSpectrum();
 			if ( _bars == null )

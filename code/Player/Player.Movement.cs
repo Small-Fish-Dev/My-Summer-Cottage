@@ -12,7 +12,7 @@ partial class Player
 	/// <summary>
 	/// How fast you move normally
 	/// </summary>
-	[Property]
+	[Property, Sync]
 	[Category( "Movement" )]
 	[Range( 0f, 400f, 1f )]
 	public float Speed { get; set; } = 140f;
@@ -20,7 +20,7 @@ partial class Player
 	/// <summary>
 	/// How fast you move when holding the sprint button
 	/// </summary>
-	[Property]
+	[Property, Sync]
 	[Category( "Movement" )]
 	[Range( 0f, 800f, 1f )]
 	public float SprintSpeed { get; set; } = 280f;
@@ -28,15 +28,15 @@ partial class Player
 	/// <summary>
 	/// How fast you move when holding the walk button
 	/// </summary>
-	[Property]
+	[Property, Sync]
 	[Category( "Movement" )]
 	[Range( 0f, 200f, 1f )]
-	public float WalkSpeed { get; set; } = 80f;
+	public float WalkSpeed { get; set; } = 60f;
 
 	/// <summary>
 	/// How fast you move when holding the duck button
 	/// </summary>
-	[Property]
+	[Property, Sync]
 	[Category( "Movement" )]
 	[Range( 0f, 200f, 1f )]
 	public float DuckSpeed { get; set; } = 60f;
@@ -44,7 +44,7 @@ partial class Player
 	/// <summary>
 	/// How high you can jump
 	/// </summary>
-	[Property]
+	[Property, Sync]
 	[Category( "Movement" )]
 	[Range( 0f, 800f, 1f )]
 	public float JumpStrength { get; set; } = 200f;
@@ -154,8 +154,8 @@ partial class Player
 
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );
-		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 100f;
-		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 100f;
+		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 170f;
+		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 170f;
 		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
 		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
 
@@ -165,7 +165,7 @@ partial class Player
 		Model.SceneModel.Morphs.Set( "fat", Fatness );
 		Model.Set( "height", Height );
 
-		Model.Set( "lookat", EyeAngles.Forward * 5f * Vector3.Up );
+		Model.Set( "lookat", EyeAngles.WithYaw( 0 ).Forward );
 	}
 
 	private void OnJumpEvent( SceneModel.GenericEvent e )
