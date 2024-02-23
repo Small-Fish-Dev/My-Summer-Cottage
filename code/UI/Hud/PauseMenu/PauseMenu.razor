@@ -5,32 +5,32 @@
 <root>
 	<div style="width: 50%; flex-direction: column;">
 		<img class="title" src="ui/mainmenu/title.png" />
-		<div style="flex-direction: column; justify-content: center; top: 40%; gap: 5px;">
-			<PauseMenuButton
+		<div style="flex-direction: column; justify-content: center; top: 38%; gap: 5px; width: 70%;">
+			<SideButton
 				ImagePath="ui/hud/goback.png"
 				Title="Resume"
 				Subtitle="Continue being Finnish"
-				onclick=@(() => { _isOpen = false; })
+				OnClick=@(() => { _isOpen = false; })
 			/>
 
 			<div style="height: 10px;" />
 
-			<PauseMenuButton
+			<SideButton
 				ImagePath="ui/hud/task_completed.png"
 				Title="Tasks"
 				Subtitle="Full history of your tasks"
 			/>
-			<PauseMenuButton
+			<SideButton
 				ImagePath="ui/hud/inv.png"
 				Title="Inventory"
 				Subtitle="Your inventory and stats"
 			/>
-			<PauseMenuButton
+			<SideButton
 				ImagePath="ui/hud/fish_collection.png"
 				Title="Fish Collection"
 				Subtitle="All the kinds of fish you collected"
 			/>
-			<PauseMenuButton
+			<SideButton
 				ImagePath="ui/hud/exit.png"
 				Title="Quit"
 				Subtitle="End this session and go back to the main menu"
