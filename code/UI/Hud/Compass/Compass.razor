@@ -1,16 +1,19 @@
 @namespace Sauna.UI
 @attribute [StyleSheet]
+@using Sauna.Game
 @inherits Panel
 
 <root>
 	<div @ref=_container class="container">	
-		<div class="time">@(DateTime.Now.ToString( "HH:mm" ))</div>
+		<div class="time">@(TimeSpan.FromSeconds( GameTimeManager.InGameSeconds ).ToString( @"hh\:mm" ))</div>
 		<div class="direction">Facing @(Player.Local?.FacedDirection)</div>
 		<div @ref=_line class="line" />
 	</div>
 </root>
 
 @code {
+	public GameTimeManager GameTimeManager { get; set; }
+	
 	private float ContainerWidth => 650f;
 
 	private struct MarkerData
@@ -81,6 +84,9 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( Player.Local?.EyeAngles.yaw, Player.Local?.Transform.Position );
+		return HashCode.Combine(
+			// Update every minute
+			GameTimeManager.InGameSeconds / 60,
+			Player.Local?.EyeAngles.yaw, Player.Local?.Transform.Position );
 	}
 }

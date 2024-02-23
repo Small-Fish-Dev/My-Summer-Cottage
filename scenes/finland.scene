@@ -12,6 +12,55 @@
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
           }
+        },
+        {
+          "__type": "GameTimeManager",
+          "DayLength": 30,
+          "SkyDayColor": {
+            "color": [
+              {
+                "c": "0.01961,0.09804,0.22745,1"
+              },
+              {
+                "t": 0.1388889,
+                "c": "0.21961,0.34902,0.52549,1"
+              },
+              {
+                "t": 0.24358974,
+                "c": "0.82353,0.7098,0.72941,1"
+              },
+              {
+                "t": 0.37606838,
+                "c": "0.97255,0.97255,0.94118,1"
+              },
+              {
+                "t": 0.5555556,
+                "c": "0.97255,0.97255,0.94118,1"
+              },
+              {
+                "t": 0.67948717,
+                "c": "0.89804,0.33333,0.01961,1"
+              },
+              {
+                "t": 0.8418803,
+                "c": "0.21961,0.34902,0.52549,1"
+              },
+              {
+                "t": 1,
+                "c": "0.01961,0.09804,0.22745,1"
+              }
+            ],
+            "alpha": []
+          },
+          "SkyNightColor": "0.01961,0.09804,0.22745,1",
+          "Sun": {
+            "_type": "component",
+            "go": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
+            "component_type": "DirectionalLight"
+          },
+          "SunOrbit": "-30,-5,0",
+          "SunriseTime": 25200,
+          "SunsetTime": 79200
         }
       ],
       "Children": [
@@ -28,7 +77,12 @@
               "ZIndex": 100
             },
             {
-              "__type": "Hud"
+              "__type": "Hud",
+              "GameTimeManager": {
+                "_type": "component",
+                "go": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
+                "component_type": "GameTimeManager"
+              }
             },
             {
               "__type": "Subtitles",
@@ -268,6 +322,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-22T18:57:30.3918088\u002B02:00",
+  "LastSaved": "2024-02-23T02:57:35.6343\u002B03:00",
   "__references": []
 }
