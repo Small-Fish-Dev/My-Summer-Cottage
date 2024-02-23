@@ -16,7 +16,7 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 	void INetworkListener.OnActive( Connection connection )
 	{
-		var obj = Prefab.Clone();
+		var obj = Prefab.Clone( transform:global::Transform.Zero, startEnabled:false );
 		obj.NetworkSpawn( connection );
 		obj.Enabled = true;
 	}
