@@ -3,5 +3,37 @@
 @inherits Panel
 
 <root>
-	
+	<div>
+		<div class="player-info">
+			<div style="flex-direction: column; margin-right: 10px;">
+				<text class="player-name">@SteamName</text>
+				<text class="player-details">@FormatDetails()</text>
+			</div>
+		</div>
+		<div class="border-img">
+			<img class="player-img" />
+		</div>
+	</div>
+	@if (IsHost)
+	{
+		<div class="host-spacer" />
+	}
 </root>
+
+@code {
+	// TODO: When we get real data, why not just pass in the player obj itself?
+	public string SteamName { get; set; }
+	public string PlayerName { get; set; }
+	public int PlayerLevel { get; set; }
+	public bool IsHost { get; set; } = false;
+
+	private string FormatDetails()
+	{
+		return $"{PlayerName}, Lv. {PlayerLevel}";
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(SteamName.GetHashCode(), PlayerName.GetHashCode(), PlayerLevel.GetHashCode(), IsHost);
+	}
+}

@@ -1,0 +1,48 @@
+@import "/UI/Style.scss";
+
+PlayerPortrait {
+    flex-direction: column;
+    align-items: center;
+
+    .player-info {
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        background: linear-gradient(to left, rgba(black, 1) 0%, rgba(black, 0.4) 70%, rgba(black, 0) 100%);
+
+        .player-name {
+            font-size: 28px;
+            font-family: BasicHandwriting;
+            text-align: right;
+        }
+
+        .player-details {
+            font-size: 18px;
+            text-align: right;
+        }
+    }
+
+    .border-img {
+        height: 75px;
+        width: 75px;
+        background-color: white;
+        border: 2px black;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .player-img {
+        height: 60px;
+        width: 60px;
+        background-color: lightblue;
+        border: 2px black;
+    }
+
+    .host-spacer {
+        align-self: flex-end;
+        margin: 15px 0px 0px 0px;
+        background-color: white;
+        height: 2px;
+        width: 75px;
+    }
+}
