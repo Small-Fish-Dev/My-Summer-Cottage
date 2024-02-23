@@ -39,28 +39,27 @@
 
 	@if( stageInteger > 1)
 	{
-		<div class="goback gradient-thing" @onclick=@CreatorComponent.PreviousStage>
-			<image src="ui/hud/goback2.png" />
-			<div class="text-container">
-				Go back
-				<div class="description">to Stage @(stageInteger  - 1)</div>
-			</div>
-		</div>
+		<SideButton 
+			Title="Go back" 
+			Subtitle="to stage @(stageInteger  - 1)"
+			OnClick=@CreatorComponent.PreviousStage
+			style="left: 0px; top: 40px;"
+		/>
 	}
 
 	@* Other related UI element. *@
 	@switch( CreatorComponent.Current )
 	{
 		case CreatorStage.Identification:
-			<div class="continue gradient-thing @(disabled ? "disabled" : "")" @onclick=@CreatorComponent.NextStage>
-				<div class="text-container">
-					Continue
-					<div class="description">Use the enter key to swap between the fields.</div>
-					<div class="description">Press here to finish selecting your name.</div>
-					
-				</div>
-				<image src="ui/hud/confirm.png" />
-			</div>
+			<SideButton 
+				Title="Continue" 
+				Subtitle="Use the enter key to swap between the fields."
+				ImagePath="ui/hud/confirm.png"
+				OnClick=@CreatorComponent.NextStage
+				IsDisabled=@disabled
+				IsInverted=@true
+				style="right: 0px; bottom: 50px;"
+			/>
 
 			break;
 

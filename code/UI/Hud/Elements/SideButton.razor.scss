@@ -1,0 +1,51 @@
+@import "/UI/Style.scss";
+
+SideButton {
+    position: absolute;
+    background: linear-gradient(to right, rgba(black, 0.8) 0%, rgba(black, 0.4) 70%, rgba(black, 0) 100%);
+    padding: 30px 10px;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    transition: all 0.5s ease-out;
+    pointer-events: all;
+    z-index: 4;
+
+    image {
+        height: 75%;
+        aspect-ratio: 1;
+        flex-shrink: 0;
+        background-size: 100%;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .text-container {
+        flex-direction: column;
+        color: white;
+        max-width: 600px;
+        flex-shrink: 0;
+        gap: 10px;
+
+        .text-title {
+            font-family: BasicHandwriting;
+            font-size: 48px;
+        }
+
+        .text-subtitle {
+            font-family: HabboExtended;
+            color: darken(white, 0.1);
+            font-size: 18px;
+        }
+    }
+
+    &:hover {
+        background: linear-gradient(to right, rgba($dark-gray, 0.8) 0%, rgba($dark-gray, 0.4) 70%, rgba($dark-gray, 0) 100%);
+        cursor: pointer;
+    }
+
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
