@@ -18,13 +18,15 @@ partial class Player
 
 	public Connection Connection { get; set; }
 
-	public ulong SteamID => Connection.SteamId;
-	public string Name => Connection.DisplayName;
+	[HostSync] public ulong SteamID { get; set; }
+	[HostSync] public string Name { get; set; }
 
 	public void SetupConnection( Connection connection )
 	{
-		ConnectionID = connection.Id;
 		Connection = connection;
+		ConnectionID = connection.Id;
+		Name = connection.DisplayName;
+		SteamID = connection.SteamId;
 		GameObject.Name = $"{Name} / {SteamID}";
 	}
 }
