@@ -16,6 +16,21 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Range( -100f, 100f, 1f )]
 	public float Height { get; set; } = 0f;
 
+	[Property, Sync, Category( "Appearance" )]
+	public Color SkinColor
+	{
+		get => _skinColor;
+		set
+		{
+			_skinColor = value;
+			
+			if ( Model.SceneModel.IsValid() )
+				Model.SceneModel.Attributes.Set( "g_flColorTint", _skinColor );
+		}
+	}
+
+	Color _skinColor;
+
 	/// <summary>
 	/// Block both inputs and mouse aiming
 	/// </summary>
