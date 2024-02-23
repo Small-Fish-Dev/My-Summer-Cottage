@@ -8,7 +8,7 @@
 	@if (Item is not null)
 	{
 		<div class="item">
-				<img src=@Item.IconTexture />
+				<img src=@Item.IconTexture.ResourcePath />
 				<text class="weight">@Item.WeightInGrams.ToKilograms() kg</text>
 		</div>
 	}
