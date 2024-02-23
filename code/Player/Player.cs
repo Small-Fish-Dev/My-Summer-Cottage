@@ -23,9 +23,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 		set
 		{
 			_skinColor = value;
-			
-			if ( Model.SceneModel.IsValid() )
-				Model.SceneModel.Attributes.Set( "g_flColorTint", _skinColor );
+
+			if ( Renderer.SceneModel.IsValid() )
+				Renderer.SceneModel.Attributes.Set( "g_flColorTint", _skinColor );
 		}
 	}
 
@@ -85,11 +85,11 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	public Inventory Inventory { get; private set; }
 	protected CameraComponent Camera;
-	protected SkinnedModelRenderer Model;
+	protected SkinnedModelRenderer Renderer;
 	protected BoxCollider Collider;
 	protected ParticleConeEmitter PissEmitter;
 	protected ParticleEffect PissParticles;
-	
+
 	protected override void DrawGizmos()
 	{
 	}
@@ -105,15 +105,15 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		Inventory = Components.Get<Inventory>( FindMode.EverythingInSelfAndDescendants );
 
-		Model = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+		Renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
 		Collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndDescendants );
 
 		PissEmitter = Components.Get<ParticleConeEmitter>( FindMode.EverythingInSelfAndDescendants );
 		PissParticles = Components.Get<ParticleEffect>( FindMode.EverythingInSelfAndDescendants );
 
 		// Footsteps
-		Model.OnFootstepEvent += OnFootstep;
-		Model.OnGenericEvent += OnJumpEvent;
+		Renderer.OnFootstepEvent += OnFootstep;
+		Renderer.OnGenericEvent += OnJumpEvent;
 	}
 
 	protected override void OnUpdate()

@@ -47,6 +47,6 @@ public partial class Player
 	[Broadcast]
 	public void BroadcastInteraction()
 	{
-		Model.Set( "use", true );
+		Renderer.Set( "use", true );
 	}
 }

@@ -70,7 +70,7 @@ partial class Player
 
 		if ( !BlockInputs && Input.Pressed( "Jump" ) && MoveHelper.IsOnGround )
 		{
-			Model?.Set( "jump", true );
+			Renderer?.Set( "jump", true );
 			JumpBroadcast();
 		}
 
@@ -134,38 +134,38 @@ partial class Player
 		if ( Camera == null )
 			return;
 
-		var eyes = Model.GetAttachment( "eyes" ) ?? Transform.World;
+		var eyes = Renderer.GetAttachment( "eyes" ) ?? Transform.World;
 		var rot = Transform.Rotation;
 		Camera.Transform.Position = eyes.Position + rot.Forward * 2.4f;
 		Camera.Transform.Rotation = EyeAngles.ToRotation();
 		Camera.FieldOfView = 90f;
 		Camera.ZNear = 2.5f;
 
-		Model?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
+		Renderer?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
 	}
 
 	protected void UpdateAnimation()
 	{
-		if ( Model == null || Model.SceneModel == null || MoveHelper == null )
+		if ( Renderer == null || Renderer.SceneModel == null || MoveHelper == null )
 			return;
 
-		Model.Set( "grounded", MoveHelper.IsOnGround );
-		Model.Set( "crouching", Ducking );
+		Renderer.Set( "grounded", MoveHelper.IsOnGround );
+		Renderer.Set( "crouching", Ducking );
 
-		var oldX = Model.GetFloat( "move_x" );
-		var oldY = Model.GetFloat( "move_y" );
+		var oldX = Renderer.GetFloat( "move_x" );
+		var oldY = Renderer.GetFloat( "move_y" );
 		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 170f;
 		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 170f;
 		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
 		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
 
-		Model.Set( "move_x", x );
-		Model.Set( "move_y", y );
+		Renderer.Set( "move_x", x );
+		Renderer.Set( "move_y", y );
 
-		Model.SceneModel.Morphs.Set( "fat", Fatness );
-		Model.Set( "height", Height );
+		Renderer.SceneModel.Morphs.Set( "fat", Fatness );
+		Renderer.Set( "height", Height );
 
-		Model.Set( "lookat", EyeAngles.WithYaw( 0 ).Forward );
+		Renderer.Set( "lookat", EyeAngles.WithYaw( 0 ).Forward );
 	}
 
 	private void OnJumpEvent( SceneModel.GenericEvent e )
@@ -177,6 +177,6 @@ partial class Player
 	[Broadcast]
 	protected void JumpBroadcast()
 	{
-		Model?.Set( "jump", true );
+		Renderer?.Set( "jump", true );
 	}
 }
