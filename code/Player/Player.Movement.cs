@@ -117,6 +117,14 @@ partial class Player
 		MoveHelper.CollisionBBox = new BBox( bbox.Mins, bbox.Maxs.WithZ( height ) );
 		Collider.Scale = Collider.Scale.WithZ( height );
 		Collider.Center = Vector3.Up * height / 2f;
+
+		if ( IsRagdolled )
+			FollowRagdoll();
+
+		if ( Input.Pressed( "Ragdoll" ) )
+		{
+			SetRagdoll( !IsRagdolled );
+		}
 	}
 
 	protected void UpdateAngles()

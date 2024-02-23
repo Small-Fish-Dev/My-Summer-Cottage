@@ -131,6 +131,7 @@ public class Character : Component, Component.ExecuteInEditor
 			{
 				var clothingGO = new GameObject( true, piece.Name );
 				clothingGO.SetParent( GameObject );
+				clothingGO.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity );
 
 				var clothing = clothingGO.Components.Create<SkinnedModelRenderer>();
 				clothing.Model = piece;

@@ -247,17 +247,6 @@
               "Model": "models/guy/guy.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "ModelPhysics",
-              "Locking": {},
-              "Model": "models/guy/guy.vmdl",
-              "Renderer": {
-                "_type": "component",
-                "go": "f305e778-13c3-46cb-ba51-41d439c6a761",
-                "component_type": "SkinnedModelRenderer"
-              },
-              "RigidbodyFlags": 0
             }
           ]
         },
@@ -430,6 +419,32 @@
           ]
         }
       ]
+    },
+    {
+      "Id": "f53b3f49-43d5-4930-9431-c317c3f424fe",
+      "Name": "Cube",
+      "Position": "329.2953,-15.64861,91.40627",
+      "Scale": "3.773694,5.479699,1.348766",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 18446744073709551615,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/dev/box.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "BoxCollider",
+          "Center": "0,0,0",
+          "IsTrigger": false,
+          "Scale": "50,50,50",
+          "Static": false,
+          "Surface": null
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -455,6 +470,6 @@
   },
   "Title": "debug",
   "Description": "",
-  "LastSaved": "2024-02-24T00:02:03.0889844\u002B01:00",
+  "LastSaved": "2024-02-24T00:37:56.2079474\u002B01:00",
   "__references": []
 }
