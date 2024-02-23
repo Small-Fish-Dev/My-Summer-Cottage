@@ -11,12 +11,13 @@ partial class Player
 		set
 		{
 			_guid = value;
+			Connection = Networking.FindConnection( _guid );
 			if ( _guid == Connection.Local.Id )
 				Local = this;
 		}
 	}
 
-	public Connection Connection { get; set; }
+	public Connection Connection { get; private set; }
 
 	public ulong SteamID => Connection.SteamId;
 	public string Name => Connection.DisplayName;
@@ -24,7 +25,6 @@ partial class Player
 	public void SetupConnection( Connection connection )
 	{
 		ConnectionID = connection.Id;
-		Connection = connection;
 		GameObject.Name = $"{Name} / {SteamID}";
 	}
 }

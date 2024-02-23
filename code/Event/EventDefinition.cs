@@ -113,7 +113,21 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 	protected override void OnStart()
 	{
-		if ( !GameManager.IsPlaying ) return;
+		if ( !GameManager.IsPlaying )
+		{
+			if ( Game.IsEditor )
+			{
+				foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+				{
+					if ( component != this )
+						component.Enabled = false;
+				}
+
+				_showToggle = false;
+			}
+
+			return;
+		}
 
 		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
 		{

@@ -12,7 +12,18 @@ public partial class SlotMachine : Component
 	#endregion
 
 	[Property] public SkinnedModelRenderer Model { get; set; }
-	[Sync, Property] public BetFlag BetFlags { get; set; }
+
+	[Sync, Property] public BetFlag BetFlags
+	{
+		get => _betflags;
+		set
+		{
+			_betflags = value;
+			UpdateBodygroups();
+		}
+	}
+	private BetFlag _betflags;
+
 	[Sync, Property] public int Money { get; set; }
 
 	public int Bet => BitOperations.PopCount( (uint)BetFlags ) * DEFAULT_BET;
@@ -110,8 +121,6 @@ public partial class SlotMachine : Component
 	{
 		var flags = (byte)BetFlags;
 		BetFlags = (BetFlag)(flags ^ (1 << (line - 1)));
-
-		UpdateBodygroups();
 	}
 
 	private void CheckForWin()
@@ -128,6 +137,8 @@ public partial class SlotMachine : Component
 
 	protected override void OnStart()
 	{
+		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
+
 		UpdateBodygroups();
 	}
 

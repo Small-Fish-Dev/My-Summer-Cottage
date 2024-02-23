@@ -9,6 +9,7 @@ HEADER
 FEATURES
 {
     #include "common/features.hlsl"
+    Feature( F_ALPHA_TEST, 0..1, "Rendering" );
 	Feature( F_TRANSPARENCY, 0..1, "Rendering" );
 	Feature( F_EMISSIVE, 0..1, "Rendering" );
 }
@@ -74,6 +75,7 @@ VS
 PS
 { 
 	StaticCombo( S_TRANSPARENCY, F_TRANSPARENCY, Sys( ALL ) );
+    StaticCombo( S_ALPHA_TEST, F_ALPHA_TEST, Sys( ALL ) );
 	
 	#define CUSTOM_TEXTURE_FILTERING
     SamplerState Sampler < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
@@ -85,9 +87,12 @@ PS
 	CreateInputTexture2D( Color, Srgb, 8, "", "_color", "Material,10/10", Default3( 1.0, 1.0, 1.0 ) );
 
 	CreateInputTexture2D( ColorTintMask, Linear, 8, "", "_tint", "Material,10/20", Default3( 1.0, 1.0, 1.0 ) );	// Tint mask, stored in color map's alpha channel
-	float3 g_flColorTint < UiType( Color ); Default3( 1.0, 1.0, 1.0 ); UiGroup( "Material,10/20" ); >;			// Tint color
+	float3 g_flColorTint < Attribute( "g_flColorTint" ); UiType( Color ); Default3( 1.0, 1.0, 1.0 ); UiGroup( "Material,10/20" ); >;			// Tint color
 
 	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); Channel( A, Box( ColorTintMask ), Linear ); OutputFormat( BC7 ); SrgbRead( true ); Filter( POINT ); >;
+	#if S_ALPHA_TEST
+		TextureAttribute( LightSim_Opacity_A, g_tColor );
+	#endif
 
     CreateInputTexture2D( Normal, Linear, 8, "NormalizeNormals", "_normal", "Material,10/30", Default3( 0.5, 0.5, 1.0 ) );
 	CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;

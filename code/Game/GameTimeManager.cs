@@ -42,6 +42,9 @@ public class GameTimeManager : Component
 		base.OnAwake();
 
 		NewDay();
+
+		SetTimeFromSeconds( (int)(SunriseTime * 1.5f) );
+
 	}
 
 	protected override void DrawGizmos()
@@ -105,7 +108,7 @@ public class GameTimeManager : Component
 
 		Sun.Transform.Rotation = sunRotation.Right.EulerAngles;
 		Sun.SkyColor = SkyNightColor;
-		
+
 		// using ( Gizmo.Scope() )
 		// {
 		// 	Gizmo.Draw.ScreenText( $"{DayPercent}", new Vector2( 200, 200 ) );
@@ -123,9 +126,9 @@ public class GameTimeManager : Component
 	/// Set the time
 	/// </summary>
 	/// <param name="seconds">Time as in-game seconds</param>
-	public void SetTimeFromSeconds(int seconds)
+	public void SetTimeFromSeconds( int seconds )
 	{
-		_inGameTime = ((float) seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
+		_inGameTime = ((float)seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
 	}
 
 	private void NewDay()
