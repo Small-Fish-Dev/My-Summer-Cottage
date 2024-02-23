@@ -34,7 +34,7 @@
 	private int textOffset;
 	private TimeUntil timeUntilScroll = ScrollPostWait;
 
-	public string VirtualText => Radio.Title;
+	public string VirtualText => Radio.Title.RemoveDiacritics();
 	public string ActualText => new string( (VirtualText ?? "")
 		.Skip( textOffset )
 		.Take( MaxScreenCharacters ).ToArray() )
