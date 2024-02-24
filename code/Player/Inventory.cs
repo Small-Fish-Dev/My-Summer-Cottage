@@ -52,9 +52,7 @@ public class Inventory : Component
 		if ( index == -1 )
 			return false;
 
-		var equipment = item.Components.Get<ItemEquipment>();
-
-		if ( equipment is null )
+		if ( item is not ItemEquipment equipment )
 			return false;
 
 		equipment.Equipped = true;
@@ -74,13 +72,26 @@ public class Inventory : Component
 			_equippedItems[slotIndex] = item;
 		}
 
+		UpdateBodygroups();
+
 		return true;
+	}
+
+	public void UpdateBodygroups()
+	{
+		var bodygroups = HiddenBodyGroup.None;
+		foreach ( var item in EquippedItems )
+		{
+			var equipment = item.Components.Get<ItemEquipment>();
+			bodygroups |= equipment.HideBodygroups;
+		}
+
+		Player.HideBodygroups = bodygroups;
 	}
 
 	public bool UnequipItem( ItemComponent item )
 	{
-		var equipment = item.Components.Get<ItemEquipment>();
-		if ( equipment is null )
+		if ( item is not ItemEquipment equipment )
 			return false;
 
 		var slotIndex = (int)equipment.Slot;
@@ -92,6 +103,9 @@ public class Inventory : Component
 		equipment.Equipped = false;
 
 		_equippedItems[slotIndex] = null;
+
+		UpdateBodygroups();
+
 		return true;
 	}
 
@@ -122,5 +136,30 @@ public class Inventory : Component
 
 		_backpackItems[index] = null;
 		return item;
+	}
+
+	[ConCmd]
+	public static void UnEquip( int index )
+	{
+		var player = GameManager.ActiveScene.GetAllComponents<Player>().FirstOrDefault();
+		player.Inventory.UnequipItem( player.Inventory.EquippedItems[(int)EquipSlot.Body] );
+	}
+
+	[ConCmd]
+	public static void GiveItem( string name )
+	{
+		var player = GameManager.ActiveScene.GetAllComponents<Player>().FirstOrDefault();
+		if ( player == null )
+			return;
+
+		var item = PrefabLibrary.FindByComponent<ItemComponent>()
+			.FirstOrDefault( x => x.Name.ToLower() == name.ToLower() )
+			?.Prefab;
+
+		if ( item == null )
+			return;
+
+		var obj = SceneUtility.GetPrefabScene( item ).Clone();
+		player.Inventory.GiveItem( obj );
 	}
 }

@@ -10,12 +10,13 @@ public enum EquipSlot : byte
 	Hand
 }
 
-public class ItemEquipment : Component
+public class ItemEquipment : ItemComponent
 {
-	[Property] public EquipSlot Slot { get; set; }
+	[Property, Category( "Equipment" )] public EquipSlot Slot { get; set; }
+	[Property, Category( "Equipment" )] public HiddenBodyGroup HideBodygroups { get; set; }
 
 	private bool _equipped = false;
-	public bool Equipped
+	[Sync] public bool Equipped
 	{
 		get => _equipped;
 		set

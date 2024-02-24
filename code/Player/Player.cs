@@ -30,6 +30,17 @@ public partial class Player : Component, Component.ExecuteInEditor
 	}
 
 	Color _skinColor;
+	HiddenBodyGroup _hideBodygroups;
+
+	[Sync] public HiddenBodyGroup HideBodygroups
+	{
+		get => _hideBodygroups;
+		set
+		{
+			_hideBodygroups = value;
+			Model.BodyGroups = (ulong)_hideBodygroups;
+		}
+	}
 
 	/// <summary>
 	/// Block both inputs and mouse aiming
