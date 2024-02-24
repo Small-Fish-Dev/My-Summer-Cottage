@@ -106,7 +106,7 @@
                   "Type": "call",
                   "Properties": {
                     "_name": "Get",
-                    "T": "package.fish.project_cyber/Sauna.Player",
+                    "T": "package.fish.sauna/Sauna.Player",
                     "_isStatic": false,
                     "_type": "Sandbox.Game/Sandbox.IComponentLister"
                   },
@@ -256,21 +256,6 @@
                   }
                 },
                 {
-                  "Id": 36,
-                  "Type": "scene.ref",
-                  "Properties": {
-                    "value": {
-                      "_type": "component",
-                      "go": "d7d448b2-96af-4858-b966-3722196434c8",
-                      "component_type": "EventComponent"
-                    },
-                    "T": "package.fish.project_cyber/EventComponent"
-                  },
-                  "UserData": {
-                    "Position": "1664,176"
-                  }
-                },
-                {
                   "Id": 38,
                   "Type": "scene.ref",
                   "Properties": {
@@ -282,6 +267,21 @@
                   },
                   "UserData": {
                     "Position": "-176,112"
+                  }
+                },
+                {
+                  "Id": 42,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "value": {
+                      "_type": "component",
+                      "go": "d7d448b2-96af-4858-b966-3722196434c8",
+                      "component_type": "EventComponent"
+                    },
+                    "T": "package.fish.sauna/EventComponent"
+                  },
+                  "UserData": {
+                    "Position": "1568,176"
                   }
                 }
               ],
@@ -327,15 +327,7 @@
                   "DstName": "duration"
                 },
                 {
-                  "Value": {
-                    "$type": "Simple",
-                    "Type": {
-                      "$type": "Nested",
-                      "DeclaringType": "package.fish.project_cyber/SaunaActionNodes",
-                      "Name": "EasingFunction"
-                    },
-                    "Value": "Linear"
-                  },
+                  "Value": "Linear",
                   "DstId": 10,
                   "DstName": "easer"
                 },
@@ -480,7 +472,7 @@
                   "DstName": "_signal"
                 },
                 {
-                  "SrcId": 36,
+                  "SrcId": 42,
                   "SrcName": "_result",
                   "DstId": 31,
                   "DstName": "component"
@@ -701,7 +693,7 @@
                   }
                 },
                 {
-                  "Id": 33,
+                  "Id": 35,
                   "Type": "scene.ref",
                   "Properties": {
                     "value": {
@@ -709,10 +701,10 @@
                       "go": "959dc437-a39e-4b8f-a4fc-9116b8ceb3e3",
                       "component_type": "EventComponent"
                     },
-                    "T": "package.fish.project_cyber/EventComponent"
+                    "T": "package.fish.sauna/EventComponent"
                   },
                   "UserData": {
-                    "Position": "1328,336"
+                    "Position": "1344,256"
                   }
                 }
               ],
@@ -729,15 +721,7 @@
                   "DstName": "duration"
                 },
                 {
-                  "Value": {
-                    "$type": "Simple",
-                    "Type": {
-                      "$type": "Nested",
-                      "DeclaringType": "package.fish.project_cyber/SaunaActionNodes",
-                      "Name": "EasingFunction"
-                    },
-                    "Value": "EaseOut"
-                  },
+                  "Value": "Linear",
                   "DstId": 1,
                   "DstName": "easer"
                 },
@@ -813,15 +797,7 @@
                   "DstName": "duration"
                 },
                 {
-                  "Value": {
-                    "$type": "Simple",
-                    "Type": {
-                      "$type": "Nested",
-                      "DeclaringType": "package.fish.project_cyber/SaunaActionNodes",
-                      "Name": "EasingFunction"
-                    },
-                    "Value": "EaseIn"
-                  },
+                  "Value": "Linear",
                   "DstId": 15,
                   "DstName": "easer"
                 },
@@ -871,15 +847,7 @@
                   "DstName": "duration"
                 },
                 {
-                  "Value": {
-                    "$type": "Simple",
-                    "Type": {
-                      "$type": "Nested",
-                      "DeclaringType": "package.fish.project_cyber/SaunaActionNodes",
-                      "Name": "EasingFunction"
-                    },
-                    "Value": "EaseIn"
-                  },
+                  "Value": "Linear",
                   "DstId": 18,
                   "DstName": "easer"
                 },
@@ -911,15 +879,7 @@
                   "DstName": "duration"
                 },
                 {
-                  "Value": {
-                    "$type": "Simple",
-                    "Type": {
-                      "$type": "Nested",
-                      "DeclaringType": "package.fish.project_cyber/SaunaActionNodes",
-                      "Name": "EasingFunction"
-                    },
-                    "Value": "EaseOut"
-                  },
+                  "Value": "Linear",
                   "DstId": 19,
                   "DstName": "easer"
                 },
@@ -980,7 +940,7 @@
                   "DstName": "_signal"
                 },
                 {
-                  "SrcId": 33,
+                  "SrcId": 35,
                   "SrcName": "_result",
                   "DstId": 24,
                   "DstName": "component"
