@@ -1,8 +1,12 @@
+@import "/UI/Style.scss";
+
 FishLog {
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: #000000bd;
+    background-color: $fullscreen-bg;
+    backdrop-filter: $fullscreen-blur;
+    pointer-events: all;
 
     .container {
         height: 100%;
