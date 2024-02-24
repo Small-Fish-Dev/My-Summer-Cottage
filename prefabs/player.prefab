@@ -1,8 +1,8 @@
 {
   "RootObject": {
-    "Id": "996d740c-98fc-4ef6-8838-193817eea9d0",
+    "Id": "d3bba06a-849e-429c-aaf0-071342c7fc70",
     "Name": "player",
-    "Tags": "player,localplayer",
+    "Tags": "localplayer,player",
     "Enabled": true,
     "Components": [
       {
@@ -14,9 +14,10 @@
         "Money": 0,
         "MoveHelper": {
           "_type": "component",
-          "go": "996d740c-98fc-4ef6-8838-193817eea9d0",
+          "go": "d3bba06a-849e-429c-aaf0-071342c7fc70",
           "component_type": "MoveHelper"
         },
+        "SkinColor": "0,0,0,0",
         "Speed": 140,
         "SprintSpeed": 280,
         "WalkSpeed": 80
@@ -25,7 +26,7 @@
         "__type": "Inventory",
         "Player": {
           "_type": "component",
-          "go": "996d740c-98fc-4ef6-8838-193817eea9d0",
+          "go": "d3bba06a-849e-429c-aaf0-071342c7fc70",
           "component_type": "Player"
         }
       },
@@ -64,28 +65,11 @@
         "TraceType": "BBox",
         "UseCollider": false,
         "UseSceneGravity": true
-      },
-      {
-        "__type": "Rigidbody",
-        "AngularDamping": 0,
-        "Gravity": false,
-        "LinearDamping": 0,
-        "Locking": {
-          "X": true,
-          "Y": true,
-          "Z": true,
-          "Pitch": true,
-          "Yaw": true,
-          "Roll": true
-        },
-        "MassOverride": 0,
-        "RigidbodyFlags": 0,
-        "StartAsleep": false
       }
     ],
     "Children": [
       {
-        "Id": "01266419-a2bb-496f-99c7-920dc07e43f1",
+        "Id": "9bb4375e-d5d6-4a75-9f3e-395d19c17723",
         "Name": "Camera",
         "Position": "5.992126,0.00009575188,66.4233",
         "Tags": "maincamera",
@@ -130,7 +114,7 @@
         ]
       },
       {
-        "Id": "6e2e957c-fbe0-4c60-927a-1e696fca2adf",
+        "Id": "2a1e000a-9d12-4dff-ba0a-e04b6829e6b0",
         "Name": "Model",
         "Enabled": true,
         "Components": [
@@ -146,7 +130,7 @@
             "HideBodyGroup": "Torso",
             "Player": {
               "_type": "component",
-              "go": "996d740c-98fc-4ef6-8838-193817eea9d0",
+              "go": "d3bba06a-849e-429c-aaf0-071342c7fc70",
               "component_type": "Player"
             }
           },
@@ -165,7 +149,7 @@
         ]
       },
       {
-        "Id": "2c335c4e-6c9c-45fb-8290-6035b7c9f1cc",
+        "Id": "4ab7e6f4-8a48-4cc2-a2e3-34cba41f937c",
         "Name": "Piss",
         "Position": "1.936967,0.0000001154522,34.7722",
         "Tags": "particles",
