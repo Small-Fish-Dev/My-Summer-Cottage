@@ -53,7 +53,7 @@ public class PrefabDefinition
 	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
 	public IEnumerable<ComponentDefinition> GetComponents<T>() where T : Component
-		=> Components.Where( component => component.Type?.TargetType == typeof( T ) );
+		=> Components.Where( component => component.Type?.TargetType.IsAssignableTo( typeof( T ) ) ?? false );
 
 	/// <summary>
 	/// Gets the first component of type T.
@@ -61,7 +61,7 @@ public class PrefabDefinition
 	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
 	public ComponentDefinition GetComponent<T>() where T : Component
-		=> Components.FirstOrDefault( component => component.Type?.TargetType == typeof( T ) );
+		=> Components.FirstOrDefault( component => component.Type?.TargetType.IsAssignableTo( typeof( T ) ) ?? false );
 }
 
 /// <summary>
