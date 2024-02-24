@@ -6,9 +6,232 @@
     "Components": [
       {
         "__type": "EventComponent",
+        "DisabledWhilePlaying": [],
         "DisableOnTrigger": [],
-        "Event": null,
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "5dbd6303-a8eb-4126-a0d9-99495a851c0c",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-32,160"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "event.localpunchplayer",
+              "UserData": {
+                "Position": "448,96"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                "_name": "Get",
+                "T": "package.fish.sauna/Sauna.Player",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "176,288"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "event.ragdollplayer",
+              "UserData": {
+                "Position": "784,176"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "event.finished",
+              "UserData": {
+                "Position": "1184,176"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.ref",
+              "Properties": {
+                "value": {
+                  "_type": "component",
+                  "go": "6bda71a1-2762-4b22-998f-d8b7d051419e",
+                  "component_type": "EventComponent"
+                },
+                "T": "package.fish.sauna/EventComponent"
+              },
+              "UserData": {
+                "Position": "928,304"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "resource.ref",
+              "Properties": {
+                "value": "sounds/misc/banana_slip.sound",
+                "T": "Sandbox.Engine/Sandbox.SoundEvent"
+              },
+              "UserData": {
+                "Position": "480,-176"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "sound.playat",
+              "UserData": {
+                "Position": "768,-176"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Position": "272,-48"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              },
+              "UserData": {
+                "Position": "448,-48"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0,
+              "DstId": 1,
+              "DstName": "extraVerticalStrength"
+            },
+            {
+              "Value": "0,0,1",
+              "DstId": 1,
+              "DstName": "launchDirection"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "player"
+            },
+            {
+              "Value": 400,
+              "DstId": 1,
+              "DstName": "strength"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "obj",
+              "DstId": 2,
+              "DstName": "_target"
+            },
+            {
+              "Value": "EnabledInSelf, InAncestors",
+              "DstId": 2,
+              "DstName": "search"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 3,
+              "DstId": 3,
+              "DstName": "duration"
+            },
+            {
+              "Value": true,
+              "DstId": 3,
+              "DstName": "enabled"
+            },
+            {
+              "Value": true,
+              "DstId": 3,
+              "DstName": "forced"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "player"
+            },
+            {
+              "Value": 0,
+              "DstId": 3,
+              "DstName": "spin"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 4,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "component"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 11,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "soundEvent"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 12,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 12,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "_target"
+            }
+          ]
+        },
         "RequiredToFinish": true,
+        "TriggerCooldown": 1,
+        "TriggerOnce": false,
         "Triggers": [
           {
             "_type": "component",
@@ -22,6 +245,7 @@
         "EventName": "Banana Peel",
         "Frequency": "Repeatable",
         "Rarity": "Common",
+        "ReinstantiateOnRestart": false,
         "Stackable": true,
         "Type": "Zone"
       }
@@ -30,8 +254,8 @@
       {
         "Id": "14ced500-a032-45af-b42e-d34891efe4fd",
         "Name": "Model",
-        "Position": "0,0,9.040004",
-        "Rotation": "-0.7071068,-0,0,0.7071068",
+        "Position": "0,-0.0000008760562,4.140741",
+        "Scale": "2,2,2",
         "Enabled": true,
         "Components": [
           {
@@ -39,7 +263,7 @@
             "BodyGroups": 18446744073709551615,
             "MaterialGroup": null,
             "MaterialOverride": null,
-            "Model": "models/ladel/ladel.vmdl",
+            "Model": "models/bananapeel/bananapeel.vmdl",
             "RenderType": "On",
             "Tint": "1,1,1,1"
           }
@@ -55,21 +279,6 @@
             "Extents": "20,20,30",
             "MaxPollingRate": 5,
             "Offset": "0,0,15",
-            "TagSet": "player",
-            "TriggerPrefab": []
-          }
-        ]
-      },
-      {
-        "Id": "e1c8e099-ec98-4554-a213-e858ad9e0391",
-        "Name": "PlayersInArea",
-        "Enabled": true,
-        "Components": [
-          {
-            "__type": "EventAreaFinder",
-            "Extents": "400,400,200",
-            "MaxPollingRate": 10,
-            "Offset": "0,0,100",
             "TagSet": "player",
             "TriggerPrefab": []
           }
