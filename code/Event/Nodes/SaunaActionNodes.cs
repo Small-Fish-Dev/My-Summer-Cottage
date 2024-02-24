@@ -10,7 +10,7 @@ public static partial class SaunaActionNodes
 	/// </summary>
 	[ActionGraphNode( "event.localpunchplayer" )]
 	[Title( "Local Punch Player" ), Group( "Events" ), Icon( "sports_mma" )]
-	public static void LocalPunch( Player player, Vector3 launchDirection, float strength, float extraVerticalStrength )
+	public static void LocalPunch( Player player, Vector3 launchDirection, float strength = 0f, float extraVerticalStrength = 0f )
 	{
 		if ( player == null ) return;
 
@@ -26,7 +26,7 @@ public static partial class SaunaActionNodes
 	/// </summary>
 	[ActionGraphNode( "event.worldpunchplayer" )]
 	[Title( "World Punch Player" ), Group( "Events" ), Icon( "sports_mma" )]
-	public static void WorldPunch( Player player, Vector3 worldSource, float strength, float extraVerticalStrength )
+	public static void WorldPunch( Player player, Vector3 worldSource, float strength = 0f, float extraVerticalStrength = 0f )
 	{
 		if ( player == null ) return;
 
@@ -43,7 +43,7 @@ public static partial class SaunaActionNodes
 	/// </summary>
 	[ActionGraphNode( "event.ragdollplayer" )]
 	[Title( "Ragdoll Player" ), Group( "Events" ), Icon( "accessibility_new" )]
-	public static void Ragdoll( Player player, bool enabled, bool forced, float duration, float spin )
+	public static void Ragdoll( Player player, bool enabled = true, bool forced = true, float duration = 1f, float spin = 0f )
 	{
 		if ( player == null ) return;
 
@@ -89,7 +89,7 @@ public static partial class SaunaActionNodes
 	/// </summary>
 	[ActionGraphNode( "event.interpolateposition" )]
 	[Title( "Interpolate Position" ), Group( "Events" ), Icon( "double_arrow" )]
-	public static async Task InterpolatePosition( GameObject target, Vector3 from, Vector3 to, float duration, EasingFunction easer )
+	public static async Task InterpolatePosition( GameObject target, Vector3 from, Vector3 to, EasingFunction easer, float duration = 1f )
 	{
 		TimeSince timeSince = 0;
 
@@ -111,7 +111,7 @@ public static partial class SaunaActionNodes
 	/// </summary>
 	[ActionGraphNode( "event.interpolaterotation" )]
 	[Title( "Interpolate Rotation" ), Group( "Events" ), Icon( "sync" )]
-	public static async Task InterpolateRotation( GameObject target, Rotation from, Rotation to, float duration, EasingFunction easer )
+	public static async Task InterpolateRotation( GameObject target, Rotation from, Rotation to, EasingFunction easer, float duration = 1f )
 	{
 		TimeSince timeSince = 0;
 
@@ -133,7 +133,7 @@ public static partial class SaunaActionNodes
 	/// </summary>
 	[ActionGraphNode( "event.interpolatescale" )]
 	[Title( "Interpolate Scale" ), Group( "Events" ), Icon( "aspect_ratio" )]
-	public static async Task InterpolateScale( GameObject target, Vector3 from, Vector3 to, float duration, EasingFunction easer )
+	public static async Task InterpolateScale( GameObject target, Vector3 from, Vector3 to, EasingFunction easer, float duration = 1f )
 	{
 		TimeSince timeSince = 0;
 

@@ -29,7 +29,22 @@ public sealed class EventComponent : Component
 	[Property]
 	public List<EventComponent> DisableOnTrigger { get; set; } = new();
 
+	/// <summary>
+	/// Once triggered, it won't trigger again until reset. False will let this event trigger as many times 
+	/// </summary>
+	[Property]
+	public bool TriggerOnce { get; set; } = true;
+
+	/// <summary>
+	/// If it can get triggered multiple times, set a cooldown in between triggers.
+	/// </summary>
+	[Property]
+	[Range( 0f, 10f, 0.1f )]
+	[ShowIf( "TriggerOnce", false )]
+	public float TriggerCooldown { get; set; } = 1f;
+
 	bool _triggered = false;
+	TimeSince _lastTrigger = 0f;
 
 	/// <summary>
 	/// Has this event component been triggered?
@@ -42,19 +57,13 @@ public sealed class EventComponent : Component
 			if ( value == true && !Triggered )
 			{
 				foreach ( var trigger in Triggers )
-				{
-					trigger.OnTrigger -= Event;
 					trigger.OnTrigger -= HasBeenTriggered;
-				}
 			}
 
 			if ( value == false && Triggered )
 			{
 				foreach ( var trigger in Triggers )
-				{
-					trigger.OnTrigger += Event;
 					trigger.OnTrigger += HasBeenTriggered;
-				}
 			}
 
 			_triggered = value;
@@ -73,29 +82,44 @@ public sealed class EventComponent : Component
 
 	List<EventComponent> _eventsDisabled = new();
 
-	void HasBeenTriggered( GameObject _ )
+	void HasBeenTriggered( GameObject triggerer )
 	{
-		Triggered = true;
-		IsPlaying = true;
-
-		foreach ( var eventComponent in DisableOnTrigger )
+		if ( TriggerOnce || (!TriggerOnce && _lastTrigger >= TriggerCooldown) )
 		{
-			eventComponent.Triggered = true;
-			eventComponent.Enabled = false;
-		}
+			Triggered = true;
+			IsPlaying = true;
 
-		foreach ( var eventComponent in DisabledWhilePlaying )
-		{
-			if ( eventComponent.Enabled )
+			_lastTrigger = 0f;
+
+			foreach ( var eventComponent in DisableOnTrigger )
 			{
+				eventComponent.Triggered = true;
 				eventComponent.Enabled = false;
-				_eventsDisabled.Add( eventComponent );
 			}
+
+			foreach ( var eventComponent in DisabledWhilePlaying )
+			{
+				if ( eventComponent.Enabled )
+				{
+					eventComponent.Enabled = false;
+					_eventsDisabled.Add( eventComponent );
+				}
+			}
+
+			if ( !TriggerOnce )
+			{
+				foreach ( var trigger in Triggers )
+					trigger.Clear();
+			}
+
+			Event?.Invoke( triggerer );
 		}
 	}
 
-	public void Finish()
+	public async void Finish()
 	{
+		await Task.Frame();
+
 		IsPlaying = false;
 
 		foreach ( var eventToEnable in _eventsDisabled )
@@ -104,6 +128,9 @@ public sealed class EventComponent : Component
 		}
 
 		_eventsDisabled.Clear();
+
+		if ( !TriggerOnce )
+			Triggered = false;
 	}
 
 	protected override void OnEnabled()
@@ -114,7 +141,6 @@ public sealed class EventComponent : Component
 		{
 			foreach ( var trigger in Triggers )
 			{
-				trigger.OnTrigger += Event;
 				trigger.OnTrigger += HasBeenTriggered;
 				trigger.Clear();
 			}
@@ -125,11 +151,13 @@ public sealed class EventComponent : Component
 	{
 		IsPlaying = false;
 
-		foreach ( var trigger in Triggers )
+		if ( TriggerOnce )
 		{
-			trigger.OnTrigger -= Event;
-			trigger.OnTrigger -= HasBeenTriggered;
-			trigger.Clear();
+			foreach ( var trigger in Triggers )
+			{
+				trigger.OnTrigger -= HasBeenTriggered;
+				trigger.Clear();
+			}
 		}
 	}
 
