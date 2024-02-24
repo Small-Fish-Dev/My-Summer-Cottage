@@ -2,8 +2,7 @@ namespace Sauna;
 
 public class Inventory : Component
 {
-	[Property]
-	public Player Player { get; set; }
+	[Property] public Player Player { get; set; }
 
 	public const int MAX_BACKPACK_SLOTS = 18;
 	public const int MAX_WEIGHT_IN_GRAMS = 30000;
@@ -17,7 +16,7 @@ public class Inventory : Component
 	public Inventory()
 	{
 		_backpackItems = new List<ItemComponent>( new ItemComponent[MAX_BACKPACK_SLOTS] );
-		_equippedItems = new List<ItemComponent>( new ItemComponent[Enum.GetNames( typeof( EquipSlot ) ).Length] );
+		_equippedItems = new List<ItemComponent>( new ItemComponent[Enum.GetNames( typeof(EquipSlot) ).Length] );
 	}
 
 	public bool GiveItem( ItemComponent item )
@@ -114,7 +113,8 @@ public class Inventory : Component
 		if ( _backpackItems[endIndex] is not null )
 		{
 			// Perform a swap since we are moving the item to an already occupied index.
-			(_backpackItems[startIndex], _backpackItems[endIndex]) = (_backpackItems[endIndex], _backpackItems[startIndex]);
+			(_backpackItems[startIndex], _backpackItems[endIndex]) =
+				(_backpackItems[endIndex], _backpackItems[startIndex]);
 		}
 		else
 		{
@@ -157,7 +157,12 @@ public class Inventory : Component
 			?.Prefab;
 
 		if ( item == null )
+		{
+			var itemNames = string.Join( ',', PrefabLibrary.FindByComponent<ItemComponent>().Select( v => v.Name ) );
+			Log.Warning( $"couldn't find {name}" );
+			Log.Warning( $"valid item names: {itemNames}" );
 			return;
+		}
 
 		var obj = SceneUtility.GetPrefabScene( item ).Clone();
 		player.Inventory.GiveItem( obj );
