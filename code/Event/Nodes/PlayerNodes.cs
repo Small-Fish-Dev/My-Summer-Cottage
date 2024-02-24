@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.Utility;
 using Sauna;
+using static Sandbox.PhysicsContact;
 
 public static partial class PlayerNodes
 {
@@ -42,10 +43,32 @@ public static partial class PlayerNodes
 	/// </summary>
 	[ActionGraphNode( "event.ragdollplayer" )]
 	[Title( "Ragdoll Player" ), Group( "Events" ), Icon( "accessibility_new" )]
-	public static void Ragdoll( Player player, bool enabled = true, bool forced = true, float duration = 1f, float spin = 0f )
+	public static async Task Ragdoll( Player player, bool enabled = true, bool forced = true, float duration = 1f, float spin = 0f )
 	{
 		if ( player == null ) return;
 
 		player.SetRagdoll( enabled, forced, duration, spin );
+
+		while ( player.IsRagdolled )
+		{
+			await Task.Delay( (int)(Time.Delta * 1000) );
+		}
+	}
+
+	/// <summary>
+	/// Fades to black
+	/// </summary>
+	[ActionGraphNode( "event.blackscreen" ), Pure]
+	[Title( "Black Screen" ), Group( "Events" ), Icon( "blinds" )]
+	public static async Task BlackScreen( Player player, float startingTransition = 2f, float blackTransition = 2f, float endingTransition = 1f )
+	{
+		if ( player == null ) return;
+
+		player.BlackScreen( startingTransition, blackTransition, endingTransition );
+		Log.Info( startingTransition );
+		Log.Info( blackTransition );
+		Log.Info( endingTransition );
+
+		await Task.Delay( (int)(startingTransition + blackTransition + endingTransition) * 1000 );
 	}
 }

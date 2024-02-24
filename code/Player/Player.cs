@@ -220,4 +220,25 @@ public partial class Player : Component, Component.ExecuteInEditor
 		sound.Volume *= e.Volume;
 		sound.Update();
 	}
+
+	/// <summary>
+	/// Fades to black
+	/// </summary>
+	/// <param name="startingTransition"></param>
+	/// <param name="blackTransition"></param>
+	/// <param name="endingTransition"></param>
+	public void BlackScreen( float startingTransition = 2f, float blackTransition = 2f, float endingTransition = 1f )
+	{
+		if ( IsProxy ) return;
+
+		var gameObject = Hud.Instance.GameObject;
+
+		if ( gameObject == null ) return;
+
+		var blackScreen = gameObject.Components.Create<BlackScreen>();
+		blackScreen.StartingTransition = startingTransition;
+		blackScreen.BlackTransition = blackTransition;
+		blackScreen.EndingTransition = endingTransition;
+		blackScreen.Start();
+	}
 }
