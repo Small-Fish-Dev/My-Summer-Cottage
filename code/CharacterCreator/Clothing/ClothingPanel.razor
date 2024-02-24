@@ -55,7 +55,18 @@
 			EquipSlot.Feet => 22,
 			_ => 0
 		};
-
+		
+	private Vector3 GetOffset( EquipSlot slot )
+		=> slot switch
+		{
+			EquipSlot.Head => new Vector3( 0, 5, 1 ),
+			EquipSlot.Face => new Vector3( 0, -5, 2 ),
+			EquipSlot.Body => new Vector3( 0, 8, 0 ),
+			EquipSlot.Legs => new Vector3( 0, -18, 0 ),
+			EquipSlot.Feet => new Vector3( 0, 16, 0 ),
+			_ => 0
+		};
+		
 	public override void Tick()
 	{
 		if ( panels == null )
@@ -64,7 +75,7 @@
 		foreach ( var panel in panels )
 		{
 			var worldPosition = Model.GetBoneWorldTransform( GetBone( panel.Slot ) ).Position;
-			var position = Scene.Camera.PointToScreenNormal( worldPosition );
+			var position = Scene.Camera.PointToScreenNormal( GetOffset( panel.Slot ) + worldPosition );
 
 			panel.Style.Left = Length.Fraction( position.x );
 			panel.Style.Top = Length.Fraction( position.y );
