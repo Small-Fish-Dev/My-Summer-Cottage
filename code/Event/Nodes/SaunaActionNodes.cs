@@ -10,12 +10,12 @@ public static partial class SaunaActionNodes
 	/// </summary>
 	[ActionGraphNode( "event.localpunchplayer" )]
 	[Title( "Local Punch Player" ), Group( "Events" ), Icon( "sports_mma" )]
-	public static void LocalPunch( Player player, Vector3 launchDirection, float strength )
+	public static void LocalPunch( Player player, Vector3 launchDirection, float strength, float extraVerticalStrength )
 	{
 		if ( player == null ) return;
 
 		var punchDirection = launchDirection.Normal;
-		var punch = punchDirection * strength;
+		var punch = punchDirection * strength + Vector3.Up * extraVerticalStrength;
 
 		if ( player.Components.TryGet<MoveHelper>( out MoveHelper moveHelper ) )
 			moveHelper.Punch( punch );
@@ -26,16 +26,28 @@ public static partial class SaunaActionNodes
 	/// </summary>
 	[ActionGraphNode( "event.worldpunchplayer" )]
 	[Title( "World Punch Player" ), Group( "Events" ), Icon( "sports_mma" )]
-	public static void WorldPunch( Player player, Vector3 worldSource, float strength )
+	public static void WorldPunch( Player player, Vector3 worldSource, float strength, float extraVerticalStrength )
 	{
 		if ( player == null ) return;
 
 		var punchVector = player.Transform.Position + Vector3.Up * 36f - worldSource;
 		var punchDirection = punchVector.Normal;
-		var punch = punchDirection * strength;
+		var punch = punchDirection * strength + Vector3.Up * extraVerticalStrength;
 
 		if ( player.Components.TryGet<MoveHelper>( out MoveHelper moveHelper ) )
 			moveHelper.Punch( punch );
+	}
+
+	/// <summary>
+	/// Ragdolls/Unragdolls the player
+	/// </summary>
+	[ActionGraphNode( "event.ragdollplayer" )]
+	[Title( "Ragdoll Player" ), Group( "Events" ), Icon( "accessibility_new" )]
+	public static void Ragdoll( Player player, bool enabled, bool forced, float duration, float spin )
+	{
+		if ( player == null ) return;
+
+		player.SetRagdoll( enabled, forced, duration, spin );
 	}
 
 	public enum EasingFunction
