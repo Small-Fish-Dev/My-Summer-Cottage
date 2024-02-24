@@ -10,14 +10,6 @@ partial class Player
 	public MoveHelper MoveHelper { get; set; }
 
 	/// <summary>
-	/// How fast you move normally
-	/// </summary>
-	[Property, Sync]
-	[Category( "Movement" )]
-	[Range( 0f, 400f, 1f )]
-	public float Speed { get; set; } = 140f;
-
-	/// <summary>
 	/// How fast you move when holding the sprint button
 	/// </summary>
 	[Property, Sync]
@@ -59,11 +51,10 @@ partial class Player
 	{
 		if ( MoveHelper == null ) return;
 
-		var isWalking = Input.Down( "Walk" );
 		var isSprinting = Input.Down( "Run" );
 		var isDucking = Input.Down( "Duck" );
 
-		var wishSpeed = isDucking ? DuckSpeed : (isWalking ? WalkSpeed : (isSprinting ? SprintSpeed : Speed));
+		var wishSpeed = isDucking ? DuckSpeed : isSprinting ? SprintSpeed : WalkSpeed;
 		var wishVelocity = Input.AnalogMove.Normal * wishSpeed * EyeAngles.WithPitch( 0f );
 
 		MoveHelper.WishVelocity = BlockInputs ? Vector3.Zero : wishVelocity;
@@ -160,8 +151,8 @@ partial class Player
 
 		var oldX = Renderer.GetFloat( "move_x" );
 		var oldY = Renderer.GetFloat( "move_y" );
-		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 170f;
-		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 170f;
+		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 140f;
+		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 140f;
 		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
 		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
 
