@@ -112,7 +112,7 @@ partial class Player
 		if ( IsRagdolled )
 			FollowRagdoll();
 
-		if ( Input.Pressed( "Ragdoll" ) )
+		if ( Input.Pressed( "Ragdoll" ) && CanRagdoll )
 			SetRagdoll( !IsRagdolled );
 	}
 

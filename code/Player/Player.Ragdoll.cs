@@ -10,13 +10,26 @@ partial class Player
 	/// </summary>
 	public bool IsRagdolled => Ragdoll.IsValid();
 
+	/// <summary>
+	/// Can the player ragdoll or unragdoll themselves or not
+	/// </summary>
+	public bool CanRagdoll { get; set; } = true;
+
 	public ModelPhysics Ragdoll => Renderer.Components.Get<ModelPhysics>();
 	SkinnedModelRenderer _puppet;
 	bool _isTransitioning = false;
 	float _oldAirFriction = 1f;
+	TimeUntil _unragdoll;
+	bool _couldRagdoll = true;
 
+	/// <summary>
+	/// Set the ragdoll state of the player
+	/// </summary>
+	/// <param name="ragdoll">Ragdoll or Unragdoll</param>
+	/// <param name="forced">Force the player to go through ragdoll state</param>
+	/// <param name="duration">How long ragdoll state lasts</param>
 	[Broadcast]
-	public void SetRagdoll( bool ragdoll, bool blockInputs = true )
+	public void SetRagdoll( bool ragdoll, bool forced = true, float duration = 2f )
 	{
 		if ( ragdoll )
 		{
@@ -37,17 +50,21 @@ partial class Player
 
 			var collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndAncestors );
 			collider.Enabled = false;
+
+			BlockMovements = true;
+
+			_unragdoll = duration;
+			_couldRagdoll = CanRagdoll;
+			CanRagdoll = !forced;
 		}
 		else
-		{
 			DeleteRagdoll();
-		}
-
-		BlockMovements = ragdoll;
 	}
 
 	async void DeleteRagdoll()
 	{
+		if ( _isTransitioning ) return;
+
 		_puppet = Renderer.GameObject.Parent.Components.Create<SkinnedModelRenderer>();
 		_puppet.Model = Renderer.Model;
 		_puppet.Enabled = false;
@@ -122,6 +139,8 @@ partial class Player
 		collider.Enabled = true;
 
 		_isTransitioning = false;
+		BlockMovements = false;
+		CanRagdoll = _couldRagdoll;
 	}
 
 	void FollowRagdoll()
@@ -139,5 +158,17 @@ partial class Player
 		}
 
 		Ducking = true;
+
+		if ( _unragdoll )
+		{
+			var groundTrace = Scene.Trace.Ray( rootPosition, rootPosition + Vector3.Down * 10f )
+				.Size( 20f )
+				.IgnoreGameObjectHierarchy( GameObject )
+				.WithoutTags( "player", "trigger", "npc" )
+				.Run();
+
+			if ( groundTrace.Hit )
+				SetRagdoll( false );
+		}
 	}
 }
