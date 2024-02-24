@@ -137,8 +137,9 @@ partial class Player
 		var newEyeRot = IsRagdolled ? eyes.Rotation : EyeAngles.ToRotation();
 		var oldEyePos = Camera.Transform.Position;
 		var newEyePos = eyes.Position + (IsRagdolled ? 0f : rot.Forward * 2.4f);
+
 		Camera.Transform.Position = IsRagdolled ? Vector3.Lerp( oldEyePos, newEyePos, Time.Delta * 10f ) : newEyePos;
-		Camera.Transform.Rotation = IsRagdolled ? Rotation.Lerp( oldEyeRot, newEyeRot, Time.Delta * 10f ) : newEyeRot;
+		Camera.Transform.Rotation = IsRagdolled ? Rotation.Lerp( oldEyeRot, newEyeRot, Time.Delta * 5f ) : newEyeRot;
 		Camera.FieldOfView = 90f;
 		Camera.ZNear = 2.5f;
 
