@@ -30,6 +30,7 @@ public partial class SlotMachine : Component
 
 	[Sync] public bool Rolling { get; set; }
 	[Sync] public Result RollResult { get; set; }
+	[Sync] public WheelMode Wheels { get; set; }
 
 	[Sync] TimeSince SinceResult { get; set; }
 	[Sync] int ShowCount { get; set; }
@@ -45,10 +46,33 @@ public partial class SlotMachine : Component
 		All = First | Second | Third
 	}
 
-	/// <summary>
-	/// Data structure for storing a slot machine roll.
-	/// </summary>
 	public struct Result
+	{
+		public int a;
+		public int b;
+		public int c;
+
+		public int this[int index]
+		{
+			get
+			{
+				return index switch
+				{
+					1 => a,
+					2 => b,
+					3 => c,
+					_ => 0,
+				};
+			}
+		}
+
+		public override string ToString()
+		{
+			return $"{a}, {b}, {c}";
+		}
+	}
+
+	public struct WheelMode
 	{
 		public int a;
 		public int b;
@@ -84,9 +108,16 @@ public partial class SlotMachine : Component
 
 		RollResult = new Result
 		{
-			a = new Random().Next( 0, 7 ),
-			b = new Random().Next( 0, 7 ),
-			c = new Random().Next( 0, 7 )
+			a = Sandbox.Game.Random.Int( 0, 7 ),
+			b = Sandbox.Game.Random.Int( 0, 7 ),
+			c = Sandbox.Game.Random.Int( 0, 7 )
+		};
+
+		Wheels = new WheelMode
+		{
+			a = Sandbox.Game.Random.Int( 1, 3 ),
+			b = Sandbox.Game.Random.Int( 1, 3 ),
+			c = Sandbox.Game.Random.Int( 1, 3 ),
 		};
 
 		SinceResult = 0;
@@ -98,7 +129,7 @@ public partial class SlotMachine : Component
 		for ( int i = 0; i < 3; i++ )
 		{
 			var val = BetFlags.HasFlag( (BetFlag)(1 << i) ) ? 1 : 0;
-			Model?.SetBodyGroup( 8 + i, val );
+			Model?.SetBodyGroup( 10 + i, val );
 			Model?.SetBodyGroup( i == 0 ? 2 : i == 1 ? 1 : 1 + i, val ); // THANKS GROD BERT!!
 		}
 	}
@@ -137,6 +168,7 @@ public partial class SlotMachine : Component
 
 	protected override void OnStart()
 	{
+		GameObject.NetworkSpawn();
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 
 		UpdateBodygroups();
@@ -156,8 +188,11 @@ public partial class SlotMachine : Component
 		{
 			var boneIndex = i + 1;
 			var target = ShowCount >= i || !Rolling
-				? RollResult[i] * ANGLE_STEP
+				? (RollResult[i] + 1) * ANGLE_STEP
 				: SinceResult * 1000f;
+
+			if ( ShowCount >= i || !Rolling )
+				Model?.SetBodyGroup( 6 + i, (Wheels[i] - 1) * 2 );
 
 			var fixedRotation = Transform.Rotation
 				* Rotation.FromAxis( Vector3.Right, ANGLE_STEP / 2f + target )
