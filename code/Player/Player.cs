@@ -38,7 +38,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		set
 		{
 			_hideBodygroups = value;
-			Model.BodyGroups = (ulong)_hideBodygroups;
+			Renderer.BodyGroups = (ulong)_hideBodygroups;
 		}
 	}
 
