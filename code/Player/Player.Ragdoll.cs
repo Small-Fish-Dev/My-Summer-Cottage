@@ -137,6 +137,7 @@ partial class Player
 			Transform.Position = rootPosition; // Remember to set before Renderer!
 			Renderer.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Model goes offset
 		}
+
 		Ducking = true;
 	}
 }
