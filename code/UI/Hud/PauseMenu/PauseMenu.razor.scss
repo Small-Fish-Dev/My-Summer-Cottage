@@ -2,9 +2,9 @@ PauseMenu {
     position: absolute;
     height: 100%;
     width: 100%;
-    display: none;
     background-color: #000000bd;
     z-index: 50;
+    pointer-events: all;
 
     .title {
         position: absolute;
@@ -24,10 +24,5 @@ PauseMenu {
         padding-right: 50px; 
         padding-top: 250px;
         gap: 10px;
-    }
-
-    &.visible {
-        display: flex;
-        pointer-events: all;
     }
 }

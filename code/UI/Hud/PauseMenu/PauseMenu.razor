@@ -10,7 +10,7 @@
 				ImagePath="ui/hud/goback.png"
 				Title="Resume"
 				Subtitle="Continue being Finnish"
-				OnClick=@(() => { _isOpen = false; })
+				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.InGameHud); })
 			/>
 
 			<div style="height: 10px;" />
@@ -64,20 +64,3 @@
 		</div>
 	</div>
 </root>
-
-@code {
-	private bool _isOpen = false;
-
-	public override void Tick()
-	{
-		if (Input.EscapePressed)
-			_isOpen = !_isOpen;
-
-		if ( _isOpen )
-		{
-			Inventory.Instance.IsOpen = false;
-		}
-		
-		SetClass("visible", _isOpen);
-	}
-}

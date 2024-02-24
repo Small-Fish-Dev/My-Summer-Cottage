@@ -52,10 +52,6 @@
 </root>
 
 @code {
-	public bool IsOpen { get; set; } = false;
-	public static Inventory Instance { get; private set; }
-	public Inventory() => Instance = this;
-
 	private void OpenInspect( ItemComponent item )
 	{
 		if ( item is not null )
@@ -66,14 +62,6 @@
 	{
 		if ( item is not null )
 			Player.Local.Inventory.DropItem( item );
-	}
-
-	public override void Tick()
-	{
-		if ( Input.Pressed( "inventory" ) )
-			IsOpen = !IsOpen;
-
-		SetClass( "visible", IsOpen );
 	}
 
 	protected override int BuildHash()
