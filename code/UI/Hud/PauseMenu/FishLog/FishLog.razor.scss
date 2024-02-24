@@ -1,0 +1,49 @@
+FishLog {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #000000bd;
+
+    .container {
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .fish-img {
+            aspect-ratio: 1;
+            height: 60px;
+            image-rendering: pixelated;
+            margin-right: 20px;
+        }
+
+        .fish-title {
+            font-size: 28px;
+            font-family: BasicHandwriting;
+        }
+
+        .fish-subtitle {
+            font-size: 26px;
+            letter-spacing: 1px;
+            color: darken(white, 0.1);
+            font-family: battlenetcopy;
+        }
+
+        .content {
+            .fishes {
+                width: 40%;
+                height: 600px;
+                overflow: scroll;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+    
+            .fish-selected {
+                background-color: #000000ac;
+                height: 400px;
+                width: 30%;
+            }
+        }
+    }
+}

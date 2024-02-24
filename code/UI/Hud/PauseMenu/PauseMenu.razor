@@ -29,6 +29,7 @@
 				ImagePath="ui/hud/fish_collection.png"
 				Title="Fish Collection"
 				Subtitle="All the kinds of fish you collected"
+				OnClick=@(() => { AddChild(new FishLog()); })
 			/>
 			<SideButton
 				ImagePath="ui/hud/exit.png"
