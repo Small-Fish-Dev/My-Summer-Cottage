@@ -59,8 +59,12 @@ partial class Player
 	{
 		if ( !IsRagdolled ) return;
 
+		var leftFoot = Renderer.GetAttachment( "foot_L" ).Value.Position;
+		var rightFoot = Renderer.GetAttachment( "foot_R" ).Value.Position;
+		var rootPosition = (leftFoot + rightFoot) / 2f;
+
+		Transform.Position = rootPosition; // Remember to set before Renderer!
 		Renderer.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Model goes offset
-		GameObject.Transform.Position = Ragdoll.Transform.World.Position;
 		Ducking = true;
 	}
 }

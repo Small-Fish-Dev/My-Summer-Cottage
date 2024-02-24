@@ -122,9 +122,7 @@ partial class Player
 			FollowRagdoll();
 
 		if ( Input.Pressed( "Ragdoll" ) )
-		{
 			SetRagdoll( !IsRagdolled );
-		}
 	}
 
 	protected void UpdateAngles()
