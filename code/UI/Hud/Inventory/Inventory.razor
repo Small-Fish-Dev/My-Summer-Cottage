@@ -5,27 +5,27 @@
 <root>
 	<div class="section" style="flex-direction: row; align-items: center; justify-content: flex-end;">
 		<div style="flex-direction: column; flex-shrink: 0; align-items: flex-end;">
-			<InventorySlot Slot=@EquipSlot.Head Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Head] />
-			<InventorySlot Slot=@EquipSlot.Face Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Face] />
+			<InventorySlot Slot=@EquipSlot.Head Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Head]/>
+			<InventorySlot Slot=@EquipSlot.Face Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Face]/>
 			<div>
-				<InventorySlot Slot=@EquipSlot.Hand Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Hand] />
-				<InventorySlot Slot=@EquipSlot.Body Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Body] />
+				<InventorySlot Slot=@EquipSlot.Hand Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Hand]/>
+				<InventorySlot Slot=@EquipSlot.Body Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Body]/>
 			</div>
-			<InventorySlot Slot=@EquipSlot.Legs Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Legs] />
-			<InventorySlot Slot=@EquipSlot.Feet Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Feet] />
+			<InventorySlot Slot=@EquipSlot.Legs Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Legs]/>
+			<InventorySlot Slot=@EquipSlot.Feet Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Feet]/>
 		</div>
-		<CharacterRenderer />
+		<CharacterRenderer/>
 	</div>
 	<div class="section" style="width: 45%;">
 		<text class="title">INVENTORY</text>
 		<div class="items">
-			@foreach(var item in Player.Local.Inventory.BackpackItems)
+			@foreach ( var item in Player.Local.Inventory.BackpackItems )
 			{
-				<InventorySlot onrightclick=@(() => OpenInspect(item)) Item=@item />
+				<InventorySlot onrightclick=@( () => OpenInspect( item ) ) Item=@item/>
 			}
 		</div>
 		<div style="align-items: center; margin: 20px 0px;">
-			<img src="/ui/hud/weight.png" style="width: 40px; height: 40px; margin-right: 20px;" />
+			<img src="/ui/hud/weight.png" style="width: 40px; height: 40px; margin-right: 20px;"/>
 			<div style="font-size: 30px; gap: 10px;">
 				<text>TOTAL WEIGHT: </text>
 				<text class="active-weight">@Player.Local.Inventory.GetTotalWeightInGrams().ToKilograms() kg</text>
@@ -35,7 +35,7 @@
 		<div style="flex-direction: column;">
 			<div style="margin: 30px 0px 0px 0px; align-items: flex-end; justify-content: space-between;">
 				<div style="align-items: center;">
-					<img src="/ui/hud/current_level.png" style="width: 50px; height: 50px; margin-right: 20px;" />
+					<img src="/ui/hud/current_level.png" style="width: 50px; height: 50px; margin-right: 20px;"/>
 					<text class="level">Lv. 7</text>
 				</div>
 				<div class="exp-text">
@@ -45,34 +45,37 @@
 				</div>
 			</div>
 			<div class="exp-bar">
-				<div class="progress" style="width: @(10)%" />
+				<div class="progress" style="width: @( 10 )%"/>
 			</div>
 		</div>
 	</div>
 </root>
 
 @code {
-	private bool _isOpen = false;
+	public bool IsOpen { get; set; } = false;
+	public static Inventory Instance { get; private set; }
+	public Inventory() => Instance = this;
 
-	private void OpenInspect(ItemComponent item)
+	private void OpenInspect( ItemComponent item )
 	{
 		if ( item is not null )
-			AddChild(new InspectItem(item));
+			AddChild( new InspectItem( item ) );
 	}
 
 	public override void Tick()
 	{
-		if (Input.Pressed("inventory"))
-			_isOpen = !_isOpen;
+		if ( Input.Pressed( "inventory" ) )
+			IsOpen = !IsOpen;
 
-		SetClass("visible", _isOpen);
+		SetClass( "visible", IsOpen );
 	}
 
 	protected override int BuildHash()
 	{
 		return HashCode.Combine(
-			Player.Local.Inventory.BackpackItems.HashCombine(i => i?.GetHashCode() ?? -1),
-			Player.Local.Inventory.EquippedItems.HashCombine(i => i?.GetHashCode() ?? -1)
+			Player.Local.Inventory.BackpackItems.HashCombine( i => i?.GetHashCode() ?? -1 ),
+			Player.Local.Inventory.EquippedItems.HashCombine( i => i?.GetHashCode() ?? -1 )
 		);
 	}
+
 }

@@ -73,6 +73,11 @@
 		if (Input.EscapePressed)
 			_isOpen = !_isOpen;
 
+		if ( _isOpen )
+		{
+			Inventory.Instance.IsOpen = false;
+		}
+		
 		SetClass("visible", _isOpen);
 	}
 }
