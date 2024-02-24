@@ -1,0 +1,46 @@
+﻿BodypartPanel {
+    position: absolute;
+    flex-direction: row;
+    gap: 4px;
+    font-family: BasicHandwriting;
+    align-items: center;
+    font-size: 24px;
+    white-space: nowrap;
+    font-smooth: never;
+    image-rendering: pixelated;
+
+    .text-container {
+        padding: 8px;
+        background: linear-gradient(to right, rgba(black, 0.9) 0%, rgba(black, 0.5) 70%, rgba(black, 0) 100%);
+        padding-right: 50px;
+    }
+
+    &.legs { margin-left: 130px; }
+    &.feet { margin-left: -120px; }
+    &.body { margin-left: -70px; }
+    &.head { margin-left: -40px; margin-top: -20px; }
+    &.face { margin-left: 40px; margin-top: -20px; }
+
+    &.left {
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        transform: translate(-100% -100%);
+
+        .text-container {
+            padding-right: 8px;
+            background: linear-gradient(to left, rgba(black, 0.9) 0%, rgba(black, 0.5) 70%, rgba(black, 0) 100%);
+            padding-left: 50px;
+        }
+    }
+
+    .icon-container {
+        background-color: rgba(black, 0.9);
+        height: 100%;
+        aspect-ratio: 1;
+        padding: 8px;
+
+        .icon {
+            background-size: cover;
+        }
+    }
+}

@@ -15,12 +15,59 @@
 	{
 		get
 		{
-			if (model != null)
+			if ( model != null )
 				return model;
 
-			return model = CreatorComponent.All[CreatorComponent.Current].GameObject
-				.Components.Get<SkinnedModelRenderer>(FindMode.EverythingInDescendants)
+			return model = CreatorComponent.All[CreatorStage.Appearance].GameObject
+				.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInDescendants )
 				.SceneModel;
+		}
+	}
+
+	private BodypartPanel[] panels;
+
+	protected override void OnAfterTreeRender( bool firstTime )
+	{
+		base.OnAfterTreeRender( firstTime );
+		if ( !firstTime )
+			return;
+
+		var slots = Enum.GetValues<EquipSlot>();
+		panels = new BodypartPanel[slots.Length - 1];
+		for ( int i = 0; i < slots.Length; i++ )
+		{
+			if ( slots[i] == EquipSlot.Hand )
+				continue;
+
+			var pnl = panels[i] = AddChild<BodypartPanel>();
+			pnl.GradientLeft = i % 2 == 0;
+			pnl.Slot = slots[i];
+		}
+	}
+
+	private int GetBone( EquipSlot slot ) // i love le hardcoding values!
+		=> slot switch
+		{
+			EquipSlot.Head => 7,
+			EquipSlot.Face => 6,
+			EquipSlot.Body => 4,
+			EquipSlot.Legs => 20,
+			EquipSlot.Feet => 22,
+			_ => 0
+		};
+
+	public override void Tick()
+	{
+		if ( panels == null )
+			return;
+
+		foreach ( var panel in panels )
+		{
+			var worldPosition = Model.GetBoneWorldTransform( GetBone( panel.Slot ) ).Position;
+			var position = Scene.Camera.PointToScreenNormal( worldPosition );
+
+			panel.Style.Left = Length.Fraction( position.x );
+			panel.Style.Top = Length.Fraction( position.y );
 		}
 	}
 }
