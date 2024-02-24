@@ -12,15 +12,17 @@ public class ItemComponent : Component
 	public static implicit operator ItemComponent( GameObject obj )
 		=> obj.Components.Get<ItemComponent>();
 
+	[Sync]
 	public bool DrawingEnabled
 	{
-		get => GameObject.Components.Get<ModelRenderer>( true ).Enabled;
-		set => GameObject.Components.Get<ModelRenderer>( true ).Enabled = value;
+		get => GameObject.Enabled;
+		set => GameObject.Enabled = value;
 	}
 
 	protected override void OnStart()
 	{
 		GameObject.Name = Name;
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
+		GameObject.NetworkSpawn();
 	}
 }

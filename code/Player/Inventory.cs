@@ -16,7 +16,7 @@ public class Inventory : Component
 	public Inventory()
 	{
 		_backpackItems = new List<ItemComponent>( new ItemComponent[MAX_BACKPACK_SLOTS] );
-		_equippedItems = new List<ItemComponent>( new ItemComponent[Enum.GetNames( typeof(EquipSlot) ).Length] );
+		_equippedItems = new List<ItemComponent>( new ItemComponent[Enum.GetNames( typeof( EquipSlot ) ).Length] );
 	}
 
 	public bool GiveItem( ItemComponent item )
@@ -25,6 +25,7 @@ public class Inventory : Component
 		if ( firstFreeSlot == -1 )
 			return false;
 
+		item.GameObject.Network.TakeOwnership();
 		item.DrawingEnabled = false;
 		item.GameObject.Parent = Player.GameObject;
 
@@ -39,8 +40,9 @@ public class Inventory : Component
 			return false;
 
 		droppedItem.DrawingEnabled = true;
-		droppedItem.GameObject.Transform.Position = Player.ViewRay.Position;
 		droppedItem.GameObject.Parent = null;
+		droppedItem.GameObject.Transform.Position = Player.ViewRay.Position + Player.ViewRay.Forward * 2f;
+		droppedItem.Network.DropOwnership();
 
 		return true;
 	}

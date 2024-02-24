@@ -21,7 +21,7 @@
 		<div class="items">
 			@foreach ( var item in Player.Local.Inventory.BackpackItems )
 			{
-				<InventorySlot onrightclick=@( () => OpenInspect( item ) ) Item=@item/>
+				<InventorySlot onrightclick=@( () => DropItem(item) ) Item=@item/>
 			}
 		</div>
 		<div style="align-items: center; margin: 20px 0px;">
@@ -60,6 +60,12 @@
 	{
 		if ( item is not null )
 			AddChild( new InspectItem( item ) );
+	}
+
+	private void DropItem( ItemComponent item ) 
+	{
+		if ( item is not null )
+			Player.Local.Inventory.DropItem( item );
 	}
 
 	public override void Tick()
