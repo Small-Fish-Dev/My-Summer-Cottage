@@ -24,17 +24,19 @@
 				ImagePath="ui/hud/inv.png"
 				Title="Inventory"
 				Subtitle="Your inventory and stats"
+				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.Inventory); })
 			/>
 			<SideButton
 				ImagePath="ui/hud/fish_collection.png"
 				Title="Fish Collection"
 				Subtitle="All the kinds of fish you collected"
-				OnClick=@(() => { AddChild(new FishLog()); })
+				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.FishLog); })
 			/>
 			<SideButton
 				ImagePath="ui/hud/exit.png"
 				Title="Quit"
 				Subtitle="End this session and go back to the main menu"
+				OnClick=@(() => { Sandbox.Game.Close(); })
 			/>
 		</div>
 	</div>

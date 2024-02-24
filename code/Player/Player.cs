@@ -32,7 +32,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	Color _skinColor;
 	HiddenBodyGroup _hideBodygroups;
 
-	[Sync] public HiddenBodyGroup HideBodygroups
+	[Sync]
+	public HiddenBodyGroup HideBodygroups
 	{
 		get => _hideBodygroups;
 		set

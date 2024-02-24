@@ -7,7 +7,7 @@
 		ImagePath="ui/hud/goback.png"
 		Title="Go back"
 		Subtitle="To pause screen"
-		OnClick=@(() => Delete())
+		OnClick=@(() => FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.PauseMenu) )
 		style="position: absolute; top: 50px;" 
 	/>
 

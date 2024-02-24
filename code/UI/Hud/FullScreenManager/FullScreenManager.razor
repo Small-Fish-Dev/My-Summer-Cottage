@@ -11,6 +11,14 @@
 	{
 		<Inventory />
 	}
+	else if (_activePanel == ActivePanel.TaskLog)
+	{
+
+	}
+	else if (_activePanel == ActivePanel.FishLog)
+	{
+		<FishLog />
+	}
 	else if (_activePanel == ActivePanel.PauseMenu)
 	{
 		<PauseMenu />
@@ -24,7 +32,9 @@
 	{
 		InGameHud,
 		Inventory,
-		PauseMenu
+		TaskLog,
+		FishLog,
+		PauseMenu,
 	}
 
 	private ActivePanel _activePanel = ActivePanel.InGameHud;
