@@ -21,6 +21,8 @@ partial class Player
 	float _oldAirFriction = 1f;
 	TimeUntil _unragdoll;
 	bool _couldRagdoll = true;
+	Vector3 _lastPosition = Vector3.Zero;
+	float _spin = 10f;
 
 	/// <summary>
 	/// Set the ragdoll state of the player
@@ -28,8 +30,9 @@ partial class Player
 	/// <param name="ragdoll">Ragdoll or Unragdoll</param>
 	/// <param name="forced">Force the player to go through ragdoll state</param>
 	/// <param name="duration">How long ragdoll state lasts</param>
+	/// <param name="spin">How fast it spins towards the given velocity</param>
 	[Broadcast]
-	public void SetRagdoll( bool ragdoll, bool forced = true, float duration = 2f )
+	public void SetRagdoll( bool ragdoll, bool forced = true, float duration = 2f, float spin = 10f )
 	{
 		if ( ragdoll )
 		{
@@ -56,6 +59,8 @@ partial class Player
 			_unragdoll = duration;
 			_couldRagdoll = CanRagdoll;
 			CanRagdoll = !forced;
+			_lastPosition = Ragdoll.Transform.World.Position;
+			_spin = spin;
 		}
 		else
 			DeleteRagdoll();
@@ -147,6 +152,8 @@ partial class Player
 	{
 		if ( !IsRagdolled ) return;
 
+		Ducking = true;
+
 		var leftFoot = Renderer.GetAttachment( "foot_L" ).Value.Position;
 		var rightFoot = Renderer.GetAttachment( "foot_R" ).Value.Position;
 		var rootPosition = (leftFoot + rightFoot) / 2f;
@@ -157,7 +164,13 @@ partial class Player
 			Renderer.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Model goes offset
 		}
 
-		Ducking = true;
+		var velocity = (Ragdoll.Transform.World.Position - _lastPosition);
+		_lastPosition = Ragdoll.Transform.World.Position;
+
+		var horizontalDirection = velocity.WithZ( 0f ).Normal;
+		var rotatedDirection = horizontalDirection.RotateAround( 0f, Rotation.FromYaw( 90f ) );
+
+		Ragdoll.PhysicsGroup.AngularVelocity = rotatedDirection * _spin;
 
 		if ( _unragdoll )
 		{
