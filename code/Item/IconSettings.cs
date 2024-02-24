@@ -7,6 +7,8 @@ public struct IconSettings : IEquatable<IconSettings>
 	public Rotation Rotation { get; set; }
 	public Guid Guid { get; set; }
 
+	public string Path => $"ui/icons/{Guid}.png";
+
 	public override int GetHashCode()
 	{
 		return HashCode.Combine( Guid );

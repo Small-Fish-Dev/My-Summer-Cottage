@@ -7,7 +7,7 @@
 
 <root class="@(GradientLeft ? "left" : "") @(Slot.ToString())">
 	<div class="icon-container">
-		<img class="icon" src=@GetSlotIcon() />
+		<img src=@Slot.GetIcon() />
 	</div>
 
 	<div class="text-container">
@@ -18,20 +18,6 @@
 @code {
 	public bool GradientLeft { get; set; }
 	public EquipSlot Slot { get; set; }
-
-	private string GetSlotIcon()
-	{
-		var path = "/ui/hud/" + Slot switch
-		{
-			EquipSlot.Head => "clothes_face.png",
-			EquipSlot.Face => "clothes_face.png",
-			EquipSlot.Body => "clothes_torso.png",
-			EquipSlot.Legs => "clothes_legs.png",
-			EquipSlot.Feet => "clothes_boots.png",
-			EquipSlot.Hand => "hand_slot.png",
-		};
-		return path;
-	}
 
 	protected override int BuildHash()
 	{

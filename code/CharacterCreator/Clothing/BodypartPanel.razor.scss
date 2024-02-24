@@ -7,7 +7,6 @@
     font-size: 24px;
     white-space: nowrap;
     font-smooth: never;
-    image-rendering: pixelated;
 
     .text-container {
         padding: 8px;
@@ -33,7 +32,8 @@
         aspect-ratio: 1;
         padding: 8px;
 
-        .icon {
+        img {
+            image-rendering: pixelated;
             background-size: cover;
         }
     }
