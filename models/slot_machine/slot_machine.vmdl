@@ -30,6 +30,10 @@
 								from = "body_on.vmat"
 								to = "models/slot_machine/materials/body_on.vmat"
 							},
+							{
+								from = "displays.vmat"
+								to = "models/slot_machine/materials/displays.vmat"
+							},
 						]
 						use_global_default = false
 						global_default_material = ""
@@ -323,48 +327,407 @@
 					},
 					{
 						_class = "Folder"
-						name = "Wheel"
+						name = "Wheels"
 						children = 
 						[
 							{
-								_class = "RenderMeshFile"
-								name = "wheel"
-								filename = "models/slot_machine/slot_machine.fbx"
-								import_translation = [ 0.0, 0.0, 0.0 ]
-								import_rotation = [ 0.0, 0.0, 0.0 ]
-								import_scale = 1.0
-								align_origin_x_type = "None"
-								align_origin_y_type = "None"
-								align_origin_z_type = "None"
-								parent_bone = ""
-								import_filter = 
-								{
-									exclude_by_default = true
-									exception_list = 
-									[
-										"wheel",
-									]
-								}
+								_class = "Folder"
+								name = "wheel_1"
+								children = 
+								[
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_1a"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel",
+												"wheel_1a",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_1a_on"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel_on",
+												"wheel_1a_on",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_1b"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel",
+												"wheel_1b",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_1b_on"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel_on",
+												"wheel_1b_on",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_1c"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel",
+												"wheel_1c",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_1c_on"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel_on",
+												"wheel_1c_on",
+											]
+										}
+									},
+								]
 							},
 							{
-								_class = "RenderMeshFile"
-								name = "wheel_on"
-								filename = "models/slot_machine/slot_machine.fbx"
-								import_translation = [ 0.0, 0.0, 0.0 ]
-								import_rotation = [ 0.0, 0.0, 0.0 ]
-								import_scale = 1.0
-								align_origin_x_type = "None"
-								align_origin_y_type = "None"
-								align_origin_z_type = "None"
-								parent_bone = ""
-								import_filter = 
-								{
-									exclude_by_default = true
-									exception_list = 
-									[
-										"wheel_on",
-									]
-								}
+								_class = "Folder"
+								name = "wheel_2"
+								children = 
+								[
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_2a"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel",
+												"wheel_2a_on",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_2a_on"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel_on",
+												"wheel_2a_on",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_2b"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel",
+												"wheel_2b",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_2b_on"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel_on",
+												"wheel_2b_on",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_2c"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel",
+												"wheel_2c",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_2c_on"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel_on",
+												"wheel_2c_on",
+											]
+										}
+									},
+								]
+							},
+							{
+								_class = "Folder"
+								name = "wheel_3"
+								children = 
+								[
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_3a"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel",
+												"wheel_3a",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_3a_on"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel_on",
+												"wheel_3a_on",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_3b"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel",
+												"wheel_3b",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_3b_on"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel_on",
+												"wheel_3b_on",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_3c"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel",
+												"wheel_3c",
+											]
+										}
+									},
+									{
+										_class = "RenderMeshFile"
+										name = "wheel_3c_on"
+										filename = "models/slot_machine/slot_machine.fbx"
+										import_translation = [ 0.0, 0.0, 0.0 ]
+										import_rotation = [ 0.0, 0.0, 0.0 ]
+										import_scale = 1.0
+										align_origin_x_type = "None"
+										align_origin_y_type = "None"
+										align_origin_z_type = "None"
+										parent_bone = ""
+										import_filter = 
+										{
+											exclude_by_default = true
+											exception_list = 
+											[
+												"wheel_on",
+												"wheel_3c_on",
+											]
+										}
+									},
+								]
 							},
 						]
 					},
@@ -721,23 +1084,167 @@
 					},
 					{
 						_class = "BodyGroup"
-						name = "wheel"
+						name = "wheel_1"
 						children = 
 						[
 							{
 								_class = "BodyGroupChoice"
-								name = "wheel_off"
+								name = "1a"
 								meshes = 
 								[
-									"wheel",
+									"wheel_1a",
 								]
 							},
 							{
 								_class = "BodyGroupChoice"
-								name = "wheel_on"
+								name = "1a_on"
 								meshes = 
 								[
-									"wheel_on",
+									"wheel_1a_on",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "1b"
+								meshes = 
+								[
+									"wheel_1b",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "1b_on"
+								meshes = 
+								[
+									"wheel_1b_on",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "1c"
+								meshes = 
+								[
+									"wheel_1c",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "1c_on"
+								meshes = 
+								[
+									"wheel_1c_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "wheel_2"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "2a"
+								meshes = 
+								[
+									"wheel_2a",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "2a_on"
+								meshes = 
+								[
+									"wheel_2a_on",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "2b"
+								meshes = 
+								[
+									"wheel_2b",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "2b_on"
+								meshes = 
+								[
+									"wheel_2b_on",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "2c"
+								meshes = 
+								[
+									"wheel_2c",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "2c_on"
+								meshes = 
+								[
+									"wheel_2c_on",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "wheel_3"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "3a"
+								meshes = 
+								[
+									"wheel_3a",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "3a_on"
+								meshes = 
+								[
+									"wheel_3a_on",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "3b"
+								meshes = 
+								[
+									"wheel_3b",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "3b_on"
+								meshes = 
+								[
+									"wheel_3b_on",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "3c"
+								meshes = 
+								[
+									"wheel_3c",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "3c_on"
+								meshes = 
+								[
+									"wheel_3c_on",
 								]
 							},
 						]
@@ -958,16 +1465,6 @@
 									value = 0
 								}
 							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_CL_BODYGROUP_SET_VALUE"
-								event_frame = 0
-								event_keys = 
-								{
-									bodygroup = "wheel"
-									value = 0
-								}
-							},
 						]
 						activity_name = ""
 						activity_weight = 1
@@ -980,6 +1477,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						enable_scale = false
 						source_filename = "models/slot_machine/spin_animation.fbx"
 						start_frame = -1
 						end_frame = -1
@@ -1001,6 +1499,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						enable_scale = false
 						source_filename = "models/slot_machine/frames.fbx"
 						start_frame = -1
 						end_frame = -1
@@ -1235,6 +1734,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
+						enable_scale = false
 						source_filename = "models/slot_machine/blinking.fbx"
 						start_frame = -1
 						end_frame = -1
