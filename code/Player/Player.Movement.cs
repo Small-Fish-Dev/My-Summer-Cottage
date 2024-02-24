@@ -41,6 +41,14 @@ partial class Player
 	[Range( 0f, 800f, 1f )]
 	public float JumpStrength { get; set; } = 200f;
 
+	/// <summary>
+	/// Zoom field of view
+	/// </summary>
+	[Property, Sync]
+	[Category( "Camera" )]
+	[Range( 20f, 40f, 30f )]
+	public float Zoom { get; set; } = 30f;
+
 	[Sync] public bool Ducking { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
 	[Sync] public Vector3 Velocity { get; set; }
@@ -140,7 +148,7 @@ partial class Player
 
 		Camera.Transform.Position = IsRagdolled ? Vector3.Lerp( oldEyePos, newEyePos, Time.Delta * 10f ) : newEyePos;
 		Camera.Transform.Rotation = IsRagdolled ? Rotation.Lerp( oldEyeRot, newEyeRot, Time.Delta * 5f ) : newEyeRot;
-		Camera.FieldOfView = 90f;
+		Camera.FieldOfView = MathX.LerpTo( Camera.FieldOfView, Input.Down( "view" ) ? Zoom : 90f, 10f * Time.Delta );
 		Camera.ZNear = 2.5f;
 
 		Renderer?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
