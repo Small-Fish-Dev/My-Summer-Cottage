@@ -21,7 +21,11 @@
 		<div class="items">
 			@foreach ( var item in Player.Local.Inventory.BackpackItems )
 			{
-				<InventorySlot onrightclick=@( () => DropItem(item) ) Item=@item/>
+				<InventorySlot 
+					onmiddleclick=@( () => Inspect(item) )
+					onrightclick=@( () => DropItem(item) ) 
+					Item=@item
+				/>
 			}
 		</div>
 		<div style="align-items: center; margin: 20px 0px;">
@@ -52,7 +56,7 @@
 </root>
 
 @code {
-	private void OpenInspect( ItemComponent item )
+	private void Inspect( ItemComponent item )
 	{
 		if ( item is not null )
 			AddChild( new InspectItem( item ) );
