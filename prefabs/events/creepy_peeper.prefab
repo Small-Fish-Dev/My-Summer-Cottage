@@ -105,10 +105,10 @@
                   "Id": 6,
                   "Type": "call",
                   "Properties": {
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
                     "_name": "Get",
                     "T": "package.fish.sauna/Sauna.Player",
-                    "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    "_isStatic": false
                   },
                   "UserData": {
                     "Position": "96,-176"
@@ -180,8 +180,8 @@
                   "Id": 13,
                   "Type": "property.get",
                   "Properties": {
-                    "_name": "Position",
-                    "_type": "Sandbox.System/Transform"
+                    "_type": "Sandbox.System/Transform",
+                    "_name": "Position"
                   },
                   "UserData": {
                     "Position": "496,160"
@@ -202,18 +202,11 @@
                   }
                 },
                 {
-                  "Id": 21,
-                  "Type": "event.localpunchplayer",
-                  "UserData": {
-                    "Position": "1408,32"
-                  }
-                },
-                {
                   "Id": 23,
                   "Type": "property.get",
                   "Properties": {
-                    "_name": "Normal",
-                    "_type": "Sandbox.System/Vector3"
+                    "_type": "Sandbox.System/Vector3",
+                    "_name": "Normal"
                   },
                   "UserData": {
                     "Position": "496,432"
@@ -252,7 +245,7 @@
                   "Id": 31,
                   "Type": "event.finished",
                   "UserData": {
-                    "Position": "1856,32"
+                    "Position": "1952,96"
                   }
                 },
                 {
@@ -281,7 +274,21 @@
                     "T": "package.fish.sauna/EventComponent"
                   },
                   "UserData": {
-                    "Position": "1568,176"
+                    "Position": "1744,336"
+                  }
+                },
+                {
+                  "Id": 43,
+                  "Type": "event.ragdollplayer",
+                  "UserData": {
+                    "Position": "1648,32"
+                  }
+                },
+                {
+                  "Id": 44,
+                  "Type": "event.worldpunchplayer",
+                  "UserData": {
+                    "Position": "1360,32"
                   }
                 }
               ],
@@ -386,28 +393,6 @@
                   "DstName": "b"
                 },
                 {
-                  "SrcId": 10,
-                  "SrcName": "_signal",
-                  "DstId": 21,
-                  "DstName": "_signal"
-                },
-                {
-                  "Value": "0,0,1",
-                  "DstId": 21,
-                  "DstName": "launchDirection"
-                },
-                {
-                  "SrcId": 6,
-                  "SrcName": "_result",
-                  "DstId": 21,
-                  "DstName": "player"
-                },
-                {
-                  "Value": 400,
-                  "DstId": 21,
-                  "DstName": "strength"
-                },
-                {
                   "SrcId": 16,
                   "SrcName": "_result",
                   "DstId": 23,
@@ -466,7 +451,7 @@
                   "DstName": "_value"
                 },
                 {
-                  "SrcId": 21,
+                  "SrcId": 43,
                   "SrcName": "_signal",
                   "DstId": 31,
                   "DstName": "_signal"
@@ -476,6 +461,66 @@
                   "SrcName": "_result",
                   "DstId": 31,
                   "DstName": "component"
+                },
+                {
+                  "SrcId": 44,
+                  "SrcName": "_signal",
+                  "DstId": 43,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": 3,
+                  "DstId": 43,
+                  "DstName": "duration"
+                },
+                {
+                  "Value": true,
+                  "DstId": 43,
+                  "DstName": "enabled"
+                },
+                {
+                  "Value": true,
+                  "DstId": 43,
+                  "DstName": "forced"
+                },
+                {
+                  "SrcId": 6,
+                  "SrcName": "_result",
+                  "DstId": 43,
+                  "DstName": "player"
+                },
+                {
+                  "Value": 10,
+                  "DstId": 43,
+                  "DstName": "spin"
+                },
+                {
+                  "SrcId": 10,
+                  "SrcName": "_signal",
+                  "DstId": 44,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": 200,
+                  "DstId": 44,
+                  "DstName": "extraVerticalStrength"
+                },
+                {
+                  "SrcId": 6,
+                  "SrcName": "_result",
+                  "DstId": 44,
+                  "DstName": "player"
+                },
+                {
+                  "Value": 400,
+                  "DstId": 44,
+                  "DstName": "strength"
+                },
+                {
+                  "SrcId": 13,
+                  "SrcName": "_result",
+                  "DstId": 44,
+                  "DstName": "worldSource"
                 }
               ]
             },
@@ -716,7 +761,7 @@
                   "DstName": "_signal"
                 },
                 {
-                  "Value": 5,
+                  "Value": 0.5,
                   "DstId": 1,
                   "DstName": "duration"
                 },
