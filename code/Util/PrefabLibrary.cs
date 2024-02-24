@@ -69,43 +69,47 @@ public class PrefabDefinition
 /// </summary>
 public static class PrefabLibrary
 {
-	public static IReadOnlyList<PrefabDefinition> All => all;
+	public static IReadOnlyDictionary<PrefabFile, PrefabDefinition> All => all;
+	private static Dictionary<PrefabFile, PrefabDefinition> all;
 
-	// Go through all PrefabFiles and store their data in structs.
-	private static List<PrefabDefinition> all = ResourceLibrary.GetAll<PrefabFile>()
-		.Select( prefab =>
-		{
-			var root = prefab.RootObject?.AsObject();
-			if ( root == null )
-				return null;
-
-			var components = new List<ComponentDefinition>();
-			var name = root["Name"]?.GetValue<string>();
-
-			// Go through all of the prefab's components.
-			foreach ( var component in prefab.RootObject?["Components"].AsArray() )
+	public static void Initialize()
+	{
+		all = ResourceLibrary.GetAll<PrefabFile>()
+			.Select( prefab =>
 			{
-				var obj = component.AsObject();
-				var typeName = obj?["__type"]?.GetValue<string>();
-				if ( typeName == null )
-					continue;
+				var root = prefab.RootObject?.AsObject();
+				if ( root == null )
+					return null;
 
-				components.Add( new()
+				var components = new List<ComponentDefinition>();
+				var name = root["Name"]?.GetValue<string>();
+
+				// Go through all of the prefab's components.
+				foreach ( var component in prefab.RootObject?["Components"].AsArray() )
 				{
-					Type = GlobalGameNamespace.TypeLibrary.GetType( typeName ),
-					Object = obj
-				} );
-			}
+					var obj = component.AsObject();
+					var typeName = obj?["__type"]?.GetValue<string>();
+					if ( typeName == null )
+						continue;
 
-			// Return a PrefabDefinition with all relevant data.
-			return new PrefabDefinition
-			{
-				Name = name,
-				Prefab = prefab,
-				Components = components
-			};
-		} )
-		.ToList();
+					components.Add( new()
+					{
+						Type = GlobalGameNamespace.TypeLibrary.GetType( typeName ),
+						Object = obj
+					} );
+				}
+
+				// Return a PrefabDefinition with all relevant data.
+				return new PrefabDefinition
+				{
+					Name = name,
+					Prefab = prefab,
+					Components = components
+				};
+			} )
+			.Where( p => p != null )
+			.ToDictionary( p => p.Prefab, p => p );
+	}
 
 	/// <summary>
 	/// Find all prefabs that contain a component.
@@ -114,7 +118,9 @@ public static class PrefabLibrary
 	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
 	public static IEnumerable<PrefabDefinition> FindByComponent<T>() where T : Component
-		=> all.Where( prefab => prefab?.Components?.Any( component => component?.Type?.TargetType == typeof( T ) ) ?? false );
+		=> all
+			.Where( kvp => kvp.Value.Components.Any( component => component?.Type?.TargetType.IsAssignableTo( typeof( T ) ) ?? false ) )
+			.Select( kvp => kvp.Value );
 
 	/// <summary>
 	/// Converts PrefabFile to a PrefabDefinition.
@@ -122,7 +128,12 @@ public static class PrefabLibrary
 	/// <param name="resource"></param>
 	/// <returns></returns>
 	public static PrefabDefinition AsDefinition( this PrefabFile resource )
-		=> all.FirstOrDefault( prefab => prefab?.Path == resource.ResourcePath );
+	{
+		if ( all.TryGetValue( resource, out var definition ) )
+			return definition;
+
+		return null;
+	}
 
 	/// <summary>
 	/// Tries to find a PrefabDefinition by Prefab path.
@@ -131,5 +142,5 @@ public static class PrefabLibrary
 	/// <param name="prefab"></param>
 	/// <returns></returns>
 	public static bool TryGetByPath( string path, out PrefabDefinition prefab )
-		=> (prefab = all.FirstOrDefault( prefab => FileSystem.NormalizeFilename( path ).Equals( prefab?.Path ) )) != null;
+		=> (prefab = all.FirstOrDefault( kvp => FileSystem.NormalizeFilename( path ).Equals( kvp.Value?.Path ) ).Value) != null;
 }
