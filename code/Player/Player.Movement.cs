@@ -59,15 +59,15 @@ partial class Player
 	{
 		if ( MoveHelper == null ) return;
 
-		var isSprinting = Input.Down( "Run" );
-		var isDucking = Input.Down( "Duck" );
+		var isSprinting = Input.Down( InputAction.Run );
+		var isDucking = Input.Down( InputAction.Duck );
 
 		var wishSpeed = isDucking ? DuckSpeed : isSprinting ? SprintSpeed : WalkSpeed;
 		var wishVelocity = Input.AnalogMove.Normal * wishSpeed * EyeAngles.WithPitch( 0f );
 
 		MoveHelper.WishVelocity = BlockInputs ? Vector3.Zero : wishVelocity;
 
-		if ( !BlockInputs && Input.Pressed( "Jump" ) && MoveHelper.IsOnGround )
+		if ( !BlockInputs && Input.Pressed( InputAction.Jump ) && MoveHelper.IsOnGround )
 		{
 			Renderer?.Set( "jump", true );
 			JumpBroadcast();
@@ -81,7 +81,7 @@ partial class Player
 		if ( !BlockInputs )
 		{
 			Ducking = (Ducking && Scene.Trace.Ray( in from, in to ).Size( Collider.Scale.WithZ( 0f ) ).IgnoreGameObjectHierarchy( GameObject ).WithoutTags( "trigger" ).Run().Hit)
-				|| Input.Down( "duck" ); // Beautiful.
+				|| Input.Down( InputAction.Duck ); // Beautiful.
 		}
 
 		MoveHelper.Move();
