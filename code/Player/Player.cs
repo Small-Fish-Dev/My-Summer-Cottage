@@ -24,7 +24,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		{
 			_skinColor = value;
 
-			if ( Renderer.SceneModel.IsValid() )
+			if ( Renderer != null && Renderer.SceneModel.IsValid() )
 				Renderer.SceneModel.Attributes.Set( "g_flColorTint", _skinColor );
 		}
 	}

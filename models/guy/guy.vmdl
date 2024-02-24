@@ -264,6 +264,33 @@
 							]
 						}
 					},
+					{
+						_class = "LookAtChain"
+						name = "right_arm"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "hand_R"
+									weight = 1.0
+								},
+								{
+									name = "arm_lower_R"
+									weight = 0.66
+								},
+								{
+									name = "arm_upper_R"
+									weight = 0.339
+								},
+								{
+									name = "clavicle_R"
+									weight = 0.196
+								},
+							]
+						}
+					},
 				]
 			},
 			{
@@ -820,12 +847,34 @@
 					{
 						_class = "AnimFile"
 						name = "use_delta"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/guy/animations/use.fbx"
+						start_frame = -1
+						end_frame = 8
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "use_delta_2"
 						children = 
 						[
 							{
 								_class = "AnimSubtract"
 								anim_name = "use"
-								frame = 0
+								frame = 8
 							},
 						]
 						activity_name = ""
@@ -841,9 +890,9 @@
 						disable_compression = false
 						enable_scale = false
 						source_filename = "models/guy/animations/use.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
+						start_frame = 8
+						end_frame = 14
+						framerate = 12.0
 						take = 0
 						reverse = false
 					},
@@ -1875,6 +1924,15 @@
 						weight = 1.0
 						ignore_rotation = false
 					},
+					{
+						_class = "Attachment"
+						name = "right_arm_forward"
+						parent_bone = "hand_R"
+						relative_origin = [ 5.299253, -0.296711, -0.364796 ]
+						relative_angles = [ -0.0, -0.007481, -0.006157 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
 				]
 			},
 			{
@@ -2225,13 +2283,17 @@
 				[
 					{
 						_class = "WeightList"
-						name = "right_arm_disable"
+						name = "right_arm"
 						default_weight = 0.0
 						weights = 
 						[
 							{
-								bone = "arm_upper_R"
+								bone = "arm_lower_R"
 								weight = 1.0
+							},
+							{
+								bone = "arm_upper_R"
+								weight = 0.639098
 							},
 							{
 								bone = "clavicle_L"
@@ -2239,7 +2301,7 @@
 							},
 							{
 								bone = "clavicle_R"
-								weight = 1.0
+								weight = 0.293233
 							},
 							{
 								bone = "fingers_L"
@@ -2302,6 +2364,14 @@
 								weight = 0.0
 							},
 							{
+								bone = "IK_L"
+								weight = 0.0
+							},
+							{
+								bone = "IK_R"
+								weight = 0.0
+							},
+							{
 								bone = "aim"
 								weight = 0.0
 							},
@@ -2335,6 +2405,14 @@
 							},
 							{
 								bone = "fingers_R"
+								weight = 1.0
+							},
+							{
+								bone = "hand_IK_L"
+								weight = 1.0
+							},
+							{
+								bone = "hand_IK_R"
 								weight = 1.0
 							},
 							{
@@ -2435,6 +2513,104 @@
 							},
 							{
 								bone = "root"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "right_arm_torso"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "Hand_IK_L"
+								weight = 0.0
+							},
+							{
+								bone = "Hand_IK_R"
+								weight = 0.0
+							},
+							{
+								bone = "IK_L"
+								weight = 0.0
+							},
+							{
+								bone = "IK_R"
+								weight = 0.0
+							},
+							{
+								bone = "aim"
+								weight = 0.0
+							},
+							{
+								bone = "arm_lower_L"
+								weight = 0.0
+							},
+							{
+								bone = "arm_lower_R"
+								weight = 1.0
+							},
+							{
+								bone = "arm_upper_L"
+								weight = 0.0
+							},
+							{
+								bone = "arm_upper_R"
+								weight = 1.0
+							},
+							{
+								bone = "clavicle_L"
+								weight = 0.0
+							},
+							{
+								bone = "clavicle_R"
+								weight = 1.0
+							},
+							{
+								bone = "fingers_L"
+								weight = 0.0
+							},
+							{
+								bone = "fingers_R"
+								weight = 1.0
+							},
+							{
+								bone = "hand_IK_L"
+								weight = 0.0
+							},
+							{
+								bone = "hand_IK_R"
+								weight = 1.0
+							},
+							{
+								bone = "hand_L"
+								weight = 0.0
+							},
+							{
+								bone = "hand_R"
+								weight = 1.0
+							},
+							{
+								bone = "head"
+								weight = 1.0
+							},
+							{
+								bone = "neck"
+								weight = 1.0
+							},
+							{
+								bone = "spine0"
+								weight = 0.180995
+							},
+							{
+								bone = "spine1"
+								weight = 0.520362
+							},
+							{
+								bone = "spine2"
 								weight = 1.0
 							},
 						]

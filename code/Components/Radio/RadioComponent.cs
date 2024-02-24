@@ -93,6 +93,12 @@ public partial class RadioComponent : Component
 		_player.Volume = 0.05f;
 	}
 
+	protected override void OnDestroy()
+	{
+		_player?.Stop();
+		_player = null;
+	}
+
 	protected override void OnUpdate()
 	{
 		if ( _player == null )

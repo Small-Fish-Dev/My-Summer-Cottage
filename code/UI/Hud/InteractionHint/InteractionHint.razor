@@ -58,7 +58,9 @@
 				{
 					Player.Local.TargetedGameObject?.Network.TakeOwnership();
 					interaction.Action?.Invoke(Player.Local, Player.Local.TargetedGameObject);
-					Player.Local.BroadcastInteraction();
+
+					var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
+					Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ) );
 				}
 			}
 		}
