@@ -6,21 +6,190 @@
 @attribute [StyleSheet]
 
 <root>
+	<div class="slot-container">
+		@{
+			var slots = Enum.GetValues<EquipSlot>();
+			if ( clothes == null )
+				LoadClothes();
+		
+			foreach ( var slot in slots )
+			{
+				<div class="equip-slot">
+					<div class="title">
+						<img src=@slot.GetIcon() />
+						@slot.ToString()
+					</div>
+					<div class="row">
 
+						@* NONE *@
+						<div class="slot @(selections[slot] == -1 ? "selected" : "")" @onclick=@( () => { selections[slot] = -1; UpdateSelection(); })>
+							<div class="border" />
+							<div class="background" />
+						</div>
+
+						@for ( int i = 0; i < 4; i++ )
+						{
+							var clothing = clothes?[slot].ElementAtOrDefault( i );
+							<div 
+								class="slot @(selections[slot] == i ? "selected" : "") @(clothing == null ? "disabled" : "")" 
+								onclick=@( () => { 
+									selections[slot] = clothes[slot].IndexOf( clothing ); 
+									UpdateSelection(); 
+								})
+							>
+								<div class="border" />
+								<div class="background" />
+
+								@if ( clothing != null )
+								{
+									<img src=@(clothing.Get<IconSettings>( "Icon" ).Path) />
+								}
+							</div>
+						}
+					</div>
+				</div>
+			}
+		}
+	</div>
 </root>
 
 @code {
-	private SceneModel model;
-	public SceneModel Model
+	private SkinnedModelRenderer renderer;
+	public SkinnedModelRenderer Renderer
 	{
 		get
 		{
-			if (model != null)
-				return model;
+			if ( renderer != null )
+				return renderer;
 
-			return model = CreatorComponent.All[CreatorComponent.Current].GameObject
-				.Components.Get<SkinnedModelRenderer>(FindMode.EverythingInDescendants)
-				.SceneModel;
+			return renderer = CreatorComponent.All[CreatorStage.Appearance].GameObject
+				.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInDescendants );
+		}
+	}
+	public SceneModel Model => Renderer.SceneModel;
+
+	private BodypartPanel[] panels;
+	private Dictionary<EquipSlot, List<ComponentDefinition>> clothes;
+	private static Dictionary<EquipSlot, int> selections;
+	private static List<GameObject> clothingObjects = new();
+
+	private void CreateClothing( Model model )
+	{
+		var obj = Scene.CreateObject();
+		var renderer = obj.Components.Create<SkinnedModelRenderer>();
+		renderer.Model = model;
+		renderer.BoneMergeTarget = Renderer;
+		obj.Parent = Renderer.GameObject;
+
+		clothingObjects.Add( obj );
+	}
+
+	private void UpdateSelection()
+	{
+		foreach ( var obj in clothingObjects )
+			obj.Destroy();
+
+		clothingObjects.Clear();
+
+		var flags = HiddenBodyGroup.None;
+		foreach ( var (slot, index) in selections )
+		{
+			if ( index == -1 )
+				continue;
+
+			var component = clothes[slot]?.ElementAtOrDefault( index );
+			if ( component == null )
+				continue;
+
+			var icon = component.Get<IconSettings>( "Icon" );
+			var model = Sandbox.Model.Load( icon.Model );
+			CreateClothing( model );
+			flags |= component.Get<HiddenBodyGroup>( "HideBodygroups" );
+		}
+
+		Renderer.SetBodyGroup( "head", flags.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 );
+		Renderer.SetBodyGroup( "torso", flags.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
+		Renderer.SetBodyGroup( "hands", flags.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 );
+		Renderer.SetBodyGroup( "legs", flags.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
+		Renderer.SetBodyGroup( "feet", flags.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
+	}
+
+	private void LoadClothes()
+	{
+		var values = Enum.GetValues<EquipSlot>();
+		clothes = values
+			.ToDictionary( 
+				x => x, 
+				x => new List<ComponentDefinition>() 
+			);
+
+		selections ??= values
+			.ToDictionary( 
+				x => x, 
+				x => -1
+			);
+
+		foreach ( var prefab in PrefabLibrary.FindByComponent<ItemEquipment>() )
+		{
+			var equipment = prefab.GetComponent<ItemEquipment>();
+			var slot = equipment.Get<EquipSlot>( "Slot" );
+			clothes[slot].Add( equipment );
+		}
+	}
+
+	protected override void OnAfterTreeRender( bool firstTime )
+	{
+		base.OnAfterTreeRender( firstTime );
+		if ( !firstTime )
+			return;
+
+		var slots = Enum.GetValues<EquipSlot>();
+		panels = new BodypartPanel[slots.Length - 1];
+		for ( int i = 0; i < slots.Length; i++ )
+		{
+			if ( slots[i] == EquipSlot.Hand )
+				continue;
+
+			var pnl = panels[i] = AddChild<BodypartPanel>();
+			pnl.GradientLeft = i % 2 == 0;
+			pnl.Slot = slots[i];
+		}
+	}
+
+	private int GetBone( EquipSlot slot ) // i love le hardcoding values!
+		=> slot switch
+		{
+			EquipSlot.Head => 7,
+			EquipSlot.Face => 6,
+			EquipSlot.Body => 4,
+			EquipSlot.Legs => 20,
+			EquipSlot.Feet => 22,
+			_ => 0
+		};
+
+	private Vector3 GetOffset( EquipSlot slot )
+		=> slot switch
+		{
+			EquipSlot.Head => new Vector3( 0, 5, 1 ),
+			EquipSlot.Face => new Vector3( 0, -5, 2 ),
+			EquipSlot.Body => new Vector3( 0, 8, 0 ),
+			EquipSlot.Legs => new Vector3( 0, -18, 0 ),
+			EquipSlot.Feet => new Vector3( 0, 16, 0 ),
+			_ => 0
+		};
+
+	public override void Tick()
+	{
+		if ( panels == null )
+			return;
+
+		foreach ( var panel in panels )
+		{
+			var worldPosition = Model.GetBoneWorldTransform( GetBone( panel.Slot ) ).Position;
+			var position = Scene.Camera.PointToScreenNormal( GetOffset( panel.Slot ) + worldPosition );
+
+			panel.Style.Left = Length.Fraction( position.x );
+			panel.Style.Top = Length.Fraction( position.y );
 		}
 	}
 }

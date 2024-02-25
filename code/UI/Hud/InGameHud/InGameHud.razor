@@ -1,0 +1,12 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+@* Anything that is always active and displayed to the player when ingame. *@
+<root>
+	<InteractionHint />
+	<Compass GameTimeManager="@Hud.Instance.GameTimeManager" />
+	<Date />
+	<PrimaryTask />
+	<Crosshair />
+</root>

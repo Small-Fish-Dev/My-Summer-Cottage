@@ -10,17 +10,9 @@ partial class Player
 	public MoveHelper MoveHelper { get; set; }
 
 	/// <summary>
-	/// How fast you move normally
-	/// </summary>
-	[Property]
-	[Category( "Movement" )]
-	[Range( 0f, 400f, 1f )]
-	public float Speed { get; set; } = 140f;
-
-	/// <summary>
 	/// How fast you move when holding the sprint button
 	/// </summary>
-	[Property]
+	[Property, Sync]
 	[Category( "Movement" )]
 	[Range( 0f, 800f, 1f )]
 	public float SprintSpeed { get; set; } = 280f;
@@ -28,15 +20,15 @@ partial class Player
 	/// <summary>
 	/// How fast you move when holding the walk button
 	/// </summary>
-	[Property]
+	[Property, Sync]
 	[Category( "Movement" )]
 	[Range( 0f, 200f, 1f )]
-	public float WalkSpeed { get; set; } = 80f;
+	public float WalkSpeed { get; set; } = 60f;
 
 	/// <summary>
 	/// How fast you move when holding the duck button
 	/// </summary>
-	[Property]
+	[Property, Sync]
 	[Category( "Movement" )]
 	[Range( 0f, 200f, 1f )]
 	public float DuckSpeed { get; set; } = 60f;
@@ -44,10 +36,18 @@ partial class Player
 	/// <summary>
 	/// How high you can jump
 	/// </summary>
-	[Property]
+	[Property, Sync]
 	[Category( "Movement" )]
 	[Range( 0f, 800f, 1f )]
 	public float JumpStrength { get; set; } = 200f;
+
+	/// <summary>
+	/// Zoom field of view
+	/// </summary>
+	[Property, Sync]
+	[Category( "Camera" )]
+	[Range( 20f, 40f, 30f )]
+	public float Zoom { get; set; } = 30f;
 
 	[Sync] public bool Ducking { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
@@ -59,18 +59,17 @@ partial class Player
 	{
 		if ( MoveHelper == null ) return;
 
-		var isWalking = Input.Down( "Walk" );
-		var isSprinting = Input.Down( "Run" );
-		var isDucking = Input.Down( "Duck" );
+		var isSprinting = Input.Down( InputAction.Run );
+		var isDucking = Input.Down( InputAction.Duck );
 
-		var wishSpeed = isDucking ? DuckSpeed : (isWalking ? WalkSpeed : (isSprinting ? SprintSpeed : Speed));
+		var wishSpeed = isDucking ? DuckSpeed : isSprinting ? SprintSpeed : WalkSpeed;
 		var wishVelocity = Input.AnalogMove.Normal * wishSpeed * EyeAngles.WithPitch( 0f );
 
 		MoveHelper.WishVelocity = BlockInputs ? Vector3.Zero : wishVelocity;
 
-		if ( !BlockInputs && Input.Pressed( "Jump" ) && MoveHelper.IsOnGround )
+		if ( !BlockInputs && Input.Pressed( InputAction.Jump ) && MoveHelper.IsOnGround )
 		{
-			Model?.Set( "jump", true );
+			Renderer?.Set( "jump", true );
 			JumpBroadcast();
 		}
 
@@ -82,7 +81,7 @@ partial class Player
 		if ( !BlockInputs )
 		{
 			Ducking = (Ducking && Scene.Trace.Ray( in from, in to ).Size( Collider.Scale.WithZ( 0f ) ).IgnoreGameObjectHierarchy( GameObject ).WithoutTags( "trigger" ).Run().Hit)
-				|| Input.Down( "duck" ); // Beautiful.
+				|| Input.Down( InputAction.Duck ); // Beautiful.
 		}
 
 		MoveHelper.Move();
@@ -117,6 +116,12 @@ partial class Player
 		MoveHelper.CollisionBBox = new BBox( bbox.Mins, bbox.Maxs.WithZ( height ) );
 		Collider.Scale = Collider.Scale.WithZ( height );
 		Collider.Center = Vector3.Up * height / 2f;
+
+		if ( IsRagdolled )
+			FollowRagdoll();
+
+		if ( Input.Pressed( "Ragdoll" ) && CanRagdoll )
+			SetRagdoll( !IsRagdolled );
 	}
 
 	protected void UpdateAngles()
@@ -134,38 +139,43 @@ partial class Player
 		if ( Camera == null )
 			return;
 
-		var eyes = Model.GetAttachment( "eyes" ) ?? Transform.World;
+		var eyes = Renderer.GetAttachment( "eyes" ) ?? Transform.World;
 		var rot = Transform.Rotation;
-		Camera.Transform.Position = eyes.Position + rot.Forward * 2.4f;
-		Camera.Transform.Rotation = EyeAngles.ToRotation();
-		Camera.FieldOfView = 90f;
+		var oldEyeRot = Camera.Transform.Rotation;
+		var newEyeRot = IsRagdolled ? eyes.Rotation : EyeAngles.ToRotation();
+		var oldEyePos = Camera.Transform.Position;
+		var newEyePos = eyes.Position + (IsRagdolled ? 0f : rot.Forward * 2.4f);
+
+		Camera.Transform.Position = IsRagdolled ? Vector3.Lerp( oldEyePos, newEyePos, Time.Delta * 10f ) : newEyePos;
+		Camera.Transform.Rotation = IsRagdolled ? Rotation.Lerp( oldEyeRot, newEyeRot, Time.Delta * 5f ) : newEyeRot;
+		Camera.FieldOfView = MathX.LerpTo( Camera.FieldOfView, Input.Down( "view" ) ? Zoom : 90f, 10f * Time.Delta );
 		Camera.ZNear = 2.5f;
 
-		Model?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
+		Renderer?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
 	}
 
 	protected void UpdateAnimation()
 	{
-		if ( Model == null || Model.SceneModel == null || MoveHelper == null )
+		if ( Renderer == null || Renderer.SceneModel == null || MoveHelper == null )
 			return;
 
-		Model.Set( "grounded", MoveHelper.IsOnGround );
-		Model.Set( "crouching", Ducking );
+		Renderer.Set( "grounded", MoveHelper.IsOnGround );
+		Renderer.Set( "crouching", Ducking );
 
-		var oldX = Model.GetFloat( "move_x" );
-		var oldY = Model.GetFloat( "move_y" );
-		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 100f;
-		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 100f;
+		var oldX = Renderer.GetFloat( "move_x" );
+		var oldY = Renderer.GetFloat( "move_y" );
+		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 140f;
+		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 140f;
 		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
 		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
 
-		Model.Set( "move_x", x );
-		Model.Set( "move_y", y );
+		Renderer.Set( "move_x", x );
+		Renderer.Set( "move_y", y );
 
-		Model.SceneModel.Morphs.Set( "fat", Fatness );
-		Model.Set( "height", Height );
+		Renderer.SceneModel.Morphs.Set( "fat", Fatness );
+		Renderer.Set( "height", Height );
 
-		Model.Set( "lookat", EyeAngles.Forward * 5f );
+		Renderer.Set( "lookat", EyeAngles.WithYaw( 0 ).Forward );
 	}
 
 	private void OnJumpEvent( SceneModel.GenericEvent e )
@@ -177,6 +187,6 @@ partial class Player
 	[Broadcast]
 	protected void JumpBroadcast()
 	{
-		Model?.Set( "jump", true );
+		Renderer?.Set( "jump", true );
 	}
 }

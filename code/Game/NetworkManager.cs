@@ -20,6 +20,7 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		var player = obj.Components.Get<Player>( FindMode.EverythingInSelfAndDescendants );
 		obj.NetworkSpawn( connection );
 		player.SetupConnection( connection );
+		player.Transform.Position = Transform.Position;
 	}
 
 	void INetworkListener.OnDisconnected( Connection connection )

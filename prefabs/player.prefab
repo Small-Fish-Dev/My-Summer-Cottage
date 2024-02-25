@@ -1,8 +1,8 @@
 {
   "RootObject": {
-    "Id": "996d740c-98fc-4ef6-8838-193817eea9d0",
+    "Id": "1dc4a778-838d-4040-9189-89dba95426e5",
     "Name": "player",
-    "Tags": "player,localplayer",
+    "Tags": "localplayer,player",
     "Enabled": true,
     "Components": [
       {
@@ -14,18 +14,19 @@
         "Money": 0,
         "MoveHelper": {
           "_type": "component",
-          "go": "996d740c-98fc-4ef6-8838-193817eea9d0",
+          "go": "1dc4a778-838d-4040-9189-89dba95426e5",
           "component_type": "MoveHelper"
         },
-        "Speed": 140,
-        "SprintSpeed": 280,
-        "WalkSpeed": 80
+        "SkinColor": "1,1,1,1",
+        "SprintSpeed": 260,
+        "WalkSpeed": 80,
+        "Zoom": 30
       },
       {
         "__type": "Inventory",
         "Player": {
           "_type": "component",
-          "go": "996d740c-98fc-4ef6-8838-193817eea9d0",
+          "go": "1dc4a778-838d-4040-9189-89dba95426e5",
           "component_type": "Player"
         }
       },
@@ -85,9 +86,9 @@
     ],
     "Children": [
       {
-        "Id": "01266419-a2bb-496f-99c7-920dc07e43f1",
+        "Id": "ae7c854d-af43-4ca0-bf2f-2ca5b6771c85",
         "Name": "Camera",
-        "Position": "5.992126,0.00009575188,66.4233",
+        "Position": "5.991993,0.00007995074,66.42353",
         "Tags": "maincamera",
         "Enabled": true,
         "Components": [
@@ -105,7 +106,7 @@
             "TargetEye": "None",
             "Viewport": "0,0,1,1",
             "ZFar": 10000,
-            "ZNear": 2.5
+            "ZNear": 1
           },
           {
             "__type": "Voice",
@@ -130,30 +131,14 @@
         ]
       },
       {
-        "Id": "6e2e957c-fbe0-4c60-927a-1e696fca2adf",
+        "Id": "5b4ac6a5-e4e5-4544-acb2-c76987a278c1",
         "Name": "Model",
         "Enabled": true,
         "Components": [
           {
-            "__type": "Character",
-            "Clothes": [
-              "models/clothes/cargo_shorts/cargo_shorts.vmdl",
-              "models/clothes/jumper/jumper.vmdl",
-              "models/clothes/sauna_boss_hat/sauna_boss.vmdl"
-            ],
-            "Fatness": 0,
-            "Height": 0,
-            "HideBodyGroup": "Torso",
-            "Player": {
-              "_type": "component",
-              "go": "996d740c-98fc-4ef6-8838-193817eea9d0",
-              "component_type": "Player"
-            }
-          },
-          {
             "__type": "SkinnedModelRenderer",
             "AnimationGraph": null,
-            "BodyGroups": 1,
+            "BodyGroups": 341,
             "BoneMergeTarget": null,
             "CreateBoneObjects": false,
             "MaterialGroup": null,
@@ -165,170 +150,198 @@
         ]
       },
       {
-        "Id": "2c335c4e-6c9c-45fb-8290-6035b7c9f1cc",
-        "Name": "Piss",
-        "Position": "1.936967,0.0000001154522,34.7722",
-        "Tags": "particles",
+        "Id": "d8a29529-c2c8-459f-9ee2-fb8868c4efd1",
+        "Name": "Penoid",
         "Enabled": true,
         "Components": [
           {
-            "__type": "ParticleEffect",
-            "Alpha": {
-              "Type": "Curve",
-              "CurveA": [
-                {
-                  "y": 1
-                },
-                {
-                  "x": 0.48029557,
-                  "y": 1,
-                  "in": 1.5365853,
-                  "out": -1.5365853
-                },
-                {
-                  "x": 1,
-                  "in": 1.312303,
-                  "out": -1.312303
-                }
-              ],
-              "Constants": "1,0,0,0"
+            "__type": "SkinnedModelRenderer",
+            "AnimationGraph": null,
+            "BodyGroups": 18446744073709551615,
+            "BoneMergeTarget": {
+              "_type": "component",
+              "go": "5b4ac6a5-e4e5-4544-acb2-c76987a278c1",
+              "component_type": "SkinnedModelRenderer"
             },
-            "ApplyColor": true,
-            "ApplyRotation": true,
-            "ApplyShape": true,
-            "Bounce": {},
-            "Brightness": {
-              "Constants": "1,0,0,0"
-            },
-            "Bumpiness": {},
-            "Collision": true,
-            "CollisionIgnore": "localplayer",
-            "CollisionRadius": 1,
-            "Damping": {},
-            "DieOnCollisionChance": {},
-            "Force": true,
-            "ForceDirection": "0,0,-200",
-            "ForceScale": {
-              "Constants": "1,0,0,0"
-            },
-            "Friction": {
-              "Constants": "100,0,0,0"
-            },
-            "Gradient": {
-              "Type": "Range",
-              "Evaluation": "Particle",
-              "GradientA": {
-                "color": [
-                  {
-                    "t": 0.5,
-                    "c": "1,1,1,1"
-                  }
-                ],
-                "alpha": []
-              },
-              "GradientB": {
-                "color": [
-                  {
-                    "t": 0.5,
-                    "c": "1,1,1,1"
-                  }
-                ],
-                "alpha": []
-              },
-              "ConstantA": "1,1,1,1",
-              "ConstantB": "0.94651,1,0.35814,1"
-            },
-            "Lifetime": {
-              "Type": "Range",
-              "Evaluation": "Particle",
-              "Constants": "1,2,0,0"
-            },
-            "MaxParticles": 200,
-            "PerParticleTimeScale": {
-              "Constants": "1,0.4,0,0"
-            },
-            "PreWarm": 0,
-            "PushStrength": {
-              "Constants": "5,0,0,0"
-            },
-            "Roll": {
-              "Type": "Range",
-              "Evaluation": "Particle",
-              "Constants": "0,360,0,0"
-            },
-            "Scale": {
-              "Type": "Curve",
-              "CurveA": {
-                "rangey": "0,3",
-                "frames": [
-                  {
-                    "in": -9.333329,
-                    "out": 9.333329
-                  },
-                  {
-                    "x": 0.03325123,
-                    "y": 1,
-                    "in": -0.056075174,
-                    "out": 0.056075174
-                  },
-                  {
-                    "x": 1,
-                    "in": 2.9152544,
-                    "out": -2.9152544
-                  }
-                ]
-              },
-              "Constants": "1,0,0,0"
-            },
-            "SequenceId": {},
-            "SequenceSpeed": {
-              "Constants": "1,0,0,0"
-            },
-            "SequenceTime": {
-              "Constants": "1,0,0,0"
-            },
-            "SheetSequence": true,
-            "Space": "World",
-            "StartVelocity": {
-              "Type": "Range",
-              "Evaluation": "Particle",
-              "Constants": "100,200,0,0"
-            },
-            "Stretch": {},
-            "TimeScale": 1,
+            "CreateBoneObjects": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/guy/penoid.vmdl",
+            "RenderType": "On",
             "Tint": "1,1,1,1"
           },
           {
-            "__type": "ParticleSpriteRenderer",
-            "Additive": false,
-            "BlurAmount": 1,
-            "BlurOpacity": 0.62,
-            "BlurSpacing": 0.16,
-            "DepthFeather": 15,
-            "FaceVelocity": false,
-            "FogStrength": 1,
-            "LeadingTrail": true,
-            "MotionBlur": true,
-            "Opaque": false,
-            "RotationOffset": 0,
-            "Scale": 3,
-            "Shadows": false,
-            "SortMode": "Unsorted",
-            "Texture": "textures/piss_splash/piss_splash.vtex"
-          },
+            "__type": "CensorComponent"
+          }
+        ],
+        "Children": [
           {
-            "__type": "ParticleConeEmitter",
-            "Burst": 0,
-            "ConeAngle": 3,
-            "ConeFar": 50,
-            "ConeNear": 1,
-            "Delay": 0,
-            "DestroyOnEnd": false,
-            "Duration": 1,
-            "InVolume": false,
-            "Loop": true,
-            "OnEdge": false,
-            "Rate": 30
+            "Id": "d947d46e-f269-4377-bd0e-339a8a91e7ff",
+            "Name": "Piss",
+            "Position": "1.936967,0.0000001154522,34.7722",
+            "Tags": "particles",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "ParticleEffect",
+                "Alpha": {
+                  "Type": "Curve",
+                  "CurveA": [
+                    {
+                      "y": 1
+                    },
+                    {
+                      "x": 0.48029557,
+                      "y": 1,
+                      "in": 1.5365853,
+                      "out": -1.5365853
+                    },
+                    {
+                      "x": 1,
+                      "in": 1.312303,
+                      "out": -1.312303
+                    }
+                  ],
+                  "Constants": "1,0,0,0"
+                },
+                "ApplyColor": true,
+                "ApplyRotation": true,
+                "ApplyShape": true,
+                "Bounce": {},
+                "Brightness": {
+                  "Constants": "1,0,0,0"
+                },
+                "Bumpiness": {},
+                "Collision": true,
+                "CollisionIgnore": "localplayer",
+                "CollisionRadius": 1,
+                "Damping": {},
+                "DieOnCollisionChance": {},
+                "Force": true,
+                "ForceDirection": "0,0,-200",
+                "ForceScale": {
+                  "Constants": "1,0,0,0"
+                },
+                "Friction": {
+                  "Constants": "100,0,0,0"
+                },
+                "Gradient": {
+                  "Type": "Range",
+                  "Evaluation": "Particle",
+                  "GradientA": {
+                    "color": [
+                      {
+                        "t": 0.5,
+                        "c": "1,1,1,1"
+                      }
+                    ],
+                    "alpha": []
+                  },
+                  "GradientB": {
+                    "color": [
+                      {
+                        "t": 0.5,
+                        "c": "1,1,1,1"
+                      }
+                    ],
+                    "alpha": []
+                  },
+                  "ConstantA": "1,1,1,1",
+                  "ConstantB": "0.94651,1,0.35814,1"
+                },
+                "Lifetime": {
+                  "Type": "Range",
+                  "Evaluation": "Particle",
+                  "Constants": "1,2,0,0"
+                },
+                "MaxParticles": 200,
+                "PerParticleTimeScale": {
+                  "Constants": "1,0.4,0,0"
+                },
+                "PreWarm": 0,
+                "PushStrength": {
+                  "Constants": "5,0,0,0"
+                },
+                "Roll": {
+                  "Type": "Range",
+                  "Evaluation": "Particle",
+                  "Constants": "0,360,0,0"
+                },
+                "Scale": {
+                  "Type": "Curve",
+                  "CurveA": {
+                    "rangey": "0,3",
+                    "frames": [
+                      {
+                        "in": -9.333329,
+                        "out": 9.333329
+                      },
+                      {
+                        "x": 0.03325123,
+                        "y": 1,
+                        "in": -0.056075174,
+                        "out": 0.056075174
+                      },
+                      {
+                        "x": 1,
+                        "in": 2.9152544,
+                        "out": -2.9152544
+                      }
+                    ]
+                  },
+                  "Constants": "1,0,0,0"
+                },
+                "SequenceId": {},
+                "SequenceSpeed": {
+                  "Constants": "1,0,0,0"
+                },
+                "SequenceTime": {
+                  "Constants": "1,0,0,0"
+                },
+                "SheetSequence": true,
+                "Space": "World",
+                "StartVelocity": {
+                  "Type": "Range",
+                  "Evaluation": "Particle",
+                  "Constants": "100,200,0,0"
+                },
+                "Stretch": {},
+                "TimeScale": 1,
+                "Tint": "1,1,1,1"
+              },
+              {
+                "__type": "ParticleSpriteRenderer",
+                "Additive": false,
+                "BlurAmount": 1,
+                "BlurOpacity": 0.62,
+                "BlurSpacing": 0.16,
+                "DepthFeather": 15,
+                "FaceVelocity": false,
+                "FogStrength": 1,
+                "LeadingTrail": true,
+                "MotionBlur": true,
+                "Opaque": false,
+                "RotationOffset": 0,
+                "Scale": 3,
+                "Shadows": false,
+                "SortMode": "Unsorted",
+                "Texture": "textures/piss_splash/piss_splash.vtex"
+              },
+              {
+                "__type": "ParticleConeEmitter",
+                "Burst": 0,
+                "ConeAngle": 3,
+                "ConeFar": 50,
+                "ConeNear": 1,
+                "Delay": 0,
+                "DestroyOnEnd": false,
+                "Duration": 1,
+                "InVolume": false,
+                "Loop": true,
+                "OnEdge": false,
+                "Rate": 30
+              }
+            ]
           }
         ]
       }

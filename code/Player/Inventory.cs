@@ -2,8 +2,7 @@ namespace Sauna;
 
 public class Inventory : Component
 {
-	[Property]
-	public Player Player { get; set; }
+	[Property] public Player Player { get; set; }
 
 	public const int MAX_BACKPACK_SLOTS = 18;
 	public const int MAX_WEIGHT_IN_GRAMS = 30000;
@@ -26,6 +25,7 @@ public class Inventory : Component
 		if ( firstFreeSlot == -1 )
 			return false;
 
+		item.GameObject.Network.TakeOwnership();
 		item.DrawingEnabled = false;
 		item.GameObject.Parent = Player.GameObject;
 
@@ -40,8 +40,9 @@ public class Inventory : Component
 			return false;
 
 		droppedItem.DrawingEnabled = true;
-		droppedItem.GameObject.Transform.Position = Player.ViewRay.Position;
 		droppedItem.GameObject.Parent = null;
+		droppedItem.GameObject.Transform.Position = Player.ViewRay.Position + Player.ViewRay.Forward * 2f;
+		droppedItem.Network.DropOwnership();
 
 		return true;
 	}
@@ -52,9 +53,7 @@ public class Inventory : Component
 		if ( index == -1 )
 			return false;
 
-		var equipment = item.Components.Get<ItemEquipment>();
-
-		if ( equipment is null )
+		if ( item is not ItemEquipment equipment )
 			return false;
 
 		equipment.Equipped = true;
@@ -74,13 +73,26 @@ public class Inventory : Component
 			_equippedItems[slotIndex] = item;
 		}
 
+		UpdateBodygroups();
+
 		return true;
+	}
+
+	public void UpdateBodygroups()
+	{
+		var bodygroups = HiddenBodyGroup.None;
+		foreach ( var item in EquippedItems )
+		{
+			var equipment = item.Components.Get<ItemEquipment>();
+			bodygroups |= equipment.HideBodygroups;
+		}
+
+		Player.HideBodygroups = bodygroups;
 	}
 
 	public bool UnequipItem( ItemComponent item )
 	{
-		var equipment = item.Components.Get<ItemEquipment>();
-		if ( equipment is null )
+		if ( item is not ItemEquipment equipment )
 			return false;
 
 		var slotIndex = (int)equipment.Slot;
@@ -92,6 +104,9 @@ public class Inventory : Component
 		equipment.Equipped = false;
 
 		_equippedItems[slotIndex] = null;
+
+		UpdateBodygroups();
+
 		return true;
 	}
 
@@ -100,7 +115,8 @@ public class Inventory : Component
 		if ( _backpackItems[endIndex] is not null )
 		{
 			// Perform a swap since we are moving the item to an already occupied index.
-			(_backpackItems[startIndex], _backpackItems[endIndex]) = (_backpackItems[endIndex], _backpackItems[startIndex]);
+			(_backpackItems[startIndex], _backpackItems[endIndex]) =
+				(_backpackItems[endIndex], _backpackItems[startIndex]);
 		}
 		else
 		{
@@ -122,5 +138,35 @@ public class Inventory : Component
 
 		_backpackItems[index] = null;
 		return item;
+	}
+
+	[ConCmd]
+	public static void UnEquip( int index )
+	{
+		var player = GameManager.ActiveScene.GetAllComponents<Player>().FirstOrDefault();
+		player.Inventory.UnequipItem( player.Inventory.EquippedItems[(int)EquipSlot.Body] );
+	}
+
+	[ConCmd]
+	public static void GiveItem( string name )
+	{
+		var player = GameManager.ActiveScene.GetAllComponents<Player>().FirstOrDefault();
+		if ( player == null )
+			return;
+
+		var item = PrefabLibrary.FindByComponent<ItemComponent>()
+			.FirstOrDefault( x => x.Name.ToLower() == name.ToLower() )
+			?.Prefab;
+
+		if ( item == null )
+		{
+			var itemNames = string.Join( ',', PrefabLibrary.FindByComponent<ItemComponent>().Select( v => v.Name ) );
+			Log.Warning( $"couldn't find {name}" );
+			Log.Warning( $"valid item names: {itemNames}" );
+			return;
+		}
+
+		var obj = SceneUtility.GetPrefabScene( item ).Clone();
+		player.Inventory.GiveItem( obj );
 	}
 }

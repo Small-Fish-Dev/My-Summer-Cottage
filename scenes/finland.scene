@@ -4,6 +4,7 @@
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
       "Name": "GameManager",
+      "Position": "0,0,200",
       "Enabled": true,
       "Components": [
         {
@@ -15,7 +16,17 @@
         },
         {
           "__type": "GameTimeManager",
-          "DayLength": 30,
+          "DayLength": 300,
+          "Fog": {
+            "_type": "component",
+            "go": "74c6edc7-2832-4482-8f0f-c8312c6f4e77",
+            "component_type": "GradientFog"
+          },
+          "Skybox": {
+            "_type": "component",
+            "go": "7f2477ff-54a5-4127-a102-c905b031713e",
+            "component_type": "SkyBox2D"
+          },
           "SkyDayColor": {
             "color": [
               {
@@ -53,20 +64,25 @@
             "alpha": []
           },
           "SkyNightColor": "0.01961,0.09804,0.22745,1",
+          "StartTime": 33600,
           "Sun": {
             "_type": "component",
             "go": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
             "component_type": "DirectionalLight"
           },
-          "SunOrbit": "-30,-5,0",
+          "SunOrbit": "-30,5,0",
           "SunriseTime": 25200,
           "SunsetTime": 79200
+        },
+        {
+          "__type": "PrefabInitializer"
         }
       ],
       "Children": [
         {
           "Id": "79a42b52-3dd6-4018-a1c6-cb514e3de500",
           "Name": "HUD",
+          "Position": "0,0,0",
           "Enabled": true,
           "Components": [
             {
@@ -113,7 +129,7 @@
     {
       "Id": "9cc058fc-954e-41bb-8364-b5d715129e56",
       "Name": "beer_bottle",
-      "Position": "424.232,-122.7964,99.437",
+      "Position": "424.232,-96.59681,31.7402",
       "Rotation": "0.0000004499667,0.0000001490116,-0.0000013499,1",
       "Enabled": true,
       "__Prefab": "prefabs/items/beer_bottle.prefab"
@@ -134,7 +150,7 @@
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "1,1,1,1"
+              "Tint": "0.31574,0.40645,0.55795,1"
             }
           ]
         },
@@ -146,7 +162,7 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.33921,0.34504,0.45581,1",
+              "Color": "0.31574,0.40645,0.55795,1",
               "EndDistance": 10000,
               "FalloffExponent": 1,
               "Height": 10000,
@@ -159,7 +175,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.113039,0.4957226,-0.0652631,0.8586168",
+          "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
           "Tags": "light_directional,light",
           "Enabled": true,
           "Components": [
@@ -167,9 +183,9 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "1,1,1,1",
+              "LightColor": "0.31574,0.40645,0.55795,1",
               "Shadows": false,
-              "SkyColor": "1,1,1,1"
+              "SkyColor": "0.01961,0.09804,0.22745,1"
             }
           ]
         }
@@ -178,8 +194,8 @@
     {
       "Id": "2d4783cc-caf7-4dae-af45-06d44aff2664",
       "Name": "banana_peel",
-      "Position": "424.4501,-123.1364,23.48116",
-      "Rotation": "0.00002079736,0.000913322,-0.02251128,0.9997461",
+      "Position": "424.4533,-123.1365,25.23573",
+      "Rotation": "0.00002079736,0.0009133221,-0.02251128,0.9997461",
       "Enabled": true,
       "__Prefab": "prefabs/events/banana_peel.prefab"
     },
@@ -315,6 +331,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-23T20:32:45.4283755\u002B03:00",
+  "LastSaved": "2024-02-25T14:21:58.3780599\u002B01:00",
   "__references": []
 }

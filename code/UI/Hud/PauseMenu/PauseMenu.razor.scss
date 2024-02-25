@@ -1,10 +1,13 @@
+@import "/UI/Style.scss";
+
 PauseMenu {
     position: absolute;
     height: 100%;
     width: 100%;
-    display: none;
-    background-color: #000000bd;
-    z-index: 10;
+    z-index: 50;
+    pointer-events: all;
+    background-color: $fullscreen-bg;
+    backdrop-filter: $fullscreen-blur;
 
     .title {
         position: absolute;
@@ -12,22 +15,28 @@ PauseMenu {
         background-size: contain;
         image-rendering: pixelated;
         width: 550px;
-        height: 200px;
+        height: 300px;
         margin-left: 100px;
-        margin-top: 130px;
+        margin-top: 100px;
     }
 
     .portraits {
+        position: absolute;
         width: 100%;
         flex-direction: column;
         align-items: flex-end;
-        padding-right: 50px; 
-        padding-top: 250px;
+        top: 50px;
+        right: 50px;
         gap: 10px;
     }
 
-    &.visible {
-        display: flex;
-        pointer-events: all;
+    .inputs {
+        position: absolute;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 15px;
+        right: 50px;
+        top: 65%;
+        justify-content: flex-end;
     }
 }

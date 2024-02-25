@@ -1,0 +1,26 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Panel
+@attribute [StyleSheet]
+
+<root class="@(GradientLeft ? "left" : "") @(Slot.ToString())">
+	<div class="icon-container">
+		<img src=@Slot.GetIcon() />
+	</div>
+
+	<div class="text-container">
+		<label>@Slot.ToString()</label>
+	</div>
+</root>
+
+@code {
+	public bool GradientLeft { get; set; }
+	public EquipSlot Slot { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( GradientLeft, Slot );
+	}
+}

@@ -18,7 +18,7 @@
 				@for ( int i = 0; i < 3; i++ )
 				{
 					<div class="box">
-						@if ( stageInteger >= i + 1 )
+						@if ( stageInteger == i + 1 )
 						{
 							<div class="fill" />
 						}
@@ -43,7 +43,7 @@
 			Title="Go back" 
 			Subtitle="to Stage @(stageInteger  - 1)"
 			OnClick=@CreatorComponent.PreviousStage
-			style="left: 0px; top: 40px;"
+			style="position:absolute; left: 0px; top: 40px;"
 		/>
 	}
 
@@ -58,7 +58,7 @@
 				OnClick=@CreatorComponent.NextStage
 				IsDisabled=@disabled
 				IsInverted=@true
-				style="right: 0px; bottom: 50px;"
+				style="position:absolute; right: 0px; bottom: 50px;"
 			/>
 
 			break;
@@ -70,6 +70,16 @@
 
 		case CreatorStage.Dressing_up:
 			<ClothingPanel />
+
+			<SideButton 
+				Title="Confirm" 
+				Subtitle="Finish the character creation."
+				ImagePath="ui/hud/confirm.png"
+				OnClick=@CreatorComponent.NextStage
+				IsDisabled=@false
+				IsInverted=@true
+				style="position:absolute; right: 0px; bottom: 50px;"
+			/>
 
 			break;
 	}

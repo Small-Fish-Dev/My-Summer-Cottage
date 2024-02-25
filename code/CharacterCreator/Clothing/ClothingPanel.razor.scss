@@ -1,3 +1,104 @@
-﻿ClothingPanel {
+﻿@import "/UI/Style.scss";
 
+ClothingPanel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-family: BasicHandwriting;
+    font-smooth: never;
+
+    .slot-container {
+        position: absolute;
+        width: 700px;
+        top: 200px;
+        max-height: 800px;
+        overflow: scroll;
+        flex-direction: column;
+        gap: 20px;
+
+        .equip-slot {
+            flex-direction: column;
+            flex-shrink: 0;
+
+            .title {
+                font-size: 42px;
+                align-items: center;
+                gap: 20px;
+                padding: 20px 0px 0px 50px;
+                background-image: url(ui/hud/dialogue_name.png);
+                background-image-tint: rgba(white, 0.9);
+                background-size: contain;
+                background-repeat: no-repeat;
+                image-rendering: pixelated;
+
+                img {
+                    height: 42px;
+                    aspect-ratio: 1;
+                    image-rendering: pixelated;
+                    background-size: contain;
+                }
+            }
+
+            .row {
+                flex-direction: row;
+                gap: 10px;
+                background-color: rgba(black, 0.9);
+                padding: 20px 0px 20px 50px;
+
+                .slot {
+                    width: 110px;
+                    flex-shrink: 0;
+                    aspect-ratio: 1;
+                    justify-content: center;
+                    align-items: center;
+                    transition: transform 0.2s ease-in-out;
+
+                    img {
+                        transition: transform 0.2s ease-in-out;
+                        image-rendering: pixelated;
+                        width: 70%;
+                        height: 70%;
+                        background-size: cover;
+                    }
+
+                    .border {
+                        position: absolute;
+                        background-image: linear-gradient(#989898, #4a4a4a);
+                        height: 100%;
+                        width: 100%;
+                        mask-mode: alpha;
+                        mask-image: url( '/ui/hud/slot_mask.png' );
+                        mask-size: 100%;
+                    }
+
+                    .background {
+                        position: absolute;
+                        background: radial-gradient(#00000000, #000000c0);
+                        height: 100%;
+                        width: 100%;
+                    }
+
+                    &.disabled {
+                        opacity: 0.5;
+                        pointer-events: none;
+                    }
+
+                    &.selected {
+                        .border {
+                            background-image: linear-gradient(darken($orange, 0.3), $orange);
+                        }
+                    }
+
+                    &:hover {
+                        transform: scale(1.1);
+                        cursor: pointer;
+
+                        img {
+                            transform: scale(1.1);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

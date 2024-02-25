@@ -45,8 +45,10 @@ public partial class Player
 	}
 
 	[Broadcast]
-	public void BroadcastInteraction()
+	public void BroadcastInteraction( Vector3 position, Rotation rotation )
 	{
-		Model.Set( "use", true );
+		Renderer.Set( "right_ik_pos", position );
+		Renderer.Set( "right_ik_rot", rotation );
+		Renderer.Set( "use", true );
 	}
 }

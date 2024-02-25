@@ -1,0 +1,73 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	@if (_activePanel == ActivePanel.InGameHud)
+	{
+		<InGameHud />
+	}
+	else if (_activePanel == ActivePanel.Inventory)
+	{
+		<Inventory />
+	}
+	else if (_activePanel == ActivePanel.TaskLog)
+	{
+
+	}
+	else if (_activePanel == ActivePanel.FishLog)
+	{
+		<FishLog />
+	}
+	else if (_activePanel == ActivePanel.PauseMenu)
+	{
+		<PauseMenu />
+	}
+</root>
+
+@code {
+	public static FullScreenManager Instance { get; set; }
+
+	public enum ActivePanel
+	{
+		InGameHud,
+		Inventory,
+		TaskLog,
+		FishLog,
+		PauseMenu,
+	}
+
+	private ActivePanel _activePanel = ActivePanel.InGameHud;
+
+	public FullScreenManager()
+	{
+		Instance = this;
+	}
+
+	public void Display(ActivePanel panel)
+	{
+		_activePanel = panel;
+	}
+
+	public override void Tick()
+	{
+		if (Input.EscapePressed) 
+			Toggle(ActivePanel.PauseMenu);
+
+		if (Input.Pressed(InputAction.Inventory))
+			Toggle(ActivePanel.Inventory);
+	}
+
+	private void Toggle(ActivePanel panel)
+	{
+		if (_activePanel == panel)
+			_activePanel = ActivePanel.InGameHud;
+		else
+			_activePanel = panel;
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(_activePanel.GetHashCode());
+	}
+}

@@ -23,23 +23,27 @@
         }
     }
 
-    .timeline-container {
+    .visualizer-container {
         position: absolute;
-        bottom: 5px;
-        left: 0px;
-        padding: 2px 14px 2px 12px;
-        width: 100%;
-        height: 20px;
+        bottom: 8px;
+        left: 12px;
+        width: 92%;
+        height: 30px;
+        flex-direction: row;
+        gap: 5px;
+        flex-wrap: wrap-reverse;
 
-        .timeline {
-            width: 100%;
+        .bar-container {
             height: 100%;
-            border: 2px black;
-            padding: 1px;
+            flex-grow: 1;
+            background-color: darken(#5E7C34, 0.6);
+            padding: 2px;
+            flex-direction: column-reverse;
 
-            .inner {
-                width: 10%;
-                background-color: black;
+            .bar {
+                width: 100%;
+                background-color: darken(#5E7C34, 0.2);
+                min-height: 2px;
             }
         }
     }

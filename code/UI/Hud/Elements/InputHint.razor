@@ -3,12 +3,19 @@
 @inherits Panel
 
 <root>
-	<text class="text">
-		@(!string.IsNullOrEmpty( Input ) ? Sandbox.Input.GetButtonOrigin( Input ) : "?")
-	</text>
+	@if (!string.IsNullOrEmpty( Hint ))
+	{
+		<div class="hint">
+			<text>@Input</text>
+		</div>
+	}
+	<div class="input">
+		<text style="bottom: 1px;">@(!string.IsNullOrEmpty( Input ) ? Sandbox.Input.GetButtonOrigin( Input ) : "?")</text>
+	</div>
 </root>
 
 @code {
+	public string Hint { get; set; }
 	public string Input { get; set; }
 
 	protected override int BuildHash()

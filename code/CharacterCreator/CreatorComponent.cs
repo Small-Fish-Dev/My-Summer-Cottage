@@ -69,6 +69,17 @@ public class CreatorComponent : Component
 		All[Current = (CreatorStage)next].EnableStage();
 	}
 
+	private int GetBone( EquipSlot slot )
+		=> slot switch
+		{
+			EquipSlot.Head => 7,
+			EquipSlot.Face => 6,
+			EquipSlot.Body => 4,
+			EquipSlot.Legs => 20,
+			EquipSlot.Feet => 22,
+			_ => 0
+		};
+
 	protected override void OnUpdate()
 	{
 		if ( Camera == null || !Camera.IsMainCamera )

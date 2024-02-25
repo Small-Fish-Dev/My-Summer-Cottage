@@ -16,6 +16,33 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Range( -100f, 100f, 1f )]
 	public float Height { get; set; } = 0f;
 
+	[Property, Sync, Category( "Appearance" )]
+	public Color SkinColor
+	{
+		get => _skinColor;
+		set
+		{
+			_skinColor = value;
+
+			if ( Renderer != null && Renderer.SceneModel.IsValid() )
+				Renderer.SceneModel.Attributes.Set( "g_flColorTint", _skinColor );
+		}
+	}
+
+	Color _skinColor;
+	HiddenBodyGroup _hideBodygroups;
+
+	[Sync]
+	public HiddenBodyGroup HideBodygroups
+	{
+		get => _hideBodygroups;
+		set
+		{
+			_hideBodygroups = value;
+			Renderer.BodyGroups = (ulong)_hideBodygroups;
+		}
+	}
+
 	/// <summary>
 	/// Block both inputs and mouse aiming
 	/// </summary>
@@ -70,11 +97,11 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	public Inventory Inventory { get; private set; }
 	protected CameraComponent Camera;
-	protected SkinnedModelRenderer Model;
+	protected SkinnedModelRenderer Renderer;
 	protected BoxCollider Collider;
 	protected ParticleConeEmitter PissEmitter;
 	protected ParticleEffect PissParticles;
-	
+
 	protected override void DrawGizmos()
 	{
 	}
@@ -90,15 +117,15 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		Inventory = Components.Get<Inventory>( FindMode.EverythingInSelfAndDescendants );
 
-		Model = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+		Renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
 		Collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndDescendants );
 
 		PissEmitter = Components.Get<ParticleConeEmitter>( FindMode.EverythingInSelfAndDescendants );
 		PissParticles = Components.Get<ParticleEffect>( FindMode.EverythingInSelfAndDescendants );
 
 		// Footsteps
-		Model.OnFootstepEvent += OnFootstep;
-		Model.OnGenericEvent += OnJumpEvent;
+		Renderer.OnFootstepEvent += OnFootstep;
+		Renderer.OnGenericEvent += OnJumpEvent;
 	}
 
 	protected override void OnUpdate()
@@ -192,5 +219,26 @@ public partial class Player : Component, Component.ExecuteInEditor
 		var sound = Sound.Play( path, tr.HitPosition + tr.Normal * 5 );
 		sound.Volume *= e.Volume;
 		sound.Update();
+	}
+
+	/// <summary>
+	/// Fades to black
+	/// </summary>
+	/// <param name="startingTransition"></param>
+	/// <param name="blackTransition"></param>
+	/// <param name="endingTransition"></param>
+	public void BlackScreen( float startingTransition = 2f, float blackTransition = 2f, float endingTransition = 1f )
+	{
+		if ( IsProxy ) return;
+
+		var gameObject = Hud.Instance.GameObject;
+
+		if ( gameObject == null ) return;
+
+		var blackScreen = gameObject.Components.Create<BlackScreen>();
+		blackScreen.StartingTransition = startingTransition;
+		blackScreen.BlackTransition = blackTransition;
+		blackScreen.EndingTransition = endingTransition;
+		blackScreen.Start();
 	}
 }
