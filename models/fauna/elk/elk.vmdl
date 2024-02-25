@@ -17,6 +17,14 @@
 								from = "elk.vmat"
 								to = "models/fauna/elk/materials/elk.vmat"
 							},
+							{
+								from = "elk_female.vmat"
+								to = "models/fauna/elk/materials/elk_female.vmat"
+							},
+							{
+								from = "antlers.vmat"
+								to = "models/fauna/elk/materials/elk_antlers.vmat"
+							},
 						]
 						use_global_default = false
 						global_default_material = ""
@@ -29,6 +37,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
+						name = "male"
 						filename = "models/fauna/elk/elk.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -45,6 +54,75 @@
 								"elk",
 							]
 						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "female"
+						filename = "models/fauna/elk/elk_female.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"elk",
+								"elk_female",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "elk_antlers"
+						filename = "models/fauna/elk/elk_antlers.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "BodyGroup"
+						name = "MtF"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								name = "male"
+								meshes = 
+								[
+									"male",
+									"elk_antlers",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "female"
+								meshes = 
+								[
+									"female",
+								]
+							},
+						]
+						hidden_in_tools = false
 					},
 				]
 			},
