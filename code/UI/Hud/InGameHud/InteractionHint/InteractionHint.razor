@@ -60,7 +60,7 @@
                     interaction.Action?.Invoke(Player.Local, Player.Local.TargetedGameObject);
 
                     if ( interaction.Identifier != String.Empty )
-                      EventSystem.InteractionInvoked( interaction.Identifier ); // Pass off this interaction for events to find
+                      EventSystem.InteractionInvoked( interaction.Identifier, Player.Local.TargetedGameObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
 
 					var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
 					Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ) );

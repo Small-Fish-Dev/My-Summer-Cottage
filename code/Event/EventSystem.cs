@@ -37,8 +37,10 @@ public class EventSystem : GameObjectSystem
 	}
 
 	[Broadcast]
-	public static void InteractionInvoked( string interaction )
+	public static void InteractionInvoked( string interaction, Guid target, Guid player )
 	{
 		Log.Info( interaction );
+		Log.Info( target );
+		Log.Info( player );
 	}
 }
