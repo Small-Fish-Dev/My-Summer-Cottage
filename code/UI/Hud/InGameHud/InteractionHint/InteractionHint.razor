@@ -71,6 +71,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(HasTarget, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i))));
+		return HashCode.Combine(HasTarget, Player.Local.TargetedGameObject?.Name, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i))));
 	}
 }
