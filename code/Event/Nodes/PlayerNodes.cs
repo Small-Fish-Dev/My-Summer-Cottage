@@ -51,7 +51,7 @@ public static partial class PlayerNodes
 
 		while ( player.IsRagdolled )
 		{
-			await Task.Delay( (int)(Time.Delta * 1000) );
+			await GameTask.DelaySeconds( Time.Delta );
 		}
 	}
 
@@ -65,10 +65,7 @@ public static partial class PlayerNodes
 		if ( player == null ) return;
 
 		player.BlackScreen( startingTransition, blackTransition, endingTransition );
-		Log.Info( startingTransition );
-		Log.Info( blackTransition );
-		Log.Info( endingTransition );
 
-		await Task.Delay( (int)(startingTransition + blackTransition + endingTransition) * 1000 );
+		await GameTask.DelaySeconds( startingTransition + blackTransition + endingTransition );
 	}
 }

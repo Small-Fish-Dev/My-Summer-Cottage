@@ -7,55 +7,44 @@ public static partial class GlobalNodes
 {
 	public delegate Task Body();
 
-	[ActionGraphNode( "if" )]
-	public static Task If( bool condition,
-		Body? @true = null,
-		Body? @false = null )
-	{
-		return (condition ? @true : @false)?.Invoke() ?? Task.CompletedTask;
-	}
 	/// <summary>
 	/// Is the game being played by a single player
 	/// </summary>
-	[ActionGraphNode( "event.issingleplayer", DefaultOutputSignal = false )]
+	[ActionGraphNode( "event.issingleplayer" ), Pure]
 	[Title( "Is Single Player" ), Group( "Events" ), Icon( "emoji_people" )]
-	public static Task IsSingleplayer( Body? @true = null, Body? @false = null )
+	public static bool IsSingleplayer()
 	{
-		return (Networking.Connections.Count > 1 ? @true : @false)?.Invoke() ?? Task.CompletedTask;
+		return Networking.Connections.Count == 1;
 	}
 
 	/// <summary>
-	/// Get every single player in game
+	/// Get every component of type {T} in the game
 	/// </summary>
-	[ActionGraphNode( "event.geteveryplayer" ), Pure]
-	[Title( "Get Every Player" ), Group( "Events" ), Icon( "groups" )]
-	public static IEnumerable<Player> GetEveryPlayer()
+	[ActionGraphNode( "event.geteverycomponent" ), Pure]
+	[Title( "Get Every {T} Component" ), Group( "Events" ), Icon( "groups" )]
+	public static IEnumerable<T> GetEveryComponent<T>()
 	{
-		return GameManager.ActiveScene.GetAllComponents<Player>();
+		return GameManager.ActiveScene.GetAllComponents<T>();
 	}
 
 	/// <summary>
-	/// Get every player inside of a collection of gameobjects
+	/// Get every component of type {T} in the provided collection
 	/// </summary>
-	[ActionGraphNode( "event.getveryplayerincollection" )]
-	[Title( "Get Every Player In Collection" ), Group( "Events" ), Icon( "groups" )]
-	public static IEnumerable<Player> GetEveryPlayerInCollection( IEnumerable<GameObject> gameObjects )
+	[ActionGraphNode( "event.geteverycomponentincollection" )]
+	[Title( "Get Every {T} Component In Collection" ), Group( "Events" ), Icon( "reduce_capacity" )]
+	public static IEnumerable<T> GetAllComponentsInCollection<T>( IEnumerable<GameObject> collection )
 	{
-		return gameObjects.Select( x => x.Components.TryGet<Player>( out var player ) ? player : null ) // Try and get the player from each item
-			.Where( x => x != null ) // If it found no player, remove the item
-			.Distinct(); // Make sure every player is counted once in the list
+		return collection.SelectMany( x => x.Components.GetAll<T>() );
 	}
 
 	/// <summary>
-	/// Is everyone in the game included in the players collection
+	/// Is every in the collectionA included inside of collectionB
 	/// </summary>
-	[ActionGraphNode( "event.iseveryplayerincluded", DefaultOutputSignal = false )]
-	[Title( "Is Every Player Included" ), Group( "Events" ), Icon( "reduce_capacity" )]
-	public static Task IsEveryPlayerIncluded( IEnumerable<Player> players, Body? @true = null, Body? @false = null )
+	[ActionGraphNode( "event.iseverycomponentincluded" )]
+	[Title( "Is Every Component {T} Included" ), Group( "Events" ), Icon( "reduce_capacity" )]
+	public static bool IsEveryComponentIncluded<T>( IEnumerable<Component> collectionA, IEnumerable<Component> collectionB ) where T : Component
 	{
-		var allPlayers = GameManager.ActiveScene.GetAllComponents<Player>();
-
-		return (allPlayers.All( x => players.Any( player => player == x ) ) ? @true : @false)?.Invoke() ?? Task.CompletedTask;
+		return collectionA.All( x => collectionB.Any( y => x == y ) );
 	}
 
 	/// <summary>
