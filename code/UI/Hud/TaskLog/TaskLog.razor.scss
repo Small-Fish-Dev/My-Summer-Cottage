@@ -7,4 +7,26 @@ TaskLog {
     pointer-events: all;
     background-color: $fullscreen-bg;
     backdrop-filter: $fullscreen-blur;
+
+    align-items: center;
+    justify-content: center;
+
+    .task-container {
+        top: 5%;
+        height: 70%;
+        width: 70%;
+        gap: 4px;
+
+        .task-list {
+            height: 100%;
+            width: 30%;
+            background-color: $black-bg;
+        }
+
+        .task-details {
+            height: 100%;
+            width: 70%;
+            background-color: $black-bg;
+        }
+    }
 }
