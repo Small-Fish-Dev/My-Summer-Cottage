@@ -19,6 +19,7 @@
 				ImagePath="ui/hud/task_completed.png"
 				Title="Tasks"
 				Subtitle="Full history of your tasks"
+				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.TaskLog); })
 			/>
 			<SideButton
 				ImagePath="ui/hud/inv.png"

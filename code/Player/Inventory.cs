@@ -83,7 +83,9 @@ public class Inventory : Component
 		var bodygroups = HiddenBodyGroup.None;
 		foreach ( var item in EquippedItems )
 		{
-			var equipment = item.Components.Get<ItemEquipment>();
+			if ( item is not ItemEquipment equipment )
+				continue;
+
 			bodygroups |= equipment.HideBodygroups;
 		}
 

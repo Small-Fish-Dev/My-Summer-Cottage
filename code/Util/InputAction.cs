@@ -9,4 +9,5 @@ public static class InputAction
 	public const string Voice = "Voice";
 
 	public const string Inventory = "Inventory";
+	public const string Tasks = "Tasks";
 }

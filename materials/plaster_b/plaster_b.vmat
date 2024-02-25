@@ -4,23 +4,20 @@ Layer0
 {
 	shader "shaders/saunasimple.shader"
 
-	//---- Texture Filtering ----
-	F_TEXTURE_FILTERING 4 // Nearest Neighbour
-
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	Color "materials/ground/grass/new_graph_basecolor.png"
+	Color "materials/plaster_b/plaster_b_basecolor.png"
 	ColorTintMask "materials/default/default.tga"
 	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
 	Metalness "materials/default/default_metal.tga"
-	Normal "materials/ground/grass/new_graph_normal.png"
-	Roughness "materials/ground/grass/new_graph_roughness.png"
+	Normal "materials/plaster_b/plaster_b_normal.png"
+	Roughness "materials/plaster_b/plaster_b_roughness.png"
 
 	SystemAttributes
 	{
-		PhysicsSurfaceProperties "grass"
+		PhysicsSurfaceProperties "plaster"
 		WorldMappingWidth "128"
 		WorldMappingHeight "128"
 	}
