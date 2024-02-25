@@ -46,6 +46,7 @@ public partial class SlotMachine : Component
 		All = First | Second | Third
 	}
 
+	#region Data structures
 	public struct Result
 	{
 		public int a;
@@ -97,10 +98,11 @@ public partial class SlotMachine : Component
 			return $"{a}, {b}, {c}";
 		}
 	}
+	#endregion
 
 	public void TryRoll()
 	{
-		if ( BetFlags == BetFlag.None || Money < Bet )
+		if ( Rolling || BetFlags == BetFlag.None || Money < Bet )
 			return;
 
 		Rolling = true;
@@ -150,6 +152,9 @@ public partial class SlotMachine : Component
 
 	public void ToggleBetFlag( byte line )
 	{
+		if ( Rolling )
+			return;
+
 		var flags = (byte)BetFlags;
 		BetFlags = (BetFlag)(flags ^ (1 << (line - 1)));
 	}
