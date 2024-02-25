@@ -50,7 +50,7 @@ public static partial class GlobalNodes
 	}
 
 	/// <summary>
-	/// Skips in game seconds, only the host can do this so make sure to check if it's singleplayer or if everyone is
+	/// Skips in game seconds, only the host can do this so make sure to check if it's singleplayer or if everyone is included in the event
 	/// </summary>
 	[ActionGraphNode( "event.skiptime" )]
 	[Title( "Skip Time" ), Group( "Events" ), Icon( "update" )]
