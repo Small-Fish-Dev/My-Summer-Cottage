@@ -35,4 +35,10 @@ public class EventSystem : GameObjectSystem
 			expiredEvent.LastPoll = 0;
 		}
 	}
+
+	[Broadcast]
+	public static void InteractionInvoked( Interaction interaction, GameObject obj, Player caller )
+	{
+
+	}
 }
