@@ -1,0 +1,29 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/rusty_panels_hs/rusty_panels_hs_basecolor.png"
+	ColorTintMask "materials/default/default.tga"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/rusty_panels_hs/rusty_panels_hs_metallic.png"
+	Normal "materials/rusty_panels_hs/rusty_panels_hs_normal.png"
+	Roughness "materials/rusty_panels_hs/rusty_panels_hs_roughness.png"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "metal.sheet"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+
+	ToolAttributes
+	{
+		SubrectDefinition "materials/shrimple_hs.rect"
+	}
+}
