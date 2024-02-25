@@ -4,7 +4,7 @@
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
       "Name": "GameManager",
-      "Position": "516.5028,-259.5471,33.03564",
+      "Position": "0,0,200",
       "Enabled": true,
       "Components": [
         {
@@ -16,7 +16,17 @@
         },
         {
           "__type": "GameTimeManager",
-          "DayLength": 30,
+          "DayLength": 300,
+          "Fog": {
+            "_type": "component",
+            "go": "74c6edc7-2832-4482-8f0f-c8312c6f4e77",
+            "component_type": "GradientFog"
+          },
+          "Skybox": {
+            "_type": "component",
+            "go": "7f2477ff-54a5-4127-a102-c905b031713e",
+            "component_type": "SkyBox2D"
+          },
           "SkyDayColor": {
             "color": [
               {
@@ -54,12 +64,13 @@
             "alpha": []
           },
           "SkyNightColor": "0.01961,0.09804,0.22745,1",
+          "StartTime": 33600,
           "Sun": {
             "_type": "component",
             "go": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
             "component_type": "DirectionalLight"
           },
-          "SunOrbit": "-30,-5,0",
+          "SunOrbit": "-30,5,0",
           "SunriseTime": 25200,
           "SunsetTime": 79200
         },
@@ -139,7 +150,7 @@
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "1,1,1,1"
+              "Tint": "0.31574,0.40645,0.55795,1"
             }
           ]
         },
@@ -151,7 +162,7 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.33921,0.34504,0.45581,1",
+              "Color": "0.31574,0.40645,0.55795,1",
               "EndDistance": 10000,
               "FalloffExponent": 1,
               "Height": 10000,
@@ -164,7 +175,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.113039,0.4957226,-0.0652631,0.8586168",
+          "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
           "Tags": "light_directional,light",
           "Enabled": true,
           "Components": [
@@ -172,9 +183,9 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "1,1,1,1",
+              "LightColor": "0.31574,0.40645,0.55795,1",
               "Shadows": false,
-              "SkyColor": "1,1,1,1"
+              "SkyColor": "0.01961,0.09804,0.22745,1"
             }
           ]
         }
@@ -320,6 +331,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-25T13:42:33.8802385\u002B01:00",
+  "LastSaved": "2024-02-25T14:12:49.7774729\u002B01:00",
   "__references": []
 }

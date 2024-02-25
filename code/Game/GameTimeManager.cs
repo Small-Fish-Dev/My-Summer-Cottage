@@ -1,34 +1,66 @@
 namespace Sauna.Game;
 
-public class GameTimeManager : Component
+public class GameTimeManager : Component, Component.ExecuteInEditor
 {
-	[Property] public DirectionalLight Sun;
-	[Property] public SkyBox2D Skybox;
-	[Property] public GradientFog Fog;
+	[Property]
+	[Category( "Components" )]
+	public DirectionalLight Sun { get; set; }
 
-	[Property] public Gradient SkyDayColor;
-	[Property] public Color SkyNightColor;
+	[Property]
+	[Category( "Components" )]
+	public SkyBox2D Skybox { get; set; }
+
+	[Property]
+	[Category( "Components" )]
+	public GradientFog Fog { get; set; }
+
+	[Property]
+	[Category( "Visuals" )]
+	public Gradient SkyDayColor { get; set; }
+
+	[Property]
+	[Category( "Visuals" )]
+	public Color SkyNightColor { get; set; }
 
 	/// <summary>
 	/// Imagine it like the angle of a big pole sticking out of the Earth, and the Sun is spinning around it.
 	/// The roll is ignored.
 	/// </summary>
-	[Property] public Angles SunOrbit;
+	[Property]
+	[Category( "Visuals" )]
+	public Angles SunOrbit { get; set; }
 
 	/// <summary>
 	/// Time of the sunrise in in-game seconds (7 AM by default)
 	/// </summary>
-	[Property] public int SunriseTime = 7 * 60 * 60;
+	[Property]
+	[Category( "Time" )]
+	[Range( 0, 86400, 600 )]
+	public int SunriseTime { get; set; } = 7 * 60 * 60;
 
 	/// <summary>
 	/// Time of the sunset in in-game seconds (10 PM by default)
 	/// </summary>
-	[Property] public int SunsetTime = 22 * 60 * 60;
+	[Property]
+	[Category( "Time" )]
+	[Range( 0, 86400, 600 )]
+	public int SunsetTime { get; set; } = 22 * 60 * 60;
+
+	/// <summary>
+	/// When do we start our day during normal gameplay (10 AM by default)
+	/// </summary>
+	[Property]
+	[Category( "Time" )]
+	[Range( 0, 86400, 600 )]
+	public int StartTime { get; set; } = 10 * 60 * 60;
 
 	/// <summary>
 	/// Length of the day in real time second
 	/// </summary>
-	[Property] public float DayLength = 30 * 60;
+	[Property]
+	[Category( "Time" )]
+	[Range( 0f, 1200f, 10f )]
+	public float DayLength { get; set; } = 5 * 60;
 
 	/// <summary>
 	/// Progress of the day in percents [0; 1].
@@ -41,19 +73,18 @@ public class GameTimeManager : Component
 
 	protected override void OnAwake()
 	{
-		base.OnAwake();
+		if ( !GameManager.IsPlaying ) return;
 
 		NewDay();
 
-		SetTimeFromSeconds( (int)(SunriseTime * 1.5f) );
-
+		SetTimeFromSeconds( StartTime );
 	}
 
 	protected override void DrawGizmos()
 	{
-		base.DrawGizmos();
+		if ( !Scene.IsEditor ) return;
 
-		if ( Gizmo.IsSelected && GameManager.IsPlaying )
+		if ( Gizmo.IsSelected )
 		{
 			Gizmo.Draw.ScreenText( $"Day percent: {DayPercent * 100f:F1}", Vector2.One * 10, "Roboto", 12f,
 				TextFlag.LeftTop );
@@ -62,7 +93,10 @@ public class GameTimeManager : Component
 
 	protected override void OnUpdate()
 	{
-		base.OnUpdate();
+		if ( Scene.IsEditor && !GameManager.IsPlaying )
+		{
+			SetTimeFromSeconds( StartTime );
+		}
 
 		if ( _inGameTime >= DayLength )
 			NewDay();
@@ -76,9 +110,15 @@ public class GameTimeManager : Component
 			// Value in [0; 1]
 			var daytimePercent = ((float)igs).Remap( SunriseTime, SunsetTime );
 			sunRotation = Rotation.From( SunOrbit.WithRoll( daytimePercent * 180 ) );
-			Sun.LightColor = SkyDayColor.Evaluate( daytimePercent );
-			Fog.Color = SkyDayColor.Evaluate( daytimePercent );
-			Skybox.Tint = SkyDayColor.Evaluate( daytimePercent );
+
+			if ( Sun != null )
+				Sun.LightColor = SkyDayColor.Evaluate( daytimePercent );
+
+			if ( Fog != null )
+				Fog.Color = SkyDayColor.Evaluate( daytimePercent );
+
+			if ( Skybox != null )
+				Skybox.Tint = SkyDayColor.Evaluate( daytimePercent );
 		}
 		else
 		{
@@ -104,13 +144,23 @@ public class GameTimeManager : Component
 			}
 
 			sunRotation = Rotation.From( SunOrbit.WithRoll( nightPercent * 180 + 180 ) );
-			Sun.LightColor = SkyNightColor;
-			Fog.Color = SkyNightColor;
-			Skybox.Tint = SkyNightColor;
+
+			if ( Sun != null )
+				Sun.LightColor = SkyNightColor;
+
+			if ( Fog != null )
+				Fog.Color = SkyNightColor;
+
+			if ( Skybox != null )
+				Skybox.Tint = SkyNightColor;
 		}
 
-		Sun.Transform.Rotation = sunRotation.Right.EulerAngles;
-		Sun.SkyColor = SkyNightColor;
+
+		if ( Sun != null )
+		{
+			Sun.Transform.Rotation = sunRotation.Right.EulerAngles;
+			Sun.SkyColor = SkyNightColor;
+		}
 
 		// using ( Gizmo.Scope() )
 		// {
@@ -137,6 +187,5 @@ public class GameTimeManager : Component
 	private void NewDay()
 	{
 		_inGameTime = 0;
-		Log.Info( "New day!" );
 	}
 }
