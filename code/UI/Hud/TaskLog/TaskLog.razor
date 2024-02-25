@@ -3,5 +3,11 @@
 @inherits Panel
 
 <root>
-	
+	<SideButton 
+		Title="Inventory" 
+		Subtitle="Press @(Input.GetButtonOrigin( InputAction.Inventory )) or click here"
+		OnClick=@(() => FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.Inventory))
+		ImagePath="ui/hud/inv.png"
+		style="position: absolute; top: 50px;" 
+	/>
 </root>
