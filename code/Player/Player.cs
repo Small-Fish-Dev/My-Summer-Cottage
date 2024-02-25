@@ -95,7 +95,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// Where you're pissing on
 	/// </summary>
 	public Vector3 PissingPosition { get; set; }
-
+	public TimeSince LastPiss { get; set; } = 0f;
 	public bool IsPissing => !BlockInputs && Input.Down( "Piss" );
 
 	public string FacedDirection => (int)((EyeAngles.Normal.yaw + 45f / 2 + 180) % 360 / 45f) switch
@@ -181,6 +181,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 					{
 						PissingPosition = particle.HitPos;
 						PissingOn = Scene.FindInPhysics( new Sphere( particle.HitPos, 5f ) ).First();
+						LastPiss = 0f;
 					}
 				}
 			}

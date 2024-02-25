@@ -18,6 +18,11 @@ public abstract class EventTrigger : Component
 
 	public int LastPoll = 0;
 
+	/// <summary>
+	/// How much time passed since the last poll
+	/// </summary>
+	public float Delta => Time.Delta + LastPoll * Time.Delta;
+
 	protected override void OnStart()
 	{
 	}
