@@ -179,11 +179,13 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	/// Set the time
 	/// </summary>
 	/// <param name="seconds">Time as in-game seconds</param>
+	[Broadcast( NetPermission.HostOnly )]
 	public void SetTimeFromSeconds( int seconds )
 	{
 		_inGameTime = ((float)seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
 	}
 
+	[Broadcast( NetPermission.HostOnly )]
 	private void NewDay()
 	{
 		_inGameTime = 0;
