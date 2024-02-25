@@ -5,14 +5,23 @@ using Sauna.Game;
 
 public static partial class GlobalNodes
 {
+	public delegate Task Body();
+
+	[ActionGraphNode( "if" )]
+	public static Task If( bool condition,
+		Body? @true = null,
+		Body? @false = null )
+	{
+		return (condition ? @true : @false)?.Invoke() ?? Task.CompletedTask;
+	}
 	/// <summary>
 	/// Is the game being played by a single player
 	/// </summary>
-	[ActionGraphNode( "event.issingleplayer" ), Pure]
+	[ActionGraphNode( "event.issingleplayer", DefaultOutputSignal = false )]
 	[Title( "Is Single Player" ), Group( "Events" ), Icon( "emoji_people" )]
-	public static bool IsSingleplayer()
+	public static Task IsSingleplayer( Body? @true = null, Body? @false = null )
 	{
-		return Networking.Connections.Count > 1; // lol! :-)
+		return (Networking.Connections.Count > 1 ? @true : @false)?.Invoke() ?? Task.CompletedTask;
 	}
 
 	/// <summary>
@@ -40,13 +49,13 @@ public static partial class GlobalNodes
 	/// <summary>
 	/// Is everyone in the game included in the players collection
 	/// </summary>
-	[ActionGraphNode( "event.iseveryplayerincluded" )]
+	[ActionGraphNode( "event.iseveryplayerincluded", DefaultOutputSignal = false )]
 	[Title( "Is Every Player Included" ), Group( "Events" ), Icon( "reduce_capacity" )]
-	public static bool IsEveryPlayerIncluded( IEnumerable<Player> players )
+	public static Task IsEveryPlayerIncluded( IEnumerable<Player> players, Body? @true = null, Body? @false = null )
 	{
 		var allPlayers = GameManager.ActiveScene.GetAllComponents<Player>();
 
-		return allPlayers.All( x => players.Any( player => player == x ) );
+		return (allPlayers.All( x => players.Any( player => player == x ) ) ? @true : @false)?.Invoke() ?? Task.CompletedTask;
 	}
 
 	/// <summary>
