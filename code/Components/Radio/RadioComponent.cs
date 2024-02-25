@@ -12,7 +12,25 @@ public partial class RadioComponent : Component
 		}
 	}
 
-	[Sync, Property] public bool On { get; set; }
+	[Sync, Property] public bool On
+	{
+		get => _on;
+		set
+		{
+			_on = value;
+
+			if ( !_on ) // Close the player.
+			{
+				_player?.Stop();
+				_player = null;
+
+				return;
+			}
+
+			// Start the player.
+			StartMusic();
+		}
+	}
 
 	public RadioChannel Channel => RadioChannel.All[ChannelIndex];
 	public string Title => _player != null && !string.IsNullOrWhiteSpace( _player.Title )
@@ -20,35 +38,19 @@ public partial class RadioComponent : Component
 		: Channel.Name;
 
 	MusicPlayer _player;
+	bool _on;
 	int _channelIndex;
 
 	public ReadOnlySpan<float> GetSpectrum() => _player != null ? _player.Spectrum : ReadOnlySpan<float>.Empty;
 
 	protected override void OnStart()
 	{
-		if ( On )
-			StartMusic();
-
 		var interactions = Components.Create<Interactions>();
 
 		// Toggle
 		interactions.AddInteraction( new Interaction()
 		{
-			Action = ( Player interactor, GameObject obj ) =>
-			{
-				On = !On;
-
-				if ( !On ) // Close the player.
-				{
-					_player?.Stop();
-					_player = null;
-
-					return;
-				}
-
-				// Start the player.
-				StartMusic();
-			},
+			Action = ( Player interactor, GameObject obj ) => On = !On,
 			Keybind = "use",
 			DynamicText = () => $"Toggle {(On ? "off" : "on")}",
 		} );

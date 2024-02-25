@@ -1,0 +1,110 @@
+@import "/UI/Style.scss";
+
+TaskLog {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    pointer-events: all;
+    background-color: $fullscreen-bg;
+    backdrop-filter: $fullscreen-blur;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    .task-container {
+        top: 5%;
+        height: 70%;
+        width: 70%;
+        gap: 4px;
+
+        .title-container {
+            font-size: 34px;
+            font-family: BasicHandwriting;
+            top: -48px;
+        }
+
+        .task-list {
+            height: 100%;
+            width: 30%;
+            background-color: $black-bg;
+        }
+
+        .task-details {
+            height: 100%;
+            width: 70%;
+            background-color: $black-bg;
+            flex-direction: column;
+
+            .title {
+                font-size: 28px;
+                font-family: BasicHandwriting;
+                margin-bottom: 8px;
+            }
+
+            .subtitle {
+                font-size: 22px;
+                letter-spacing: 1px;
+                font-family: battlenetcopy;
+                margin-bottom: 3px;
+            }
+
+            .pinned {
+                font-size: 20px;
+                letter-spacing: 3px;
+                font-family: battlenetcopy;
+                color: $gray;
+            }
+
+            .completed {
+                background-color: $green;
+                top: -5px;
+                margin-left: 40px;
+                padding: 2px 15px;
+                color: black;
+                font-size: 24px;
+            }
+
+            .divider {
+                width: 1px;
+                height: 100%;
+                background-color: white;
+            }
+
+            .task-additional-details {
+                height: 70%;
+                padding: 10px 40px;
+                flex-direction: column;
+                overflow-y: scroll;
+            }
+
+            .requirement {
+                flex-shrink: 0;
+                align-items: center;
+
+                .requirement-status {
+                    width: 20px;
+                    height: 20px;
+                    border: 2px white;
+                    margin-top: 4px;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 8px;
+                    align-self: flex-start;
+                    flex-shrink: 0;
+    
+                    .requirement-completed {
+                        background-color: white;
+                        height: 50%;
+                        width: 50%;
+                    }
+                }
+
+                .requirement-details {
+                    font-size: 28px;
+                }
+            }
+        }
+    }
+}

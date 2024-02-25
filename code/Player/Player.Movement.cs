@@ -59,10 +59,10 @@ partial class Player
 	{
 		if ( MoveHelper == null ) return;
 
-		var isSprinting = Input.Down( InputAction.Run );
+		var isWalking = Input.Down( InputAction.Walk );
 		var isDucking = Input.Down( InputAction.Duck );
 
-		var wishSpeed = isDucking ? DuckSpeed : isSprinting ? SprintSpeed : WalkSpeed;
+		var wishSpeed = isDucking ? DuckSpeed : isWalking ? WalkSpeed : SprintSpeed;
 		var wishVelocity = Input.AnalogMove.Normal * wishSpeed * EyeAngles.WithPitch( 0f );
 
 		MoveHelper.WishVelocity = BlockInputs ? Vector3.Zero : wishVelocity;

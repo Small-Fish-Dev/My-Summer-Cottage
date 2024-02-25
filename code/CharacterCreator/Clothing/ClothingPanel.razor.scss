@@ -83,7 +83,24 @@ ClothingPanel {
                         pointer-events: none;
                     }
 
+                    .equip {
+                        display: none;
+                        position: absolute;
+                        background-color: rgba(black, 0.5);
+                        padding: 5px;
+                        width: 100%;
+                        text-align: center;
+                        font-family: HabboExtended;
+                        font-weight: bold;
+                        font-size: 16px;
+                        letter-spacing: 2px;
+                    }
+
                     &.selected {
+                        .equip {
+                            display: flex;
+                        }
+
                         .border {
                             background-image: linear-gradient(darken($orange, 0.3), $orange);
                         }

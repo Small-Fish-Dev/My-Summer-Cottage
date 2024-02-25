@@ -188,6 +188,16 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 		_inGameTime = ((float)seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
 	}
 
+	/// <summary>
+	/// Skip some time
+	/// </summary>
+	/// <param name="seconds">Time as in-game seconds</param>
+	[Broadcast( NetPermission.HostOnly )]
+	public void SkipTimeFromSeconds( int seconds )
+	{
+		_inGameTime += ((float)seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
+	}
+
 	[Broadcast( NetPermission.HostOnly )]
 	private void NewDay()
 	{

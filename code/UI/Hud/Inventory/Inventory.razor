@@ -3,6 +3,14 @@
 @inherits Panel
 
 <root>
+	<SideButton 
+		Title="Tasks" 
+		Subtitle="Press @(Input.GetButtonOrigin( InputAction.Tasks )) or click here"
+		OnClick=@(() => FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.TaskLog))
+		ImagePath="ui/hud/task_completed.png"
+		IsInverted=@(true)
+		style="position: absolute; top: 50px; right: 0px;" 
+	/>
 	<div class="section" style="flex-direction: row; align-items: center; justify-content: flex-end;">
 		<div style="flex-direction: column; flex-shrink: 0; align-items: flex-end;">
 			<InventorySlot Slot=@EquipSlot.Head Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Head]/>
