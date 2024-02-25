@@ -168,7 +168,11 @@ public partial class SlotMachine : Component
 
 	protected override void OnStart()
 	{
-		GameObject.NetworkSpawn();
+		Wheels = new WheelMode { a = 1, b = 1, c = 1 };
+
+		if ( !Network.Active )
+			GameObject.NetworkSpawn();
+
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 
 		UpdateBodygroups();
