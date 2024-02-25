@@ -8,9 +8,16 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	Color "materials/default/default_color.tga"
+	Color "materials/office_ceiling/office_ceiling_basecolor.png"
 	ColorTintMask "materials/default/default.tga"
-	Metalness "materials/default/default_metal.tga"
-	Normal "materials/default/default_normal.tga"
-	Roughness "materials/default/default_rough.tga"
+	Metalness "materials/office_ceiling/office_ceiling_metallic.png"
+	Normal "materials/office_ceiling/office_ceiling_normal.png"
+	Roughness "materials/office_ceiling/office_ceiling_roughness.png"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "plastic.hollow"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
 }
