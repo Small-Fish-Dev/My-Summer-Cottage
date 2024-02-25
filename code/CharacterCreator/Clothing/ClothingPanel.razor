@@ -43,6 +43,7 @@
 								@if ( clothing != null )
 								{
 									<img src=@(clothing.Get<IconSettings>( "Icon" ).Path) />
+									<label class="equip">EQUIPPED</label>
 								}
 							</div>
 						}
@@ -118,6 +119,8 @@
 		Renderer.SetBodyGroup( "hands", flags.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 );
 		Renderer.SetBodyGroup( "legs", flags.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
 		Renderer.SetBodyGroup( "feet", flags.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
+
+		Renderer.Set( "inspect", true );
 
 		penoid.Enabled = selections[EquipSlot.Legs] == -1;
 	}
