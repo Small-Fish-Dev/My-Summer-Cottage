@@ -13,7 +13,7 @@
 	}
 	else if (_activePanel == ActivePanel.TaskLog)
 	{
-
+		<TaskLog />
 	}
 	else if (_activePanel == ActivePanel.FishLog)
 	{
@@ -56,6 +56,9 @@
 
 		if (Input.Pressed(InputAction.Inventory))
 			Toggle(ActivePanel.Inventory);
+
+		if (Input.Pressed(InputAction.Tasks))
+			Toggle(ActivePanel.TaskLog);
 	}
 
 	private void Toggle(ActivePanel panel)
