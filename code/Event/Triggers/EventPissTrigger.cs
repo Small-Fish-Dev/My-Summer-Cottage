@@ -23,7 +23,7 @@ public sealed class EventPissTrigger : EventTrigger
 
 		foreach ( var player in pissingPlayers )
 		{
-			if ( player.LastPiss <= Time.Delta * MaxPollingRate )
+			if ( player.LastPiss <= Delta )
 			{
 				if ( WorldBBox.Contains( player.PissingPosition ) )
 				{
