@@ -12,7 +12,7 @@ public enum HiddenBodyGroup
 	Torso = 2,
 	[Icon( "sign_language" )]
 	Hands = 4,
-	[Icon( "accessible_forward" )]
+	[Icon( "airline_seat_legroom_reduced" )]
 	Legs = 8,
 	[Icon( "do_not_step" )]
 	Feet = 16

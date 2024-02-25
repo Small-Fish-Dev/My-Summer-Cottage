@@ -108,10 +108,10 @@
                   "Id": 6,
                   "Type": "call",
                   "Properties": {
-                    "T": "package.fish.sauna/Sauna.Player",
-                    "_name": "Get",
                     "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    "_name": "Get",
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                    "T": "package.fish.sauna/Sauna.Player"
                   },
                   "UserData": {
                     "Position": "64,-128",
@@ -189,8 +189,8 @@
                   "Id": 13,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.System/Transform",
-                    "_name": "Position"
+                    "_name": "Position",
+                    "_type": "Sandbox.System/Transform"
                   },
                   "UserData": {
                     "Position": "464,192",
@@ -264,11 +264,11 @@
                   "Id": 38,
                   "Type": "scene.ref",
                   "Properties": {
+                    "T": "Sandbox.Game/Sandbox.GameObject",
                     "value": {
                       "_type": "gameobject",
                       "go": "ad81ba83-9b0e-45f4-bb37-2673dc189b7c"
-                    },
-                    "T": "Sandbox.Game/Sandbox.GameObject"
+                    }
                   },
                   "UserData": {
                     "Position": "-192,112"
@@ -278,12 +278,12 @@
                   "Id": 42,
                   "Type": "scene.ref",
                   "Properties": {
+                    "T": "package.fish.sauna/EventComponent",
                     "value": {
                       "_type": "component",
                       "go": "d7d448b2-96af-4858-b966-3722196434c8",
                       "component_type": "EventComponent"
-                    },
-                    "T": "package.fish.sauna/EventComponent"
+                    }
                   },
                   "UserData": {
                     "Position": "1616,192"
@@ -616,11 +616,11 @@
                   "Id": 3,
                   "Type": "scene.ref",
                   "Properties": {
+                    "T": "Sandbox.Game/Sandbox.GameObject",
                     "value": {
                       "_type": "gameobject",
                       "go": "ad81ba83-9b0e-45f4-bb37-2673dc189b7c"
-                    },
-                    "T": "Sandbox.Game/Sandbox.GameObject"
+                    }
                   },
                   "UserData": {
                     "Position": "-608,144"
@@ -630,11 +630,11 @@
                   "Id": 5,
                   "Type": "scene.ref",
                   "Properties": {
+                    "T": "Sandbox.Game/Sandbox.GameObject",
                     "value": {
                       "_type": "gameobject",
                       "go": "5b9573b9-d26c-4cc6-886f-9ddff24c0735"
-                    },
-                    "T": "Sandbox.Game/Sandbox.GameObject"
+                    }
                   },
                   "UserData": {
                     "Position": "-768,320"
@@ -728,8 +728,8 @@
                   "Id": 17,
                   "Type": "call",
                   "Properties": {
-                    "_name": "RotateAroundAxis",
                     "_isStatic": false,
+                    "_name": "RotateAroundAxis",
                     "_type": "Sandbox.System/Rotation"
                   },
                   "UserData": {
@@ -779,12 +779,12 @@
                   "Id": 35,
                   "Type": "scene.ref",
                   "Properties": {
+                    "T": "package.fish.sauna/EventComponent",
                     "value": {
                       "_type": "component",
                       "go": "959dc437-a39e-4b8f-a4fc-9116b8ceb3e3",
                       "component_type": "EventComponent"
-                    },
-                    "T": "package.fish.sauna/EventComponent"
+                    }
                   },
                   "UserData": {
                     "Position": "1344,256"
