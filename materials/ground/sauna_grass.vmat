@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader_c"
+	shader "shaders/saunasimple.shader"
 
 	//---- Texture Filtering ----
 	F_TEXTURE_FILTERING 4 // Nearest Neighbour
@@ -12,16 +12,16 @@ Layer0
 
 	//---- Material ----
 	Color "materials/ground/grass/new_graph_basecolor.png"
+	ColorTintMask "materials/default/default.tga"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/default/default_metal.tga"
 	Normal "materials/ground/grass/new_graph_normal.png"
 	Roughness "materials/ground/grass/new_graph_roughness.png"
-
-	//---- Material A ----
-	Metalness "materials/default/default_metal.tga"
 
 	SystemAttributes
 	{
 		PhysicsSurfaceProperties "grass"
-		WorldMappingWidth "256"
-		WorldMappingHeight "256"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
 	}
 }
