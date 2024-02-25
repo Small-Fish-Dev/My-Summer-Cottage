@@ -58,7 +58,9 @@
                 {
                     Player.Local.TargetedGameObject?.Network.TakeOwnership();
                     interaction.Action?.Invoke(Player.Local, Player.Local.TargetedGameObject);
-                    EventSystem.InteractionInvoked(interaction, Player.Local.TargetedGameObject, Player.Local); // Pass off this interaction for events to find
+
+                    if ( interaction.Identifier != String.Empty )
+                      EventSystem.InteractionInvoked( interaction.Identifier ); // Pass off this interaction for events to find
 
 					var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
 					Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ) );
