@@ -3,6 +3,8 @@ namespace Sauna.Game;
 public class GameTimeManager : Component
 {
 	[Property] public DirectionalLight Sun;
+	[Property] public SkyBox2D Skybox;
+	[Property] public GradientFog Fog;
 
 	[Property] public Gradient SkyDayColor;
 	[Property] public Color SkyNightColor;
@@ -75,6 +77,8 @@ public class GameTimeManager : Component
 			var daytimePercent = ((float)igs).Remap( SunriseTime, SunsetTime );
 			sunRotation = Rotation.From( SunOrbit.WithRoll( daytimePercent * 180 ) );
 			Sun.LightColor = SkyDayColor.Evaluate( daytimePercent );
+			Fog.Color = SkyDayColor.Evaluate( daytimePercent );
+			Skybox.Tint = SkyDayColor.Evaluate( daytimePercent );
 		}
 		else
 		{
@@ -101,6 +105,8 @@ public class GameTimeManager : Component
 
 			sunRotation = Rotation.From( SunOrbit.WithRoll( nightPercent * 180 + 180 ) );
 			Sun.LightColor = SkyNightColor;
+			Fog.Color = SkyNightColor;
+			Skybox.Tint = SkyNightColor;
 		}
 
 		Sun.Transform.Rotation = sunRotation.Right.EulerAngles;
