@@ -49,4 +49,16 @@ public static partial class GlobalNodes
 		return allPlayers.All( x => players.Any( player => player == x ) );
 	}
 
+	/// <summary>
+	/// Skips in game seconds, only the host can do this so make sure to check if it's singleplayer or if everyone is
+	/// </summary>
+	[ActionGraphNode( "event.skiptime" )]
+	[Title( "Skip Time" ), Group( "Events" ), Icon( "update" )]
+	public static void SkipTime( int inGameSeconds )
+	{
+		var timeManager = GameManager.ActiveScene.GetAllComponents<GameTimeManager>()?.First() ?? null;
+
+		if ( timeManager != null )
+			timeManager.SkipTimeFromSeconds( inGameSeconds );
+	}
 }
