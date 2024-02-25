@@ -4,7 +4,7 @@ public static class InputAction
 {
 	public const string Jump = "Jump";
 	public const string Duck = "Duck";
-	public const string Run = "Run";
+	public const string Walk = "Walk";
 
 	public const string Voice = "Voice";
 
