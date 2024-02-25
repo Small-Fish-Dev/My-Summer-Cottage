@@ -45,7 +45,7 @@ public sealed class BeerCrate : Component
 			return offset.Value;
 		}
 	}
-	
+
 	private (Vector3, Vector3)? offset;
 	private Dictionary<int, SceneObject> beers = new();
 	private Model beerModel = Model.Load( "models/beer_bottle/beer.vmdl" );
@@ -66,6 +66,7 @@ public sealed class BeerCrate : Component
 
 		interactions.AddInteraction( new Interaction()
 		{
+			Identifier = "beer_crate.take",
 			Action = ( Player interactor, GameObject obj ) =>
 			{
 				Count--;

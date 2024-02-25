@@ -2,7 +2,8 @@
 
 public partial class RadioComponent : Component
 {
-	[Sync] public int ChannelIndex
+	[Sync]
+	public int ChannelIndex
 	{
 		get => _channelIndex;
 		set
@@ -12,7 +13,8 @@ public partial class RadioComponent : Component
 		}
 	}
 
-	[Sync, Property] public bool On
+	[Sync, Property]
+	public bool On
 	{
 		get => _on;
 		set
@@ -50,6 +52,7 @@ public partial class RadioComponent : Component
 		// Toggle
 		interactions.AddInteraction( new Interaction()
 		{
+			Identifier = "radio.toggle",
 			Action = ( Player interactor, GameObject obj ) => On = !On,
 			Keybind = "use",
 			DynamicText = () => $"Toggle {(On ? "off" : "on")}",
@@ -58,11 +61,12 @@ public partial class RadioComponent : Component
 		// Next channel
 		interactions.AddInteraction( new Interaction()
 		{
+			Identifier = "radio.next",
 			Action = ( Player interactor, GameObject obj ) =>
 			{
 				var next = ChannelIndex + 1;
 				ChannelIndex = next >= RadioChannel.All.Length
-					? 0 
+					? 0
 					: next;
 			},
 			Keybind = "next",
@@ -73,6 +77,7 @@ public partial class RadioComponent : Component
 		// Previous channel
 		interactions.AddInteraction( new Interaction()
 		{
+			Identifier = "radio.previous",
 			Action = ( Player interactor, GameObject obj ) =>
 			{
 				var previous = ChannelIndex - 1;

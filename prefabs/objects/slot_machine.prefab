@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "Id": "0308d5f9-2d51-4b84-95a0-b024a7317c7f",
-    "Name": "Slot Machine",
+    "Name": "slot_machine",
     "Networked": true,
     "Enabled": true,
     "Components": [
@@ -9,6 +9,7 @@
         "__type": "Interactions",
         "ObjectInteractions": [
           {
+            "Identifier": "slot.play",
             "Keybind": "use",
             "Description": "Play",
             "Action": {
@@ -35,10 +36,10 @@
                   "Id": 1,
                   "Type": "call",
                   "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine",
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
                     "_isStatic": false,
-                    "_name": "Get",
-                    "_type": "IComponentLister",
-                    "T": "SlotMachine"
+                    "_name": "Get"
                   },
                   "UserData": {
                     "Position": "208,80"
@@ -48,9 +49,9 @@
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
                     "_isStatic": false,
-                    "_name": "TryRoll",
-                    "_type": "SlotMachine"
+                    "_name": "TryRoll"
                   },
                   "UserData": {
                     "Position": "432,80"
@@ -83,6 +84,7 @@
             "Extents": "2.950275,5.265101,4.963008"
           },
           {
+            "Identifier": "slot.line2",
             "Keybind": "use",
             "Description": "Line 2",
             "Action": {
@@ -109,10 +111,10 @@
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine",
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
                     "_isStatic": false,
-                    "_name": "Get",
-                    "_type": "IComponentLister",
-                    "T": "SlotMachine"
+                    "_name": "Get"
                   },
                   "UserData": {
                     "Position": "176,64"
@@ -122,9 +124,9 @@
                   "Id": 4,
                   "Type": "call",
                   "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
                     "_isStatic": false,
-                    "_name": "ToggleBetFlag",
-                    "_type": "SlotMachine"
+                    "_name": "ToggleBetFlag"
                   },
                   "UserData": {
                     "Position": "416,64"
@@ -162,6 +164,7 @@
             "Extents": "3.157069,5.474216,4.794635"
           },
           {
+            "Identifier": "slot.line1",
             "Keybind": "use",
             "Description": "Line 1",
             "Action": {
@@ -188,10 +191,10 @@
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine",
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
                     "_isStatic": false,
-                    "_name": "Get",
-                    "_type": "IComponentLister",
-                    "T": "SlotMachine"
+                    "_name": "Get"
                   },
                   "UserData": {
                     "Position": "240,64"
@@ -201,9 +204,9 @@
                   "Id": 3,
                   "Type": "call",
                   "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
                     "_isStatic": false,
-                    "_name": "ToggleBetFlag",
-                    "_type": "SlotMachine"
+                    "_name": "ToggleBetFlag"
                   },
                   "UserData": {
                     "Position": "480,64"
@@ -241,6 +244,7 @@
             "Extents": "3.459248,5.384391,4.798366"
           },
           {
+            "Identifier": "slot.line3",
             "Keybind": "use",
             "Description": "Line 3",
             "Action": {
@@ -267,10 +271,10 @@
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine",
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
                     "_isStatic": false,
-                    "_name": "Get",
-                    "_type": "IComponentLister",
-                    "T": "SlotMachine"
+                    "_name": "Get"
                   },
                   "UserData": {
                     "Position": "240,128"
@@ -280,9 +284,9 @@
                   "Id": 3,
                   "Type": "call",
                   "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
                     "_isStatic": false,
-                    "_name": "ToggleBetFlag",
-                    "_type": "SlotMachine"
+                    "_name": "ToggleBetFlag"
                   },
                   "UserData": {
                     "Position": "480,128"
@@ -320,6 +324,7 @@
             "Extents": "3.184448,5.080022,4.854632"
           },
           {
+            "Identifier": "slot.cash_out",
             "Keybind": "use",
             "Description": "Cash out",
             "Action": {
@@ -347,10 +352,10 @@
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine",
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
                     "_isStatic": false,
-                    "_name": "Get",
-                    "_type": "IComponentLister",
-                    "T": "SlotMachine"
+                    "_name": "Get"
                   },
                   "UserData": {
                     "Position": "192,208"
@@ -360,9 +365,9 @@
                   "Id": 4,
                   "Type": "call",
                   "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
                     "_isStatic": false,
-                    "_name": "Cashout",
-                    "_type": "SlotMachine"
+                    "_name": "Cashout"
                   },
                   "UserData": {
                     "Position": "416,208"
@@ -401,6 +406,7 @@
             "Extents": "4.215116,5.380785,5.297434"
           },
           {
+            "Identifier": "slot.insert_coin",
             "Keybind": "use",
             "Description": "Insert coin",
             "Action": {
@@ -428,10 +434,10 @@
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine",
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
                     "_isStatic": false,
-                    "_name": "Get",
-                    "_type": "IComponentLister",
-                    "T": "SlotMachine"
+                    "_name": "Get"
                   },
                   "UserData": {
                     "Position": "240,160"
@@ -441,9 +447,9 @@
                   "Id": 4,
                   "Type": "call",
                   "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
                     "_isStatic": false,
-                    "_name": "InsertCoin",
-                    "_type": "SlotMachine"
+                    "_name": "InsertCoin"
                   },
                   "UserData": {
                     "Position": "464,160"
@@ -510,7 +516,7 @@
           {
             "__type": "SkinnedModelRenderer",
             "AnimationGraph": null,
-            "BodyGroups": 699051,
+            "BodyGroups": 2731,
             "BoneMergeTarget": null,
             "CreateBoneObjects": false,
             "MaterialGroup": null,

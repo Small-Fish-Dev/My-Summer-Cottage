@@ -17,6 +17,12 @@ public enum InputMode
 public struct Interaction
 {
 	/// <summary>
+	/// Unique identifier for this interaction
+	/// </summary>
+	[Property]
+	public string Identifier { get; set; }
+
+	/// <summary>
 	/// The keybind used to trigger this interaction
 	/// </summary>
 	[Property]
