@@ -78,6 +78,33 @@ TaskLog {
                 flex-direction: column;
                 overflow-y: scroll;
             }
+
+            .requirement {
+                flex-shrink: 0;
+                align-items: center;
+
+                .requirement-status {
+                    width: 20px;
+                    height: 20px;
+                    border: 2px white;
+                    margin-top: 4px;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: 8px;
+                    align-self: flex-start;
+                    flex-shrink: 0;
+    
+                    .requirement-completed {
+                        background-color: white;
+                        height: 50%;
+                        width: 50%;
+                    }
+                }
+
+                .requirement-details {
+                    font-size: 28px;
+                }
+            }
         }
     }
 }
