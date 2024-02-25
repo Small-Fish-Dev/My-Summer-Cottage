@@ -55,6 +55,7 @@
 
 @code {
 	private SkinnedModelRenderer renderer;
+	private SkinnedModelRenderer penoid;
 	public SkinnedModelRenderer Renderer
 	{
 		get
@@ -62,8 +63,13 @@
 			if ( renderer != null )
 				return renderer;
 
-			return renderer = CreatorComponent.All[CreatorStage.Appearance].GameObject
+			renderer = CreatorComponent.All[CreatorStage.Appearance].GameObject
 				.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInDescendants );
+
+			penoid = renderer.GameObject.Children
+				.FirstOrDefault().Components.Get<SkinnedModelRenderer>();
+
+			return renderer;
 		}
 	}
 	public SceneModel Model => Renderer.SceneModel;
@@ -112,6 +118,8 @@
 		Renderer.SetBodyGroup( "hands", flags.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 );
 		Renderer.SetBodyGroup( "legs", flags.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
 		Renderer.SetBodyGroup( "feet", flags.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
+
+		penoid.Enabled = selections[EquipSlot.Legs] == -1;
 	}
 
 	private void LoadClothes()
