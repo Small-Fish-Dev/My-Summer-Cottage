@@ -29,6 +29,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 		}
 	}
 
+	[Property]
+	public SkinnedModelRenderer Penoid { get; set; }
+
 	Color _skinColor;
 	HiddenBodyGroup _hideBodygroups;
 
@@ -39,7 +42,20 @@ public partial class Player : Component, Component.ExecuteInEditor
 		set
 		{
 			_hideBodygroups = value;
-			Renderer.BodyGroups = (ulong)_hideBodygroups;
+
+			if ( Renderer == null )
+				return;
+
+			Renderer.SetBodyGroup( "head", _hideBodygroups.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 );
+			Renderer.SetBodyGroup( "torso", _hideBodygroups.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
+			Renderer.SetBodyGroup( "hands", _hideBodygroups.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 );
+			Renderer.SetBodyGroup( "legs", _hideBodygroups.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
+			Renderer.SetBodyGroup( "feet", _hideBodygroups.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
+
+			if ( Penoid == null )
+				return;
+
+			Penoid.Enabled = Inventory.EquippedItems[(int)EquipSlot.Legs] == null;
 		}
 	}
 
