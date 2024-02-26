@@ -7,7 +7,7 @@ public partial class Player
 	private const float INTERACTION_DISTANCE = 75f;
 	private const float INTERACTION_SIZE = 10f;
 
-	public Ray ViewRay => new( Camera.Transform.Position + Camera.Transform.Rotation.Forward * 25f, Camera.Transform.Rotation.Forward );
+	public Ray ViewRay => new( Camera.Transform.Position, Camera.Transform.Rotation.Forward );
 	public GameObject TargetedGameObject { get; private set; }
 	public SceneTraceResult InteractionTrace { get; private set; }
 	public BBox? InteractionBounds { get; private set; }

@@ -2,7 +2,7 @@
 
 partial class SlotMachine
 {
-	private enum Slot : byte
+	public enum Slot : byte
 	{
 		Poop,
 		Orange,
@@ -51,7 +51,7 @@ partial class SlotMachine
 	private int GetRollIndex( int wheel, BetFlag flag )
 		=> Normalize( RollResult[wheel] + (flag switch { BetFlag.Second => 1, BetFlag.Third => -1, _ => 0 }), 8 );
 
-	public int CalculateWin()
+	public (int Amount, IReadOnlyList<(Slot, Slot, Slot)> Wins) CalculateWinResult()
 	{
 		var total = 0;
 		var wins = new List<(Slot, Slot, Slot)>();
@@ -87,6 +87,6 @@ partial class SlotMachine
 			}
 		}
 
-		return total;
+		return (total, wins);
 	}
 }

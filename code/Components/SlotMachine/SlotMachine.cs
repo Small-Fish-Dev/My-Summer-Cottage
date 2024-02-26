@@ -35,6 +35,9 @@ public partial class SlotMachine : Component
 	[Sync] TimeSince SinceResult { get; set; }
 	[Sync] int ShowCount { get; set; }
 
+	SoundHandle _winSound;
+	SoundHandle[] _rollSounds = new SoundHandle[3];
+
 	[Flags]
 	public enum BetFlag : byte
 	{
@@ -102,8 +105,17 @@ public partial class SlotMachine : Component
 
 	public void TryRoll()
 	{
+		PlaySound( "button" );
+
 		if ( Rolling || BetFlags == BetFlag.None || Money < Bet )
 			return;
+
+		_winSound?.Stop();
+		for ( int i = 0; i < 3; i++ )
+		{
+			var snd = _rollSounds[i] = PlaySound( "roll" );
+			snd.Pitch = 0.4f + i / 10f * 2f;
+		}
 
 		Rolling = true;
 		Money -= Bet;
@@ -138,25 +150,44 @@ public partial class SlotMachine : Component
 
 	public void InsertCoin( Player player )
 	{
-		// todo: play coin sounds
 		if ( player.TakeMoney( 1 ) )
+		{
+			PlaySound( "insert" );
 			Money++;
+		}	
 	}
 
 	public void Cashout( Player player )
 	{
+		PlaySound( "button" );
+
+		if ( Money <= 0 )
+			return;
+
 		player.Money += Money;
 		Money = 0;
-		// todo: play coin sounds
+
+		PlaySound( "cashout" );
 	}
 
 	public void ToggleBetFlag( byte line )
 	{
+		PlaySound( "button" );
+
 		if ( Rolling )
 			return;
 
 		var flags = (byte)BetFlags;
 		BetFlags = (BetFlag)(flags ^ (1 << (line - 1)));
+	}
+
+	private SoundHandle PlaySound( string path )
+	{
+		var sound = Sound.Play( path );
+		sound.Position = Transform.Position;
+		sound.Decibels = 40;
+		sound.ListenLocal = false;
+		return sound;
 	}
 
 	private void CheckForWin()
@@ -165,10 +196,14 @@ public partial class SlotMachine : Component
 			return;
 
 		Rolling = false;
-		Money += CalculateWin();
 
-		// todo: Actually calculate win based on slot results.
-		// todo: Play sounds on win etc.
+		var result = CalculateWinResult();
+		Money += result.Amount;
+
+		if ( result.Wins.Contains( (Slot.Jackpot, Slot.Jackpot, Slot.Jackpot) ) )
+			_winSound = PlaySound( "jackpot" );
+		else if ( result.Wins.Count > 0 )
+			_winSound = PlaySound( "win" );
 	}
 
 	protected override void OnStart()
@@ -191,6 +226,9 @@ public partial class SlotMachine : Component
 
 	protected override void OnPreRender()
 	{
+		if ( !GameManager.IsPlaying )
+			return;
+
 		// Which slot results can we show already?
 		ShowCount = MathX.FloorToInt( SinceResult / (ROLL_TIME / 3) ).Clamp( 0, 3 );
 		for ( int i = 1; i <= 3; i++ )
@@ -199,6 +237,14 @@ public partial class SlotMachine : Component
 			var target = ShowCount >= i || !Rolling
 				? (RollResult[i] + 1) * ANGLE_STEP
 				: SinceResult * 1000f;
+
+			var soundIndex = i - 1;
+			if ( ShowCount >= i && _rollSounds[soundIndex] != null )
+			{
+				_rollSounds[soundIndex]?.Stop();
+				_rollSounds[soundIndex] = null;
+				PlaySound( "stop" );
+			}
 
 			if ( ShowCount >= i || !Rolling )
 				Model?.SetBodyGroup( 6 + i, (Wheels[i] - 1) * 2 );
