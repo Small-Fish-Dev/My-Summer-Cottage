@@ -9,10 +9,12 @@ TaskPanel {
         aspect-ratio: 1;
         height: 70px;
         margin-right: 10px;
+        transition: all 0.1s;
     }
 
     .task-details {
         flex-direction: column;
+        transition: all 0.1s;
         
         .task-title {
             font-family: BasicHandwriting;
@@ -25,6 +27,17 @@ TaskPanel {
             font-size: 24px;
             text-overflow: ellipsis;
             white-space: nowrap;
+        }
+    }
+
+    &:hover {
+        background-color: #7474743c;
+        cursor: pointer;
+    }
+
+    &:active {
+        .task-img, .task-details {
+            transform: scale(0.98);
         }
     }
 }
