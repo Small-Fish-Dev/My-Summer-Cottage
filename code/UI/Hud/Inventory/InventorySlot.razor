@@ -63,7 +63,12 @@
 
 		CurrentDraggable = new DraggableItem( this, holdPoint: Mouse.Position - Box.Rect.TopLeft );
 		CurrentDraggable.SetPositionInScreenPixels( Mouse.Position );
-		AddChild( CurrentDraggable );
+
+		var fraction = (Mouse.Position - Box.Rect.Size / 2f) / Screen.Size;
+		CurrentDraggable.Style.Left = Length.Fraction( fraction.x );
+		CurrentDraggable.Style.Top = Length.Fraction( fraction.y );
+
+		Hud.Instance.Panel.AddChild( CurrentDraggable );
 	}
 
 	private void MoveItemTo( InventorySlot targetSlot )
