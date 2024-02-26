@@ -1,4 +1,4 @@
-﻿@using Sandbox;
+@using Sandbox;
 @using Sandbox.UI;
 
 @namespace Sauna
@@ -80,7 +80,7 @@
 				.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInDescendants );
 
 			penoid = renderer.GameObject.Children
-				.FirstOrDefault().Components.Get<SkinnedModelRenderer>();
+				.FirstOrDefault().Components.Get<SkinnedModelRenderer>( true );
 
 			return renderer;
 		}
