@@ -82,6 +82,19 @@
 			/>
 
 			break;
+
+		case CreatorStage.Confirmation:
+			<SideButton 
+				Title="Confirm" 
+				Subtitle="Finish creating your character."
+				ImagePath="ui/hud/confirm.png"
+				OnClick=@Save
+				IsDisabled=@false
+				IsInverted=@true
+				style="position:absolute; right: 0px; bottom: 50px;"
+			/>
+
+			break;
 	}
 </root>
 
@@ -89,8 +102,24 @@
 	private int stageInteger => (int)CreatorComponent.Current + 1;
 	
 	private bool disabled => 
-		string.IsNullOrEmpty( PassportComponent.Firstname ) 
-	 || string.IsNullOrEmpty( PassportComponent.Lastname );
+		string.IsNullOrEmpty( PassportPanel.Firstname ) 
+	 || string.IsNullOrEmpty( PassportPanel.Lastname );
+
+	private void Save() =>
+		Player.Save( 
+			new() {
+				Firstname = PassportPanel.Firstname.ToLower().ToTitleCase(),
+				Lastname = PassportPanel.Lastname.ToLower().ToTitleCase(),
+				Fatness = TabletPanel.Weight,
+				Height = TabletPanel.Height,
+				SkinColor = TabletPanel.SkinColor,
+				Clothes = ClothingPanel.GetSelections()
+					.Select( x => new ItemSave {
+						Path = x.Value
+					} )
+					.ToArray()
+			} 
+		);
 
 	protected override int BuildHash()
 	{

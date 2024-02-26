@@ -34,7 +34,7 @@
 @code {
 	[Property] public CreatorOverlay Overlay { get; set; }
 
-	public static string Fullname => ($"{Firstname} {Lastname}").ToTitleCase();
+	public static string Fullname => ($"{Firstname} {Lastname}").ToLower().ToTitleCase();
 
 	public static string Firstname { get; private set; }
 	public static string Lastname { get; private set; }
