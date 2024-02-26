@@ -3,6 +3,7 @@ namespace Sauna;
 public struct IconSettings : IEquatable<IconSettings>
 {
 	public string Model { get; set; }
+	public string MaterialGroup { get; set; }
 	public Vector3 Position { get; set; }
 	public Rotation Rotation { get; set; }
 	public Guid Guid { get; set; }
