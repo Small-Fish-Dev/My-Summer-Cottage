@@ -13,27 +13,28 @@
 	/>
 	<div class="section" style="flex-direction: row; align-items: center; justify-content: flex-end;">
 		<div style="flex-direction: column; flex-shrink: 0; align-items: flex-end;">
-			<InventorySlot Slot=@EquipSlot.Head Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Head]/>
-			<InventorySlot Slot=@EquipSlot.Face Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Face]/>
+			<InventorySlot EquipSlotIndex=@EquipSlot.Head Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Head]/>
+			<InventorySlot EquipSlotIndex=@EquipSlot.Face Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Face]/>
 			<div>
-				<InventorySlot Slot=@EquipSlot.Hand Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Hand]/>
-				<InventorySlot Slot=@EquipSlot.Body Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Body]/>
+				<InventorySlot EquipSlotIndex=@EquipSlot.Hand Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Hand]/>
+				<InventorySlot EquipSlotIndex=@EquipSlot.Body Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Body]/>
 			</div>
-			<InventorySlot Slot=@EquipSlot.Legs Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Legs]/>
-			<InventorySlot Slot=@EquipSlot.Feet Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Feet]/>
+			<InventorySlot EquipSlotIndex=@EquipSlot.Legs Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Legs]/>
+			<InventorySlot EquipSlotIndex=@EquipSlot.Feet Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Feet]/>
 		</div>
 		<CharacterRenderer/>
 	</div>
 	<div class="section" style="width: 45%;">
 		<text class="title">INVENTORY</text>
 		<div class="items">
-			@foreach ( var item in Player.Local.Inventory.BackpackItems )
+			@for ( var index = 0; index < Player.Local.Inventory.BackpackItems.Count; index++ )
 			{
-				<InventorySlot 
-					onmiddleclick=@( () => Inspect(item) )
-					onrightclick=@( () => DropItem(item) ) 
+				var item = Player.Local.Inventory.BackpackItems[index];
+				<InventorySlot
+					onmiddleclick=@(() => Inspect( item ))
+					onrightclick=@(() => DropItem( item ))
 					Item=@item
-				/>
+					BackpackSlotIndex=@index/>
 			}
 		</div>
 		<div style="align-items: center; margin: 20px 0px;">
@@ -64,6 +65,10 @@
 </root>
 
 @code {
+	public static Inventory Instance { get; private set; }
+
+	public Inventory() => Instance = this;
+
 	private void Inspect( ItemComponent item )
 	{
 		if ( item is not null )
