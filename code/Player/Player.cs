@@ -7,6 +7,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 {
 	[Sync] public string Firstname { get; set; }
 	[Sync] public string Lastname { get; set; }
+	[Sync] public bool HidePenoid { get; set; }
 
 
 	[Property, Sync, Category( "Parameters" )]
@@ -55,11 +56,6 @@ public partial class Player : Component, Component.ExecuteInEditor
 			Renderer.SetBodyGroup( "hands", _hideBodygroups.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 );
 			Renderer.SetBodyGroup( "legs", _hideBodygroups.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
 			Renderer.SetBodyGroup( "feet", _hideBodygroups.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
-
-			if ( Penoid == null )
-				return;
-
-			Penoid.Enabled = Inventory.EquippedItems[(int)EquipSlot.Legs] == null;
 		}
 	}
 
@@ -161,9 +157,15 @@ public partial class Player : Component, Component.ExecuteInEditor
 		{
 			UpdateAngles();
 			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
+			HidePenoid = Inventory.EquippedItems[(int)EquipSlot.Legs] == null;
 		}
 
 		UpdateAnimation();
+
+		if ( Penoid == null )
+			return;
+
+		Penoid.Enabled = HidePenoid;
 	}
 
 	protected override void OnFixedUpdate()
