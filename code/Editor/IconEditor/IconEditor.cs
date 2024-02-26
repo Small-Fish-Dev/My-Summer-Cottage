@@ -10,6 +10,7 @@ public class IconEditor : GraphicsView
 
 	private SceneObject _obj;
 	private StringProperty _model;
+	private StringProperty _materialgroup;
 	private AnglesProperty _angles;
 	private Vector3Property _position;
 	private SceneCamera _camera;
@@ -40,6 +41,7 @@ public class IconEditor : GraphicsView
 			property.SetValue( icon = new IconSettings
 			{
 				Model = icon.Model,
+				MaterialGroup = icon.MaterialGroup,
 				Rotation = global::Rotation.Identity,
 				Position = Vector3.Zero,
 				Guid = Guid.NewGuid()
@@ -76,6 +78,15 @@ public class IconEditor : GraphicsView
 					? Model.Load( "models/dev/box.vmdl" )
 					: mdl;
 			};
+			_materialgroup = Layout.Add( new StringProperty( this )
+			{
+				Value = icon.MaterialGroup
+			}, 0 );
+			_materialgroup.TextEdited += ( text ) =>
+			{
+				_obj.SetMaterialGroup( text );
+			};
+
 		}
 
 		Layout.AddSpacingCell( 4 );
@@ -100,6 +111,7 @@ public class IconEditor : GraphicsView
 					property.SetValue( new IconSettings()
 					{
 						Model = _model.Value,
+						MaterialGroup = _materialgroup.Value,
 						Position = _position.Value,
 						Rotation = _angles.Value,
 						Guid = icon.Guid,
@@ -123,6 +135,7 @@ public class IconEditor : GraphicsView
 				? Model.Load( "models/dev/box.vmdl" )
 				: mdl
 		);
+		_obj.SetMaterialGroup( _materialgroup.Value );	
 	}
 
 	[EditorEvent.Frame]

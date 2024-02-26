@@ -21,7 +21,9 @@ public class ItemComponent : Component
 
 	protected override void OnStart()
 	{
-		GameObject.NetworkSpawn();
+		if ( !Network.Active )
+			GameObject.NetworkSpawn();
+
 		GameObject.Name = Name;
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 	}

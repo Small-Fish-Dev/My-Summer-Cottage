@@ -3,27 +3,146 @@
 @inherits Panel
 
 <root>
-	<div class="border" />
-	<div class="background" />
-	@if (Item is not null)
+	<div class="border"/>
+	<div class="background"/>
+	@if ( Item is not null )
 	{
-		<div class="item">
-				<img src=@Item.IconTexture.ResourcePath />
-				<text class="weight">@Item.WeightInGrams.ToKilograms() kg</text>
+		<div class="item @HasCurrentDraggableClassSelector">
+			<img src=@Item.IconTexture.ResourcePath/>
+			<text class="weight">@Item.WeightInGrams.ToKilograms() kg</text>
 		</div>
 	}
-	@if (Slot is not null)
+	@if ( EquipSlotIndex is not null )
 	{
-		<img class="slot" src=@Slot?.GetIcon() />
+		<img class="slot" src=@EquipSlotIndex?.GetIcon()/>
 	}
 </root>
 
 @code {
 	public ItemComponent Item { get; set; }
-	public EquipSlot? Slot { get; set; } = null;
+	public EquipSlot? EquipSlotIndex { get; set; } = null;
+	public int? BackpackSlotIndex { get; set; } = null;
+	private DraggableItem CurrentDraggable { get; set; }
+	private string HasCurrentDraggableClassSelector => CurrentDraggable == null ? "" : "has-draggable";
 
-	protected override int BuildHash()
+	protected override int BuildHash() => HashCode.Combine( Item?.GetHashCode() );
+
+	/// Update the ItemComponent instance from the Slot / SlotIndex properties
+	public void UpdateItem()
 	{
-		return HashCode.Combine(Item?.GetHashCode());
+		var inventory = Player.Local.Inventory;
+		if ( EquipSlotIndex != null )
+		{
+			Item = inventory.EquippedItems[(int)EquipSlotIndex];
+			StateHasChanged();
+			return;
+		}
+
+		if ( BackpackSlotIndex != null )
+		{
+			Item = inventory.BackpackItems[(int)BackpackSlotIndex];
+			StateHasChanged();
+			return;
+		}
+
+		throw new Exception( "EquipSlotIndex or BackpackSlotIndex needs to be provided to InventorySlot!" );
 	}
+
+	/// Is mouse inside the slot bounding box?
+	public bool IsHoveredByMouse() => Box.Rect.IsInside( Mouse.Position );
+
+	protected override void OnMouseDown( MousePanelEvent e )
+	{
+		base.OnMouseDown( e );
+
+		if ( CurrentDraggable != null )
+			return;
+
+		if ( Item == null )
+			return; // Ignore itemless slot
+
+		CurrentDraggable = new DraggableItem( this, holdPoint: Mouse.Position - Box.Rect.TopLeft );
+		CurrentDraggable.SetPositionInScreenPixels( Mouse.Position );
+
+		var fraction = (Mouse.Position - Box.Rect.Size / 2f) / Screen.Size;
+		CurrentDraggable.Style.Left = Length.Fraction( fraction.x );
+		CurrentDraggable.Style.Top = Length.Fraction( fraction.y );
+
+		Hud.Instance.Panel.AddChild( CurrentDraggable );
+	}
+
+	private void MoveItemTo( InventorySlot targetSlot )
+	{
+		var fromSlot = this;
+		var inventory = Player.Local.Inventory;
+
+		if ( fromSlot.EquipSlotIndex != null )
+		{
+			// If we're an equip slot...
+			if ( targetSlot.EquipSlotIndex != null && Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex )
+			{
+				// and the target is an equip slot:
+				inventory.MoveItem( fromSlot.EquipSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
+			}
+			else if ( targetSlot.BackpackSlotIndex != null )
+			{
+				// and the target is a backpack slot:
+				inventory.MoveItem( fromSlot.EquipSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
+			}
+		}
+		else if ( fromSlot.BackpackSlotIndex != null )
+		{
+			// If we're a backpack slot...
+			if ( targetSlot.EquipSlotIndex != null && Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex )
+			{
+				// and the target is an equip slot:
+				inventory.MoveItem( fromSlot.BackpackSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
+			}
+			else if ( targetSlot.BackpackSlotIndex != null )
+			{
+				// and the target is a backpack slot:
+				inventory.MoveItem( fromSlot.BackpackSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
+			}
+		}
+		
+		// Update both slots
+		fromSlot.UpdateItem();
+		targetSlot.UpdateItem();
+	}
+
+	protected override void OnMouseUp( MousePanelEvent e )
+	{
+		base.OnMouseUp( e );
+
+		if ( CurrentDraggable == null )
+			return;
+        
+		var targetSlot = Inventory.Instance.Descendants.OfType<InventorySlot>().FirstOrDefault( v => v.IsHoveredByMouse() );
+		if ( targetSlot != null && targetSlot.Item != Item )
+		{
+			MoveItemTo( targetSlot );
+		}
+
+		CurrentDraggable?.Delete();
+		CurrentDraggable = null;
+	}
+
+	private Vector2 _lastMousePos;
+
+	protected override void OnMouseMove( MousePanelEvent e )
+	{
+		base.OnMouseMove( e );
+
+		if ( CurrentDraggable == null )
+			return;
+        
+		// Mouse.Delta returns 0,0 for small values?
+		// Make our own delta!
+		var delta = Mouse.Position - (_lastMousePos == -0 ? Mouse.Position : _lastMousePos);
+		_lastMousePos = Mouse.Position;
+		
+		CurrentDraggable.AddPositionDeltaInScreenPixels( delta );
+		CurrentDraggable.SetPositionInScreenPixels( Mouse.Position );
+	}
+
 }

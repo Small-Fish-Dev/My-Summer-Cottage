@@ -5,6 +5,10 @@ namespace Sauna;
 
 public partial class Player : Component, Component.ExecuteInEditor
 {
+	[Sync] public string Firstname { get; set; }
+	[Sync] public string Lastname { get; set; }
+
+
 	[Property, Sync, Category( "Parameters" )]
 	public int Money { get; set; }
 
@@ -121,7 +125,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	protected override void DrawGizmos()
 	{
 	}
-
+	 
 	protected override void OnStart()
 	{
 		if ( !GameManager.IsPlaying )
@@ -138,6 +142,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		PissEmitter = Components.Get<ParticleConeEmitter>( FindMode.EverythingInSelfAndDescendants );
 		PissParticles = Components.Get<ParticleEffect>( FindMode.EverythingInSelfAndDescendants );
+
+		if ( !IsProxy ) // Load save.
+			Load( this );
 
 		// Footsteps
 		Renderer.OnFootstepEvent += OnFootstep;

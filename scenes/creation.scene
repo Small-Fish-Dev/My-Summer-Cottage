@@ -111,7 +111,7 @@
                   "VerticalAlign": "Center"
                 },
                 {
-                  "__type": "PassportComponent",
+                  "__type": "PassportPanel",
                   "Overlay": {
                     "_type": "component",
                     "go": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
@@ -493,6 +493,57 @@
       ]
     },
     {
+      "Id": "c63a3bfc-2074-4b84-95b6-8db77055398a",
+      "Name": "Fourth Stage",
+      "Position": "-174.6382,-145.472,212.5286",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CreatorComponent",
+          "Camera": {
+            "_type": "component",
+            "go": "0a8c0886-1118-4ea2-91e0-81d22b429a13",
+            "component_type": "CameraComponent"
+          },
+          "Stage": "Confirmation"
+        }
+      ],
+      "Children": [
+        {
+          "Id": "0a8c0886-1118-4ea2-91e0-81d22b429a13",
+          "Name": "Camera",
+          "Position": "-145.4506,-206.331,-147.6715",
+          "Rotation": "0.005131484,0.03628263,-0.1399432,0.9894812",
+          "Tags": "maincamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "CameraComponent",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 50,
+              "IsMainCamera": true,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 1000,
+              "ZNear": 2
+            },
+            {
+              "__type": "DitherHook"
+            },
+            {
+              "__type": "EyeProtector"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "Id": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
       "Name": "Overlay UI",
       "Enabled": true,
@@ -533,6 +584,6 @@
   },
   "Title": "creation",
   "Description": "",
-  "LastSaved": "2024-02-24T17:32:15.026141\u002B02:00",
+  "LastSaved": "2024-02-26T19:39:57.7541588\u002B02:00",
   "__references": []
 }

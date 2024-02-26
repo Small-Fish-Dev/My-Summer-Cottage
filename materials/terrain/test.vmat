@@ -1,0 +1,29 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/groundshadertest.shader"
+
+	//---- Rendering ----
+	F_ALPHA_TEST 1
+	F_RENDER_BACKFACES 1
+	F_TRANSPARENCY 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Grass Settings ----
+	GrassWidth "3.904"
+
+	//---- Material ----
+	BillboardColor "materials/nature/grass_test/grass_color.png"
+	Color "materials/ground/grass/new_graph_basecolor.png"
+	Opacity "materials/nature/grass_test/grass_opacity.png"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.010"
+	g_flAntiAliasedEdgeStrength "0.000"
+
+	//---- Transparency ----
+	TransparencyRounding "0.000"
+}

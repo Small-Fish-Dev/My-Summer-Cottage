@@ -15,6 +15,11 @@ ClothingPanel {
         overflow: scroll;
         flex-direction: column;
         gap: 20px;
+        padding: 0px 0px 30px 0px;
+        
+        mask-mode: luminance;
+        mask-image: url(ui/clothing-mask.png);
+        mask-size: 100%;
 
         .equip-slot {
             flex-direction: column;
@@ -44,6 +49,8 @@ ClothingPanel {
                 gap: 10px;
                 background-color: rgba(black, 0.9);
                 padding: 20px 0px 20px 50px;
+                overflow-x: scroll;
+                overflow-y: hidden;
 
                 .slot {
                     width: 110px;

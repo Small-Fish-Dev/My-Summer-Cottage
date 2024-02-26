@@ -1,8 +1,7 @@
 {
   "RootObject": {
     "Id": "0308d5f9-2d51-4b84-95a0-b024a7317c7f",
-    "Name": "slot_machine",
-    "Networked": true,
+    "Name": "Slot Machine",
     "Enabled": true,
     "Components": [
       {
@@ -505,157 +504,6 @@
         "Model": "models/slot_machine/slot_machine.vmdl",
         "Static": false,
         "Surface": null
-      },
-      {
-        "__type": "EventComponent",
-        "DisabledWhilePlaying": [],
-        "DisableOnTrigger": [],
-        "Event": {
-          "Version": 5,
-          "UserData": {
-            "Title": "Event",
-            "id": "e6f4035a-97db-4f05-87bb-99f5c7f83565",
-            "ReferencedComponentTypes": []
-          },
-          "Variables": [],
-          "Nodes": [
-            {
-              "Id": 0,
-              "Type": "input",
-              "UserData": {
-                "Position": "-80,-0"
-              }
-            },
-            {
-              "Id": 1,
-              "Type": "event.localpunchplayer",
-              "UserData": {
-                "Position": "400,0"
-              }
-            },
-            {
-              "Id": 2,
-              "Type": "call",
-              "Properties": {
-                "T": "package.fish.sauna/Sauna.Player",
-                "_name": "Get",
-                "_isStatic": false,
-                "_type": "Sandbox.Game/Sandbox.IComponentLister"
-              },
-              "UserData": {
-                "Position": "128,80"
-              }
-            },
-            {
-              "Id": 3,
-              "Type": "event.ragdollplayer",
-              "UserData": {
-                "Position": "656,144"
-              }
-            },
-            {
-              "Id": 4,
-              "Type": "event.finished",
-              "UserData": {
-                "Position": "944,160"
-              }
-            },
-            {
-              "Id": 6,
-              "Type": "scene.ref",
-              "Properties": {
-                "T": "package.fish.sauna/EventComponent",
-                "value": {
-                  "_type": "component",
-                  "go": "0308d5f9-2d51-4b84-95a0-b024a7317c7f",
-                  "component_type": "EventComponent"
-                }
-              },
-              "UserData": {
-                "Position": "752,304"
-              }
-            }
-          ],
-          "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 1,
-              "DstName": "_signal"
-            },
-            {
-              "Value": "0,0,1",
-              "DstId": 1,
-              "DstName": "launchDirection"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_result",
-              "DstId": 1,
-              "DstName": "player"
-            },
-            {
-              "Value": 300,
-              "DstId": 1,
-              "DstName": "strength"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "triggerer",
-              "DstId": 2,
-              "DstName": "_target"
-            },
-            {
-              "Value": "EnabledInSelf, InAncestors",
-              "DstId": 2,
-              "DstName": "search"
-            },
-            {
-              "SrcId": 1,
-              "SrcName": "_signal",
-              "DstId": 3,
-              "DstName": "_signal"
-            },
-            {
-              "Value": 2,
-              "DstId": 3,
-              "DstName": "duration"
-            },
-            {
-              "Value": true,
-              "DstId": 3,
-              "DstName": "enabled"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_result",
-              "DstId": 3,
-              "DstName": "player"
-            },
-            {
-              "SrcId": 3,
-              "SrcName": "_signal",
-              "DstId": 4,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 6,
-              "SrcName": "_result",
-              "DstId": 4,
-              "DstName": "component"
-            }
-          ]
-        },
-        "RequiredToFinish": false,
-        "TriggerCooldown": 1,
-        "TriggerOnce": false,
-        "Triggers": [
-          {
-            "_type": "component",
-            "go": "092049d7-03c7-40dc-a4ff-67d54ccecfd5",
-            "component_type": "EventInteractionTrigger"
-          }
-        ]
       }
     ],
     "Children": [
@@ -727,21 +575,6 @@
               "go": "0308d5f9-2d51-4b84-95a0-b024a7317c7f",
               "component_type": "SlotMachine"
             }
-          }
-        ]
-      },
-      {
-        "Id": "092049d7-03c7-40dc-a4ff-67d54ccecfd5",
-        "Name": "InteractTriggerTest",
-        "Enabled": true,
-        "Components": [
-          {
-            "__type": "EventInteractionTrigger",
-            "Extents": "70,70,120",
-            "InsideArea": true,
-            "InteractionIdentifier": "slot.play",
-            "MaxPollingRate": 5,
-            "Offset": "0,0,50"
           }
         ]
       }

@@ -1,0 +1,37 @@
+DraggableItem {
+    position: absolute;
+    
+    pointer-events: all;
+    
+    // Default sizes, but we want to have this set when it's created
+    width: 80px;
+    height: 80px;
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+    
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+
+    transition: left 0.06s ease-out,
+        top 0.08s ease-out,
+        opacity 0.11s ease-out,
+        transform 0.11s ease-out,
+        filter 0.2s ease;
+    
+    z-index: 99;
+    transform: scale(1);
+    
+    &:intro {
+        opacity: 0;
+        transform: scale(0);
+        filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.0));
+    }
+    
+    &:outro {
+        pointer-events: none;
+        opacity: 0;
+        filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.0));
+    }
+}

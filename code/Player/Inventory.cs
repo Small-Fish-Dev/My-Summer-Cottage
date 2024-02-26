@@ -16,7 +16,7 @@ public class Inventory : Component
 	public Inventory()
 	{
 		_backpackItems = new List<ItemComponent>( new ItemComponent[MAX_BACKPACK_SLOTS] );
-		_equippedItems = new List<ItemComponent>( new ItemComponent[Enum.GetNames( typeof( EquipSlot ) ).Length] );
+		_equippedItems = new List<ItemComponent>( new ItemComponent[Enum.GetNames( typeof(EquipSlot) ).Length] );
 	}
 
 	public bool GiveItem( ItemComponent item )
@@ -127,18 +127,73 @@ public class Inventory : Component
 		}
 	}
 
+	public void MoveItem( EquipSlot startIndex, int endIndex )
+	{
+		if ( _backpackItems[endIndex] is not null )
+		{
+			// Perform a swap since we are moving the item to an already occupied index.
+			(_equippedItems[(int)startIndex], _backpackItems[endIndex]) =
+				(_backpackItems[endIndex], _equippedItems[(int)startIndex]);
+		}
+		else
+		{
+			_backpackItems[endIndex] = _equippedItems[(int)startIndex];
+			RemoveItem( startIndex );
+		}
+	}
+
+	public void MoveItem( int startIndex, EquipSlot endIndex )
+	{
+		if ( _equippedItems[(int)endIndex] is not null )
+		{
+			// Perform a swap since we are moving the item to an already occupied index.
+			(_backpackItems[startIndex], _equippedItems[(int)endIndex]) =
+				(_equippedItems[(int)endIndex], _backpackItems[startIndex]);
+		}
+		else
+		{
+			_equippedItems[(int)endIndex] = _backpackItems[startIndex];
+			RemoveItem( startIndex );
+		}
+	}
+
+	public void MoveItem( EquipSlot startIndex, EquipSlot endIndex )
+	{
+		if ( _equippedItems[(int)endIndex] is not null )
+		{
+			// Perform a swap since we are moving the item to an already occupied index.
+			(_equippedItems[(int)startIndex], _equippedItems[(int)endIndex]) =
+				(_equippedItems[(int)endIndex], _equippedItems[(int)startIndex]);
+		}
+		else
+		{
+			_equippedItems[(int)endIndex] = _equippedItems[(int)startIndex];
+			RemoveItem( startIndex );
+		}
+	}
+
 	public int GetTotalWeightInGrams()
 	{
 		return _backpackItems.Sum( i => i?.WeightInGrams ?? 0 ) + _equippedItems.Sum( i => i?.WeightInGrams ?? 0 );
 	}
 
-	private ItemComponent RemoveItem( int index )
+	public ItemComponent RemoveItem( int index )
 	{
 		var item = _backpackItems.ElementAtOrDefault( index );
 		if ( item is null )
 			return null;
 
 		_backpackItems[index] = null;
+		return item;
+	}
+
+	public ItemComponent RemoveItem( EquipSlot index )
+	{
+		var item = _equippedItems.ElementAtOrDefault( (int)index );
+		if ( item is null )
+			return null;
+
+		_equippedItems[(int)index] = null;
 		return item;
 	}
 

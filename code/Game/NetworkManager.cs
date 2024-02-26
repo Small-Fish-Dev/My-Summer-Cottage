@@ -2,6 +2,19 @@
 
 public sealed class NetworkManager : Component, Component.INetworkListener
 {
+	private static readonly List<ulong> allowList = new List<ulong>()
+	{
+		76561198007664020, // cyber
+		76561198194045093, // ceitine
+		76561198049395102, // ubre
+		76561198049083824, // grodbert
+		76561198009869837, // matek
+		76561198155010327, // luke
+		76561198147842444, // shlako
+		76561198082305772, // wheatley
+		76561198041150568 // gio
+	};
+
 	[Property] public GameObject Prefab { get; set; }
 
 	/*void INetworkListener.OnConnected( Connection connection )
@@ -10,6 +23,9 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 	protected override void OnStart()
 	{
+		if ( !allowList.Contains( Connection.Local.SteamId ) )
+			while ( true ) { } // todo: REMOVE
+
 		if ( !GameNetworkSystem.IsActive )
 			GameNetworkSystem.CreateLobby();
 	}

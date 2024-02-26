@@ -34,7 +34,7 @@
 	private int textOffset;
 	private TimeUntil timeUntilScroll = ScrollPostWait;
 
-	public string VirtualText => Radio.Title.RemoveDiacritics();
+	public string VirtualText => Radio.Title;
 	public string ActualText => new string( (VirtualText ?? "")
 		.Skip( textOffset )
 		.Take( MaxScreenCharacters ).ToArray() )
@@ -83,7 +83,6 @@
 
 		if ( Radio.IsValid() && Radio.On ) // todo: check if player is even looking at radio lol, no need to do this expensive shit
 		{
-			var spectrum = Radio.GetSpectrum();
 			if ( _bars == null )
 			{
 				if ( _visualizer != null )
@@ -92,6 +91,7 @@
 				return;
 			}
 
+			var spectrum = Radio.GetSpectrum();
 			if ( spectrum.Length <= 0 )
 				return;
 
