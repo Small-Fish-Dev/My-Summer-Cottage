@@ -93,6 +93,8 @@ PS
 	float3 g_flColorTint < Attribute( "g_flColorTint" ); UiType( Color ); Default3( 1.0, 1.0, 1.0 ); UiGroup( "Material,10/20" ); >;			// Tint color
 
 	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); Channel( A, Box( ColorTintMask ), Linear ); OutputFormat( BC7 ); SrgbRead( true ); Filter( POINT ); >;
+	TextureAttribute(LightSim_DiffuseAlbedoTexture, g_tColor);
+
 	#if S_ALPHA_TEST
 		TextureAttribute( LightSim_Opacity_A, g_tColor );
 	#endif
@@ -147,7 +149,9 @@ PS
         Material m = Material::Init();
         m.Albedo = lerp(l_tColor.rgb, l_tColor.rgb * g_flColorTint, l_tColor.a );
         m.Normal = TransformNormal( DecodeNormal( Tex2DS( g_tNormal, Sampler, UV.xy ).rgb ), i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
+		
 
+		
 		float2 rm = Tex2DS( g_tRm, Sampler, UV.xy ).rg;
         m.Roughness = rm.r;
         m.Metalness = rm.g;
