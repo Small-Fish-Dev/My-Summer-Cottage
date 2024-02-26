@@ -243,7 +243,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	{
 	}
 
-	void HasBeenTriggered( GameObject _ )
+	void HasBeenTriggered( GameObject triggerer, GameObject targetObject = null )
 	{
 		HasBeenPlayed = true;
 	}

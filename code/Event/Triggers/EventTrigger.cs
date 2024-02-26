@@ -1,4 +1,5 @@
 using Sandbox;
+using static EventComponent;
 using static Sauna.Event.EventTrigger;
 
 namespace Sauna.Event;
@@ -6,7 +7,7 @@ namespace Sauna.Event;
 [Hide]
 public abstract class EventTrigger : Component
 {
-	public event Action<GameObject> OnTrigger;
+	public event SaunaEvent OnTrigger;
 
 	public virtual bool IsPolled { get; set; } = false;
 
@@ -48,8 +49,8 @@ public abstract class EventTrigger : Component
 	}
 
 	// Can't invoke events outside of the class itself even if it derives from this, so we have this method instead
-	protected virtual void CallTrigger( GameObject triggerer )
+	protected virtual void CallTrigger( GameObject triggerer, GameObject targetObject = null )
 	{
-		OnTrigger?.Invoke( triggerer );
+		OnTrigger?.Invoke( triggerer, targetObject );
 	}
 }

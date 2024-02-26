@@ -1,4 +1,5 @@
 using Sandbox;
+using Sauna;
 using Sauna.Event;
 
 [Icon( "flash_on" )]
@@ -9,7 +10,8 @@ public sealed class EventComponent : Component
 	public List<EventTrigger> Triggers { get; set; }
 
 	[Property]
-	public Action<GameObject> Event { get; set; }
+	public SaunaEvent Event { get; set; }
+	public delegate void SaunaEvent( GameObject triggerer, GameObject targetObject );
 
 	/// <summary>
 	/// This event component is required to play before the event can be considered finished
@@ -82,7 +84,7 @@ public sealed class EventComponent : Component
 
 	List<EventComponent> _eventsDisabled = new();
 
-	void HasBeenTriggered( GameObject triggerer )
+	void HasBeenTriggered( GameObject triggerer, GameObject targetObject = null )
 	{
 		if ( TriggerOnce || (!TriggerOnce && _lastTrigger >= TriggerCooldown) )
 		{
@@ -112,7 +114,7 @@ public sealed class EventComponent : Component
 					trigger.Clear();
 			}
 
-			Event?.Invoke( triggerer );
+			Event?.Invoke( triggerer, targetObject );
 		}
 	}
 
