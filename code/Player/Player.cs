@@ -182,7 +182,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 					if ( particle.HitTime > 0 )
 					{
 						PissingPosition = particle.HitPos;
-						PissingOn = Scene.FindInPhysics( new Sphere( particle.HitPos, 5f ) ).First();
+						PissingOn = Scene.FindInPhysics( new Sphere( particle.HitPos, 5f ) ).FirstOrDefault();
 						LastPiss = 0f;
 					}
 				}
