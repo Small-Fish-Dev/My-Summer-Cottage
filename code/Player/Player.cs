@@ -66,14 +66,14 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Block both inputs and mouse aiming
 	/// </summary>
-	public bool BlockMovements { get; set; } = false;
+	[Sync] public bool BlockMovements { get; set; } = false;
 
 	bool _blockMouseAim = false;
 
 	/// <summary>
 	/// Block mouse aiming
 	/// </summary>
-	public bool BlockMouseAim
+	[Sync] public bool BlockMouseAim
 	{
 		get => BlockMovements || _blockMouseAim;
 		set => _blockMouseAim = value;
@@ -84,7 +84,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Block inputs (Like WASD, Pissing, Left/Right click)
 	/// </summary>
-	public bool BlockInputs
+	[Sync] public bool BlockInputs
 	{
 		get => BlockMovements || _blockInputs;
 		set => _blockInputs = value;
@@ -100,7 +100,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// </summary>
 	public Vector3 PissingPosition { get; set; }
 	public TimeSince LastPiss { get; set; } = 0f;
-	public bool IsPissing => !BlockInputs && Input.Down( "Piss" );
+
+	[Sync] public bool IsPissing { get; set; }
 
 	public string FacedDirection => (int)((EyeAngles.Normal.yaw + 45f / 2 + 180) % 360 / 45f) switch
 	{
@@ -160,6 +161,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 		{
 			UpdateAngles();
 			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
+
+			IsPissing = Input.Down( "Piss" );
 		}
 
 		UpdateAnimation();

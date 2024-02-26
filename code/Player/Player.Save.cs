@@ -61,6 +61,8 @@ partial class Player
 				player.Inventory.GiveItem( equipment );
 				player.Inventory.EquipItem( equipment );
 				o.Enabled = true;
+				if ( !o.Network.Active )
+					o.NetworkSpawn();
 			}
 
 		// todo @ceitine: Go through items.
