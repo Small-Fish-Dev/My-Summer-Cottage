@@ -11,6 +11,9 @@ public sealed class WaterComponent : Component
 	[Property, Sync, Category( "Appearance" )] 
 	public Color Color { get; set; } = Color.Blue;
 
+	[Property, Sync, Category( "Appearance" ), Range( 0.01f, 5f )]
+	public float TextureScale { get; set; } = 0.4f;
+
 	public BBox Bounds => new BBox( Mins, Maxs );
 	public Model Model
 	{
@@ -59,6 +62,7 @@ public sealed class WaterComponent : Component
 			return;
 
 		_sceneObject.Transform = Transform.World;
+		_sceneObject.Attributes.Set( "g_flTextureScale", TextureScale );
 		_sceneObject.Attributes.Set( "g_flOpacity", Color.a );
 		_sceneObject.Attributes.Set( "g_flColorTint", Color );
 	}

@@ -85,6 +85,8 @@ PS
     #include "sbox_pixel.fxc"
     #include "common/pixel.hlsl"
 
+    float g_flTextureScale < Attribute( "g_flTextureScale" ); UiType( Slider ); Default( 0.4 ); UiGroup( "Material,10/60" ); >;
+
     BoolAttribute( translucent, true );
 
     #if ( S_MODE_DEPTH )
@@ -98,7 +100,7 @@ PS
 	{
         float time = g_flTime * 0.03;
         float sine = 0.2 * sin( i.vTextureCoords.x + time );
-		float2 UV = i.vTextureCoords.xy * 10 - float2( time / 2 + sine, sine / 2 );
+		float2 UV = i.vTextureCoords.xy / g_flTextureScale - float2( time / 2 + sine, sine / 2 );
 
         Material m = Material::Init();
         float4 color = Tex2DS( g_tColor, Sampler, UV.xy ).rgba;
