@@ -65,11 +65,11 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Progress of the day in percents [0; 1].
 	/// </summary>
-	public float DayPercent => _inGameTime / DayLength;
+	public float DayPercent => InGameTime / DayLength;
 
 	public int InGameSeconds => (int)(DayPercent * 24 * 60 * 60);
 
-	private TimeSince _inGameTime;
+	[Sync] private TimeSince InGameTime { get; set; }
 
 	protected override void OnAwake()
 	{
@@ -98,7 +98,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 			SetTimeFromSeconds( StartTime );
 		}
 
-		if ( _inGameTime >= DayLength )
+		if ( InGameTime >= DayLength )
 			NewDay();
 
 		Rotation sunRotation;
@@ -185,7 +185,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Broadcast( NetPermission.HostOnly )]
 	public void SetTimeFromSeconds( int seconds )
 	{
-		_inGameTime = ((float)seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
+		InGameTime = ((float)seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
 	}
 
 	/// <summary>
@@ -195,12 +195,12 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Broadcast( NetPermission.HostOnly )]
 	public void SkipTimeFromSeconds( int seconds )
 	{
-		_inGameTime += ((float)seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
+		InGameTime += ((float)seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
 	}
 
 	[Broadcast( NetPermission.HostOnly )]
 	private void NewDay()
 	{
-		_inGameTime = 0;
+		InGameTime = 0;
 	}
 }
