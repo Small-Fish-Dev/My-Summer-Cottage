@@ -12,54 +12,91 @@
           "Version": 5,
           "UserData": {
             "Title": "Event",
-            "id": "5dbd6303-a8eb-4126-a0d9-99495a851c0c",
+            "id": "8939851b-924a-4f12-ad44-7cb08a8a1fba",
             "ReferencedComponentTypes": []
           },
           "Variables": [],
           "Nodes": [
             {
               "Id": 0,
-              "Type": "input",
-              "UserData": {
-                "Position": "-32,160"
-              }
+              "Type": "input"
             },
             {
               "Id": 1,
               "Type": "event.localpunchplayer",
               "UserData": {
-                "Position": "448,96"
+                "Position": "512,-112"
               }
             },
             {
               "Id": 2,
               "Type": "call",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.IComponentLister",
                 "_name": "Get",
-                "T": "package.fish.sauna/Sauna.Player",
-                "_isStatic": false
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                "T": "package.fish.sauna/Sauna.Player"
               },
               "UserData": {
-                "Position": "176,288"
+                "Position": "240,80"
               }
             },
             {
               "Id": 3,
               "Type": "event.ragdollplayer",
               "UserData": {
-                "Position": "784,176"
+                "Position": "848,-32"
               }
             },
             {
               "Id": 4,
               "Type": "event.finished",
               "UserData": {
-                "Position": "1184,176"
+                "Position": "1248,-32"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "resource.ref",
+              "Properties": {
+                "value": "sounds/misc/banana_slip.sound",
+                "T": "Sandbox.Engine/Sandbox.SoundEvent"
+              },
+              "UserData": {
+                "Position": "544,-384"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "sound.playat",
+              "UserData": {
+                "Position": "832,-384"
               }
             },
             {
               "Id": 8,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "336,-256"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              },
+              "UserData": {
+                "Position": "512,-256"
+              }
+            },
+            {
+              "Id": 11,
               "Type": "scene.ref",
               "Properties": {
                 "value": {
@@ -70,47 +107,7 @@
                 "T": "package.fish.sauna/EventComponent"
               },
               "UserData": {
-                "Position": "928,304"
-              }
-            },
-            {
-              "Id": 10,
-              "Type": "resource.ref",
-              "Properties": {
-                "value": "sounds/misc/banana_slip.sound",
-                "T": "Sandbox.Engine/Sandbox.SoundEvent"
-              },
-              "UserData": {
-                "Position": "480,-176"
-              }
-            },
-            {
-              "Id": 11,
-              "Type": "sound.playat",
-              "UserData": {
-                "Position": "768,-176"
-              }
-            },
-            {
-              "Id": 12,
-              "Type": "property.get",
-              "Properties": {
-                "_name": "Transform",
-                "_type": "Sandbox.Game/Sandbox.GameObject"
-              },
-              "UserData": {
-                "Position": "272,-48"
-              }
-            },
-            {
-              "Id": 13,
-              "Type": "property.get",
-              "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameTransform",
-                "_name": "Position"
-              },
-              "UserData": {
-                "Position": "448,-48"
+                "Position": "944,176"
               }
             }
           ],
@@ -144,7 +141,7 @@
             },
             {
               "SrcId": 0,
-              "SrcName": "obj",
+              "SrcName": "triggerer",
               "DstId": 2,
               "DstName": "_target"
             },
@@ -192,7 +189,7 @@
               "DstName": "_signal"
             },
             {
-              "SrcId": 8,
+              "SrcId": 11,
               "SrcName": "_result",
               "DstId": 4,
               "DstName": "component"
@@ -200,31 +197,31 @@
             {
               "SrcId": 1,
               "SrcName": "_signal",
-              "DstId": 11,
+              "DstId": 7,
               "DstName": "_signal"
             },
             {
-              "SrcId": 13,
+              "SrcId": 9,
               "SrcName": "_result",
-              "DstId": 11,
+              "DstId": 7,
               "DstName": "position"
             },
             {
-              "SrcId": 10,
+              "SrcId": 6,
               "SrcName": "_result",
-              "DstId": 11,
+              "DstId": 7,
               "DstName": "soundEvent"
             },
             {
               "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 12,
+              "SrcName": "triggerer",
+              "DstId": 8,
               "DstName": "_target"
             },
             {
-              "SrcId": 12,
+              "SrcId": 8,
               "SrcName": "_result",
-              "DstId": 13,
+              "DstId": 9,
               "DstName": "_target"
             }
           ]
