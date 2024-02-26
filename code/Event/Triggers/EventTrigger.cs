@@ -49,7 +49,7 @@ public abstract class EventTrigger : Component
 	}
 
 	// Can't invoke events outside of the class itself even if it derives from this, so we have this method instead
-	protected virtual void CallTrigger( GameObject triggerer, GameObject targetObject = null )
+	public virtual void CallTrigger( GameObject triggerer, GameObject targetObject = null )
 	{
 		OnTrigger?.Invoke( triggerer, targetObject );
 	}

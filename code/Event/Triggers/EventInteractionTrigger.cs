@@ -30,7 +30,6 @@ public sealed class EventInteractionTrigger : EventTrigger
 	public BBox WorldBBox => BBox.Transform( GameObject.Transform.World );
 
 
-
 	protected override void DrawGizmos()
 	{
 		if ( InsideArea )

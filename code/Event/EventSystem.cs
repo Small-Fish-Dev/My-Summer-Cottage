@@ -39,8 +39,28 @@ public class EventSystem : GameObjectSystem
 	[Broadcast]
 	public static void InteractionInvoked( string interaction, Guid target, Guid player )
 	{
-		Log.Info( interaction );
-		Log.Info( target );
-		Log.Info( player );
+		var allTriggers = GameManager.ActiveScene.GetAllComponents<EventInteractionTrigger>();
+		var foundTarget = GameManager.ActiveScene.GetAllObjects( true )
+			.Where( x => x.Id == target )
+			.FirstOrDefault();
+		var foundPlayer = GameManager.ActiveScene.GetAllObjects( true )
+			.Where( x => x.Id == player )
+			.FirstOrDefault();
+
+		foreach ( var trigger in allTriggers )
+		{
+			if ( trigger.InteractionIdentifier == interaction )
+			{
+				if ( !trigger.InsideArea )
+					trigger.CallTrigger( foundPlayer, foundTarget );
+				else
+				{
+					var expandedWorldBox = trigger.WorldBBox.Grow( 10f ); // Expand it a bit to make sure it's included even when on the edges
+
+					if ( expandedWorldBox.Contains( foundTarget.Transform.Position ) )
+						trigger.CallTrigger( foundPlayer, foundTarget );
+				}
+			}
+		}
 	}
 }
