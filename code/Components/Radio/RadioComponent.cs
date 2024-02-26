@@ -21,6 +21,9 @@ public partial class RadioComponent : Component
 		{
 			_on = value;
 
+			if ( !GameManager.IsPlaying )
+				return;
+
 			if ( !_on ) // Close the player.
 			{
 				_player?.Stop();
@@ -35,15 +38,14 @@ public partial class RadioComponent : Component
 	}
 
 	public RadioChannel Channel => RadioChannel.All[ChannelIndex];
-	public string Title => _player != null && !string.IsNullOrWhiteSpace( _player.Title )
-		? $"{Channel.Name} - {_player.Title}"
-		: Channel.Name;
+	public string Title { get; private set; }
 
 	MusicPlayer _player;
 	bool _on;
 	int _channelIndex;
 
-	public ReadOnlySpan<float> GetSpectrum() => _player != null ? _player.Spectrum : ReadOnlySpan<float>.Empty;
+	// todo: try to thread spectrum shit
+	public ReadOnlySpan<float> GetSpectrum() => ReadOnlySpan<float>.Empty; // _player != null ? _player.Spectrum :
 
 	protected override void OnStart()
 	{
@@ -52,7 +54,7 @@ public partial class RadioComponent : Component
 		// Toggle
 		interactions.AddInteraction( new Interaction()
 		{
-			Identifier = "radio.toggle",
+			//Identifier = "radio.toggle",
 			Action = ( Player interactor, GameObject obj ) => On = !On,
 			Keybind = "use",
 			DynamicText = () => $"Toggle {(On ? "off" : "on")}",
@@ -61,7 +63,7 @@ public partial class RadioComponent : Component
 		// Next channel
 		interactions.AddInteraction( new Interaction()
 		{
-			Identifier = "radio.next",
+			//Identifier = "radio.next",
 			Action = ( Player interactor, GameObject obj ) =>
 			{
 				var next = ChannelIndex + 1;
@@ -77,7 +79,7 @@ public partial class RadioComponent : Component
 		// Previous channel
 		interactions.AddInteraction( new Interaction()
 		{
-			Identifier = "radio.previous",
+			//Identifier = "radio.previous",
 			Action = ( Player interactor, GameObject obj ) =>
 			{
 				var previous = ChannelIndex - 1;
@@ -98,6 +100,12 @@ public partial class RadioComponent : Component
 		_player.Repeat = true;
 		_player.ListenLocal = false;
 		_player.Volume = 0.05f;
+
+		Title = _player != null && !string.IsNullOrWhiteSpace( _player.Title )
+			? $"{Channel.Name} - {_player.Title}"
+			: Channel.Name;
+
+		Title = Title.RemoveDiacritics();
 	}
 
 	protected override void OnDestroy()
@@ -113,4 +121,28 @@ public partial class RadioComponent : Component
 
 		_player.Position = Transform.Position;
 	}
+	/*MusicPlayer _player;
+	bool _isPlaying;
+
+	[Sync, Property]
+	public bool IsPlaying
+	{
+		get => _isPlaying;
+		set
+		{
+			_isPlaying = value;
+			_player?.Stop();
+			if ( _isPlaying )
+				StartPlaying();
+		}
+	}
+
+	private void StartPlaying()
+	{
+		_player = MusicPlayer.PlayUrl( "https://yleradiolive.akamaized.net/hls/live/2027672/in-YleRadio1/256/variant.m3u8" );
+		_player.Position = Transform.Position;
+		_player.Repeat = true;
+		_player.ListenLocal = false;
+		_player.Volume = 0.05f;
+	}*/
 }
