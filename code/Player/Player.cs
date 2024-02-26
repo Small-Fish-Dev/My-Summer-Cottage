@@ -161,8 +161,6 @@ public partial class Player : Component, Component.ExecuteInEditor
 		{
 			UpdateAngles();
 			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
-
-			IsPissing = Input.Down( "Piss" );
 		}
 
 		UpdateAnimation();
@@ -172,12 +170,6 @@ public partial class Player : Component, Component.ExecuteInEditor
 	{
 		if ( !GameManager.IsPlaying )
 			return;
-
-		if ( IsProxy )
-			return;
-
-		UpdateMovement();
-		UpdateInteractions();
 
 		if ( PissEmitter != null )
 		{
@@ -196,6 +188,13 @@ public partial class Player : Component, Component.ExecuteInEditor
 				}
 			}
 		}
+
+		if ( IsProxy )
+			return;
+
+		IsPissing = Input.Down( "Piss" );
+		UpdateMovement();
+		UpdateInteractions();
 	}
 
 	public bool TakeMoney( int amount )
