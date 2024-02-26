@@ -1,4 +1,4 @@
-@using Sandbox;
+﻿@using Sandbox;
 @using Sandbox.UI;
 
 @namespace Sauna
@@ -30,7 +30,7 @@
 							<div class="background" />
 						</div>
 
-						@for ( int i = 0; i < 4; i++ )
+						@for ( int i = 0; i < 20; i++ )
 						{
 							var clothing = clothes?[slot].ElementAtOrDefault( i );
 							<div 
@@ -58,7 +58,8 @@
 </root>
 
 @code {
-	private static readonly Dictionary<EquipSlot, List<string>> defaultClothes = new()
+	// readonly
+	private static Dictionary<EquipSlot, List<string>> defaultClothes = new()
 	{
 		[EquipSlot.Head] = new List<string>() { "prefabs/clothes/cap.prefab", "prefabs/clothes/flat_cap.prefab", "prefabs/clothes/beanie.prefab" },
 		[EquipSlot.Face] = new List<string>() { "prefabs/clothes/glasses.prefab", "prefabs/clothes/round_glasses.prefab" },
@@ -147,6 +148,22 @@
 
 	private void LoadClothes()
 	{
+		// todo remove
+		defaultClothes = new();
+		foreach ( var p in PrefabLibrary.FindByComponent<ItemEquipment>() )
+		{
+			var equipment = p?.GetComponent<ItemEquipment>();
+			if ( equipment == null )
+				continue;
+
+			var slot = equipment.Get<EquipSlot>("Slot");
+			if (!defaultClothes.TryGetValue( slot, out var list ) )
+				defaultClothes.Add( slot, list = new() );
+
+			list.Add( p.Path );
+		}
+		// todo remove
+
 		var values = Enum.GetValues<EquipSlot>();
 		selections = values.ToDictionary( x => x, x => -1 );
 		clothes = new();
