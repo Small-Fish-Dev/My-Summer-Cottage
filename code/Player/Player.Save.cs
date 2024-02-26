@@ -53,10 +53,10 @@ partial class Player
 		if ( save.Clothes != null )
 			foreach ( var cloth in save.Clothes )
 			{
-				if ( !PrefabLibrary.TryGetByPath( cloth.Path, out var prefab ) )
+				if ( !ResourceLibrary.TryGet<PrefabFile>( cloth.Path, out var prefab ) )
 					continue;
 
-				var o = SceneUtility.GetPrefabScene( prefab.Prefab ).Clone();
+				var o = SceneUtility.GetPrefabScene( prefab ).Clone();
 				var equipment = o.Components.Get<ItemEquipment>();
 				player.Inventory.GiveItem( equipment );
 				player.Inventory.EquipItem( equipment );
