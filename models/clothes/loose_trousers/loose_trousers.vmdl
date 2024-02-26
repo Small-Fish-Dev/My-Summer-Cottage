@@ -11,9 +11,26 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
-						remaps = [  ]
-						use_global_default = true
-						global_default_material = "models/clothes/glasses/brimline_glasses.vmat"
+						remaps = 
+						[
+							{
+								from = "jeans.001.vmat"
+								to = "models/clothes/loose_trousers/loose_jeans.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+					{
+						_class = "MaterialGroup"
+						name = "khakis"
+						remaps = 
+						[
+							{
+								from = "models/clothes/loose_trousers/loose_jeans.vmat"
+								to = "models/clothes/loose_trousers/khakis.vmat"
+							},
+						]
 					},
 				]
 			},
@@ -23,7 +40,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/clothes/glasses/glasses.fbx"
+						filename = "models\\clothes\\loose_trousers/loose_jeans.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -36,13 +53,7 @@
 							exclude_by_default = true
 							exception_list = 
 							[
-								"man_029",
-								"Plane_007",
-								"Plane_008",
-								"Plane_009",
-								"Plane_004",
-								"Plane_003",
-								"Plane_001",
+								"guy_feet_019",
 							]
 						}
 					},

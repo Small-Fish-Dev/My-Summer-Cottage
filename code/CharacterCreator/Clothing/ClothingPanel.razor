@@ -80,11 +80,12 @@
 	private static Dictionary<EquipSlot, int> selections;
 	private static List<GameObject> clothingObjects = new();
 
-	private void CreateClothing( Model model )
+	private void CreateClothing(Model model, string materialGroup = "" )
 	{
 		var obj = Scene.CreateObject();
 		var renderer = obj.Components.Create<SkinnedModelRenderer>();
 		renderer.Model = model;
+		renderer.MaterialGroup = materialGroup;
 		renderer.BoneMergeTarget = Renderer;
 		obj.Parent = Renderer.GameObject;
 
@@ -110,7 +111,7 @@
 
 			var icon = component.Get<IconSettings>( "Icon" );
 			var model = Sandbox.Model.Load( icon.Model );
-			CreateClothing( model );
+			CreateClothing( model, icon.MaterialGroup );
 			flags |= component.Get<HiddenBodyGroup>( "HideBodygroups" );
 		}
 
