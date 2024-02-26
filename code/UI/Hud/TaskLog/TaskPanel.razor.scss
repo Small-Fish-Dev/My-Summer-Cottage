@@ -1,0 +1,30 @@
+TaskPanel {
+    padding: 20px 20px;
+    flex-shrink: 0;
+    align-items: center;
+    background-color: #7474740e;
+
+    .task-img {
+        image-rendering: pixelated;
+        aspect-ratio: 1;
+        height: 70px;
+        margin-right: 10px;
+    }
+
+    .task-details {
+        flex-direction: column;
+        
+        .task-title {
+            font-family: BasicHandwriting;
+            font-size: 28px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .task-description {
+            font-size: 24px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+}
