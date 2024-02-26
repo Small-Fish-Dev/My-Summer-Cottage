@@ -79,7 +79,7 @@
 		if ( fromSlot.EquipSlotIndex != null )
 		{
 			// If we're an equip slot...
-			if ( targetSlot.EquipSlotIndex != null )
+			if ( targetSlot.EquipSlotIndex != null && Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex )
 			{
 				// and the target is an equip slot:
 				inventory.MoveItem( fromSlot.EquipSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
@@ -93,7 +93,7 @@
 		else if ( fromSlot.BackpackSlotIndex != null )
 		{
 			// If we're a backpack slot...
-			if ( targetSlot.EquipSlotIndex != null )
+			if ( targetSlot.EquipSlotIndex != null && Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex )
 			{
 				// and the target is an equip slot:
 				inventory.MoveItem( fromSlot.BackpackSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
