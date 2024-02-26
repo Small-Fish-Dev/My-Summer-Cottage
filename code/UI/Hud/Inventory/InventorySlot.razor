@@ -55,6 +55,9 @@
 	{
 		base.OnMouseDown( e );
 
+		if (e.Button != "mouseleft")
+			return;
+
 		if ( CurrentDraggable != null )
 			return;
 
