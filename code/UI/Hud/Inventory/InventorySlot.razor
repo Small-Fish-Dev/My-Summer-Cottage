@@ -66,7 +66,7 @@
 	{
 		base.OnMouseDown( e );
 
-		if (e.Button != "mouseleft")
+		if ( e.Button != "mouseleft" )
 			return;
 
 		if ( CurrentDraggable != null )
@@ -93,7 +93,7 @@
 		if ( fromSlot.EquipSlotIndex != null )
 		{
 			// If we're an equip slot...
-			if ( targetSlot.EquipSlotIndex != null && Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex )
+			if ( targetSlot.EquipSlotIndex != null && ((Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex) || (Item.Holdable && targetSlot.EquipSlotIndex == EquipSlot.Hand)) )
 			{
 				// and the target is an equip slot:
 				inventory.MoveItem( fromSlot.EquipSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
@@ -107,7 +107,7 @@
 		else if ( fromSlot.BackpackSlotIndex != null )
 		{
 			// If we're a backpack slot...
-			if ( targetSlot.EquipSlotIndex != null && Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex )
+			if ( targetSlot.EquipSlotIndex != null && ((Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex) || (Item.Holdable && targetSlot.EquipSlotIndex == EquipSlot.Hand)) )
 			{
 				// and the target is an equip slot:
 				inventory.MoveItem( fromSlot.BackpackSlotIndex.Value, targetSlot.EquipSlotIndex.Value );

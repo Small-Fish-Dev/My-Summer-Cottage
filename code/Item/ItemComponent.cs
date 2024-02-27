@@ -6,6 +6,7 @@ public class ItemComponent : Component
 	[Property] public string Name { get; set; }
 	[Property] public string Description { get; set; }
 	[Property] public int WeightInGrams { get; set; }
+	[Property] public bool Holdable { get; set; }
 
 	public Texture IconTexture => Texture.Load( FileSystem.Mounted, Icon.Path );
 
@@ -26,5 +27,25 @@ public class ItemComponent : Component
 
 		GameObject.Name = Name;
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
+
+		// Pickup
+		var interactions = Components.GetOrCreate<Interactions>();
+		interactions.AddInteraction( new Interaction()
+		{
+			Identifier = "item.pickup",
+			Action = ( Player interactor, GameObject obj ) => interactor.Inventory.GiveItem( this ),
+			Keybind = "use",
+			Description = "Pickup",
+			Disabled = () => !DrawingEnabled,
+		} );
+	}
+
+	protected override void OnDestroy()
+	{
+		if ( IsProxy )
+			return;
+
+		var inventory = Player.Local.Inventory;
+		inventory?.RemoveItem( this );
 	}
 }

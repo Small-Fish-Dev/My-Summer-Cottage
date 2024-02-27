@@ -71,7 +71,7 @@ public sealed class BeerCrate : Component
 			{
 				Count--;
 			},
-			Keybind = "use",
+			Keybind = "use2",
 			DynamicText = () => $"Take a beer",
 			Disabled = () => Count <= 0,
 		} );

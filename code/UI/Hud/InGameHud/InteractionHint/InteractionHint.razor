@@ -7,14 +7,21 @@
 	return;
 
 <root>
-	<image src="ui/hud/interaction-pointer.png" class="icon" />
+	@if ( !FromHold )
+	{
+		<image src="ui/hud/interaction-pointer.png" class="icon" />
+	}
+
 	<div class="content">
-		<text class="title">@Player.Local.TargetedGameObject.Name</text>
+		<text class="title">@_targetObject.Name</text>
 
 		<div class="interactions">
 			@foreach(var interaction in _interactions)
 			{
-				@if ( CanInteract( interaction ) )
+				if ( !FromHold && interaction.HoldOnly )
+					continue;
+
+				if ( CanInteract( interaction ) )
 				{
 					<div class="interaction">
 						<inputhint class="hint" input=@interaction.Keybind />
@@ -27,8 +34,15 @@
 </root>
 
 @code {
-    private bool HasTarget => Player.Local?.TargetedGameObject is not null;
-    private IEnumerable<Interaction> _interactions => Player.Local?.TargetedGameObject?.GetInteractions() ?? new List<Interaction>();
+	public bool FromHold { get; set; }
+
+	private GameObject _targetObject => FromHold
+		? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
+		: Player.Local?.TargetedGameObject;
+
+	private bool HasTarget => _targetObject is not null;
+
+	private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
     private Vector2 _lerpPosition;
 
     private bool CanInteract( Interaction interaction )
@@ -46,27 +60,36 @@
         if (!HasTarget)
             return;
 
-        var pos = Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
+        var pos = FromHold ? 0 : Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
         foreach ( var interaction in _interactions )
         {
+			if ( !FromHold && interaction.HoldOnly )
+				continue;
+
             if ( CanInteract( interaction ) )
             {
-                if ( interaction.HasBounds )
+                if ( interaction.HasBounds && !FromHold )
                     pos = Player.Local.TargetedGameObject.Transform.Position + interaction.Position * Player.Local.TargetedGameObject.Transform.Rotation;
 
-                if ( interaction.InputFunction( interaction.Keybind ) )
+                if ( interaction.InputFunction( interaction.Keybind ) )	
                 {
-                    Player.Local.TargetedGameObject?.Network.TakeOwnership();
-                    interaction.Action?.Invoke(Player.Local, Player.Local.TargetedGameObject);
+					_targetObject?.Network.TakeOwnership();
+					interaction.Action?.Invoke(Player.Local, _targetObject);
 
                     if ( interaction.Identifier != String.Empty )
-                      EventSystem.InteractionInvoked( interaction.Identifier, Player.Local.TargetedGameObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
+                      EventSystem.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
 
-					var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
-					Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ) );
+					if ( !FromHold ) // No need to play use animation for held items.
+					{
+						var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
+						Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ) );
+					}
 				}
 			}
 		}
+
+		if ( FromHold ) // No need to play use animation for held items.
+			return;
 
 		_lerpPosition = Vector2.Lerp( _lerpPosition, pos.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
         Style.Left = Length.Fraction( MathF.Floor( _lerpPosition.x * 200f + 0.5f ) / 200f );
@@ -75,6 +98,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(HasTarget, Player.Local.TargetedGameObject?.Name, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i))));
+		return HashCode.Combine(HasTarget, _targetObject?.Name, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i))));
 	}
 }
