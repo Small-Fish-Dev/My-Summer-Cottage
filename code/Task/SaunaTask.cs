@@ -192,6 +192,7 @@ public partial class SaunaTask : GameResource
 		Completed = false;
 		Successful = false;
 		CurrentSubtaskOrder = 0;
+		TaskTimer = TimeLimitInSeconds;
 
 		foreach ( var subtask in Subtasks )
 		{
