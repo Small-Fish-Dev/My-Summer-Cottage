@@ -29,7 +29,7 @@ public class TaskMaster : Component
 					if ( subtask.EvaluateOnTick != null ) // Manually set current completion progress if we have an EvaluateOnTick
 						subtask.CurrentAmount = subtask.EvaluateOnTick.Invoke( Player.Local );
 
-					subtask.Completed = subtask.CurrentAmount >= subtask.AmountToComplete;
+					subtask.SetComplete( subtask.CurrentAmount >= subtask.AmountToComplete );
 				}
 
 				// If all subtasks have been completed, the task has been completed succesfully
@@ -48,6 +48,9 @@ public class TaskMaster : Component
 				// Time limit fail condition
 				if ( task.TimeLimited && task.TaskTimer )
 					task.Fail();
+
+				if ( activeSubtasks.All( x => x.Completed ) )
+					task.CurrentSubtaskOrder++;
 			}
 		}
 	}
@@ -69,16 +72,12 @@ public class TaskMaster : Component
 		{
 			if ( !task.Global && triggerer != Player.Local ) continue; // If this task isn't global and the triggerer isn't our player, ignore it
 
-			var activeSubtasks = task.Subtasks.Where( x => x.SubtaskOrder == task.CurrentSubtaskOrder ); // Current active subtasks
+			var activeSubtasks = task.Subtasks; // Current active subtasks
 
 			foreach ( var subtask in activeSubtasks )
 			{
 				if ( subtask.TriggerSignal == signalIdentifier ) // If the given signal is the one we're looking for, increase the subtask's progress
-				{
 					subtask.CurrentAmount++;
-
-					Log.Info( $"Beer obtained! ({subtask.CurrentAmount}/{subtask.AmountToComplete})" );
-				}
 			}
 		}
 	}

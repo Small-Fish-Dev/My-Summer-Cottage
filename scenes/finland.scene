@@ -93,7 +93,9 @@
           "__type": "TaskMaster",
           "CurrentTasks": [
             "resources/tasks/get_money.task",
-            "resources/tasks/get_single_beer.task"
+            "resources/tasks/get_single_beer.task",
+            "resources/tasks/enter_sauna.task",
+            "resources/tasks/goombler.task"
           ]
         }
       ],
@@ -178,7 +180,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.06988802,0,0.9975548",
+          "Rotation": "0,-0.2637238,0,0.9645982",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -372,6 +374,23 @@
       "Position": "574.0919,-605.1056,93.00001",
       "Enabled": true,
       "__Prefab": "prefabs/items/rifle.prefab"
+    },
+    {
+      "Id": "6256e00d-b380-4ebb-b468-35255ab4b86c",
+      "Name": "Object",
+      "Position": "1024.928,-748.9748,76.24623",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "Extents": "228.7999,348.8002,108.56",
+          "MaxPollingRate": 20,
+          "Offset": "0,0,0",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "sauna.entered"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -397,6 +416,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-27T22:37:01.4203515\u002B01:00",
+  "LastSaved": "2024-02-27T23:02:55.8344899\u002B01:00",
   "__references": []
 }
