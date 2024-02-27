@@ -56,7 +56,7 @@ partial class Player
 		var save = tuple.Save;
 
 		player.Firstname = save.Firstname.ToLower().ToTitleCase();
-		player.Firstname = save.Lastname.ToLower().ToTitleCase();
+		player.Lastname = save.Lastname.ToLower().ToTitleCase();
 
 		player.Money = save.Money;
 
