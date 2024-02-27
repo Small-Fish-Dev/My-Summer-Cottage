@@ -2,15 +2,15 @@ namespace Sauna.Game;
 
 public class GameTimeManager : Component, Component.ExecuteInEditor
 {
-	[Property] [Category( "Components" )] public DirectionalLight Sun { get; set; }
+	[Property][Category( "Components" )] public DirectionalLight Sun { get; set; }
 
-	[Property] [Category( "Components" )] public SkyBox2D Skybox { get; set; }
+	[Property][Category( "Components" )] public SkyBox2D Skybox { get; set; }
 
-	[Property] [Category( "Components" )] public GradientFog Fog { get; set; }
+	[Property][Category( "Components" )] public GradientFog Fog { get; set; }
 
-	[Property] [Category( "Visuals" )] public Gradient SkyDayColor { get; set; }
+	[Property][Category( "Visuals" )] public Gradient SkyDayColor { get; set; }
 
-	[Property] [Category( "Visuals" )] public Color SkyNightColor { get; set; }
+	[Property][Category( "Visuals" )] public Color SkyNightColor { get; set; }
 
 	/// <summary>
 	/// Imagine it like the angle of a big pole sticking out of the Earth, and the Sun is spinning around it.
@@ -19,6 +19,13 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Property]
 	[Category( "Visuals" )]
 	public Angles SunOrbit { get; set; }
+
+	/// <summary>
+	/// How fast the skybox (clouds) rotate along each axis
+	/// </summary>
+	[Property]
+	[Category( "Visuals" )]
+	public Angles CloudSpeed { get; set; }
 
 	/// <summary>
 	/// Time of the sunrise in in-game seconds (7 AM by default)
@@ -82,6 +89,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 	[HostSync] private TimeSince InGameTime { get; set; }
 	[HostSync] private float? FrozenTime { get; set; }
+	private Angles _cloudAngle = new();
 
 	protected override void OnAwake()
 	{
@@ -112,6 +120,12 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 		if ( Scene.IsEditor && !GameManager.IsPlaying )
 		{
 			SetTimeFromSeconds( StartTime );
+		}
+
+		if ( Skybox != null )
+		{
+			_cloudAngle += CloudSpeed * Time.Delta;
+			Skybox.Transform.Rotation = _cloudAngle;
 		}
 
 		var igs = InGameSeconds;
@@ -152,7 +166,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 				Fog.Color = SkyDayColor.Evaluate( daytimePercent );
 
 			if ( Skybox != null )
-				Skybox.Tint = SkyDayColor.Evaluate( daytimePercent );
+				Skybox.Tint = SkyDayColor.Evaluate( daytimePercent ) * 2f;
 		}
 		else
 		{
