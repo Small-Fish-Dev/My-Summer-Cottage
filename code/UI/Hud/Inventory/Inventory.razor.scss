@@ -26,22 +26,30 @@ Inventory {
         flex-wrap: wrap;
     }
 
-    .active-weight {
-        color: $orange;
-    }
-
-    .max {
-        color: $gray;
+    .total-weight {
+        text-shadow: $text-shadow-sm;
+        font-size: 35px; 
+        gap: 10px;
+        
+        .active-weight {
+            color: $orange;
+        }
+    
+        .max {
+            color: $gray;
+        }
     }
 
     .level {
+        text-shadow: $text-shadow-sm;
         font-size: 30px;
         margin-top: 10px;
         font-family: 'BasicHandwriting';
     }
 
     .exp-text {
-        font-size: 28px;
+        text-shadow: $text-shadow-sm;
+        font-size: 35px;
         gap: 10px;
     }
 

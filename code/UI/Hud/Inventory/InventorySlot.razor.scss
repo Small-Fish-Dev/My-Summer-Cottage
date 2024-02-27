@@ -20,9 +20,10 @@ InventorySlot {
 
     .background {
         position: absolute;
-        background: radial-gradient(#00000000, #000000c0);
-        height: 90%;
-        width: 90%;
+        background: radial-gradient(#00000047, #000000);
+        height: 100%;
+        width: 100%;
+        z-index: -10;
     }
 
     .item {
@@ -31,14 +32,6 @@ InventorySlot {
 
         &.has-draggable {
             opacity: 0.3;
-        }
-
-        .weight {
-            position: absolute;
-            bottom: 0px;
-            right: 2px;
-            font-size: 25px;
-            color: $orange;
         }
 
         &:hover {
