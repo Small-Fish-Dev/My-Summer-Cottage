@@ -4,6 +4,13 @@
 
 <root>
 	<SideButton 
+		Title="Pause Menu" 
+		Subtitle="Press Escape or click here"
+		OnClick=@(() => FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.PauseMenu))
+		ImagePath="ui/hud/goback.png"
+		style="position: absolute; top: 50px; left: 0px;" 
+	/>
+	<SideButton 
 		Title="Tasks" 
 		Subtitle="Press @(Input.GetButtonOrigin( InputAction.Tasks )) or click here"
 		OnClick=@(() => FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.TaskLog))
