@@ -33,6 +33,14 @@ public class Inventory : Component
 		return true;
 	}
 
+	public void RemoveItem( ItemComponent item )
+	{
+		if ( _backpackItems.Contains( item ) )
+			_backpackItems[_backpackItems.IndexOf( item )] = null;
+		else if ( _equippedItems.Contains( item ) )
+			_equippedItems[_equippedItems.IndexOf( item )] = null;
+	}
+
 	public bool DropItem( ItemComponent item )
 	{
 		var droppedItem = item is ItemEquipment equipment && equipment.Equipped ? RemoveItem( equipment.Slot ) : RemoveItem( _backpackItems.IndexOf( item ) );
@@ -83,7 +91,7 @@ public class Inventory : Component
 		var bodygroups = HiddenBodyGroup.None;
 		foreach ( var item in EquippedItems )
 		{
-			if ( item is not ItemEquipment equipment )
+			if ( item is not ItemEquipment equipment || !equipment.Equipped )
 				continue;
 
 			bodygroups |= equipment.HideBodygroups;

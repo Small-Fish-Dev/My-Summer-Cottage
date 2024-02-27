@@ -7,6 +7,7 @@
       {
         "__type": "ItemComponent",
         "Description": "Use this to get fucked up like Cyberagent",
+        "Holdable": true,
         "Icon": {
           "Model": "models/beer_bottle/beer.vmdl",
           "MaterialGroup": "",
@@ -21,14 +22,14 @@
         "__type": "Interactions",
         "ObjectInteractions": [
           {
-            "Identifier": "beer.pickup",
-            "Keybind": "use",
-            "Description": "Pickup",
+            "Identifier": "beer.drink",
+            "Keybind": "attack1",
+            "Description": "Drink",
             "Action": {
               "Version": 5,
               "UserData": {
-                "Title": "Pickup",
-                "id": "ae924be3-cc57-42c9-a38a-4e0be2fba050",
+                "Title": "Action",
+                "id": "1d472d5d-54f0-4785-84c0-47529d8279f7",
                 "ReferencedComponentTypes": []
               },
               "Variables": [],
@@ -39,50 +40,29 @@
                 },
                 {
                   "Id": 1,
-                  "Type": "property.get",
-                  "Properties": {
-                    "_name": "Inventory"
-                  },
-                  "UserData": {
-                    "Position": "144,-0"
-                  }
-                },
-                {
-                  "Id": 3,
                   "Type": "call",
                   "Properties": {
-                    "_isStatic": false,
-                    "_name": "GiveItem"
+                    "_name": "Destroy",
+                    "_type": "Sandbox.Game/Sandbox.GameObject",
+                    "_isStatic": false
                   },
                   "UserData": {
-                    "Position": "336,0"
+                    "Position": "160,0"
                   }
                 }
               ],
               "Links": [
                 {
                   "SrcId": 0,
-                  "SrcName": "interactor",
-                  "DstId": 1,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 0,
                   "SrcName": "_signal",
-                  "DstId": 3,
+                  "DstId": 1,
                   "DstName": "_signal"
-                },
-                {
-                  "SrcId": 1,
-                  "SrcName": "_result",
-                  "DstId": 3,
-                  "DstName": "_target"
                 },
                 {
                   "SrcId": 0,
                   "SrcName": "obj",
-                  "DstId": 3,
-                  "DstName": "item"
+                  "DstId": 1,
+                  "DstName": "_target"
                 }
               ]
             }

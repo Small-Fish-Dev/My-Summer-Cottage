@@ -6,7 +6,7 @@ public static class EnumExtensions
 	{
 		var path = "/ui/hud/" + slot switch
 		{
-			EquipSlot.Head => "clothes_face.png",
+			EquipSlot.Head => "clothes_hat.png",
 			EquipSlot.Face => "clothes_face.png",
 			EquipSlot.Body => "clothes_torso.png",
 			EquipSlot.Legs => "clothes_legs.png",

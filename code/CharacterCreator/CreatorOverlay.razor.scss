@@ -18,6 +18,26 @@ CreatorOverlay {
     pointer-events: all;
     image-rendering: pixelated;
 
+    .infobox {
+        position: absolute;
+        left: 700px;
+        top: 280px;
+        max-width: 400px;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-size: 22px;
+        padding: 10px;
+        font-family: HabboExtended;
+        flex-direction: column;
+        gap: 10px;
+        font-weight: bold;
+        letter-spacing: 2px;
+
+        label {
+            flex-shrink: 0;
+        }
+    }
+
     .header-content {
         flex-direction: column;
         gap: 20px;

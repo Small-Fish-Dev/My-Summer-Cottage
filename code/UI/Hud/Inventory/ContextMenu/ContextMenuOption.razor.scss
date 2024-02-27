@@ -1,0 +1,31 @@
+@import "/UI/Style.scss";
+
+ContextMenuOption {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: #1b1c1b;
+    transition: all 0.1s ease-out;
+
+    img {
+        aspect-ratio: 1;
+        height: 20px;
+        image-rendering: pixelated;
+        margin-right: 8px;
+    }
+
+    text {
+        font-family: HabboExtended;
+        letter-spacing: 1px;
+        font-weight: bold;
+        font-size: 18px;
+        text-shadow: $text-shadow-sm;
+    }
+
+    &:hover {
+        background-color: #323332;
+        pointer-events: all;
+        cursor: pointer;
+        transform: translateY(-1);
+    }
+}

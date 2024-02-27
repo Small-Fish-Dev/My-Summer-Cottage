@@ -26,19 +26,35 @@ public struct PlayerSave
 
 partial class Player
 {
+	private static PlayerSave? _saveData;
+
+	public static (PlayerSave Save, bool Has) GetSave()
+	{
+		if ( _saveData.HasValue )
+			return (_saveData.Value, true);
+
+		if ( !FileSystem.Data.FileExists( PlayerSave.FILE_PATH ) )
+			return (default, false);
+
+		_saveData = FileSystem.Data.ReadJson<PlayerSave>( PlayerSave.FILE_PATH );
+
+		return (_saveData.Value, true);
+	}
+
 	public static void Save( PlayerSave save )
 		=> FileSystem.Data.WriteJson( PlayerSave.FILE_PATH, save );
 
-	public static bool Load( Player player = null )
+	public static bool Setup( Player player = null )
 	{
 		player ??= Local;
 
-		if ( !FileSystem.Data.FileExists( PlayerSave.FILE_PATH ) )
+		var tuple = GetSave();
+		if ( !tuple.Has )
 			return false;
 
-		var save = FileSystem.Data.ReadJson<PlayerSave>( PlayerSave.FILE_PATH );
-
 		// Setup basic player information.
+		var save = tuple.Save;
+
 		player.Firstname = save.Firstname.ToLower().ToTitleCase();
 		player.Firstname = save.Lastname.ToLower().ToTitleCase();
 
@@ -61,8 +77,7 @@ partial class Player
 				var equipment = o.Components.Get<ItemEquipment>();
 				player.Inventory.GiveItem( equipment );
 				player.Inventory.EquipItem( equipment );
-				//if ( !o.Network.Active )
-					o.NetworkSpawn();
+				o.NetworkSpawn();
 			}
 
 		// todo @ceitine: Go through items.

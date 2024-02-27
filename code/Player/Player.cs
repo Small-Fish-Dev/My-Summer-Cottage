@@ -141,7 +141,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		PissParticles = Components.Get<ParticleEffect>( FindMode.EverythingInSelfAndDescendants );
 
 		if ( !IsProxy ) // Load save.
-			Load( this );
+			Setup( this );
 
 		// Footsteps
 		Renderer.OnFootstepEvent += OnFootstep;

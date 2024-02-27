@@ -1,5 +1,3 @@
-using Microsoft.VisualBasic;
-
 namespace Sauna;
 
 public enum InputMode
@@ -21,6 +19,11 @@ public struct Interaction
 	/// </summary>
 	[Property]
 	public string Identifier { get; set; }
+
+	/// <summary>
+	/// Is this interaction only available when holding
+	/// </summary>
+	public bool HoldOnly { get; set; }
 
 	/// <summary>
 	/// The keybind used to trigger this interaction
@@ -113,7 +116,10 @@ public class Interactions : Component
 	private List<Interaction> _queue = new();
 	public void AddInteraction( Interaction interaction )
 	{
-		_queue.Add( interaction );
+		if ( ObjectInteractions == null )
+			_queue.Add( interaction );
+		else
+			ObjectInteractions.Add( interaction );
 	}
 
 	protected override void OnStart()

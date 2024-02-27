@@ -1,0 +1,20 @@
+@import "/UI/Style.scss";
+
+ContextMenu {
+    position: absolute;
+    flex-direction: column;
+    z-index: 500;
+    pointer-events: all;
+    gap: 2px;
+    background-color: #393a38;
+    transition: all 0.1s ease-out;
+    scale: 1;
+
+    &:intro {
+        transform: scale(0);
+    }
+
+    &:outro {
+        transform: scale(0);
+    }
+}

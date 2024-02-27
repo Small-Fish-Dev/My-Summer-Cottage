@@ -56,7 +56,7 @@ public partial class RadioComponent : Component
 		{
 			//Identifier = "radio.toggle",
 			Action = ( Player interactor, GameObject obj ) => On = !On,
-			Keybind = "use",
+			Keybind = "use2",
 			DynamicText = () => $"Toggle {(On ? "off" : "on")}",
 		} );
 
