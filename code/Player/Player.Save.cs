@@ -28,6 +28,10 @@ partial class Player
 {
 	private static PlayerSave? _saveData;
 
+	/// <summary>
+	/// Gets current local save data.
+	/// </summary>
+	/// <returns></returns>
 	public static (PlayerSave Save, bool Has) GetSave()
 	{
 		if ( _saveData.HasValue )
@@ -41,9 +45,62 @@ partial class Player
 		return (_saveData.Value, true);
 	}
 
-	public static void Save( PlayerSave save )
+	/// <summary>
+	/// Writes a pure PlayerSave struct into a local save.
+	/// </summary>
+	/// <param name="save"></param>
+	public static void WriteSave( PlayerSave save )
 		=> FileSystem.Data.WriteJson( PlayerSave.FILE_PATH, save );
 
+	/// <summary>
+	/// Writes a local save based on player or local.
+	/// </summary>
+	/// <param name="player"></param>
+	public static void Save( Player player = null )
+	{
+		player ??= Local;
+
+		// Get the data that sticks.
+		var data = GetSave();
+		var save = data.Has 
+			? data.Save 
+			: new PlayerSave()
+			{
+				Firstname = player.Firstname,
+				Lastname = player.Lastname,
+				Fatness = player.Fatness,
+				Height = player.Height,
+				SkinColor= player.SkinColor
+			};
+
+		// Save dynamic data.
+		ItemSave Serialize( ItemComponent item )
+		{
+			return default; // TODO @ceitine: figure out way to fetch prefab path, add attribute to store data, go through all components and check if any property has that attribute
+		}
+
+		_saveData = save with
+		{
+			Money = player.Money,
+
+			Clothes = player.Inventory.EquippedItems
+				.Select( x => Serialize( x ) )
+				.ToArray(),
+
+			Inventory = player.Inventory.BackpackItems
+				.Select( x => Serialize( x ) )
+				.ToArray()
+		};
+
+		// Write save.
+		WriteSave( _saveData.Value );
+	}
+
+	/// <summary>
+	/// Sets up everything for a player or local from local save.
+	/// </summary>
+	/// <param name="player"></param>
+	/// <returns></returns>
 	public static bool Setup( Player player = null )
 	{
 		player ??= Local;

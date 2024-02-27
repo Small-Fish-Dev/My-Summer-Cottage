@@ -110,7 +110,7 @@
 	 || string.IsNullOrEmpty( PassportPanel.Lastname );
 
 	private void Save() =>
-		Player.Save( 
+		Player.WriteSave( 
 			new() {
 				Firstname = PassportPanel.Firstname.ToLower().ToTitleCase(),
 				Lastname = PassportPanel.Lastname.ToLower().ToTitleCase(),
