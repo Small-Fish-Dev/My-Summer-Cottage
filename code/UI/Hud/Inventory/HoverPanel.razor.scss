@@ -1,19 +1,25 @@
+@import "/UI/Style.scss";
+
 HoverPanel {
     position: absolute;
-    background-color: #505050ef;
-    width: 400px;
+    background-color: #1b1c1b;
     align-items: center;
     padding: 10px;
-    transition: all 0.1s;
-
-    .item-icon {
-        aspect-ratio: 1;
-        height: 120px;
-    }
+    transition: all 0.08s ease-out;
+    text-shadow: $text-shadow-sm;
 
     .item-details {
         flex-direction: column;
         justify-content: center;
+
+        .item-weight {
+            position: absolute;
+            color: $orange;
+            font-family: battlenetcopy;
+            font-size: 25px;
+            top: -8px;
+            right: 0px;
+        }
 
         .item-name {
             font-family: BasicHandwriting;
@@ -22,30 +28,29 @@ HoverPanel {
         }
 
         .item-description {
-
             font-family: battlenetcopy;
-            font-size: 23px;
+            font-size: 25px;
         }
     }
 
     .footer {
         position: absolute;
-        background-color: #101010f6;
-        padding-top: 2px;
+        background-color: #101010;
         color: #535353;
         bottom: -30px;
         width: 100%;
         height: 30px;
-        font-size: 23px;
+        font-size: 28px;
         justify-content: center;
     }
 
     
     &:intro {
+        transform: translateY(20);
         opacity: 0;
     }
 
     &:outro {
-        opacity: 0;
+        transform: scale(0);
     }
 }
