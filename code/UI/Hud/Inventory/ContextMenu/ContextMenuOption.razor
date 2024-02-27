@@ -1,0 +1,13 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<img src=@ImagePath />
+	<text>@Description</text>
+</root>
+
+@code {
+	public string Description { get; set; }
+	public string ImagePath { get; set; }
+}

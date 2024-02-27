@@ -5,10 +5,22 @@
 <root onclick=@(() => Close())>
 	@if (_item is ItemEquipment equipment)
 	{
-		<div class="option" onclick=@(() => ToggleEquip(equipment))>@(equipment.Equipped ? "Unequip" : "Equip")</div>
+		<ContextMenuOption ]
+			Description=@(equipment.Equipped ? "Unequip" : "Equip") 
+			ImagePath="ui/hud/inv_actions_equip.png" 
+			onclick=@(() => ToggleEquip(equipment)) 
+		/>
 	}
-	<div class="option" onclick=@(() => Inspect(_item))>Inspect</div>
-	<div class="option" onclick=@(() => Player.Local.Inventory.DropItem(_item))>Drop</div>
+	<ContextMenuOption ]
+		Description="Inspect"
+		ImagePath="ui/hud/inv_actions_inspect.png" 
+		onclick=@(() => Inspect(_item)) 
+	/>
+	<ContextMenuOption ]
+		Description="Drop"
+		ImagePath="ui/hud/inv_actions_drop.png" 
+		onclick=@(() => Player.Local.Inventory.DropItem(_item)) 
+	/>
 </root>
 
 @code {
