@@ -6,7 +6,7 @@ public class TaskMaster : Component
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
 
-	protected override void OnUpdate()
+	protected override void OnFixedUpdate()
 	{
 		foreach ( var task in CurrentTasks )
 		{
