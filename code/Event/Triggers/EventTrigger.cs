@@ -59,7 +59,7 @@ public abstract class EventTrigger : Component
 	{
 		OnTrigger?.Invoke( triggerer, targetObject );
 
-		if ( TriggerSignalIdentifier != null )
+		if ( TriggerSignalIdentifier != null && TriggerSignalIdentifier != "" && TriggerSignalIdentifier != String.Empty )
 		{
 			var playerComponent = triggerer.Components.Get<Player>();
 

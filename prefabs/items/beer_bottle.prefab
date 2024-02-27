@@ -19,57 +19,6 @@
         "WeightInGrams": 300
       },
       {
-        "__type": "Interactions",
-        "ObjectInteractions": [
-          {
-            "Identifier": "beer.drink",
-            "Keybind": "attack1",
-            "Description": "Drink",
-            "Action": {
-              "Version": 5,
-              "UserData": {
-                "Title": "Action",
-                "id": "1d472d5d-54f0-4785-84c0-47529d8279f7",
-                "ReferencedComponentTypes": []
-              },
-              "Variables": [],
-              "Nodes": [
-                {
-                  "Id": 0,
-                  "Type": "input"
-                },
-                {
-                  "Id": 1,
-                  "Type": "call",
-                  "Properties": {
-                    "_name": "Destroy",
-                    "_type": "Sandbox.Game/Sandbox.GameObject",
-                    "_isStatic": false
-                  },
-                  "UserData": {
-                    "Position": "160,0"
-                  }
-                }
-              ],
-              "Links": [
-                {
-                  "SrcId": 0,
-                  "SrcName": "_signal",
-                  "DstId": 1,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 0,
-                  "SrcName": "obj",
-                  "DstId": 1,
-                  "DstName": "_target"
-                }
-              ]
-            }
-          }
-        ]
-      },
-      {
         "__type": "ModelRenderer",
         "BodyGroups": 11,
         "MaterialGroup": null,

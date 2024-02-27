@@ -30,6 +30,8 @@ public class Inventory : Component
 		item.GameObject.Parent = Player.GameObject;
 
 		_backpackItems[firstFreeSlot] = item;
+
+		TaskMaster.SubmitTriggerSignal( $"item.received.{item.Name}", Player );
 		return true;
 	}
 
@@ -39,6 +41,8 @@ public class Inventory : Component
 			_backpackItems[_backpackItems.IndexOf( item )] = null;
 		else if ( _equippedItems.Contains( item ) )
 			_equippedItems[_equippedItems.IndexOf( item )] = null;
+
+		TaskMaster.SubmitTriggerSignal( $"item.removed.{item.Name}", Player );
 	}
 
 	public bool DropItem( ItemComponent item )
@@ -51,6 +55,8 @@ public class Inventory : Component
 		droppedItem.GameObject.Parent = null;
 		droppedItem.GameObject.Transform.Position = Player.ViewRay.Position + Player.ViewRay.Forward * 2f;
 		droppedItem.Network.DropOwnership();
+
+		TaskMaster.SubmitTriggerSignal( $"item.dropped.{item.Name}", Player );
 
 		return true;
 	}
@@ -82,6 +88,8 @@ public class Inventory : Component
 		}
 
 		UpdateBodygroups();
+
+		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
 
 		return true;
 	}
@@ -116,6 +124,8 @@ public class Inventory : Component
 		_equippedItems[slotIndex] = null;
 
 		UpdateBodygroups();
+
+		TaskMaster.SubmitTriggerSignal( $"item.unequipped.{item.Name}", Player );
 
 		return true;
 	}
@@ -192,6 +202,8 @@ public class Inventory : Component
 			return null;
 
 		_backpackItems[index] = null;
+
+		TaskMaster.SubmitTriggerSignal( $"item.removed.{item.Name}", Player );
 		return item;
 	}
 
@@ -202,6 +214,8 @@ public class Inventory : Component
 			return null;
 
 		_equippedItems[(int)index] = null;
+
+		TaskMaster.SubmitTriggerSignal( $"item.removed.{item.Name}", Player );
 		return item;
 	}
 

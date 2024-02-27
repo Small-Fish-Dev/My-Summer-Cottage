@@ -71,5 +71,7 @@ public class TaskMaster : Component
 					subtask.CurrentAmount++;
 			}
 		}
+
+		Log.Info( signalIdentifier );
 	}
 }
