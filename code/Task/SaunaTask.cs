@@ -1,3 +1,6 @@
+using System.Threading.Tasks;
+using static Sauna.SaunaTask.Subtask;
+
 namespace Sauna;
 
 [GameResource( "Task", "task", "A task for the player to complete", Icon = "event_busy", IconBgColor = "#4a4fa8", IconFgColor = "#ffffff" )]
@@ -96,16 +99,24 @@ public partial class SaunaTask : GameResource
 	public TaskAction OnStart { get; set; }
 
 	/// <summary>
-	/// A generic action that runs when the task has been succesfully completed by the player (Like rewarding the player with money)
+	/// A generic action that runs when the task has been succesfully succeeded by the player (Like rewarding the player with money)
 	/// </summary>
 	[Property]
-	public TaskAction OnComplete { get; set; }
+	public TaskAction OnSuccess { get; set; }
 
 	/// <summary>
 	/// A generic action that runs when the task has been failed by the player (Like triggering a nagging wife SMS)
 	/// </summary>
 	[Property]
 	public TaskAction OnFail { get; set; }
+
+	public delegate bool TaskCondition( Player player );
+
+	/// <summary>
+	/// Check every tick for a fail condition, if it returns true then fail the task
+	/// </summary>
+	[Property]
+	public TaskCondition FailConditionCheck { get; set; }
 
 	[Property]
 	public List<Subtask> Subtasks { get; set; } = new();
@@ -114,5 +125,48 @@ public partial class SaunaTask : GameResource
 	public int CurrentSubtaskOrder { get; set; } = 0;
 
 	[Hide]
+	public bool Successful { get; set; } = false;
+
+	[Hide]
+	public bool Started { get; set; } = false;
+
+	[Hide]
 	public bool Completed { get; set; } = false;
+
+	[Hide]
+	public TimeUntil TaskTimer { get; set; } = 0;
+
+	/// <summary>
+	/// The task has started
+	/// </summary>
+	public void Start()
+	{
+		Started = true;
+		OnStart?.Invoke( Player.Local );
+
+		if ( TimeLimited )
+			TaskTimer = TimeLimitInSeconds;
+	}
+
+	/// <summary>
+	/// Task completed succesfully
+	/// </summary>
+	public void Succeed()
+	{
+		Completed = true;
+		Successful = true;
+
+		OnSuccess?.Invoke( Player.Local );
+	}
+
+	/// <summary>
+	/// Task not completed
+	/// </summary>
+	public void Fail()
+	{
+		Completed = true;
+		Successful = false;
+
+		OnFail?.Invoke( Player.Local );
+	}
 }
