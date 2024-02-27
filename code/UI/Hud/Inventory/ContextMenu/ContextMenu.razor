@@ -73,7 +73,9 @@
 		var boxRect = (Box.Rect * ScaleFromScreen).Grow( 5f );
 
 		if ( !boxRect.IsInside( mousePosition ) )
-			Delete();
+			Close();
+		if (FullScreenManager.Instance.ActivePanel != FullScreenManager.FullScreenPanel.Inventory)
+			Close();
 	}
 
 	protected override int BuildHash()

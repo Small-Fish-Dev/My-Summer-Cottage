@@ -4,9 +4,14 @@
 
 <root>
 	<div class="item-details">
-		<text class="item-weight">@_item.WeightInGrams.ToKilograms() kg</text>
-		<text class="item-name">@_item.Name</text>
-		<text class="item-description">@_item.Description</text>
+		<div class="top-row">
+			<text class="item-name">@_item.Name</text>
+			<text class="item-weight">@_item.WeightInGrams.ToKilograms() kg</text>
+		</div>
+		@if (!String.IsNullOrEmpty(@_item.Description))
+		{
+			<div class="item-description">@_item.Description</div>
+		}
 	</div>
 	<div class="footer">RMB to view actions</div>
 </root>
@@ -51,5 +56,11 @@
 			layoutRect.Left -= layoutRect.Right - w;
 			layoutRect.Right -= layoutRect.Right - w;
 		}
+	}
+
+	public override void Tick()
+	{
+		if (FullScreenManager.Instance.ActivePanel != FullScreenManager.FullScreenPanel.Inventory)
+			Close();
 	}
 }
