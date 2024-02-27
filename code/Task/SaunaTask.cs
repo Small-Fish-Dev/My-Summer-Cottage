@@ -169,4 +169,16 @@ public partial class SaunaTask : GameResource
 
 		OnFail?.Invoke( Player.Local );
 	}
+
+	/// <summary>
+	/// Reset all progress on the task
+	/// </summary>
+	public void Reset()
+	{
+		Completed = false;
+		Successful = false;
+
+		foreach ( var subtask in Subtasks )
+			subtask.CurrentAmount = 0;
+	}
 }

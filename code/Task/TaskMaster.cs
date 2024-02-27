@@ -6,6 +6,12 @@ public class TaskMaster : Component
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
 
+	protected override void OnStart()
+	{
+		foreach ( var task in CurrentTasks ) // Tasks persist between sessions?
+			task.Reset();
+	}
+
 	protected override void OnFixedUpdate()
 	{
 		foreach ( var task in CurrentTasks )
@@ -68,10 +74,12 @@ public class TaskMaster : Component
 			foreach ( var subtask in activeSubtasks )
 			{
 				if ( subtask.TriggerSignal == signalIdentifier ) // If the given signal is the one we're looking for, increase the subtask's progress
+				{
 					subtask.CurrentAmount++;
+
+					Log.Info( $"Beer obtained! ({subtask.CurrentAmount}/{subtask.AmountToComplete})" );
+				}
 			}
 		}
-
-		Log.Info( signalIdentifier );
 	}
 }
