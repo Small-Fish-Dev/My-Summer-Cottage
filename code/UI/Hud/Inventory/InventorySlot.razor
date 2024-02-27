@@ -2,12 +2,12 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root @onrightclick=@(() => OpenContextMenu()) @onmouseover=@(() => OpenHoverPanel())>
+<root @onrightclick=@(() => OpenContextMenu())>
 	<div class="border"/>
 	<div class="background"/>
 	@if ( Item is not null )
 	{
-		<div class="item @HasCurrentDraggableClassSelector">
+		<div class="item @HasCurrentDraggableClassSelector" onmouseover=@(() => OnItemHover()) onmouseout=@(() => OnItemHoverExit())>
 			<img src=@Item.IconTexture.ResourcePath />
 		</div>
 	}
@@ -23,6 +23,7 @@
 	public int? BackpackSlotIndex { get; set; } = null;
 	private DraggableItem CurrentDraggable { get; set; }
 	private string HasCurrentDraggableClassSelector => CurrentDraggable == null ? "" : "has-draggable";
+	private bool _isHoveringItem { get; set;} = false;
 
 	protected override int BuildHash() => HashCode.Combine( Item?.GetHashCode() );
 
@@ -32,9 +33,20 @@
 			ContextMenu.Open( Item );
 	}
 
-	private void OpenHoverPanel()
+	private async void OnItemHover()
 	{
+		_isHoveringItem = true;
 
+		await GameTask.Delay(300);
+
+		if (_isHoveringItem && !ContextMenu.IsOpen() && Item is not null)
+			HoverPanel.Open(Item);
+	}
+
+	private void OnItemHoverExit()
+	{
+		_isHoveringItem = false;
+		HoverPanel.Close();
 	}
 
 	/// Update the ItemComponent instance from the Slot / SlotIndex properties

@@ -41,6 +41,11 @@
 		Hud.Instance.Panel.AddChild(_instance);
 	}
 
+	public static bool IsOpen()
+	{
+		return _instance != null && _instance.IsValid();
+	}
+
 	public static void Close()
 	{
 		_instance?.Delete();

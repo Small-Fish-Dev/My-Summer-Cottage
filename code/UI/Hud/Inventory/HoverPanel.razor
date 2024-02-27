@@ -1,6 +1,6 @@
 @namespace Sauna.UI
 @attribute [StyleSheet]
-@inherits Popup
+@inherits Panel
 
 <root>
 	<img src=@_item.IconTexture.ResourcePath class="item-icon" />
@@ -32,5 +32,24 @@
 	{
 		Instance?.Delete();
 		Instance = null;
+	}
+
+	public override void OnLayout( ref Rect layoutRect )
+	{
+		var padding = 10;
+		var h = Screen.Height - padding;
+		var w = Screen.Width - padding;
+
+		if ( layoutRect.Bottom > h )
+		{
+			layoutRect.Top -= layoutRect.Bottom - h;
+			layoutRect.Bottom -= layoutRect.Bottom - h;
+		}
+
+		if ( layoutRect.Right > w )
+		{
+			layoutRect.Left -= layoutRect.Right - w;
+			layoutRect.Right -= layoutRect.Right - w;
+		}
 	}
 }

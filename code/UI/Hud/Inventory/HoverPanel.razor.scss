@@ -4,6 +4,7 @@ HoverPanel {
     width: 400px;
     align-items: center;
     padding: 10px;
+    transition: all 0.1s;
 
     .item-icon {
         aspect-ratio: 1;
@@ -37,5 +38,14 @@ HoverPanel {
         height: 30px;
         font-size: 23px;
         justify-content: center;
+    }
+
+    
+    &:intro {
+        opacity: 0;
+    }
+
+    &:outro {
+        opacity: 0;
     }
 }
