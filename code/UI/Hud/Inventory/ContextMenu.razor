@@ -51,15 +51,9 @@
 	public override void Tick()
 	{
 		var mousePosition = Mouse.Position * ScaleFromScreen;
-		var boxRect = Box.Rect * ScaleFromScreen;
+		var boxRect = (Box.Rect * ScaleFromScreen).Grow( 5f );
 
-		if (mousePosition.y < boxRect.TopLeft.y) // top
-			Delete();
-		else if (mousePosition.x < boxRect.TopLeft.x) // left
-			Delete();
-		else if (mousePosition.x > boxRect.TopRight.x) // right
-			Delete();
-		else if (mousePosition.y > boxRect.BottomRight.y) // bottom
+		if ( !boxRect.IsInside( mousePosition ) )
 			Delete();
 	}
 
