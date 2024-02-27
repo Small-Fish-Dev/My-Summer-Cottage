@@ -22,7 +22,7 @@
 			<InventorySlot EquipSlotIndex=@EquipSlot.Legs Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Legs]/>
 			<InventorySlot EquipSlotIndex=@EquipSlot.Feet Item=@Player.Local.Inventory.EquippedItems[(int)EquipSlot.Feet]/>
 		</div>
-		<CharacterRenderer/>
+		<CharacterRenderer @ref=_renderer />
 	</div>
 	<div class="section" style="width: 670px;">
 		<text class="title">INVENTORY</text>
@@ -65,6 +65,8 @@
 
 	public Inventory() => Instance = this;
 
+	CharacterRenderer _renderer;
+
 	// We want the inspect menu to be apart of the inventory so both close.
 	public void Inspect( ItemComponent item )
 	{
@@ -76,6 +78,11 @@
 	{
 		if ( item is not null )
 			Player.Local.Inventory.DropItem( item );
+	}
+
+	public void OnChanged()
+	{
+		_renderer.Refresh();
 	}
 
 	protected override int BuildHash()

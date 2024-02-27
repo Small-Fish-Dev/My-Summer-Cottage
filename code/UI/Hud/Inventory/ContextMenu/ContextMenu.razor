@@ -58,6 +58,8 @@
 			Player.Local.Inventory.UnequipItem(equipment);
 		else
 			Player.Local.Inventory.EquipItem(equipment);
+
+		Inventory.Instance?.OnChanged();
 	}
 
 	public override void Tick()

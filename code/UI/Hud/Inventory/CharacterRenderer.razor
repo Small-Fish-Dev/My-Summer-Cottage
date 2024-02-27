@@ -14,9 +14,11 @@
 	private SceneWorld _sceneWorld;
 	private ScenePanel _scenePanel;
 	private SceneModel _character;
+	private SceneModel _penoid;
+	private SceneModel[] _clothes;
 	private SceneLight _sceneLight;
 	private SceneDirectionalLight _sceneDirectionalLight;
-	private float _yaw = 0f;
+	private static float _yaw = 0f;
 	private bool _isDragging = false;
 
 	protected override void OnAfterTreeRender(bool firstTime)
@@ -25,13 +27,88 @@
 
 		_sceneWorld ??= new SceneWorld();
 		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
-        _sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
+		_sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
 		_character ??= new SceneModel( _sceneWorld, "models/guy/guy.vmdl", new Transform(Vector3.Zero, Rotation.From(0, _yaw, 0)) );
+		if ( firstTime ) Refresh();
+
 		_scenePanel.World = _sceneWorld;
 		_scenePanel.Camera.FieldOfView = 5f;
-
+		_scenePanel.Camera.ZNear = 3;
 		_scenePanel.Camera.FitModel(_character);
+		_scenePanel.Camera.OnRenderPostProcess = () =>
+		{
+			var shader = Material.FromShader( "shaders/saunaCensor.shader" );
+
+			// Grab textures we're going to need.
+			Graphics.GrabFrameTexture( "ColorTexture" );
+
+			// Create RenderTarget for the censoring.
+			using var rt = RenderTarget.GetTemporary( 1, ImageFormat.None, ImageFormat.D32FS8, MultisampleAmount.MultisampleScreen );
+			Graphics.RenderTarget = rt;
+			Graphics.Clear( Color.Black, clearColor: false );
+
+			if ( _penoid != null && _penoid.RenderingEnabled )
+				Graphics.Render( _penoid, material: shader );
+
+			// Clear RenderTarget.
+			Graphics.RenderTarget = null;
+		};
+
 		_sceneLight.Position = _scenePanel.Camera.Position + _scenePanel.Camera.Rotation.Forward * 500f;
+	}
+
+	public void Refresh()
+	{
+		_penoid ??= new SceneModel( _sceneWorld, "models/guy/penoid.vmdl", global::Transform.Zero );
+		if ( _penoid.Parent != _character )
+			_character.AddChild( "penoid", _penoid );
+
+		var inventory = Player.Local?.Inventory;
+		if ( inventory == null )
+			return;
+
+		if ( _clothes != null )
+			foreach ( var clothing in _clothes )
+			{
+				if ( !clothing.IsValid() )
+					continue;
+
+				_character.RemoveChild( clothing );
+				clothing.Delete();
+			}
+
+		var slots = Enum.GetValues<EquipSlot>();
+		var bodygroups = HiddenBodyGroup.None;
+		_clothes ??= new SceneModel[slots.Length];
+
+		for ( int i = 0; i < _clothes.Length; i++ )
+		{
+			if ( inventory?.EquippedItems?.ElementAtOrDefault( i ) is not ItemEquipment equipment )
+				continue;
+
+			var renderer = equipment?.Components?.Get<ModelRenderer>( FindMode.EverythingInSelfAndChildren );
+			if ( renderer == null )
+				continue;
+
+			var cloth = _clothes[i] = new SceneModel( _sceneWorld, renderer.Model, global::Transform.Zero );
+			cloth.SetMaterialGroup( renderer.MaterialGroup );
+			bodygroups |= equipment.HideBodygroups;
+
+			_character.AddChild( $"clothing_{i}_{equipment.Name}", cloth );
+		}
+
+		_character.SetBodyGroup( "head", bodygroups.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 );
+		_character.SetBodyGroup( "torso", bodygroups.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
+		_character.SetBodyGroup( "hands", bodygroups.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 );
+		_character.SetBodyGroup( "legs", bodygroups.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
+		_character.SetBodyGroup( "feet", bodygroups.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
+		_penoid.RenderingEnabled = inventory.EquippedItems[(int)EquipSlot.Legs] == null;
+
+		_penoid?.Update( RealTime.Delta );
+		if ( _clothes != null )
+			foreach ( var clothing in _clothes )
+				if ( clothing.IsValid() )
+					clothing?.Update( RealTime.Delta );
 	}
 
 	public override void OnButtonEvent( ButtonEvent e )
@@ -52,5 +129,13 @@
 
 		_character.Update(RealTime.Delta);
 		_character.Rotation = Rotation.From(0, _yaw, 0);
+
+		_penoid?.Update(RealTime.Delta);
+		if ( _clothes != null )
+		{
+			foreach ( var clothing in _clothes )
+				if ( clothing.IsValid() )
+					clothing?.Update( RealTime.Delta );
+		}
 	}
 }

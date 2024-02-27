@@ -40,6 +40,7 @@
 	/// Update the ItemComponent instance from the Slot / SlotIndex properties
 	public void UpdateItem()
 	{
+		Inventory.Instance?.OnChanged();
 		var inventory = Player.Local.Inventory;
 		if ( EquipSlotIndex != null )
 		{
@@ -117,7 +118,7 @@
 				inventory.MoveItem( fromSlot.BackpackSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
 			}
 		}
-		
+
 		// Update both slots
 		fromSlot.UpdateItem();
 		targetSlot.UpdateItem();
