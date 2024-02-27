@@ -10,7 +10,7 @@
 				ImagePath="ui/hud/goback.png"
 				Title="Resume"
 				Subtitle="Continue being Finnish"
-				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.InGameHud); })
+				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.FullScreenPanel.InGameHud); })
 			/>
 
 			<div style="height: 10px;" />
@@ -19,19 +19,19 @@
 				ImagePath="ui/hud/task_completed.png"
 				Title="Tasks"
 				Subtitle="Full history of your tasks"
-				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.TaskLog); })
+				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.FullScreenPanel.TaskLog); })
 			/>
 			<SideButton
 				ImagePath="ui/hud/inv.png"
 				Title="Inventory"
 				Subtitle="Your inventory and stats"
-				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.Inventory); })
+				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.FullScreenPanel.Inventory); })
 			/>
 			<SideButton
 				ImagePath="ui/hud/fish_collection.png"
 				Title="Fish Collection"
 				Subtitle="All the kinds of fish you collected"
-				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.FishLog); })
+				OnClick=@(() => { FullScreenManager.Instance.Display(FullScreenManager.FullScreenPanel.FishLog); })
 			/>
 			<SideButton
 				ImagePath="ui/hud/exit.png"

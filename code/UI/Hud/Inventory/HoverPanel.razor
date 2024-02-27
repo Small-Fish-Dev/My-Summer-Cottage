@@ -57,4 +57,10 @@
 			layoutRect.Right -= layoutRect.Right - w;
 		}
 	}
+
+	public override void Tick()
+	{
+		if (FullScreenManager.Instance.ActivePanel != FullScreenManager.FullScreenPanel.Inventory)
+			Close();
+	}
 }

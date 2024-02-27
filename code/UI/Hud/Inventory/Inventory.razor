@@ -6,7 +6,7 @@
 	<SideButton 
 		Title="Tasks" 
 		Subtitle="Press @(Input.GetButtonOrigin( InputAction.Tasks )) or click here"
-		OnClick=@(() => FullScreenManager.Instance.Display(FullScreenManager.ActivePanel.TaskLog))
+		OnClick=@(() => FullScreenManager.Instance.Display(FullScreenManager.FullScreenPanel.TaskLog))
 		ImagePath="ui/hud/task_completed.png"
 		IsInverted=@(true)
 		style="position: absolute; top: 50px; right: 0px;" 
