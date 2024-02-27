@@ -1,0 +1,36 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Popup
+
+<root>
+	<img src=@_item.IconTexture.ResourcePath class="item-icon" />
+	<div class="item-details">
+		<text class="item-name">@_item.Name</text>
+		<text class="item-description">@_item.Description</text>
+	</div>
+	<div class="footer">RMB to view actions</div>
+</root>
+
+@code {
+	public static HoverPanel Instance { get; private set; }
+	private ItemComponent _item;
+
+	public static void Open(ItemComponent item)
+	{
+		Close();
+
+		var fraction = Mouse.Position / Screen.Size;
+
+		Instance = new();
+		Instance.Style.Left = Length.Fraction( fraction.x );
+		Instance.Style.Top = Length.Fraction( fraction.y );
+		Instance._item = item;
+		Hud.Instance.Panel.AddChild(Instance);
+	}
+
+	public static void Close()
+	{
+		Instance?.Delete();
+		Instance = null;
+	}
+}

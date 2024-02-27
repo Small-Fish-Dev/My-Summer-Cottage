@@ -2,13 +2,13 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root @onrightclick=@(() => OpenContextMenu(Item))>
+<root @onrightclick=@(() => OpenContextMenu()) @onmouseover=@(() => OpenHoverPanel())>
 	<div class="border"/>
 	<div class="background"/>
 	@if ( Item is not null )
 	{
 		<div class="item @HasCurrentDraggableClassSelector">
-			<img src=@Item.IconTexture.ResourcePath/>
+			<img src=@Item.IconTexture.ResourcePath />
 			<text class="weight">@Item.WeightInGrams.ToKilograms() kg</text>
 		</div>
 	}
@@ -27,10 +27,15 @@
 
 	protected override int BuildHash() => HashCode.Combine( Item?.GetHashCode() );
 
-	private void OpenContextMenu( ItemComponent item )
+	private void OpenContextMenu()
 	{
-		if ( item is not null )
-			ContextMenu.Open( item );
+		if ( Item is not null )
+			ContextMenu.Open( Item );
+	}
+
+	private void OpenHoverPanel()
+	{
+
 	}
 
 	/// Update the ItemComponent instance from the Slot / SlotIndex properties

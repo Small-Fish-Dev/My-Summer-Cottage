@@ -1,0 +1,41 @@
+HoverPanel {
+    position: absolute;
+    background-color: #505050ef;
+    width: 400px;
+    align-items: center;
+    padding: 10px;
+
+    .item-icon {
+        aspect-ratio: 1;
+        height: 120px;
+    }
+
+    .item-details {
+        flex-direction: column;
+        justify-content: center;
+
+        .item-name {
+            font-family: BasicHandwriting;
+            font-size: 27px;
+            margin-bottom: 5px;
+        }
+
+        .item-description {
+
+            font-family: battlenetcopy;
+            font-size: 23px;
+        }
+    }
+
+    .footer {
+        position: absolute;
+        background-color: #101010f6;
+        padding-top: 2px;
+        color: #535353;
+        bottom: -30px;
+        width: 100%;
+        height: 30px;
+        font-size: 23px;
+        justify-content: center;
+    }
+}

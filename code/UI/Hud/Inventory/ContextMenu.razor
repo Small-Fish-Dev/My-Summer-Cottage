@@ -12,27 +12,27 @@
 </root>
 
 @code {
-	public static ContextMenu Instance { get; private set; }
-
+	private static ContextMenu _instance;
 	private ItemComponent _item;
 
 	public static void Open(ItemComponent item)
-	{			
+	{
 		Close();
 
 		var fraction = Mouse.Position / Screen.Size;
 
-		Instance = new();
-		Instance.Style.Left = Length.Fraction( fraction.x );
-		Instance.Style.Top = Length.Fraction( fraction.y );
-		Instance._item = item;
-		Hud.Instance.Panel.AddChild(Instance);
+		_instance = new();
+		_instance.Style.Left = Length.Fraction( fraction.x );
+		_instance.Style.Top = Length.Fraction( fraction.y );
+		_instance._item = item;
+	
+		Hud.Instance.Panel.AddChild(_instance);
 	}
 
 	public static void Close()
 	{
-		Instance?.Delete();
-		Instance = null;
+		_instance?.Delete();
+		_instance = null;
 	}
 
 	private void Inspect( ItemComponent item )
