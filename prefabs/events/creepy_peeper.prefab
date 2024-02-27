@@ -43,7 +43,8 @@
             "MaxPollingRate": 5,
             "Offset": "0,0,50",
             "TagSet": "player",
-            "TriggerPrefab": []
+            "TriggerPrefab": [],
+            "TriggerSignalIdentifier": null
           }
         ]
       },
@@ -59,7 +60,8 @@
             "MaxPollingRate": 5,
             "Offset": "0,0,50",
             "TagSet": "player",
-            "TriggerPrefab": []
+            "TriggerPrefab": [],
+            "TriggerSignalIdentifier": null
           }
         ]
       },
@@ -108,9 +110,9 @@
                   "Id": 1,
                   "Type": "call",
                   "Properties": {
+                    "_isStatic": false,
                     "T": "package.fish.sauna/Sauna.Player",
                     "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                    "_isStatic": false,
                     "_name": "Get"
                   },
                   "UserData": {
@@ -217,8 +219,8 @@
                   "Id": 11,
                   "Type": "property.get",
                   "Properties": {
-                    "_name": "Normal",
-                    "_type": "Sandbox.System/Vector3"
+                    "_type": "Sandbox.System/Vector3",
+                    "_name": "Normal"
                   },
                   "UserData": {
                     "Position": "336,320"
@@ -336,6 +338,13 @@
                   },
                   "UserData": {
                     "Position": "2096,96"
+                  }
+                },
+                {
+                  "Id": 29,
+                  "Type": "event.triggersignal",
+                  "UserData": {
+                    "Position": "2672,48"
                   }
                 }
               ],
@@ -624,6 +633,23 @@
                   "Value": 7200,
                   "DstId": 24,
                   "DstName": "inGameSeconds"
+                },
+                {
+                  "SrcId": 15,
+                  "SrcName": "_signal",
+                  "DstId": 29,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 29,
+                  "DstName": "player"
+                },
+                {
+                  "Value": "event.peeper_attacks",
+                  "DstId": 29,
+                  "DstName": "signalIdentifier"
                 }
               ]
             },
@@ -669,7 +695,7 @@
                   "Id": 0,
                   "Type": "input",
                   "UserData": {
-                    "Position": "-384,-144"
+                    "Position": "-576,-160"
                   }
                 },
                 {
@@ -855,6 +881,26 @@
                   },
                   "UserData": {
                     "Position": "1344,256"
+                  }
+                },
+                {
+                  "Id": 19,
+                  "Type": "event.triggersignal",
+                  "UserData": {
+                    "Position": "1824,160"
+                  }
+                },
+                {
+                  "Id": 20,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "T": "package.fish.sauna/Sauna.Player",
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                    "_name": "Get"
+                  },
+                  "UserData": {
+                    "Position": "-128,-320"
                   }
                 }
               ],
@@ -1094,6 +1140,34 @@
                   "SrcName": "_result",
                   "DstId": 17,
                   "DstName": "component"
+                },
+                {
+                  "SrcId": 17,
+                  "SrcName": "_signal",
+                  "DstId": 19,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 20,
+                  "SrcName": "_result",
+                  "DstId": 19,
+                  "DstName": "player"
+                },
+                {
+                  "Value": "event.peeper_scared",
+                  "DstId": 19,
+                  "DstName": "signalIdentifier"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "triggerer",
+                  "DstId": 20,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": "EnabledInSelf, InAncestors",
+                  "DstId": 20,
+                  "DstName": "search"
                 }
               ]
             },

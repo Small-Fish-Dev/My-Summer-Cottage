@@ -32,10 +32,10 @@
               "Id": 2,
               "Type": "call",
               "Properties": {
-                "_name": "Get",
                 "_isStatic": false,
+                "T": "package.fish.sauna/Sauna.Player",
                 "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                "T": "package.fish.sauna/Sauna.Player"
+                "_name": "Get"
               },
               "UserData": {
                 "Position": "240,80"
@@ -77,8 +77,8 @@
               "Id": 8,
               "Type": "property.get",
               "Properties": {
-                "_name": "Transform",
-                "_type": "Sandbox.Game/Sandbox.GameObject"
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
               },
               "UserData": {
                 "Position": "336,-256"
@@ -108,6 +108,13 @@
               },
               "UserData": {
                 "Position": "944,176"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "event.triggersignal",
+              "UserData": {
+                "Position": "512,208"
               }
             }
           ],
@@ -223,6 +230,23 @@
               "SrcName": "_result",
               "DstId": 9,
               "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "player"
+            },
+            {
+              "Value": "event.banana_peel_slip",
+              "DstId": 12,
+              "DstName": "signalIdentifier"
             }
           ]
         },
