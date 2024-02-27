@@ -1,3 +1,5 @@
+@import "/UI/Style.scss";
+
 InspectItem {
     position: absolute;
     height: 100%;
@@ -6,6 +8,7 @@ InspectItem {
     background-color: #101010d4;
     transition: all 0.1s ease-out;
     opacity: 1;
+    text-shadow: $text-shadow-sm;
 
     .scene {
         height: 100%;
@@ -39,14 +42,23 @@ InspectItem {
             background-color: #00000050;
             padding: 20px;
 
+            .weight {
+                position: absolute;
+                right: 20px;
+                top: 10px;
+                font-size: 28px;
+                font-family: battlenetcopy;
+                color: $orange;
+            }
+
             .title {
                 font-size: 26px;
                 font-family: BasicHandwriting;
             }
 
             .description {
-                font-size: 16px;
-                font-family: HabboExtended;
+                font-size: 24px;
+                font-family: battlenetcopy;
             }
         }
         
