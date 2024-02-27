@@ -45,8 +45,11 @@
 
 		_sceneWorld ??= new SceneWorld();
 		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
-        _sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
-		_model ??= new SceneModel( _sceneWorld, _item.Components.Get<ModelRenderer>(FindMode.EverythingInSelfAndDescendants).Model, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)) );
+		_sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
+
+		var renderer = _item.Components.Get<ModelRenderer>(FindMode.EverythingInSelfAndDescendants);
+		_model ??= new SceneModel( _sceneWorld, renderer.Model, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)) );
+		_model.SetMaterialGroup( renderer.MaterialGroup );
 		_scenePanel.World = _sceneWorld;
 		_scenePanel.Camera.FieldOfView = 120f;
 		
