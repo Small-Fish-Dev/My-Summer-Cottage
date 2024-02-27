@@ -1,5 +1,6 @@
 @namespace Sauna.UI
 @attribute [StyleSheet]
+@using Sauna.Game
 @inherits Panel
 
 <root>
@@ -7,7 +8,7 @@
 		<div class="icon day"></div>
 		<div class="text-container">
 			<div class="title">day</div>
-			<div class="value">@CurrentDay</div>
+			<div class="value">@(GameTimeManager.Day + 1)</div>
 		</div>
 	</div>
 	<div class="item">
@@ -20,13 +21,14 @@
 </root>
 
 @code {
+	
+	public GameTimeManager GameTimeManager { get; set; }
 
-	public int CurrentDay => 16;
 	public int CurrentLevel => 7;
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( CurrentDay, CurrentLevel );
+		return HashCode.Combine( GameTimeManager.Day, CurrentLevel );
 	}
 
 }

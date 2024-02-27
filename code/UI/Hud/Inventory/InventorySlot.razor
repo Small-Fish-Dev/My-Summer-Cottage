@@ -2,13 +2,13 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root>
+<root @onrightclick=@(() => OpenContextMenu()) @onmouseover=@(() => OpenHoverPanel())>
 	<div class="border"/>
 	<div class="background"/>
 	@if ( Item is not null )
 	{
 		<div class="item @HasCurrentDraggableClassSelector">
-			<img src=@Item.IconTexture.ResourcePath/>
+			<img src=@Item.IconTexture.ResourcePath />
 			<text class="weight">@Item.WeightInGrams.ToKilograms() kg</text>
 		</div>
 	}
@@ -26,6 +26,17 @@
 	private string HasCurrentDraggableClassSelector => CurrentDraggable == null ? "" : "has-draggable";
 
 	protected override int BuildHash() => HashCode.Combine( Item?.GetHashCode() );
+
+	private void OpenContextMenu()
+	{
+		if ( Item is not null )
+			ContextMenu.Open( Item );
+	}
+
+	private void OpenHoverPanel()
+	{
+
+	}
 
 	/// Update the ItemComponent instance from the Slot / SlotIndex properties
 	public void UpdateItem()
@@ -55,6 +66,9 @@
 	{
 		base.OnMouseDown( e );
 
+		if (e.Button != "mouseleft")
+			return;
+
 		if ( CurrentDraggable != null )
 			return;
 
@@ -79,7 +93,7 @@
 		if ( fromSlot.EquipSlotIndex != null )
 		{
 			// If we're an equip slot...
-			if ( targetSlot.EquipSlotIndex != null )
+			if ( targetSlot.EquipSlotIndex != null && Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex )
 			{
 				// and the target is an equip slot:
 				inventory.MoveItem( fromSlot.EquipSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
@@ -93,7 +107,7 @@
 		else if ( fromSlot.BackpackSlotIndex != null )
 		{
 			// If we're a backpack slot...
-			if ( targetSlot.EquipSlotIndex != null )
+			if ( targetSlot.EquipSlotIndex != null && Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex )
 			{
 				// and the target is an equip slot:
 				inventory.MoveItem( fromSlot.BackpackSlotIndex.Value, targetSlot.EquipSlotIndex.Value );

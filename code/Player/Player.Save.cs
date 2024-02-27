@@ -57,10 +57,12 @@ partial class Player
 					continue;
 
 				var o = SceneUtility.GetPrefabScene( prefab ).Clone();
+				o.Enabled = true;
 				var equipment = o.Components.Get<ItemEquipment>();
 				player.Inventory.GiveItem( equipment );
 				player.Inventory.EquipItem( equipment );
-				o.Enabled = true;
+				//if ( !o.Network.Active )
+					o.NetworkSpawn();
 			}
 
 		// todo @ceitine: Go through items.

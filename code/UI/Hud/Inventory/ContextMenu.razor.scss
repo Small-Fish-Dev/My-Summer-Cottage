@@ -1,0 +1,26 @@
+@import "/UI/Style.scss";
+
+ContextMenu {
+    position: absolute;
+    flex-direction: column;
+    z-index: 500;
+    pointer-events: all;
+    background-color: $black-bg;
+
+    .option {
+        flex-direction: row;
+        align-items: center;
+        font-size: 18px;
+        text-shadow: 2px 2px 0px black;
+        padding: 10px 10px;
+        font-family: HabboExtended;
+        letter-spacing: 1px;
+        font-weight: bold;
+
+        &:hover {
+            background-color: #7474743c;
+            pointer-events: all;
+            cursor: pointer;
+        }
+    }
+}

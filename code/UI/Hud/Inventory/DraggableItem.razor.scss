@@ -7,12 +7,15 @@ DraggableItem {
     width: 80px;
     height: 80px;
     
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    image-rendering: pixelated;
+    img {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        image-rendering: pixelated;
     
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+        //filter: drop-shadow(5px 5px 0px rgba(black, 0.2));
+        filter: border-wrap(2px rgba(white, 0.5));
+    }
 
     transition: left 0.06s ease-out,
         top 0.08s ease-out,
@@ -22,6 +25,27 @@ DraggableItem {
     
     z-index: 99;
     transform: scale(1);
+    cursor: pointer;
+    overflow: visible;
+
+    label {
+        font-family: HabboExtended;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 100%;
+        margin-bottom: 5px;
+        padding: 7px 10px 7px 10px;
+        color: black;
+        background-color: rgba(white, 1);
+        box-shadow: 4px 4px 0px black;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        overflow: visible;
+        transform-origin: top;
+        text-shadow: 2px 2px 0px rgba(black, 0.5);
+    }
     
     &:intro {
         opacity: 0;
