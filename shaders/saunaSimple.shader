@@ -110,7 +110,7 @@ PS
 		float EmissionStrength < UiType( Slider ); Default( 1.0f ); Range( 0, 5.0 ); UiGroup( "Emission,20/10" );  >;
 
 		CreateInputTexture2D( Emission, Linear, 8, "", "", "Emission,20/20", Default3( 0, 0, 0 ) );
-		CreateTexture2DWithoutSampler( g_tEmission ) < Channel( RGB, Box( Emission ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+		CreateTexture2DWithoutSampler( g_tEmission ) < Channel( RGB, Box( Emission ), Linear ); OutputFormat( BC7 ); SrgbRead( true ); >;
 	#endif 
 
     #include "sbox_pixel.fxc"
