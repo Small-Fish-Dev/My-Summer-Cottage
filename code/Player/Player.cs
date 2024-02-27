@@ -157,7 +157,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		{
 			UpdateAngles();
 			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
-			HidePenoid = Inventory.EquippedItems[(int)EquipSlot.Legs] == null;
+			HidePenoid = Inventory.EquippedItems[(int)EquipSlot.Legs] != null;
 		}
 
 		UpdateAnimation();
@@ -165,7 +165,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		if ( Penoid == null )
 			return;
 
-		Penoid.Enabled = HidePenoid;
+		Penoid.Enabled = !HidePenoid;
 	}
 
 	protected override void OnFixedUpdate()
@@ -195,6 +195,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 			return;
 
 		IsPissing = Input.Down( "Piss" ) && !HidePenoid;
+
 		UpdateMovement();
 		UpdateInteractions();
 	}
