@@ -62,5 +62,9 @@ public class EventSystem : GameObjectSystem
 				}
 			}
 		}
+
+		var playerComponent = foundPlayer.Components.Get<Player>();
+
+		TaskMaster.SubmitTriggerSignal( interaction, playerComponent );
 	}
 }
