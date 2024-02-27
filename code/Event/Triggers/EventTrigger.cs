@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic;
 using Sandbox;
 using static EventComponent;
 using static Sauna.Event.EventTrigger;
@@ -7,6 +8,11 @@ namespace Sauna.Event;
 [Hide]
 public abstract class EventTrigger : Component
 {
+	/// <summary>
+	/// Give this trigger a name to shoot a signal that gets picked up by the task master when triggered
+	/// </summary>
+	[Property]
+	public string TriggerSignalIdentifier { get; set; }
 	public event SaunaEvent OnTrigger;
 
 	public virtual bool IsPolled { get; set; } = false;
@@ -52,5 +58,13 @@ public abstract class EventTrigger : Component
 	public virtual void CallTrigger( GameObject triggerer, GameObject targetObject = null )
 	{
 		OnTrigger?.Invoke( triggerer, targetObject );
+
+		if ( TriggerSignalIdentifier != null )
+		{
+			var playerComponent = triggerer.Components.Get<Player>();
+
+			if ( playerComponent != null )
+				TaskMaster.SubmitTriggerSignal( TriggerSignalIdentifier, playerComponent );
+		}
 	}
 }
