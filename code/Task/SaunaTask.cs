@@ -50,6 +50,18 @@ public partial class SaunaTask : GameResource
 		public bool Completed { get; set; } = false;
 
 		public Subtask() { }
+
+		public void SetComplete( bool completed )
+		{
+			if ( completed != Completed )
+			{
+				Completed = completed;
+				if ( completed )
+					Log.Info( $"Completed the '{Description}' subtask ({CurrentAmount}/{AmountToComplete})" );
+				else
+					Log.Info( $"Uncompleted the '{Description}' subtask ({CurrentAmount}/{AmountToComplete})" );
+			}
+		}
 	}
 
 	/// <summary>
@@ -156,6 +168,8 @@ public partial class SaunaTask : GameResource
 		Completed = true;
 		Successful = true;
 
+		Log.Info( $"Succesfully completed the '{Name}' task" );
+
 		OnSuccess?.Invoke( Player.Local );
 	}
 
@@ -177,8 +191,12 @@ public partial class SaunaTask : GameResource
 	{
 		Completed = false;
 		Successful = false;
+		CurrentSubtaskOrder = 0;
 
 		foreach ( var subtask in Subtasks )
+		{
 			subtask.CurrentAmount = 0;
+			subtask.Completed = false;
+		}
 	}
 }
