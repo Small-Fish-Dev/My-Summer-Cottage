@@ -2,25 +2,15 @@ namespace Sauna.Game;
 
 public class GameTimeManager : Component, Component.ExecuteInEditor
 {
-	[Property]
-	[Category( "Components" )]
-	public DirectionalLight Sun { get; set; }
+	[Property] [Category( "Components" )] public DirectionalLight Sun { get; set; }
 
-	[Property]
-	[Category( "Components" )]
-	public SkyBox2D Skybox { get; set; }
+	[Property] [Category( "Components" )] public SkyBox2D Skybox { get; set; }
 
-	[Property]
-	[Category( "Components" )]
-	public GradientFog Fog { get; set; }
+	[Property] [Category( "Components" )] public GradientFog Fog { get; set; }
 
-	[Property]
-	[Category( "Visuals" )]
-	public Gradient SkyDayColor { get; set; }
+	[Property] [Category( "Visuals" )] public Gradient SkyDayColor { get; set; }
 
-	[Property]
-	[Category( "Visuals" )]
-	public Color SkyNightColor { get; set; }
+	[Property] [Category( "Visuals" )] public Color SkyNightColor { get; set; }
 
 	/// <summary>
 	/// Imagine it like the angle of a big pole sticking out of the Earth, and the Sun is spinning around it.
@@ -55,6 +45,14 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	public int StartTime { get; set; } = 10 * 60 * 60;
 
 	/// <summary>
+	/// When do we end our day during normal gameplay no matter what (3 AM by default)
+	/// </summary>
+	[Property]
+	[Category( "Time" )]
+	[Range( 0, 86400, 600 )]
+	public int EndTime { get; set; } = 3 * 60 * 60;
+
+	/// <summary>
 	/// Length of the day in real time second
 	/// </summary>
 	[Property]
@@ -63,21 +61,37 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	public float DayLength { get; set; } = 5 * 60;
 
 	/// <summary>
+	/// How many in-game days have passed
+	/// </summary>
+	[Property]
+	[Category( "Time" )]
+	[HostSync]
+	public int Day { get; private set; } = 0;
+
+	public event Action OnDayStart;
+	public event Action OnDayEnd;
+
+	/// <summary>
 	/// Progress of the day in percents [0; 1].
 	/// </summary>
-	public float DayPercent => InGameTime / DayLength;
+	public float DayPercent => (FrozenTime ?? InGameTime) / DayLength;
 
 	public int InGameSeconds => (int)(DayPercent * 24 * 60 * 60);
 
-	[Sync] private TimeSince InGameTime { get; set; }
+	[HostSync] public bool IsDayOver { get; private set; } = false;
+
+	[HostSync] private TimeSince InGameTime { get; set; }
+	[HostSync] private float? FrozenTime { get; set; }
 
 	protected override void OnAwake()
 	{
 		if ( !GameManager.IsPlaying ) return;
 
-		NewDay();
+		// TODO: Load the current day from the save file
+		// NewDay();
 
 		SetTimeFromSeconds( StartTime );
+		OnDayStart?.Invoke();
 	}
 
 	protected override void DrawGizmos()
@@ -86,7 +100,9 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 		if ( Gizmo.IsSelected )
 		{
-			Gizmo.Draw.ScreenText( $"Day percent: {DayPercent * 100f:F1}", Vector2.One * 10, "Roboto", 12f,
+			Gizmo.Draw.ScreenText(
+				$"{(FrozenTime is null ? "" : "❄ ")}Day percent: {DayPercent * 100f:F1}",
+				Vector2.One * 10, "Roboto", 12f,
 				TextFlag.LeftTop );
 		}
 	}
@@ -98,16 +114,31 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 			SetTimeFromSeconds( StartTime );
 		}
 
-		if ( InGameTime >= DayLength )
-			NewDay();
+		var igs = InGameSeconds;
 
-		Rotation sunRotation;
-		
-		if (SunsetTime <= SunriseTime)
+		if ( !IsDayOver )
+		{
+			if ( InGameTime >= DayLength )
+				NewDay();
+
+			if ( EndTime < StartTime )
+			{
+				if ( igs >= EndTime && igs < StartTime )
+				{
+					EndDay();
+				}
+			}
+			else
+			{
+				Log.Error( "Not yet supported" );
+			}
+		}
+
+		if ( SunsetTime <= SunriseTime )
 			Log.Error( "Sunset before the sunrise is not yet supported" );
 
-		var igs = InGameSeconds;
 		var isDayTime = igs > SunriseTime && igs < SunsetTime;
+		Rotation sunRotation;
 		if ( isDayTime )
 		{
 			// Value in [0; 1]
@@ -179,7 +210,20 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	}
 
 	/// <summary>
-	/// Set the time
+	/// End the day. Freezes the time and emits the OnDayEnd event.
+	/// </summary>
+	[Broadcast( NetPermission.HostOnly )]
+	public void EndDay()
+	{
+		FreezeTime();
+
+		IsDayOver = true;
+
+		OnDayEnd?.Invoke();
+	}
+
+	/// <summary>
+	/// Set the time. Does not impact the day count.
 	/// </summary>
 	/// <param name="seconds">Time as in-game seconds</param>
 	[Broadcast( NetPermission.HostOnly )]
@@ -189,18 +233,57 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	}
 
 	/// <summary>
-	/// Skip some time
+	/// Skip some time. Impacts the day count.
 	/// </summary>
 	/// <param name="seconds">Time as in-game seconds</param>
 	[Broadcast( NetPermission.HostOnly )]
 	public void SkipTimeFromSeconds( int seconds )
 	{
-		InGameTime += ((float)seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
+		var newInGameTime = InGameTime + ((float)seconds).Remap( 0, 24 * 60 * 60, 0, DayLength );
+		while ( newInGameTime >= DayLength )
+		{
+			newInGameTime -= DayLength;
+			Day++;
+		}
+
+		InGameTime = newInGameTime;
+	}
+
+	/// <summary>
+	/// Advances to the next day.
+	/// Unfreezes the time if it's frozen.
+	/// Increases the day count if required (e.g. if ended the day at 10 PM).
+	/// </summary>
+	[Broadcast( NetPermission.HostOnly )]
+	public void AdvanceToNextDay()
+	{
+		if ( InGameSeconds > StartTime )
+			Day++;
+		SetTimeFromSeconds( StartTime );
+
+		FrozenTime = null;
+		IsDayOver = false;
+
+		OnDayStart?.Invoke();
+	}
+
+	/// <summary>
+	/// Stop the clock.
+	/// </summary>
+	[Broadcast( NetPermission.HostOnly )]
+	public void FreezeTime()
+	{
+		if ( FrozenTime != null )
+			return;
+
+		FrozenTime = InGameTime;
+		// TODO: should we also make the TimeScale equal 0?
 	}
 
 	[Broadcast( NetPermission.HostOnly )]
 	private void NewDay()
 	{
 		InGameTime = 0;
+		Day++;
 	}
 }

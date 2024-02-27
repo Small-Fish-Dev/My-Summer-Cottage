@@ -3,26 +3,47 @@
 @inherits Panel
 
 <root>
-	@if (_activePanel == ActivePanel.InGameHud)
+	@if ( Hud.Instance.GameTimeManager.IsDayOver )
 	{
-		<InGameHud />
+		<div style="pointer-events: all">
+			<div>Good job, asshole!</div>
+
+			<div>Gained:</div>
+			<div>+10 XP</div>
+			<div>+5 Smk (Gambling)</div>
+			<div>+1.5 KG of fat</div>
+			<div>+Prostatitis</div>
+
+			<div>Lost:</div>
+			<div>-150 Smk (Gambling)</div>
+			<div>-Sanity</div>
+			<div>-Wife</div>
+			<div>-Driver's license</div>
+
+			<div onclick="@( () => Hud.Instance.GameTimeManager.AdvanceToNextDay() )">Continue</div>
+		</div>
 	}
-	else if (_activePanel == ActivePanel.Inventory)
-	{
-		<Inventory />
-	}
-	else if (_activePanel == ActivePanel.TaskLog)
-	{
-		<TaskLog />
-	}
-	else if (_activePanel == ActivePanel.FishLog)
-	{
-		<FishLog />
-	}
-	else if (_activePanel == ActivePanel.PauseMenu)
-	{
-		<PauseMenu />
-	}
+	else
+		switch ( _activePanel )
+		{
+			case ActivePanel.InGameHud:
+				<InGameHud/>
+				break;
+			case ActivePanel.Inventory:
+				<Inventory/>
+				break;
+			case ActivePanel.TaskLog:
+				<TaskLog/>
+				break;
+			case ActivePanel.FishLog:
+				<FishLog/>
+				break;
+			case ActivePanel.PauseMenu:
+				<PauseMenu/>
+				break;
+			default:
+				throw new ArgumentOutOfRangeException();
+		}
 </root>
 
 @code {
@@ -44,26 +65,26 @@
 		Instance = this;
 	}
 
-	public void Display(ActivePanel panel)
+	public void Display( ActivePanel panel )
 	{
 		_activePanel = panel;
 	}
 
 	public override void Tick()
 	{
-		if (Input.EscapePressed) 
-			Toggle(ActivePanel.PauseMenu);
+		if ( Input.EscapePressed )
+			Toggle( ActivePanel.PauseMenu );
 
-		if (Input.Pressed(InputAction.Inventory))
-			Toggle(ActivePanel.Inventory);
+		if ( Input.Pressed( InputAction.Inventory ) )
+			Toggle( ActivePanel.Inventory );
 
-		if (Input.Pressed(InputAction.Tasks))
-			Toggle(ActivePanel.TaskLog);
+		if ( Input.Pressed( InputAction.Tasks ) )
+			Toggle( ActivePanel.TaskLog );
 	}
 
-	private void Toggle(ActivePanel panel)
+	private void Toggle( ActivePanel panel )
 	{
-		if (_activePanel == panel)
+		if ( _activePanel == panel )
 			_activePanel = ActivePanel.InGameHud;
 		else
 			_activePanel = panel;
@@ -71,6 +92,7 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(_activePanel.GetHashCode());
+		return HashCode.Combine( Hud.Instance.GameTimeManager.IsDayOver, _activePanel.GetHashCode() );
 	}
+
 }
