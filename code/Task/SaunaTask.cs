@@ -5,12 +5,47 @@ public partial class SaunaTask : GameResource
 {
 	public struct Subtask
 	{
+		/// <summary>
+		/// What to display for this subtask
+		/// </summary>
+		[Property]
 		public string Description { get; set; } = "Do that thing";
 
-		public Subtask( string description )
-		{
-			Description = description;
-		}
+		/// <summary>
+		/// Which order will this subtask be bunched in, previous subtask orders need to be completed
+		/// </summary>
+		[Property]
+		public int SubtaskOrder { get; set; } = 0;
+
+		/// <summary>
+		/// Which trigger signal is going to trigger the progress/completion of this subtask
+		/// </summary>
+		[Property]
+		public string TriggerSignal { get; set; }
+
+		/// <summary>
+		/// How many times the trigger needs to run before the subtask is considered completed
+		/// </summary>
+		[Property]
+		//[ShowIf( "EvaluateOnTick", null )] // TODO: Add this back when it's fixed
+		[Range( 1, 100, 1 )]
+		public int AmountToComplete { get; set; } = 1;
+
+		public delegate int TaskRequirement( Player player );
+
+		/// <summary>
+		/// When the condition needs to be constantly checked instead of requiring triggers (Return the int amount used with AmountToComplete)
+		/// </summary>
+		[Property]
+		public TaskRequirement EvaluateOnTick { get; set; }
+
+		[Hide]
+		public int CurrentAmount { get; set; } = 0;
+
+		[Hide]
+		public bool Completed { get; set; } = false;
+
+		public Subtask() { }
 	}
 
 	/// <summary>
@@ -70,4 +105,7 @@ public partial class SaunaTask : GameResource
 	/// </summary>
 	[Property]
 	public TaskAction OnFail { get; set; }
+
+	[Property]
+	public List<Subtask> Subtasks { get; set; } = new();
 }
