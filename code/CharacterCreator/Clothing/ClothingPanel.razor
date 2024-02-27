@@ -28,6 +28,8 @@
 						<div class="slot @(selections[slot] == -1 ? "selected" : "")" @onclick=@( () => { selections[slot] = -1; UpdateSelection(); })>
 							<div class="border" />
 							<div class="background" />
+
+							<img src="ui/hud/blocked.png" />
 						</div>
 
 						@for ( int i = 0; i < 4; i++ )
