@@ -8,10 +8,26 @@ public class TaskMaster : Component
 
 	protected override void OnUpdate()
 	{
-
 		foreach ( var task in CurrentTasks )
 		{
-			Log.Info( task.Name );
+			if ( !task.Completed )
+			{
+				var currentSubtasks = task.Subtasks.Where( x => x.SubtaskOrder == task.CurrentSubtaskOrder );
+
+				foreach ( var subtask in currentSubtasks )
+				{
+					if ( subtask.EvaluateOnTick != null )
+						subtask.CurrentAmount = subtask.EvaluateOnTick.Invoke( Player.Local );
+
+					subtask.Completed = subtask.CurrentAmount >= subtask.AmountToComplete;
+				}
+
+				if ( task.Subtasks.All( x => x.Completed ) )
+				{
+					task.Completed = true;
+					Log.Info( "TASK COMPLETED!!" );
+				}
+			}
 		}
 	}
 }

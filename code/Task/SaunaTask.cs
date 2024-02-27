@@ -3,7 +3,8 @@ namespace Sauna;
 [GameResource( "Task", "task", "A task for the player to complete", Icon = "event_busy", IconBgColor = "#4a4fa8", IconFgColor = "#ffffff" )]
 public partial class SaunaTask : GameResource
 {
-	public struct Subtask
+	// Needs to be a class instead of struct so I can reference to it! :)
+	public class Subtask
 	{
 		/// <summary>
 		/// What to display for this subtask
@@ -108,4 +109,10 @@ public partial class SaunaTask : GameResource
 
 	[Property]
 	public List<Subtask> Subtasks { get; set; } = new();
+
+	[Hide]
+	public int CurrentSubtaskOrder { get; set; } = 0;
+
+	[Hide]
+	public bool Completed { get; set; } = false;
 }
