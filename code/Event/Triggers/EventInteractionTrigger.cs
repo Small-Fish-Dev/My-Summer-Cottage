@@ -32,6 +32,8 @@ public sealed class EventInteractionTrigger : EventTrigger
 
 	protected override void DrawGizmos()
 	{
+		if ( !Gizmo.IsSelected ) return;
+
 		if ( InsideArea )
 		{
 			Gizmo.Draw.Color = Color.Green.WithAlpha( 0.3f );

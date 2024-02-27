@@ -17,7 +17,7 @@ public class EventSystem : GameObjectSystem
 			?.Where( x => x.IsPolled )
 			?.OrderBy( x => x.LastPoll );
 
-		if ( !allEvents.Any() ) return; // Bail if we have no events
+		if ( !allEvents.Any() ) return; // Bail if we have no triggers
 
 		var firstEvent = allEvents.First();
 		firstEvent.PolledMethod();

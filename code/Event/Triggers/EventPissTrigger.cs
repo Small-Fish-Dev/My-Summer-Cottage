@@ -40,6 +40,8 @@ public sealed class EventPissTrigger : EventTrigger
 
 	protected override void DrawGizmos()
 	{
+		if ( !Gizmo.IsSelected ) return;
+
 		Gizmo.Draw.Color = Color.Yellow.WithAlpha( 0.3f );
 		Gizmo.Draw.SolidBox( BBox );
 		Gizmo.Draw.Color = Color.White.WithAlpha( 0.3f );
