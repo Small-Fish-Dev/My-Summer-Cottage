@@ -32,7 +32,7 @@ float ClampedRandom( float3 input )
 }
 
 // This matrix is used to convert grass triangles to tangent space
-float3x3 convertTangetToLocal( float3 tangent, float3 bitangent, float3 normal )
+float3x3 convertTangentToLocal( float3 tangent, float3 bitangent, float3 normal )
 {
 	return float3x3
 	(
@@ -60,7 +60,7 @@ void EmitGrass( inout TriangleStream<PS_INPUT> triStream, triangle PS_INPUT i, f
 	float3 tangent 	 = normalize( i.vTangentUWs.xyz );
 	float3 bitangent = cross( normal, tangent.xyz );
 
-	float3x3 tangentToLocal = convertTangetToLocal( tangent.xyz, bitangent.xyz, normal.xyz );
+	float3x3 tangentToLocal = convertTangentToLocal( tangent.xyz, bitangent.xyz, normal.xyz );
 
 	float3x3 rotationMatrix = AngleAxis3x3( ClampedRandom( position * 2 ) * PI_DOUBLE, float3( 0, 0, 1) );	// Rotates vertex on given XYZ axis. (in this case Z)
 	float3x3 transformationMatrix = mul( tangentToLocal, rotationMatrix );									// Set given vertex to tangent space, then apply rotation.
