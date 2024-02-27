@@ -1,0 +1,68 @@
+{
+  "Name": "Get Money",
+  "Description": "You need beer money, do it fast!",
+  "IsPrimary": true,
+  "Global": false,
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 300,
+  "OnStart": null,
+  "OnComplete": null,
+  "OnFail": null,
+  "Subtasks": [
+    {
+      "Description": "Get \u20AC100",
+      "AmountToComplete": 100,
+      "EvaluateOnTick": {
+        "Version": 5,
+        "UserData": {
+          "Title": "Evaluate On Tick",
+          "id": "fe189e02-72ec-4210-b33d-d0d87d3f442f",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input",
+            "UserData": {
+              "Position": "-64,80"
+            }
+          },
+          {
+            "Id": 1,
+            "Type": "output",
+            "UserData": {
+              "Position": "368,80"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "property.get",
+            "Properties": {
+              "_name": "Money",
+              "_type": "package.fish.sauna/Sauna.Player"
+            },
+            "UserData": {
+              "Position": "144,80"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "_result"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 2,
+            "DstName": "_target"
+          }
+        ]
+      }
+    }
+  ],
+  "__references": []
+}
