@@ -5,7 +5,7 @@
 <root onclick=@(() => Close())>
 	@if (_item is ItemEquipment equipment)
 	{
-		<div class="option" onclick=@(() => Inspect(_item))>@(equipment.Equipped ? "Unequip" : "Equip")</div>
+		<div class="option" onclick=@(() => ToggleEquip(equipment))>@(equipment.Equipped ? "Unequip" : "Equip")</div>
 	}
 	<div class="option" onclick=@(() => Inspect(_item))>Inspect</div>
 	<div class="option" onclick=@(() => Player.Local.Inventory.DropItem(_item))>Drop</div>
@@ -38,6 +38,14 @@
 	private void Inspect( ItemComponent item )
 	{
 		Inventory.Instance.Inspect(item);
+	}
+
+	private void ToggleEquip( ItemEquipment equipment )
+	{
+		if (equipment.Equipped)
+			Player.Local.Inventory.UnequipItem(equipment);
+		else
+			Player.Local.Inventory.EquipItem(equipment);
 	}
 
 	public override void Tick()

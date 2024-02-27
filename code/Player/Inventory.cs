@@ -16,7 +16,7 @@ public class Inventory : Component
 	public Inventory()
 	{
 		_backpackItems = new List<ItemComponent>( new ItemComponent[MAX_BACKPACK_SLOTS] );
-		_equippedItems = new List<ItemComponent>( new ItemComponent[Enum.GetNames( typeof(EquipSlot) ).Length] );
+		_equippedItems = new List<ItemComponent>( new ItemComponent[Enum.GetNames( typeof( EquipSlot ) ).Length] );
 	}
 
 	public bool GiveItem( ItemComponent item )
@@ -35,7 +35,7 @@ public class Inventory : Component
 
 	public bool DropItem( ItemComponent item )
 	{
-		var droppedItem = RemoveItem( _backpackItems.IndexOf( item ) );
+		var droppedItem = item is ItemEquipment equipment && equipment.Equipped ? RemoveItem( equipment.Slot ) : RemoveItem( _backpackItems.IndexOf( item ) );
 		if ( droppedItem is null )
 			return false;
 
