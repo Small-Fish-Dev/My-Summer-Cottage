@@ -15,10 +15,10 @@ public class TaskMaster : Component
 
 			if ( !task.Completed )
 			{
-				var currentSubtasks = task.Subtasks.Where( x => x.SubtaskOrder == task.CurrentSubtaskOrder ); // Current active subtasks
+				var activeSubtasks = task.Subtasks.Where( x => x.SubtaskOrder == task.CurrentSubtaskOrder ); // Current active subtasks
 
 				// Check if the subtasks have met the conditions (Previous subtask orders will always remain completed)
-				foreach ( var subtask in currentSubtasks )
+				foreach ( var subtask in activeSubtasks )
 				{
 					if ( subtask.EvaluateOnTick != null ) // Manually set current completion progress if we have an EvaluateOnTick
 						subtask.CurrentAmount = subtask.EvaluateOnTick.Invoke( Player.Local );
@@ -42,6 +42,33 @@ public class TaskMaster : Component
 				// Time limit fail condition
 				if ( task.TimeLimited && task.TaskTimer )
 					task.Fail();
+			}
+		}
+	}
+
+	/// <summary>
+	/// Let all the tasks know a trigger has been activated
+	/// </summary>
+	/// <param name="signalIdentifier"></param>
+	/// <param name="triggerer"></param>
+	public static void SubmitTriggerSignal( string signalIdentifier, Player triggerer )
+	{
+		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+
+		if ( taskMaster == null ) return;
+
+		var allActiveTasks = taskMaster.CurrentTasks.Where( x => !x.Completed ); // Get active tasks
+
+		foreach ( var task in allActiveTasks )
+		{
+			if ( !task.Global && triggerer != Player.Local ) continue; // If this task isn't global and the triggerer isn't our player, ignore it
+
+			var activeSubtasks = task.Subtasks.Where( x => x.SubtaskOrder == task.CurrentSubtaskOrder ); // Current active subtasks
+
+			foreach ( var subtask in activeSubtasks )
+			{
+				if ( subtask.TriggerSignal == signalIdentifier ) // If the given signal is the one we're looking for, increase the subtask's progress
+					subtask.CurrentAmount++;
 			}
 		}
 	}
