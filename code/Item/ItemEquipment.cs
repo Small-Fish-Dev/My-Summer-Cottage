@@ -15,6 +15,8 @@ public class ItemEquipment : ItemComponent
 	[Property, Category( "Equipment" )] public EquipSlot Slot { get; set; }
 	[Property, Category( "Equipment" )] public HiddenBodyGroup HideBodygroups { get; set; }
 
+	public ModelRenderer Renderer { get; private set; }
+
 	private bool _equipped = false;
 	[Sync] public bool Equipped
 	{
@@ -23,10 +25,10 @@ public class ItemEquipment : ItemComponent
 		{
 			_equipped = value;
 
-			var renderer = Components.Get<SkinnedModelRenderer>( FindMode.InSelf ) ?? Components.Get<ModelRenderer>( FindMode.InSelf );
-			renderer.Enabled = value;
+			Renderer = Components.Get<SkinnedModelRenderer>( FindMode.InSelf ) ?? Components.Get<ModelRenderer>( FindMode.InSelf );
+			Renderer.Enabled = value;
 
-			if ( renderer is SkinnedModelRenderer skinned )
+			if ( Renderer is SkinnedModelRenderer skinned )
 			{
 				skinned.BoneMergeTarget = value
 					? GameObject.Parent?.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInChildren )

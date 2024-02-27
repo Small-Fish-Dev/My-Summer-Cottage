@@ -152,6 +152,13 @@ partial class Player
 		Camera.ZNear = 2.5f;
 
 		Renderer?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
+
+		// Hide face and head clothing.
+		var face = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Face ) as ItemEquipment)?.Renderer?.SceneObject;
+		if ( face != null ) face.RenderingEnabled = false;
+
+		var head = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Head ) as ItemEquipment)?.Renderer?.SceneObject;
+		if ( head != null ) head.RenderingEnabled = false;
 	}
 
 	protected void UpdateAnimation()
