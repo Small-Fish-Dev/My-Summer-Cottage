@@ -1,0 +1,62 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root onclick=@(() => Close())>
+	@if (_item is ItemEquipment equipment)
+	{
+		<div class="option" onclick=@(() => Inspect(_item))>@(equipment.Equipped ? "Unequip" : "Equip")</div>
+	}
+	<div class="option" onclick=@(() => Inspect(_item))>Inspect</div>
+	<div class="option" onclick=@(() => Player.Local.Inventory.DropItem(_item))>Drop</div>
+</root>
+
+@code {
+	public static ContextMenu Instance { get; private set; }
+
+	private ItemComponent _item;
+
+	public static void Open(ItemComponent item)
+	{			
+		Close();
+
+		var fraction = Mouse.Position / Screen.Size;
+
+		Instance = new();
+		Instance.Style.Left = Length.Fraction( fraction.x );
+		Instance.Style.Top = Length.Fraction( fraction.y );
+		Instance._item = item;
+		Hud.Instance.Panel.AddChild(Instance);
+	}
+
+	public static void Close()
+	{
+		Instance?.Delete();
+		Instance = null;
+	}
+
+	private void Inspect( ItemComponent item )
+	{
+		Inventory.Instance.Inspect(item);
+	}
+
+	public override void Tick()
+	{
+		var mousePosition = Mouse.Position * ScaleFromScreen;
+		var boxRect = Box.Rect * ScaleFromScreen;
+
+		if (mousePosition.y < boxRect.TopLeft.y) // top
+			Delete();
+		else if (mousePosition.x < boxRect.TopLeft.x) // left
+			Delete();
+		else if (mousePosition.x > boxRect.TopRight.x) // right
+			Delete();
+		else if (mousePosition.y > boxRect.BottomRight.y) // bottom
+			Delete();
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(_item is ItemEquipment);
+	}
+}

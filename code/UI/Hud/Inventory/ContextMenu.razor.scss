@@ -1,0 +1,24 @@
+@import "/UI/Style.scss";
+
+ContextMenu {
+    position: absolute;
+    flex-direction: column;
+    z-index: 500;
+    pointer-events: all;
+    background-color: $black-bg;
+
+    .option {
+        flex-direction: row;
+        align-items: center;
+        font-size: 24px;
+        font-family: battlenetcopy;
+        text-shadow: 2px 2px 0px black;
+        padding: 5px 10px;
+
+        &:hover {
+            background-color: #7474743c;
+            pointer-events: all;
+            cursor: pointer;
+        }
+    }
+}

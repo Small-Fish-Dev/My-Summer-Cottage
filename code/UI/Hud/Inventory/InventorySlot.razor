@@ -2,7 +2,7 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root>
+<root @onrightclick=@(() => OpenContextMenu(Item))>
 	<div class="border"/>
 	<div class="background"/>
 	@if ( Item is not null )
@@ -26,6 +26,12 @@
 	private string HasCurrentDraggableClassSelector => CurrentDraggable == null ? "" : "has-draggable";
 
 	protected override int BuildHash() => HashCode.Combine( Item?.GetHashCode() );
+
+	private void OpenContextMenu( ItemComponent item )
+	{
+		if ( item is not null )
+			ContextMenu.Open( item );
+	}
 
 	/// Update the ItemComponent instance from the Slot / SlotIndex properties
 	public void UpdateItem()

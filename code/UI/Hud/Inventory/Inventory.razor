@@ -30,11 +30,7 @@
 			@for ( var index = 0; index < Player.Local.Inventory.BackpackItems.Count; index++ )
 			{
 				var item = Player.Local.Inventory.BackpackItems[index];
-				<InventorySlot
-					onmiddleclick=@(() => Inspect( item ))
-					onrightclick=@(() => DropItem( item ))
-					Item=@item
-					BackpackSlotIndex=@index/>
+				<InventorySlot Item=@item BackpackSlotIndex=@index />
 			}
 		</div>
 		<div style="align-items: center; margin: 20px 0px;">
@@ -69,7 +65,8 @@
 
 	public Inventory() => Instance = this;
 
-	private void Inspect( ItemComponent item )
+	// We want the inspect menu to be apart of the inventory so both close.
+	public void Inspect( ItemComponent item )
 	{
 		if ( item is not null )
 			AddChild( new InspectItem( item ) );
