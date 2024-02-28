@@ -9,8 +9,6 @@ public class ItemComponent : Component
 
 	public string Prefab { get; private set; }
 	public Texture IconTexture => Texture.Load( FileSystem.Mounted, Icon.Path );
-	private ItemEquipment AsEquipment => this as ItemEquipment;
-
 	public static implicit operator ItemComponent( GameObject obj )
 		=> obj.Components.Get<ItemComponent>();
 
