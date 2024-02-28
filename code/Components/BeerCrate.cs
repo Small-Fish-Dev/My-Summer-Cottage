@@ -75,13 +75,13 @@ public sealed class BeerCrate : Component
 			Action = ( Player interactor, GameObject obj ) =>
 			{
 				var inventory = interactor.Inventory;
-				if ( inventory == null ) 
+				if ( inventory == null )
 					return;
 
 				GameObject beer;
 				if ( inventory.EquippedItems[(int)EquipSlot.Hand] != null )
 				{
-					if ( !inventory.HasSpace() )
+					if ( !inventory.HasSpaceInBackpack() )
 						return;
 
 					beer = Beer.Clone();

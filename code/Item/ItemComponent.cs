@@ -14,6 +14,18 @@ public class ItemComponent : Component
 	public static implicit operator ItemComponent( GameObject obj )
 		=> obj.Components.Get<ItemComponent>();
 
+	/// <summary>
+	/// If the item is in the player's inventory (this includes backpack and equipped items).
+	/// </summary>
+	[Sync]
+	public bool InInventory
+	{
+		get => InBackpack || (this is ItemEquipment equipment && equipment.Equipped);
+	}
+
+	/// <summary>
+	/// If the item is in the player's backpack (note not equipped!).
+	/// </summary>
 	[Sync]
 	public bool InBackpack
 	{
@@ -43,7 +55,7 @@ public class ItemComponent : Component
 			Action = ( Player interactor, GameObject obj ) => interactor.Inventory.GiveItem( this ),
 			Keybind = "use",
 			Description = "Pickup",
-			Disabled = () => InBackpack || (AsEquipment?.Equipped ?? false),
+			Disabled = () => InInventory,
 		} );
 	}
 
