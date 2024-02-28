@@ -110,6 +110,30 @@ public class TaskMaster : Component
 	}
 
 	/// <summary>
+	/// Assign a new task to the specified player, doesn't work if the task already exists
+	/// </summary>
+	/// <param name="taskToAssign"></param>
+	/// <param name="player"></param>
+	[Broadcast( NetPermission.Anyone )]
+	public static void AssignNewTask( SaunaTask taskToAssign, Player player )
+	{
+		if ( Player.Local == player )
+			AssignNewTask( taskToAssign );
+	}
+
+	/// <summary>
+	/// Assign a new task to the specified player, doesn't work if the task already exists
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <param name="player"></param>
+	[Broadcast( NetPermission.Anyone )]
+	public static void AssignNewTask( string filePath, Player player )
+	{
+		if ( Player.Local == player )
+			AssignNewTask( filePath );
+	}
+
+	/// <summary>
 	/// Assign everyone in the server a new task
 	/// </summary>
 	/// <param name="taskToAssign"></param>
@@ -151,6 +175,30 @@ public class TaskMaster : Component
 	}
 
 	/// <summary>
+	/// Remove the task from the targetted player, doesn't work if the task doesn't exists
+	/// </summary>
+	/// <param name="taskToRemove"></param>
+	/// <param name="player"></param>
+	[Broadcast( NetPermission.Anyone )]
+	public static void RemoveTask( SaunaTask taskToRemove, Player player )
+	{
+		if ( Player.Local == player )
+			RemoveTask( taskToRemove );
+	}
+
+	/// <summary>
+	/// Remove the task from the targetted player, doesn't work if the task doesn't exists
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <param name="player"></param>
+	[Broadcast( NetPermission.Anyone )]
+	public static void RemoveTask( string filePath, Player player )
+	{
+		if ( Player.Local == player )
+			RemoveTask( filePath );
+	}
+
+	/// <summary>
 	/// Remove the task from everyone in the server
 	/// </summary>
 	/// <param name="taskToRemove"></param>
@@ -189,6 +237,30 @@ public class TaskMaster : Component
 	{
 		if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
 			ResetTask( foundTask );
+	}
+
+	/// <summary>
+	/// Resets the found task for the targetted player, doesn't work if the task doesn't exists
+	/// </summary>
+	/// <param name="taskToReset"></param>
+	/// <param name="player"></param>
+	[Broadcast( NetPermission.Anyone )]
+	public static void ResetTask( SaunaTask taskToReset, Player player )
+	{
+		if ( Player.Local == player )
+			ResetTask( taskToReset );
+	}
+
+	/// <summary>
+	/// Resets the found task for the targetted player, doesn't work if the task doesn't exists
+	/// </summary>
+	/// <param name="filePath"></param>
+	/// <param name="player"></param>
+	[Broadcast( NetPermission.Anyone )]
+	public static void ResetTask( string filePath, Player player )
+	{
+		if ( Player.Local == player )
+			ResetTask( filePath );
 	}
 
 	/// <summary>
