@@ -41,19 +41,20 @@
 			</div>
 		</div>
 		<div style="flex-direction: column; padding: 10px;">
+			@* TODO: better put this shit to a separate component with its own BuildHash to prevent the unnecessary redraws *@
 			<div style="margin: 30px 0px 0px 0px; align-items: flex-end; justify-content: space-between;">
 				<div style="align-items: center;">
 					<img src="/ui/hud/current_level.png" style="width: 50px; height: 50px; margin-right: 20px;"/>
-					<text class="level">Lv. 7</text>
+					<text class="level">Lv. @Player.Local.Level</text>
 				</div>
 				<div class="exp-text">
-					<text>472</text>
+					<text>@Player.Local.Experience</text>
 					<text>/</text>
-					<text>1020 XP</text>
+					<text>@Player.Local.ExpPerLevel XP</text>
 				</div>
 			</div>
 			<div class="exp-bar">
-				<div class="progress" style="width: @( 10 )%"/>
+				<div class="progress" style="width: @( Player.Local.Experience / Player.Local.ExpPerLevel * 100 )%"/>
 			</div>
 		</div>
 		<div class="inputs">
@@ -92,6 +93,8 @@
 	protected override int BuildHash()
 	{
 		return HashCode.Combine(
+			Player.Local.Level,
+			Player.Local.Experience,
 			Player.Local.Inventory.BackpackItems.HashCombine( i => i?.GetHashCode() ?? -1 ),
 			Player.Local.Inventory.EquippedItems.HashCombine( i => i?.GetHashCode() ?? -1 )
 		);

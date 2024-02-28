@@ -15,6 +15,8 @@ public struct PlayerSave
 	[JsonInclude] public string Lastname;
 
 	[JsonInclude] public int Money;
+	[JsonInclude] public int Experience;
+	[JsonInclude] public int Level;
 
 	[JsonInclude] public float Height;
 	[JsonInclude] public float Fatness;
@@ -161,6 +163,8 @@ partial class Player
 		player.Lastname = save.Lastname.ToLower().ToTitleCase();
 
 		player.Money = save.Money;
+		player.Experience = save.Experience;
+		player.Level = save.Level;
 
 		player.Fatness = save.Fatness;
 		player.Height = save.Height;

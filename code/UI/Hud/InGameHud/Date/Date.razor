@@ -15,7 +15,7 @@
 		<div class="icon level"></div>
 		<div class="text-container">
 			<div class="title">level</div>
-			<div class="value">@CurrentLevel</div>
+			<div class="value">@Player.Local.Level</div>
 		</div>
 	</div>
 </root>
@@ -24,11 +24,9 @@
 	
 	public GameTimeManager GameTimeManager { get; set; }
 
-	public int CurrentLevel => 7;
-
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( GameTimeManager.Day, CurrentLevel );
+		return HashCode.Combine( GameTimeManager.Day, Player.Local.Level );
 	}
 
 }
