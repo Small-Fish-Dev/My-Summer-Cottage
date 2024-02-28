@@ -19,7 +19,10 @@
 	<ContextMenuOption ]
 		Description="Drop"
 		ImagePath="ui/hud/inv_actions_drop.png" 
-		onclick=@(() => Player.Local.Inventory.DropItem(_item)) 
+		onclick=@(() => {
+			Player.Local.Inventory.DropItem(_item);
+			Inventory.Instance?.OnChanged();
+		}) 
 	/>
 </root>
 
