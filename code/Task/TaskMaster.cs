@@ -122,4 +122,46 @@ public class TaskMaster : Component
 	/// <param name="filePath"></param>
 	[Broadcast( NetPermission.Anyone )]
 	public static void AssignEveryoneNewTask( string filePath ) => AssignNewTask( filePath );
+
+
+	/// <summary>
+	/// Removes the found task from the local player, doesn't work if the task doesn't exists
+	/// </summary>
+	/// <param name="taskToRemove"></param>
+	public static void RemoveTask( SaunaTask taskToRemove )
+	{
+		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+
+		if ( taskMaster == null ) return;
+
+		var sameTaskFound = taskMaster.CurrentTasks.Where( x => x.ResourceName == taskToRemove.ResourceName )?.FirstOrDefault() ?? null;
+
+		if ( sameTaskFound == null ) return; // Bail if no task found
+
+		taskMaster.CurrentTasks.Remove( sameTaskFound ); // Remove the task
+	}
+
+	/// <summary>
+	/// Removes the found task from the local player, doesn't work if the task doesn't exists
+	/// </summary>
+	/// <param name="filePath"></param>
+	public static void RemoveTask( string filePath )
+	{
+		if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
+			RemoveTask( foundTask );
+	}
+
+	/// <summary>
+	/// Remove the task from everyone in the server
+	/// </summary>
+	/// <param name="taskToRemove"></param>
+	[Broadcast( NetPermission.Anyone )]
+	public static void RemoveEveryoneTask( SaunaTask taskToRemove ) => RemoveTask( taskToRemove );
+
+	/// <summary>
+	/// Remove the task from everyone in the server
+	/// </summary>
+	/// <param name="filePath"></param>
+	[Broadcast( NetPermission.Anyone )]
+	public static void RemoveEveryoneTask( string filePath ) => RemoveTask( filePath );
 }
