@@ -52,6 +52,8 @@ public class Inventory : Component
 		if ( item is not ItemEquipment equipment )
 			return false;
 
+		RemoveBackpackItem( item, index );
+
 		var slotIndex = (int)equipment.Slot;
 		var previouslyEquippedItem = _equippedItems[slotIndex];
 
@@ -61,7 +63,6 @@ public class Inventory : Component
 			GiveBackpackItem( previouslyEquippedItem, index );
 		}
 
-		RemoveBackpackItem( item, index );
 		GiveEquipmentItem( equipment );
 
 		return true;
