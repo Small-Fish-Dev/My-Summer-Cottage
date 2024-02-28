@@ -26,6 +26,13 @@ public class Inventory : Component
 		=> (item is ItemEquipment equipment && equipment.Equipped ? _equippedItems : _backpackItems).IndexOf( item );
 
 	/// <summary>
+	/// Returns true if the backpack has any free slots.
+	/// </summary>
+	/// <returns></returns>
+	public bool HasSpace()
+		=> _backpackItems.IndexOf( null ) != -1;
+
+	/// <summary>
 	/// Item is given to the inventory system if they have free slots.
 	/// </summary>
 	public bool GiveItem( ItemComponent item )

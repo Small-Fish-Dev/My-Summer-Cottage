@@ -78,10 +78,22 @@ public sealed class BeerCrate : Component
 				if ( inventory == null ) 
 					return;
 
+				GameObject beer;
 				if ( inventory.EquippedItems[(int)EquipSlot.Hand] != null )
-					return;
+				{
+					if ( !inventory.HasSpace() )
+						return;
 
-				var beer = Beer.Clone();
+					beer = Beer.Clone();
+					beer.Enabled = true;
+					beer.BreakFromPrefab();
+					inventory.GiveItem( beer );
+					Count--;
+
+					return;
+				}
+
+				beer = Beer.Clone();
 				beer.BreakFromPrefab();
 				inventory.TryEquip( beer );
 				Count--;
