@@ -206,6 +206,22 @@ public class Inventory : Component
 			_equippedItems[_equippedItems.IndexOf( item )] = null;
 	}
 
+	/// <summary>
+	/// The item is equipped from the world if possible.
+	/// </summary>
+	public bool TryEquip( ItemComponent item )
+	{
+		if ( item is not ItemEquipment equipment )
+			return false;
+
+		var slotIndex = (int)equipment.Slot;
+		if ( _equippedItems[slotIndex] is not null )
+			return false;
+
+		GiveEquipmentItem( equipment );
+		return true;
+	}
+
 	public int GetTotalWeightInGrams()
 	{
 		return _backpackItems.Sum( i => i?.WeightInGrams ?? 0 ) + _equippedItems.Sum( i => i?.WeightInGrams ?? 0 );
