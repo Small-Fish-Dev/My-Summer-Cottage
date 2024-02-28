@@ -8,7 +8,7 @@ public sealed class BeerCrate : Component
 	/// <summary>
 	/// The amount of beers still in the crate.
 	/// </summary>
-	[Sync, Property, Range( 0, 24, 1 ), TargetSaveAttribute]
+	[Sync, Property, Range( 0, 24, 1 ), TargetSave]
 	public int Count
 	{
 		get => _count;

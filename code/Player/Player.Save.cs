@@ -177,6 +177,9 @@ partial class Player
 				var o = SceneUtility.GetPrefabScene( prefab ).Clone();
 				o.Enabled = true;
 				var equipment = o.Components.Get<ItemEquipment>();
+				if ( equipment == null )
+					continue;
+
 				player.Inventory.GiveItem( equipment );
 				player.Inventory.EquipItem( equipment );
 				o.NetworkSpawn();
@@ -192,6 +195,9 @@ partial class Player
 				var o = SceneUtility.GetPrefabScene( prefab ).Clone();
 				//o.Enabled = true;
 				var item = o.Components.Get<ItemComponent>();
+				if ( item == null )
+					continue;
+
 				player.Inventory.SetItem( item, data.Index );
 				o.NetworkSpawn();
 				o.Enabled = false;
