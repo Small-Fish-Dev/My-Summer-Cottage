@@ -28,4 +28,28 @@ public static partial class TaskNodes
 	{
 		TaskMaster.AssignEveryoneNewTask( taskToAdd );
 	}
+
+	/// <summary>
+	/// Remove a task from the player's current tasks
+	/// </summary>
+	/// <param name="taskToRemove"></param>
+	/// <param name="player"></param>
+	[ActionGraphNode( "event.removetaskfrom" )]
+	[Title( "Remove Task From" ), Group( "Events" ), Icon( "event_busy" )]
+	public static void RemoveTaskFrom( SaunaTask taskToRemove, Player player )
+	{
+		if ( player != null )
+			TaskMaster.RemoveTask( taskToRemove, player );
+	}
+
+	/// <summary>
+	///Remove a task from all of the players current tasks
+	/// </summary>
+	/// <param name="taskToRemove"></param>
+	[ActionGraphNode( "event.removetaskfromeveryone" )]
+	[Title( "Remove Task From Everyone" ), Group( "Events" ), Icon( "event_busy" )]
+	public static void RemoveTaskFromEveryone( SaunaTask taskToRemove )
+	{
+		TaskMaster.RemoveEveryoneTask( taskToRemove );
+	}
 }
