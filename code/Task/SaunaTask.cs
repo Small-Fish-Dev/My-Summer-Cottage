@@ -158,6 +158,11 @@ public partial class SaunaTask : GameResource
 
 		if ( TimeLimited )
 			TaskTimer = TimeLimitInSeconds;
+
+		Log.Info( $"Task '{Name}' has started: {Description}" );
+
+		foreach ( var subtask in Subtasks )
+			Log.Info( $"New subtask: '{subtask.Description}' ({subtask.CurrentAmount}/{subtask.AmountToComplete})" );
 	}
 
 	/// <summary>
@@ -181,6 +186,8 @@ public partial class SaunaTask : GameResource
 		Completed = true;
 		Successful = false;
 
+		Log.Info( $"Failed the '{Name}' task" );
+
 		OnFail?.Invoke( Player.Local );
 	}
 
@@ -191,6 +198,7 @@ public partial class SaunaTask : GameResource
 	{
 		Completed = false;
 		Successful = false;
+		Started = false;
 		CurrentSubtaskOrder = 0;
 		TaskTimer = TimeLimitInSeconds;
 

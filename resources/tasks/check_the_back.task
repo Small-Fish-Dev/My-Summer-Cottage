@@ -1,0 +1,27 @@
+{
+  "Name": "Creepy Peeper",
+  "Description": "Did you see that? Something is behind the sauna.",
+  "IsPrimary": true,
+  "Global": false,
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go behind the sauna",
+      "TriggerSignal": "event.peeper_attacks",
+      "AmountToComplete": 1
+    }
+  ],
+  "CurrentSubtaskOrder": 0,
+  "Successful": false,
+  "Started": false,
+  "Completed": false,
+  "TaskTimer": {
+    "Fraction": "NaN"
+  },
+  "__references": []
+}
