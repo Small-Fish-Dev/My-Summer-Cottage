@@ -91,8 +91,16 @@ public class Inventory : Component
 	/// </summary>
 	public bool DropItem( ItemComponent item )
 	{
-		if ( item is ItemEquipment equipment && equipment.Equipped )
-			RemoveEquipmentItem( equipment );
+		if ( item is ItemEquipment equipment )
+		{
+			if ( equipment.Equipped )
+				RemoveEquipmentItem( equipment );
+			else
+			{
+				equipment.ToggleRenderer( false );
+				equipment.UpdateParcel( false );
+			}
+		}
 
 		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
 
