@@ -21,7 +21,7 @@ public partial class RadioComponent : Component
 		{
 			_on = value;
 
-			if ( !GameManager.IsPlaying )
+			if ( !GameManager.IsPlaying || GameObject == GameManager.ActiveScene )
 				return;
 
 			if ( !_on ) // Close the player.

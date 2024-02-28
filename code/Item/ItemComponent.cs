@@ -7,6 +7,7 @@ public class ItemComponent : Component
 	[Property] public string Description { get; set; }
 	[Property] public int WeightInGrams { get; set; }
 
+	public string Prefab { get; private set; }
 	public Texture IconTexture => Texture.Load( FileSystem.Mounted, Icon.Path );
 
 	public static implicit operator ItemComponent( GameObject obj )
@@ -15,8 +16,14 @@ public class ItemComponent : Component
 	[Sync]
 	public bool InBackpack
 	{
-		get => GameObject.Enabled;
-		set => GameObject.Enabled = value;
+		get => !GameObject.Enabled;
+		set => GameObject.Enabled = !value;
+	}
+
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		Prefab = GameObject.PrefabInstanceSource;
 	}
 
 	protected override void OnStart()
@@ -35,7 +42,7 @@ public class ItemComponent : Component
 			Action = ( Player interactor, GameObject obj ) => interactor.Inventory.GiveItem( this ),
 			Keybind = "use",
 			Description = "Pickup",
-			Disabled = () => !InBackpack,
+			Disabled = () => InBackpack,
 		} );
 	}
 

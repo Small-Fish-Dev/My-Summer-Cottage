@@ -3,7 +3,8 @@
 public struct ItemSave
 {
 	[JsonInclude] public string Path;
-	[JsonInclude] public Dictionary<string, object> Data;
+	[JsonInclude] public Dictionary<string, string> Data;
+	[JsonInclude] public int Index;
 }
 
 public struct PlayerSave
@@ -24,8 +25,16 @@ public struct PlayerSave
 	[JsonInclude] public ItemSave[] Inventory;
 }
 
+[AttributeUsage( AttributeTargets.Property )]
+public class TargetSaveAttribute : Attribute { }
+
 partial class Player
 {
+	private static readonly JsonSerializerOptions options = new JsonSerializerOptions()
+	{
+		DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+	};
+
 	private static PlayerSave? _saveData;
 
 	/// <summary>
@@ -62,21 +71,49 @@ partial class Player
 
 		// Get the data that sticks.
 		var data = GetSave();
-		var save = data.Has 
-			? data.Save 
+		var save = data.Has
+			? data.Save
 			: new PlayerSave()
 			{
 				Firstname = player.Firstname,
 				Lastname = player.Lastname,
 				Fatness = player.Fatness,
 				Height = player.Height,
-				SkinColor= player.SkinColor
+				SkinColor = player.SkinColor
 			};
+
+		var items = PrefabLibrary.FindByComponent<ItemComponent>();
 
 		// Save dynamic data.
 		ItemSave Serialize( ItemComponent item )
 		{
-			return default; // TODO @ceitine: figure out way to fetch prefab path, add attribute to store data, go through all components and check if any property has that attribute
+			if ( item == null )
+				return default;
+
+			if ( !ResourceLibrary.TryGet<PrefabFile>( item.Prefab, out var resource ) )
+				return default;
+
+			var data = new Dictionary<string, string>();
+			foreach ( var component in item.Components.GetAll() )
+			{
+				var properties = GlobalGameNamespace.TypeLibrary
+					?.GetType( component.GetType() )
+					?.Properties
+					?.Where( x => x.HasAttribute<TargetSaveAttribute>() );
+
+				foreach ( var property in properties )
+				{
+					var serialized = JsonSerializer.Serialize( property.GetValue( component ), property.PropertyType, options );
+					data.Add( property.Name, serialized );
+				}
+			}
+
+			return new ItemSave
+			{
+				Path = item.Prefab,
+				Data = data.Count > 0 ? data : null,
+				Index = player.Inventory.IndexOf( item )
+			};
 		}
 
 		_saveData = save with
@@ -84,16 +121,24 @@ partial class Player
 			Money = player.Money,
 
 			Clothes = player.Inventory.EquippedItems
-				.Select( x => Serialize( x ) )
+				.Where( x => x != null )
+				.Select( Serialize )
 				.ToArray(),
 
 			Inventory = player.Inventory.BackpackItems
-				.Select( x => Serialize( x ) )
+				.Where( x => x != null )
+				.Select( Serialize )
 				.ToArray()
 		};
 
 		// Write save.
 		WriteSave( _saveData.Value );
+	}
+
+	[ConCmd]
+	public static void SaveGame()
+	{
+		Save();
 	}
 
 	/// <summary>
@@ -124,9 +169,9 @@ partial class Player
 
 		// Go through all clothes.
 		if ( save.Clothes != null )
-			foreach ( var cloth in save.Clothes )
+			foreach ( var data in save.Clothes )
 			{
-				if ( !ResourceLibrary.TryGet<PrefabFile>( cloth.Path, out var prefab ) )
+				if ( !ResourceLibrary.TryGet<PrefabFile>( data.Path, out var prefab ) )
 					continue;
 
 				var o = SceneUtility.GetPrefabScene( prefab ).Clone();
@@ -137,7 +182,39 @@ partial class Player
 				o.NetworkSpawn();
 			}
 
-		// todo @ceitine: Go through items.
+		// Go through all items.
+		if ( save.Inventory != null )
+			foreach ( var data in save.Inventory )
+			{
+				if ( !ResourceLibrary.TryGet<PrefabFile>( data.Path, out var prefab ) )
+					continue;
+
+				var o = SceneUtility.GetPrefabScene( prefab ).Clone();
+				//o.Enabled = true;
+				var item = o.Components.Get<ItemComponent>();
+				player.Inventory.SetItem( item, data.Index );
+				o.NetworkSpawn();
+				o.Enabled = false;
+
+				// Read data kvp.
+				var components = o.Components.GetAll();
+				foreach ( var component in components )
+				{
+					var properties = GlobalGameNamespace.TypeLibrary
+						?.GetType( component.GetType() )
+						?.Properties
+						?.Where( x => x.HasAttribute<TargetSaveAttribute>() );
+
+					foreach ( var property in properties )
+					{
+						if ( !data.Data.TryGetValue( property.Name, out var serialized ) )
+							continue;
+
+						var deserialized = JsonSerializer.Deserialize( serialized, property.PropertyType, options );
+						property.SetValue( component, deserialized );
+					}
+				}
+			}
 
 		return true;
 	}

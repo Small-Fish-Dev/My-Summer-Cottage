@@ -20,6 +20,12 @@ public class Inventory : Component
 	}
 
 	/// <summary>
+	/// Returns the index of an item regardless of whether it is equipped or in the backpack.
+	/// </summary>
+	public int IndexOf( ItemComponent item )
+		=> (item is ItemEquipment equipment && equipment.Equipped ? _equippedItems : _backpackItems).IndexOf( item );
+
+	/// <summary>
 	/// Item is given to the inventory system if they have free slots.
 	/// </summary>
 	public bool GiveItem( ItemComponent item )
@@ -28,8 +34,7 @@ public class Inventory : Component
 		if ( firstFreeSlot == -1 )
 			return false;
 
-		item.GameObject.Network.TakeOwnership();
-		item.GameObject.Parent = Player.GameObject;
+		SetOwner( item );
 		GiveBackpackItem( item, firstFreeSlot );
 
 		return true;
@@ -172,9 +177,21 @@ public class Inventory : Component
 		return true;
 	}
 
+	public void SetItem( ItemComponent item, int index )
+	{
+		SetOwner( item );
+		GiveBackpackItem( item, index );
+	}
+
 	public int GetTotalWeightInGrams()
 	{
 		return _backpackItems.Sum( i => i?.WeightInGrams ?? 0 ) + _equippedItems.Sum( i => i?.WeightInGrams ?? 0 );
+	}
+
+	private void SetOwner( ItemComponent item )
+	{
+		item.GameObject.Network.TakeOwnership();
+		item.GameObject.Parent = Player.GameObject;
 	}
 
 	/// <summary>
@@ -182,7 +199,7 @@ public class Inventory : Component
 	/// </summary>
 	private void GiveBackpackItem( ItemComponent item, int index )
 	{
-		item.InBackpack = false;
+		item.InBackpack = true;
 		_backpackItems[index] = item;
 	}
 
@@ -191,7 +208,7 @@ public class Inventory : Component
 	/// </summary>
 	private void RemoveBackpackItem( ItemComponent item, int index )
 	{
-		item.InBackpack = true;
+		item.InBackpack = false;
 
 		if ( index >= 0 && index < _backpackItems.Count )
 			_backpackItems[index] = null;

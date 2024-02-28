@@ -38,5 +38,5 @@ public class ItemEquipment : ItemComponent
 		}
 	}
 
-	// todo: base onstart, also create box model renderer and collider for world.
+	// todo: create box model renderer and collider for world.
 }

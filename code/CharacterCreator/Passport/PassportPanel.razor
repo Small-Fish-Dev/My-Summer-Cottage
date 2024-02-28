@@ -70,7 +70,7 @@
 
 		Overlay.Panel.AddChild( entry = new()
 		{
-			CharacterRegex = "[a-zA-ZäöåÄÖÅ ]",
+			CharacterRegex = @"[a-zA-ZäöåÄÖÅ\- ]",
 			MaxLength = 14,
 			Text = Firstname
 		} );
