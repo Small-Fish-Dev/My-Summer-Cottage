@@ -4,13 +4,19 @@ Layer0
 {
 	shader "shaders/saunasimple.shader"
 
+	//---- Rendering ----
+	F_EMISSIVE 1
+
+	//---- Emission ----
+	Emission "materials/props/desk_lamp/desk_complete.png"
+	EmissionStrength "1.080"
+
 	//---- Fog ----
 	g_bFogEnabled "1"
 
 	//---- Material ----
 	Color "materials/props/desk_lamp/desk_lamp_albedo.png"
 	ColorTintMask "materials/default/default.tga"
-	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
 	Metalness "materials/props/desk_lamp/desk_lamp_metal.png"
 	Normal "materials/props/desk_lamp/desk_lamp_normal.png"
 	Roughness "materials/props/desk_lamp/desk_lamp_rough.png"
