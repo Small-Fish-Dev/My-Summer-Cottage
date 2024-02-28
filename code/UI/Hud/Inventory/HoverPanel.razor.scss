@@ -7,6 +7,8 @@ HoverPanel {
     transition: all 0.08s ease-out;
     text-shadow: $text-shadow-sm;
     flex-direction: column;
+    margin-left: 20px;
+    box-shadow: 4px 4px 0px black;
 
     .item-details {
         width: 100%;
@@ -19,10 +21,12 @@ HoverPanel {
 
             .item-weight {
                 color: $orange;
-                font-family: battlenetcopy;
-                font-size: 25px;
+                font-family: HabboExtended;
+                font-size: 16px;
+                letter-spacing: 1px;
+                font-weight: bold;
             }
-    
+
             .item-name {
                 font-family: BasicHandwriting;
                 font-size: 27px;
@@ -31,8 +35,11 @@ HoverPanel {
         }
 
         .item-description {
-            font-family: battlenetcopy;
-            font-size: 25px;
+            max-width: 400px;
+            font-family: HabboExtended;
+            font-size: 16px;
+            padding-top: 4px;
+            color: darken(white, 0.3);
         }
     }
 
@@ -40,12 +47,15 @@ HoverPanel {
         background-color: #101010;
         color: #535353;
         width: 100%;
-        font-size: 28px;
+        font-size: 18px;
         justify-content: center;
-        padding: 5px 10px;
+        padding: 10px 10px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        font-family: HabboExtended;
     }
 
-    
+
     &:intro {
         transform: translateY(20);
         opacity: 0;
