@@ -2,6 +2,9 @@
 
 partial class Player
 {
+	public static IReadOnlyList<Player> All => players;
+	private static List<Player> players = new List<Player>();
+
 	public static Player Local { get; private set; }
 
 	private Guid _guid;
@@ -12,6 +15,9 @@ partial class Player
 		{
 			_guid = value;
 			Connection = Networking.FindConnection( _guid );
+			if ( !players.Contains( this ) )
+				players.Add( this );
+
 			if ( _guid == Connection.Local.Id )
 				Local = this;
 		}
@@ -27,4 +33,7 @@ partial class Player
 		ConnectionID = connection.Id;
 		GameObject.Name = $"{Name} / {SteamID}";
 	}
+
+	public static Player GetByID( Guid id )
+		=> players.FirstOrDefault( x => x.ConnectionID == id );
 }
