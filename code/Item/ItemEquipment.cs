@@ -53,10 +53,10 @@ public class ItemEquipment : ItemComponent
 		Renderer.Enabled = value;
 	}
 
-	public void UpdateParcel( bool value )
+	public bool UpdateParcel( bool value )
 	{
 		if ( parcelBody == null && Components.Get<Rigidbody>( FindMode.EverythingInSelfAndDescendants ) != null )
-			return;
+			return false;
 
 		if ( parcelRenderer == null )
 		{
@@ -73,5 +73,7 @@ public class ItemEquipment : ItemComponent
 		parcelRenderer.Enabled = !value; 
 		parcelCollider.Enabled = !value;
 		parcelBody.Enabled = !value;
+
+		return true;
 	}
 }

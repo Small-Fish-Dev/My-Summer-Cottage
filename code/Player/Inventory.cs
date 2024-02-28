@@ -95,11 +95,11 @@ public class Inventory : Component
 		{
 			if ( equipment.Equipped )
 				RemoveEquipmentItem( equipment );
-			else
-			{
+
+			if ( equipment.UpdateParcel( false ) ) // If goes into parcel.
 				equipment.ToggleRenderer( false );
-				equipment.UpdateParcel( false );
-			}
+			else
+				equipment.ToggleRenderer( true );
 		}
 
 		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
