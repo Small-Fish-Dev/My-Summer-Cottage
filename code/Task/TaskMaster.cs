@@ -111,29 +111,40 @@ public class TaskMaster : Component
 			AssignNewTask( foundTask );
 	}
 
+	[Broadcast( NetPermission.Anyone )]
+	internal static void InternalAssignNewTask( SaunaTask taskToAssign, Guid playerId )
+	{
+		var player = Player.GetByID( playerId );
+
+		if ( player != null )
+			if ( Player.Local == player )
+				AssignNewTask( taskToAssign );
+	}
+
+	[Broadcast( NetPermission.Anyone )]
+	internal static void InternalAssignNewTask( string filePath, Guid playerId )
+	{
+		var player = Player.GetByID( playerId );
+
+		if ( player != null )
+			if ( Player.Local == player )
+				if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
+					AssignNewTask( foundTask );
+	}
+
 	/// <summary>
 	/// Assign a new task to the specified player, doesn't work if the task already exists
 	/// </summary>
 	/// <param name="taskToAssign"></param>
 	/// <param name="player"></param>
-	[Broadcast( NetPermission.Anyone )]
-	public static void AssignNewTask( SaunaTask taskToAssign, Player player )
-	{
-		if ( Player.Local == player )
-			AssignNewTask( taskToAssign );
-	}
+	public static void AssignNewTask( SaunaTask taskToAssign, Player player ) => InternalAssignNewTask( taskToAssign, player.ConnectionID );
 
 	/// <summary>
 	/// Assign a new task to the specified player, doesn't work if the task already exists
 	/// </summary>
 	/// <param name="filePath"></param>
 	/// <param name="player"></param>
-	[Broadcast( NetPermission.Anyone )]
-	public static void AssignNewTask( string filePath, Player player )
-	{
-		if ( Player.Local == player )
-			AssignNewTask( filePath );
-	}
+	public static void AssignNewTask( string filePath, Player player ) => InternalAssignNewTask( filePath, player.ConnectionID );
 
 	/// <summary>
 	/// Assign everyone in the server a new task
@@ -176,6 +187,7 @@ public class TaskMaster : Component
 			RemoveTask( foundTask );
 	}
 
+	[Broadcast( NetPermission.Anyone )]
 	internal static void InternalRemoveTask( SaunaTask taskToRemove, Guid playerId )
 	{
 		var player = Player.GetByID( playerId );
@@ -185,6 +197,7 @@ public class TaskMaster : Component
 				RemoveTask( taskToRemove );
 	}
 
+	[Broadcast( NetPermission.Anyone )]
 	internal static void InternalRemoveTask( string filePath, Guid playerId )
 	{
 		var player = Player.GetByID( playerId );
@@ -200,7 +213,6 @@ public class TaskMaster : Component
 	/// </summary>
 	/// <param name="taskToRemove"></param>
 	/// <param name="player"></param>
-	[Broadcast( NetPermission.Anyone )]
 	public static void RemoveTask( SaunaTask taskToRemove, Player player ) => InternalRemoveTask( taskToRemove, player.ConnectionID );
 
 	/// <summary>
@@ -208,7 +220,6 @@ public class TaskMaster : Component
 	/// </summary>
 	/// <param name="filePath"></param>
 	/// <param name="player"></param>
-	[Broadcast( NetPermission.Anyone )]
 	public static void RemoveTask( string filePath, Player player ) => InternalRemoveTask( filePath, player.ConnectionID );
 
 	/// <summary>
