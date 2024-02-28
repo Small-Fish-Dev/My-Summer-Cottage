@@ -17,7 +17,6 @@ public class ItemComponent : Component
 	/// <summary>
 	/// If the item is in the player's inventory (this includes backpack and equipped items).
 	/// </summary>
-	[Sync]
 	public bool InInventory
 	{
 		get => InBackpack || (this is ItemEquipment equipment && equipment.Equipped);
