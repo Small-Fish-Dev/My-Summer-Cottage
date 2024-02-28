@@ -31,34 +31,32 @@ InspectItem {
         width: 100%;
         justify-content: center;
         align-items: center;
-        bottom: -33%;
-        right: -20%;
+        bottom: -35%;
         transition: all 0.2s ease-out;
         opacity: 1;
 
         .text-container {
             flex-direction: column;
             width: 450px;
-            background-color: #00000050;
+            background-color: #1b1c1b;
+            box-shadow: 4px 4px 0px black;
             padding: 20px;
+            text-shadow: $text-shadow-sm;
 
             .weight {
-                position: absolute;
-                right: 20px;
-                top: 10px;
-                font-size: 28px;
-                font-family: battlenetcopy;
+                font-size: 20px;
+                font-family: HabboExtended;
                 color: $orange;
             }
 
             .title {
-                font-size: 26px;
+                font-size: 36px;
                 font-family: BasicHandwriting;
             }
 
             .description {
-                font-size: 24px;
-                font-family: battlenetcopy;
+                font-size: 22px;
+                font-family: HabboExtended;
             }
         }
         

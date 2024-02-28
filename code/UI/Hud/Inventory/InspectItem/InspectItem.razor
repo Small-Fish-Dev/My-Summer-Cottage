@@ -12,9 +12,14 @@
 	<ScenePanel class="scene" @ref=_scenePanel />
 	<div class="text-placement">
 		<div class="text-container">
-			<text class="weight">@_item.WeightInGrams.ToKilograms() kg</text>
-			<text class="title">@_item.Name</text>
-			<text class="description">@_item.Description</text>
+			<div style="width: 100%; justify-content: space-between; @(!HasDescription ? "align-items: center;" : "")">
+				<text class="title">@_item.Name</text>
+				<text class="weight">@_item.WeightInGrams.ToKilograms() kg</text>
+			</div>
+			@if (HasDescription)
+			{
+				<div class="description">@_item.Description</div>
+			}
 		</div>
 	</div>
 </root>
@@ -31,6 +36,8 @@
 	private bool _isDragging = false;
 	private Transform _cameraTransform;
 	private float _distance;
+
+	private bool HasDescription => !String.IsNullOrEmpty(_item.Description);
 
 	public InspectItem(ItemComponent item)
 	{
