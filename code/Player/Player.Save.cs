@@ -71,21 +71,21 @@ partial class Player
 
 		// Get the data that sticks.
 		var data = GetSave();
-		var save = data.Has 
-			? data.Save 
+		var save = data.Has
+			? data.Save
 			: new PlayerSave()
 			{
 				Firstname = player.Firstname,
 				Lastname = player.Lastname,
 				Fatness = player.Fatness,
 				Height = player.Height,
-				SkinColor= player.SkinColor
+				SkinColor = player.SkinColor
 			};
 
 		var items = PrefabLibrary.FindByComponent<ItemComponent>();
 
 		// Save dynamic data.
-		ItemSave Serialize( ItemComponent item, bool inventory = false )
+		ItemSave Serialize( ItemComponent item )
 		{
 			if ( item == null )
 				return default;
@@ -112,7 +112,7 @@ partial class Player
 			{
 				Path = item.Prefab,
 				Data = data.Count > 0 ? data : null,
-				Index = player.Inventory.IndexOf( item, inventory )
+				Index = player.Inventory.IndexOf( item )
 			};
 		}
 
@@ -122,12 +122,12 @@ partial class Player
 
 			Clothes = player.Inventory.EquippedItems
 				.Where( x => x != null )
-				.Select( x => Serialize( x ) )
+				.Select( Serialize )
 				.ToArray(),
 
 			Inventory = player.Inventory.BackpackItems
 				.Where( x => x != null )
-				.Select( x => Serialize( x, true ) )
+				.Select( Serialize )
 				.ToArray()
 		};
 

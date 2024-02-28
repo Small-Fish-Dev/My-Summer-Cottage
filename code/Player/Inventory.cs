@@ -19,49 +19,30 @@ public class Inventory : Component
 		_equippedItems = new List<ItemComponent>( new ItemComponent[Enum.GetNames( typeof( EquipSlot ) ).Length] );
 	}
 
-	public int IndexOf( ItemComponent item, bool inventory = true )
-		=> (inventory ? _backpackItems : _equippedItems ).IndexOf( item );
+	/// <summary>
+	/// Returns the index of an item regardless of whether it is equipped or in the backpack.
+	/// </summary>
+	public int IndexOf( ItemComponent item )
+		=> (item is ItemEquipment equipment && equipment.Equipped ? _equippedItems : _backpackItems).IndexOf( item );
 
-	public void SetItem( ItemComponent item, int index )
-	{
-		item.GameObject.Network.TakeOwnership();
-		item.DrawingEnabled = false;
-		item.GameObject.Parent = Player.GameObject;
-		_backpackItems[index] = item;
-	}
-
+	/// <summary>
+	/// Item is given to the inventory system if they have free slots.
+	/// </summary>
 	public bool GiveItem( ItemComponent item )
 	{
 		var firstFreeSlot = _backpackItems.IndexOf( null );
 		if ( firstFreeSlot == -1 )
 			return false;
 
-		SetItem( item, firstFreeSlot );
-		return true;
-	}
-
-	public void RemoveItem( ItemComponent item )
-	{
-		if ( _backpackItems.Contains( item ) )
-			_backpackItems[_backpackItems.IndexOf( item )] = null;
-		else if ( _equippedItems.Contains( item ) )
-			_equippedItems[_equippedItems.IndexOf( item )] = null;
-	}
-
-	public bool DropItem( ItemComponent item )
-	{
-		var droppedItem = item is ItemEquipment equipment && equipment.Equipped ? RemoveItem( equipment.Slot ) : RemoveItem( _backpackItems.IndexOf( item ) );
-		if ( droppedItem is null )
-			return false;
-
-		droppedItem.DrawingEnabled = true;
-		droppedItem.GameObject.Parent = null;
-		droppedItem.GameObject.Transform.Position = Player.ViewRay.Position + Player.ViewRay.Forward * 2f;
-		droppedItem.Network.DropOwnership();
+		SetOwner( item );
+		GiveBackpackItem( item, firstFreeSlot );
 
 		return true;
 	}
 
+	/// <summary>
+	/// The item is equipped from the backpack and swaps out any previously equipped item.
+	/// </summary>
 	public bool EquipItem( ItemComponent item )
 	{
 		var index = _backpackItems.IndexOf( item );
@@ -71,29 +52,203 @@ public class Inventory : Component
 		if ( item is not ItemEquipment equipment )
 			return false;
 
-		equipment.Equipped = true;
+		var slotIndex = (int)equipment.Slot;
+		var previouslyEquippedItem = _equippedItems[slotIndex];
 
-		var slot = equipment.Slot;
-		var slotIndex = (int)slot;
-
-		var equippedItem = _equippedItems[slotIndex];
-		if ( equippedItem is not null )
+		if ( previouslyEquippedItem is not null )
 		{
-			_backpackItems[index] = equippedItem;
-			_equippedItems[slotIndex] = item;
-		}
-		else
-		{
-			RemoveItem( index );
-			_equippedItems[slotIndex] = item;
+			RemoveEquipmentItem( previouslyEquippedItem as ItemEquipment );
+			GiveBackpackItem( previouslyEquippedItem, index );
 		}
 
-		UpdateBodygroups();
+		RemoveBackpackItem( item, index );
+		GiveEquipmentItem( equipment );
 
 		return true;
 	}
 
-	public void UpdateBodygroups()
+	/// <summary>
+	/// The item is unequipped and placed into the backpack if there are free slots. 
+	/// </summary>
+	public bool UnequipItem( ItemComponent item )
+	{
+		if ( item is not ItemEquipment equipment || !equipment.Equipped )
+			return false;
+
+		var firstFreeSlot = _backpackItems.IndexOf( null );
+		if ( firstFreeSlot == -1 )
+			return false;
+
+		RemoveEquipmentItem( equipment );
+		GiveBackpackItem( equipment, firstFreeSlot );
+
+		return true;
+	}
+
+	/// <summary>
+	/// The item is removed completely from the inventory system.
+	/// </summary>
+	public bool DropItem( ItemComponent item )
+	{
+		if ( item is ItemEquipment equipment && equipment.Equipped )
+			RemoveEquipmentItem( equipment );
+
+		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
+
+		item.GameObject.Parent = null;
+		item.GameObject.Transform.Position = Player.ViewRay.Position + Player.ViewRay.Forward * 2f;
+		item.Network.DropOwnership();
+
+		return true;
+	}
+
+	/// <summary>
+	/// A swap is performed from the backpack to the equipment slots.
+	/// </summary>
+	public bool SwapItems( int index, EquipSlot slot )
+	{
+		var item = _backpackItems.ElementAtOrDefault( index );
+		if ( item is null )
+			return false;
+
+		if ( item is not ItemEquipment equipment || equipment.Slot != slot )
+			return false;
+
+		RemoveBackpackItem( item, index );
+
+		var previouslyEquippedItem = _equippedItems[(int)slot];
+		if ( previouslyEquippedItem is not null )
+		{
+			RemoveEquipmentItem( previouslyEquippedItem as ItemEquipment );
+			GiveBackpackItem( previouslyEquippedItem, index );
+		}
+
+		GiveEquipmentItem( equipment );
+
+		return true;
+	}
+
+	/// <summary>
+	/// A swap is performed from a backpack slot to another backpack slot.
+	/// </summary>
+	public bool SwapItems( int firstIndex, int secondIndex )
+	{
+		var firstItem = _backpackItems.ElementAtOrDefault( firstIndex );
+		if ( firstItem is null )
+			return false;
+
+		RemoveBackpackItem( firstItem, firstIndex );
+
+		var secondItem = _backpackItems.ElementAtOrDefault( secondIndex );
+		if ( secondItem is not null )
+		{
+			RemoveBackpackItem( secondItem, secondIndex );
+			GiveBackpackItem( secondItem, firstIndex );
+		}
+
+		GiveBackpackItem( firstItem, secondIndex );
+
+		return true;
+	}
+
+	/// <summary>
+	/// A swap is performed from the equipment slot to the backpack.
+	/// </summary>
+	public bool SwapItems( EquipSlot slot, int index )
+	{
+		var item = _equippedItems[(int)slot];
+		if ( item is null )
+			return false;
+
+		var previousBackpackItem = _backpackItems[index];
+		if ( previousBackpackItem is not null && (previousBackpackItem is not ItemEquipment itemToEquip || slot != itemToEquip.Slot) )
+			return false;
+
+		RemoveEquipmentItem( item as ItemEquipment );
+
+		if ( previousBackpackItem is not null )
+		{
+			RemoveBackpackItem( previousBackpackItem, index );
+			GiveEquipmentItem( previousBackpackItem as ItemEquipment );
+		}
+
+		GiveBackpackItem( item, index );
+
+		return true;
+	}
+
+	/// <summary>
+	/// Bypasses any restrictions and sets the item at the given index. Do not use this for regular inventory usage.
+	/// </summary>
+	public void SetItem( ItemComponent item, int index )
+	{
+		SetOwner( item );
+		GiveBackpackItem( item, index );
+	}
+
+	/// <summary>
+	/// Bypasses any restrictions and clears the item. Do not use this for regular inventory usage.
+	/// </summary>
+	public void ClearItem( ItemComponent item )
+	{
+		if ( _backpackItems.Contains( item ) )
+			_backpackItems[_backpackItems.IndexOf( item )] = null;
+		else if ( _equippedItems.Contains( item ) )
+			_equippedItems[_equippedItems.IndexOf( item )] = null;
+	}
+
+	public int GetTotalWeightInGrams()
+	{
+		return _backpackItems.Sum( i => i?.WeightInGrams ?? 0 ) + _equippedItems.Sum( i => i?.WeightInGrams ?? 0 );
+	}
+
+	private void SetOwner( ItemComponent item )
+	{
+		item.GameObject.Network.TakeOwnership();
+		item.GameObject.Parent = Player.GameObject;
+	}
+
+	/// <summary>
+	/// The item is given to the backpack.
+	/// </summary>
+	private void GiveBackpackItem( ItemComponent item, int index )
+	{
+		item.InBackpack = true;
+		_backpackItems[index] = item;
+	}
+
+	/// <summary>
+	/// The item is removed from the backpack.
+	/// </summary>
+	private void RemoveBackpackItem( ItemComponent item, int index )
+	{
+		item.InBackpack = false;
+
+		if ( index >= 0 && index < _backpackItems.Count )
+			_backpackItems[index] = null;
+	}
+
+	/// <summary>
+	/// The item is equipped.
+	/// </summary>
+	private void GiveEquipmentItem( ItemEquipment equipment )
+	{
+		equipment.Equipped = true;
+		_equippedItems[(int)equipment.Slot] = equipment;
+		UpdateBodygroups();
+	}
+
+	/// <summary>
+	/// The item is unequipped.
+	/// </summary>
+	private void RemoveEquipmentItem( ItemEquipment equipment )
+	{
+		equipment.Equipped = false;
+		_equippedItems[(int)equipment.Slot] = null;
+		UpdateBodygroups();
+	}
+
+	private void UpdateBodygroups()
 	{
 		var bodygroups = HiddenBodyGroup.None;
 		foreach ( var item in EquippedItems )
@@ -107,110 +262,6 @@ public class Inventory : Component
 		Player.HideBodygroups = bodygroups;
 	}
 
-	public bool UnequipItem( ItemComponent item )
-	{
-		if ( item is not ItemEquipment equipment )
-			return false;
-
-		var slotIndex = (int)equipment.Slot;
-		var equippedItem = _equippedItems[slotIndex];
-		var hasGivenItem = GiveItem( equippedItem );
-		if ( !hasGivenItem )
-			return false;
-
-		equipment.Equipped = false;
-
-		_equippedItems[slotIndex] = null;
-
-		UpdateBodygroups();
-
-		return true;
-	}
-
-	public void MoveItem( int startIndex, int endIndex )
-	{
-		if ( _backpackItems[endIndex] is not null )
-		{
-			// Perform a swap since we are moving the item to an already occupied index.
-			(_backpackItems[startIndex], _backpackItems[endIndex]) =
-				(_backpackItems[endIndex], _backpackItems[startIndex]);
-		}
-		else
-		{
-			_backpackItems[endIndex] = _backpackItems[startIndex];
-			RemoveItem( startIndex );
-		}
-	}
-
-	public void MoveItem( EquipSlot startIndex, int endIndex )
-	{
-		if ( _backpackItems[endIndex] is not null )
-		{
-			// Perform a swap since we are moving the item to an already occupied index.
-			(_equippedItems[(int)startIndex], _backpackItems[endIndex]) =
-				(_backpackItems[endIndex], _equippedItems[(int)startIndex]);
-		}
-		else
-		{
-			_backpackItems[endIndex] = _equippedItems[(int)startIndex];
-			RemoveItem( startIndex );
-		}
-	}
-
-	public void MoveItem( int startIndex, EquipSlot endIndex )
-	{
-		if ( _equippedItems[(int)endIndex] is not null )
-		{
-			// Perform a swap since we are moving the item to an already occupied index.
-			(_backpackItems[startIndex], _equippedItems[(int)endIndex]) =
-				(_equippedItems[(int)endIndex], _backpackItems[startIndex]);
-		}
-		else
-		{
-			_equippedItems[(int)endIndex] = _backpackItems[startIndex];
-			RemoveItem( startIndex );
-		}
-	}
-
-	public void MoveItem( EquipSlot startIndex, EquipSlot endIndex )
-	{
-		if ( _equippedItems[(int)endIndex] is not null )
-		{
-			// Perform a swap since we are moving the item to an already occupied index.
-			(_equippedItems[(int)startIndex], _equippedItems[(int)endIndex]) =
-				(_equippedItems[(int)endIndex], _equippedItems[(int)startIndex]);
-		}
-		else
-		{
-			_equippedItems[(int)endIndex] = _equippedItems[(int)startIndex];
-			RemoveItem( startIndex );
-		}
-	}
-
-	public int GetTotalWeightInGrams()
-	{
-		return _backpackItems.Sum( i => i?.WeightInGrams ?? 0 ) + _equippedItems.Sum( i => i?.WeightInGrams ?? 0 );
-	}
-
-	public ItemComponent RemoveItem( int index )
-	{
-		var item = _backpackItems.ElementAtOrDefault( index );
-		if ( item is null )
-			return null;
-
-		_backpackItems[index] = null;
-		return item;
-	}
-
-	public ItemComponent RemoveItem( EquipSlot index )
-	{
-		var item = _equippedItems.ElementAtOrDefault( (int)index );
-		if ( item is null )
-			return null;
-
-		_equippedItems[(int)index] = null;
-		return item;
-	}
 
 	[ConCmd]
 	public static void UnEquip( int index )

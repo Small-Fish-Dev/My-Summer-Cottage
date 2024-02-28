@@ -6,7 +6,6 @@ public class ItemComponent : Component
 	[Property] public string Name { get; set; }
 	[Property] public string Description { get; set; }
 	[Property] public int WeightInGrams { get; set; }
-	[Property] public bool Holdable { get; set; }
 
 	public string Prefab { get; private set; }
 	public Texture IconTexture => Texture.Load( FileSystem.Mounted, Icon.Path );
@@ -15,10 +14,10 @@ public class ItemComponent : Component
 		=> obj.Components.Get<ItemComponent>();
 
 	[Sync]
-	public bool DrawingEnabled
+	public bool InBackpack
 	{
-		get => GameObject.Enabled;
-		set => GameObject.Enabled = value;
+		get => !GameObject.Enabled;
+		set => GameObject.Enabled = !value;
 	}
 
 	protected override void OnAwake()
@@ -43,7 +42,7 @@ public class ItemComponent : Component
 			Action = ( Player interactor, GameObject obj ) => interactor.Inventory.GiveItem( this ),
 			Keybind = "use",
 			Description = "Pickup",
-			Disabled = () => !DrawingEnabled,
+			Disabled = () => InBackpack,
 		} );
 	}
 
@@ -53,6 +52,6 @@ public class ItemComponent : Component
 			return;
 
 		var inventory = Player.Local.Inventory;
-		inventory?.RemoveItem( this );
+		inventory?.ClearItem( this );
 	}
 }
