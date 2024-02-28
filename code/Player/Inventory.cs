@@ -177,10 +177,24 @@ public class Inventory : Component
 		return true;
 	}
 
+	/// <summary>
+	/// Bypasses any restrictions and sets the item at the given index. Do not use this for regular inventory usage.
+	/// </summary>
 	public void SetItem( ItemComponent item, int index )
 	{
 		SetOwner( item );
 		GiveBackpackItem( item, index );
+	}
+
+	/// <summary>
+	/// Bypasses any restrictions and clears the item. Do not use this for regular inventory usage.
+	/// </summary>
+	public void ClearItem( ItemComponent item )
+	{
+		if ( _backpackItems.Contains( item ) )
+			_backpackItems[_backpackItems.IndexOf( item )] = null;
+		else if ( _equippedItems.Contains( item ) )
+			_equippedItems[_equippedItems.IndexOf( item )] = null;
 	}
 
 	public int GetTotalWeightInGrams()

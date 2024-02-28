@@ -52,7 +52,6 @@ public class ItemComponent : Component
 			return;
 
 		var inventory = Player.Local.Inventory;
-		// TODO: Remove from inventory.
-		// inventory?.RemoveItem( this );
+		inventory?.ClearItem( this );
 	}
 }
