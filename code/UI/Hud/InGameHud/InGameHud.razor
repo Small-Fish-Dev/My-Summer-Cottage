@@ -4,10 +4,11 @@
 
 @* Anything that is always active and displayed to the player when ingame. *@
 <root>
+	<InteractionHint class="hold-hints" FromHold=@true />
 	<InteractionHint />
+
 	<Compass GameTimeManager="@Hud.Instance.GameTimeManager" />
 	<Date GameTimeManager="@Hud.Instance.GameTimeManager" />
 	<PrimaryTask />
 	<Crosshair />
-	<InteractionHint class="hold-hints" FromHold=@true />
 </root>

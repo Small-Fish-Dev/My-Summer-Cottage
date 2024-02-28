@@ -6,6 +6,12 @@ public sealed class BeerCrate : Component
 	public const int Rows = 4;
 
 	/// <summary>
+	/// The beer we are giving the player when they interact.
+	/// </summary>
+	[Property]
+	public GameObject Beer { get; set; }
+
+	/// <summary>
 	/// The amount of beers still in the crate.
 	/// </summary>
 	[Sync, Property, Range( 0, 24, 1 ), TargetSave]
@@ -57,7 +63,6 @@ public sealed class BeerCrate : Component
 	protected override void OnStart()
 	{
 		renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
-
 		BeerCountChanged( 0, Count );
 		UpdateName();
 
@@ -69,12 +74,52 @@ public sealed class BeerCrate : Component
 			Identifier = "beer_crate.take",
 			Action = ( Player interactor, GameObject obj ) =>
 			{
+				var inventory = interactor.Inventory;
+				if ( inventory == null ) 
+					return;
+
+				GameObject beer;
+				if ( inventory.EquippedItems[(int)EquipSlot.Hand] != null )
+				{
+					if ( !inventory.HasSpace() )
+						return;
+
+					beer = Beer.Clone();
+					beer.Enabled = true;
+					beer.BreakFromPrefab();
+					inventory.GiveItem( beer );
+					Count--;
+
+					return;
+				}
+
+				beer = Beer.Clone();
+				beer.BreakFromPrefab();
+				inventory.TryEquip( beer );
 				Count--;
 			},
 			Keybind = "use2",
 			DynamicText = () => $"Take a beer",
 			Disabled = () => Count <= 0,
 		} );
+	}
+
+	protected override void OnEnabled()
+	{
+		BeerCountChanged( 0, Count );
+		UpdateName();
+	}
+
+	protected override void OnDisabled()
+	{
+		foreach ( var (index, beer) in beers )
+			if ( beer.IsValid() )
+			{
+				renderer?.SceneObject?.RemoveChild( beer );
+				beer.Delete();
+			}
+
+		beers.Clear();
 	}
 
 	// Handle the visual beers.

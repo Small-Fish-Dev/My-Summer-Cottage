@@ -26,6 +26,13 @@ public class Inventory : Component
 		=> (item is ItemEquipment equipment && equipment.Equipped ? _equippedItems : _backpackItems).IndexOf( item );
 
 	/// <summary>
+	/// Returns true if the backpack has any free slots.
+	/// </summary>
+	/// <returns></returns>
+	public bool HasSpace()
+		=> _backpackItems.IndexOf( null ) != -1;
+
+	/// <summary>
 	/// Item is given to the inventory system if they have free slots.
 	/// </summary>
 	public bool GiveItem( ItemComponent item )
@@ -208,6 +215,24 @@ public class Inventory : Component
 			_backpackItems[_backpackItems.IndexOf( item )] = null;
 		else if ( _equippedItems.Contains( item ) )
 			_equippedItems[_equippedItems.IndexOf( item )] = null;
+	}
+
+	/// <summary>
+	/// The item is equipped from the world if possible.
+	/// </summary>
+	public bool TryEquip( ItemComponent item )
+	{
+		if ( item is not ItemEquipment equipment )
+			return false;
+
+		var slotIndex = (int)equipment.Slot;
+		if ( _equippedItems[slotIndex] is not null )
+			return false;
+
+		SetOwner( equipment );
+		GiveEquipmentItem( equipment );
+
+		return true;
 	}
 
 	public int GetTotalWeightInGrams()
