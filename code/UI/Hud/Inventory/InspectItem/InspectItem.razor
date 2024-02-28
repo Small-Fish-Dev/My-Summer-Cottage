@@ -57,7 +57,7 @@
 		if (_cameraTransform.Position == Vector3.Zero)
 		{
 			_scenePanel.Camera.FitModel(_model);
-			_distance = _scenePanel.Camera.Position.Distance(_model.Bounds.Center);
+			_distance = _scenePanel.Camera.Position.Distance(_model.Model.Bounds.Center);
 			_cameraTransform = new Transform(_scenePanel.Camera.Position, _scenePanel.Camera.Rotation);
 		}
 	}
@@ -77,8 +77,8 @@
 
 		if (_isDragging)
 		{
-			_cameraTransform = _cameraTransform.RotateAround(_model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Up, -Mouse.Delta.x * 0.20f));
-			_cameraTransform = _cameraTransform.RotateAround(_model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Right, -Mouse.Delta.y * 0.20f));
+			_cameraTransform = _cameraTransform.RotateAround(_model.Model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Up, -Mouse.Delta.x * 0.20f));
+			_cameraTransform = _cameraTransform.RotateAround(_model.Model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Right, -Mouse.Delta.y * 0.20f));
 		}
 
 		_scenePanel.Camera.Position = Vector3.Lerp(_scenePanel.Camera.Position, _cameraTransform.Position, RealTime.Delta * 40.0f);
