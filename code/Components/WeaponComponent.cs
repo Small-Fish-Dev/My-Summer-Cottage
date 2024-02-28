@@ -10,7 +10,7 @@ public sealed class WeaponComponent : Component
 		{
 			HoldOnly = true,
 			Description = "Fire",
-			Keybind = "attack1",
+			Keybind = "mouse1",
 			Action = ( Player shooter, GameObject obj ) => Shoot( shooter ),
 		} );
 	}

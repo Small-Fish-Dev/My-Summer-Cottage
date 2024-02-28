@@ -19,7 +19,10 @@
 	<ContextMenuOption ]
 		Description="Drop"
 		ImagePath="ui/hud/inv_actions_drop.png" 
-		onclick=@(() => Player.Local.Inventory.DropItem(_item)) 
+		onclick=@(() => {
+			Player.Local.Inventory.DropItem(_item);
+			Inventory.Instance?.OnChanged();
+		}) 
 	/>
 </root>
 
@@ -41,6 +44,11 @@
 		Hud.Instance.Panel.AddChild(_instance);
 	}
 
+	public static bool IsOpen()
+	{
+		return _instance != null && _instance.IsValid();
+	}
+
 	public static void Close()
 	{
 		_instance?.Delete();
@@ -58,6 +66,8 @@
 			Player.Local.Inventory.UnequipItem(equipment);
 		else
 			Player.Local.Inventory.EquipItem(equipment);
+
+		Inventory.Instance?.OnChanged();
 	}
 
 	public override void Tick()
@@ -66,7 +76,9 @@
 		var boxRect = (Box.Rect * ScaleFromScreen).Grow( 5f );
 
 		if ( !boxRect.IsInside( mousePosition ) )
-			Delete();
+			Close();
+		if (FullScreenManager.Instance.ActivePanel != FullScreenManager.FullScreenPanel.Inventory)
+			Close();
 	}
 
 	protected override int BuildHash()

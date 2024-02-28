@@ -24,24 +24,35 @@ Inventory {
 
     .items {
         flex-wrap: wrap;
+        width: 700px;
     }
 
-    .active-weight {
-        color: $orange;
-    }
-
-    .max {
-        color: $gray;
+    .total-weight {
+        font-family: HabboExtended;
+        text-shadow: $text-shadow-sm;
+        font-size: 20px; 
+        gap: 10px;
+        
+        .active-weight {
+            color: $orange;
+        }
+    
+        .max {
+            color: $gray;
+        }
     }
 
     .level {
+        text-shadow: $text-shadow-sm;
         font-size: 30px;
         margin-top: 10px;
         font-family: 'BasicHandwriting';
     }
 
     .exp-text {
-        font-size: 28px;
+        font-family: HabboExtended;
+        text-shadow: $text-shadow-sm;
+        font-size: 20px;
         gap: 10px;
     }
 
@@ -56,6 +67,15 @@ Inventory {
             height: 100%;
             background-color: white;
         }
+    }
+
+    .inputs {
+        position: absolute;
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-end;
+        bottom: -5px;
+        right: 10px;
     }
 
     img {

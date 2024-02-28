@@ -15,24 +15,25 @@ SelectedTask {
     .subtitle {
         font-size: 22px;
         letter-spacing: 1px;
-        font-family: battlenetcopy;
+        font-family: HabboExtended;
         margin-bottom: 3px;
     }
 
     .pinned {
         font-size: 20px;
         letter-spacing: 3px;
-        font-family: battlenetcopy;
+        font-family: HabboExtended;
         color: $gray;
     }
 
     .completed {
         background-color: $green;
-        top: -5px;
         margin-left: 40px;
         padding: 2px 15px;
         color: black;
-        font-size: 24px;
+        font-size: 17px;
+        font-weight: bold;
+        font-family: HabboExtended;
     }
 
     .divider {
@@ -46,6 +47,7 @@ SelectedTask {
         padding: 10px 40px;
         flex-direction: column;
         overflow-y: scroll;
+        font-family: HabboExtended;
     }
 
     .requirement {
@@ -56,7 +58,7 @@ SelectedTask {
             width: 20px;
             height: 20px;
             border: 2px white;
-            margin-top: 4px;
+            bottom: 2px;
             justify-content: center;
             align-items: center;
             margin-right: 8px;
@@ -71,7 +73,7 @@ SelectedTask {
         }
 
         .requirement-details {
-            font-size: 28px;
+            font-size: 18px;
         }
     }
 }

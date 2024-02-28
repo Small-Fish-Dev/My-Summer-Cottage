@@ -1,8 +1,11 @@
+@import "/UI/Style.scss";
+
 CharacterRenderer {
     height: 100%;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    z-index: -5;
 
     .scene {
         height: 60%;
@@ -13,8 +16,9 @@ CharacterRenderer {
     .name {
         gap: 10px;
         font-family: BasicHandwriting;
-        font-size: 22px;
+        font-size: 30px;
         flex-direction: column;
         text-align: center;
+        text-shadow: $text-shadow-sm;
     }
 }

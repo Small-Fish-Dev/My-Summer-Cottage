@@ -12,8 +12,14 @@
 	<ScenePanel class="scene" @ref=_scenePanel />
 	<div class="text-placement">
 		<div class="text-container">
-			<text class="title">@_item.Name</text>
-			<text class="description">@_item.Description</text>
+			<div style="width: 100%; justify-content: space-between; @(!HasDescription ? "align-items: center;" : "")">
+				<text class="title">@_item.Name</text>
+				<text class="weight">@_item.WeightInGrams.ToKilograms() kg</text>
+			</div>
+			@if (HasDescription)
+			{
+				<div class="description">@_item.Description</div>
+			}
 		</div>
 	</div>
 </root>
@@ -31,6 +37,8 @@
 	private Transform _cameraTransform;
 	private float _distance;
 
+	private bool HasDescription => !String.IsNullOrEmpty(_item.Description);
+
 	public InspectItem(ItemComponent item)
 	{
 		_instance?.Delete();
@@ -45,15 +53,18 @@
 
 		_sceneWorld ??= new SceneWorld();
 		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
-        _sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
-		_model ??= new SceneModel( _sceneWorld, _item.Components.Get<ModelRenderer>(FindMode.EverythingInSelfAndDescendants).Model, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)) );
+		_sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
+
+		var renderer = _item.Components.Get<ModelRenderer>(FindMode.EverythingInSelfAndDescendants);
+		_model ??= new SceneModel( _sceneWorld, renderer.Model, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)) );
+		_model.SetMaterialGroup( renderer.MaterialGroup );
 		_scenePanel.World = _sceneWorld;
 		_scenePanel.Camera.FieldOfView = 120f;
 		
 		if (_cameraTransform.Position == Vector3.Zero)
 		{
 			_scenePanel.Camera.FitModel(_model);
-			_distance = _scenePanel.Camera.Position.Distance(_model.Bounds.Center);
+			_distance = _scenePanel.Camera.Position.Distance(_model.Model.Bounds.Center);
 			_cameraTransform = new Transform(_scenePanel.Camera.Position, _scenePanel.Camera.Rotation);
 		}
 	}
@@ -73,8 +84,8 @@
 
 		if (_isDragging)
 		{
-			_cameraTransform = _cameraTransform.RotateAround(_model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Up, -Mouse.Delta.x * 0.20f));
-			_cameraTransform = _cameraTransform.RotateAround(_model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Right, -Mouse.Delta.y * 0.20f));
+			_cameraTransform = _cameraTransform.RotateAround(_model.Model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Up, -Mouse.Delta.x * 0.20f));
+			_cameraTransform = _cameraTransform.RotateAround(_model.Model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Right, -Mouse.Delta.y * 0.20f));
 		}
 
 		_scenePanel.Camera.Position = Vector3.Lerp(_scenePanel.Camera.Position, _cameraTransform.Position, RealTime.Delta * 40.0f);

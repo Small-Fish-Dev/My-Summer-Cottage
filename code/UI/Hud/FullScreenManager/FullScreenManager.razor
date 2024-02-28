@@ -24,21 +24,21 @@
 		</div>
 	}
 	else
-		switch ( _activePanel )
+		switch ( ActivePanel )
 		{
-			case ActivePanel.InGameHud:
+			case FullScreenPanel.InGameHud:
 				<InGameHud/>
 				break;
-			case ActivePanel.Inventory:
+			case FullScreenPanel.Inventory:
 				<Inventory/>
 				break;
-			case ActivePanel.TaskLog:
+			case FullScreenPanel.TaskLog:
 				<TaskLog/>
 				break;
-			case ActivePanel.FishLog:
+			case FullScreenPanel.FishLog:
 				<FishLog/>
 				break;
-			case ActivePanel.PauseMenu:
+			case FullScreenPanel.PauseMenu:
 				<PauseMenu/>
 				break;
 			default:
@@ -47,9 +47,9 @@
 </root>
 
 @code {
-	public static FullScreenManager Instance { get; set; }
+	public static FullScreenManager Instance { get; private set; }
 
-	public enum ActivePanel
+	public enum FullScreenPanel
 	{
 		InGameHud,
 		Inventory,
@@ -58,41 +58,40 @@
 		PauseMenu,
 	}
 
-	private ActivePanel _activePanel = ActivePanel.InGameHud;
+	public FullScreenPanel ActivePanel { get; private set; } = FullScreenPanel.InGameHud;
 
 	public FullScreenManager()
 	{
 		Instance = this;
 	}
 
-	public void Display( ActivePanel panel )
+	public void Display( FullScreenPanel panel )
 	{
-		_activePanel = panel;
+		ActivePanel = panel;
 	}
 
 	public override void Tick()
 	{
 		if ( Input.EscapePressed )
-			Toggle( ActivePanel.PauseMenu );
+			Toggle( FullScreenPanel.PauseMenu );
 
 		if ( Input.Pressed( InputAction.Inventory ) )
-			Toggle( ActivePanel.Inventory );
+			Toggle( FullScreenPanel.Inventory );
 
 		if ( Input.Pressed( InputAction.Tasks ) )
-			Toggle( ActivePanel.TaskLog );
+			Toggle( FullScreenPanel.TaskLog );
 	}
 
-	private void Toggle( ActivePanel panel )
+	private void Toggle( FullScreenPanel panel )
 	{
-		if ( _activePanel == panel )
-			_activePanel = ActivePanel.InGameHud;
+		if ( ActivePanel == panel )
+			ActivePanel = FullScreenPanel.InGameHud;
 		else
-			_activePanel = panel;
+			ActivePanel = panel;
 	}
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( Hud.Instance.GameTimeManager.IsDayOver, _activePanel.GetHashCode() );
+		return HashCode.Combine( Hud.Instance.GameTimeManager.IsDayOver, ActivePanel.GetHashCode() );
 	}
-
 }

@@ -1,18 +1,23 @@
 @namespace Sauna.UI
 @attribute [StyleSheet]
-@inherits Popup
+@inherits Panel
 
 <root>
-	<img src=@_item.IconTexture.ResourcePath class="item-icon" />
 	<div class="item-details">
-		<text class="item-name">@_item.Name</text>
-		<text class="item-description">@_item.Description</text>
+		<div class="top-row" style="@(!HasDescription ? "align-items: center;" : "")">
+			<text class="item-name">@_item.Name</text>
+			<text class="item-weight">@_item.WeightInGrams.ToKilograms() kg</text>
+		</div>
+		@if (HasDescription)
+		{
+			<div class="item-description">@_item.Description</div>
+		}
 	</div>
-	<div class="footer">RMB to view actions</div>
 </root>
 
 @code {
 	public static HoverPanel Instance { get; private set; }
+	private bool HasDescription => !String.IsNullOrEmpty(_item.Description);
 	private ItemComponent _item;
 
 	public static void Open(ItemComponent item)
@@ -32,5 +37,30 @@
 	{
 		Instance?.Delete();
 		Instance = null;
+	}
+
+	public override void OnLayout( ref Rect layoutRect )
+	{
+		var padding = 10;
+		var h = Screen.Height - padding;
+		var w = Screen.Width - padding;
+
+		if ( layoutRect.Bottom > h )
+		{
+			layoutRect.Top -= layoutRect.Bottom - h;
+			layoutRect.Bottom -= layoutRect.Bottom - h;
+		}
+
+		if ( layoutRect.Right > w )
+		{
+			layoutRect.Left -= layoutRect.Right - w;
+			layoutRect.Right -= layoutRect.Right - w;
+		}
+	}
+
+	public override void Tick()
+	{
+		if (FullScreenManager.Instance.ActivePanel != FullScreenManager.FullScreenPanel.Inventory)
+			Close();
 	}
 }

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "dce16c7a-3255-4809-a107-8ce026101fc4",
+    "Id": "ff2c4893-e694-4754-b792-74c5d7910e76",
     "Name": "rifle",
     "Enabled": true,
     "Components": [
@@ -8,9 +8,9 @@
         "__type": "WeaponComponent"
       },
       {
-        "__type": "ItemComponent",
+        "__type": "ItemEquipment",
         "Description": "Wow, this looks like it packs a punch.",
-        "Holdable": true,
+        "HideBodygroups": "None",
         "Icon": {
           "Model": "models/rifle/m38.vmdl",
           "MaterialGroup": "",
@@ -40,6 +40,16 @@
         "Model": "models/rifle/m38.vmdl",
         "Static": false,
         "Surface": null
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
       }
     ],
     "Children": []
