@@ -239,29 +239,38 @@ public class TaskMaster : Component
 			ResetTask( foundTask );
 	}
 
+	[Broadcast( NetPermission.Anyone )]
+	internal static void InternalResetTask( SaunaTask taskToReset, Guid playerId )
+	{
+		var player = Player.GetByID( playerId );
+
+		if ( Player.Local == player )
+			ResetTask( taskToReset );
+	}
+
+	[Broadcast( NetPermission.Anyone )]
+	internal static void InternalResetTask( string filePath, Guid playerId )
+	{
+		var player = Player.GetByID( playerId );
+
+		if ( Player.Local == player )
+			if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
+				ResetTask( foundTask );
+	}
+
 	/// <summary>
 	/// Resets the found task for the targetted player, doesn't work if the task doesn't exists
 	/// </summary>
 	/// <param name="taskToReset"></param>
 	/// <param name="player"></param>
-	[Broadcast( NetPermission.Anyone )]
-	public static void ResetTask( SaunaTask taskToReset, Player player )
-	{
-		if ( Player.Local == player )
-			ResetTask( taskToReset );
-	}
+	public static void ResetTask( SaunaTask taskToReset, Player player ) => InternalResetTask( taskToReset, player.ConnectionID );
 
 	/// <summary>
 	/// Resets the found task for the targetted player, doesn't work if the task doesn't exists
 	/// </summary>
 	/// <param name="filePath"></param>
 	/// <param name="player"></param>
-	[Broadcast( NetPermission.Anyone )]
-	public static void ResetTask( string filePath, Player player )
-	{
-		if ( Player.Local == player )
-			ResetTask( filePath );
-	}
+	public static void ResetTask( string filePath, Player player ) => InternalResetTask( filePath, player.ConnectionID );
 
 	/// <summary>
 	/// Resets the task for everyone in the server
