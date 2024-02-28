@@ -56,13 +56,14 @@ public sealed class BeerCrate : Component
 	private Dictionary<int, SceneObject> beers = new();
 	private Model beerModel = Model.Load( "models/beer_bottle/beer.vmdl" );
 	private SkinnedModelRenderer renderer;
+	private ItemComponent itemComponent;
 
-	private void UpdateName()
-		=> GameObject.Name = $"Beer Crate ({Count}/{Columns * Rows})";
+	private void UpdateName() => itemComponent.Name = $"Beer Crate ({Count}/{Columns * Rows})";
 
 	protected override void OnStart()
 	{
 		renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+		itemComponent = Components.Get<ItemComponent>();
 		BeerCountChanged( 0, Count );
 		UpdateName();
 
