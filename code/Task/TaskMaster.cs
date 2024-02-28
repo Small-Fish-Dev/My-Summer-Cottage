@@ -1,3 +1,5 @@
+using Sandbox;
+
 namespace Sauna;
 
 [Icon( "calendar_month" )]
@@ -174,17 +176,32 @@ public class TaskMaster : Component
 			RemoveTask( foundTask );
 	}
 
+	internal static void InternalRemoveTask( SaunaTask taskToRemove, Guid playerId )
+	{
+		var player = Player.GetByID( playerId );
+
+		if ( player != null )
+			if ( Player.Local == player )
+				RemoveTask( taskToRemove );
+	}
+
+	internal static void InternalRemoveTask( string filePath, Guid playerId )
+	{
+		var player = Player.GetByID( playerId );
+
+		if ( player != null )
+			if ( Player.Local == player )
+				if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
+					RemoveTask( foundTask );
+	}
+
 	/// <summary>
 	/// Remove the task from the targetted player, doesn't work if the task doesn't exists
 	/// </summary>
 	/// <param name="taskToRemove"></param>
 	/// <param name="player"></param>
 	[Broadcast( NetPermission.Anyone )]
-	public static void RemoveTask( SaunaTask taskToRemove, Player player )
-	{
-		if ( Player.Local == player )
-			RemoveTask( taskToRemove );
-	}
+	public static void RemoveTask( SaunaTask taskToRemove, Player player ) => InternalRemoveTask( taskToRemove, player.ConnectionID );
 
 	/// <summary>
 	/// Remove the task from the targetted player, doesn't work if the task doesn't exists
@@ -192,11 +209,7 @@ public class TaskMaster : Component
 	/// <param name="filePath"></param>
 	/// <param name="player"></param>
 	[Broadcast( NetPermission.Anyone )]
-	public static void RemoveTask( string filePath, Player player )
-	{
-		if ( Player.Local == player )
-			RemoveTask( filePath );
-	}
+	public static void RemoveTask( string filePath, Player player ) => InternalRemoveTask( filePath, player.ConnectionID );
 
 	/// <summary>
 	/// Remove the task from everyone in the server
@@ -244,8 +257,9 @@ public class TaskMaster : Component
 	{
 		var player = Player.GetByID( playerId );
 
-		if ( Player.Local == player )
-			ResetTask( taskToReset );
+		if ( player != null )
+			if ( Player.Local == player )
+				ResetTask( taskToReset );
 	}
 
 	[Broadcast( NetPermission.Anyone )]
@@ -253,9 +267,10 @@ public class TaskMaster : Component
 	{
 		var player = Player.GetByID( playerId );
 
-		if ( Player.Local == player )
-			if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
-				ResetTask( foundTask );
+		if ( player != null )
+			if ( Player.Local == player )
+				if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
+					ResetTask( foundTask );
 	}
 
 	/// <summary>
