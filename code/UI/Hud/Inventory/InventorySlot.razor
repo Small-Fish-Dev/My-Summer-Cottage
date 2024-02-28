@@ -102,33 +102,23 @@
 		var fromSlot = this;
 		var inventory = Player.Local.Inventory;
 
-		if ( fromSlot.EquipSlotIndex != null )
+		// From backpack slot.
+		if (fromSlot.BackpackSlotIndex is not null)
 		{
-			// If we're an equip slot...
-			if ( targetSlot.EquipSlotIndex != null && ((Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex) || (Item.Holdable && targetSlot.EquipSlotIndex == EquipSlot.Hand)) )
-			{
-				// and the target is an equip slot:
-				inventory.MoveItem( fromSlot.EquipSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
-			}
-			else if ( targetSlot.BackpackSlotIndex != null )
-			{
-				// and the target is a backpack slot:
-				inventory.MoveItem( fromSlot.EquipSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
-			}
+			// To backpack slot.
+			if (targetSlot.BackpackSlotIndex is not null)
+				inventory.SwapItems(fromSlot.BackpackSlotIndex.Value, targetSlot.BackpackSlotIndex.Value);
+			// To equipment slot.
+			else if (targetSlot.EquipSlotIndex is not null)
+				inventory.SwapItems(fromSlot.BackpackSlotIndex.Value, targetSlot.EquipSlotIndex.Value);
 		}
-		else if ( fromSlot.BackpackSlotIndex != null )
+		
+		// From equipment slot.
+		else if (fromSlot.EquipSlotIndex is not null)
 		{
-			// If we're a backpack slot...
-			if ( targetSlot.EquipSlotIndex != null && ((Item is ItemEquipment equipment && equipment.Slot == targetSlot.EquipSlotIndex) || (Item.Holdable && targetSlot.EquipSlotIndex == EquipSlot.Hand)) )
-			{
-				// and the target is an equip slot:
-				inventory.MoveItem( fromSlot.BackpackSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
-			}
-			else if ( targetSlot.BackpackSlotIndex != null )
-			{
-				// and the target is a backpack slot:
-				inventory.MoveItem( fromSlot.BackpackSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
-			}
+			// To backpack slot.
+			if (targetSlot.BackpackSlotIndex is not null)
+				inventory.SwapItems(fromSlot.EquipSlotIndex.Value, targetSlot.BackpackSlotIndex.Value);
 		}
 
 		// Update both slots
