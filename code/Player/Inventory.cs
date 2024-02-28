@@ -19,17 +19,24 @@ public class Inventory : Component
 		_equippedItems = new List<ItemComponent>( new ItemComponent[Enum.GetNames( typeof( EquipSlot ) ).Length] );
 	}
 
+	public int IndexOf( ItemComponent item, bool inventory = true )
+		=> (inventory ? _backpackItems : _equippedItems ).IndexOf( item );
+
+	public void SetItem( ItemComponent item, int index )
+	{
+		item.GameObject.Network.TakeOwnership();
+		item.DrawingEnabled = false;
+		item.GameObject.Parent = Player.GameObject;
+		_backpackItems[index] = item;
+	}
+
 	public bool GiveItem( ItemComponent item )
 	{
 		var firstFreeSlot = _backpackItems.IndexOf( null );
 		if ( firstFreeSlot == -1 )
 			return false;
 
-		item.GameObject.Network.TakeOwnership();
-		item.DrawingEnabled = false;
-		item.GameObject.Parent = Player.GameObject;
-
-		_backpackItems[firstFreeSlot] = item;
+		SetItem( item, firstFreeSlot );
 		return true;
 	}
 

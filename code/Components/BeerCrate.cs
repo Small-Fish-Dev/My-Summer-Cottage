@@ -1,4 +1,4 @@
-﻿namespace Sauna;
+namespace Sauna;
 
 public sealed class BeerCrate : Component
 {
@@ -8,7 +8,7 @@ public sealed class BeerCrate : Component
 	/// <summary>
 	/// The amount of beers still in the crate.
 	/// </summary>
-	[Sync, Property, Range( 0, 24, 1 )]
+	[Sync, Property, Range( 0, 24, 1 ), TargetSaveAttribute]
 	public int Count
 	{
 		get => _count;
@@ -62,7 +62,7 @@ public sealed class BeerCrate : Component
 		UpdateName();
 
 		// Take a beer.
-		var interactions = Components.Create<Interactions>();
+		var interactions = Components.GetOrCreate<Interactions>();
 
 		interactions.AddInteraction( new Interaction()
 		{
