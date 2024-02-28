@@ -81,4 +81,45 @@ public class TaskMaster : Component
 			}
 		}
 	}
+
+	/// <summary>
+	/// Assign a new task to the local player, doesn't work if the task already exists
+	/// </summary>
+	/// <param name="taskToAssign"></param>
+	public static void AssignNewTask( SaunaTask taskToAssign )
+	{
+		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+
+		if ( taskMaster == null ) return;
+
+		var sameTaskFound = taskMaster.CurrentTasks.Where( x => x.ResourceName == taskToAssign.ResourceName )?.Any() ?? false;
+
+		if ( sameTaskFound ) return; // Bail if we have the same task already
+
+		taskMaster.CurrentTasks.Add( taskToAssign ); // Add the task
+	}
+
+	/// <summary>
+	/// Assign a new task to the local player, doesn't work if the task already exists
+	/// </summary>
+	/// <param name="filePath"></param>
+	public static void AssignNewTask( string filePath )
+	{
+		if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
+			AssignNewTask( foundTask );
+	}
+
+	/// <summary>
+	/// Assign everyone in the server a new task
+	/// </summary>
+	/// <param name="taskToAssign"></param>
+	[Broadcast( NetPermission.Anyone )]
+	public static void AssignEveryoneNewTask( SaunaTask taskToAssign ) => AssignNewTask( taskToAssign );
+
+	/// <summary>
+	/// Assign everyone in the server a new task
+	/// </summary>
+	/// <param name="filePath"></param>
+	[Broadcast( NetPermission.Anyone )]
+	public static void AssignEveryoneNewTask( string filePath ) => AssignNewTask( filePath );
 }
