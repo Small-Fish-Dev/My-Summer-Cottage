@@ -13,7 +13,7 @@
 	}
 
 	<div class="content">
-		<text class="title">@_targetObject.Name</text>
+		<text class="title">@Name</text>
 
 		<div class="interactions">
 			@foreach(var interaction in _interactions)
@@ -40,6 +40,7 @@
 		? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
 		: Player.Local?.TargetedGameObject;
 
+	private string Name => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Name;
 	private bool HasTarget => _targetObject is not null;
 
 	private const float INTERACTION_COOLDOWN = 0.1f;
@@ -130,6 +131,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(HasTarget, _targetObject?.Name, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i), HasPriority(i.Keybind))));
+		return HashCode.Combine(HasTarget, Name, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i), HasPriority(i.Keybind))));
 	}
 }

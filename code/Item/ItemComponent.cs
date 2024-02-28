@@ -2,8 +2,11 @@ namespace Sauna;
 
 public class ItemComponent : Component
 {
+	[Sync]
+	[Property]
+	public string Name { get; set; }
+
 	[Property] public IconSettings Icon { get; set; }
-	[Property] public string Name { get; set; }
 	[Property] public string Description { get; set; }
 	[Property] public int WeightInGrams { get; set; }
 
