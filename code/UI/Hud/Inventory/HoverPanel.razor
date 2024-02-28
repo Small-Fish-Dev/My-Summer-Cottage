@@ -4,20 +4,20 @@
 
 <root>
 	<div class="item-details">
-		<div class="top-row">
+		<div class="top-row" style="@(!HasDescription ? "align-items: center;" : "")">
 			<text class="item-name">@_item.Name</text>
 			<text class="item-weight">@_item.WeightInGrams.ToKilograms() kg</text>
 		</div>
-		@if (!String.IsNullOrEmpty(@_item.Description))
+		@if (HasDescription)
 		{
 			<div class="item-description">@_item.Description</div>
 		}
 	</div>
-	<div class="footer">RMB to view actions</div>
 </root>
 
 @code {
 	public static HoverPanel Instance { get; private set; }
+	private bool HasDescription => !String.IsNullOrEmpty(_item.Description);
 	private ItemComponent _item;
 
 	public static void Open(ItemComponent item)
