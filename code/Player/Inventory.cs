@@ -225,7 +225,7 @@ public class Inventory : Component
 		if ( _equippedItems[slotIndex] is not null )
 			return false;
 
-		equipment.GameObject.Parent = Player.GameObject;
+		SetOwner( equipment );
 		GiveEquipmentItem( equipment );
 
 		return true;
