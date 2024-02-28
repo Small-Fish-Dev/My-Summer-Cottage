@@ -6,7 +6,7 @@
 <root>
 	<div @ref=_container class="container">	
 		<div class="time">@(TimeSpan.FromSeconds( GameTimeManager.InGameSeconds ).ToString( @"hh\:mm" ))</div>
-		<div class="direction">Facing @(Player.Local?.FacedDirection)</div>
+		<div class="direction">@(Player.Local?.FacedDirection)</div>
 		<div @ref=_line class="line" />
 	</div>
 </root>

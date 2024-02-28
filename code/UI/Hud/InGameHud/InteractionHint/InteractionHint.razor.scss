@@ -1,3 +1,5 @@
+@import "/UI/Style.scss";
+
 InteractionHint {
     flex-direction: row;
     position: absolute;
@@ -44,12 +46,13 @@ InteractionHint {
     .interaction {
         flex-direction: row;
         align-items: center;
-        font-size: 28px;
-        font-family: battlenetcopy;
+        font-size: 20px;
+        font-family: HabboExtended;
         margin-left: 10px;
 
         .description {
-            text-shadow: 2px 2px 0px black;
+            text-shadow: $text-shadow-sm;
+            margin-top: 5px;
         }
 
         .hint {

@@ -20,7 +20,7 @@
 		<div class="task-additional-details">
 			<div style="flex-direction: column; margin-bottom: 40px; flex-shrink: 0;">
 				<text class="title">Task Details:</text>
-				<text style="font-size: 26px;">
+				<text style="font-size: 20px;">
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget semper ante. Suspendisse tincidunt eros eu volutpat congue. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eget posuere augue. Donec sit amet scelerisque sapien, vel feugiat nulla. Pellentesque gravida eget ligula commodo fringilla. Ut at arcu ut dui convallis faucibus vitae sed ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam maximus vestibulum nisl, ut imperdiet felis efficitur ut. Donec placerat nisl eget efficitur pellentesque. Aenean eleifend volutpat egestas.
 				</text>
 			</div>
@@ -43,14 +43,14 @@
 	else
 	{
 		<div style="width: 100%; height: 100%; justify-content: center; align-items: center;">
-			<text style="font-size: 50px;">No task selected</text>
+			<text style="font-size: 28px; font-family: HabboExtended;">No task selected</text>
 		</div>
 	}
 </root>
 
 @code {
 	// TODO: Remove at some point and replace with proper data.
-	public bool HasTask = false;
+	public bool HasTask = true;
 
 	public List<string> Requirements = new List<string>
 	{
