@@ -9,6 +9,7 @@ public class ItemComponent : Component
 
 	public string Prefab { get; private set; }
 	public Texture IconTexture => Texture.Load( FileSystem.Mounted, Icon.Path );
+	private ItemEquipment AsEquipment => this as ItemEquipment;
 
 	public static implicit operator ItemComponent( GameObject obj )
 		=> obj.Components.Get<ItemComponent>();
@@ -42,7 +43,7 @@ public class ItemComponent : Component
 			Action = ( Player interactor, GameObject obj ) => interactor.Inventory.GiveItem( this ),
 			Keybind = "use",
 			Description = "Pickup",
-			Disabled = () => InBackpack,
+			Disabled = () => InBackpack || (AsEquipment?.Equipped ?? false),
 		} );
 	}
 
