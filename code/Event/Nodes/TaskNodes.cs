@@ -52,4 +52,28 @@ public static partial class TaskNodes
 	{
 		TaskMaster.RemoveEveryoneTask( taskToRemove );
 	}
+
+	/// <summary>
+	/// Reset a task on the player's current tasks
+	/// </summary>
+	/// <param name="taskToReset"></param>
+	/// <param name="player"></param>
+	[ActionGraphNode( "event.resettaskon" )]
+	[Title( "Reset Task On" ), Group( "Events" ), Icon( "event_repeat" )]
+	public static void ResetTaskOn( SaunaTask taskToReset, Player player )
+	{
+		if ( player != null )
+			TaskMaster.ResetTask( taskToReset, player );
+	}
+
+	/// <summary>
+	/// Reset a task on all of the players current tasks
+	/// </summary>
+	/// <param name="taskToReset"></param>
+	[ActionGraphNode( "event.resettaskoneveryone" )]
+	[Title( "Reset Task On Everyone" ), Group( "Events" ), Icon( "event_repeat" )]
+	public static void ResetTaskOnEveryone( SaunaTask taskToReset )
+	{
+		TaskMaster.ResetEveryoneTask( taskToReset );
+	}
 }
