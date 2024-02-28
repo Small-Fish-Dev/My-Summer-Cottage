@@ -36,6 +36,7 @@ public class Inventory : Component
 
 		SetOwner( item );
 		GiveBackpackItem( item, firstFreeSlot );
+		TaskMaster.SubmitTriggerSignal( $"item.received.{item.Name}", Player );
 
 		return true;
 	}
@@ -64,6 +65,7 @@ public class Inventory : Component
 		}
 
 		GiveEquipmentItem( equipment );
+		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
 
 		return true;
 	}
@@ -82,6 +84,7 @@ public class Inventory : Component
 
 		RemoveEquipmentItem( equipment );
 		GiveBackpackItem( equipment, firstFreeSlot );
+		TaskMaster.SubmitTriggerSignal( $"item.unequipped.{item.Name}", Player );
 
 		return true;
 	}
@@ -103,6 +106,7 @@ public class Inventory : Component
 		}
 
 		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
+		TaskMaster.SubmitTriggerSignal( $"item.dropped.{item.Name}", Player );
 
 		item.GameObject.Parent = null;
 		item.GameObject.Transform.Position = Player.ViewRay.Position + Player.ViewRay.Forward * 2f;
