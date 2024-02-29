@@ -96,6 +96,9 @@ PS
 	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >;	
 	CreateTexture2DWithoutSampler( g_tGrass ) < Channel( RGB, Box( BillboardColor ), Srgb ); Channel( A, Box( Opacity ), Linear ); OutputFormat( BC7 ); SrgbRead( true ); >;
 
+	TextureAttribute(LightSim_DiffuseAlbedoTexture, g_tColor);
+	TextureAttribute(RepresentativeTexture, g_tColor);
+
 	#if S_ALPHA_TEST
 		TextureAttribute( LightSim_Opacity_A, g_tGrass );
 	#endif
