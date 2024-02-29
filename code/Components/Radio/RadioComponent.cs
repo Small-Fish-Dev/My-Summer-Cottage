@@ -26,9 +26,7 @@ public partial class RadioComponent : Component
 
 			if ( !_on ) // Close the player.
 			{
-				_player?.Stop();
-				_player = null;
-
+				StopMusic();
 				return;
 			}
 
@@ -95,7 +93,7 @@ public partial class RadioComponent : Component
 
 	private void StartMusic()
 	{
-		_player?.Stop();
+		StopMusic();
 		_player = MusicPlayer.PlayUrl( Channel.URL );
 		_player.Repeat = true;
 		_player.ListenLocal = false;
@@ -108,10 +106,20 @@ public partial class RadioComponent : Component
 		Title = Title.RemoveDiacritics();
 	}
 
-	protected override void OnDestroy()
+	private void StopMusic()
 	{
 		_player?.Stop();
 		_player = null;
+	}
+
+	protected override void OnDestroy()
+	{
+		StopMusic();
+	}
+
+	protected override void OnDisabled()
+	{
+		StopMusic();
 	}
 
 	protected override void OnUpdate()
@@ -121,28 +129,4 @@ public partial class RadioComponent : Component
 
 		_player.Position = Transform.Position;
 	}
-	/*MusicPlayer _player;
-	bool _isPlaying;
-
-	[Sync, Property]
-	public bool IsPlaying
-	{
-		get => _isPlaying;
-		set
-		{
-			_isPlaying = value;
-			_player?.Stop();
-			if ( _isPlaying )
-				StartPlaying();
-		}
-	}
-
-	private void StartPlaying()
-	{
-		_player = MusicPlayer.PlayUrl( "https://yleradiolive.akamaized.net/hls/live/2027672/in-YleRadio1/256/variant.m3u8" );
-		_player.Position = Transform.Position;
-		_player.Repeat = true;
-		_player.ListenLocal = false;
-		_player.Volume = 0.05f;
-	}*/
 }

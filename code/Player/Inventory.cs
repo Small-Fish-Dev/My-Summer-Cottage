@@ -29,7 +29,7 @@ public class Inventory : Component
 	/// Returns true if the backpack has any free slots.
 	/// </summary>
 	/// <returns></returns>
-	public bool HasSpace()
+	public bool HasSpaceInBackpack()
 		=> _backpackItems.IndexOf( null ) != -1;
 
 	/// <summary>

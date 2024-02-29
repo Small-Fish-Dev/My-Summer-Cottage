@@ -197,14 +197,11 @@ partial class Player
 					continue;
 
 				var o = SceneUtility.GetPrefabScene( prefab ).Clone();
-				//o.Enabled = true;
 				var item = o.Components.Get<ItemComponent>();
 				if ( item == null )
 					continue;
 
 				player.Inventory.SetItem( item, data.Index );
-				o.NetworkSpawn();
-				o.Enabled = false;
 
 				// Read data kvp.
 				var components = o.Components.GetAll();

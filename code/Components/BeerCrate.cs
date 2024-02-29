@@ -56,13 +56,14 @@ public sealed class BeerCrate : Component
 	private Dictionary<int, SceneObject> beers = new();
 	private Model beerModel = Model.Load( "models/beer_bottle/beer.vmdl" );
 	private SkinnedModelRenderer renderer;
+	private ItemComponent itemComponent;
 
-	private void UpdateName()
-		=> GameObject.Name = $"Beer Crate ({Count}/{Columns * Rows})";
+	private void UpdateName() => itemComponent.Name = $"Beer Crate ({Count}/{Columns * Rows})";
 
 	protected override void OnStart()
 	{
 		renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+		itemComponent = Components.Get<ItemComponent>();
 		BeerCountChanged( 0, Count );
 		UpdateName();
 
@@ -75,13 +76,13 @@ public sealed class BeerCrate : Component
 			Action = ( Player interactor, GameObject obj ) =>
 			{
 				var inventory = interactor.Inventory;
-				if ( inventory == null ) 
+				if ( inventory == null )
 					return;
 
 				GameObject beer;
 				if ( inventory.EquippedItems[(int)EquipSlot.Hand] != null )
 				{
-					if ( !inventory.HasSpace() )
+					if ( !inventory.HasSpaceInBackpack() )
 						return;
 
 					beer = Beer.Clone();
