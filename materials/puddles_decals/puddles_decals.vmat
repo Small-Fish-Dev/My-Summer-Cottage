@@ -1,0 +1,31 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunaworld.shader"
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+	F_TRANSPARENCY 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/puddles_decals/puddles_decals_basecolor.png"
+	ColorTintMask "materials/default/default.tga"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/puddles_decals/puddles_decals_metallic.png"
+	Normal "materials/default/default_normal.tga"
+	Roughness "materials/puddles_decals/puddles_decals_roughness.png"
+
+	//---- Transparency ----
+	TransparencyMask "materials/puddles_decals/puddles_decals_opacity.png"
+	TransparencyRounding "0.000"
+
+	SystemAttributes
+	{
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}
