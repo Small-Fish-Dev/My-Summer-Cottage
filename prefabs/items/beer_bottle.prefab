@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "2a69dc49-85ed-46d5-aa07-8e4e02590c92",
+    "Id": "7226d2fc-27dc-48ce-af0f-0730974ddb81",
     "Name": "beer_bottle",
     "Enabled": true,
     "Components": [
@@ -44,17 +44,29 @@
                   "Type": "call",
                   "Properties": {
                     "_type": "Sandbox.Game/Sandbox.GameObject",
-                    "_name": "Destroy",
-                    "_isStatic": false
+                    "_isStatic": false,
+                    "_name": "Destroy"
                   },
                   "UserData": {
-                    "Position": "160,0"
+                    "Position": "400,0"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_isStatic": false,
+                    "_name": "AddExperience"
+                  },
+                  "UserData": {
+                    "Position": "208,-0"
                   }
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 0,
+                  "SrcId": 2,
                   "SrcName": "_signal",
                   "DstId": 1,
                   "DstName": "_signal"
@@ -64,6 +76,23 @@
                   "SrcName": "obj",
                   "DstId": 1,
                   "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": 20,
+                  "DstId": 2,
+                  "DstName": "exp"
                 }
               ]
             }
