@@ -131,11 +131,11 @@ public partial class SaunaTask : GameResource
 	public bool TimeLimited { get; set; } = false;
 
 	/// <summary>
-	/// How many real-life the player has to complete the task before it's automatically failed
+	/// How many real-life seconds the player has to complete the task before it's automatically failed
 	/// </summary>
 	[Property]
 	// [HideIf( "TimeLimited", false )] TODO: Add back when it's been fixed
-	[Range( 10, 300, 10 )]
+	[Range( 10, 600, 10 )]
 	public int TimeLimitInSeconds { get; set; } = 120;
 
 	public delegate void TaskAction( Player player );
@@ -251,7 +251,7 @@ public partial class SaunaTask : GameResource
 	/// <param name="taskType"></param>
 	/// <param name="taskRarity"></param>
 	/// <returns></returns>
-	public SaunaTask GetRandomTask( TaskType taskType = TaskType.Any, TaskRarity taskRarity = TaskRarity.Any )
+	public static SaunaTask GetRandomTask( TaskType taskType = TaskType.Any, TaskRarity taskRarity = TaskRarity.Any )
 	{
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
 

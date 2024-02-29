@@ -1,0 +1,37 @@
+{
+  "Name": "Nagging Wife Task",
+  "Description": "The nagging wife asked for some milk.",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": true,
+  "Global": false,
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Get some milk",
+      "TriggerSignal": "item.received.Milk",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Go back home",
+      "TriggerSignal": "end_of_session",
+      "AmountToComplete": 1
+    }
+  ],
+  "CurrentSubtaskOrder": 0,
+  "Successful": false,
+  "Started": false,
+  "Completed": false,
+  "TaskTimer": {
+    "Absolute": 9136.129,
+    "Relative": -240.3164,
+    "Passed": 240.3164,
+    "Fraction": 1
+  },
+  "__references": []
+}

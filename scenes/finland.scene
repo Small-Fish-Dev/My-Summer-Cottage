@@ -97,6 +97,80 @@
             "resources/tasks/enter_sauna.task",
             "resources/tasks/goombler.task"
           ]
+        },
+        {
+          "__type": "StoryDirector",
+          "StoryDays": {
+            "1": {
+              "ScriptedEvents": [
+                {
+                  "TriggerTime": "10.00,12.00,1",
+                  "OnStart": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "On Start",
+                      "id": "5ec47a5f-31e9-4021-911b-b051daefdcd5",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "-192,64"
+                        }
+                      },
+                      {
+                        "Id": 5,
+                        "Type": "event.getrandomtask",
+                        "UserData": {
+                          "Position": "16,176"
+                        }
+                      },
+                      {
+                        "Id": 6,
+                        "Type": "event.assigntaskto",
+                        "UserData": {
+                          "Position": "320,64"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "Value": "Common",
+                        "DstId": 5,
+                        "DstName": "taskRarity"
+                      },
+                      {
+                        "Value": "GivenByWife",
+                        "DstId": 5,
+                        "DstName": "taskType"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 6,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "player",
+                        "DstId": 6,
+                        "DstName": "player"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_result",
+                        "DstId": 6,
+                        "DstName": "taskToAdd"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
         }
       ],
       "Children": [
@@ -181,7 +255,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.6787288,0,-0.734389",
+          "Rotation": "0,-0.8215454,0,0.5701432",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -420,6 +494,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-28T22:42:34.7583736\u002B02:00",
+  "LastSaved": "2024-02-29T23:35:40.7855741\u002B01:00",
   "__references": []
 }
