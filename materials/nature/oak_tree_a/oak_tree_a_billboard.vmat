@@ -5,6 +5,7 @@ Layer0
 	shader "shaders/saunasimple.shader"
 
 	//---- Rendering ----
+	F_ALPHA_TEST 1
 	F_RENDER_BACKFACES 1
 	F_TRANSPARENCY 1
 
@@ -14,10 +15,13 @@ Layer0
 	//---- Material ----
 	Color "materials/nature/oak_tree_a/oak_tree_a_billboard_color.png"
 	ColorTintMask "materials/default/default.tga"
-	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
 	Metalness "materials/default/default_metal.tga"
 	Normal "materials/nature/oak_tree_a/oak_tree_a_billboard_normal.png"
 	Roughness "[0.943000 0.943000 0.943000 0.000000]"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
 
 	//---- Transparency ----
 	TransparencyMask "materials/nature/oak_tree_a/oak_tree_a_billboard_alpha.png"
