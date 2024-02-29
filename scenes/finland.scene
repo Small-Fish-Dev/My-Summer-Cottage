@@ -255,14 +255,14 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.8215454,0,0.5701432",
+          "Rotation": "0,0.2206352,0,0.9753564",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "0.63127,0.81277,1.11583,2"
+              "Tint": "0.63149,0.8129,1.1159,2"
             }
           ]
         },
@@ -274,7 +274,7 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.31564,0.40639,0.55791,1",
+              "Color": "0.31574,0.40645,0.55795,1",
               "EndDistance": 10000,
               "FalloffExponent": 1,
               "Height": 10000,
@@ -287,7 +287,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.1193591,-0.1701019,0.5618529,-0.8007123",
+          "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
           "Tags": "light_directional,light",
           "Enabled": true,
           "Components": [
@@ -295,7 +295,7 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.31564,0.40639,0.55791,1",
+              "LightColor": "0.31574,0.40645,0.55795,1",
               "Shadows": false,
               "SkyColor": "0.00784,0.03922,0.0902,1"
             }
@@ -437,15 +437,6 @@
       "__Prefab": "prefabs/items/beer_crate.prefab"
     },
     {
-      "Id": "1d959b6c-a8fe-4e04-bdb8-48f77651b36e",
-      "Name": "radio",
-      "Position": "695.3849,-642.7993,90.00198",
-      "Rotation": "-0.00004982948,-0.00005677342,0.9108707,-0.4126917",
-      "Networked": true,
-      "Enabled": true,
-      "__Prefab": "prefabs/items/radio.prefab"
-    },
-    {
       "Id": "27a9b3f4-879f-4e60-9810-1fdc09fffac0",
       "Name": "rifle",
       "Position": "574.0919,-605.1056,93.00001",
@@ -469,6 +460,13 @@
           "TriggerSignalIdentifier": "sauna.entered"
         }
       ]
+    },
+    {
+      "Id": "b21f3811-be00-47a4-ad66-2294fdd6ff07",
+      "Name": "shop_beer_bottle",
+      "Position": "458.7336,-214.3331,27",
+      "Enabled": true,
+      "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
     }
   ],
   "SceneProperties": {
@@ -494,6 +492,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-29T23:35:40.7855741\u002B01:00",
+  "LastSaved": "2024-02-29T18:14:17.2390844-05:00",
   "__references": []
 }
