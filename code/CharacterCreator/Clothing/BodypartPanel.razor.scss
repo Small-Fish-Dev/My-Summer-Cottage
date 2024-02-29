@@ -7,11 +7,11 @@
     font-size: 24px;
     white-space: nowrap;
     font-smooth: never;
+    transition: opacity 0.2s linear;
 
     .text-container {
-        padding: 8px;
+        padding: 8px 50px 8px 15px;
         background: linear-gradient(to right, rgba(black, 0.9) 0%, rgba(black, 0.5) 70%, rgba(black, 0) 100%);
-        padding-right: 50px;
     }
 
     &.left {
@@ -20,9 +20,8 @@
         transform: translate(-100% -100%);
 
         .text-container {
-            padding-right: 8px;
             background: linear-gradient(to left, rgba(black, 0.9) 0%, rgba(black, 0.5) 70%, rgba(black, 0) 100%);
-            padding-left: 50px;
+            padding: 8px 15px 8px 50px;
         }
     }
 

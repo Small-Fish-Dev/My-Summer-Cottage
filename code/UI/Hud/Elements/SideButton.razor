@@ -3,7 +3,7 @@
 @inherits Panel
 
 <root 
-	onclick=@(() => { if (!IsDisabled) OnClick?.Invoke(); })
+	onclick=@(() => { if (!IsDisabled) OnClick?.Invoke(); if ( PlaySound ) CreatorOverlay.PlayUISound( "press" ); })
 	class="@(IsDisabled ? "disabled" : "") @(IsInverted ? "ltr" : "")"
 >
 	<image src=@ImagePath />
@@ -16,6 +16,7 @@
 @code {
 	public string Title { get; set; }
 	public string Subtitle { get; set; }
+	public bool PlaySound { get; set; } = true;
 	public string ImagePath { get; set; } = "ui/hud/goback.png";
 	public bool IsDisabled { get; set; } = false;
 	public bool IsInverted { get; set; } = false;

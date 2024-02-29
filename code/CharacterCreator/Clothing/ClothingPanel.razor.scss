@@ -6,6 +6,15 @@ ClothingPanel {
     height: 100%;
     font-family: BasicHandwriting;
     font-smooth: never;
+    transition: transform 0.5s ease-out;
+
+    &:intro {
+        transform: translateX(-100%);
+    }
+
+    &:outro { // doesn't work :/
+        transform: translateX(-100%);
+    }
 
     .slot-container {
         position: absolute;
@@ -16,7 +25,6 @@ ClothingPanel {
         flex-direction: column;
         gap: 20px;
         padding: 0px 0px 30px 0px;
-        
         mask-mode: luminance;
         mask-image: url(ui/clothing-mask.png);
         mask-size: 100%;

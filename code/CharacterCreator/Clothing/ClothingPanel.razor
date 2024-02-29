@@ -89,7 +89,6 @@
 	}
 	public SceneModel Model => Renderer.SceneModel;
 
-	private BodypartPanel[] panels;
 	private Dictionary<EquipSlot, List<ComponentDefinition>> clothes;
 
 	private static Dictionary<EquipSlot, int> selections;
@@ -115,6 +114,8 @@
 
 	private void UpdateSelection()
 	{
+		CreatorOverlay.PlayUISound( "press" );
+
 		foreach ( var obj in clothingObjects )
 			obj.Destroy();
 
@@ -168,62 +169,6 @@
 
 				clothes[slot].Add( equipment );
 			}
-		}
-	}
-
-	protected override void OnAfterTreeRender( bool firstTime )
-	{
-		base.OnAfterTreeRender( firstTime );
-		if ( !firstTime )
-			return;
-
-		var slots = Enum.GetValues<EquipSlot>();
-		panels = new BodypartPanel[slots.Length - 1];
-		for ( int i = 0; i < slots.Length; i++ )
-		{
-			if ( slots[i] == EquipSlot.Hand )
-				continue;
-
-			var pnl = panels[i] = AddChild<BodypartPanel>();
-			pnl.GradientLeft = i % 2 == 0;
-			pnl.Slot = slots[i];
-		}
-	}
-
-	private int GetBone( EquipSlot slot ) // i love le hardcoding values!
-		=> slot switch
-		{
-			EquipSlot.Head => 7,
-			EquipSlot.Face => 6,
-			EquipSlot.Body => 4,
-			EquipSlot.Legs => 20,
-			EquipSlot.Feet => 22,
-			_ => 0
-		};
-
-	private Vector3 GetOffset( EquipSlot slot )
-		=> slot switch
-		{
-			EquipSlot.Head => new Vector3( 0, 5, 1 ),
-			EquipSlot.Face => new Vector3( 0, -5, 2 ),
-			EquipSlot.Body => new Vector3( 0, 8, 0 ),
-			EquipSlot.Legs => new Vector3( 0, -18, 0 ),
-			EquipSlot.Feet => new Vector3( 0, 16, 0 ),
-			_ => 0
-		};
-
-	public override void Tick()
-	{
-		if ( panels == null )
-			return;
-
-		foreach ( var panel in panels )
-		{
-			var worldPosition = Model.GetBoneWorldTransform( GetBone( panel.Slot ) ).Position;
-			var position = Scene.Camera.PointToScreenNormal( GetOffset( panel.Slot ) + worldPosition );
-
-			panel.Style.Left = Length.Fraction( position.x );
-			panel.Style.Top = Length.Fraction( position.y );
 		}
 	}
 }

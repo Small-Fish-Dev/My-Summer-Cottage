@@ -38,6 +38,7 @@
 					onclick=@(() => {
 						SkinColor = color;
 						Model.Attributes.Set( "g_flColorTint", SkinColor );
+						CreatorOverlay.PlayUISound( "press" );
 					})
 				>
 					<div class="inner" style="background-color: @(color.Hex)" />
@@ -63,7 +64,10 @@
 		/>
 	</div>
 
-	<div class="confirm" @onclick=@CreatorComponent.NextStage>
+	<div class="confirm" @onclick=@(() => {
+		CreatorComponent.NextStage();
+		CreatorOverlay.PlayUISound( "press" );
+	})>
 		CONFIRM
 	</div>
 </root>

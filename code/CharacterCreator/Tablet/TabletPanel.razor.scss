@@ -19,6 +19,15 @@ TabletPanel {
     text-transform: uppercase;
     letter-spacing: 6px;
     // filter: drop-shadow(20px 20px 4px rgba(black, 0.5));
+    transition: transform 0.5s ease-out;
+
+    &:intro {
+        transform: translateX(-100%);
+    }
+
+    &:outro { // doesn't work :/
+        transform: translateX(-100%);
+    }
 
     .dark {
         color: $dark-brown;

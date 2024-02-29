@@ -18,6 +18,7 @@ public class CreatorComponent : Component
 			.ToDictionary( stage => stage.Stage, stage => stage );
 
 	public static CreatorStage Current { get; private set; } = CreatorStage.Identification;
+	public static CameraComponent TargetCamera { get; private set; }
 
 	[Property] public CreatorStage Stage { get; set; }
 	[Property] public CameraComponent Camera { get; set; }
@@ -35,14 +36,9 @@ public class CreatorComponent : Component
 		initialTransform = Camera.Transform.World;
 	}
 
-	public void DisableStage()
-	{
-		Camera.Enabled = false;
-	}
-
 	public void EnableStage()
 	{
-		Camera.Enabled = true;
+		TargetCamera = Camera;
 	}
 
 	public static void PreviousStage()
@@ -51,7 +47,6 @@ public class CreatorComponent : Component
 		if ( previous < 0 )
 			return;
 
-		All[Current].DisableStage();
 		All[Current = (CreatorStage)previous].EnableStage();
 	}
 
@@ -65,7 +60,6 @@ public class CreatorComponent : Component
 			return;
 		}
 
-		All[Current].DisableStage();
 		All[Current = (CreatorStage)next].EnableStage();
 	}
 
@@ -82,16 +76,18 @@ public class CreatorComponent : Component
 
 	protected override void OnUpdate()
 	{
-		if ( Camera == null || !Camera.IsMainCamera )
+		if ( TargetCamera != Camera )
 			return;
 
 		var transform = new Transform()
 		{
-			Position = Vector3.Up * 0.5f * MathF.Sin( Time.Now ),
-			Rotation = Rotation.FromRoll( 3f * MathF.Sin( Time.Now / 2f ) )
+			Position = Vector3.Up * 0.3f * MathF.Sin( Time.Now ),
+			Rotation = Rotation.FromRoll( 2f * MathF.Sin( Time.Now / 2f ) )
 		};
 
-		Camera.Transform.Position = initialTransform.Position + transform.Position;
-		Camera.Transform.Rotation = initialTransform.Rotation * transform.Rotation;
+		var delta = 2.3f * RealTime.Delta;
+		Scene.Camera.Transform.Position = Vector3.Lerp( Scene.Camera.Transform.Position, initialTransform.Position + transform.Position, delta );
+		Scene.Camera.Transform.Rotation = Rotation.Slerp( Scene.Camera.Transform.Rotation, initialTransform.Rotation * transform.Rotation, delta );
+		Scene.Camera.FieldOfView = MathX.Lerp( Scene.Camera.FieldOfView, Camera.FieldOfView, 2f * delta );
 	}
 }
