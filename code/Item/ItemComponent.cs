@@ -46,6 +46,7 @@ public class ItemComponent : Component
 
 		GameObject.Name = Name;
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
+		Network.SetOrphanedMode( NetworkOrphaned.ClearOwner );
 
 		// Pickup
 		var interactions = Components.GetOrCreate<Interactions>();
