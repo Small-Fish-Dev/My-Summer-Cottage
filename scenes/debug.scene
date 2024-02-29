@@ -72,6 +72,7 @@
       "Components": [
         {
           "__type": "DirectionalLight",
+          "__enabled": false,
           "FogMode": "Enabled",
           "FogStrength": 1,
           "LightColor": "0.91373,0.98039,1,1",
@@ -83,26 +84,29 @@
     {
       "Id": "bd29b6ab-06aa-4d9c-9f6f-e03bd24eee7e",
       "Name": "Player",
-      "Position": "159.248,33.54742,-0.6253681",
+      "Position": "-647.5668,-552.7444,-0.6256557",
       "Tags": "player,localplayer",
       "Enabled": true,
       "Components": [
         {
           "__type": "Player",
           "DuckSpeed": 60,
+          "Experience": 0,
           "Fatness": 0,
           "Height": 0,
           "JumpStrength": 280,
+          "Level": 0,
           "Money": 0,
           "MoveHelper": {
             "_type": "component",
             "go": "bd29b6ab-06aa-4d9c-9f6f-e03bd24eee7e",
             "component_type": "MoveHelper"
           },
+          "Penoid": null,
           "SkinColor": "0,0,0,0",
-          "Speed": 140,
           "SprintSpeed": 280,
-          "WalkSpeed": 80
+          "WalkSpeed": 80,
+          "Zoom": 30
         },
         {
           "__type": "Inventory",
@@ -421,28 +425,35 @@
       ]
     },
     {
-      "Id": "f53b3f49-43d5-4930-9431-c317c3f424fe",
-      "Name": "Cube",
-      "Position": "329.2953,-15.64861,91.40627",
-      "Scale": "3.773694,5.479699,1.348766",
+      "Id": "ea6f378b-575f-415f-a674-7fdb712507db",
+      "Name": "Object",
+      "Position": "-66.33267,329.1486,151.8689",
       "Enabled": true,
       "Components": [
         {
-          "__type": "ModelRenderer",
-          "BodyGroups": 18446744073709551615,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/dev/box.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
+          "__type": "MapInstance",
+          "MapName": "sauna_police",
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": false
+        }
+      ],
+      "Children": []
+    },
+    {
+      "Id": "7b4ceda3-34d5-41a2-a523-645c0a303c99",
+      "Name": "shader_test",
+      "Position": "-442.9607,-546.6078,11.0724",
+      "Enabled": true,
+      "Components": [
         {
-          "__type": "BoxCollider",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "50,50,50",
-          "Static": false,
-          "Surface": null
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": true,
+          "Model": "models/test/shader_test.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
         }
       ]
     }
@@ -470,6 +481,6 @@
   },
   "Title": "debug",
   "Description": "",
-  "LastSaved": "2024-02-24T00:52:00.8557817\u002B01:00",
+  "LastSaved": "2024-02-29T23:02:00.511923\u002B03:00",
   "__references": []
 }
