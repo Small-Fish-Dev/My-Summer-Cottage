@@ -42,6 +42,7 @@ struct PixelInput
 {
 	#include "common/pixelinput.hlsl"
 	float2 grassUV : TEXCOORD9 < Semantic( LowPrecisionUv1 ); >;
+	float3 AbsolutePosition : TEXCOORD10;
 };
 
 struct GeometryInput
@@ -55,14 +56,14 @@ VS
 {
 	#include "common/vertex.hlsl"
 
-	//
-	// Main
-	//
-	PixelInput MainVs( VertexInput i )		// I don't know why but game complains about incomplete MainVs initialization
+	PixelInput MainVs( VertexInput i )
 	{
 		PixelInput o = ProcessVertex( i );
 		o = FinalizeVertex(o); 
-		o.grassUV = o.vTextureCoords.zw;
+
+		o.grassUV = o.vTextureCoords.zw;		// Used to add grass billboard onto new triangles. Probably there's a better way to do it.
+												// UV2 isn't used at this stage but we initialize all inputs anyway so shader doesn't spam warnings on each compile.
+		o.AbsolutePosition = i.vPositionOs.xyz;	// Include vertex data into PixelInput so we can use it for per-triangle grass tinting
 
 		return o;
 	}
@@ -91,6 +92,7 @@ PS
 	CreateInputTexture2D( BillboardColor, Srgb, 8, "", "_color", "Material,20/10", Default3( 1.0, 1.0, 1.0 ) );	// Grass billboard color
 	CreateInputTexture2D( Opacity, Linear, 8, "", "_alpha", "Material,30/10", Default( 1.0f ) );				// Grass billboard alpha
 
+	float3 g_flColorVariation < UiType( Color ); Default3( 1.0, 1.0, 1.0 ); UiGroup( "Material,10/20" ); >;		// Color variation
 
 	// Store color map, include tint mask into alpha channel.
 	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >;	
@@ -105,6 +107,7 @@ PS
 
     #include "sbox_pixel.fxc"
     #include "common/pixel.hlsl"
+	#include "noise3D.hlsl"
 
 	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
 
@@ -134,10 +137,12 @@ PS
 
 		float3 l_tColorMap = Tex2DS( g_tColor, Sampler, UV ).rgb;
 		float4 l_tGrass = Tex2DS( g_tGrass, Sampler, UV2 ).rgba;
+		float  rand = snoise( i.AbsolutePosition.xyz );
+			   l_tGrass.rgb = lerp( l_tGrass.rgb, l_tGrass.rgb * g_flColorVariation, saturate( rand ) );
 
         Material m = Material::Init();
 
-		m.Albedo = lerp( l_tColorMap.rgb, l_tGrass.rgb, ( UV2.x >= 0.01 || UV2.y >= 0.01 ) ? 1 : 0 );
+		m.Albedo = lerp( l_tColorMap.rgb, l_tGrass.rgb, ( UV2.x > 0 || UV2.y > 0 ) ? 1 : 0 );
 		
 		m.Opacity = 1;
         m.Roughness = 1;
@@ -150,7 +155,7 @@ PS
 		float4 result = ShadingModelStandard::Shade( i, m );
 
 		#if( S_TRANSPARENCY )
-			float alpha = lerp( 1, l_tGrass.a, ( UV2.x >= 0.01 || UV2.y >= 0.01 ) ? 1 : 0 );
+			float alpha = lerp( 1, l_tGrass.a, ( UV2.x > 0 || UV2.y > 0 ) ? 1 : 0 );
 			result.a = max( alpha, floor( alpha + TransparencyRounding ) );
 		#endif		
 
