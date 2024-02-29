@@ -1,0 +1,335 @@
+{
+  "Id": "bb582f0d-97c6-4a24-8449-0f5413324c12",
+  "GameObjects": [
+    {
+      "Id": "b01f3514-9536-4424-8674-06ec00814b70",
+      "Name": "Map",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "MapInstance",
+          "MapName": "maps/sauna_police.vmap",
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": false
+        },
+        {
+          "__type": "PrefabInitializer"
+        }
+      ],
+      "Children": []
+    },
+    {
+      "Id": "cdaef7ee-f2c8-40a7-86af-bfcd10437bbe",
+      "Name": "Camera",
+      "Position": "903.8242,-862.4387,94.14466",
+      "Rotation": "-0.3105598,-0.01507103,0.9486845,0.05765311",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CameraComponent",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 45,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 2000,
+          "ZNear": 2
+        },
+        {
+          "__type": "DitherHook"
+        },
+        {
+          "__type": "EyeProtector"
+        },
+        {
+          "__type": "MotionBlur",
+          "Samples": 4,
+          "Scale": 0.25
+        }
+      ]
+    },
+    {
+      "Id": "4ae5b3d2-b62c-4688-911d-e1804886c39d",
+      "Name": "First Stage",
+      "Position": "851.2806,-853.9232,-2.582662",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CreatorComponent",
+          "Camera": {
+            "_type": "component",
+            "go": "c54d44fb-93a6-4493-8c18-5e352f062548",
+            "component_type": "CameraComponent"
+          },
+          "Stage": "Identification"
+        }
+      ],
+      "Children": [
+        {
+          "Id": "c54d44fb-93a6-4493-8c18-5e352f062548",
+          "Name": "Camera",
+          "Position": "-30.56458,-2.551636,50.41547",
+          "Rotation": "-0.5699275,0.08325136,0.7934575,0.1966653",
+          "Tags": "maincamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "CameraComponent",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 45,
+              "IsMainCamera": false,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 2000,
+              "ZNear": 2
+            }
+          ]
+        },
+        {
+          "Id": "0cfd5487-0542-4f7e-8681-ad923820784a",
+          "Name": "Panel",
+          "Position": "-34.62659,0.9349976,35.28112",
+          "Rotation": "-0.08986445,-0.6955219,-0.0913457,0.7069863",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "WorldPanel",
+              "HorizontalAlign": "Center",
+              "LookAtCamera": false,
+              "PanelSize": "115,64",
+              "RenderScale": 0.06,
+              "VerticalAlign": "Center"
+            },
+            {
+              "__type": "PassportPanel",
+              "Overlay": {
+                "_type": "component",
+                "go": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
+                "component_type": "CreatorOverlay"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "498bf75e-5b94-44c2-8b7f-41d08d9105ea",
+      "Name": "Second Stage",
+      "Position": "681.5797,-854.7111,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CreatorComponent",
+          "Camera": {
+            "_type": "component",
+            "go": "72fd3ea0-f5d5-4070-9878-d7eb46a96d66",
+            "component_type": "CameraComponent"
+          },
+          "Stage": "Appearance"
+        }
+      ],
+      "Children": [
+        {
+          "Id": "72fd3ea0-f5d5-4070-9878-d7eb46a96d66",
+          "Name": "Camera",
+          "Position": "51.3819,189.1125,58.09797",
+          "Rotation": "0.02439861,0.02733988,-0.6653863,0.7455993",
+          "Tags": "maincamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "CameraComponent",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 60,
+              "IsMainCamera": false,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 1000,
+              "ZNear": 2
+            }
+          ]
+        },
+        {
+          "Id": "6f3f425b-eec4-40d2-8fd6-b1524721598a",
+          "Name": "Player",
+          "Position": "40.896,-10.21344,0",
+          "Rotation": "0,0,0.7126565,0.7015132",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "AnimationGraph": "models/guy/character_creation.vanmgrph",
+              "BodyGroups": 341,
+              "BoneMergeTarget": null,
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/guy/guy.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ],
+          "Children": [
+            {
+              "Id": "43f99c1e-650b-4e0a-8989-391177b23261",
+              "Name": "Penoid",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SkinnedModelRenderer",
+                  "AnimationGraph": null,
+                  "BodyGroups": 18446744073709551615,
+                  "BoneMergeTarget": {
+                    "_type": "component",
+                    "go": "6f3f425b-eec4-40d2-8fd6-b1524721598a",
+                    "component_type": "SkinnedModelRenderer"
+                  },
+                  "CreateBoneObjects": false,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/guy/penoid.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                },
+                {
+                  "__type": "CensorComponent"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "c91a005b-5b13-4ce0-b51d-92aefd46ffd6",
+      "Name": "Third Stage",
+      "Position": "719.5748,-749.2759,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CreatorComponent",
+          "Camera": {
+            "_type": "component",
+            "go": "72fd3ea0-f5d5-4070-9878-d7eb46a96d66",
+            "component_type": "CameraComponent"
+          },
+          "Stage": "Dressing_up"
+        }
+      ]
+    },
+    {
+      "Id": "c63a3bfc-2074-4b84-95b6-8db77055398a",
+      "Name": "Fourth Stage",
+      "Position": "709.6197,-680.3291,0",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CreatorComponent",
+          "Camera": {
+            "_type": "component",
+            "go": "0a8c0886-1118-4ea2-91e0-81d22b429a13",
+            "component_type": "CameraComponent"
+          },
+          "Stage": "Confirmation"
+        }
+      ],
+      "Children": [
+        {
+          "Id": "0a8c0886-1118-4ea2-91e0-81d22b429a13",
+          "Name": "Camera",
+          "Position": "16.93005,-83.81671,74.15398",
+          "Rotation": "0.09229596,0.09229596,-0.7010574,0.7010574",
+          "Tags": "maincamera",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "CameraComponent",
+              "BackgroundColor": "0.33333,0.46275,0.52157,1",
+              "ClearFlags": "All",
+              "FieldOfView": 80,
+              "IsMainCamera": true,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "TargetEye": "None",
+              "Viewport": "0,0,1,1",
+              "ZFar": 1000,
+              "ZNear": 2
+            },
+            {
+              "__type": "DitherHook"
+            },
+            {
+              "__type": "EyeProtector"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
+      "Name": "Overlay UI",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ScreenPanel",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "CreatorOverlay"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "Lerping": true,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "creation",
+  "Description": "",
+  "LastSaved": "2024-02-29T23:54:01.2603481\u002B02:00",
+  "__references": []
+}

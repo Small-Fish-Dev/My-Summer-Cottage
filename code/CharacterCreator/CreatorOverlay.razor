@@ -103,11 +103,25 @@
 </root>
 
 @code {
+	private SkinnedModelRenderer renderer;
+	public SkinnedModelRenderer Renderer
+	{
+		get
+		{
+			if (renderer != null)
+				return renderer;
+
+			return renderer = CreatorComponent.All[CreatorStage.Appearance].GameObject
+				.Components.Get<SkinnedModelRenderer>(FindMode.EverythingInDescendants);
+		}
+	}
+	public SceneModel Model => Renderer.SceneModel;
+
 	private int stageInteger => (int)CreatorComponent.Current + 1;
-	
+
 	private bool disabled => 
 		string.IsNullOrEmpty( PassportPanel.Firstname ) 
-	 || string.IsNullOrEmpty( PassportPanel.Lastname );
+		|| string.IsNullOrEmpty( PassportPanel.Lastname );
 
 	private void Save() =>
 		Player.WriteSave( 
@@ -124,6 +138,72 @@
 					.ToArray()
 			} 
 		);
+
+	private BodypartPanel[] panels;
+
+	public static void PlayUISound( string path )
+	{
+		var sound = Sound.Play( path );
+		sound.ListenLocal = true;
+		sound.Volume = 0.5f;
+	}
+
+	protected override void OnTreeFirstBuilt()
+	{
+		base.OnTreeFirstBuilt();
+
+		var slots = Enum.GetValues<EquipSlot>();
+		panels = new BodypartPanel[slots.Length - 1];
+		for ( int i = 0; i < slots.Length; i++ )
+		{
+			if ( slots[i] == EquipSlot.Hand )
+				continue;
+
+			var pnl = panels[i] = Panel.AddChild<BodypartPanel>();
+			pnl.GradientLeft = i % 2 == 0;
+			pnl.Slot = slots[i];
+		}
+	}
+
+	private int GetBone( EquipSlot slot ) // i love le hardcoding values!
+		=> slot switch
+		{
+			EquipSlot.Head => 7,
+			EquipSlot.Face => 6,
+			EquipSlot.Body => 4,
+			EquipSlot.Legs => 20,
+			EquipSlot.Feet => 22,
+			_ => 0
+		};
+
+	private Vector3 GetOffset( EquipSlot slot )
+		=> slot switch
+		{
+			EquipSlot.Head => new Vector3( 0, -5, 1 ),
+			EquipSlot.Face => new Vector3( 0, 5, 4 ),
+			EquipSlot.Body => new Vector3( 0, -12, 0 ),
+			EquipSlot.Legs => new Vector3( 0, 15, 0 ),
+			EquipSlot.Feet => new Vector3( 0, -16, -4 ),
+			_ => 0
+		};
+
+	protected override void OnUpdate()
+	{
+		if ( panels == null )
+			return;
+
+		foreach ( var panel in panels )
+		{
+			var worldPosition = Model.GetBoneWorldTransform( GetBone( panel.Slot ) ).Position;
+			var position = Scene.Camera.PointToScreenNormal( GetOffset( panel.Slot ) * Scene.Camera.Transform.Rotation.Inverse + worldPosition );
+
+			panel.Style.Opacity = CreatorComponent.Current == CreatorStage.Appearance || CreatorComponent.Current == CreatorStage.Dressing_up 
+				? 1 
+				: 0;
+			panel.Style.Left = Length.Fraction( position.x );
+			panel.Style.Top = Length.Fraction( position.y );
+		}
+	}
 
 	protected override int BuildHash()
 	{
