@@ -112,27 +112,19 @@ public class Interactions : Component
 {
 	[Property]
 	public List<Interaction> ObjectInteractions { get; set; }
+	public IEnumerable<Interaction> AllInteractions => ObjectInteractions.Concat( programmedInteractions );
 
-	private List<Interaction> _queue = new();
+	private List<Interaction> programmedInteractions;
+
 	public void AddInteraction( Interaction interaction )
 	{
-		if ( ObjectInteractions == null )
-			_queue.Add( interaction );
-		else
-			ObjectInteractions.Add( interaction );
+		programmedInteractions ??= new();
+		programmedInteractions.Add( interaction );
 	}
 
 	protected override void OnStart()
 	{
 		ObjectInteractions ??= new();
-		ObjectInteractions.AddRange( _queue );
-	}
-
-	protected override void OnUpdate()
-	{
-		var interactions = ObjectInteractions;
-		if ( interactions == null )
-			return;
 	}
 
 	protected override void DrawGizmos()
