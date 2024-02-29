@@ -58,8 +58,6 @@ public sealed class BeerCrate : Component
 	private SkinnedModelRenderer renderer;
 	private ItemComponent itemComponent;
 
-	private void UpdateName() => itemComponent.Name = $"Beer Crate ({Count}/{Columns * Rows})";
-
 	protected override void OnStart()
 	{
 		renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
@@ -121,6 +119,12 @@ public sealed class BeerCrate : Component
 			}
 
 		beers.Clear();
+	}
+
+	private void UpdateName()
+	{
+		if ( itemComponent is not null )
+			itemComponent.Name = $"Beer Crate ({Count}/{Columns * Rows})";
 	}
 
 	// Handle the visual beers.
