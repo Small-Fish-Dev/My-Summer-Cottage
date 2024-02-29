@@ -46,7 +46,7 @@ public struct Interaction
 	public delegate void InteractionEvent( Player interactor, GameObject obj );
 
 	/// <summary>
-	/// Whether or not the interaction is shown (and if it can be performed).
+	/// Whether or not the interaction can be performed.
 	/// </summary>
 	[Property]
 	public Func<bool> Disabled { get; set; }
