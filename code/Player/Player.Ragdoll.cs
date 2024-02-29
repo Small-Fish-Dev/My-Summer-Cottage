@@ -1,4 +1,5 @@
-﻿using static Sandbox.PhysicsGroupDescription.BodyPart;
+﻿using Sandbox;
+using static Sandbox.PhysicsGroupDescription.BodyPart;
 
 namespace Sauna;
 
@@ -36,23 +37,30 @@ partial class Player
 	{
 		if ( ragdoll )
 		{
-			Ragdoll?.Destroy(); // Can never be too safe, what if there's one already??
+			if ( Ragdoll == null )
+			{
+				var newRagdoll = Renderer.Components.Create<ModelPhysics>();
 
-			var newRagdoll = Renderer.Components.Create<ModelPhysics>();
+				newRagdoll.Model = Renderer.Model;
+				newRagdoll.Renderer = Renderer;
 
-			newRagdoll.Model = Renderer.Model;
-			newRagdoll.Renderer = Renderer;
+				newRagdoll.Enabled = false;
+				newRagdoll.Enabled = true; // Gotta call OnEnabled for it to update :)
 
-			newRagdoll.Enabled = false;
-			newRagdoll.Enabled = true; // Gotta call OnEnabled for it to update :)
+				newRagdoll.PhysicsGroup.Velocity = MoveHelper.Velocity;
 
-			newRagdoll.PhysicsGroup.Velocity = MoveHelper.Velocity;
+				_puppet = Renderer.GameObject.Parent.Components.Create<SkinnedModelRenderer>();
+				_puppet.Model = Renderer.Model;
+				_puppet.Enabled = false;
+				_puppet.Enabled = true;
+				_puppet.SceneModel.RenderingEnabled = false;
 
-			_oldAirFriction = MoveHelper.AirFriction;
-			MoveHelper.AirFriction = 0f;
+				_oldAirFriction = MoveHelper.AirFriction;
+				MoveHelper.AirFriction = 0f;
 
-			var collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndAncestors );
-			collider.Enabled = false;
+				var collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndAncestors );
+				collider.Enabled = false;
+			}
 
 			BlockMovements = true;
 
@@ -63,89 +71,10 @@ partial class Player
 			_spin = spin;
 		}
 		else
-			DeleteRagdoll();
-	}
-
-	async void DeleteRagdoll()
-	{
-		if ( _isTransitioning ) return;
-
-		_puppet = Renderer.GameObject.Parent.Components.Create<SkinnedModelRenderer>();
-		_puppet.Model = Renderer.Model;
-		_puppet.Enabled = false;
-		_puppet.Enabled = true;
-		_puppet.SceneModel.RenderingEnabled = false;
-
-		_isTransitioning = true;
-
-		TimeSince timeSince = 0f;
-
-		var transition = 0.15f;
-
-
-		var bones = _puppet.Model.Bones.AllBones;
-		Dictionary<PhysicsBody, Transform> bodyTransforms = new();
-
-		foreach ( var bone in bones )
 		{
-			var body = Ragdoll.PhysicsGroup.GetBody( bone.Index );
-
-			if ( body != null )
-				bodyTransforms.Add( body, body.Transform );
+			Log.Info( "Hi" );
+			_unragdoll = 0f;
 		}
-
-		while ( timeSince <= transition )
-		{
-			_puppet.Set( "grounded", MoveHelper.IsOnGround );
-			_puppet.Set( "crouching", Ducking );
-			_puppet.SceneModel.Morphs.Set( "fat", Fatness );
-			_puppet.Set( "height", Height );
-
-			var time = timeSince / transition;
-
-			foreach ( var bone in bones )
-			{
-				if ( _puppet.TryGetBoneTransform( in bone, out var transform ) )
-				{
-					var body = Ragdoll.PhysicsGroup.GetBody( bone.Index );
-
-					if ( body != null )
-					{
-						body.MotionEnabled = false;
-						body.GravityEnabled = false;
-						body.EnableSolidCollisions = false;
-						body.LinearDrag = 9999f;
-						body.AngularDrag = 9999f;
-
-						var oldTransform = bodyTransforms[body];
-						var newPos = oldTransform.Position.LerpTo( transform.Position, time );
-						var newRot = Rotation.Lerp( oldTransform.Rotation, transform.Rotation, time );
-
-						body.Position = newPos;
-						body.Rotation = newRot;
-					}
-				}
-			}
-
-			await Task.Frame();
-		}
-
-		_puppet.Destroy();
-		Ragdoll?.Destroy();
-
-		Renderer.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Model goes offset
-
-		foreach ( var clothing in Renderer.GameObject.Children )
-			clothing.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Clothing go offset too
-
-		MoveHelper.AirFriction = _oldAirFriction;
-
-		var collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndAncestors );
-		collider.Enabled = true;
-
-		_isTransitioning = false;
-		BlockMovements = false;
-		CanRagdoll = _couldRagdoll;
 	}
 
 	void FollowRagdoll()
@@ -174,14 +103,87 @@ partial class Player
 
 		if ( _unragdoll )
 		{
-			var groundTrace = Scene.Trace.Ray( rootPosition, rootPosition + Vector3.Down * 10f )
-				.Size( 20f )
-				.IgnoreGameObjectHierarchy( GameObject )
-				.WithoutTags( "player", "trigger", "npc" )
-				.Run();
+			if ( !_isTransitioning )
+			{
+				_unragdoll = 0f;
 
-			if ( groundTrace.Hit )
-				SetRagdoll( false );
+				var groundTrace = Scene.Trace.Ray( rootPosition, rootPosition + Vector3.Down * 10f )
+					.Size( 20f )
+					.IgnoreGameObjectHierarchy( GameObject )
+					.WithoutTags( "player", "trigger", "npc" )
+					.Run();
+
+				if ( groundTrace.Hit )
+					_isTransitioning = true;
+			}
+			else
+			{
+				var transition = 0.15f;
+
+				var bones = _puppet.Model.Bones.AllBones;
+				Dictionary<PhysicsBody, Transform> bodyTransforms = new();
+
+				foreach ( var bone in bones )
+				{
+					var body = Ragdoll.PhysicsGroup.GetBody( bone.Index );
+
+					if ( body != null )
+						bodyTransforms.Add( body, body.Transform );
+				}
+
+				if ( _unragdoll.Passed <= transition )
+				{
+					_puppet.Set( "grounded", MoveHelper.IsOnGround );
+					_puppet.Set( "crouching", Ducking );
+					_puppet.SceneModel.Morphs.Set( "fat", Fatness );
+					_puppet.Set( "height", Height );
+
+					var time = _unragdoll.Passed / transition;
+
+					foreach ( var bone in bones )
+					{
+						if ( _puppet.TryGetBoneTransform( in bone, out var transform ) )
+						{
+							var body = Ragdoll.PhysicsGroup.GetBody( bone.Index );
+
+							if ( body != null )
+							{
+								body.MotionEnabled = false;
+								body.GravityEnabled = false;
+								body.EnableSolidCollisions = false;
+								body.LinearDrag = 9999f;
+								body.AngularDrag = 9999f;
+
+								var oldTransform = bodyTransforms[body];
+								var newPos = oldTransform.Position.LerpTo( transform.Position, time );
+								var newRot = Rotation.Lerp( oldTransform.Rotation, transform.Rotation, time );
+
+								body.Position = newPos;
+								body.Rotation = newRot;
+							}
+						}
+					}
+				}
+				else
+				{
+					_puppet.Destroy();
+					Ragdoll?.Destroy();
+
+					Renderer.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Model goes offset
+
+					foreach ( var clothing in Renderer.GameObject.Children )
+						clothing.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Clothing go offset too
+
+					MoveHelper.AirFriction = _oldAirFriction;
+
+					var collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndAncestors );
+					collider.Enabled = true;
+
+					_isTransitioning = false;
+					BlockMovements = false;
+					CanRagdoll = _couldRagdoll;
+				}
+			}
 		}
 	}
 }

@@ -112,7 +112,7 @@ public class Interactions : Component
 {
 	[Property]
 	public List<Interaction> ObjectInteractions { get; set; }
-	public IEnumerable<Interaction> AllInteractions => ObjectInteractions.Concat( programmedInteractions );
+	public IEnumerable<Interaction> AllInteractions => ObjectInteractions.Concat( programmedInteractions ?? new List<Interaction>() );
 
 	private List<Interaction> programmedInteractions;
 
