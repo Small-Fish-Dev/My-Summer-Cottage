@@ -3,6 +3,30 @@ using static Sauna.SaunaTask.Subtask;
 
 namespace Sauna;
 
+public enum TaskType
+{
+	[Hide]
+	Any,
+	[Icon( "woman" )]
+	GivenByWife,
+	[Icon( "feedback" )]
+	GivenByNPC,
+	[Icon( "event_note" )]
+	GivenByEvent
+}
+
+public enum TaskRarity
+{
+	[Hide]
+	Any,
+	[Icon( "calendar_month" )]
+	Common,
+	[Icon( "date_range" )]
+	Uncommon,
+	[Icon( "today" )]
+	Rare
+}
+
 [GameResource( "Task", "task", "A task for the player to complete", Icon = "event_busy", IconBgColor = "#4a4fa8", IconFgColor = "#ffffff" )]
 public partial class SaunaTask : GameResource
 {
@@ -75,6 +99,18 @@ public partial class SaunaTask : GameResource
 	/// </summary>
 	[Property]
 	public string Description { get; set; } = "Kindly do the needful";
+
+	/// <summary>
+	/// Who gave this task (Used to fetch tasks to give)
+	/// </summary>
+	[Property]
+	public TaskType TaskType { get; set; } = TaskType.Any;
+
+	/// <summary>
+	/// How frequently this taks will be given out
+	/// </summary>
+	[Property]
+	public TaskRarity TaskRarity { get; set; } = TaskRarity.Any;
 
 	/// <summary>
 	/// Is this a primary task that will show up on the hud?
@@ -207,5 +243,31 @@ public partial class SaunaTask : GameResource
 			subtask.CurrentAmount = 0;
 			subtask.Completed = false;
 		}
+	}
+
+	/// <summary>
+	/// Find a random task with the given parameters
+	/// </summary>
+	/// <param name="taskType"></param>
+	/// <param name="taskRarity"></param>
+	/// <returns></returns>
+	public SaunaTask GetRandomTask( TaskType taskType = TaskType.Any, TaskRarity taskRarity = TaskRarity.Any )
+	{
+		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
+
+		if ( taskType != TaskType.Any )
+			allTasks = allTasks.Where( x => x.TaskType == taskType );
+
+		if ( taskRarity != TaskRarity.Any )
+			allTasks = allTasks.Where( x => x.TaskRarity == taskRarity );
+
+		if ( allTasks.Any() )
+		{
+			var rnd = new Random();
+
+			return rnd.FromList( allTasks.ToList() );
+		}
+
+		return null;
 	}
 }
