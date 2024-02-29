@@ -1,9 +1,444 @@
 {
-  "Id": "00000000-0000-0000-0000-000000000000",
-  "GameObjects": null,
-  "SceneProperties": null,
-  "Title": null,
-  "Description": null,
-  "LastSaved": "0001-01-01T00:00:00\u002B00:00",
+  "Id": "73df49f7-04af-4846-8bc8-b4600692cb3f",
+  "GameObjects": [
+    {
+      "Id": "cffdd16c-9b97-4ef9-8d4d-8fd7d5f68de3",
+      "Name": "2000_computer",
+      "Position": "-3.387243,-66.00967,31.93412",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/2000_computer/2000_computer.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "f5f3eb43-1e13-4d27-b39e-2b46a4d7f074",
+      "Name": "2000_keyboard",
+      "Position": "6.546403,-41.58273,31.95178",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/2000_keyboard/2000_keyboard.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "f0520a1e-2dd9-4e97-adde-455980f9d24b",
+      "Name": "Object",
+      "Position": "-144.7967,-40.80103,176.1118",
+      "Enabled": true,
+      "Children": [
+        {
+          "Id": "7bfc6c24-e2fd-4b94-bbaf-350306e983cd",
+          "Name": "Sun",
+          "Position": "0,0,0",
+          "Rotation": "0.09904575,0.8923991,0.2391176,0.3696438",
+          "Tags": "light_directional,light",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "DirectionalLight",
+              "FogMode": "Enabled",
+              "FogStrength": 1,
+              "LightColor": "0.91373,0.98039,1,1",
+              "Shadows": true,
+              "SkyColor": "0.05882,0.07451,0.08235,1"
+            }
+          ]
+        },
+        {
+          "Id": "7a65929b-ed22-4c5d-a1d9-3848502d51bb",
+          "Name": "2D Skybox",
+          "Position": "0,0,0",
+          "Tags": "skybox",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkyBox2D",
+              "SkyMaterial": "materials/skybox/light_test_sky_sunny02.vmat",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "001437a0-7edd-4a4e-aa17-91b0605a44ae",
+      "Name": "2000_mouse",
+      "Position": "6.612573,-26.25294,31.76903",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/2000_mouse/2000_mouse.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "f3e28737-c655-4fd4-8660-1cd56b79a1be",
+      "Name": "desk",
+      "Position": "-2.088516,-40.83282,0.000002909997",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/desk/desk.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "261f506c-7e4c-4633-93ee-ff294e2854e8",
+      "Name": "2000_monitor",
+      "Position": "-10.11702,-40.92942,31.91815",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/2000_monitor/2000_monitor.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "af28eb47-fd87-44a6-ae7f-29c5452e00fe",
+      "Name": "cardboard_box",
+      "Position": "-0.4868546,14.01555,0.000002976719",
+      "Rotation": "0,0,0.8660254,0.5000001",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/carboard_box/cardboard_box.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "811eeaac-07eb-426e-aaed-750147c53e16",
+      "Name": "cardboard_box2",
+      "Position": "0.05479431,51.28601,0.000002976719",
+      "Rotation": "0,0,0.8660254,0.5000001",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/carboard_box/cardboard_box2.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "93cbd267-9b2e-4f07-88d3-961fe404f17f",
+      "Name": "filing_cabinet",
+      "Position": "2.193565,87.88318,0.00000254758",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/filing_cabinet/filing_cabinet.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "fb294bb8-4474-46d7-ae1e-9bdf169cf05c",
+      "Name": "locker",
+      "Position": "5.193443,131.3737,0.00000254758",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/locker/locker.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "33a7e1d2-5c1d-4819-be56-69ee8f166cf9",
+      "Name": "office_chair",
+      "Position": "5.330551,-100.018,0.0000002009457",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/office_chair/office_chair.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "198b48dd-0bf4-41e1-a829-795a9e7d1481",
+      "Name": "paperwork",
+      "Position": "-0.5209198,13.83344,24.75908",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/paperwork/paperwork.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "375d0c0d-4776-405e-9e8e-a1031b305dcd",
+      "Name": "bulletin_board",
+      "Position": "-25.21352,8.265513,75.76933",
+      "Rotation": "0,0.7071067,0,0.7071068",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/bulletin_board/bulletin_board.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "0794560d-0754-4be4-b6c5-bbc18de40c99",
+      "Name": "clothing_parcel",
+      "Position": "76.33328,107.9597,0.9114869",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/clothing_parcel/clothing_parcel.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "faeaab35-9c4b-4dcf-8950-3ff6d060ea7d",
+      "Name": "toilet",
+      "Position": "0.6105194,-128.2952,0.00000983596",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/toilet/toilet.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "bd2886af-8c40-44f2-a171-cee1fbcd9ca5",
+      "Name": "urinal",
+      "Position": "0,-160.5357,32",
+      "Rotation": "0,0.7071067,0,0.7071068",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/urinal/urinal.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "efb62f14-ed70-4461-8704-e78d5c520fd2",
+      "Name": "sink",
+      "Position": "-6.197205,-189.1777,0.0000000000004670509",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/sink/sink.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "b404c2dd-7eae-4b51-9523-3fabf2dcc279",
+      "Name": "desk_lamp",
+      "Position": "-5.269394,-15.39181,31.91815",
+      "Scale": "0.7,0.6999999,0.7",
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/desk_lamp/desk_lamp.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "4038c3a3-3a9c-4c75-bc3b-5c8c3cdad8d6",
+      "Name": "ceiling_lamp",
+      "Position": "4.017402,-41.99945,72.51575",
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/ceiling_lamp/ceiling_lamp.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "b19cff60-b89d-476d-95f6-a31cc2e55f5c",
+      "Name": "electrical_box",
+      "Position": "-0.5924988,-230.1502,0.000002122988",
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/electrical_box/electrical_box.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "bd82382b-b518-4ce2-a94b-7a0e06fdd9c2",
+      "Name": "fluo_lamp",
+      "Position": "8.035683,-172.6951,69.73971",
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/fluo_lamp/fluo_lamp.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "9a601597-2b30-4e54-8cf9-2a7660c5d751",
+      "Name": "slot_machine",
+      "Position": "-5.376961,-280.2863,0.05937205",
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/slot_machine/slot_machine.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    },
+    {
+      "Id": "cd3646cc-4365-4d2b-9880-85007f544e93",
+      "Name": "cash_register",
+      "Position": "26.18428,-202.5744,0.000001985909",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Prop",
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/cash_register/cash_register.vmdl",
+          "OnPropBreak": null,
+          "OnPropTakeDamage": null,
+          "ShowCreatedComponents": false
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "Lerping": true,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "temp_test",
+  "Description": "",
+  "LastSaved": "2024-02-29T11:10:57.1920397\u002B00:00",
   "__references": []
 }
