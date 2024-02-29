@@ -47,7 +47,7 @@ public partial class RadioComponent : Component
 
 	protected override void OnStart()
 	{
-		var interactions = Components.Create<Interactions>();
+		var interactions = Components.GetOrCreate<Interactions>();
 
 		// Toggle
 		interactions.AddInteraction( new Interaction()
