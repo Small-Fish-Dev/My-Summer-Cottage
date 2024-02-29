@@ -76,4 +76,16 @@ public static partial class TaskNodes
 	{
 		TaskMaster.ResetEveryoneTask( taskToReset );
 	}
+
+	/// <summary>
+	/// Get a random task with the given parameters
+	/// </summary>
+	/// <param name="taskType"></param>
+	/// <param name="taskRarity"></param>
+	[ActionGraphNode( "event.getrandomtask" ), Pure]
+	[Title( "Get Random Task" ), Group( "Events" ), Icon( "calendar_month" )]
+	public static SaunaTask GetRandomTask( TaskType taskType = TaskType.Any, TaskRarity taskRarity = TaskRarity.Any )
+	{
+		return SaunaTask.GetRandomTask( taskType, taskRarity );
+	}
 }
