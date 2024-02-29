@@ -137,12 +137,23 @@
 							{
 								_class = "AnimEvent"
 								event_class = "AE_FOOTSTEP"
+								event_frame = 3
+								event_keys = 
+								{
+									Attachment = "foot_L"
+									Foot = "0"
+									Volume = 0.5
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
 								event_frame = 12
 								event_keys = 
 								{
 									Attachment = "hand_L"
 									Foot = "0"
-									Volume = 0.3
+									Volume = 0.5
 								}
 							},
 							{
@@ -152,8 +163,8 @@
 								event_keys = 
 								{
 									Attachment = "foot_R"
-									Foot = "0"
-									Volume = 0.3
+									Foot = "1"
+									Volume = 0.5
 								}
 							},
 							{
@@ -163,19 +174,8 @@
 								event_keys = 
 								{
 									Attachment = "hand_R"
-									Foot = "0"
-									Volume = 0.3
-								}
-							},
-							{
-								_class = "AnimEvent"
-								event_class = "AE_FOOTSTEP"
-								event_frame = 3
-								event_keys = 
-								{
-									Attachment = "foot_L"
-									Foot = "0"
-									Volume = 0.3
+									Foot = "1"
+									Volume = 0.5
 								}
 							},
 						]
@@ -195,6 +195,91 @@
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "elk_run"
+						children = 
+						[
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								root_bone_name = ""
+								motion_type = "Uniform"
+							},
+							{
+								_class = "AnimSmoothLoop"
+								frames_from_start = 2
+								frames_from_end = 2
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 12
+								event_keys = 
+								{
+									Attachment = "foot_L"
+									Foot = "0"
+									Volume = 2.0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 22
+								event_keys = 
+								{
+									Attachment = "hand_L"
+									Foot = "0"
+									Volume = 2.0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 24
+								event_keys = 
+								{
+									Attachment = "foot_R"
+									Foot = "1"
+									Volume = 2.0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 32
+								event_keys = 
+								{
+									Attachment = "hand_R"
+									Foot = "1"
+									Volume = 2.0
+								}
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/fauna/elk/elk_run.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 54.0
 						take = 0
 						reverse = false
 					},
@@ -227,7 +312,7 @@
 								{
 									Attachment = "foot_L"
 									Foot = "0"
-									Volume = 0.3
+									Volume = 0.5
 								}
 							},
 							{
@@ -237,8 +322,8 @@
 								event_keys = 
 								{
 									Attachment = "foot_R"
-									Foot = "0"
-									Volume = 0.3
+									Foot = "1"
+									Volume = 0.5
 								}
 							},
 						]
@@ -258,6 +343,94 @@
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "runN"
+						children = 
+						[
+							{
+								_class = "ExtractMotion"
+								extract_tx = true
+								extract_ty = true
+								extract_tz = false
+								extract_rz = false
+								linear = false
+								quadratic = false
+								root_bone_name = ""
+								motion_type = "Single"
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 21
+								event_keys = 
+								{
+									Attachment = "foot_L"
+									Foot = "0"
+									Volume = 2.0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 7
+								event_keys = 
+								{
+									Attachment = "foot_R"
+									Foot = "1"
+									Volume = 2.0
+								}
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/guy/animations/runN.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 36.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "elk_idle"
+						children = 
+						[
+							{
+								_class = "AnimSmoothLoop"
+								frames_from_start = 5
+								frames_from_end = 5
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/fauna/elk/elk_idle.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 12.0
 						take = 0
 						reverse = false
 					},
@@ -303,6 +476,28 @@
 						relative_angles = [ 0.0, 0.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "MovementSettings"
+						movementsettings = 
+						{
+							name = ""
+							speeds = [  ]
+							runspeed = 360.0
+							walkspeed = 140.0
+							maxSpringTension = 100.0
+							springConstant = 10.0
+							useSmoothPaths = true
+							useMotionDamping = false
+							sharpStartAngle = 180.0
+							m_vTraceScale = [ 1.0, 1.0, 1.0 ]
+						}
 					},
 				]
 			},
