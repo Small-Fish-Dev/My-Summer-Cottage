@@ -1,0 +1,70 @@
+﻿@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<div class="container" style="opacity: @( Hide ? 0 : 1 )">
+		<div class="top-text">
+			<div>LEVEL @Player.Local.Level</div>
+
+			<div>+@_delta EXP</div>
+
+			<div class="exp-text">
+				<text>@Player.Local.Experience</text>
+				<text>/</text>
+				<text>@Player.Local.ExpPerLevel XP</text>
+			</div>
+		</div>
+
+		<div class="exp-bar">
+			@* 100f in front to avoid the cast to float *@
+			<div class="progress" style="width: @( 100f * Player.Local.Experience / Player.Local.ExpPerLevel )%"/>
+		</div>
+	</div>
+</root>
+
+
+@code
+{
+	// Time in seconds
+	public const float TimeOnScreen = 3;
+
+	public TimeUntil Hide;
+
+	private int _delta;
+
+	protected override void OnAfterTreeRender( bool firstTime )
+	{
+		// TODO: it's acoustically regarded, but it works
+
+		if ( !firstTime )
+		{
+			Player.Local.OnExperienceEarned -= OnExperienceEarned;
+			Player.Local.OnLevelUp -= OnLevelUp;
+		}
+
+		Player.Local.OnExperienceEarned += OnExperienceEarned;
+		Player.Local.OnLevelUp += OnLevelUp;
+	}
+
+	void OnExperienceEarned( int delta )
+	{
+		if ( Hide )
+			_delta = 0;
+
+		_delta += delta;
+		Hide = TimeOnScreen;
+	}
+
+	void OnLevelUp( int newLevel )
+	{
+		Hide = TimeOnScreen;
+	}
+
+	public override void Tick()
+	{
+		base.Tick();
+	}
+
+	protected override int BuildHash() => HashCode.Combine( Player.Local.Experience, Player.Local.ExpPerLevel, _delta, (bool)Hide );
+}

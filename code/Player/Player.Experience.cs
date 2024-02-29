@@ -15,6 +15,7 @@ public partial class Player
 		(0, "Kalanruokaa")
 	};
 
+	public event Action<int> OnExperienceEarned;
 	public event Action<int> OnLevelUp;
 
 	public string GetRankName() => Ranks.First( rank => rank.MinLevel <= Level ).Name;
@@ -29,6 +30,7 @@ public partial class Player
 			Level++;
 		}
 		
+		OnExperienceEarned?.Invoke( exp );
 		if (oldLevel != Level)
 			OnLevelUp?.Invoke( Level );
 	}

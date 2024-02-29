@@ -54,7 +54,8 @@
 				</div>
 			</div>
 			<div class="exp-bar">
-				<div class="progress" style="width: @( Player.Local.Experience / Player.Local.ExpPerLevel * 100 )%"/>
+				@* 100f in front to avoid the cast to float *@
+				<div class="progress" style="width: @( 100f * Player.Local.Experience / Player.Local.ExpPerLevel )%"/>
 			</div>
 		</div>
 		<div class="inputs">
