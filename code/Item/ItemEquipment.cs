@@ -15,6 +15,10 @@ public class ItemEquipment : ItemComponent
 	[Property, Category( "Equipment" )] public EquipSlot Slot { get; set; } = EquipSlot.Hand;
 	[Property, Category( "Equipment" )] public HiddenBodyGroup HideBodygroups { get; set; }
 
+	[Property, Category( "Attachment" )] public bool UpdatePosition { get; set; }
+	[Property, Category( "Attachment" ), ShowIf( "UpdatePosition", true )] public string Attachment { get; set; } = "hand_R";
+	[Property, Category( "Attachment" ), ShowIf( "UpdatePosition", true )] public Transform AttachmentTransform { get; set; }
+
 	public ModelRenderer Renderer { get; private set; }
 
 	private ModelRenderer parcelRenderer;
@@ -75,5 +79,31 @@ public class ItemEquipment : ItemComponent
 		parcelBody.Enabled = !value;
 
 		return true;
+	}
+
+	protected override void OnPreRender()
+	{
+		if ( !Equipped || !UpdatePosition )
+			return;
+
+		var player = GameObject.Parent.Components.Get<Player>();
+		if ( player == null )
+			return;
+
+		var transform = player.GetAttachment( Attachment );
+		Transform.LocalPosition = AttachmentTransform.Position + 
+			(Attachment == string.Empty 
+				? 0 
+				: transform.Position);
+
+		Transform.LocalRotation = AttachmentTransform.Rotation * 
+			(Attachment == string.Empty
+				? Rotation.Identity
+				: transform.Rotation);
+	}
+
+	protected override void DrawGizmos()
+	{
+		
 	}
 }
