@@ -24,7 +24,7 @@
 	private DraggableItem CurrentDraggable { get; set; }
 	private string HasCurrentDraggableClassSelector => CurrentDraggable == null ? "" : "has-draggable";
 	private bool _isHoveringItem { get; set;} = false;
-
+	private TimeSince sinceClick;
 	protected override int BuildHash() => HashCode.Combine( Item?.GetHashCode() );
 
 	private void OpenContextMenu()
@@ -80,6 +80,21 @@
 
 		if ( e.Button != "mouseleft" )
 			return;
+
+		if ( sinceClick < 0.3f && Item is ItemEquipment equipment ) 
+		{
+			if ( equipment.Equipped )
+				Player.Local.Inventory.UnequipItem( equipment );
+			else	
+				Player.Local.Inventory.EquipItem( equipment );
+
+			Inventory.Instance.OnChanged();
+			sinceClick = 0;
+
+			return;
+		}
+
+		sinceClick = 0;
 
 		if ( CurrentDraggable != null )
 			return;
