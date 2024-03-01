@@ -20,7 +20,7 @@ partial class Player
 	SkinnedModelRenderer _puppet;
 	bool _isTransitioning = false;
 	float _oldAirFriction = 1f;
-	TimeUntil _unragdoll;
+	[Sync] TimeUntil _unragdoll { get; set; }
 	bool _couldRagdoll = true;
 	Vector3 _lastPosition = Vector3.Zero;
 	float _spin = 10f;
@@ -32,7 +32,7 @@ partial class Player
 	/// <param name="forced">Force the player to go through ragdoll state</param>
 	/// <param name="duration">How long ragdoll state lasts</param>
 	/// <param name="spin">How fast it spins towards the given velocity</param>
-	[Broadcast]
+	[Broadcast( NetPermission.Anyone )]
 	public void SetRagdoll( bool ragdoll, bool forced = true, float duration = 2f, float spin = 10f )
 	{
 		if ( ragdoll )

@@ -200,6 +200,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 			}
 		}
 
+		if ( IsRagdolled )
+			FollowRagdoll();
+
 		if ( IsProxy )
 			return;
 

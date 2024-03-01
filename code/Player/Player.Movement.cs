@@ -117,9 +117,6 @@ partial class Player
 		Collider.Scale = Collider.Scale.WithZ( height );
 		Collider.Center = Vector3.Up * height / 2f;
 
-		if ( IsRagdolled )
-			FollowRagdoll();
-
 		if ( Input.Pressed( "Ragdoll" ) && CanRagdoll )
 			SetRagdoll( !IsRagdolled );
 	}
