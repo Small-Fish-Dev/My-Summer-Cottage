@@ -29,7 +29,7 @@ public class ItemComponent : Component
 	/// </summary>
 	[Property] public int SellPrice { get; set; } = -1;
 
-	public string Prefab { get; private set; }
+	[Sync] public string Prefab { get; private set; }
 	public Texture IconTexture => Texture.Load( FileSystem.Mounted, Icon.Path );
 	public static implicit operator ItemComponent( GameObject obj )
 		=> obj.Components.Get<ItemComponent>();
