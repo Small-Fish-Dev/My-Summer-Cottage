@@ -125,8 +125,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	protected ParticleConeEmitter PissEmitter;
 	protected ParticleEffect PissParticles;
 
-	public Transform GetAttachment( string attachment )
-		=> Renderer.GetAttachment( attachment, false ) ?? global::Transform.Zero;
+	public Transform GetAttachment( string attachment, bool world = true )
+		=> Renderer.GetAttachment( attachment, world ) ?? global::Transform.Zero;
 
 	protected override void DrawGizmos()
 	{

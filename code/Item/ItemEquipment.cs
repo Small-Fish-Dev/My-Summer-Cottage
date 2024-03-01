@@ -90,21 +90,14 @@ public class ItemEquipment : ItemComponent
 		if ( player == null )
 			return;
 
-		var transform = player.GetAttachment( Attachment );
-		Transform.LocalPosition = AttachmentTransform.Position + 
-			(Attachment == string.Empty 
-				? 0 
-				: transform.Position);
-
-		Transform.LocalRotation = transform.Rotation *
-			(Attachment == string.Empty
-				? Rotation.Identity
-				: AttachmentTransform.Rotation);
+		var transform = player.GetAttachment( Attachment, false );
+		var rotated = Vector3.Zero.RotateAround( AttachmentTransform.Position, AttachmentTransform.Rotation );
+		Transform.LocalPosition = transform.Position + rotated;
+		Transform.LocalRotation = transform.Rotation * AttachmentTransform.Rotation;
 	}
 
 	#region GIZMO STUFF
 	private SceneModel _model;
-	private SceneObject _child;
 	private SceneObject GetModel()
 	{
 		var world = GameManager.ActiveScene?.SceneWorld;
@@ -112,17 +105,8 @@ public class ItemEquipment : ItemComponent
 			return null;
 
 		_model ??= new SceneModel( world, "models/guy/guy.vmdl", global::Transform.Zero );
-			
-		if ( _child == null )
-		{
-			var renderer = Components.Get<ModelRenderer>( FindMode.EverythingInSelfAndDescendants );
-			_child = new SceneObject( world, renderer.Model );
-			_model.AddChild( "held", _child );
-		}
-
 		_model.RenderingEnabled = true;
-		_child.RenderingEnabled = true;
-		return _child;
+		return _model;
 	}
 
 	protected override void DrawGizmos()
@@ -139,9 +123,6 @@ public class ItemEquipment : ItemComponent
 			if ( _model != null )
 				_model.RenderingEnabled = false;
 
-			if ( _child != null )
-				_child.RenderingEnabled = false;
-
 			return;
 		}
 
@@ -149,7 +130,18 @@ public class ItemEquipment : ItemComponent
 		if ( model == null )
 			return;
 
+		var renderer = Components.Get<ModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+		if ( renderer == null )
+			return;
+
 		var attachment = _model.GetAttachment( Attachment ) ?? global::Transform.Zero;
+
+		Gizmo.Draw.Model( renderer.Model, model.Transform );
+
+		Gizmo.Draw.IgnoreDepth = true;
+		Gizmo.Draw.SolidSphere( attachment.Position, 0.1f );
+		Gizmo.Draw.IgnoreDepth = false;
+
 		model.Position = attachment.Position + AttachmentTransform.Position;
 		model.Rotation = attachment.Rotation * AttachmentTransform.Rotation;
 
@@ -166,10 +158,7 @@ public class ItemEquipment : ItemComponent
 			}
 
 			if ( Gizmo.Control.Position( "position", Vector3.Zero, out var pos ) )
-			{
-				Log.Error( pos * model.Rotation );
 				AttachmentTransform = AttachmentTransform.WithPosition( AttachmentTransform.Position + pos * model.Rotation );
-			}
 		}
 	}
 	#endregion
