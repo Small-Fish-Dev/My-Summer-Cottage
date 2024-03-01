@@ -244,6 +244,7 @@ public class Inventory : Component
 	{
 		item.GameObject.Network.TakeOwnership();
 		item.GameObject.Parent = Player.GameObject;
+		item.LastParent = Player;
 	}
 
 	/// <summary>
