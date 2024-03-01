@@ -8,10 +8,90 @@ public class TaskMaster : Component
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
 
+	public class TaskCompletion
+	{
+		[JsonInclude]
+		public string Task { get; set; }
+		[JsonInclude]
+		public int TimesTriggered { get; set; }
+		[JsonInclude]
+		public int TimesCompleted { get; set; }
+
+		public TaskCompletion( string task, int timesTriggered = 0, int timesCompleted = 0 )
+		{
+			Task = task;
+			TimesTriggered = timesTriggered;
+			TimesCompleted = timesCompleted;
+		}
+	}
+
+	public struct SaunaTasksProgress
+	{
+		[JsonInclude]
+		public List<TaskCompletion> Tasks = new();
+
+		public SaunaTasksProgress() { }
+	}
+
+	public SaunaTasksProgress TasksCompletion { get; private set; } = new();
+
 	protected override void OnStart()
 	{
-		foreach ( var task in CurrentTasks ) // Tasks persist between sessions?
-			task.Reset();
+		LoadTasksCompletion();
+
+		for ( int i = 0; i < 10; i++ )
+		{
+			var task = SaunaTask.GetRandomTask();
+			TaskTriggered( task.ResourcePath );
+		}
+
+		SaveTasksCompletion();
+	}
+
+	public void TaskTriggered( string task )
+	{
+		var taskCompletionExists = TasksCompletion.Tasks.Any( x => x.Task == task );
+
+		if ( taskCompletionExists )
+		{
+			var foundTaskCompletion = TasksCompletion.Tasks.Where( x => x.Task == task ).First();
+			foundTaskCompletion.TimesTriggered++;
+		}
+		else
+		{
+			var newTaskCompletion = new TaskCompletion( task, 1, 0 );
+			TasksCompletion.Tasks.Add( newTaskCompletion );
+		}
+	}
+
+	public void TaskCompleted( string task )
+	{
+		var taskCompletionExists = TasksCompletion.Tasks.Any( x => x.Task == task );
+
+		if ( taskCompletionExists )
+		{
+			var foundTaskCompletion = TasksCompletion.Tasks.Where( x => x.Task == task ).First();
+			foundTaskCompletion.TimesCompleted++;
+		}
+		else
+		{
+			var newTaskCompletion = new TaskCompletion( task, 0, 1 );
+			TasksCompletion.Tasks.Add( newTaskCompletion );
+		}
+
+	}
+
+	public void LoadTasksCompletion()
+	{
+		if ( FileSystem.Data.FileExists( "tasks.json" ) )
+			TasksCompletion = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
+		else
+			TasksCompletion = new();
+	}
+
+	public void SaveTasksCompletion()
+	{
+		FileSystem.Data.WriteJson( "tasks.json", TasksCompletion );
 	}
 
 	protected override void OnFixedUpdate()
