@@ -6,7 +6,13 @@
 	<div class="item-details">
 		<div class="top-row" style="@(!HasDescription ? "align-items: center;" : "")">
 			<text class="item-name">@_item.Name</text>
-			<text class="item-weight">@_item.WeightInGrams.ToKilograms() kg</text>
+			<div style="flex-direction: column; align-items: flex-end; gap: 2px;">
+				<text class="item-weight">@_item.WeightInGrams.ToKilograms() kg</text>
+				@if (_item.IsSellable)
+				{
+					<div class="item-price">@($"{_item.SellPrice}mk")</div>
+				}
+			</div>
 		</div>
 		@if (HasDescription)
 		{
