@@ -1,0 +1,26 @@
+﻿@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<img class="image" @ref=_image />
+	<text class="caption">@Caption</text>
+</root>
+
+@code {
+	public Texture Texture { get; set; }
+	public string Caption { get; set; }
+
+	Image _image;
+
+	protected override void OnAfterTreeRender( bool firstTime )
+	{
+		base.OnAfterTreeRender( firstTime );
+		_image.Texture = Texture;
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Texture, Caption );
+	}
+}

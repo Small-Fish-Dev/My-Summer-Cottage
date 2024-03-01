@@ -3,9 +3,61 @@
 @inherits Panel
 
 <root>
+	<div class="title">Day @(Hud.Instance.GameTimeManager.Day - 1) completed!</div>
+	<div class="information">
+		<div class="sweet-memories" @ref=_memoryContainer >
+			<div class="title" />
+			<MemoryPanel 
+				class="first back"
+				Texture=@Texture.Load( FileSystem.Mounted, "ui/memories/first.png" )
+				Caption="It was a tough day of avoiding all the CIA agents."
+			/>
 
+			<MemoryPanel 
+				class="second back"
+				Texture=@Texture.Load( FileSystem.Mounted, "ui/memories/second.png" )
+				Caption="le cottage has le fallen"
+			/>
+		</div>
+
+		<div class="progress">
+			Fuck ass BOB
+		</div>
+	</div>
 </root>
 
 @code {
+	private const float DISPLAY_TIME = 6f;
 
+	TimeSince _sinceNext = DISPLAY_TIME;
+	int _currentMemory;
+	Panel _memoryContainer;
+	MemoryPanel _currentPanel;
+
+	public override void Tick()
+	{
+		if ( SweetMemories.All.Count == 0 )
+			return;
+
+		// Move to next memory.
+		if ( _sinceNext > DISPLAY_TIME )
+		{
+			_currentPanel?.Delete();
+			_currentMemory = _currentMemory >= SweetMemories.All.Count - 1 
+				? 0
+				: _currentMemory + 1;
+
+			var memory = SweetMemories.All.ElementAt( _currentMemory );
+			_currentPanel = _memoryContainer.AddChild<MemoryPanel>();
+			_currentPanel.Texture = memory.Texture;
+			_currentPanel.Caption = memory.Caption;
+
+			_sinceNext = 0;
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( _currentMemory );
+	}
 }

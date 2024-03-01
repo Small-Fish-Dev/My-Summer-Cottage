@@ -15,8 +15,8 @@ public class SweetMemories : Panel
 {
 	public const int RESOLUTION = 512;
 
-	public static IReadOnlyList<SweetMemory> All => all;
-	private static List<SweetMemory> all = new();
+	public static IReadOnlyList<SweetMemory> All => _all;
+	private static List<SweetMemory> _all = new();
 	private static List<SweetMemory> _queue = new();
 
 	/// <summary>
@@ -34,7 +34,7 @@ public class SweetMemories : Panel
 		{
 			Texture = Texture.CreateRenderTarget()
 				.WithSize( RESOLUTION )
-				.Create( "sweetmemory" ),
+				.Create( $"sweetmemory_{_all.Count}" ),
 
 			Position = position,
 			Rotation = (lookAt.HasValue ? Rotation.LookAt( lookAt.Value - position ) : Rotation.Identity) * rotation,
@@ -42,6 +42,7 @@ public class SweetMemories : Panel
 			Caption = caption,
 		};
 
+		_all.Add( memory );
 		_queue.Add( memory );
 		return memory;
 	}
@@ -50,7 +51,7 @@ public class SweetMemories : Panel
 	/// Clears all the sweet memories.
 	/// </summary>
 	public static void Clear()
-		=> all.Clear();
+		=> _all.Clear();
 
 	void Render( Texture texture, Vector3 position, Rotation rotation )
 	{
@@ -96,6 +97,8 @@ public class SweetMemories : Panel
 
 		// Render to texture.
 		Graphics.RenderToTexture( camera, texture );
+
+		camera.Dispose();
 	}
 
 	public override void DrawBackground( ref RenderState state )
@@ -106,17 +109,10 @@ public class SweetMemories : Panel
 		// Render
 		var item = _queue.First();
 		Player.HideHead = false;
+		Log.Error( item.Position );
 		Render( item.Texture, item.Position, item.Rotation );
 		_queue.Remove( item );
 		Player.HideHead = true;
-
-		var img = Hud.Instance.Panel.AddChild<Image>();
-		img.Style.Width = 512;
-		img.Style.Height = 512;
-		img.Style.Position = PositionMode.Absolute;
-		img.Style.BackgroundSizeX = 512;
-		img.Style.BackgroundSizeY = 512;
-		img.Texture = item.Texture;
 	}
 
 	[ConCmd]

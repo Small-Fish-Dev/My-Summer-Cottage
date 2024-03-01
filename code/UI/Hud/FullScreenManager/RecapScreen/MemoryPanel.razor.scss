@@ -1,0 +1,28 @@
+﻿$paper-color: #f1ebe4;
+$caption-color: #785858;
+
+MemoryPanel {
+    background-color: $paper-color;
+    padding: 35px;
+    flex-direction: column;
+    gap: 15px;
+
+    .image {
+        width: 100%;
+        aspect-ratio: 1;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        backdrop-filter: grayscale(100%);
+    }
+
+    .caption {
+        font-family: HabboExtended;
+        color: $caption-color;
+        font-size: 24px;
+        letter-spacing: 3px;
+        line-height: 28px;
+        font-weight: bold;
+        text-shadow: 2px 2px 0px rgba(black 0.4);
+    }
+}
