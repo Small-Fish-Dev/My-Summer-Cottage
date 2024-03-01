@@ -1,12 +1,59 @@
 {
   "Name": "I\u0027m gooombling",
   "Description": "Gamble your life savings away.",
+  "TaskType": "Any",
+  "TaskRarity": "Any",
   "IsPrimary": true,
   "Global": false,
   "TimeLimited": false,
   "TimeLimitInSeconds": 120,
   "OnStart": null,
-  "OnSuccess": null,
+  "OnSuccess": {
+    "Version": 5,
+    "UserData": {
+      "Title": "On Success",
+      "id": "109066ea-dd35-424f-82c0-caacd7c83156",
+      "ReferencedComponentTypes": []
+    },
+    "Variables": [],
+    "Nodes": [
+      {
+        "Id": 0,
+        "Type": "input"
+      },
+      {
+        "Id": 1,
+        "Type": "call",
+        "Properties": {
+          "_type": "package.fish.sauna/Sauna.Player",
+          "_name": "CaptureMemory",
+          "_isStatic": false
+        },
+        "UserData": {
+          "Position": "192,0"
+        }
+      }
+    ],
+    "Links": [
+      {
+        "SrcId": 0,
+        "SrcName": "_signal",
+        "DstId": 1,
+        "DstName": "_signal"
+      },
+      {
+        "SrcId": 0,
+        "SrcName": "player",
+        "DstId": 1,
+        "DstName": "_target"
+      },
+      {
+        "Value": "A day spent well (gambling)! The wife is probably going to nag about this too...",
+        "DstId": 1,
+        "DstName": "caption"
+      }
+    ]
+  },
   "OnFail": null,
   "FailConditionCheck": null,
   "Subtasks": [
@@ -21,10 +68,7 @@
   "Started": false,
   "Completed": false,
   "TaskTimer": {
-    "Absolute": 2113.3179,
-    "Relative": -577.25366,
-    "Passed": 577.25366,
-    "Fraction": 1
+    "Fraction": "NaN"
   },
   "__references": []
 }
