@@ -7,6 +7,7 @@
 float GrassSize 	< UiType( VectorText ); Default( 2.0f ); Range ( 1.0f, 20.0f ); UiGroup("Grass Settings,20/10"); >;
 float GrassRandom 	< UiType( VectorText ); Default( 1.0f ); Range ( 0.0f, 5.0f  ); UiGroup("Grass Settings,20/20"); >;
 float GrassScale 	< UiType( VectorText ); Default( 6.0f ); Range ( 1.0f, 12.0f ); UiGroup("Grass Settings,20/30"); >;
+float SwayIntensity	< UiType( VectorText ); Default( 14.0f); Range ( 1.0f, 28.0f ); UiGroup("Grass Settings,20/40"); >;
 
 // Rotation matrix bullshit: taken from https://gist.github.com/keijiro/ee439d5e7388f3aafc5296005c8c3f33 
 // Usage: float3x3 rotationMatrix = AngleAxis3x3( 0.4f, float3( 0, 0, 1 ) ) - create rotation matrix with angle 0.4 on Z axis. 
@@ -96,7 +97,7 @@ void MainGs( triangle in PixelInput input[3], inout TriangleStream<PixelInput> t
 	for (float k = 0; k < 3; k++)
 	{
 		PS_INPUT o = input[k];
-		float sway = sin ( g_flTime ) / 12; // Shrimplest sway animation possible. Speed can be exposed as a variable imo.
+		float sway = sin( g_flTime ) / SwayIntensity; // Shrimplest sway animation possible. Speed can be exposed as a variable imo.
 
 		EmitGrass( triStream, o, float3( GrassSize, 0, 0 ), 	 float2(   1, 1 ), GrassScale );
 		EmitGrass( triStream, o, float3(-GrassSize, 0, 0 ), 	 float2(   0, 1 ), GrassScale );
