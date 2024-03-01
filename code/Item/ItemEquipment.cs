@@ -24,6 +24,7 @@ public class ItemEquipment : ItemComponent
 	private ModelRenderer parcelRenderer;
 	private BoxCollider parcelCollider;
 	private Rigidbody parcelBody;
+	private GameObject iconWorldObject;
 
 	private bool _equipped = false;
 
@@ -50,7 +51,7 @@ public class ItemEquipment : ItemComponent
 			}
 		}
 	}
-	
+
 	public void ToggleRenderer( bool value )
 	{
 		Renderer ??= Components.Get<SkinnedModelRenderer>( FindMode.InSelf ) ?? Components.Get<ModelRenderer>( FindMode.InSelf );
@@ -72,9 +73,12 @@ public class ItemEquipment : ItemComponent
 			parcelCollider.Scale = new Vector3( 27f, 27f, 7.5f );
 
 			parcelBody = Components.GetOrCreate<Rigidbody>();
+
+			CreateIconWorldPanel();
 		}
 
-		parcelRenderer.Enabled = !value; 
+		iconWorldObject.Enabled = !value;
+		parcelRenderer.Enabled = !value;
 		parcelCollider.Enabled = !value;
 		parcelBody.Enabled = !value;
 
@@ -91,19 +95,32 @@ public class ItemEquipment : ItemComponent
 			return;
 
 		var transform = player.GetAttachment( Attachment );
-		Transform.LocalPosition = AttachmentTransform.Position + 
-			(Attachment == string.Empty 
-				? 0 
+		Transform.LocalPosition = AttachmentTransform.Position +
+			(Attachment == string.Empty
+				? 0
 				: transform.Position);
 
-		Transform.LocalRotation = AttachmentTransform.Rotation * 
+		Transform.LocalRotation = AttachmentTransform.Rotation *
 			(Attachment == string.Empty
 				? Rotation.Identity
 				: transform.Rotation);
 	}
 
+	private void CreateIconWorldPanel()
+	{
+		if ( iconWorldObject is not null )
+			return;
+
+		iconWorldObject = new GameObject { Parent = GameObject };
+		iconWorldObject.Transform.LocalPosition = new Vector3( 0, 0, 10 );
+		iconWorldObject.Transform.LocalRotation = Rotation.FromPitch( 90 );
+		iconWorldObject.NetworkSpawn();
+		iconWorldObject.Components.GetOrCreate<Sandbox.WorldPanel>();
+		iconWorldObject.Components.GetOrCreate<IconWorldPanel>().Icon = IconTexture;
+	}
+
 	protected override void DrawGizmos()
 	{
-		
+
 	}
 }
