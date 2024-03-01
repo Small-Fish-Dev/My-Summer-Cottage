@@ -8,10 +8,133 @@ public class TaskMaster : Component
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
 
+	public class TaskCompletion
+	{
+		[JsonInclude]
+		public string Task { get; set; }
+		[JsonInclude]
+		public int TimesTriggered { get; set; }
+		[JsonInclude]
+		public int TimesCompleted { get; set; }
+
+		public TaskCompletion( string task, int timesTriggered = 0, int timesCompleted = 0 )
+		{
+			Task = task;
+			TimesTriggered = timesTriggered;
+			TimesCompleted = timesCompleted;
+		}
+	}
+
+	public struct SaunaTasksProgress
+	{
+		[JsonInclude]
+		public List<TaskCompletion> Tasks = new();
+
+		public SaunaTasksProgress() { }
+	}
+
+	public SaunaTasksProgress TasksCompletion { get; private set; } = new();
+
 	protected override void OnStart()
 	{
-		foreach ( var task in CurrentTasks ) // Tasks persist between sessions?
-			task.Reset();
+		LoadTasksCompletion();
+	}
+
+	/// <summary>
+	/// Get the current stats on that task
+	/// </summary>
+	/// <param name="task"></param>
+	/// <returns></returns>
+	public static TaskCompletion GetTaskCompletion( SaunaTask task )
+	{
+		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+
+		if ( taskMaster == null ) return null;
+
+		var taskPath = task.ResourcePath;
+		var taskCompletionExists = taskMaster.TasksCompletion.Tasks.Any( x => x.Task == taskPath );
+
+		if ( taskCompletionExists )
+		{
+			var foundTaskCompletion = taskMaster.TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
+			foundTaskCompletion.TimesTriggered++;
+
+			return foundTaskCompletion;
+		}
+		else
+		{
+			var newTaskCompletion = new TaskCompletion( taskPath, 0, 0 );
+			taskMaster.TasksCompletion.Tasks.Add( newTaskCompletion );
+
+			return newTaskCompletion;
+		}
+	}
+
+	/// <summary>
+	/// Increase that task's total triggered amount
+	/// </summary>
+	/// <param name="task"></param>
+	public static void TaskTriggered( SaunaTask task )
+	{
+		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+
+		if ( taskMaster == null ) return;
+
+		var taskPath = task.ResourcePath;
+		var taskCompletionExists = taskMaster.TasksCompletion.Tasks.Any( x => x.Task == taskPath );
+
+		if ( taskCompletionExists )
+		{
+			var foundTaskCompletion = taskMaster.TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
+			foundTaskCompletion.TimesTriggered++;
+		}
+		else
+		{
+			var newTaskCompletion = new TaskCompletion( taskPath, 1, 0 );
+			taskMaster.TasksCompletion.Tasks.Add( newTaskCompletion );
+		}
+
+		taskMaster.SaveTasksCompletion();
+	}
+
+	/// <summary>
+	/// Increase that task's total completed amount
+	/// </summary>
+	/// <param name="task"></param>
+	public static void TaskCompleted( SaunaTask task )
+	{
+		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+
+		if ( taskMaster == null ) return;
+
+		var taskPath = task.ResourcePath;
+		var taskCompletionExists = taskMaster.TasksCompletion.Tasks.Any( x => x.Task == taskPath );
+
+		if ( taskCompletionExists )
+		{
+			var foundTaskCompletion = taskMaster.TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
+			foundTaskCompletion.TimesCompleted++;
+		}
+		else
+		{
+			var newTaskCompletion = new TaskCompletion( taskPath, 0, 1 );
+			taskMaster.TasksCompletion.Tasks.Add( newTaskCompletion );
+		}
+
+		taskMaster.SaveTasksCompletion();
+	}
+
+	public void LoadTasksCompletion()
+	{
+		if ( FileSystem.Data.FileExists( "tasks.json" ) )
+			TasksCompletion = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
+		else
+			TasksCompletion = new();
+	}
+
+	public void SaveTasksCompletion()
+	{
+		FileSystem.Data.WriteJson( "tasks.json", TasksCompletion );
 	}
 
 	protected override void OnFixedUpdate()

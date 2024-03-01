@@ -143,6 +143,7 @@ partial class Player
 		EyeAngles = ang;
 	}
 
+	Rotation _lastRot;
 	protected void UpdateCamera()
 	{
 		if ( Camera == null )
@@ -157,9 +158,11 @@ partial class Player
 
 		Camera.Transform.Position = IsRagdolled ? Vector3.Lerp( oldEyePos, newEyePos, Time.Delta * 10f ) : newEyePos;
 		Camera.Transform.Rotation = IsRagdolled ? Rotation.Lerp( oldEyeRot, newEyeRot, Time.Delta * 5f ) : newEyeRot;
+		var newRot = Rotation.FromRoll( Vector3.Dot( Transform.Rotation.Right, MoveHelper.Velocity.Normal ) ) * 2f;
+		_lastRot = Rotation.Lerp( _lastRot, newRot, Time.Delta * 5f );
+		Camera.Transform.Rotation *= _lastRot;
 		Camera.FieldOfView = MathX.LerpTo( Camera.FieldOfView, Input.Down( "view" ) ? Zoom : 90f, 10f * Time.Delta );
 		Camera.ZNear = 2.5f;
-
 		UpdateHeadVisibility();
 	}
 

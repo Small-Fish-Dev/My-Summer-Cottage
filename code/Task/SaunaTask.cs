@@ -68,9 +68,11 @@ public partial class SaunaTask : GameResource
 		public TaskRequirement EvaluateOnTick { get; set; }
 
 		[Hide]
+		[JsonIgnore]
 		public int CurrentAmount { get; set; } = 0;
 
 		[Hide]
+		[JsonIgnore]
 		public bool Completed { get; set; } = false;
 
 		public Subtask() { }
