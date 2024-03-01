@@ -316,6 +316,14 @@
 					{
 						_class = "AnimFile"
 						name = "bugle"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "bugle"
+								frame = 0
+							},
+						]
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -407,9 +415,8 @@
 						children = 
 						[
 							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 2
-								frames_from_end = 2
+								_class = "AnimStartLoop"
+								start_loop_frame = 4
 							},
 						]
 						activity_name = ""
@@ -495,6 +502,38 @@
 							sharpStartAngle = 180.0
 							m_vTraceScale = [ 1.0, 1.0, 1.0 ]
 						}
+					},
+				]
+			},
+			{
+				_class = "WeightListList"
+				children = 
+				[
+					{
+						_class = "WeightList"
+						name = "head"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "clavicle_L"
+								weight = 0.0
+							},
+							{
+								bone = "clavicle_R"
+								weight = 0.0
+							},
+							{
+								bone = "neck0"
+								weight = 1.0
+							},
+							{
+								bone = "spine2"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
 					},
 				]
 			},
