@@ -3,9 +3,6 @@ namespace Sauna;
 public class ShopItem : Component, Component.ExecuteInEditor
 {
 	[Property]
-	public string Name { get; set; }
-
-	[Property]
 	public PrefabFile Item { get; set; }
 
 	[Property]
@@ -22,7 +19,7 @@ public class ShopItem : Component, Component.ExecuteInEditor
 		if ( !Network.Active )
 			GameObject.NetworkSpawn();
 
-		GameObject.Name = $"{Name} €{Price}";
+		GameObject.Name = $"Buy {PrefabLibrary.AsDefinition( Item ).GetComponent<ItemComponent>().Get<string>( "Name" )}";
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 
 		var interactions = Components.GetOrCreate<Interactions>();
@@ -31,8 +28,10 @@ public class ShopItem : Component, Component.ExecuteInEditor
 			Identifier = "item.purchase",
 			Action = PurchaseItem,
 			Keybind = "use",
-			Description = $"Purchase €{Price}",
+			Description = $"{Price}mk",
 			Disabled = () => Player.Local.Money < Price,
+			ShowWhenDisabled = true,
+			DynamicColor = () => Player.Local.Money < Price ? Color.Red : Color.FromBytes( 116, 254, 64 ),
 		} );
 	}
 

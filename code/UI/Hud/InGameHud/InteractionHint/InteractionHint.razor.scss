@@ -5,7 +5,6 @@ InteractionHint {
     position: absolute;
     border-radius: 10px;
     transform-origin: left top;
-    transition: transform 0.5s ease-in-out;
     opacity: 0;
     font-family: BasicHandwriting;
 
@@ -59,8 +58,8 @@ InteractionHint {
             margin-right: 12px;
         }
 
-        &.disabled {
-            opacity: 0.8;
+        &.inactive {
+            opacity: 0.5;
         }
     }
 

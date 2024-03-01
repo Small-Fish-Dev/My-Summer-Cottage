@@ -21,11 +21,13 @@
 				if ( !FromHold && interaction.HoldOnly )
 					continue;
 
-				if ( CanInteract( interaction ) )
+				var disabled = !CanInteract( interaction );
+				if ( !disabled || interaction.ShowWhenDisabled )
 				{
-					<div class="interaction @(!HasPriority( interaction.Keybind ) ? "disabled" : "")">
+					var inactive = !HasPriority( interaction.Keybind ) || disabled;
+					<div class="interaction @(inactive ? "inactive" : "")">
 						<inputhint class="hint" input=@interaction.Keybind />
-						<text class="description">@interaction.Text</text>
+						<text class="description" style="color: @interaction.Color.Hex">@interaction.Text</text>
 					</div>
 				}
 			}
@@ -46,7 +48,6 @@
 	private const float INTERACTION_COOLDOWN = 0.1f;
 	private static List<string> priorityList = new();
 	private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
-	private Vector2 _lerpPosition;
 	private static TimeSince _lastInteracted;
 
 	public InteractionHint()
@@ -124,9 +125,9 @@
 		if ( FromHold ) // No need to play use animation for held items.
 			return;
 
-		_lerpPosition = Vector2.Lerp( _lerpPosition, pos.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
-        Style.Left = Length.Fraction( MathF.Floor( _lerpPosition.x * 200f + 0.5f ) / 200f );
-        Style.Top = Length.Fraction( MathF.Floor( _lerpPosition.y * 200f + 0.5f ) / 200f );
+		var screenPosition = pos.ToScreen();
+        Style.Left = Length.Fraction( MathF.Floor( screenPosition.x * 200f + 0.5f ) / 200f );
+        Style.Top = Length.Fraction( MathF.Floor( screenPosition.y * 200f + 0.5f ) / 200f );
 	}
 
 	protected override int BuildHash()

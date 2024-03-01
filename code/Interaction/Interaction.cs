@@ -46,16 +46,29 @@ public struct Interaction
 	public delegate void InteractionEvent( Player interactor, GameObject obj );
 
 	/// <summary>
-	/// Whether or not the interaction is able to be performed
+	/// Whether or not the interaction can be performed.
 	/// </summary>
 	[Property]
 	public Func<bool> Disabled { get; set; }
+
+	/// <summary>
+	/// If the interaction is disabled, we still show it in the list but with a disabled look.
+	/// </summary>
+	[Property]
+	public bool ShowWhenDisabled { get; set; }
 
 	/// <summary>
 	/// What the text should be displayed as
 	/// </summary>
 	[Property]
 	public Func<string> DynamicText { get; set; }
+
+
+	/// <summary>
+	/// The color the text will use
+	/// </summary>
+	[Property]
+	public Func<Color> DynamicColor { get; set; }
 
 	/// <summary>
 	/// What context should the input be called in
@@ -86,6 +99,12 @@ public struct Interaction
 	/// </summary>
 	[Hide, JsonIgnore]
 	public string Text => DynamicText?.Invoke() ?? Description;
+
+	/// <summary>
+	/// The color that should actually be displayed.
+	/// </summary>
+	[Hide, JsonIgnore]
+	public Color Color => DynamicColor?.Invoke() ?? Color.White;
 
 	/// <summary>
 	/// Uses the interactions input mode and gets the key state by input action
