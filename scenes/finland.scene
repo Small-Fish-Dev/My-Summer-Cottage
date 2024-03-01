@@ -246,14 +246,14 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.6337855,0,0.7735088",
+          "Rotation": "0,0.2799714,0,0.9600083",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "1.90992,1.64327,1.44721,2"
+              "Tint": "0.63149,0.8129,1.1159,2"
             }
           ]
         },
@@ -265,7 +265,7 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.95496,0.82164,0.72361,1",
+              "Color": "0.31574,0.40645,0.55795,1",
               "EndDistance": 10000,
               "FalloffExponent": 1,
               "Height": 10000,
@@ -278,7 +278,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.1372864,0.4542905,0.2546268,0.8425781",
+          "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
           "Tags": "light_directional,light",
           "Enabled": true,
           "Components": [
@@ -286,7 +286,7 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.95496,0.82164,0.72361,1",
+              "LightColor": "0.31574,0.40645,0.55795,1",
               "Shadows": false,
               "SkyColor": "0.00784,0.03922,0.0902,1"
             }
@@ -303,6 +303,7 @@
       "Components": [
         {
           "__type": "EventComponent",
+          "__enabled": false,
           "DisabledWhilePlaying": [],
           "DisableOnTrigger": [],
           "Event": {
@@ -578,6 +579,7 @@
           "Components": [
             {
               "__type": "ModelRenderer",
+              "__enabled": false,
               "BodyGroups": 18446744073709551615,
               "MaterialGroup": null,
               "MaterialOverride": null,
@@ -595,6 +597,7 @@
           "Components": [
             {
               "__type": "EventAreaTrigger",
+              "__enabled": false,
               "Extents": "20,20,30",
               "MaxPollingRate": 5,
               "Offset": "0,0,15",
@@ -1387,6 +1390,7 @@
               "Components": [
                 {
                   "__type": "ModelRenderer",
+                  "__enabled": false,
                   "BodyGroups": 341,
                   "MaterialGroup": null,
                   "MaterialOverride": null,
@@ -1404,6 +1408,7 @@
               "Components": [
                 {
                   "__type": "EventAreaTrigger",
+                  "__enabled": false,
                   "Extents": "295.9999,173.4401,100",
                   "MaxPollingRate": 5,
                   "Offset": "0,0,50",
@@ -1421,6 +1426,7 @@
               "Components": [
                 {
                   "__type": "EventAreaTrigger",
+                  "__enabled": false,
                   "Extents": "348.1601,949.3594,100",
                   "MaxPollingRate": 5,
                   "Offset": "0,0,50",
@@ -1444,6 +1450,7 @@
               "Components": [
                 {
                   "__type": "EventComponent",
+                  "__enabled": false,
                   "DisabledWhilePlaying": [],
                   "DisableOnTrigger": [
                     {
@@ -1584,8 +1591,8 @@
                         "Id": 11,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Normal",
-                          "_type": "Sandbox.System/Vector3"
+                          "_type": "Sandbox.System/Vector3",
+                          "_name": "Normal"
                         },
                         "UserData": {
                           "Position": "336,320"
@@ -2039,6 +2046,7 @@
               "Components": [
                 {
                   "__type": "EventComponent",
+                  "__enabled": false,
                   "DisabledWhilePlaying": [
                     {
                       "_type": "component",
@@ -2815,7 +2823,11 @@
         {
           "__type": "ItemEquipment",
           "Attachment": "hand_R",
-          "AttachmentTransform": {},
+          "AttachmentTransform": {
+            "UniformScale": 1,
+            "Scale": "1,1,1",
+            "Rotation": "0,0,0,1"
+          },
           "Description": "Wow, this looks like it packs a punch.",
           "HideBodygroups": "None",
           "Icon": {
@@ -2929,669 +2941,6 @@
           "MaxPollingRate": 5,
           "Offset": "0,0,0",
           "TriggerSignalIdentifier": null
-        }
-      ]
-    },
-    {
-      "Id": "292617f0-d52c-4bdb-91f1-b3832cc9de89",
-      "Name": "matek / 76561198009869837",
-      "Position": "553.7131,31.99317,19.22379",
-      "Rotation": "0,0,-0.5652258,0.8249366",
-      "Tags": "localplayer,player",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Player",
-          "DuckSpeed": 60,
-          "Experience": 0,
-          "Fatness": 0.046153847,
-          "Height": 12,
-          "JumpStrength": 280,
-          "Level": 0,
-          "Money": 0,
-          "MoveHelper": {
-            "_type": "component",
-            "go": "292617f0-d52c-4bdb-91f1-b3832cc9de89",
-            "component_type": "MoveHelper"
-          },
-          "Penoid": {
-            "_type": "component",
-            "go": "e1a7f991-40a6-4c95-8d3a-20b7b62fd811",
-            "component_type": "SkinnedModelRenderer"
-          },
-          "SkinColor": "1,1,1,1",
-          "SprintSpeed": 260,
-          "WalkSpeed": 80,
-          "Zoom": 30
-        },
-        {
-          "__type": "Inventory",
-          "Player": {
-            "_type": "component",
-            "go": "292617f0-d52c-4bdb-91f1-b3832cc9de89",
-            "component_type": "Player"
-          }
-        },
-        {
-          "__type": "BoxCollider",
-          "Center": "0,0,36",
-          "IsTrigger": false,
-          "Scale": "25,25,72",
-          "Static": false,
-          "Surface": null
-        },
-        {
-          "__type": "MoveHelper",
-          "AccelerationCurve": [
-            {
-              "x": 0.5,
-              "y": 0.5053192
-            }
-          ],
-          "AirAcceleration": 800,
-          "AirFriction": 1,
-          "Bounce": 0.3,
-          "Collider": null,
-          "EnableUnstuck": true,
-          "Gravity": "0,0,850",
-          "GroundAcceleration": 2000,
-          "GroundAngle": 45,
-          "GroundFriction": 30,
-          "IgnoreTags": "trigger",
-          "MaxUnstuckTries": 20,
-          "StepHeight": 18,
-          "StickToGround": true,
-          "StopSpeed": 10,
-          "TraceHeight": 72,
-          "TraceRadius": 16,
-          "TraceType": "BBox",
-          "UseCollider": false,
-          "UseSceneGravity": true
-        },
-        {
-          "__type": "Rigidbody",
-          "AngularDamping": 0,
-          "Gravity": false,
-          "LinearDamping": 0,
-          "Locking": {
-            "X": true,
-            "Y": true,
-            "Z": true,
-            "Pitch": true,
-            "Yaw": true,
-            "Roll": true
-          },
-          "MassOverride": 0,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        }
-      ],
-      "Children": [
-        {
-          "Id": "25683e95-763b-4aa9-acfc-a13c51ebe495",
-          "Name": "Camera",
-          "Position": "6.343817,0.09349251,67.08053",
-          "Rotation": "0.0000001378357,0.07141153,-0.0000008642673,0.9974468",
-          "Tags": "maincamera",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "CameraComponent",
-              "BackgroundColor": "0.33333,0.46275,0.52157,1",
-              "ClearFlags": "All",
-              "FieldOfView": 90,
-              "IsMainCamera": true,
-              "Orthographic": false,
-              "OrthographicHeight": 1204,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": "",
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 10000,
-              "ZNear": 2.5
-            },
-            {
-              "__type": "Voice",
-              "Loopback": false,
-              "Mode": "PushToTalk",
-              "MorphScale": 3,
-              "MorphSmoothTime": 0.1,
-              "PushToTalkInput": "voice",
-              "Renderer": null,
-              "Volume": 1,
-              "WorldspacePlayback": true
-            },
-            {
-              "__type": "AudioListener"
-            },
-            {
-              "__type": "DitherHook"
-            },
-            {
-              "__type": "EyeProtector"
-            }
-          ]
-        },
-        {
-          "Id": "eb58c932-ff59-4706-ae12-e14e0116c0f5",
-          "Name": "Model",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
-              "BodyGroups": 273,
-              "BoneMergeTarget": null,
-              "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/guy/guy.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "Id": "e1a7f991-40a6-4c95-8d3a-20b7b62fd811",
-          "Name": "Penoid",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "SkinnedModelRenderer",
-              "__enabled": false,
-              "AnimationGraph": null,
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": {
-                "_type": "component",
-                "go": "eb58c932-ff59-4706-ae12-e14e0116c0f5",
-                "component_type": "SkinnedModelRenderer"
-              },
-              "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/guy/penoid.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "CensorComponent"
-            }
-          ],
-          "Children": [
-            {
-              "Id": "04c85f9a-6cc7-4224-8699-0741318c119b",
-              "Name": "Piss",
-              "Position": "1.936967,0.0000001154522,34.7722",
-              "Tags": "particles",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "ParticleEffect",
-                  "Alpha": {
-                    "Type": "Curve",
-                    "CurveA": [
-                      {
-                        "y": 1
-                      },
-                      {
-                        "x": 0.48029557,
-                        "y": 1,
-                        "in": 1.5365853,
-                        "out": -1.5365853
-                      },
-                      {
-                        "x": 1,
-                        "in": 1.312303,
-                        "out": -1.312303
-                      }
-                    ],
-                    "Constants": "1,0,0,0"
-                  },
-                  "ApplyColor": true,
-                  "ApplyRotation": true,
-                  "ApplyShape": true,
-                  "Bounce": {},
-                  "Brightness": {
-                    "Constants": "1,0,0,0"
-                  },
-                  "Bumpiness": {},
-                  "Collision": true,
-                  "CollisionIgnore": "localplayer",
-                  "CollisionRadius": 1,
-                  "Damping": {},
-                  "DieOnCollisionChance": {},
-                  "Force": true,
-                  "ForceDirection": "0,0,-200",
-                  "ForceScale": {
-                    "Constants": "1,0,0,0"
-                  },
-                  "Friction": {
-                    "Constants": "100,0,0,0"
-                  },
-                  "Gradient": {
-                    "Type": "Range",
-                    "Evaluation": "Particle",
-                    "GradientA": {
-                      "color": [
-                        {
-                          "t": 0.5,
-                          "c": "1,1,1,1"
-                        }
-                      ],
-                      "alpha": []
-                    },
-                    "GradientB": {
-                      "color": [
-                        {
-                          "t": 0.5,
-                          "c": "1,1,1,1"
-                        }
-                      ],
-                      "alpha": []
-                    },
-                    "ConstantA": "1,1,1,1",
-                    "ConstantB": "0.94651,1,0.35814,1"
-                  },
-                  "Lifetime": {
-                    "Type": "Range",
-                    "Evaluation": "Particle",
-                    "Constants": "1,2,0,0"
-                  },
-                  "MaxParticles": 200,
-                  "PerParticleTimeScale": {
-                    "Constants": "1,0.4,0,0"
-                  },
-                  "PreWarm": 0,
-                  "PushStrength": {
-                    "Constants": "5,0,0,0"
-                  },
-                  "Roll": {
-                    "Type": "Range",
-                    "Evaluation": "Particle",
-                    "Constants": "0,360,0,0"
-                  },
-                  "Scale": {
-                    "Type": "Curve",
-                    "CurveA": {
-                      "rangey": "0,3",
-                      "frames": [
-                        {
-                          "in": -9.333329,
-                          "out": 9.333329
-                        },
-                        {
-                          "x": 0.03325123,
-                          "y": 1,
-                          "in": -0.056075174,
-                          "out": 0.056075174
-                        },
-                        {
-                          "x": 1,
-                          "in": 2.9152544,
-                          "out": -2.9152544
-                        }
-                      ]
-                    },
-                    "Constants": "1,0,0,0"
-                  },
-                  "SequenceId": {},
-                  "SequenceSpeed": {
-                    "Constants": "1,0,0,0"
-                  },
-                  "SequenceTime": {
-                    "Constants": "1,0,0,0"
-                  },
-                  "SheetSequence": true,
-                  "Space": "World",
-                  "StartVelocity": {
-                    "Type": "Range",
-                    "Evaluation": "Particle",
-                    "Constants": "100,200,0,0"
-                  },
-                  "Stretch": {},
-                  "TimeScale": 1,
-                  "Tint": "1,1,1,1"
-                },
-                {
-                  "__type": "ParticleSpriteRenderer",
-                  "Additive": false,
-                  "BlurAmount": 1,
-                  "BlurOpacity": 0.62,
-                  "BlurSpacing": 0.16,
-                  "DepthFeather": 15,
-                  "FaceVelocity": false,
-                  "FogStrength": 1,
-                  "LeadingTrail": true,
-                  "MotionBlur": true,
-                  "Opaque": false,
-                  "RotationOffset": 0,
-                  "Scale": 3,
-                  "Shadows": false,
-                  "SortMode": "Unsorted",
-                  "Texture": "textures/piss_splash/piss_splash.vtex"
-                },
-                {
-                  "__type": "ParticleConeEmitter",
-                  "__enabled": false,
-                  "Burst": 0,
-                  "ConeAngle": 3,
-                  "ConeFar": 50,
-                  "ConeNear": 1,
-                  "Delay": 0,
-                  "DestroyOnEnd": false,
-                  "Duration": 1,
-                  "InVolume": false,
-                  "Loop": true,
-                  "OnEdge": false,
-                  "Rate": 30
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Id": "66699c2c-9e50-412d-aa26-25fd4405c2aa",
-          "Name": "Drive Jacket",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "ItemEquipment",
-              "Attachment": "hand_R",
-              "AttachmentTransform": {},
-              "Description": null,
-              "HideBodygroups": "Torso",
-              "Icon": {
-                "Model": "models/clothes/bomber_jacket/bomber_jacket.vmdl",
-                "MaterialGroup": "drive",
-                "Rotation": "0,0,0,1",
-                "Guid": "07077a32-2634-4b38-9380-8c29d35506dc"
-              },
-              "Name": "Drive Jacket",
-              "SellPrice": -1,
-              "Slot": "Body",
-              "UpdatePosition": false,
-              "WeightInGrams": 100
-            },
-            {
-              "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": {
-                "_type": "component",
-                "go": "eb58c932-ff59-4706-ae12-e14e0116c0f5",
-                "component_type": "SkinnedModelRenderer"
-              },
-              "CreateBoneObjects": false,
-              "MaterialGroup": "drive",
-              "MaterialOverride": null,
-              "Model": "models/clothes/bomber_jacket/bomber_jacket.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "ModelRenderer",
-              "__enabled": false,
-              "BodyGroups": 18446744073709551615,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/props/clothing_parcel/clothing_parcel.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "BoxCollider",
-              "__enabled": false,
-              "Center": "0,0,4.8",
-              "IsTrigger": false,
-              "Scale": "27,27,7.5",
-              "Static": false,
-              "Surface": null
-            },
-            {
-              "__type": "Rigidbody",
-              "__enabled": false,
-              "AngularDamping": 0,
-              "Gravity": true,
-              "LinearDamping": 0,
-              "Locking": {},
-              "MassOverride": 0,
-              "RigidbodyFlags": 0,
-              "StartAsleep": false
-            },
-            {
-              "__type": "Interactions",
-              "ObjectInteractions": []
-            }
-          ]
-        },
-        {
-          "Id": "63a135cb-c0ba-40ec-84bb-f240f4c825d4",
-          "Name": "Cargo Joggers",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "ItemEquipment",
-              "Attachment": "hand_R",
-              "AttachmentTransform": {},
-              "Description": "",
-              "HideBodygroups": "Legs",
-              "Icon": {
-                "Model": "models/clothes/baggy_trousers/cargo_trousers.vmdl",
-                "MaterialGroup": "joggers",
-                "Position": "-9.450001,0.15,0",
-                "Rotation": "0,0,0,1",
-                "Guid": "b11906b4-48e0-421e-8f80-a7064c83936e"
-              },
-              "Name": "Cargo Joggers",
-              "SellPrice": -1,
-              "Slot": "Legs",
-              "UpdatePosition": false,
-              "WeightInGrams": 100
-            },
-            {
-              "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": {
-                "_type": "component",
-                "go": "eb58c932-ff59-4706-ae12-e14e0116c0f5",
-                "component_type": "SkinnedModelRenderer"
-              },
-              "CreateBoneObjects": false,
-              "MaterialGroup": "joggers",
-              "MaterialOverride": null,
-              "Model": "models/clothes/baggy_trousers/cargo_trousers.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "ModelRenderer",
-              "__enabled": false,
-              "BodyGroups": 18446744073709551615,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/props/clothing_parcel/clothing_parcel.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            },
-            {
-              "__type": "BoxCollider",
-              "__enabled": false,
-              "Center": "0,0,4.8",
-              "IsTrigger": false,
-              "Scale": "27,27,7.5",
-              "Static": false,
-              "Surface": null
-            },
-            {
-              "__type": "Rigidbody",
-              "__enabled": false,
-              "AngularDamping": 0,
-              "Gravity": true,
-              "LinearDamping": 0,
-              "Locking": {},
-              "MassOverride": 0,
-              "RigidbodyFlags": 0,
-              "StartAsleep": false
-            },
-            {
-              "__type": "Interactions",
-              "ObjectInteractions": []
-            }
-          ]
-        },
-        {
-          "Id": "9f61ea82-9fdf-4f19-9f9a-5890806c41ea",
-          "Name": "cap",
-          "Position": "0,0,0",
-          "Components": [
-            {
-              "__type": "ItemEquipment",
-              "Attachment": "hand_R",
-              "AttachmentTransform": {},
-              "Description": "",
-              "HideBodygroups": "None",
-              "Icon": {
-                "Model": "models/clothes/cap/cap.vmdl",
-                "MaterialGroup": "",
-                "Rotation": "0,0,0,1",
-                "Guid": "bf32a52f-ed42-4097-9ccd-1de10ad4af79"
-              },
-              "Name": "Cap",
-              "SellPrice": -1,
-              "Slot": "Head",
-              "UpdatePosition": false,
-              "WeightInGrams": 100
-            },
-            {
-              "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
-              "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/clothes/cap/cap.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "Id": "bcf1062a-e6e2-4fbc-a3fd-5a765ff79139",
-          "Name": "boots",
-          "Position": "0,0,0",
-          "Components": [
-            {
-              "__type": "ItemEquipment",
-              "Attachment": "hand_R",
-              "AttachmentTransform": {},
-              "Description": "",
-              "HideBodygroups": "Feet",
-              "Icon": {
-                "Model": "models/clothes/boots/boots.vmdl",
-                "MaterialGroup": "",
-                "Rotation": "0,0,0,1",
-                "Guid": "2de142ac-34ad-4996-b1b1-d5ad5f67b162"
-              },
-              "Name": "Boots",
-              "SellPrice": -1,
-              "Slot": "Feet",
-              "UpdatePosition": false,
-              "WeightInGrams": 100
-            },
-            {
-              "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
-              "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/clothes/boots/boots.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "Id": "2b1708c9-5c02-4e57-9a30-afe40a9f4729",
-          "Name": "jumper",
-          "Position": "0,0,0",
-          "Components": [
-            {
-              "__type": "ItemEquipment",
-              "Attachment": "hand_R",
-              "AttachmentTransform": {},
-              "Description": "cool ass jumper :D",
-              "HideBodygroups": "Torso",
-              "Icon": {
-                "Model": "models/clothes/jumper/jumper.vmdl",
-                "MaterialGroup": "",
-                "Rotation": "0,0,0,1",
-                "Guid": "88d45e78-9479-48c6-b4f4-f86e123f1f55"
-              },
-              "Name": "Jumper",
-              "SellPrice": -1,
-              "Slot": "Body",
-              "UpdatePosition": false,
-              "WeightInGrams": 100
-            },
-            {
-              "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
-              "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/clothes/jumper/jumper.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "Id": "6f45cffb-11d0-4dd6-88e2-a03497bf59ab",
-          "Name": "jumper",
-          "Position": "0,0,0",
-          "Components": [
-            {
-              "__type": "ItemEquipment",
-              "Attachment": "hand_R",
-              "AttachmentTransform": {},
-              "Description": "cool ass jumper :D",
-              "HideBodygroups": "Torso",
-              "Icon": {
-                "Model": "models/clothes/jumper/jumper.vmdl",
-                "MaterialGroup": "",
-                "Rotation": "0,0,0,1",
-                "Guid": "88d45e78-9479-48c6-b4f4-f86e123f1f55"
-              },
-              "Name": "Jumper",
-              "SellPrice": -1,
-              "Slot": "Body",
-              "UpdatePosition": false,
-              "WeightInGrams": 100
-            },
-            {
-              "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": null,
-              "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/clothes/jumper/jumper.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
         }
       ]
     },
@@ -3758,6 +3107,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-29T19:28:11.4080442-05:00",
+  "LastSaved": "2024-02-29T19:34:59.4445049-05:00",
   "__references": []
 }
