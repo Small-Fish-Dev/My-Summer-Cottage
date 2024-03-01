@@ -75,7 +75,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Block mouse aiming
 	/// </summary>
-	[Sync] public bool BlockMouseAim
+	[Sync]
+	public bool BlockMouseAim
 	{
 		get => BlockMovements || _blockMouseAim;
 		set => _blockMouseAim = value;
@@ -86,7 +87,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Block inputs (Like WASD, Pissing, Left/Right click)
 	/// </summary>
-	[Sync] public bool BlockInputs
+	[Sync]
+	public bool BlockInputs
 	{
 		get => BlockMovements || _blockInputs;
 		set => _blockInputs = value;
@@ -131,7 +133,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	protected override void DrawGizmos()
 	{
 	}
-	 
+
 	protected override void OnStart()
 	{
 		if ( !GameManager.IsPlaying )
@@ -171,10 +173,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		UpdateAnimation();
 
-		if ( Penoid == null )
-			return;
-
-		Penoid.Enabled = !HidePenoid;
+		if ( Penoid is not null )
+			Penoid.Enabled = !HidePenoid;
 	}
 
 	protected override void OnFixedUpdate()

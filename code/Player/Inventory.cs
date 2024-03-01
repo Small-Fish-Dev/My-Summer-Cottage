@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Sauna;
 
 public class Inventory : Component
@@ -116,7 +118,18 @@ public class Inventory : Component
 		TaskMaster.SubmitTriggerSignal( $"item.dropped.{item.Name}", Player );
 
 		item.GameObject.Parent = null;
-		item.GameObject.Transform.Position = Player.ViewRay.Position + Player.ViewRay.Forward * 2f;
+
+		var trace = Scene.Trace.FromTo( Player.ViewRay.Position + Player.ViewRay.Forward, Player.ViewRay.Position + Player.ViewRay.Forward * 20f )
+				.IgnoreGameObject( Player.GameObject )
+				.IgnoreGameObject( item.GameObject )
+				.Radius( 1.0f )
+				.Run();
+
+		item.GameObject.Transform.Rotation = Rotation.Identity;
+		item.GameObject.Transform.Position = trace.EndPosition;
+		if ( item.GameObject.Components.TryGet<Rigidbody>( out var rigidbody ) )
+			rigidbody.Velocity = Player.Velocity + Player.ViewRay.Forward * 150f;
+
 		item.Network.DropOwnership();
 
 		return true;
