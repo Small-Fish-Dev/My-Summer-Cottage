@@ -85,7 +85,7 @@ public class ItemEquipment : ItemComponent
 		return true;
 	}
 
-	protected override void OnPreRender()
+	protected override void OnUpdate()
 	{
 		if ( !Equipped || !UpdatePosition )
 			return;
@@ -95,8 +95,7 @@ public class ItemEquipment : ItemComponent
 			return;
 
 		var transform = player.GetAttachment( Attachment, false );
-		var rotated = Vector3.Zero.RotateAround( AttachmentTransform.Position, AttachmentTransform.Rotation );
-		Transform.LocalPosition = transform.Position + rotated;
+		Transform.LocalPosition = transform.Position - AttachmentTransform.Position; // todo: fix, not centered properly
 		Transform.LocalRotation = transform.Rotation * AttachmentTransform.Rotation;
 	}
 
@@ -152,14 +151,13 @@ public class ItemEquipment : ItemComponent
 			return;
 
 		var attachment = _model.GetAttachment( Attachment ) ?? global::Transform.Zero;
-
 		Gizmo.Draw.Model( renderer.Model, model.Transform );
 
 		Gizmo.Draw.IgnoreDepth = true;
 		Gizmo.Draw.SolidSphere( attachment.Position, 0.1f );
 		Gizmo.Draw.IgnoreDepth = false;
 
-		model.Position = attachment.Position + AttachmentTransform.Position;
+		model.Position = attachment.Position - AttachmentTransform.Position;
 		model.Rotation = attachment.Rotation * AttachmentTransform.Rotation;
 
 		using ( Gizmo.Scope( $"{Name}", new Transform( model.Position, model.Rotation ) ) )
@@ -175,7 +173,7 @@ public class ItemEquipment : ItemComponent
 			}
 
 			if ( Gizmo.Control.Position( "position", Vector3.Zero, out var pos ) )
-				AttachmentTransform = AttachmentTransform.WithPosition( AttachmentTransform.Position + pos * model.Rotation );
+				AttachmentTransform = AttachmentTransform.WithPosition( AttachmentTransform.Position - pos * model.Rotation );
 		}
 	}
 	#endregion
