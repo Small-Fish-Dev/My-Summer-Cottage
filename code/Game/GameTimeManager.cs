@@ -231,6 +231,14 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Broadcast( NetPermission.HostOnly )]
 	public void EndDay()
 	{
+		// End of day memory !
+		Player.Local?.CaptureMemory( Sandbox.Game.Random.FromArray( new string[]
+		{
+			"All in all.. It was a great and productive day!",
+			"Great end to a day, just wish I could've spent a bit more time at the cottage.",
+			"I did fuck all today... I feel like it's only going to get worse from here."
+		} ) );
+
 		FreezeTime();
 
 		IsDayOver = true;
@@ -279,6 +287,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 		FrozenTime = null;
 		IsDayOver = false;
+		SweetMemories.Clear();
 
 		OnDayStart?.Invoke();
 	}
