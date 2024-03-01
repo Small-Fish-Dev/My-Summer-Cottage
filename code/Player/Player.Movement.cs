@@ -5,6 +5,18 @@ partial class Player
 	public const float DUCK_HEIGHT = 58f;
 	public const float HEIGHT = 72f;
 
+	public static bool HideHead
+	{
+		get => _hideHead;
+		set
+		{
+			_hideHead = value;
+			Local?.UpdateHeadVisibility();
+			Local?.Renderer?.SceneModel?.Update( RealTime.Delta );
+		}
+	}
+	private static bool _hideHead;
+
 	[Property]
 	[Category( "Movement" )]
 	public MoveHelper MoveHelper { get; set; }
@@ -148,14 +160,23 @@ partial class Player
 		Camera.FieldOfView = MathX.LerpTo( Camera.FieldOfView, Input.Down( "view" ) ? Zoom : 90f, 10f * Time.Delta );
 		Camera.ZNear = 2.5f;
 
-		Renderer?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
+		UpdateHeadVisibility();
+	}
+
+	public void UpdateHeadVisibility()
+	{
+		var eyes = Renderer.GetAttachment( "eyes" ) ?? Transform.World;
+		var rot = Transform.Rotation;
+
+		if ( HideHead )
+			Renderer?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
 
 		// Hide face and head clothing.
 		var face = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Face ) as ItemEquipment)?.Renderer?.SceneObject;
-		if ( face != null ) face.RenderingEnabled = false;
+		if ( face != null ) face.RenderingEnabled = !HideHead;
 
 		var head = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Head ) as ItemEquipment)?.Renderer?.SceneObject;
-		if ( head != null ) head.RenderingEnabled = false;
+		if ( head != null ) head.RenderingEnabled = !HideHead;
 	}
 
 	protected void UpdateAnimation()
