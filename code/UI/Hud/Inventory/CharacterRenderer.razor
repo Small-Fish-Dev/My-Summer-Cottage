@@ -133,6 +133,11 @@
 		_penoid?.Update(RealTime.Delta);
 		if ( _clothes != null )
 		{
+			if ( Player.Local.Inventory.EquippedItems[(int)EquipSlot.Hand] is ItemEquipment hand && hand.UpdatePosition )
+				_clothes[(int)EquipSlot.Hand].Transform = (_character.GetAttachment( hand.Attachment, true ) ?? global::Transform.Zero)
+					.ToWorld( hand.AttachmentTransform )
+					.WithScale( 1 );
+
 			foreach ( var clothing in _clothes )
 				if ( clothing.IsValid() )
 					clothing?.Update( RealTime.Delta );
