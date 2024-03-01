@@ -43,6 +43,16 @@ public class ItemComponent : Component
 	}
 
 	/// <summary>
+	/// Whether the item can be sold.
+	/// </summary>
+	public bool IsSellable => SellPrice != -1;
+
+	/// <summary>
+	/// The last player that had this item parented to them.
+	/// </summary>
+	public Player LastParent { get; set; }
+
+	/// <summary>
 	/// If the item is in the player's backpack (note not equipped!).
 	/// </summary>
 	[Sync]

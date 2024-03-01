@@ -237,15 +237,6 @@
       ]
     },
     {
-      "Id": "9cc058fc-954e-41bb-8364-b5d715129e56",
-      "Name": "beer_bottle",
-      "Position": "424.232,-96.59681,31.7402",
-      "Rotation": "0.0000004499667,0.0000001490116,-0.0000013499,1",
-      "Networked": true,
-      "Enabled": true,
-      "__Prefab": "prefabs/items/beer_bottle.prefab"
-    },
-    {
       "Id": "b60318fc-dbb8-45c3-b9d4-1347270ab4b5",
       "Name": "Ambient",
       "Position": "357.8161,0.0000213275,258.2727",
@@ -255,7 +246,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.2206352,0,0.9753564",
+          "Rotation": "0,0.2799714,0,0.9600083",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -309,7 +300,314 @@
       "Position": "424.4533,-123.1365,25.23573",
       "Rotation": "0.00002079736,0.0009133221,-0.02251128,0.9997461",
       "Enabled": true,
-      "__Prefab": "prefabs/events/banana_peel.prefab"
+      "Components": [
+        {
+          "__type": "EventComponent",
+          "__enabled": false,
+          "DisabledWhilePlaying": [],
+          "DisableOnTrigger": [],
+          "Event": {
+            "Version": 5,
+            "UserData": {
+              "Title": "Event",
+              "id": "8939851b-924a-4f12-ad44-7cb08a8a1fba",
+              "ReferencedComponentTypes": []
+            },
+            "Variables": [],
+            "Nodes": [
+              {
+                "Id": 0,
+                "Type": "input"
+              },
+              {
+                "Id": 1,
+                "Type": "event.localpunchplayer",
+                "UserData": {
+                  "Position": "512,-112"
+                }
+              },
+              {
+                "Id": 2,
+                "Type": "call",
+                "Properties": {
+                  "_isStatic": false,
+                  "T": "package.fish.sauna/Sauna.Player",
+                  "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                  "_name": "Get"
+                },
+                "UserData": {
+                  "Position": "240,80"
+                }
+              },
+              {
+                "Id": 3,
+                "Type": "event.ragdollplayer",
+                "UserData": {
+                  "Position": "848,-32"
+                }
+              },
+              {
+                "Id": 4,
+                "Type": "event.finished",
+                "UserData": {
+                  "Position": "1248,-32"
+                }
+              },
+              {
+                "Id": 6,
+                "Type": "resource.ref",
+                "Properties": {
+                  "value": "sounds/misc/banana_slip.sound",
+                  "T": "Sandbox.Engine/Sandbox.SoundEvent"
+                },
+                "UserData": {
+                  "Position": "544,-384"
+                }
+              },
+              {
+                "Id": 7,
+                "Type": "sound.playat",
+                "UserData": {
+                  "Position": "832,-384"
+                }
+              },
+              {
+                "Id": 8,
+                "Type": "property.get",
+                "Properties": {
+                  "_type": "Sandbox.Game/Sandbox.GameObject",
+                  "_name": "Transform"
+                },
+                "UserData": {
+                  "Position": "336,-256"
+                }
+              },
+              {
+                "Id": 9,
+                "Type": "property.get",
+                "Properties": {
+                  "_type": "Sandbox.Game/Sandbox.GameTransform",
+                  "_name": "Position"
+                },
+                "UserData": {
+                  "Position": "512,-256"
+                }
+              },
+              {
+                "Id": 11,
+                "Type": "scene.ref",
+                "Properties": {
+                  "value": {
+                    "_type": "component",
+                    "go": "2d4783cc-caf7-4dae-af45-06d44aff2664",
+                    "component_type": "EventComponent"
+                  },
+                  "T": "package.fish.sauna/EventComponent"
+                },
+                "UserData": {
+                  "Position": "944,176"
+                }
+              },
+              {
+                "Id": 12,
+                "Type": "event.triggersignal",
+                "UserData": {
+                  "Position": "512,208"
+                }
+              }
+            ],
+            "Links": [
+              {
+                "SrcId": 0,
+                "SrcName": "_signal",
+                "DstId": 1,
+                "DstName": "_signal"
+              },
+              {
+                "Value": 0,
+                "DstId": 1,
+                "DstName": "extraVerticalStrength"
+              },
+              {
+                "Value": "0,0,1",
+                "DstId": 1,
+                "DstName": "launchDirection"
+              },
+              {
+                "SrcId": 2,
+                "SrcName": "_result",
+                "DstId": 1,
+                "DstName": "player"
+              },
+              {
+                "Value": 400,
+                "DstId": 1,
+                "DstName": "strength"
+              },
+              {
+                "SrcId": 0,
+                "SrcName": "triggerer",
+                "DstId": 2,
+                "DstName": "_target"
+              },
+              {
+                "Value": "EnabledInSelf, InAncestors",
+                "DstId": 2,
+                "DstName": "search"
+              },
+              {
+                "SrcId": 1,
+                "SrcName": "_signal",
+                "DstId": 3,
+                "DstName": "_signal"
+              },
+              {
+                "Value": 3,
+                "DstId": 3,
+                "DstName": "duration"
+              },
+              {
+                "Value": true,
+                "DstId": 3,
+                "DstName": "enabled"
+              },
+              {
+                "Value": true,
+                "DstId": 3,
+                "DstName": "forced"
+              },
+              {
+                "SrcId": 2,
+                "SrcName": "_result",
+                "DstId": 3,
+                "DstName": "player"
+              },
+              {
+                "Value": 0,
+                "DstId": 3,
+                "DstName": "spin"
+              },
+              {
+                "SrcId": 3,
+                "SrcName": "_signal",
+                "DstId": 4,
+                "DstName": "_signal"
+              },
+              {
+                "SrcId": 11,
+                "SrcName": "_result",
+                "DstId": 4,
+                "DstName": "component"
+              },
+              {
+                "SrcId": 1,
+                "SrcName": "_signal",
+                "DstId": 7,
+                "DstName": "_signal"
+              },
+              {
+                "SrcId": 9,
+                "SrcName": "_result",
+                "DstId": 7,
+                "DstName": "position"
+              },
+              {
+                "SrcId": 6,
+                "SrcName": "_result",
+                "DstId": 7,
+                "DstName": "soundEvent"
+              },
+              {
+                "SrcId": 0,
+                "SrcName": "triggerer",
+                "DstId": 8,
+                "DstName": "_target"
+              },
+              {
+                "SrcId": 8,
+                "SrcName": "_result",
+                "DstId": 9,
+                "DstName": "_target"
+              },
+              {
+                "SrcId": 0,
+                "SrcName": "_signal",
+                "DstId": 12,
+                "DstName": "_signal"
+              },
+              {
+                "SrcId": 2,
+                "SrcName": "_result",
+                "DstId": 12,
+                "DstName": "player"
+              },
+              {
+                "Value": "event.banana_peel_slip",
+                "DstId": 12,
+                "DstName": "signalIdentifier"
+              }
+            ]
+          },
+          "RequiredToFinish": true,
+          "TriggerCooldown": 1,
+          "TriggerOnce": false,
+          "Triggers": [
+            {
+              "_type": "component",
+              "go": "f8da7c08-d088-4c0f-99f0-ee85649c11d9",
+              "component_type": "EventAreaTrigger"
+            }
+          ]
+        },
+        {
+          "__type": "EventDefinition",
+          "EventName": "Banana Peel",
+          "Frequency": "Repeatable",
+          "Rarity": "Common",
+          "ReinstantiateOnRestart": false,
+          "Stackable": true,
+          "Type": "Zone"
+        }
+      ],
+      "Children": [
+        {
+          "Id": "4fc3532c-2e98-4b04-ad59-63710847707e",
+          "Name": "Model",
+          "Position": "0,-0.0000008760562,4.140741",
+          "Scale": "2,2,2",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "__enabled": false,
+              "BodyGroups": 18446744073709551615,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/bananapeel/bananapeel.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "f8da7c08-d088-4c0f-99f0-ee85649c11d9",
+          "Name": "SlipTrigger",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "EventAreaTrigger",
+              "__enabled": false,
+              "Extents": "20,20,30",
+              "MaxPollingRate": 5,
+              "Offset": "0,0,15",
+              "TagSet": "player",
+              "TriggerPrefab": [],
+              "TriggerSignalIdentifier": ""
+            }
+          ]
+        }
+      ]
     },
     {
       "Id": "e515313b-9348-4f73-bb39-cf28f38bb0da",
@@ -321,7 +619,7 @@
         {
           "__type": "SkinnedModelRenderer",
           "AnimationGraph": null,
-          "BodyGroups": 11,
+          "BodyGroups": 351,
           "BoneMergeTarget": null,
           "CreateBoneObjects": false,
           "MaterialGroup": null,
@@ -341,6 +639,56 @@
           "HideBodyGroup": "None",
           "Player": null
         }
+      ],
+      "Children": [
+        {
+          "Id": "63e0f5fe-46a4-46c8-92a7-aaa8d1c8db8c",
+          "Name": "models/clothes/wives_undies/wives_panties.vmdl",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "AnimationGraph": null,
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": {
+                "_type": "component",
+                "go": "e515313b-9348-4f73-bb39-cf28f38bb0da",
+                "component_type": "SkinnedModelRenderer"
+              },
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/clothes/wives_undies/wives_panties.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "07d838fb-4b3a-46ed-ba52-798bf85855bb",
+          "Name": "models/clothes/wives_undies/wives_bra.vmdl",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "AnimationGraph": null,
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": {
+                "_type": "component",
+                "go": "e515313b-9348-4f73-bb39-cf28f38bb0da",
+                "component_type": "SkinnedModelRenderer"
+              },
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/clothes/wives_undies/wives_bra.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        }
       ]
     },
     {
@@ -353,7 +701,7 @@
         {
           "__type": "SkinnedModelRenderer",
           "AnimationGraph": null,
-          "BodyGroups": 11,
+          "BodyGroups": 351,
           "BoneMergeTarget": null,
           "CreateBoneObjects": false,
           "MaterialGroup": null,
@@ -373,6 +721,56 @@
           "HideBodyGroup": "None",
           "Player": null
         }
+      ],
+      "Children": [
+        {
+          "Id": "e9a3d7cc-5a79-49e5-9762-242f94725590",
+          "Name": "models/clothes/wives_undies/wives_bra.vmdl",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "AnimationGraph": null,
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": {
+                "_type": "component",
+                "go": "9c3edec3-a5ae-4b18-b2d4-f44b6018269a",
+                "component_type": "SkinnedModelRenderer"
+              },
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/clothes/wives_undies/wives_bra.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "0b6c074c-cf11-461c-9e97-0f5e13961176",
+          "Name": "models/clothes/wives_undies/wives_panties.vmdl",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "AnimationGraph": null,
+              "BodyGroups": 18446744073709551615,
+              "BoneMergeTarget": {
+                "_type": "component",
+                "go": "9c3edec3-a5ae-4b18-b2d4-f44b6018269a",
+                "component_type": "SkinnedModelRenderer"
+              },
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/clothes/wives_undies/wives_panties.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        }
       ]
     },
     {
@@ -381,7 +779,583 @@
       "Position": "184.3291,-144.0419,7.43956",
       "Networked": true,
       "Enabled": true,
-      "__Prefab": "prefabs/objects/slot_machine.prefab"
+      "Components": [
+        {
+          "__type": "Interactions",
+          "ObjectInteractions": [
+            {
+              "Identifier": "slot.play",
+              "Keybind": "use",
+              "Description": "Play",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "41242cc7-4847-4e4f-bf68-74c810bf0c5c",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input",
+                    "UserData": {
+                      "Labels": {
+                        "_signal": "on start",
+                        "obj": "gameobject"
+                      },
+                      "Position": "-112,80"
+                    }
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "call",
+                    "Properties": {
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "Get",
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    },
+                    "UserData": {
+                      "Position": "208,80"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "TryRoll",
+                      "_isStatic": false,
+                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                    },
+                    "UserData": {
+                      "Position": "432,80"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 0,
+                    "SrcName": "obj",
+                    "DstId": 1,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 2,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_result",
+                    "DstId": 2,
+                    "DstName": "_target"
+                  }
+                ]
+              },
+              "HasBounds": true,
+              "Position": "19.25671,11.21452,43.52247",
+              "Extents": "2.950275,5.265101,4.963008"
+            },
+            {
+              "Identifier": "slot.line2",
+              "Keybind": "use",
+              "Description": "Line 2",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "f372a2d9-afa9-450c-a306-7aec4b3c9d18",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 1,
+                    "Type": "input",
+                    "UserData": {
+                      "Labels": {
+                        "_signal": "on start",
+                        "obj": "gameobject"
+                      },
+                      "Position": "-128,64"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "call",
+                    "Properties": {
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "Get",
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    },
+                    "UserData": {
+                      "Position": "176,64"
+                    }
+                  },
+                  {
+                    "Id": 4,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "ToggleBetFlag",
+                      "_isStatic": false,
+                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                    },
+                    "UserData": {
+                      "Position": "416,64"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 1,
+                    "SrcName": "obj",
+                    "DstId": 2,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_signal",
+                    "DstId": 4,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 4,
+                    "DstName": "_target"
+                  },
+                  {
+                    "Value": 2,
+                    "DstId": 4,
+                    "DstName": "line"
+                  }
+                ]
+              },
+              "HasBounds": true,
+              "Position": "17.43249,-8.707147,46.94442",
+              "Extents": "3.157069,5.474216,4.794635"
+            },
+            {
+              "Identifier": "slot.line1",
+              "Keybind": "use",
+              "Description": "Line 1",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "b18e7a2a-72ee-4962-8424-ec296adddf53",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 1,
+                    "Type": "input",
+                    "UserData": {
+                      "Labels": {
+                        "_signal": "on start",
+                        "obj": "gameobject"
+                      },
+                      "Position": "-64,64"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "call",
+                    "Properties": {
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "Get",
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    },
+                    "UserData": {
+                      "Position": "240,64"
+                    }
+                  },
+                  {
+                    "Id": 3,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "ToggleBetFlag",
+                      "_isStatic": false,
+                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                    },
+                    "UserData": {
+                      "Position": "480,64"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 1,
+                    "SrcName": "obj",
+                    "DstId": 2,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_signal",
+                    "DstId": 3,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 3,
+                    "DstName": "_target"
+                  },
+                  {
+                    "Value": 1,
+                    "DstId": 3,
+                    "DstName": "line"
+                  }
+                ]
+              },
+              "HasBounds": true,
+              "Position": "17.50141,-2.121587,46.89997",
+              "Extents": "3.459248,5.384391,4.798366"
+            },
+            {
+              "Identifier": "slot.line3",
+              "Keybind": "use",
+              "Description": "Line 3",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "f1e25444-42b3-440d-ba0b-e036c4e38bec",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 1,
+                    "Type": "input",
+                    "UserData": {
+                      "Labels": {
+                        "_signal": "on start",
+                        "obj": "gameobject"
+                      },
+                      "Position": "-64,128"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "call",
+                    "Properties": {
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "Get",
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    },
+                    "UserData": {
+                      "Position": "240,128"
+                    }
+                  },
+                  {
+                    "Id": 3,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "ToggleBetFlag",
+                      "_isStatic": false,
+                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                    },
+                    "UserData": {
+                      "Position": "480,128"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 1,
+                    "SrcName": "obj",
+                    "DstId": 2,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_signal",
+                    "DstId": 3,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 3,
+                    "DstName": "_target"
+                  },
+                  {
+                    "Value": 3,
+                    "DstId": 3,
+                    "DstName": "line"
+                  }
+                ]
+              },
+              "HasBounds": true,
+              "Position": "17.71548,4.640842,46.9936",
+              "Extents": "3.184448,5.080022,4.854632"
+            },
+            {
+              "Identifier": "slot.cash_out",
+              "Keybind": "use",
+              "Description": "Cash out",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "851b4f40-cb5c-4648-992c-572746907237",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 1,
+                    "Type": "input",
+                    "UserData": {
+                      "Labels": {
+                        "_signal": "on start",
+                        "obj": "gameobject",
+                        "interactor": "player"
+                      },
+                      "Position": "-112,208"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "call",
+                    "Properties": {
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "Get",
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    },
+                    "UserData": {
+                      "Position": "192,208"
+                    }
+                  },
+                  {
+                    "Id": 4,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "Cashout",
+                      "_isStatic": false,
+                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                    },
+                    "UserData": {
+                      "Position": "416,208"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 1,
+                    "SrcName": "obj",
+                    "DstId": 2,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_signal",
+                    "DstId": 4,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 4,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "interactor",
+                    "DstId": 4,
+                    "DstName": "player"
+                  }
+                ]
+              },
+              "HasBounds": true,
+              "Position": "12.13725,9.601606,63.11052",
+              "Extents": "4.215116,5.380785,5.297434"
+            },
+            {
+              "Identifier": "slot.insert_coin",
+              "Keybind": "use",
+              "Description": "Insert coin",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "488b9ef4-9481-4116-b293-4004a65aafb5",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 1,
+                    "Type": "input",
+                    "UserData": {
+                      "Labels": {
+                        "_signal": "on start",
+                        "obj": "gameobject",
+                        "interactor": "player"
+                      },
+                      "Position": "-64,160"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "call",
+                    "Properties": {
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "Get",
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    },
+                    "UserData": {
+                      "Position": "240,160"
+                    }
+                  },
+                  {
+                    "Id": 4,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "InsertCoin",
+                      "_isStatic": false,
+                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                    },
+                    "UserData": {
+                      "Position": "464,160"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 1,
+                    "SrcName": "obj",
+                    "DstId": 2,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_signal",
+                    "DstId": 4,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 4,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "interactor",
+                    "DstId": 4,
+                    "DstName": "player"
+                  }
+                ]
+              },
+              "HasBounds": true,
+              "Position": "10.28304,12.3685,74.36001",
+              "Extents": "3.469205,4.972645,4.684541"
+            }
+          ]
+        },
+        {
+          "__type": "SlotMachine",
+          "BetFlags": "None",
+          "Model": {
+            "_type": "component",
+            "go": "d485756a-dee8-4831-9796-bf13f312d472",
+            "component_type": "SkinnedModelRenderer"
+          },
+          "Money": 0
+        },
+        {
+          "__type": "ModelCollider",
+          "IsTrigger": false,
+          "Model": "models/slot_machine/slot_machine.vmdl",
+          "Static": false,
+          "Surface": null
+        }
+      ],
+      "Children": [
+        {
+          "Id": "d485756a-dee8-4831-9796-bf13f312d472",
+          "Name": "Model",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SkinnedModelRenderer",
+              "AnimationGraph": null,
+              "BodyGroups": 45131246251,
+              "BoneMergeTarget": null,
+              "CreateBoneObjects": false,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/slot_machine/slot_machine.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "c899de78-f929-4026-b6e5-09de0fa285f8",
+          "Name": "Bet",
+          "Position": "10.32875,8.282434,69.98674",
+          "Rotation": "0,-0.1010562,0,0.9948807",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "WorldPanel",
+              "HorizontalAlign": "Center",
+              "LookAtCamera": false,
+              "PanelSize": "85,32",
+              "RenderScale": 0.3,
+              "VerticalAlign": "Center"
+            },
+            {
+              "__type": "SlotsDisplay",
+              "PropertyName": "Bet",
+              "SlotMachine": {
+                "_type": "component",
+                "go": "260069fe-c9c2-4409-9da0-ba954d6e9925",
+                "component_type": "SlotMachine"
+              }
+            }
+          ]
+        },
+        {
+          "Id": "3509a6c8-4a4d-4afb-bb86-75c39ead01cf",
+          "Name": "Money",
+          "Position": "10.97142,8.282434,66.8559",
+          "Rotation": "0,-0.1010562,0,0.9948807",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "WorldPanel",
+              "HorizontalAlign": "Center",
+              "LookAtCamera": false,
+              "PanelSize": "85,32",
+              "RenderScale": 0.3,
+              "VerticalAlign": "Center"
+            },
+            {
+              "__type": "SlotsDisplay",
+              "PropertyName": "Money",
+              "SlotMachine": {
+                "_type": "component",
+                "go": "260069fe-c9c2-4409-9da0-ba954d6e9925",
+                "component_type": "SlotMachine"
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       "Id": "538efc3e-c012-4428-ba4b-5101879fd994",
@@ -396,14 +1370,1225 @@
           "Rotation": "-0.00000000000000003579115,0.000000000818806,1,-0.00000004371139",
           "Networked": true,
           "Enabled": true,
-          "__Prefab": "prefabs/events/creepy_peeper.prefab"
+          "Components": [
+            {
+              "__type": "EventDefinition",
+              "EventName": "Peeping Creep",
+              "Frequency": "Repeatable",
+              "Rarity": "Common",
+              "ReinstantiateOnRestart": true,
+              "Stackable": true,
+              "Type": "Zone"
+            }
+          ],
+          "Children": [
+            {
+              "Id": "2be1fab6-ae57-4170-8210-55400c556dc6",
+              "Name": "Creeper",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "ModelRenderer",
+                  "__enabled": false,
+                  "BodyGroups": 341,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/guy/guy.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ]
+            },
+            {
+              "Id": "90becdb4-7cc4-48b4-b0ed-b08f43ec6ddb",
+              "Name": "TriggerArea",
+              "Position": "123.0409,0,0",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "EventAreaTrigger",
+                  "__enabled": false,
+                  "Extents": "295.9999,173.4401,100",
+                  "MaxPollingRate": 5,
+                  "Offset": "0,0,50",
+                  "TagSet": "player",
+                  "TriggerPrefab": [],
+                  "TriggerSignalIdentifier": null
+                }
+              ]
+            },
+            {
+              "Id": "0530f77c-818b-486c-a779-34025c229f3e",
+              "Name": "AttackArea",
+              "Position": "-189.718,48.40234,-0.00001094096",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "EventAreaTrigger",
+                  "__enabled": false,
+                  "Extents": "348.1601,949.3594,100",
+                  "MaxPollingRate": 5,
+                  "Offset": "0,0,50",
+                  "TagSet": "player",
+                  "TriggerPrefab": [],
+                  "TriggerSignalIdentifier": null
+                }
+              ]
+            },
+            {
+              "Id": "20ba868b-9876-4f99-8a41-882ff4c46a16",
+              "Name": "Target",
+              "Position": "0,91.21024,0",
+              "Enabled": true
+            },
+            {
+              "Id": "2f80e6c2-8f26-4f25-8c21-6de0874ed0b5",
+              "Name": "AttackEvent",
+              "Position": "-50.11293,-33.09923,-1.524353",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "EventComponent",
+                  "__enabled": false,
+                  "DisabledWhilePlaying": [],
+                  "DisableOnTrigger": [
+                    {
+                      "_type": "component",
+                      "go": "cb9ad1f7-3db3-4b43-aef3-a5d4b322e48c",
+                      "component_type": "EventComponent"
+                    }
+                  ],
+                  "Event": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Event",
+                      "id": "a969da17-b92b-46f0-8887-71fffb339db2",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "16,-144",
+                          "Labels": {
+                            "_signal": "Trigger"
+                          }
+                        }
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "call",
+                        "Properties": {
+                          "_name": "Get",
+                          "T": "package.fish.sauna/Sauna.Player",
+                          "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                          "_isStatic": false
+                        },
+                        "UserData": {
+                          "Position": "496,-240",
+                          "Labels": {
+                            "_result": "Player"
+                          }
+                        }
+                      },
+                      {
+                        "Id": 2,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "Transform",
+                          "_type": "Sandbox.Game/Sandbox.GameObject"
+                        },
+                        "UserData": {
+                          "Position": "496,-112"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "World",
+                          "_type": "Sandbox.Game/Sandbox.GameTransform"
+                        },
+                        "UserData": {
+                          "Position": "704,-112"
+                        }
+                      },
+                      {
+                        "Id": 4,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "Position",
+                          "_type": "Sandbox.System/Transform"
+                        },
+                        "UserData": {
+                          "Position": "896,-112",
+                          "Labels": {
+                            "_result": "PlayerPos"
+                          }
+                        }
+                      },
+                      {
+                        "Id": 5,
+                        "Type": "event.interpolateposition",
+                        "UserData": {
+                          "Position": "1200,0"
+                        }
+                      },
+                      {
+                        "Id": 6,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "Transform",
+                          "_type": "Sandbox.Game/Sandbox.GameObject"
+                        },
+                        "UserData": {
+                          "Position": "496,80"
+                        }
+                      },
+                      {
+                        "Id": 7,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "World",
+                          "_type": "Sandbox.Game/Sandbox.GameTransform"
+                        },
+                        "UserData": {
+                          "Position": "704,80"
+                        }
+                      },
+                      {
+                        "Id": 8,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "Position",
+                          "_type": "Sandbox.System/Transform"
+                        },
+                        "UserData": {
+                          "Position": "896,80",
+                          "Labels": {
+                            "_result": "CreeperPos"
+                          }
+                        }
+                      },
+                      {
+                        "Id": 9,
+                        "Type": "rotation.lookat",
+                        "UserData": {
+                          "Position": "528,320"
+                        }
+                      },
+                      {
+                        "Id": 10,
+                        "Type": "op.subtract",
+                        "UserData": {
+                          "Position": "192,320"
+                        }
+                      },
+                      {
+                        "Id": 11,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_type": "Sandbox.System/Vector3",
+                          "_name": "Normal"
+                        },
+                        "UserData": {
+                          "Position": "336,320"
+                        }
+                      },
+                      {
+                        "Id": 12,
+                        "Type": "property.set",
+                        "Properties": {
+                          "_name": "Rotation",
+                          "_type": "Sandbox.Game/Sandbox.GameTransform"
+                        },
+                        "UserData": {
+                          "Position": "736,208"
+                        }
+                      },
+                      {
+                        "Id": 13,
+                        "Type": "sound.playat",
+                        "UserData": {
+                          "Position": "1232,272"
+                        }
+                      },
+                      {
+                        "Id": 14,
+                        "Type": "property.set",
+                        "Properties": {
+                          "_name": "Volume",
+                          "_type": "Sandbox.Engine/Sandbox.SoundHandle"
+                        },
+                        "UserData": {
+                          "Position": "1520,272"
+                        }
+                      },
+                      {
+                        "Id": 15,
+                        "Type": "event.finished",
+                        "UserData": {
+                          "Position": "2336,0"
+                        }
+                      },
+                      {
+                        "Id": 18,
+                        "Type": "event.ragdollplayer",
+                        "UserData": {
+                          "Position": "1872,0"
+                        }
+                      },
+                      {
+                        "Id": 19,
+                        "Type": "event.worldpunchplayer",
+                        "UserData": {
+                          "Position": "1504,0"
+                        }
+                      },
+                      {
+                        "Id": 20,
+                        "Type": "event.blackscreen",
+                        "UserData": {
+                          "Position": "1840,208"
+                        }
+                      },
+                      {
+                        "Id": 21,
+                        "Type": "time.delay",
+                        "UserData": {
+                          "Position": "2096,-160"
+                        }
+                      },
+                      {
+                        "Id": 22,
+                        "Type": "event.issingleplayer",
+                        "UserData": {
+                          "Position": "1632,-160"
+                        }
+                      },
+                      {
+                        "Id": 23,
+                        "Type": "if",
+                        "UserData": {
+                          "Position": "1872,-160"
+                        }
+                      },
+                      {
+                        "Id": 24,
+                        "Type": "event.skiptime",
+                        "UserData": {
+                          "Position": "2336,-160"
+                        }
+                      },
+                      {
+                        "Id": 26,
+                        "Type": "scene.ref",
+                        "Properties": {
+                          "T": "Sandbox.Game/Sandbox.GameObject",
+                          "value": {
+                            "_type": "gameobject",
+                            "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
+                          }
+                        },
+                        "UserData": {
+                          "Position": "176,80"
+                        }
+                      },
+                      {
+                        "Id": 28,
+                        "Type": "scene.ref",
+                        "Properties": {
+                          "T": "package.fish.sauna/EventComponent",
+                          "value": {
+                            "_type": "component",
+                            "go": "2f80e6c2-8f26-4f25-8c21-6de0874ed0b5",
+                            "component_type": "EventComponent"
+                          }
+                        },
+                        "UserData": {
+                          "Position": "2096,96"
+                        }
+                      },
+                      {
+                        "Id": 29,
+                        "Type": "event.triggersignal",
+                        "UserData": {
+                          "Position": "1824,416"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 0,
+                        "SrcName": "triggerer",
+                        "DstId": 1,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": "EnabledInSelf, InAncestors",
+                        "DstId": 1,
+                        "DstName": "search"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "triggerer",
+                        "DstId": 2,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_result",
+                        "DstId": 3,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_result",
+                        "DstId": 4,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 5,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 0.2,
+                        "DstId": 5,
+                        "DstName": "duration"
+                      },
+                      {
+                        "Value": "Linear",
+                        "DstId": 5,
+                        "DstName": "easer"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_result",
+                        "DstId": 5,
+                        "DstName": "from"
+                      },
+                      {
+                        "SrcId": 26,
+                        "SrcName": "_result",
+                        "DstId": 5,
+                        "DstName": "target"
+                      },
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_result",
+                        "DstId": 5,
+                        "DstName": "to"
+                      },
+                      {
+                        "SrcId": 26,
+                        "SrcName": "_result",
+                        "DstId": 6,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 6,
+                        "SrcName": "_result",
+                        "DstId": 7,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 7,
+                        "SrcName": "_result",
+                        "DstId": 8,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 11,
+                        "SrcName": "_result",
+                        "DstId": 9,
+                        "DstName": "forward"
+                      },
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_result",
+                        "DstId": 10,
+                        "DstName": "a"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_result",
+                        "DstId": 10,
+                        "DstName": "b"
+                      },
+                      {
+                        "SrcId": 10,
+                        "SrcName": "_result",
+                        "DstId": 11,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 12,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 6,
+                        "SrcName": "_result",
+                        "DstId": 12,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 9,
+                        "SrcName": "_result",
+                        "DstId": 12,
+                        "DstName": "_value"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 13,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_result",
+                        "DstId": 13,
+                        "DstName": "position"
+                      },
+                      {
+                        "Value": "sounds/speech/test_drunk.sound",
+                        "DstId": 13,
+                        "DstName": "soundEvent"
+                      },
+                      {
+                        "SrcId": 13,
+                        "SrcName": "_signal",
+                        "DstId": 14,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 13,
+                        "SrcName": "_result",
+                        "DstId": 14,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": 6,
+                        "DstId": 14,
+                        "DstName": "_value"
+                      },
+                      {
+                        "SrcId": 18,
+                        "SrcName": "_signal",
+                        "DstId": 15,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 28,
+                        "SrcName": "_result",
+                        "DstId": 15,
+                        "DstName": "component"
+                      },
+                      {
+                        "SrcId": 19,
+                        "SrcName": "_signal",
+                        "DstId": 18,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 6,
+                        "DstId": 18,
+                        "DstName": "duration"
+                      },
+                      {
+                        "Value": true,
+                        "DstId": 18,
+                        "DstName": "enabled"
+                      },
+                      {
+                        "Value": true,
+                        "DstId": 18,
+                        "DstName": "forced"
+                      },
+                      {
+                        "SrcId": 1,
+                        "SrcName": "_result",
+                        "DstId": 18,
+                        "DstName": "player"
+                      },
+                      {
+                        "Value": 10,
+                        "DstId": 18,
+                        "DstName": "spin"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_signal",
+                        "DstId": 19,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 200,
+                        "DstId": 19,
+                        "DstName": "extraVerticalStrength"
+                      },
+                      {
+                        "SrcId": 1,
+                        "SrcName": "_result",
+                        "DstId": 19,
+                        "DstName": "player"
+                      },
+                      {
+                        "Value": 400,
+                        "DstId": 19,
+                        "DstName": "strength"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_result",
+                        "DstId": 19,
+                        "DstName": "worldSource"
+                      },
+                      {
+                        "SrcId": 19,
+                        "SrcName": "_signal",
+                        "DstId": 20,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 5,
+                        "DstId": 20,
+                        "DstName": "blackTransition"
+                      },
+                      {
+                        "SrcId": 1,
+                        "SrcName": "_result",
+                        "DstId": 20,
+                        "DstName": "player"
+                      },
+                      {
+                        "Value": 0.5,
+                        "DstId": 20,
+                        "DstName": "startingTransition"
+                      },
+                      {
+                        "SrcId": 23,
+                        "SrcName": "true",
+                        "DstId": 21,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 3,
+                        "DstId": 21,
+                        "DstName": "seconds"
+                      },
+                      {
+                        "SrcId": 19,
+                        "SrcName": "_signal",
+                        "DstId": 23,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 22,
+                        "SrcName": "_result",
+                        "DstId": 23,
+                        "DstName": "condition"
+                      },
+                      {
+                        "SrcId": 21,
+                        "SrcName": "_signal",
+                        "DstId": 24,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 7200,
+                        "DstId": 24,
+                        "DstName": "inGameSeconds"
+                      },
+                      {
+                        "SrcId": 19,
+                        "SrcName": "_signal",
+                        "DstId": 29,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 1,
+                        "SrcName": "_result",
+                        "DstId": 29,
+                        "DstName": "player"
+                      },
+                      {
+                        "Value": "event.peeper_attacks",
+                        "DstId": 29,
+                        "DstName": "signalIdentifier"
+                      }
+                    ]
+                  },
+                  "RequiredToFinish": true,
+                  "TriggerCooldown": 1,
+                  "TriggerOnce": true,
+                  "Triggers": [
+                    {
+                      "_type": "component",
+                      "go": "0530f77c-818b-486c-a779-34025c229f3e",
+                      "component_type": "EventAreaTrigger"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Id": "cb9ad1f7-3db3-4b43-aef3-a5d4b322e48c",
+              "Name": "ScaredEvent",
+              "Position": "-50.11293,-33.09923,-1.524353",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "EventComponent",
+                  "__enabled": false,
+                  "DisabledWhilePlaying": [
+                    {
+                      "_type": "component",
+                      "go": "2f80e6c2-8f26-4f25-8c21-6de0874ed0b5",
+                      "component_type": "EventComponent"
+                    }
+                  ],
+                  "DisableOnTrigger": [],
+                  "Event": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Event",
+                      "id": "34d538c4-e9d1-4798-9d46-4da51ce34dcd",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "-576,-160"
+                        }
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "event.interpolateposition",
+                        "UserData": {
+                          "Position": "1168,128"
+                        }
+                      },
+                      {
+                        "Id": 2,
+                        "Type": "scene.ref",
+                        "Properties": {
+                          "T": "Sandbox.Game/Sandbox.GameObject",
+                          "value": {
+                            "_type": "gameobject",
+                            "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
+                          }
+                        },
+                        "UserData": {
+                          "Position": "-608,144"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "scene.ref",
+                        "Properties": {
+                          "T": "Sandbox.Game/Sandbox.GameObject",
+                          "value": {
+                            "_type": "gameobject",
+                            "go": "20ba868b-9876-4f99-8a41-882ff4c46a16"
+                          }
+                        },
+                        "UserData": {
+                          "Position": "-768,320"
+                        }
+                      },
+                      {
+                        "Id": 4,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "Transform",
+                          "_type": "Sandbox.Game/Sandbox.GameObject"
+                        },
+                        "UserData": {
+                          "Position": "-528,336"
+                        }
+                      },
+                      {
+                        "Id": 5,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "World",
+                          "_type": "Sandbox.Game/Sandbox.GameTransform"
+                        },
+                        "UserData": {
+                          "Position": "-256,384"
+                        }
+                      },
+                      {
+                        "Id": 6,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "Position",
+                          "_type": "Sandbox.System/Transform"
+                        },
+                        "UserData": {
+                          "Position": "-48,416"
+                        }
+                      },
+                      {
+                        "Id": 7,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "Transform",
+                          "_type": "Sandbox.Game/Sandbox.GameObject"
+                        },
+                        "UserData": {
+                          "Position": "-352,208"
+                        }
+                      },
+                      {
+                        "Id": 8,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "World",
+                          "_type": "Sandbox.Game/Sandbox.GameTransform"
+                        },
+                        "UserData": {
+                          "Position": "-160,208"
+                        }
+                      },
+                      {
+                        "Id": 9,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "Position",
+                          "_type": "Sandbox.System/Transform"
+                        },
+                        "UserData": {
+                          "Position": "16,192"
+                        }
+                      },
+                      {
+                        "Id": 10,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "Rotation",
+                          "_type": "Sandbox.System/Transform"
+                        },
+                        "UserData": {
+                          "Position": "16,288"
+                        }
+                      },
+                      {
+                        "Id": 11,
+                        "Type": "event.interpolaterotation",
+                        "UserData": {
+                          "Position": "784,-16"
+                        }
+                      },
+                      {
+                        "Id": 12,
+                        "Type": "call",
+                        "Properties": {
+                          "_name": "RotateAroundAxis",
+                          "_type": "Sandbox.System/Rotation",
+                          "_isStatic": false
+                        },
+                        "UserData": {
+                          "Position": "288,352"
+                        }
+                      },
+                      {
+                        "Id": 13,
+                        "Type": "event.interpolatescale",
+                        "UserData": {
+                          "Position": "96,-160"
+                        }
+                      },
+                      {
+                        "Id": 14,
+                        "Type": "event.interpolatescale",
+                        "UserData": {
+                          "Position": "400,-160"
+                        }
+                      },
+                      {
+                        "Id": 15,
+                        "Type": "sound.playat",
+                        "UserData": {
+                          "Position": "736,368"
+                        }
+                      },
+                      {
+                        "Id": 16,
+                        "Type": "property.set",
+                        "Properties": {
+                          "_name": "Volume",
+                          "_type": "Sandbox.Engine/Sandbox.SoundHandle"
+                        },
+                        "UserData": {
+                          "Position": "1008,400"
+                        }
+                      },
+                      {
+                        "Id": 17,
+                        "Type": "event.finished",
+                        "UserData": {
+                          "Position": "1552,144"
+                        }
+                      },
+                      {
+                        "Id": 18,
+                        "Type": "scene.ref",
+                        "Properties": {
+                          "T": "package.fish.sauna/EventComponent",
+                          "value": {
+                            "_type": "component",
+                            "go": "cb9ad1f7-3db3-4b43-aef3-a5d4b322e48c",
+                            "component_type": "EventComponent"
+                          }
+                        },
+                        "UserData": {
+                          "Position": "1344,256"
+                        }
+                      },
+                      {
+                        "Id": 19,
+                        "Type": "event.triggersignal",
+                        "UserData": {
+                          "Position": "1824,160"
+                        }
+                      },
+                      {
+                        "Id": 20,
+                        "Type": "call",
+                        "Properties": {
+                          "_name": "Get",
+                          "T": "package.fish.sauna/Sauna.Player",
+                          "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                          "_isStatic": false
+                        },
+                        "UserData": {
+                          "Position": "-128,-320"
+                        }
+                      },
+                      {
+                        "Id": 22,
+                        "Type": "event.assigntaskto",
+                        "UserData": {
+                          "Position": "1440,-48"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 11,
+                        "SrcName": "_signal",
+                        "DstId": 1,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 0.5,
+                        "DstId": 1,
+                        "DstName": "duration"
+                      },
+                      {
+                        "Value": "Linear",
+                        "DstId": 1,
+                        "DstName": "easer"
+                      },
+                      {
+                        "SrcId": 9,
+                        "SrcName": "_result",
+                        "DstId": 1,
+                        "DstName": "from"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_result",
+                        "DstId": 1,
+                        "DstName": "target"
+                      },
+                      {
+                        "SrcId": 6,
+                        "SrcName": "_result",
+                        "DstId": 1,
+                        "DstName": "to"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_result",
+                        "DstId": 4,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_result",
+                        "DstId": 5,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_result",
+                        "DstId": 6,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_result",
+                        "DstId": 7,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 7,
+                        "SrcName": "_result",
+                        "DstId": 8,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_result",
+                        "DstId": 9,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_result",
+                        "DstId": 10,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 14,
+                        "SrcName": "_signal",
+                        "DstId": 11,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 0.3,
+                        "DstId": 11,
+                        "DstName": "duration"
+                      },
+                      {
+                        "Value": "Linear",
+                        "DstId": 11,
+                        "DstName": "easer"
+                      },
+                      {
+                        "SrcId": 10,
+                        "SrcName": "_result",
+                        "DstId": 11,
+                        "DstName": "from"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_result",
+                        "DstId": 11,
+                        "DstName": "target"
+                      },
+                      {
+                        "SrcId": 12,
+                        "SrcName": "_result",
+                        "DstId": 11,
+                        "DstName": "to"
+                      },
+                      {
+                        "SrcId": 10,
+                        "SrcName": "_result",
+                        "DstId": 12,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": "0,0,1",
+                        "DstId": 12,
+                        "DstName": "axis"
+                      },
+                      {
+                        "Value": 90,
+                        "DstId": 12,
+                        "DstName": "degrees"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 13,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 0.2,
+                        "DstId": 13,
+                        "DstName": "duration"
+                      },
+                      {
+                        "Value": "Linear",
+                        "DstId": 13,
+                        "DstName": "easer"
+                      },
+                      {
+                        "Value": "1,1,1",
+                        "DstId": 13,
+                        "DstName": "from"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_result",
+                        "DstId": 13,
+                        "DstName": "target"
+                      },
+                      {
+                        "Value": "1,1.3,1.2",
+                        "DstId": 13,
+                        "DstName": "to"
+                      },
+                      {
+                        "SrcId": 13,
+                        "SrcName": "_signal",
+                        "DstId": 14,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 0.2,
+                        "DstId": 14,
+                        "DstName": "duration"
+                      },
+                      {
+                        "Value": "Linear",
+                        "DstId": 14,
+                        "DstName": "easer"
+                      },
+                      {
+                        "Value": "1,1.3,1.2",
+                        "DstId": 14,
+                        "DstName": "from"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_result",
+                        "DstId": 14,
+                        "DstName": "target"
+                      },
+                      {
+                        "Value": "1,1,1",
+                        "DstId": 14,
+                        "DstName": "to"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 15,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 9,
+                        "SrcName": "_result",
+                        "DstId": 15,
+                        "DstName": "position"
+                      },
+                      {
+                        "Value": "sounds/speech/test_drunk.sound",
+                        "DstId": 15,
+                        "DstName": "soundEvent"
+                      },
+                      {
+                        "SrcId": 15,
+                        "SrcName": "_signal",
+                        "DstId": 16,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 15,
+                        "SrcName": "_result",
+                        "DstId": 16,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": 3,
+                        "DstId": 16,
+                        "DstName": "_value"
+                      },
+                      {
+                        "SrcId": 1,
+                        "SrcName": "_signal",
+                        "DstId": 17,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 18,
+                        "SrcName": "_result",
+                        "DstId": 17,
+                        "DstName": "component"
+                      },
+                      {
+                        "SrcId": 17,
+                        "SrcName": "_signal",
+                        "DstId": 19,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 20,
+                        "SrcName": "_result",
+                        "DstId": 19,
+                        "DstName": "player"
+                      },
+                      {
+                        "Value": "event.peeper_scared",
+                        "DstId": 19,
+                        "DstName": "signalIdentifier"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "triggerer",
+                        "DstId": 20,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": "EnabledInSelf, InAncestors",
+                        "DstId": 20,
+                        "DstName": "search"
+                      },
+                      {
+                        "SrcId": 1,
+                        "SrcName": "_signal",
+                        "DstId": 22,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 20,
+                        "SrcName": "_result",
+                        "DstId": 22,
+                        "DstName": "player"
+                      },
+                      {
+                        "Value": "resources/tasks/check_the_back.task",
+                        "DstId": 22,
+                        "DstName": "taskToAdd"
+                      }
+                    ]
+                  },
+                  "RequiredToFinish": false,
+                  "TriggerCooldown": 1,
+                  "TriggerOnce": true,
+                  "Triggers": [
+                    {
+                      "_type": "component",
+                      "go": "90becdb4-7cc4-48b4-b0ed-b08f43ec6ddb",
+                      "component_type": "EventAreaTrigger"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "Id": "8e4eb9c9-1991-4591-91ff-7feba30f2050",
       "Name": "oak_tree_a",
-      "Position": "441.9283,-710.48,30.111",
+      "Position": "441.9283,-710.48,-589033.5",
       "Rotation": "0.00009629934,0.03252056,-0.002959586,0.9994667",
       "Scale": "2.174943,2.174943,2.174943",
       "Enabled": true,
@@ -421,28 +2606,277 @@
     },
     {
       "Id": "25c66c9b-2a89-47ad-8b8a-1e55ba924a67",
-      "Name": "beer_bottle (1)",
-      "Position": "676.2495,-598.8569,27",
+      "Name": "Beer Bottle",
+      "Position": "676.2654,-598.8034,27.09615",
+      "Rotation": "-0.003481871,0.003837303,0.000008459314,0.9999866",
       "Networked": true,
       "Enabled": true,
-      "__Prefab": "prefabs/items/beer_bottle.prefab"
+      "Components": [
+        {
+          "__type": "ItemEquipment",
+          "Attachment": "hand_R",
+          "AttachmentTransform": {
+            "UniformScale": 1,
+            "Scale": "1,1,1",
+            "Rotation": "0,0,0,1"
+          },
+          "Description": "This is the beer bottle desc",
+          "HideBodygroups": "None",
+          "Icon": {
+            "Model": "models/beer_bottle/beer.vmdl",
+            "MaterialGroup": "",
+            "Position": "-2.25,1.95,0.75",
+            "Rotation": "0.1938814,-0.1557454,0.7551184,0.6065885",
+            "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
+          },
+          "Name": "Beer Bottle",
+          "SellPrice": 5,
+          "Slot": "Hand",
+          "UpdatePosition": false,
+          "WeightInGrams": 100
+        },
+        {
+          "__type": "Interactions",
+          "ObjectInteractions": [
+            {
+              "Identifier": "beer.drink",
+              "Keybind": "Mouse1",
+              "Description": "Drink",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "1d472d5d-54f0-4785-84c0-47529d8279f7",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input"
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "Destroy",
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    },
+                    "UserData": {
+                      "Position": "400,0"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "AddExperience",
+                      "_isStatic": false,
+                      "_type": "package.fish.sauna/Sauna.Player"
+                    },
+                    "UserData": {
+                      "Position": "208,-0"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_signal",
+                    "DstId": 1,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "obj",
+                    "DstId": 1,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 2,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "interactor",
+                    "DstId": 2,
+                    "DstName": "_target"
+                  },
+                  {
+                    "Value": 20,
+                    "DstId": 2,
+                    "DstName": "exp"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 11,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/beer_bottle/beer.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "ModelCollider",
+          "IsTrigger": false,
+          "Model": "models/beer_bottle/beer.vmdl",
+          "Static": false,
+          "Surface": null
+        },
+        {
+          "__type": "Rigidbody",
+          "AngularDamping": 0,
+          "Gravity": true,
+          "LinearDamping": 0,
+          "Locking": {},
+          "MassOverride": 0,
+          "RigidbodyFlags": 0,
+          "StartAsleep": false
+        }
+      ]
     },
     {
       "Id": "184a4247-0fc8-4518-ad18-3e1e704296e6",
-      "Name": "Beer Crate (24/24)",
-      "Position": "641.15,-590.0552,91",
-      "Rotation": "-0.00000037217,0.00000005960464,0.00000111651,0.9999999",
+      "Name": "Beer Crate",
+      "Position": "641.1452,-590.0398,27.09369",
+      "Rotation": "-0.00000005102128,-0.0000009886251,-0.0008163078,0.9999998",
       "Networked": true,
       "Enabled": true,
-      "__Prefab": "prefabs/items/beer_crate.prefab"
+      "Components": [
+        {
+          "__type": "BeerCrate",
+          "Beer": {
+            "_type": "gameobject",
+            "prefab": "prefabs/items/beer_bottle.prefab"
+          },
+          "Count": 24
+        },
+        {
+          "__type": "ItemComponent",
+          "Description": null,
+          "Icon": {
+            "Model": "models/beer_crate/beer_crate.vmdl",
+            "MaterialGroup": "",
+            "Position": "-7.2,1.05,0.6",
+            "Rotation": "0.03179746,0.2449005,-0.2439722,0.9378114",
+            "Guid": "2f4cce36-cc91-46d5-a3d5-0adff732545a"
+          },
+          "Name": "Beer Crate (24/24)",
+          "SellPrice": -1,
+          "WeightInGrams": 400
+        },
+        {
+          "__type": "BoxCollider",
+          "Center": "0,0,4.25",
+          "IsTrigger": false,
+          "Scale": "12.20005,18.00001,8.5",
+          "Static": false,
+          "Surface": null
+        },
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 18446744073709551615,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/beer_crate/beer_crate.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Rigidbody",
+          "AngularDamping": 0,
+          "Gravity": true,
+          "LinearDamping": 0,
+          "Locking": {},
+          "MassOverride": 0,
+          "RigidbodyFlags": 0,
+          "StartAsleep": false
+        },
+        {
+          "__type": "Interactions",
+          "ObjectInteractions": []
+        }
+      ]
     },
     {
       "Id": "27a9b3f4-879f-4e60-9810-1fdc09fffac0",
-      "Name": "rifle",
-      "Position": "574.0919,-605.1056,93.00001",
+      "Name": "Ukko-Pekka M39",
+      "Position": "574.3383,-605.3303,27.74782",
+      "Rotation": "-0.7176243,0.01276186,-0.009125232,0.6962538",
       "Networked": true,
       "Enabled": true,
-      "__Prefab": "prefabs/items/rifle.prefab"
+      "Components": [
+        {
+          "__type": "WeaponComponent"
+        },
+        {
+          "__type": "ItemEquipment",
+          "Attachment": "hand_R",
+          "AttachmentTransform": {
+            "UniformScale": 1,
+            "Scale": "1,1,1",
+            "Rotation": "0,0,0,1"
+          },
+          "Description": "Wow, this looks like it packs a punch.",
+          "HideBodygroups": "None",
+          "Icon": {
+            "Model": "models/rifle/m38.vmdl",
+            "MaterialGroup": "",
+            "Position": "31.35,-6,-3.3",
+            "Rotation": "0.2983258,0.04915657,0.8452148,0.4406781",
+            "Guid": "b33135ad-9c3d-4e6d-a25f-3562d2ba4547"
+          },
+          "Name": "Ukko-Pekka M39",
+          "SellPrice": -1,
+          "Slot": "Hand",
+          "UpdatePosition": false,
+          "WeightInGrams": 4800
+        },
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 18446744073709551615,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/rifle/m38.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "ModelCollider",
+          "IsTrigger": false,
+          "Model": "models/rifle/m38.vmdl",
+          "Static": false,
+          "Surface": null
+        },
+        {
+          "__type": "Rigidbody",
+          "AngularDamping": 0,
+          "Gravity": true,
+          "LinearDamping": 0,
+          "Locking": {},
+          "MassOverride": 0,
+          "RigidbodyFlags": 0,
+          "StartAsleep": false
+        },
+        {
+          "__type": "Interactions",
+          "ObjectInteractions": []
+        }
+      ]
     },
     {
       "Id": "6256e00d-b380-4ebb-b468-35255ab4b86c",
@@ -463,10 +2897,191 @@
     },
     {
       "Id": "b21f3811-be00-47a4-ad66-2294fdd6ff07",
-      "Name": "shop_beer_bottle",
+      "Name": "Buy Beer Bottle",
       "Position": "458.7336,-214.3331,27",
       "Enabled": true,
-      "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+      "Components": [
+        {
+          "__type": "ShopItem",
+          "HasBounds": true,
+          "Item": "prefabs/items/beer_bottle.prefab",
+          "Price": 5
+        },
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 11,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/beer_bottle/beer.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "ModelCollider",
+          "IsTrigger": false,
+          "Model": "models/beer_bottle/beer.vmdl",
+          "Static": false,
+          "Surface": null
+        },
+        {
+          "__type": "Interactions",
+          "ObjectInteractions": []
+        }
+      ]
+    },
+    {
+      "Id": "444e5e65-8c75-46f1-8186-dffaa5904730",
+      "Name": "sell_zone",
+      "Position": "708.5266,-42.11619,43.9567",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "EventSellAreaTrigger",
+          "Extents": "44.47984,32.39981,58.23997",
+          "MaxPollingRate": 5,
+          "Offset": "0,0,0",
+          "TriggerSignalIdentifier": null
+        }
+      ]
+    },
+    {
+      "Id": "9cc058fc-954e-41bb-8364-b5d715129e56",
+      "Name": "Beer Bottle",
+      "Position": "691.2806,-294.9676,27.5626",
+      "Rotation": "-0.4975642,0.5014031,0.05570718,0.7056355",
+      "Networked": true,
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ItemEquipment",
+          "Attachment": "hand_R",
+          "AttachmentTransform": {
+            "UniformScale": 1,
+            "Scale": "1,1,1",
+            "Rotation": "0,0,0,1"
+          },
+          "Description": "This is the beer bottle desc",
+          "HideBodygroups": "None",
+          "Icon": {
+            "Model": "models/beer_bottle/beer.vmdl",
+            "MaterialGroup": "",
+            "Position": "-2.25,1.95,0.75",
+            "Rotation": "0.1938814,-0.1557454,0.7551184,0.6065885",
+            "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
+          },
+          "Name": "Beer Bottle",
+          "SellPrice": 5,
+          "Slot": "Hand",
+          "UpdatePosition": false,
+          "WeightInGrams": 100
+        },
+        {
+          "__type": "Interactions",
+          "ObjectInteractions": [
+            {
+              "Identifier": "beer.drink",
+              "Keybind": "Mouse1",
+              "Description": "Drink",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "1d472d5d-54f0-4785-84c0-47529d8279f7",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input"
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "Destroy",
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    },
+                    "UserData": {
+                      "Position": "400,0"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "AddExperience",
+                      "_isStatic": false,
+                      "_type": "package.fish.sauna/Sauna.Player"
+                    },
+                    "UserData": {
+                      "Position": "208,-0"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_signal",
+                    "DstId": 1,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "obj",
+                    "DstId": 1,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 2,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "interactor",
+                    "DstId": 2,
+                    "DstName": "_target"
+                  },
+                  {
+                    "Value": 20,
+                    "DstId": 2,
+                    "DstName": "exp"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 11,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/beer_bottle/beer.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "ModelCollider",
+          "IsTrigger": false,
+          "Model": "models/beer_bottle/beer.vmdl",
+          "Static": false,
+          "Surface": null
+        },
+        {
+          "__type": "Rigidbody",
+          "AngularDamping": 0,
+          "Gravity": true,
+          "LinearDamping": 0,
+          "Locking": {},
+          "MassOverride": 0,
+          "RigidbodyFlags": 0,
+          "StartAsleep": false
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -492,6 +3107,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-29T18:14:17.2390844-05:00",
+  "LastSaved": "2024-02-29T19:34:59.4445049-05:00",
   "__references": []
 }

@@ -1,0 +1,14 @@
+@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits PanelComponent
+@attribute [StyleSheet]
+
+<root>
+	<img src=@Icon.ResourcePath />
+</root>
+
+@code {
+	public Texture Icon { get; set; }
+}

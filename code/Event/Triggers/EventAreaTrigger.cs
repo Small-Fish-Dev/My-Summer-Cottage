@@ -1,4 +1,3 @@
-using Sandbox;
 using Sauna.Event;
 
 [Icon( "highlight_alt" )]
