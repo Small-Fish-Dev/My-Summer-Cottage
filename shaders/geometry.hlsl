@@ -8,6 +8,7 @@ float GrassSize 	< UiType( VectorText ); Default( 2.0f ); Range ( 1.0f, 20.0f );
 float GrassRandom 	< UiType( VectorText ); Default( 1.0f ); Range ( 0.0f, 5.0f  ); UiGroup("Grass Settings,20/20"); >;
 float GrassScale 	< UiType( VectorText ); Default( 6.0f ); Range ( 1.0f, 12.0f ); UiGroup("Grass Settings,20/30"); >;
 float SwayIntensity	< UiType( VectorText ); Default( 14.0f); Range ( 1.0f, 28.0f ); UiGroup("Grass Settings,20/40"); >;
+float MaxDistance	< UiType( VectorText ); Default( 100.0f); Range( 1.0f, 500.0f); UiGroup("Grass Settings,20/50"); >;
 
 // Rotation matrix bullshit: taken from https://gist.github.com/keijiro/ee439d5e7388f3aafc5296005c8c3f33 
 // Usage: float3x3 rotationMatrix = AngleAxis3x3( 0.4f, float3( 0, 0, 1 ) ) - create rotation matrix with angle 0.4 on Z axis. 
@@ -102,6 +103,13 @@ bool isOutsideFrustum( float4 position[3], float offset = 0.0f )
 	return isOutside; // Returns 'false' only if all statement checks in 'for' returned false.
 }
 
+// Returns 'true' or 'false' if given position is outside of render distance.
+bool isOutOfRenderDistance( float3 position )
+{
+	float3 vWorldPosition = position + g_vHighPrecisionLightingOffsetWs.xyz;
+	return distance( vWorldPosition, g_vCameraPositionWs ) > MaxDistance;
+}
+
 // Main geometry shader function 
 [maxvertexcount(6)]
 void MainGs( triangle in PixelInput input[3], inout TriangleStream<PixelInput> triStream )
@@ -117,6 +125,9 @@ void MainGs( triangle in PixelInput input[3], inout TriangleStream<PixelInput> t
 	// Check if given triangle vertices are within camera view. If not, exit program early. 
 	float4 positions[3] = { input[0].vPositionPs, input[1].vPositionPs, input[2].vPositionPs };
 	if( isOutsideFrustum( positions, 30 ) ) return;
+
+	// Don't render grass if it's, well, outside of specified render distance. 
+	if ( isOutOfRenderDistance( input[0].vPositionWs ) ) return;
 
 	// Cycle through each mesh vertex position and create a triangle with set width and UV.
 	for (float k = 0; k < 3; k++)
