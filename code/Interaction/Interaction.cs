@@ -141,7 +141,7 @@ public class Interactions : Component
 		programmedInteractions.Add( interaction );
 	}
 
-	protected override void OnStart()
+	protected override void OnAwake()
 	{
 		ObjectInteractions ??= new();
 	}
