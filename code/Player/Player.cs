@@ -221,6 +221,34 @@ public partial class Player : Component, Component.ExecuteInEditor
 		return true;
 	}
 
+	[Icon( "camera" )]
+	public SweetMemory CaptureMemory( string caption, float distance = 100f, int maxTries = 20 )
+	{
+		var center = Bounds.Center + Transform.Position + Vector3.Up * 10f;
+		var position = center + Transform.Rotation.Backward * distance; // Default
+
+		for ( int i = 0; i < maxTries; i++ )
+		{
+			var dir = Vector3.Random;
+			dir = dir.WithZ( dir.z.Clamp( 0.3f, 0.9f ) ); // Clamped on z-axis so it doesn't go too low.
+
+			var from = Transform.Position + dir * distance;
+			var ray = new Ray( from, (center - from).Normal );
+
+			var tr = Scene.Trace.Ray( ray, distance )
+				.WithoutTags( "trigger" )
+				.Run();
+
+			if ( tr.GameObject == GameObject )
+			{
+				position = ray.Position;
+				break;
+			}
+		}
+
+		return SweetMemories.Capture( caption, position, Rotation.Identity, center );
+	}
+
 	protected override void OnPreRender()
 	{
 		if ( !GameManager.IsPlaying )
