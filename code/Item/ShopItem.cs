@@ -1,6 +1,6 @@
 namespace Sauna;
 
-public class ShopItem : Component, Component.ExecuteInEditor
+public class ShopItem : Component
 {
 	[Property]
 	public PrefabFile Item { get; set; }
