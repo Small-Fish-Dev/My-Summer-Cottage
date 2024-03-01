@@ -49,6 +49,13 @@ public class ItemEquipment : ItemComponent
 					? GameObject.Parent?.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInChildren )
 					: null;
 			}
+
+			// Disable rigidbody and collider.
+			var body = GameObject?.Components.Get<Rigidbody>( FindMode.EverythingInSelfAndChildren );
+			if ( body != null && body != parcelBody ) body.Enabled = !value;
+
+			var collider = GameObject?.Components.Get<Collider>( FindMode.EverythingInSelfAndChildren );
+			if ( collider != null && collider != parcelCollider ) collider.Enabled = !value;
 		}
 	}
 
