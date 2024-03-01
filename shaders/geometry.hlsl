@@ -99,10 +99,8 @@ void MainGs( triangle in PixelInput input[3], inout TriangleStream<PixelInput> t
 		PS_INPUT o = input[k];
 		float sway = sin( g_flTime ) / SwayIntensity; // Shrimplest sway animation possible. Speed can be exposed as a variable imo.
 
-		EmitGrass( triStream, o, float3( GrassSize, 0, 0 ), 	 float2(   1, 1 ), GrassScale );
-		EmitGrass( triStream, o, float3(-GrassSize, 0, 0 ), 	 float2(   0, 1 ), GrassScale );
-		EmitGrass( triStream, o, float3( 0, 0, 1 + GrassSize ),  float2( sway, 0 ), GrassScale );	// UV X axis here can be used for sway animation
+		EmitGrass( triStream, o, float3( GrassSize, 0, sin(g_flTime) / 16 ), 	 float2(   1, 1 ), GrassScale );
+		EmitGrass( triStream, o, float3(-GrassSize, sin(g_flTime) / 16, 0 ), 	 float2(   0, 1 ), GrassScale );
+		EmitGrass( triStream, o, float3( 0, 0, 1 + (sin(g_flTime) / 4 ) + GrassSize),  float2( sway, 0 ), GrassScale );	// UV X axis here can be used for sway animation
 	}
-
-	GSRestartStrip( triStream );
 }
