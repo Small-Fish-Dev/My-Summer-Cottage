@@ -9,7 +9,7 @@
 			<text>@Hint</text>
 		</div>
 	}
-	<div class="input">
+	<div class="input @(DarkMode ? "dark" : "")">
 		<text style="bottom: 1px;">@(!string.IsNullOrEmpty( Input ) ? Sandbox.Input.GetButtonOrigin( Input ) : "?")</text>
 	</div>
 </root>
@@ -17,6 +17,7 @@
 @code {
 	public string Hint { get; set; }
 	public string Input { get; set; }
+	public bool DarkMode { get; set; } = true;
 
 	protected override int BuildHash()
 	{

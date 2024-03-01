@@ -25,8 +25,8 @@
 				if ( !disabled || interaction.ShowWhenDisabled )
 				{
 					var inactive = !HasPriority( interaction.Keybind ) || disabled;
-					<div class="interaction @(inactive ? "inactive" : "")">
-						<inputhint class="hint" input=@interaction.Keybind />
+					<div class="interaction">
+						<inputhint class="hint" input=@interaction.Keybind DarkMode=@inactive />
 						<text class="description" style="color: @interaction.Color.Hex">@interaction.Text</text>
 					</div>
 				}
