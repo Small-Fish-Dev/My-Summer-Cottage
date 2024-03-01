@@ -81,6 +81,27 @@ void EmitGrass( inout TriangleStream<PS_INPUT> triStream, triangle PS_INPUT i, f
 	GSAppendVertex( triStream, i );
 }
 
+// This section can be likely improved, I'm not sure if this is the optimal way to do frustum culling. 
+// Returns true/false if given vPositionPS is outside of frustum. Optionally you can add offset so triangles get culled closer/farther from camera frustum. 
+bool isOutsideFrustum( float4 position[3], float offset = 0.0f )
+{
+	bool isOutside = false;
+
+	if ( position[0].z > position[0].w && position[1].z > position[1].w && position[2].z > position[2].w ) return true;	// 'true' if vertice is outside far plane.
+	if ( position[0].z < 0.0 || position[1].z < 0.0 || position[2].z < 0.0 ) return true;								// 'true' if vertice is outside near plane.
+
+	for (float i = 0; i < 3; i++)
+	{
+		isOutside = ( position[i].x < -position[i].w - offset
+		|| position[i].y < -position[i].w - offset
+		|| position[i].x > position[i].w + offset
+		|| position[i].y > position[i].w + offset ) ? 1 : 0;
+
+		if (isOutside) return true;
+	}
+	return isOutside; // Returns 'false' only if all statement checks in 'for' returned false.
+}
+
 // Main geometry shader function 
 [maxvertexcount(6)]
 void MainGs( triangle in PixelInput input[3], inout TriangleStream<PixelInput> triStream )
@@ -92,6 +113,10 @@ void MainGs( triangle in PixelInput input[3], inout TriangleStream<PixelInput> t
 	EmitVertex( triStream, input[2] );
 
 	GSRestartStrip( triStream );
+
+	// Check if given triangle vertices are within camera view. If not, exit program early. 
+	float4 positions[3] = { input[0].vPositionPs, input[1].vPositionPs, input[2].vPositionPs };
+	if( isOutsideFrustum( positions, 30 ) ) return;
 
 	// Cycle through each mesh vertex position and create a triangle with set width and UV.
 	for (float k = 0; k < 3; k++)
