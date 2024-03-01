@@ -5,23 +5,7 @@
 <root>
 	@if ( Hud.Instance.GameTimeManager.IsDayOver && false ) // todo: make better
 	{
-		<div style="pointer-events: all">
-			<div>Good job, asshole!</div>
-
-			<div>Gained:</div>
-			<div>+10 XP</div>
-			<div>+5 Smk (Gambling)</div>
-			<div>+1.5 KG of fat</div>
-			<div>+Prostatitis</div>
-
-			<div>Lost:</div>
-			<div>-150 Smk (Gambling)</div>
-			<div>-Sanity</div>
-			<div>-Wife</div>
-			<div>-Driver's license</div>
-
-			<div onclick="@( () => Hud.Instance.GameTimeManager.AdvanceToNextDay() )">Continue</div>
-		</div>
+		<RecapScreen />
 	}
 	else
 		switch ( ActivePanel )
