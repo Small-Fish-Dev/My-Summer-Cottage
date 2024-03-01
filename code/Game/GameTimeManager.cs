@@ -81,7 +81,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Progress of the day in percents [0; 1].
 	/// </summary>
-	public float DayPercent => (FrozenTime ?? InGameTime) / DayLength;
+	public float DayPercent => ((Scene.IsEditor && !GameManager.IsPlaying) ? (InGameTime) : (FrozenTime ?? InGameTime)) / DayLength;
 
 	public int InGameSeconds => (int)(DayPercent * 24 * 60 * 60);
 
