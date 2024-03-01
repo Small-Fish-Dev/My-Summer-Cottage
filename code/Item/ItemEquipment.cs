@@ -101,8 +101,10 @@ public class ItemEquipment : ItemComponent
 		if ( player == null )
 			return;
 
-		var transform = player.GetAttachment( Attachment, true );
-		Transform.World = transform.ToWorld( AttachmentTransform );
+		Renderer ??= Components.Get<SkinnedModelRenderer>( FindMode.InSelf ) ?? Components.Get<ModelRenderer>( FindMode.InSelf );
+		var obj = Renderer.SceneObject;
+		if ( obj.IsValid() )
+			obj.Transform = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
 	}
 
 	#region GIZMO STUFF
