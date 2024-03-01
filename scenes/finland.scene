@@ -246,14 +246,14 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.2799714,0,0.9600083",
+          "Rotation": "0,0.9736078,0,0.2282276",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "0.63149,0.8129,1.1159,2"
+              "Tint": "0.63127,0.81277,1.11583,2"
             }
           ]
         },
@@ -265,7 +265,7 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.31574,0.40645,0.55795,1",
+              "Color": "0.31564,0.40639,0.55791,1",
               "EndDistance": 10000,
               "FalloffExponent": 1,
               "Height": 10000,
@@ -278,7 +278,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
+          "Rotation": "-0.1193591,-0.1701019,0.5618529,-0.8007123",
           "Tags": "light_directional,light",
           "Enabled": true,
           "Components": [
@@ -286,7 +286,7 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.31574,0.40645,0.55795,1",
+              "LightColor": "0.31564,0.40639,0.55791,1",
               "Shadows": false,
               "SkyColor": "0.00784,0.03922,0.0902,1"
             }
@@ -330,10 +330,10 @@
                 "Id": 2,
                 "Type": "call",
                 "Properties": {
+                  "_name": "Get",
                   "_isStatic": false,
                   "T": "package.fish.sauna/Sauna.Player",
-                  "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                  "_name": "Get"
+                  "_type": "Sandbox.Game/Sandbox.IComponentLister"
                 },
                 "UserData": {
                   "Position": "240,80"
@@ -375,8 +375,8 @@
                 "Id": 8,
                 "Type": "property.get",
                 "Properties": {
-                  "_type": "Sandbox.Game/Sandbox.GameObject",
-                  "_name": "Transform"
+                  "_name": "Transform",
+                  "_type": "Sandbox.Game/Sandbox.GameObject"
                 },
                 "UserData": {
                   "Position": "336,-256"
@@ -386,8 +386,8 @@
                 "Id": 9,
                 "Type": "property.get",
                 "Properties": {
-                  "_type": "Sandbox.Game/Sandbox.GameTransform",
-                  "_name": "Position"
+                  "_name": "Position",
+                  "_type": "Sandbox.Game/Sandbox.GameTransform"
                 },
                 "UserData": {
                   "Position": "512,-256"
@@ -811,9 +811,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_name": "Get",
                       "_isStatic": false,
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_type": "Sandbox.Game/Sandbox.IComponentLister"
                     },
                     "UserData": {
@@ -886,9 +886,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_name": "Get",
                       "_isStatic": false,
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_type": "Sandbox.Game/Sandbox.IComponentLister"
                     },
                     "UserData": {
@@ -966,9 +966,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_name": "Get",
                       "_isStatic": false,
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_type": "Sandbox.Game/Sandbox.IComponentLister"
                     },
                     "UserData": {
@@ -1046,9 +1046,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_name": "Get",
                       "_isStatic": false,
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_type": "Sandbox.Game/Sandbox.IComponentLister"
                     },
                     "UserData": {
@@ -1127,9 +1127,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_name": "Get",
                       "_isStatic": false,
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_type": "Sandbox.Game/Sandbox.IComponentLister"
                     },
                     "UserData": {
@@ -1209,9 +1209,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_name": "Get",
                       "_isStatic": false,
+                      "T": "package.fish.sauna/Sauna.SlotMachine",
                       "_type": "Sandbox.Game/Sandbox.IComponentLister"
                     },
                     "UserData": {
@@ -1483,9 +1483,9 @@
                         "Type": "call",
                         "Properties": {
                           "_name": "Get",
+                          "_isStatic": false,
                           "T": "package.fish.sauna/Sauna.Player",
-                          "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                          "_isStatic": false
+                          "_type": "Sandbox.Game/Sandbox.IComponentLister"
                         },
                         "UserData": {
                           "Position": "496,-240",
@@ -1591,8 +1591,8 @@
                         "Id": 11,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "Sandbox.System/Vector3",
-                          "_name": "Normal"
+                          "_name": "Normal",
+                          "_type": "Sandbox.System/Vector3"
                         },
                         "UserData": {
                           "Position": "336,320"
@@ -1687,11 +1687,11 @@
                         "Id": 26,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
-                          }
+                          },
+                          "T": "Sandbox.Game/Sandbox.GameObject"
                         },
                         "UserData": {
                           "Position": "176,80"
@@ -1701,12 +1701,12 @@
                         "Id": 28,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/EventComponent",
                           "value": {
                             "_type": "component",
                             "go": "2f80e6c2-8f26-4f25-8c21-6de0874ed0b5",
                             "component_type": "EventComponent"
-                          }
+                          },
+                          "T": "package.fish.sauna/EventComponent"
                         },
                         "UserData": {
                           "Position": "2096,96"
@@ -2082,11 +2082,11 @@
                         "Id": 2,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
-                          }
+                          },
+                          "T": "Sandbox.Game/Sandbox.GameObject"
                         },
                         "UserData": {
                           "Position": "-608,144"
@@ -2096,11 +2096,11 @@
                         "Id": 3,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "20ba868b-9876-4f99-8a41-882ff4c46a16"
-                          }
+                          },
+                          "T": "Sandbox.Game/Sandbox.GameObject"
                         },
                         "UserData": {
                           "Position": "-768,320"
@@ -2195,8 +2195,8 @@
                         "Type": "call",
                         "Properties": {
                           "_name": "RotateAroundAxis",
-                          "_type": "Sandbox.System/Rotation",
-                          "_isStatic": false
+                          "_isStatic": false,
+                          "_type": "Sandbox.System/Rotation"
                         },
                         "UserData": {
                           "Position": "288,352"
@@ -2245,12 +2245,12 @@
                         "Id": 18,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/EventComponent",
                           "value": {
                             "_type": "component",
                             "go": "cb9ad1f7-3db3-4b43-aef3-a5d4b322e48c",
                             "component_type": "EventComponent"
-                          }
+                          },
+                          "T": "package.fish.sauna/EventComponent"
                         },
                         "UserData": {
                           "Position": "1344,256"
@@ -2268,9 +2268,9 @@
                         "Type": "call",
                         "Properties": {
                           "_name": "Get",
+                          "_isStatic": false,
                           "T": "package.fish.sauna/Sauna.Player",
-                          "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                          "_isStatic": false
+                          "_type": "Sandbox.Game/Sandbox.IComponentLister"
                         },
                         "UserData": {
                           "Position": "-128,-320"
@@ -2605,280 +2605,6 @@
       ]
     },
     {
-      "Id": "25c66c9b-2a89-47ad-8b8a-1e55ba924a67",
-      "Name": "Beer Bottle",
-      "Position": "676.2654,-598.8034,27.09615",
-      "Rotation": "-0.003481871,0.003837303,0.000008459314,0.9999866",
-      "Networked": true,
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "ItemEquipment",
-          "Attachment": "hand_R",
-          "AttachmentTransform": {
-            "UniformScale": 1,
-            "Scale": "1,1,1",
-            "Rotation": "0,0,0,1"
-          },
-          "Description": "This is the beer bottle desc",
-          "HideBodygroups": "None",
-          "Icon": {
-            "Model": "models/beer_bottle/beer.vmdl",
-            "MaterialGroup": "",
-            "Position": "-2.25,1.95,0.75",
-            "Rotation": "0.1938814,-0.1557454,0.7551184,0.6065885",
-            "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
-          },
-          "Name": "Beer Bottle",
-          "SellPrice": 5,
-          "Slot": "Hand",
-          "UpdatePosition": false,
-          "WeightInGrams": 100
-        },
-        {
-          "__type": "Interactions",
-          "ObjectInteractions": [
-            {
-              "Identifier": "beer.drink",
-              "Keybind": "Mouse1",
-              "Description": "Drink",
-              "Action": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Action",
-                  "id": "1d472d5d-54f0-4785-84c0-47529d8279f7",
-                  "ReferencedComponentTypes": []
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 1,
-                    "Type": "call",
-                    "Properties": {
-                      "_name": "Destroy",
-                      "_isStatic": false,
-                      "_type": "Sandbox.Game/Sandbox.GameObject"
-                    },
-                    "UserData": {
-                      "Position": "400,0"
-                    }
-                  },
-                  {
-                    "Id": 2,
-                    "Type": "call",
-                    "Properties": {
-                      "_name": "AddExperience",
-                      "_isStatic": false,
-                      "_type": "package.fish.sauna/Sauna.Player"
-                    },
-                    "UserData": {
-                      "Position": "208,-0"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_signal",
-                    "DstId": 1,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "obj",
-                    "DstId": 1,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 2,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "interactor",
-                    "DstId": 2,
-                    "DstName": "_target"
-                  },
-                  {
-                    "Value": 20,
-                    "DstId": 2,
-                    "DstName": "exp"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "__type": "ModelRenderer",
-          "BodyGroups": 11,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/beer_bottle/beer.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "ModelCollider",
-          "IsTrigger": false,
-          "Model": "models/beer_bottle/beer.vmdl",
-          "Static": false,
-          "Surface": null
-        },
-        {
-          "__type": "Rigidbody",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {},
-          "MassOverride": 0,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        }
-      ]
-    },
-    {
-      "Id": "184a4247-0fc8-4518-ad18-3e1e704296e6",
-      "Name": "Beer Crate",
-      "Position": "641.1452,-590.0398,27.09369",
-      "Rotation": "-0.00000005102128,-0.0000009886251,-0.0008163078,0.9999998",
-      "Networked": true,
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "BeerCrate",
-          "Beer": {
-            "_type": "gameobject",
-            "prefab": "prefabs/items/beer_bottle.prefab"
-          },
-          "Count": 24
-        },
-        {
-          "__type": "ItemComponent",
-          "Description": null,
-          "Icon": {
-            "Model": "models/beer_crate/beer_crate.vmdl",
-            "MaterialGroup": "",
-            "Position": "-7.2,1.05,0.6",
-            "Rotation": "0.03179746,0.2449005,-0.2439722,0.9378114",
-            "Guid": "2f4cce36-cc91-46d5-a3d5-0adff732545a"
-          },
-          "Name": "Beer Crate (24/24)",
-          "SellPrice": -1,
-          "WeightInGrams": 400
-        },
-        {
-          "__type": "BoxCollider",
-          "Center": "0,0,4.25",
-          "IsTrigger": false,
-          "Scale": "12.20005,18.00001,8.5",
-          "Static": false,
-          "Surface": null
-        },
-        {
-          "__type": "SkinnedModelRenderer",
-          "AnimationGraph": null,
-          "BodyGroups": 18446744073709551615,
-          "BoneMergeTarget": null,
-          "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/beer_crate/beer_crate.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "Rigidbody",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {},
-          "MassOverride": 0,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        },
-        {
-          "__type": "Interactions",
-          "ObjectInteractions": []
-        }
-      ]
-    },
-    {
-      "Id": "27a9b3f4-879f-4e60-9810-1fdc09fffac0",
-      "Name": "Ukko-Pekka M39",
-      "Position": "574.3383,-605.3303,27.74782",
-      "Rotation": "-0.7176243,0.01276186,-0.009125232,0.6962538",
-      "Networked": true,
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "WeaponComponent"
-        },
-        {
-          "__type": "ItemEquipment",
-          "Attachment": "hand_R",
-          "AttachmentTransform": {
-            "UniformScale": 1,
-            "Scale": "1,1,1",
-            "Rotation": "0,0,0,1"
-          },
-          "Description": "Wow, this looks like it packs a punch.",
-          "HideBodygroups": "None",
-          "Icon": {
-            "Model": "models/rifle/m38.vmdl",
-            "MaterialGroup": "",
-            "Position": "31.35,-6,-3.3",
-            "Rotation": "0.2983258,0.04915657,0.8452148,0.4406781",
-            "Guid": "b33135ad-9c3d-4e6d-a25f-3562d2ba4547"
-          },
-          "Name": "Ukko-Pekka M39",
-          "SellPrice": -1,
-          "Slot": "Hand",
-          "UpdatePosition": false,
-          "WeightInGrams": 4800
-        },
-        {
-          "__type": "SkinnedModelRenderer",
-          "AnimationGraph": null,
-          "BodyGroups": 18446744073709551615,
-          "BoneMergeTarget": null,
-          "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/rifle/m38.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "ModelCollider",
-          "IsTrigger": false,
-          "Model": "models/rifle/m38.vmdl",
-          "Static": false,
-          "Surface": null
-        },
-        {
-          "__type": "Rigidbody",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {},
-          "MassOverride": 0,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        },
-        {
-          "__type": "Interactions",
-          "ObjectInteractions": []
-        }
-      ]
-    },
-    {
       "Id": "6256e00d-b380-4ebb-b468-35255ab4b86c",
       "Name": "Object",
       "Position": "1024.928,-748.9748,76.24623",
@@ -2899,6 +2625,7 @@
       "Id": "b21f3811-be00-47a4-ad66-2294fdd6ff07",
       "Name": "Buy Beer Bottle",
       "Position": "458.7336,-214.3331,27",
+      "Networked": true,
       "Enabled": true,
       "Components": [
         {
@@ -2945,143 +2672,39 @@
       ]
     },
     {
-      "Id": "9cc058fc-954e-41bb-8364-b5d715129e56",
-      "Name": "Beer Bottle",
-      "Position": "691.2806,-294.9676,27.5626",
-      "Rotation": "-0.4975642,0.5014031,0.05570718,0.7056355",
+      "Id": "3b45c2a9-5055-4e08-be32-9402fa22f8cf",
+      "Name": "beer_bottle",
+      "Position": "659.1287,-579.0093,27.00001",
+      "Rotation": "-0.0000002682209,0.0000003657387,1,0.000001097216",
       "Networked": true,
       "Enabled": true,
-      "Components": [
-        {
-          "__type": "ItemEquipment",
-          "Attachment": "hand_R",
-          "AttachmentTransform": {
-            "UniformScale": 1,
-            "Scale": "1,1,1",
-            "Rotation": "0,0,0,1"
-          },
-          "Description": "This is the beer bottle desc",
-          "HideBodygroups": "None",
-          "Icon": {
-            "Model": "models/beer_bottle/beer.vmdl",
-            "MaterialGroup": "",
-            "Position": "-2.25,1.95,0.75",
-            "Rotation": "0.1938814,-0.1557454,0.7551184,0.6065885",
-            "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
-          },
-          "Name": "Beer Bottle",
-          "SellPrice": 5,
-          "Slot": "Hand",
-          "UpdatePosition": false,
-          "WeightInGrams": 100
-        },
-        {
-          "__type": "Interactions",
-          "ObjectInteractions": [
-            {
-              "Identifier": "beer.drink",
-              "Keybind": "Mouse1",
-              "Description": "Drink",
-              "Action": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Action",
-                  "id": "1d472d5d-54f0-4785-84c0-47529d8279f7",
-                  "ReferencedComponentTypes": []
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 1,
-                    "Type": "call",
-                    "Properties": {
-                      "_name": "Destroy",
-                      "_isStatic": false,
-                      "_type": "Sandbox.Game/Sandbox.GameObject"
-                    },
-                    "UserData": {
-                      "Position": "400,0"
-                    }
-                  },
-                  {
-                    "Id": 2,
-                    "Type": "call",
-                    "Properties": {
-                      "_name": "AddExperience",
-                      "_isStatic": false,
-                      "_type": "package.fish.sauna/Sauna.Player"
-                    },
-                    "UserData": {
-                      "Position": "208,-0"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_signal",
-                    "DstId": 1,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "obj",
-                    "DstId": 1,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 2,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "interactor",
-                    "DstId": 2,
-                    "DstName": "_target"
-                  },
-                  {
-                    "Value": 20,
-                    "DstId": 2,
-                    "DstName": "exp"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "__type": "ModelRenderer",
-          "BodyGroups": 11,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/beer_bottle/beer.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "ModelCollider",
-          "IsTrigger": false,
-          "Model": "models/beer_bottle/beer.vmdl",
-          "Static": false,
-          "Surface": null
-        },
-        {
-          "__type": "Rigidbody",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {},
-          "MassOverride": 0,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        }
-      ]
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "4913524f-d5ca-49c9-b018-3596a4cb6932",
+      "Name": "beer_bottle (1)",
+      "Position": "670.0865,-571.3389,27",
+      "Networked": true,
+      "Enabled": true,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "669d6c8d-539e-482d-8bb6-822b2ca09d14",
+      "Name": "beer_crate",
+      "Position": "634.5552,-583.0193,35.04873",
+      "Rotation": "-0.00000037217,0.00000005960464,0.00000111651,0.9999999",
+      "Networked": true,
+      "Enabled": true,
+      "__Prefab": "prefabs/items/beer_crate.prefab"
+    },
+    {
+      "Id": "1fd8ba8f-1e11-479d-8156-b44ced9310d9",
+      "Name": "rifle",
+      "Position": "580.2663,-566.476,45.18832",
+      "Rotation": "-0.00000037217,0.00000005960464,0.00000111651,0.9999999",
+      "Networked": true,
+      "Enabled": true,
+      "__Prefab": "prefabs/items/rifle.prefab"
     }
   ],
   "SceneProperties": {
@@ -3107,6 +2730,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-02-29T19:34:59.4445049-05:00",
+  "LastSaved": "2024-03-01T11:07:45.8295508\u002B02:00",
   "__references": []
 }

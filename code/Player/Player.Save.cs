@@ -121,6 +121,7 @@ partial class Player
 		_saveData = save with
 		{
 			Money = player.Money,
+			Experience = player.Experience,
 
 			Clothes = player.Inventory.EquippedItems
 				.Where( x => x != null )
