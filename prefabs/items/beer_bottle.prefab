@@ -6,6 +6,11 @@
     "Components": [
       {
         "__type": "ItemEquipment",
+        "Attachment": "hand_R",
+        "AttachmentTransform": {
+          "Position": "-2.557573,0.1863745,-1.316826",
+          "Rotation": "-0.6464939,-0.03623828,0.06607966,0.7591884"
+        },
         "Description": "This is the beer bottle desc",
         "HideBodygroups": "None",
         "Icon": {
@@ -17,6 +22,7 @@
         },
         "Name": "Beer Bottle",
         "Slot": "Hand",
+        "UpdatePosition": true,
         "WeightInGrams": 100
       },
       {
@@ -43,9 +49,9 @@
                   "Id": 1,
                   "Type": "call",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameObject",
                     "_isStatic": false,
-                    "_name": "Destroy"
+                    "_name": "Destroy",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
                   },
                   "UserData": {
                     "Position": "400,0"
@@ -55,9 +61,9 @@
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
-                    "_type": "package.fish.sauna/Sauna.Player",
                     "_isStatic": false,
-                    "_name": "AddExperience"
+                    "_name": "AddExperience",
+                    "_type": "package.fish.sauna/Sauna.Player"
                   },
                   "UserData": {
                     "Position": "208,-0"

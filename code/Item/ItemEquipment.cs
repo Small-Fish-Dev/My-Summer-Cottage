@@ -96,14 +96,81 @@ public class ItemEquipment : ItemComponent
 				? 0 
 				: transform.Position);
 
-		Transform.LocalRotation = AttachmentTransform.Rotation * 
+		Transform.LocalRotation = transform.Rotation *
 			(Attachment == string.Empty
 				? Rotation.Identity
-				: transform.Rotation);
+				: AttachmentTransform.Rotation);
+	}
+
+	#region GIZMO STUFF
+	private SceneModel _model;
+	private SceneObject _child;
+	private SceneObject GetModel()
+	{
+		var world = GameManager.ActiveScene?.SceneWorld;
+		if ( world == null )
+			return null;
+
+		_model ??= new SceneModel( world, "models/guy/guy.vmdl", global::Transform.Zero );
+			
+		if ( _child == null )
+		{
+			var renderer = Components.Get<ModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+			_child = new SceneObject( world, renderer.Model );
+			_model.AddChild( "held", _child );
+		}
+
+		_model.RenderingEnabled = true;
+		_child.RenderingEnabled = true;
+		return _child;
 	}
 
 	protected override void DrawGizmos()
 	{
-		
+		var ignore = false;
+		if ( !UpdatePosition || Attachment == string.Empty )
+			ignore = true;
+
+		if ( ignore || GameObject != GameManager.ActiveScene )
+			ignore = true;
+
+		if ( ignore || !Gizmo.HasSelected )
+		{
+			if ( _model != null )
+				_model.RenderingEnabled = false;
+
+			if ( _child != null )
+				_child.RenderingEnabled = false;
+
+			return;
+		}
+
+		var model = GetModel();
+		if ( model == null )
+			return;
+
+		var attachment = _model.GetAttachment( Attachment ) ?? global::Transform.Zero;
+		model.Position = attachment.Position + AttachmentTransform.Position;
+		model.Rotation = attachment.Rotation * AttachmentTransform.Rotation;
+
+		using ( Gizmo.Scope( $"{Name}", new Transform( model.Position, model.Rotation ) ) )
+		{
+			Gizmo.Hitbox.DepthBias = 0.01f;
+
+			if ( Gizmo.IsShiftPressed )
+			{
+				if ( Gizmo.Control.Rotate( "rotate", out var rotate ) )
+					AttachmentTransform = AttachmentTransform.WithRotation( AttachmentTransform.Rotation * rotate.ToRotation() );
+
+				return;
+			}
+
+			if ( Gizmo.Control.Position( "position", Vector3.Zero, out var pos ) )
+			{
+				Log.Error( pos * model.Rotation );
+				AttachmentTransform = AttachmentTransform.WithPosition( AttachmentTransform.Position + pos * model.Rotation );
+			}
+		}
 	}
+	#endregion
 }
