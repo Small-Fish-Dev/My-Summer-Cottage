@@ -1,4 +1,5 @@
 using Sandbox;
+using System.Threading.Tasks;
 
 namespace Sauna;
 
@@ -40,6 +41,12 @@ public class TaskMaster : Component
 	protected override void OnStart()
 	{
 		LoadTasksCompletion();
+	}
+
+	internal void AddTaskCompletion( string taskPath, int timesTriggered = 0, int timesCompleted = 0 )
+	{
+		var newTaskCompletion = new TaskCompletion( taskPath, timesTriggered, timesCompleted );
+		TasksCompletion.Tasks.Add( newTaskCompletion );
 	}
 
 	internal TaskCompletion InternalGetTaskCompletion( SaunaTask task )
@@ -89,8 +96,7 @@ public class TaskMaster : Component
 		}
 		else
 		{
-			var newTaskCompletion = new TaskCompletion( taskPath, 1, 0 );
-			TasksCompletion.Tasks.Add( newTaskCompletion );
+			AddTaskCompletion( taskPath, 1, 0 );
 		}
 	}
 
@@ -119,8 +125,7 @@ public class TaskMaster : Component
 		}
 		else
 		{
-			var newTaskCompletion = new TaskCompletion( taskPath, 0, 1 );
-			TasksCompletion.Tasks.Add( newTaskCompletion );
+			AddTaskCompletion( taskPath, 0, 1 );
 		}
 
 	}
@@ -149,15 +154,27 @@ public class TaskMaster : Component
 			var allTasks = ResourceLibrary.GetAll<SaunaTask>();
 
 			foreach ( var task in allTasks )
-			{
+				AddTaskCompletion( task.ResourcePath );
 
-			}
+			InternalSaveTasksCompletion();
 		}
 	}
 
-	public void SaveTasksCompletion()
+	internal void InternalSaveTasksCompletion()
 	{
 		FileSystem.Data.WriteJson( "tasks.json", TasksCompletion );
+	}
+
+	/// <summary>
+	/// Save the tasks current triggered and completion progress/amount
+	/// </summary>
+	public static void SaveTasksCompletion()
+	{
+		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+
+		if ( taskMaster == null ) return;
+
+		taskMaster.InternalSaveTasksCompletion();
 	}
 
 	protected override void OnFixedUpdate()
