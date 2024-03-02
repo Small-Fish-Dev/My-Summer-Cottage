@@ -20,8 +20,8 @@ public class EventMaster : Component
 			if ( eventMaster == null ) return 0f;
 
 			var allEvents = eventMaster.EventsProgression.Events;
-			var totalEvents = allEvents.Count();
-			var triggeredEvents = allEvents.Where( x => x.TimesTriggered > 0 ).Count();
+			float totalEvents = allEvents.Count();
+			float triggeredEvents = allEvents.Where( x => x.TimesTriggered > 0 ).Count();
 
 			return triggeredEvents / totalEvents;
 		}
@@ -39,8 +39,8 @@ public class EventMaster : Component
 			if ( eventMaster == null ) return 0f;
 
 			var allEvents = eventMaster.EventsProgression.Events;
-			var totalEvents = allEvents.Count();
-			var triggeredEvents = allEvents.Where( x => x.TimesCompleted > 0 ).Count();
+			float totalEvents = allEvents.Count();
+			float triggeredEvents = allEvents.Where( x => x.TimesCompleted > 0 ).Count();
 
 			return triggeredEvents / totalEvents;
 		}

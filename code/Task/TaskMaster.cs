@@ -22,8 +22,8 @@ public class TaskMaster : Component
 			if ( taskMaster == null ) return 0f;
 
 			var allTasks = taskMaster.TasksProgression.Tasks;
-			var totalTasks = allTasks.Count();
-			var triggeredTasks = allTasks.Where( x => x.TimesTriggered > 0 ).Count();
+			float totalTasks = allTasks.Count();
+			float triggeredTasks = allTasks.Where( x => x.TimesTriggered > 0 ).Count();
 
 			return triggeredTasks / totalTasks;
 		}
@@ -41,8 +41,8 @@ public class TaskMaster : Component
 			if ( taskMaster == null ) return 0f;
 
 			var allTasks = taskMaster.TasksProgression.Tasks;
-			var totalTasks = allTasks.Count();
-			var triggeredTasks = allTasks.Where( x => x.TimesCompleted > 0 ).Count();
+			float totalTasks = allTasks.Count();
+			float triggeredTasks = allTasks.Where( x => x.TimesCompleted > 0 ).Count();
 
 			return triggeredTasks / totalTasks;
 		}
