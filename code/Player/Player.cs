@@ -139,6 +139,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 		if ( !GameManager.IsPlaying )
 			return;
 
+		Network.SetOrphanedMode( NetworkOrphaned.Destroy );
+
 		// Components
 		Camera = Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants );
 		Camera.GameObject.Enabled = !IsProxy;
