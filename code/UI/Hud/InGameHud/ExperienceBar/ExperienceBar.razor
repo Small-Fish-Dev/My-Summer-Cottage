@@ -17,35 +17,32 @@
 
 @code
 {
+	private static ExperienceBar _instance;
 	private Panel _container;
 	private const float TIME_ON_SCREEN = 3;
 	private TimeUntil _timeUntilHidden;
 
-	protected override void OnAfterTreeRender( bool firstTime )
+	public ExperienceBar()
 	{
-		// TODO: it's acoustically regarded, but it works
-		Player.Local.OnExperienceEarned -= OnExperienceEarned;
-		Player.Local.OnLevelUp -= OnLevelUp;
-
-		Player.Local.OnExperienceEarned += OnExperienceEarned;
-		Player.Local.OnLevelUp += OnLevelUp;
+		_instance = this;
 	}
 
-	private void OnExperienceEarned( int delta )
+	public static void OnExperienceEarned( int delta )
 	{
-		_timeUntilHidden = TIME_ON_SCREEN;
+		_instance._timeUntilHidden = TIME_ON_SCREEN;
 		var popupExp = new PopupText($"+{delta} XP");
 		popupExp.Style.Right = Length.Pixels(0);
 		popupExp.Style.Bottom = Length.Pixels(90);
-		_container.AddChild(popupExp);
+		_instance._container.AddChild(popupExp);
 	}
 
-	private void OnLevelUp( int newLevel )
+	public static void OnLevelUp( int newLevel )
 	{
+		_instance._timeUntilHidden = TIME_ON_SCREEN;
 		var popupLvl = new PopupText($"+{newLevel} LVL");
 		popupLvl.Style.Left = Length.Pixels(0);
 		popupLvl.Style.Bottom = Length.Pixels(90);
-		_container.AddChild(popupLvl);
+		_instance._container.AddChild(popupLvl);
 	}
 
 	protected override int BuildHash()
