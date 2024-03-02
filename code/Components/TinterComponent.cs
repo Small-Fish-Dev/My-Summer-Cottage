@@ -12,7 +12,10 @@ public sealed class TinterComponent : Component, Component.ExecuteInEditor
 
 			var obj = Renderer?.SceneObject;
 			if ( obj != null )
+			{
 				obj.Attributes.Set( "g_flColorTint", _tint );
+				obj.Batchable = false;
+			}
 		}
 	}
 	
