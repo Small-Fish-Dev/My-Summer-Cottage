@@ -79,6 +79,90 @@
                 }
               ]
             },
+            "Disabled": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Disabled",
+                "id": "81d80c0c-a733-480b-863b-33aa950513d5",
+                "ReferencedComponentTypes": [
+                  "package.fish.sauna/Sauna.SlotMachine"
+                ]
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output",
+                  "UserData": {
+                    "Position": "80,80"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "input"
+                },
+                {
+                  "Id": 3,
+                  "Type": "scene.get",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine"
+                  },
+                  "UserData": {
+                    "Position": "-464,16"
+                  }
+                },
+                {
+                  "Id": 4,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
+                    "_name": "Money"
+                  },
+                  "UserData": {
+                    "Position": "-304,48"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "op.lessthanorequal",
+                  "UserData": {
+                    "Position": "-80,112"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 5,
+                  "SrcName": "_result",
+                  "DstId": 0,
+                  "DstName": "_result"
+                },
+                {
+                  "SrcId": 2,
+                  "SrcName": "_target",
+                  "DstId": 3,
+                  "DstName": "_this"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 4,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 4,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "a"
+                },
+                {
+                  "Value": 0,
+                  "DstId": 5,
+                  "DstName": "b"
+                }
+              ]
+            },
+            "ShowWhenDisabled": true,
             "HasBounds": true,
             "Position": "19.25671,11.21452,43.52247",
             "Extents": "2.950275,5.265101,4.963008"
@@ -401,6 +485,93 @@
                 }
               ]
             },
+            "Disabled": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Disabled",
+                "id": "919ecec2-b985-4c7b-bc14-be198438f184",
+                "ReferencedComponentTypes": [
+                  "package.fish.sauna/Sauna.SlotMachine"
+                ]
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output",
+                  "UserData": {
+                    "Position": "32,160"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "input",
+                  "UserData": {
+                    "Position": "-224,80"
+                  }
+                },
+                {
+                  "Id": 3,
+                  "Type": "scene.get",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine"
+                  },
+                  "UserData": {
+                    "Position": "-528,176"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "op.lessthanorequal",
+                  "UserData": {
+                    "Position": "-128,208"
+                  }
+                },
+                {
+                  "Id": 6,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
+                    "_name": "Money"
+                  },
+                  "UserData": {
+                    "Position": "-336,208"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 5,
+                  "SrcName": "_result",
+                  "DstId": 0,
+                  "DstName": "_result"
+                },
+                {
+                  "SrcId": 2,
+                  "SrcName": "_target",
+                  "DstId": 3,
+                  "DstName": "_this"
+                },
+                {
+                  "SrcId": 6,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "a"
+                },
+                {
+                  "Value": 0,
+                  "DstId": 5,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 6,
+                  "DstName": "_target"
+                }
+              ]
+            },
+            "ShowWhenDisabled": true,
             "HasBounds": true,
             "Position": "12.13725,9.601606,63.11052",
             "Extents": "4.215116,5.380785,5.297434"
@@ -483,6 +654,80 @@
                 }
               ]
             },
+            "Disabled": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Disabled",
+                "id": "3ba7a1c0-9cd1-4e26-be23-d8c0e6dccc7a",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                },
+                {
+                  "Id": 2,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_name": "Local"
+                  },
+                  "UserData": {
+                    "Position": "-560,-16"
+                  }
+                },
+                {
+                  "Id": 4,
+                  "Type": "op.lessthanorequal",
+                  "UserData": {
+                    "Position": "-192,-16"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_name": "Money"
+                  },
+                  "UserData": {
+                    "Position": "-384,-16"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 4,
+                  "SrcName": "_result",
+                  "DstId": 0,
+                  "DstName": "_result"
+                },
+                {
+                  "SrcId": 5,
+                  "SrcName": "_result",
+                  "DstId": 4,
+                  "DstName": "a"
+                },
+                {
+                  "Value": 0,
+                  "DstId": 4,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 2,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "_target"
+                }
+              ]
+            },
+            "ShowWhenDisabled": true,
             "HasBounds": true,
             "Position": "10.28304,12.3685,74.36001",
             "Extents": "3.469205,4.972645,4.684541"

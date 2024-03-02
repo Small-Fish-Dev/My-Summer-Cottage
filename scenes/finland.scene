@@ -107,7 +107,12 @@
           "CurrentDay": 1,
           "StoryDays": {
             "1": {
-              "ScriptedEvents": []
+              "ScriptedEvents": [],
+              "RandomEvents": {
+                "Common": 3,
+                "Uncommon": 2,
+                "Rare": 1
+              }
             }
           }
         }
@@ -185,7 +190,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.9203054,0,0.3912007",
+          "Rotation": "0,0.06047017,0,0.99817",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -269,9 +274,9 @@
                 "Id": 2,
                 "Type": "call",
                 "Properties": {
-                  "T": "package.fish.sauna/Sauna.Player",
-                  "_isStatic": false,
                   "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                  "_isStatic": false,
+                  "T": "package.fish.sauna/Sauna.Player",
                   "_name": "Get"
                 },
                 "UserData": {
@@ -296,8 +301,8 @@
                 "Id": 6,
                 "Type": "resource.ref",
                 "Properties": {
-                  "T": "Sandbox.Engine/Sandbox.SoundEvent",
-                  "value": "sounds/misc/banana_slip.sound"
+                  "value": "sounds/misc/banana_slip.sound",
+                  "T": "Sandbox.Engine/Sandbox.SoundEvent"
                 },
                 "UserData": {
                   "Position": "544,-384"
@@ -336,12 +341,12 @@
                 "Id": 11,
                 "Type": "scene.ref",
                 "Properties": {
-                  "T": "package.fish.sauna/EventComponent",
                   "value": {
                     "_type": "component",
                     "go": "2d4783cc-caf7-4dae-af45-06d44aff2664",
                     "component_type": "EventComponent"
-                  }
+                  },
+                  "T": "package.fish.sauna/EventComponent"
                 },
                 "UserData": {
                   "Position": "944,176"
@@ -500,8 +505,8 @@
         },
         {
           "__type": "EventDefinition",
+          "AddToEventPool": true,
           "EventName": "Banana Peel",
-          "Frequency": "Repeatable",
           "Rarity": "Common",
           "ReinstantiateOnRestart": false,
           "Stackable": true,
@@ -728,8 +733,8 @@
           "Components": [
             {
               "__type": "EventDefinition",
+              "AddToEventPool": true,
               "EventName": "Peeping Creep",
-              "Frequency": "Repeatable",
               "Rarity": "Common",
               "ReinstantiateOnRestart": true,
               "Stackable": true,
@@ -837,9 +842,9 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.Player",
-                          "_isStatic": false,
                           "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                          "_isStatic": false,
+                          "T": "package.fish.sauna/Sauna.Player",
                           "_name": "Get"
                         },
                         "UserData": {
@@ -1042,11 +1047,11 @@
                         "Id": 26,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
-                          }
+                          },
+                          "T": "Sandbox.Game/Sandbox.GameObject"
                         },
                         "UserData": {
                           "Position": "176,80"
@@ -1056,12 +1061,12 @@
                         "Id": 28,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/EventComponent",
                           "value": {
                             "_type": "component",
                             "go": "2f80e6c2-8f26-4f25-8c21-6de0874ed0b5",
                             "component_type": "EventComponent"
-                          }
+                          },
+                          "T": "package.fish.sauna/EventComponent"
                         },
                         "UserData": {
                           "Position": "2096,96"
@@ -1437,11 +1442,11 @@
                         "Id": 2,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
-                          }
+                          },
+                          "T": "Sandbox.Game/Sandbox.GameObject"
                         },
                         "UserData": {
                           "Position": "-608,144"
@@ -1451,11 +1456,11 @@
                         "Id": 3,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "20ba868b-9876-4f99-8a41-882ff4c46a16"
-                          }
+                          },
+                          "T": "Sandbox.Game/Sandbox.GameObject"
                         },
                         "UserData": {
                           "Position": "-768,320"
@@ -1549,8 +1554,8 @@
                         "Id": 12,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": false,
                           "_type": "Sandbox.System/Rotation",
+                          "_isStatic": false,
                           "_name": "RotateAroundAxis"
                         },
                         "UserData": {
@@ -1600,12 +1605,12 @@
                         "Id": 18,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/EventComponent",
                           "value": {
                             "_type": "component",
                             "go": "cb9ad1f7-3db3-4b43-aef3-a5d4b322e48c",
                             "component_type": "EventComponent"
-                          }
+                          },
+                          "T": "package.fish.sauna/EventComponent"
                         },
                         "UserData": {
                           "Position": "1344,256"
@@ -1622,9 +1627,9 @@
                         "Id": 20,
                         "Type": "call",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.Player",
-                          "_isStatic": false,
                           "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                          "_isStatic": false,
+                          "T": "package.fish.sauna/Sauna.Player",
                           "_name": "Get"
                         },
                         "UserData": {
@@ -2094,6 +2099,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-03T00:05:44.5754738\u002B02:00",
+  "LastSaved": "2024-03-02T18:24:08.4678915-05:00",
   "__references": []
 }

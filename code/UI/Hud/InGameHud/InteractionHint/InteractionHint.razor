@@ -3,9 +3,6 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-@if ( !HasTarget )
-	return;
-
 <root>
 	@if ( !FromHold )
 	{
@@ -52,7 +49,6 @@
 	private const float INTERACTION_COOLDOWN = 0.1f;
 	private static List<string> priorityList = new();
 	private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
-	private Vector2 _lerpPosition;
 	private static TimeSince _lastInteracted;
 
 	public InteractionHint()
@@ -91,8 +87,7 @@
 		if ( FromHold ) priorityList.Clear();
 
 		SetClass( "visible", HasTarget && !ShouldHide );
-
-		if (!HasTarget)
+		if (!HasClass("visible"))
 			return;
 
 		var pos = FromHold ? 0 : Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
@@ -101,7 +96,7 @@
 			if ( !FromHold && interaction.HoldOnly )
 				continue;
 
-			if ( CanInteract( interaction ) && WithinBounds( interaction ) )
+			if ( WithinBounds( interaction ) )
 			{
 				AddToPriority( interaction.Keybind );
 
@@ -111,7 +106,7 @@
 				if ( interaction.HasBounds && !FromHold )
 					pos = Player.Local.TargetedGameObject.Transform.Position + interaction.Position * Player.Local.TargetedGameObject.Transform.Rotation;
 
-				if (interaction.InputFunction(interaction.Keybind) && (interaction.InputMode == InputMode.Down|| _lastInteracted > INTERACTION_COOLDOWN))
+				if (CanInteract(interaction) && interaction.InputFunction(interaction.Keybind) && (interaction.InputMode == InputMode.Down|| _lastInteracted > INTERACTION_COOLDOWN))
 				{
 					_targetObject?.Network.TakeOwnership();
 					interaction.Action?.Invoke(Player.Local, _targetObject);
