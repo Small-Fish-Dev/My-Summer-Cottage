@@ -10,14 +10,21 @@ public enum EquipSlot : byte
 	Hand
 }
 
+public enum HoldType : byte
+{
+	None,
+	Rifle,
+}
+
 public class ItemEquipment : ItemComponent
 {
 	[Property, Category( "Equipment" )] public EquipSlot Slot { get; set; } = EquipSlot.Hand;
 	[Property, Category( "Equipment" )] public HiddenBodyGroup HideBodygroups { get; set; }
 
-	[Property, Category( "Attachment" )] public bool UpdatePosition { get; set; }
-	[Property, Category( "Attachment" ), ShowIf( "UpdatePosition", true )] public string Attachment { get; set; } = "hand_R";
-	[Property, Category( "Attachment" ), ShowIf( "UpdatePosition", true )] public Transform AttachmentTransform { get; set; }
+	[Property, Category( "Holding" ), ShowIf( "Slot", EquipSlot.Hand )] public HoldType HoldType { get; set;  }
+	[Property, Category( "Holding" )] public bool UpdatePosition { get; set; }
+	[Property, Category( "Holding" ), ShowIf( "UpdatePosition", true )] public string Attachment { get; set; } = "hand_R";
+	[Property, Category( "Holding" ), ShowIf( "UpdatePosition", true )] public Transform AttachmentTransform { get; set; }
 
 	public ModelRenderer Renderer { get; private set; }
 

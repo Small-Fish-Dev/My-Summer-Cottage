@@ -152,7 +152,10 @@ public partial class Player : Component, Component.ExecuteInEditor
 		PissParticles = Components.Get<ParticleEffect>( FindMode.EverythingInSelfAndDescendants );
 
 		if ( !IsProxy ) // Load save.
+		{
+			HideHead = true;
 			Setup( this );
+		}
 
 		// Footsteps
 		Renderer.OnFootstepEvent += OnFootstep;
@@ -169,6 +172,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 			UpdateAngles();
 			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
 			HidePenoid = Inventory.EquippedItems[(int)EquipSlot.Legs] != null;
+			HoldType = (Inventory.EquippedItems[(int)EquipSlot.Hand] as ItemEquipment)?.HoldType ?? HoldType.None;
 		}
 
 		UpdateAnimation();

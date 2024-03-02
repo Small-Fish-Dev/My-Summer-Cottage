@@ -15,7 +15,7 @@ partial class Player
 			Local?.Renderer?.SceneModel?.Update( RealTime.Delta );
 		}
 	}
-	private static bool _hideHead;
+	private static bool _hideHead = true;
 
 	[Property]
 	[Category( "Movement" )]
@@ -64,6 +64,7 @@ partial class Player
 	[Sync] public bool Ducking { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
 	[Sync] public Vector3 Velocity { get; set; }
+	[Sync] public HoldType HoldType { get; set; } = HoldType.None;
 
 	public BBox Bounds => new BBox( Collider.Center - Collider.Scale / 2f, Collider.Center + Collider.Scale / 2f );
 
@@ -204,6 +205,7 @@ partial class Player
 		Renderer.Set( "height", Height );
 
 		Renderer.Set( "lookat", EyeAngles.WithYaw( 0 ).Forward );
+		Renderer.Set( "hold_type", (int)HoldType );
 	}
 
 	private void OnJumpEvent( SceneModel.GenericEvent e )
