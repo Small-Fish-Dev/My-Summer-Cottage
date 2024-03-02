@@ -8,6 +8,8 @@ public class TaskMaster : Component
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
 
+	// TODO: THIS BUT FOR EVENTS
+
 	public class TaskCompletion
 	{
 		[JsonInclude]
@@ -40,6 +42,27 @@ public class TaskMaster : Component
 		LoadTasksCompletion();
 	}
 
+	internal TaskCompletion InternalGetTaskCompletion( SaunaTask task )
+	{
+		var taskPath = task.ResourcePath;
+		var taskCompletionExists = TasksCompletion.Tasks.Any( x => x.Task == taskPath );
+
+		if ( taskCompletionExists )
+		{
+			var foundTaskCompletion = TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
+			foundTaskCompletion.TimesTriggered++;
+
+			return foundTaskCompletion;
+		}
+		else
+		{
+			var newTaskCompletion = new TaskCompletion( taskPath, 0, 0 );
+			TasksCompletion.Tasks.Add( newTaskCompletion );
+
+			return newTaskCompletion;
+		}
+	}
+
 	/// <summary>
 	/// Get the current stats on that task
 	/// </summary>
@@ -51,22 +74,23 @@ public class TaskMaster : Component
 
 		if ( taskMaster == null ) return null;
 
+		return taskMaster.InternalGetTaskCompletion( task );
+	}
+
+	internal void InternalTaskTriggered( SaunaTask task )
+	{
 		var taskPath = task.ResourcePath;
-		var taskCompletionExists = taskMaster.TasksCompletion.Tasks.Any( x => x.Task == taskPath );
+		var taskCompletionExists = TasksCompletion.Tasks.Any( x => x.Task == taskPath );
 
 		if ( taskCompletionExists )
 		{
-			var foundTaskCompletion = taskMaster.TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
+			var foundTaskCompletion = TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
 			foundTaskCompletion.TimesTriggered++;
-
-			return foundTaskCompletion;
 		}
 		else
 		{
-			var newTaskCompletion = new TaskCompletion( taskPath, 0, 0 );
-			taskMaster.TasksCompletion.Tasks.Add( newTaskCompletion );
-
-			return newTaskCompletion;
+			var newTaskCompletion = new TaskCompletion( taskPath, 1, 0 );
+			TasksCompletion.Tasks.Add( newTaskCompletion );
 		}
 	}
 
@@ -80,21 +104,25 @@ public class TaskMaster : Component
 
 		if ( taskMaster == null ) return;
 
+		taskMaster.InternalTaskTriggered( task );
+	}
+
+	internal void InternalTaskCompleted( SaunaTask task )
+	{
 		var taskPath = task.ResourcePath;
-		var taskCompletionExists = taskMaster.TasksCompletion.Tasks.Any( x => x.Task == taskPath );
+		var taskCompletionExists = TasksCompletion.Tasks.Any( x => x.Task == taskPath );
 
 		if ( taskCompletionExists )
 		{
-			var foundTaskCompletion = taskMaster.TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
-			foundTaskCompletion.TimesTriggered++;
+			var foundTaskCompletion = TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
+			foundTaskCompletion.TimesCompleted++;
 		}
 		else
 		{
-			var newTaskCompletion = new TaskCompletion( taskPath, 1, 0 );
-			taskMaster.TasksCompletion.Tasks.Add( newTaskCompletion );
+			var newTaskCompletion = new TaskCompletion( taskPath, 0, 1 );
+			TasksCompletion.Tasks.Add( newTaskCompletion );
 		}
 
-		taskMaster.SaveTasksCompletion();
 	}
 
 	/// <summary>
@@ -107,21 +135,7 @@ public class TaskMaster : Component
 
 		if ( taskMaster == null ) return;
 
-		var taskPath = task.ResourcePath;
-		var taskCompletionExists = taskMaster.TasksCompletion.Tasks.Any( x => x.Task == taskPath );
-
-		if ( taskCompletionExists )
-		{
-			var foundTaskCompletion = taskMaster.TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
-			foundTaskCompletion.TimesCompleted++;
-		}
-		else
-		{
-			var newTaskCompletion = new TaskCompletion( taskPath, 0, 1 );
-			taskMaster.TasksCompletion.Tasks.Add( newTaskCompletion );
-		}
-
-		taskMaster.SaveTasksCompletion();
+		taskMaster.InternalTaskCompleted( task );
 	}
 
 	public void LoadTasksCompletion()
@@ -129,7 +143,16 @@ public class TaskMaster : Component
 		if ( FileSystem.Data.FileExists( "tasks.json" ) )
 			TasksCompletion = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
 		else
+		{
 			TasksCompletion = new();
+
+			var allTasks = ResourceLibrary.GetAll<SaunaTask>();
+
+			foreach ( var task in allTasks )
+			{
+
+			}
+		}
 	}
 
 	public void SaveTasksCompletion()
