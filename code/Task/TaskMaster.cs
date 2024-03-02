@@ -34,27 +34,27 @@ public class TaskMaster : Component
 		public SaunaTasksProgress() { }
 	}
 
-	public SaunaTasksProgress TasksCompletion { get; private set; } = new();
+	public SaunaTasksProgress TasksProgression { get; private set; } = new();
 
 	protected override void OnStart()
 	{
-		LoadTasksCompletion();
+		LoadTasksProgression();
 	}
 
-	internal void AddTaskCompletion( string taskPath, int timesTriggered = 0, int timesCompleted = 0 )
+	internal void AddTaskProgression( string taskPath, int timesTriggered = 0, int timesCompleted = 0 )
 	{
 		var newTaskCompletion = new TaskCompletion( taskPath, timesTriggered, timesCompleted );
-		TasksCompletion.Tasks.Add( newTaskCompletion );
+		TasksProgression.Tasks.Add( newTaskCompletion );
 	}
 
-	internal TaskCompletion InternalGetTaskCompletion( SaunaTask task )
+	internal TaskCompletion InternalGetTaskProgression( SaunaTask task )
 	{
 		var taskPath = task.ResourcePath;
-		var taskCompletionExists = TasksCompletion.Tasks.Any( x => x.Task == taskPath );
+		var taskCompletionExists = TasksProgression.Tasks.Any( x => x.Task == taskPath );
 
 		if ( taskCompletionExists )
 		{
-			var foundTaskCompletion = TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
+			var foundTaskCompletion = TasksProgression.Tasks.Where( x => x.Task == taskPath ).First();
 			foundTaskCompletion.TimesTriggered++;
 
 			return foundTaskCompletion;
@@ -62,7 +62,7 @@ public class TaskMaster : Component
 		else
 		{
 			var newTaskCompletion = new TaskCompletion( taskPath, 0, 0 );
-			TasksCompletion.Tasks.Add( newTaskCompletion );
+			TasksProgression.Tasks.Add( newTaskCompletion );
 
 			return newTaskCompletion;
 		}
@@ -73,28 +73,28 @@ public class TaskMaster : Component
 	/// </summary>
 	/// <param name="task"></param>
 	/// <returns></returns>
-	public static TaskCompletion GetTaskCompletion( SaunaTask task )
+	public static TaskCompletion GetTaskProgression( SaunaTask task )
 	{
 		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
 
 		if ( taskMaster == null ) return null;
 
-		return taskMaster.InternalGetTaskCompletion( task );
+		return taskMaster.InternalGetTaskProgression( task );
 	}
 
 	internal void InternalTaskTriggered( SaunaTask task )
 	{
 		var taskPath = task.ResourcePath;
-		var taskCompletionExists = TasksCompletion.Tasks.Any( x => x.Task == taskPath );
+		var taskCompletionExists = TasksProgression.Tasks.Any( x => x.Task == taskPath );
 
 		if ( taskCompletionExists )
 		{
-			var foundTaskCompletion = TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
+			var foundTaskCompletion = TasksProgression.Tasks.Where( x => x.Task == taskPath ).First();
 			foundTaskCompletion.TimesTriggered++;
 		}
 		else
 		{
-			AddTaskCompletion( taskPath, 1, 0 );
+			AddTaskProgression( taskPath, 1, 0 );
 		}
 	}
 
@@ -102,7 +102,7 @@ public class TaskMaster : Component
 	/// Increase that task's total triggered amount
 	/// </summary>
 	/// <param name="task"></param>
-	public static void TaskTriggered( SaunaTask task )
+	public static void TaskTriggered( SaunaTask task ) // TODO Hook this up
 	{
 		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
 
@@ -114,16 +114,16 @@ public class TaskMaster : Component
 	internal void InternalTaskCompleted( SaunaTask task )
 	{
 		var taskPath = task.ResourcePath;
-		var taskCompletionExists = TasksCompletion.Tasks.Any( x => x.Task == taskPath );
+		var taskCompletionExists = TasksProgression.Tasks.Any( x => x.Task == taskPath );
 
 		if ( taskCompletionExists )
 		{
-			var foundTaskCompletion = TasksCompletion.Tasks.Where( x => x.Task == taskPath ).First();
+			var foundTaskCompletion = TasksProgression.Tasks.Where( x => x.Task == taskPath ).First();
 			foundTaskCompletion.TimesCompleted++;
 		}
 		else
 		{
-			AddTaskCompletion( taskPath, 0, 1 );
+			AddTaskProgression( taskPath, 0, 1 );
 		}
 
 	}
@@ -132,7 +132,7 @@ public class TaskMaster : Component
 	/// Increase that task's total completed amount
 	/// </summary>
 	/// <param name="task"></param>
-	public static void TaskCompleted( SaunaTask task )
+	public static void TaskCompleted( SaunaTask task ) // TODO Hook this up
 	{
 		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
 
@@ -141,38 +141,38 @@ public class TaskMaster : Component
 		taskMaster.InternalTaskCompleted( task );
 	}
 
-	public void LoadTasksCompletion()
+	public void LoadTasksProgression()
 	{
 		if ( FileSystem.Data.FileExists( "tasks.json" ) )
-			TasksCompletion = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
+			TasksProgression = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
 		else
 		{
-			TasksCompletion = new();
+			TasksProgression = new();
 
 			var allTasks = ResourceLibrary.GetAll<SaunaTask>();
 
 			foreach ( var task in allTasks )
-				AddTaskCompletion( task.ResourcePath );
+				AddTaskProgression( task.ResourcePath );
 
-			InternalSaveTasksCompletion();
+			InternalSaveTasksProgression();
 		}
 	}
 
-	internal void InternalSaveTasksCompletion()
+	internal void InternalSaveTasksProgression()
 	{
-		FileSystem.Data.WriteJson( "tasks.json", TasksCompletion );
+		FileSystem.Data.WriteJson( "tasks.json", TasksProgression );
 	}
 
 	/// <summary>
 	/// Save the tasks current triggered and completion progress/amount
 	/// </summary>
-	public static void SaveTasksCompletion()
+	public static void SaveTasksProgression()
 	{
 		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
 
 		if ( taskMaster == null ) return;
 
-		taskMaster.InternalSaveTasksCompletion();
+		taskMaster.InternalSaveTasksProgression();
 	}
 
 	protected override void OnFixedUpdate()

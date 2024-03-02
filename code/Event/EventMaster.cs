@@ -5,6 +5,173 @@ namespace Sauna.Event;
 [Icon( "free_cancellation" )]
 public class EventMaster : Component
 {
+	[Property]
+	public List<EventDefinition> CurrentEvents { get; set; }
+
+	public class EventCompletion
+	{
+		[JsonInclude]
+		public string Event { get; set; }
+		[JsonInclude]
+		public int TimesTriggered { get; set; }
+		[JsonInclude]
+		public int TimesCompleted { get; set; }
+
+		public EventCompletion( string @event, int timesTriggered = 0, int timesCompleted = 0 )
+		{
+			Event = @event; // Don't bug me on this ye?
+			TimesTriggered = timesTriggered;
+			TimesCompleted = timesCompleted;
+		}
+	}
+
+	public struct SaunaEventProgress
+	{
+		[JsonInclude]
+		public List<EventCompletion> Events = new();
+
+		public SaunaEventProgress() { }
+	}
+
+	public SaunaEventProgress EventsProgression { get; private set; } = new();
+
+	protected override void OnStart()
+	{
+		LoadEventsProgression();
+	}
+
+	internal void AddEventProgression( string eventName, int timesTriggered = 0, int timesCompleted = 0 )
+	{
+		var newTaskCompletion = new EventCompletion( eventName, timesTriggered, timesCompleted );
+		EventsProgression.Events.Add( newTaskCompletion );
+	}
+
+	internal EventCompletion InternalGetEventProgression( string eventName )
+	{
+		var eventCompletionExists = EventsProgression.Events.Any( x => x.Event == eventName );
+
+		if ( eventCompletionExists )
+		{
+			var foundEventCompletion = EventsProgression.Events.Where( x => x.Event == eventName ).First();
+			foundEventCompletion.TimesTriggered++;
+
+			return foundEventCompletion;
+		}
+		else
+		{
+			var newEventCompletion = new EventCompletion( eventName, 0, 0 );
+			EventsProgression.Events.Add( newEventCompletion );
+
+			return newEventCompletion;
+		}
+	}
+
+	/// <summary>
+	/// Get the current stats on that event
+	/// </summary>
+	/// <param name="eventName"></param>
+	/// <returns></returns>
+	public static EventCompletion GetEventCompletion( string eventName )
+	{
+		var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
+
+		if ( eventMaster == null ) return null;
+
+		return eventMaster.InternalGetEventProgression( eventName );
+	}
+
+	internal void InternalEventTriggered( string eventName )
+	{
+		var eventCompletionExists = EventsProgression.Events.Any( x => x.Event == eventName );
+
+		if ( eventCompletionExists )
+		{
+			var foundEventCompletion = EventsProgression.Events.Where( x => x.Event == eventName ).First();
+			foundEventCompletion.TimesTriggered++;
+		}
+		else
+		{
+			AddEventProgression( eventName, 1, 0 );
+		}
+	}
+
+	/// <summary>
+	/// Increase that events's total triggered amount
+	/// </summary>
+	/// <param name="eventName"></param>
+	public static void EventTriggered( string eventName ) // TODO Hook this up
+	{
+		var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
+
+		if ( eventMaster == null ) return;
+
+		eventMaster.InternalEventTriggered( eventName );
+	}
+
+	internal void InternalEventCompleted( string eventName )
+	{
+		var eventCompletionExists = EventsProgression.Events.Any( x => x.Event == eventName );
+
+		if ( eventCompletionExists )
+		{
+			var foundEventCompletion = EventsProgression.Events.Where( x => x.Event == eventName ).First();
+			foundEventCompletion.TimesCompleted++;
+		}
+		else
+		{
+			AddEventProgression( eventName, 0, 1 );
+		}
+
+	}
+
+	/// <summary>
+	/// Increase that event's total completed amount
+	/// </summary>
+	/// <param name="eventName"></param>
+	public static void TaskCompleted( string eventName ) // TODO Hook this up
+	{
+		var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
+
+		if ( eventMaster == null ) return;
+
+		eventMaster.InternalEventCompleted( eventName );
+	}
+
+	public void LoadEventsProgression()
+	{
+		if ( FileSystem.Data.FileExists( "events.json" ) )
+			EventsProgression = FileSystem.Data.ReadJsonOrDefault<SaunaEventProgress>( "events.json" );
+		else
+		{
+			EventsProgression = new();
+
+			var allEvents = Scene.Components.GetAll<EventDefinition>()
+				.DistinctBy( x => x.EventName );
+
+			foreach ( var @event in allEvents )
+				AddEventProgression( @event.EventName );
+
+			InternalSaveEventsProgression();
+		}
+	}
+
+	internal void InternalSaveEventsProgression()
+	{
+		FileSystem.Data.WriteJson( "events.json", EventsProgression );
+	}
+
+	/// <summary>
+	/// Save the events current triggered and completion progress/amount
+	/// </summary>
+	public static void SaveEventsProgression()
+	{
+		var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
+
+		if ( eventMaster == null ) return;
+
+		eventMaster.InternalSaveEventsProgression();
+	}
+
 	protected override void OnFixedUpdate()
 	{
 		InvokePolledMethods();
