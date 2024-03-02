@@ -3,9 +3,6 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-@if ( !HasTarget )
-	return;
-
 <root>
 	@if ( !FromHold )
 	{
@@ -22,7 +19,7 @@
 					continue;
 
 				var disabled = !CanInteract( interaction );
-				if ( !disabled || interaction.ShowWhenDisabled )
+				if ( (!disabled || interaction.ShowWhenDisabled) && WithinBounds( interaction ) )
 				{
 					var inactive = !HasPriority( interaction.Keybind ) || disabled;
 					<div class="interaction">
@@ -45,10 +42,13 @@
 	private string Name => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Name;
 	private bool HasTarget => _targetObject is not null;
 
+	private bool ShouldHide => 
+		(_targetObject?.Components?.Get<Interactions>( FindMode.EverythingInSelf )?.HideOnEmpty ?? false)
+		&& !(_interactions?.Any( i => (CanInteract( i ) || i.ShowWhenDisabled) && WithinBounds( i ) ) ?? false);
+
 	private const float INTERACTION_COOLDOWN = 0.1f;
 	private static List<string> priorityList = new();
 	private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
-	private Vector2 _lerpPosition;
 	private static TimeSince _lastInteracted;
 
 	public InteractionHint()
@@ -57,8 +57,10 @@
 	}
 
 	private bool CanInteract(Interaction interaction)
-		=> (interaction.Disabled is null || !interaction.Disabled())
-		&& (!interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition));
+		=> interaction.Disabled is null || !interaction.Disabled();
+
+	private bool WithinBounds(Interaction interaction)
+		=> !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
 
 	private bool HasPriority( string key )
 		=> FromHold || !priorityList.Contains( key.ToLower() );
@@ -84,9 +86,8 @@
 	{
 		if ( FromHold ) priorityList.Clear();
 
-		SetClass("visible", HasTarget);		
-
-		if (!HasTarget)
+		SetClass( "visible", HasTarget && !ShouldHide );
+		if (!HasClass("visible"))
 			return;
 
 		var pos = FromHold ? 0 : Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
@@ -95,7 +96,7 @@
 			if ( !FromHold && interaction.HoldOnly )
 				continue;
 
-			if ( CanInteract( interaction ) )
+			if ( WithinBounds( interaction ) )
 			{
 				AddToPriority( interaction.Keybind );
 
@@ -105,7 +106,7 @@
 				if ( interaction.HasBounds && !FromHold )
 					pos = Player.Local.TargetedGameObject.Transform.Position + interaction.Position * Player.Local.TargetedGameObject.Transform.Rotation;
 
-				if (interaction.InputFunction(interaction.Keybind) && (interaction.InputMode == InputMode.Down|| _lastInteracted > INTERACTION_COOLDOWN))
+				if (CanInteract(interaction) && interaction.InputFunction(interaction.Keybind) && (interaction.InputMode == InputMode.Down|| _lastInteracted > INTERACTION_COOLDOWN))
 				{
 					_targetObject?.Network.TakeOwnership();
 					interaction.Action?.Invoke(Player.Local, _targetObject);
@@ -126,13 +127,13 @@
 		if ( FromHold ) // No need to play use animation for held items.
 			return;
 
-		_lerpPosition = Vector2.Lerp( _lerpPosition, pos.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
-        Style.Left = Length.Fraction( MathF.Floor( _lerpPosition.x * 200f + 0.5f ) / 200f );
-        Style.Top = Length.Fraction( MathF.Floor( _lerpPosition.y * 200f + 0.5f ) / 200f );
+		pos = pos.ToScreen().Clamp( -0.5f, 1.5f );
+        Style.Left = Length.Fraction( MathF.Floor( pos.x * 200f + 0.5f ) / 200f );
+        Style.Top = Length.Fraction( MathF.Floor( pos.y * 200f + 0.5f ) / 200f );
 	}
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(HasTarget, Name, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i), HasPriority(i.Keybind))));
+		return HashCode.Combine(HasTarget, Name, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i), WithinBounds(i), HasPriority(i.Keybind))));
 	}
 }

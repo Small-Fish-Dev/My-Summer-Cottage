@@ -1,16 +1,24 @@
 {
   "RootObject": {
-    "Id": "49c669bc-f683-44d6-9f2a-e40cb3ba49ad",
+    "Id": "6caff148-1e3f-47b5-b936-1459f41d79b3",
     "Name": "rifle",
     "Enabled": true,
     "Components": [
       {
-        "__type": "WeaponComponent"
+        "__type": "WeaponComponent",
+        "Ammo": 0,
+        "Ammunition": "prefabs/items/762ammo.prefab",
+        "Capacity": 5,
+        "Type": "Ranged"
       },
       {
         "__type": "ItemEquipment",
         "Attachment": "hand_R",
-        "AttachmentTransform": {},
+        "AttachmentTransform": {
+          "UniformScale": 1,
+          "Scale": "1,1,1",
+          "Rotation": "0,0,0,1"
+        },
         "Description": "Wow, this looks like it packs a punch.",
         "HideBodygroups": "None",
         "HoldType": "Rifle",

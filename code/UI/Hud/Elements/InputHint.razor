@@ -21,6 +21,6 @@
 
 	protected override int BuildHash()
 	{
-		return Input.GetHashCode();
+		return HashCode.Combine(Hint?.GetHashCode(), Input?.GetHashCode(), DarkMode);
 	}
 }

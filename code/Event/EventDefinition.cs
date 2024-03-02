@@ -1,19 +1,6 @@
 using Sandbox;
 using Sauna;
 
-public enum EventFrequency
-{
-	[Icon( "menu_book" )]
-	[Description( "Events that are run at specific times in the story. Doesn't get added to the daily events pool" )]
-	Story,
-	[Icon( "stars" )]
-	[Description( "Events that are run once and will never happen again unless we ran out of uniques. Can get added to the daily events pool" )]
-	Unique,
-	[Icon( "timeline" )]
-	[Description( "Events that can run multiple times. Can get added to the daily events pool" )]
-	Repeatable
-}
-
 public enum EventType
 {
 	[Icon( "not_listed_location" )]
@@ -53,12 +40,15 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	[Property]
 	public EventType Type { get; set; } = EventType.Random;
 
+	/// <summary>
+	/// Does this event get added to the daily event pool to enable during gameplay?
+	/// </summary>
 	[Property]
-	public EventFrequency Frequency { get; set; } = EventFrequency.Repeatable;
+	public bool AddToEventPool { get; set; } = true;
 
 	[Property]
-	[HideIf( "Frequency", EventFrequency.Story )]
-	public EventRarity Rarity { get; set; } = EventRarity.Common;
+	[HideIf( "AddToEventPool", true )]
+	public EventRarity Rarity { get; set; } = EventRarity.None;
 
 	[Property]
 	[Description( "Can this event trigger when there's another event going on? And can other events trigger whn this one is going on?" )]

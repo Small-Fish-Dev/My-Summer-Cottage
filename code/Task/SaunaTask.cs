@@ -12,7 +12,9 @@ public enum TaskType
 	[Icon( "feedback" )]
 	GivenByNPC,
 	[Icon( "event_note" )]
-	GivenByEvent
+	GivenByEvent,
+	[Icon( "menu_book" )]
+	GivenByStory
 }
 
 public enum TaskRarity

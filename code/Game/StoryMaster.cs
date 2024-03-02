@@ -7,10 +7,23 @@ namespace Sauna;
 public struct SaunaScriptedEvent
 {
 	/// <summary>
-	/// When the scripted event plays in in-game hours (Ex. 7.5 = 07:30, 23.25 = 23:15, 0.5 = 00:30)
+	/// Does this scripted event instantly start at the new session instead of a timeframe? (Defaults to midnight if SaunaDay NewSessionOnly is false and the day rolls over)
 	/// </summary>
 	[Property]
-	public RangedFloat TriggerTime { get; set; }
+	public bool TriggerOnNewSession { get; set; } = false;
+
+	/// <summary>
+	/// When the scripted event plays in in-game hours (Ex. 7.5 = 07:30, 23.25 = 23:15, 0.5 = 00:30).
+	/// </summary>
+	[Property]
+	[HideIf( "TriggerOnNewSession", true )]
+	public RangedFloat TriggerTime { get; set; } = new RangedFloat( 10.5f, 12.0f );
+
+	/// <summary>
+	/// This scripted event needs to be triggered for the story to progress
+	/// </summary>
+	[Property]
+	public bool TriggerNecessary { get; set; } = true;
 
 	public delegate void ScriptedAction( Player player );
 
@@ -18,9 +31,11 @@ public struct SaunaScriptedEvent
 	/// When the scripted event starts. Send sms here, calls, load events, trigger them, assign tasks, etc...
 	/// </summary>
 	[Property]
-	public ScriptedAction OnStart { get; set; }
+	public ScriptedAction Setup { get; set; }
 
-	public bool Completed { get; set; } = false;
+	[Hide]
+	[JsonIgnore]
+	public bool Triggered { get; set; } = false;
 
 	public SaunaScriptedEvent() { }
 }
@@ -30,6 +45,26 @@ public class SaunaDay
 	[Property]
 	public List<SaunaScriptedEvent> ScriptedEvents { get; set; }
 
+	/// <summary>
+	/// This Story Day can only start on a new session (Exiting the car), you can't just pass the night for it to begin
+	/// </summary>
+	[Property]
+	public bool NewSessionOnly { get; set; } = false;
+
+	/// <summary>
+	/// How many random events to load at the beginning of the session (ONLY session, not new day, events will unload at the end of session)
+	/// </summary>
+	[Property]
+	[Category( "Event Pool" )]
+	public Dictionary<EventRarity, int> RandomEvents { get; set; } = new Dictionary<EventRarity, int>
+	{
+		{ EventRarity.Common, 3 },
+		{ EventRarity.Uncommon, 2 },
+		{ EventRarity.Rare, 1 },
+	};
+
+	[Hide]
+	[JsonIgnore]
 	public bool Completed { get; set; } = false;
 }
 
@@ -40,7 +75,7 @@ public class StoryMaster : Component
 	/// Define each story days, if a story day hasn't been completed it will roll over to the next in-game day
 	/// </summary>
 	[Property]
-	public Dictionary<int, SaunaDay> StoryDays { get; set; }
+	public Dictionary<int, SaunaDay> StoryDays { get; set; } = new();
 
 	/// <summary>
 	/// Current story day
@@ -63,7 +98,9 @@ public class StoryMaster : Component
 			var currentHour = timeManager.InGameHours;
 
 			var saunaEvent = CurrentSaunaDay.ScriptedEvents.First();
-			saunaEvent.Completed = true;
+
+			saunaEvent.Setup?.Invoke( Player.Local );
+
 
 		}
 	}

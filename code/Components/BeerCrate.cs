@@ -58,13 +58,15 @@ public sealed class BeerCrate : Component
 	private SkinnedModelRenderer renderer;
 	private ItemComponent itemComponent;
 
-	protected override void OnStart()
+	protected override void OnAwake()
 	{
 		renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
 		itemComponent = Components.Get<ItemComponent>();
-		BeerCountChanged( 0, Count );
 		UpdateName();
+	}
 
+	protected override void OnStart()
+	{
 		// Take a beer.
 		var interactions = Components.GetOrCreate<Interactions>();
 
