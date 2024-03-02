@@ -22,7 +22,7 @@
 					continue;
 
 				var disabled = !CanInteract( interaction );
-				if ( !disabled || interaction.ShowWhenDisabled )
+				if ( (!disabled || interaction.ShowWhenDisabled) && WithinBounds( interaction ) )
 				{
 					var inactive = !HasPriority( interaction.Keybind ) || disabled;
 					<div class="interaction">
@@ -47,7 +47,7 @@
 
 	private bool ShouldHide => 
 		(_targetObject?.Components?.Get<Interactions>( FindMode.EverythingInSelf )?.HideOnEmpty ?? false)
-	 && !(_interactions?.Any( i => CanInteract( i ) || i.ShowWhenDisabled ) ?? false);
+		&& !(_interactions?.Any( i => (CanInteract( i ) || i.ShowWhenDisabled) && WithinBounds( i ) ) ?? false);
 
 	private const float INTERACTION_COOLDOWN = 0.1f;
 	private static List<string> priorityList = new();
@@ -61,8 +61,10 @@
 	}
 
 	private bool CanInteract(Interaction interaction)
-		=> (interaction.Disabled is null || !interaction.Disabled())
-		&& (!interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition));
+		=> interaction.Disabled is null || !interaction.Disabled();
+
+	private bool WithinBounds(Interaction interaction)
+		=> !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
 
 	private bool HasPriority( string key )
 		=> FromHold || !priorityList.Contains( key.ToLower() );
@@ -99,7 +101,7 @@
 			if ( !FromHold && interaction.HoldOnly )
 				continue;
 
-			if ( CanInteract( interaction ) )
+			if ( CanInteract( interaction ) && WithinBounds( interaction ) )
 			{
 				AddToPriority( interaction.Keybind );
 
@@ -137,6 +139,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(HasTarget, Name, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i), HasPriority(i.Keybind))));
+		return HashCode.Combine(HasTarget, Name, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i), WithinBounds(i), HasPriority(i.Keybind))));
 	}
 }
