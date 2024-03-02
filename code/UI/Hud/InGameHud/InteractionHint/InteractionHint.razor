@@ -112,7 +112,7 @@
 					_lastInteracted = 0f;
 
 					if ( interaction.Identifier != String.Empty )
-						EventSystem.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
+						EventMaster.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
 
 					if ( !FromHold ) // No need to play use animation for held items.
 					{

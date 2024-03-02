@@ -1,5 +1,6 @@
 using Editor;
 using Sandbox;
+using Sauna.Game;
 
 namespace Sauna;
 
@@ -18,12 +19,18 @@ public struct SaunaScriptedEvent
 	/// </summary>
 	[Property]
 	public ScriptedAction OnStart { get; set; }
+
+	public bool Completed { get; set; } = false;
+
+	public SaunaScriptedEvent() { }
 }
 
-public struct SaunaDay
+public class SaunaDay
 {
 	[Property]
 	public List<SaunaScriptedEvent> ScriptedEvents { get; set; }
+
+	public bool Completed { get; set; } = false;
 }
 
 [Icon( "auto_stories" )]
@@ -34,4 +41,31 @@ public class StoryDirector : Component
 	/// </summary>
 	[Property]
 	public Dictionary<int, SaunaDay> StoryDays { get; set; }
+
+	/// <summary>
+	/// Current story day
+	/// </summary>
+	[Property]
+	[HostSync]
+	public int CurrentDay { get; set; } = 1;
+
+	public SaunaDay CurrentSaunaDay => StoryDays.TryGetValue( CurrentDay, out var saunaDay ) ? saunaDay : LastValidSaunaDay;
+	public SaunaDay LastValidSaunaDay => StoryDays.Any() ? StoryDays.Last().Value : null;
+
+
+	protected override void OnFixedUpdate()
+	{
+		var timeManager = Scene.GetAllComponents<GameTimeManager>().First();
+
+		if ( timeManager == null ) return;
+
+		if ( CurrentSaunaDay != null )
+		{
+			var currentHour = timeManager.InGameHours;
+
+			var saunaEvent = CurrentSaunaDay.ScriptedEvents.First();
+			saunaEvent.Completed = true;
+
+		}
+	}
 }

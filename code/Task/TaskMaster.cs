@@ -3,13 +3,11 @@ using System.Threading.Tasks;
 
 namespace Sauna;
 
-[Icon( "calendar_month" )]
+[Icon( "live_help" )]
 public class TaskMaster : Component
 {
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
-
-	// TODO: THIS BUT FOR EVENTS
 
 	public class TaskCompletion
 	{
