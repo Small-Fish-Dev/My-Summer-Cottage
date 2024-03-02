@@ -9,13 +9,40 @@ public class EventMaster : Component
 	public List<EventDefinition> CurrentEvents { get; set; }
 
 	/// <summary>
-	/// Get how many events the player has triggered so far
+	/// Get how many events the player has triggered so far (From 0 to 1) - Fetching this runs a check so don't overuse it
 	/// </summary>
-	public static float CurrentEventsTriggered
+	public static float EventsTriggered
 	{
 		get
 		{
-			return 1;
+			var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
+
+			if ( eventMaster == null ) return 0f;
+
+			var allEvents = eventMaster.EventsProgression.Events;
+			var totalEvents = allEvents.Count();
+			var triggeredEvents = allEvents.Where( x => x.TimesTriggered > 0 ).Count();
+
+			return triggeredEvents / totalEvents;
+		}
+	}
+
+	/// <summary>
+	/// Get how many events the player has completed so far (From 0 to 1) - Fetching this runs a check so don't overuse it
+	/// </summary>
+	public static float EventsCompleted
+	{
+		get
+		{
+			var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
+
+			if ( eventMaster == null ) return 0f;
+
+			var allEvents = eventMaster.EventsProgression.Events;
+			var totalEvents = allEvents.Count();
+			var triggeredEvents = allEvents.Where( x => x.TimesCompleted > 0 ).Count();
+
+			return triggeredEvents / totalEvents;
 		}
 	}
 
