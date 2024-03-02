@@ -52,25 +52,16 @@ public class SaunaDay
 	public bool NewSessionOnly { get; set; } = false;
 
 	/// <summary>
-	/// How many random common events to load at the beginning of the session (ONLY session, not new day, events will unload at the end of session)
+	/// How many random events to load at the beginning of the session (ONLY session, not new day, events will unload at the end of session)
 	/// </summary>
 	[Property]
 	[Category( "Event Pool" )]
-	public int RandomCommonEvents { get; set; } = 0;
-
-	/// <summary>
-	/// How many random uncommon events to load at the beginning of the session (ONLY session, not new day, events will unload at the end of session)
-	/// </summary>
-	[Property]
-	[Category( "Event Pool" )]
-	public int RandomUncommonEvents { get; set; } = 0;
-
-	/// <summary>
-	/// How many random rare events to load at the beginning of the session (ONLY session, not new day, events will unload at the end of session)
-	/// </summary>
-	[Property]
-	[Category( "Event Pool" )]
-	public int RandomRareEvents { get; set; } = 0;
+	public Dictionary<EventRarity, int> RandomEvents { get; set; } = new Dictionary<EventRarity, int>
+	{
+		{ EventRarity.Common, 3 },
+		{ EventRarity.Uncommon, 2 },
+		{ EventRarity.Rare, 1 },
+	};
 
 	[Hide]
 	[JsonIgnore]
@@ -84,7 +75,7 @@ public class StoryMaster : Component
 	/// Define each story days, if a story day hasn't been completed it will roll over to the next in-game day
 	/// </summary>
 	[Property]
-	public Dictionary<int, SaunaDay> StoryDays { get; set; }
+	public Dictionary<int, SaunaDay> StoryDays { get; set; } = new();
 
 	/// <summary>
 	/// Current story day
