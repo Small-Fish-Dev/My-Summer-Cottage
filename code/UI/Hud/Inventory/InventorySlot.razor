@@ -141,6 +141,17 @@
 		targetSlot.UpdateItem();
 	}
 
+	private void MoveOntoCharacter()
+	{
+		var fromSlot = this;
+		var inventory = Player.Local.Inventory;
+
+		if (fromSlot.Item is ItemEquipment equipment)
+			Player.Local.Inventory.EquipItem(equipment);
+
+		fromSlot.UpdateItem();
+	}
+
 	protected override void OnMouseUp( MousePanelEvent e )
 	{
 		base.OnMouseUp( e );
@@ -148,10 +159,15 @@
 		if ( CurrentDraggable == null )
 			return;
         
+		var rendererTarget = Inventory.Instance.Descendants.OfType<CharacterRenderer>().FirstOrDefault(v => v.IsHoveredByMouse());
 		var targetSlot = Inventory.Instance.Descendants.OfType<InventorySlot>().FirstOrDefault( v => v.IsHoveredByMouse() );
 		if ( targetSlot != null && targetSlot.Item != Item )
 		{
 			MoveItemTo( targetSlot );
+		} 
+		else if (rendererTarget != null)
+		{
+			MoveOntoCharacter();
 		}
 
 		CurrentDraggable?.Delete();

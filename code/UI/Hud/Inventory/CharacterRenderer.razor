@@ -21,6 +21,8 @@
 	private static float _yaw = 0f;
 	private bool _isDragging = false;
 
+	public bool IsHoveredByMouse() => Box.Rect.IsInside( Mouse.Position );
+
 	protected override void OnAfterTreeRender(bool firstTime)
 	{
 		base.OnAfterTreeRender(firstTime);
