@@ -14,16 +14,16 @@
 						remaps = 
 						[
 							{
-								from = "elk.vmat"
+								from = "antlers.vmat"
+								to = "models/fauna/elk/materials/elk_antlers.vmat"
+							},
+							{
+								from = "models/fauna/elk/materials/elk.vmat"
 								to = "models/fauna/elk/materials/elk.vmat"
 							},
 							{
-								from = "elk_female.vmat"
-								to = "models/fauna/elk/materials/elk_female.vmat"
-							},
-							{
-								from = "antlers.vmat"
-								to = "models/fauna/elk/materials/elk_antlers.vmat"
+								from = "reindeer_antlers.vmat"
+								to = "models/fauna/elk/materials/reindeer_antlers.vmat"
 							},
 						]
 						use_global_default = false
@@ -37,7 +37,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						name = "male"
+						name = "elk"
 						filename = "models/fauna/elk/elk.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -57,7 +57,7 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "female"
+						name = "elk_female"
 						filename = "models/fauna/elk/elk_female.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -77,6 +77,23 @@
 							]
 						}
 					},
+					{
+						_class = "RenderMeshFile"
+						name = "reindeer"
+						filename = "models/fauna/elk/reindeer.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
 				]
 			},
 			{
@@ -85,23 +102,31 @@
 				[
 					{
 						_class = "BodyGroup"
-						name = "MtF"
+						name = "type"
 						children = 
 						[
 							{
 								_class = "BodyGroupChoice"
-								name = "male"
+								name = "reindeer"
 								meshes = 
 								[
-									"male",
+									"reindeer",
 								]
 							},
 							{
 								_class = "BodyGroupChoice"
-								name = "female"
+								name = "elk"
 								meshes = 
 								[
-									"female",
+									"elk",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "elk_female"
+								meshes = 
+								[
+									"elk_female",
 								]
 							},
 						]
