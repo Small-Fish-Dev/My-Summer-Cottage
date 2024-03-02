@@ -99,12 +99,22 @@
           ]
         },
         {
-          "__type": "EventMaster"
+          "__type": "EventMaster",
+          "CurrentEvents": []
         },
         {
           "__type": "StoryMaster",
           "CurrentDay": 1,
-          "StoryDays": {}
+          "StoryDays": {
+            "1": {
+              "ScriptedEvents": [],
+              "EventPool": {
+                "Common": 5,
+                "Uncommon": 2,
+                "Rare": 1
+              }
+            }
+          }
         }
       ],
       "Children": [
@@ -180,14 +190,14 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.9596199,0,0.2813",
+          "Rotation": "0,0.8720656,0,0.489389",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "0.63127,0.81277,1.11583,2"
+              "Tint": "0.63149,0.8129,1.1159,2"
             }
           ]
         },
@@ -199,7 +209,7 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.31564,0.40639,0.55791,1",
+              "Color": "0.31574,0.40645,0.55795,1",
               "EndDistance": 10000,
               "FalloffExponent": 1,
               "Height": 10000,
@@ -212,7 +222,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.1193591,-0.1701019,0.5618529,-0.8007123",
+          "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
           "Tags": "light_directional,light",
           "Enabled": true,
           "Components": [
@@ -220,7 +230,7 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.31564,0.40639,0.55791,1",
+              "LightColor": "0.31574,0.40645,0.55795,1",
               "Shadows": false,
               "SkyColor": "0.00784,0.03922,0.0902,1"
             }
@@ -2664,6 +2674,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-02T14:47:36.5561802\u002B01:00",
+  "LastSaved": "2024-03-02T17:39:06.8553495\u002B01:00",
   "__references": []
 }
