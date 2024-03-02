@@ -130,6 +130,7 @@
 			_yaw += Mouse.Delta.x * 0.20f;
 
 		_character.Update(RealTime.Delta);
+		_character.SetAnimParameter("hold_type", (int)Player.Local.HoldType);
 		_character.Rotation = Rotation.From(0, _yaw, 0);
 
 		_penoid?.Update(RealTime.Delta);
