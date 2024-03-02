@@ -1,4 +1,5 @@
 using Sandbox;
+using Sauna.Event;
 using System.Threading.Tasks;
 
 namespace Sauna;
@@ -8,6 +9,44 @@ public class TaskMaster : Component
 {
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
+
+	/// <summary>
+	/// Get how many tasks the player has triggered so far (From 0 to 1) - Fetching this runs a check so don't overuse it
+	/// </summary>
+	public static float TasksTriggered
+	{
+		get
+		{
+			var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+
+			if ( taskMaster == null ) return 0f;
+
+			var allTasks = taskMaster.TasksProgression.Tasks;
+			var totalTasks = allTasks.Count();
+			var triggeredTasks = allTasks.Where( x => x.TimesTriggered > 0 ).Count();
+
+			return triggeredTasks / totalTasks;
+		}
+	}
+
+	/// <summary>
+	/// Get how many tasks the player has completed so far (From 0 to 1) - Fetching this runs a check so don't overuse it
+	/// </summary>
+	public static float TasksCompleted
+	{
+		get
+		{
+			var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+
+			if ( taskMaster == null ) return 0f;
+
+			var allTasks = taskMaster.TasksProgression.Tasks;
+			var totalTasks = allTasks.Count();
+			var triggeredTasks = allTasks.Where( x => x.TimesCompleted > 0 ).Count();
+
+			return triggeredTasks / totalTasks;
+		}
+	}
 
 	public class TaskCompletion
 	{
