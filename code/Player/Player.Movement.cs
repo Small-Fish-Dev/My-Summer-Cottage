@@ -64,7 +64,7 @@ partial class Player
 	[Sync] public bool Ducking { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
 	[Sync] public Vector3 Velocity { get; set; }
-	[Sync] public HoldType HoldType { get; set; } = HoldType.None;
+	[Sync] public HoldType HoldType { get; set; } = HoldType.Idle;
 
 	public BBox Bounds => new BBox( Collider.Center - Collider.Scale / 2f, Collider.Center + Collider.Scale / 2f );
 

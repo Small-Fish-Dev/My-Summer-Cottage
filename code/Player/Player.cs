@@ -172,7 +172,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 			UpdateAngles();
 			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
 			HidePenoid = Inventory.EquippedItems[(int)EquipSlot.Legs] != null;
-			HoldType = (Inventory.EquippedItems[(int)EquipSlot.Hand] as ItemEquipment)?.HoldType ?? HoldType.None;
+			HoldType = (Inventory.EquippedItems[(int)EquipSlot.Hand] as ItemEquipment)?.HoldType ?? HoldType.Idle;
 		}
 
 		UpdateAnimation();
