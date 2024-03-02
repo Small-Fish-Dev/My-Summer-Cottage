@@ -231,6 +231,8 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Broadcast( NetPermission.HostOnly )]
 	public void EndDay()
 	{
+		if ( Scene.IsEditor && !GameManager.IsPlaying ) return;
+
 		// End of day memory !
 		Player.Local?.CaptureMemory( Sandbox.Game.Random.FromArray( new string[]
 		{
