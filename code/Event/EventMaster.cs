@@ -8,6 +8,17 @@ public class EventMaster : Component
 	[Property]
 	public List<EventDefinition> CurrentEvents { get; set; }
 
+	/// <summary>
+	/// Get how many events the player has triggered so far
+	/// </summary>
+	public static float CurrentEventsTriggered
+	{
+		get
+		{
+			return 1;
+		}
+	}
+
 	public class EventCompletion
 	{
 		[JsonInclude]
@@ -146,7 +157,7 @@ public class EventMaster : Component
 			EventsProgression = new();
 
 			var allEvents = Scene.Components.GetAll<EventDefinition>()
-				.DistinctBy( x => x.EventName );
+				.DistinctBy( x => x.EventName ); // Avoid multiple event definitions
 
 			foreach ( var @event in allEvents )
 				AddEventProgression( @event.EventName );
@@ -157,6 +168,14 @@ public class EventMaster : Component
 
 	internal void InternalSaveEventsProgression()
 	{
+		var allEvents = Scene.Components.GetAll<EventDefinition>()
+				.DistinctBy( x => x.EventName ); // Avoid multiple event definitions
+
+		// If future updates contain new events or we're live adding newer ones, save those to the file too
+		foreach ( var @event in allEvents )
+			if ( !EventsProgression.Events.Any( x => x.Event == @event.EventName ) )
+				AddEventProgression( @event.EventName );
+
 		FileSystem.Data.WriteJson( "events.json", EventsProgression );
 	}
 

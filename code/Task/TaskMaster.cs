@@ -160,6 +160,13 @@ public class TaskMaster : Component
 
 	internal void InternalSaveTasksProgression()
 	{
+		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
+
+		// If future updates contain new tasks or we're live adding newer ones, save those to the file too
+		foreach ( var task in allTasks )
+			if ( !TasksProgression.Tasks.Any( x => x.Task == task.ResourcePath ) )
+				AddTaskProgression( task.ResourcePath );
+
 		FileSystem.Data.WriteJson( "tasks.json", TasksProgression );
 	}
 

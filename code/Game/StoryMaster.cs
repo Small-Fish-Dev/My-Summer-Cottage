@@ -52,7 +52,6 @@ public class StoryMaster : Component
 	public SaunaDay CurrentSaunaDay => StoryDays.TryGetValue( CurrentDay, out var saunaDay ) ? saunaDay : LastValidSaunaDay;
 	public SaunaDay LastValidSaunaDay => StoryDays.Any() ? StoryDays.Last().Value : null;
 
-
 	protected override void OnFixedUpdate()
 	{
 		var timeManager = Scene.GetAllComponents<GameTimeManager>().First();
