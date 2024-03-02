@@ -34,7 +34,7 @@ public class SaunaDay
 }
 
 [Icon( "auto_stories" )]
-public class StoryDirector : Component
+public class StoryMaster : Component
 {
 	/// <summary>
 	/// Define each story days, if a story day hasn't been completed it will roll over to the next in-game day

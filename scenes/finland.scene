@@ -99,79 +99,12 @@
           ]
         },
         {
-          "__type": "StoryDirector",
+          "__type": "EventMaster"
+        },
+        {
+          "__type": "StoryMaster",
           "CurrentDay": 1,
-          "StoryDays": {
-            "1": {
-              "ScriptedEvents": [
-                {
-                  "TriggerTime": "10.00,12.00,1",
-                  "OnStart": {
-                    "Version": 5,
-                    "UserData": {
-                      "Title": "On Start",
-                      "id": "5ec47a5f-31e9-4021-911b-b051daefdcd5",
-                      "ReferencedComponentTypes": []
-                    },
-                    "Variables": [],
-                    "Nodes": [
-                      {
-                        "Id": 0,
-                        "Type": "input",
-                        "UserData": {
-                          "Position": "-192,64"
-                        }
-                      },
-                      {
-                        "Id": 5,
-                        "Type": "event.getrandomtask",
-                        "UserData": {
-                          "Position": "16,176"
-                        }
-                      },
-                      {
-                        "Id": 6,
-                        "Type": "event.assigntaskto",
-                        "UserData": {
-                          "Position": "320,64"
-                        }
-                      }
-                    ],
-                    "Links": [
-                      {
-                        "Value": "Common",
-                        "DstId": 5,
-                        "DstName": "taskRarity"
-                      },
-                      {
-                        "Value": "GivenByWife",
-                        "DstId": 5,
-                        "DstName": "taskType"
-                      },
-                      {
-                        "SrcId": 0,
-                        "SrcName": "_signal",
-                        "DstId": 6,
-                        "DstName": "_signal"
-                      },
-                      {
-                        "SrcId": 0,
-                        "SrcName": "player",
-                        "DstId": 6,
-                        "DstName": "player"
-                      },
-                      {
-                        "SrcId": 5,
-                        "SrcName": "_result",
-                        "DstId": 6,
-                        "DstName": "taskToAdd"
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          }
+          "StoryDays": {}
         }
       ],
       "Children": [
@@ -247,14 +180,14 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.5484839,0,0.8361611",
+          "Rotation": "0,0.9596199,0,0.2813",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "0.63149,0.8129,1.1159,2"
+              "Tint": "0.63127,0.81277,1.11583,2"
             }
           ]
         },
@@ -266,7 +199,7 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.31574,0.40645,0.55795,1",
+              "Color": "0.31564,0.40639,0.55791,1",
               "EndDistance": 10000,
               "FalloffExponent": 1,
               "Height": 10000,
@@ -279,7 +212,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
+          "Rotation": "-0.1193591,-0.1701019,0.5618529,-0.8007123",
           "Tags": "light_directional,light",
           "Enabled": true,
           "Components": [
@@ -287,7 +220,7 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.31574,0.40645,0.55795,1",
+              "LightColor": "0.31564,0.40639,0.55791,1",
               "Shadows": false,
               "SkyColor": "0.00784,0.03922,0.0902,1"
             }
@@ -304,6 +237,7 @@
       "Components": [
         {
           "__type": "EventComponent",
+          "__enabled": false,
           "DisabledWhilePlaying": [],
           "DisableOnTrigger": [],
           "Event": {
@@ -330,10 +264,10 @@
                 "Id": 2,
                 "Type": "call",
                 "Properties": {
-                  "_name": "Get",
-                  "_isStatic": false,
                   "T": "package.fish.sauna/Sauna.Player",
-                  "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                  "_isStatic": false,
+                  "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                  "_name": "Get"
                 },
                 "UserData": {
                   "Position": "240,80"
@@ -357,8 +291,8 @@
                 "Id": 6,
                 "Type": "resource.ref",
                 "Properties": {
-                  "value": "sounds/misc/banana_slip.sound",
-                  "T": "Sandbox.Engine/Sandbox.SoundEvent"
+                  "T": "Sandbox.Engine/Sandbox.SoundEvent",
+                  "value": "sounds/misc/banana_slip.sound"
                 },
                 "UserData": {
                   "Position": "544,-384"
@@ -375,8 +309,8 @@
                 "Id": 8,
                 "Type": "property.get",
                 "Properties": {
-                  "_name": "Transform",
-                  "_type": "Sandbox.Game/Sandbox.GameObject"
+                  "_type": "Sandbox.Game/Sandbox.GameObject",
+                  "_name": "Transform"
                 },
                 "UserData": {
                   "Position": "336,-256"
@@ -386,8 +320,8 @@
                 "Id": 9,
                 "Type": "property.get",
                 "Properties": {
-                  "_name": "Position",
-                  "_type": "Sandbox.Game/Sandbox.GameTransform"
+                  "_type": "Sandbox.Game/Sandbox.GameTransform",
+                  "_name": "Position"
                 },
                 "UserData": {
                   "Position": "512,-256"
@@ -397,12 +331,12 @@
                 "Id": 11,
                 "Type": "scene.ref",
                 "Properties": {
+                  "T": "package.fish.sauna/EventComponent",
                   "value": {
                     "_type": "component",
                     "go": "2d4783cc-caf7-4dae-af45-06d44aff2664",
                     "component_type": "EventComponent"
-                  },
-                  "T": "package.fish.sauna/EventComponent"
+                  }
                 },
                 "UserData": {
                   "Position": "944,176"
@@ -579,6 +513,7 @@
           "Components": [
             {
               "__type": "ModelRenderer",
+              "__enabled": false,
               "BodyGroups": 18446744073709551615,
               "MaterialGroup": null,
               "MaterialOverride": null,
@@ -596,6 +531,7 @@
           "Components": [
             {
               "__type": "EventAreaTrigger",
+              "__enabled": false,
               "Extents": "20,20,30",
               "MaxPollingRate": 5,
               "Offset": "0,0,15",
@@ -809,10 +745,10 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_name": "Get",
-                      "_isStatic": false,
                       "T": "package.fish.sauna/Sauna.SlotMachine",
-                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                      "_name": "Get"
                     },
                     "UserData": {
                       "Position": "208,80"
@@ -822,9 +758,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_name": "TryRoll",
                       "_isStatic": false,
-                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                      "_type": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "TryRoll"
                     },
                     "UserData": {
                       "Position": "432,80"
@@ -884,10 +820,10 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_name": "Get",
-                      "_isStatic": false,
                       "T": "package.fish.sauna/Sauna.SlotMachine",
-                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                      "_name": "Get"
                     },
                     "UserData": {
                       "Position": "176,64"
@@ -897,9 +833,9 @@
                     "Id": 4,
                     "Type": "call",
                     "Properties": {
-                      "_name": "ToggleBetFlag",
                       "_isStatic": false,
-                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                      "_type": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "ToggleBetFlag"
                     },
                     "UserData": {
                       "Position": "416,64"
@@ -964,10 +900,10 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_name": "Get",
-                      "_isStatic": false,
                       "T": "package.fish.sauna/Sauna.SlotMachine",
-                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                      "_name": "Get"
                     },
                     "UserData": {
                       "Position": "240,64"
@@ -977,9 +913,9 @@
                     "Id": 3,
                     "Type": "call",
                     "Properties": {
-                      "_name": "ToggleBetFlag",
                       "_isStatic": false,
-                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                      "_type": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "ToggleBetFlag"
                     },
                     "UserData": {
                       "Position": "480,64"
@@ -1044,10 +980,10 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_name": "Get",
-                      "_isStatic": false,
                       "T": "package.fish.sauna/Sauna.SlotMachine",
-                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                      "_name": "Get"
                     },
                     "UserData": {
                       "Position": "240,128"
@@ -1057,9 +993,9 @@
                     "Id": 3,
                     "Type": "call",
                     "Properties": {
-                      "_name": "ToggleBetFlag",
                       "_isStatic": false,
-                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                      "_type": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "ToggleBetFlag"
                     },
                     "UserData": {
                       "Position": "480,128"
@@ -1125,10 +1061,10 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_name": "Get",
-                      "_isStatic": false,
                       "T": "package.fish.sauna/Sauna.SlotMachine",
-                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                      "_name": "Get"
                     },
                     "UserData": {
                       "Position": "192,208"
@@ -1138,9 +1074,9 @@
                     "Id": 4,
                     "Type": "call",
                     "Properties": {
-                      "_name": "Cashout",
                       "_isStatic": false,
-                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                      "_type": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "Cashout"
                     },
                     "UserData": {
                       "Position": "416,208"
@@ -1207,10 +1143,10 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_name": "Get",
-                      "_isStatic": false,
                       "T": "package.fish.sauna/Sauna.SlotMachine",
-                      "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                      "_name": "Get"
                     },
                     "UserData": {
                       "Position": "240,160"
@@ -1220,9 +1156,9 @@
                     "Id": 4,
                     "Type": "call",
                     "Properties": {
-                      "_name": "InsertCoin",
                       "_isStatic": false,
-                      "_type": "package.fish.sauna/Sauna.SlotMachine"
+                      "_type": "package.fish.sauna/Sauna.SlotMachine",
+                      "_name": "InsertCoin"
                     },
                     "UserData": {
                       "Position": "464,160"
@@ -1480,10 +1416,10 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "_name": "Get",
-                          "_isStatic": false,
                           "T": "package.fish.sauna/Sauna.Player",
-                          "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                          "_isStatic": false,
+                          "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                          "_name": "Get"
                         },
                         "UserData": {
                           "Position": "496,-240",
@@ -1496,8 +1432,8 @@
                         "Id": 2,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Transform",
-                          "_type": "Sandbox.Game/Sandbox.GameObject"
+                          "_type": "Sandbox.Game/Sandbox.GameObject",
+                          "_name": "Transform"
                         },
                         "UserData": {
                           "Position": "496,-112"
@@ -1507,8 +1443,8 @@
                         "Id": 3,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "World",
-                          "_type": "Sandbox.Game/Sandbox.GameTransform"
+                          "_type": "Sandbox.Game/Sandbox.GameTransform",
+                          "_name": "World"
                         },
                         "UserData": {
                           "Position": "704,-112"
@@ -1518,8 +1454,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Position",
-                          "_type": "Sandbox.System/Transform"
+                          "_type": "Sandbox.System/Transform",
+                          "_name": "Position"
                         },
                         "UserData": {
                           "Position": "896,-112",
@@ -1539,8 +1475,8 @@
                         "Id": 6,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Transform",
-                          "_type": "Sandbox.Game/Sandbox.GameObject"
+                          "_type": "Sandbox.Game/Sandbox.GameObject",
+                          "_name": "Transform"
                         },
                         "UserData": {
                           "Position": "496,80"
@@ -1550,8 +1486,8 @@
                         "Id": 7,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "World",
-                          "_type": "Sandbox.Game/Sandbox.GameTransform"
+                          "_type": "Sandbox.Game/Sandbox.GameTransform",
+                          "_name": "World"
                         },
                         "UserData": {
                           "Position": "704,80"
@@ -1561,8 +1497,8 @@
                         "Id": 8,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Position",
-                          "_type": "Sandbox.System/Transform"
+                          "_type": "Sandbox.System/Transform",
+                          "_name": "Position"
                         },
                         "UserData": {
                           "Position": "896,80",
@@ -1589,8 +1525,8 @@
                         "Id": 11,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Normal",
-                          "_type": "Sandbox.System/Vector3"
+                          "_type": "Sandbox.System/Vector3",
+                          "_name": "Normal"
                         },
                         "UserData": {
                           "Position": "336,320"
@@ -1600,8 +1536,8 @@
                         "Id": 12,
                         "Type": "property.set",
                         "Properties": {
-                          "_name": "Rotation",
-                          "_type": "Sandbox.Game/Sandbox.GameTransform"
+                          "_type": "Sandbox.Game/Sandbox.GameTransform",
+                          "_name": "Rotation"
                         },
                         "UserData": {
                           "Position": "736,208"
@@ -1618,8 +1554,8 @@
                         "Id": 14,
                         "Type": "property.set",
                         "Properties": {
-                          "_name": "Volume",
-                          "_type": "Sandbox.Engine/Sandbox.SoundHandle"
+                          "_type": "Sandbox.Engine/Sandbox.SoundHandle",
+                          "_name": "Volume"
                         },
                         "UserData": {
                           "Position": "1520,272"
@@ -1685,11 +1621,11 @@
                         "Id": 26,
                         "Type": "scene.ref",
                         "Properties": {
+                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
-                          },
-                          "T": "Sandbox.Game/Sandbox.GameObject"
+                          }
                         },
                         "UserData": {
                           "Position": "176,80"
@@ -1699,12 +1635,12 @@
                         "Id": 28,
                         "Type": "scene.ref",
                         "Properties": {
+                          "T": "package.fish.sauna/EventComponent",
                           "value": {
                             "_type": "component",
                             "go": "2f80e6c2-8f26-4f25-8c21-6de0874ed0b5",
                             "component_type": "EventComponent"
-                          },
-                          "T": "package.fish.sauna/EventComponent"
+                          }
                         },
                         "UserData": {
                           "Position": "2096,96"
@@ -2080,11 +2016,11 @@
                         "Id": 2,
                         "Type": "scene.ref",
                         "Properties": {
+                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
-                          },
-                          "T": "Sandbox.Game/Sandbox.GameObject"
+                          }
                         },
                         "UserData": {
                           "Position": "-608,144"
@@ -2094,11 +2030,11 @@
                         "Id": 3,
                         "Type": "scene.ref",
                         "Properties": {
+                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "20ba868b-9876-4f99-8a41-882ff4c46a16"
-                          },
-                          "T": "Sandbox.Game/Sandbox.GameObject"
+                          }
                         },
                         "UserData": {
                           "Position": "-768,320"
@@ -2108,8 +2044,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Transform",
-                          "_type": "Sandbox.Game/Sandbox.GameObject"
+                          "_type": "Sandbox.Game/Sandbox.GameObject",
+                          "_name": "Transform"
                         },
                         "UserData": {
                           "Position": "-528,336"
@@ -2119,8 +2055,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "World",
-                          "_type": "Sandbox.Game/Sandbox.GameTransform"
+                          "_type": "Sandbox.Game/Sandbox.GameTransform",
+                          "_name": "World"
                         },
                         "UserData": {
                           "Position": "-256,384"
@@ -2130,8 +2066,8 @@
                         "Id": 6,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Position",
-                          "_type": "Sandbox.System/Transform"
+                          "_type": "Sandbox.System/Transform",
+                          "_name": "Position"
                         },
                         "UserData": {
                           "Position": "-48,416"
@@ -2141,8 +2077,8 @@
                         "Id": 7,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Transform",
-                          "_type": "Sandbox.Game/Sandbox.GameObject"
+                          "_type": "Sandbox.Game/Sandbox.GameObject",
+                          "_name": "Transform"
                         },
                         "UserData": {
                           "Position": "-352,208"
@@ -2152,8 +2088,8 @@
                         "Id": 8,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "World",
-                          "_type": "Sandbox.Game/Sandbox.GameTransform"
+                          "_type": "Sandbox.Game/Sandbox.GameTransform",
+                          "_name": "World"
                         },
                         "UserData": {
                           "Position": "-160,208"
@@ -2163,8 +2099,8 @@
                         "Id": 9,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Position",
-                          "_type": "Sandbox.System/Transform"
+                          "_type": "Sandbox.System/Transform",
+                          "_name": "Position"
                         },
                         "UserData": {
                           "Position": "16,192"
@@ -2174,8 +2110,8 @@
                         "Id": 10,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "Rotation",
-                          "_type": "Sandbox.System/Transform"
+                          "_type": "Sandbox.System/Transform",
+                          "_name": "Rotation"
                         },
                         "UserData": {
                           "Position": "16,288"
@@ -2192,9 +2128,9 @@
                         "Id": 12,
                         "Type": "call",
                         "Properties": {
-                          "_name": "RotateAroundAxis",
                           "_isStatic": false,
-                          "_type": "Sandbox.System/Rotation"
+                          "_type": "Sandbox.System/Rotation",
+                          "_name": "RotateAroundAxis"
                         },
                         "UserData": {
                           "Position": "288,352"
@@ -2225,8 +2161,8 @@
                         "Id": 16,
                         "Type": "property.set",
                         "Properties": {
-                          "_name": "Volume",
-                          "_type": "Sandbox.Engine/Sandbox.SoundHandle"
+                          "_type": "Sandbox.Engine/Sandbox.SoundHandle",
+                          "_name": "Volume"
                         },
                         "UserData": {
                           "Position": "1008,400"
@@ -2243,12 +2179,12 @@
                         "Id": 18,
                         "Type": "scene.ref",
                         "Properties": {
+                          "T": "package.fish.sauna/EventComponent",
                           "value": {
                             "_type": "component",
                             "go": "cb9ad1f7-3db3-4b43-aef3-a5d4b322e48c",
                             "component_type": "EventComponent"
-                          },
-                          "T": "package.fish.sauna/EventComponent"
+                          }
                         },
                         "UserData": {
                           "Position": "1344,256"
@@ -2265,10 +2201,10 @@
                         "Id": 20,
                         "Type": "call",
                         "Properties": {
-                          "_name": "Get",
-                          "_isStatic": false,
                           "T": "package.fish.sauna/Sauna.Player",
-                          "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                          "_isStatic": false,
+                          "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                          "_name": "Get"
                         },
                         "UserData": {
                           "Position": "-128,-320"
@@ -2728,6 +2664,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-01T17:26:14.5729381\u002B01:00",
+  "LastSaved": "2024-03-02T14:47:36.5561802\u002B01:00",
   "__references": []
 }
