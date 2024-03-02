@@ -131,6 +131,10 @@ public class Interactions : Component
 {
 	[Property]
 	public List<Interaction> ObjectInteractions { get; set; }
+
+	[Property]
+	public bool HideOnEmpty { get; set; } = false;
+
 	public IEnumerable<Interaction> AllInteractions => ObjectInteractions.Concat( programmedInteractions ?? new List<Interaction>() );
 
 	private List<Interaction> programmedInteractions;

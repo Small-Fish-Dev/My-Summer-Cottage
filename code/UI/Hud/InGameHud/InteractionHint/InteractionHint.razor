@@ -45,6 +45,10 @@
 	private string Name => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Name;
 	private bool HasTarget => _targetObject is not null;
 
+	private bool ShouldHide => 
+		(_targetObject?.Components?.Get<Interactions>( FindMode.EverythingInSelf )?.HideOnEmpty ?? false)
+	 && !(_interactions?.Any( i => CanInteract( i ) || i.ShowWhenDisabled ) ?? false);
+
 	private const float INTERACTION_COOLDOWN = 0.1f;
 	private static List<string> priorityList = new();
 	private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
@@ -84,7 +88,7 @@
 	{
 		if ( FromHold ) priorityList.Clear();
 
-		SetClass("visible", HasTarget);		
+		SetClass( "visible", HasTarget && !ShouldHide );
 
 		if (!HasTarget)
 			return;
@@ -126,9 +130,9 @@
 		if ( FromHold ) // No need to play use animation for held items.
 			return;
 
-		_lerpPosition = Vector2.Lerp( _lerpPosition, pos.ToScreen().Clamp( -0.5f, 1.5f ), 10f * Time.Delta );
-        Style.Left = Length.Fraction( MathF.Floor( _lerpPosition.x * 200f + 0.5f ) / 200f );
-        Style.Top = Length.Fraction( MathF.Floor( _lerpPosition.y * 200f + 0.5f ) / 200f );
+		pos = pos.ToScreen().Clamp( -0.5f, 1.5f );
+        Style.Left = Length.Fraction( MathF.Floor( pos.x * 200f + 0.5f ) / 200f );
+        Style.Top = Length.Fraction( MathF.Floor( pos.y * 200f + 0.5f ) / 200f );
 	}
 
 	protected override int BuildHash()
