@@ -1,49 +1,51 @@
-﻿@import "/UI/Style.scss";
+@import "/UI/Style.scss";
 
 ExperienceBar {
-  position: absolute;
-  width: 100%;
-  bottom: 30px;
-  flex-direction: row;
-  justify-content: center;
-
-  .container {
-    color: white;
-    
+    width: 100%;
+    height: 100%;
     justify-content: center;
-    align-items: stretch;
-    flex-direction: column;
-    transition: all 0.25s ease-in-out;
-    top: 10px;
-    
-    width: 30vw;
-    opacity: 1;
-    
-    .top-text {
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      font-family: BasicHandwriting;
-      font-size: 20px;
-      text-shadow: $text-shadow-sm;
-    }
+    align-items: center;
+    bottom: -40%;
 
-    .exp-bar {
-      border: 2px white;
-      width: 100%;
-      height: 20px;
-      margin: 10px 0px;
-      
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      align-items: stretch;
+    .container {
+        width: 800px;
+        flex-direction: column;
+        transition: all 0.2s ease-out;
 
-      .progress {
-        background-color: white;
-        width: 50%;
-        transition: all 0.5s ease-out;
-      }
+        .level-details {
+            width: 100%;
+            text-shadow: $text-shadow-sm;
+            justify-content: space-between;
+            align-items: center;
+
+            .level {
+                font-size: 30px;
+                font-family: BasicHandwriting;
+            }
+
+            .level-exp {
+                font-size: 20px;
+                font-family: HabboExtended;
+            }
+        }
+
+        .exp-bar {
+            margin-top: 5px;
+            height: 17px;
+            border: 3px $green;
+            box-shadow: 4px 4px 2px 2px #000000b4;
+
+            .progress {
+                padding: 5px;
+                height: 100%;
+                background-color: $green;
+                transition: all 0.2s ease-out;
+            }
+        }
+
+        &.inactive {
+            opacity: 0;
+            transform: translateY(20);
+        }
     }
-  }
 }

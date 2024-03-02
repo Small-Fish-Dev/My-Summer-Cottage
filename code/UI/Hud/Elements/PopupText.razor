@@ -1,0 +1,23 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<text>@_text</text>
+</root>
+
+@code {
+	private string _text;
+
+	public PopupText(string Text)
+	{
+		_text = Text;
+		_ = DelayDelete();
+	}
+
+    private async Task DelayDelete()
+    {
+        await GameTask.Delay(1500);
+        Delete();
+    }
+}

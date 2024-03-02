@@ -29,9 +29,9 @@ public partial class Player
 			Experience -= ExpPerLevel;
 			Level++;
 		}
-		
+
 		OnExperienceEarned?.Invoke( exp );
-		if (oldLevel != Level)
+		if ( oldLevel != Level )
 			OnLevelUp?.Invoke( Level );
 	}
 }

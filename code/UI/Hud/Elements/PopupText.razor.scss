@@ -1,0 +1,19 @@
+@import "/UI/Style.scss";
+
+PopupText {
+    position: absolute;
+    transition: transform 4s ease-out;
+    transition: opacity 0.2s ease-out;
+    text-shadow: $text-shadow-sm;
+    font-size: 24px;
+    font-family: HabboExtended;
+
+    &:intro {
+        opacity: 0;
+        transform: translateY(30);
+    }
+
+    &:outro {
+        opacity: 0;
+    }
+}
