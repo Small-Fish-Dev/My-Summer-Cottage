@@ -78,6 +78,7 @@ public class TaskMaster : Component
 	protected override void OnStart()
 	{
 		LoadTasksProgression();
+		InternalResetTasksProgression();
 	}
 
 	internal void AddTaskProgression( string taskPath, int timesTriggered = 0, int timesCompleted = 0 )
@@ -186,7 +187,7 @@ public class TaskMaster : Component
 			TasksProgression = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
 		else
 		{
-			TasksProgression = new();
+			TasksProgression.Tasks?.Clear();
 
 			var allTasks = ResourceLibrary.GetAll<SaunaTask>();
 
@@ -219,6 +220,30 @@ public class TaskMaster : Component
 		if ( taskMaster == null ) return;
 
 		taskMaster.InternalSaveTasksProgression();
+	}
+
+	internal void InternalResetTasksProgression()
+	{
+		TasksProgression.Tasks?.Clear();
+
+		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
+
+		foreach ( var task in allTasks )
+			AddTaskProgression( task.ResourcePath );
+
+		InternalSaveTasksProgression();
+	}
+
+	/// <summary>
+	/// Reset the tasks current triggered and completion progress/amount
+	/// </summary>
+	public static void ResetTasksProgression()
+	{
+		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+
+		if ( taskMaster == null ) return;
+
+		taskMaster.InternalResetTasksProgression();
 	}
 
 	protected override void OnFixedUpdate()
