@@ -78,7 +78,6 @@ public class TaskMaster : Component
 	protected override void OnStart()
 	{
 		LoadTasksProgression();
-		InternalResetTasksProgression();
 	}
 
 	internal void AddTaskProgression( string taskPath, int timesTriggered = 0, int timesCompleted = 0 )

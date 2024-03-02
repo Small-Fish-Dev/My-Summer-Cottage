@@ -218,6 +218,31 @@ public class EventMaster : Component
 		eventMaster.InternalSaveEventsProgression();
 	}
 
+	internal void InternalResetEventsProgression()
+	{
+		EventsProgression.Events?.Clear();
+
+		var allEvents = Scene.Components.GetAll<EventDefinition>()
+				.DistinctBy( x => x.EventName ); // Avoid multiple event definitions
+
+		foreach ( var @event in allEvents )
+			AddEventProgression( @event.EventName );
+
+		InternalSaveEventsProgression();
+	}
+
+	/// <summary>
+	/// Reset the events current triggered and completion progress/amount
+	/// </summary>
+	public static void ResetEventsProgression()
+	{
+		var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
+
+		if ( eventMaster == null ) return;
+
+		eventMaster.InternalResetEventsProgression();
+	}
+
 	protected override void OnFixedUpdate()
 	{
 		InvokePolledMethods();
