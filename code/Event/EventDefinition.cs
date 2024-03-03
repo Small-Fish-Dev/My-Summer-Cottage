@@ -63,8 +63,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// </summary>
 	public bool HasBeenPlayed { get; set; } = false;
 
-	public int TimesPlayed = 0;
-
 	/// <summary>
 	/// Are any of the event components inside playing?
 	/// </summary>
@@ -119,12 +117,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 			return;
 		}
 
-		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
-		{
-			if ( component != this )
-				component.Enabled = true; // Make sure to enable back all the components in case they were disabled
-		}
-
 		foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
 		{
 			foreach ( var trigger in eventComponent.Triggers )
@@ -132,6 +124,8 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		}
 
 		GameObject.BreakFromPrefab();
+
+		Enable();
 
 		if ( ReinstantiateOnRestart )
 			_initialState = GameObject.Serialize();
@@ -147,13 +141,21 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		if ( !IsFinished && nowFinished )
 		{
 			IsFinished = nowFinished;
-			TimesPlayed++;
 
-			End();
+			Disable();
 		}
 	}
 
-	public void End()
+	public void Enable()
+	{
+		if ( HasBeenPlayed )
+			Restart();
+
+		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+			component.Enabled = true;
+	}
+
+	public void Disable()
 	{
 		IsFinished = true;
 
@@ -187,7 +189,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		if ( ReinstantiateOnRestart )
 		{
 			var substitute = new GameObject( true, GameObject.Name );
-			var timesPlayed = TimesPlayed;
 			var networked = GameObject.Networked;
 			var parent = GameObject.Parent;
 			var worldTransform = Transform.World;
@@ -198,7 +199,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 			substitute.Networked = networked;
 			substitute.SetParent( parent );
 			substitute.Transform.World = worldTransform;
-			substitute.Components.Get<EventDefinition>().TimesPlayed = timesPlayed;
 		}
 		else
 		{
