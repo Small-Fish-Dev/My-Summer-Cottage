@@ -62,16 +62,31 @@ public static partial class GlobalNodes
 	}
 
 	/// <summary>
-	/// End this session, sets the next story day, opens the recap, and saves all progress
+	/// End this session, sets the next story day, opens the recap, unloads all events, and saves all progress
 	/// </summary>
 	[ActionGraphNode( "event.endsession" )]
 	[Title( "End Session" ), Group( "Events" ), Icon( "view_day" )]
 	public static void EndSession()
 	{
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
 
-		// TODO: Save other types of progress here
+		if ( storyMaster == null ) return;
 
-		//StoryMaster.NextStoryDay();
+		storyMaster.EndSession();
+	}
 
+
+	/// <summary>
+	/// Start this session, loads the event pool
+	/// </summary>
+	[ActionGraphNode( "event.startsession" )]
+	[Title( "Start Session" ), Group( "Events" ), Icon( "view_day" )]
+	public static void StartSession()
+	{
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster == null ) return;
+
+		storyMaster.StartSession();
 	}
 }

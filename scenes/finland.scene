@@ -4,7 +4,7 @@
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
       "Name": "GameManager",
-      "Position": "0,0,200",
+      "Position": "654.5014,-857.5838,200",
       "Networked": true,
       "Enabled": true,
       "Components": [
@@ -164,7 +164,7 @@
         {
           "Id": "79a42b52-3dd6-4018-a1c6-cb514e3de500",
           "Name": "HUD",
-          "Position": "0,0,0",
+          "Position": "0,-89.9234,-159.244",
           "Enabled": true,
           "Components": [
             {
@@ -233,7 +233,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.9350618,0,0.3544846",
+          "Rotation": "0,-0.7679276,0,0.6405366",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -284,7 +284,7 @@
     {
       "Id": "2d4783cc-caf7-4dae-af45-06d44aff2664",
       "Name": "banana_peel",
-      "Position": "608.1223,-858.6236,28.14005",
+      "Position": "476.6435,-734.2329,28.39031",
       "Rotation": "0.00002079736,0.0009133221,-0.02251128,0.9997461",
       "Enabled": true,
       "Components": [
@@ -792,6 +792,7 @@
               "Components": [
                 {
                   "__type": "ModelRenderer",
+                  "__enabled": false,
                   "BodyGroups": 341,
                   "MaterialGroup": null,
                   "MaterialOverride": null,
@@ -809,6 +810,7 @@
               "Components": [
                 {
                   "__type": "EventAreaTrigger",
+                  "__enabled": false,
                   "Extents": "295.9999,173.4401,100",
                   "MaxPollingRate": 5,
                   "Offset": "0,0,50",
@@ -826,6 +828,7 @@
               "Components": [
                 {
                   "__type": "EventAreaTrigger",
+                  "__enabled": false,
                   "Extents": "348.1601,949.3594,100",
                   "MaxPollingRate": 5,
                   "Offset": "0,0,50",
@@ -849,6 +852,7 @@
               "Components": [
                 {
                   "__type": "EventComponent",
+                  "__enabled": false,
                   "DisabledWhilePlaying": [],
                   "DisableOnTrigger": [
                     {
@@ -1444,6 +1448,7 @@
               "Components": [
                 {
                   "__type": "EventComponent",
+                  "__enabled": false,
                   "DisabledWhilePlaying": [
                     {
                       "_type": "component",
@@ -2159,6 +2164,155 @@
           "AnimationSpeed": 100
         }
       ]
+    },
+    {
+      "Id": "91028a1e-d6d2-4409-9a34-3cc4ecbccc1e",
+      "Name": "Car",
+      "Position": "731.5923,-1014.71,25.51387",
+      "Rotation": "0,0,-0.3826834,0.9238796",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Interactions",
+          "HideOnEmpty": false,
+          "ObjectInteractions": [
+            {
+              "Identifier": "sauna.gohome",
+              "Keybind": "Use",
+              "Description": "Go home",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "aa36db60-c674-4afd-9c84-3c1831cb9bb9",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input",
+                    "UserData": {
+                      "Position": "-80,32"
+                    }
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "event.endsession",
+                    "UserData": {
+                      "Position": "272,-32"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "time.delay",
+                    "UserData": {
+                      "Position": "448,-32"
+                    }
+                  },
+                  {
+                    "Id": 3,
+                    "Type": "event.startsession",
+                    "UserData": {
+                      "Position": "624,-32"
+                    }
+                  },
+                  {
+                    "Id": 4,
+                    "Type": "event.blackscreen",
+                    "UserData": {
+                      "Position": "160,96"
+                    }
+                  },
+                  {
+                    "Id": 5,
+                    "Type": "time.delay",
+                    "UserData": {
+                      "Position": "96,-32"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 5,
+                    "SrcName": "_signal",
+                    "DstId": 1,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_signal",
+                    "DstId": 2,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 1,
+                    "DstId": 2,
+                    "DstName": "seconds"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_signal",
+                    "DstId": 3,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 4,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "interactor",
+                    "DstId": 4,
+                    "DstName": "player"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 5,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 2,
+                    "DstId": 5,
+                    "DstName": "seconds"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "__type": "BoxCollider",
+          "Center": "0,0,25.28",
+          "IsTrigger": false,
+          "Scale": "50,118,50",
+          "Static": false,
+          "Surface": null
+        }
+      ],
+      "Children": [
+        {
+          "Id": "20524fe5-a996-471d-b5f9-d574d01797ef",
+          "Name": "Model",
+          "Position": "0,0,0",
+          "Scale": "9,9,9",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "MaterialGroup": null,
+              "MaterialOverride": null,
+              "Model": "models/consumables/bread/bread.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -2184,6 +2338,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-03T05:07:07.2963225\u002B01:00",
+  "LastSaved": "2024-03-03T05:21:17.8158043\u002B01:00",
   "__references": []
 }

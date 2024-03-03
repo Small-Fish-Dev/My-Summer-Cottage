@@ -235,6 +235,8 @@ public class StoryMaster : Component
 
 		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Common ) )
 		{
+			int eventsPicked = 0;
+
 			for ( int common = 0; common < CurrentSaunaDay.RandomEvents[EventRarity.Common]; common++ )
 			{
 				var availableCommonEvents = _eventMaster.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Common )
@@ -245,12 +247,17 @@ public class StoryMaster : Component
 				{
 					var chosenEvent = new Random().FromList( availableCommonEvents );
 					chosenEvent.Enable();
+					eventsPicked++;
 				}
 			}
+
+			Log.Info( $"{eventsPicked} common events loaded." );
 		}
 
 		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Uncommon ) )
 		{
+			int eventsPicked = 0;
+
 			for ( int uncommon = 0; uncommon < CurrentSaunaDay.RandomEvents[EventRarity.Uncommon]; uncommon++ )
 			{
 				var availableUncommonEvents = _eventMaster.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Uncommon )
@@ -261,12 +268,17 @@ public class StoryMaster : Component
 				{
 					var chosenEvent = new Random().FromList( availableUncommonEvents );
 					chosenEvent.Enable();
+					eventsPicked++;
 				}
+
+				Log.Info( $"{eventsPicked} uncommon events loaded." );
 			}
 		}
 
 		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Rare ) )
 		{
+			int eventsPicked = 0;
+
 			for ( int rare = 0; rare < CurrentSaunaDay.RandomEvents[EventRarity.Rare]; rare++ )
 			{
 				var availableRareEvents = _eventMaster.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Rare )
@@ -277,7 +289,10 @@ public class StoryMaster : Component
 				{
 					var chosenEvent = new Random().FromList( availableRareEvents );
 					chosenEvent.Enable();
+					eventsPicked++;
 				}
+
+				Log.Info( $"{eventsPicked} rare events loaded." );
 			}
 		}
 	}
@@ -292,12 +307,15 @@ public class StoryMaster : Component
 		_eventMaster.UnloadAllEvents();
 
 		LoadEventPool();
+		Log.Info( "Session started" );
 	}
 
 	public void EndSession()
 	{
 		_eventMaster.UnloadAllEvents();
-
+		Log.Info( "Ended session" );
+		Log.Info( "Unloaded events" );
+		Log.Info( "Game saved" );
 		SaveGame();
 	}
 
