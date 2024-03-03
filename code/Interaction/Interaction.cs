@@ -1,3 +1,5 @@
+using Sandbox.UI.GameMenu;
+
 namespace Sauna;
 
 public enum InputMode
@@ -12,75 +14,70 @@ public enum InputMode
 	Down
 }
 
-public struct Interaction
+public class Interaction
 {
 	/// <summary>
 	/// Unique identifier for this interaction
 	/// </summary>
-	[Property]
+	[Property, Category( "Required" )]
 	public string Identifier { get; set; }
-
-	/// <summary>
-	/// Is this interaction only available when holding
-	/// </summary>
-	public bool HoldOnly { get; set; }
 
 	/// <summary>
 	/// The keybind used to trigger this interaction
 	/// </summary>
-	[Property]
+	[Property, Category( "Required" )]
 	[InputAction]
-	public string Keybind { get; set; }
+	public string Keybind { get; set; } = InputAction.Use;
 
 	/// <summary>
 	/// The UI description displayed when interacting
 	/// </summary>
-	[Property]
-	public string Description { get; set; }
+	[Property, Category( "Required" )]
+	public string Description { get; set; } = "";
 
 	/// <summary>
 	/// The action that is performed when interacted with
 	/// </summary>
-	[Property]
+	[Property, Category( "Required" )]
 	public InteractionEvent Action { get; set; }
 	public delegate void InteractionEvent( Player interactor, GameObject obj );
 
 	/// <summary>
+	/// Is this interaction only available when holding
+	/// </summary>
+	[Property, Category( "Optional" )]
+	public bool HoldOnly { get; set; } = false;
+
+	/// <summary>
 	/// Whether or not the interaction can be performed.
 	/// </summary>
-	[Property]
-	public Func<bool> Disabled { get; set; }
+	[Property, Category( "Optional" )]
+	public Func<bool> Disabled { get; set; } = () => false;
 
 	/// <summary>
 	/// If the interaction is disabled, we still show it in the list but with a disabled look.
 	/// </summary>
-	[Property]
-	public bool ShowWhenDisabled { get; set; }
+	[Property, Category( "Optional" )]
+	public Func<bool> ShowWhenDisabled { get; set; } = () => false;
 
 	/// <summary>
 	/// What the text should be displayed as
 	/// </summary>
-	[Property]
+	[Property, Category( "Optional" )]
 	public Func<string> DynamicText { get; set; }
 
 
 	/// <summary>
 	/// The color the text will use
 	/// </summary>
-	[Property]
+	[Property, Category( "Optional" )]
 	public Func<Color> DynamicColor { get; set; }
-
-	/// <summary>
-	/// What context should the input be called in
-	/// </summary>
-	[Property]
-	public InputMode InputMode { get; set; }
 
 	/// <summary>
 	/// Does this interaction use bounds?
 	/// </summary>
 	[Property]
-	public bool HasBounds { get; set; }
+	public bool HasBounds { get; set; } = false;
 
 	/// <summary>
 	/// The position of this interaction, if it even has them
@@ -93,6 +90,15 @@ public struct Interaction
 	/// </summary>
 	[Property, ShowIf( "HasBounds", true )]
 	public Vector3 Extents { get; set; }
+
+	[Property, Category( "Optional" )]
+	public string AnimationIdentifier { get; set; } = "interact";
+
+	/// <summary>
+	/// What context should the input be called in
+	/// </summary>
+	[Property, Category( "Optional" )]
+	public InputMode InputMode { get; set; } = InputMode.Pressed;
 
 	/// <summary>
 	/// The text that should actually be displayed.
@@ -145,6 +151,12 @@ public class Interactions : Component
 		programmedInteractions.Add( interaction );
 	}
 
+	public void AddInteractions( List<Interaction> interactions )
+	{
+		programmedInteractions ??= new();
+		programmedInteractions.AddRange( interactions );
+	}
+
 	protected override void OnAwake()
 	{
 		ObjectInteractions ??= new();
@@ -181,19 +193,18 @@ public class Interactions : Component
 				if ( Gizmo.IsShiftPressed )
 				{
 					if ( Gizmo.Control.Scale( "scale", Vector3.Zero, out var scale ) )
-						ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = interaction with
-						{
-							Extents = interaction.Extents + scale * 50
-						};
-
+					{
+						interaction.Extents += scale * 50;
+						ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = interaction;
+					}
 					continue;
 				}
 
 				if ( Gizmo.Control.Position( "position", Vector3.Zero, out var pos ) )
-					ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = interaction with
-					{
-						Position = interaction.Position + pos
-					};
+				{
+					interaction.Position += pos;
+					ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = interaction;
+				}
 			}
 		}
 	}

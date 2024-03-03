@@ -13,7 +13,7 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Projectile" ), Sync] public int Ammo { get; set; }
 	[Property, Category( "Projectile" )] public int Capacity { get; set; }
 	[Property, Category( "Projectile" )] public PrefabFile Ammunition { get; set; }
-	
+
 	private string _name;
 
 	protected override void OnAwake()
@@ -40,10 +40,10 @@ public sealed class WeaponComponent : Component
 			Keybind = "next",
 			Action = Reload,
 			Disabled = () => Type != WeaponType.Ranged || Ammo >= Capacity, // todo @ceitine: doesn't  
-			ShowWhenDisabled = true
+			ShowWhenDisabled = () => true
 		} );
 	}
-	
+
 	public void Attack( Player shooter, GameObject obj )
 	{
 		switch ( Type )
