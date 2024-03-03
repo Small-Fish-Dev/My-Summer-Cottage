@@ -75,8 +75,8 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// </summary>
 	public bool IsFinished { get; set; } = false;
 
-	TaskMaster _taskMaster => Scene.Components.Get<TaskMaster>();
-	EventMaster _eventMaster => Scene.Components.Get<EventMaster>();
+	TaskMaster _taskMaster => Scene.GetAllComponents<TaskMaster>().FirstOrDefault();
+	EventMaster _eventMaster => Scene.GetAllComponents<EventMaster>().FirstOrDefault();
 
 	bool _showToggle = false;
 	JsonObject _initialState;
@@ -128,10 +128,13 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 		GameObject.BreakFromPrefab();
 
-		Enable();
-
 		if ( ReinstantiateOnRestart )
 			_initialState = GameObject.Serialize();
+	}
+
+	protected override void OnAwake()
+	{
+		Disable();
 	}
 
 	protected override void OnFixedUpdate()
