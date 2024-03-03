@@ -31,10 +31,11 @@ public class SaunaScriptedEvent
 	[Property]
 	public bool CompletionNecessary { get; set; } = true;
 
-	public delegate void ScriptedAction( Player player, out string signalToComplete );
+	public delegate Task<string> ScriptedAction( Player player );
 
 	/// <summary>
-	/// When the scripted event starts. Send sms here, calls, load events, trigger them, assign tasks, etc...
+	/// When the scripted event starts. Send sms here, calls, load events, trigger them, assign tasks, etc... 
+	/// Output Result is a string defining which signal trigger is the one needed to complete this scripted action
 	/// </summary>
 	[Property]
 	public ScriptedAction Setup { get; set; }
@@ -352,10 +353,8 @@ public class StoryMaster : Component
 				{
 					if ( scriptedEvent.TriggerTime <= currentHour )
 					{
-						var signalToComplete = String.Empty;
-						scriptedEvent.Setup?.Invoke( Player.Local, out signalToComplete );
 						scriptedEvent.Triggered = true;
-						scriptedEvent.SignalToComplete = signalToComplete;
+						BeginScriptedEvent( scriptedEvent );
 					}
 				}
 			}
@@ -364,5 +363,11 @@ public class StoryMaster : Component
 				if ( CurrentSaunaDay.ScriptedEvents.All( x => x.Completed || x.Triggered && !x.CompletionNecessary ) )
 					CurrentSaunaDay.Completed = true;
 		}
+	}
+
+	internal async void BeginScriptedEvent( SaunaScriptedEvent scriptedEvent )
+	{
+		var signalToComplete = await scriptedEvent.Setup?.Invoke( Player.Local );
+		scriptedEvent.SignalToComplete = signalToComplete;
 	}
 }

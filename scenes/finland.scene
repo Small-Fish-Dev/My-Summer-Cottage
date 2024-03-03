@@ -109,131 +109,104 @@
               "ScriptedEvents": [
                 {
                   "TriggerTimeslot": "10.50,12.00,1",
-                  "Setup": {
-                    "Version": 5,
-                    "UserData": {
-                      "Title": "Setup",
-                      "id": "4bdb722b-0785-4364-9415-d03052e2c5fd",
-                      "ReferencedComponentTypes": []
-                    },
-                    "Variables": [],
-                    "Nodes": [
-                      {
-                        "Id": 0,
-                        "Type": "input"
-                      },
-                      {
-                        "Id": 2,
-                        "Type": "event.assigntaskto",
-                        "UserData": {
-                          "Position": "320,-0"
-                        }
-                      },
-                      {
-                        "Id": 3,
-                        "Type": "event.getrandomtask",
-                        "UserData": {
-                          "Position": "64,112"
-                        }
-                      }
-                    ],
-                    "Links": [
-                      {
-                        "SrcId": 0,
-                        "SrcName": "_signal",
-                        "DstId": 2,
-                        "DstName": "_signal"
-                      },
-                      {
-                        "SrcId": 0,
-                        "SrcName": "player",
-                        "DstId": 2,
-                        "DstName": "player"
-                      },
-                      {
-                        "SrcId": 3,
-                        "SrcName": "_result",
-                        "DstId": 2,
-                        "DstName": "taskToAdd"
-                      },
-                      {
-                        "Value": "GivenByWife",
-                        "DstId": 3,
-                        "DstName": "taskType"
-                      }
-                    ]
-                  }
-                }
-              ],
-              "RandomEvents": {
-                "Common": 3,
-                "Uncommon": 0,
-                "Rare": 0
-              }
-            },
-            "2": {
-              "ScriptedEvents": [
-                {
-                  "TriggerTimeslot": "10.50,12.00,1",
                   "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
                       "Title": "Setup",
-                      "id": "4cdcc169-d202-475e-a31c-2bbe6fb484b0",
+                      "id": "e4645dd7-8afb-47db-9be8-c543d13c6000",
                       "ReferencedComponentTypes": []
                     },
                     "Variables": [],
                     "Nodes": [
                       {
                         "Id": 0,
-                        "Type": "input"
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "-48,96"
+                        }
                       },
                       {
                         "Id": 1,
+                        "Type": "output",
+                        "UserData": {
+                          "Position": "448,96"
+                        }
+                      },
+                      {
+                        "Id": 2,
                         "Type": "event.assigntaskto",
                         "UserData": {
-                          "Position": "288,0"
+                          "Position": "192,96"
                         }
                       },
                       {
                         "Id": 3,
                         "Type": "event.getrandomtask",
                         "UserData": {
-                          "Position": "80,128"
+                          "Position": "-96,208"
+                        }
+                      },
+                      {
+                        "Id": 4,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                        },
+                        "UserData": {
+                          "Position": "208,224"
                         }
                       }
                     ],
                     "Links": [
                       {
-                        "SrcId": 0,
+                        "SrcId": 4,
+                        "SrcName": "_result",
+                        "DstId": 1,
+                        "DstName": "_result"
+                      },
+                      {
+                        "SrcId": 2,
                         "SrcName": "_signal",
                         "DstId": 1,
                         "DstName": "_signal"
                       },
                       {
                         "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 2,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 0,
                         "SrcName": "player",
-                        "DstId": 1,
+                        "DstId": 2,
                         "DstName": "player"
                       },
                       {
                         "SrcId": 3,
                         "SrcName": "_result",
-                        "DstId": 1,
+                        "DstId": 2,
                         "DstName": "taskToAdd"
                       },
                       {
                         "Value": "GivenByWife",
                         "DstId": 3,
                         "DstName": "taskType"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_result",
+                        "DstId": 4,
+                        "DstName": "_target"
                       }
                     ]
                   }
                 }
               ],
               "RandomEvents": {
-                "Common": 3,
+                "Common": 2,
                 "Uncommon": 0,
                 "Rare": 0
               }
@@ -318,7 +291,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.9338853,0,-0.3575726",
+          "Rotation": "0,-0.4137246,0,-0.9104021",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -714,6 +687,8 @@
             {
               "Keybind": "use",
               "Description": "",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "AnimationIdentifier": "interact"
             }
           ]
@@ -878,8 +853,8 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_name": "SendToDialogueStage",
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_isStatic": false
                         },
                         "UserData": {
@@ -942,7 +917,6 @@
                       }
                     ]
                   },
-                  "DynamicColor": null,
                   "Disabled": {
                     "Version": 5,
                     "UserData": {
@@ -960,8 +934,8 @@
                         "Id": 1,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.Player",
-                          "_name": "Local"
+                          "_name": "Local",
+                          "_type": "package.fish.sauna/Sauna.Player"
                         },
                         "UserData": {
                           "Position": "-416,-16"
@@ -971,8 +945,8 @@
                         "Id": 2,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.Player",
-                          "_name": "Money"
+                          "_name": "Money",
+                          "_type": "package.fish.sauna/Sauna.Player"
                         },
                         "UserData": {
                           "Position": "-256,0"
@@ -1054,8 +1028,8 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_name": "SendToDialogueStage",
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_isStatic": false
                         },
                         "UserData": {
@@ -1114,8 +1088,7 @@
                         "DstName": "_result"
                       }
                     ]
-                  },
-                  "Disabled": null
+                  }
                 }
               ]
             }
@@ -1270,6 +1243,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-03T23:50:15.7473977\u002B01:00",
+  "LastSaved": "2024-03-04T00:29:06.5508808\u002B01:00",
   "__references": []
 }
