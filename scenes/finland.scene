@@ -234,7 +234,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.2141362,0,0.9768038",
+          "Rotation": "0,0.6130071,0,0.7900774",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -319,9 +319,9 @@
                 "Type": "call",
                 "Properties": {
                   "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                  "_isStatic": false,
                   "T": "package.fish.sauna/Sauna.Player",
-                  "_name": "Get"
+                  "_name": "Get",
+                  "_isStatic": false
                 },
                 "UserData": {
                   "Position": "240,80"
@@ -345,8 +345,8 @@
                 "Id": 6,
                 "Type": "resource.ref",
                 "Properties": {
-                  "value": "sounds/misc/banana_slip.sound",
-                  "T": "Sandbox.Engine/Sandbox.SoundEvent"
+                  "T": "Sandbox.Engine/Sandbox.SoundEvent",
+                  "value": "sounds/misc/banana_slip.sound"
                 },
                 "UserData": {
                   "Position": "544,-384"
@@ -385,12 +385,12 @@
                 "Id": 11,
                 "Type": "scene.ref",
                 "Properties": {
+                  "T": "package.fish.sauna/EventComponent",
                   "value": {
                     "_type": "component",
                     "go": "2d4783cc-caf7-4dae-af45-06d44aff2664",
                     "component_type": "EventComponent"
-                  },
-                  "T": "package.fish.sauna/EventComponent"
+                  }
                 },
                 "UserData": {
                   "Position": "944,176"
@@ -887,9 +887,9 @@
                         "Type": "call",
                         "Properties": {
                           "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                          "_isStatic": false,
                           "T": "package.fish.sauna/Sauna.Player",
-                          "_name": "Get"
+                          "_name": "Get",
+                          "_isStatic": false
                         },
                         "UserData": {
                           "Position": "496,-240",
@@ -1091,11 +1091,11 @@
                         "Id": 26,
                         "Type": "scene.ref",
                         "Properties": {
+                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
-                          },
-                          "T": "Sandbox.Game/Sandbox.GameObject"
+                          }
                         },
                         "UserData": {
                           "Position": "176,80"
@@ -1105,12 +1105,12 @@
                         "Id": 28,
                         "Type": "scene.ref",
                         "Properties": {
+                          "T": "package.fish.sauna/EventComponent",
                           "value": {
                             "_type": "component",
                             "go": "2f80e6c2-8f26-4f25-8c21-6de0874ed0b5",
                             "component_type": "EventComponent"
-                          },
-                          "T": "package.fish.sauna/EventComponent"
+                          }
                         },
                         "UserData": {
                           "Position": "2096,96"
@@ -1486,11 +1486,11 @@
                         "Id": 2,
                         "Type": "scene.ref",
                         "Properties": {
+                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
-                          },
-                          "T": "Sandbox.Game/Sandbox.GameObject"
+                          }
                         },
                         "UserData": {
                           "Position": "-608,144"
@@ -1500,11 +1500,11 @@
                         "Id": 3,
                         "Type": "scene.ref",
                         "Properties": {
+                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "20ba868b-9876-4f99-8a41-882ff4c46a16"
-                          },
-                          "T": "Sandbox.Game/Sandbox.GameObject"
+                          }
                         },
                         "UserData": {
                           "Position": "-768,320"
@@ -1599,8 +1599,8 @@
                         "Type": "call",
                         "Properties": {
                           "_type": "Sandbox.System/Rotation",
-                          "_isStatic": false,
-                          "_name": "RotateAroundAxis"
+                          "_name": "RotateAroundAxis",
+                          "_isStatic": false
                         },
                         "UserData": {
                           "Position": "288,352"
@@ -1649,12 +1649,12 @@
                         "Id": 18,
                         "Type": "scene.ref",
                         "Properties": {
+                          "T": "package.fish.sauna/EventComponent",
                           "value": {
                             "_type": "component",
                             "go": "cb9ad1f7-3db3-4b43-aef3-a5d4b322e48c",
                             "component_type": "EventComponent"
-                          },
-                          "T": "package.fish.sauna/EventComponent"
+                          }
                         },
                         "UserData": {
                           "Position": "1344,256"
@@ -1672,9 +1672,9 @@
                         "Type": "call",
                         "Properties": {
                           "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                          "_isStatic": false,
                           "T": "package.fish.sauna/Sauna.Player",
-                          "_name": "Get"
+                          "_name": "Get",
+                          "_isStatic": false
                         },
                         "UserData": {
                           "Position": "-128,-320"
@@ -2118,6 +2118,54 @@
       "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/objects/slot_machine.prefab"
+    },
+    {
+      "Id": "4e7fbb0d-b705-4ac3-8bd6-c849128dc60e",
+      "Name": "MooseTest",
+      "Position": "467.127,-568.0612,27.49162",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 16,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/fauna/elk/elk.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "MooseTest",
+          "AnimationSpeed": 50
+        }
+      ]
+    },
+    {
+      "Id": "f53b1b3c-80bd-4662-9281-be0b84d9d7bb",
+      "Name": "MooseTest (1)",
+      "Position": "465.8501,-647.155,27.49164",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 16,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/fauna/elk/elk.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "MooseTest",
+          "AnimationSpeed": 100
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -2143,6 +2191,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-03T01:46:56.6714846\u002B01:00",
+  "LastSaved": "2024-03-03T02:46:52.6516255\u002B01:00",
   "__references": []
 }
