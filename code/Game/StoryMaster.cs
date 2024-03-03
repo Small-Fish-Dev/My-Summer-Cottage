@@ -32,6 +32,12 @@ public class SaunaScriptedEvent
 	public bool CompletionNecessary { get; set; } = true;
 
 	/// <summary>
+	/// The task that's needed to complete for this scripted event to be completed
+	/// </summary>
+	[Property]
+	public SaunaTask TaskToComplete { get; set; }
+
+	/// <summary>
 	/// The signal we are looking for this scripted event to be completed
 	/// </summary>
 	[Property]
