@@ -4,7 +4,7 @@ using Sauna.Game;
 
 namespace Sauna;
 
-public struct SaunaScriptedEvent
+public class SaunaScriptedEvent
 {
 	/// <summary>
 	/// Does this scripted event instantly start at the new session instead of a timeframe? (Defaults to midnight if SaunaDay NewSessionOnly is false and the day rolls over)
@@ -17,7 +17,11 @@ public struct SaunaScriptedEvent
 	/// </summary>
 	[Property]
 	[HideIf( "TriggerOnNewSession", true )]
-	public RangedFloat TriggerTime { get; set; } = new RangedFloat( 10.5f, 12.0f );
+	public RangedFloat TriggerTimeslot { get; set; } = new RangedFloat( 10.5f, 12.0f );
+
+	[Hide]
+	[JsonIgnore]
+	public float TriggerTime { get; set; } = 0f;
 
 	/// <summary>
 	/// This scripted event needs to be triggered for the story to progress
@@ -87,6 +91,30 @@ public class StoryMaster : Component
 	public SaunaDay CurrentSaunaDay => StoryDays.TryGetValue( CurrentDay, out var saunaDay ) ? saunaDay : LastValidSaunaDay;
 	public SaunaDay LastValidSaunaDay => StoryDays.Any() ? StoryDays.Last().Value : null;
 
+	public void StartStoryDay( int dayNumber )
+	{
+		CurrentDay = dayNumber;
+
+		if ( CurrentSaunaDay == null ) return;
+
+		foreach ( var scriptedEvent in CurrentSaunaDay.ScriptedEvents )
+		{
+			if ( scriptedEvent.TriggerOnNewSession )
+				scriptedEvent.TriggerTime = 0f;
+			else
+				scriptedEvent.TriggerTime = new Random().Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
+		}
+
+		// Load events
+
+
+	}
+
+	protected override void OnStart()
+	{
+		StartStoryDay( 1 );
+	}
+
 	protected override void OnFixedUpdate()
 	{
 		var timeManager = Scene.GetAllComponents<GameTimeManager>().First();
@@ -97,11 +125,19 @@ public class StoryMaster : Component
 		{
 			var currentHour = timeManager.InGameHours;
 
-			var saunaEvent = CurrentSaunaDay.ScriptedEvents.First();
+			foreach ( var scriptedEvent in CurrentSaunaDay.ScriptedEvents )
+			{
+				if ( !scriptedEvent.Triggered )
+				{
+					if ( scriptedEvent.TriggerTime <= currentHour )
+					{
+						scriptedEvent.Setup?.Invoke( Player.Local );
+						scriptedEvent.Triggered = true;
+					}
+				}
 
-			saunaEvent.Setup?.Invoke( Player.Local );
-
-
+				Log.Info( $"Triggered: {scriptedEvent.Triggered} - TriggerTime: {scriptedEvent.TriggerTime} - CurrentTime: {currentHour}" );
+			}
 		}
 	}
 }
