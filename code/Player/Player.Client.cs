@@ -2,21 +2,22 @@
 
 partial class Player
 {
-	public static IReadOnlyList<Player> All => players;
-	private static List<Player> players = new List<Player>();
+	public static IReadOnlyList<Player> All => _internalPlayers;
+	public static List<Player> _internalPlayers = new List<Player>();
 
 	public static Player Local { get; private set; }
 
 	private Guid _guid;
-	[HostSync] public Guid ConnectionID
+	[HostSync]
+	public Guid ConnectionID
 	{
 		get => _guid;
 		set
 		{
 			_guid = value;
 			Connection = Networking.FindConnection( _guid );
-			if ( !players.Contains( this ) )
-				players.Add( this );
+			if ( !_internalPlayers.Contains( this ) )
+				_internalPlayers.Add( this );
 
 			if ( _guid == Connection.Local.Id )
 				Local = this;
@@ -35,5 +36,5 @@ partial class Player
 	}
 
 	public static Player GetByID( Guid id )
-		=> players.FirstOrDefault( x => x.ConnectionID == id );
+		=> _internalPlayers.FirstOrDefault( x => x.ConnectionID == id );
 }

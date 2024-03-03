@@ -3,41 +3,40 @@
 @inherits Panel
 
 <root>
-	@if (IsHost)
+	@if (Player.Connection.IsHost)
 	{
 		<div class="host-title">HOST</div>
 	}
 	<div>
 		<div class="player-info">
 			<div style="flex-direction: column; margin-right: 10px;">
-				<text class="player-name">@SteamName</text>
+				<text class="player-name">@Player.Connection.DisplayName</text>
 				<text class="player-details">@FormatDetails()</text>
 			</div>
 		</div>
-		<div class="border-img @(IsHost ? "host" : "")">
-			<img class="player-img" />
+		<div class="border-img @(Player.Connection.IsHost ? "host" : "")">
+			<img src="avatar:@Player.Connection.SteamId" class="player-img" />
 		</div>
 	</div>
-	@if (IsHost)
+	@if (Player.Connection.IsHost)
 	{
 		<div class="host-spacer" />
 	}
 </root>
 
 @code {
-	// TODO: When we get real data, why not just pass in the player obj itself?
-	public string SteamName { get; set; }
-	public string PlayerName { get; set; }
-	public int PlayerLevel { get; set; }
-	public bool IsHost { get; set; } = false;
+	public Player Player { get; set; }
 
 	private string FormatDetails()
 	{
-		return $"{PlayerName}, Lv. {PlayerLevel}";
+		return $"{Player.Firstname}, Lv. {Player.Level}";
 	}
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(SteamName.GetHashCode(), PlayerName.GetHashCode(), PlayerLevel.GetHashCode(), IsHost);
+		if (Player is null)
+			return -1;
+
+		return HashCode.Combine(Player.Level, Player.Connection.IsHost, Player.Firstname.GetHashCode());
 	}
 }

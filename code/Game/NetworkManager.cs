@@ -27,6 +27,9 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 			while ( true ) { } // todo: REMOVE
 							   // For the love of God all mighty please remember to remove this PLEASE
 
+		// Someone report this bug, for some reason the static list doesn't get cleared on restart!
+		Player._internalPlayers.Clear();
+
 		if ( !GameNetworkSystem.IsActive )
 			GameNetworkSystem.CreateLobby();
 	}

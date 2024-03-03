@@ -43,27 +43,13 @@
 	</div>
 	<div style="width: 50%;">
 		<div class="portraits">
-			<PlayerPortrait 
-				SteamName="ceitine"
-				PlayerName="Teemu"
-				PlayerLevel=@(7)
-				IsHost=@(true)
-			/>
-			<PlayerPortrait 
-				SteamName="ceitine"
-				PlayerName="Teemu"
-				PlayerLevel=@(7)
-			/>
-			<PlayerPortrait 
-				SteamName="ceitine"
-				PlayerName="Teemu"
-				PlayerLevel=@(7)
-			/>
-			<PlayerPortrait 
-				SteamName="ceitine"
-				PlayerName="Teemu"
-				PlayerLevel=@(7)
-			/>
+			@{
+				var players = Player.All.OrderBy((p) => p.Connection.IsHost);
+				@foreach (var player in Player.All)
+				{
+					<PlayerPortrait Player=@player />
+				}
+			}
 		</div>
 
 		<div class="inputs">
@@ -73,3 +59,10 @@
 		</div>
 	</div>
 </root>
+
+@code {
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(Player.All.HashCombine((p) => p.ConnectionID.GetHashCode()));
+	}
+}
