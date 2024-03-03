@@ -18,7 +18,7 @@ public class Dialogue : Component
 
 	/// <summary>
 	/// Networks the dialogue stage, however, actions will not be replicated on client.
-	/// Instead, you'd ideally use "NetworkedDialogue" to play dialogue to everyone.
+	/// Instead, you'd ideally be broadcasting actions to everyone, for instance NetworkedDialogue(...)
 	/// </summary>
 	[Property, HideIf( "HostOnly", true )]
 	public bool Networked { get; set; }
