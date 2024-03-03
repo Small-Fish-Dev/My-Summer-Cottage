@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.Utility;
 using Sauna;
+using Sauna.Event;
 using Sauna.Game;
 
 public static partial class GlobalNodes
@@ -58,5 +59,22 @@ public static partial class GlobalNodes
 
 		if ( timeManager != null )
 			timeManager.SkipTimeFromSeconds( inGameSeconds );
+	}
+
+	/// <summary>
+	/// End this session, sets the next story day, opens the recap, and saves all progress
+	/// </summary>
+	[ActionGraphNode( "event.endsession" )]
+	[Title( "End Session" ), Group( "Events" ), Icon( "view_day" )]
+	public static void EndSession()
+	{
+		StoryMaster.SaveStoryProgression();
+		TaskMaster.SaveTasksProgression();
+		EventMaster.SaveEventsProgression();
+
+		// TODO: Save other types of progress here
+
+		StoryMaster.NextStoryDay();
+
 	}
 }
