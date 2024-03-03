@@ -290,6 +290,8 @@ public class StoryMaster : Component
 		StartGameDay();
 
 		_eventMaster.UnloadAllEvents();
+
+		LoadEventPool();
 	}
 
 	public void EndSession()
