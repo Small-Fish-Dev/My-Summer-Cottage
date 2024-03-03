@@ -300,7 +300,6 @@ public class StoryMaster : Component
 	public void StartSession()
 	{
 		LoadStoryProgression();
-		Log.Info( CurrentGameDay.ToString() );
 
 		StartStoryDay();
 		StartGameDay();
