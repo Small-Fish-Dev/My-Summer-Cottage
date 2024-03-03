@@ -1,3 +1,5 @@
+using Sauna.Util.Extensions;
+
 namespace Sauna;
 
 public class DialogueStage
@@ -11,8 +13,15 @@ public class Dialogue : Component
 	/// <summary>
 	/// Only the host can perform this dialogue.
 	/// </summary>
-	[Property]
+	[Property, HideIf( "Networked", true )]
 	public bool HostOnly { get; set; }
+
+	/// <summary>
+	/// Networks the dialogue stage, however, actions will not be replicated on client.
+	/// Instead, you'd ideally use "NetworkedDialogue" to play dialogue to everyone.
+	/// </summary>
+	[Property, HideIf( "HostOnly", true )]
+	public bool Networked { get; set; }
 
 	/// <summary>
 	/// Each dialogue stage within the list are the possible interactions that can be performed.
@@ -22,7 +31,9 @@ public class Dialogue : Component
 	[Property]
 	public List<DialogueStage> DialogueStages { get; set; }
 
-	public int CurrentStage { get; set; } = 0;
+	[Sync]
+	private int NetworkedStageIndex { get; set; } = 0;
+	private int LocalStageIndex { get; set; } = 0;
 
 	protected override void OnStart()
 	{
@@ -30,6 +41,7 @@ public class Dialogue : Component
 			GameObject.NetworkSpawn();
 
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
+		Network.SetOrphanedMode( NetworkOrphaned.ClearOwner );
 
 		if ( HostOnly && !Player.Local.Connection.IsHost )
 			EndDialogue();
@@ -41,7 +53,7 @@ public class Dialogue : Component
 			for ( int j = 0; j < DialogueStages[i].AvailableResponses.Count; ++j )
 			{
 				DialogueStages[i].AvailableResponses[j].ShowWhenDisabled = false;
-				DialogueStages[i].AvailableResponses[j].Disabled = () => stageIndex != CurrentStage;
+				DialogueStages[i].AvailableResponses[j].Disabled = () => stageIndex != GetStageIndex();
 			}
 		}
 
@@ -49,13 +61,34 @@ public class Dialogue : Component
 			interactions.AddInteractions( dialogueStage.AvailableResponses );
 	}
 
+	[Broadcast]
+	public void NetworkedDialogue( int resourceId )
+	{
+		var resource = ResourceLibrary.Get<SoundWithSubtitlesResource>( resourceId );
+		if ( resource is not null )
+			Scene.SoundSystem().Play( resource, GameObject );
+	}
+
 	public void SendToDialogueStage( int index )
 	{
-		CurrentStage = index;
+		SetStageIndex( index );
 	}
 
 	public void EndDialogue()
 	{
-		CurrentStage = -1;
+		SetStageIndex( -1 );
+	}
+
+	private void SetStageIndex( int i )
+	{
+		if ( Networked )
+			NetworkedStageIndex = i;
+		else
+			LocalStageIndex = i;
+	}
+
+	private int GetStageIndex()
+	{
+		return Networked ? NetworkedStageIndex : LocalStageIndex;
 	}
 }

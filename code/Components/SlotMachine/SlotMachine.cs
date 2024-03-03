@@ -214,6 +214,7 @@ public partial class SlotMachine : Component
 			GameObject.NetworkSpawn();
 
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
+		Network.SetOrphanedMode( NetworkOrphaned.ClearOwner );
 
 		UpdateBodygroups();
 	}
