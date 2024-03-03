@@ -24,6 +24,9 @@
 
 	protected override void OnAfterTreeRender( bool firstTime )
 	{
+		if (Player.Local is null)
+			return;
+
 		Player.Local.OnExperienceEarned -= OnExperienceEarned;
 		Player.Local.OnLevelUp -= OnLevelUp;
 
@@ -34,7 +37,7 @@
 	// For some reason these need to be static due to some weird s&box bug?
 	public static void OnExperienceEarned( int delta )
 	{
-		var expBar = InGameHud.Instance.Descendants.OfType<ExperienceBar>().FirstOrDefault();
+		var expBar = InGameHud.Instance?.Descendants.OfType<ExperienceBar>().FirstOrDefault();
 		if (expBar is null)
 			return;
 
@@ -47,7 +50,7 @@
 
 	public static void OnLevelUp( int newLevel )
 	{
-		var expBar = InGameHud.Instance.Descendants.OfType<ExperienceBar>().FirstOrDefault();
+		var expBar = InGameHud.Instance?.Descendants.OfType<ExperienceBar>().FirstOrDefault();
 		if (expBar is null)
 			return;
 
