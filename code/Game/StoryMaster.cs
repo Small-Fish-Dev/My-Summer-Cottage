@@ -365,6 +365,10 @@ public class StoryMaster : Component
 					}
 				}
 			}
+
+			if ( !CurrentSaunaDay.Completed )
+				if ( CurrentSaunaDay.ScriptedEvents.All( x => x.Completed || x.Triggered && !x.CompletionNecessary ) )
+					CurrentSaunaDay.Completed = true;
 		}
 	}
 }
