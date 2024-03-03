@@ -74,7 +74,7 @@ public static partial class GlobalNodes
 
 		// TODO: Save other types of progress here
 
-		StoryMaster.NextStoryDay();
+		//StoryMaster.NextStoryDay();
 
 	}
 }

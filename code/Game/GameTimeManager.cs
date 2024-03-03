@@ -67,16 +67,17 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Range( 0f, 1200f, 10f )]
 	public float DayLength { get; set; } = 5 * 60;
 
+	internal StoryMaster _storyMaster => Components.Get<StoryMaster>();
+
 	/// <summary>
 	/// How many in-game days have passed
 	/// </summary>
 	[Property]
 	[Category( "Time" )]
-	[HostSync]
 	public int Day
 	{
-		set => StoryMaster.SetStoryDay( value );
-		get => StoryMaster.CurrentGameDay;
+		set => _storyMaster.SetGameDay( value );
+		get => _storyMaster?.CurrentGameDay ?? 1;
 	}
 
 	public event Action OnDayStart;
@@ -314,8 +315,11 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Broadcast( NetPermission.HostOnly )]
 	private void NewDay()
 	{
+		if ( Scene.IsEditor && !GameManager.IsPlaying ) return;
+
 		InGameTime = 0;
 
-		StoryMaster.NextGameDay();
+		_storyMaster.NextGameDay();
+		_storyMaster.StartGameDay();
 	}
 }

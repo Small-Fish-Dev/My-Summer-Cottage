@@ -103,11 +103,11 @@ public class StoryMaster : Component
 	/// <summary>
 	/// Get the current story day
 	/// </summary>
-	public static int CurrentStoryDay
+	public int CurrentStoryDay
 	{
 		get
 		{
-			var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+			var storyMaster = Scene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
 
 			if ( storyMaster == null ) return 0;
 
@@ -118,22 +118,22 @@ public class StoryMaster : Component
 	/// <summary>
 	/// Get the current game day
 	/// </summary>
-	public static int CurrentGameDay
+	public int CurrentGameDay
 	{
 		get
 		{
-			var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
-
-			if ( storyMaster == null ) return 0;
-
-			return storyMaster.StoryProgression.GameDay;
+			return StoryProgression.GameDay;
 		}
 	}
 
 	public SaunaDay CurrentSaunaDay => StoryDays.TryGetValue( StoryProgression.StoryDay, out var saunaDay ) ? saunaDay : LastValidSaunaDay;
 	public SaunaDay LastValidSaunaDay => StoryDays.Any() ? StoryDays.Last().Value : null;
+	public SaunaDay NextSaunaDay => StoryDays.TryGetValue( StoryProgression.StoryDay + 1, out var saunaDay ) ? saunaDay : null;
 
-	public void InternalStartStoryDay()
+	/// <summary>
+	/// Start the story day
+	/// </summary>
+	public void StartStoryDay()
 	{
 		if ( CurrentSaunaDay == null ) return;
 
@@ -149,35 +149,22 @@ public class StoryMaster : Component
 	}
 
 	/// <summary>
-	/// Start the story day
+	/// Start the game day
 	/// </summary>
-	public static void StartStoryDay()
+	public void StartGameDay()
 	{
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+		var nextSaunaDay = NextSaunaDay;
 
-		if ( storyMaster == null ) return;
-
-		storyMaster.InternalStartStoryDay();
-	}
-
-	public void InternalStartGameDay()
-	{
-		// Whatever lol
+		if ( CurrentSaunaDay?.Completed ?? true ) // If we completed our story day
+			if ( NextSaunaDay == null || !NextSaunaDay.NewSessionOnly ) // And we don't have a next day planned, or it's not new session only
+				NextStoryDay(); // Move to the next story day without ending the session
 	}
 
 	/// <summary>
-	/// Start the game day
+	/// Set the current story day and save it
 	/// </summary>
-	public static void StartGameDay()
-	{
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
-
-		if ( storyMaster == null ) return;
-
-		storyMaster.InternalStartGameDay();
-	}
-
-	public void InternalSetStoryDay( int dayNumber )
+	/// <param name="dayNumber"></param>
+	public void SetStoryDay( int dayNumber )
 	{
 		StoryProgression.StoryDay = dayNumber;
 
@@ -185,51 +172,28 @@ public class StoryMaster : Component
 	}
 
 	/// <summary>
-	/// Set the current story day and save it
-	/// </summary>
-	/// <param name="dayNumber"></param>
-	public static void SetStoryDay( int dayNumber )
-	{
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
-
-		if ( storyMaster == null ) return;
-
-		storyMaster.InternalSetStoryDay( dayNumber );
-	}
-
-	/// <summary>
 	/// Go to the next story day
 	/// </summary>
-	public static void NextStoryDay()
+	public void NextStoryDay()
 	{
 		var nestStoryDay = CurrentStoryDay + 1;
 		SetStoryDay( nestStoryDay );
-	}
-
-	public void InternalSetGameDay( int dayNumber )
-	{
-		StoryProgression.GameDay = dayNumber;
-
-		InternalSaveStoryProgression();
 	}
 
 	/// <summary>
 	/// Set the current game day and save it
 	/// </summary>
 	/// <param name="dayNumber"></param>
-	public static void SetGameDay( int dayNumber )
+	public void SetGameDay( int dayNumber )
 	{
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
-
-		if ( storyMaster == null ) return;
-
-		storyMaster.InternalSetGameDay( dayNumber );
+		StoryProgression.GameDay = dayNumber;
+		InternalSaveStoryProgression();
 	}
 
 	/// <summary>
 	/// Go to the next game day
 	/// </summary>
-	public static void NextGameDay()
+	public void NextGameDay()
 	{
 		var nextGameDay = CurrentGameDay + 1;
 		SetGameDay( nextGameDay );
@@ -283,15 +247,19 @@ public class StoryMaster : Component
 
 	protected override void OnStart()
 	{
+		if ( Scene.IsEditor ) return;
+
 		LoadStoryProgression();
 
-		InternalStartStoryDay();
-		InternalStartGameDay();
+		StartStoryDay();
+		StartGameDay();
 	}
 
 	protected override void OnFixedUpdate()
 	{
-		var timeManager = Scene.GetAllComponents<GameTimeManager>().First();
+		if ( Scene.IsEditor ) return;
+
+		var timeManager = Scene.GetAllComponents<GameTimeManager>()?.FirstOrDefault();
 
 		if ( timeManager == null ) return;
 
