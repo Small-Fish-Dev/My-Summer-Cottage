@@ -18,20 +18,19 @@ CreatorOverlay {
     pointer-events: all;
     image-rendering: pixelated;
 
-    .infobox {
+    .note {
         position: absolute;
-        left: 700px;
-        top: 280px;
-        max-width: 400px;
-        justify-content: flex-start;
-        align-items: flex-start;
-        font-size: 22px;
-        padding: 10px;
-        font-family: HabboExtended;
+        right: 0px;
+        padding: 20px;
         flex-direction: column;
-        gap: 10px;
-        font-weight: bold;
-        letter-spacing: 2px;
+        bottom: 200px;
+        font-size: 24px;
+        max-width: 400px;
+        height: 200px;
+        gap: 20px;
+        background-color: rgba(black, 0.5);
+        backdrop-filter: blur(5px);
+        border-left: 4px red;
 
         label {
             flex-shrink: 0;

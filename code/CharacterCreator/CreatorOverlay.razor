@@ -71,14 +71,14 @@
 		case CreatorStage.Dressing_up:
 			<ClothingPanel />
 
-			<div class="infobox">
+			<div class="note">
 				<label>Choose the clothing you want to begin your journey with.</label>
 				<label>Scroll to view all the different options.</label>
 			</div>
 
 			<SideButton 
 				Title="Confirm" 
-				Subtitle="Finish the character creation."
+				Subtitle="Finish selecting clothes."
 				ImagePath="ui/hud/confirm.png"
 				OnClick=@CreatorComponent.NextStage
 				IsDisabled=@false
@@ -88,9 +88,14 @@
 			break;
 
 		case CreatorStage.Confirmation:
+			<div class="note">
+				<label>You can always choose your clothes during the gameplay.</label>
+				<label>Do note that your full name and appearance cannot be changed, so choose wisely...</label>
+			</div>
+
 			<SideButton 
 				Title="Confirm" 
-				Subtitle="Finish creating your character."
+				Subtitle="Begin your cottage story."
 				ImagePath="ui/hud/confirm.png"
 				OnClick=@Save
 				IsDisabled=@false
