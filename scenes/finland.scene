@@ -156,8 +156,7 @@
             }
           },
           "StoryProgression": {
-            "StoryDay": 1,
-            "GameDay": 1
+            "StoryDay": 1
           }
         }
       ],
@@ -234,7 +233,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.6130071,0,0.7900774",
+          "Rotation": "0,-0.9350618,0,0.3544846",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -318,10 +317,10 @@
                 "Id": 2,
                 "Type": "call",
                 "Properties": {
-                  "_type": "Sandbox.Game/Sandbox.IComponentLister",
                   "T": "package.fish.sauna/Sauna.Player",
-                  "_name": "Get",
-                  "_isStatic": false
+                  "_isStatic": false,
+                  "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                  "_name": "Get"
                 },
                 "UserData": {
                   "Position": "240,80"
@@ -772,7 +771,6 @@
           "Name": "creepy_peeper",
           "Position": "380.0869,-33.8725,-147.148",
           "Rotation": "-0.00000000000000003579115,0.000000000818806,1,-0.00000004371139",
-          "Networked": true,
           "Enabled": true,
           "Components": [
             {
@@ -794,7 +792,6 @@
               "Components": [
                 {
                   "__type": "ModelRenderer",
-                  "__enabled": false,
                   "BodyGroups": 341,
                   "MaterialGroup": null,
                   "MaterialOverride": null,
@@ -812,7 +809,6 @@
               "Components": [
                 {
                   "__type": "EventAreaTrigger",
-                  "__enabled": false,
                   "Extents": "295.9999,173.4401,100",
                   "MaxPollingRate": 5,
                   "Offset": "0,0,50",
@@ -830,7 +826,6 @@
               "Components": [
                 {
                   "__type": "EventAreaTrigger",
-                  "__enabled": false,
                   "Extents": "348.1601,949.3594,100",
                   "MaxPollingRate": 5,
                   "Offset": "0,0,50",
@@ -854,7 +849,6 @@
               "Components": [
                 {
                   "__type": "EventComponent",
-                  "__enabled": false,
                   "DisabledWhilePlaying": [],
                   "DisableOnTrigger": [
                     {
@@ -886,10 +880,10 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.IComponentLister",
                           "T": "package.fish.sauna/Sauna.Player",
-                          "_name": "Get",
-                          "_isStatic": false
+                          "_isStatic": false,
+                          "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                          "_name": "Get"
                         },
                         "UserData": {
                           "Position": "496,-240",
@@ -1450,7 +1444,6 @@
               "Components": [
                 {
                   "__type": "EventComponent",
-                  "__enabled": false,
                   "DisabledWhilePlaying": [
                     {
                       "_type": "component",
@@ -1598,9 +1591,9 @@
                         "Id": 12,
                         "Type": "call",
                         "Properties": {
+                          "_isStatic": false,
                           "_type": "Sandbox.System/Rotation",
-                          "_name": "RotateAroundAxis",
-                          "_isStatic": false
+                          "_name": "RotateAroundAxis"
                         },
                         "UserData": {
                           "Position": "288,352"
@@ -1671,10 +1664,10 @@
                         "Id": 20,
                         "Type": "call",
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.IComponentLister",
                           "T": "package.fish.sauna/Sauna.Player",
-                          "_name": "Get",
-                          "_isStatic": false
+                          "_isStatic": false,
+                          "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                          "_name": "Get"
                         },
                         "UserData": {
                           "Position": "-128,-320"
@@ -2191,6 +2184,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-03T02:46:52.6516255\u002B01:00",
+  "LastSaved": "2024-03-03T05:07:07.2963225\u002B01:00",
   "__references": []
 }

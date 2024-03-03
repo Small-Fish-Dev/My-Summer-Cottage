@@ -72,7 +72,6 @@ partial class Player
 		}
 		else
 		{
-			Log.Info( "Hi" );
 			_unragdoll = 0f;
 		}
 	}

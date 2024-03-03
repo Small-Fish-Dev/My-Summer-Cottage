@@ -132,11 +132,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 			_initialState = GameObject.Serialize();
 	}
 
-	protected override void OnAwake()
-	{
-		Disable();
-	}
-
 	protected override void OnFixedUpdate()
 	{
 		if ( !GameManager.IsPlaying ) return;
@@ -167,20 +162,20 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	{
 		IsFinished = true;
 
-		if ( ReinstantiateOnRestart )
+		if ( HasBeenPlayed && ReinstantiateOnRestart )
 		{
 			foreach ( var child in GameObject.Children )
 				child.Destroy();
 		}
 		else
 		{
-			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 			{
 				if ( component != this )
 					component.Enabled = false;
 			}
 
-			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
+			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants ) )
 			{
 				if ( !eventComponent.Triggered )
 					eventComponent.Triggered = true;
@@ -212,13 +207,13 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		}
 		else
 		{
-			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 			{
 				if ( component != this )
 					component.Enabled = true;
 			}
 
-			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
+			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants ) )
 			{
 				if ( eventComponent.Triggered )
 					eventComponent.Triggered = false;
