@@ -112,27 +112,27 @@
                   }
                 },
                 {
-                  "Id": 4,
+                  "Id": 6,
                   "Type": "property.get",
                   "Properties": {
                     "_type": "package.fish.sauna/Sauna.SlotMachine",
-                    "_name": "Money"
+                    "_name": "CanRoll"
                   },
                   "UserData": {
-                    "Position": "-304,48"
+                    "Position": "-272,80"
                   }
                 },
                 {
-                  "Id": 5,
-                  "Type": "op.lessthanorequal",
+                  "Id": 7,
+                  "Type": "op.not",
                   "UserData": {
-                    "Position": "-80,112"
+                    "Position": "-64,96"
                   }
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 5,
+                  "SrcId": 7,
                   "SrcName": "_result",
                   "DstId": 0,
                   "DstName": "_result"
@@ -146,19 +146,14 @@
                 {
                   "SrcId": 3,
                   "SrcName": "_result",
-                  "DstId": 4,
+                  "DstId": 6,
                   "DstName": "_target"
                 },
                 {
-                  "SrcId": 4,
+                  "SrcId": 6,
                   "SrcName": "_result",
-                  "DstId": 5,
+                  "DstId": 7,
                   "DstName": "a"
-                },
-                {
-                  "Value": 0,
-                  "DstId": 5,
-                  "DstName": "b"
                 }
               ]
             },

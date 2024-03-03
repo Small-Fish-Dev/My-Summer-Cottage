@@ -32,14 +32,10 @@ public partial class Player
 			Level++;
 		}
 
-		// For some reason the UI cant subscribe to the events without breaking actiongraph...
-		ExperienceBar.OnExperienceEarned( exp );
-
 		OnExperienceEarned?.Invoke( exp );
 		if ( oldLevel != Level )
 		{
 			OnLevelUp?.Invoke( Level );
-			ExperienceBar.OnLevelUp( Level );
 		}
 	}
 }
