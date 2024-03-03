@@ -3,7 +3,7 @@
 @inherits Panel
 
 <root>
-	<div @ref=_container class="container @(_timeUntilHidden ? "inactive" : "")">
+	<div @ref=_container class="container @(!IsInventoryScreen && _timeUntilHidden ? "inactive" : "")">
 		<div class="level-details">
 			<text class="level">Lv. @Player.Local.Level</text>
 			<text class="level-exp">@($"{Player.Local.Experience} / {Player.Local.ExpPerLevel} XP")</text>
@@ -17,32 +17,45 @@
 
 @code
 {
-	private static ExperienceBar _instance;
+	public bool IsInventoryScreen { get; set; }
 	private Panel _container;
 	private const float TIME_ON_SCREEN = 3;
 	private TimeUntil _timeUntilHidden;
 
-	public ExperienceBar()
+	protected override void OnAfterTreeRender( bool firstTime )
 	{
-		_instance = this;
+		Player.Local.OnExperienceEarned -= OnExperienceEarned;
+		Player.Local.OnLevelUp -= OnLevelUp;
+
+		Player.Local.OnExperienceEarned += OnExperienceEarned;
+		Player.Local.OnLevelUp += OnLevelUp;
 	}
 
+	// For some reason these need to be static due to some weird s&box bug?
 	public static void OnExperienceEarned( int delta )
 	{
-		_instance._timeUntilHidden = TIME_ON_SCREEN;
+		var expBar = InGameHud.Instance.Descendants.OfType<ExperienceBar>().FirstOrDefault();
+		if (expBar is null)
+			return;
+
+		expBar._timeUntilHidden = TIME_ON_SCREEN;
 		var popupExp = new PopupText($"+{delta} XP");
 		popupExp.Style.Right = Length.Pixels(0);
-		popupExp.Style.Bottom = Length.Pixels(90);
-		_instance._container.AddChild(popupExp);
+		popupExp.Style.Top = Length.Pixels(-60);
+		expBar._container.AddChild(popupExp);
 	}
 
 	public static void OnLevelUp( int newLevel )
 	{
-		_instance._timeUntilHidden = TIME_ON_SCREEN;
-		var popupLvl = new PopupText($"+{newLevel} LVL");
+		var expBar = InGameHud.Instance.Descendants.OfType<ExperienceBar>().FirstOrDefault();
+		if (expBar is null)
+			return;
+
+		expBar._timeUntilHidden = TIME_ON_SCREEN;
+		var popupLvl = new PopupText($"+1 LVL");
 		popupLvl.Style.Left = Length.Pixels(0);
-		popupLvl.Style.Bottom = Length.Pixels(90);
-		_instance._container.AddChild(popupLvl);
+		popupLvl.Style.Top = Length.Pixels(-60);
+		expBar._container.AddChild(popupLvl);
 	}
 
 	protected override int BuildHash()
