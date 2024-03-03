@@ -197,6 +197,15 @@ public class StoryMaster : Component
 		storyMaster.InternalSetStoryDay( dayNumber );
 	}
 
+	/// <summary>
+	/// Go to the next story day
+	/// </summary>
+	public static void NextStoryDay()
+	{
+		var nestStoryDay = CurrentStoryDay + 1;
+		SetStoryDay( nestStoryDay );
+	}
+
 	public void InternalSetGameDay( int dayNumber )
 	{
 		StoryProgression.GameDay = dayNumber;
@@ -217,9 +226,13 @@ public class StoryMaster : Component
 		storyMaster.InternalSetGameDay( dayNumber );
 	}
 
+	/// <summary>
+	/// Go to the next game day
+	/// </summary>
 	public static void NextGameDay()
 	{
-		/// DO
+		var nextGameDay = CurrentGameDay + 1;
+		SetGameDay( nextGameDay );
 	}
 
 	public void LoadStoryProgression()
