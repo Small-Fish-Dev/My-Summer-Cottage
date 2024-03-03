@@ -12,7 +12,7 @@ public enum InputMode
 	Down
 }
 
-public class Interaction
+public struct Interaction
 {
 	/// <summary>
 	/// Unique identifier for this interaction
@@ -55,7 +55,7 @@ public class Interaction
 	/// If the interaction is disabled, we still show it in the list but with a disabled look.
 	/// </summary>
 	[Property]
-	public bool ShowWhenDisabled { get; set; }
+	public Func<bool> ShowWhenDisabled { get; set; }
 
 	/// <summary>
 	/// What the text should be displayed as
@@ -93,6 +93,9 @@ public class Interaction
 	/// </summary>
 	[Property, ShowIf( "HasBounds", true )]
 	public Vector3 Extents { get; set; }
+
+	[Property]
+	public bool DisableUseAnimation { get; set; }
 
 	/// <summary>
 	/// The text that should actually be displayed.
@@ -187,7 +190,7 @@ public class Interactions : Component
 				if ( Gizmo.IsShiftPressed )
 				{
 					if ( Gizmo.Control.Scale( "scale", Vector3.Zero, out var scale ) )
-						ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = new Interaction
+						ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = interaction with
 						{
 							Extents = interaction.Extents + scale * 50
 						};
@@ -196,7 +199,7 @@ public class Interactions : Component
 				}
 
 				if ( Gizmo.Control.Position( "position", Vector3.Zero, out var pos ) )
-					ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = new Interaction
+					ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = interaction with
 					{
 						Position = interaction.Position + pos
 					};

@@ -18,10 +18,13 @@
 				if ( !FromHold && interaction.HoldOnly )
 					continue;
 
-				var disabled = !CanInteract( interaction );
-				if ( (!disabled || interaction.ShowWhenDisabled) && WithinBounds( interaction ) )
+				if (!WithinBounds(interaction))
+					continue;
+
+				var canInteract = CanInteract( interaction );
+				if ( canInteract || (interaction.ShowWhenDisabled is not null && interaction.ShowWhenDisabled()) )
 				{
-					var inactive = !HasPriority( interaction.Keybind ) || disabled;
+					var inactive = !HasPriority( interaction.Keybind ) || !canInteract;
 					<div class="interaction">
 						<inputhint class="hint" input=@interaction.Keybind DarkMode=@inactive />
 						<text class="description" style="color: @interaction.Color.Hex">@interaction.Text</text>
@@ -42,9 +45,10 @@
 	private string Name => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Name;
 	private bool HasTarget => _targetObject is not null;
 
+	// We should clean this up!!
 	private bool ShouldHide => 
 		(_targetObject?.Components?.Get<Interactions>( FindMode.EverythingInSelf )?.HideOnEmpty ?? false)
-		&& !(_interactions?.Any( i => (CanInteract( i ) || i.ShowWhenDisabled) && WithinBounds( i ) ) ?? false);
+		&& !(_interactions?.Any( i => (CanInteract( i ) || (i.ShowWhenDisabled is not null && i.ShowWhenDisabled())) && WithinBounds( i ) ) ?? false);
 
 	private const float INTERACTION_COOLDOWN = 0.1f;
 	private static List<string> priorityList = new();
@@ -121,7 +125,7 @@
 					if ( !FromHold ) // No need to play use animation for held items.
 					{
 						var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
-						Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ) );
+						Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ), interaction.DisableUseAnimation );
 					}
 				}
 			}

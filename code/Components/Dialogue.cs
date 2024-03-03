@@ -2,13 +2,53 @@ using Sauna.Util.Extensions;
 
 namespace Sauna;
 
+public class DialogueResponse
+{
+	/// <summary>
+	/// Unique identifier for this response
+	/// </summary>
+	[Property]
+	public string Identifier { get; set; }
+
+	/// <summary>
+	/// The keybind used to trigger this response.
+	/// </summary>
+	[Property]
+	[InputAction]
+	public string Keybind { get; set; }
+
+	/// <summary>
+	/// The UI description displayed for this response.
+	/// </summary>
+	[Property]
+	public string Description { get; set; }
+
+	/// <summary>
+	/// The action that is performed when this response is selected.
+	/// </summary>
+	[Property]
+	public Interaction.InteractionEvent Action { get; set; }
+
+	/// <summary>
+	/// The color of the text of the response.
+	/// </summary>
+	[Property]
+	public Func<Color> DynamicColor { get; set; }
+
+	/// <summary>
+	/// If the response is disabled.
+	/// </summary>
+	[Property]
+	public Func<bool> Disabled { get; set; }
+}
+
 public class DialogueStage
 {
 	[Property]
-	public List<Interaction> AvailableResponses { get; set; }
+	public List<DialogueResponse> AvailableResponses { get; set; }
 }
 
-public class Dialogue : Component
+public class DialogueComponent : Component
 {
 	/// <summary>
 	/// Only the host can perform this dialogue.
@@ -52,13 +92,23 @@ public class Dialogue : Component
 			var stageIndex = i;
 			for ( int j = 0; j < DialogueStages[i].AvailableResponses.Count; ++j )
 			{
-				DialogueStages[i].AvailableResponses[j].ShowWhenDisabled = false;
-				DialogueStages[i].AvailableResponses[j].Disabled = () => stageIndex != GetStageIndex();
+				var response = DialogueStages[i].AvailableResponses[j];
+				interactions.AddInteraction
+				(
+					new Interaction()
+					{
+						Identifier = response.Identifier,
+						Keybind = response.Keybind,
+						Description = response.Description,
+						Action = response.Action,
+						Disabled = () => !IsActiveStage( stageIndex ) || (response.Disabled is not null && response.Disabled()),
+						ShowWhenDisabled = () => IsActiveStage( stageIndex ),
+						DisableUseAnimation = true,
+						DynamicColor = () => response.DynamicColor?.Invoke() ?? Color.White
+					}
+				);
 			}
 		}
-
-		foreach ( var dialogueStage in DialogueStages )
-			interactions.AddInteractions( dialogueStage.AvailableResponses );
 	}
 
 	[Broadcast]
@@ -77,6 +127,11 @@ public class Dialogue : Component
 	public void EndDialogue()
 	{
 		SetStageIndex( -1 );
+	}
+
+	private bool IsActiveStage( int i )
+	{
+		return GetStageIndex() == i;
 	}
 
 	private void SetStageIndex( int i )
