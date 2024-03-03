@@ -26,10 +26,16 @@ public class SaunaScriptedEvent
 	public float TriggerTime { get; set; } = 0f;
 
 	/// <summary>
-	/// This scripted event needs to be triggered for the story to progress
+	/// This scripted event needs to be completed for the story to progress
 	/// </summary>
 	[Property]
-	public bool TriggerNecessary { get; set; } = true;
+	public bool CompletionNecessary { get; set; } = true;
+
+	/// <summary>
+	/// The signal we are looking for this scripted event to be completed
+	/// </summary>
+	[Property]
+	public string SignalToComplete { get; set; }
 
 	public delegate void ScriptedAction( Player player );
 
@@ -38,6 +44,10 @@ public class SaunaScriptedEvent
 	/// </summary>
 	[Property]
 	public ScriptedAction Setup { get; set; }
+
+	[Hide]
+	[JsonIgnore]
+	public bool Completed { get; set; } = false;
 
 	[Hide]
 	[JsonIgnore]
@@ -50,12 +60,6 @@ public class SaunaDay
 {
 	[Property]
 	public List<SaunaScriptedEvent> ScriptedEvents { get; set; }
-
-	/// <summary>
-	/// This Story Day can only start on a new session (Exiting the car), you can't just pass the night for it to begin
-	/// </summary>
-	[Property]
-	public bool NewSessionOnly { get; set; } = false;
 
 	/// <summary>
 	/// How many random events to load at the beginning of the session (ONLY session, not new day, events will unload at the end of session)
@@ -158,8 +162,7 @@ public class StoryMaster : Component
 		var nextSaunaDay = NextSaunaDay;
 
 		if ( CurrentSaunaDay?.Completed ?? true ) // If we completed our story day
-			if ( NextSaunaDay == null || !NextSaunaDay.NewSessionOnly ) // And we don't have a next day planned, or it's not new session only
-				NextStoryDay(); // Move to the next story day without ending the session
+			NextStoryDay(); // Move to the next story day without ending the session
 	}
 
 	/// <summary>

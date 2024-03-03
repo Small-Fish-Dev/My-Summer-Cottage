@@ -246,20 +246,34 @@ public class TaskMaster : Component
 	{
 		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
 
-		if ( taskMaster == null ) return;
-
-		var allActiveTasks = taskMaster.CurrentTasks.Where( x => !x.Completed ); // Get active tasks
-
-		foreach ( var task in allActiveTasks )
+		if ( taskMaster != null )
 		{
-			if ( !task.Global && triggerer != Player.Local ) continue; // If this task isn't global and the triggerer isn't our player, ignore it
+			var allActiveTasks = taskMaster.CurrentTasks.Where( x => !x.Completed ); // Get active tasks
 
-			var activeSubtasks = task.Subtasks; // Current active subtasks
-
-			foreach ( var subtask in activeSubtasks )
+			foreach ( var task in allActiveTasks )
 			{
-				if ( subtask.TriggerSignal == signalIdentifier ) // If the given signal is the one we're looking for, increase the subtask's progress
-					subtask.CurrentAmount++;
+				if ( !task.Global && triggerer != Player.Local ) continue; // If this task isn't global and the triggerer isn't our player, ignore it
+
+				var activeSubtasks = task.Subtasks; // Current active subtasks
+
+				foreach ( var subtask in activeSubtasks )
+				{
+					if ( subtask.TriggerSignal == signalIdentifier ) // If the given signal is the one we're looking for, increase the subtask's progress
+						subtask.CurrentAmount++;
+				}
+			}
+		}
+
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+
+		if ( storyMaster != null )
+		{
+			var allActiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Completed ); // Get all active scripted events
+
+			foreach ( var scriptedEvent in allActiveScriptedEvents )
+			{
+				if ( scriptedEvent.SignalToComplete == signalIdentifier )
+					scriptedEvent.Completed = true;
 			}
 		}
 	}
