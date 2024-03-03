@@ -98,7 +98,10 @@
 
 			if ( WithinBounds( interaction ) )
 			{
-				AddToPriority( interaction.Keybind );
+				var canInteract = CanInteract(interaction);
+
+				if ( canInteract )
+					AddToPriority( interaction.Keybind );
 
 				if ( !HasPriority( interaction.Keybind ) )
 					continue;
@@ -106,7 +109,7 @@
 				if ( interaction.HasBounds && !FromHold )
 					pos = Player.Local.TargetedGameObject.Transform.Position + interaction.Position * Player.Local.TargetedGameObject.Transform.Rotation;
 
-				if (CanInteract(interaction) && interaction.InputFunction(interaction.Keybind) && (interaction.InputMode == InputMode.Down|| _lastInteracted > INTERACTION_COOLDOWN))
+				if (canInteract && interaction.InputFunction(interaction.Keybind) && (interaction.InputMode == InputMode.Down || _lastInteracted > INTERACTION_COOLDOWN))
 				{
 					_targetObject?.Network.TakeOwnership();
 					interaction.Action?.Invoke(Player.Local, _targetObject);
