@@ -21,6 +21,8 @@
 	private static float _yaw = 0f;
 	private bool _isDragging = false;
 
+	public bool IsHoveredByMouse() => Box.Rect.IsInside( Mouse.Position );
+
 	protected override void OnAfterTreeRender(bool firstTime)
 	{
 		base.OnAfterTreeRender(firstTime);
@@ -128,6 +130,7 @@
 			_yaw += Mouse.Delta.x * 0.20f;
 
 		_character.Update(RealTime.Delta);
+		_character.SetAnimParameter("hold_type", (int)Player.Local.HoldType);
 		_character.Rotation = Rotation.From(0, _yaw, 0);
 
 		_penoid?.Update(RealTime.Delta);

@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.Utility;
 using Sauna;
+using Sauna.Event;
 using Sauna.Game;
 
 public static partial class GlobalNodes
@@ -58,5 +59,34 @@ public static partial class GlobalNodes
 
 		if ( timeManager != null )
 			timeManager.SkipTimeFromSeconds( inGameSeconds );
+	}
+
+	/// <summary>
+	/// End this session, sets the next story day, opens the recap, unloads all events, and saves all progress
+	/// </summary>
+	[ActionGraphNode( "event.endsession" )]
+	[Title( "End Session" ), Group( "Events" ), Icon( "view_day" )]
+	public static void EndSession()
+	{
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster == null ) return;
+
+		storyMaster.EndSession();
+	}
+
+
+	/// <summary>
+	/// Start this session, loads the event pool
+	/// </summary>
+	[ActionGraphNode( "event.startsession" )]
+	[Title( "Start Session" ), Group( "Events" ), Icon( "view_day" )]
+	public static void StartSession()
+	{
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster == null ) return;
+
+		storyMaster.StartSession();
 	}
 }

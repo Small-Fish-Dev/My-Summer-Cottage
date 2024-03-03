@@ -1,4 +1,6 @@
-﻿namespace Sauna;
+﻿using Sauna.UI;
+
+namespace Sauna;
 
 public partial class Player
 {
@@ -29,9 +31,11 @@ public partial class Player
 			Experience -= ExpPerLevel;
 			Level++;
 		}
-		
+
 		OnExperienceEarned?.Invoke( exp );
-		if (oldLevel != Level)
+		if ( oldLevel != Level )
+		{
 			OnLevelUp?.Invoke( Level );
+		}
 	}
 }

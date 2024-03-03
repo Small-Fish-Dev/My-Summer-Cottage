@@ -3,21 +3,12 @@
 @inherits Panel
 
 <root>
-	<div class="container" style="opacity: @( Hide ? 0 : 1 )">
-		<div class="top-text">
-			<div>LEVEL @Player.Local.Level</div>
-
-			<div>+@_delta EXP</div>
-
-			<div class="exp-text">
-				<text>@Player.Local.Experience</text>
-				<text>/</text>
-				<text>@Player.Local.ExpPerLevel XP</text>
-			</div>
+	<div @ref=_container class="container @(!IsInventoryScreen && _timeUntilHidden ? "inactive" : "")">
+		<div class="level-details">
+			<text class="level">Lv. @Player.Local.Level</text>
+			<text class="level-exp">@($"{Player.Local.Experience} / {Player.Local.ExpPerLevel} XP")</text>
 		</div>
-
 		<div class="exp-bar">
-			@* 100f in front to avoid the cast to float *@
 			<div class="progress" style="width: @( 100f * Player.Local.Experience / Player.Local.ExpPerLevel )%"/>
 		</div>
 	</div>
@@ -26,45 +17,52 @@
 
 @code
 {
-	// Time in seconds
-	public const float TimeOnScreen = 3;
-
-	public TimeUntil Hide;
-
-	private int _delta;
+	public bool IsInventoryScreen { get; set; }
+	private Panel _container;
+	private const float TIME_ON_SCREEN = 3;
+	private TimeUntil _timeUntilHidden;
 
 	protected override void OnAfterTreeRender( bool firstTime )
 	{
-		// TODO: it's acoustically regarded, but it works
+		if (Player.Local is null)
+			return;
 
-		if ( !firstTime )
-		{
-			Player.Local.OnExperienceEarned -= OnExperienceEarned;
-			Player.Local.OnLevelUp -= OnLevelUp;
-		}
+		Player.Local.OnExperienceEarned -= OnExperienceEarned;
+		Player.Local.OnLevelUp -= OnLevelUp;
 
 		Player.Local.OnExperienceEarned += OnExperienceEarned;
 		Player.Local.OnLevelUp += OnLevelUp;
 	}
 
-	void OnExperienceEarned( int delta )
+	// For some reason these need to be static due to some weird s&box bug?
+	public static void OnExperienceEarned( int delta )
 	{
-		if ( Hide )
-			_delta = 0;
+		var expBar = InGameHud.Instance?.Descendants.OfType<ExperienceBar>().FirstOrDefault();
+		if (expBar is null)
+			return;
 
-		_delta += delta;
-		Hide = TimeOnScreen;
+		expBar._timeUntilHidden = TIME_ON_SCREEN;
+		var popupExp = new PopupText($"+{delta} XP");
+		popupExp.Style.Right = Length.Pixels(0);
+		popupExp.Style.Top = Length.Pixels(-60);
+		expBar._container.AddChild(popupExp);
 	}
 
-	void OnLevelUp( int newLevel )
+	public static void OnLevelUp( int newLevel )
 	{
-		Hide = TimeOnScreen;
+		var expBar = InGameHud.Instance?.Descendants.OfType<ExperienceBar>().FirstOrDefault();
+		if (expBar is null)
+			return;
+
+		expBar._timeUntilHidden = TIME_ON_SCREEN;
+		var popupLvl = new PopupText($"+1 LVL");
+		popupLvl.Style.Left = Length.Pixels(0);
+		popupLvl.Style.Top = Length.Pixels(-60);
+		expBar._container.AddChild(popupLvl);
 	}
 
-	public override void Tick()
+	protected override int BuildHash()
 	{
-		base.Tick();
+		return HashCode.Combine( Player.Local.Experience, Player.Local.ExpPerLevel, (bool)_timeUntilHidden );
 	}
-
-	protected override int BuildHash() => HashCode.Combine( Player.Local.Experience, Player.Local.ExpPerLevel, _delta, (bool)Hide );
 }

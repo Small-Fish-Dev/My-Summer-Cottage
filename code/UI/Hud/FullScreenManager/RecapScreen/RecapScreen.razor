@@ -1,0 +1,97 @@
+﻿@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<div class="title">Day @(Hud.Instance.GameTimeManager.Day - 1) completed!</div>
+	<div class="information">
+		<div class="sweet-memories" @ref=_memoryContainer >
+			<div class="title" />
+			<MemoryPanel 
+				class="first back"
+				Texture=@Texture.Load( FileSystem.Mounted, "ui/memories/first.png" )
+				Caption="It was a tough day of avoiding all the CIA agents."
+			/>
+
+			<MemoryPanel 
+				class="second back"
+				Texture=@Texture.Load( FileSystem.Mounted, "ui/memories/second.png" )
+				Caption="le cottage has le fallen"
+			/>
+		</div>
+
+		<div class="progress">
+			<div class="section" style="background-image: url(ui/hud/task_completed.png);">
+				<div class="header">Tasks completed today:</div>
+				<div class="tasks">
+					<div class="task-title">2 Primary Tasks:</div>
+					<div class="task">
+						<div class="checkbox"><div class="checkbox-inner true" /></div>
+						<text>Murder fuckass Bob</text>
+					</div>
+					<div class="task">
+						<div class="checkbox"><div class="checkbox-inner" /></div>
+						<text>Hide Bob's body</text>
+					</div>
+				</div>
+				<div class="tasks">
+					<div class="task-title">1/3 Secondary Tasks:</div>
+					<div class="task">
+						<div class="checkbox"><div class="checkbox-inner true" /></div>
+						<text>SHIT FUCK FUCK SHIT</text>
+					</div>
+					<div class="task">
+						<div class="checkbox"><div class="checkbox-inner" /></div>
+						<text>implement cyber's shit ideas</text>
+					</div>
+					<div class="task">
+						<div class="checkbox"><div class="checkbox-inner" /></div>
+						<text>kill self</text>
+					</div>
+				</div>
+			</div>
+			<div class="section" style="background-image: url(ui/hud/moni.png);">
+				<div class="header">Your current balance:</div>
+			</div>
+			<div class="section" style="background-image: url(ui/hud/current_level.png);">
+				<div class="header">Character statistics:</div>
+			</div>
+		</div>
+	</div>
+</root>
+
+@code {
+	private const float DISPLAY_TIME = 6f;
+
+	TimeSince _sinceNext = DISPLAY_TIME;
+	int _currentMemory;
+	Panel _memoryContainer;
+	MemoryPanel _currentPanel;
+
+	public override void Tick()
+	{
+		if ( SweetMemories.All.Count == 0 )
+			return;
+
+		// Move to next memory.
+		if ( _sinceNext > DISPLAY_TIME )
+		{
+			_currentPanel?.Delete();
+			_currentMemory = _currentMemory >= SweetMemories.All.Count - 1 
+				? 0
+				: _currentMemory + 1;
+
+			var memory = SweetMemories.All.ElementAt( _currentMemory );
+			_currentPanel = _memoryContainer.AddChild<MemoryPanel>();
+			_currentPanel.Texture = memory.Texture;
+			_currentPanel.Caption = memory.Caption;
+
+			_sinceNext = 0;
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( _currentMemory );
+	}
+}

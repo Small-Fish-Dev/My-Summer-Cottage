@@ -5,6 +5,18 @@ partial class Player
 	public const float DUCK_HEIGHT = 58f;
 	public const float HEIGHT = 72f;
 
+	public static bool HideHead
+	{
+		get => _hideHead;
+		set
+		{
+			_hideHead = value;
+			Local?.UpdateHeadVisibility();
+			Local?.Renderer?.SceneModel?.Update( RealTime.Delta );
+		}
+	}
+	private static bool _hideHead = true;
+
 	[Property]
 	[Category( "Movement" )]
 	public MoveHelper MoveHelper { get; set; }
@@ -52,6 +64,7 @@ partial class Player
 	[Sync] public bool Ducking { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
 	[Sync] public Vector3 Velocity { get; set; }
+	[Sync] public HoldType HoldType { get; set; } = HoldType.Idle;
 
 	public BBox Bounds => new BBox( Collider.Center - Collider.Scale / 2f, Collider.Center + Collider.Scale / 2f );
 
@@ -117,9 +130,6 @@ partial class Player
 		Collider.Scale = Collider.Scale.WithZ( height );
 		Collider.Center = Vector3.Up * height / 2f;
 
-		if ( IsRagdolled )
-			FollowRagdoll();
-
 		if ( Input.Pressed( "Ragdoll" ) && CanRagdoll )
 			SetRagdoll( !IsRagdolled );
 	}
@@ -134,6 +144,7 @@ partial class Player
 		EyeAngles = ang;
 	}
 
+	Rotation _lastRot;
 	protected void UpdateCamera()
 	{
 		if ( Camera == null )
@@ -148,17 +159,28 @@ partial class Player
 
 		Camera.Transform.Position = IsRagdolled ? Vector3.Lerp( oldEyePos, newEyePos, Time.Delta * 10f ) : newEyePos;
 		Camera.Transform.Rotation = IsRagdolled ? Rotation.Lerp( oldEyeRot, newEyeRot, Time.Delta * 5f ) : newEyeRot;
+		var newRot = Rotation.FromRoll( Vector3.Dot( Transform.Rotation.Right, MoveHelper.Velocity.Normal ) ) * 2f;
+		_lastRot = Rotation.Lerp( _lastRot, newRot, Time.Delta * 5f );
+		Camera.Transform.Rotation *= _lastRot;
 		Camera.FieldOfView = MathX.LerpTo( Camera.FieldOfView, Input.Down( "view" ) ? Zoom : 90f, 10f * Time.Delta );
 		Camera.ZNear = 2.5f;
+		UpdateHeadVisibility();
+	}
 
-		Renderer?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
+	public void UpdateHeadVisibility()
+	{
+		var eyes = Renderer.GetAttachment( "eyes" ) ?? Transform.World;
+		var rot = Transform.Rotation;
+
+		if ( HideHead )
+			Renderer?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
 
 		// Hide face and head clothing.
 		var face = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Face ) as ItemEquipment)?.Renderer?.SceneObject;
-		if ( face != null ) face.RenderingEnabled = false;
+		if ( face != null ) face.RenderingEnabled = !HideHead;
 
 		var head = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Head ) as ItemEquipment)?.Renderer?.SceneObject;
-		if ( head != null ) head.RenderingEnabled = false;
+		if ( head != null ) head.RenderingEnabled = !HideHead;
 	}
 
 	protected void UpdateAnimation()
@@ -183,6 +205,7 @@ partial class Player
 		Renderer.Set( "height", Height );
 
 		Renderer.Set( "lookat", EyeAngles.WithYaw( 0 ).Forward );
+		Renderer.Set( "hold_type", (int)HoldType );
 	}
 
 	private void OnJumpEvent( SceneModel.GenericEvent e )

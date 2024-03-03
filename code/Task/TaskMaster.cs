@@ -1,18 +1,197 @@
 using Sandbox;
+using Sauna.Event;
+using System.Threading.Tasks;
 
 namespace Sauna;
 
-[Icon( "calendar_month" )]
+[Icon( "live_help" )]
 public class TaskMaster : Component
 {
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
 
+	/// <summary>
+	/// Get how many tasks the player has triggered so far (From 0 to 1) - Fetching this runs a check so don't overuse it
+	/// </summary>
+	public float TasksTriggered
+	{
+		get
+		{
+			var allTasks = TasksProgression.Tasks;
+			float totalTasks = allTasks.Count();
+			float triggeredTasks = allTasks.Where( x => x.TimesTriggered > 0 ).Count();
+
+			return triggeredTasks / totalTasks;
+		}
+	}
+
+	/// <summary>
+	/// Get how many tasks the player has completed so far (From 0 to 1) - Fetching this runs a check so don't overuse it
+	/// </summary>
+	public float TasksCompleted
+	{
+		get
+		{
+			var allTasks = TasksProgression.Tasks;
+			float totalTasks = allTasks.Count();
+			float triggeredTasks = allTasks.Where( x => x.TimesCompleted > 0 ).Count();
+
+			return triggeredTasks / totalTasks;
+		}
+	}
+
+	public class TaskCompletion
+	{
+		[JsonInclude]
+		public string Task { get; set; }
+		[JsonInclude]
+		public int TimesTriggered { get; set; }
+		[JsonInclude]
+		public int TimesCompleted { get; set; }
+
+		public TaskCompletion( string task, int timesTriggered = 0, int timesCompleted = 0 )
+		{
+			Task = task;
+			TimesTriggered = timesTriggered;
+			TimesCompleted = timesCompleted;
+		}
+	}
+
+	public struct SaunaTasksProgress
+	{
+		[JsonInclude]
+		public List<TaskCompletion> Tasks = new();
+
+		public SaunaTasksProgress() { }
+	}
+
+	public SaunaTasksProgress TasksProgression { get; private set; } = new();
+
 	protected override void OnStart()
 	{
-		foreach ( var task in CurrentTasks ) // Tasks persist between sessions?
-			task.Reset();
+		LoadTasksProgression();
 	}
+
+	public void AddTaskProgression( string taskPath, int timesTriggered = 0, int timesCompleted = 0 )
+	{
+		var newTaskCompletion = new TaskCompletion( taskPath, timesTriggered, timesCompleted );
+		TasksProgression.Tasks.Add( newTaskCompletion );
+	}
+
+	/// <summary>
+	/// Get the current stats on that task
+	/// </summary>
+	/// <param name="task"></param>
+	/// <returns></returns>
+	public TaskCompletion GetTaskProgression( SaunaTask task )
+	{
+		var taskPath = task.ResourcePath;
+		var taskCompletionExists = TasksProgression.Tasks.Any( x => x.Task == taskPath );
+
+		if ( taskCompletionExists )
+		{
+			var foundTaskCompletion = TasksProgression.Tasks.Where( x => x.Task == taskPath ).First();
+			foundTaskCompletion.TimesTriggered++;
+
+			return foundTaskCompletion;
+		}
+		else
+		{
+			var newTaskCompletion = new TaskCompletion( taskPath, 0, 0 );
+			TasksProgression.Tasks.Add( newTaskCompletion );
+
+			return newTaskCompletion;
+		}
+	}
+
+	/// <summary>
+	/// Increase that task's total triggered amount
+	/// </summary>
+	/// <param name="task"></param>
+	public void TaskTriggered( SaunaTask task )
+	{
+		var taskPath = task.ResourcePath;
+		var taskCompletionExists = TasksProgression.Tasks.Any( x => x.Task == taskPath );
+
+		if ( taskCompletionExists )
+		{
+			var foundTaskCompletion = TasksProgression.Tasks.Where( x => x.Task == taskPath ).First();
+			foundTaskCompletion.TimesTriggered++;
+		}
+		else
+		{
+			AddTaskProgression( taskPath, 1, 0 );
+		}
+	}
+
+	/// <summary>
+	/// Increase that task's total completed amount
+	/// </summary>
+	/// <param name="task"></param>
+	public void TaskCompleted( SaunaTask task )
+	{
+		var taskPath = task.ResourcePath;
+		var taskCompletionExists = TasksProgression.Tasks.Any( x => x.Task == taskPath );
+
+		if ( taskCompletionExists )
+		{
+			var foundTaskCompletion = TasksProgression.Tasks.Where( x => x.Task == taskPath ).First();
+			foundTaskCompletion.TimesCompleted++;
+		}
+		else
+		{
+			AddTaskProgression( taskPath, 0, 1 );
+		}
+
+	}
+
+	public void LoadTasksProgression()
+	{
+		if ( FileSystem.Data.FileExists( "tasks.json" ) )
+			TasksProgression = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
+		else
+		{
+			TasksProgression.Tasks?.Clear();
+
+			var allTasks = ResourceLibrary.GetAll<SaunaTask>();
+
+			foreach ( var task in allTasks )
+				AddTaskProgression( task.ResourcePath );
+
+			SaveTasksProgression();
+		}
+	}
+
+	/// <summary>
+	/// Save the tasks current triggered and completion progress/amount
+	/// </summary>
+	public void SaveTasksProgression()
+	{
+		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
+
+		// If future updates contain new tasks or we're live adding newer ones, save those to the file too
+		foreach ( var task in allTasks )
+			if ( !TasksProgression.Tasks.Any( x => x.Task == task.ResourcePath ) )
+				AddTaskProgression( task.ResourcePath );
+
+		FileSystem.Data.WriteJson( "tasks.json", TasksProgression );
+	}
+
+	/// <summary>
+	/// Reset the tasks current triggered and completion progress/amount
+	/// </summary>
+	public void ResetTasksProgression()
+	{
+		TasksProgression.Tasks?.Clear();
+
+		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
+
+		foreach ( var task in allTasks )
+			AddTaskProgression( task.ResourcePath );
+
+		SaveTasksProgression();
+	}
+
 
 	protected override void OnFixedUpdate()
 	{

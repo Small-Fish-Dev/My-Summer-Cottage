@@ -40,24 +40,7 @@
 				<text class="max">/ @Sauna.Inventory.MAX_WEIGHT_IN_GRAMS.ToKilograms() kg</text>
 			</div>
 		</div>
-		<div style="flex-direction: column; padding: 10px;">
-			@* TODO: better put this shit to a separate component with its own BuildHash to prevent the unnecessary redraws *@
-			<div style="margin: 30px 0px 0px 0px; align-items: flex-end; justify-content: space-between;">
-				<div style="align-items: center;">
-					<img src="/ui/hud/current_level.png" style="width: 50px; height: 50px; margin-right: 20px;"/>
-					<text class="level">Lv. @Player.Local.Level</text>
-				</div>
-				<div class="exp-text">
-					<text>@Player.Local.Experience</text>
-					<text>/</text>
-					<text>@Player.Local.ExpPerLevel XP</text>
-				</div>
-			</div>
-			<div class="exp-bar">
-				@* 100f in front to avoid the cast to float *@
-				<div class="progress" style="width: @( 100f * Player.Local.Experience / Player.Local.ExpPerLevel )%"/>
-			</div>
-		</div>
+		<ExperienceBar IsInventoryScreen=@true style="opacity: 1; margin: 30px 5px;" />
 		<div class="inputs">
 			<InputHint Hint="Drag items"  Input=@InputAction.LeftClick />
 			<InputHint Hint="View additional item actions"  Input=@InputAction.RightClick />

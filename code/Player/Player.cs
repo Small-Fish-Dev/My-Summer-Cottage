@@ -36,7 +36,10 @@ public partial class Player : Component, Component.ExecuteInEditor
 			_skinColor = value;
 
 			if ( Renderer != null && Renderer.SceneModel.IsValid() )
+			{
 				Renderer.SceneModel.Attributes.Set( "g_flColorTint", _skinColor );
+				Renderer.SceneModel.Batchable = false;
+			}
 		}
 	}
 
@@ -75,7 +78,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Block mouse aiming
 	/// </summary>
-	[Sync] public bool BlockMouseAim
+	[Sync]
+	public bool BlockMouseAim
 	{
 		get => BlockMovements || _blockMouseAim;
 		set => _blockMouseAim = value;
@@ -86,7 +90,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Block inputs (Like WASD, Pissing, Left/Right click)
 	/// </summary>
-	[Sync] public bool BlockInputs
+	[Sync]
+	public bool BlockInputs
 	{
 		get => BlockMovements || _blockInputs;
 		set => _blockInputs = value;
@@ -131,11 +136,13 @@ public partial class Player : Component, Component.ExecuteInEditor
 	protected override void DrawGizmos()
 	{
 	}
-	 
+
 	protected override void OnStart()
 	{
 		if ( !GameManager.IsPlaying )
 			return;
+
+		Network.SetOrphanedMode( NetworkOrphaned.Destroy );
 
 		// Components
 		Camera = Components.Get<CameraComponent>( FindMode.EverythingInSelfAndDescendants );
@@ -150,7 +157,10 @@ public partial class Player : Component, Component.ExecuteInEditor
 		PissParticles = Components.Get<ParticleEffect>( FindMode.EverythingInSelfAndDescendants );
 
 		if ( !IsProxy ) // Load save.
+		{
+			HideHead = true;
 			Setup( this );
+		}
 
 		// Footsteps
 		Renderer.OnFootstepEvent += OnFootstep;
@@ -167,14 +177,13 @@ public partial class Player : Component, Component.ExecuteInEditor
 			UpdateAngles();
 			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
 			HidePenoid = Inventory.EquippedItems[(int)EquipSlot.Legs] != null;
+			HoldType = (Inventory.EquippedItems[(int)EquipSlot.Hand] as ItemEquipment)?.HoldType ?? HoldType.Idle;
 		}
 
 		UpdateAnimation();
 
-		if ( Penoid == null )
-			return;
-
-		Penoid.Enabled = !HidePenoid;
+		if ( Penoid is not null )
+			Penoid.Enabled = !HidePenoid;
 	}
 
 	protected override void OnFixedUpdate()
@@ -200,6 +209,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 			}
 		}
 
+		if ( IsRagdolled )
+			FollowRagdoll();
+
 		if ( IsProxy )
 			return;
 
@@ -216,6 +228,35 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		Money -= amount;
 		return true;
+	}
+
+	[Icon( "camera" )]
+	public SweetMemory CaptureMemory( string caption, float distance = 100f, int maxTries = 20 )
+	{
+		var center = Bounds.Center + Transform.Position + Vector3.Up * 10f;
+		var position = center + Transform.Rotation.Backward * distance; // Default
+		var rotation = Rotation.FromRoll( Sandbox.Game.Random.Int( -15, 15 ) );
+
+		for ( int i = 0; i < maxTries; i++ )
+		{
+			var dir = Vector3.Random;
+			dir = dir.WithZ( dir.z.Clamp( 0.3f, 0.9f ) ); // Clamped on z-axis so it doesn't go too low.
+
+			var from = Transform.Position + dir * distance;
+			var ray = new Ray( from, (center - from).Normal );
+
+			var tr = Scene.Trace.Ray( ray, distance )
+				.WithoutTags( "trigger" )
+				.Run();
+
+			if ( tr.GameObject == GameObject )
+			{
+				position = ray.Position;
+				break;
+			}
+		}
+
+		return SweetMemories.Capture( caption, position, rotation, center );
 	}
 
 	protected override void OnPreRender()

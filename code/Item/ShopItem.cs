@@ -31,7 +31,7 @@ public class ShopItem : Component
 			Description = $"{Price}mk",
 			Disabled = () => Player.Local.Money < Price,
 			ShowWhenDisabled = true,
-			DynamicColor = () => Player.Local.Money < Price ? Color.Red : Color.FromBytes( 116, 254, 64 ),
+			DynamicColor = () => Player.Local.Money < Price ? Color.FromBytes( 143, 50, 50 ) : Color.FromBytes( 116, 254, 64 ),
 		} );
 	}
 

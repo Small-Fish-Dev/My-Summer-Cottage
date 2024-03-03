@@ -73,7 +73,7 @@ public class ItemComponent : Component
 		if ( !Network.Active )
 			GameObject.NetworkSpawn();
 
-		GameObject.Name = Name;
+		//GameObject.Name = Name;
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 		Network.SetOrphanedMode( NetworkOrphaned.ClearOwner );
 

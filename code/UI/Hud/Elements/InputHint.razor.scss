@@ -1,4 +1,6 @@
-﻿InputHint {
+﻿@import "/UI/Style.scss";
+
+InputHint {
     font-family: HabboExtended;
     align-items: center;
 
@@ -19,5 +21,10 @@
         max-height: 27px;
         text-shadow: 2px 2px 0px rgba(black, 0.5);
         flex-shrink: 0;
+
+        &.dark {
+            color: $dark-gray;
+            background-color: #1e1e1e;
+        }
     }
 }

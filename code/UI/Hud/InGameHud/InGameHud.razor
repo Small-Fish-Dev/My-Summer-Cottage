@@ -10,6 +10,16 @@
 	<Compass GameTimeManager="@Hud.Instance.GameTimeManager" />
 	<Date GameTimeManager="@Hud.Instance.GameTimeManager" />
 	<PrimaryTask />
+	<TaskNotification />
 	<Crosshair />
-	<ExperienceBar />
+	<ExperienceBar style="height: 100%; width: 100%; justify-content: center; bottom: -85%;" />
 </root>
+
+@code {
+	public static InGameHud Instance { get; private set; }
+
+	public InGameHud()
+	{
+		Instance = this;
+	}
+}

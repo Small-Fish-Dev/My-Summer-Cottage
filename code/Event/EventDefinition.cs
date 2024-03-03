@@ -1,18 +1,6 @@
 using Sandbox;
 using Sauna;
-
-public enum EventFrequency
-{
-	[Icon( "menu_book" )]
-	[Description( "Events that are run at specific times in the story. Doesn't get added to the daily events pool" )]
-	Story,
-	[Icon( "stars" )]
-	[Description( "Events that are run once and will never happen again unless we ran out of uniques. Can get added to the daily events pool" )]
-	Unique,
-	[Icon( "timeline" )]
-	[Description( "Events that can run multiple times. Can get added to the daily events pool" )]
-	Repeatable
-}
+using Sauna.Event;
 
 public enum EventType
 {
@@ -53,12 +41,15 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	[Property]
 	public EventType Type { get; set; } = EventType.Random;
 
+	/// <summary>
+	/// Does this event get added to the daily event pool to enable during gameplay?
+	/// </summary>
 	[Property]
-	public EventFrequency Frequency { get; set; } = EventFrequency.Repeatable;
+	public bool AddToEventPool { get; set; } = true;
 
 	[Property]
-	[HideIf( "Frequency", EventFrequency.Story )]
-	public EventRarity Rarity { get; set; } = EventRarity.Common;
+	[HideIf( "AddToEventPool", true )]
+	public EventRarity Rarity { get; set; } = EventRarity.None;
 
 	[Property]
 	[Description( "Can this event trigger when there's another event going on? And can other events trigger whn this one is going on?" )]
@@ -73,8 +64,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// </summary>
 	public bool HasBeenPlayed { get; set; } = false;
 
-	public int TimesPlayed = 0;
-
 	/// <summary>
 	/// Are any of the event components inside playing?
 	/// </summary>
@@ -86,6 +75,8 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// </summary>
 	public bool IsFinished { get; set; } = false;
 
+	TaskMaster _taskMaster => Scene.GetAllComponents<TaskMaster>().FirstOrDefault();
+	EventMaster _eventMaster => Scene.GetAllComponents<EventMaster>().FirstOrDefault();
 
 	bool _showToggle = false;
 	JsonObject _initialState;
@@ -129,12 +120,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 			return;
 		}
 
-		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
-		{
-			if ( component != this )
-				component.Enabled = true; // Make sure to enable back all the components in case they were disabled
-		}
-
 		foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
 		{
 			foreach ( var trigger in eventComponent.Triggers )
@@ -157,30 +142,40 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		if ( !IsFinished && nowFinished )
 		{
 			IsFinished = nowFinished;
-			TimesPlayed++;
 
-			End();
+			Disable();
 		}
 	}
 
-	public void End()
+	public void Enable()
+	{
+		if ( HasBeenPlayed )
+			Restart();
+
+		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+			component.Enabled = true;
+
+		_eventMaster.CurrentEvents.Add( this );
+	}
+
+	public void Disable()
 	{
 		IsFinished = true;
 
-		if ( ReinstantiateOnRestart )
+		if ( HasBeenPlayed && ReinstantiateOnRestart )
 		{
 			foreach ( var child in GameObject.Children )
 				child.Destroy();
 		}
 		else
 		{
-			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 			{
 				if ( component != this )
 					component.Enabled = false;
 			}
 
-			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
+			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants ) )
 			{
 				if ( !eventComponent.Triggered )
 					eventComponent.Triggered = true;
@@ -188,6 +183,8 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 				eventComponent.IsPlaying = false;
 			}
 		}
+
+		_eventMaster.CurrentEvents.Remove( this );
 	}
 
 	public void Restart()
@@ -197,7 +194,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		if ( ReinstantiateOnRestart )
 		{
 			var substitute = new GameObject( true, GameObject.Name );
-			var timesPlayed = TimesPlayed;
 			var networked = GameObject.Networked;
 			var parent = GameObject.Parent;
 			var worldTransform = Transform.World;
@@ -208,17 +204,16 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 			substitute.Networked = networked;
 			substitute.SetParent( parent );
 			substitute.Transform.World = worldTransform;
-			substitute.Components.Get<EventDefinition>().TimesPlayed = timesPlayed;
 		}
 		else
 		{
-			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 			{
 				if ( component != this )
 					component.Enabled = true;
 			}
 
-			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
+			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants ) )
 			{
 				if ( eventComponent.Triggered )
 					eventComponent.Triggered = false;

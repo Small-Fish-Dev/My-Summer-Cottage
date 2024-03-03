@@ -67,13 +67,18 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Range( 0f, 1200f, 10f )]
 	public float DayLength { get; set; } = 5 * 60;
 
+	internal StoryMaster _storyMaster => Components.Get<StoryMaster>();
+
 	/// <summary>
 	/// How many in-game days have passed
 	/// </summary>
 	[Property]
 	[Category( "Time" )]
-	[HostSync]
-	public int Day { get; private set; } = 0;
+	public int Day
+	{
+		set => _storyMaster.SetGameDay( value );
+		get => _storyMaster?.CurrentGameDay ?? 1;
+	}
 
 	public event Action OnDayStart;
 	public event Action OnDayEnd;
@@ -81,9 +86,11 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Progress of the day in percents [0; 1].
 	/// </summary>
-	public float DayPercent => (FrozenTime ?? InGameTime) / DayLength;
+	public float DayPercent => ((Scene.IsEditor && !GameManager.IsPlaying) ? (InGameTime) : (FrozenTime ?? InGameTime)) / DayLength;
 
 	public int InGameSeconds => (int)(DayPercent * 24 * 60 * 60);
+
+	public float InGameHours => MathX.Remap( InGameSeconds, 0, 86400, 0f, 24f );
 
 	[HostSync] public bool IsDayOver { get; private set; } = false;
 
@@ -229,6 +236,16 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Broadcast( NetPermission.HostOnly )]
 	public void EndDay()
 	{
+		if ( Scene.IsEditor && !GameManager.IsPlaying ) return;
+
+		// End of day memory !
+		Player.Local?.CaptureMemory( Sandbox.Game.Random.FromArray( new string[]
+		{
+			"All in all.. It was a great and productive day!",
+			"Great end to a day, just wish I could've spent a bit more time at the cottage.",
+			"I did fuck all today... I feel like it's only going to get worse from here."
+		} ) );
+
 		FreezeTime();
 
 		IsDayOver = true;
@@ -277,6 +294,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 		FrozenTime = null;
 		IsDayOver = false;
+		SweetMemories.Clear();
 
 		OnDayStart?.Invoke();
 	}
@@ -297,7 +315,11 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Broadcast( NetPermission.HostOnly )]
 	private void NewDay()
 	{
+		if ( Scene.IsEditor && !GameManager.IsPlaying ) return;
+
 		InGameTime = 0;
-		Day++;
+
+		_storyMaster.NextGameDay();
+		_storyMaster.StartGameDay();
 	}
 }

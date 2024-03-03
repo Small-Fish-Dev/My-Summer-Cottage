@@ -13,7 +13,8 @@ public partial class SlotMachine : Component
 
 	[Property] public SkinnedModelRenderer Model { get; set; }
 
-	[Sync, Property] public BetFlag BetFlags
+	[Sync, Property]
+	public BetFlag BetFlags
 	{
 		get => _betflags;
 		set
@@ -103,12 +104,11 @@ public partial class SlotMachine : Component
 	}
 	#endregion
 
+	public bool CanRoll => !Rolling && BetFlags != BetFlag.None && Money >= Bet;
+
 	public void TryRoll()
 	{
 		PlaySound( "button" );
-
-		if ( Rolling || BetFlags == BetFlag.None || Money < Bet )
-			return;
 
 		_winSound?.Stop();
 		for ( int i = 0; i < 3; i++ )
@@ -154,7 +154,7 @@ public partial class SlotMachine : Component
 		{
 			PlaySound( "insert" );
 			Money++;
-		}	
+		}
 	}
 
 	public void Cashout( Player player )
