@@ -68,9 +68,6 @@ public static partial class GlobalNodes
 	[Title( "End Session" ), Group( "Events" ), Icon( "view_day" )]
 	public static void EndSession()
 	{
-		StoryMaster.SaveStoryProgression();
-		TaskMaster.SaveTasksProgression();
-		EventMaster.SaveEventsProgression();
 
 		// TODO: Save other types of progress here
 

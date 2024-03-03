@@ -1,5 +1,6 @@
 using Editor;
 using Sandbox;
+using Sauna.Event;
 using Sauna.Game;
 using static Sauna.TaskMaster;
 
@@ -130,6 +131,9 @@ public class StoryMaster : Component
 	public SaunaDay LastValidSaunaDay => StoryDays.Any() ? StoryDays.Last().Value : null;
 	public SaunaDay NextSaunaDay => StoryDays.TryGetValue( StoryProgression.StoryDay + 1, out var saunaDay ) ? saunaDay : null;
 
+	TaskMaster _taskMaster => Components.Get<TaskMaster>();
+	EventMaster _eventMaster => Components.Get<EventMaster>();
+
 	/// <summary>
 	/// Start the story day
 	/// </summary>
@@ -144,8 +148,6 @@ public class StoryMaster : Component
 			else
 				scriptedEvent.TriggerTime = new Random().Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
 		}
-
-		// Load events
 	}
 
 	/// <summary>
@@ -168,7 +170,7 @@ public class StoryMaster : Component
 	{
 		StoryProgression.StoryDay = dayNumber;
 
-		InternalSaveStoryProgression();
+		SaveStoryProgression();
 	}
 
 	/// <summary>
@@ -187,7 +189,7 @@ public class StoryMaster : Component
 	public void SetGameDay( int dayNumber )
 	{
 		StoryProgression.GameDay = dayNumber;
-		InternalSaveStoryProgression();
+		SaveStoryProgression();
 	}
 
 	/// <summary>
@@ -206,53 +208,56 @@ public class StoryMaster : Component
 		else
 		{
 			StoryProgression = new();
-			InternalSaveStoryProgression();
+			SaveStoryProgression();
 		}
-	}
-
-	internal void InternalSaveStoryProgression()
-	{
-		FileSystem.Data.WriteJson( "story.json", StoryProgression );
 	}
 
 	/// <summary>
 	/// Save the story progression (Story Day and Game Day)
 	/// </summary>
-	public static void SaveStoryProgression()
+	public void SaveStoryProgression()
 	{
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
-
-		if ( storyMaster == null ) return;
-
-		storyMaster.InternalSaveStoryProgression();
-	}
-
-	internal void InternalResetStoryProgression()
-	{
-		StoryProgression = new();
-		InternalSaveStoryProgression();
+		FileSystem.Data.WriteJson( "story.json", StoryProgression );
 	}
 
 	/// <summary>
 	/// Reset the story progression (Story Day and Game Day)
 	/// </summary>
-	public static void ResetStoryProgression()
+	public void ResetStoryProgression()
 	{
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+		StoryProgression = new();
+		SaveStoryProgression();
+	}
 
-		if ( storyMaster == null ) return;
+	public void StartSession()
+	{
+		LoadStoryProgression();
 
-		storyMaster.InternalResetStoryProgression();
+		StartStoryDay();
+		StartGameDay();
+
+
+	}
+
+	public void EndSession()
+	{
+		// Unload Events
+
+		SaveGame();
+	}
+
+	public void SaveGame()
+	{
+		SaveStoryProgression();
+		_taskMaster.SaveTasksProgression();
+		_eventMaster.SaveEventsProgression();
 	}
 
 	protected override void OnStart()
 	{
 		if ( Scene.IsEditor ) return;
 
-		LoadStoryProgression();
-
-		StartStoryDay();
-		StartGameDay();
+		StartSession();
 	}
 
 	protected override void OnFixedUpdate()

@@ -11,15 +11,11 @@ public class EventMaster : Component
 	/// <summary>
 	/// Get how many events the player has triggered so far (From 0 to 1) - Fetching this runs a check so don't overuse it
 	/// </summary>
-	public static float EventsTriggered
+	public float EventsTriggered
 	{
 		get
 		{
-			var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
-
-			if ( eventMaster == null ) return 0f;
-
-			var allEvents = eventMaster.EventsProgression.Events;
+			var allEvents = EventsProgression.Events;
 			float totalEvents = allEvents.Count();
 			float triggeredEvents = allEvents.Where( x => x.TimesTriggered > 0 ).Count();
 
@@ -30,15 +26,11 @@ public class EventMaster : Component
 	/// <summary>
 	/// Get how many events the player has completed so far (From 0 to 1) - Fetching this runs a check so don't overuse it
 	/// </summary>
-	public static float EventsCompleted
+	public float EventsCompleted
 	{
 		get
 		{
-			var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
-
-			if ( eventMaster == null ) return 0f;
-
-			var allEvents = eventMaster.EventsProgression.Events;
+			var allEvents = EventsProgression.Events;
 			float totalEvents = allEvents.Count();
 			float triggeredEvents = allEvents.Where( x => x.TimesCompleted > 0 ).Count();
 
@@ -84,7 +76,12 @@ public class EventMaster : Component
 		EventsProgression.Events.Add( newTaskCompletion );
 	}
 
-	internal EventCompletion InternalGetEventProgression( string eventName )
+	/// <summary>
+	/// Get the current stats on that event
+	/// </summary>
+	/// <param name="eventName"></param>
+	/// <returns></returns>
+	public EventCompletion GetEventProgression( string eventName )
 	{
 		var eventCompletionExists = EventsProgression.Events.Any( x => x.Event == eventName );
 
@@ -105,20 +102,10 @@ public class EventMaster : Component
 	}
 
 	/// <summary>
-	/// Get the current stats on that event
+	/// Increase that events's total triggered amount
 	/// </summary>
 	/// <param name="eventName"></param>
-	/// <returns></returns>
-	public static EventCompletion GetEventCompletion( string eventName )
-	{
-		var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
-
-		if ( eventMaster == null ) return null;
-
-		return eventMaster.InternalGetEventProgression( eventName );
-	}
-
-	internal void InternalEventTriggered( string eventName )
+	public void EventTriggered( string eventName )
 	{
 		var eventCompletionExists = EventsProgression.Events.Any( x => x.Event == eventName );
 
@@ -134,19 +121,10 @@ public class EventMaster : Component
 	}
 
 	/// <summary>
-	/// Increase that events's total triggered amount
+	/// Increase that event's total completed amount
 	/// </summary>
 	/// <param name="eventName"></param>
-	public static void EventTriggered( string eventName ) // TODO Hook this up
-	{
-		var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
-
-		if ( eventMaster == null ) return;
-
-		eventMaster.InternalEventTriggered( eventName );
-	}
-
-	internal void InternalEventCompleted( string eventName )
+	public void EventCompleted( string eventName )
 	{
 		var eventCompletionExists = EventsProgression.Events.Any( x => x.Event == eventName );
 
@@ -160,19 +138,6 @@ public class EventMaster : Component
 			AddEventProgression( eventName, 0, 1 );
 		}
 
-	}
-
-	/// <summary>
-	/// Increase that event's total completed amount
-	/// </summary>
-	/// <param name="eventName"></param>
-	public static void TaskCompleted( string eventName ) // TODO Hook this up
-	{
-		var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
-
-		if ( eventMaster == null ) return;
-
-		eventMaster.InternalEventCompleted( eventName );
 	}
 
 	public void LoadEventsProgression()
@@ -189,11 +154,14 @@ public class EventMaster : Component
 			foreach ( var @event in allEvents )
 				AddEventProgression( @event.EventName );
 
-			InternalSaveEventsProgression();
+			SaveEventsProgression();
 		}
 	}
 
-	internal void InternalSaveEventsProgression()
+	/// <summary>
+	/// Save the events current triggered and completion progress/amount
+	/// </summary>
+	public void SaveEventsProgression()
 	{
 		var allEvents = Scene.Components.GetAll<EventDefinition>()
 				.DistinctBy( x => x.EventName ); // Avoid multiple event definitions
@@ -207,18 +175,9 @@ public class EventMaster : Component
 	}
 
 	/// <summary>
-	/// Save the events current triggered and completion progress/amount
+	/// Reset the events current triggered and completion progress/amount
 	/// </summary>
-	public static void SaveEventsProgression()
-	{
-		var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
-
-		if ( eventMaster == null ) return;
-
-		eventMaster.InternalSaveEventsProgression();
-	}
-
-	internal void InternalResetEventsProgression()
+	public void ResetEventsProgression()
 	{
 		EventsProgression.Events?.Clear();
 
@@ -228,19 +187,7 @@ public class EventMaster : Component
 		foreach ( var @event in allEvents )
 			AddEventProgression( @event.EventName );
 
-		InternalSaveEventsProgression();
-	}
-
-	/// <summary>
-	/// Reset the events current triggered and completion progress/amount
-	/// </summary>
-	public static void ResetEventsProgression()
-	{
-		var eventMaster = GameManager.ActiveScene.GetAllComponents<EventMaster>().FirstOrDefault(); // Find the event master
-
-		if ( eventMaster == null ) return;
-
-		eventMaster.InternalResetEventsProgression();
+		SaveEventsProgression();
 	}
 
 	protected override void OnFixedUpdate()
