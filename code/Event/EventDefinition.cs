@@ -1,5 +1,6 @@
 using Sandbox;
 using Sauna;
+using Sauna.Event;
 
 public enum EventType
 {
@@ -74,6 +75,8 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// </summary>
 	public bool IsFinished { get; set; } = false;
 
+	TaskMaster _taskMaster => Scene.Components.Get<TaskMaster>();
+	EventMaster _eventMaster => Scene.Components.Get<EventMaster>();
 
 	bool _showToggle = false;
 	JsonObject _initialState;
@@ -153,6 +156,8 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
 			component.Enabled = true;
+
+		_eventMaster.CurrentEvents.Add( this );
 	}
 
 	public void Disable()
@@ -180,6 +185,8 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 				eventComponent.IsPlaying = false;
 			}
 		}
+
+		_eventMaster.CurrentEvents.Remove( this );
 	}
 
 	public void Restart()

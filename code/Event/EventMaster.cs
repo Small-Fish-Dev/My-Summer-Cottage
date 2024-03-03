@@ -6,7 +6,8 @@ namespace Sauna.Event;
 public class EventMaster : Component
 {
 	[Property]
-	public List<EventDefinition> CurrentEvents { get; set; }
+	public List<EventDefinition> CurrentEvents { get; set; } = new();
+	public IEnumerable<EventDefinition> AllEvents => Scene.GetAllComponents<EventDefinition>();
 
 	/// <summary>
 	/// Get how many events the player has triggered so far (From 0 to 1) - Fetching this runs a check so don't overuse it

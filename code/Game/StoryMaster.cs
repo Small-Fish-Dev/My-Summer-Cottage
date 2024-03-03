@@ -229,6 +229,59 @@ public class StoryMaster : Component
 		SaveStoryProgression();
 	}
 
+	public void LoadEventPool()
+	{
+		if ( CurrentSaunaDay == null ) return;
+
+		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Common ) )
+		{
+			for ( int common = 0; common < CurrentSaunaDay.RandomEvents[EventRarity.Common]; common++ )
+			{
+				var availableCommonEvents = _eventMaster.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Common )
+					.Where( x => !_eventMaster.CurrentEvents.Contains( x ) )
+					.ToList(); // We haven't chosen it yet
+
+				if ( availableCommonEvents.Any() )
+				{
+					var chosenEvent = new Random().FromList( availableCommonEvents );
+					chosenEvent.Enable();
+				}
+			}
+		}
+
+		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Uncommon ) )
+		{
+			for ( int uncommon = 0; uncommon < CurrentSaunaDay.RandomEvents[EventRarity.Uncommon]; uncommon++ )
+			{
+				var availableUncommonEvents = _eventMaster.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Uncommon )
+					.Where( x => !_eventMaster.CurrentEvents.Contains( x ) )
+					.ToList(); // We haven't chosen it yet
+
+				if ( availableUncommonEvents.Any() )
+				{
+					var chosenEvent = new Random().FromList( availableUncommonEvents );
+					chosenEvent.Enable();
+				}
+			}
+		}
+
+		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Rare ) )
+		{
+			for ( int rare = 0; rare < CurrentSaunaDay.RandomEvents[EventRarity.Rare]; rare++ )
+			{
+				var availableRareEvents = _eventMaster.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Rare )
+					.Where( x => !_eventMaster.CurrentEvents.Contains( x ) )
+					.ToList(); // We haven't chosen it yet
+
+				if ( availableRareEvents.Any() )
+				{
+					var chosenEvent = new Random().FromList( availableRareEvents );
+					chosenEvent.Enable();
+				}
+			}
+		}
+	}
+
 	public void StartSession()
 	{
 		LoadStoryProgression();
