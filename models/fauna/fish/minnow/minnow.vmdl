@@ -109,13 +109,97 @@
 				children = 
 				[
 					{
-						_class = "PhysicsShapeBox"
+						_class = "PhysicsShapeCapsule"
 						parent_bone = "body"
-						surface_prop = "default"
+						surface_prop = "flesh"
 						collision_tags = "solid"
-						origin = [ 0.0, 0.0, 0.0 ]
+						radius = 0.486554
+						point0 = [ -0.357323, 0.0, 0.0 ]
+						point1 = [ 0.407332, 0.0, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "head"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 0.398653
+						point0 = [ 0.167518, 0.0, 0.0 ]
+						point1 = [ 0.767602, 0.0, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeCapsule"
+						parent_bone = "tail"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						radius = 0.302875
+						point0 = [ 1.211501, 0.0, 0.0 ]
+						point1 = [ 0.0, 0.0, 0.0 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "fin"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						origin = [ 0.765509, 0.019269, 0.127619 ]
 						angles = [ 0.0, 0.0, 0.0 ]
-						dimensions = [ 10.0, 10.0, 10.0 ]
+						dimensions = [ 1.447021, 1.165341, 0.39975 ]
+					},
+				]
+			},
+			{
+				_class = "PhysicsJointList"
+				children = 
+				[
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "head"
+						anchor_origin = [ 1.100126, 0.0, -0.000008 ]
+						anchor_angles = [ 0.001453, -89.999992, -87.207993 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.01
+						enable_swing_limit = true
+						swing_limit = 45.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -30.0
+						max_twist_angle = 30.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "tail"
+						anchor_origin = [ -0.974819, 0.0, -0.010076 ]
+						anchor_angles = [ 87.914856, 0.044805, 0.044835 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.01
+						enable_swing_limit = true
+						swing_limit = 45.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -30.0
+						max_twist_angle = 30.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail"
+						child_body = "fin"
+						anchor_origin = [ 1.2115, 0.000002, -0.0 ]
+						anchor_angles = [ -0.000065, -91.02578, -90.000008 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.01
+						enable_swing_limit = true
+						swing_limit = 45.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -30.0
+						max_twist_angle = 30.0
 					},
 				]
 			},

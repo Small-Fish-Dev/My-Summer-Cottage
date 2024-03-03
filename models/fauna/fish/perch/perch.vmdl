@@ -113,6 +113,105 @@
 					},
 				]
 			},
+			{
+				_class = "PhysicsJointList"
+				children = 
+				[
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "head"
+						anchor_origin = [ 5.428909, -0.000001, 0.028592 ]
+						anchor_angles = [ -0.000318, -90.0, -87.207108 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 45.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -30.0
+						max_twist_angle = 30.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "body"
+						child_body = "tail"
+						anchor_origin = [ -5.419713, 0.000003, 0.261969 ]
+						anchor_angles = [ 87.914284, -0.010422, -0.010504 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 45.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -30.0
+						max_twist_angle = 30.0
+					},
+					{
+						_class = "PhysicsJointConical"
+						parent_body = "tail"
+						child_body = "fin"
+						anchor_origin = [ 6.799163, 0.156709, -0.000002 ]
+						anchor_angles = [ -0.000309, -91.026619, -90.000015 ]
+						collision_enabled = false
+						linear_strength = 0.0
+						angular_strength = 0.0
+						friction = 0.1
+						enable_swing_limit = true
+						swing_limit = 45.0
+						swing_offset_angle = [ 0.0, 0.0, 0.0 ]
+						enable_twist_limit = true
+						min_twist_angle = -30.0
+						max_twist_angle = 30.0
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "body"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						origin = [ 0.0, -0.043423, 0.009984 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 10.0, 2.748281, 8.380095 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "head"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						origin = [ 2.186485, -0.068701, 0.021787 ]
+						angles = [ -46.305893, 0.000198, -0.000082 ]
+						dimensions = [ 5.30092, 1.545822, 5.000076 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "tail"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						origin = [ 3.186212, 0.337167, -0.06396 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 6.243333, 5.663507, 1.602721 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = "fin"
+						surface_prop = "flesh"
+						collision_tags = "solid"
+						origin = [ 3.136868, -0.202816, 0.182649 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 6.390085, 5.160279, 1.588848 ]
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
