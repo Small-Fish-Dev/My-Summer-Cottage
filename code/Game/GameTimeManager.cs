@@ -73,7 +73,11 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Property]
 	[Category( "Time" )]
 	[HostSync]
-	public int Day { get; private set; } = 0;
+	public int Day
+	{
+		set => StoryMaster.SetStoryDay( value );
+		get => StoryMaster.CurrentGameDay;
+	}
 
 	public event Action OnDayStart;
 	public event Action OnDayEnd;
@@ -311,6 +315,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	private void NewDay()
 	{
 		InGameTime = 0;
-		Day++;
+
+		StoryMaster.NextGameDay();
 	}
 }
