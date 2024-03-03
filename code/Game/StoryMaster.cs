@@ -241,7 +241,7 @@ public class StoryMaster : Component
 
 	public void EndSession()
 	{
-		// Unload Events
+		_eventMaster.UnloadAllEvents();
 
 		SaveGame();
 	}

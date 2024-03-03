@@ -190,6 +190,14 @@ public class EventMaster : Component
 		SaveEventsProgression();
 	}
 
+	public void UnloadAllEvents()
+	{
+		var allEvents = Scene.Components.GetAll<EventDefinition>();
+
+		foreach ( var @event in allEvents )
+			@event.Disable();
+	}
+
 	protected override void OnFixedUpdate()
 	{
 		InvokePolledMethods();
