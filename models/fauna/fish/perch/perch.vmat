@@ -1,0 +1,29 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader"
+
+	//---- Rendering ----
+	F_ALPHA_TEST 1
+	F_RENDER_BACKFACES 1
+	F_TRANSPARENCY 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "models/fauna/fish/perch/perch_color.png"
+	ColorTintMask "materials/default/default.tga"
+	Metalness "models/fauna/fish/perch/perch_metal.png"
+	Normal "models/fauna/fish/perch/perch_normal.png"
+	Roughness "models/fauna/fish/perch/perch_rough.png"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+
+	//---- Transparency ----
+	TransparencyMask "models/fauna/fish/perch/perch_trans.png"
+	TransparencyRounding "0.500"
+}
