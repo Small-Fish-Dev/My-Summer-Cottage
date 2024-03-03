@@ -94,7 +94,7 @@ public class ItemComponent : Component
 		if ( IsProxy )
 			return;
 
-		var inventory = Player.Local.Inventory;
+		var inventory = Player.Local?.Inventory;
 		inventory?.ClearItem( this );
 	}
 }

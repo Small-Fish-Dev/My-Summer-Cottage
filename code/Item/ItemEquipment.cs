@@ -101,7 +101,7 @@ public class ItemEquipment : ItemComponent
 
 	protected override void OnPreRender()
 	{
-		if ( !Equipped || !UpdatePosition )
+		if ( !Equipped || !UpdatePosition || !GameManager.IsPlaying || GameObject == Scene )
 			return;
 
 		var player = GameObject.Parent.Components.Get<Player>( true );
@@ -162,7 +162,7 @@ public class ItemEquipment : ItemComponent
 			return;
 
 		var renderer = Components.Get<ModelRenderer>( FindMode.EverythingInSelfAndDescendants );
-		if ( renderer == null )
+		if ( renderer == null || renderer.Model == null )
 			return;
 
 		var attachment = _model.GetAttachment( Attachment ) ?? global::Transform.Zero;
@@ -171,7 +171,7 @@ public class ItemEquipment : ItemComponent
 		Gizmo.Draw.IgnoreDepth = true;
 		Gizmo.Draw.SolidSphere( attachment.Position, 0.1f );
 		Gizmo.Draw.IgnoreDepth = false;
-
+		//AttachmentTransform = global::Transform.Zero;
 		model.Transform = attachment.ToWorld( AttachmentTransform );
 
 		using ( Gizmo.Scope( $"{Name}", new Transform( model.Position, model.Rotation ) ) )
