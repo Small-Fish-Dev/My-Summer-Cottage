@@ -296,8 +296,6 @@ public class StoryMaster : Component
 						scriptedEvent.Triggered = true;
 					}
 				}
-
-				Log.Info( $"Triggered: {scriptedEvent.Triggered} - TriggerTime: {scriptedEvent.TriggerTime} - CurrentTime: {currentHour}" );
 			}
 		}
 	}
