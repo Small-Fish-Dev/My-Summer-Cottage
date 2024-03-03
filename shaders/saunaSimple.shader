@@ -11,6 +11,7 @@ FEATURES
     #include "common/features.hlsl"
     Feature( F_ALPHA_TEST, 0..1, "Rendering" );
 	Feature( F_TRANSPARENCY, 0..1, "Rendering" );
+	FeatureRule( Requires1(F_ALPHA_TEST, F_TRANSPARENCY), "You might want to enable Transparency for this material first.");
 	Feature( F_EMISSIVE, 0..1, "Rendering" );
 }
 

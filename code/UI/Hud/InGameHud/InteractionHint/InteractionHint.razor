@@ -10,20 +10,19 @@
 	}
 
 	<div class="content">
-		<text class="title">@Name</text>
-
+		<text class="title">@DisplayName</text>
 		<div class="interactions">
 			@foreach(var interaction in _interactions)
 			{
-				if ( !FromHold && interaction.HoldOnly )
+				if ( !FromHold && interaction.HoldOnly || !WithinBounds(interaction) )
 					continue;
 
-				var disabled = !CanInteract( interaction );
-				if ( (!disabled || interaction.ShowWhenDisabled) && WithinBounds( interaction ) )
+				var canInteract = !interaction.Disabled();
+				if ( canInteract || interaction.ShowWhenDisabled() )
 				{
-					var inactive = !HasPriority( interaction.Keybind ) || disabled;
+					var isActive = HasPriority( interaction.Keybind ) && canInteract;
 					<div class="interaction">
-						<inputhint class="hint" input=@interaction.Keybind DarkMode=@inactive />
+						<inputhint class="hint" input=@interaction.Keybind DarkMode=@(!isActive) />
 						<text class="description" style="color: @interaction.Color.Hex">@interaction.Text</text>
 					</div>
 				}
@@ -35,39 +34,25 @@
 @code {
 	public bool FromHold { get; set; }
 
+	private string DisplayName => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Name;
 	private GameObject _targetObject => FromHold
 		? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
 		: Player.Local?.TargetedGameObject;
 
-	private string Name => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Name;
-	private bool HasTarget => _targetObject is not null;
-
-	private bool ShouldHide => 
-		(_targetObject?.Components?.Get<Interactions>( FindMode.EverythingInSelf )?.HideOnEmpty ?? false)
-		&& !(_interactions?.Any( i => (CanInteract( i ) || i.ShowWhenDisabled) && WithinBounds( i ) ) ?? false);
-
 	private const float INTERACTION_COOLDOWN = 0.1f;
+	private static TimeSince _lastInteracted = 0f;
 	private static List<string> priorityList = new();
 	private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
-	private static TimeSince _lastInteracted;
+	private bool WithinBounds(Interaction interaction) => !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
+	private bool HasPriority( string key ) => FromHold || !priorityList.Contains( key.ToLower() );
+	private BBox GetInteractionBounds(Interaction interaction)
+		=> new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
+			.Transform(Player.Local.TargetedGameObject.Transform.World);
 
 	public InteractionHint()
 	{
 		_lastInteracted = 0f;
 	}
-
-	private bool CanInteract(Interaction interaction)
-		=> interaction.Disabled is null || !interaction.Disabled();
-
-	private bool WithinBounds(Interaction interaction)
-		=> !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
-
-	private bool HasPriority( string key )
-		=> FromHold || !priorityList.Contains( key.ToLower() );
-
-	private BBox GetInteractionBounds(Interaction interaction)
-		=> new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
-			.Transform(Player.Local.TargetedGameObject.Transform.World);
 
 	private void AddToPriority( string key, bool forced = false )
 	{
@@ -86,43 +71,39 @@
 	{
 		if ( FromHold ) priorityList.Clear();
 
-		SetClass( "visible", HasTarget && !ShouldHide );
+		SetClass( "visible", ShowHint() );
 		if (!HasClass("visible"))
 			return;
 
 		var pos = FromHold ? 0 : Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
 		foreach ( var interaction in _interactions )
 		{
-			if ( !FromHold && interaction.HoldOnly )
+			if ( !FromHold && interaction.HoldOnly || !WithinBounds(interaction))
 				continue;
 
-			if ( WithinBounds( interaction ) )
+			var canInteract = !interaction.Disabled();
+			if ( canInteract )
+				AddToPriority( interaction.Keybind );
+
+			if ( !HasPriority( interaction.Keybind ) )
+				continue;
+
+			if ( interaction.HasBounds && !FromHold )
+				pos = Player.Local.TargetedGameObject.Transform.Position + interaction.Position * Player.Local.TargetedGameObject.Transform.Rotation;
+
+			if (canInteract && interaction.InputFunction(interaction.Keybind) && (interaction.InputMode == InputMode.Down || _lastInteracted > INTERACTION_COOLDOWN))
 			{
-				var canInteract = CanInteract(interaction);
+				_targetObject?.Network.TakeOwnership();
+				interaction.Action?.Invoke(Player.Local, _targetObject);
+				_lastInteracted = 0f;
 
-				if ( canInteract )
-					AddToPriority( interaction.Keybind );
+				if ( interaction.Identifier != String.Empty )
+					EventMaster.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
 
-				if ( !HasPriority( interaction.Keybind ) )
-					continue;
-
-				if ( interaction.HasBounds && !FromHold )
-					pos = Player.Local.TargetedGameObject.Transform.Position + interaction.Position * Player.Local.TargetedGameObject.Transform.Rotation;
-
-				if (canInteract && interaction.InputFunction(interaction.Keybind) && (interaction.InputMode == InputMode.Down || _lastInteracted > INTERACTION_COOLDOWN))
+				if ( !FromHold ) // No need to play use animation for held items.
 				{
-					_targetObject?.Network.TakeOwnership();
-					interaction.Action?.Invoke(Player.Local, _targetObject);
-					_lastInteracted = 0f;
-
-					if ( interaction.Identifier != String.Empty )
-						EventMaster.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
-
-					if ( !FromHold ) // No need to play use animation for held items.
-					{
-						var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
-						Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ) );
-					}
+					var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
+					Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ), interaction.AnimationIdentifier );
 				}
 			}
 		}
@@ -135,8 +116,28 @@
         Style.Top = Length.Fraction( MathF.Floor( pos.y * 200f + 0.5f ) / 200f );
 	}
 
+	private bool ShowHint()
+	{
+		if (!_targetObject.IsValid())
+			return false;
+
+		if (!_targetObject.Components.TryGet<Interactions>( out var interactions ))
+			return false;
+
+		var interactionsAvailable = interactions.AllInteractions.Where((i) => (!i.Disabled() || i.ShowWhenDisabled()) && WithinBounds(i)).Any();
+		if (!interactionsAvailable && interactions.HideOnEmpty)
+			return false;
+
+		return interactionsAvailable;
+	}
+
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(HasTarget, Name, _interactions.HashCombine(i => HashCode.Combine(i.Text, CanInteract(i), WithinBounds(i), HasPriority(i.Keybind))));
+		return HashCode.Combine
+		(
+			DisplayName, 
+			_targetObject.IsValid(),
+			_interactions.HashCombine(i => HashCode.Combine(i.Text, i.Disabled(), WithinBounds(i), HasPriority(i.Keybind)))
+		);
 	}
 }

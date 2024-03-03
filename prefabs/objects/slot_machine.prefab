@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "0308d5f9-2d51-4b84-95a0-b024a7317c7f",
+    "Id": "f1bdc728-67ca-44f9-a33f-291bb5fa162e",
     "Name": "slot_machine",
     "Enabled": true,
     "Components": [
@@ -10,51 +10,43 @@
         "ObjectInteractions": [
           {
             "Identifier": "slot.play",
-            "Keybind": "use",
+            "Keybind": "Use",
             "Description": "Play",
             "Action": {
               "Version": 5,
               "UserData": {
                 "Title": "Action",
-                "id": "41242cc7-4847-4e4f-bf68-74c810bf0c5c",
-                "ReferencedComponentTypes": []
+                "id": "4a56af3b-2d31-48b7-807e-268e9e2a30a8",
+                "ReferencedComponentTypes": [
+                  "package.fish.sauna/Sauna.SlotMachine"
+                ]
               },
               "Variables": [],
               "Nodes": [
                 {
                   "Id": 0,
-                  "Type": "input",
-                  "UserData": {
-                    "Labels": {
-                      "_signal": "on start",
-                      "obj": "gameobject"
-                    },
-                    "Position": "-112,80"
-                  }
+                  "Type": "input"
                 },
                 {
                   "Id": 1,
-                  "Type": "call",
+                  "Type": "scene.get",
                   "Properties": {
-                    "T": "package.fish.sauna/Sauna.SlotMachine",
-                    "_name": "Get",
-                    "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    "T": "package.fish.sauna/Sauna.SlotMachine"
                   },
                   "UserData": {
-                    "Position": "208,80"
+                    "Position": "176,16"
                   }
                 },
                 {
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
-                    "_name": "TryRoll",
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
                     "_isStatic": false,
-                    "_type": "package.fish.sauna/Sauna.SlotMachine"
+                    "_name": "TryRoll"
                   },
                   "UserData": {
-                    "Position": "432,80"
+                    "Position": "432,0"
                   }
                 }
               ],
@@ -63,7 +55,7 @@
                   "SrcId": 0,
                   "SrcName": "obj",
                   "DstId": 1,
-                  "DstName": "_target"
+                  "DstName": "_this"
                 },
                 {
                   "SrcId": 0,
@@ -83,7 +75,7 @@
               "Version": 5,
               "UserData": {
                 "Title": "Disabled",
-                "id": "81d80c0c-a733-480b-863b-33aa950513d5",
+                "id": "5f09ced7-3376-4bf3-9755-ccc147ba6767",
                 "ReferencedComponentTypes": [
                   "package.fish.sauna/Sauna.SlotMachine"
                 ]
@@ -94,12 +86,15 @@
                   "Id": 0,
                   "Type": "output",
                   "UserData": {
-                    "Position": "80,80"
+                    "Position": "48,-16"
                   }
                 },
                 {
                   "Id": 2,
-                  "Type": "input"
+                  "Type": "input",
+                  "UserData": {
+                    "Position": "-240,-112"
+                  }
                 },
                 {
                   "Id": 3,
@@ -108,429 +103,25 @@
                     "T": "package.fish.sauna/Sauna.SlotMachine"
                   },
                   "UserData": {
-                    "Position": "-464,16"
+                    "Position": "-496,-16"
                   }
                 },
                 {
-                  "Id": 6,
+                  "Id": 4,
                   "Type": "property.get",
                   "Properties": {
                     "_type": "package.fish.sauna/Sauna.SlotMachine",
                     "_name": "CanRoll"
                   },
                   "UserData": {
-                    "Position": "-272,80"
-                  }
-                },
-                {
-                  "Id": 7,
-                  "Type": "op.not",
-                  "UserData": {
-                    "Position": "-64,96"
-                  }
-                }
-              ],
-              "Links": [
-                {
-                  "SrcId": 7,
-                  "SrcName": "_result",
-                  "DstId": 0,
-                  "DstName": "_result"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_target",
-                  "DstId": 3,
-                  "DstName": "_this"
-                },
-                {
-                  "SrcId": 3,
-                  "SrcName": "_result",
-                  "DstId": 6,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 6,
-                  "SrcName": "_result",
-                  "DstId": 7,
-                  "DstName": "a"
-                }
-              ]
-            },
-            "ShowWhenDisabled": true,
-            "HasBounds": true,
-            "Position": "19.25671,11.21452,43.52247",
-            "Extents": "2.950275,5.265101,4.963008"
-          },
-          {
-            "Identifier": "slot.line2",
-            "Keybind": "use",
-            "Description": "Line 2",
-            "Action": {
-              "Version": 5,
-              "UserData": {
-                "Title": "Action",
-                "id": "f372a2d9-afa9-450c-a306-7aec4b3c9d18",
-                "ReferencedComponentTypes": []
-              },
-              "Variables": [],
-              "Nodes": [
-                {
-                  "Id": 1,
-                  "Type": "input",
-                  "UserData": {
-                    "Labels": {
-                      "_signal": "on start",
-                      "obj": "gameobject"
-                    },
-                    "Position": "-128,64"
-                  }
-                },
-                {
-                  "Id": 2,
-                  "Type": "call",
-                  "Properties": {
-                    "T": "package.fish.sauna/Sauna.SlotMachine",
-                    "_name": "Get",
-                    "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
-                  },
-                  "UserData": {
-                    "Position": "176,64"
-                  }
-                },
-                {
-                  "Id": 4,
-                  "Type": "call",
-                  "Properties": {
-                    "_name": "ToggleBetFlag",
-                    "_isStatic": false,
-                    "_type": "package.fish.sauna/Sauna.SlotMachine"
-                  },
-                  "UserData": {
-                    "Position": "416,64"
-                  }
-                }
-              ],
-              "Links": [
-                {
-                  "SrcId": 1,
-                  "SrcName": "obj",
-                  "DstId": 2,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 1,
-                  "SrcName": "_signal",
-                  "DstId": 4,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_result",
-                  "DstId": 4,
-                  "DstName": "_target"
-                },
-                {
-                  "Value": 2,
-                  "DstId": 4,
-                  "DstName": "line"
-                }
-              ]
-            },
-            "HasBounds": true,
-            "Position": "17.43249,-8.707147,46.94442",
-            "Extents": "3.157069,5.474216,4.794635"
-          },
-          {
-            "Identifier": "slot.line1",
-            "Keybind": "use",
-            "Description": "Line 1",
-            "Action": {
-              "Version": 5,
-              "UserData": {
-                "Title": "Action",
-                "id": "b18e7a2a-72ee-4962-8424-ec296adddf53",
-                "ReferencedComponentTypes": []
-              },
-              "Variables": [],
-              "Nodes": [
-                {
-                  "Id": 1,
-                  "Type": "input",
-                  "UserData": {
-                    "Labels": {
-                      "_signal": "on start",
-                      "obj": "gameobject"
-                    },
-                    "Position": "-64,64"
-                  }
-                },
-                {
-                  "Id": 2,
-                  "Type": "call",
-                  "Properties": {
-                    "T": "package.fish.sauna/Sauna.SlotMachine",
-                    "_name": "Get",
-                    "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
-                  },
-                  "UserData": {
-                    "Position": "240,64"
-                  }
-                },
-                {
-                  "Id": 3,
-                  "Type": "call",
-                  "Properties": {
-                    "_name": "ToggleBetFlag",
-                    "_isStatic": false,
-                    "_type": "package.fish.sauna/Sauna.SlotMachine"
-                  },
-                  "UserData": {
-                    "Position": "480,64"
-                  }
-                }
-              ],
-              "Links": [
-                {
-                  "SrcId": 1,
-                  "SrcName": "obj",
-                  "DstId": 2,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 1,
-                  "SrcName": "_signal",
-                  "DstId": 3,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_result",
-                  "DstId": 3,
-                  "DstName": "_target"
-                },
-                {
-                  "Value": 1,
-                  "DstId": 3,
-                  "DstName": "line"
-                }
-              ]
-            },
-            "HasBounds": true,
-            "Position": "17.50141,-2.121587,46.89997",
-            "Extents": "3.459248,5.384391,4.798366"
-          },
-          {
-            "Identifier": "slot.line3",
-            "Keybind": "use",
-            "Description": "Line 3",
-            "Action": {
-              "Version": 5,
-              "UserData": {
-                "Title": "Action",
-                "id": "f1e25444-42b3-440d-ba0b-e036c4e38bec",
-                "ReferencedComponentTypes": []
-              },
-              "Variables": [],
-              "Nodes": [
-                {
-                  "Id": 1,
-                  "Type": "input",
-                  "UserData": {
-                    "Labels": {
-                      "_signal": "on start",
-                      "obj": "gameobject"
-                    },
-                    "Position": "-64,128"
-                  }
-                },
-                {
-                  "Id": 2,
-                  "Type": "call",
-                  "Properties": {
-                    "T": "package.fish.sauna/Sauna.SlotMachine",
-                    "_name": "Get",
-                    "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
-                  },
-                  "UserData": {
-                    "Position": "240,128"
-                  }
-                },
-                {
-                  "Id": 3,
-                  "Type": "call",
-                  "Properties": {
-                    "_name": "ToggleBetFlag",
-                    "_isStatic": false,
-                    "_type": "package.fish.sauna/Sauna.SlotMachine"
-                  },
-                  "UserData": {
-                    "Position": "480,128"
-                  }
-                }
-              ],
-              "Links": [
-                {
-                  "SrcId": 1,
-                  "SrcName": "obj",
-                  "DstId": 2,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 1,
-                  "SrcName": "_signal",
-                  "DstId": 3,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_result",
-                  "DstId": 3,
-                  "DstName": "_target"
-                },
-                {
-                  "Value": 3,
-                  "DstId": 3,
-                  "DstName": "line"
-                }
-              ]
-            },
-            "HasBounds": true,
-            "Position": "17.71548,4.640842,46.9936",
-            "Extents": "3.184448,5.080022,4.854632"
-          },
-          {
-            "Identifier": "slot.cash_out",
-            "Keybind": "use",
-            "Description": "Cash out",
-            "Action": {
-              "Version": 5,
-              "UserData": {
-                "Title": "Action",
-                "id": "851b4f40-cb5c-4648-992c-572746907237",
-                "ReferencedComponentTypes": []
-              },
-              "Variables": [],
-              "Nodes": [
-                {
-                  "Id": 1,
-                  "Type": "input",
-                  "UserData": {
-                    "Labels": {
-                      "_signal": "on start",
-                      "obj": "gameobject",
-                      "interactor": "player"
-                    },
-                    "Position": "-112,208"
-                  }
-                },
-                {
-                  "Id": 2,
-                  "Type": "call",
-                  "Properties": {
-                    "T": "package.fish.sauna/Sauna.SlotMachine",
-                    "_name": "Get",
-                    "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
-                  },
-                  "UserData": {
-                    "Position": "192,208"
-                  }
-                },
-                {
-                  "Id": 4,
-                  "Type": "call",
-                  "Properties": {
-                    "_name": "Cashout",
-                    "_isStatic": false,
-                    "_type": "package.fish.sauna/Sauna.SlotMachine"
-                  },
-                  "UserData": {
-                    "Position": "416,208"
-                  }
-                }
-              ],
-              "Links": [
-                {
-                  "SrcId": 1,
-                  "SrcName": "obj",
-                  "DstId": 2,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 1,
-                  "SrcName": "_signal",
-                  "DstId": 4,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_result",
-                  "DstId": 4,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 1,
-                  "SrcName": "interactor",
-                  "DstId": 4,
-                  "DstName": "player"
-                }
-              ]
-            },
-            "Disabled": {
-              "Version": 5,
-              "UserData": {
-                "Title": "Disabled",
-                "id": "919ecec2-b985-4c7b-bc14-be198438f184",
-                "ReferencedComponentTypes": [
-                  "package.fish.sauna/Sauna.SlotMachine"
-                ]
-              },
-              "Variables": [],
-              "Nodes": [
-                {
-                  "Id": 0,
-                  "Type": "output",
-                  "UserData": {
-                    "Position": "32,160"
-                  }
-                },
-                {
-                  "Id": 2,
-                  "Type": "input",
-                  "UserData": {
-                    "Position": "-224,80"
-                  }
-                },
-                {
-                  "Id": 3,
-                  "Type": "scene.get",
-                  "Properties": {
-                    "T": "package.fish.sauna/Sauna.SlotMachine"
-                  },
-                  "UserData": {
-                    "Position": "-528,176"
+                    "Position": "-320,-16"
                   }
                 },
                 {
                   "Id": 5,
-                  "Type": "op.lessthanorequal",
+                  "Type": "op.not",
                   "UserData": {
-                    "Position": "-128,208"
-                  }
-                },
-                {
-                  "Id": 6,
-                  "Type": "property.get",
-                  "Properties": {
-                    "_type": "package.fish.sauna/Sauna.SlotMachine",
-                    "_name": "Money"
-                  },
-                  "UserData": {
-                    "Position": "-336,208"
+                    "Position": "-96,-0"
                   }
                 }
               ],
@@ -548,103 +139,118 @@
                   "DstName": "_this"
                 },
                 {
-                  "SrcId": 6,
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 4,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 4,
                   "SrcName": "_result",
                   "DstId": 5,
                   "DstName": "a"
-                },
-                {
-                  "Value": 0,
-                  "DstId": 5,
-                  "DstName": "b"
-                },
-                {
-                  "SrcId": 3,
-                  "SrcName": "_result",
-                  "DstId": 6,
-                  "DstName": "_target"
                 }
               ]
             },
-            "ShowWhenDisabled": true,
-            "HasBounds": true,
-            "Position": "12.13725,9.601606,63.11052",
-            "Extents": "4.215116,5.380785,5.297434"
-          },
-          {
-            "Identifier": "slot.insert_coin",
-            "Keybind": "use",
-            "Description": "Insert coin",
-            "Action": {
+            "ShowWhenDisabled": {
               "Version": 5,
               "UserData": {
-                "Title": "Action",
-                "id": "488b9ef4-9481-4116-b293-4004a65aafb5",
+                "Title": "Show When Disabled",
+                "id": "4d155c6a-288a-43cc-af4b-171f349b1e3d",
                 "ReferencedComponentTypes": []
               },
               "Variables": [],
               "Nodes": [
                 {
-                  "Id": 1,
-                  "Type": "input",
+                  "Id": 0,
+                  "Type": "output",
                   "UserData": {
-                    "Labels": {
-                      "_signal": "on start",
-                      "obj": "gameobject",
-                      "interactor": "player"
-                    },
-                    "Position": "-64,160"
+                    "Position": "16,48"
+                  }
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": true,
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "HasBounds": true,
+            "Position": "19.257,11.215,43.522",
+            "Extents": "2.95,5.265,4.963",
+            "AnimationIdentifier": "interact"
+          },
+          {
+            "Identifier": "slot.insert_coin",
+            "Keybind": "Use",
+            "Description": "Insert Coin",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "66ae2fad-8356-492d-9623-ad809de60903",
+                "ReferencedComponentTypes": [
+                  "package.fish.sauna/Sauna.SlotMachine"
+                ]
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "scene.get",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine"
+                  },
+                  "UserData": {
+                    "Position": "176,16"
                   }
                 },
                 {
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
-                    "T": "package.fish.sauna/Sauna.SlotMachine",
-                    "_name": "Get",
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
                     "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    "_name": "InsertCoin"
                   },
                   "UserData": {
-                    "Position": "240,160"
-                  }
-                },
-                {
-                  "Id": 4,
-                  "Type": "call",
-                  "Properties": {
-                    "_name": "InsertCoin",
-                    "_isStatic": false,
-                    "_type": "package.fish.sauna/Sauna.SlotMachine"
-                  },
-                  "UserData": {
-                    "Position": "464,160"
+                    "Position": "464,-0"
                   }
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 1,
+                  "SrcId": 0,
                   "SrcName": "obj",
+                  "DstId": 1,
+                  "DstName": "_this"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
                   "DstId": 2,
                   "DstName": "_target"
                 },
                 {
-                  "SrcId": 1,
-                  "SrcName": "_signal",
-                  "DstId": 4,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_result",
-                  "DstId": 4,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 1,
+                  "SrcId": 0,
                   "SrcName": "interactor",
-                  "DstId": 4,
+                  "DstId": 2,
                   "DstName": "player"
                 }
               ]
@@ -653,7 +259,7 @@
               "Version": 5,
               "UserData": {
                 "Title": "Disabled",
-                "id": "3ba7a1c0-9cd1-4e26-be23-d8c0e6dccc7a",
+                "id": "021d1239-5db8-4206-8460-9fbe00945ecc",
                 "ReferencedComponentTypes": []
               },
               "Variables": [],
@@ -664,68 +270,491 @@
                 },
                 {
                   "Id": 1,
-                  "Type": "input"
-                },
-                {
-                  "Id": 2,
                   "Type": "property.get",
                   "Properties": {
                     "_type": "package.fish.sauna/Sauna.Player",
                     "_name": "Local"
                   },
                   "UserData": {
-                    "Position": "-560,-16"
+                    "Position": "-464,-0"
                   }
                 },
                 {
-                  "Id": 4,
-                  "Type": "op.lessthanorequal",
-                  "UserData": {
-                    "Position": "-192,-16"
-                  }
-                },
-                {
-                  "Id": 5,
+                  "Id": 2,
                   "Type": "property.get",
                   "Properties": {
                     "_type": "package.fish.sauna/Sauna.Player",
                     "_name": "Money"
                   },
                   "UserData": {
-                    "Position": "-384,-16"
+                    "Position": "-304,48"
                   }
+                },
+                {
+                  "Id": 3,
+                  "Type": "op.lessthanorequal",
+                  "UserData": {
+                    "Position": "-144,0"
+                  }
+                },
+                {
+                  "Id": 4,
+                  "Type": "input"
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 4,
+                  "SrcId": 3,
                   "SrcName": "_result",
                   "DstId": 0,
                   "DstName": "_result"
                 },
                 {
-                  "SrcId": 5,
+                  "SrcId": 1,
                   "SrcName": "_result",
-                  "DstId": 4,
-                  "DstName": "a"
-                },
-                {
-                  "Value": 0,
-                  "DstId": 4,
-                  "DstName": "b"
+                  "DstId": 2,
+                  "DstName": "_target"
                 },
                 {
                   "SrcId": 2,
                   "SrcName": "_result",
-                  "DstId": 5,
-                  "DstName": "_target"
+                  "DstId": 3,
+                  "DstName": "a"
+                },
+                {
+                  "Value": 0,
+                  "DstId": 3,
+                  "DstName": "b"
                 }
               ]
             },
-            "ShowWhenDisabled": true,
+            "ShowWhenDisabled": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Show When Disabled",
+                "id": "54ccd282-78eb-48b5-ba59-f84b7e7b3546",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": true,
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
             "HasBounds": true,
-            "Position": "10.28304,12.3685,74.36001",
-            "Extents": "3.469205,4.972645,4.684541"
+            "Position": "10.283,12.369,74.36",
+            "Extents": "3.469,4.973,4.685",
+            "AnimationIdentifier": "interact"
+          },
+          {
+            "Identifier": "slot.cash_out",
+            "Keybind": "Use",
+            "Description": "Cash out",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "9fc88627-63be-4674-92fd-c6370502a914",
+                "ReferencedComponentTypes": [
+                  "package.fish.sauna/Sauna.SlotMachine"
+                ]
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "scene.get",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine"
+                  },
+                  "UserData": {
+                    "Position": "144,16"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
+                    "_isStatic": false,
+                    "_name": "Cashout"
+                  },
+                  "UserData": {
+                    "Position": "416,-16"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 1,
+                  "DstName": "_this"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 2,
+                  "DstName": "player"
+                }
+              ]
+            },
+            "Disabled": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Disabled",
+                "id": "08c11f94-393e-4b87-8031-521a8e26f8bb",
+                "ReferencedComponentTypes": [
+                  "package.fish.sauna/Sauna.SlotMachine"
+                ]
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output",
+                  "UserData": {
+                    "Position": "96,64"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "input",
+                  "UserData": {
+                    "Position": "-256,-64"
+                  }
+                },
+                {
+                  "Id": 3,
+                  "Type": "scene.get",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine"
+                  },
+                  "UserData": {
+                    "Position": "-416,32"
+                  }
+                },
+                {
+                  "Id": 4,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
+                    "_name": "Money"
+                  },
+                  "UserData": {
+                    "Position": "-256,32"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "op.lessthanorequal",
+                  "UserData": {
+                    "Position": "-48,64"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 5,
+                  "SrcName": "_result",
+                  "DstId": 0,
+                  "DstName": "_result"
+                },
+                {
+                  "SrcId": 2,
+                  "SrcName": "_target",
+                  "DstId": 3,
+                  "DstName": "_this"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 4,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 4,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "a"
+                },
+                {
+                  "Value": 0,
+                  "DstId": 5,
+                  "DstName": "b"
+                }
+              ]
+            },
+            "ShowWhenDisabled": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Show When Disabled",
+                "id": "766db42e-463f-4d7c-b69d-ae0db318e46f",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": true,
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "HasBounds": true,
+            "Position": "12.137,9.602,63.111",
+            "Extents": "4.215,5.381,5.297",
+            "AnimationIdentifier": "interact"
+          },
+          {
+            "Identifier": "slot.line1",
+            "Keybind": "Use",
+            "Description": "Line 1",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "d60b52cb-554c-4931-9dd9-7eed73be2edb",
+                "ReferencedComponentTypes": [
+                  "package.fish.sauna/Sauna.SlotMachine"
+                ]
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "scene.get",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine"
+                  },
+                  "UserData": {
+                    "Position": "144,16"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
+                    "_isStatic": false,
+                    "_name": "ToggleBetFlag"
+                  },
+                  "UserData": {
+                    "Position": "384,0"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 1,
+                  "DstName": "_this"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": 1,
+                  "DstId": 2,
+                  "DstName": "line"
+                }
+              ]
+            },
+            "HasBounds": true,
+            "Position": "17.501,-2.122,46.9",
+            "Extents": "3.459,5.384,4.789",
+            "AnimationIdentifier": "interact"
+          },
+          {
+            "Identifier": "slot.line2",
+            "Keybind": "Use",
+            "Description": "Line 2",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "ee25cb20-9337-46fe-8f9e-00e0d4646d97",
+                "ReferencedComponentTypes": [
+                  "package.fish.sauna/Sauna.SlotMachine"
+                ]
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "scene.get",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine"
+                  },
+                  "UserData": {
+                    "Position": "160,16"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
+                    "_isStatic": false,
+                    "_name": "ToggleBetFlag"
+                  },
+                  "UserData": {
+                    "Position": "432,0"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 1,
+                  "DstName": "_this"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": 2,
+                  "DstId": 2,
+                  "DstName": "line"
+                }
+              ]
+            },
+            "HasBounds": true,
+            "Position": "17.432,-8.707,46.944",
+            "Extents": "3.157,5.474,4.795",
+            "AnimationIdentifier": "interact"
+          },
+          {
+            "Identifier": "slot.line3",
+            "Keybind": "Use",
+            "Description": "Line 3",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "67b4d0b3-9f7e-4f31-928c-23ca4cad0268",
+                "ReferencedComponentTypes": [
+                  "package.fish.sauna/Sauna.SlotMachine"
+                ]
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "scene.get",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.SlotMachine"
+                  },
+                  "UserData": {
+                    "Position": "160,16"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.SlotMachine",
+                    "_isStatic": false,
+                    "_name": "ToggleBetFlag"
+                  },
+                  "UserData": {
+                    "Position": "400,0"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 1,
+                  "DstName": "_this"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": 3,
+                  "DstId": 2,
+                  "DstName": "line"
+                }
+              ]
+            },
+            "HasBounds": true,
+            "Position": "17.715,4.641,46.994",
+            "Extents": "3.184,5.08,4.855",
+            "AnimationIdentifier": "interact"
           }
         ]
       },
@@ -734,7 +763,7 @@
         "BetFlags": "None",
         "Model": {
           "_type": "component",
-          "go": "6ec8a614-2c68-4727-a049-9e7cc2e5783c",
+          "go": "ccc23f10-e323-4d9b-ae05-38d3d1374b6d",
           "component_type": "SkinnedModelRenderer"
         },
         "Money": 0
@@ -749,7 +778,7 @@
     ],
     "Children": [
       {
-        "Id": "6ec8a614-2c68-4727-a049-9e7cc2e5783c",
+        "Id": "ccc23f10-e323-4d9b-ae05-38d3d1374b6d",
         "Name": "Model",
         "Enabled": true,
         "Components": [
@@ -768,7 +797,7 @@
         ]
       },
       {
-        "Id": "a58600c3-4cd5-48f5-84bc-1352444a0c72",
+        "Id": "e426d888-4bed-49f9-8a1c-fe825fa8dc7b",
         "Name": "Bet",
         "Position": "10.32875,8.282434,69.98674",
         "Rotation": "0,-0.1010562,0,0.9948807",
@@ -787,14 +816,14 @@
             "PropertyName": "Bet",
             "SlotMachine": {
               "_type": "component",
-              "go": "0308d5f9-2d51-4b84-95a0-b024a7317c7f",
+              "go": "f1bdc728-67ca-44f9-a33f-291bb5fa162e",
               "component_type": "SlotMachine"
             }
           }
         ]
       },
       {
-        "Id": "51ddd988-31c9-4f3d-88c4-81091969d743",
+        "Id": "d64a14b0-264b-4c30-bdcb-e7409f443927",
         "Name": "Money",
         "Position": "10.97142,8.282434,66.8559",
         "Rotation": "0,-0.1010562,0,0.9948807",
@@ -813,7 +842,7 @@
             "PropertyName": "Money",
             "SlotMachine": {
               "_type": "component",
-              "go": "0308d5f9-2d51-4b84-95a0-b024a7317c7f",
+              "go": "f1bdc728-67ca-44f9-a33f-291bb5fa162e",
               "component_type": "SlotMachine"
             }
           }

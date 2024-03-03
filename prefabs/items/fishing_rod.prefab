@@ -1,0 +1,59 @@
+{
+  "RootObject": {
+    "Id": "c8e3d5d8-335f-4980-b4bd-c1b61112031f",
+    "Name": "fishing_rod",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ItemEquipment",
+        "Attachment": "hand_R",
+        "AttachmentTransform": {
+          "UniformScale": 1,
+          "Position": "2.800744,-13.65857,-0.7652572",
+          "Scale": "1,1,1",
+          "Rotation": "-0.6850799,-0.05490911,0.05191869,0.7245392"
+        },
+        "Description": "Looks pretty sturdy, can catch some big fish with this thing.",
+        "HideBodygroups": "None",
+        "HoldType": "Idle",
+        "Icon": {
+          "Model": "models/fishingrod/saunarod.vmdl",
+          "MaterialGroup": "",
+          "Position": "2.25,17.4,3.75",
+          "Rotation": "0.2981895,0.008664448,0.2370221,0.9245694",
+          "Guid": "04ac2c4d-4ef9-4624-97d8-5fe9514efbd8"
+        },
+        "Name": "Fishing Rod",
+        "SellPrice": -1,
+        "Slot": "Hand",
+        "UpdatePosition": true,
+        "WeightInGrams": 150
+      },
+      {
+        "__type": "ModelRenderer",
+        "BodyGroups": 18446744073709551615,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/fishingrod/saunarod.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "BoxCollider",
+        "Center": "0,0,35.75",
+        "IsTrigger": false,
+        "Scale": "1.5,1.5,71.5",
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "FishingRod"
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
