@@ -103,7 +103,7 @@ public class StoryMaster : Component
 	public SaunaDay CurrentSaunaDay => StoryDays.TryGetValue( StoryProgression.StoryDay, out var saunaDay ) ? saunaDay : LastValidSaunaDay;
 	public SaunaDay LastValidSaunaDay => StoryDays.Any() ? StoryDays.Last().Value : null;
 
-	public void StartStoryDay()
+	public void InternalStartStoryDay()
 	{
 		if ( CurrentSaunaDay == null ) return;
 
@@ -118,23 +118,59 @@ public class StoryMaster : Component
 		// Load events
 	}
 
-	public void StartGameDay()
+	public static void StartStoryDay()
+	{
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+
+		if ( storyMaster == null ) return;
+
+		storyMaster.InternalStartStoryDay();
+	}
+
+	public void InternalStartGameDay()
 	{
 		// Whatever lol
 	}
 
-	public void SetStoryDay( int dayNumber )
+	public static void StartGameDay()
+	{
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+
+		if ( storyMaster == null ) return;
+
+		storyMaster.InternalStartGameDay();
+	}
+
+	public void InternalSetStoryDay( int dayNumber )
 	{
 		StoryProgression.StoryDay = dayNumber;
 
 		InternalSaveStoryProgression();
 	}
 
-	public void SetGameDay( int dayNumber )
+	public static void SetStoryDay( int dayNumber )
+	{
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+
+		if ( storyMaster == null ) return;
+
+		storyMaster.InternalSetStoryDay( dayNumber );
+	}
+
+	public void InternalSetGameDay( int dayNumber )
 	{
 		StoryProgression.GameDay = dayNumber;
 
 		InternalSaveStoryProgression();
+	}
+
+	public static void SetGameDay( int dayNumber )
+	{
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+
+		if ( storyMaster == null ) return;
+
+		storyMaster.InternalSetGameDay( dayNumber );
 	}
 
 	public void LoadStoryProgression()
@@ -187,7 +223,8 @@ public class StoryMaster : Component
 	{
 		LoadStoryProgression();
 
-		StartStoryDay();
+		InternalStartStoryDay();
+		InternalStartGameDay();
 	}
 
 	protected override void OnFixedUpdate()
