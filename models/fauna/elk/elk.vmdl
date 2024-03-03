@@ -22,8 +22,8 @@
 								to = "models/fauna/elk/materials/elk.vmat"
 							},
 							{
-								from = "reindeer_antlers.vmat"
-								to = "models/fauna/elk/materials/reindeer_antlers.vmat"
+								from = "moose.vmat"
+								to = "models/fauna/elk/materials/moose.vmat"
 							},
 						]
 						use_global_default = false
@@ -111,6 +111,23 @@
 							exception_list = [  ]
 						}
 					},
+					{
+						_class = "RenderMeshFile"
+						name = "moose"
+						filename = "models/fauna/elk/moose.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
 				]
 			},
 			{
@@ -152,6 +169,14 @@
 								meshes = 
 								[
 									"elk_female",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								name = "moose"
+								meshes = 
+								[
+									"moose",
 								]
 							},
 						]
