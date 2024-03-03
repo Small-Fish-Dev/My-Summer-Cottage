@@ -39,8 +39,6 @@
 		? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
 		: Player.Local?.TargetedGameObject;
 
-	private const float INTERACTION_COOLDOWN = 0.1f;
-	private static TimeSince _lastInteracted = 0f;
 	private static List<string> priorityList = new();
 	private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
 	private bool WithinBounds(Interaction interaction) => !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
@@ -48,11 +46,6 @@
 	private BBox GetInteractionBounds(Interaction interaction)
 		=> new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
 			.Transform(Player.Local.TargetedGameObject.Transform.World);
-
-	public InteractionHint()
-	{
-		_lastInteracted = 0f;
-	}
 
 	private void AddToPriority( string key, bool forced = false )
 	{
@@ -91,11 +84,13 @@
 			if ( interaction.HasBounds && !FromHold )
 				pos = Player.Local.TargetedGameObject.Transform.Position + interaction.Position * Player.Local.TargetedGameObject.Transform.Rotation;
 
-			if (canInteract && interaction.InputFunction(interaction.Keybind) && (interaction.InputMode == InputMode.Down || _lastInteracted > INTERACTION_COOLDOWN))
+			if (canInteract && interaction.InputFunction(interaction.Keybind))
 			{
 				_targetObject?.Network.TakeOwnership();
 				interaction.Action?.Invoke(Player.Local, _targetObject);
-				_lastInteracted = 0f;
+
+				if (interaction.InputMode != InputMode.Down)
+					Input.Clear(interaction.Keybind);
 
 				if ( interaction.Identifier != String.Empty )
 					EventMaster.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
