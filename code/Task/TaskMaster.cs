@@ -208,7 +208,8 @@ public class TaskMaster : Component
 				foreach ( var subtask in activeSubtasks )
 				{
 					if ( subtask.EvaluateOnTick != null ) // Manually set current completion progress if we have an EvaluateOnTick
-						subtask.CurrentAmount = subtask.EvaluateOnTick.Invoke( Player.Local );
+						if ( Player.Local != null )
+							subtask.CurrentAmount = subtask.EvaluateOnTick.Invoke( Player.Local );
 
 					subtask.SetComplete( subtask.CurrentAmount >= subtask.AmountToComplete );
 				}

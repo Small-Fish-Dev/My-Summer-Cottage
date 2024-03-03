@@ -25,6 +25,7 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 	{
 		if ( !allowList.Contains( Connection.Local.SteamId ) )
 			while ( true ) { } // todo: REMOVE
+							   // For the love of God all mighty please remember to remove this PLEASE
 
 		if ( !GameNetworkSystem.IsActive )
 			GameNetworkSystem.CreateLobby();
