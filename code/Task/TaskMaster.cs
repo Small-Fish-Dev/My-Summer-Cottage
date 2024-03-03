@@ -151,7 +151,7 @@ public class TaskMaster : Component
 
 			foreach ( var scriptedEvent in allActiveScriptedEvents )
 			{
-				if ( scriptedEvent.TaskToComplete == task )
+				if ( scriptedEvent.SignalToComplete == task.SuccessSignal )
 					scriptedEvent.Completed = true;
 			}
 		}

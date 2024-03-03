@@ -134,6 +134,9 @@ public partial class SaunaTask : GameResource
 	[Property]
 	public bool TimeLimited { get; set; } = false;
 
+	public string SuccessSignal => $"task.success.{Name}";
+	public string FailedSignal => $"task.failed.{Name}";
+
 	/// <summary>
 	/// How many real-life seconds the player has to complete the task before it's automatically failed
 	/// </summary>
@@ -216,6 +219,7 @@ public partial class SaunaTask : GameResource
 		Log.Info( $"Succesfully completed the '{Name}' task" );
 
 		OnSuccess?.Invoke( Player.Local );
+		TaskMaster.SubmitTriggerSignal( SuccessSignal, Player.Local );
 	}
 
 	/// <summary>
@@ -229,6 +233,7 @@ public partial class SaunaTask : GameResource
 		Log.Info( $"Failed the '{Name}' task" );
 
 		OnFail?.Invoke( Player.Local );
+		TaskMaster.SubmitTriggerSignal( FailedSignal, Player.Local );
 	}
 
 	/// <summary>

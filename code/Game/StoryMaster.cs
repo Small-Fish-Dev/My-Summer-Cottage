@@ -9,7 +9,7 @@ namespace Sauna;
 public class SaunaScriptedEvent
 {
 	/// <summary>
-	/// Does this scripted event instantly start at the new session instead of a timeframe? (Defaults to midnight if SaunaDay NewSessionOnly is false and the day rolls over)
+	/// Does this scripted event instantly start at the new session instead of a timeframe? 
 	/// </summary>
 	[Property]
 	public bool TriggerOnNewSession { get; set; } = false;
@@ -31,25 +31,17 @@ public class SaunaScriptedEvent
 	[Property]
 	public bool CompletionNecessary { get; set; } = true;
 
-	/// <summary>
-	/// The task that's needed to complete for this scripted event to be completed
-	/// </summary>
-	[Property]
-	public SaunaTask TaskToComplete { get; set; }
-
-	/// <summary>
-	/// The signal we are looking for this scripted event to be completed
-	/// </summary>
-	[Property]
-	public string SignalToComplete { get; set; }
-
-	public delegate void ScriptedAction( Player player );
+	public delegate void ScriptedAction( Player player, out string signalToComplete );
 
 	/// <summary>
 	/// When the scripted event starts. Send sms here, calls, load events, trigger them, assign tasks, etc...
 	/// </summary>
 	[Property]
 	public ScriptedAction Setup { get; set; }
+
+	[Hide]
+	[JsonIgnore]
+	public string SignalToComplete { get; set; }
 
 	[Hide]
 	[JsonIgnore]
@@ -360,8 +352,10 @@ public class StoryMaster : Component
 				{
 					if ( scriptedEvent.TriggerTime <= currentHour )
 					{
-						scriptedEvent.Setup?.Invoke( Player.Local );
+						var signalToComplete = String.Empty;
+						scriptedEvent.Setup?.Invoke( Player.Local, out signalToComplete );
 						scriptedEvent.Triggered = true;
+						scriptedEvent.SignalToComplete = signalToComplete;
 					}
 				}
 			}
