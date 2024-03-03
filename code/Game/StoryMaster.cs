@@ -100,6 +100,36 @@ public class StoryMaster : Component
 	[HostSync]
 	public SaunaStoryProgression StoryProgression { get; set; }
 
+	/// <summary>
+	/// Get the current story day
+	/// </summary>
+	public static int CurrentStoryDay
+	{
+		get
+		{
+			var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+
+			if ( storyMaster == null ) return 0;
+
+			return storyMaster.StoryProgression.StoryDay;
+		}
+	}
+
+	/// <summary>
+	/// Get the current game day
+	/// </summary>
+	public static int CurrentGameDay
+	{
+		get
+		{
+			var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+
+			if ( storyMaster == null ) return 0;
+
+			return storyMaster.StoryProgression.GameDay;
+		}
+	}
+
 	public SaunaDay CurrentSaunaDay => StoryDays.TryGetValue( StoryProgression.StoryDay, out var saunaDay ) ? saunaDay : LastValidSaunaDay;
 	public SaunaDay LastValidSaunaDay => StoryDays.Any() ? StoryDays.Last().Value : null;
 
@@ -118,6 +148,9 @@ public class StoryMaster : Component
 		// Load events
 	}
 
+	/// <summary>
+	/// Start the story day
+	/// </summary>
 	public static void StartStoryDay()
 	{
 		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
@@ -132,6 +165,9 @@ public class StoryMaster : Component
 		// Whatever lol
 	}
 
+	/// <summary>
+	/// Start the game day
+	/// </summary>
 	public static void StartGameDay()
 	{
 		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
@@ -148,6 +184,10 @@ public class StoryMaster : Component
 		InternalSaveStoryProgression();
 	}
 
+	/// <summary>
+	/// Set the current story day and save it
+	/// </summary>
+	/// <param name="dayNumber"></param>
 	public static void SetStoryDay( int dayNumber )
 	{
 		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
@@ -164,6 +204,10 @@ public class StoryMaster : Component
 		InternalSaveStoryProgression();
 	}
 
+	/// <summary>
+	/// Set the current game day and save it
+	/// </summary>
+	/// <param name="dayNumber"></param>
 	public static void SetGameDay( int dayNumber )
 	{
 		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
@@ -171,6 +215,11 @@ public class StoryMaster : Component
 		if ( storyMaster == null ) return;
 
 		storyMaster.InternalSetGameDay( dayNumber );
+	}
+
+	public static void NextGameDay()
+	{
+		/// DO
 	}
 
 	public void LoadStoryProgression()
