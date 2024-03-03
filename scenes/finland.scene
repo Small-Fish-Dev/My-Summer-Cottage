@@ -104,16 +104,60 @@
         },
         {
           "__type": "StoryMaster",
-          "CurrentDay": 1,
           "StoryDays": {
             "1": {
-              "ScriptedEvents": [],
+              "ScriptedEvents": [
+                {
+                  "TriggerTimeslot": "10.50,12.00,1",
+                  "TriggerNecessary": true,
+                  "Setup": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Setup",
+                      "id": "4bdb722b-0785-4364-9415-d03052e2c5fd",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input"
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "event.ragdollplayer",
+                        "UserData": {
+                          "Position": "288,16"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 1,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "player",
+                        "DstId": 1,
+                        "DstName": "player"
+                      }
+                    ]
+                  }
+                }
+              ],
               "RandomEvents": {
                 "Common": 3,
                 "Uncommon": 2,
                 "Rare": 1
               }
             }
+          },
+          "StoryProgression": {
+            "StoryDay": 1,
+            "GameDay": 1
           }
         }
       ],
@@ -190,7 +234,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.06047017,0,0.99817",
+          "Rotation": "0,0.2141362,0,0.9768038",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -2099,6 +2143,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-02T18:24:08.4678915-05:00",
+  "LastSaved": "2024-03-03T01:46:56.6714846\u002B01:00",
   "__references": []
 }

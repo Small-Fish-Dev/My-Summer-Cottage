@@ -1,6 +1,7 @@
 using Editor;
 using Sandbox;
 using Sauna.Game;
+using static Sauna.TaskMaster;
 
 namespace Sauna;
 
@@ -75,6 +76,17 @@ public class SaunaDay
 [Icon( "auto_stories" )]
 public class StoryMaster : Component
 {
+	public class SaunaStoryProgression
+	{
+		[JsonInclude]
+		public int StoryDay { get; set; } = 1;
+
+		[JsonInclude]
+		public int GameDay { get; set; } = 1;
+
+		public SaunaStoryProgression() { }
+	}
+
 	/// <summary>
 	/// Define each story days, if a story day hasn't been completed it will roll over to the next in-game day
 	/// </summary>
@@ -82,19 +94,17 @@ public class StoryMaster : Component
 	public Dictionary<int, SaunaDay> StoryDays { get; set; } = new();
 
 	/// <summary>
-	/// Current story day
+	/// Current story day/game day
 	/// </summary>
 	[Property]
 	[HostSync]
-	public int CurrentDay { get; set; } = 1;
+	public SaunaStoryProgression StoryProgression { get; set; }
 
-	public SaunaDay CurrentSaunaDay => StoryDays.TryGetValue( CurrentDay, out var saunaDay ) ? saunaDay : LastValidSaunaDay;
+	public SaunaDay CurrentSaunaDay => StoryDays.TryGetValue( StoryProgression.StoryDay, out var saunaDay ) ? saunaDay : LastValidSaunaDay;
 	public SaunaDay LastValidSaunaDay => StoryDays.Any() ? StoryDays.Last().Value : null;
 
-	public void StartStoryDay( int dayNumber )
+	public void StartStoryDay()
 	{
-		CurrentDay = dayNumber;
-
 		if ( CurrentSaunaDay == null ) return;
 
 		foreach ( var scriptedEvent in CurrentSaunaDay.ScriptedEvents )
@@ -106,13 +116,78 @@ public class StoryMaster : Component
 		}
 
 		// Load events
+	}
 
+	public void StartGameDay()
+	{
+		// Whatever lol
+	}
 
+	public void SetStoryDay( int dayNumber )
+	{
+		StoryProgression.StoryDay = dayNumber;
+
+		InternalSaveStoryProgression();
+	}
+
+	public void SetGameDay( int dayNumber )
+	{
+		StoryProgression.GameDay = dayNumber;
+
+		InternalSaveStoryProgression();
+	}
+
+	public void LoadStoryProgression()
+	{
+		if ( FileSystem.Data.FileExists( "story.json" ) )
+			StoryProgression = FileSystem.Data.ReadJsonOrDefault<SaunaStoryProgression>( "story.json" );
+		else
+		{
+			StoryProgression = new();
+			InternalSaveStoryProgression();
+		}
+	}
+
+	internal void InternalSaveStoryProgression()
+	{
+		FileSystem.Data.WriteJson( "story.json", StoryProgression );
+	}
+
+	/// <summary>
+	/// Save the story progression (Story Day and Game Day)
+	/// </summary>
+	public static void SaveStoryProgression()
+	{
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+
+		if ( storyMaster == null ) return;
+
+		storyMaster.InternalSaveStoryProgression();
+	}
+
+	internal void InternalResetStoryProgression()
+	{
+		StoryProgression = new();
+		InternalSaveStoryProgression();
+	}
+
+	/// <summary>
+	/// Reset the story progression (Story Day and Game Day)
+	/// </summary>
+	public static void ResetStoryProgression()
+	{
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+
+		if ( storyMaster == null ) return;
+
+		storyMaster.InternalResetStoryProgression();
 	}
 
 	protected override void OnStart()
 	{
-		StartStoryDay( 1 );
+		LoadStoryProgression();
+
+		StartStoryDay();
 	}
 
 	protected override void OnFixedUpdate()
