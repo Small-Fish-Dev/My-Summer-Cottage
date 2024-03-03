@@ -15,7 +15,7 @@ public class DialogueResponse
 	/// </summary>
 	[Property]
 	[InputAction]
-	public string Keybind { get; set; }
+	public string Keybind { get; set; } = InputAction.Use;
 
 	/// <summary>
 	/// The UI description displayed for this response.
@@ -33,13 +33,13 @@ public class DialogueResponse
 	/// The color of the text of the response.
 	/// </summary>
 	[Property]
-	public Func<Color> DynamicColor { get; set; }
+	public Func<Color> DynamicColor { get; set; } = () => Color.White;
 
 	/// <summary>
 	/// If the response is disabled.
 	/// </summary>
 	[Property]
-	public Func<bool> Disabled { get; set; }
+	public Func<bool> Disabled { get; set; } = () => false;
 }
 
 public class DialogueStage
@@ -103,7 +103,7 @@ public class DialogueComponent : Component
 						Action = response.Action,
 						Disabled = () => !IsActiveStage( stageIndex ) || (response.Disabled is not null && response.Disabled()),
 						ShowWhenDisabled = () => IsActiveStage( stageIndex ),
-						DisableUseAnimation = true,
+						AnimationIdentifier = string.Empty,
 						DynamicColor = () => response.DynamicColor?.Invoke() ?? Color.White
 					}
 				);

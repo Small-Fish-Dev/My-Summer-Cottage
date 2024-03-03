@@ -234,7 +234,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.7788731,0,0.6271815",
+          "Rotation": "0,0.07890093,0,0.9968824",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -627,7 +627,13 @@
           "__type": "Interactions",
           "HideOnEmpty": false,
           "ObjectInteractions": [
-            {}
+            {
+              "Keybind": "use",
+              "Description": "",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
+              "AnimationIdentifier": "interact"
+            }
           ]
         },
         {
@@ -790,8 +796,8 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_isStatic": false,
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_name": "SendToDialogueStage"
                         },
                         "UserData": {
@@ -807,11 +813,18 @@
                         "UserData": {
                           "Position": "144,32"
                         }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "log.info",
+                        "UserData": {
+                          "Position": "224,160"
+                        }
                       }
                     ],
                     "Links": [
                       {
-                        "SrcId": 0,
+                        "SrcId": 3,
                         "SrcName": "_signal",
                         "DstId": 1,
                         "DstName": "_signal"
@@ -832,6 +845,18 @@
                         "SrcName": "obj",
                         "DstId": 2,
                         "DstName": "_this"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 3,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": "called",
+                        "DstId": 3,
+                        "DstName": "args",
+                        "DstIndex": 0
                       }
                     ]
                   },
@@ -876,6 +901,10 @@
                         "UserData": {
                           "Position": "-80,128"
                         }
+                      },
+                      {
+                        "Id": 4,
+                        "Type": "input"
                       }
                     ],
                     "Links": [
@@ -942,8 +971,8 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_isStatic": false,
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_name": "SendToDialogueStage"
                         },
                         "UserData": {
@@ -1041,6 +1070,13 @@
           "StartAsleep": false
         }
       ]
+    },
+    {
+      "Id": "f1bdc728-67ca-44f9-a33f-291bb5fa162e",
+      "Name": "slot_machine",
+      "Position": "202.9279,-145.6154,9.137436",
+      "Enabled": true,
+      "__Prefab": "prefabs/objects/slot_machine.prefab"
     }
   ],
   "SceneProperties": {
@@ -1066,6 +1102,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-03T15:06:33.9823852-05:00",
+  "LastSaved": "2024-03-03T16:22:20.7550305-05:00",
   "__references": []
 }

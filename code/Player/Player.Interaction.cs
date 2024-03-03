@@ -45,10 +45,13 @@ public partial class Player
 	}
 
 	[Broadcast]
-	public void BroadcastInteraction( Vector3 position, Rotation rotation, bool disableUse )
+	public void BroadcastInteraction( Vector3 position, Rotation rotation, string animationIdentifier )
 	{
-		Renderer.Set( "right_ik_pos", position );
-		Renderer.Set( "right_ik_rot", rotation );
-		Renderer.Set( "use", !disableUse );
+		if ( animationIdentifier == "interact" )
+		{
+			Renderer.Set( "right_ik_pos", position );
+			Renderer.Set( "right_ik_rot", rotation );
+			Renderer.Set( "use", true );
+		}
 	}
 }
