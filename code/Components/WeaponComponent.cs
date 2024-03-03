@@ -13,6 +13,13 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Projectile" ), Sync] public int Ammo { get; set; }
 	[Property, Category( "Projectile" )] public int Capacity { get; set; }
 	[Property, Category( "Projectile" )] public PrefabFile Ammunition { get; set; }
+	
+	private string _name;
+
+	protected override void OnAwake()
+	{
+		UpdateName();
+	}
 
 	protected override void OnStart()
 	{
@@ -43,6 +50,7 @@ public sealed class WeaponComponent : Component
 		{
 			case WeaponType.Ranged:
 				Fire( shooter );
+				UpdateName();
 				break;
 
 			default:
@@ -60,6 +68,7 @@ public sealed class WeaponComponent : Component
 
 		// Reload magazine.
 		Ammo = Capacity;
+		UpdateName();
 
 		// todo @ceitine: play reload anim / sound
 
@@ -93,5 +102,24 @@ public sealed class WeaponComponent : Component
 		Ammo--;
 
 		return true;
+	}
+
+	private void UpdateName()
+	{
+		var item = Components.Get<ItemComponent>( true );
+		if ( item == null )
+			return;
+
+		if ( string.IsNullOrEmpty( _name ) ) _name = item.Name;
+
+		switch ( Type )
+		{
+			case WeaponType.Ranged:
+				item.Name = $"{_name} ({Ammo}/{Capacity})";
+				break;
+
+			default:
+				break;
+		}
 	}
 }
