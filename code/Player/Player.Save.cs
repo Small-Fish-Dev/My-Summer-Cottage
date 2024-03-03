@@ -122,6 +122,7 @@ partial class Player
 		{
 			Money = player.Money,
 			Experience = player.Experience,
+			Level = player.Level,
 
 			Clothes = player.Inventory.EquippedItems
 				.Where( x => x != null )

@@ -4,9 +4,11 @@ Layer0
 {
 	shader "shaders/groundshadertest.shader"
 
+	//---- Blending ----
+	F_ADDITIVE_BLEND 1
+
 	//---- Rendering ----
 	F_ALPHA_TEST 1
-	F_DO_NOT_CAST_SHADOWS 1
 	F_RENDER_BACKFACES 1
 	F_TRANSPARENCY 1
 
@@ -14,20 +16,58 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Grass Settings ----
-	GrassRandom "0.731"
+	GrassDist "materials/terrain/splat_a.png"
+	GrassRandom "1.279"
 	GrassScale "6.007"
-	GrassSize "4.219"
+	GrassSize "1.000"
+	MaxDistance "120.542"
+	SwayIntensity "21.900"
 
 	//---- Material ----
 	BillboardColor "materials/nature/grass_test/grass_color.png"
-	Color "materials/ground/grass/new_graph_basecolor.png"
-	g_flColorVariation "[1.000000 0.776471 0.043137 0.000000]"
+	Color "materials/ground/grass2/grass2_basecolor.png"
+	g_flColorVariation "[0.698039 0.564706 0.164706 0.000000]"
 	Opacity "materials/nature/grass_test/grass_opacity.png"
+
+	//---- Splat Map ----
+	Splat_LayerA "materials/terrain/splat_r.png"
+	Splat_LayerB "materials/terrain/splat_g.png"
+	Splat_LayerC "materials/terrain/splat_b.png"
+	Splat_LayerD "materials/terrain/splat_a.png"
+
+	//---- Splat Textures A ----
+	Splat_BlendMask_A "materials/ground/dirt/dirt_roughness.png"
+	Splat_ColorA "materials/ground/dirt/dirt_basecolor.png"
+	Splat_NormalA "materials/ground/dirt/dirt_normal.png"
+	Splat_Roughness_A "materials/ground/dirt/dirt_roughness.png"
+
+	//---- Splat Textures B ----
+	Splat_BlendMask_B "materials/ground/stones/ground_stones_height.png"
+	Splat_ColorB "materials/ground/stones/ground_stones_basecolor.png"
+	Splat_NormalB "materials/ground/stones/ground_stones_normal.png"
+	Splat_Roughness_B "materials/ground/stones/ground_stones_roughness.png"
+
+	//---- Splat Textures C ----
+	Splat_BlendMask_C "materials/ground/rock/rock3_height.png"
+	Splat_ColorC "materials/ground/rock/rock3_basecolor.png"
+	Splat_NormalC "materials/ground/rock/rock3_normal.png"
+	Splat_Roughness_C "materials/ground/rock/rock3_roughness.png"
+
+	//---- Splat Textures D ----
+	Splat_BlendMask_D "materials/ground/dirt/dirt_height.png"
+	Splat_ColorD "materials/ground/grass2/grass2_basecolor.png"
+	Splat_NormalD "materials/ground/grass2/grass2_normal.png"
+	Splat_Roughness_D "materials/ground/grass2/grass2_roughness.png"
 
 	//---- Translucent ----
 	g_flAlphaTestReference "0.010"
 	g_flAntiAliasedEdgeStrength "0.000"
 
 	//---- Transparency ----
-	TransparencyRounding "0.000"
+	TransparencyRounding "0.999"
+
+	//---- Triplanar Settings ----
+	TextureBlending "10.000"
+	TextureScale "3.615"
+	TextureTiling "3.000"
 }

@@ -48,7 +48,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	public bool AddToEventPool { get; set; } = true;
 
 	[Property]
-	[HideIf( "AddToEventPool", true )]
+	[ShowIf( "AddToEventPool", true )]
 	public EventRarity Rarity { get; set; } = EventRarity.None;
 
 	[Property]
@@ -75,8 +75,8 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// </summary>
 	public bool IsFinished { get; set; } = false;
 
-	TaskMaster _taskMaster => Scene.GetAllComponents<TaskMaster>().FirstOrDefault();
-	EventMaster _eventMaster => Scene.GetAllComponents<EventMaster>().FirstOrDefault();
+	TaskMaster _taskMaster;
+	EventMaster _eventMaster;
 
 	bool _showToggle = false;
 	JsonObject _initialState;
@@ -126,6 +126,9 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 				trigger.OnTrigger += HasBeenTriggered;
 		}
 
+		_taskMaster = Scene.GetAllComponents<TaskMaster>().FirstOrDefault();
+		_eventMaster = Scene.GetAllComponents<EventMaster>().FirstOrDefault();
+
 		GameObject.BreakFromPrefab();
 
 		if ( ReinstantiateOnRestart )
@@ -162,26 +165,18 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	{
 		IsFinished = true;
 
-		if ( HasBeenPlayed && ReinstantiateOnRestart )
+		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 		{
-			foreach ( var child in GameObject.Children )
-				child.Destroy();
+			if ( component != this )
+				component.Enabled = false;
 		}
-		else
+
+		foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants ) )
 		{
-			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
-			{
-				if ( component != this )
-					component.Enabled = false;
-			}
+			if ( !eventComponent.Triggered )
+				eventComponent.Triggered = true;
 
-			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants ) )
-			{
-				if ( !eventComponent.Triggered )
-					eventComponent.Triggered = true;
-
-				eventComponent.IsPlaying = false;
-			}
+			eventComponent.IsPlaying = false;
 		}
 
 		_eventMaster.CurrentEvents.Remove( this );
@@ -193,6 +188,10 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 		if ( ReinstantiateOnRestart )
 		{
+			if ( HasBeenPlayed )
+				foreach ( var child in GameObject.Children )
+					child.Destroy();
+
 			var substitute = new GameObject( true, GameObject.Name );
 			var networked = GameObject.Networked;
 			var parent = GameObject.Parent;

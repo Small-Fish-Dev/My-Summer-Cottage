@@ -7,6 +7,13 @@
 float GrassSize 	< UiType( VectorText ); Default( 2.0f ); Range ( 1.0f, 20.0f ); UiGroup("Grass Settings,20/10"); >;
 float GrassRandom 	< UiType( VectorText ); Default( 1.0f ); Range ( 0.0f, 5.0f  ); UiGroup("Grass Settings,20/20"); >;
 float GrassScale 	< UiType( VectorText ); Default( 6.0f ); Range ( 1.0f, 12.0f ); UiGroup("Grass Settings,20/30"); >;
+float SwayIntensity	< UiType( VectorText ); Default( 14.0f); Range ( 1.0f, 28.0f ); UiGroup("Grass Settings,20/40"); >;
+float MaxDistance	< UiType( VectorText ); Default( 100.0f); Range( 1.0f, 2000.0f); UiGroup("Grass Settings,20/50"); >;
+
+CreateInputTexture2D( GrassDist, Linear, 8, "", "_layerD", "Grass Settings,20/60", Default( 0.0 ) );
+
+CreateTexture2D( g_tGrassDistribution ) < Channel( R, Box( GrassDist ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+	
 
 // Rotation matrix bullshit: taken from https://gist.github.com/keijiro/ee439d5e7388f3aafc5296005c8c3f33 
 // Usage: float3x3 rotationMatrix = AngleAxis3x3( 0.4f, float3( 0, 0, 1 ) ) - create rotation matrix with angle 0.4 on Z axis. 
@@ -69,7 +76,11 @@ void EmitGrass( inout TriangleStream<PS_INPUT> triStream, triangle PS_INPUT i, f
 
 	size = ( ClampedRandom( position ) * 2 - 1 ) * GrassRandom + size;		// Apply randomness to grass scale
 
-	i.vPositionWs += mul( transformationMatrix, shape * size );						// Apply "tangent + rotation" matrix to current world space position
+	float currentDistance = distance( position, g_vCameraPositionWs );
+	float Falloff = (currentDistance > MaxDistance / 2.5) ? (MaxDistance - currentDistance) * 0.007 : 1;	// This is quite bad honestly, there should be a better way to implement smooth falloff.
+	if (Falloff < 0.15 ) return;
+
+	i.vPositionWs += mul( transformationMatrix, shape * size ) * saturate(Falloff);	// Apply "tangent + rotation" matrix to current world space position, then lower the scale for triangles near render distance cutoff.
 	float3 vWorldPosition = i.vPositionWs + g_vHighPrecisionLightingOffsetWs.xyz;	// Same weird tricks to get real world space position
 
 	i.vPositionWs = vWorldPosition - g_vHighPrecisionLightingOffsetWs.xyz;			 
@@ -78,6 +89,34 @@ void EmitGrass( inout TriangleStream<PS_INPUT> triStream, triangle PS_INPUT i, f
 	i.grassUV.xy = uv;
 
 	GSAppendVertex( triStream, i );
+}
+
+// This section can be likely improved, I'm not sure if this is the optimal way to do frustum culling. 
+// Returns true/false if given vPositionPS is outside of frustum. Optionally you can add offset so triangles get culled closer/farther from camera frustum. 
+bool isOutsideFrustum( float4 position[3], float offset = 0.0f )
+{
+	bool isOutside = false;
+
+	if ( position[0].z > position[0].w && position[1].z > position[1].w && position[2].z > position[2].w ) return true;	// 'true' if vertice is outside far plane.
+	if ( position[0].z < 0.0 || position[1].z < 0.0 || position[2].z < 0.0 ) return true;								// 'true' if vertice is outside near plane.
+
+	for (float i = 0; i < 3; i++)
+	{
+		isOutside = ( position[i].x < -position[i].w - offset
+		|| position[i].y < -position[i].w - offset
+		|| position[i].x > position[i].w + offset
+		|| position[i].y > position[i].w + offset ) ? 1 : 0;
+
+		if (isOutside) return true;
+	}
+	return isOutside; // Returns 'false' only if all statement checks in 'for' returned false.
+}
+
+// Returns 'true' or 'false' if given position is outside of render distance.
+bool isOutOfRenderDistance( float3 position )
+{
+	float3 vWorldPosition = position + g_vHighPrecisionLightingOffsetWs.xyz;
+	return distance( vWorldPosition, g_vCameraPositionWs ) > MaxDistance;
 }
 
 // Main geometry shader function 
@@ -92,16 +131,28 @@ void MainGs( triangle in PixelInput input[3], inout TriangleStream<PixelInput> t
 
 	GSRestartStrip( triStream );
 
+	// Check if given triangle vertices are within camera view. If not, exit program early. 
+	float4 positions[3] = { input[0].vPositionPs, input[1].vPositionPs, input[2].vPositionPs };
+	if( isOutsideFrustum( positions, 30 ) ) return;
+
+	// Don't render grass if it's, well, outside of specified render distance. 
+	if ( isOutOfRenderDistance( input[0].vPositionWs ) ) return;
+
+	const float2 grassDistr = Tex2DLevel( g_tGrassDistribution, input[0].vTextureCoords.xy, 0.0 ).rg;
+
+	if ( grassDistr.x <= 0.1 && grassDistr.y <= 0.1 ) return;
+
 	// Cycle through each mesh vertex position and create a triangle with set width and UV.
 	for (float k = 0; k < 3; k++)
 	{
 		PS_INPUT o = input[k];
-		float sway = sin ( g_flTime ) / 12; // Shrimplest sway animation possible. Speed can be exposed as a variable imo.
+		float sway = sin( g_flTime ) / SwayIntensity; // Shrimplest sway animation possible. Speed can be exposed as a variable imo.
 
 		EmitGrass( triStream, o, float3( GrassSize, 0, 0 ), 	 float2(   1, 1 ), GrassScale );
+		
 		EmitGrass( triStream, o, float3(-GrassSize, 0, 0 ), 	 float2(   0, 1 ), GrassScale );
-		EmitGrass( triStream, o, float3( 0, 0, 1 + GrassSize ),  float2( sway, 0 ), GrassScale );	// UV X axis here can be used for sway animation
-	}
 
-	GSRestartStrip( triStream );
+		EmitGrass( triStream, o, float3( 0, 0, 1 + (sin(g_flTime) / 16 ) + GrassSize),  float2( sway, 0 ), GrassScale );	// UV X axis here can be used for sway animation	
+		GSRestartStrip( triStream );	
+	}
 }

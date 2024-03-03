@@ -76,7 +76,11 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Category( "Time" )]
 	public int Day
 	{
-		set => _storyMaster.SetGameDay( value );
+		set
+		{
+			if ( value != 0 )
+				_storyMaster.SetGameDay( value );
+		}
 		get => _storyMaster?.CurrentGameDay ?? 1;
 	}
 
