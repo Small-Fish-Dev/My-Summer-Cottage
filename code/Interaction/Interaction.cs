@@ -12,7 +12,7 @@ public enum InputMode
 	Down
 }
 
-public struct Interaction
+public class Interaction
 {
 	/// <summary>
 	/// Unique identifier for this interaction
@@ -145,6 +145,12 @@ public class Interactions : Component
 		programmedInteractions.Add( interaction );
 	}
 
+	public void AddInteractions( List<Interaction> interactions )
+	{
+		programmedInteractions ??= new();
+		programmedInteractions.AddRange( interactions );
+	}
+
 	protected override void OnAwake()
 	{
 		ObjectInteractions ??= new();
@@ -181,7 +187,7 @@ public class Interactions : Component
 				if ( Gizmo.IsShiftPressed )
 				{
 					if ( Gizmo.Control.Scale( "scale", Vector3.Zero, out var scale ) )
-						ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = interaction with
+						ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = new Interaction
 						{
 							Extents = interaction.Extents + scale * 50
 						};
@@ -190,7 +196,7 @@ public class Interactions : Component
 				}
 
 				if ( Gizmo.Control.Position( "position", Vector3.Zero, out var pos ) )
-					ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = interaction with
+					ObjectInteractions[ObjectInteractions.IndexOf( interaction )] = new Interaction
 					{
 						Position = interaction.Position + pos
 					};

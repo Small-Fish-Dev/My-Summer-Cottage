@@ -233,7 +233,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.7679276,0,0.6405366",
+          "Rotation": "0,0.3100249,0,0.9507284",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -317,9 +317,9 @@
                 "Id": 2,
                 "Type": "call",
                 "Properties": {
-                  "T": "package.fish.sauna/Sauna.Player",
                   "_isStatic": false,
                   "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                  "T": "package.fish.sauna/Sauna.Player",
                   "_name": "Get"
                 },
                 "UserData": {
@@ -344,8 +344,8 @@
                 "Id": 6,
                 "Type": "resource.ref",
                 "Properties": {
-                  "T": "Sandbox.Engine/Sandbox.SoundEvent",
-                  "value": "sounds/misc/banana_slip.sound"
+                  "value": "sounds/misc/banana_slip.sound",
+                  "T": "Sandbox.Engine/Sandbox.SoundEvent"
                 },
                 "UserData": {
                   "Position": "544,-384"
@@ -384,12 +384,12 @@
                 "Id": 11,
                 "Type": "scene.ref",
                 "Properties": {
-                  "T": "package.fish.sauna/EventComponent",
                   "value": {
                     "_type": "component",
                     "go": "2d4783cc-caf7-4dae-af45-06d44aff2664",
                     "component_type": "EventComponent"
-                  }
+                  },
+                  "T": "package.fish.sauna/EventComponent"
                 },
                 "UserData": {
                   "Position": "944,176"
@@ -884,9 +884,9 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.Player",
                           "_isStatic": false,
                           "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                          "T": "package.fish.sauna/Sauna.Player",
                           "_name": "Get"
                         },
                         "UserData": {
@@ -1089,11 +1089,11 @@
                         "Id": 26,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
-                          }
+                          },
+                          "T": "Sandbox.Game/Sandbox.GameObject"
                         },
                         "UserData": {
                           "Position": "176,80"
@@ -1103,12 +1103,12 @@
                         "Id": 28,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/EventComponent",
                           "value": {
                             "_type": "component",
                             "go": "2f80e6c2-8f26-4f25-8c21-6de0874ed0b5",
                             "component_type": "EventComponent"
-                          }
+                          },
+                          "T": "package.fish.sauna/EventComponent"
                         },
                         "UserData": {
                           "Position": "2096,96"
@@ -1484,11 +1484,11 @@
                         "Id": 2,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "2be1fab6-ae57-4170-8210-55400c556dc6"
-                          }
+                          },
+                          "T": "Sandbox.Game/Sandbox.GameObject"
                         },
                         "UserData": {
                           "Position": "-608,144"
@@ -1498,11 +1498,11 @@
                         "Id": 3,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "Sandbox.Game/Sandbox.GameObject",
                           "value": {
                             "_type": "gameobject",
                             "go": "20ba868b-9876-4f99-8a41-882ff4c46a16"
-                          }
+                          },
+                          "T": "Sandbox.Game/Sandbox.GameObject"
                         },
                         "UserData": {
                           "Position": "-768,320"
@@ -1647,12 +1647,12 @@
                         "Id": 18,
                         "Type": "scene.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/EventComponent",
                           "value": {
                             "_type": "component",
                             "go": "cb9ad1f7-3db3-4b43-aef3-a5d4b322e48c",
                             "component_type": "EventComponent"
-                          }
+                          },
+                          "T": "package.fish.sauna/EventComponent"
                         },
                         "UserData": {
                           "Position": "1344,256"
@@ -1669,9 +1669,9 @@
                         "Id": 20,
                         "Type": "call",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.Player",
                           "_isStatic": false,
                           "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                          "T": "package.fish.sauna/Sauna.Player",
                           "_name": "Get"
                         },
                         "UserData": {
@@ -2101,6 +2101,289 @@
       "__Prefab": "prefabs/items/beer_crate.prefab"
     },
     {
+      "Id": "f7cfe4de-f5f8-4591-a11c-f25229848c8a",
+      "Name": "Weird Crate",
+      "Position": "892.0236,-795.3896,35.04873",
+      "Rotation": "-0.00000037217,0.00000005960464,0.00000111651,0.9999999",
+      "Networked": true,
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "BoxCollider",
+          "Center": "0,0,4.25",
+          "IsTrigger": false,
+          "Scale": "12.20005,18.00001,8.5",
+          "Static": false,
+          "Surface": null
+        },
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 18446744073709551615,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/beer_crate/beer_crate.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Rigidbody",
+          "AngularDamping": 0,
+          "Gravity": true,
+          "LinearDamping": 0,
+          "Locking": {},
+          "MassOverride": 0,
+          "RigidbodyFlags": 0,
+          "StartAsleep": false
+        },
+        {
+          "__type": "Interactions",
+          "HideOnEmpty": false,
+          "ObjectInteractions": []
+        },
+        {
+          "__type": "Dialogue",
+          "DialogueStages": [
+            {
+              "AvailableResponses": [
+                {
+                  "Identifier": "Talk",
+                  "Keybind": "Use",
+                  "Description": "Talk",
+                  "Action": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Action",
+                      "id": "508b618c-4f8b-44ba-b934-71bd97091391",
+                      "ReferencedComponentTypes": [
+                        "package.fish.sauna/Sauna.Dialogue"
+                      ]
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "-80,-16"
+                        }
+                      },
+                      {
+                        "Id": 4,
+                        "Type": "scene.get",
+                        "Properties": {
+                          "T": "package.fish.sauna/Sauna.Dialogue"
+                        },
+                        "UserData": {
+                          "Position": "112,-0"
+                        }
+                      },
+                      {
+                        "Id": 7,
+                        "Type": "call",
+                        "Properties": {
+                          "_isStatic": false,
+                          "_type": "package.fish.sauna/Sauna.Dialogue",
+                          "_name": "SendToDialogueStage"
+                        },
+                        "UserData": {
+                          "Position": "480,-0"
+                        }
+                      },
+                      {
+                        "Id": 8,
+                        "Type": "log.info",
+                        "UserData": {
+                          "Position": "160,-144"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 0,
+                        "SrcName": "obj",
+                        "DstId": 4,
+                        "DstName": "_this"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_signal",
+                        "DstId": 7,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_result",
+                        "DstId": 7,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": 1,
+                        "DstId": 7,
+                        "DstName": "index"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 8,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": "this message plays to everyone.",
+                        "DstId": 8,
+                        "DstName": "args",
+                        "DstIndex": 0
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "AvailableResponses": [
+                {
+                  "Identifier": "accept",
+                  "Keybind": "Use",
+                  "Description": "Accept Task",
+                  "Action": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Action",
+                      "id": "befe971e-6aa1-4da8-a182-391daea6bdaa",
+                      "ReferencedComponentTypes": [
+                        "package.fish.sauna/Sauna.Dialogue"
+                      ]
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input"
+                      },
+                      {
+                        "Id": 2,
+                        "Type": "scene.get",
+                        "Properties": {
+                          "T": "package.fish.sauna/Sauna.Dialogue"
+                        },
+                        "UserData": {
+                          "Position": "144,32"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "call",
+                        "Properties": {
+                          "_isStatic": false,
+                          "_type": "package.fish.sauna/Sauna.Dialogue",
+                          "_name": "SendToDialogueStage"
+                        },
+                        "UserData": {
+                          "Position": "384,16"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 0,
+                        "SrcName": "obj",
+                        "DstId": 2,
+                        "DstName": "_this"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 3,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_result",
+                        "DstId": 3,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": 0,
+                        "DstId": 3,
+                        "DstName": "index"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Identifier": "decline",
+                  "Keybind": "use2",
+                  "Description": "Decline",
+                  "Action": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Action",
+                      "id": "8d88d7e2-7b68-4ba3-9e19-cf1db2417c49",
+                      "ReferencedComponentTypes": [
+                        "package.fish.sauna/Sauna.Dialogue"
+                      ]
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input"
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "call",
+                        "Properties": {
+                          "_isStatic": false,
+                          "_type": "package.fish.sauna/Sauna.Dialogue",
+                          "_name": "EndDialogue"
+                        },
+                        "UserData": {
+                          "Position": "416,48"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "scene.get",
+                        "Properties": {
+                          "T": "package.fish.sauna/Sauna.Dialogue"
+                        },
+                        "UserData": {
+                          "Position": "176,64"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 1,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_result",
+                        "DstId": 1,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "obj",
+                        "DstId": 3,
+                        "DstName": "_this"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "HostOnly": true
+        }
+      ]
+    },
+    {
       "Id": "1fd8ba8f-1e11-479d-8156-b44ced9310d9",
       "Name": "rifle",
       "Position": "580.2663,-566.476,45.18832",
@@ -2338,6 +2621,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-03T05:21:17.8158043\u002B01:00",
+  "LastSaved": "2024-03-03T10:49:47.6701326-05:00",
   "__references": []
 }
