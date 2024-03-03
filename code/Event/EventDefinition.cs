@@ -48,7 +48,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	public bool AddToEventPool { get; set; } = true;
 
 	[Property]
-	[HideIf( "AddToEventPool", true )]
+	[ShowIf( "AddToEventPool", true )]
 	public EventRarity Rarity { get; set; } = EventRarity.None;
 
 	[Property]

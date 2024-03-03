@@ -1,14 +1,14 @@
 {
   "RootObject": {
-    "Id": "5d8fe712-7689-4089-b21c-dbc5c0ad22d2",
+    "Id": "4480e4d0-10a1-4c25-8730-0aee3d1e95f7",
     "Name": "creepy_peeper",
     "Enabled": true,
     "Components": [
       {
         "__type": "EventDefinition",
+        "AddToEventPool": true,
         "EventName": "Peeping Creep",
-        "Frequency": "Repeatable",
-        "Rarity": "Common",
+        "Rarity": "Uncommon",
         "ReinstantiateOnRestart": true,
         "Stackable": true,
         "Type": "Zone"
@@ -16,7 +16,7 @@
     ],
     "Children": [
       {
-        "Id": "ad81ba83-9b0e-45f4-bb37-2673dc189b7c",
+        "Id": "62eeeacc-8718-4b4a-a808-931ac49b67ba",
         "Name": "Creeper",
         "Enabled": true,
         "Components": [
@@ -32,7 +32,7 @@
         ]
       },
       {
-        "Id": "91a616ec-9d82-43d1-ac36-f0aa9b393b21",
+        "Id": "8b5d059b-24b5-4d5d-ae73-746f12cfd80c",
         "Name": "TriggerArea",
         "Position": "123.0409,0,0",
         "Enabled": true,
@@ -49,7 +49,7 @@
         ]
       },
       {
-        "Id": "a3794f55-1651-4ecb-b957-c5ea31e0ec47",
+        "Id": "493a16ea-5eb5-4e32-bef2-cbfba7630f41",
         "Name": "AttackArea",
         "Position": "-189.718,48.40234,-0.00001094096",
         "Enabled": true,
@@ -66,13 +66,13 @@
         ]
       },
       {
-        "Id": "5b9573b9-d26c-4cc6-886f-9ddff24c0735",
+        "Id": "f045e128-75a9-406d-b3f4-1876d9b2b890",
         "Name": "Target",
         "Position": "0,91.21024,0",
         "Enabled": true
       },
       {
-        "Id": "d7d448b2-96af-4858-b966-3722196434c8",
+        "Id": "d54f1ec7-aff8-49ce-9075-f7552953e849",
         "Name": "AttackEvent",
         "Position": "-50.11293,-33.09923,-1.524353",
         "Enabled": true,
@@ -83,7 +83,7 @@
             "DisableOnTrigger": [
               {
                 "_type": "component",
-                "go": "959dc437-a39e-4b8f-a4fc-9116b8ceb3e3",
+                "go": "36becf83-e407-47a4-b10d-10dd361f5791",
                 "component_type": "EventComponent"
               }
             ],
@@ -111,9 +111,9 @@
                   "Type": "call",
                   "Properties": {
                     "_name": "Get",
-                    "T": "package.fish.sauna/Sauna.Player",
+                    "_isStatic": false,
                     "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                    "_isStatic": false
+                    "T": "package.fish.sauna/Sauna.Player"
                   },
                   "UserData": {
                     "Position": "496,-240",
@@ -315,11 +315,11 @@
                   "Id": 26,
                   "Type": "scene.ref",
                   "Properties": {
-                    "T": "Sandbox.Game/Sandbox.GameObject",
                     "value": {
                       "_type": "gameobject",
-                      "go": "ad81ba83-9b0e-45f4-bb37-2673dc189b7c"
-                    }
+                      "go": "62eeeacc-8718-4b4a-a808-931ac49b67ba"
+                    },
+                    "T": "Sandbox.Game/Sandbox.GameObject"
                   },
                   "UserData": {
                     "Position": "176,80"
@@ -329,12 +329,12 @@
                   "Id": 28,
                   "Type": "scene.ref",
                   "Properties": {
-                    "T": "package.fish.sauna/EventComponent",
                     "value": {
                       "_type": "component",
-                      "go": "d7d448b2-96af-4858-b966-3722196434c8",
+                      "go": "d54f1ec7-aff8-49ce-9075-f7552953e849",
                       "component_type": "EventComponent"
-                    }
+                    },
+                    "T": "package.fish.sauna/EventComponent"
                   },
                   "UserData": {
                     "Position": "2096,96"
@@ -659,7 +659,7 @@
             "Triggers": [
               {
                 "_type": "component",
-                "go": "a3794f55-1651-4ecb-b957-c5ea31e0ec47",
+                "go": "493a16ea-5eb5-4e32-bef2-cbfba7630f41",
                 "component_type": "EventAreaTrigger"
               }
             ]
@@ -667,7 +667,7 @@
         ]
       },
       {
-        "Id": "959dc437-a39e-4b8f-a4fc-9116b8ceb3e3",
+        "Id": "36becf83-e407-47a4-b10d-10dd361f5791",
         "Name": "ScaredEvent",
         "Position": "-50.11293,-33.09923,-1.524353",
         "Enabled": true,
@@ -677,7 +677,7 @@
             "DisabledWhilePlaying": [
               {
                 "_type": "component",
-                "go": "d7d448b2-96af-4858-b966-3722196434c8",
+                "go": "d54f1ec7-aff8-49ce-9075-f7552953e849",
                 "component_type": "EventComponent"
               }
             ],
@@ -709,11 +709,11 @@
                   "Id": 2,
                   "Type": "scene.ref",
                   "Properties": {
-                    "T": "Sandbox.Game/Sandbox.GameObject",
                     "value": {
                       "_type": "gameobject",
-                      "go": "ad81ba83-9b0e-45f4-bb37-2673dc189b7c"
-                    }
+                      "go": "62eeeacc-8718-4b4a-a808-931ac49b67ba"
+                    },
+                    "T": "Sandbox.Game/Sandbox.GameObject"
                   },
                   "UserData": {
                     "Position": "-608,144"
@@ -723,11 +723,11 @@
                   "Id": 3,
                   "Type": "scene.ref",
                   "Properties": {
-                    "T": "Sandbox.Game/Sandbox.GameObject",
                     "value": {
                       "_type": "gameobject",
-                      "go": "5b9573b9-d26c-4cc6-886f-9ddff24c0735"
-                    }
+                      "go": "f045e128-75a9-406d-b3f4-1876d9b2b890"
+                    },
+                    "T": "Sandbox.Game/Sandbox.GameObject"
                   },
                   "UserData": {
                     "Position": "-768,320"
@@ -822,8 +822,8 @@
                   "Type": "call",
                   "Properties": {
                     "_name": "RotateAroundAxis",
-                    "_type": "Sandbox.System/Rotation",
-                    "_isStatic": false
+                    "_isStatic": false,
+                    "_type": "Sandbox.System/Rotation"
                   },
                   "UserData": {
                     "Position": "288,352"
@@ -872,12 +872,12 @@
                   "Id": 18,
                   "Type": "scene.ref",
                   "Properties": {
-                    "T": "package.fish.sauna/EventComponent",
                     "value": {
                       "_type": "component",
-                      "go": "959dc437-a39e-4b8f-a4fc-9116b8ceb3e3",
+                      "go": "36becf83-e407-47a4-b10d-10dd361f5791",
                       "component_type": "EventComponent"
-                    }
+                    },
+                    "T": "package.fish.sauna/EventComponent"
                   },
                   "UserData": {
                     "Position": "1344,256"
@@ -895,9 +895,9 @@
                   "Type": "call",
                   "Properties": {
                     "_name": "Get",
-                    "T": "package.fish.sauna/Sauna.Player",
+                    "_isStatic": false,
                     "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                    "_isStatic": false
+                    "T": "package.fish.sauna/Sauna.Player"
                   },
                   "UserData": {
                     "Position": "-128,-320"
@@ -1201,7 +1201,7 @@
             "Triggers": [
               {
                 "_type": "component",
-                "go": "91a616ec-9d82-43d1-ac36-f0aa9b393b21",
+                "go": "8b5d059b-24b5-4d5d-ae73-746f12cfd80c",
                 "component_type": "EventAreaTrigger"
               }
             ]

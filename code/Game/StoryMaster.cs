@@ -270,9 +270,9 @@ public class StoryMaster : Component
 					chosenEvent.Enable();
 					eventsPicked++;
 				}
-
-				Log.Info( $"{eventsPicked} uncommon events loaded." );
 			}
+
+			Log.Info( $"{eventsPicked} uncommon events loaded." );
 		}
 
 		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Rare ) )
@@ -291,9 +291,9 @@ public class StoryMaster : Component
 					chosenEvent.Enable();
 					eventsPicked++;
 				}
-
-				Log.Info( $"{eventsPicked} rare events loaded." );
 			}
+
+			Log.Info( $"{eventsPicked} rare events loaded." );
 		}
 	}
 
