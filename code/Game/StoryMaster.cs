@@ -148,7 +148,7 @@ public class StoryMaster : Component
 			if ( scriptedEvent.TriggerOnNewSession )
 				scriptedEvent.TriggerTime = 0f;
 			else
-				scriptedEvent.TriggerTime = new Random().Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
+				scriptedEvent.TriggerTime = Sandbox.Game.Random.Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
 		}
 	}
 
@@ -246,7 +246,7 @@ public class StoryMaster : Component
 
 				if ( availableCommonEvents.Any() )
 				{
-					var chosenEvent = new Random().FromList( availableCommonEvents );
+					var chosenEvent = Sandbox.Game.Random.FromList( availableCommonEvents );
 					chosenEvent.Enable();
 					eventsPicked++;
 				}
@@ -267,7 +267,7 @@ public class StoryMaster : Component
 
 				if ( availableUncommonEvents.Any() )
 				{
-					var chosenEvent = new Random().FromList( availableUncommonEvents );
+					var chosenEvent = Sandbox.Game.Random.FromList( availableUncommonEvents );
 					chosenEvent.Enable();
 					eventsPicked++;
 				}
@@ -288,7 +288,7 @@ public class StoryMaster : Component
 
 				if ( availableRareEvents.Any() )
 				{
-					var chosenEvent = new Random().FromList( availableRareEvents );
+					var chosenEvent = Sandbox.Game.Random.FromList( availableRareEvents );
 					chosenEvent.Enable();
 					eventsPicked++;
 				}
