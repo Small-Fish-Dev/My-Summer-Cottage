@@ -415,7 +415,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.06357731,0,0.9979769",
+          "Rotation": "0,0.7287191,0,-0.6848128",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -822,6 +822,260 @@
                       }
                     ]
                   },
+                  "InteractDistance": 125
+                }
+              ]
+            },
+            {
+              "AvailableResponses": [
+                {
+                  "Identifier": "npc.talk2",
+                  "Keybind": "Use",
+                  "Description": "Go back to talk",
+                  "Action": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Action",
+                      "id": "7198e188-8a49-4db1-ad5d-e3d229161297",
+                      "ReferencedComponentTypes": [
+                        "package.fish.sauna/Sauna.DialogueComponent"
+                      ]
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input"
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "call",
+                        "Properties": {
+                          "_name": "SendToDialogueStage",
+                          "_isStatic": false,
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent"
+                        },
+                        "UserData": {
+                          "Position": "384,-16"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "scene.get",
+                        "Properties": {
+                          "T": "package.fish.sauna/Sauna.DialogueComponent"
+                        },
+                        "UserData": {
+                          "Position": "128,32"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 1,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_result",
+                        "DstId": 1,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": 0,
+                        "DstId": 1,
+                        "DstName": "index"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "obj",
+                        "DstId": 3,
+                        "DstName": "_this"
+                      }
+                    ]
+                  },
+                  "InteractDistance": 125,
+                  "DynamicColor": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Dynamic Color",
+                      "id": "4632f270-3252-43a6-9c64-e7f66d5cec16",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "output"
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "input"
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "Value": "0,0.7,1,1",
+                        "DstId": 0,
+                        "DstName": "_result"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "Identifier": "fuck",
+                  "Keybind": "use2",
+                  "Description": "fuck",
+                  "InteractDistance": 125,
+                  "Disabled": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Disabled",
+                      "id": "96d17eee-5cfb-4914-b100-f4675b49b571",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "output"
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "input"
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "Value": true,
+                        "DstId": 0,
+                        "DstName": "_result"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "HostOnly": false,
+          "Networked": false
+        },
+        {
+          "__type": "BoxCollider",
+          "Center": "0,0,4.25",
+          "IsTrigger": false,
+          "Scale": "31.40003,43.20007,8.5",
+          "Static": false,
+          "Surface": null
+        },
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 18446744073709551615,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/beer_crate/beer_crate.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Rigidbody",
+          "AngularDamping": 0,
+          "Gravity": true,
+          "LinearDamping": 0,
+          "Locking": {},
+          "MassOverride": 0,
+          "RigidbodyFlags": 0,
+          "StartAsleep": false
+        }
+      ]
+    },
+    {
+      "Id": "36b17f10-ad37-4900-afb5-d6b8e3097326",
+      "Name": "NPC (networked)",
+      "Position": "899.8499,-830.4589,56.00232",
+      "Rotation": "0.4999992,-0.5000003,-0.4999995,0.5000008",
+      "Scale": "1,1,2.148212",
+      "Networked": true,
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "DialogueComponent",
+          "DialogueStages": [
+            {
+              "AvailableResponses": [
+                {
+                  "Identifier": "npc.talk",
+                  "Keybind": "Use",
+                  "Description": "Talk",
+                  "Action": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Action",
+                      "id": "a434588d-f21c-46a3-a12c-06f66d21f47a",
+                      "ReferencedComponentTypes": [
+                        "package.fish.sauna/Sauna.DialogueComponent"
+                      ]
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input"
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "scene.get",
+                        "Properties": {
+                          "T": "package.fish.sauna/Sauna.DialogueComponent"
+                        },
+                        "UserData": {
+                          "Position": "160,32"
+                        }
+                      },
+                      {
+                        "Id": 2,
+                        "Type": "call",
+                        "Properties": {
+                          "_name": "SendToDialogueStage",
+                          "_isStatic": false,
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent"
+                        },
+                        "UserData": {
+                          "Position": "448,16"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 0,
+                        "SrcName": "obj",
+                        "DstId": 1,
+                        "DstName": "_this"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 2,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 1,
+                        "SrcName": "_result",
+                        "DstId": 2,
+                        "DstName": "_target"
+                      },
+                      {
+                        "Value": 1,
+                        "DstId": 2,
+                        "DstName": "index"
+                      }
+                    ]
+                  },
                   "InteractDistance": 125,
                   "DynamicColor": null,
                   "Disabled": null
@@ -964,7 +1218,7 @@
             }
           ],
           "HostOnly": false,
-          "Networked": false
+          "Networked": true
         },
         {
           "__type": "BoxCollider",
@@ -999,9 +1253,9 @@
       ]
     },
     {
-      "Id": "36b17f10-ad37-4900-afb5-d6b8e3097326",
-      "Name": "NPC (networked)",
-      "Position": "899.8499,-830.4589,56.00232",
+      "Id": "19677fb0-2c4d-4927-80cf-7bf2d6f679a1",
+      "Name": "NPC (host)",
+      "Position": "899.8499,-871.8862,56.00232",
       "Rotation": "0.4999992,-0.5000003,-0.4999995,0.5000008",
       "Scale": "1,1,2.148212",
       "Networked": true,
@@ -1217,264 +1471,6 @@
               ]
             }
           ],
-          "HostOnly": false,
-          "Networked": true
-        },
-        {
-          "__type": "BoxCollider",
-          "Center": "0,0,4.25",
-          "IsTrigger": false,
-          "Scale": "31.40003,43.20007,8.5",
-          "Static": false,
-          "Surface": null
-        },
-        {
-          "__type": "SkinnedModelRenderer",
-          "AnimationGraph": null,
-          "BodyGroups": 18446744073709551615,
-          "BoneMergeTarget": null,
-          "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/beer_crate/beer_crate.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "Rigidbody",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {},
-          "MassOverride": 0,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        }
-      ]
-    },
-    {
-      "Id": "19677fb0-2c4d-4927-80cf-7bf2d6f679a1",
-      "Name": "NPC (host)",
-      "Position": "899.8499,-871.8862,56.00232",
-      "Rotation": "0.4999992,-0.5000003,-0.4999995,0.5000008",
-      "Scale": "1,1,2.148212",
-      "Networked": true,
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "DialogueComponent",
-          "DialogueStages": [
-            {
-              "AvailableResponses": [
-                {
-                  "Identifier": "npc.talk",
-                  "Keybind": "Use",
-                  "Description": "Talk",
-                  "Action": {
-                    "Version": 5,
-                    "UserData": {
-                      "Title": "Action",
-                      "id": "a434588d-f21c-46a3-a12c-06f66d21f47a",
-                      "ReferencedComponentTypes": [
-                        "package.fish.sauna/Sauna.DialogueComponent"
-                      ]
-                    },
-                    "Variables": [],
-                    "Nodes": [
-                      {
-                        "Id": 0,
-                        "Type": "input"
-                      },
-                      {
-                        "Id": 1,
-                        "Type": "scene.get",
-                        "Properties": {
-                          "T": "package.fish.sauna/Sauna.DialogueComponent"
-                        },
-                        "UserData": {
-                          "Position": "160,32"
-                        }
-                      },
-                      {
-                        "Id": 2,
-                        "Type": "call",
-                        "Properties": {
-                          "_name": "SendToDialogueStage",
-                          "_isStatic": false,
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent"
-                        },
-                        "UserData": {
-                          "Position": "448,16"
-                        }
-                      }
-                    ],
-                    "Links": [
-                      {
-                        "SrcId": 0,
-                        "SrcName": "obj",
-                        "DstId": 1,
-                        "DstName": "_this"
-                      },
-                      {
-                        "SrcId": 0,
-                        "SrcName": "_signal",
-                        "DstId": 2,
-                        "DstName": "_signal"
-                      },
-                      {
-                        "SrcId": 1,
-                        "SrcName": "_result",
-                        "DstId": 2,
-                        "DstName": "_target"
-                      },
-                      {
-                        "Value": 1,
-                        "DstId": 2,
-                        "DstName": "index"
-                      }
-                    ]
-                  },
-                  "InteractDistance": 125,
-                  "DynamicColor": null,
-                  "Disabled": null
-                }
-              ]
-            },
-            {
-              "AvailableResponses": [
-                {
-                  "Identifier": "npc.talk2",
-                  "Keybind": "Use",
-                  "Description": "Go back to talk",
-                  "Action": {
-                    "Version": 5,
-                    "UserData": {
-                      "Title": "Action",
-                      "id": "7198e188-8a49-4db1-ad5d-e3d229161297",
-                      "ReferencedComponentTypes": [
-                        "package.fish.sauna/Sauna.DialogueComponent"
-                      ]
-                    },
-                    "Variables": [],
-                    "Nodes": [
-                      {
-                        "Id": 0,
-                        "Type": "input"
-                      },
-                      {
-                        "Id": 1,
-                        "Type": "call",
-                        "Properties": {
-                          "_name": "SendToDialogueStage",
-                          "_isStatic": false,
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent"
-                        },
-                        "UserData": {
-                          "Position": "384,-16"
-                        }
-                      },
-                      {
-                        "Id": 3,
-                        "Type": "scene.get",
-                        "Properties": {
-                          "T": "package.fish.sauna/Sauna.DialogueComponent"
-                        },
-                        "UserData": {
-                          "Position": "128,32"
-                        }
-                      }
-                    ],
-                    "Links": [
-                      {
-                        "SrcId": 0,
-                        "SrcName": "_signal",
-                        "DstId": 1,
-                        "DstName": "_signal"
-                      },
-                      {
-                        "SrcId": 3,
-                        "SrcName": "_result",
-                        "DstId": 1,
-                        "DstName": "_target"
-                      },
-                      {
-                        "Value": 0,
-                        "DstId": 1,
-                        "DstName": "index"
-                      },
-                      {
-                        "SrcId": 0,
-                        "SrcName": "obj",
-                        "DstId": 3,
-                        "DstName": "_this"
-                      }
-                    ]
-                  },
-                  "InteractDistance": 125,
-                  "DynamicColor": {
-                    "Version": 5,
-                    "UserData": {
-                      "Title": "Dynamic Color",
-                      "id": "4632f270-3252-43a6-9c64-e7f66d5cec16",
-                      "ReferencedComponentTypes": []
-                    },
-                    "Variables": [],
-                    "Nodes": [
-                      {
-                        "Id": 0,
-                        "Type": "output"
-                      },
-                      {
-                        "Id": 1,
-                        "Type": "input"
-                      }
-                    ],
-                    "Links": [
-                      {
-                        "Value": "0,0.7,1,1",
-                        "DstId": 0,
-                        "DstName": "_result"
-                      }
-                    ]
-                  },
-                  "Disabled": null
-                },
-                {
-                  "Identifier": "fuck",
-                  "Keybind": "use2",
-                  "Description": "fuck",
-                  "InteractDistance": 125,
-                  "DynamicColor": null,
-                  "Disabled": {
-                    "Version": 5,
-                    "UserData": {
-                      "Title": "Disabled",
-                      "id": "96d17eee-5cfb-4914-b100-f4675b49b571",
-                      "ReferencedComponentTypes": []
-                    },
-                    "Variables": [],
-                    "Nodes": [
-                      {
-                        "Id": 0,
-                        "Type": "output"
-                      },
-                      {
-                        "Id": 1,
-                        "Type": "input"
-                      }
-                    ],
-                    "Links": [
-                      {
-                        "Value": true,
-                        "DstId": 0,
-                        "DstName": "_result"
-                      }
-                    ]
-                  }
-                }
-              ]
-            }
-          ],
           "HostOnly": true,
           "Networked": false
         },
@@ -1564,164 +1560,6 @@
         {
           "__type": "MooseTest",
           "AnimationSpeed": 100
-        }
-      ]
-    },
-    {
-      "Id": "91028a1e-d6d2-4409-9a34-3cc4ecbccc1e",
-      "Name": "Car",
-      "Position": "731.5923,-1014.71,25.51387",
-      "Rotation": "0,0,-0.3826834,0.9238796",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Interactions",
-          "HideOnEmpty": false,
-          "ObjectInteractions": [
-            {
-              "Identifier": "sauna.endsession",
-              "Keybind": "use",
-              "Description": "End session",
-              "Action": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Action",
-                  "id": "33319bc0-e128-4e9d-a45a-8dedd8e9cf81",
-                  "ReferencedComponentTypes": []
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 1,
-                    "Type": "event.endsession",
-                    "UserData": {
-                      "Position": "240,16"
-                    }
-                  },
-                  {
-                    "Id": 2,
-                    "Type": "time.delay",
-                    "UserData": {
-                      "Position": "480,16"
-                    }
-                  },
-                  {
-                    "Id": 3,
-                    "Type": "event.geteverycomponent",
-                    "Properties": {
-                      "T": "package.fish.sauna/Sauna.Player"
-                    },
-                    "UserData": {
-                      "Position": "-96,144"
-                    }
-                  },
-                  {
-                    "Id": 4,
-                    "Type": "event.blackscreen",
-                    "UserData": {
-                      "Position": "448,144"
-                    }
-                  },
-                  {
-                    "Id": 5,
-                    "Type": "event.startsession",
-                    "UserData": {
-                      "Position": "672,32"
-                    }
-                  },
-                  {
-                    "Id": 6,
-                    "Type": "foreach",
-                    "UserData": {
-                      "Position": "192,160"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 1,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 1,
-                    "SrcName": "_signal",
-                    "DstId": 2,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 2,
-                    "DstId": 2,
-                    "DstName": "seconds"
-                  },
-                  {
-                    "SrcId": 6,
-                    "SrcName": "body",
-                    "DstId": 4,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 6,
-                    "SrcName": "body.value",
-                    "DstId": 4,
-                    "DstName": "player"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_signal",
-                    "DstId": 5,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 6,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 3,
-                    "SrcName": "_result",
-                    "DstId": 6,
-                    "DstName": "enumerable"
-                  }
-                ]
-              },
-              "InteractDistance": 75,
-              "Accessibility": "World",
-              "Animation": "Interact"
-            }
-          ]
-        },
-        {
-          "__type": "ModelCollider",
-          "IsTrigger": false,
-          "Model": "models/old_red_lada/old_red_lada.vmdl",
-          "Static": false,
-          "Surface": null
-        }
-      ],
-      "Children": [
-        {
-          "Id": "20524fe5-a996-471d-b5f9-d574d01797ef",
-          "Name": "Model",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "ModelRenderer",
-              "BodyGroups": 18446744073709551615,
-              "MaterialGroup": "default",
-              "MaterialOverride": null,
-              "Model": "models/old_red_lada/old_red_lada.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
         }
       ]
     },
@@ -1911,6 +1749,13 @@
       "Position": "193.1826,-1234.466,69.25894",
       "Enabled": true,
       "__Prefab": "prefabs/items/rifle.prefab"
+    },
+    {
+      "Id": "23622d84-5944-4616-bbe5-9898b856d66e",
+      "Name": "car",
+      "Position": "728.8416,-1016.331,27.00001",
+      "Enabled": true,
+      "__Prefab": "prefabs/objects/car.prefab"
     }
   ],
   "SceneProperties": {
@@ -1936,6 +1781,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-05T01:54:05.2732054\u002B03:00",
+  "LastSaved": "2024-03-05T00:53:05.2002586\u002B01:00",
   "__references": []
 }
