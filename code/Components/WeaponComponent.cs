@@ -14,6 +14,9 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Projectile" )] public int Capacity { get; set; }
 	[Property, Category( "Projectile" )] public PrefabFile Ammunition { get; set; }
 
+	[Property, Category( "Recoil" )] public bool HasRecoil { get; set; } = false;
+	[Property, Category( "Recoil" ), ShowIf( "HasRecoil", true )] public RangedFloat StrengthRange { get; set; }
+
 	private string _name;
 
 	protected override void OnAwake()
@@ -49,7 +52,14 @@ public sealed class WeaponComponent : Component
 		switch ( Type )
 		{
 			case WeaponType.Ranged:
-				Fire( shooter );
+				var shot = Fire( shooter );
+				if ( shot && HasRecoil )
+				{
+					var ang = (shooter.EyeAngles + new Angles( -1f, Sandbox.Game.Random.Float( -0.3f, 0.3f ), 0 ) * Sandbox.Game.Random.Float( StrengthRange.x, StrengthRange.y ));
+					ang = ang.WithPitch( ang.pitch.Clamp( -89, 89 ) );
+					shooter.EyeAngles = ang;
+				}
+
 				UpdateName();
 				break;
 
