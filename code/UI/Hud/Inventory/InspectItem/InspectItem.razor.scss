@@ -25,7 +25,7 @@ InspectItem {
         }
     }
 
-    .text-placement {
+    .info {
         position: absolute;
         height: 100%;
         width: 100%;
@@ -35,37 +35,6 @@ InspectItem {
         transition: all 0.2s ease-out;
         opacity: 1;
 
-        .text-container {
-            flex-direction: column;
-            width: 450px;
-            background-color: #1b1c1b;
-            box-shadow: 4px 4px 0px black;
-            padding: 20px;
-            text-shadow: $text-shadow-sm;
-
-            .weight {
-                font-size: 19px;
-                font-family: HabboExtended;
-                color: $orange;
-            }
-
-            .price {
-                font-size: 19px;
-                font-family: HabboExtended;
-                color: $green;
-            }
-
-            .title {
-                font-size: 36px;
-                font-family: BasicHandwriting;
-            }
-
-            .description {
-                font-size: 22px;
-                font-family: HabboExtended;
-            }
-        }
-        
         &:intro {
             opacity: 0;
         }

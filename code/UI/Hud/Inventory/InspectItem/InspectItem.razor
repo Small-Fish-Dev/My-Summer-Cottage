@@ -10,23 +10,8 @@
 		 style="position: absolute; top: 50px;" 
 	/>
 	<ScenePanel class="scene" @ref=_scenePanel />
-	<div class="text-placement">
-		<div class="text-container">
-			<div style="width: 100%; justify-content: space-between; @(!HasDescription ? "align-items: center;" : "")">
-				<text class="title">@_item.Name</text>
-				<div style="flex-direction: column; align-items: flex-end; gap: 4px;">
-					<text class="weight">@_item.WeightInGrams.ToKilograms() kg</text>
-					@if (_item.IsSellable)
-					{
-						<div class="price">@($"{_item.SellPrice}mk")</div>
-					}
-				</div>
-			</div>
-			@if (HasDescription)
-			{
-				<div class="description">@_item.Description</div>
-			}
-		</div>
+	<div class="info">
+		<ItemInformation Item=@_item style="max-width: 500px;" />
 	</div>
 </root>
 

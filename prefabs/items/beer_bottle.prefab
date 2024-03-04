@@ -13,8 +13,9 @@
           "Scale": "1,1,1",
           "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
         },
-        "Description": "This is the beer bottle desc",
+        "Description": "This item has a really long description because I\u0027d like to test out the UI",
         "HideBodygroups": "None",
+        "HoldType": "Idle",
         "Icon": {
           "Model": "models/beer_bottle/beer.vmdl",
           "MaterialGroup": "",
@@ -23,13 +24,14 @@
           "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
         },
         "Name": "Beer Bottle",
-        "SellPrice": -1,
+        "SellPrice": 10,
         "Slot": "Hand",
         "UpdatePosition": true,
         "WeightInGrams": 100
       },
       {
         "__type": "Interactions",
+        "HideOnEmpty": false,
         "ObjectInteractions": [
           {
             "Identifier": "beer.drink",
@@ -104,7 +106,10 @@
                   "DstName": "exp"
                 }
               ]
-            }
+            },
+            "InteractDistance": 75,
+            "Accessibility": "All",
+            "Animation": "Interact"
           }
         ]
       },

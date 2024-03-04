@@ -1,0 +1,52 @@
+@import "/UI/Style.scss";
+
+ItemInformation {
+    background-color: #1b1c1b;
+    align-items: center;
+    transition: all 0.08s ease-out;
+    text-shadow: $text-shadow-sm;
+    flex-direction: column;
+    margin-left: 20px;
+    box-shadow: 4px 4px 0px black;
+
+    .item-details {
+        width: 100%;
+        padding: 10px;
+        flex-direction: column;
+        justify-content: center;
+
+        .top-row {
+            justify-content: space-between;
+            align-items: center;
+
+            .item-weight {
+                color: $orange;
+                font-family: HabboExtended;
+                font-size: 16px;
+                letter-spacing: 1px;
+                font-weight: bold;
+            }
+
+            .item-price {
+                color: $green;
+                font-family: HabboExtended;
+                font-size: 16px;
+                letter-spacing: 1px;
+                font-weight: bold;
+            }
+
+            .item-name {
+                font-family: BasicHandwriting;
+                font-size: 27px;
+                margin-right: 25px;
+            }
+        }
+
+        .item-description {
+            font-family: HabboExtended;
+            font-size: 16px;
+            padding-top: 8px;
+            color: darken(white, 0.3);
+        }
+    }
+}

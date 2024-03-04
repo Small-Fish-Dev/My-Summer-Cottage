@@ -3,27 +3,11 @@
 @inherits Panel
 
 <root>
-	<div class="item-details">
-		<div class="top-row" style="@(!HasDescription ? "align-items: center;" : "")">
-			<text class="item-name">@_item.Name</text>
-			<div style="flex-direction: column; align-items: flex-end; gap: 2px;">
-				<text class="item-weight">@_item.WeightInGrams.ToKilograms() kg</text>
-				@if (_item.IsSellable)
-				{
-					<div class="item-price">@($"{_item.SellPrice}mk")</div>
-				}
-			</div>
-		</div>
-		@if (HasDescription)
-		{
-			<div class="item-description">@_item.Description</div>
-		}
-	</div>
+	<ItemInformation Item=@_item style="max-width: 400px;" />
 </root>
 
 @code {
 	public static HoverPanel Instance { get; private set; }
-	private bool HasDescription => !String.IsNullOrEmpty(_item.Description);
 	private ItemComponent _item;
 
 	public static void Open(ItemComponent item)

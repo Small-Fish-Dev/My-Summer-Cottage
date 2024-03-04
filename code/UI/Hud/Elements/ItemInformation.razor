@@ -1,0 +1,26 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<div class="item-details">
+		<div class="top-row" style="@(!string.IsNullOrEmpty(Item.Description) ? "align-items: center;" : "")">
+			<text class="item-name">@Item.Name</text>
+			<div style="flex-direction: column; align-items: flex-end; gap: 2px;">
+				<text class="item-weight">@Item.WeightInGrams.ToKilograms() kg</text>
+				@if (Item.IsSellable)
+				{
+					<div class="item-price">@($"{Item.SellPrice}mk")</div>
+				}
+			</div>
+		</div>
+		@if (!string.IsNullOrEmpty(Item.Description))
+		{
+			<div class="item-description">@Item.Description</div>
+		}
+	</div>
+</root>
+
+@code {
+	public ItemComponent Item { get; set; }
+}
