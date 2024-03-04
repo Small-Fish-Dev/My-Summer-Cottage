@@ -1,11 +1,14 @@
 {
   "Name": "Wife Needs Beer",
+  "Subtitle": "Kindly do the needful",
   "Description": "I don\u0027t know why",
   "TaskType": "GivenByWife",
   "TaskRarity": "Common",
   "IsPrimary": true,
   "Global": false,
   "TimeLimited": true,
+  "SuccessSignal": "task.success.Wife Needs Beer",
+  "FailedSignal": "task.failed.Wife Needs Beer",
   "TimeLimitInSeconds": 120,
   "OnStart": null,
   "OnSuccess": null,
@@ -13,17 +16,10 @@
   "FailConditionCheck": null,
   "Subtasks": [
     {
-      "Description": "Get ammo",
+      "Description": "Get beer",
       "TriggerSignal": "item.received.Beer Bottle",
       "AmountToComplete": 1
     }
   ],
-  "CurrentSubtaskOrder": 0,
-  "Successful": false,
-  "Started": false,
-  "Completed": false,
-  "TaskTimer": {
-    "Fraction": "NaN"
-  },
   "__references": []
 }
