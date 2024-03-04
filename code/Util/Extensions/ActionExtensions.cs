@@ -2,8 +2,10 @@ namespace Sauna;
 
 public static class ActionExtensions
 {
-	public static bool InvokeOrDefault( this Func<bool> func )
+	public static T InvokeOrDefault<T>( this Func<T> func )
 	{
-		return func?.Invoke() ?? false;
+		return func == null 
+			? default( T )
+			: func.Invoke();
 	}
 }
