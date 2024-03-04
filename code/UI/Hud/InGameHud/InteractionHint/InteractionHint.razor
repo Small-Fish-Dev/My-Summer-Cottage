@@ -98,7 +98,7 @@
 				if ( !FromHands ) // No need to play use animation for held items.
 				{
 					var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
-					Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ), interaction.AnimationIdentifier );
+					Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ), interaction.Animation );
 				}
 			}
 		}

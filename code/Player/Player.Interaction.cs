@@ -45,9 +45,9 @@ public partial class Player
 	}
 
 	[Broadcast]
-	public void BroadcastInteraction( Vector3 position, Rotation rotation, string animationIdentifier )
+	public void BroadcastInteraction( Vector3 position, Rotation rotation, InteractAnimations animations )
 	{
-		if ( animationIdentifier == "interact" )
+		if ( animations == InteractAnimations.Interact )
 		{
 			Renderer.Set( "right_ik_pos", position );
 			Renderer.Set( "right_ik_rot", rotation );

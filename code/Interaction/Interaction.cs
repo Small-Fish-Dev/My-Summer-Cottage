@@ -14,6 +14,12 @@ public enum InputMode
 	Down
 }
 
+public enum InteractAnimations
+{
+	None,
+	Interact,
+}
+
 [Flags]
 public enum AccessibleFrom
 {
@@ -101,7 +107,7 @@ public class Interaction
 	public Vector3 Extents { get; set; }
 
 	[Property, Category( "Optional" )]
-	public string AnimationIdentifier { get; set; } = "interact";
+	public InteractAnimations Animation { get; set; } = InteractAnimations.Interact;
 
 	/// <summary>
 	/// What context should the input be called in

@@ -103,7 +103,7 @@ public class DialogueComponent : Component
 						Action = response.Action,
 						Disabled = () => !IsActiveStage( stageIndex ) || (response.Disabled is not null && response.Disabled()),
 						ShowWhenDisabled = () => IsActiveStage( stageIndex ),
-						AnimationIdentifier = string.Empty,
+						Animation = InteractAnimations.None,
 						DynamicColor = () => response.DynamicColor?.Invoke() ?? Color.White
 					}
 				);
