@@ -14,7 +14,7 @@ InventorySlot {
         height: 100%;
         width: 100%;
         mask-mode: alpha;
-        mask-image: url( '/ui/hud/slot_mask.png' );
+        mask-image: url('/ui/hud/slot_mask.png');
         mask-size: 100%;
     }
 
@@ -30,7 +30,7 @@ InventorySlot {
         height: 90%;
         width: 90%;
 
-        &.has-draggable {
+        &.has-child-draggable {
             opacity: 0.3;
         }
 
@@ -45,5 +45,36 @@ InventorySlot {
         top: -15px;
         height: 40px;
         width: 40px;
+    }
+
+    // Drop target stuff
+    // Drop target transitions
+    .border {
+        transition: transform 0.06s ease;
+    }
+
+    transition: background-color 0.23s ease-in-out;
+    
+    // Behaviour for when the draggable could be dropped here
+    &.can-drop {
+        background-color: rgba(255, 255, 255, 0.02);
+    }
+    
+    // Behaviour for when we are the drop target,
+    &.is-drop-target {
+        &.can-drop {
+            // ... and the draggable can be dropped here
+            .border {
+                transform: scale(1.1);
+            }
+
+            transition: background-color 0.13s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &:not(.can-drop) {
+            // ... and the draggable can't be dropped here
+            background-color: rgba(255, 0, 0, 0.1);
+        }
     }
 }

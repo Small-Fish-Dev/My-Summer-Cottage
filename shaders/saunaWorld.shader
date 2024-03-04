@@ -133,12 +133,13 @@ PS
         m.Roughness = rm.r;
         m.Metalness = rm.g;
         m.AmbientOcclusion = 1;
-        m.TintMask = 0;
+        m.TintMask = l_tColor.a;
         m.Opacity = 1;
 
 		float4 result = ShadingModelStandard::Shade( i, m );
 		#if( S_TRANSPARENCY )
 			float alpha = Tex2DS( g_tTransparencyMask, Sampler, UV.xy ).r;
+			m.Opacity = alpha;
 			result.a = max( alpha, floor( alpha + TransparencyRounding ) );
 		#endif
 

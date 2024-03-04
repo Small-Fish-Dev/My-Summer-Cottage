@@ -3,9 +3,9 @@
 public class EyeProtector : Component, Component.ExecuteInEditor
 {
 	private IDisposable hook;
-	private Material shader = Material.FromShader( "shaders/saunaCensor.shader" );
+	private static Material shader = Material.FromShader( "shaders/saunaCensor.shader" );
 
-	public void Render( SceneCamera camera )
+	public static void Render( SceneCamera camera, SceneObject specific = null )
 	{
 		// Grab textures we're going to need.
 		Graphics.GrabFrameTexture( "ColorTexture" );
@@ -15,21 +15,32 @@ public class EyeProtector : Component, Component.ExecuteInEditor
 		Graphics.RenderTarget = rt;
 		Graphics.Clear( Color.Black, clearColor: false );
 
-		var targets = Scene.GetAllComponents<CensorComponent>();
-		foreach ( var target in targets )
-			Censor( target );
+		if ( specific != null )
+			Censor( specific );
+		else
+		{
+			var targets = GameManager.ActiveScene.GetAllComponents<CensorComponent>();
+			foreach ( var target in targets )
+			{
+				var obj = target.Renderer?.SceneObject;
+				if ( target.Renderer?.SceneObject == null )
+					continue;
+
+				Censor( obj );
+			}
+		}
 
 		// Clear RenderTarget.
 		Graphics.RenderTarget = null;
 	}
 
-	private void Censor( CensorComponent component )
+	private static void Censor( SceneObject obj )
 	{
-		if ( component.Renderer == null )
+		if ( !obj.RenderingEnabled )
 			return;
 
 		Graphics.Attributes.Set( "Width", 1f );
-		Graphics.Render( component.Renderer.SceneObject, material: shader );
+		Graphics.Render( obj, material: shader );
 	}
 
 	protected override void OnEnabled()
@@ -37,7 +48,7 @@ public class EyeProtector : Component, Component.ExecuteInEditor
 		hook?.Dispose();
 
 		var camera = Components.Get<CameraComponent>( FindMode.InSelf );
-		hook = camera.AddHookAfterTransparent( "Censoring", 10, Render );
+		hook = camera.AddHookAfterTransparent( "Censoring", 10, ( SceneCamera cam ) => Render( cam ) );
 	}
 
 	protected override void OnDisabled()
