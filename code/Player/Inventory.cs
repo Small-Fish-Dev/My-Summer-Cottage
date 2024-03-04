@@ -34,6 +34,8 @@ public class Inventory : Component
 	public bool HasSpaceInBackpack()
 		=> _backpackItems.IndexOf( null ) != -1;
 
+	public bool IsSlotOccupied( EquipSlot slot ) => _equippedItems.ElementAtOrDefault( (int)slot ) is not null;
+
 	/// <summary>
 	/// Item is given to the inventory system if they have free slots.
 	/// </summary>
@@ -53,7 +55,7 @@ public class Inventory : Component
 	/// <summary>
 	/// The item is equipped from the backpack and swaps out any previously equipped item.
 	/// </summary>
-	public bool EquipItem( ItemComponent item )
+	public bool EquipItemFromBackpack( ItemComponent item )
 	{
 		var index = _backpackItems.IndexOf( item );
 		if ( index == -1 )
@@ -74,6 +76,22 @@ public class Inventory : Component
 		}
 
 		GiveEquipmentItem( equipment );
+		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
+
+		return true;
+	}
+
+	public bool EquipItemFromWorld( ItemComponent item )
+	{
+		if ( item is not ItemEquipment equipment )
+			return false;
+
+		if ( IsSlotOccupied( equipment.Slot ) )
+			return false;
+
+		SetOwner( item );
+		GiveEquipmentItem( equipment );
+		TaskMaster.SubmitTriggerSignal( $"item.received.{item.Name}", Player );
 		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
 
 		return true;
@@ -228,24 +246,6 @@ public class Inventory : Component
 			_backpackItems[_backpackItems.IndexOf( item )] = null;
 		else if ( _equippedItems.Contains( item ) )
 			_equippedItems[_equippedItems.IndexOf( item )] = null;
-	}
-
-	/// <summary>
-	/// The item is equipped from the world if possible.
-	/// </summary>
-	public bool TryEquip( ItemComponent item )
-	{
-		if ( item is not ItemEquipment equipment )
-			return false;
-
-		var slotIndex = (int)equipment.Slot;
-		if ( _equippedItems[slotIndex] is not null )
-			return false;
-
-		SetOwner( equipment );
-		GiveEquipmentItem( equipment );
-
-		return true;
 	}
 
 	public int GetTotalWeightInGrams()

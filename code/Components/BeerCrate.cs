@@ -96,7 +96,7 @@ public sealed class BeerCrate : Component
 
 				beer = Beer.Clone();
 				beer.BreakFromPrefab();
-				inventory.TryEquip( beer );
+				inventory.EquipItemFromWorld( beer );
 				Count--;
 			},
 			Keybind = "use2",
