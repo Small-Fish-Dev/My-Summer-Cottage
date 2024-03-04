@@ -14,8 +14,8 @@
 						remaps = 
 						[
 							{
-								from = "pallet.vmat"
-								to = "models/props/pallet/pallet.vmat"
+								from = "dining_chair.vmat"
+								to = "models/props/dining_chair/dining_chair.vmat"
 							},
 						]
 						use_global_default = false
@@ -28,12 +28,40 @@
 				children = 
 				[
 					{
-						_class = "PhysicsHullFromRender"
+						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
 						collision_tags = "solid"
-						faceMergeAngle = 20.0
-						maxHullVertices = 32
+						origin = [ -0.333524, 0.0, 18.954426 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 20.917482, 19.0, 1.96711 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						origin = [ -0.932837, 8.867043, 9.85816 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 21.979652, 2.389376, 19.71632 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						origin = [ -0.932837, -8.86704, 9.85816 ]
+						angles = [ -0.0, 180.0, 180.0 ]
+						dimensions = [ 21.979652, 2.389376, 19.71632 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						origin = [ -11.463408, 0.0, 32.4002 ]
+						angles = [ -4.0, 0.0, 0.0 ]
+						dimensions = [ 2.02678, 20.0, 29.082561 ]
 					},
 				]
 			},
@@ -43,7 +71,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/props/pallet/pallet.fbx"
+						filename = "models/props/dining_chair/dining_chair.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -56,7 +84,6 @@
 							exclude_by_default = true
 							exception_list = 
 							[
-								"Cube_073",
 								"Cube_023",
 							]
 						}
