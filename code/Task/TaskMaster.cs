@@ -41,20 +41,43 @@ public class TaskMaster : Component
 		}
 	}
 
+	public struct SubtaskCompletion
+	{
+		[JsonInclude]
+		public string Description { get; set; }
+		[JsonInclude]
+		public int CurrentAmount { get; set; } = 0;
+
+		public SubtaskCompletion( string description, int currentAmount = 0 )
+		{
+			Description = description;
+			CurrentAmount = currentAmount;
+		}
+	}
+
 	public class TaskCompletion
 	{
 		[JsonInclude]
 		public string Task { get; set; }
 		[JsonInclude]
-		public int TimesTriggered { get; set; }
+		public int TimesTriggered { get; set; } = 0;
 		[JsonInclude]
-		public int TimesCompleted { get; set; }
+		public int TimesCompleted { get; set; } = 0;
+		[JsonInclude]
+		public bool CurrentlyActive { get; set; } = false;
+		[JsonInclude]
+		public int CurrentSubtaskOrder { get; set; } = 0;
 
-		public TaskCompletion( string task, int timesTriggered = 0, int timesCompleted = 0 )
+		[JsonInclude]
+		public List<SubtaskCompletion> Subtasks { get; set; } = new();
+
+		public TaskCompletion( string task, int timesTriggered = 0, int timesCompleted = 0, bool currentlyActive = false, int currentSubtaskOrder = 0 )
 		{
 			Task = task;
 			TimesTriggered = timesTriggered;
 			TimesCompleted = timesCompleted;
+			CurrentlyActive = currentlyActive;
+			CurrentSubtaskOrder = currentSubtaskOrder;
 		}
 	}
 
@@ -74,10 +97,35 @@ public class TaskMaster : Component
 		SelectedTask = null; // dogshit s&box bug doesn't reset static
 		LoadTasksProgression();
 	}
+	protected override void OnDestroy()
+	{
+		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
+
+		foreach ( var task in allTasks )
+		{
+			task.Reset();
+		}
+	}
 
 	public void AddTaskProgression( string taskPath, int timesTriggered = 0, int timesCompleted = 0 )
 	{
 		var newTaskCompletion = new TaskCompletion( taskPath, timesTriggered, timesCompleted );
+
+		foreach ( var task in CurrentTasks )
+		{
+			if ( task.ResourcePath == taskPath && !task.Completed )
+			{
+				newTaskCompletion.CurrentlyActive = true;
+				newTaskCompletion.CurrentSubtaskOrder = task.CurrentSubtaskOrder;
+
+				foreach ( var subtask in task.Subtasks )
+				{
+					var newSubtaskCompletion = new SubtaskCompletion( subtask.Description, subtask.CurrentAmount );
+					newTaskCompletion.Subtasks.Add( newSubtaskCompletion );
+				}
+			}
+		}
+
 		TasksProgression.Tasks.Add( newTaskCompletion );
 	}
 
