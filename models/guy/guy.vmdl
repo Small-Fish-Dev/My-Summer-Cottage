@@ -824,57 +824,13 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "use"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/use.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "use_delta"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/use.fbx"
-						start_frame = -1
-						end_frame = 8
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "use_delta_2"
+						name = "inspect_arms"
 						children = 
 						[
 							{
-								_class = "AnimSubtract"
-								anim_name = "use"
-								frame = 8
+								_class = "AnimSmoothLoop"
+								frames_from_start = 3
+								frames_from_end = 3
 							},
 						]
 						activity_name = ""
@@ -889,40 +845,10 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						enable_scale = false
-						source_filename = "models/guy/animations/use.fbx"
-						start_frame = 8
-						end_frame = 14
-						framerate = 12.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "arms_raise"
-						children = 
-						[
-							{
-								_class = "AnimSubtract"
-								anim_name = "arms_raise"
-								frame = 0
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/arms_raise.fbx"
+						source_filename = "models/guy/animations/inspect_arms.fbx"
 						start_frame = -1
 						end_frame = -1
-						framerate = 5.0
+						framerate = -1.0
 						take = 0
 						reverse = false
 					},
@@ -1722,128 +1648,245 @@
 						]
 					},
 					{
-						_class = "AnimFile"
-						name = "aim_matrix_delta"
+						_class = "Folder"
+						name = "use"
 						children = 
 						[
 							{
-								_class = "AnimSubtract"
-								anim_name = "aim_matrix"
-								frame = 4
+								_class = "AnimFile"
+								name = "use"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/use.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "use_delta"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/use.fbx"
+								start_frame = -1
+								end_frame = 8
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "use_delta_2"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "use"
+										frame = 8
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/use.fbx"
+								start_frame = 8
+								end_frame = 14
+								framerate = 12.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "arms_raise"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "arms_raise"
+										frame = 0
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/arms_raise.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = 5.0
+								take = 0
+								reverse = false
 							},
 						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/aim_matrix.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
 					},
 					{
-						_class = "AnimFile"
-						name = "aim_matrix"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/aim_matrix.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "tallness"
+						_class = "Folder"
+						name = "aim"
 						children = 
 						[
 							{
-								_class = "AnimSubtract"
-								anim_name = "tallness"
-								frame = 0
+								_class = "AnimFile"
+								name = "aim_matrix_delta"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "aim_matrix"
+										frame = 4
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/aim_matrix.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "aim_matrix"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/aim_matrix.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
 							},
 						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/tallness.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
 					},
 					{
-						_class = "AnimFile"
-						name = "shortness"
+						_class = "Folder"
+						name = "height"
 						children = 
 						[
 							{
-								_class = "AnimSubtract"
-								anim_name = "shortness"
-								frame = 0
+								_class = "AnimFile"
+								name = "tallness"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "tallness"
+										frame = 0
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/tallness.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "shortness"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "shortness"
+										frame = 0
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/tallness.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = true
 							},
 						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/tallness.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = true
 					},
 					{
 						_class = "AnimFile"
-						name = "inspect_arms"
-						children = 
-						[
-							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 3
-								frames_from_end = 3
-							},
-						]
+						name = "fishing_pose"
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -1856,7 +1899,7 @@
 						anim_markup_ordered = false
 						disable_compression = false
 						enable_scale = false
-						source_filename = "models/guy/animations/inspect_arms.fbx"
+						source_filename = "models/guy/animations/fishing_pose.fbx"
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
