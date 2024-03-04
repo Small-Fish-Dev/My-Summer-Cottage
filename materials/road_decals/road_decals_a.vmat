@@ -1,0 +1,26 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunaworld.shader"
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+	F_RENDER_BACKFACES 1
+	F_TRANSPARENCY 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/road_decals/road_decals_basecolor.png"
+	ColorTintMask "[1.000000 1.000000 1.000000 0.000000]"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/road_decals/road_decals_metallic.png"
+	Normal "materials/road_decals/road_decals_normal.png"
+	Roughness "materials/road_decals/road_decals_roughness.png"
+
+	//---- Transparency ----
+	TransparencyMask "materials/road_decals/road_decals_opacity.png"
+	TransparencyRounding "0.475"
+}
