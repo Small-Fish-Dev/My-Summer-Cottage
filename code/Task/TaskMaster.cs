@@ -142,19 +142,6 @@ public class TaskMaster : Component
 		{
 			AddTaskProgression( taskPath, 0, 1 );
 		}
-
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
-
-		if ( storyMaster != null )
-		{
-			var allActiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Completed ); // Get all active scripted events
-
-			foreach ( var scriptedEvent in allActiveScriptedEvents )
-			{
-				if ( scriptedEvent.SignalToComplete == task.SuccessSignal )
-					scriptedEvent.Completed = true;
-			}
-		}
 	}
 
 	public void LoadTasksProgression()
@@ -284,6 +271,8 @@ public class TaskMaster : Component
 
 			foreach ( var scriptedEvent in allActiveScriptedEvents )
 			{
+				Log.Info( signalIdentifier );
+				Log.Info( scriptedEvent.SignalToComplete );
 				if ( scriptedEvent.SignalToComplete == signalIdentifier )
 					scriptedEvent.Completed = true;
 			}

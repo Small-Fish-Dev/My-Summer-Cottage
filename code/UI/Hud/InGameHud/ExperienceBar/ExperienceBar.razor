@@ -5,7 +5,7 @@
 <root>
 	<div @ref=_container class="container @(!IsInventoryScreen && _timeUntilHidden ? "inactive" : "")">
 		<div class="level-details">
-			<text class="level">Lv. @Player.Local.Level</text>
+			<text class="level">@($"Lv. {@Player.Local.Level}")</text>
 			<text class="level-exp">@($"{Player.Local.Experience} / {Player.Local.ExpPerLevel} XP")</text>
 		</div>
 		<div class="exp-bar">

@@ -220,6 +220,7 @@ public partial class SaunaTask : GameResource
 
 		OnSuccess?.Invoke( Player.Local );
 		TaskMaster.SubmitTriggerSignal( SuccessSignal, Player.Local );
+		Log.Info( $"Submitted signal {SuccessSignal}" );
 	}
 
 	/// <summary>
