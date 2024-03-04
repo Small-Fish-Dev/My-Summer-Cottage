@@ -108,20 +108,17 @@ public class SweetMemories : Panel
 		// Render
 		var item = _queue.First();
 		Player.HideHead = false;
-		Log.Error( item.Position );
 		Render( item.Texture, item.Position, item.Rotation );
 		_queue.Remove( item );
 		Player.HideHead = true;
 	}
 
 	[ConCmd]
-	public static void CaptureBehind()
-	{
-		var xform = Player.Local.Transform.World;
-
-		var center = Player.Local.Bounds.Center + Player.Local.Transform.World.Position;
-		var pos = xform.Position + Vector3.Up * 60f + xform.Rotation.Forward * 150f + xform.Rotation.Left * 50f;
-
-		Player.Local.CaptureMemory( "fuck ass bob", 200f );
-	}
+	public static void DebugMemory()
+		=> Player.Local.CaptureMemory( Sandbox.Game.Random.FromArray( new string[] {
+			"a day filled with joy,, NOT!",
+			"mfw i wanna kill myself", 
+			"i fucking hate this place get me out of here please",
+			"i wish my life was more of this"
+		} ), 200f );
 }
