@@ -197,6 +197,8 @@ public class EventMaster : Component
 
 		foreach ( var @event in allEvents )
 			@event.Disable();
+
+		Log.Info( "Unloaded all events" );
 	}
 
 	protected override void OnFixedUpdate()

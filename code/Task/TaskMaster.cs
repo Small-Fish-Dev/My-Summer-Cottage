@@ -350,8 +350,6 @@ public class TaskMaster : Component
 
 			foreach ( var scriptedEvent in allActiveScriptedEvents )
 			{
-				Log.Info( signalIdentifier );
-				Log.Info( scriptedEvent.SignalToComplete );
 				if ( scriptedEvent.SignalToComplete == signalIdentifier )
 					scriptedEvent.Completed = true;
 			}

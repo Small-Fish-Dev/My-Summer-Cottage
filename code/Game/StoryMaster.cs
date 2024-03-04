@@ -182,6 +182,7 @@ public class StoryMaster : Component
 	{
 		var nestStoryDay = CurrentStoryDay + 1;
 		SetStoryDay( nestStoryDay );
+		Log.Info( "Advancing story" );
 	}
 
 	/// <summary>
@@ -324,10 +325,15 @@ public class StoryMaster : Component
 
 		if ( storyMaster == null ) return;
 
+		Log.Info( "Ending Session" );
+
+		if ( storyMaster.CurrentSaunaDay.Completed )
+		{
+			storyMaster.NextStoryDay();
+			storyMaster.NextGameDay();
+		}
+
 		storyMaster._eventMaster.UnloadAllEvents();
-		Log.Info( "Ended session" );
-		Log.Info( "Unloaded events" );
-		Log.Info( "Game saved" );
 		storyMaster.SaveGame();
 	}
 
@@ -336,6 +342,8 @@ public class StoryMaster : Component
 		SaveStoryProgression();
 		_taskMaster.SaveTasksProgression();
 		_eventMaster.SaveEventsProgression();
+
+		Log.Info( "Game Saved" );
 	}
 
 	protected override void OnStart()
@@ -382,6 +390,5 @@ public class StoryMaster : Component
 	{
 		var signalToComplete = await scriptedEvent.Setup?.Invoke( Player.Local );
 		scriptedEvent.SignalToComplete = signalToComplete;
-		Log.Info( $"Signal needed is {signalToComplete}" );
 	}
 }
