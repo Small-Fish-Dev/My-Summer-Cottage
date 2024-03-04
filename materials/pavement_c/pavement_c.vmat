@@ -1,0 +1,24 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunaworld.shader"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/pavement_c/pavement_c_basecolor.png"
+	ColorTintMask "materials/default/default.tga"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/default/default_metal.tga"
+	Normal "materials/pavement_c/pavement_c_normal.png"
+	Roughness "materials/pavement_c/pavement_c_roughness.png"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "concrete"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}
