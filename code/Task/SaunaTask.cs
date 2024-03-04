@@ -152,11 +152,11 @@ public partial class SaunaTask : GameResource
 	public int TimeLimitInSeconds { get; set; } = 120;
 
 	[Property]
-	[HideIf( "TimeLimited", true )]
+	[ShowIf( "TimeLimited", false )]
 	public bool PersistThroughSessions { get; set; } = true;
 
 	[Property]
-	[ShowIf( "TimeLimited", true )]
+	[ShowIf( "TimeLimited", false )]
 	public bool RunOnStartEverySession { get; set; } = false;
 
 	public delegate void TaskAction( Player player );
