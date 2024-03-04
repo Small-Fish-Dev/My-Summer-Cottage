@@ -139,7 +139,7 @@
 
 	private bool WithinRange(Interaction interaction)
 	{
-		return Player.Local.ViewRay.Position.Distance(_targetObject.Transform.Position) < interaction.InteractDistance;
+		return FromHands || Player.Local.ViewRay.Position.Distance(_targetObject.Transform.Position) < interaction.InteractDistance;
 	}
 
 	protected override int BuildHash()
