@@ -40,9 +40,11 @@ public sealed class WeaponComponent : Component
 		interactions.AddInteraction( new Interaction()
 		{
 			Accessibility = AccessibleFrom.Hands,
-			Description = "Fire",
+			Description = Type == WeaponType.Ranged ? "Fire" : "Attack",
 			Keybind = "mouse1",
 			Action = Attack,
+			ShowWhenDisabled = () => true,
+			Disabled = () => Capacity > 0 && Ammo == 0
 		} );
 
 		interactions.AddInteraction( new Interaction()
@@ -51,9 +53,21 @@ public sealed class WeaponComponent : Component
 			Description = "Reload",
 			Keybind = "next",
 			Action = Reload,
-			Disabled = () => Type != WeaponType.Ranged || Ammo >= Capacity, // todo @ceitine: doesn't  
+			Disabled = Disabled,
 			ShowWhenDisabled = () => true
 		} );
+	}
+
+	private bool Disabled()
+	{
+		if ( Capacity != 0 && Ammo > 0 )
+			return true;
+
+		var ammunition = Player.Local?.Inventory?.BackpackItems?.FirstOrDefault( x => x?.Prefab == Ammunition?.ResourcePath );
+		if ( Ammunition != null && ammunition == null )
+			return true;
+
+		return false;
 	}
 
 	public void Attack( Player shooter, GameObject obj )
