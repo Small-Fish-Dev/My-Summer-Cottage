@@ -82,7 +82,7 @@ public static partial class TaskNodes
 	/// </summary>
 	/// <param name="taskType"></param>
 	/// <param name="taskRarity"></param>
-	[ActionGraphNode( "event.getrandomtask" ), Pure]
+	[ActionGraphNode( "event.getrandomtask" )]
 	[Title( "Get Random Task" ), Group( "Events" ), Icon( "calendar_month" )]
 	public static SaunaTask GetRandomTask( TaskType taskType = TaskType.Any, TaskRarity taskRarity = TaskRarity.Any )
 	{
