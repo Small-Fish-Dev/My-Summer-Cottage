@@ -1,0 +1,82 @@
+﻿namespace Sauna.Fishing;
+
+public class LeFisheSpawner : Component
+{
+	[Property] public List<FishResource> Fishes;
+	[Property] public float GridCellSize = 128;
+	[Property] public float MinimumDepth = 10;
+
+	private WaterComponent _water;
+	private List<BBox> _debugFailedCells = new();
+
+	protected override void OnAwake()
+	{
+		_water = Components.Get<WaterComponent>();
+		if ( _water is null )
+			throw new Exception( "This component should be used only on the water volumes" );
+
+		var countX = (int)Math.Ceiling( _water.Bounds.Size.x / GridCellSize );
+		var countY = (int)Math.Ceiling( _water.Bounds.Size.y / GridCellSize );
+
+		var begX = _water.Bounds.Mins.x;
+		var begY = _water.Bounds.Mins.y;
+		var waterTop = _water.Bounds.Maxs.z;
+
+		for ( var x = 0; x < countX; x++ )
+		for ( var y = 0; y < countY; y++ )
+		{
+			var center = new Vector3( begX + (x + 0.5f) * GridCellSize, begY + (y + 0.5f) * GridCellSize, waterTop );
+			var bbox = new BBox( new Vector3( -GridCellSize / 2, -GridCellSize / 2, -MinimumDepth ),
+				new Vector3( GridCellSize / 2, GridCellSize / 2, 0 ) );
+
+			var skyTrace = Scene.Trace
+				.Box( bbox, center, center + Vector3.Up * 100 )
+				.Run();
+			if ( skyTrace.Hit )
+			{
+				_debugFailedCells.Add( bbox + skyTrace.EndPosition );
+				Log.Info( $"The sky is obscured by {skyTrace.Body.GetGameObject()}" );
+				continue;
+			}
+
+			var depthTrace = Scene.Trace
+				.Box( bbox, center, center + Vector3.Down * 100 )
+				.Run();
+			bbox.AddPoint( Vector3.Down * depthTrace.Distance );
+
+			var cellGameObject = new GameObject { Transform = { Position = center } };
+			cellGameObject.Tags.Add( "fishing_cell" );
+
+			var boxCollider = cellGameObject.Components.Create<BoxCollider>();
+			boxCollider.Center = bbox.Size.z / 2 * Vector3.Down;
+			boxCollider.Scale = bbox.Size;
+			boxCollider.IsTrigger = true;
+
+			var fishingCell = cellGameObject.Components.Create<FishingCell>();
+			// TODO: assign the fishes by depth
+
+			GameObject.Children.Add( cellGameObject );
+
+			// _cells[x, y] = new FishGridCell( new List<string> { "fishe" },
+			// 	bbox + center );
+		}
+	}
+
+	protected override void OnUpdate()
+	{
+		// using ( Gizmo.Scope() )
+		// {
+		// 	Gizmo.Draw.Color = Color.Blue;
+		// 	Gizmo.Draw.IgnoreDepth = true;
+		// 	Gizmo.Draw.LineBBox( _water.Bounds );
+		//
+		// 	Gizmo.Draw.IgnoreDepth = false;
+		//
+		// 	Gizmo.Draw.Color = Color.Red;
+		// 	foreach ( var sweep in _debugFailedCells )
+		// 	{
+		// 		Gizmo.Draw.LineBBox( sweep );
+		// 	}
+		// }
+	}
+}
