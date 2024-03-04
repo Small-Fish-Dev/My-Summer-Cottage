@@ -183,18 +183,23 @@ public partial class SaunaTask : GameResource
 	public List<Subtask> Subtasks { get; set; } = new();
 
 	[Hide]
+	[JsonIgnore]
 	public int CurrentSubtaskOrder { get; set; } = 0;
 
 	[Hide]
+	[JsonIgnore]
 	public bool Successful { get; set; } = false;
 
 	[Hide]
+	[JsonIgnore]
 	public bool Started { get; set; } = false;
 
 	[Hide]
+	[JsonIgnore]
 	public bool Completed { get; set; } = false;
 
 	[Hide]
+	[JsonIgnore]
 	public TimeUntil TaskTimer { get; set; } = 0;
 
 	/// <summary>
