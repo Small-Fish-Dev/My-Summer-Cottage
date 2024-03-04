@@ -110,10 +110,10 @@
                   "Id": 1,
                   "Type": "call",
                   "Properties": {
-                    "_name": "Get",
+                    "T": "package.fish.sauna/Sauna.Player",
                     "_isStatic": false,
                     "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                    "T": "package.fish.sauna/Sauna.Player"
+                    "_name": "Get"
                   },
                   "UserData": {
                     "Position": "496,-240",
@@ -219,8 +219,8 @@
                   "Id": 11,
                   "Type": "property.get",
                   "Properties": {
-                    "_name": "Normal",
-                    "_type": "Sandbox.System/Vector3"
+                    "_type": "Sandbox.System/Vector3",
+                    "_name": "Normal"
                   },
                   "UserData": {
                     "Position": "336,320"
@@ -345,6 +345,13 @@
                   "Type": "event.triggersignal",
                   "UserData": {
                     "Position": "1824,416"
+                  }
+                },
+                {
+                  "Id": 30,
+                  "Type": "event.triggersignal",
+                  "UserData": {
+                    "Position": "2592,-0"
                   }
                 }
               ],
@@ -649,6 +656,23 @@
                 {
                   "Value": "event.peeper_attacks",
                   "DstId": 29,
+                  "DstName": "signalIdentifier"
+                },
+                {
+                  "SrcId": 15,
+                  "SrcName": "_signal",
+                  "DstId": 30,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 30,
+                  "DstName": "player"
+                },
+                {
+                  "Value": "event.peeper_attacks",
+                  "DstId": 30,
                   "DstName": "signalIdentifier"
                 }
               ]
@@ -1189,7 +1213,7 @@
                   "DstName": "player"
                 },
                 {
-                  "Value": "resources/tasks/check_the_back.task",
+                  "Value": "resources/tasks/event_tasks/event.check_the_back.task",
                   "DstId": 22,
                   "DstName": "taskToAdd"
                 }
