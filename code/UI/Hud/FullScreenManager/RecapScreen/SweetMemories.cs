@@ -60,7 +60,6 @@ public class SweetMemories : Panel
 		{
 			World = Scene.SceneWorld,
 			AmbientLightColor = Color.White,
-			AntiAliasing = false,
 			BackgroundColor = Color.Transparent,
 			Position = position,
 			Rotation = rotation,
