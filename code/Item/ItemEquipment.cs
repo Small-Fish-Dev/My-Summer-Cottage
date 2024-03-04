@@ -24,7 +24,7 @@ public class ItemEquipment : ItemComponent
 	[Property, Category( "Holding" ), ShowIf( "Slot", EquipSlot.Hand )] public HoldType HoldType { get; set; }
 	[Property, Category( "Holding" )] public bool UpdatePosition { get; set; }
 	[Property, Category( "Holding" ), ShowIf( "UpdatePosition", true )] public string Attachment { get; set; } = "hand_R";
-	[Property, Category( "Holding" ), ShowIf( "UpdatePosition", true )] public Transform AttachmentTransform { get; set; }
+	[Property, Category( "Holding" ), ShowIf( "UpdatePosition", true )] public Transform AttachmentTransform { get; set; } = global::Transform.Zero;
 
 	public ModelRenderer Renderer { get; private set; }
 
@@ -108,10 +108,7 @@ public class ItemEquipment : ItemComponent
 		if ( player == null )
 			return;
 
-		Renderer ??= Components.Get<SkinnedModelRenderer>( FindMode.InSelf ) ?? Components.Get<ModelRenderer>( FindMode.InSelf );
-		var obj = Renderer.SceneObject;
-		if ( obj.IsValid() )
-			obj.Transform = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
+		GameObject.Transform.World = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
 	}
 
 	#region GIZMO STUFF
@@ -171,7 +168,7 @@ public class ItemEquipment : ItemComponent
 		Gizmo.Draw.IgnoreDepth = true;
 		Gizmo.Draw.SolidSphere( attachment.Position, 0.1f );
 		Gizmo.Draw.IgnoreDepth = false;
-		//AttachmentTransform = global::Transform.Zero;
+
 		model.Transform = attachment.ToWorld( AttachmentTransform );
 
 		using ( Gizmo.Scope( $"{Name}", new Transform( model.Position, model.Rotation ) ) )

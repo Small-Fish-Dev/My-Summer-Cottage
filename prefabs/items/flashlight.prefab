@@ -1,0 +1,98 @@
+{
+  "RootObject": {
+    "Id": "8aef03ed-d62d-40d4-a9df-34d959fb81d6",
+    "Name": "flashlight",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ItemEquipment",
+        "Attachment": "hand_R",
+        "AttachmentTransform": {
+          "UniformScale": 1,
+          "Position": "0.6162283,-1.683272,0.000002459274",
+          "Scale": "1,1,1",
+          "Rotation": "0,0,0.03133544,0.999508"
+        },
+        "Description": "Great! This is perfect for ghost hunting.",
+        "HideBodygroups": "None",
+        "HoldType": "Idle",
+        "Icon": {
+          "Model": "models/flashlight/flashlight.vmdl",
+          "MaterialGroup": "",
+          "Position": "0,-0.3,-0.9",
+          "Rotation": "0.1319351,-0.0494598,-0.3475227,0.9270247",
+          "Guid": "46bfdec0-a2cd-430e-88e0-e0d3e0c91be1"
+        },
+        "Name": "Flashlight",
+        "SellPrice": -1,
+        "Slot": "Hand",
+        "UpdatePosition": true,
+        "WeightInGrams": 225
+      },
+      {
+        "__type": "Flashlight",
+        "Brightness": 1,
+        "Color": "1,1,1,1",
+        "Distance": 1000,
+        "On": false,
+        "Radius": 30,
+        "Strength": 15
+      },
+      {
+        "__type": "ModelRenderer",
+        "BodyGroups": 18446744073709551615,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/flashlight/flashlight.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "BoxCollider",
+        "Center": "0,1.75,0",
+        "IsTrigger": false,
+        "Scale": "3,10.5,3",
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      }
+    ],
+    "Children": [
+      {
+        "Id": "98754f52-c672-4324-96e7-83eeb5f89938",
+        "Name": "Light",
+        "Position": "0.000001671839,7.0122,0",
+        "Rotation": "0,0,0.7071068,0.7071068",
+        "Tags": "light_spot,light",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "SpotLight",
+            "Attenuation": 1,
+            "ConeInner": 15,
+            "ConeOuter": 45,
+            "Cookie": null,
+            "FogMode": "Enabled",
+            "FogStrength": 1,
+            "LightColor": "0.91373,0.98039,1,1",
+            "Radius": 500,
+            "Shadows": true
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
