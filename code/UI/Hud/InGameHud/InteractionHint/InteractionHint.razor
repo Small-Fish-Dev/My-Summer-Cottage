@@ -71,7 +71,7 @@
 		var pos = FromHands ? 0 : Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
 		foreach ( var interaction in _interactions )
 		{
-			if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
+			if ( !WithinBounds(interaction) || !WithinRange(interaction) || !IsAccessible(interaction) )
 				continue;
 
 			var canInteract = !interaction.Disabled();
@@ -119,7 +119,7 @@
 		if (!_targetObject.Components.TryGet<Interactions>( out var interactions ))
 			return false;
 
-		var interactionsAvailable = interactions.AllInteractions.Where((i) => (!i.Disabled() || i.ShowWhenDisabled()) && WithinBounds(i)).Any();
+		var interactionsAvailable = interactions.AllInteractions.Where((i) => (!i.Disabled() || i.ShowWhenDisabled()) && WithinBounds(i) && WithinRange(i)).Any();
 		if (!interactionsAvailable && interactions.HideOnEmpty)
 			return false;
 
@@ -135,6 +135,11 @@
 			return true;
 
 		return false;
+	}
+
+	private bool WithinRange(Interaction interaction)
+	{
+		return Player.Local.ViewRay.Position.Distance(_targetObject.Transform.Position) < interaction.InteractDistance;
 	}
 
 	protected override int BuildHash()

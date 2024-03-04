@@ -58,6 +58,12 @@ public class Interaction
 	public delegate void InteractionEvent( Player interactor, GameObject obj );
 
 	/// <summary>
+	/// The max distance you can use this interaction from
+	/// </summary>
+	[Property, Category( "Optional" )]
+	public float InteractDistance { get; set; } = 75f;
+
+	/// <summary>
 	/// Where this interaction is accessible from
 	/// </summary>
 	[Property, Category( "Optional" )]

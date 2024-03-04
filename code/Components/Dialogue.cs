@@ -30,6 +30,12 @@ public class DialogueResponse
 	public Interaction.InteractionEvent Action { get; set; }
 
 	/// <summary>
+	/// The max distance at which you can interact with the dialogue.
+	/// </summary>
+	[Property]
+	public float InteractDistance { get; set; } = 125f;
+
+	/// <summary>
 	/// The color of the text of the response.
 	/// </summary>
 	[Property]
@@ -101,7 +107,8 @@ public class DialogueComponent : Component
 						Disabled = () => IsDisabled( response, stageIndex ),
 						ShowWhenDisabled = () => IsActiveStage( stageIndex ),
 						Animation = InteractAnimations.None,
-						DynamicColor = () => response.DynamicColor?.Invoke() ?? Color.White
+						DynamicColor = () => response.DynamicColor?.Invoke() ?? Color.White,
+						InteractDistance = response.InteractDistance,
 					}
 				);
 			}
