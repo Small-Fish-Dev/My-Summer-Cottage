@@ -31,7 +31,7 @@ public static partial class GlobalNodes
 	/// <summary>
 	/// Get every component of type {T} in the provided collection
 	/// </summary>
-	[ActionGraphNode( "event.geteverycomponentincollection" )]
+	[ActionGraphNode( "event.geteverycomponentincollection" ), Pure]
 	[Title( "Get Every {T} Component In Collection" ), Group( "Events" ), Icon( "reduce_capacity" )]
 	public static IEnumerable<T> GetAllComponentsInCollection<T>( IEnumerable<GameObject> collection )
 	{
@@ -41,7 +41,7 @@ public static partial class GlobalNodes
 	/// <summary>
 	/// Is every in the collectionA included inside of collectionB
 	/// </summary>
-	[ActionGraphNode( "event.iseverycomponentincluded" )]
+	[ActionGraphNode( "event.iseverycomponentincluded" ), Pure]
 	[Title( "Is Every Component {T} Included" ), Group( "Events" ), Icon( "reduce_capacity" )]
 	public static bool IsEveryComponentIncluded<T>( IEnumerable<Component> collectionA, IEnumerable<Component> collectionB ) where T : Component
 	{

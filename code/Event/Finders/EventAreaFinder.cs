@@ -53,6 +53,8 @@ public sealed class EventAreaFinder : EventTrigger
 
 	protected override void DrawGizmos()
 	{
+		if ( !Gizmo.IsSelected && !Gizmo.IsChildSelected ) return;
+
 		Gizmo.Draw.Color = Color.Yellow.WithAlpha( 0.2f );
 		Gizmo.Draw.SolidBox( BBox );
 		Gizmo.Draw.Color = Color.White.WithAlpha( 0.3f );
