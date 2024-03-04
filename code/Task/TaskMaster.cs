@@ -46,15 +46,24 @@ public class TaskMaster : Component
 		[JsonInclude]
 		public string Task { get; set; }
 		[JsonInclude]
-		public int TimesTriggered { get; set; }
+		public int TimesTriggered { get; set; } = 0;
 		[JsonInclude]
-		public int TimesCompleted { get; set; }
+		public int TimesCompleted { get; set; } = 0;
+		[JsonInclude]
+		public bool CurrentlyActive { get; set; } = false;
+		[JsonInclude]
+		public int CurrentSubtaskOrder { get; set; } = 0;
 
-		public TaskCompletion( string task, int timesTriggered = 0, int timesCompleted = 0 )
+		[JsonInclude]
+		public Dictionary<string, int> Subtasks { get; set; } = new();
+
+		public TaskCompletion( string task, int timesTriggered = 0, int timesCompleted = 0, bool currentlyActive = false, int currentSubtaskOrder = 0 )
 		{
 			Task = task;
 			TimesTriggered = timesTriggered;
 			TimesCompleted = timesCompleted;
+			CurrentlyActive = currentlyActive;
+			CurrentSubtaskOrder = currentSubtaskOrder;
 		}
 	}
 
@@ -74,10 +83,20 @@ public class TaskMaster : Component
 		SelectedTask = null; // dogshit s&box bug doesn't reset static
 		LoadTasksProgression();
 	}
+	protected override void OnDestroy()
+	{
+		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
+
+		foreach ( var task in allTasks )
+		{
+			task.Reset();
+		}
+	}
 
 	public void AddTaskProgression( string taskPath, int timesTriggered = 0, int timesCompleted = 0 )
 	{
 		var newTaskCompletion = new TaskCompletion( taskPath, timesTriggered, timesCompleted );
+
 		TasksProgression.Tasks.Add( newTaskCompletion );
 	}
 
@@ -104,6 +123,41 @@ public class TaskMaster : Component
 			TasksProgression.Tasks.Add( newTaskCompletion );
 
 			return newTaskCompletion;
+		}
+	}
+
+	/// <summary>
+	/// Update the tasks progression
+	/// </summary>
+	public void UpdateTaskProgression( SaunaTask task )
+	{
+		var taskPath = task.ResourcePath;
+		var taskCompletionExists = TasksProgression.Tasks.Any( x => x.Task == taskPath );
+
+		if ( taskCompletionExists )
+		{
+			var foundTaskCompletion = TasksProgression.Tasks.Where( x => x.Task == taskPath ).First();
+
+			foreach ( var activeTask in CurrentTasks )
+			{
+				if ( activeTask.ResourcePath == taskPath && !task.Completed )
+				{
+					foundTaskCompletion.CurrentlyActive = true;
+					foundTaskCompletion.CurrentSubtaskOrder = task.CurrentSubtaskOrder;
+					foreach ( var subtask in task.Subtasks )
+					{
+						if ( foundTaskCompletion.Subtasks.ContainsKey( subtask.Description ) )
+							foundTaskCompletion.Subtasks[subtask.Description] = subtask.CurrentAmount;
+						else
+							foundTaskCompletion.Subtasks.Add( subtask.Description, subtask.CurrentAmount );
+					}
+				}
+			}
+
+		}
+		else
+		{
+			AddTaskProgression( taskPath );
 		}
 	}
 
@@ -150,7 +204,24 @@ public class TaskMaster : Component
 	public void LoadTasksProgression()
 	{
 		if ( FileSystem.Data.FileExists( "tasks.json" ) )
+		{
 			TasksProgression = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
+
+			var activeTasks = TasksProgression.Tasks.Where( x => x.CurrentlyActive );
+
+			foreach ( var activeTask in activeTasks )
+			{
+				var assignedTask = AssignNewTask( activeTask.Task );
+				assignedTask.Started = !assignedTask.RunOnStartEverySession;
+				assignedTask.CurrentSubtaskOrder = activeTask.CurrentSubtaskOrder;
+
+				foreach ( var subtask in assignedTask.Subtasks )
+				{
+					var relativeSubtask = activeTask.Subtasks[subtask.Description];
+					subtask.CurrentAmount = relativeSubtask;
+				}
+			}
+		}
 		else
 		{
 			TasksProgression.Tasks?.Clear();
@@ -176,13 +247,19 @@ public class TaskMaster : Component
 			if ( !TasksProgression.Tasks.Any( x => x.Task == task.ResourcePath ) )
 				AddTaskProgression( task.ResourcePath );
 
+		foreach ( var task in CurrentTasks )
+		{
+			if ( task.PersistThroughSessions )
+				UpdateTaskProgression( task );
+		}
+
 		FileSystem.Data.WriteJson( "tasks.json", TasksProgression );
 	}
 
 	/// <summary>
-	/// Reset the tasks current triggered and completion progress/amount
+	/// Reset the tasks progress
 	/// </summary>
-	public void ResetTasksProgression()
+	public void ResetTasksProgression( bool save = true )
 	{
 		TasksProgression.Tasks?.Clear();
 
@@ -191,7 +268,8 @@ public class TaskMaster : Component
 		foreach ( var task in allTasks )
 			AddTaskProgression( task.ResourcePath );
 
-		SaveTasksProgression();
+		if ( save )
+			SaveTasksProgression();
 	}
 
 
@@ -284,25 +362,28 @@ public class TaskMaster : Component
 	/// Assign a new task to the local player, doesn't work if the task already exists
 	/// </summary>
 	/// <param name="taskToAssign"></param>
-	public static void AssignNewTask( SaunaTask taskToAssign )
+	public static SaunaTask AssignNewTask( SaunaTask taskToAssign )
 	{
-		if ( _instance == null ) return;
+		if ( _instance == null ) return null;
 
 		var sameTaskFound = _instance.CurrentTasks.Where( x => x.ResourceName == taskToAssign.ResourceName )?.Any() ?? false;
 
-		if ( sameTaskFound ) return; // Bail if we have the same task already
+		if ( sameTaskFound ) return _instance.CurrentTasks.Where( x => x.ResourceName == taskToAssign.ResourceName ).First(); // Bail if we have the same task already
 
 		_instance.CurrentTasks.Add( taskToAssign ); // Add the task
+		return taskToAssign;
 	}
 
 	/// <summary>
 	/// Assign a new task to the local player, doesn't work if the task already exists
 	/// </summary>
 	/// <param name="filePath"></param>
-	public static void AssignNewTask( string filePath )
+	public static SaunaTask AssignNewTask( string filePath )
 	{
 		if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
-			AssignNewTask( foundTask );
+			return AssignNewTask( foundTask );
+
+		return null;
 	}
 
 	[Broadcast( NetPermission.Anyone )]

@@ -151,8 +151,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -263,8 +263,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -409,7 +409,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.1049703,0,0.9944754",
+          "Rotation": "0,-0.9949187,0,0.1006816",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -781,8 +781,8 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_name": "SendToDialogueStage",
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_isStatic": false
                         },
                         "UserData": {
@@ -816,9 +816,7 @@
                       }
                     ]
                   },
-                  "InteractDistance": 125,
-                  "DynamicColor": null,
-                  "Disabled": null
+                  "InteractDistance": 125
                 }
               ]
             },
@@ -847,8 +845,8 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_name": "SendToDialogueStage",
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_isStatic": false
                         },
                         "UserData": {
@@ -918,15 +916,13 @@
                         "DstName": "_result"
                       }
                     ]
-                  },
-                  "Disabled": null
+                  }
                 },
                 {
                   "Identifier": "fuck",
                   "Keybind": "use2",
                   "Description": "fuck",
                   "InteractDistance": 125,
-                  "DynamicColor": null,
                   "Disabled": {
                     "Version": 5,
                     "UserData": {
@@ -1039,8 +1035,8 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_name": "SendToDialogueStage",
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_isStatic": false
                         },
                         "UserData": {
@@ -1074,7 +1070,9 @@
                       }
                     ]
                   },
-                  "InteractDistance": 125
+                  "InteractDistance": 125,
+                  "DynamicColor": null,
+                  "Disabled": null
                 }
               ]
             },
@@ -1103,8 +1101,8 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_name": "SendToDialogueStage",
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_isStatic": false
                         },
                         "UserData": {
@@ -1174,13 +1172,15 @@
                         "DstName": "_result"
                       }
                     ]
-                  }
+                  },
+                  "Disabled": null
                 },
                 {
                   "Identifier": "fuck",
                   "Keybind": "use2",
                   "Description": "fuck",
                   "InteractDistance": 125,
+                  "DynamicColor": null,
                   "Disabled": {
                     "Version": 5,
                     "UserData": {
@@ -1293,8 +1293,8 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_name": "SendToDialogueStage",
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_isStatic": false
                         },
                         "UserData": {
@@ -1328,9 +1328,7 @@
                       }
                     ]
                   },
-                  "InteractDistance": 125,
-                  "DynamicColor": null,
-                  "Disabled": null
+                  "InteractDistance": 125
                 }
               ]
             },
@@ -1359,8 +1357,8 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_name": "SendToDialogueStage",
+                          "_type": "package.fish.sauna/Sauna.DialogueComponent",
                           "_isStatic": false
                         },
                         "UserData": {
@@ -1430,15 +1428,13 @@
                         "DstName": "_result"
                       }
                     ]
-                  },
-                  "Disabled": null
+                  }
                 },
                 {
                   "Identifier": "fuck",
                   "Keybind": "use2",
                   "Description": "fuck",
                   "InteractDistance": 125,
-                  "DynamicColor": null,
                   "Disabled": {
                     "Version": 5,
                     "UserData": {
@@ -1573,10 +1569,122 @@
           "HideOnEmpty": false,
           "ObjectInteractions": [
             {
+              "Identifier": "sauna.endsession",
               "Keybind": "use",
-              "Description": "",
+              "Description": "End session",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "33319bc0-e128-4e9d-a45a-8dedd8e9cf81",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input"
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "event.endsession",
+                    "UserData": {
+                      "Position": "240,16"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "time.delay",
+                    "UserData": {
+                      "Position": "480,16"
+                    }
+                  },
+                  {
+                    "Id": 3,
+                    "Type": "event.geteverycomponent",
+                    "Properties": {
+                      "T": "package.fish.sauna/Sauna.Player"
+                    },
+                    "UserData": {
+                      "Position": "-96,144"
+                    }
+                  },
+                  {
+                    "Id": 4,
+                    "Type": "event.blackscreen",
+                    "UserData": {
+                      "Position": "448,144"
+                    }
+                  },
+                  {
+                    "Id": 5,
+                    "Type": "event.startsession",
+                    "UserData": {
+                      "Position": "672,32"
+                    }
+                  },
+                  {
+                    "Id": 6,
+                    "Type": "foreach",
+                    "UserData": {
+                      "Position": "192,160"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 1,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_signal",
+                    "DstId": 2,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 2,
+                    "DstId": 2,
+                    "DstName": "seconds"
+                  },
+                  {
+                    "SrcId": 6,
+                    "SrcName": "body",
+                    "DstId": 4,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 6,
+                    "SrcName": "body.value",
+                    "DstId": 4,
+                    "DstName": "player"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_signal",
+                    "DstId": 5,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 6,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 3,
+                    "SrcName": "_result",
+                    "DstId": 6,
+                    "DstName": "enumerable"
+                  }
+                ]
+              },
               "InteractDistance": 75,
               "Accessibility": "World",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "Animation": "Interact"
             }
           ]
@@ -1707,9 +1815,8 @@
     },
     {
       "Id": "f1bdc728-67ca-44f9-a33f-291bb5fa162e",
-      "Name": "Slot Machine",
+      "Name": "slot_machine",
       "Position": "202.9279,-145.6154,9.137436",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/objects/slot_machine.prefab"
     },
@@ -1821,6 +1928,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-04T22:13:53.8938415\u002B02:00",
+  "LastSaved": "2024-03-04T21:33:06.7439227\u002B01:00",
   "__references": []
 }

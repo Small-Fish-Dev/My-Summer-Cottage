@@ -1,22 +1,27 @@
 {
-  "Name": "Default Name",
-  "Description": "Kindly do the needful",
+  "Name": "Get beers",
+  "Subtitle": "Get beers",
+  "Description": "Get beers",
+  "TaskType": "Any",
+  "TaskRarity": "Any",
   "IsPrimary": true,
   "Global": false,
+  "SuccessSignal": "task.success.Get beers",
+  "FailedSignal": "task.failed.Get beers",
   "TimeLimited": false,
   "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": true,
+  "RunOnStartEverySession": false,
   "OnStart": null,
   "OnSuccess": null,
   "OnFail": null,
   "FailConditionCheck": null,
-  "Subtasks": [],
-  "CurrentSubtaskOrder": 0,
-  "Successful": false,
-  "Started": false,
-  "Completed": false,
-  "TaskTimer": {
-    "Absolute": 332.33908,
-    "Fraction": "NaN"
-  },
+  "Subtasks": [
+    {
+      "Description": "Get beers",
+      "TriggerSignal": "item.received.Beer Bottle",
+      "AmountToComplete": 10
+    }
+  ],
   "__references": []
 }

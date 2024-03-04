@@ -68,11 +68,7 @@ public static partial class GlobalNodes
 	[Title( "End Session" ), Group( "Events" ), Icon( "view_day" )]
 	public static void EndSession()
 	{
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
-
-		if ( storyMaster == null ) return;
-
-		storyMaster.EndSession();
+		StoryMaster.EndSession();
 	}
 
 
@@ -83,10 +79,6 @@ public static partial class GlobalNodes
 	[Title( "Start Session" ), Group( "Events" ), Icon( "view_day" )]
 	public static void StartSession()
 	{
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
-
-		if ( storyMaster == null ) return;
-
-		storyMaster.StartSession();
+		StoryMaster.StartSession();
 	}
 }

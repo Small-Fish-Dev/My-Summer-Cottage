@@ -134,22 +134,30 @@ public partial class SaunaTask : GameResource
 	[Property]
 	public bool Global { get; set; } = false;
 
+	public string SuccessSignal => $"task.success.{Name}";
+	public string FailedSignal => $"task.failed.{Name}";
+
 	/// <summary>
 	/// Does the player need to complete this task within a time limit before it automatically fails?
 	/// </summary>
 	[Property]
 	public bool TimeLimited { get; set; } = false;
 
-	public string SuccessSignal => $"task.success.{Name}";
-	public string FailedSignal => $"task.failed.{Name}";
-
 	/// <summary>
 	/// How many real-life seconds the player has to complete the task before it's automatically failed
 	/// </summary>
 	[Property]
-	// [HideIf( "TimeLimited", false )] TODO: Add back when it's been fixed
+	[ShowIf( nameof( TimeLimited ), true )]
 	[Range( 10, 600, 10 )]
 	public int TimeLimitInSeconds { get; set; } = 120;
+
+	[Property]
+	[ShowIf( "TimeLimited", false )]
+	public bool PersistThroughSessions { get; set; } = true;
+
+	[Property]
+	[ShowIf( "TimeLimited", false )]
+	public bool RunOnStartEverySession { get; set; } = false;
 
 	public delegate void TaskAction( Player player );
 
