@@ -99,6 +99,21 @@ public class ItemEquipment : ItemComponent
 		return true;
 	}
 
+	protected override void OnStart()
+	{
+		base.OnStart();
+
+		var interactions = Components.GetOrCreate<Interactions>();
+		interactions.AddInteraction( new Interaction()
+		{
+			Identifier = "item.equip",
+			Action = ( Player interactor, GameObject obj ) => interactor.Inventory.EquipItemFromWorld( this ),
+			Keybind = "use2",
+			Description = "Equip",
+			Disabled = () => Player.Local.Inventory.IsSlotOccupied( Slot ),
+		} );
+	}
+
 	protected override void OnPreRender()
 	{
 		if ( !Equipped || !UpdatePosition || !GameManager.IsPlaying || GameObject == Scene )

@@ -186,8 +186,7 @@ partial class Player
 				if ( equipment == null )
 					continue;
 
-				player.Inventory.GiveItem( equipment );
-				player.Inventory.EquipItem( equipment );
+				player.Inventory.EquipItemFromWorld( equipment );
 			}
 
 		// Go through all items.

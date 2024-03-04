@@ -65,7 +65,7 @@
 		if (equipment.Equipped)
 			Player.Local.Inventory.UnequipItem(equipment);
 		else
-			Player.Local.Inventory.EquipItem(equipment);
+			Player.Local.Inventory.EquipItemFromBackpack(equipment);
 
 		Inventory.Instance?.OnChanged();
 	}
