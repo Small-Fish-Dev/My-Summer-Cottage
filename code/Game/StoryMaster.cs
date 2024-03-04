@@ -154,17 +154,6 @@ public class StoryMaster : Component
 	}
 
 	/// <summary>
-	/// Start the game day
-	/// </summary>
-	public void StartGameDay()
-	{
-		var nextSaunaDay = NextSaunaDay;
-
-		if ( CurrentSaunaDay?.Completed ?? true ) // If we completed our story day
-			NextStoryDay(); // Move to the next story day without ending the session
-	}
-
-	/// <summary>
 	/// Set the current story day and save it
 	/// </summary>
 	/// <param name="dayNumber"></param>
@@ -310,7 +299,6 @@ public class StoryMaster : Component
 		storyMaster.LoadStoryProgression();
 
 		storyMaster.StartStoryDay();
-		storyMaster.StartGameDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
 

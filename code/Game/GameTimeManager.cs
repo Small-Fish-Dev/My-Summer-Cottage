@@ -324,6 +324,5 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 		InGameTime = 0;
 
 		_storyMaster.NextGameDay();
-		_storyMaster.StartGameDay();
 	}
 }
