@@ -210,6 +210,112 @@
                 "Uncommon": 0,
                 "Rare": 0
               }
+            },
+            "2": {
+              "ScriptedEvents": [
+                {
+                  "TriggerTimeslot": "10.50,12.00,1",
+                  "CompletionNecessary": true,
+                  "Setup": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Setup",
+                      "id": "560efaf8-9a35-492a-a854-5d163feb2765",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "-80,32"
+                        }
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "output",
+                        "UserData": {
+                          "Position": "384,48"
+                        }
+                      },
+                      {
+                        "Id": 2,
+                        "Type": "event.assigntaskto",
+                        "UserData": {
+                          "Position": "160,48"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "event.getrandomtask",
+                        "UserData": {
+                          "Position": "-64,192"
+                        }
+                      },
+                      {
+                        "Id": 4,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                        },
+                        "UserData": {
+                          "Position": "160,192"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_result",
+                        "DstId": 1,
+                        "DstName": "_result"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_signal",
+                        "DstId": 1,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 2,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "player",
+                        "DstId": 2,
+                        "DstName": "player"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_result",
+                        "DstId": 2,
+                        "DstName": "taskToAdd"
+                      },
+                      {
+                        "Value": "GivenByWife",
+                        "DstId": 3,
+                        "DstName": "taskType"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_result",
+                        "DstId": 4,
+                        "DstName": "_target"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "RandomEvents": {
+                "Common": 3,
+                "Uncommon": 0,
+                "Rare": 0
+              }
             }
           },
           "StoryProgression": {
@@ -291,7 +397,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.4137246,0,-0.9104021",
+          "Rotation": "0,0.5597232,0,0.8286796",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -1243,6 +1349,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-04T00:29:06.5508808\u002B01:00",
+  "LastSaved": "2024-03-04T00:48:45.6727536\u002B01:00",
   "__references": []
 }

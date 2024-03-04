@@ -361,7 +361,10 @@ public class StoryMaster : Component
 
 			if ( !CurrentSaunaDay.Completed )
 				if ( CurrentSaunaDay.ScriptedEvents.All( x => x.Completed || x.Triggered && !x.CompletionNecessary ) )
+				{
 					CurrentSaunaDay.Completed = true;
+					Log.Info( "All story scripted event requirements completed, story can now progress" );
+				}
 		}
 	}
 
@@ -369,5 +372,6 @@ public class StoryMaster : Component
 	{
 		var signalToComplete = await scriptedEvent.Setup?.Invoke( Player.Local );
 		scriptedEvent.SignalToComplete = signalToComplete;
+		Log.Info( $"Signal needed is {signalToComplete}" );
 	}
 }
