@@ -4,7 +4,7 @@
 @inherits Panel
 
 <root>
-	@if ( !FromHold )
+	@if ( !FromHands )
 	{
 		<image src="ui/hud/interaction-pointer.png" class="icon" />
 	}
@@ -14,7 +14,7 @@
 		<div class="interactions">
 			@foreach(var interaction in _interactions)
 			{
-				if ( !FromHold && interaction.HoldOnly || !WithinBounds(interaction) )
+				if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
 					continue;
 
 				var canInteract = !interaction.Disabled();
@@ -32,24 +32,24 @@
 </root>
 
 @code {
-	public bool FromHold { get; set; }
+	public bool FromHands { get; set; }
 
 	private string DisplayName => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Name;
-	private GameObject _targetObject => FromHold
+	private GameObject _targetObject => FromHands
 		? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
 		: Player.Local?.TargetedGameObject;
 
 	private static List<string> priorityList = new();
 	private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
 	private bool WithinBounds(Interaction interaction) => !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
-	private bool HasPriority( string key ) => FromHold || !priorityList.Contains( key.ToLower() );
+	private bool HasPriority( string key ) => FromHands || !priorityList.Contains( key.ToLower() );
 	private BBox GetInteractionBounds(Interaction interaction)
 		=> new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
 			.Transform(Player.Local.TargetedGameObject.Transform.World);
 
 	private void AddToPriority( string key, bool forced = false )
 	{
-		if ( !FromHold && !forced ) 
+		if ( !FromHands && !forced ) 
 			return;
 
 		key = key.ToLower();
@@ -62,16 +62,16 @@
 
 	public override void Tick() 
 	{
-		if ( FromHold ) priorityList.Clear();
+		if ( FromHands ) priorityList.Clear();
 
 		SetClass( "visible", ShowHint() );
 		if (!HasClass("visible"))
 			return;
 
-		var pos = FromHold ? 0 : Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
+		var pos = FromHands ? 0 : Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
 		foreach ( var interaction in _interactions )
 		{
-			if ( !FromHold && interaction.HoldOnly || !WithinBounds(interaction))
+			if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
 				continue;
 
 			var canInteract = !interaction.Disabled();
@@ -81,7 +81,7 @@
 			if ( !HasPriority( interaction.Keybind ) )
 				continue;
 
-			if ( interaction.HasBounds && !FromHold )
+			if ( interaction.HasBounds && !FromHands )
 				pos = Player.Local.TargetedGameObject.Transform.Position + interaction.Position * Player.Local.TargetedGameObject.Transform.Rotation;
 
 			if (canInteract && interaction.InputFunction(interaction.Keybind))
@@ -95,7 +95,7 @@
 				if ( interaction.Identifier != String.Empty )
 					EventMaster.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
 
-				if ( !FromHold ) // No need to play use animation for held items.
+				if ( !FromHands ) // No need to play use animation for held items.
 				{
 					var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
 					Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ), interaction.AnimationIdentifier );
@@ -103,7 +103,7 @@
 			}
 		}
 
-		if ( FromHold ) // No need to play use animation for held items.
+		if ( FromHands ) // No need to play use animation for held items.
 			return;
 
 		pos = pos.ToScreen().Clamp( -0.5f, 1.5f );
@@ -124,6 +124,17 @@
 			return false;
 
 		return interactionsAvailable;
+	}
+
+	private bool IsAccessible(Interaction interaction)
+	{
+		if (FromHands && interaction.Accessibility.HasFlag(AccessibleFrom.Hands))
+			return true;
+		
+		if (!FromHands && interaction.Accessibility.HasFlag(AccessibleFrom.World))
+			return true;
+
+		return false;
 	}
 
 	protected override int BuildHash()

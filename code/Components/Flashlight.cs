@@ -19,7 +19,7 @@ public sealed class Flashlight : Component
 		var interactions = Components.GetOrCreate<Interactions>();
 		interactions.AddInteraction( new Interaction
 		{
-			HoldOnly = true,
+			Accessibility = AccessibleFrom.Hands,
 			Action = ( Player player, GameObject obj ) =>
 			{
 				On = !On;

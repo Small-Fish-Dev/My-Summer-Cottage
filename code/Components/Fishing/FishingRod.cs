@@ -10,7 +10,7 @@ public sealed class FishingRod : Component
 
 		interactions.AddInteraction( new Interaction
 		{
-			HoldOnly = true,
+			Accessibility = AccessibleFrom.Hands,
 			Action = ( Player player, GameObject obj ) =>
 			{
 				Casted = !Casted;

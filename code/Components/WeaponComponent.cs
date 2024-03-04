@@ -27,7 +27,7 @@ public sealed class WeaponComponent : Component
 		var interactions = Components.GetOrCreate<Interactions>();
 		interactions.AddInteraction( new Interaction()
 		{
-			HoldOnly = true,
+			Accessibility = AccessibleFrom.Hands,
 			Description = "Fire",
 			Keybind = "mouse1",
 			Action = Attack,
@@ -35,7 +35,7 @@ public sealed class WeaponComponent : Component
 
 		interactions.AddInteraction( new Interaction()
 		{
-			HoldOnly = true,
+			Accessibility = AccessibleFrom.Hands,
 			Description = "Reload",
 			Keybind = "next",
 			Action = Reload,

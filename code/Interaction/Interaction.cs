@@ -14,6 +14,15 @@ public enum InputMode
 	Down
 }
 
+[Flags]
+public enum AccessibleFrom
+{
+	None = 0,
+	World = 1 << 0,
+	Hands = 1 << 1,
+	All = World | Hands,
+}
+
 public class Interaction
 {
 	/// <summary>
@@ -43,10 +52,10 @@ public class Interaction
 	public delegate void InteractionEvent( Player interactor, GameObject obj );
 
 	/// <summary>
-	/// Is this interaction only available when holding
+	/// Where this interaction is accessible from
 	/// </summary>
 	[Property, Category( "Optional" )]
-	public bool HoldOnly { get; set; } = false;
+	public AccessibleFrom Accessibility { get; set; } = AccessibleFrom.All;
 
 	/// <summary>
 	/// Whether or not the interaction can be performed.

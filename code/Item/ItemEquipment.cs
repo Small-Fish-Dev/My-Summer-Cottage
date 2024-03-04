@@ -111,6 +111,8 @@ public class ItemEquipment : ItemComponent
 			Keybind = "use2",
 			Description = "Equip",
 			Disabled = () => Player.Local.Inventory.IsSlotOccupied( Slot ),
+			ShowWhenDisabled = () => true,
+			Accessibility = AccessibleFrom.World,
 		} );
 	}
 
