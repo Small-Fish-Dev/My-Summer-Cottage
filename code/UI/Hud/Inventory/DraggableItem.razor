@@ -3,13 +3,16 @@
 @inherits Panel
 
 <root>
-	<img src=@texture.ResourcePath />
+	<img src=@texture.ResourcePath/>
 	<label>@name</label>
 </root>
 
 @code {
 
 	protected bool InitialTransitionComplete { get; private set; }
+
+	public static DraggableItem Current { get; private set; }
+	public ItemComponent ItemComponent { get; private set; }
 
 	private static float XyMultiplier => -6.3f;
 	private static float ZMultiplier => 6.9f;
@@ -22,6 +25,8 @@
 
 	public DraggableItem( InventorySlot slot, Vector2 holdPoint )
 	{
+		Current = this;
+
 		Style.ZIndex = 99;
 
 		Parent = slot;
@@ -31,7 +36,9 @@
 
 		SetPositionInScreenPixels( Mouse.Position );
 		SetSizeInScreenPixels( slot.Box.Rect.Size );
-		
+
+		ItemComponent = slot.Item;
+
 		// Use the slot item image
 		name = slot.Item.Name;
 		texture = slot.Item.IconTexture;
@@ -47,25 +54,25 @@
 	{
 		var p = v;
 		var parentRect = Parent.Box.Rect;
-		
+
 		p -= parentRect.TopLeft;
-		
+
 		p -= _holdPoint;
-		
+
 		p *= ScaleFromScreen;
-		
+
 		Style.Left = p.x;
 		Style.Top = p.y;
 
 		_lastPosition = v;
 	}
 
-	private void UpdateVelocity(Vector2 delta)
+	private void UpdateVelocity( Vector2 delta )
 	{
 		_velocity += delta * 0.02f;
 		_velocity = _velocity.Clamp( -10, 10 );
 	}
-	
+
 	public virtual void AddPositionDeltaInScreenPixels( Vector2 d )
 	{
 		UpdateVelocity( d );
@@ -83,7 +90,7 @@
 
 			return;
 		}
-		
+
 		_velocity = Vector2.Lerp( _velocity, Vector2.Zero, Time.Delta * 10.0f );
 
 		Style.TransformOriginX = Length.Fraction( _holdPoint.x / Box.Rect.Width );
@@ -93,8 +100,20 @@
 		transform.AddRotation( _velocity.y * XyMultiplier, -_velocity.x * XyMultiplier, _velocity.x * _velocity.y * ZMultiplier );
 
 		Style.Transform = transform;
-		
+
 		StateHasChanged();
+	}
+
+	public override void OnDeleted()
+	{
+		base.OnDeleted();
+		if ( Current == this )
+			Current = null;
+	}
+
+	public static void ClearCurrent()
+	{
+		Current = null;
 	}
 
 }
