@@ -68,6 +68,9 @@ partial class Player
 
 	public BBox Bounds => new BBox( Collider.Center - Collider.Scale / 2f, Collider.Center + Collider.Scale / 2f );
 
+	private Angles _currentRecoil;
+	private Angles _previousRecoil;
+
 	protected void UpdateMovement()
 	{
 		if ( MoveHelper == null ) return;
@@ -134,14 +137,24 @@ partial class Player
 			SetRagdoll( !IsRagdolled );
 	}
 
+	public void ApplyRecoil( Angles angle )
+		=> _currentRecoil += angle;
+
 	protected void UpdateAngles()
 	{
 		if ( BlockMouseAim ) return;
 
+		var before = EyeAngles;
 		var ang = EyeAngles;
 		ang += Input.AnalogLook;
+		ang += _currentRecoil - _previousRecoil; // Apply recoil to eye angles.
 		ang.pitch = ang.pitch.Clamp( -89, 89 );
 		EyeAngles = ang;
+
+		// Calculate recoil.
+		var diff = (before - ang).AsVector3().Abs().Length.Clamp( 1, 15 );
+		_previousRecoil = _currentRecoil;
+		_currentRecoil = _currentRecoil.LerpTo( Angles.Zero, diff * Time.Delta );
 	}
 
 	Rotation _lastRot;

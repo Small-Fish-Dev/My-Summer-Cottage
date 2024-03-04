@@ -9,6 +9,8 @@ public enum WeaponType
 public sealed class WeaponComponent : Component
 {
 	[Property, Category( "Parameters" )] public WeaponType Type { get; set; }
+	[Property, Category( "Parameters" )] public float FireSpeed { get; set; } = 0.5f;
+	[Property, Category( "Parameters" )] public InputMode Mode { get; set; } = InputMode.Pressed;
 
 	[Property, Category( "Projectile" ), Sync] public int Ammo { get; set; }
 	[Property, Category( "Projectile" )] public int Capacity { get; set; }
@@ -17,7 +19,14 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Recoil" )] public bool HasRecoil { get; set; } = false;
 	[Property, Category( "Recoil" ), ShowIf( "HasRecoil", true )] public RangedFloat StrengthRange { get; set; }
 
+	[Property, Category( "Sounds" )] public SoundEvent FireSound { get; set; }
+	[Property, Category( "Sounds" )] public SoundEvent EmptySound { get; set; }
+	[Property, Category( "Sounds" )] public SoundEvent PostFireSound { get; set; }
+	[Property, Category( "Sounds" )] public SoundEvent ReloadSound { get; set; }
+
+
 	private string _name;
+	private TimeUntil _canFire;
 
 	protected override void OnAwake()
 	{
@@ -53,11 +62,17 @@ public sealed class WeaponComponent : Component
 		{
 			case WeaponType.Ranged:
 				var shot = Fire( shooter );
-				if ( shot && HasRecoil )
+				if ( shot )
 				{
-					var ang = (shooter.EyeAngles + new Angles( -1f, Sandbox.Game.Random.Float( -0.3f, 0.3f ), 0 ) * Sandbox.Game.Random.Float( StrengthRange.x, StrengthRange.y ));
-					ang = ang.WithPitch( ang.pitch.Clamp( -89, 89 ) );
-					shooter.EyeAngles = ang;
+					TryPlaySound( FireSound );
+
+					Ammo--;
+					_canFire = FireSpeed;
+
+					// todo @ceitine: post fire sound (i.e. bolt)
+
+					if ( HasRecoil )
+						shooter.ApplyRecoil( new Angles( -1f, Sandbox.Game.Random.Float( -0.3f, 0.3f ), 0 ) * Sandbox.Game.Random.Float( StrengthRange.x, StrengthRange.y ) );
 				}
 
 				UpdateName();
@@ -79,8 +94,7 @@ public sealed class WeaponComponent : Component
 		// Reload magazine.
 		Ammo = Capacity;
 		UpdateName();
-
-		// todo @ceitine: play reload anim / sound
+		TryPlaySound( ReloadSound );
 
 		// Destroy ammunition object.
 		player.Inventory.ClearItem( ammunition );
@@ -89,9 +103,12 @@ public sealed class WeaponComponent : Component
 
 	private bool Fire( Player shooter )
 	{
+		if ( !_canFire )
+			return false;
+
 		if ( Ammo <= 0 )
 		{
-			// todo @ceitine: play empty gun click
+			TryPlaySound( EmptySound );
 			return false;
 		}
 
@@ -102,14 +119,6 @@ public sealed class WeaponComponent : Component
 		var target = tr.GameObject?.Components.Get<Player>( FindMode.EverythingInSelfAndAncestors );
 		if ( target != null )
 			target.SetRagdoll( true, duration: 0.5f, spin: 30 );
-
-		// todo @ceitine: proper shoot sound
-		var sound = Sound.Play( "stop" );
-		sound.Position = Transform.Position;
-		sound.Decibels = 120;
-		sound.ListenLocal = false;
-
-		Ammo--;
 
 		return true;
 	}
@@ -131,5 +140,23 @@ public sealed class WeaponComponent : Component
 			default:
 				break;
 		}
+	}
+
+	private void TryPlaySound( SoundEvent @event )
+	{
+		if ( @event == null )
+			return;
+
+		var transform = GameObject.Parent.Transform;
+		BroadcastSound( @event.ResourceName, transform.Position, transform.Rotation );
+	}
+
+	[Broadcast] 
+	public void BroadcastSound( string file, Vector3 pos, Rotation rot )
+	{
+		var sound = Sound.Play( file );
+		sound.ListenLocal = false;
+		sound.Position = pos;
+		sound.Rotation = rot;
 	}
 }
