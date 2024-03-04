@@ -1,12 +1,13 @@
-using Sandbox;
-using Sauna.Event;
-using System.Threading.Tasks;
-
 namespace Sauna;
 
 [Icon( "live_help" )]
 public class TaskMaster : Component
 {
+	private static TaskMaster _instance;
+
+	public static IReadOnlyList<SaunaTask> Tasks => _instance.CurrentTasks;
+	public static SaunaTask SelectedTask { get; set; } // TODO: Maybe move this to player??
+
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
 
@@ -69,6 +70,8 @@ public class TaskMaster : Component
 
 	protected override void OnStart()
 	{
+		_instance = this;
+		SelectedTask = null; // dogshit s&box bug doesn't reset static
 		LoadTasksProgression();
 	}
 
@@ -243,11 +246,9 @@ public class TaskMaster : Component
 	/// <param name="triggerer"></param>
 	public static void SubmitTriggerSignal( string signalIdentifier, Player triggerer )
 	{
-		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
-
-		if ( taskMaster != null )
+		if ( _instance != null )
 		{
-			var allActiveTasks = taskMaster.CurrentTasks.Where( x => !x.Completed ); // Get active tasks
+			var allActiveTasks = _instance.CurrentTasks.Where( x => !x.Completed ); // Get active tasks
 
 			foreach ( var task in allActiveTasks )
 			{
@@ -285,15 +286,13 @@ public class TaskMaster : Component
 	/// <param name="taskToAssign"></param>
 	public static void AssignNewTask( SaunaTask taskToAssign )
 	{
-		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+		if ( _instance == null ) return;
 
-		if ( taskMaster == null ) return;
-
-		var sameTaskFound = taskMaster.CurrentTasks.Where( x => x.ResourceName == taskToAssign.ResourceName )?.Any() ?? false;
+		var sameTaskFound = _instance.CurrentTasks.Where( x => x.ResourceName == taskToAssign.ResourceName )?.Any() ?? false;
 
 		if ( sameTaskFound ) return; // Bail if we have the same task already
 
-		taskMaster.CurrentTasks.Add( taskToAssign ); // Add the task
+		_instance.CurrentTasks.Add( taskToAssign ); // Add the task
 	}
 
 	/// <summary>
@@ -361,15 +360,13 @@ public class TaskMaster : Component
 	/// <param name="taskToRemove"></param>
 	public static void RemoveTask( SaunaTask taskToRemove )
 	{
-		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+		if ( _instance == null ) return;
 
-		if ( taskMaster == null ) return;
-
-		var sameTaskFound = taskMaster.CurrentTasks.Where( x => x.ResourceName == taskToRemove.ResourceName )?.FirstOrDefault() ?? null;
+		var sameTaskFound = _instance.CurrentTasks.Where( x => x.ResourceName == taskToRemove.ResourceName )?.FirstOrDefault() ?? null;
 
 		if ( sameTaskFound == null ) return; // Bail if no task found
 
-		taskMaster.CurrentTasks.Remove( sameTaskFound ); // Remove the task
+		_instance.CurrentTasks.Remove( sameTaskFound ); // Remove the task
 	}
 
 	/// <summary>
@@ -437,11 +434,9 @@ public class TaskMaster : Component
 	/// <param name="taskToReset"></param>
 	public static void ResetTask( SaunaTask taskToReset )
 	{
-		var taskMaster = GameManager.ActiveScene.GetAllComponents<TaskMaster>().FirstOrDefault(); // Find the task master
+		if ( _instance == null ) return;
 
-		if ( taskMaster == null ) return;
-
-		var sameTaskFound = taskMaster.CurrentTasks.Where( x => x.ResourceName == taskToReset.ResourceName )?.FirstOrDefault() ?? null;
+		var sameTaskFound = _instance.CurrentTasks.Where( x => x.ResourceName == taskToReset.ResourceName )?.FirstOrDefault() ?? null;
 
 		if ( sameTaskFound == null ) return; // Bail if no task found
 

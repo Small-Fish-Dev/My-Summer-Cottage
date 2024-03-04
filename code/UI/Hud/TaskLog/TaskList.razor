@@ -5,10 +5,17 @@
 <root>
 	<text class="title-container">TASKS JOURNAL</text>
 	<div class="tasks">
-		<div class="heading">PRIMARY TASKS</div>
-		<TaskPanel />
-		<TaskPanel />
-		<div class="heading">SECONDARY TASKS</div>
-		<TaskPanel />
+		<div class="heading">TODO SEPERATE HEADINGS</div>
+		@foreach(var task in TaskMaster.Tasks)
+		{
+			<TaskPanel Task=@task />
+		}
 	</div>
 </root>
+
+@code {
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(TaskMaster.Tasks.HashCombine((t) => t.ResourceId));
+	}
+}

@@ -99,10 +99,16 @@ public partial class SaunaTask : GameResource
 	public string Name { get; set; } = "Default Name";
 
 	/// <summary>
-	/// A rought description of what happened and what you need to do
+	/// A short subtitle of what needs to be done
 	/// </summary>
 	[Property]
-	public string Description { get; set; } = "Kindly do the needful";
+	public string Subtitle { get; set; } = "Kindly do the needful";
+
+	/// <summary>
+	/// A long lore description describing the task at hand
+	/// </summary>
+	[Property]
+	public string Description { get; set; } = "We need you to do x immediately, right now! If you don't I am going to start punching myself.";
 
 	/// <summary>
 	/// Who gave this task (Used to fetch tasks to give)
@@ -202,7 +208,7 @@ public partial class SaunaTask : GameResource
 		if ( TimeLimited )
 			TaskTimer = TimeLimitInSeconds;
 
-		Log.Info( $"Task '{Name}' has started: {Description}" );
+		Log.Info( $"Task '{Name}' has started: {Subtitle}" );
 
 		foreach ( var subtask in Subtasks )
 			Log.Info( $"New subtask: '{subtask.Description}' ({subtask.CurrentAmount}/{subtask.AmountToComplete})" );

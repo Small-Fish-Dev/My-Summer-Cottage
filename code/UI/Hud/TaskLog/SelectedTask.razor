@@ -4,36 +4,39 @@
 
 <root>
 	<text class="title-container">TASKS DETAILS</text>
-	@if (HasTask)
+	@if (TaskMaster.SelectedTask is not null)
 	{
 		<div style="width: 100%; padding: 40px;">
 			<div style="width: 75%; flex-direction: column;">
 				<div style="align-items: flex-start;">
-					<text class="title">Task Title</text>
-					<div class="completed">COMPLETED</div>
+					<text class="title">@TaskMaster.SelectedTask.Name</text>
+					@if (TaskMaster.SelectedTask.Completed)
+					{
+						<div class="completed">COMPLETED</div>
+					}
 				</div>
-				<text class="subtitle">Subtitle</text>
+				<text class="subtitle">@TaskMaster.SelectedTask.Subtitle</text>
 				<text class="pinned">( PINNED )</text>
 			</div>
-			<div class="divider" />
 		</div>
 		<div class="task-additional-details">
 			<div style="flex-direction: column; margin-bottom: 40px; flex-shrink: 0;">
 				<text class="title">Task Details:</text>
-				<text style="font-size: 20px;">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget semper ante. Suspendisse tincidunt eros eu volutpat congue. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eget posuere augue. Donec sit amet scelerisque sapien, vel feugiat nulla. Pellentesque gravida eget ligula commodo fringilla. Ut at arcu ut dui convallis faucibus vitae sed ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam maximus vestibulum nisl, ut imperdiet felis efficitur ut. Donec placerat nisl eget efficitur pellentesque. Aenean eleifend volutpat egestas.
-				</text>
+				<text style="font-size: 20px;">@TaskMaster.SelectedTask.Description</text>
 			</div>
 			<div style="flex-direction: column; flex-shrink: 0;">
 				<text class="title">Task Requirements:</text>
 				<div style="flex-direction: column; flex-shrink: 0; gap: 20px;">
-					@foreach (var requirement in Requirements)
+					@foreach (var subtask in TaskMaster.SelectedTask.Subtasks)
 					{
 						<div class="requirement">
 							<div class="requirement-status">
+							@if (subtask.Completed)
+							{
 								<div class="requirement-completed" />
+							}
 							</div>
-							<text class="requirement-details">@requirement</text>
+							<text class="requirement-details">@subtask.Description</text>
 						</div>
 					}
 				</div>
@@ -48,20 +51,15 @@
 	}
 </root>
 
-@code {
-	// TODO: Remove at some point and replace with proper data.
-	public bool HasTask = true;
-
-	public List<string> Requirements = new List<string>
+@code {	
+	protected override int BuildHash()
 	{
-		"Fight back against sudden angry homeless assholes",
-		"Buy vodka. You might need to earn some money first",
-		"Fight back against sudden angry homeless assholes",
-		"Buy vodka. You might need to earn some money first",
-		"Fight back against sudden angry homeless assholes",
-		"Buy vodka. You might need to earn some money first",
-		"Fight back against sudden angry homeless assholes",
-		"Buy vodka. You might need to earn some money first",
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eget semper ante. Suspendisse tincidunt eros eu volutpat congue. Interdum et malesuada fames ac ante ipsum primis in faucibus. Proin eget posuere augue. Donec sit amet scelerisque sapien, vel feugiat nulla. Pellentesque gravida eget ligula commodo fringilla. Ut at arcu ut dui convallis faucibus vitae sed ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam maximus vestibulum nisl, ut imperdiet felis efficitur ut. Donec placerat nisl eget efficitur pellentesque. Aenean",
-	};
+		if (TaskMaster.SelectedTask is null)
+			return -1;
+
+		return HashCode.Combine(
+			TaskMaster.SelectedTask.ResourceId, 
+			TaskMaster.SelectedTask.Subtasks.HashCombine((subtask) => HashCode.Combine(subtask.Completed))
+		);
+	}
 }

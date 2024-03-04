@@ -2,10 +2,19 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root>
+<root onclick=@(() => TaskMaster.SelectedTask = Task)>
 	<img class="task-img" src="ui/hud/task_completed.png" />
 	<div class="task-details">
-		<text class="task-title">This is an example title that is really long</text>
-		<text class="task-description">here is a short one</text>
+		<text class="task-title">@Task.Name</text>
+		<text class="task-subtitle">@Task.Subtitle</text>
 	</div>
 </root>
+
+@code {
+	public SaunaTask Task { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(Task.Name, Task.Subtitle);
+	}
+}
