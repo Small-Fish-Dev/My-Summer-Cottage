@@ -14,8 +14,8 @@
 						remaps = 
 						[
 							{
-								from = "clothing_parcel.vmat"
-								to = "models/props/clothing_parcel/clothing_parcel.vmat"
+								from = "tv.vmat"
+								to = "models/props/tv/tv.vmat"
 							},
 						]
 						use_global_default = false
@@ -32,7 +32,7 @@
 						parent_bone = ""
 						surface_prop = "default"
 						collision_tags = "solid"
-						faceMergeAngle = 20.0
+						faceMergeAngle = 46.360001
 						maxHullVertices = 32
 					},
 				]
@@ -43,7 +43,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/props/clothing_parcel/clothing_parcel.fbx"
+						filename = "models/props/tv/tv.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -56,24 +56,9 @@
 							exclude_by_default = true
 							exception_list = 
 							[
-								"Cube_048",
+								"Cube_034",
 							]
 						}
-					},
-				]
-			},
-			{
-				_class = "ModelModifierList"
-				children = 
-				[
-					{
-						_class = "ModelModifier_ScaleAndMirror"
-						scale = 0.5
-						mirror_x = false
-						mirror_y = false
-						mirror_z = false
-						flip_bone_forward = false
-						swap_left_and_right_bones = false
 					},
 				]
 			},

@@ -14,8 +14,8 @@
 						remaps = 
 						[
 							{
-								from = "clothing_parcel.vmat"
-								to = "models/props/clothing_parcel/clothing_parcel.vmat"
+								from = "sofa.vmat"
+								to = "models/props/sofa/sofa.vmat"
 							},
 						]
 						use_global_default = false
@@ -28,12 +28,40 @@
 				children = 
 				[
 					{
-						_class = "PhysicsHullFromRender"
+						_class = "PhysicsShapeBox"
 						parent_bone = ""
 						surface_prop = "default"
 						collision_tags = "solid"
-						faceMergeAngle = 20.0
-						maxHullVertices = 32
+						origin = [ -0.746683, 0.0, 10.926806 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 35.861084, 84.0, 21.8536 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						origin = [ -12.853818, 0.0, 31.761223 ]
+						angles = [ -6.0, 0.0, 0.0 ]
+						dimensions = [ 11.664103, 84.0, 22.414261 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						origin = [ -3.263594, -39.007229, 25.867809 ]
+						angles = [ 0.0, 0.0, 0.0 ]
+						dimensions = [ 30.827263, 5.985542, 14.012444 ]
+					},
+					{
+						_class = "PhysicsShapeBox"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_tags = "solid"
+						origin = [ 3.26359, 39.007198, 25.8678 ]
+						angles = [ -0.0, 180.0, 180.0 ]
+						dimensions = [ 30.827263, 5.985542, 14.012444 ]
 					},
 				]
 			},
@@ -43,7 +71,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/props/clothing_parcel/clothing_parcel.fbx"
+						filename = "models/props/sofa/sofa.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -56,24 +84,9 @@
 							exclude_by_default = true
 							exception_list = 
 							[
-								"Cube_048",
+								"Cube_033",
 							]
 						}
-					},
-				]
-			},
-			{
-				_class = "ModelModifierList"
-				children = 
-				[
-					{
-						_class = "ModelModifier_ScaleAndMirror"
-						scale = 0.5
-						mirror_x = false
-						mirror_y = false
-						mirror_z = false
-						flip_bone_forward = false
-						swap_left_and_right_bones = false
 					},
 				]
 			},
