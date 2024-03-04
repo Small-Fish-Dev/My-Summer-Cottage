@@ -1,0 +1,24 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunaworld.shader"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/metal_corrugated_wall/metal_corrugated_wall_basecolor.png"
+	ColorTintMask "[1.000000 1.000000 1.000000 0.000000]"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/metal_corrugated_wall/metal_corrugated_wall_metallic.png"
+	Normal "materials/metal_corrugated_wall/metal_corrugated_wall_normal.png"
+	Roughness "materials/metal_corrugated_wall/metal_corrugated_wall_roughness.png"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "metal"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}
