@@ -12,21 +12,19 @@
 		</div>
 	</div>
 	<div class="item">
-		<div class="icon level"></div>
+		<div class="icon money"></div>
 		<div class="text-container">
-			<div class="title">level</div>
-			<div class="value">@Player.Local.Level</div>
+			<div class="title">balance</div>
+			<div class="value">@($"{Player.Local.Money}mk")</div>
 		</div>
 	</div>
 </root>
 
 @code {
-	
 	public GameTimeManager GameTimeManager { get; set; }
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( GameTimeManager.Day, Player.Local.Level );
+		return HashCode.Combine( GameTimeManager.Day, Player.Local.Money );
 	}
-
 }
