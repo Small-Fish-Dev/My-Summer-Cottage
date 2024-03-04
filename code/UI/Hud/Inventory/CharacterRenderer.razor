@@ -39,21 +39,8 @@
 		_scenePanel.Camera.FitModel(_character);
 		_scenePanel.Camera.OnRenderPostProcess = () =>
 		{
-			var shader = Material.FromShader( "shaders/saunaCensor.shader" );
-
-			// Grab textures we're going to need.
-			Graphics.GrabFrameTexture( "ColorTexture" );
-
-			// Create RenderTarget for the censoring.
-			using var rt = RenderTarget.GetTemporary( 1, ImageFormat.None, ImageFormat.D32FS8, MultisampleAmount.MultisampleScreen );
-			Graphics.RenderTarget = rt;
-			Graphics.Clear( Color.Black, clearColor: false );
-
-			if ( _penoid != null && _penoid.RenderingEnabled )
-				Graphics.Render( _penoid, material: shader );
-
-			// Clear RenderTarget.
-			Graphics.RenderTarget = null;
+			if (_penoid != null)
+				SFX.EyeProtector.Render(_scenePanel.Camera, _penoid);
 		};
 
 		_sceneLight.Position = _scenePanel.Camera.Position + _scenePanel.Camera.Rotation.Forward * 500f;

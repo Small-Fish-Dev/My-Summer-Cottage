@@ -1,7 +1,4 @@
-﻿using Sauna.SFX;
-using Sauna.UI;
-
-namespace Sauna;
+﻿namespace Sauna;
 
 public struct SweetMemory
 {
@@ -68,31 +65,7 @@ public class SweetMemories : Panel
 		};
 
 		// Setup censoring.
-		camera.OnRenderPostProcess = () =>
-		{
-			var shader = Material.FromShader( "shaders/saunaCensor.shader" );
-
-			// Grab textures we're going to need.
-			Graphics.GrabFrameTexture( "ColorTexture" );
-
-			// Create RenderTarget for the censoring.
-			using var rt = RenderTarget.GetTemporary( 1, ImageFormat.None, ImageFormat.D32FS8, MultisampleAmount.MultisampleScreen );
-			Graphics.RenderTarget = rt;
-			Graphics.Clear( Color.Black, clearColor: false );
-
-			var targets = Scene.GetAllComponents<CensorComponent>();
-			foreach ( var target in targets )
-			{
-				if ( target.Renderer == null )
-					return;
-
-				Graphics.Attributes.Set( "Width", 1f );
-				Graphics.Render( target.Renderer.SceneObject, material: shader );
-			}
-
-			// Clear RenderTarget.
-			Graphics.RenderTarget = null;
-		};
+		camera.OnRenderPostProcess = () => SFX.EyeProtector.Render( camera );
 
 		// Render to texture.
 		Graphics.RenderToTexture( camera, texture );
