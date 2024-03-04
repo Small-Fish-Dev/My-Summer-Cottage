@@ -299,26 +299,36 @@ public class StoryMaster : Component
 		}
 	}
 
-	public void StartSession()
+	[ConCmd]
+	public static void StartSession()
 	{
-		LoadStoryProgression();
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().First();
 
-		StartStoryDay();
-		StartGameDay();
+		if ( storyMaster == null ) return;
 
-		_eventMaster.UnloadAllEvents();
+		storyMaster.LoadStoryProgression();
 
-		LoadEventPool();
+		storyMaster.StartStoryDay();
+		storyMaster.StartGameDay();
+
+		storyMaster._eventMaster.UnloadAllEvents();
+
+		storyMaster.LoadEventPool();
 		Log.Info( "Session started" );
 	}
 
-	public void EndSession()
+	[ConCmd]
+	public static void EndSession()
 	{
-		_eventMaster.UnloadAllEvents();
+		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().First();
+
+		if ( storyMaster == null ) return;
+
+		storyMaster._eventMaster.UnloadAllEvents();
 		Log.Info( "Ended session" );
 		Log.Info( "Unloaded events" );
 		Log.Info( "Game saved" );
-		SaveGame();
+		storyMaster.SaveGame();
 	}
 
 	public void SaveGame()
