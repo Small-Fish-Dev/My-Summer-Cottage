@@ -17,7 +17,7 @@
 				if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
 					continue;
 
-				var canInteract = !interaction.Disabled();
+				var canInteract = !interaction.Disabled.InvokeOrDefault();
 				if ( canInteract || interaction.ShowWhenDisabled() )
 				{
 					var isActive = HasPriority( interaction.Keybind ) && canInteract;
@@ -74,7 +74,7 @@
 			if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
 				continue;
 
-			var canInteract = !interaction.Disabled();
+			var canInteract = !interaction.Disabled.InvokeOrDefault();
 			if ( canInteract )
 				AddToPriority( interaction.Keybind );
 
@@ -119,7 +119,7 @@
 		if (!_targetObject.Components.TryGet<Interactions>( out var interactions ))
 			return false;
 
-		var interactionsAvailable = interactions.AllInteractions.Where((i) => (!i.Disabled() || i.ShowWhenDisabled()) && WithinBounds(i) && WithinRange(i)).Any();
+		var interactionsAvailable = interactions.AllInteractions.Where((i) => (!i.Disabled.InvokeOrDefault() || i.ShowWhenDisabled()) && WithinBounds(i) && WithinRange(i)).Any();
 		if (!interactionsAvailable && interactions.HideOnEmpty)
 			return false;
 
@@ -148,7 +148,7 @@
 		(
 			DisplayName, 
 			_targetObject.IsValid(),
-			_interactions.HashCombine(i => HashCode.Combine(i.Text, i.Disabled(), WithinBounds(i), HasPriority(i.Keybind)))
+			_interactions.HashCombine(i => HashCode.Combine(i.Text, i.Disabled.InvokeOrDefault(), WithinBounds(i), HasPriority(i.Keybind)))
 		);
 	}
 }
