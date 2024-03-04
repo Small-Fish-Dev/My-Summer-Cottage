@@ -83,9 +83,6 @@ public class DialogueComponent : Component
 		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 		Network.SetOrphanedMode( NetworkOrphaned.ClearOwner );
 
-		if ( HostOnly && !Player.Local.Connection.IsHost )
-			EndDialogue();
-
 		var interactions = Components.GetOrCreate<Interactions>();
 		for ( int i = 0; i < DialogueStages.Count; ++i )
 		{
@@ -101,7 +98,7 @@ public class DialogueComponent : Component
 						Keybind = response.Keybind,
 						Description = response.Description,
 						Action = response.Action,
-						Disabled = () => !IsActiveStage( stageIndex ) || (response.Disabled is not null && response.Disabled()),
+						Disabled = () => IsDisabled( response, stageIndex ),
 						ShowWhenDisabled = () => IsActiveStage( stageIndex ),
 						Animation = InteractAnimations.None,
 						DynamicColor = () => response.DynamicColor?.Invoke() ?? Color.White
@@ -129,21 +126,35 @@ public class DialogueComponent : Component
 		SetStageIndex( -1 );
 	}
 
-	private bool IsActiveStage( int i )
+	private bool IsActiveStage( int stageIndex )
 	{
-		return GetStageIndex() == i;
+		return GetStageIndex() == stageIndex;
 	}
 
-	private void SetStageIndex( int i )
+	private void SetStageIndex( int stageIndex )
 	{
 		if ( Networked )
-			NetworkedStageIndex = i;
+			NetworkedStageIndex = stageIndex;
 		else
-			LocalStageIndex = i;
+			LocalStageIndex = stageIndex;
 	}
 
 	private int GetStageIndex()
 	{
 		return Networked ? NetworkedStageIndex : LocalStageIndex;
+	}
+
+	private bool IsDisabled( DialogueResponse response, int stageIndex )
+	{
+		if ( !IsActiveStage( stageIndex ) )
+			return true;
+
+		if ( response.Disabled is not null && response.Disabled() )
+			return true;
+
+		if ( HostOnly && !Player.Local.Connection.IsHost )
+			return true;
+
+		return false;
 	}
 }
