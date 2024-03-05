@@ -6,6 +6,7 @@ partial class Player
 	public static List<Player> _internalPlayers = new List<Player>();
 
 	public static Player Local { get; private set; }
+	public static SaunaTask PinnedTask { get; set; }
 
 	private Guid _guid;
 	[HostSync]

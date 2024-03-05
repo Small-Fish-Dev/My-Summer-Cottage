@@ -5,8 +5,7 @@ public class TaskMaster : Component
 {
 	private static TaskMaster _instance;
 
-	public static IReadOnlyList<SaunaTask> Tasks => _instance.CurrentTasks;
-	public static SaunaTask SelectedTask { get; set; } // TODO: Maybe move this to player??
+	public static IReadOnlyList<SaunaTask> ActiveTasks => _instance.CurrentTasks;
 
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
@@ -80,7 +79,6 @@ public class TaskMaster : Component
 	protected override void OnStart()
 	{
 		_instance = this;
-		SelectedTask = null; // dogshit s&box bug doesn't reset static
 		LoadTasksProgression();
 	}
 	protected override void OnDestroy()

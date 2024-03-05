@@ -6,16 +6,18 @@
 	<text class="title-container">TASKS JOURNAL</text>
 	<div class="tasks">
 		<div class="heading">TODO SEPERATE HEADINGS</div>
-		@foreach(var task in TaskMaster.Tasks)
+		@foreach(var task in TaskMaster.ActiveTasks)
 		{
-			<TaskPanel Task=@task />
+			<TaskListElement Task=@task onclick=@(() => OnTaskClick(task)) />
 		}
 	</div>
 </root>
 
 @code {
+	public Action<SaunaTask> OnTaskClick { get; set; }
+
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(TaskMaster.Tasks.HashCombine((t) => t.ResourceId));
+		return HashCode.Combine(TaskMaster.ActiveTasks.HashCombine((t) => t.ResourceId));
 	}
 }

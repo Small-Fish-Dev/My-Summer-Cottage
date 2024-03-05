@@ -73,8 +73,8 @@
 @code {
 	private const float DISPLAY_TIME = 6f;
 
-	private IEnumerable<SaunaTask> _primaryTasks => TaskMaster.Tasks.Where( x => x.IsPrimary ).OrderBy( x => !x.Successful );
-	private IEnumerable<SaunaTask> _secondaryTasks => TaskMaster.Tasks.Where( x => !x.IsPrimary ).OrderBy( x => !x.Successful );
+	private IEnumerable<SaunaTask> _primaryTasks => TaskMaster.ActiveTasks.Where( x => x.IsPrimary ).OrderBy( x => !x.Successful );
+	private IEnumerable<SaunaTask> _secondaryTasks => TaskMaster.ActiveTasks.Where( x => !x.IsPrimary ).OrderBy( x => !x.Successful );
 
 	TimeSince _sinceNext = DISPLAY_TIME;
 	int _currentMemory;

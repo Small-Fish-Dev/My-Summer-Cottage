@@ -11,7 +11,16 @@
 		style="position: absolute; top: 50px; left: 0px;" 
 	/>
 	<div class="task-container">
-		<TaskList />
-		<SelectedTask />
+		<TaskList OnTaskClick=@((SaunaTask task) => { SelectedTask = task; }) />
+		<TaskDetails SelectedTask=@SelectedTask />
 	</div>
 </root>
+
+@code {
+	public static SaunaTask SelectedTask { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(SelectedTask?.ResourceId);
+	}
+}

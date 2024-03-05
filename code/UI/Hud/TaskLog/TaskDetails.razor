@@ -4,15 +4,15 @@
 
 <root>
 	<text class="title-container">TASKS DETAILS</text>
-	@if (TaskMaster.SelectedTask is not null)
+	@if (SelectedTask is not null)
 	{
 		<div style="width: 100%; padding: 40px;">
 			<div style="width: 75%; flex-direction: column;">
 				<div style="align-items: flex-start;">
-					<text class="title">@TaskMaster.SelectedTask.Name</text>
-					@if (TaskMaster.SelectedTask.Completed)
+					<text class="title">@SelectedTask.Name</text>
+					@if (SelectedTask.Completed)
 					{
-						@if (TaskMaster.SelectedTask.Successful)
+						@if (SelectedTask.Successful)
 						{
 							<div class="success completed">COMPLETED</div>
 						}
@@ -22,19 +22,19 @@
 						}
 					}
 				</div>
-				<text class="subtitle">@TaskMaster.SelectedTask.Subtitle</text>
+				<text class="subtitle">@SelectedTask.Subtitle</text>
 				<text class="pinned">( PINNED )</text>
 			</div>
 		</div>
 		<div class="task-additional-details">
 			<div style="flex-direction: column; margin-bottom: 40px; flex-shrink: 0;">
 				<text class="title">Task Details:</text>
-				<text style="font-size: 20px;">@TaskMaster.SelectedTask.Description</text>
+				<text style="font-size: 20px;">@SelectedTask.Description</text>
 			</div>
 			<div style="flex-direction: column; flex-shrink: 0;">
 				<text class="title">Task Requirements:</text>
 				<div style="flex-direction: column; flex-shrink: 0; gap: 20px;">
-					@foreach (var subtask in TaskMaster.SelectedTask.Subtasks)
+					@foreach (var subtask in SelectedTask.Subtasks)
 					{
 						<div class="requirement">
 							<div class="requirement-status">
@@ -58,17 +58,19 @@
 	}
 </root>
 
-@code {	
+@code {
+	public SaunaTask SelectedTask { get; set; }
+
 	protected override int BuildHash()
 	{
-		if (TaskMaster.SelectedTask is null)
+		if (SelectedTask is null)
 			return -1;
 
 		return HashCode.Combine(
-			TaskMaster.SelectedTask.ResourceId,
-			TaskMaster.SelectedTask.Completed,
-			TaskMaster.SelectedTask.Successful,
-			TaskMaster.SelectedTask.Subtasks.HashCombine((subtask) => HashCode.Combine(subtask.Completed))
+			SelectedTask.ResourceId,
+			SelectedTask.Completed,
+			SelectedTask.Successful,
+			SelectedTask.Subtasks.HashCombine((subtask) => HashCode.Combine(subtask.Completed))
 		);
 	}
 }

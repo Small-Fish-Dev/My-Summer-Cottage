@@ -2,7 +2,7 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root onclick=@(() => TaskMaster.SelectedTask = Task) class=@(TaskMaster.SelectedTask?.ResourceId == Task.ResourceId ? "selected" : "")>
+<root class=@(SelectedTask?.ResourceId == Task.ResourceId ? "selected" : "")>
 	<img class="task-img" src="ui/hud/task_completed.png" />
 	<div class="task-details">
 		<text class="task-title">@Task.Name</text>
@@ -11,10 +11,11 @@
 </root>
 
 @code {
+	public SaunaTask SelectedTask { get; set; }
 	public SaunaTask Task { get; set; }
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(Task.Name, Task.Subtitle, TaskMaster.SelectedTask?.ResourceId);
+		return HashCode.Combine(Task.Name, Task.Subtitle, SelectedTask?.ResourceId);
 	}
 }
