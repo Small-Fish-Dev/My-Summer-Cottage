@@ -1,3 +1,5 @@
+@import "/UI/Style.scss";
+
 // $date-padding: change this if you want to move the whole thing a bit
 $date-padding: 20px 20px 20px 25px;
 
@@ -65,6 +67,16 @@ Date {
 
             .value {
                 font-size: 37px;
+                color: white;
+                transition: all 0.3s;
+
+                &.increment {
+                    color: $green;
+                }
+
+                &.decrement {
+                    color: $blood-red;
+                }
             }
         }
     }
