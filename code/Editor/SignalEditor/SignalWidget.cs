@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Nodes;
 using Editor.NodeEditor;
 using Facepunch.ActionGraphs;
 using Sandbox;
@@ -225,8 +226,14 @@ internal class SignalWidget : ControlWidget
 	void OpenMenu()
 	{
 		var tests = PrefabLibrary.All
-			.Select( x => x.Value.Prefab.ResourceName );
-
+			.Select( x => x.Value.Prefab.RootObject )
+			.SelectMany( x =>
+			{
+				var components = x["Components"].AsArray();
+				return components
+					.Where( component => component["__type"].ToString() == "EventDefinition" )
+					.Select( component => component["EventName"].ToString() );
+			} );
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;
 
