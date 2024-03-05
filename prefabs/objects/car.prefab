@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "Id": "91028a1e-d6d2-4409-9a34-3cc4ecbccc1e",
-    "Name": "car",
+    "Name": "Car",
     "Enabled": true,
     "Components": [
       {
@@ -11,7 +11,7 @@
           {
             "Identifier": "sauna.endsession",
             "Keybind": "use",
-            "Description": "End session",
+            "Description": "Go Home",
             "Action": {
               "Version": 5,
               "UserData": {
@@ -245,7 +245,220 @@
                 }
               ]
             },
-            "ShowWhenDisabled": null,
+            "ShowWhenDisabled": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Show When Disabled",
+                "id": "9b2aae18-192d-42e5-abd0-e953864f5e96",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": true,
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "DynamicText": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Dynamic Text",
+                "id": "ffc76fb6-66ea-43ca-a028-9521be9422b2",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output",
+                  "UserData": {
+                    "Position": "576,-16"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "component": {
+                      "_type": "component",
+                      "go": "b5cfdeb8-a0b4-46fd-ba71-d0c74c933069",
+                      "component_type": "EventAreaFinder"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "-1472,-0"
+                  }
+                },
+                {
+                  "Id": 3,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_name": "ObjectsInside",
+                    "_type": "package.fish.sauna/EventAreaFinder"
+                  },
+                  "UserData": {
+                    "Position": "-1184,-0"
+                  }
+                },
+                {
+                  "Id": 4,
+                  "Type": "event.geteverycomponentincollection",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.Player"
+                  },
+                  "UserData": {
+                    "Position": "-864,-0"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "event.iseverycomponentincluded",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.Player"
+                  },
+                  "UserData": {
+                    "Position": "-544,-32"
+                  }
+                },
+                {
+                  "Id": 6,
+                  "Type": "event.geteverycomponent",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.Player"
+                  },
+                  "UserData": {
+                    "Position": "-832,-80"
+                  }
+                },
+                {
+                  "Id": 7,
+                  "Type": "op.not",
+                  "UserData": {
+                    "Position": "-256,-16"
+                  }
+                },
+                {
+                  "Id": 10,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_type": "System.Private.CoreLib/System.Boolean",
+                    "_name": "ToString"
+                  },
+                  "UserData": {
+                    "Position": "-80,16"
+                  }
+                },
+                {
+                  "Id": 13,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_type": "System.Private.CoreLib/System.String",
+                    "_name": "Replace"
+                  },
+                  "UserData": {
+                    "Position": "128,16"
+                  }
+                },
+                {
+                  "Id": 14,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_type": "System.Private.CoreLib/System.String",
+                    "_name": "Replace"
+                  },
+                  "UserData": {
+                    "Position": "352,64"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 14,
+                  "SrcName": "_result",
+                  "DstId": 0,
+                  "DstName": "_result"
+                },
+                {
+                  "SrcId": 2,
+                  "SrcName": "_result",
+                  "DstId": 3,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 4,
+                  "DstName": "collection"
+                },
+                {
+                  "SrcId": 6,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "collectionA"
+                },
+                {
+                  "SrcId": 4,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "collectionB"
+                },
+                {
+                  "SrcId": 5,
+                  "SrcName": "_result",
+                  "DstId": 7,
+                  "DstName": "a"
+                },
+                {
+                  "SrcId": 7,
+                  "SrcName": "_result",
+                  "DstId": 10,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 10,
+                  "SrcName": "_result",
+                  "DstId": 13,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": "Go Home (Some players are not nearby)",
+                  "DstId": 13,
+                  "DstName": "newValue"
+                },
+                {
+                  "Value": "True",
+                  "DstId": 13,
+                  "DstName": "oldValue"
+                },
+                {
+                  "SrcId": 13,
+                  "SrcName": "_result",
+                  "DstId": 14,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": "Go Home",
+                  "DstId": 14,
+                  "DstName": "newValue"
+                },
+                {
+                  "Value": "False",
+                  "DstId": 14,
+                  "DstName": "oldValue"
+                }
+              ]
+            },
             "HasBounds": true,
             "Position": "0,0,29.44",
             "Extents": "160.8,83.11999,61.68002",
