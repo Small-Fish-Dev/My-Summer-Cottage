@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "Id": "91028a1e-d6d2-4409-9a34-3cc4ecbccc1e",
-    "Name": "Car",
+    "Name": "car",
     "Enabled": true,
     "Components": [
       {
@@ -257,6 +257,10 @@
                 {
                   "Id": 0,
                   "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
                 }
               ],
               "Links": [
@@ -280,7 +284,7 @@
                   "Id": 0,
                   "Type": "output",
                   "UserData": {
-                    "Position": "576,-16"
+                    "Position": "368,48"
                   }
                 },
                 {
@@ -294,7 +298,7 @@
                     }
                   },
                   "UserData": {
-                    "Position": "-1472,-0"
+                    "Position": "-1328,96"
                   }
                 },
                 {
@@ -305,7 +309,7 @@
                     "_type": "package.fish.sauna/EventAreaFinder"
                   },
                   "UserData": {
-                    "Position": "-1184,-0"
+                    "Position": "-1040,96"
                   }
                 },
                 {
@@ -315,7 +319,7 @@
                     "T": "package.fish.sauna/Sauna.Player"
                   },
                   "UserData": {
-                    "Position": "-864,-0"
+                    "Position": "-720,96"
                   }
                 },
                 {
@@ -325,7 +329,7 @@
                     "T": "package.fish.sauna/Sauna.Player"
                   },
                   "UserData": {
-                    "Position": "-544,-32"
+                    "Position": "-400,64"
                   }
                 },
                 {
@@ -335,56 +339,34 @@
                     "T": "package.fish.sauna/Sauna.Player"
                   },
                   "UserData": {
-                    "Position": "-832,-80"
+                    "Position": "-688,16"
                   }
                 },
                 {
                   "Id": 7,
                   "Type": "op.not",
                   "UserData": {
-                    "Position": "-256,-16"
+                    "Position": "-112,80"
                   }
                 },
                 {
-                  "Id": 10,
-                  "Type": "call",
-                  "Properties": {
-                    "_isStatic": false,
-                    "_type": "System.Private.CoreLib/System.Boolean",
-                    "_name": "ToString"
-                  },
+                  "Id": 15,
+                  "Type": "input",
                   "UserData": {
-                    "Position": "-80,16"
+                    "Position": "128,-96"
                   }
                 },
                 {
-                  "Id": 13,
-                  "Type": "call",
-                  "Properties": {
-                    "_isStatic": false,
-                    "_type": "System.Private.CoreLib/System.String",
-                    "_name": "Replace"
-                  },
+                  "Id": 16,
+                  "Type": "op.conditional",
                   "UserData": {
-                    "Position": "128,16"
-                  }
-                },
-                {
-                  "Id": 14,
-                  "Type": "call",
-                  "Properties": {
-                    "_isStatic": false,
-                    "_type": "System.Private.CoreLib/System.String",
-                    "_name": "Replace"
-                  },
-                  "UserData": {
-                    "Position": "352,64"
+                    "Position": "96,64"
                   }
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 14,
+                  "SrcId": 16,
                   "SrcName": "_result",
                   "DstId": 0,
                   "DstName": "_result"
@@ -420,42 +402,20 @@
                   "DstName": "a"
                 },
                 {
+                  "Value": "Everyone must be nearby",
+                  "DstId": 16,
+                  "DstName": "a"
+                },
+                {
+                  "Value": "Go home",
+                  "DstId": 16,
+                  "DstName": "b"
+                },
+                {
                   "SrcId": 7,
                   "SrcName": "_result",
-                  "DstId": 10,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 10,
-                  "SrcName": "_result",
-                  "DstId": 13,
-                  "DstName": "_target"
-                },
-                {
-                  "Value": "Go Home (Some players are not nearby)",
-                  "DstId": 13,
-                  "DstName": "newValue"
-                },
-                {
-                  "Value": "True",
-                  "DstId": 13,
-                  "DstName": "oldValue"
-                },
-                {
-                  "SrcId": 13,
-                  "SrcName": "_result",
-                  "DstId": 14,
-                  "DstName": "_target"
-                },
-                {
-                  "Value": "Go Home",
-                  "DstId": 14,
-                  "DstName": "newValue"
-                },
-                {
-                  "Value": "False",
-                  "DstId": 14,
-                  "DstName": "oldValue"
+                  "DstId": 16,
+                  "DstName": "x"
                 }
               ]
             },
