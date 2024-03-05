@@ -71,7 +71,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						name = "base"
+						name = "base_post"
 						filename = "models/props/street_name_sign/street_name_sign.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -87,12 +87,13 @@
 							[
 								"Cylinder_014",
 								"Cylinder_015",
+								"Cylinder_022",
 							]
 						}
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "top"
+						name = "top_post"
 						filename = "models/props/street_name_sign/street_name_sign.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -108,48 +109,97 @@
 							[
 								"Cylinder_014",
 								"Cylinder_017",
+								"Cylinder_023",
 							]
 						}
 					},
-				]
-			},
-			{
-				_class = "BodyGroupList"
-				children = 
-				[
 					{
-						_class = "BodyGroup"
-						name = "base"
-						children = 
-						[
-							{
-								_class = "BodyGroupChoice"
-								meshes = 
-								[
-									"base",
-								]
-							},
-						]
-						hidden_in_tools = false
+						_class = "RenderMeshFile"
+						name = "big_base_sign"
+						filename = "models/props/street_name_sign/street_name_sign.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"Cylinder_014",
+								"Cylinder_017",
+								"Cylinder_027",
+							]
+						}
 					},
 					{
-						_class = "BodyGroup"
-						name = "top_signs"
-						children = 
-						[
-							{
-								_class = "BodyGroupChoice"
-								meshes = 
-								[
-									"top",
-								]
-							},
-							{
-								_class = "BodyGroupChoice"
-								meshes = [  ]
-							},
-						]
-						hidden_in_tools = false
+						_class = "RenderMeshFile"
+						name = "top_big_sign"
+						filename = "models/props/street_name_sign/street_name_sign.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"Cylinder_014",
+								"Cylinder_017",
+								"Cylinder_024",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "top_little_sign"
+						filename = "models/props/street_name_sign/street_name_sign.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"Cylinder_014",
+								"Cylinder_017",
+								"Cylinder_026",
+							]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "top_little_sideways_sign"
+						filename = "models/props/street_name_sign/street_name_sign.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"Cylinder_014",
+								"Cylinder_017",
+								"Cylinder_025",
+							]
+						}
 					},
 				]
 			},
