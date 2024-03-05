@@ -92,6 +92,9 @@ public partial class SaunaTask : GameResource
 		}
 	}
 
+	[Property]
+	public Signal Test { get; set; }
+
 	/// <summary>
 	/// The name of this task, keep it short 2-4 words
 	/// </summary>
