@@ -19,7 +19,8 @@ public sealed class FishingRod : Component
 			Accessibility = AccessibleFrom.Hands,
 			Action = OnInteract,
 			DynamicText = () => Casted ? "Pull back" : "Cast",
-			Keybind = "mouse1"
+			Keybind = "mouse1",
+			Animation = InteractAnimations.Action
 		} );
 	}
 
