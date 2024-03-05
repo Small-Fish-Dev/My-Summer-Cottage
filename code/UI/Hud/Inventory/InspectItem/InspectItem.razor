@@ -26,6 +26,7 @@
 	private SceneDirectionalLight _sceneDirectionalLight;
 	private bool _isDragging = false;
 	private Transform _cameraTransform;
+	private float _scrollDelta;
 	private float _distance;
 
 	private bool HasDescription => !String.IsNullOrEmpty(_item.Description);
@@ -68,6 +69,13 @@
 		base.OnButtonEvent( e );
 	}
 
+	public override void OnMouseWheel(Vector2 value)
+    {
+		_scrollDelta = value.y;
+
+		base.OnMouseWheel(value);
+	}
+
 	public override void Tick() 
 	{
 		if (_model is null)
@@ -78,6 +86,11 @@
 			_cameraTransform = _cameraTransform.RotateAround(_model.Model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Up, -Mouse.Delta.x * 0.20f));
 			_cameraTransform = _cameraTransform.RotateAround(_model.Model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Right, -Mouse.Delta.y * 0.20f));
 		}
+
+		_distance += _scrollDelta * 3f;
+		_distance = _distance.Clamp(10f, 100f);
+		_cameraTransform.Position = _model.Model.Bounds.Center - _cameraTransform.Forward * _distance;
+		_scrollDelta = 0;
 
 		_scenePanel.Camera.Position = Vector3.Lerp(_scenePanel.Camera.Position, _cameraTransform.Position, RealTime.Delta * 40.0f);
 		_scenePanel.Camera.Rotation = Rotation.Lerp(_scenePanel.Camera.Rotation, _cameraTransform.Rotation, RealTime.Delta * 50.0f);
