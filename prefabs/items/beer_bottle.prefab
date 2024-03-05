@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "744ad036-2060-45fd-93e8-f20349539372",
+    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
     "Name": "beer_bottle",
     "Enabled": true,
     "Components": [
@@ -34,14 +34,14 @@
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
-            "Identifier": "beer.drink",
+            "Identifier": "beer_bottle.drink",
             "Keybind": "Mouse1",
             "Description": "Drink",
             "Action": {
               "Version": 5,
               "UserData": {
                 "Title": "Action",
-                "id": "1d472d5d-54f0-4785-84c0-47529d8279f7",
+                "id": "ac577e47-fb94-4546-a0f3-085a86043b2e",
                 "ReferencedComponentTypes": []
               },
               "Variables": [],
@@ -54,30 +54,30 @@
                   "Id": 1,
                   "Type": "call",
                   "Properties": {
-                    "_name": "Destroy",
                     "_isStatic": false,
+                    "_name": "Destroy",
                     "_type": "Sandbox.Game/Sandbox.GameObject"
                   },
                   "UserData": {
-                    "Position": "400,0"
+                    "Position": "224,-16"
                   }
                 },
                 {
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
-                    "_name": "AddExperience",
                     "_isStatic": false,
+                    "_name": "AddExperience",
                     "_type": "package.fish.sauna/Sauna.Player"
                   },
                   "UserData": {
-                    "Position": "208,-0"
+                    "Position": "224,48"
                   }
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 2,
+                  "SrcId": 0,
                   "SrcName": "_signal",
                   "DstId": 1,
                   "DstName": "_signal"
@@ -109,7 +109,9 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Animation": "Eat"
+            "Disabled": null,
+            "ShowWhenDisabled": null,
+            "Animation": "Action"
           }
         ]
       },

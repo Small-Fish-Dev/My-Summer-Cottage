@@ -71,6 +71,15 @@ partial class Player
 	private Angles _currentRecoil;
 	private Angles _previousRecoil;
 
+	private HoldType _targetHoldType;
+	private TimeUntil _resetHoldType;
+
+	public void ForceHoldType( HoldType type, float time )
+	{
+		_targetHoldType = type;
+		_resetHoldType = time;
+	}
+
 	protected void UpdateMovement()
 	{
 		if ( MoveHelper == null ) return;
@@ -218,7 +227,9 @@ partial class Player
 		Renderer.Set( "height", Height );
 
 		Renderer.Set( "lookat", EyeAngles.WithYaw( 0 ).Forward );
-		Renderer.Set( "hold_type", (int)HoldType );
+
+		var holdType = _resetHoldType ? HoldType : _targetHoldType;
+		Renderer.Set( "hold_type", (int)holdType );
 	}
 
 	private void OnJumpEvent( SceneModel.GenericEvent e )
