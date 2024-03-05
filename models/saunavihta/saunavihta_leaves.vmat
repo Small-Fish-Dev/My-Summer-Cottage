@@ -2,9 +2,10 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader_c"
+	shader "shaders/saunasimple.shader"
 
 	//---- Rendering ----
+	F_ALPHA_TEST 1
 	F_RENDER_BACKFACES 1
 	F_TRANSPARENCY 1
 
@@ -13,8 +14,14 @@ Layer0
 
 	//---- Material ----
 	Color "models/saunavihta/saunavihta_color.png"
+	ColorTintMask "materials/default/default.tga"
+	Metalness "materials/default/default_metal.tga"
 	Normal "models/saunavihta/saunavihta_normal.png"
 	Roughness "models/saunavihta/saunavihta_rough.png"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
 
 	//---- Transparency ----
 	TransparencyMask "models/saunavihta/saunavihta_trans.png"
