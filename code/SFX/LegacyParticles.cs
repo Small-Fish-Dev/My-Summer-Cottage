@@ -38,7 +38,10 @@ public class LegacyParticles
 	}
 
 	public void Destroy()
-		=> GameObject?.Destroy();
+	{
+		System?.Destroy();
+		GameObject?.Destroy();
+	}
 
 	public void SetGameObject( int index, GameObject obj )
 	{
