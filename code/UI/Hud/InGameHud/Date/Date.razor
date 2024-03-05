@@ -15,7 +15,9 @@
 		<div class="icon money"></div>
 		<div class="text-container">
 			<div class="title">balance</div>
-			<div class="value">@($"{Player.Local.Money}mk")</div>
+			<div class="value @GetBalanceClass()">
+				@($"{_lastBalance}mk")
+			</div>
 		</div>
 	</div>
 </root>
@@ -23,8 +25,27 @@
 @code {
 	public GameTimeManager GameTimeManager { get; set; }
 
+	private int _lastBalance;
+	private int _delta;
+
+	public override void Tick()
+	{
+		if (_lastBalance != Player.Local.Money)
+		{
+			_delta = Player.Local.Money < _lastBalance ? -1 : 1;
+            _lastBalance = _lastBalance + _delta;
+		}
+	}
+
+	private string GetBalanceClass()
+	{
+		if (_lastBalance != Player.Local.Money)
+			return _delta > 0 ? "increment" : "decrement";
+		return string.Empty;
+	}
+
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( GameTimeManager.Day, Player.Local.Money );
+		return HashCode.Combine( GameTimeManager.Day, Player.Local.Money, _lastBalance );
 	}
 }

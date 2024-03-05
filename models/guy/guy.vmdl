@@ -135,6 +135,37 @@
 				children = 
 				[
 					{
+						_class = "Feet"
+						children = 
+						[
+							{
+								_class = "Foot"
+								name = "foot_R"
+								anklebone = "foot_R"
+								toebone = ""
+								balloffset = [ 6.36238, -1.640113, -0.344668 ]
+								heeloffset = [ 1.720289, -3.89865, 0.015931 ]
+								autolevel = true
+								traceheight = 40.0
+								traceradius = 0.5
+							},
+							{
+								_class = "Foot"
+								name = "foot_L"
+								anklebone = "foot_L"
+								toebone = ""
+								balloffset = [ 6.382753, -1.679912, -0.341087 ]
+								heeloffset = [ 1.720289, -3.89865, 0.015931 ]
+								autolevel = true
+								traceheight = 40.0
+								traceradius = 0.5
+							},
+						]
+						locktolerance = 0.8
+						heighttolerance = 1.5
+						sanitizetrajectories = true
+					},
+					{
 						_class = "GenericGameData"
 						game_class = "ao_proxy_box"
 						game_keys = 
@@ -203,37 +234,6 @@
 						}
 					},
 					{
-						_class = "Feet"
-						children = 
-						[
-							{
-								_class = "Foot"
-								name = "foot_R"
-								anklebone = "foot_R"
-								toebone = ""
-								balloffset = [ 6.36238, -1.640113, -0.344668 ]
-								heeloffset = [ 1.720289, -3.89865, 0.015931 ]
-								autolevel = true
-								traceheight = 40.0
-								traceradius = 0.5
-							},
-							{
-								_class = "Foot"
-								name = "foot_L"
-								anklebone = "foot_L"
-								toebone = ""
-								balloffset = [ 6.382753, -1.679912, -0.341087 ]
-								heeloffset = [ 1.720289, -3.89865, 0.015931 ]
-								autolevel = true
-								traceheight = 40.0
-								traceradius = 0.5
-							},
-						]
-						locktolerance = 0.8
-						heighttolerance = 1.5
-						sanitizetrajectories = true
-					},
-					{
 						_class = "LookAtChain"
 						name = "lookat_torso"
 						lookat_chain = 
@@ -259,6 +259,41 @@
 								},
 								{
 									name = "spine0"
+									weight = 0.25
+								},
+							]
+						}
+					},
+					{
+						_class = "LookAtChain"
+						name = "lookat_torso_pelvis"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "head"
+									weight = 1.0
+								},
+								{
+									name = "neck"
+									weight = 1.0
+								},
+								{
+									name = "spine2"
+									weight = 1.0
+								},
+								{
+									name = "spine1"
+									weight = 0.75
+								},
+								{
+									name = "spine0"
+									weight = 0.5
+								},
+								{
+									name = "pelvis"
 									weight = 0.25
 								},
 							]
@@ -846,6 +881,28 @@
 						disable_compression = false
 						enable_scale = false
 						source_filename = "models/guy/animations/inspect_arms.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "hold_pose"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/guy/animations/hold_pose.fbx"
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
@@ -1760,65 +1817,6 @@
 					},
 					{
 						_class = "Folder"
-						name = "aim"
-						children = 
-						[
-							{
-								_class = "AnimFile"
-								name = "aim_matrix_delta"
-								children = 
-								[
-									{
-										_class = "AnimSubtract"
-										anim_name = "aim_matrix"
-										frame = 4
-									},
-								]
-								activity_name = ""
-								activity_weight = 1
-								weight_list_name = ""
-								fade_in_time = 0.2
-								fade_out_time = 0.2
-								looping = false
-								delta = false
-								worldSpace = false
-								hidden = false
-								anim_markup_ordered = false
-								disable_compression = false
-								enable_scale = false
-								source_filename = "models/guy/animations/aim_matrix.fbx"
-								start_frame = -1
-								end_frame = -1
-								framerate = -1.0
-								take = 0
-								reverse = false
-							},
-							{
-								_class = "AnimFile"
-								name = "aim_matrix"
-								activity_name = ""
-								activity_weight = 1
-								weight_list_name = ""
-								fade_in_time = 0.2
-								fade_out_time = 0.2
-								looping = false
-								delta = false
-								worldSpace = false
-								hidden = false
-								anim_markup_ordered = false
-								disable_compression = false
-								enable_scale = false
-								source_filename = "models/guy/animations/aim_matrix.fbx"
-								start_frame = -1
-								end_frame = -1
-								framerate = -1.0
-								take = 0
-								reverse = false
-							},
-						]
-					},
-					{
-						_class = "Folder"
 						name = "height"
 						children = 
 						[
@@ -1885,26 +1883,152 @@
 						]
 					},
 					{
-						_class = "AnimFile"
-						name = "fishing_pose"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/fishing_pose.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
+						_class = "Folder"
+						name = "rifle"
+						children = 
+						[
+							{
+								_class = "AnimFile"
+								name = "aim_matrix_delta"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "aim_matrix"
+										frame = 4
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/aim_matrix.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "aim_matrix"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/aim_matrix.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+						]
+					},
+					{
+						_class = "Folder"
+						name = "fishing"
+						children = 
+						[
+							{
+								_class = "AnimFile"
+								name = "fishing_pose"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/fishing_pose.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "fishing_cast"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "fishing_cast"
+										frame = 0
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/fishing_cast.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "fishing_pull"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "fishing_pull"
+										frame = 0
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/fishing_cast.fbx"
+								start_frame = -1
+								end_frame = 11
+								framerate = 42.0
+								take = 0
+								reverse = false
+							},
+						]
 					},
 				]
 				default_root_bone_name = ""
