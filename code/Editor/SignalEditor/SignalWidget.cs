@@ -76,7 +76,7 @@ internal class SignalWidget : ControlWidget
 		typeof(object)
 	};
 
-	private TypeOption GetTypeOption( Type type )
+	private SignalOption GetSignalOption( Type type, string title )
 	{
 		var typeDesc = TypeLibrary.GetType( type );
 
@@ -84,10 +84,9 @@ internal class SignalWidget : ControlWidget
 			? GetTypePath( typeDesc )
 			: $"System/{type.Name}";
 
-		return new TypeOption( Menu.GetSplitPath( path ),
+		return new SignalOption( Menu.GetSplitPath( path ),
 			type,
-			type.Name,
-			typeDesc?.Description,
+			title,
 			typeDesc?.Icon );
 	}
 
@@ -147,81 +146,7 @@ internal class SignalWidget : ControlWidget
 		return $"{prefix}/{typeDesc.Title}:{icon}@2000";
 	}
 
-	private record TypeOption( Menu.PathElement[] Path, Type Type, string Title, string Description, string Icon );
-
-	private static bool SatisfiesConstraints( Type type, Type genericParam )
-	{
-		if ( genericParam is null )
-		{
-			return true;
-		}
-
-		if ( !genericParam.GenericParameterAttributes.AreSatisfiedBy( type ) )
-		{
-			return false;
-		}
-
-		// TODO: constraints might involve other generic parameters
-
-		foreach ( var constraint in genericParam.GetGenericParameterConstraints() )
-		{
-			if ( !type.IsAssignableTo( constraint ) )
-			{
-				return false;
-			}
-		}
-
-		foreach ( var hasImpl in genericParam.GetCustomAttributes<HasImplementationAttribute>() )
-		{
-			// Easy case
-
-			if ( type.IsAssignableTo( hasImpl.BaseType ) )
-			{
-				continue;
-			}
-
-			var anyImplementing = TypeLibrary.GetTypes( hasImpl.BaseType )
-				.Where( x => !x.IsAbstract && !x.IsInterface )
-				.Any( x => x.TargetType.IsAssignableTo( type ) );
-
-			if ( !anyImplementing )
-			{
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	private IEnumerable<TypeOption> GetPossibleTypes()
-	{
-		var genericParam = typeof( Type );
-		var listedTypes = new HashSet<Type>();
-
-		foreach ( var type in SystemTypes )
-		{
-			if ( !listedTypes.Add( type ) ) continue;
-			if ( !SatisfiesConstraints( type, genericParam ) ) continue;
-			yield return GetTypeOption( type );
-		}
-
-		var componentTypes = TypeLibrary.GetTypes<Component>();
-		var resourceTypes = TypeLibrary.GetTypes<GameResource>();
-		var userTypes = TypeLibrary.GetTypes()
-			.Where( x => x.TargetType.Assembly.GetName().Name?.StartsWith( "package." ) ?? false );
-
-		foreach ( var typeDesc in componentTypes.Union( resourceTypes ).Union( userTypes ) )
-		{
-			if ( typeDesc.IsStatic ) continue;
-			if ( typeDesc.IsGenericType ) continue;
-			if ( typeDesc.HasAttribute<CompilerGeneratedAttribute>() ) continue;
-			if ( typeDesc.Name.StartsWith( "<" ) || typeDesc.Name.StartsWith( "_" ) ) continue;
-			if ( !listedTypes.Add( typeDesc.TargetType ) ) continue;
-			if ( !SatisfiesConstraints( typeDesc.TargetType, genericParam ) ) continue;
-
-			yield return GetTypeOption( typeDesc.TargetType );
-		}
-	}
+	private record SignalOption( Menu.PathElement[] Path, Type Type, string Title, string Icon );
 
 	void OpenMenu()
 	{
@@ -232,8 +157,9 @@ internal class SignalWidget : ControlWidget
 				var components = x["Components"].AsArray();
 				return components
 					.Where( component => component["__type"].ToString() == "EventDefinition" )
-					.Select( component => component["EventName"].ToString() );
+					.Select( component => GetSignalOption( TypeLibrary.GetType( component["__type"].ToString() ).TargetType, component["EventName"].ToString() ) );
 			} );
+
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;
 
@@ -248,7 +174,7 @@ internal class SignalWidget : ControlWidget
 		_menu.MinimumWidth = ScreenRect.Width;
 	}
 
-	private void PopulateSuffixMenu( Menu menu, IEnumerable<string> items, string filter = null )
+	private void PopulateSuffixMenu( Menu menu, IEnumerable<SignalOption> items, string filter = null )
 	{
 		menu.RemoveMenus();
 		menu.RemoveOptions();
@@ -265,7 +191,7 @@ internal class SignalWidget : ControlWidget
 
 		if ( useFilter )
 		{
-			var filtered = items.Where( x => x.Contains( filter, StringComparison.OrdinalIgnoreCase ) ).ToArray();
+			var filtered = items.Where( x => x.Title.Contains( filter, StringComparison.OrdinalIgnoreCase ) ).ToArray();
 
 			if ( filtered.Length > maxFiltered + 1 )
 			{
@@ -286,14 +212,9 @@ internal class SignalWidget : ControlWidget
 			}
 		}
 
-		string getPath( string name )
+		menu.AddOptions( items, x => $"Events/{x.Title}", x =>
 		{
-			return name;
-		}
-
-		menu.AddOptions( items, x => getPath( x ), x =>
-		{
-			SerializedProperty.SetValue( x );
+			SerializedProperty.SetValue( x.Title );
 			SignalValuesChanged();
 		}, flat: useFilter );
 
