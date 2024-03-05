@@ -270,8 +270,8 @@
 			m_InputValue = 
 			{
 				m_nType = "PF_TYPE_LITERAL"
-				m_nMapType = "PF_MAP_TYPE_DIRECT"
-				m_NamedValue = ""
+				m_nMapType = "PF_MAP_TYPE_REMAP"
+				m_NamedValue = "girth"
 				m_flLiteralValue = 0.2
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
@@ -300,8 +300,8 @@
 				m_nInputMode = "PF_INPUT_MODE_CLAMPED"
 				m_flMultFactor = 1.0
 				m_flInput0 = 0.0
-				m_flInput1 = 1.0
-				m_flOutput0 = 0.0
+				m_flInput1 = 100.0
+				m_flOutput0 = 0.1
 				m_flOutput1 = 1.0
 				m_nBiasType = "PF_BIAS_TYPE_STANDARD"
 				m_flBiasParameter = 0.0
@@ -351,7 +351,7 @@
 			_class = "C_OP_RopeSpringConstraint"
 			m_flRestLength = 
 			{
-				m_nType = "PF_TYPE_NAMED_VALUE"
+				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_REMAP"
 				m_NamedValue = "slack"
 				m_flLiteralValue = 0.0
@@ -383,8 +383,8 @@
 				m_flMultFactor = 1.0
 				m_flInput0 = 0.0
 				m_flInput1 = 1.0
-				m_flOutput0 = -1.0
-				m_flOutput1 = 2.0
+				m_flOutput0 = 0.0
+				m_flOutput1 = 1.0
 				m_nBiasType = "PF_BIAS_TYPE_STANDARD"
 				m_flBiasParameter = 0.0
 				m_Curve = 
@@ -445,7 +445,7 @@
 				m_nType = "PF_TYPE_LITERAL"
 				m_nMapType = "PF_MAP_TYPE_DIRECT"
 				m_NamedValue = ""
-				m_flLiteralValue = 1.0
+				m_flLiteralValue = 5.0
 				m_nControlPoint = 0
 				m_nScalarAttribute = 3
 				m_nVectorAttribute = 6
@@ -486,7 +486,7 @@
 					m_vDomainMaxs = [ 0.0, 0.0 ]
 				}
 			}
-			m_flAdjustmentScale = 25.0
+			m_flAdjustmentScale = 40.0
 		},
 		{
 			_class = "C_OP_WorldTraceConstraint"
