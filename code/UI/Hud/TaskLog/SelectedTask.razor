@@ -12,7 +12,14 @@
 					<text class="title">@TaskMaster.SelectedTask.Name</text>
 					@if (TaskMaster.SelectedTask.Completed)
 					{
-						<div class="completed">COMPLETED</div>
+						@if (TaskMaster.SelectedTask.Successful)
+						{
+							<div class="success completed">COMPLETED</div>
+						}
+						else
+						{
+							<div class="success failed">FAILED</div>
+						}
 					}
 				</div>
 				<text class="subtitle">@TaskMaster.SelectedTask.Subtitle</text>
@@ -58,7 +65,9 @@
 			return -1;
 
 		return HashCode.Combine(
-			TaskMaster.SelectedTask.ResourceId, 
+			TaskMaster.SelectedTask.ResourceId,
+			TaskMaster.SelectedTask.Completed,
+			TaskMaster.SelectedTask.Successful,
 			TaskMaster.SelectedTask.Subtasks.HashCombine((subtask) => HashCode.Combine(subtask.Completed))
 		);
 	}

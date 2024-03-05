@@ -26,14 +26,21 @@ SelectedTask {
         color: $gray;
     }
 
-    .completed {
-        background-color: $green;
+    .success {
         margin-left: 40px;
-        padding: 2px 15px;
+        padding: 4px 15px 0px 15px;
         color: black;
-        font-size: 17px;
+        font-size: 20px;
         font-weight: bold;
         font-family: HabboExtended;
+
+        &.completed {
+            background-color: $green;
+        }
+
+        &.failed {
+            background-color: $blood-red;
+        }
     }
 
     .task-additional-details {
