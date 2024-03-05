@@ -44,7 +44,7 @@ InteractionHint {
 
     .interaction {
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
         font-size: 20px;
         font-family: HabboExtended;
         margin-left: 10px;
@@ -52,6 +52,7 @@ InteractionHint {
         .description {
             text-shadow: $text-shadow-sm;
             margin-top: 5px;
+            max-width: 325px;
         }
 
         .hint {
