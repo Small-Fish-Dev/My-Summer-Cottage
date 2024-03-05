@@ -22,12 +22,12 @@ public class ItemComponent : Component
 	/// <summary>
 	/// The weight (in grams) of the item.
 	/// </summary>
-	[Property] public int WeightInGrams { get; set; }
+	[Property, Sync] public int WeightInGrams { get; set; }
 
 	/// <summary>
 	/// The sell price of an item in mk (-1 indicating it cannot be sold).
 	/// </summary>
-	[Property] public int SellPrice { get; set; } = -1;
+	[Property, Sync] public int SellPrice { get; set; } = -1;
 
 	[Sync] public string Prefab { get; private set; }
 	public Texture IconTexture => Texture.Load( FileSystem.Mounted, Icon.Path );
