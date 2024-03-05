@@ -95,11 +95,8 @@
 				if ( interaction.Identifier != String.Empty )
 					EventMaster.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
 
-				if ( !FromHands ) // No need to play use animation for held items.
-				{
-					var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
-					Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ), interaction.Animation );
-				}
+				var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
+				Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ), interaction.Animation );
 			}
 		}
 

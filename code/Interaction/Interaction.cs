@@ -1,5 +1,3 @@
-using Sandbox.UI.GameMenu;
-
 namespace Sauna;
 
 public enum InputMode
@@ -18,6 +16,7 @@ public enum InteractAnimations
 {
 	None,
 	Interact,
+	Eat,
 }
 
 [Flags]

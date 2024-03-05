@@ -1,5 +1,3 @@
-using Sandbox;
-
 namespace Sauna;
 
 public partial class Player
@@ -45,13 +43,19 @@ public partial class Player
 	}
 
 	[Broadcast]
-	public void BroadcastInteraction( Vector3 position, Rotation rotation, InteractAnimations animations )
+	public void BroadcastInteraction( Vector3 position, Rotation rotation, InteractAnimations animation )
 	{
-		if ( animations == InteractAnimations.Interact )
+		if ( animation == InteractAnimations.Interact )
 		{
 			Renderer.Set( "right_ik_pos", position );
 			Renderer.Set( "right_ik_rot", rotation );
 			Renderer.Set( "use", true );
+		}
+		else if ( animation == InteractAnimations.Eat )
+		{
+			Renderer.Set( "right_ik_pos", position );
+			Renderer.Set( "right_ik_rot", rotation );
+			Renderer.Set( "action", true );
 		}
 	}
 }
