@@ -12,7 +12,7 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Parameters" )] public float FireSpeed { get; set; } = 0.5f;
 	[Property, Category( "Parameters" )] public InputMode Mode { get; set; } = InputMode.Pressed;
 
-	[Property, Category( "Projectile" ), Sync] public int Ammo { get; set; }
+	[Property, Category( "Projectile" ), Sync, TargetSave] public int Ammo { get; set; }
 	[Property, Category( "Projectile" )] public int Capacity { get; set; }
 	[Property, Category( "Projectile" )] public PrefabFile Ammunition { get; set; }
 

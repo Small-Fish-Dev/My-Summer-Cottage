@@ -51,8 +51,9 @@ public partial class Player
 			Renderer.Set( "right_ik_rot", rotation );
 			Renderer.Set( "use", true );
 		}
-		else if ( animation == InteractAnimations.Eat )
+		else if ( animation == InteractAnimations.Action )
 		{
+			ForceHoldType( HoldType.Item, 0.5f );
 			Renderer.Set( "right_ik_pos", position );
 			Renderer.Set( "right_ik_rot", rotation );
 			Renderer.Set( "action", true );

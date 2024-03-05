@@ -23,9 +23,11 @@ public sealed class Flashlight : Component
 			Action = ( Player player, GameObject obj ) =>
 			{
 				On = !On;
+				// todo @ceitine: add click on/off sound
 			},
 			DynamicText = () => On ? "Turn off" : "Turn on",
-			Keybind = "mouse1"
+			Keybind = "mouse1",
+			Animation = InteractAnimations.Action
 		} );
 	}
 
