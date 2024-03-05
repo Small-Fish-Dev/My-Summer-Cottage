@@ -53,7 +53,7 @@ public partial class Player
 		}
 		else if ( animation == InteractAnimations.Action )
 		{
-			ForceHoldType( HoldType.Item, 0.5f );
+			ForceHoldType( HoldType, 0.5f );
 			Renderer.Set( "right_ik_pos", position );
 			Renderer.Set( "right_ik_rot", rotation );
 			Renderer.Set( "action", true );

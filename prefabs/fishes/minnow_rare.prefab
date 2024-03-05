@@ -1,44 +1,43 @@
 {
   "RootObject": {
-    "Id": "b4ad2da0-8ce3-4440-97f1-e3d32e3de3ea",
-    "Name": "pike",
+    "Id": "63ab4376-3345-4d5f-afaa-67d6c3981015",
+    "Name": "minnow_rare",
     "Enabled": true,
     "Components": [
       {
         "__type": "Fish",
-        "CostPerKilo": 5,
+        "CostPerKilo": 45,
         "MinimumWaterDepth": 15,
         "Rarity": 0.9,
-        "WeightRange": "400.00,2400.00,1"
+        "WeightRange": "50.00,250.00,1"
       },
       {
         "__type": "ItemComponent",
-        "Description": "A carnivorous fish species commonly found in fresh water as well as moderately salty waters.",
+        "Description": "A small fresh water fish.",
         "Icon": {
-          "Model": "models/fauna/fish/pike/pike.vmdl",
-          "MaterialGroup": "",
-          "Position": "15,-3.9,0.75",
-          "Rotation": "-0.03863738,0.0786081,0.4394188,0.8940017",
-          "Guid": "38d71037-c577-4ac2-82c9-c10298c307f9"
+          "Model": "models/fauna/fish/minnow/minnow.vmdl",
+          "MaterialGroup": "rare",
+          "Rotation": "0.03354711,-0.06802682,0.4410146,0.8942891",
+          "Guid": "347ad092-9f1c-432d-9428-dc4f058e44ae"
         },
-        "Name": "Pike",
+        "Name": "Minnow (rare)",
         "SellPrice": -1,
         "WeightInGrams": 0
       },
       {
         "__type": "ModelRenderer",
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": null,
+        "MaterialGroup": "rare",
         "MaterialOverride": null,
-        "Model": "models/fauna/fish/pike/pike.vmdl",
+        "Model": "models/fauna/fish/minnow/minnow.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "BoxCollider",
-        "Center": "0,0,3.4",
+        "Center": "-0.6000001,0,0.7000027",
         "IsTrigger": false,
-        "Scale": "37.10008,3.300003,6.299984",
+        "Scale": "5.80003,0.8000035,1.999984",
         "Static": false,
         "Surface": null
       }

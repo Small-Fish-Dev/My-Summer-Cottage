@@ -129,6 +129,7 @@ public class ItemEquipment : ItemComponent
 			return;
 
 		GameObject.Transform.World = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
+		GameObject.Transform.ClearLerp();
 	}
 
 	#region GIZMO STUFF
