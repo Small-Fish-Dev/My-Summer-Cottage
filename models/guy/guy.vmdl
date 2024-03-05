@@ -940,6 +940,28 @@
 						reverse = false
 					},
 					{
+						_class = "AnimFile"
+						name = "hold_flashlight"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/guy/animations/hold_flashlight.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
 						_class = "Folder"
 						name = "movement"
 						children = 
@@ -2135,7 +2157,16 @@
 						name = "hand_R"
 						parent_bone = "hand_R"
 						relative_origin = [ 3.618608, 0.434778, -1.3619 ]
-						relative_angles = [ 0.01623, -0.019875, 0.045166 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "hand_R_flashlight"
+						parent_bone = "hand_R"
+						relative_origin = [ 3.618608, 0.434778, -1.3619 ]
+						relative_angles = [ 0.0, -90.0, 0.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
