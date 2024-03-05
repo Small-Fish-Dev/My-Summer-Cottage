@@ -23,43 +23,44 @@ public class LeFisheSpawner : Component
 		var waterTop = _water.Bounds.Maxs.z;
 
 		for ( var x = 0; x < countX; x++ )
-		for ( var y = 0; y < countY; y++ )
-		{
-			var center = new Vector3( begX + (x + 0.5f) * GridCellSize, begY + (y + 0.5f) * GridCellSize, waterTop );
-			var bbox = new BBox( new Vector3( -GridCellSize / 2, -GridCellSize / 2, -MinimumDepth ),
-				new Vector3( GridCellSize / 2, GridCellSize / 2, 0 ) );
-
-			var skyTrace = Scene.Trace
-				.Box( bbox, center, center + Vector3.Up * 100 )
-				.Run();
-			if ( skyTrace.Hit )
+			for ( var y = 0; y < countY; y++ )
 			{
-				_debugFailedCells.Add( bbox + skyTrace.EndPosition );
-				Log.Info( $"The sky is obscured by {skyTrace.Body.GetGameObject()}" );
-				continue;
+				var center = new Vector3( begX + (x + 0.5f) * GridCellSize, begY + (y + 0.5f) * GridCellSize, waterTop );
+				var bbox = new BBox( new Vector3( -GridCellSize / 2, -GridCellSize / 2, -MinimumDepth ),
+					new Vector3( GridCellSize / 2, GridCellSize / 2, 0 ) );
+
+				var skyTrace = Scene.Trace
+					.Box( bbox, center, center + Vector3.Up * 100 )
+					.Run();
+				if ( skyTrace.Hit )
+				{
+					_debugFailedCells.Add( bbox + skyTrace.EndPosition );
+					Log.Info( $"The sky is obscured by {skyTrace.Body.GetGameObject()}" );
+					continue;
+				}
+
+				var depthTrace = Scene.Trace
+					.Box( bbox, center, center + Vector3.Down * 100 )
+					.Run();
+				bbox.AddPoint( Vector3.Down * depthTrace.Distance );
+
+				var cellGameObject = new GameObject { Transform = { Position = center } };
+				cellGameObject.Tags.Add( "fishing_cell" );
+
+				var boxCollider = cellGameObject.Components.Create<BoxCollider>();
+				boxCollider.Center = bbox.Size.z / 2 * Vector3.Down;
+				boxCollider.Scale = bbox.Size;
+				boxCollider.IsTrigger = true;
+
+				var fishingCell = cellGameObject.Components.Create<FishingCell>();
+				// TODO: assign the fishes by depth
+
+				cellGameObject.Name = $"Fishing Cell [{x},{y}]";
+				cellGameObject.SetParent( GameObject );
+
+				// _cells[x, y] = new FishGridCell( new List<string> { "fishe" },
+				// 	bbox + center );
 			}
-
-			var depthTrace = Scene.Trace
-				.Box( bbox, center, center + Vector3.Down * 100 )
-				.Run();
-			bbox.AddPoint( Vector3.Down * depthTrace.Distance );
-
-			var cellGameObject = new GameObject { Transform = { Position = center } };
-			cellGameObject.Tags.Add( "fishing_cell" );
-
-			var boxCollider = cellGameObject.Components.Create<BoxCollider>();
-			boxCollider.Center = bbox.Size.z / 2 * Vector3.Down;
-			boxCollider.Scale = bbox.Size;
-			boxCollider.IsTrigger = true;
-
-			var fishingCell = cellGameObject.Components.Create<FishingCell>();
-			// TODO: assign the fishes by depth
-
-			GameObject.Children.Add( cellGameObject );
-
-			// _cells[x, y] = new FishGridCell( new List<string> { "fishe" },
-			// 	bbox + center );
-		}
 	}
 
 	protected override void OnUpdate()
