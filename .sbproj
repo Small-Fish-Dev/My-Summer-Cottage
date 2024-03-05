@@ -37,7 +37,9 @@
         "ladder": "Ignore",
         "water": "Trigger",
         "player": "Collide",
-        "npc": "Collide"
+        "npc": "Collide",
+        "bobber": "Ignore",
+        "fishing_cell": "Trigger"
       },
       "Pairs": [
         {
@@ -84,6 +86,29 @@
           "a": "player",
           "b": "npc",
           "r": "Trigger"
+        },
+        {
+          "a": "bobber",
+          "b": "fishing_cell",
+          "r": "Collide"
+        },
+        {
+          "a": "solid",
+          "b": "fishing_cell"
+        },
+        {
+          "a": "solid",
+          "b": "bobber",
+          "r": "Collide"
+        },
+        {
+          "a": "bobber",
+          "b": "bobber"
+        },
+        {
+          "a": "player",
+          "b": "bobber",
+          "r": "Ignore"
         }
       ]
     },

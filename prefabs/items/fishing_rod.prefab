@@ -57,10 +57,56 @@
         "StartAsleep": false
       },
       {
-        "__type": "FishingRod"
+        "__type": "FishingRod",
+        "BobberPrefab": {
+          "_type": "gameobject",
+          "go": "24f0895c-c2b4-4970-83cc-62260e11c26c"
+        },
+        "RetractDistance": 500,
+        "ThrowForce": 1000
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "Id": "24f0895c-c2b4-4970-83cc-62260e11c26c",
+        "Name": "bobber",
+        "Tags": "bobber",
+        "Networked": true,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "BodyGroups": 18446744073709551615,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/rodbobber/rodbobber.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "SphereCollider",
+            "Center": "0,0,0.5",
+            "IsTrigger": false,
+            "Radius": 1.8000016,
+            "Static": false,
+            "Surface": null
+          },
+          {
+            "__type": "Rigidbody",
+            "AngularDamping": 0,
+            "Gravity": true,
+            "LinearDamping": 0,
+            "Locking": {
+              "Pitch": true,
+              "Yaw": true,
+              "Roll": true
+            },
+            "MassOverride": 1,
+            "RigidbodyFlags": 0,
+            "StartAsleep": false
+          }
+        ]
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,
