@@ -151,8 +151,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -263,8 +263,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -417,7 +417,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.9959365,0,0.09005798",
+          "Rotation": "0,-0.5544515,0,-0.832216",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -789,9 +789,9 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_name": "SendToDialogueStage",
                           "_type": "package.fish.sauna/Sauna.DialogueComponent",
-                          "_isStatic": false
+                          "_isStatic": false,
+                          "_name": "SendToDialogueStage"
                         },
                         "UserData": {
                           "Position": "448,16"
@@ -824,9 +824,7 @@
                       }
                     ]
                   },
-                  "InteractDistance": 125,
-                  "DynamicColor": null,
-                  "Disabled": null
+                  "InteractDistance": 125
                 }
               ]
             },
@@ -855,9 +853,9 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "_name": "SendToDialogueStage",
                           "_type": "package.fish.sauna/Sauna.DialogueComponent",
-                          "_isStatic": false
+                          "_isStatic": false,
+                          "_name": "SendToDialogueStage"
                         },
                         "UserData": {
                           "Position": "384,-16"
@@ -926,15 +924,13 @@
                         "DstName": "_result"
                       }
                     ]
-                  },
-                  "Disabled": null
+                  }
                 },
                 {
                   "Identifier": "fuck",
                   "Keybind": "use2",
                   "Description": "fuck",
                   "InteractDistance": 125,
-                  "DynamicColor": null,
                   "Disabled": {
                     "Version": 5,
                     "UserData": {
@@ -1047,9 +1043,9 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_name": "SendToDialogueStage",
                           "_type": "package.fish.sauna/Sauna.DialogueComponent",
-                          "_isStatic": false
+                          "_isStatic": false,
+                          "_name": "SendToDialogueStage"
                         },
                         "UserData": {
                           "Position": "448,16"
@@ -1082,7 +1078,9 @@
                       }
                     ]
                   },
-                  "InteractDistance": 125
+                  "InteractDistance": 125,
+                  "DynamicColor": null,
+                  "Disabled": null
                 }
               ]
             },
@@ -1111,9 +1109,9 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "_name": "SendToDialogueStage",
                           "_type": "package.fish.sauna/Sauna.DialogueComponent",
-                          "_isStatic": false
+                          "_isStatic": false,
+                          "_name": "SendToDialogueStage"
                         },
                         "UserData": {
                           "Position": "384,-16"
@@ -1182,13 +1180,15 @@
                         "DstName": "_result"
                       }
                     ]
-                  }
+                  },
+                  "Disabled": null
                 },
                 {
                   "Identifier": "fuck",
                   "Keybind": "use2",
                   "Description": "fuck",
                   "InteractDistance": 125,
+                  "DynamicColor": null,
                   "Disabled": {
                     "Version": 5,
                     "UserData": {
@@ -1301,9 +1301,9 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_name": "SendToDialogueStage",
                           "_type": "package.fish.sauna/Sauna.DialogueComponent",
-                          "_isStatic": false
+                          "_isStatic": false,
+                          "_name": "SendToDialogueStage"
                         },
                         "UserData": {
                           "Position": "448,16"
@@ -1336,9 +1336,7 @@
                       }
                     ]
                   },
-                  "InteractDistance": 125,
-                  "DynamicColor": null,
-                  "Disabled": null
+                  "InteractDistance": 125
                 }
               ]
             },
@@ -1367,9 +1365,9 @@
                         "Id": 1,
                         "Type": "call",
                         "Properties": {
-                          "_name": "SendToDialogueStage",
                           "_type": "package.fish.sauna/Sauna.DialogueComponent",
-                          "_isStatic": false
+                          "_isStatic": false,
+                          "_name": "SendToDialogueStage"
                         },
                         "UserData": {
                           "Position": "384,-16"
@@ -1438,15 +1436,13 @@
                         "DstName": "_result"
                       }
                     ]
-                  },
-                  "Disabled": null
+                  }
                 },
                 {
                   "Identifier": "fuck",
                   "Keybind": "use2",
                   "Description": "fuck",
                   "InteractDistance": 125,
-                  "DynamicColor": null,
                   "Disabled": {
                     "Version": 5,
                     "UserData": {
@@ -1762,6 +1758,23 @@
       "Position": "728.8416,-1016.331,27.00001",
       "Enabled": true,
       "__Prefab": "prefabs/objects/car.prefab"
+    },
+    {
+      "Id": "2d275a08-37aa-4f82-8a08-8a44e5c2f953",
+      "Name": "TEST",
+      "Position": "723.7906,-524.1287,137.5402",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "Extents": "0,0,0",
+          "MaxPollingRate": 5,
+          "Offset": "0,0,0",
+          "TagSet": null,
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "LOOOL"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -1787,6 +1800,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-05T05:50:52.3474121\u002B03:00",
+  "LastSaved": "2024-03-05T23:09:19.2726934\u002B01:00",
   "__references": []
 }

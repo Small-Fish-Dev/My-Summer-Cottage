@@ -80,14 +80,7 @@ internal class SignalWidget : ControlWidget
 	{
 		var typeDesc = TypeLibrary.GetType( type );
 
-		var path = typeDesc is { }
-			? GetTypePath( typeDesc )
-			: $"System/{type.Name}";
-
-		return new SignalOption( Menu.GetSplitPath( path ),
-			type,
-			title,
-			typeDesc?.Icon );
+		return new SignalOption( type, title, typeDesc?.Icon );
 	}
 
 	private static string FormatAssemblyName( Assembly asm )
@@ -146,11 +139,24 @@ internal class SignalWidget : ControlWidget
 		return $"{prefix}/{typeDesc.Title}:{icon}@2000";
 	}
 
-	private record SignalOption( Menu.PathElement[] Path, Type Type, string Title, string Icon );
+	private record SignalOption( Type Type, string Title, string Icon );
 
 	void OpenMenu()
 	{
-		var tests = PrefabLibrary.All
+		var test = ResourceLibrary.GetAll<SceneFile>()
+			.SelectMany( x =>
+			{
+				return x.GameObjects.Where( x => x.ContainsKey( "Components" ) )
+				.SelectMany( x =>
+				{
+					var components = x["Components"].AsArray();
+					return components
+						.Where( component => component["__type"].ToString() == "EventAreaTrigger" );
+				} );
+			} )
+			.Select( x => GetSignalOption( TypeLibrary.GetType( x["__type"].ToString() ).TargetType, x["TriggerSignalIdentifier"].ToString() ) );
+
+		var eventDefinitions = PrefabLibrary.All
 			.Select( x => x.Value.Prefab.RootObject )
 			.SelectMany( x =>
 			{
@@ -160,15 +166,28 @@ internal class SignalWidget : ControlWidget
 					.Select( component => GetSignalOption( TypeLibrary.GetType( component["__type"].ToString() ).TargetType, component["EventName"].ToString() ) );
 			} );
 
+		var areaTriggers = PrefabLibrary.All
+			.Select( x => x.Value.Prefab.RootObject )
+			.SelectMany( x =>
+			{
+				var components = x["Components"].AsArray();
+				return components
+					.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
+					.Where( component => component["TriggerSignalIdentifier"].ToString() != String.Empty )
+					.Select( component => GetSignalOption( TypeLibrary.GetType( component["__type"].ToString() ).TargetType, component["TriggerSignalIdentifier"].ToString() ) );
+			} );
+
+		var allItems = eventDefinitions.Concat( areaTriggers );
+
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;
 
 		_menu.AddLineEdit( "Filter",
 			placeholder: "Filter Signalers...",
 			autoFocus: true,
-			onChange: s => PopulateSuffixMenu( _menu, tests, s ) );
+			onChange: s => PopulateSuffixMenu( _menu, test, s ) );
 
-		_menu.AboutToShow += () => PopulateSuffixMenu( _menu, tests );
+		_menu.AboutToShow += () => PopulateSuffixMenu( _menu, test );
 
 		_menu.OpenAtCursor( true );
 		_menu.MinimumWidth = ScreenRect.Width;
@@ -212,7 +231,7 @@ internal class SignalWidget : ControlWidget
 			}
 		}
 
-		menu.AddOptions( items, x => $"Events/{x.Title}", x =>
+		menu.AddOptions( items, x => $"{x.Type}/{x.Title}", x =>
 		{
 			SerializedProperty.SetValue( x.Title );
 			SignalValuesChanged();
