@@ -1,0 +1,29 @@
+Checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px white;
+    bottom: 2px;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s;
+
+    &.interactable {
+        pointer-events: all;
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+
+        &:active {
+            transform: scale(1.1);
+        }
+    }
+
+    .completed {
+        background-color: white;
+        height: 50%;
+        width: 50%;
+    }
+}

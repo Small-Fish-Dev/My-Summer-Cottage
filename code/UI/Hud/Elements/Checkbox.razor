@@ -1,0 +1,21 @@
+@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root onclick=@(() => { if (Interactable) { Enabled = !Enabled; OnChange?.Invoke(Enabled); } }) class="@(Interactable ? "interactable" : "")">
+	<div class="@(Enabled ? "completed" : "")" />
+</root>
+
+@code {
+	public bool Enabled { get; set; } = false;
+	public bool Interactable { get; set; } = true;
+	public Action<bool> OnChange { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(Enabled, Interactable);
+	}
+}

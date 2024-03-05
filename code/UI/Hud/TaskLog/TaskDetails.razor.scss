@@ -55,26 +55,29 @@ TaskDetails {
         flex-shrink: 0;
         align-items: center;
 
-        .requirement-status {
-            width: 20px;
-            height: 20px;
-            border: 2px white;
-            bottom: 2px;
-            justify-content: center;
-            align-items: center;
-            margin-right: 8px;
-            align-self: flex-start;
-            flex-shrink: 0;
-
-            .requirement-completed {
-                background-color: white;
-                height: 50%;
-                width: 50%;
-            }
-        }
-
         .requirement-details {
             font-size: 18px;
+            margin-left: 8px;
+        }
+    }
+
+    .pin-details {
+        position: absolute;
+        right: 0px;
+        bottom: -55px;
+        background-color: $black-bg;
+        height: 40px;
+        padding: 25px 45px;
+        justify-content: center;
+        align-items: center;
+        font-family: HabboExtended;
+        font-size: 20px;
+        gap: 10px;
+
+        img {
+            image-rendering: pixelated;
+            height: 25px;
+            width: 25px;
         }
     }
 }

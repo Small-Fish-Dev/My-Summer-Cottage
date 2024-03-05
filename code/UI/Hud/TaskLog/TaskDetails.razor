@@ -37,17 +37,17 @@
 					@foreach (var subtask in SelectedTask.Subtasks)
 					{
 						<div class="requirement">
-							<div class="requirement-status">
-							@if (subtask.Completed)
-							{
-								<div class="requirement-completed" />
-							}
-							</div>
+							<Checkbox Interactable=@false Enabled=@subtask.Completed />
 							<text class="requirement-details">@subtask.Description</text>
 						</div>
 					}
 				</div>
 			</div>
+		</div>
+		<div class="pin-details">
+			<img src="ui/hud/task_pin.png" />
+			<text>Pin this task to top right corner</text>
+			<Checkbox Enabled=@(SelectedTask == Player.PinnedTask) OnChange=@((bool pinned) => { Player.PinnedTask = pinned ? SelectedTask : null; }) />
 		</div>
 	}
 	else
