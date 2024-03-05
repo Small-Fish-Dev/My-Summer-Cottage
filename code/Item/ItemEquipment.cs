@@ -121,7 +121,7 @@ public class ItemEquipment : ItemComponent
 
 	protected override void OnPreRender()
 	{
-		if ( !Equipped || !UpdatePosition || !GameManager.IsPlaying || GameObject == Scene )
+		if ( !Equipped || !UpdatePosition || !Game.IsPlaying || GameObject == Scene )
 			return;
 
 		var player = GameObject.Parent.Components.Get<Player>( true );
@@ -135,7 +135,7 @@ public class ItemEquipment : ItemComponent
 	private SceneModel _model;
 	private SceneObject GetModel()
 	{
-		var world = GameManager.ActiveScene?.SceneWorld;
+		var world = Game.ActiveScene?.SceneWorld;
 		if ( world == null )
 			return null;
 
@@ -163,7 +163,7 @@ public class ItemEquipment : ItemComponent
 		if ( !UpdatePosition || Attachment == string.Empty )
 			ignore = true;
 
-		if ( ignore || GameObject != GameManager.ActiveScene )
+		if ( ignore || GameObject != Game.ActiveScene )
 			ignore = true;
 
 		if ( ignore || !Gizmo.HasSelected )

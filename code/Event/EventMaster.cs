@@ -236,11 +236,11 @@ public class EventMaster : Component
 	[Broadcast]
 	public static void InteractionInvoked( string interaction, Guid target, Guid player )
 	{
-		var allTriggers = GameManager.ActiveScene.GetAllComponents<EventInteractionTrigger>();
-		var foundTarget = GameManager.ActiveScene.GetAllObjects( true )
+		var allTriggers = Game.ActiveScene.GetAllComponents<EventInteractionTrigger>();
+		var foundTarget = Game.ActiveScene.GetAllObjects( true )
 			.Where( x => x.Id == target )
 			.FirstOrDefault();
-		var foundPlayer = GameManager.ActiveScene.GetAllObjects( true )
+		var foundPlayer = Game.ActiveScene.GetAllObjects( true )
 			.Where( x => x.Id == player )
 			.FirstOrDefault();
 

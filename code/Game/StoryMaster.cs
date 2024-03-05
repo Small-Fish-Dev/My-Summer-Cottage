@@ -1,7 +1,6 @@
 using Editor;
 using Sandbox;
 using Sauna.Event;
-using Sauna.Game;
 using static Sauna.TaskMaster;
 
 namespace Sauna;
@@ -149,7 +148,7 @@ public class StoryMaster : Component
 			if ( scriptedEvent.TriggerOnNewSession )
 				scriptedEvent.TriggerTime = 0f;
 			else
-				scriptedEvent.TriggerTime = Sandbox.Game.Random.Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
+				scriptedEvent.TriggerTime = Game.Random.Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
 		}
 	}
 
@@ -237,7 +236,7 @@ public class StoryMaster : Component
 
 				if ( availableCommonEvents.Any() )
 				{
-					var chosenEvent = Sandbox.Game.Random.FromList( availableCommonEvents );
+					var chosenEvent = Game.Random.FromList( availableCommonEvents );
 					chosenEvent.Enable();
 					eventsPicked++;
 				}
@@ -258,7 +257,7 @@ public class StoryMaster : Component
 
 				if ( availableUncommonEvents.Any() )
 				{
-					var chosenEvent = Sandbox.Game.Random.FromList( availableUncommonEvents );
+					var chosenEvent = Game.Random.FromList( availableUncommonEvents );
 					chosenEvent.Enable();
 					eventsPicked++;
 				}
@@ -279,7 +278,7 @@ public class StoryMaster : Component
 
 				if ( availableRareEvents.Any() )
 				{
-					var chosenEvent = Sandbox.Game.Random.FromList( availableRareEvents );
+					var chosenEvent = Game.Random.FromList( availableRareEvents );
 					chosenEvent.Enable();
 					eventsPicked++;
 				}
@@ -292,7 +291,7 @@ public class StoryMaster : Component
 	[ConCmd]
 	public static void StartSession()
 	{
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().First();
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().First();
 
 		if ( storyMaster == null ) return;
 
@@ -309,7 +308,7 @@ public class StoryMaster : Component
 	[ConCmd]
 	public static void EndSession()
 	{
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().First();
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().First();
 
 		if ( storyMaster == null ) return;
 

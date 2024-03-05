@@ -340,7 +340,7 @@ public class TaskMaster : Component
 			}
 		}
 
-		var storyMaster = GameManager.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
 
 		if ( storyMaster != null )
 		{

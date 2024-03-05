@@ -25,7 +25,7 @@ public class SoundSystem009 : GameObjectSystem
 
 	private void UpdateSounds()
 	{
-		if ( !GameManager.IsPlaying )
+		if ( !Game.IsPlaying )
 			return;
 		
 		var validSounds = Sounds.Where( sound => sound.SoundHandle.IsValid() ).Where( sound => sound.Source != null );
@@ -77,6 +77,6 @@ public class SoundSystem009 : GameObjectSystem
 		if ( soundResource is null )
 			throw new Exception( $"Cannot find a sound with subtitles @ {path}" );
 
-		GameManager.ActiveScene.SoundSystem().Play( soundResource, Player.Local.GameObject );
+		Game.ActiveScene.SoundSystem().Play( soundResource, Player.Local.GameObject );
 	}
 }

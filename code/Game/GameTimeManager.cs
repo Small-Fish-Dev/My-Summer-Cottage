@@ -1,4 +1,4 @@
-namespace Sauna.Game;
+namespace Sauna;
 
 public class GameTimeManager : Component, Component.ExecuteInEditor
 {
@@ -90,7 +90,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Progress of the day in percents [0; 1].
 	/// </summary>
-	public float DayPercent => ((Scene.IsEditor && !GameManager.IsPlaying) ? (InGameTime) : (FrozenTime ?? InGameTime)) / DayLength;
+	public float DayPercent => ((Scene.IsEditor && !Game.IsPlaying) ? (InGameTime) : (FrozenTime ?? InGameTime)) / DayLength;
 
 	public int InGameSeconds => (int)(DayPercent * 24 * 60 * 60);
 
@@ -104,7 +104,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 	protected override void OnAwake()
 	{
-		if ( !GameManager.IsPlaying ) return;
+		if ( !Game.IsPlaying ) return;
 
 		// TODO: Load the current day from the save file
 		// NewDay();
@@ -128,7 +128,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 	protected override void OnUpdate()
 	{
-		if ( Scene.IsEditor && !GameManager.IsPlaying )
+		if ( Scene.IsEditor && !Game.IsPlaying )
 		{
 			SetTimeFromSeconds( StartTime );
 		}
@@ -240,10 +240,10 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Broadcast( NetPermission.HostOnly )]
 	public void EndDay()
 	{
-		if ( Scene.IsEditor && !GameManager.IsPlaying ) return;
+		if ( Scene.IsEditor && !Game.IsPlaying ) return;
 
 		// End of day memory !
-		Player.Local?.CaptureMemory( Sandbox.Game.Random.FromArray( new string[]
+		Player.Local?.CaptureMemory( Game.Random.FromArray( new string[]
 		{
 			"All in all.. It was a great and productive day!",
 			"Great end to a day, just wish I could've spent a bit more time at the cottage.",
@@ -319,7 +319,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Broadcast( NetPermission.HostOnly )]
 	private void NewDay()
 	{
-		if ( Scene.IsEditor && !GameManager.IsPlaying ) return;
+		if ( Scene.IsEditor && !Game.IsPlaying ) return;
 
 		InGameTime = 0;
 

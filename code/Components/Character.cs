@@ -68,7 +68,7 @@ public class Character : Component, Component.ExecuteInEditor
 
 	protected override void DrawGizmos()
 	{
-		if ( !GameManager.IsPlaying )
+		if ( !Game.IsPlaying )
 		{
 			var parent = Components.Get<SkinnedModelRenderer>().SceneModel;
 
@@ -121,7 +121,7 @@ public class Character : Component, Component.ExecuteInEditor
 
 	protected override void OnStart()
 	{
-		if ( GameManager.IsPlaying )
+		if ( Game.IsPlaying )
 		{
 			var model = Components.GetOrCreate<SkinnedModelRenderer>();
 			model.Model = Model.Load( "models/guy/guy.vmdl" );

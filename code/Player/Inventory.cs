@@ -318,14 +318,14 @@ public class Inventory : Component
 	[ConCmd]
 	public static void UnEquip( int index )
 	{
-		var player = GameManager.ActiveScene.GetAllComponents<Player>().FirstOrDefault();
+		var player = Game.ActiveScene.GetAllComponents<Player>().FirstOrDefault();
 		player.Inventory.UnequipItem( player.Inventory.EquippedItems[(int)EquipSlot.Body] );
 	}
 
 	[ConCmd]
 	public static void GiveItem( string name )
 	{
-		var player = GameManager.ActiveScene.GetAllComponents<Player>().FirstOrDefault();
+		var player = Game.ActiveScene.GetAllComponents<Player>().FirstOrDefault();
 		if ( player == null )
 			return;
 

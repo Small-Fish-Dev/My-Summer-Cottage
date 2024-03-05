@@ -86,7 +86,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		// It's done inside of here because this is when we can detect if it's been selected
 		if ( Game.IsEditor )
 		{
-			var shouldShow = GameManager.ActiveScene == GameObject || Gizmo.IsSelected;
+			var shouldShow = Game.ActiveScene == GameObject || Gizmo.IsSelected;
 			// The components inside are enabled if you're inside of the prefab or you have the prefab selected
 
 			if ( _showToggle != shouldShow )
@@ -104,7 +104,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 	protected override void OnStart()
 	{
-		if ( !GameManager.IsPlaying )
+		if ( !Game.IsPlaying )
 		{
 			if ( Game.IsEditor )
 			{
@@ -137,7 +137,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 	protected override void OnFixedUpdate()
 	{
-		if ( !GameManager.IsPlaying ) return;
+		if ( !Game.IsPlaying ) return;
 
 		var nowFinished = Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren )
 			.All( x => x.Finished || (!x.RequiredToFinish && !x.IsPlaying) || !x.Enabled );
@@ -224,12 +224,12 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 	protected override void OnEnabled()
 	{
-		if ( !GameManager.IsPlaying ) return;
+		if ( !Game.IsPlaying ) return;
 	}
 
 	protected override void OnDisabled()
 	{
-		if ( !GameManager.IsPlaying ) return;
+		if ( !Game.IsPlaying ) return;
 
 	}
 

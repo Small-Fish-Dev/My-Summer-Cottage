@@ -86,7 +86,7 @@ public sealed class WeaponComponent : Component
 					// todo @ceitine: post fire sound (i.e. bolt)
 
 					if ( HasRecoil )
-						shooter.ApplyRecoil( new Angles( -1f, Sandbox.Game.Random.Float( -0.3f, 0.3f ), 0 ) * Sandbox.Game.Random.Float( StrengthRange.x, StrengthRange.y ) );
+						shooter.ApplyRecoil( new Angles( -1f, Game.Random.Float( -0.3f, 0.3f ), 0 ) * Game.Random.Float( StrengthRange.x, StrengthRange.y ) );
 				}
 
 				UpdateName();

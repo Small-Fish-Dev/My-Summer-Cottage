@@ -15,7 +15,7 @@ public class FishingCell : Component
 
 	protected override void OnUpdate()
 	{
-		if ( !GameManager.IsPlaying )
+		if ( !Game.IsPlaying )
 			return;
 		
 		using ( Gizmo.Scope() )

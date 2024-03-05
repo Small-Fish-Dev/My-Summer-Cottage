@@ -202,7 +202,7 @@ public class Interactions : Component
 			Gizmo.Draw.Color = Color.White;
 			Gizmo.Draw.Text( $"{interaction.Description}", new Transform( interaction.Position ), "Consolas", 12 );
 
-			if ( !Gizmo.HasSelected || GameObject != GameManager.ActiveScene )
+			if ( !Gizmo.HasSelected || GameObject != Game.ActiveScene )
 				continue;
 
 			using ( Gizmo.Scope( $"{interaction.Description}", new Transform( interaction.Position ) ) )

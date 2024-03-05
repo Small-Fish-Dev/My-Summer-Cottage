@@ -145,7 +145,7 @@ public sealed class BeerCrate : Component
 				var row = (int)MathF.Floor( i / Columns ) + 1;
 				var column = i % Columns;
 
-				var rot = Rotation.FromYaw( Sandbox.Game.Random.Int( 0, 360 ) );
+				var rot = Rotation.FromYaw( Game.Random.Int( 0, 360 ) );
 				var pos = (row - Rows / 2f - 0.5f) * Offset.Vertical
 					+ (column - Columns / 2f + 0.5f) * Offset.Horizontal
 					+ sceneObject.Position

@@ -122,16 +122,16 @@ public partial class SlotMachine : Component
 
 		RollResult = new Result
 		{
-			a = Sandbox.Game.Random.Int( 0, 7 ),
-			b = Sandbox.Game.Random.Int( 0, 7 ),
-			c = Sandbox.Game.Random.Int( 0, 7 )
+			a = Game.Random.Int( 0, 7 ),
+			b = Game.Random.Int( 0, 7 ),
+			c = Game.Random.Int( 0, 7 )
 		};
 
 		Wheels = new WheelMode
 		{
-			a = Sandbox.Game.Random.Int( 1, 3 ),
-			b = Sandbox.Game.Random.Int( 1, 3 ),
-			c = Sandbox.Game.Random.Int( 1, 3 ),
+			a = Game.Random.Int( 1, 3 ),
+			b = Game.Random.Int( 1, 3 ),
+			c = Game.Random.Int( 1, 3 ),
 		};
 
 		SinceResult = 0;
@@ -227,7 +227,7 @@ public partial class SlotMachine : Component
 
 	protected override void OnPreRender()
 	{
-		if ( !GameManager.IsPlaying )
+		if ( !Game.IsPlaying )
 			return;
 
 		// Which slot results can we show already?

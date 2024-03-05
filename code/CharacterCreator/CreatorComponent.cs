@@ -11,7 +11,7 @@ public enum CreatorStage : byte
 public class CreatorComponent : Component
 {
 	public static Dictionary<CreatorStage, CreatorComponent> All 
-		=> GameManager.ActiveScene?.GetAllObjects( false )
+		=> Game.ActiveScene?.GetAllObjects( false )
 			.Select( x => x?.Components.Get<CreatorComponent>( FindMode.InSelf ) )
 			.Where( x => x != null )
 			.OrderBy( stage => (int)stage.Stage )

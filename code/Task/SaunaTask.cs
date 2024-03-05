@@ -292,7 +292,7 @@ public partial class SaunaTask : GameResource
 
 		if ( allTasks.Any() )
 		{
-			var rnd = Sandbox.Game.Random;
+			var rnd = Game.Random;
 
 			return rnd.FromList( allTasks.ToList() );
 		}

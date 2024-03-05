@@ -141,7 +141,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	protected override void OnStart()
 	{
-		if ( !GameManager.IsPlaying )
+		if ( !Game.IsPlaying )
 			return;
 
 		Network.SetOrphanedMode( NetworkOrphaned.Destroy );
@@ -171,7 +171,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	protected override void OnUpdate()
 	{
-		if ( !GameManager.IsPlaying )
+		if ( !Game.IsPlaying )
 			return;
 
 		if ( !IsProxy )
@@ -190,7 +190,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	protected override void OnFixedUpdate()
 	{
-		if ( !GameManager.IsPlaying )
+		if ( !Game.IsPlaying )
 			return;
 
 		if ( PissEmitter != null )
@@ -237,7 +237,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	{
 		var center = Bounds.Center + Transform.Position + Vector3.Up * 10f;
 		var position = center + Transform.Rotation.Backward * distance; // Default
-		var rotation = Rotation.FromRoll( Sandbox.Game.Random.Int( -15, 15 ) );
+		var rotation = Rotation.FromRoll( Game.Random.Int( -15, 15 ) );
 
 		for ( int i = 0; i < maxTries; i++ )
 		{
@@ -263,7 +263,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	protected override void OnPreRender()
 	{
-		if ( !GameManager.IsPlaying )
+		if ( !Game.IsPlaying )
 			return;
 
 		if ( IsProxy )

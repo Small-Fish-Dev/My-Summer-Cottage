@@ -19,7 +19,7 @@ public class EyeProtector : Component, Component.ExecuteInEditor
 			Censor( specific );
 		else
 		{
-			var targets = GameManager.ActiveScene?.GetAllComponents<CensorComponent>();
+			var targets = Game.ActiveScene?.GetAllComponents<CensorComponent>();
 			if ( targets != null )
 				foreach ( var target in targets )
 				{

@@ -2,7 +2,6 @@
 using Sandbox.Utility;
 using Sauna;
 using Sauna.Event;
-using Sauna.Game;
 
 public static partial class GlobalNodes
 {
@@ -25,7 +24,7 @@ public static partial class GlobalNodes
 	[Title( "Get Every {T} Component" ), Group( "Events" ), Icon( "groups" )]
 	public static IEnumerable<T> GetEveryComponent<T>()
 	{
-		return GameManager.ActiveScene.GetAllComponents<T>();
+		return Game.ActiveScene.GetAllComponents<T>();
 	}
 
 	/// <summary>
@@ -55,7 +54,7 @@ public static partial class GlobalNodes
 	[Title( "Skip Time" ), Group( "Events" ), Icon( "update" )]
 	public static void SkipTime( int inGameSeconds )
 	{
-		var timeManager = GameManager.ActiveScene.GetAllComponents<GameTimeManager>()?.First() ?? null;
+		var timeManager = Game.ActiveScene.GetAllComponents<GameTimeManager>()?.First() ?? null;
 
 		if ( timeManager != null )
 			timeManager.SkipTimeFromSeconds( inGameSeconds );
