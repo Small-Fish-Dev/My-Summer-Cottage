@@ -16,7 +16,7 @@ public enum InteractAnimations
 {
 	None,
 	Interact,
-	Eat,
+	Action,
 }
 
 [Flags]
