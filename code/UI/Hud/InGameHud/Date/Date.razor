@@ -30,6 +30,9 @@
 
 	public override void Tick()
 	{
+		if (Player.Local is null)
+			return;
+
 		if (_lastBalance != Player.Local.Money)
 		{
 			_delta = Player.Local.Money < _lastBalance ? -1 : 1;
