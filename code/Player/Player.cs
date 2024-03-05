@@ -10,15 +10,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Sync] public string Lastname { get; set; }
 	[Sync] public bool HidePenoid { get; set; }
 
-
 	[Property, Sync, Category( "Parameters" )]
 	public int Money { get; set; }
-
-	[Property, Sync, Category( "Parameters" )]
-	public int Experience { get; set; }
-
-	[Property, Sync, Category( "Parameters" )]
-	public int Level { get; set; }
 
 	[Property, Sync, Category( "Appearance" )]
 	[Range( 0f, 1f, 0.05f )]
