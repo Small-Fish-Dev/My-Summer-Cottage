@@ -2,7 +2,7 @@
 
 public class FishingCell : Component
 {
-	[Property] public List<FishResource> AvailableFish;
+	[Property] public List<PrefabFile> AvailableFish { get; set; }
 
 	private BoxCollider _collider;
 
@@ -15,10 +15,13 @@ public class FishingCell : Component
 
 	protected override void OnUpdate()
 	{
-		// using ( Gizmo.Scope() )
-		// {
-		// 	Gizmo.Draw.Color = Color.Green;
-		// 	Gizmo.Draw.LineBBox( BBox.FromPositionAndSize( _collider.Center + Transform.Position, _collider.Scale ) );
-		// }
+		if ( !GameManager.IsPlaying )
+			return;
+		
+		using ( Gizmo.Scope() )
+		{
+			Gizmo.Draw.Color = Color.Green;
+			Gizmo.Draw.LineBBox( BBox.FromPositionAndSize( _collider.Center + Transform.Position, _collider.Scale ) );
+		}
 	}
 }

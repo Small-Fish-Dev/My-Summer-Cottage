@@ -1,4 +1,5 @@
 using Sandbox.Citizen;
+using Sauna.Fishing;
 using Sauna.UI;
 
 namespace Sauna;
@@ -123,6 +124,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		_ => "None"
 	};
 
+	public Dictionary<string, PlayerSave.FishRecord> FishesCaught;
 	public Inventory Inventory { get; private set; }
 	protected CameraComponent Camera;
 	protected SkinnedModelRenderer Renderer;

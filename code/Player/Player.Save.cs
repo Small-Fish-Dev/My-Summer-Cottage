@@ -1,4 +1,6 @@
-﻿namespace Sauna;
+﻿using Sauna.Fishing;
+
+namespace Sauna;
 
 public struct ItemSave
 {
@@ -9,6 +11,13 @@ public struct ItemSave
 
 public struct PlayerSave
 {
+	public struct FishRecord
+	{
+		[JsonInclude] public int Count;
+		[JsonInclude] public float MaxWeight;
+		[JsonInclude] public DateTime MaxWhen;
+	}
+
 	public const string FILE_PATH = "saunasona.json";
 
 	[JsonInclude] public string Firstname;
@@ -25,10 +34,14 @@ public struct PlayerSave
 
 	[JsonInclude] public ItemSave[] Clothes;
 	[JsonInclude] public ItemSave[] Inventory;
+
+	[JsonInclude] public Dictionary<string, FishRecord> FishesCaught;
 }
 
 [AttributeUsage( AttributeTargets.Property )]
-public class TargetSaveAttribute : Attribute { }
+public class TargetSaveAttribute : Attribute
+{
+}
 
 partial class Player
 {
@@ -105,16 +118,15 @@ partial class Player
 
 				foreach ( var property in properties )
 				{
-					var serialized = JsonSerializer.Serialize( property.GetValue( component ), property.PropertyType, options );
+					var serialized = JsonSerializer.Serialize( property.GetValue( component ), property.PropertyType,
+						options );
 					data.Add( property.Name, serialized );
 				}
 			}
 
 			return new ItemSave
 			{
-				Path = item.Prefab,
-				Data = data.Count > 0 ? data : null,
-				Index = player.Inventory.IndexOf( item )
+				Path = item.Prefab, Data = data.Count > 0 ? data : null, Index = player.Inventory.IndexOf( item )
 			};
 		}
 
@@ -123,16 +135,15 @@ partial class Player
 			Money = player.Money,
 			Experience = player.Experience,
 			Level = player.Level,
-
 			Clothes = player.Inventory.EquippedItems
 				.Where( x => x != null )
 				.Select( Serialize )
 				.ToArray(),
-
 			Inventory = player.Inventory.BackpackItems
 				.Where( x => x != null )
 				.Select( Serialize )
-				.ToArray()
+				.ToArray(),
+			FishesCaught = player.FishesCaught
 		};
 
 		// Write save.
@@ -223,6 +234,11 @@ partial class Player
 					}
 				}
 			}
+
+		if ( save.FishesCaught != null )
+			player.FishesCaught = save.FishesCaught.Where( kv => PrefabLibrary
+					.TryGetByPath( kv.Key, out _ ) )
+				.ToDictionary( kv => kv.Key, kv => kv.Value );
 
 		return true;
 	}
