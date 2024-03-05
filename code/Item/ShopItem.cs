@@ -28,8 +28,9 @@ public class ShopItem : Component
 			Identifier = "item.purchase",
 			Action = PurchaseItem,
 			Keybind = "use",
-			Description = $"{Price}mk",
-			Disabled = () => Player.Local.Money < Price,
+			Disabled = () => Player.Local.Money < Price || !Player.Local.Inventory.HasSpaceInBackpack(),
+			DynamicText = () => Player.Local.Inventory.HasSpaceInBackpack() ? $"{Price}mk" : $"{Price}mk (Inventory full)",
+			DynamicColor = () => Color.FromBytes( 116, 254, 64 ),
 			ShowWhenDisabled = () => true,
 		} );
 	}
