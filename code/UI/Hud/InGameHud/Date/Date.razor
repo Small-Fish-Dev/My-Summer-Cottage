@@ -25,8 +25,9 @@
 @code {
 	public GameTimeManager GameTimeManager { get; set; }
 
-	private int _lastBalance;
-	private int _delta;
+	private int _lastBalance = Player.Local.Money;
+	private int _delta = 0;
+	private TimeUntil _timeUntilRevert = 0f;
 
 	public override void Tick()
 	{
@@ -34,18 +35,19 @@
 		{
 			_delta = Player.Local.Money < _lastBalance ? -1 : 1;
             _lastBalance = _lastBalance + _delta;
+			_timeUntilRevert = 0.5f;
 		}
 	}
 
 	private string GetBalanceClass()
 	{
-		if (_lastBalance != Player.Local.Money)
+		if (_lastBalance != Player.Local.Money || !_timeUntilRevert)
 			return _delta > 0 ? "increment" : "decrement";
 		return string.Empty;
 	}
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( GameTimeManager.Day, Player.Local.Money, _lastBalance );
+		return HashCode.Combine( GameTimeManager.Day, Player.Local.Money, _lastBalance, (bool)_timeUntilRevert );
 	}
 }
