@@ -888,80 +888,6 @@
 						reverse = false
 					},
 					{
-						_class = "AnimFile"
-						name = "hold_pose"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/hold_pose.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "hold_consume"
-						children = 
-						[
-							{
-								_class = "AnimSubtract"
-								anim_name = "hold_consume"
-								frame = 0
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/hold_consume.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "hold_flashlight"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/hold_flashlight.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
 						_class = "Folder"
 						name = "movement"
 						children = 
@@ -2082,6 +2008,153 @@
 							},
 						]
 					},
+					{
+						_class = "Folder"
+						name = "items"
+						children = 
+						[
+							{
+								_class = "AnimFile"
+								name = "hold_pose"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/hold_pose.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "hold_consume"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "hold_consume"
+										frame = 0
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/hold_consume.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "hold_flashlight"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/hold_flashlight.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "melee_pose"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/melee_pose.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "melee_attack"
+								children = 
+								[
+									{
+										_class = "AnimEvent"
+										name = "hit"
+										event_class = "AE_GENERIC_EVENT"
+										event_frame = 8
+										event_keys = 
+										{
+											TypeName = "hit"
+											Int = 0
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
+									},
+									{
+										_class = "AnimSubtract"
+										anim_name = "melee_attack"
+										frame = 0
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/melee_attack.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = 28.0
+								take = 0
+								reverse = false
+							},
+						]
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -2829,6 +2902,108 @@
 							{
 								bone = "hand_R"
 								weight = 1.0
+							},
+							{
+								bone = "head"
+								weight = 1.0
+							},
+							{
+								bone = "neck"
+								weight = 1.0
+							},
+							{
+								bone = "spine0"
+								weight = 0.180995
+							},
+							{
+								bone = "spine1"
+								weight = 0.520362
+							},
+							{
+								bone = "spine2"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "right_arm_torso_50_left"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "Hand_IK_L"
+								weight = 0.0
+							},
+							{
+								bone = "Hand_IK_R"
+								weight = 0.0
+							},
+							{
+								bone = "IK_L"
+								weight = 0.0
+							},
+							{
+								bone = "IK_R"
+								weight = 0.0
+							},
+							{
+								bone = "aim"
+								weight = 0.0
+							},
+							{
+								bone = "arm_lower_L"
+								weight = 0.792982
+							},
+							{
+								bone = "arm_lower_R"
+								weight = 0.919298
+							},
+							{
+								bone = "arm_upper_L"
+								weight = 0.8
+							},
+							{
+								bone = "arm_upper_R"
+								weight = 0.919298
+							},
+							{
+								bone = "clavicle_L"
+								weight = 0.792982
+							},
+							{
+								bone = "clavicle_R"
+								weight = 0.915789
+							},
+							{
+								bone = "fingers_L"
+								weight = 0.792982
+							},
+							{
+								bone = "fingers_R"
+								weight = 0.926316
+							},
+							{
+								bone = "hand_IK_L"
+								weight = 0.519298
+							},
+							{
+								bone = "hand_IK_R"
+								weight = 1.0
+							},
+							{
+								bone = "hand_L"
+								weight = 0.792982
+							},
+							{
+								bone = "hand_R"
+								weight = 0.919298
+							},
+							{
+								bone = "hand_R_to_L"
+								weight = 0.0
 							},
 							{
 								bone = "head"
