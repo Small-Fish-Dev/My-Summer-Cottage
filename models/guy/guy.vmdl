@@ -326,6 +326,25 @@
 							]
 						}
 					},
+					{
+						_class = "LookAtChain"
+						name = "lookat_weak"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "head"
+									weight = 0.8
+								},
+								{
+									name = "neck"
+									weight = 0.4
+								},
+							]
+						}
+					},
 				]
 			},
 			{
@@ -2147,6 +2166,94 @@
 								disable_compression = false
 								enable_scale = false
 								source_filename = "models/guy/animations/melee_attack.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = 28.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "melee_attack2"
+								children = 
+								[
+									{
+										_class = "AnimEvent"
+										name = "hit1"
+										event_class = "AE_GENERIC_EVENT"
+										event_frame = 8
+										event_keys = 
+										{
+											TypeName = "hit"
+											Int = 0
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
+									},
+									{
+										_class = "AnimSubtract"
+										anim_name = "melee_attack2"
+										frame = 0
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/melee_attack2.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = 28.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "melee_attack3"
+								children = 
+								[
+									{
+										_class = "AnimEvent"
+										name = "hit2"
+										event_class = "AE_GENERIC_EVENT"
+										event_frame = 8
+										event_keys = 
+										{
+											TypeName = "hit"
+											Int = 0
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
+									},
+									{
+										_class = "AnimSubtract"
+										anim_name = "melee_attack3"
+										frame = 0
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/melee_attack3.fbx"
 								start_frame = -1
 								end_frame = -1
 								framerate = 28.0
