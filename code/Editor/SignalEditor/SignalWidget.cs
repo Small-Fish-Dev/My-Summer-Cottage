@@ -109,9 +109,10 @@ internal class SignalWidget : ControlWidget
 		var allEvents = PrefabLibrary.All
 			.SelectMany( prefab =>
 			{
+				var allSignals = new List<SignalOption>();
 				var components = prefab.Value.GetComponents<EventDefinition>();
 
-				return components
+				allSignals.AddRange( components
 				.SelectMany( component =>
 				{
 					var finalSignals = new List<Signal>();
@@ -120,9 +121,41 @@ internal class SignalWidget : ControlWidget
 					if ( signals != null )
 						finalSignals.AddRange( signals );
 
+					var triggers = prefab.Value.GetComponents<EventTrigger>();
+
+					allSignals.AddRange( triggers
+					.Select( trigger => GetSignalOption( trigger.Get<string>( "TriggerSignalIdentifier" ), trigger.Type.ToString(), component.Get<string>( "EventName" ), "Events" ) ) );
+
+					var children = prefab.Value.Prefab.RootObject["Children"]?.AsArray() ?? null;
+
+					if ( children != null )
+					{
+						foreach ( var child in children )
+						{
+							var components = child["Components"]?.AsArray() ?? null;
+
+							if ( components != null )
+							{
+								allSignals.AddRange( components
+									.Where( component =>
+									{
+										var type = component["__type"].ToString(); // Don't bother me about this!!
+
+										return (type == "EventAreaTrigger" || type == "EventInteractionTrigger" || type == "EventPissTrigger" || type == "EventSellAreaTrigger");
+									} )
+									.Where( x => x["TriggerSignalIdentifier"] != null && x["TriggerSignalIdentifier"].ToString() != "" )
+									.Select( y => GetSignalOption( y["TriggerSignalIdentifier"].ToString(), y["__type"].ToString(), component.Get<string>( "EventName" ), "Events" ) ) );
+							}
+						}
+					}
+
 					return finalSignals
 					.Select( signal => GetSignalOption( $"{signal.Identifier}", component.Type.ToString(), component.Get<string>( "EventName" ), "Events" ) );
-				} );
+
+				} ) );
+
+
+				return allSignals;
 			} );
 
 		var allItems = PrefabLibrary.All

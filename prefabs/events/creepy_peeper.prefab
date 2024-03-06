@@ -20,6 +20,13 @@
         "ReinstantiateOnRestart": true,
         "Stackable": true,
         "Type": "Zone"
+      },
+      {
+        "__type": "EventPissTrigger",
+        "Extents": "0,0,0",
+        "MaxPollingRate": 5,
+        "Offset": "0,0,0",
+        "TriggerSignalIdentifier": "hello piss"
       }
     ],
     "Children": [
@@ -52,7 +59,7 @@
             "Offset": "0,0,50",
             "TagSet": "player",
             "TriggerPrefab": [],
-            "TriggerSignalIdentifier": null
+            "TriggerSignalIdentifier": "creepy.peeper.scared.area"
           }
         ]
       },
@@ -69,7 +76,7 @@
             "Offset": "0,0,50",
             "TagSet": "player",
             "TriggerPrefab": [],
-            "TriggerSignalIdentifier": null
+            "TriggerSignalIdentifier": "creepy.peeper.attack.area"
           }
         ]
       },
@@ -118,10 +125,10 @@
                   "Id": 1,
                   "Type": "call",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                    "_isStatic": false,
                     "_name": "Get",
-                    "T": "package.fish.sauna/Sauna.Player"
+                    "T": "package.fish.sauna/Sauna.Player",
+                    "_isStatic": false,
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
                   },
                   "UserData": {
                     "Position": "496,-240",
@@ -134,8 +141,8 @@
                   "Id": 2,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameObject",
-                    "_name": "Transform"
+                    "_name": "Transform",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
                   },
                   "UserData": {
                     "Position": "496,-112"
@@ -145,8 +152,8 @@
                   "Id": 3,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameTransform",
-                    "_name": "World"
+                    "_name": "World",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
                   },
                   "UserData": {
                     "Position": "704,-112"
@@ -156,8 +163,8 @@
                   "Id": 4,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.System/Transform",
-                    "_name": "Position"
+                    "_name": "Position",
+                    "_type": "Sandbox.System/Transform"
                   },
                   "UserData": {
                     "Position": "896,-112",
@@ -177,8 +184,8 @@
                   "Id": 6,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameObject",
-                    "_name": "Transform"
+                    "_name": "Transform",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
                   },
                   "UserData": {
                     "Position": "496,80"
@@ -188,8 +195,8 @@
                   "Id": 7,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameTransform",
-                    "_name": "World"
+                    "_name": "World",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
                   },
                   "UserData": {
                     "Position": "704,80"
@@ -199,8 +206,8 @@
                   "Id": 8,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.System/Transform",
-                    "_name": "Position"
+                    "_name": "Position",
+                    "_type": "Sandbox.System/Transform"
                   },
                   "UserData": {
                     "Position": "896,80",
@@ -227,8 +234,8 @@
                   "Id": 11,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.System/Vector3",
-                    "_name": "Normal"
+                    "_name": "Normal",
+                    "_type": "Sandbox.System/Vector3"
                   },
                   "UserData": {
                     "Position": "336,320"
@@ -238,8 +245,8 @@
                   "Id": 12,
                   "Type": "property.set",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameTransform",
-                    "_name": "Rotation"
+                    "_name": "Rotation",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
                   },
                   "UserData": {
                     "Position": "736,208"
@@ -256,8 +263,8 @@
                   "Id": 14,
                   "Type": "property.set",
                   "Properties": {
-                    "_type": "Sandbox.Engine/Sandbox.SoundHandle",
-                    "_name": "Volume"
+                    "_name": "Volume",
+                    "_type": "Sandbox.Engine/Sandbox.SoundHandle"
                   },
                   "UserData": {
                     "Position": "1520,272"
@@ -769,8 +776,8 @@
                   "Id": 4,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameObject",
-                    "_name": "Transform"
+                    "_name": "Transform",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
                   },
                   "UserData": {
                     "Position": "-528,336"
@@ -780,8 +787,8 @@
                   "Id": 5,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameTransform",
-                    "_name": "World"
+                    "_name": "World",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
                   },
                   "UserData": {
                     "Position": "-256,384"
@@ -791,8 +798,8 @@
                   "Id": 6,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.System/Transform",
-                    "_name": "Position"
+                    "_name": "Position",
+                    "_type": "Sandbox.System/Transform"
                   },
                   "UserData": {
                     "Position": "-48,416"
@@ -802,8 +809,8 @@
                   "Id": 7,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameObject",
-                    "_name": "Transform"
+                    "_name": "Transform",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
                   },
                   "UserData": {
                     "Position": "-352,208"
@@ -813,8 +820,8 @@
                   "Id": 8,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameTransform",
-                    "_name": "World"
+                    "_name": "World",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
                   },
                   "UserData": {
                     "Position": "-160,208"
@@ -824,8 +831,8 @@
                   "Id": 9,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.System/Transform",
-                    "_name": "Position"
+                    "_name": "Position",
+                    "_type": "Sandbox.System/Transform"
                   },
                   "UserData": {
                     "Position": "16,192"
@@ -835,8 +842,8 @@
                   "Id": 10,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.System/Transform",
-                    "_name": "Rotation"
+                    "_name": "Rotation",
+                    "_type": "Sandbox.System/Transform"
                   },
                   "UserData": {
                     "Position": "16,288"
@@ -853,9 +860,9 @@
                   "Id": 12,
                   "Type": "call",
                   "Properties": {
-                    "_type": "Sandbox.System/Rotation",
+                    "_name": "RotateAroundAxis",
                     "_isStatic": false,
-                    "_name": "RotateAroundAxis"
+                    "_type": "Sandbox.System/Rotation"
                   },
                   "UserData": {
                     "Position": "288,352"
@@ -886,8 +893,8 @@
                   "Id": 16,
                   "Type": "property.set",
                   "Properties": {
-                    "_type": "Sandbox.Engine/Sandbox.SoundHandle",
-                    "_name": "Volume"
+                    "_name": "Volume",
+                    "_type": "Sandbox.Engine/Sandbox.SoundHandle"
                   },
                   "UserData": {
                     "Position": "1008,400"
@@ -926,10 +933,10 @@
                   "Id": 20,
                   "Type": "call",
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                    "_isStatic": false,
                     "_name": "Get",
-                    "T": "package.fish.sauna/Sauna.Player"
+                    "T": "package.fish.sauna/Sauna.Player",
+                    "_isStatic": false,
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
                   },
                   "UserData": {
                     "Position": "-128,-320"
