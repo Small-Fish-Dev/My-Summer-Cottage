@@ -5,6 +5,7 @@ namespace Sauna;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -129,6 +130,40 @@ internal class SignalWidget : ControlWidget
 					.Select( component => GetSignalOption( component["__type"].ToString(), "hello" ) );
 			} );
 
+		var allItems = PrefabLibrary.All
+			.SelectMany( prefab =>
+			{
+				var components = prefab.Value.GetComponents<ItemComponent>();
+
+				return components
+					.SelectMany( component =>
+					{
+						List<SignalOption> options = new();
+
+						options.Add( GetSignalOption( $"item.picked.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+						options.Add( GetSignalOption( $"item.received.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+						options.Add( GetSignalOption( $"item.dropped.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+						options.Add( GetSignalOption( $"item.removed.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+
+						if ( component.Type.TargetType == typeof( ItemEquipment ) )
+						{
+							options.Add( GetSignalOption( $"item.equipped.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+							options.Add( GetSignalOption( $"item.unequipped.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+							options.Add( GetSignalOption( $"item.used_1.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+							options.Add( GetSignalOption( $"item.used_2.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+						}
+
+						return options;
+					} );
+			} );
+
+		foreach ( var prefab in PrefabLibrary.All )
+		{
+			foreach ( var component in prefab.Value.GetComponents<ItemComponent>() )
+			{
+				Log.Info( prefab.Value.Name );
+			}
+		}
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>()
 			.SelectMany( x =>
 			{
@@ -143,12 +178,13 @@ internal class SignalWidget : ControlWidget
 
 		test = test.Concat( allTasks );
 		test = test.Concat( allTriggers );
+		test = test.Concat( allItems );
 
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;
 
 		_menu.AddLineEdit( "Filter",
-			placeholder: "Filter Signalers...",
+			placeholder: "Add or Filter Signals...",
 			autoFocus: true,
 			onChange: s => PopulateMenu( _menu, test, s ) );
 
