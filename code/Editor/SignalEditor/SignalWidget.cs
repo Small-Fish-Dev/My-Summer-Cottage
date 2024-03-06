@@ -200,9 +200,35 @@ internal class SignalWidget : ControlWidget
 			} );
 
 
+		var allInteractions = PrefabLibrary.All
+			.SelectMany( prefab =>
+			{
+				var components = prefab.Value.GetComponents<Interactions>();
+
+				return components
+					.SelectMany( component =>
+					{
+						List<SignalOption> options = new();
+
+						var interactions = component.Get<List<Interaction>>( "ObjectInteractions" );
+
+						if ( interactions != null )
+						{
+							foreach ( var interaction in interactions )
+							{
+								options.Add( GetSignalOption( $"{interaction.Identifier}", component.Type.ToString(), prefab.Value.Name, "Interactions" ) );
+							}
+						}
+
+						return options;
+					} );
+			} );
+
+
 		sceneTriggers = sceneTriggers.Concat( allTasks );
 		sceneTriggers = sceneTriggers.Concat( allItems );
 		sceneTriggers = sceneTriggers.Concat( allEvents );
+		sceneTriggers = sceneTriggers.Concat( allInteractions );
 
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;

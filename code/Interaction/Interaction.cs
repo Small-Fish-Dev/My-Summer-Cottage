@@ -35,7 +35,7 @@ public class Interaction
 	/// Unique identifier for this interaction
 	/// </summary>
 	[Property, Category( "Required" )]
-	public string Identifier { get; set; }
+	public Signal Identifier { get; set; }
 
 	/// <summary>
 	/// The keybind used to trigger this interaction

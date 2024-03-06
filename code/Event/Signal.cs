@@ -1,5 +1,25 @@
 namespace Sauna;
 
+public class SignalConverter : JsonConverter<Signal>
+{
+	public override Signal Read( ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options )
+	{
+		if ( reader.TokenType == JsonTokenType.String )
+		{
+			string signalString = reader.GetString();
+			return new Signal( signalString );
+		}
+
+		throw new JsonException( "Expected string value." );
+	}
+
+	public override void Write( Utf8JsonWriter writer, Signal value, JsonSerializerOptions options )
+	{
+		writer.WriteStringValue( value.Identifier );
+	}
+}
+
+[JsonConverter( typeof( SignalConverter ) )]
 public struct Signal : IEquatable<Signal>
 {
 	public string Identifier { get; set; } = "";
