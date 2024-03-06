@@ -152,7 +152,7 @@ public class Inventory : Component
 			item.GameObject.Enabled = false;
 			item.GameObject.Transform.Position = trace.EndPosition;
 			item.GameObject.Enabled = true;
-			modelPhysics.PhysicsGroup?.ApplyImpulse( velocity ); // todo: LOL WHY??
+			modelPhysics.PhysicsGroup?.AddVelocity( velocity ); // todo: LOL WHY??
 		}
 
 		item.Network.DropOwnership();
