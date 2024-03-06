@@ -44,7 +44,9 @@ public sealed class WeaponComponent : Component
 			Keybind = "mouse1",
 			Action = Attack,
 			ShowWhenDisabled = () => true,
-			Disabled = () => Capacity > 0 && Ammo == 0
+			Disabled = () => Capacity > 0 && Ammo == 0,
+			InputMode = Mode,
+			Animation = InteractAnimations.Action
 		} );
 
 		interactions.AddInteraction( new Interaction()
@@ -54,13 +56,13 @@ public sealed class WeaponComponent : Component
 			Keybind = "next",
 			Action = Reload,
 			Disabled = Disabled,
-			ShowWhenDisabled = () => true
+			ShowWhenDisabled = () => Type == WeaponType.Ranged
 		} );
 	}
 
 	private bool Disabled()
 	{
-		if ( Capacity != 0 && Ammo > 0 )
+		if ( Capacity == 0 || Ammo > 0 )
 			return true;
 
 		var ammunition = Player.Local?.Inventory?.BackpackItems?.FirstOrDefault( x => x?.Prefab == Ammunition?.ResourcePath );
@@ -70,12 +72,12 @@ public sealed class WeaponComponent : Component
 		return false;
 	}
 
-	public void Attack( Player shooter, GameObject obj )
+	public void Attack( Player attacker, GameObject obj )
 	{
 		switch ( Type )
 		{
 			case WeaponType.Ranged:
-				var shot = Fire( shooter );
+				var shot = Fire( attacker );
 				if ( shot )
 				{
 					TryPlaySound( FireSound );
@@ -86,14 +88,15 @@ public sealed class WeaponComponent : Component
 					// todo @ceitine: post fire sound (i.e. bolt)
 
 					if ( HasRecoil )
-						shooter.ApplyRecoil( new Angles( -1f, Game.Random.Float( -0.3f, 0.3f ), 0 ) * Game.Random.Float( StrengthRange.x, StrengthRange.y ) );
+						attacker.ApplyRecoil( new Angles( -1f, Game.Random.Float( -0.3f, 0.3f ), 0 ) * Game.Random.Float( StrengthRange.x, StrengthRange.y ) );
 				}
 
 				UpdateName();
 				break;
 
 			default:
-				throw new NotImplementedException();
+				var swing = Swing( attacker );
+				// todo @ceitine: add swing sound
 				break;
 		}
 	}
@@ -128,6 +131,19 @@ public sealed class WeaponComponent : Component
 
 		var tr = Scene.Trace.Ray( shooter.ViewRay, 5000f )
 			.IgnoreGameObjectHierarchy( shooter.GameObject )
+			.Run();
+
+		var target = tr.GameObject?.Components.Get<Player>( FindMode.EverythingInSelfAndAncestors );
+		if ( target != null )
+			target.SetRagdoll( true, duration: 2.5f, spin: 30 );
+
+		return true;
+	}
+
+	private bool Swing( Player attacker )
+	{
+		var tr = Scene.Trace.Ray( attacker.ViewRay, 5000f )
+			.IgnoreGameObjectHierarchy( attacker.GameObject )
 			.Run();
 
 		var target = tr.GameObject?.Components.Get<Player>( FindMode.EverythingInSelfAndAncestors );
