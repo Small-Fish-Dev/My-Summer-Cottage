@@ -17,7 +17,8 @@ public enum InteractAnimations
 	None,
 	Interact,
 	Action,
-	Shoot
+	Shoot,
+	Reload
 }
 
 [Flags]

@@ -70,7 +70,7 @@ public sealed class WeaponComponent : Component
 			Action = Reload,
 			Disabled = Disabled,
 			ShowWhenDisabled = () => Type == WeaponType.Ranged,
-			Animation = InteractAnimations.None
+			Animation = InteractAnimations.Reload
 		} );
 	}
 

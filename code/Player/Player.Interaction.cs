@@ -62,5 +62,9 @@ public partial class Player
 		{
 			Renderer.Set( "shoot", true );
 		}
+		else if ( animation == InteractAnimations.Reload )
+		{
+			Renderer.Set( "reload", true );
+		}
 	}
 }
