@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "f7a67554-328b-4cf3-bca2-9918a731930e",
+    "Id": "41e00f3c-1123-4f06-a50d-30cf1c6410a7",
     "Name": "fishing_rod",
     "Enabled": true,
     "Components": [
@@ -8,10 +8,15 @@
         "__type": "FishingRod",
         "BobberPrefab": {
           "_type": "gameobject",
-          "go": "24f0895c-c2b4-4970-83cc-62260e11c26c"
+          "go": "56eaa0d7-71e6-426c-8117-58a1ec536e14"
         },
         "RetractDistance": 750,
-        "ThrowForce": 1000
+        "ThrowForce": 1000,
+        "Renderer": {
+          "_type": "component",
+          "go": "41e00f3c-1123-4f06-a50d-30cf1c6410a7",
+          "component_type": "SkinnedModelRenderer"
+        }
       },
       {
         "__type": "ItemEquipment",
@@ -39,15 +44,6 @@
         "WeightInGrams": 150
       },
       {
-        "__type": "ModelRenderer",
-        "BodyGroups": 18446744073709551615,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
-        "Model": "models/fishingrod/saunarod.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
-      },
-      {
         "__type": "BoxCollider",
         "Center": "0,0,35.75",
         "IsTrigger": false,
@@ -64,11 +60,23 @@
         "MassOverride": 0,
         "RigidbodyFlags": 0,
         "StartAsleep": false
+      },
+      {
+        "__type": "SkinnedModelRenderer",
+        "AnimationGraph": null,
+        "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/fishingrod/saunarod.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
       }
     ],
     "Children": [
       {
-        "Id": "24f0895c-c2b4-4970-83cc-62260e11c26c",
+        "Id": "56eaa0d7-71e6-426c-8117-58a1ec536e14",
         "Name": "bobber",
         "Tags": "bobber",
         "Networked": true,

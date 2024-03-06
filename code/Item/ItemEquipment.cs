@@ -71,7 +71,7 @@ public class ItemEquipment : ItemComponent
 			else ToggleRenderer( value && !InParcel );
 
 			// Bonemerge
-			if ( Renderer is SkinnedModelRenderer skinned )
+			if ( Renderer is SkinnedModelRenderer skinned && !UpdatePosition )
 			{
 				skinned.BoneMergeTarget = value
 					? GameObject.Parent?.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInChildren )

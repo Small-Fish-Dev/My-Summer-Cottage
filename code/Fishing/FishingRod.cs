@@ -1,14 +1,19 @@
-﻿namespace Sauna.Fishing;
+﻿using Sauna.SFX;
+
+namespace Sauna.Fishing;
 
 public sealed class FishingRod : Component
 {
+	[Property] public SkinnedModelRenderer Renderer { get; set; }
 	[Property] public GameObject BobberPrefab;
 	[Property] public float RetractDistance = 200;
 	[Property] public float ThrowForce = 100;
-
+	
 	public Player Owner { get; private set; }
 
 	private Bobber CurrentBobber { get; set; }
+	private LegacyParticles _fishingLine;
+	
 	public bool Casted => CurrentBobber.IsValid();
 
 	protected override void OnStart()
@@ -31,6 +36,15 @@ public sealed class FishingRod : Component
 			RetractBobber( true );
 	}
 
+	protected override void OnPreRender()
+	{
+		if ( CurrentBobber.IsValid() && _fishingLine != null )
+		{
+			_fishingLine.Transform = Renderer?.GetAttachment( "line" ) ?? global::Transform.Zero;
+			_fishingLine.SetVector( 1, CurrentBobber.Transform.Position );
+		}
+	}
+
 	private void OnInteract( Player player, GameObject obj )
 	{
 		if ( Casted )
@@ -46,6 +60,8 @@ public sealed class FishingRod : Component
 			newBobber.Components.Get<Rigidbody>().Velocity = player.Velocity + player.EyeAngles.Forward * ThrowForce;
 			CurrentBobber = newBobber.Components.Get<Bobber>();
 			CurrentBobber.Rod = this;
+
+			_fishingLine = LegacyParticles.Create( "particles/basic_rope.vpcf", Transform.World );
 		}
 	}
 
@@ -57,5 +73,6 @@ public sealed class FishingRod : Component
 		CurrentBobber.GameObject.Destroy();
 		CurrentBobber = null;
 		Owner = null;
+		_fishingLine?.Destroy();
 	}
 }

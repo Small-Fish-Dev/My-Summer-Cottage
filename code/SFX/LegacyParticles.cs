@@ -17,6 +17,7 @@ public class LegacyParticles
 	{
 		var obj = Game.ActiveScene.CreateObject();
 		obj.Transform.World = transform;
+		obj.Name = $"Legacy Particles";
 
 		var particle = new LegacyParticles()
 		{
@@ -43,6 +44,14 @@ public class LegacyParticles
 		GameObject?.Destroy();
 	}
 
+	private void AddControlPoint( int index, ParticleControlPoint cp )
+	{
+		if ( System.ControlPoints.Count < index + 1 )
+			System.ControlPoints.Insert( index, cp );
+		else
+			System.ControlPoints[index] = cp;
+	}
+
 	public void SetGameObject( int index, GameObject obj )
 	{
 		var cp = new ParticleControlPoint() 
@@ -51,7 +60,7 @@ public class LegacyParticles
 			GameObjectValue = obj
 		};
 
-		System.ControlPoints.Insert( index, cp );
+		AddControlPoint( index, cp );
 		System.SceneObject.SetControlPoint( index, Transform );
 	}
 
@@ -63,7 +72,7 @@ public class LegacyParticles
 			VectorValue = vector
 		};
 
-		System.ControlPoints.Insert( index, cp );
+		AddControlPoint( index, cp );
 		System.SceneObject.SetControlPoint( index, vector );
 	}
 
@@ -75,7 +84,7 @@ public class LegacyParticles
 			FloatValue = @float
 		};
 
-		System.ControlPoints.Insert( index, cp );
+		AddControlPoint( index, cp );
 		System.SceneObject.SetControlPoint( index, @float );
 	}
 }
