@@ -1,10 +1,17 @@
 {
   "Name": "Gotta chill",
+  "Subtitle": "Kindly do the needful",
   "Description": "Get into the sauna",
+  "TaskType": "Any",
+  "TaskRarity": "Any",
   "IsPrimary": true,
   "Global": false,
+  "SuccessSignal": "task.success.Gotta chill",
+  "FailedSignal": "task.failed.Gotta chill",
   "TimeLimited": false,
   "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": true,
+  "RunOnStartEverySession": false,
   "OnStart": null,
   "OnSuccess": null,
   "OnFail": null,
@@ -12,19 +19,9 @@
   "Subtasks": [
     {
       "Description": "Go into the sauna",
-      "TriggerSignal": "sauna.entered",
+      "TriggerSignal": "sauna.entered_sauna",
       "AmountToComplete": 1
     }
   ],
-  "CurrentSubtaskOrder": 0,
-  "Successful": false,
-  "Started": true,
-  "Completed": false,
-  "TaskTimer": {
-    "Absolute": 2044.448,
-    "Relative": -883.41504,
-    "Passed": 883.41504,
-    "Fraction": 1
-  },
   "__references": []
 }
