@@ -16,7 +16,8 @@ public enum HoldType : byte
 	Rifle,
 	FishingRod,
 	Item,
-	Flashlight
+	Flashlight,
+	Melee
 }
 
 public class ItemEquipment : ItemComponent
