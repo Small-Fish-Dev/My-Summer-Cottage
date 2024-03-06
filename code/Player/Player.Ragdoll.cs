@@ -20,7 +20,7 @@ partial class Player
 	SkinnedModelRenderer _puppet;
 	bool _isTransitioning = false;
 	float _oldAirFriction = 1f;
-	[Sync] TimeUntil _unragdoll { get; set; }
+	[Sync] RealTimeUntil _unragdoll { get; set; }
 	bool _couldRagdoll = true;
 	Vector3 _lastPosition = Vector3.Zero;
 	float _spin = 10f;
@@ -154,8 +154,8 @@ partial class Player
 								body.AngularDrag = 9999f;
 
 								var oldTransform = bodyTransforms[body];
-								var newPos = oldTransform.Position.LerpTo( transform.Position, time );
-								var newRot = Rotation.Lerp( oldTransform.Rotation, transform.Rotation, time );
+								var newPos = oldTransform.Position.LerpTo( transform.Position, (float)time );
+								var newRot = Rotation.Lerp( oldTransform.Rotation, transform.Rotation, (float)time );
 
 								body.Position = newPos;
 								body.Rotation = newRot;
