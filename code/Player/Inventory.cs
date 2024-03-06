@@ -143,8 +143,12 @@ public class Inventory : Component
 
 		item.GameObject.Transform.Rotation = Rotation.Identity;
 		item.GameObject.Transform.Position = trace.EndPosition;
+
+		var velocity = Player.Velocity + Player.ViewRay.Forward * 150f;
 		if ( item.GameObject.Components.TryGet<Rigidbody>( out var rigidbody ) )
-			rigidbody.Velocity = Player.Velocity + Player.ViewRay.Forward * 150f;
+			rigidbody.Velocity = velocity;
+		else if ( item.GameObject.Components.TryGet<ModelPhysics>( out var modelPhysics ) )
+			modelPhysics.PhysicsGroup.ApplyImpulse( velocity ); // todo: Spawns at feet on first time? Second time at a random location? Make issue.
 
 		item.Network.DropOwnership();
 

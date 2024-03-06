@@ -26,8 +26,11 @@
         "WeightInGrams": 0
       },
       {
-        "__type": "ModelRenderer",
+        "__type": "SkinnedModelRenderer",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
         "MaterialGroup": "rare",
         "MaterialOverride": null,
         "Model": "models/fauna/fish/salmon/salmon.vmdl",
@@ -35,12 +38,15 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "BoxCollider",
-        "Center": "-0.8000001,0,7.699996",
-        "IsTrigger": false,
-        "Scale": "52.1,7.199999,11.19999",
-        "Static": false,
-        "Surface": null
+        "__type": "ModelPhysics",
+        "Locking": {},
+        "Model": "models/fauna/fish/salmon/salmon.vmdl",
+        "Renderer": {
+          "_type": "component",
+          "go": "c93cd111-a34f-4aec-a030-11fffbbca4c9",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "RigidbodyFlags": 0
       }
     ],
     "Children": []

@@ -26,8 +26,11 @@
         "WeightInGrams": 0
       },
       {
-        "__type": "ModelRenderer",
+        "__type": "SkinnedModelRenderer",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
         "MaterialGroup": null,
         "MaterialOverride": null,
         "Model": "models/fauna/fish/pike/pike.vmdl",
@@ -35,12 +38,15 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "BoxCollider",
-        "Center": "0,0,3.4",
-        "IsTrigger": false,
-        "Scale": "37.10008,3.300003,6.299984",
-        "Static": false,
-        "Surface": null
+        "__type": "ModelPhysics",
+        "Locking": {},
+        "Model": "models/fauna/fish/pike/pike.vmdl",
+        "Renderer": {
+          "_type": "component",
+          "go": "b4ad2da0-8ce3-4440-97f1-e3d32e3de3ea",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "RigidbodyFlags": 0
       }
     ],
     "Children": []

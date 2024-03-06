@@ -25,21 +25,27 @@
         "WeightInGrams": 0
       },
       {
-        "__type": "ModelRenderer",
+        "__type": "SkinnedModelRenderer",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": "default",
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
         "MaterialOverride": null,
         "Model": "models/fauna/fish/minnow/minnow.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "BoxCollider",
-        "Center": "-0.6000001,0,0.7000027",
-        "IsTrigger": false,
-        "Scale": "5.80003,0.8000035,1.999984",
-        "Static": false,
-        "Surface": null
+        "__type": "ModelPhysics",
+        "Locking": {},
+        "Model": "models/fauna/fish/minnow/minnow.vmdl",
+        "Renderer": {
+          "_type": "component",
+          "go": "e5497e1e-355c-4ea3-99d6-e626291a8b57",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "RigidbodyFlags": 0
       }
     ],
     "Children": []

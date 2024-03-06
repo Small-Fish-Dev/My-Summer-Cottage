@@ -26,21 +26,27 @@
         "WeightInGrams": 0
       },
       {
-        "__type": "ModelRenderer",
+        "__type": "SkinnedModelRenderer",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": "default",
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
         "MaterialOverride": null,
         "Model": "models/fauna/fish/perch/perch.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "BoxCollider",
-        "Center": "1.7,0,4.400003",
-        "IsTrigger": false,
-        "Scale": "27.10007,7.199999,9.399984",
-        "Static": false,
-        "Surface": null
+        "__type": "ModelPhysics",
+        "Locking": {},
+        "Model": "models/fauna/fish/perch/perch.vmdl",
+        "Renderer": {
+          "_type": "component",
+          "go": "7d3f2610-4079-40e5-9e3d-ce776821a233",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "RigidbodyFlags": 0
       }
     ],
     "Children": []

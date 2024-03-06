@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "0aa98b46-d066-4be1-b89e-ed342af8815b",
+    "Id": "93973cce-366b-4024-ad6c-41c68a4875e6",
     "Name": "herring_rare",
     "Enabled": true,
     "Components": [
@@ -26,8 +26,11 @@
         "WeightInGrams": 0
       },
       {
-        "__type": "ModelRenderer",
+        "__type": "SkinnedModelRenderer",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
         "MaterialGroup": "rare",
         "MaterialOverride": null,
         "Model": "models/fauna/fish/herring/herring.vmdl",
@@ -35,12 +38,15 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "BoxCollider",
-        "Center": "-1.6,0,1.800003",
-        "IsTrigger": false,
-        "Scale": "17.80001,2.700003,4.699982",
-        "Static": false,
-        "Surface": null
+        "__type": "ModelPhysics",
+        "Locking": {},
+        "Model": "models/fauna/fish/herring/herring.vmdl",
+        "Renderer": {
+          "_type": "component",
+          "go": "93973cce-366b-4024-ad6c-41c68a4875e6",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "RigidbodyFlags": 0
       }
     ],
     "Children": []

@@ -26,21 +26,27 @@
         "WeightInGrams": 0
       },
       {
-        "__type": "ModelRenderer",
+        "__type": "SkinnedModelRenderer",
+        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": "default",
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
         "MaterialOverride": null,
         "Model": "models/fauna/fish/herring/herring.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "BoxCollider",
-        "Center": "-1.6,0,1.800003",
-        "IsTrigger": false,
-        "Scale": "17.80001,2.700003,4.699982",
-        "Static": false,
-        "Surface": null
+        "__type": "ModelPhysics",
+        "Locking": {},
+        "Model": "models/fauna/fish/herring/herring.vmdl",
+        "Renderer": {
+          "_type": "component",
+          "go": "95a23287-0547-4773-8e11-9c2670fe0509",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "RigidbodyFlags": 0
       }
     ],
     "Children": []
