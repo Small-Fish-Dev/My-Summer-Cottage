@@ -24,7 +24,7 @@
 @code {
 	public GameTimeManager GameTimeManager { get; set; }
 
-	private int _lastBalance = Player.Local.Money;
+	private int _lastBalance = Player.Local?.Money ?? 0;
 	private int _delta = 0;
 	private TimeUntil _timeUntilRevert = 0f;
 
