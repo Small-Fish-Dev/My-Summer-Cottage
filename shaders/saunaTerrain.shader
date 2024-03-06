@@ -7,8 +7,6 @@ HEADER
 FEATURES 
 {
 	#include "common/features.hlsl"
-	Feature( F_ALPHA_TEST, 0..1, "Rendering" );
-	Feature( F_TRANSPARENCY, 0..1, "Rendering" );
 }
 
 //=========================================================================================================================
@@ -40,18 +38,8 @@ struct VertexInput
 struct PixelInput
 {
 	#include "common/pixelinput.hlsl"
-	float2 grassUV : TEXCOORD9 < Semantic( LowPrecisionUv1 ); >;
 	float3 AbsolutePosition : TEXCOORD10;
 };
-
-struct GeometryInput
-{
-	#include "common/pixelinput.hlsl"
-	float2 grassUV;
-	float3 AbsolutePosition;
-};
-
-
 
 //=========================================================================================================================
 
@@ -63,9 +51,6 @@ VS
 	{
 		PixelInput o = ProcessVertex( i );
 		o = FinalizeVertex(o); 
-
-		o.grassUV = o.vTextureCoords.zw;		// Used to add grass billboard onto new triangles. Probably there's a better way to do it.
-												// UV2 isn't used at this stage but we initialize all inputs anyway so shader doesn't spam warnings on each compile.
 		o.AbsolutePosition = i.vPositionOs.xyz;	// Include vertex data into PixelInput so we can use it for per-triangle grass tinting
 
 		return o;
@@ -74,17 +59,10 @@ VS
 
 //=========================================================================================================================
 
-GS
-{	
-	#include "geometry.hlsl"
-}
-
 //=========================================================================================================================
 
 PS
 { 
-	StaticCombo( S_TRANSPARENCY, F_TRANSPARENCY, Sys( ALL ) );
-    StaticCombo( S_ALPHA_TEST, F_ALPHA_TEST, Sys( ALL ) );
 
 	#define CUSTOM_TEXTURE_FILTERING
 	SamplerState SamplerPoint < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >; 
@@ -93,19 +71,6 @@ PS
 	StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );	// Whatever this means
 
 	#define CUSTOM_MATERIAL_INPUTS
-
-	// ---
-	// Color maps input
-	// ---
-	CreateInputTexture2D( Color, 	Srgb, 8, "", "_color", 	"Material,10/10", Default3( 1.0, 1.0, 1.0 ) );		// Ground color
-	CreateInputTexture2D( BillboardColor, Srgb, 8, "", "_color", "Material,10/20", Default3( 1.0, 1.0, 1.0 ) );	// Grass billboard color
-	CreateInputTexture2D( Opacity, Linear, 8, "", "_alpha", "Material,10/30", Default( 1.0f ) );				// Grass billboard alpha
-
-	float3 g_flColorVariation < UiType( Color ); Default3( 1.0, 1.0, 1.0 ); UiGroup( "Material,10/40" ); >;		// Color variation
-
-	// Store color map, include tint mask into alpha channel.
-	CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >;	
-	CreateTexture2DWithoutSampler( g_tGrass ) < Channel( RGB, Box( BillboardColor ), Srgb ); Channel( A, Box( Opacity ), Linear ); OutputFormat( BC7 ); SrgbRead( true ); >;
 
 	// ---
 	// Splat texture maps. Currently they contain only color, normal, roughness and mask maps.
@@ -163,16 +128,6 @@ PS
 	float TextureBlending 	< UiType( VectorText ); Default( 1.0f ); Range ( 0.0f,   10.0f ); UiGroup("Triplanar Settings,80/20"); >;
 	float TextureScale		< UiType( Slider ); 	Default( 1.0f ); Range ( 0.0f,   64.0f ); UiGroup("Triplanar Settings,80/30"); >;
 
-	// ---
-	// Assign attribute bullshit for VRAD 
-	// ---
-	TextureAttribute(LightSim_DiffuseAlbedoTexture, g_tColor);
-	TextureAttribute(RepresentativeTexture, g_tColor);
-
-	#if S_ALPHA_TEST
-		TextureAttribute( LightSim_Opacity_A, g_tGrass );
-	#endif
-
     #include "sbox_pixel.fxc"
     #include "common/pixel.hlsl"
 	#include "noise3D.hlsl"
@@ -203,21 +158,17 @@ PS
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
 		float2 UV = i.vTextureCoords.xy;
-		float2 UV2 = i.grassUV.xy; 
 
 		float scaleFactor = distance( g_vCameraPositionWs, i.AbsolutePosition.xyz );
-
-		float3 l_tColorMap = Tex2DS( g_tColor, SamplerPoint, UV ).rgb;
-
 		// Prepare splat map data.
 		float4 l_tSplatData = Tex2DS( g_tSplatMap, SamplerAniso, UV.xy ).rgba;
 
 		// Fucking mess
 		float3 l_tSplatColor_LOD = ApplyWithSplatdata( 
-			Tex2DS( g_tSplatColor_A, SamplerPoint, UV.xy * 20 ).rgba,
-			Tex2DS( g_tSplatColor_B, SamplerPoint, UV.xy * 20 ).rgba,
-			Tex2DS( g_tSplatColor_C, SamplerPoint, UV.xy * 20 ).rgba,
-			Tex2DS( g_tSplatColor_D, SamplerPoint, UV.xy * 20 ).rgba, l_tSplatData
+			Tex2DS( g_tSplatColor_A, SamplerPoint, UV.xy * 42 ).rgba,
+			Tex2DS( g_tSplatColor_B, SamplerPoint, UV.xy * 42 ).rgba,
+			Tex2DS( g_tSplatColor_C, SamplerPoint, UV.xy * 42 ).rgba,
+			Tex2DS( g_tSplatColor_D, SamplerPoint, UV.xy * 42 ).rgba, l_tSplatData
 		);
 
 		// Prepare color maps (+ blend masks in alpha channel)
@@ -227,25 +178,19 @@ PS
 		float4 l_tSplatColor_D = Tex2DTriplanar( g_tSplatColor_D, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ).rgba;
 
 		// Prepare normal maps
-		float3 l_tSplatNormal_A = DecodeNormal( Tex2DS( g_tSplatNormal_A, SamplerPoint, UV.xy * 64).rgb );
-		float3 l_tSplatNormal_B = DecodeNormal( Tex2DS( g_tSplatNormal_B, SamplerPoint, UV.xy * 64).rgb );
-		float3 l_tSplatNormal_C = DecodeNormal( Tex2DS( g_tSplatNormal_C, SamplerPoint, UV.xy * 64).rgb );
-		float3 l_tSplatNormal_D = DecodeNormal( Tex2DS( g_tSplatNormal_D, SamplerPoint, UV.xy * 64).rgb );
+		float3 l_tSplatNormal_A = DecodeNormal( Tex2DS( g_tSplatNormal_A, SamplerPoint, UV.xy * 1024).rgb );
+		float3 l_tSplatNormal_B = DecodeNormal( Tex2DS( g_tSplatNormal_B, SamplerPoint, UV.xy * 1024).rgb );
+		float3 l_tSplatNormal_C = DecodeNormal( Tex2DS( g_tSplatNormal_C, SamplerPoint, UV.xy * 1024).rgb );
+		float3 l_tSplatNormal_D = DecodeNormal( Tex2DS( g_tSplatNormal_D, SamplerPoint, UV.xy * 1024).rgb );
 
 		// Prepare roughness map.
 		float4 l_tSplatRoughness = Tex2DTriplanar( g_tSplatRoughness, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ).rgba;
-
-		float4 l_tGrass = Tex2DS( g_tGrass, SamplerPoint, UV2 ).rgba;
-		float  rand = snoise( i.AbsolutePosition.xyz );
-			   l_tGrass.rgb = lerp( l_tGrass.rgb, l_tGrass.rgb * g_flColorVariation, saturate( rand ) );
 
         Material m = Material::Init();
 
 		m.Albedo = ApplyWithSplatdata( l_tSplatColor_A, l_tSplatColor_B, l_tSplatColor_C, l_tSplatColor_D, l_tSplatData );	// Pass 1 - apply terrain textures according to splat maps
 		m.Albedo = lerp( m.Albedo, l_tSplatColor_LOD, smoothstep(400, 750, scaleFactor));									// Pass 2 - render LOD texture with smooth transition
-		m.Albedo = PaintProceduralGeometry( m.Albedo, l_tGrass.rgb, UV2 ); 													// Pass 3 - apply grass texture+opacity onto generated triangles
-		
-		m.Opacity = PaintProceduralGeometry( 1, l_tGrass.a, UV2 );	
+
         m.Roughness = ApplyWithSplatdata( 
 			float4(l_tSplatRoughness.r, 0, 0, l_tSplatColor_A.a), 
 			float4(l_tSplatRoughness.g, 0, 0, l_tSplatColor_B.a), 
@@ -263,11 +208,6 @@ PS
 
 		// Write to shading model 
 		float4 result = ShadingModelStandard::Shade( i, m );
-
-		#if( S_TRANSPARENCY )
-			float alpha = PaintProceduralGeometry( 1, l_tGrass.a, UV2 );
-			result.a = max( alpha, floor( alpha + TransparencyRounding ) );
-		#endif		
 
 		return result;
 	}
