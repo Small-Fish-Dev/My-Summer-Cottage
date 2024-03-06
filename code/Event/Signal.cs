@@ -6,6 +6,8 @@ public class SignalConverter : JsonConverter<Signal>
 	{
 		if ( reader.TokenType == JsonTokenType.String )
 		{
+			string signalString = reader.GetString();
+			return new Signal( signalString );
 		}
 
 		if ( reader.TokenType == JsonTokenType.StartObject )
@@ -38,9 +40,9 @@ public class SignalConverter : JsonConverter<Signal>
 [JsonConverter( typeof( SignalConverter ) )]
 public struct Signal : IEquatable<Signal>
 {
-	public string Identifier { get; set; } = "";
+	public string Identifier { get; set; }
 
-	public Signal( string identifier = "" )
+	public Signal( string identifier )
 	{
 		Identifier = identifier;
 	}
