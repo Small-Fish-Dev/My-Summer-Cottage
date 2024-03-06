@@ -41,6 +41,9 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	[Property]
 	public EventType Type { get; set; } = EventType.Random;
 
+	[Property]
+	public List<Signal> EventSignals { get; set; } = new();
+
 	/// <summary>
 	/// Does this event get added to the daily event pool to enable during gameplay?
 	/// </summary>

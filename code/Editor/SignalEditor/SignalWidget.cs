@@ -110,7 +110,7 @@ internal class SignalWidget : ControlWidget
 				} );
 			} );
 
-		var eventDefinitions = PrefabLibrary.All
+		var a = PrefabLibrary.All
 			.Select( x => x.Value.Prefab.RootObject )
 			.SelectMany( x =>
 			{
@@ -120,14 +120,23 @@ internal class SignalWidget : ControlWidget
 					.Select( component => GetSignalOption( component["__type"].ToString(), component["EventName"].ToString() ) );
 			} );
 
-		var allTriggers = PrefabLibrary.All
-			.Select( x => x.Value.Prefab.RootObject )
-			.SelectMany( x =>
+		var allEvents = PrefabLibrary.All
+			.SelectMany( prefab =>
 			{
-				var components = x["Components"].AsArray();
+				var components = prefab.Value.GetComponents<EventDefinition>();
+
 				return components
-					.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
-					.Select( component => GetSignalOption( component["__type"].ToString(), "hello" ) );
+				.SelectMany( component =>
+				{
+					var finalSignals = new List<Signal>();
+					var signals = component.Get<List<Signal>>( "EventSignals" );
+
+					if ( signals != null )
+						finalSignals.AddRange( signals );
+
+					return finalSignals
+					.Select( signal => GetSignalOption( $"{signal.Identifier}", component.Type.ToString(), component.Get<string>( "EventName" ), "Events" ) );
+				} );
 			} );
 
 		var allItems = PrefabLibrary.All
@@ -157,28 +166,21 @@ internal class SignalWidget : ControlWidget
 					} );
 			} );
 
-		foreach ( var prefab in PrefabLibrary.All )
-		{
-			foreach ( var component in prefab.Value.GetComponents<ItemComponent>() )
-			{
-				Log.Info( prefab.Value.Name );
-			}
-		}
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>()
 			.SelectMany( x =>
 			{
 				return new List<SignalOption>
 				{
-					GetSignalOption( $"task.start.{x.Name}", x.Name, x.TaskType.ToString(), "Tasks" ),
-					GetSignalOption( $"task.success.{x.Name}", x.Name, x.TaskType.ToString(), "Tasks" ),
-					GetSignalOption( $"task.fail.{x.Name}", x.Name, x.TaskType.ToString(), "Tasks" )
+					GetSignalOption( $"task.start.{x.Name}", x.TaskType.ToString(), x.Name, "Tasks" ),
+					GetSignalOption( $"task.success.{x.Name}", x.TaskType.ToString(), x.Name, "Tasks" ),
+					GetSignalOption( $"task.fail.{x.Name}", x.TaskType.ToString(), x.Name.ToString(), "Tasks" )
 				};
 			} );
 
 
 		test = test.Concat( allTasks );
-		test = test.Concat( allTriggers );
 		test = test.Concat( allItems );
+		test = test.Concat( allEvents );
 
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;
