@@ -234,6 +234,13 @@
                   "UserData": {
                     "Position": "1872,-16"
                   }
+                },
+                {
+                  "Id": 21,
+                  "Type": "event.triggersignal",
+                  "UserData": {
+                    "Position": "2032,224"
+                  }
                 }
               ],
               "Links": [
@@ -389,13 +396,28 @@
                   "Value": 180,
                   "DstId": 20,
                   "DstName": "degrees"
+                },
+                {
+                  "SrcId": 6,
+                  "SrcName": "true",
+                  "DstId": 21,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 21,
+                  "DstName": "player"
+                },
+                {
+                  "Value": "item.used_1.Axe",
+                  "DstId": 21,
+                  "DstName": "signalIdentifier"
                 }
               ]
             },
             "InteractDistance": 90,
             "Accessibility": "Hands",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "DynamicText": {
               "Version": 5,
               "UserData": {
@@ -474,11 +496,29 @@
                   "UserData": {
                     "Position": "320,32"
                   }
+                },
+                {
+                  "Id": 8,
+                  "Type": "op.conditional",
+                  "UserData": {
+                    "Position": "16,176"
+                  }
+                },
+                {
+                  "Id": 11,
+                  "Type": "op.isnotnull",
+                  "UserData": {
+                    "Position": "-496,160"
+                  }
+                },
+                {
+                  "Id": 16,
+                  "Type": "input"
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 6,
+                  "SrcId": 8,
                   "SrcName": "_result",
                   "DstId": 0,
                   "DstName": "_result"
@@ -527,6 +567,29 @@
                   "SrcName": "_result",
                   "DstId": 6,
                   "DstName": "x"
+                },
+                {
+                  "SrcId": 6,
+                  "SrcName": "_result",
+                  "DstId": 8,
+                  "DstName": "a"
+                },
+                {
+                  "Value": "Swing axe",
+                  "DstId": 8,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 11,
+                  "SrcName": "_result",
+                  "DstId": 8,
+                  "DstName": "x"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 11,
+                  "DstName": "input"
                 }
               ]
             },
