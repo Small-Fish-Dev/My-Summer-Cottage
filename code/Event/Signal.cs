@@ -64,7 +64,7 @@ public struct Signal : IEquatable<Signal>
 	}
 	public override string ToString()
 	{
-		return Identifier.ToString();
+		return Identifier?.ToString();
 	}
 
 	public static implicit operator string( Signal signal )
