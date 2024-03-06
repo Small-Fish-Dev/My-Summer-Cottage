@@ -1,0 +1,117 @@
+{
+  "Name": "Chop Wood",
+  "Subtitle": "We need wood for the furnace!",
+  "Description": "Go find some wood and then chop it with an axe.",
+  "TaskType": "GivenByStory",
+  "TaskRarity": "Any",
+  "IsPrimary": true,
+  "Global": false,
+  "SuccessSignal": "task.success.Chop Wood",
+  "FailedSignal": "task.failed.Chop Wood",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": true,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Chop log with axe",
+      "TriggerSignal": "item.used_1.Axe",
+      "AmountToComplete": 5
+    },
+    {
+      "Description": "Collect the chopped wood",
+      "SubtaskOrder": 1,
+      "AmountToComplete": 10,
+      "EvaluateOnTick": {
+        "Version": 5,
+        "UserData": {
+          "Title": "Evaluate On Tick",
+          "id": "81c602d9-0397-468d-a3a0-f2af2bb7a4f2",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input",
+            "UserData": {
+              "Position": "-256,64"
+            }
+          },
+          {
+            "Id": 1,
+            "Type": "output",
+            "UserData": {
+              "Position": "656,48"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "property.get",
+            "Properties": {
+              "_name": "Inventory",
+              "_type": "package.fish.sauna/Sauna.Player"
+            },
+            "UserData": {
+              "Position": "-80,48"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "property.get",
+            "Properties": {
+              "_name": "BackpackItems",
+              "_type": "package.fish.sauna/Sauna.Inventory"
+            },
+            "UserData": {
+              "Position": "144,96"
+            }
+          },
+          {
+            "Id": 6,
+            "Type": "event.getitemamount",
+            "UserData": {
+              "Position": "448,128"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 6,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "_result"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 3,
+            "DstName": "_target"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_result",
+            "DstId": 4,
+            "DstName": "_target"
+          },
+          {
+            "SrcId": 4,
+            "SrcName": "_result",
+            "DstId": 6,
+            "DstName": "itemList"
+          },
+          {
+            "Value": "Split Log",
+            "DstId": 6,
+            "DstName": "name"
+          }
+        ]
+      }
+    }
+  ],
+  "__references": []
+}
