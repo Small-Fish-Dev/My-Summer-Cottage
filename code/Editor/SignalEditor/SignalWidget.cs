@@ -210,13 +210,15 @@ internal class SignalWidget : ControlWidget
 					{
 						List<SignalOption> options = new();
 
-						var interactions = component.Get<List<Interaction>>( "ObjectInteractions" );
+						var thing = component.Object;
+
+						var interactions = thing["ObjectInteractions"].AsArray();
 
 						if ( interactions != null )
 						{
 							foreach ( var interaction in interactions )
 							{
-								options.Add( GetSignalOption( $"{interaction.Identifier}", component.Type.ToString(), prefab.Value.Name, "Interactions" ) );
+								options.Add( GetSignalOption( interaction["Identifier"].ToString(), component.Type.ToString(), prefab.Value.Name, "Interactions" ) );
 							}
 						}
 

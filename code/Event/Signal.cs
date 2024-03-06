@@ -6,11 +6,27 @@ public class SignalConverter : JsonConverter<Signal>
 	{
 		if ( reader.TokenType == JsonTokenType.String )
 		{
-			string signalString = reader.GetString();
+		}
+
+		if ( reader.TokenType == JsonTokenType.StartObject )
+		{
+			string signalString = "";
+			while ( reader.Read() )
+			{
+				if ( reader.TokenType == JsonTokenType.EndObject )
+				{
+					break;
+				}
+				if ( reader.TokenType == JsonTokenType.PropertyName && reader.GetString() == "Identifier" )
+				{
+					reader.Read();
+					signalString = reader.GetString();
+				}
+			}
 			return new Signal( signalString );
 		}
 
-		throw new JsonException( "Expected string value." );
+		return new Signal();
 	}
 
 	public override void Write( Utf8JsonWriter writer, Signal value, JsonSerializerOptions options )
