@@ -134,7 +134,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	protected override void OnStart()
 	{
-		if ( !Game.IsPlaying )
+		if ( !Game.IsPlaying || Scene == GameObject )
 			return;
 
 		Network.SetOrphanedMode( NetworkOrphaned.Destroy );
