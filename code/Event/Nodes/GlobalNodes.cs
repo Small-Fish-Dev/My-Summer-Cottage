@@ -48,6 +48,17 @@ public static partial class GlobalNodes
 	}
 
 	/// <summary>
+	/// Get the amount of items in the list
+	/// </summary>
+	[ActionGraphNode( "event.getitemamount" ), Pure]
+	[Title( "Get Item Amount" ), Group( "Events" ), Icon( "reduce_capacity" )]
+	public static int GetItemAmount( IEnumerable<ItemComponent> itemList, string name )
+	{
+		if ( itemList == null ) return 0;
+		return itemList.Where( x => x.Name == name ).Count();
+	}
+
+	/// <summary>
 	/// Skips in game seconds, only the host can do this so make sure to check if it's singleplayer or if everyone is included in the event
 	/// </summary>
 	[ActionGraphNode( "event.skiptime" )]
