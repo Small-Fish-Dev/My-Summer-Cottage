@@ -100,6 +100,7 @@
 	{
 		_character.Update(RealTime.Delta);
 		_character.SetAnimParameter("height", Player.Local.Height);
+		_character.SetAnimParameter("weight", Player.Local.Fatness);
 		_character.Morphs.Set("fat", Player.Local.Fatness);
 		_character.SetAnimParameter("hold_type", (int)Player.Local.HoldType);
 		_character.Rotation = Rotation.From(0, _yaw, 0);

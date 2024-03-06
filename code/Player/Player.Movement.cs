@@ -253,10 +253,11 @@ partial class Player
 
 		var holdType = _resetHoldType ? HoldType : _targetHoldType;
 		Renderer.Set( "hold_type", (int)holdType );
+		Renderer.Set( "weight", Fatness );
 
-		// Handle aiming. todo @ceitine: NEEDS TO BE TOGGLE
+		// Handle aiming.
 		if ( holdType == HoldType.Rifle ) 
-			Renderer.Set( "aiming", true );
+			Renderer.Set( "aiming", AimState );
 
 		if ( !IsProxy && _lastAimed > 0.1f && AimState )
 		{

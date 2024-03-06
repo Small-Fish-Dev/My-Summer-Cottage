@@ -13,6 +13,7 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Parameters" )] public InputMode Mode { get; set; } = InputMode.Pressed;
 
 	[Property, Category( "Projectile" ), Sync, TargetSave] public int Ammo { get; set; }
+	[Property, Category( "Projectile" )] public string ExitAttachment { get; set; }
 	[Property, Category( "Projectile" )] public int Capacity { get; set; }
 	[Property, Category( "Projectile" )] public PrefabFile Ammunition { get; set; }
 
@@ -93,8 +94,6 @@ public sealed class WeaponComponent : Component
 				var shot = Fire( attacker );
 				if ( shot )
 				{
-					TryPlaySound( FireSound );
-
 					Ammo--;
 					_canFire = FireSpeed;
 
@@ -142,13 +141,19 @@ public sealed class WeaponComponent : Component
 			return false;
 		}
 
-		var tr = Scene.Trace.Ray( shooter.ViewRay, 5000f )
+		var transform = Components.Get<SkinnedModelRenderer>( FindMode.DisabledInSelfAndChildren )?.GetAttachment( ExitAttachment ) 
+			?? new Transform( shooter.ViewRay.Position, Rotation.LookAt( shooter.ViewRay.Forward ) );
+
+		var ray = new Ray( transform.Position, transform.Rotation.Forward );
+		var tr = Scene.Trace.Ray( ray, 5000f )
 			.IgnoreGameObjectHierarchy( shooter.GameObject )
 			.Run();
 
 		var target = tr.GameObject?.Components.Get<Player>( FindMode.EverythingInSelfAndAncestors );
 		if ( target != null )
 			target.SetRagdoll( true, duration: 2.5f, spin: 30 );
+
+		TryPlaySound( FireSound, transform.Position, transform.Rotation );
 
 		return true;
 	}
@@ -185,13 +190,13 @@ public sealed class WeaponComponent : Component
 		}
 	}
 
-	private void TryPlaySound( SoundEvent @event )
+	private void TryPlaySound( SoundEvent @event, Vector3? position = null, Rotation? rotation = null )
 	{
 		if ( @event == null )
 			return;
 
 		var transform = GameObject.Parent.Transform;
-		BroadcastSound( @event.ResourceName, transform.Position, transform.Rotation );
+		BroadcastSound( @event.ResourceName, position ?? transform.Position, rotation ?? transform.Rotation );
 	}
 
 	[Broadcast] 
