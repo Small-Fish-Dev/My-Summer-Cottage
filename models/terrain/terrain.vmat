@@ -1,0 +1,58 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunaterrain.shader"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Grass Settings ----
+	GrassDist "materials/ground/terrain/splat_a.png"
+	GrassRandom "1.000"
+	GrassScale "6.000"
+	GrassSize "2.000"
+	MaxDistance "100.000"
+	SwayIntensity "14.000"
+
+	//---- Material ----
+	BillboardColor "materials/default/default_color.tga"
+	Color "materials/default/default_color.tga"
+	g_flColorVariation "[1.000000 1.000000 1.000000 0.000000]"
+	Opacity "materials/default/default.tga"
+
+	//---- Splat Map ----
+	Splat_LayerA "materials/ground/terrain/splat_r.png"
+	Splat_LayerB "materials/ground/terrain/splat_g.png"
+	Splat_LayerC "materials/ground/terrain/splat_b.png"
+	Splat_LayerD "materials/ground/terrain/splat_a.png"
+
+	//---- Splat Textures A ----
+	Splat_BlendMask_A "materials/ground/dirt/dirt_roughness.png"
+	Splat_ColorA "materials/ground/dirt/dirt_basecolor.png"
+	Splat_NormalA "materials/ground/dirt/dirt_normal.png"
+	Splat_Roughness_A "materials/ground/dirt/dirt_roughness.png"
+
+	//---- Splat Textures B ----
+	Splat_BlendMask_B "materials/ground/stones/ground_stones_mask.png"
+	Splat_ColorB "materials/ground/stones/ground_stones_basecolor.png"
+	Splat_NormalB "materials/ground/stones/ground_stones_normal.png"
+	Splat_Roughness_B "materials/ground/stones/ground_stones_roughness.png"
+
+	//---- Splat Textures C ----
+	Splat_BlendMask_C "materials/ground/rock/rock3_height.png"
+	Splat_ColorC "materials/ground/rock/rock3_basecolor.png"
+	Splat_NormalC "materials/ground/rock/rock3_normal.png"
+	Splat_Roughness_C "materials/ground/rock/rock3_roughness.png"
+
+	//---- Splat Textures D ----
+	Splat_BlendMask_D "materials/ground/grass2/grass2_height.png"
+	Splat_ColorD "materials/ground/grass2/grass2_basecolor.png"
+	Splat_NormalD "materials/ground/grass2/grass2_normal.png"
+	Splat_Roughness_D "materials/ground/grass2/grass2_roughness.png"
+
+	//---- Triplanar Settings ----
+	TextureBlending "1.000"
+	TextureScale "1.000"
+	TextureTiling "2.000"
+}
