@@ -224,7 +224,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	}
 
 	[Icon( "camera" )]
-	public SweetMemory CaptureMemory( string caption, float distance = 100f, int maxTries = 20 )
+	public SweetMemory CaptureMemory( string caption, string identifier = null, float distance = 100f, int maxTries = 20 )
 	{
 		var center = Bounds.Center + Transform.Position + Vector3.Up * 10f;
 		var position = center + Transform.Rotation.Backward * distance; // Default
@@ -249,7 +249,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 			}
 		}
 
-		return SweetMemories.Capture( caption, position, rotation, center );
+		return SweetMemories.Capture( caption, position, rotation, center, identifier );
 	}
 
 	protected override void OnPreRender()

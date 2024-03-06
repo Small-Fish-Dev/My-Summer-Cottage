@@ -6,6 +6,7 @@ public struct SweetMemory
 	public Vector3 Position;
 	public Rotation Rotation;
 	public string Caption;
+	public string Identifier;
 }
 
 public class SweetMemories : Panel
@@ -23,10 +24,14 @@ public class SweetMemories : Panel
 	/// <param name="position"></param>
 	/// <param name="rotation"></param>
 	/// <param name="lookAt"></param>
+	/// <param name="identifier"></param>
 	/// <returns></returns>
 	[Icon( "camera") ]
-	public static SweetMemory Capture( string caption, Vector3 position, Rotation rotation, Vector3? lookAt = null )
+	public static SweetMemory Capture( string caption, Vector3 position, Rotation rotation, Vector3? lookAt = null, string identifier = null )
 	{
+		if ( !string.IsNullOrEmpty( identifier ) && _all.Any( x => x.Identifier == identifier ) )
+			return default;
+
 		var memory = new SweetMemory()
 		{
 			Texture = Texture.CreateRenderTarget()
@@ -93,5 +98,5 @@ public class SweetMemories : Panel
 			"mfw i wanna kill myself", 
 			"i fucking hate this place get me out of here please",
 			"i wish my life was more of this"
-		} ), 200f );
+		} ), distance: 200f );
 }
