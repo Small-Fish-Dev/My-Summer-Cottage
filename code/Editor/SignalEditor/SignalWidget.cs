@@ -82,42 +82,28 @@ internal class SignalWidget : ControlWidget
 		return elements.ToArray();
 	}
 
-	IEnumerable<SignalOption> GetTriggers( JsonObject obj )
-	{
-		var components = obj["Components"].AsArray();
-
-		return components
-			.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
-			.Where( component => component["TriggerSignalIdentifier"].ToString() != String.Empty )
-			.Select( component => GetSignalOption( component["__type"].ToString(), component["TriggerSignalIdentifier"].ToString() ) );
-	}
-
 	void OpenMenu()
 	{
 		const string mainScene = "finland";
 
-		var test = ResourceLibrary.GetAll<SceneFile>()
+		var sceneTriggers = ResourceLibrary.GetAll<SceneFile>()
 			.Where( x => x.Title == mainScene )
-			.SelectMany( x =>
+			.SelectMany( scene =>
 			{
-				return x.GameObjects.Where( x => x.ContainsKey( "Components" ) )
+				return scene.GameObjects.Where( x => x.ContainsKey( "Components" ) )
 				.SelectMany( x =>
 				{
 					var components = x["Components"].AsArray();
 					return components
-						.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
+						.Where( component =>
+						{
+							var type = component["__type"].ToString(); // Don't bother me about this!!
+
+							return (type == "EventAreaTrigger" || type == "EventInteractionTrigger" || type == "EventPissTrigger" || type == "EventSellAreaTrigger");
+						} )
+						.Where( x => x["TriggerSignalIdentifier"] != null && x["TriggerSignalIdentifier"].ToString() != "" )
 						.Select( y => GetSignalOption( y["TriggerSignalIdentifier"].ToString(), y["__type"].ToString(), x["Name"].ToString(), "Scene" ) );
 				} );
-			} );
-
-		var a = PrefabLibrary.All
-			.Select( x => x.Value.Prefab.RootObject )
-			.SelectMany( x =>
-			{
-				var components = x["Components"].AsArray();
-				return components
-					.Where( component => component["__type"].ToString() == "EventDefinition" )
-					.Select( component => GetSignalOption( component["__type"].ToString(), component["EventName"].ToString() ) );
 			} );
 
 		var allEvents = PrefabLibrary.All
@@ -178,9 +164,9 @@ internal class SignalWidget : ControlWidget
 			} );
 
 
-		test = test.Concat( allTasks );
-		test = test.Concat( allItems );
-		test = test.Concat( allEvents );
+		sceneTriggers = sceneTriggers.Concat( allTasks );
+		sceneTriggers = sceneTriggers.Concat( allItems );
+		sceneTriggers = sceneTriggers.Concat( allEvents );
 
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;
@@ -188,9 +174,9 @@ internal class SignalWidget : ControlWidget
 		_menu.AddLineEdit( "Filter",
 			placeholder: "Add or Filter Signals...",
 			autoFocus: true,
-			onChange: s => PopulateMenu( _menu, test, s ) );
+			onChange: s => PopulateMenu( _menu, sceneTriggers, s ) );
 
-		_menu.AboutToShow += () => PopulateMenu( _menu, test );
+		_menu.AboutToShow += () => PopulateMenu( _menu, sceneTriggers );
 
 		_menu.OpenAtCursor( true );
 		_menu.MinimumWidth = ScreenRect.Width;
