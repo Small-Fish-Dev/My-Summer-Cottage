@@ -24,4 +24,18 @@ public struct Signal : IEquatable<Signal>
 	{
 		return other.Identifier == Identifier;
 	}
+	public override string ToString()
+	{
+		return Identifier.ToString();
+	}
+
+	public static implicit operator string( Signal signal )
+	{
+		return signal.ToString();
+	}
+
+	public static implicit operator Signal( string signal )
+	{
+		return new Signal( signal );
+	}
 }
