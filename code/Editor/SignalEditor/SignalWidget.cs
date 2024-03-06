@@ -1,21 +1,13 @@
 using Editor;
-using Sandbox;
 
 namespace Sauna;
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text.Json.Nodes;
 using Editor.NodeEditor;
-using Facepunch.ActionGraphs;
 using Sandbox;
 using Sauna.Event;
-using DisplayInfo = Sandbox.DisplayInfo;
 
 [CustomEditor( typeof( Signal ) )]
 internal class SignalWidget : ControlWidget
