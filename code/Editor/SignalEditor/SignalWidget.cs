@@ -90,20 +90,31 @@ internal class SignalWidget : ControlWidget
 			.Where( x => x.Title == mainScene )
 			.SelectMany( scene =>
 			{
-				return scene.GameObjects.Where( x => x.ContainsKey( "Components" ) )
-				.SelectMany( x =>
-				{
-					var components = x["Components"].AsArray();
-					return components
-						.Where( component =>
-						{
-							var type = component["__type"].ToString(); // Don't bother me about this!!
+				var allSignals = new List<SignalOption>();
+				var children = scene.GameObjects;
 
-							return (type == "EventAreaTrigger" || type == "EventInteractionTrigger" || type == "EventPissTrigger" || type == "EventSellAreaTrigger");
-						} )
-						.Where( x => x["TriggerSignalIdentifier"] != null && x["TriggerSignalIdentifier"].ToString() != "" )
-						.Select( y => GetSignalOption( y["TriggerSignalIdentifier"].ToString(), y["__type"].ToString(), x["Name"].ToString(), "Scene" ) );
-				} );
+				allSignals.AddRange( children.SelectMany( child =>
+				{
+					var childSignals = new List<SignalOption>();
+					var components = child["Components"]?.AsArray() ?? null;
+
+					if ( components != null )
+					{
+						childSignals.AddRange( components
+							.Where( component =>
+							{
+								var type = component["__type"].ToString(); // Don't bother me about this!!
+
+								return (type == "EventAreaTrigger" || type == "EventInteractionTrigger" || type == "EventPissTrigger" || type == "EventSellAreaTrigger");
+							} )
+							.Where( x => x["TriggerSignalIdentifier"] != null && x["TriggerSignalIdentifier"].ToString() != "" )
+							.Select( y => GetSignalOption( y["TriggerSignalIdentifier"].ToString(), y["__type"].ToString(), child["Name"].ToString(), "Scene" ) ) );
+					}
+
+					return childSignals;
+				} ) );
+
+				return allSignals;
 			} );
 
 		var allEvents = PrefabLibrary.All
