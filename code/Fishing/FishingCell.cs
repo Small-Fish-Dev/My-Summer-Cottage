@@ -245,7 +245,8 @@ public class FishingCell : Component
 		var fishComponent = fishInstance.Components.Get<Fish>();
 		fishComponent.AssignWeight( fish.Weight );
 		
-		bobber.Rod.Owner.OnFishCaught( fish.Fish, fish.Weight );
+		if ( !IsProxy )
+			Player.Local.OnFishCaught( fish.Fish, fish.Weight );
 	}
 
 	/// <summary>
