@@ -13,6 +13,7 @@ using System.Text.Json.Nodes;
 using Editor.NodeEditor;
 using Facepunch.ActionGraphs;
 using Sandbox;
+using Sauna.Event;
 using DisplayInfo = Sandbox.DisplayInfo;
 
 [CustomEditor( typeof( Signal ) )]
@@ -82,7 +83,12 @@ internal class SignalWidget : ControlWidget
 
 	IEnumerable<SignalOption> GetTriggers( JsonObject obj )
 	{
+		var components = obj["Components"].AsArray();
 
+		return components
+			.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
+			.Where( component => component["TriggerSignalIdentifier"].ToString() != String.Empty )
+			.Select( component => GetSignalOption( component["__type"].ToString(), component["TriggerSignalIdentifier"].ToString() ) );
 	}
 
 	void OpenMenu()
@@ -120,8 +126,7 @@ internal class SignalWidget : ControlWidget
 				var components = x["Components"].AsArray();
 				return components
 					.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
-					.Where( component => component["TriggerSignalIdentifier"].ToString() != String.Empty )
-					.Select( component => GetSignalOption( component["__type"].ToString(), component["TriggerSignalIdentifier"].ToString() ) );
+					.Select( component => GetSignalOption( component["__type"].ToString(), "hello" ) );
 			} );
 
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>()
@@ -135,9 +140,9 @@ internal class SignalWidget : ControlWidget
 				};
 			} );
 
-		var allItems = eventDefinitions.Concat( areaTriggers );
 
 		test = test.Concat( allTasks );
+		test = test.Concat( allTriggers );
 
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;
@@ -192,6 +197,16 @@ internal class SignalWidget : ControlWidget
 		if ( truncated > 0 )
 		{
 			menu.AddOption( $"...and {truncated} more" );
+		}
+
+		if ( useFilter )
+		{
+			void AddCurrent()
+			{
+				SerializedProperty.SetValue( new Signal( filter ) );
+				SignalValuesChanged();
+			}
+			menu.AddOption( $"{filter}", "add_circle_outline", AddCurrent );
 		}
 
 		menu.AdjustSize();
