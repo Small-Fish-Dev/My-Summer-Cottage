@@ -55,7 +55,7 @@ public static partial class GlobalNodes
 	public static int GetItemAmount( IEnumerable<ItemComponent> itemList, string name )
 	{
 		if ( itemList == null ) return 0;
-		return itemList.Where( x => x.Name == name ).Count();
+		return itemList.Where( x => x != null && x.Name == name ).Count();
 	}
 
 	/// <summary>
