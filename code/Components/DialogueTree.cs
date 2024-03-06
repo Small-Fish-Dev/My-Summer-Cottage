@@ -8,7 +8,7 @@ public class DialogueResponse
 	/// Unique identifier for this response
 	/// </summary>
 	[Property]
-	public string Identifier { get; set; }
+	public Signal Identifier { get; set; }
 
 	/// <summary>
 	/// The keybind used to trigger this response.
