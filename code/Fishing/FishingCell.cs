@@ -221,17 +221,26 @@ public class FishingCell : Component
 
 		var bobber = bobberGameObject.Components.Get<Bobber>();
 
-		if ( !_bobbers.TryGetValue( bobber, out var fish ) )
+		if ( !_bobbers.TryGetValue( bobber, out var fish ) || fish?.Fish == null )
 			return;
 
 		var fishInstance = SceneUtility.GetPrefabScene( fish.Fish ).Clone();
 		fishInstance.NetworkSpawn();
-		fishInstance.Transform.Position = Transform.Position;
-		// TODO: should probably calculate a parabolic trajectory
-		fishInstance.Components.Get<Rigidbody>().Velocity +=
-			(Transform.Position - bobber.Rod.Owner.Transform.Position + Vector3.Up * 100)
-			.Normal
-			* fish.Weight;
+		if ( fishInstance.Components.TryGet<ModelPhysics>( out var physics ) )
+		{
+			fishInstance.Enabled = false;
+			fishInstance.Transform.Position = Transform.Position;
+			fishInstance.Enabled = true;
+
+			// TODO: should probably calculate a parabolic trajectory
+
+			var from = Transform.Position;
+			var to = bobber.Rod.Owner.Transform.Position;
+			var dist = from.Distance( to );
+			var velocity = (to - from).Normal * dist / 4f + Vector3.Up * 100f;
+			physics?.PhysicsGroup?.ApplyImpulse( velocity );
+
+		}
 
 		var fishComponent = fishInstance.Components.Get<Fish>();
 		fishComponent.AssignWeight( fish.Weight );
