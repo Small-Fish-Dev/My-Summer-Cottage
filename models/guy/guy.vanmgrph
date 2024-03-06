@@ -5449,7 +5449,7 @@
 								{
 									_class = "CStateMachineAnimNode"
 									m_sName = "Unnamed"
-									m_vecPosition = [ 944.0, 32.0 ]
+									m_vecPosition = [ 1120.0, 32.0 ]
 									m_nNodeID = 
 									{
 										m_id = 284813769
@@ -5566,7 +5566,7 @@
 											{
 												m_nodeID = 
 												{
-													m_id = 1946417820
+													m_id = 1617932434
 												}
 												m_outputID = 
 												{
@@ -6251,7 +6251,7 @@
 								{
 									_class = "CGroupOutputAnimNode"
 									m_sName = "Unnamed"
-									m_vecPosition = [ 1168.0, 32.0 ]
+									m_vecPosition = [ 1344.0, 32.0 ]
 									m_nNodeID = 
 									{
 										m_id = 754973153
@@ -6567,6 +6567,49 @@
 										m_fMaxTension = 100.0
 										m_fTension = 100.0
 										m_fDamping = 5.0
+									}
+								}
+							},
+							{
+								key = 
+								{
+									m_id = 1617932434
+								}
+								value = 
+								{
+									_class = "CTwoBoneIKAnimNode"
+									m_sName = "L_to_R IKRule"
+									m_vecPosition = [ 912.0, 112.0 ]
+									m_nNodeID = 
+									{
+										m_id = 1617932434
+									}
+									m_sNote = ""
+									m_inputConnection = 
+									{
+										m_nodeID = 
+										{
+											m_id = 1946417820
+										}
+										m_outputID = 
+										{
+											m_id = 4294967295
+										}
+									}
+									m_ikChainName = "arm_L"
+									m_endEffectorType = "IkEndEffector_Bone"
+									m_endEffectorAttachmentName = ""
+									m_targetType = "IkTarget_Bone"
+									m_attachmentName = ""
+									m_targetBoneName = "hand_L_to_R"
+									m_targetParam = 
+									{
+										m_id = 4294967295
+									}
+									m_bMatchTargetOrientation = true
+									m_rotationParam = 
+									{
+										m_id = 4294967295
 									}
 								}
 							},
@@ -7053,7 +7096,7 @@
 	[
 		{
 			m_name = "models/rifle/m38.vmdl"
-			m_bEnabled = false
+			m_bEnabled = true
 		},
 		{
 			m_name = "models/fishingrod/saunarod.vmdl"
@@ -7061,7 +7104,7 @@
 		},
 		{
 			m_name = "models/saunavihta/saunavihta.vmdl"
-			m_bEnabled = true
+			m_bEnabled = false
 		},
 	]
 	m_cameraSettings = 
