@@ -8,10 +8,25 @@
         "__type": "EventDefinition",
         "AddToEventPool": true,
         "EventName": "Peeping Creep",
+        "EventSignals": [
+          {
+            "Identifier": "event.creep.attack"
+          },
+          {
+            "Identifier": "event.creep.surprise"
+          }
+        ],
         "Rarity": "Uncommon",
         "ReinstantiateOnRestart": true,
         "Stackable": true,
         "Type": "Zone"
+      },
+      {
+        "__type": "EventPissTrigger",
+        "Extents": "0,0,0",
+        "MaxPollingRate": 5,
+        "Offset": "0,0,0",
+        "TriggerSignalIdentifier": "hello piss"
       }
     ],
     "Children": [
@@ -44,7 +59,7 @@
             "Offset": "0,0,50",
             "TagSet": "player",
             "TriggerPrefab": [],
-            "TriggerSignalIdentifier": null
+            "TriggerSignalIdentifier": "creepy.peeper.scared.area"
           }
         ]
       },
@@ -61,7 +76,7 @@
             "Offset": "0,0,50",
             "TagSet": "player",
             "TriggerPrefab": [],
-            "TriggerSignalIdentifier": null
+            "TriggerSignalIdentifier": "creepy.peeper.attack.area"
           }
         ]
       },
@@ -110,10 +125,10 @@
                   "Id": 1,
                   "Type": "call",
                   "Properties": {
+                    "_name": "Get",
                     "T": "package.fish.sauna/Sauna.Player",
                     "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                    "_name": "Get"
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
                   },
                   "UserData": {
                     "Position": "496,-240",
@@ -219,8 +234,8 @@
                   "Id": 11,
                   "Type": "property.get",
                   "Properties": {
-                    "_type": "Sandbox.System/Vector3",
-                    "_name": "Normal"
+                    "_name": "Normal",
+                    "_type": "Sandbox.System/Vector3"
                   },
                   "UserData": {
                     "Position": "336,320"
@@ -919,9 +934,9 @@
                   "Type": "call",
                   "Properties": {
                     "_name": "Get",
+                    "T": "package.fish.sauna/Sauna.Player",
                     "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                    "T": "package.fish.sauna/Sauna.Player"
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
                   },
                   "UserData": {
                     "Position": "-128,-320"

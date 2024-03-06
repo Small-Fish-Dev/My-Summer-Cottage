@@ -1,20 +1,13 @@
 using Editor;
-using Sandbox;
 
 namespace Sauna;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text.Json.Nodes;
 using Editor.NodeEditor;
-using Facepunch.ActionGraphs;
 using Sandbox;
 using Sauna.Event;
-using DisplayInfo = Sandbox.DisplayInfo;
 
 [CustomEditor( typeof( Signal ) )]
 internal class SignalWidget : ControlWidget
@@ -81,52 +74,118 @@ internal class SignalWidget : ControlWidget
 		return elements.ToArray();
 	}
 
-	IEnumerable<SignalOption> GetTriggers( JsonObject obj )
-	{
-		var components = obj["Components"].AsArray();
-
-		return components
-			.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
-			.Where( component => component["TriggerSignalIdentifier"].ToString() != String.Empty )
-			.Select( component => GetSignalOption( component["__type"].ToString(), component["TriggerSignalIdentifier"].ToString() ) );
-	}
-
 	void OpenMenu()
 	{
 		const string mainScene = "finland";
 
-		var test = ResourceLibrary.GetAll<SceneFile>()
+		var sceneTriggers = ResourceLibrary.GetAll<SceneFile>()
 			.Where( x => x.Title == mainScene )
-			.SelectMany( x =>
+			.SelectMany( scene =>
 			{
-				return x.GameObjects.Where( x => x.ContainsKey( "Components" ) )
-				.SelectMany( x =>
+				var allSignals = new List<SignalOption>();
+				var children = scene.GameObjects;
+
+				allSignals.AddRange( children.SelectMany( child =>
 				{
-					var components = x["Components"].AsArray();
-					return components
-						.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
-						.Select( y => GetSignalOption( y["TriggerSignalIdentifier"].ToString(), y["__type"].ToString(), x["Name"].ToString(), "Scene" ) );
-				} );
+					var childSignals = new List<SignalOption>();
+					var components = child["Components"]?.AsArray() ?? null;
+
+					if ( components != null )
+					{
+						childSignals.AddRange( components
+							.Where( component =>
+							{
+								var type = component["__type"].ToString(); // Don't bother me about this!!
+
+								return (type == "EventAreaTrigger" || type == "EventInteractionTrigger" || type == "EventPissTrigger" || type == "EventSellAreaTrigger");
+							} )
+							.Where( x => x["TriggerSignalIdentifier"] != null && x["TriggerSignalIdentifier"].ToString() != "" )
+							.Select( y => GetSignalOption( y["TriggerSignalIdentifier"].ToString(), y["__type"].ToString(), child["Name"].ToString(), "Scene" ) ) );
+					}
+
+					return childSignals;
+				} ) );
+
+				return allSignals;
 			} );
 
-		var eventDefinitions = PrefabLibrary.All
-			.Select( x => x.Value.Prefab.RootObject )
-			.SelectMany( x =>
+		var allEvents = PrefabLibrary.All
+			.SelectMany( prefab =>
 			{
-				var components = x["Components"].AsArray();
-				return components
-					.Where( component => component["__type"].ToString() == "EventDefinition" )
-					.Select( component => GetSignalOption( component["__type"].ToString(), component["EventName"].ToString() ) );
+				var allSignals = new List<SignalOption>();
+				var components = prefab.Value.GetComponents<EventDefinition>();
+
+				allSignals.AddRange( components
+				.SelectMany( component =>
+				{
+					var finalSignals = new List<Signal>();
+					var signals = component.Get<List<Signal>>( "EventSignals" );
+
+					if ( signals != null )
+						finalSignals.AddRange( signals );
+
+					var triggers = prefab.Value.GetComponents<EventTrigger>();
+
+					allSignals.AddRange( triggers
+					.Select( trigger => GetSignalOption( trigger.Get<string>( "TriggerSignalIdentifier" ), trigger.Type.ToString(), component.Get<string>( "EventName" ), "Events" ) ) );
+
+					var children = prefab.Value.Prefab.RootObject["Children"]?.AsArray() ?? null;
+
+					if ( children != null )
+					{
+						foreach ( var child in children )
+						{
+							var components = child["Components"]?.AsArray() ?? null;
+
+							if ( components != null )
+							{
+								allSignals.AddRange( components
+									.Where( component =>
+									{
+										var type = component["__type"].ToString(); // Don't bother me about this!!
+
+										return (type == "EventAreaTrigger" || type == "EventInteractionTrigger" || type == "EventPissTrigger" || type == "EventSellAreaTrigger");
+									} )
+									.Where( x => x["TriggerSignalIdentifier"] != null && x["TriggerSignalIdentifier"].ToString() != "" )
+									.Select( y => GetSignalOption( y["TriggerSignalIdentifier"].ToString(), y["__type"].ToString(), component.Get<string>( "EventName" ), "Events" ) ) );
+							}
+						}
+					}
+
+					return finalSignals
+					.Select( signal => GetSignalOption( $"{signal.Identifier}", component.Type.ToString(), component.Get<string>( "EventName" ), "Events" ) );
+
+				} ) );
+
+
+				return allSignals;
 			} );
 
-		var allTriggers = PrefabLibrary.All
-			.Select( x => x.Value.Prefab.RootObject )
-			.SelectMany( x =>
+		var allItems = PrefabLibrary.All
+			.SelectMany( prefab =>
 			{
-				var components = x["Components"].AsArray();
+				var components = prefab.Value.GetComponents<ItemComponent>();
+
 				return components
-					.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
-					.Select( component => GetSignalOption( component["__type"].ToString(), "hello" ) );
+					.SelectMany( component =>
+					{
+						List<SignalOption> options = new();
+
+						options.Add( GetSignalOption( $"item.picked.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+						options.Add( GetSignalOption( $"item.received.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+						options.Add( GetSignalOption( $"item.dropped.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+						options.Add( GetSignalOption( $"item.removed.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+
+						if ( component.Type.TargetType == typeof( ItemEquipment ) )
+						{
+							options.Add( GetSignalOption( $"item.equipped.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+							options.Add( GetSignalOption( $"item.unequipped.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+							options.Add( GetSignalOption( $"item.used_1.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+							options.Add( GetSignalOption( $"item.used_2.{component.Get<string>( "Name" )}", component.Type.ToString(), component.Get<string>( "Name" ), "Items" ) );
+						}
+
+						return options;
+					} );
 			} );
 
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>()
@@ -134,25 +193,54 @@ internal class SignalWidget : ControlWidget
 			{
 				return new List<SignalOption>
 				{
-					GetSignalOption( $"task.start.{x.Name}", x.Name, x.TaskType.ToString(), "Tasks" ),
-					GetSignalOption( $"task.success.{x.Name}", x.Name, x.TaskType.ToString(), "Tasks" ),
-					GetSignalOption( $"task.fail.{x.Name}", x.Name, x.TaskType.ToString(), "Tasks" )
+					GetSignalOption( $"task.start.{x.Name}", x.TaskType.ToString(), x.Name, "Tasks" ),
+					GetSignalOption( $"task.success.{x.Name}", x.TaskType.ToString(), x.Name, "Tasks" ),
+					GetSignalOption( $"task.fail.{x.Name}", x.TaskType.ToString(), x.Name.ToString(), "Tasks" )
 				};
 			} );
 
 
-		test = test.Concat( allTasks );
-		test = test.Concat( allTriggers );
+		var allInteractions = PrefabLibrary.All
+			.SelectMany( prefab =>
+			{
+				var components = prefab.Value.GetComponents<Interactions>();
+
+				return components
+					.SelectMany( component =>
+					{
+						List<SignalOption> options = new();
+
+						var thing = component.Object;
+
+						var interactions = thing["ObjectInteractions"].AsArray();
+
+						if ( interactions != null )
+						{
+							foreach ( var interaction in interactions )
+							{
+								options.Add( GetSignalOption( interaction["Identifier"].ToString(), component.Type.ToString(), prefab.Value.Name, "Interactions" ) );
+							}
+						}
+
+						return options;
+					} );
+			} );
+
+
+		sceneTriggers = sceneTriggers.Concat( allTasks );
+		sceneTriggers = sceneTriggers.Concat( allItems );
+		sceneTriggers = sceneTriggers.Concat( allEvents );
+		sceneTriggers = sceneTriggers.Concat( allInteractions );
 
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;
 
 		_menu.AddLineEdit( "Filter",
-			placeholder: "Filter Signalers...",
+			placeholder: "Add or Filter Signals...",
 			autoFocus: true,
-			onChange: s => PopulateMenu( _menu, test, s ) );
+			onChange: s => PopulateMenu( _menu, sceneTriggers, s ) );
 
-		_menu.AboutToShow += () => PopulateMenu( _menu, test );
+		_menu.AboutToShow += () => PopulateMenu( _menu, sceneTriggers );
 
 		_menu.OpenAtCursor( true );
 		_menu.MinimumWidth = ScreenRect.Width;

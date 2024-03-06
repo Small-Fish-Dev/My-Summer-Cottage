@@ -34,8 +34,8 @@
               "Properties": {
                 "_isStatic": false,
                 "T": "package.fish.sauna/Sauna.Player",
-                "_type": "Sandbox.Game/Sandbox.IComponentLister",
-                "_name": "Get"
+                "_name": "Get",
+                "_type": "Sandbox.Game/Sandbox.IComponentLister"
               },
               "UserData": {
                 "Position": "240,80"
@@ -77,8 +77,8 @@
               "Id": 8,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Transform"
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
               },
               "UserData": {
                 "Position": "336,-256"
@@ -88,8 +88,8 @@
               "Id": 9,
               "Type": "property.get",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameTransform",
-                "_name": "Position"
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
               },
               "UserData": {
                 "Position": "512,-256"
@@ -265,6 +265,11 @@
         "__type": "EventDefinition",
         "AddToEventPool": true,
         "EventName": "Banana Peel",
+        "EventSignals": [
+          {
+            "Identifier": "banana.slip"
+          }
+        ],
         "Rarity": "Common",
         "ReinstantiateOnRestart": false,
         "Stackable": true,

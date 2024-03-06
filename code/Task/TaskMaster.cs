@@ -334,7 +334,7 @@ public class TaskMaster : Component
 
 				foreach ( var subtask in activeSubtasks )
 				{
-					if ( subtask.TriggerSignal == signalIdentifier ) // If the given signal is the one we're looking for, increase the subtask's progress
+					if ( subtask.TriggerSignal.Identifier == signalIdentifier ) // If the given signal is the one we're looking for, increase the subtask's progress
 						subtask.CurrentAmount++;
 				}
 			}

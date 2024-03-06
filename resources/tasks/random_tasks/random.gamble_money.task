@@ -1,12 +1,17 @@
 {
   "Name": "I\u0027m gooombling",
+  "Subtitle": "Kindly do the needful",
   "Description": "Gamble your life savings away.",
   "TaskType": "Any",
   "TaskRarity": "Any",
   "IsPrimary": true,
   "Global": false,
+  "SuccessSignal": "task.success.I\u0027m gooombling",
+  "FailedSignal": "task.failed.I\u0027m gooombling",
   "TimeLimited": false,
   "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": true,
+  "RunOnStartEverySession": false,
   "OnStart": null,
   "OnSuccess": {
     "Version": 5,
@@ -26,8 +31,8 @@
         "Type": "call",
         "Properties": {
           "_type": "package.fish.sauna/Sauna.Player",
-          "_name": "CaptureMemory",
-          "_isStatic": false
+          "_isStatic": false,
+          "_name": "CaptureMemory"
         },
         "UserData": {
           "Position": "192,0"
@@ -63,12 +68,5 @@
       "AmountToComplete": 50
     }
   ],
-  "CurrentSubtaskOrder": 0,
-  "Successful": false,
-  "Started": false,
-  "Completed": false,
-  "TaskTimer": {
-    "Fraction": "NaN"
-  },
   "__references": []
 }
