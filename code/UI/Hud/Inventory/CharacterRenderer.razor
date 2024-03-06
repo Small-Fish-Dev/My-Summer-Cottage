@@ -93,29 +93,11 @@
 		_character.SetBodyGroup( "feet", bodygroups.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
 		_penoid.RenderingEnabled = inventory.EquippedItems[(int)EquipSlot.Legs] == null;
 
-		_penoid?.Update( RealTime.Delta );
-		if ( _clothes != null )
-			foreach ( var clothing in _clothes )
-				if ( clothing.IsValid() )
-					clothing?.Update( RealTime.Delta );
+		Update();
 	}
 
-	public override void OnButtonEvent( ButtonEvent e )
+	private void Update()
 	{
-		if ( e.Button == "mouseleft" )
-			_isDragging = e.Pressed;
-
-		base.OnButtonEvent( e );
-	}
-
-	public override void Tick() 
-	{
-		if (_character is null)
-			return;
-
-		if ( _isDragging )
-			_yaw += Mouse.Delta.x * 0.20f;
-
 		_character.Update(RealTime.Delta);
 		_character.SetAnimParameter("height", Player.Local.Height);
 		_character.Morphs.Set("fat", Player.Local.Fatness);
@@ -134,5 +116,24 @@
 				if ( clothing.IsValid() )
 					clothing?.Update( RealTime.Delta );
 		}
+	}
+
+	public override void OnButtonEvent( ButtonEvent e )
+	{
+		if ( e.Button == "mouseleft" )
+			_isDragging = e.Pressed;
+
+		base.OnButtonEvent( e );
+	}
+
+	public override void Tick() 
+	{
+		if (_character is null)
+			return;
+
+		if ( _isDragging )
+			_yaw += Mouse.Delta.x * 0.20f;
+
+		Update();
 	}
 }
