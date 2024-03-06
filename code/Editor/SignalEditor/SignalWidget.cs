@@ -206,7 +206,17 @@ internal class SignalWidget : ControlWidget
 				SerializedProperty.SetValue( new Signal( filter ) );
 				SignalValuesChanged();
 			}
-			menu.AddOption( $"{filter}", "add_circle_outline", AddCurrent );
+			menu.AddOption( $"New '{filter}'", "add_circle_outline", AddCurrent );
+		}
+
+		if ( SerializedProperty.GetValue<Signal>().Identifier != "" )
+		{
+			void Clear()
+			{
+				SerializedProperty.SetValue( new Signal( "" ) );
+				SignalValuesChanged();
+			}
+			menu.AddOption( $"Clear", "clear", Clear );
 		}
 
 		menu.AdjustSize();
