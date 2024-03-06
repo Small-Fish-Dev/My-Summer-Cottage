@@ -11,7 +11,7 @@ public class IconEditorPopup : PopupWidget
 	public IconEditorPopup( Widget parent, SerializedProperty property ) : base( parent )
 	{
 		Property = property;
-		MinimumSize = new Vector2( 375, 460 );
+		MinimumSize = new Vector2( 375, 480 );
 
 		_editor = new IconEditor( this );
 		_editor.Size = MinimumSize;

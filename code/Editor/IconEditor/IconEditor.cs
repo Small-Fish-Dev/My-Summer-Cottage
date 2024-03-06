@@ -87,6 +87,12 @@ public class IconEditor : GraphicsView
 				_obj.SetMaterialGroup( text );
 			};
 
+			var button = Layout.Add( new Button( this )
+			{
+				Clicked = () => icon.Guid = Guid.NewGuid(),
+				ToolTip = "Only use this when duplicating prefabs so the GUID doesn't overwrite icons.",
+				Text = "WARNING!!! RESET GUID"
+			}, 0 );
 		}
 
 		Layout.AddSpacingCell( 4 );
