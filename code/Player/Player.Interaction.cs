@@ -58,5 +58,9 @@ public partial class Player
 			Renderer.Set( "right_ik_rot", rotation );
 			Renderer.Set( "action", true );
 		}
+		else if ( animation == InteractAnimations.Shoot )
+		{
+			Renderer.Set( "shoot", true );
+		}
 	}
 }
