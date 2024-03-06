@@ -1,4 +1,4 @@
-﻿namespace Sauna;
+﻿namespace Sauna.Fishing;
 
 public sealed class FishingRod : Component
 {
@@ -6,8 +6,9 @@ public sealed class FishingRod : Component
 	[Property] public float RetractDistance = 200;
 	[Property] public float ThrowForce = 100;
 
-	private GameObject CurrentBobber { get; set; }
-	private GameObject Owner { get; set; }
+	public Player Owner { get; private set; }
+
+	private Bobber CurrentBobber { get; set; }
 	public bool Casted => CurrentBobber.IsValid();
 
 	protected override void OnStart()
@@ -26,8 +27,8 @@ public sealed class FishingRod : Component
 
 	protected override void OnUpdate()
 	{
-		if (Casted && CurrentBobber.Transform.Position.Distance( Owner.Transform.Position ) > RetractDistance)
-			RetractBobber();
+		if ( Casted && CurrentBobber.Transform.Position.Distance( Owner.Transform.Position ) > RetractDistance )
+			RetractBobber( true );
 	}
 
 	private void OnInteract( Player player, GameObject obj )
@@ -38,17 +39,22 @@ public sealed class FishingRod : Component
 		}
 		else
 		{
-			Owner = player.GameObject;
-			CurrentBobber = BobberPrefab.Clone();
-			CurrentBobber.Enabled = true;
-			CurrentBobber.Transform.Position = player.Transform.Position + player.Bounds.Center;
-			CurrentBobber.Components.Get<Rigidbody>().Velocity = player.Velocity + player.EyeAngles.Forward * ThrowForce;
+			Owner = player;
+			var newBobber = BobberPrefab.Clone();
+			newBobber.Enabled = true;
+			newBobber.Transform.Position = player.Transform.Position + player.Bounds.Center;
+			newBobber.Components.Get<Rigidbody>().Velocity = player.Velocity + player.EyeAngles.Forward * ThrowForce;
+			CurrentBobber = newBobber.Components.Get<Bobber>();
+			CurrentBobber.Rod = this;
 		}
 	}
 
-	private void RetractBobber()
+	private void RetractBobber( bool force = false )
 	{
-		CurrentBobber.Destroy();
+		if ( !force )
+			CurrentBobber.PullOut();
+
+		CurrentBobber.GameObject.Destroy();
 		CurrentBobber = null;
 		Owner = null;
 	}

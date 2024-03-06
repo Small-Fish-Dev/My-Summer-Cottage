@@ -5,9 +5,11 @@ public class LeFisheSpawner : Component
 	[Property] public List<PrefabFile> Fishes { get; set; }
 	[Property] public float GridCellSize = 128;
 	[Property] public float MinimumDepth = 10;
+	[Property] public int FishesPerDepth = 2;
+	[Property] public float FishesDepthIncrement = 10;
 
 	private WaterComponent _water;
-	private List<BBox> _debugFailedCells = new();
+	// private List<BBox> _debugFailedCells = new();
 	private List<(float minimumDepth, PrefabFile fish)> _fishesSorted;
 
 	protected override void OnAwake()
@@ -41,8 +43,8 @@ public class LeFisheSpawner : Component
 				.Run();
 			if ( skyTrace.Hit )
 			{
-				_debugFailedCells.Add( bbox + skyTrace.EndPosition );
-				Log.Info( $"The sky is obscured by {skyTrace.Body.GetGameObject()}" );
+				// _debugFailedCells.Add( bbox + skyTrace.EndPosition );
+				// Log.Info( $"The sky is obscured by {skyTrace.Body.GetGameObject()}" );
 				continue;
 			}
 
@@ -50,6 +52,12 @@ public class LeFisheSpawner : Component
 				.Box( bbox, center, center + Vector3.Down * 100 )
 				.Run();
 			bbox = bbox.AddPoint( Vector3.Down * depthTrace.Distance );
+			
+			var depth = bbox.Size.z;
+			var availableFish = _fishesSorted.TakeWhile( fish => fish.minimumDepth <= depth ).Select( fish => fish.fish ).ToList();
+			// Let's not add cells that don't have any fishes
+			if ( availableFish.Count == 0 )
+				continue;
 
 			var cellGameObject = new GameObject { Transform = { Position = center } };
 			cellGameObject.Tags.Add( "fishing_cell" );
@@ -60,12 +68,10 @@ public class LeFisheSpawner : Component
 			boxCollider.IsTrigger = true;
 
 			var fishingCell = cellGameObject.Components.Create<FishingCell>();
-			fishingCell.AvailableFish = new List<PrefabFile>();
-			var depth = bbox.Size.z;
-			foreach ( var fish in _fishesSorted.TakeWhile( fish => fish.minimumDepth <= depth ) )
-			{
-				fishingCell.AvailableFish.Add( fish.fish );
-			}
+			fishingCell.FishCount =
+				FishesPerDepth * Math.Max( (int)Math.Floor( bbox.Size.z / FishesDepthIncrement ), 1 );
+
+			fishingCell.AvailableFish = availableFish;
 
 			cellGameObject.Name = $"Fishing Cell [{x},{y}]";
 			cellGameObject.SetParent( GameObject );

@@ -5,6 +5,15 @@
     "Enabled": true,
     "Components": [
       {
+        "__type": "FishingRod",
+        "BobberPrefab": {
+          "_type": "gameobject",
+          "go": "24f0895c-c2b4-4970-83cc-62260e11c26c"
+        },
+        "RetractDistance": 750,
+        "ThrowForce": 1000
+      },
+      {
         "__type": "ItemEquipment",
         "Attachment": "hand_R",
         "AttachmentTransform": {
@@ -55,15 +64,6 @@
         "MassOverride": 0,
         "RigidbodyFlags": 0,
         "StartAsleep": false
-      },
-      {
-        "__type": "FishingRod",
-        "BobberPrefab": {
-          "_type": "gameobject",
-          "go": "24f0895c-c2b4-4970-83cc-62260e11c26c"
-        },
-        "RetractDistance": 500,
-        "ThrowForce": 1000
       }
     ],
     "Children": [
@@ -73,6 +73,9 @@
         "Tags": "bobber",
         "Networked": true,
         "Components": [
+          {
+            "__type": "Bobber"
+          },
           {
             "__type": "ModelRenderer",
             "BodyGroups": 18446744073709551615,

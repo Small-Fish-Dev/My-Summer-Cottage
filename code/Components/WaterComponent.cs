@@ -5,16 +5,18 @@ public sealed class WaterComponent : Component
 	private const string MATERIAL_PATH = "materials/water/water.vmat";
 	private const int SUBDIVISIONS = 32;
 
+	[Property] [Range( 0, 1 )] public float BobberDrag { get; set; } = 0.8f;
 	[Property] public Vector3 Mins { get; set; } = -25;
 	[Property] public Vector3 Maxs { get; set; } = 25;
 
-	[Property, Sync, Category( "Appearance" )] 
+	[Property, Sync, Category( "Appearance" )]
 	public Color Color { get; set; } = Color.Blue;
 
 	[Property, Sync, Category( "Appearance" ), Range( 0.01f, 5f )]
 	public float TextureScale { get; set; } = 0.4f;
 
 	public BBox Bounds => new BBox( Mins, Maxs );
+
 	public Model Model
 	{
 		get
@@ -31,6 +33,7 @@ public sealed class WaterComponent : Component
 
 	private Model _model;
 	private SceneObject _sceneObject;
+	private BoxCollider _collider;
 
 	public bool Contains( Vector3 vec )
 		=> Bounds.Transform( Transform.World ).Contains( vec );
@@ -45,6 +48,34 @@ public sealed class WaterComponent : Component
 		_sceneObject?.Delete();
 		_sceneObject = new SceneObject( Scene.SceneWorld, Model );
 		_sceneObject.Transform = Transform.World;
+	}
+
+	protected override void OnAwake()
+	{
+		_collider = Components.GetOrCreate<BoxCollider>();
+		var bbox = new BBox( Mins - Transform.Position, Maxs - Transform.Position );
+		_collider.Center = bbox.Center;
+		_collider.Scale = bbox.Size;
+		_collider.IsTrigger = true;
+	}
+
+	protected override void OnFixedUpdate()
+	{
+		foreach ( var other in _collider.Touching )
+		{
+			if ( other.Tags.Has( "bobber" ) )
+			{
+				var bounds = other.Rigidbody.PhysicsBody.GetBounds();
+				var depth = Maxs.z - bounds.Mins.z;
+				var bobberHeight = bounds.Size.z;
+				var percentInWater = depth.Clamp( 0, bobberHeight ) / bobberHeight;
+
+				other.Rigidbody.Velocity = other.Rigidbody.Velocity * BobberDrag
+				                           + Vector3.Up * other.Rigidbody.MassOverride * 100 * percentInWater
+				                           // Simulating the waves
+				                           * ((float)Math.Sin( Time.Now * 5 )).Remap( -1, 1, 0.5f, 1 );
+			}
+		}
 	}
 
 	protected override void DrawGizmos()
@@ -72,10 +103,10 @@ public sealed class WaterComponent : Component
 		var mesh = new Mesh( Material.Load( MATERIAL_PATH ) );
 		var positions = new Vector3[]
 		{
-			new Vector3( Mins.x, Mins.y, 0f ),
-			new Vector3( Mins.x, Maxs.y, 0f ),
-			new Vector3( Maxs.x, Maxs.y, 0f ),
-			new Vector3( Maxs.x, Mins.y, 0f )
+			new( Mins.x, Mins.y, 0f ),
+			new( Mins.x, Maxs.y, 0f ),
+			new( Maxs.x, Maxs.y, 0f ),
+			new( Maxs.x, Mins.y, 0f )
 		};
 
 		var verts = new List<SimpleVertex>();
