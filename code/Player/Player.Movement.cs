@@ -65,6 +65,15 @@ partial class Player
 	[Sync] public Angles EyeAngles { get; set; }
 	[Sync] public Vector3 Velocity { get; set; }
 	[Sync] public HoldType HoldType { get; set; } = HoldType.Idle;
+	[Sync] public bool AimState
+	{
+		get => _aimState;
+		set
+		{
+			_aimState = value;
+			_lastAimed = 0f;
+		}
+	}
 
 	public BBox Bounds => new BBox( Collider.Center - Collider.Scale / 2f, Collider.Center + Collider.Scale / 2f );
 
@@ -73,6 +82,8 @@ partial class Player
 
 	private HoldType _targetHoldType;
 	private TimeUntil _resetHoldType;
+	private TimeSince _lastAimed;
+	private bool _aimState;
 
 	public void ForceHoldType( HoldType type, float time )
 	{
@@ -148,6 +159,18 @@ partial class Player
 
 	public void ApplyRecoil( Angles angle )
 		=> _currentRecoil += angle;
+
+	public void SetAnimation( string param, Vector3 value )
+		=> Renderer.Set( param, value );
+
+	public void SetAnimation( string param, Rotation value )
+		=> Renderer.Set( param, value );
+
+	public void SetAnimation( string param, float value )
+		=> Renderer.Set( param, value );
+
+	public void SetAnimation( string param, bool value )
+		=> Renderer.Set( param, value );
 
 	protected void UpdateAngles()
 	{
@@ -230,6 +253,16 @@ partial class Player
 
 		var holdType = _resetHoldType ? HoldType : _targetHoldType;
 		Renderer.Set( "hold_type", (int)holdType );
+
+		// Handle aiming. todo @ceitine: NEEDS TO BE TOGGLE
+		if ( holdType == HoldType.Rifle ) 
+			Renderer.Set( "aiming", true );
+
+		if ( !IsProxy && _lastAimed > 0.1f && AimState )
+		{
+			Renderer.Set( "aiming", false );
+			AimState = false;
+		}
 	}
 
 	private void OnJumpEvent( SceneModel.GenericEvent e )

@@ -39,29 +39,29 @@
 		? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
 		: Player.Local?.TargetedGameObject;
 
-	private static List<string> priorityList = new();
+	private static Dictionary<string, Interaction> priorityList = new();
 	private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
 	private bool WithinBounds(Interaction interaction) => !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
-	private bool HasPriority( string key ) => FromHands || !priorityList.Contains( key.ToLower() );
+	private bool HasPriority( string key ) => FromHands || !priorityList.ContainsKey( key.ToLower() );
 	private BBox GetInteractionBounds(Interaction interaction)
 		=> new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
 			.Transform(Player.Local.TargetedGameObject.Transform.World);
 
-	private void AddToPriority( string key, bool forced = false )
+	private void AddToPriority( Interaction interaction, bool forced = false )
 	{
 		if ( !FromHands && !forced ) 
 			return;
 
-		key = key.ToLower();
-		var contains = priorityList.Contains( key );
+		var key = interaction.Keybind.ToLower();
+		var contains = priorityList.ContainsKey( key );
 		if ( contains ) 
 			return;
 
-		priorityList.Add( key );
+		priorityList.Add( key, interaction );
 	}
 
 	public override void Tick() 
-	{
+	{	
 		if ( FromHands ) priorityList.Clear();
 
 		SetClass( "visible", ShowHint() );
@@ -76,7 +76,7 @@
 
 			var canInteract = !interaction.Disabled.InvokeOrDefault();
 			if ( canInteract )
-				AddToPriority( interaction.Keybind );
+				AddToPriority( interaction );
 
 			if ( !HasPriority( interaction.Keybind ) )
 				continue;

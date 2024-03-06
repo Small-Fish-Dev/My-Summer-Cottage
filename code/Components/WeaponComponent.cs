@@ -1,4 +1,4 @@
-﻿namespace Sauna;
+namespace Sauna;
 
 public enum WeaponType
 {
@@ -24,6 +24,7 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Sounds" )] public SoundEvent PostFireSound { get; set; }
 	[Property, Category( "Sounds" )] public SoundEvent ReloadSound { get; set; }
 
+	public Player Owner => Player.All.FirstOrDefault( x => x.ConnectionID == Network.OwnerId );
 
 	private string _name;
 	private TimeUntil _canFire;
@@ -46,7 +47,18 @@ public sealed class WeaponComponent : Component
 			ShowWhenDisabled = () => true,
 			Disabled = () => Capacity > 0 && Ammo == 0,
 			InputMode = Mode,
-			Animation = InteractAnimations.Action
+			Animation = Type == WeaponType.Ranged ? InteractAnimations.Shoot : InteractAnimations.Action
+		} );
+
+		interactions.AddInteraction( new Interaction()
+		{
+			Accessibility = AccessibleFrom.Hands,
+			Description = "Aim",
+			Keybind = "mouse2",
+			Action = (Player player, GameObject obj) => player.AimState = true,
+			Disabled = () => Type != WeaponType.Ranged,
+			InputMode = InputMode.Down,
+			Animation = InteractAnimations.None
 		} );
 
 		interactions.AddInteraction( new Interaction()
@@ -56,7 +68,8 @@ public sealed class WeaponComponent : Component
 			Keybind = "next",
 			Action = Reload,
 			Disabled = Disabled,
-			ShowWhenDisabled = () => Type == WeaponType.Ranged
+			ShowWhenDisabled = () => Type == WeaponType.Ranged,
+			Animation = InteractAnimations.None
 		} );
 	}
 
