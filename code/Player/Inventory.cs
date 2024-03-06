@@ -121,18 +121,16 @@ public class Inventory : Component
 	/// </summary>
 	public bool DropItem( ItemComponent item )
 	{
+		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
+
 		if ( item is ItemEquipment equipment )
 		{
 			if ( equipment.Equipped )
 				RemoveEquipmentItem( equipment );
 
-			if ( equipment.UpdateParcel( false ) ) // If goes into parcel.
-				equipment.ToggleRenderer( false );
-			else
-				equipment.ToggleRenderer( true );
+			equipment.Equipped = false;
 		}
 
-		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
 		TaskMaster.SubmitTriggerSignal( $"item.dropped.{item.Name}", Player );
 
 		item.GameObject.Parent = null;
@@ -342,6 +340,7 @@ public class Inventory : Component
 		}
 
 		var obj = SceneUtility.GetPrefabScene( item ).Clone();
+		obj.NetworkSpawn();
 		player.Inventory.GiveItem( obj );
 	}
 }

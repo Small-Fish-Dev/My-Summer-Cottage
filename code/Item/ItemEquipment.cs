@@ -22,6 +22,8 @@ public enum HoldType : byte
 
 public class ItemEquipment : ItemComponent
 {
+	public static Model Parcel = Model.Load( "models/props/clothing_parcel/clothing_parcel.vmdl" );
+
 	[Property, Category( "Equipment" )] public EquipSlot Slot { get; set; } = EquipSlot.Hand;
 	[Property, Category( "Equipment" )] public HiddenBodyGroup HideBodygroups { get; set; }
 
@@ -38,6 +40,20 @@ public class ItemEquipment : ItemComponent
 	private GameObject iconWorldObject;
 
 	private bool _equipped = false;
+	private bool _inParcel = false;
+
+	[Sync]
+	public bool InParcel
+	{
+		get => _inParcel;
+		set
+		{
+			_inParcel = value && GoesInParcel; // Hacky, but for now don't put any hand items in parcel.
+			if ( GoesInParcel ) UpdateParcel( _inParcel );
+		}
+	}
+
+	private bool GoesInParcel => Slot != EquipSlot.Hand;
 
 	[Sync]
 	public bool Equipped
@@ -47,11 +63,12 @@ public class ItemEquipment : ItemComponent
 		{
 			_equipped = value;
 
-			// Toggle renderer.
-			ToggleRenderer( value );
+			// Put in parcel.
+			InParcel = !value;
 
-			// Parcel
-			UpdateParcel( value );
+			// Toggle renderer
+			if ( !InParcel && !InInventory ) ToggleRenderer( true );
+			else ToggleRenderer( value && !InParcel );
 
 			// Bonemerge
 			if ( Renderer is SkinnedModelRenderer skinned )
@@ -62,45 +79,73 @@ public class ItemEquipment : ItemComponent
 			}
 
 			// Disable rigidbody and collider.
-			var body = GameObject?.Components.Get<Rigidbody>( FindMode.EverythingInSelfAndChildren );
-			if ( body != null && body != parcelBody ) body.Enabled = !value;
+			if ( !GoesInParcel )
+			{
+				var body = GameObject?.Components.GetAll<Rigidbody>( FindMode.EverythingInSelfAndChildren ).FirstOrDefault( x => x != parcelBody );
+				if ( body != null ) body.Enabled = !value;
 
-			var collider = GameObject?.Components.Get<Collider>( FindMode.EverythingInSelfAndChildren );
-			if ( collider != null && collider != parcelCollider ) collider.Enabled = !value;
+				var collider = GameObject?.Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ).FirstOrDefault( x => x != parcelCollider );
+				if ( collider != null ) collider.Enabled = !value;
+			}
 		}
 	}
 
 	public void ToggleRenderer( bool value )
 	{
-		Renderer ??= Components.Get<SkinnedModelRenderer>( FindMode.InSelf ) ?? Components.Get<ModelRenderer>( FindMode.InSelf );
+		Renderer ??= Components.GetAll<ModelRenderer>( FindMode.InSelf ).FirstOrDefault( x => x != parcelRenderer );
 		Renderer.Enabled = value;
 	}
 
-	public bool UpdateParcel( bool value )
+	private void UpdateParcel( bool value )
 	{
-		if ( parcelBody == null && Components.Get<Rigidbody>( FindMode.EverythingInSelfAndDescendants ) != null )
-			return false;
-
-		if ( parcelRenderer == null )
+		// Create
+		if ( value )
 		{
-			parcelRenderer = Components.Create<ModelRenderer>();
-			parcelRenderer.Model = Model.Load( "models/props/clothing_parcel/clothing_parcel.vmdl" );
+			parcelRenderer ??= Components.Create<ModelRenderer>();
+			parcelRenderer.Enabled = true;
+			parcelRenderer.Model = Parcel;
 
-			parcelCollider = Components.GetOrCreate<BoxCollider>();
+			parcelCollider ??= Components.Create<BoxCollider>();
 			parcelCollider.Center = Vector3.Up * 4.8f;
 			parcelCollider.Scale = new Vector3( 27f, 27f, 7.5f );
+			parcelCollider.Enabled = true;
 
-			parcelBody = Components.GetOrCreate<Rigidbody>();
+			parcelBody ??= Components.Create<Rigidbody>();
+			parcelBody.Enabled = true;
 
 			CreateIconWorldPanel();
+			iconWorldObject.Enabled = true;
+
+			return;
 		}
 
-		iconWorldObject.Enabled = !value;
-		parcelRenderer.Enabled = !value;
-		parcelCollider.Enabled = !value;
-		parcelBody.Enabled = !value;
+		// Remove
+		if ( parcelRenderer == null || iconWorldObject == null || parcelCollider ==  null || parcelBody == null )
+			return;
 
-		return true;
+		parcelRenderer.Enabled = false;
+		iconWorldObject.Enabled = false;
+		parcelCollider.Enabled = false;
+		parcelBody.Enabled = false;
+	}
+
+	private void CreateIconWorldPanel()
+	{
+		if ( iconWorldObject is not null )
+			return;
+
+		iconWorldObject = new GameObject { Parent = GameObject };
+		iconWorldObject.Transform.LocalPosition = new Vector3( 0, 0, 10 );
+		iconWorldObject.Transform.LocalRotation = Rotation.FromPitch( 90 );
+		iconWorldObject.NetworkSpawn();
+		iconWorldObject.Components.GetOrCreate<Sandbox.WorldPanel>();
+		iconWorldObject.Components.GetOrCreate<IconWorldPanel>().Icon = IconTexture;
+	}
+
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		Renderer ??= Components.GetAll<ModelRenderer>( FindMode.InSelf ).FirstOrDefault( x => x != parcelRenderer );
 	}
 
 	protected override void OnStart()
@@ -144,19 +189,6 @@ public class ItemEquipment : ItemComponent
 		_model ??= new SceneModel( world, "models/guy/guy.vmdl", global::Transform.Zero );
 		_model.RenderingEnabled = true;
 		return _model;
-	}
-
-	private void CreateIconWorldPanel()
-	{
-		if ( iconWorldObject is not null )
-			return;
-
-		iconWorldObject = new GameObject { Parent = GameObject };
-		iconWorldObject.Transform.LocalPosition = new Vector3( 0, 0, 10 );
-		iconWorldObject.Transform.LocalRotation = Rotation.FromPitch( 90 );
-		iconWorldObject.NetworkSpawn();
-		iconWorldObject.Components.GetOrCreate<Sandbox.WorldPanel>();
-		iconWorldObject.Components.GetOrCreate<IconWorldPanel>().Icon = IconTexture;
 	}
 
 	protected override void DrawGizmos()
