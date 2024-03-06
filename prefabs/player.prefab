@@ -8,9 +8,11 @@
       {
         "__type": "Player",
         "DuckSpeed": 60,
+        "Experience": 0,
         "Fatness": 0,
         "Height": 0,
         "JumpStrength": 280,
+        "Level": 0,
         "Money": 0,
         "MoveHelper": {
           "_type": "component",
@@ -53,12 +55,12 @@
         ],
         "AirAcceleration": 800,
         "AirFriction": 1,
-        "Bounce": 0.3,
+        "Bounce": 0,
         "Collider": null,
         "EnableUnstuck": true,
         "Gravity": "0,0,850",
         "GroundAcceleration": 2000,
-        "GroundAngle": 45,
+        "GroundAngle": 60,
         "GroundFriction": 30,
         "IgnoreTags": "trigger",
         "MaxUnstuckTries": 20,
@@ -125,7 +127,8 @@
             "WorldspacePlayback": true
           },
           {
-            "__type": "AudioListener"
+            "__type": "AudioListener",
+            "UseCameraDirection": true
           },
           {
             "__type": "DitherHook"
