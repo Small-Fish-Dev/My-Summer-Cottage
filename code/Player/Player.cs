@@ -116,8 +116,6 @@ public partial class Player : Component, Component.ExecuteInEditor
 		7 => "South West",
 		_ => "None"
 	};
-
-	public Dictionary<string, PlayerSave.FishRecord> FishesCaught;
 	public Inventory Inventory { get; private set; }
 	protected CameraComponent Camera;
 	protected SkinnedModelRenderer Renderer;

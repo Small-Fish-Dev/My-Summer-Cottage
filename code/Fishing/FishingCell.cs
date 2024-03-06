@@ -229,12 +229,12 @@ public class FishingCell : Component
 		if ( fishInstance.Components.TryGet<ModelPhysics>( out var physics ) )
 		{
 			fishInstance.Enabled = false;
-			fishInstance.Transform.Position = Transform.Position;
+			fishInstance.Transform.Position = bobber.Transform.Position;
 			fishInstance.Enabled = true;
 
 			// TODO: should probably calculate a parabolic trajectory
 
-			var from = Transform.Position;
+			var from = bobber.Transform.Position;
 			var to = bobber.Rod.Owner.Transform.Position;
 			var dist = from.Distance( to );
 			var velocity = (to - from).Normal * dist / 4f + Vector3.Up * 100f;
@@ -244,6 +244,8 @@ public class FishingCell : Component
 
 		var fishComponent = fishInstance.Components.Get<Fish>();
 		fishComponent.AssignWeight( fish.Weight );
+		
+		bobber.Rod.Owner.OnFishCaught( fish.Fish, fish.Weight );
 	}
 
 	/// <summary>

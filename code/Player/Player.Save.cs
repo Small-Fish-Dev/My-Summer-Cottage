@@ -11,13 +11,6 @@ public struct ItemSave
 
 public struct PlayerSave
 {
-	public struct FishRecord
-	{
-		[JsonInclude] public int Count;
-		[JsonInclude] public float MaxWeight;
-		[JsonInclude] public DateTime MaxWhen;
-	}
-
 	public const string FILE_PATH = "saunasona.json";
 
 	[JsonInclude] public string Firstname;
