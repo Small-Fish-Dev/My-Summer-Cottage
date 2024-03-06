@@ -1,6 +1,3 @@
-using System.Threading.Tasks;
-using static Sauna.SaunaTask.Subtask;
-
 namespace Sauna;
 
 public enum TaskType
@@ -118,6 +115,9 @@ public partial class SaunaTask : GameResource
 	/// </summary>
 	[Property]
 	public TaskType TaskType { get; set; } = TaskType.Any;
+
+	[Hide, JsonIgnore]
+	public bool IsPrimaryTask => TaskType == TaskType.GivenByStory;
 
 	/// <summary>
 	/// How frequently this taks will be given out
