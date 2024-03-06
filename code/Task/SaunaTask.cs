@@ -48,7 +48,7 @@ public partial class SaunaTask : GameResource
 		/// Which trigger signal is going to trigger the progress/completion of this subtask
 		/// </summary>
 		[Property]
-		public string TriggerSignal { get; set; }
+		public Signal TriggerSignal { get; set; }
 
 		/// <summary>
 		/// How many times the trigger needs to run before the subtask is considered completed
@@ -88,9 +88,6 @@ public partial class SaunaTask : GameResource
 			}
 		}
 	}
-
-	[Property]
-	public Signal Test { get; set; }
 
 	/// <summary>
 	/// The name of this task, keep it short 2-4 words

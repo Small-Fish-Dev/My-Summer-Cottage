@@ -32,8 +32,8 @@ public static partial class SaunaActionNodes
 	/// <param name="player"></param>
 	[ActionGraphNode( "event.triggersignal" )]
 	[Title( "Signal Trigger" ), Group( "Events" ), Icon( "wifi" )]
-	public static void SignalTrigger( string signalIdentifier, Player player )
+	public static void SignalTrigger( Signal signalIdentifier, Player player )
 	{
-		TaskMaster.SubmitTriggerSignal( signalIdentifier, player );
+		TaskMaster.SubmitTriggerSignal( signalIdentifier.Identifier, player );
 	}
 }

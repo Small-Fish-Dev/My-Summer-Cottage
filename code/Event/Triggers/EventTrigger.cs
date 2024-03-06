@@ -12,7 +12,7 @@ public abstract class EventTrigger : Component
 	/// Give this trigger a name to shoot a signal that gets picked up by the task master when triggered
 	/// </summary>
 	[Property]
-	public string TriggerSignalIdentifier { get; set; }
+	public Signal TriggerSignalIdentifier { get; set; }
 	public event SaunaEvent OnTrigger;
 
 	public virtual bool IsPolled { get; set; } = false;
@@ -59,12 +59,12 @@ public abstract class EventTrigger : Component
 	{
 		OnTrigger?.Invoke( triggerer, targetObject );
 
-		if ( TriggerSignalIdentifier != null && TriggerSignalIdentifier != "" && TriggerSignalIdentifier != String.Empty )
+		if ( TriggerSignalIdentifier.Identifier != null && TriggerSignalIdentifier.Identifier != "" && TriggerSignalIdentifier.Identifier != String.Empty )
 		{
 			var playerComponent = triggerer.Components.Get<Player>();
 
 			if ( playerComponent != null )
-				TaskMaster.SubmitTriggerSignal( TriggerSignalIdentifier, playerComponent );
+				TaskMaster.SubmitTriggerSignal( TriggerSignalIdentifier.Identifier, playerComponent );
 		}
 	}
 }
