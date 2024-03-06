@@ -2,32 +2,16 @@ namespace Sauna;
 
 public struct Signal : IEquatable<Signal>
 {
-	public enum SignalType
+	public string Identifier { get; set; } = "";
+
+	public Signal( string identifier = "" )
 	{
-		Generic,
-		Received,
-		Equipped,
-		Unequipped,
-		Dropped,
-		Bought,
-		Triggered,
-		Completed,
-		Placeholder1,
-		Placeholder2,
-		Placeholder3
+		Identifier = identifier;
 	}
-
-	public SignalType Prefix { get; set; } = SignalType.Generic;
-	public string Suffix { get; set; } = "";
-
-	public Signal() { }
-
-	[Hide, JsonIgnore]
-	public string SignalIdentifier => $"{Prefix}{Suffix}";
 
 	public override int GetHashCode()
 	{
-		return HashCode.Combine( SignalIdentifier );
+		return HashCode.Combine( Identifier );
 	}
 
 	public override bool Equals( object obj )
@@ -38,6 +22,6 @@ public struct Signal : IEquatable<Signal>
 
 	public bool Equals( Signal other )
 	{
-		return other.SignalIdentifier == SignalIdentifier;
+		return other.Identifier == Identifier;
 	}
 }
