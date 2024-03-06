@@ -54,7 +54,7 @@ public class DialogueStage
 	public List<DialogueResponse> AvailableResponses { get; set; }
 }
 
-public class DialogueComponent : Component
+public class DialogueTree : Component
 {
 	/// <summary>
 	/// Only the host can perform this dialogue.
@@ -115,17 +115,14 @@ public class DialogueComponent : Component
 		}
 	}
 
-	[Broadcast]
-	public void NetworkedDialogue( int resourceId )
-	{
-		var resource = ResourceLibrary.Get<SoundWithSubtitlesResource>( resourceId );
-		if ( resource is not null )
-			Scene.SoundSystem().Play( resource, GameObject );
-	}
-
 	public void SendToDialogueStage( int index )
 	{
 		SetStageIndex( index );
+	}
+
+	public void ResetDialogue()
+	{
+		SetStageIndex( 0 );
 	}
 
 	public void EndDialogue()
