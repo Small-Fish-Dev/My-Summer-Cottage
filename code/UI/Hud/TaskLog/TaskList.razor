@@ -5,8 +5,13 @@
 <root>
 	<text class="title-container">TASKS JOURNAL</text>
 	<div class="tasks">
-		<div class="heading">TODO SEPERATE HEADINGS</div>
-		@foreach(var task in TaskMaster.ActiveTasks)
+		<div class="heading">PRIMARY TASKS</div>
+		@foreach(var task in PrimaryTasks)
+		{
+			<TaskListElement Task=@task onclick=@(() => OnTaskClick(task)) />
+		}
+		<div class="heading">SECONDARY TASKS</div>
+		@foreach(var task in SecondaryTasks)
 		{
 			<TaskListElement Task=@task onclick=@(() => OnTaskClick(task)) />
 		}
@@ -15,6 +20,8 @@
 
 @code {
 	public Action<SaunaTask> OnTaskClick { get; set; }
+	private IEnumerable<SaunaTask> PrimaryTasks => TaskMaster.ActiveTasks.Where((t) => t.IsPrimaryTask);
+	private IEnumerable<SaunaTask> SecondaryTasks => TaskMaster.ActiveTasks.Where((t) => !t.IsPrimaryTask);
 
 	protected override int BuildHash()
 	{

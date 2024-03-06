@@ -23,7 +23,10 @@
 					}
 				</div>
 				<text class="subtitle">@SelectedTask.Subtitle</text>
-				<text class="pinned">( PINNED )</text>
+				@if (SelectedTask == Player.PinnedTask)
+				{
+					<div class="pinned">( PINNED )</div>
+				}
 			</div>
 		</div>
 		<div class="task-additional-details">
