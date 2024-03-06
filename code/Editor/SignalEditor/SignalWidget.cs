@@ -13,6 +13,7 @@ using System.Text.Json.Nodes;
 using Editor.NodeEditor;
 using Facepunch.ActionGraphs;
 using Sandbox;
+using Sauna.Event;
 using DisplayInfo = Sandbox.DisplayInfo;
 
 [CustomEditor( typeof( Signal ) )]
@@ -33,17 +34,15 @@ internal class SignalWidget : ControlWidget
 
 	protected override void PaintControl()
 	{
-		var value = SerializedProperty.GetValue<Type>();
+		var value = SerializedProperty.GetValue<Signal>();
 
 		var color = IsControlHovered ? Theme.Blue : Theme.ControlText;
 		var rect = LocalRect;
 
 		rect = rect.Shrink( 8, 0 );
 
-		var desc = value is not null ? TypeLibrary.GetType( value ) : null;
-
 		Paint.SetPen( color );
-		Paint.DrawText( rect, desc?.Title ?? "None", TextFlag.LeftCenter );
+		Paint.DrawText( rect, value.Identifier ?? "None", TextFlag.LeftCenter );
 
 		Paint.SetPen( color );
 		Paint.DrawIcon( rect, "Arrow_Drop_Down", 17, TextFlag.RightCenter );
@@ -59,91 +58,45 @@ internal class SignalWidget : ControlWidget
 		}
 	}
 
-	private static HashSet<Type> SystemTypes { get; } = new()
+	private SignalOption GetSignalOption( string identifier, string type = "", string parent = "", string group = "" )
 	{
-		typeof(int),
-		typeof(float),
-		typeof(string),
-		typeof(bool),
-		typeof(GameObject),
-		typeof(GameTransform),
-		typeof(Color),
-		typeof(Vector2),
-		typeof(Vector3),
-		typeof(Vector4),
-		typeof(Angles),
-		typeof(Rotation),
-		typeof(object)
-	};
-
-	private SignalOption GetSignalOption( Type type, string title )
-	{
-		var typeDesc = TypeLibrary.GetType( type );
-
-		return new SignalOption( type, title, typeDesc?.Icon );
+		return new SignalOption( identifier, type, parent, group );
 	}
 
-	private static string FormatAssemblyName( Assembly asm )
+	private record SignalOption( string Identifier, string Type = "", string Parent = "", string Group = "" );
+
+	private Menu.PathElement[] GetPath( SignalOption signal )
 	{
-		var name = asm.GetName().Name!;
+		var elements = new List<Menu.PathElement>();
 
-		if ( name.StartsWith( "package.", StringComparison.OrdinalIgnoreCase ) )
-		{
-			name = name.Substring( "package.".Length );
-		}
+		if ( signal.Group != "" )
+			elements.Add( new Menu.PathElement( signal.Group, Order: 1, IsHeading: false ) );
+		if ( signal.Parent != "" )
+			elements.Add( new Menu.PathElement( signal.Parent, Order: 2, IsHeading: false ) );
+		if ( signal.Type != "" )
+			elements.Add( new Menu.PathElement( signal.Type, Order: 3, IsHeading: true ) );
 
-		if ( name.StartsWith( "local.", StringComparison.OrdinalIgnoreCase ) )
-		{
-			name = name.Substring( "local.".Length );
-		}
+		elements.Add( new Menu.PathElement( signal.Identifier, Order: 4, IsHeading: false ) );
 
-		return name.ToTitleCase();
+		return elements.ToArray();
 	}
 
-	private static string GetAssemblyQualifiedPath( TypeDescription typeDesc )
+	IEnumerable<SignalOption> GetTriggers( JsonObject obj )
 	{
-		var path = !string.IsNullOrEmpty( typeDesc.Namespace )
-			? typeDesc.Namespace.Replace( '.', '/' )
-			: FormatAssemblyName( typeDesc.TargetType.Assembly );
+		var components = obj["Components"].AsArray();
 
-		return path;
+		return components
+			.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
+			.Where( component => component["TriggerSignalIdentifier"].ToString() != String.Empty )
+			.Select( component => GetSignalOption( component["__type"].ToString(), component["TriggerSignalIdentifier"].ToString() ) );
 	}
-
-	private string GetTypePath( TypeDescription typeDesc )
-	{
-		if ( typeDesc.TargetType.DeclaringType != null )
-		{
-			return $"{GetTypePath( TypeLibrary.GetType( typeDesc.TargetType.DeclaringType ) )}/{typeDesc.Title}";
-		}
-
-		var prefix = typeDesc.Group ?? GetAssemblyQualifiedPath( typeDesc );
-		var icon = typeDesc.Icon;
-
-		if ( typeDesc.TargetType.IsAssignableTo( typeof( Resource ) ) )
-		{
-			prefix = $"Resource/{prefix}";
-			icon ??= "description";
-		}
-		else if ( typeDesc.TargetType.IsAssignableTo( typeof( Component ) ) )
-		{
-			prefix = $"Component/{prefix}";
-			icon ??= "category";
-		}
-		else if ( SystemTypes.Contains( typeDesc.TargetType ) )
-		{
-			prefix = typeDesc.Group ?? typeDesc.Namespace?.Replace( '.', '/' ) ?? "Sandbox";
-		}
-
-		icon ??= "check_box_outline_blank";
-
-		return $"{prefix}/{typeDesc.Title}:{icon}@2000";
-	}
-
-	private record SignalOption( Type Type, string Title, string Icon );
 
 	void OpenMenu()
 	{
+		const string mainScene = "finland";
+
 		var test = ResourceLibrary.GetAll<SceneFile>()
+			.Where( x => x.Title == mainScene )
 			.SelectMany( x =>
 			{
 				return x.GameObjects.Where( x => x.ContainsKey( "Components" ) )
@@ -151,10 +104,10 @@ internal class SignalWidget : ControlWidget
 				{
 					var components = x["Components"].AsArray();
 					return components
-						.Where( component => component["__type"].ToString() == "EventAreaTrigger" );
+						.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
+						.Select( y => GetSignalOption( y["TriggerSignalIdentifier"].ToString(), y["__type"].ToString(), x["Name"].ToString(), "Scene" ) );
 				} );
-			} )
-			.Select( x => GetSignalOption( TypeLibrary.GetType( x["__type"].ToString() ).TargetType, x["TriggerSignalIdentifier"].ToString() ) );
+			} );
 
 		var eventDefinitions = PrefabLibrary.All
 			.Select( x => x.Value.Prefab.RootObject )
@@ -163,21 +116,33 @@ internal class SignalWidget : ControlWidget
 				var components = x["Components"].AsArray();
 				return components
 					.Where( component => component["__type"].ToString() == "EventDefinition" )
-					.Select( component => GetSignalOption( TypeLibrary.GetType( component["__type"].ToString() ).TargetType, component["EventName"].ToString() ) );
+					.Select( component => GetSignalOption( component["__type"].ToString(), component["EventName"].ToString() ) );
 			} );
 
-		var areaTriggers = PrefabLibrary.All
+		var allTriggers = PrefabLibrary.All
 			.Select( x => x.Value.Prefab.RootObject )
 			.SelectMany( x =>
 			{
 				var components = x["Components"].AsArray();
 				return components
 					.Where( component => component["__type"].ToString() == "EventAreaTrigger" )
-					.Where( component => component["TriggerSignalIdentifier"].ToString() != String.Empty )
-					.Select( component => GetSignalOption( TypeLibrary.GetType( component["__type"].ToString() ).TargetType, component["TriggerSignalIdentifier"].ToString() ) );
+					.Select( component => GetSignalOption( component["__type"].ToString(), "hello" ) );
 			} );
 
-		var allItems = eventDefinitions.Concat( areaTriggers );
+		var allTasks = ResourceLibrary.GetAll<SaunaTask>()
+			.SelectMany( x =>
+			{
+				return new List<SignalOption>
+				{
+					GetSignalOption( $"task.start.{x.Name}", x.Name, x.TaskType.ToString(), "Tasks" ),
+					GetSignalOption( $"task.success.{x.Name}", x.Name, x.TaskType.ToString(), "Tasks" ),
+					GetSignalOption( $"task.fail.{x.Name}", x.Name, x.TaskType.ToString(), "Tasks" )
+				};
+			} );
+
+
+		test = test.Concat( allTasks );
+		test = test.Concat( allTriggers );
 
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;
@@ -185,15 +150,15 @@ internal class SignalWidget : ControlWidget
 		_menu.AddLineEdit( "Filter",
 			placeholder: "Filter Signalers...",
 			autoFocus: true,
-			onChange: s => PopulateSuffixMenu( _menu, test, s ) );
+			onChange: s => PopulateMenu( _menu, test, s ) );
 
-		_menu.AboutToShow += () => PopulateSuffixMenu( _menu, test );
+		_menu.AboutToShow += () => PopulateMenu( _menu, test );
 
 		_menu.OpenAtCursor( true );
 		_menu.MinimumWidth = ScreenRect.Width;
 	}
 
-	private void PopulateSuffixMenu( Menu menu, IEnumerable<SignalOption> items, string filter = null )
+	private void PopulateMenu( Menu menu, IEnumerable<SignalOption> items, string filter = null )
 	{
 		menu.RemoveMenus();
 		menu.RemoveOptions();
@@ -210,7 +175,7 @@ internal class SignalWidget : ControlWidget
 
 		if ( useFilter )
 		{
-			var filtered = items.Where( x => x.Title.Contains( filter, StringComparison.OrdinalIgnoreCase ) ).ToArray();
+			var filtered = items.Where( x => x.Identifier.Contains( filter, StringComparison.OrdinalIgnoreCase ) ).ToArray();
 
 			if ( filtered.Length > maxFiltered + 1 )
 			{
@@ -222,24 +187,36 @@ internal class SignalWidget : ControlWidget
 				items = filtered;
 			}
 		}
-		else
-		{
-			if ( items.Count() > maxFiltered + 1 )
-			{
-				truncated = items.Count() - maxFiltered;
-				items = items.Take( maxFiltered );
-			}
-		}
 
-		menu.AddOptions( items, x => $"{x.Type}/{x.Title}", x =>
+		menu.AddOptions( items, GetPath, x =>
 		{
-			SerializedProperty.SetValue( x.Title );
+			SerializedProperty.SetValue( new Signal( x.Identifier ) );
 			SignalValuesChanged();
 		}, flat: useFilter );
 
 		if ( truncated > 0 )
 		{
 			menu.AddOption( $"...and {truncated} more" );
+		}
+
+		if ( useFilter )
+		{
+			void AddCurrent()
+			{
+				SerializedProperty.SetValue( new Signal( filter ) );
+				SignalValuesChanged();
+			}
+			menu.AddOption( $"New '{filter}'", "add_circle_outline", AddCurrent );
+		}
+
+		if ( SerializedProperty.GetValue<Signal>().Identifier != "" )
+		{
+			void Clear()
+			{
+				SerializedProperty.SetValue( new Signal( "" ) );
+				SignalValuesChanged();
+			}
+			menu.AddOption( $"Clear", "clear", Clear );
 		}
 
 		menu.AdjustSize();

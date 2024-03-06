@@ -417,14 +417,14 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.5544515,0,-0.832216",
+          "Rotation": "0,0.0600853,0,-0.9981933",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "0.63149,0.8129,1.1159,2"
+              "Tint": "0.63127,0.81277,1.11583,2"
             }
           ]
         },
@@ -436,7 +436,7 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.31574,0.40645,0.55795,1",
+              "Color": "0.31564,0.40639,0.55791,1",
               "EndDistance": 10000,
               "FalloffExponent": 1,
               "Height": 10000,
@@ -449,7 +449,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
+          "Rotation": "-0.1193591,-0.1701019,0.5618529,-0.8007123",
           "Tags": "light_directional,light",
           "Enabled": true,
           "Components": [
@@ -457,7 +457,7 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.31574,0.40645,0.55795,1",
+              "LightColor": "0.31564,0.40639,0.55791,1",
               "Shadows": false,
               "SkyColor": "0.00784,0.03922,0.0902,1"
             }
@@ -650,7 +650,7 @@
     },
     {
       "Id": "6256e00d-b380-4ebb-b468-35255ab4b86c",
-      "Name": "Object",
+      "Name": "Cottage",
       "Position": "1024.928,-748.9748,76.24623",
       "Enabled": true,
       "Components": [
@@ -661,7 +661,7 @@
           "Offset": "0,0,0",
           "TagSet": "player",
           "TriggerPrefab": [],
-          "TriggerSignalIdentifier": "sauna.entered"
+          "TriggerSignalIdentifier": "sauna.entered_sauna"
         }
       ]
     },
@@ -824,7 +824,9 @@
                       }
                     ]
                   },
-                  "InteractDistance": 125
+                  "InteractDistance": 125,
+                  "DynamicColor": null,
+                  "Disabled": null
                 }
               ]
             },
@@ -924,13 +926,15 @@
                         "DstName": "_result"
                       }
                     ]
-                  }
+                  },
+                  "Disabled": null
                 },
                 {
                   "Identifier": "fuck",
                   "Keybind": "use2",
                   "Description": "fuck",
                   "InteractDistance": 125,
+                  "DynamicColor": null,
                   "Disabled": {
                     "Version": 5,
                     "UserData": {
@@ -1078,9 +1082,7 @@
                       }
                     ]
                   },
-                  "InteractDistance": 125,
-                  "DynamicColor": null,
-                  "Disabled": null
+                  "InteractDistance": 125
                 }
               ]
             },
@@ -1180,15 +1182,13 @@
                         "DstName": "_result"
                       }
                     ]
-                  },
-                  "Disabled": null
+                  }
                 },
                 {
                   "Identifier": "fuck",
                   "Keybind": "use2",
                   "Description": "fuck",
                   "InteractDistance": 125,
-                  "DynamicColor": null,
                   "Disabled": {
                     "Version": 5,
                     "UserData": {
@@ -1336,7 +1336,9 @@
                       }
                     ]
                   },
-                  "InteractDistance": 125
+                  "InteractDistance": 125,
+                  "DynamicColor": null,
+                  "Disabled": null
                 }
               ]
             },
@@ -1436,13 +1438,15 @@
                         "DstName": "_result"
                       }
                     ]
-                  }
+                  },
+                  "Disabled": null
                 },
                 {
                   "Identifier": "fuck",
                   "Keybind": "use2",
                   "Description": "fuck",
                   "InteractDistance": 125,
+                  "DynamicColor": null,
                   "Disabled": {
                     "Version": 5,
                     "UserData": {
@@ -1760,8 +1764,8 @@
       "__Prefab": "prefabs/objects/car.prefab"
     },
     {
-      "Id": "2d275a08-37aa-4f82-8a08-8a44e5c2f953",
-      "Name": "TEST",
+      "Id": "792301f2-20a9-4734-a726-e3b904b3f892",
+      "Name": "Bathroom",
       "Position": "723.7906,-524.1287,137.5402",
       "Enabled": true,
       "Components": [
@@ -1772,7 +1776,64 @@
           "Offset": "0,0,0",
           "TagSet": null,
           "TriggerPrefab": [],
-          "TriggerSignalIdentifier": "LOOOL"
+          "TriggerSignalIdentifier": "sauna.entered_bathroom"
+        },
+        {
+          "__type": "EventPissTrigger",
+          "Extents": "0,0,0",
+          "MaxPollingRate": 5,
+          "Offset": "0,0,0",
+          "TriggerSignalIdentifier": "sauna.piss_in_bathroom"
+        }
+      ]
+    },
+    {
+      "Id": "ffa21fdc-0a76-4e80-a2d1-283c43759a0f",
+      "Name": "Lake",
+      "Position": "723.7906,-524.1287,137.5402",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "Extents": "0,0,0",
+          "MaxPollingRate": 5,
+          "Offset": "0,0,0",
+          "TagSet": null,
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "lake.swimming_in_lake"
+        },
+        {
+          "__type": "EventPissTrigger",
+          "Extents": "0,0,0",
+          "MaxPollingRate": 5,
+          "Offset": "0,0,0",
+          "TriggerSignalIdentifier": "lake.piss_in_lake"
+        }
+      ],
+      "Children": [
+        {
+          "Id": "96e8fdbc-4978-4c23-8e5c-d50d8c21ebe3",
+          "Name": "Lake (1)",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "EventAreaTrigger",
+              "Extents": "0,0,0",
+              "MaxPollingRate": 5,
+              "Offset": "0,0,0",
+              "TagSet": null,
+              "TriggerPrefab": [],
+              "TriggerSignalIdentifier": "lake.swimming_in_lake"
+            },
+            {
+              "__type": "EventPissTrigger",
+              "Extents": "0,0,0",
+              "MaxPollingRate": 5,
+              "Offset": "0,0,0",
+              "TriggerSignalIdentifier": "lake.piss_in_lake"
+            }
+          ]
         }
       ]
     }
@@ -1800,6 +1861,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-05T23:09:19.2726934\u002B01:00",
+  "LastSaved": "2024-03-06T00:31:59.4227437\u002B01:00",
   "__references": []
 }
