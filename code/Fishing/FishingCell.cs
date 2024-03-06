@@ -237,8 +237,8 @@ public class FishingCell : Component
 			var from = bobber.Transform.Position;
 			var to = bobber.Rod.Owner.Transform.Position;
 			var dist = from.Distance( to );
-			var velocity = (to - from).Normal * dist / 4f + Vector3.Up * 100f;
-			physics?.PhysicsGroup?.ApplyImpulse( velocity );
+			var velocity = (to - from).Normal * dist + Vector3.Up * 400f;
+			physics.PhysicsGroup?.AddVelocity( velocity );
 
 		}
 
