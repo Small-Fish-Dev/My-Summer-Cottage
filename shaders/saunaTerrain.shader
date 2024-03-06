@@ -1,6 +1,6 @@
 HEADER
 {
-	Description = "Ground Test";
+	Description = "Sauna Terrain Shader";
 	Version = 1;
 }
 
@@ -8,7 +8,6 @@ FEATURES
 {
 	#include "common/features.hlsl"
 	Feature( F_ALPHA_TEST, 0..1, "Rendering" );
-    Feature( F_PREPASS_ALPHA_TEST, 0..1 );	
 	Feature( F_TRANSPARENCY, 0..1, "Rendering" );
 }
 
@@ -21,7 +20,6 @@ MODES
 	ToolsVis( S_MODE_TOOLS_VIS );
 	Depth( S_MODE_DEPTH );
 	ToolsWireframe( "vr_tools_wireframe.shader" );
-	ToolsShadingComplexity( "tools_shading_complexity.shader" );
 }
 
 //=========================================================================================================================
@@ -30,24 +28,6 @@ COMMON
 	#define S_TRANSLUCENT 0
 	#define S_UV2 1
 	#include "common/shared.hlsl"
-
-	#define VS_INPUT_HAS_TANGENT_BASIS 1
-	#define PS_INPUT_HAS_TANGENT_BASIS 1
-
-	#define DEPTH_STATE_ALREADY_SET
-	#define COLOR_WRITE_ALREADY_SET
-	#define BLEND_MODE_ALREADY_SET
-
-	#define USE_CUSTOM_SHADING 1
-
-	#define DISTANCE_BASED_TESS 1
-	#define NO_TESSELATION 0
-
-	#define VS_INPUT_HAS_TANGENT_BASIS 1
-    #define PS_INPUT_HAS_TANGENT_BASIS 1
-	
-
-
 }
 
 //=========================================================================================================================
@@ -71,27 +51,6 @@ struct GeometryInput
 	float3 AbsolutePosition;
 };
 
-struct HullInput
-{
-	#include "common/pixelinput.hlsl"
-};
-
-struct HullOutput
-{
-	#include "common/pixelinput.hlsl"
-};
-
-struct HullPatchConstants
-{
-	float Edge[3] : SV_TessFactor;
-	float Inside : SV_InsideTessFactor;
-};
-
-struct DomainInput
-{
-	#include "common/pixelinput.hlsl"
-};
-
 
 
 //=========================================================================================================================
@@ -111,26 +70,6 @@ VS
 
 		return o;
 	}
-}
-
-//=========================================================================================================================
-
-HS // Hull Shader program
-{
-	#include "common/hull.hlsl" // My name is Hull Lee Sheet
-
-	int TessellationPower < UiType( VectorText ); UiGroup("Tessellation,90/10"); Default(3); Range(1, 5); >; // Better avoid high values, or else your GPU will EXPLODE!
-	float TessellationDistanceMin < UiType( VectorText ); UiGroup("Tessellation,90/20"); Default(250); Range(1, 500); >;
-	float TessellationDistanceMax < UiType( VectorText ); UiGroup("Tessellation,90/30"); Default(500); Range(1, 1000); >;  
-
-	#include "tesselation.hlsl"
-}
-
-// Domain Shader program
-DS
-{
-	#include "common/domain.hlsl"
-	#include "tesselation.hlsl"
 }
 
 //=========================================================================================================================
