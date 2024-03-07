@@ -1,8 +1,41 @@
 @import "/UI/Style.scss";
 
 FishSlot {
+    position: relative;
+    
     aspect-ratio: 1;
     height: 175px;
     border: 2px $gray;
     background-color: $black-bg;
+    
+    align-items: stretch;
+    
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+    
+    &.active {
+        border: 2px white;
+    }
+
+    img {
+        flex-grow: 1;
+    }
+    
+    .lock {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        
+        padding: 10px;
+        
+        background-color: $black-bg;
+        
+        align-items: stretch;
+        
+        img {
+            image-rendering: pixelated;
+            flex-grow: 1;
+        }
+    }
 }

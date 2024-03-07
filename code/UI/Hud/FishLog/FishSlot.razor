@@ -2,6 +2,18 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root>
+<root class="@( Active ? "active" : "" )">
+	<img src=@Definition.Icon.ResourcePath/>
 
+	<div class="lock" style="display: @( Locked ? "flex" : "none" )">
+		<img src="ui/hud/blocked.png">
+	</div>
 </root>
+
+@code {
+
+	public FishLog.FishInfo Definition { get; set; }
+	public bool Active { get; set; }
+	public bool Locked { get; set; }
+
+}

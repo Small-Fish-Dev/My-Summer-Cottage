@@ -7,13 +7,17 @@ FishLog {
     background-color: $fullscreen-bg;
     backdrop-filter: $fullscreen-blur;
     pointer-events: all;
+    
+    flex-direction: column;
 
     .container {
-        height: 100%;
-        width: 100%;
         justify-content: center;
-        align-items: center;
+        align-items: stretch;
         flex-direction: column;
+        gap: 10px;
+        padding: 200px 5vw 0 5vw;
+
+        flex-grow: 1;
 
         .fish-img {
             aspect-ratio: 1;
@@ -35,18 +39,82 @@ FishLog {
         }
 
         .content {
+            flex-direction: row;
+            flex-grow: 1;
+            
             .fishes {
-                width: 40%;
-                height: 600px;
                 overflow: scroll;
                 gap: 20px;
                 flex-wrap: wrap;
+                
+                flex-basis: 0;
+                flex-grow: 4;
             }
     
             .fish-selected {
-                background-color: $black-bg;
-                height: 400px;
-                width: 30%;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: stretch;
+                
+                flex-basis: 0;
+                flex-grow: 5;
+                
+                .fish-info {
+                    flex-direction: column;
+                    align-items: stretch;
+                    
+                    background-color: $black-bg;
+                    
+                    .overview {
+                        flex-direction: row;
+                        align-items: center;
+                        
+                        ScenePanel {
+                            aspect-ratio: 1.25;
+                            height: 384px;
+                        }
+                        
+                        .summary {
+                            flex-direction: column;
+                            gap: 10px;
+                            
+                            .fish-rarity {
+                                flex-direction: row;
+                                gap: 20px;
+                                
+                                .fish-stars {
+                                    flex-direction: row;
+                                    flex-wrap: nowrap;
+                                    gap: 5px;
+                                    
+                                    img {
+                                        aspect-ratio: 1;
+                                        image-rendering: pixelated;
+                                    }
+                                }
+                            }
+                            
+                            .fish-best-catch {
+                                flex-direction: row;
+                                gap: 5px;
+                            }
+
+                            .green {
+                                color: $green;
+                            }
+
+                            .gold {
+                                color: $gold;
+                            }
+                        }
+                    }
+                    
+                    .description {
+                        background-color: $black-bg;
+                        
+                        padding: 20px;
+                    }
+                }
             }
         }
     }

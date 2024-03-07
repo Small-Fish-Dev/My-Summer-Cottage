@@ -1,5 +1,6 @@
 @namespace Sauna.UI
 @attribute [StyleSheet]
+@using Sauna.Fishing
 @inherits Panel
 
 <root>
@@ -7,28 +8,203 @@
 		ImagePath="ui/hud/goback.png"
 		Title="Go back"
 		Subtitle="To pause screen"
-		OnClick=@(() => FullScreenManager.Instance.Display(FullScreenManager.FullScreenPanel.PauseMenu) )
-		style="position: absolute; top: 50px;" 
-	/>
+		OnClick=@( () => FullScreenManager.Instance.Display( FullScreenManager.FullScreenPanel.PauseMenu ) )
+		style="position: absolute; top: 50px;"/>
 
 	<div class="container">
-		<div class="content">
-			<div style="position:absolute; top: -80px; align-items: center;">
-				<img class="fish-img" src="ui/hud/fish_collection.png" />
-				<div style="flex-direction: column;">
-					<text class="fish-title">FISH COLLECTION</text>
-					<text class="fish-subtitle">This is where you can keep track of all kinds of fish you've caught so far.</text>
-				</div>
+		<div class="header">
+			<img class="fish-img" src="ui/hud/fish_collection.png"/>
+			<div style="flex-direction: column;">
+				<text class="fish-title">FISH COLLECTION</text>
+				<text class="fish-subtitle">This is where you can keep track of all kinds of fish you've caught so far.</text>
 			</div>
+		</div>
+		<div class="content">
+			@* TODO: a scrollbar component *@
 			<div class="fishes">
-				@for (int i = 0; i < 30; ++i) 
+				@foreach ( var fishInfo in _fishesRepository )
 				{
-					<FishSlot />
+					@if ( Player.Local.FishesCaught.ContainsKey( fishInfo.PrefabPath ) )
+					{
+						<FishSlot
+							Definition=@fishInfo
+							Locked=@( false )
+							Active=@( fishInfo == _selectedFish )
+							onclick="@( () => SelectFish( fishInfo ) )"/>
+					}
+					else
+					{
+						<FishSlot
+							Definition=@fishInfo
+							Locked=@( true )
+							Active=@( false )/>
+					}
 				}
 			</div>
 			<div class="fish-selected">
+				@if ( _selectedFish is null )
+				{
+					<div>Click on any fish on the left to learn more!</div>
+				}
+				else
+				{
+					<div class="fish-info">
+						<div class="overview">
+							<ScenePanel class="scene" @ref=" _scenePanel"/>
+							<div class="summary">
+								<text class="fish-title">@_selectedFish.Name</text>
+								<div class="fish-rarity">
+									Rarity:
+									<div class="fish-stars">
+										@{
+											var stars = (int)Math.Max( _selectedFish.Rarity * StarCount, 1 );
+											for ( var i = 0; i < stars; i++ )
+											{
+												<img src="ui/hud/fish_rarity.png"/>
+											}
 
+											for ( var i = stars; i < StarCount; i++ )
+											{
+												<img src="ui/hud/fish_rarity_empty.png"/>
+											}
+										}
+									</div>
+								</div>
+								@if ( _selectedFishRecord is FishRecord fr )
+								{
+									@* TODO: s&box hates the spaces between elements. fuck you, s&box! *@
+									<div>@($"You have caught {fr.Count} of these in total")</div>
+
+									<div class="fish-best-catch">
+										The Best Catch:
+										<div class="green">@fr.MaxWeight grams</div>
+										<div class="gold">(@((int)(fr.MaxWeight / 1000.0f * _selectedFish.CostPerKilo)) kr)</div>
+										on
+										<text>
+											@fr.MaxWhen.ToLongDateString()
+										</text>
+									</div>
+								}
+							</div>
+						</div>
+
+						<div class="description">
+							@_selectedFish.Description
+						</div>
+					</div>
+				}
 			</div>
 		</div>
 	</div>
 </root>
+
+@code {
+
+	public record FishInfo(
+		string PrefabPath,
+		string Name,
+		string Description,
+		float Rarity,
+		int CostPerKilo,
+		Texture Icon,
+		string ModelPath,
+		string MaterialGroup );
+
+	public const int StarCount = 5;
+
+	private List<FishInfo> _fishesRepository;
+	private FishInfo _selectedFish;
+	private FishRecord? _selectedFishRecord;
+
+	private SceneWorld _sceneWorld;
+	private ScenePanel _scenePanel;
+	private SceneModel _model;
+	private SceneLight _sceneLight;
+	private SceneDirectionalLight _sceneDirectionalLight;
+	private Transform _cameraTransform;
+	private float _distance;
+
+	public FishLog()
+	{
+		// TODO: this LINQ expression is being called every time you open the fish log, need to cache it somewhere as soon as it becomes a problem
+		_fishesRepository = PrefabLibrary.FindByComponent<Fish>()
+			.Where( prefab => !prefab.GetComponent<Fish>().Get<bool>( "IsTrash" ) )
+			.Select( prefab =>
+			{
+				var fishComponent = prefab.GetComponent<Fish>();
+				var itemComponent = prefab.GetComponent<ItemComponent>();
+				var modelComponent = prefab.GetComponent<ModelRenderer>();
+				return new FishInfo(
+					prefab.Path,
+					itemComponent.Get<string>( "Name" ),
+					itemComponent.Get<string>( "Description" ),
+					fishComponent.Get<float>( "Rarity" ),
+					fishComponent.Get<int>( "CostPerKilo" ),
+					Texture.Load( FileSystem.Mounted, itemComponent.Get<IconSettings>( "Icon" ).Path ),
+					modelComponent.Get<string>( "Model" ),
+					modelComponent.Get<string>( "MaterialGroup" )
+				);
+			} ).ToList();
+	}
+
+	private void SelectFish( FishInfo fish )
+	{
+		_selectedFish = fish;
+		if ( Player.Local.FishesCaught.TryGetValue( fish.PrefabPath, out var record ) )
+			_selectedFishRecord = record;
+		else
+			_selectedFishRecord = null;
+	}
+
+	protected override void OnAfterTreeRender( bool firstTime )
+	{
+		base.OnAfterTreeRender( firstTime );
+
+		if ( _selectedFish is null )
+			return;
+
+		_sceneWorld ??= new SceneWorld();
+		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
+		_sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, Rotation.From( 45, -45, 45 ), Color.White * 10f );
+
+		_model = new SceneModel( _sceneWorld, _selectedFish.ModelPath, new Transform( Vector3.Zero, Rotation.From( 0, 0, 0 ) ) );
+		_model.SetMaterialGroup( _selectedFish.MaterialGroup );
+		_scenePanel.World = _sceneWorld;
+		_scenePanel.Camera.FieldOfView = 120f;
+
+		if ( _cameraTransform.Position == Vector3.Zero )
+		{
+			var bounds = _model.Model.Bounds;
+			// var dist = radius / MathF.Sin( _scenePanel.Camera.FieldOfView.DegreeToRadian() );
+			var dist = bounds.Extents.Length * 1.25f;
+
+			var viewDirection = Vector3.Forward;
+			var pos = viewDirection * dist + bounds.Center;
+
+			_scenePanel.Camera.Position = pos;
+			_scenePanel.Camera.Rotation = Rotation.LookAt( bounds.Center - _scenePanel.Camera.Position ).RotateAroundAxis( -viewDirection, 90 );
+
+			_distance = _scenePanel.Camera.Position.Distance( _model.Model.Bounds.Center );
+			_cameraTransform = new Transform( _scenePanel.Camera.Position, _scenePanel.Camera.Rotation );
+		}
+	}
+
+	public override void Tick()
+	{
+		if ( _model is null )
+			return;
+
+		_cameraTransform = _cameraTransform.RotateAround( _model.Model.Bounds.Center, Rotation.FromAxis( _cameraTransform.Up, -10f * RealTime.Delta ) );
+
+		_cameraTransform.Position = _model.Model.Bounds.Center - _cameraTransform.Forward * _distance;
+
+		_scenePanel.Camera.Position = Vector3.Lerp( _scenePanel.Camera.Position, _cameraTransform.Position, RealTime.Delta * 40.0f );
+		_scenePanel.Camera.Rotation = Rotation.Lerp( _scenePanel.Camera.Rotation, _cameraTransform.Rotation, RealTime.Delta * 50.0f );
+		_sceneLight.Position = _scenePanel.Camera.Position;
+
+		_model.Update( RealTime.Delta );
+	}
+
+	protected override int BuildHash() => HashCode.Combine( _selectedFish, Player.Local.FishesCaught );
+
+}
