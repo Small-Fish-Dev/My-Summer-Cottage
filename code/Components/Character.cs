@@ -27,7 +27,6 @@ public class Character : Component, Component.ExecuteInEditor
 	float _fatness = 0f;
 
 	[Property, Sync, MakeDirty]
-	[ShowIf( "Player", null )]
 	[Range( 0f, 1f, 0.05f )]
 	public float Fatness // If we have a player assigned, use the player's fatness, else show the slider
 	{
@@ -44,7 +43,6 @@ public class Character : Component, Component.ExecuteInEditor
 	float _height = 0f;
 
 	[Property, Sync, MakeDirty]
-	[ShowIf( "Player", null )]
 	[Range( -100f, 100f, 1f )]
 	public float Height
 	{

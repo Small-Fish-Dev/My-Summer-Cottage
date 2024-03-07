@@ -7,32 +7,28 @@
     "Components": [
       {
         "__type": "NPC",
-        "Agent": {
-          "_type": "component",
-          "go": "0838c785-16cc-49ce-9481-8dbeb9b07027",
-          "component_type": "NavMeshAgent"
-        },
+        "Acceleration": 1000,
+        "FaceTowardsVelocity": true,
+        "Height": 64,
         "Model": {
           "_type": "component",
           "go": "4e723424-6bd1-42ae-9c2f-d8e98b9176fb",
           "component_type": "SkinnedModelRenderer"
-        }
+        },
+        "Radius": 8,
+        "RunSpeed": 120,
+        "WalkSpeed": 60
       },
       {
         "__type": "NavMeshAgent",
+        "__enabled": false,
         "Acceleration": 1000,
-        "Height": 54,
+        "Height": 8,
         "MaxSpeed": 160,
-        "Radius": 8,
+        "Radius": 8.640007,
         "Separation": 0.4,
-        "UpdatePosition": true
-      },
-      {
-        "__type": "FancyName",
-        "Name": "#sauna.finnish_guy"
-      },
-      {
-        "__type": "RandomYell"
+        "UpdatePosition": true,
+        "UpdateRotation": true
       },
       {
         "__type": "BoxCollider",
@@ -58,7 +54,7 @@
               "models/clothes/glasses/glasses.vmdl"
             ],
             "Fatness": 0,
-            "Height": 0,
+            "Height": 53,
             "HideBodyGroup": "Torso",
             "Player": null
           },
