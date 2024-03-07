@@ -41,7 +41,7 @@
         "__type": "BoxCollider",
         "Center": "0,0,36",
         "IsTrigger": false,
-        "Scale": "25,25,72",
+        "Scale": "16,16,72",
         "Static": false,
         "Surface": null
       },
@@ -49,8 +49,11 @@
         "__type": "MoveHelper",
         "AccelerationCurve": [
           {
-            "x": 0.5,
-            "y": 0.5053192
+            "y": 1
+          },
+          {
+            "x": 1,
+            "y": 0.5
           }
         ],
         "AirAcceleration": 800,
@@ -69,7 +72,7 @@
         "StopSpeed": 10,
         "TraceHeight": 72,
         "TraceRadius": 16,
-        "TraceType": "BBox",
+        "TraceType": "Capsule",
         "UseCollider": false,
         "UseSceneGravity": true
       },
