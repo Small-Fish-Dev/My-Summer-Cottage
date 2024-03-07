@@ -40,7 +40,8 @@ public class NPC : Component
 	public CapsuleCollider Collider { get; set; }
 
 	public Vector3 TargetPosition { get; set; }
-	Vector3 _currentTargetPosition;
+	public GameObject TargetObject { get; private set; } = null;
+	public float DesiredDistance { get; private set; } = 20f;
 
 	protected override void OnStart()
 	{
@@ -75,14 +76,7 @@ public class NPC : Component
 	{
 		if ( Agent == null ) return;
 
-		if ( TargetPosition.Distance( _currentTargetPosition ) >= 30f )
-		{
-			_currentTargetPosition = TargetPosition;
-			var closestPoint = Scene.NavMesh.GetClosestPoint( _currentTargetPosition );
-
-			if ( closestPoint != null )
-				Agent.MoveTo( closestPoint.Value );
-		}
+		CheckNewTarget();
 
 		if ( Model == null ) return;
 
@@ -95,6 +89,83 @@ public class NPC : Component
 
 		Model.Set( "move_x", x );
 		Model.Set( "move_y", y );
+	}
+
+	void CheckNewTarget()
+	{
+		if ( !TargetObject.IsValid() )
+		{
+			var desiredPosition = GetPreferredTargetPosition( TargetObject );
+
+			if ( TargetPosition.Distance( desiredPosition ) >= DesiredDistance ) // Has our target moved?
+				MoveTo( desiredPosition );
+		}
+	}
+
+	/// <summary>
+	/// Make the NPC move to the target position
+	/// </summary>
+	/// <param name="targetPosition"></param>
+	public void MoveTo( Vector3 targetPosition )
+	{
+		TargetPosition = targetPosition;
+		Agent.MoveTo( TargetPosition );
+	}
+
+	/// <summary>
+	/// Is the object within the npc's reach
+	/// </summary>
+	/// <param name="target"></param>
+	/// <param name="range"></param>
+	/// <returns></returns>
+	public bool IsWithinRange( GameObject target, float range = 50f )
+	{
+		if ( !GameObject.IsValid() ) return false;
+
+		return target.Transform.Position.Distance( Transform.Position ) - DesiredDistance <= range;
+	}
+
+	/// <summary>
+	/// Get a random position around the NPC (Horizonal)
+	/// </summary>
+	/// <param name="minRange"></param>
+	/// <param name="maxRange"></param>
+	/// <returns></returns>
+	public Vector3 GetRandomPositionAround( float minRange = 50f, float maxRange = 300f )
+	{
+		var position = Transform.Position;
+		var tries = 0;
+
+		while ( tries <= 10 && position == Transform.Position )
+		{
+			var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
+			var randomDistance = Game.Random.Float( minRange, maxRange );
+			var randomPosition = position + randomDirection * randomDistance;
+
+			var randomPoint = Scene.NavMesh?.GetClosestPoint( position );
+
+			if ( randomPoint != null )
+				position = randomPosition;
+
+			tries++;
+		}
+
+		return position;
+	}
+
+	public Vector3 GetPreferredTargetPosition( GameObject target )
+	{
+		var targetPosition = target.Transform.Position;
+
+		var direction = (targetPosition - Transform.Position).Normal;
+		var offset = direction * DesiredDistance;
+		var position = targetPosition + offset;
+		var closestObjectPoint = Scene.NavMesh?.GetClosestPoint( position );
+
+		if ( closestObjectPoint != null )
+			return closestObjectPoint.Value;
+		else
+			return position;
 	}
 
 	protected override void OnFixedUpdate()
