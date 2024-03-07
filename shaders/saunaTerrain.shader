@@ -190,10 +190,10 @@ PS
 		float4 l_tSplatColor_D = Tex2DTriplanar( g_tSplatColor_D, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ).rgba;
 
 		// Prepare normal maps
-		float3 l_tSplatNormal_A = DecodeNormal( Tex2DTriplanar( g_tSplatNormal_A, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ).rgb );
-		float3 l_tSplatNormal_B = DecodeNormal( Tex2DTriplanar( g_tSplatNormal_B, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ).rgb );
-		float3 l_tSplatNormal_C = DecodeNormal( Tex2DTriplanar( g_tSplatNormal_C, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ).rgb );
-		float3 l_tSplatNormal_D = DecodeNormal( Tex2DTriplanar( g_tSplatNormal_D, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ).rgb );
+		/* float3 l_tSplatNormal_A = DecodeNormal(Tex2DTriplanar( g_tSplatNormal_A, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ));
+		float3 l_tSplatNormal_B = DecodeNormal(Tex2DTriplanar( g_tSplatNormal_B, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ));
+		float3 l_tSplatNormal_C = DecodeNormal(Tex2DTriplanar( g_tSplatNormal_C, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ));
+		float3 l_tSplatNormal_D = DecodeNormal(Tex2DTriplanar( g_tSplatNormal_D, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale )); */
 
 		// Prepare roughness map.
 		float4 l_tSplatRoughness = Tex2DTriplanar( g_tSplatRoughness, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ).rgba;
@@ -213,7 +213,6 @@ PS
         m.Metalness = lerp( 0, 0.65, smoothstep( 2295, 2285, sin(g_flTime) + i.AbsolutePosition.z ) );
         m.AmbientOcclusion = l_tGlobalNormal.a;
 
-		// Apply normals of each splat texture layer by layer, then blend it with terrain's global normal, then transform normal so they display correctly in-game.
 		m.Normal = TransformNormal( globalnormal, i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
 
 		// Write to shading model 
