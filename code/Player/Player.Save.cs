@@ -241,8 +241,8 @@ partial class Player
 			}
 
 		if ( save.FishesCaught != null )
-			player.FishesCaught = save.FishesCaught.Where( kv => PrefabLibrary
-					.TryGetByPath( kv.Key, out _ ) )
+			player.FishesCaught = save.FishesCaught
+				.Where( kv => PrefabLibrary.TryGetByPath( kv.Key, out _ ) )
 				.ToDictionary( kv => kv.Key, kv => kv.Value );
 
 		return true;
