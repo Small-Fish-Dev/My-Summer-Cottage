@@ -46,6 +46,12 @@ public class LegacyParticles
 		return particle;
 	}
 
+	public void replay()
+	{
+		System.Enabled = false;
+		System.Enabled = true;
+	}
+
 	public void Destroy()
 	{
 		System?.Destroy();
