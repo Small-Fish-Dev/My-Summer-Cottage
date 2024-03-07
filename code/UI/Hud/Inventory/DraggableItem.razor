@@ -1,5 +1,6 @@
 @namespace Sauna.UI
 @attribute [StyleSheet]
+@using Sandbox.Utility
 @inherits Panel
 
 <root>
@@ -7,6 +8,10 @@
 	<div class="title-container">
 		<label>@name</label>
 	</div>
+	<div class="sub-label put-label">put away?</div>
+	<div class="sub-label equip-label"></div>
+	<div class="sub-label drop-label"></div>
+
 </root>
 
 @code {
@@ -83,6 +88,8 @@
 		SetPositionInScreenPixels( _lastPosition + d );
 	}
 
+	private float _shakeValue;
+	
 	public override void Tick()
 	{
 		base.Tick();
@@ -101,7 +108,18 @@
 		Style.TransformOriginY = Length.Fraction( _holdPoint.y / Box.Rect.Height );
 
 		var transform = new PanelTransform();
-		transform.AddRotation( _velocity.y * XyMultiplier, -_velocity.x * XyMultiplier, _velocity.x * _velocity.y * ZMultiplier );
+		var rotation = new Vector3( _velocity.y * XyMultiplier, -_velocity.x * XyMultiplier, _velocity.x * _velocity.y * ZMultiplier );
+		
+		// Add shaking if we're dropping the item
+		if ( HasClass( "should-trash" ) )
+		{
+			_shakeValue += 0.03f;
+			if ( _shakeValue > 1 )
+				_shakeValue = 0;
+			rotation.z += Easing.EaseInOut( _shakeValue ) * 30	;
+		}
+
+		transform.AddRotation( rotation );
 
 		Style.Transform = transform;
 

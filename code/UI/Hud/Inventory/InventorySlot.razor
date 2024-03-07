@@ -26,10 +26,12 @@
 	// Child draggable
 	private DraggableItem ChildDraggable { get; set; }
 	private string HasChildDraggableClassSelector => ChildDraggable == null ? "" : "has-child-draggable";
-
+	private TimeUntil _childDraggableTrashTimer;
+	private const float TimeUntilChildDraggableCanBeTrashed = 0.2f;
+	
 	// Current active draggable (available from anywhere)
 	public static DraggableItem CurrentDraggable { get; private set; }
-
+	
 	private Vector2 _lastMousePos;
 	private bool _isHoveringItem { get; set; } = false;
 	private TimeSince sinceClick;
@@ -213,20 +215,23 @@
 		if ( ChildDraggable == null )
 			return;
 
-		if ( ChildDraggable.HasClass( "is-hovering-slot" ) )
+		if ( ChildDraggable.HasClass( "can-drop" ) )
 		{
-			if ( ChildDraggable.LastHoveredSlot != this )
-				MoveItemTo( ChildDraggable.LastHoveredSlot );
-		}
-		else if ( ChildDraggable.HasClass( "is-hovering-character" ) )
-		{
-			MoveOntoCharacter();
-		}
-		else
-		{
-			// Not hovering anything, drop the item!
-			Player.Local.Inventory.DropItem( ChildDraggable.ItemComponent );
-			Inventory.Instance?.OnChanged();
+			if ( ChildDraggable.HasClass( "is-hovering-slot" ) )
+			{
+				if ( ChildDraggable.LastHoveredSlot != this )
+					MoveItemTo( ChildDraggable.LastHoveredSlot );
+			}
+			else if ( ChildDraggable.HasClass( "is-hovering-character" ) )
+			{
+				MoveOntoCharacter();
+			}
+			else if (ChildDraggable.HasClass( "should-trash" ))
+			{
+				// Not hovering anything, drop the item!
+				Player.Local.Inventory.DropItem( ChildDraggable.ItemComponent );
+				Inventory.Instance?.OnChanged();
+			}
 		}
 
 		ChildDraggable?.Delete();
@@ -234,6 +239,53 @@
 		CurrentDraggable = null;
 	}
 
+	private void UpdateChildDraggableState()
+	{
+		if ( ChildDraggable == null )
+			return;
+		
+		ChildDraggable.RemoveClass( "is-hovering-slot" );
+		ChildDraggable.RemoveClass( "is-hovering-character" );
+		ChildDraggable.RemoveClass( "should-trash" );
+		ChildDraggable.RemoveClass( "can-drop" );
+
+		// Check for what's under the ChildDraggable
+		var rendererTarget = Inventory.Instance.Descendants.OfType<CharacterRenderer>().FirstOrDefault( v => v.IsHoveredByMouse() );
+		var targetSlot = Inventory.Instance.Descendants.OfType<InventorySlot>().FirstOrDefault( v => v.IsHoveredByMouse() );
+		if ( targetSlot != null )
+		{
+			ChildDraggable.SetClass( "is-hovering-slot", true );
+			ChildDraggable.LastHoveredSlot = targetSlot;
+			_childDraggableTrashTimer = TimeUntilChildDraggableCanBeTrashed;
+
+			ChildDraggable.SetClass( "can-drop", true );
+            
+			if ( targetSlot.EquipSlotIndex != null && CurrentDraggable.ItemComponent is not ItemEquipment)
+			{
+				ChildDraggable.RemoveClass( "can-drop" );
+			}
+		}
+		else if ( rendererTarget != null )
+		{
+			ChildDraggable.SetClass( "is-hovering-character", true );
+			
+			_childDraggableTrashTimer = TimeUntilChildDraggableCanBeTrashed;
+			
+			// Check if this can be equipped
+			if ( CurrentDraggable.ItemComponent is ItemEquipment )
+				ChildDraggable.SetClass( "can-drop", true );
+		}
+		else
+		{
+			if (_childDraggableTrashTimer)
+				ChildDraggable.SetClass( "should-trash", true );
+			
+			ChildDraggable.SetClass( "can-drop", true );
+		}
+
+		ChildDraggable.StateHasChanged();
+	}
+	
 	protected override void OnMouseMove( MousePanelEvent e )
 	{
 		base.OnMouseMove( e );
@@ -249,23 +301,15 @@
 		ChildDraggable.AddPositionDeltaInScreenPixels( delta );
 		ChildDraggable.SetPositionInScreenPixels( Mouse.Position );
 
-		ChildDraggable.RemoveClass( "is-hovering-slot" );
-		ChildDraggable.RemoveClass( "is-hovering-character" );
+		UpdateChildDraggableState();
+	}
 
-		// Check for what's under the ChildDraggable
-		var rendererTarget = Inventory.Instance.Descendants.OfType<CharacterRenderer>().FirstOrDefault( v => v.IsHoveredByMouse() );
-		var targetSlot = Inventory.Instance.Descendants.OfType<InventorySlot>().FirstOrDefault( v => v.IsHoveredByMouse() );
-		if ( targetSlot != null )
-		{
-			ChildDraggable.SetClass( "is-hovering-slot", true );
-			ChildDraggable.LastHoveredSlot = targetSlot;
-		}
-		else if ( rendererTarget != null )
-		{
-			ChildDraggable.SetClass( "is-hovering-character", true );
-		}
-
-		ChildDraggable.StateHasChanged();
+	public override void Tick()
+	{
+		base.Tick();
+		
+		if ( _childDraggableTrashTimer )
+			UpdateChildDraggableState();
 	}
 
 }
