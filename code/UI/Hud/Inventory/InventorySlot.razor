@@ -9,7 +9,7 @@
 	{
 		<div class="item @HasChildDraggableClassSelector" onmouseover=@( () => OnItemHover() ) onmouseout=@( () => OnItemHoverExit() )>
 			<img src=@Item.IconTexture.ResourcePath/>
-			<text class="count @(!Item.IsStackable ? "hidden" : "")">@(Item.Count)x</text>
+			<text class="count @( !Item.IsStackable ? "hidden" : "" )">@( Item.Count )x</text>
 		</div>
 	}
 	@if ( EquipSlotIndex is not null )
@@ -22,8 +22,17 @@
 	public ItemComponent Item { get; set; }
 	public EquipSlot? EquipSlotIndex { get; set; } = null;
 	public int? BackpackSlotIndex { get; set; } = null;
+
+	// Child draggable
 	private DraggableItem ChildDraggable { get; set; }
 	private string HasChildDraggableClassSelector => ChildDraggable == null ? "" : "has-child-draggable";
+
+	// Current active draggable (available from anywhere)
+	public static DraggableItem CurrentDraggable { get; private set; }
+
+	private Vector2 _lastMousePos;
+	private bool _isHoveringItem { get; set; } = false;
+	private TimeSince sinceClick;
 
 	// is-drop-target,
 	// can-drop: if the draggable is usable in this slot,
@@ -31,7 +40,7 @@
 	{
 		get
 		{
-			if ( DraggableItem.Current == null )
+			if ( CurrentDraggable == null )
 				return "";
 
 			var s = "";
@@ -46,10 +55,12 @@
 		}
 	}
 
+	protected override int BuildHash() => HashCode.Combine( Item?.GetHashCode(), IsHoveredByMouse(), CurrentDraggable );
+
 	// Can the draggable (DraggableItem.Current) drop here?
 	private bool CanDraggableDrop()
 	{
-		if ( DraggableItem.Current == null )
+		if ( CurrentDraggable == null )
 			return false; // No draggable
 
 		if ( BackpackSlotIndex != null )
@@ -57,7 +68,7 @@
 
 		if ( EquipSlotIndex != null )
 		{
-			if ( DraggableItem.Current.ItemComponent is not ItemEquipment itemEquipment )
+			if ( CurrentDraggable.ItemComponent is not ItemEquipment itemEquipment )
 				return false; // Can't drop into this equipment slot, the item isn't equipment!
 
 			return itemEquipment.Slot == EquipSlotIndex;
@@ -65,10 +76,6 @@
 
 		return false;
 	}
-
-	private bool _isHoveringItem { get; set; } = false;
-	private TimeSince sinceClick;
-	protected override int BuildHash() => HashCode.Combine( Item?.GetHashCode(), IsHoveredByMouse(), DraggableItem.Current );
 
 	private void OpenContextMenu()
 	{
@@ -154,6 +161,7 @@
 		ChildDraggable.Style.Top = Length.Fraction( fraction.y );
 
 		Hud.Instance.Panel.AddChild( ChildDraggable );
+		CurrentDraggable = ChildDraggable;
 	}
 
 	private void MoveItemTo( InventorySlot targetSlot )
@@ -180,7 +188,7 @@
 				inventory.SwapItems( fromSlot.EquipSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
 		}
 
-		PlaySound("drop");
+		PlaySound( "drop" );
 
 		// Update both slots
 		fromSlot.UpdateItem();
@@ -193,7 +201,7 @@
 		var inventory = Player.Local.Inventory;
 
 		if ( fromSlot.Item is ItemEquipment equipment )
-			Player.Local.Inventory.EquipItemFromBackpack( equipment );
+			inventory.EquipItemFromBackpack( equipment );
 
 		fromSlot.UpdateItem();
 	}
@@ -205,24 +213,26 @@
 		if ( ChildDraggable == null )
 			return;
 
-		var rendererTarget = Inventory.Instance.Descendants.OfType<CharacterRenderer>().FirstOrDefault( v => v.IsHoveredByMouse() );
-		var targetSlot = Inventory.Instance.Descendants.OfType<InventorySlot>().FirstOrDefault( v => v.IsHoveredByMouse() );
-		if ( targetSlot != null && targetSlot.Item != Item )
+		if ( ChildDraggable.HasClass( "is-hovering-slot" ) )
 		{
-			MoveItemTo( targetSlot );
+			if ( ChildDraggable.LastHoveredSlot != this )
+				MoveItemTo( ChildDraggable.LastHoveredSlot );
 		}
-		else if ( rendererTarget != null )
+		else if ( ChildDraggable.HasClass( "is-hovering-character" ) )
 		{
 			MoveOntoCharacter();
+		}
+		else
+		{
+			// Not hovering anything, drop the item!
+			Player.Local.Inventory.DropItem( ChildDraggable.ItemComponent );
+			Inventory.Instance?.OnChanged();
 		}
 
 		ChildDraggable?.Delete();
 		ChildDraggable = null;
-
-		DraggableItem.ClearCurrent();
+		CurrentDraggable = null;
 	}
-
-	private Vector2 _lastMousePos;
 
 	protected override void OnMouseMove( MousePanelEvent e )
 	{
@@ -238,6 +248,24 @@
 
 		ChildDraggable.AddPositionDeltaInScreenPixels( delta );
 		ChildDraggable.SetPositionInScreenPixels( Mouse.Position );
+
+		ChildDraggable.RemoveClass( "is-hovering-slot" );
+		ChildDraggable.RemoveClass( "is-hovering-character" );
+
+		// Check for what's under the ChildDraggable
+		var rendererTarget = Inventory.Instance.Descendants.OfType<CharacterRenderer>().FirstOrDefault( v => v.IsHoveredByMouse() );
+		var targetSlot = Inventory.Instance.Descendants.OfType<InventorySlot>().FirstOrDefault( v => v.IsHoveredByMouse() );
+		if ( targetSlot != null )
+		{
+			ChildDraggable.SetClass( "is-hovering-slot", true );
+			ChildDraggable.LastHoveredSlot = targetSlot;
+		}
+		else if ( rendererTarget != null )
+		{
+			ChildDraggable.SetClass( "is-hovering-character", true );
+		}
+
+		ChildDraggable.StateHasChanged();
 	}
 
 }

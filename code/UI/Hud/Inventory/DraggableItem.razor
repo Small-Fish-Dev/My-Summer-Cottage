@@ -4,15 +4,18 @@
 
 <root>
 	<img src=@texture.ResourcePath/>
-	<label>@name</label>
+	<div class="title-container">
+		<label>@name</label>
+	</div>
 </root>
 
 @code {
 
 	protected bool InitialTransitionComplete { get; private set; }
 
-	public static DraggableItem Current { get; private set; }
 	public ItemComponent ItemComponent { get; private set; }
+
+	public InventorySlot LastHoveredSlot { get; internal set; }
 
 	private static float XyMultiplier => -6.3f;
 	private static float ZMultiplier => 6.9f;
@@ -25,17 +28,16 @@
 
 	public DraggableItem( InventorySlot slot, Vector2 holdPoint )
 	{
-		Current = this;
-
 		Style.ZIndex = 99;
 
 		Parent = slot;
 
 		// just center on mouse lol
-		_holdPoint = slot.Box.Rect.Size / 2;
+		var size = slot.Box.Rect.Size;
+		_holdPoint = size / 2;
 
 		SetPositionInScreenPixels( Mouse.Position );
-		SetSizeInScreenPixels( slot.Box.Rect.Size );
+		SetSizeInScreenPixels( size );
 
 		ItemComponent = slot.Item;
 
@@ -43,7 +45,7 @@
 		name = slot.Item.Name;
 		texture = slot.Item.IconTexture;
 
-		PlaySound("drag");
+		PlaySound( "drag" );
 	}
 
 	private void SetSizeInScreenPixels( Vector2 v )
@@ -104,18 +106,6 @@
 		Style.Transform = transform;
 
 		StateHasChanged();
-	}
-
-	public override void OnDeleted()
-	{
-		base.OnDeleted();
-		if ( Current == this )
-			Current = null;
-	}
-
-	public static void ClearCurrent()
-	{
-		Current = null;
 	}
 
 }
