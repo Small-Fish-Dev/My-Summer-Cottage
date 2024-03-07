@@ -87,6 +87,7 @@ PS
 
 	// Global normal map
 	CreateInputTexture2D( Splat_GlobalNormal, Srgb, 8, "NormalizeNormals", "_normal", "Splat Map,70/50", Default3( 1.0, 1.0, 1.0 ) );
+	CreateInputTexture2D( Splat_GlobalAO, Linear, 8, "", "_ao", "Spalt Map,70/60", Default( 1.0 ) );
 
 	CreateInputTexture2D( Splat_Roughness_A, Linear, 8, "", "_rough", "Splat Textures A,30/30", Default( 0.5 ) );
 	CreateInputTexture2D( Splat_Roughness_B, Linear, 8, "", "_rough", "Splat Textures B,40/30", Default( 0.5 ) );
@@ -109,7 +110,7 @@ PS
 	CreateTexture2DWithoutSampler( g_tSplatNormal_B ) < Channel( RGB, Box( Splat_NormalB ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); >;
 	CreateTexture2DWithoutSampler( g_tSplatNormal_C ) < Channel( RGB, Box( Splat_NormalC ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); >;
 	CreateTexture2DWithoutSampler( g_tSplatNormal_D ) < Channel( RGB, Box( Splat_NormalD ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); >;
-	CreateTexture2DWithoutSampler( g_tGlobalNormal ) < Channel( RGB, Box( Splat_GlobalNormal ), Srgb ); OutputFormat( DXT5 ); SrgbRead( true ); >;
+	CreateTexture2DWithoutSampler( g_tGlobalNormal ) < Channel( RGB, Box( Splat_GlobalNormal ), Srgb ); Channel( A, Box( Splat_GlobalAO ), Linear ); OutputFormat( DXT5 ); >;
 
 	// Build roughness maps
 	CreateTexture2DWithoutSampler( g_tSplatRoughness ) < Channel( R, Box( Splat_Roughness_A ), Linear ); Channel( G, Box( Splat_Roughness_B ), Linear ); Channel( B, Box( Splat_Roughness_C ), Linear ); Channel( A, Box( Splat_Roughness_D ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
@@ -125,6 +126,9 @@ PS
 
 	CreateTexture2DWithoutSampler( g_tSplatMap ) < Channel( R, Box( Splat_LayerA ), Linear ); Channel( G, Box( Splat_LayerB ), Linear ); Channel( B, Box( Splat_LayerC ), Linear ); Channel( A, Box( Splat_LayerD ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 	
+	float shoremin < UiType( Slider ); Default( 0.0f ); Range( -500.0f, 5500.0f ); UiGroup("Shoreline Wetness,90/10"); >;
+	float shoremax < UiType( Slider ); Default( 25.0f); Range( -500.0f, 5500.0f ); UiGroup("Shoreline Wetness,90/20"); >;
+
 	// ---
 	// Triplanar settings
 	// ---
@@ -176,7 +180,8 @@ PS
 		);
 
 		// Prepare global normal
-		float3 l_tGlobalNormal = DecodeNormal( Tex2DS( g_tGlobalNormal, SamplerAniso, UV.xy ).rgb );
+		float4 l_tGlobalNormal = Tex2DS( g_tGlobalNormal, SamplerAniso, UV.xy ).rgba;
+		float3 globalnormal = DecodeNormal( l_tGlobalNormal.rgb );
 
 		// Prepare color maps (+ blend masks in alpha channel)
 		float4 l_tSplatColor_A = Tex2DTriplanar( g_tSplatColor_A, SamplerPoint, i, TextureTiling / 8, TextureBlending, TextureScale ).rgba;
@@ -197,22 +202,19 @@ PS
 
 		m.Albedo = ApplyWithSplatdata( l_tSplatColor_A, l_tSplatColor_B, l_tSplatColor_C, l_tSplatColor_D, l_tSplatData );	// Pass 1 - apply terrain textures according to splat maps
 		m.Albedo = lerp( m.Albedo, l_tSplatColor_LOD, smoothstep(550, 1000, scaleFactor));									// Pass 2 - render LOD texture with smooth transition
+		m.Albedo = lerp( m.Albedo, m.Albedo * 0.5, smoothstep( shoremin, shoremax, i.AbsolutePosition.z ));					// Pass 3 - height-based darkening effect
 
-        m.Roughness = ApplyWithSplatdata( 
-			float4(l_tSplatRoughness.r, 0, 0, l_tSplatColor_A.a), 
-			float4(l_tSplatRoughness.g, 0, 0, l_tSplatColor_B.a), 
-			float4(l_tSplatRoughness.b, 0, 0, l_tSplatColor_C.a),
-			float4(l_tSplatRoughness.a, 0, 0, l_tSplatColor_D.a), l_tSplatData);
-        m.Metalness = 0;
-        m.AmbientOcclusion = 1;
+		m.Roughness = ApplyWithSplatdataBNW( 
+			float2(l_tSplatRoughness.r, l_tSplatColor_A.a), 
+			float2(l_tSplatRoughness.g, l_tSplatColor_B.a), 
+			float2(l_tSplatRoughness.b, l_tSplatColor_C.a),
+			float2(l_tSplatRoughness.a, l_tSplatColor_D.a), l_tSplatData);
+        m.Roughness = lerp( m.Roughness, m.Roughness * 0.2, smoothstep( 2295, 2290, sin(g_flTime) + i.AbsolutePosition.z ) );
+        m.Metalness = lerp( 0, 0.65, smoothstep( 2295, 2285, sin(g_flTime) + i.AbsolutePosition.z ) );
+        m.AmbientOcclusion = l_tGlobalNormal.a;
 
-		// Apply normals of each splat texture layer by layre, then blend it with terrain's global normal, then transform normal so they display correctly in-game.
-		m.Normal = TransformNormal( BlendNormals( l_tGlobalNormal, ApplyWithSplatdata( 
-			float4(l_tSplatNormal_A.rgb, l_tSplatColor_A.a),
-			float4(l_tSplatNormal_B.rgb, l_tSplatColor_B.a), 
-			float4(l_tSplatNormal_C.rgb, l_tSplatColor_C.a), 
-			float4(l_tSplatNormal_D.rgb, l_tSplatColor_D.a), 
-			l_tSplatData ) ), i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
+		// Apply normals of each splat texture layer by layer, then blend it with terrain's global normal, then transform normal so they display correctly in-game.
+		m.Normal = TransformNormal( globalnormal, i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
 
 		// Write to shading model 
 		float4 result = ShadingModelStandard::Shade( i, m );
