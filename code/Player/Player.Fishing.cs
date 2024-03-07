@@ -48,6 +48,10 @@ public partial class Player
 				if ( definition == null )
 					return;
 
+				var trash = definition.GetComponent<Fish>().Get<bool>( "IsTrash" );
+				if ( trash ) 
+					return;
+
 				var range = definition.GetComponent<Fish>().Get<RangedFloat>( "WeightRange" );
 				var species = definition.GetComponent<ItemComponent>().Get<string>( "Name" );
 				if ( weight >= range.y * 0.3f ) // Has to be atleast 30% of max weight.
