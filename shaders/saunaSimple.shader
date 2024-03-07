@@ -135,15 +135,17 @@ PS
 
 	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
 
-	#if ( S_MODE_DEPTH )
-        #define MainPs Disabled
-    #endif
-
 	//
 	// Main
 	//
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
+		#if S_MODE_DEPTH
+		{
+			return 0;
+		}
+		#endif
+
 		float2 UV = i.vTextureCoords.xy;
 		float4 l_tColor = Tex2DS( g_tColor, Sampler, UV.xy ).rgba;
 		float3 colorTint = g_flColorTint * i.vVertexColor;
