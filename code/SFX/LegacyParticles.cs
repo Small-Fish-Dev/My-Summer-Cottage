@@ -13,7 +13,7 @@ public class LegacyParticles
 
 	private LegacyParticles() { }
 	
-	public static LegacyParticles Create( string path, Transform transform = default, List<ParticleControlPoint> controlPoints = null )
+	public static LegacyParticles Create( string path, Transform transform = default, List<ParticleControlPoint> controlPoints = null, int? deleteTime = null )
 	{
 		var obj = Game.ActiveScene.CreateObject();
 		obj.Transform.World = transform;
@@ -35,6 +35,13 @@ public class LegacyParticles
 				VectorValue = transform.Position 
 			}
 		};
+
+		if ( deleteTime != null )
+			new Action( async () =>
+			{
+				await GameTask.Delay( deleteTime.Value );
+				particle?.Destroy();
+			} ).Invoke();
 
 		return particle;
 	}
