@@ -7,12 +7,36 @@ CharacterRenderer {
     justify-content: center;
     z-index: -5;
 
-    .scene {
+    // background-color: red;
+    
+    .scene-container {
         height: 60%;
         width: 500px;
-        margin-bottom: 10px;
-    }
 
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        
+        ScenePanel {
+            // background-color: blue;
+            
+            margin-bottom: 10px;
+
+            height: 100%;
+            width: 100%;
+        }
+
+        .scene-input-overlay {
+            position: absolute;
+            // background-color: green;
+
+            z-index: 99;
+
+            height: 100%;
+            width: 63%;
+        }
+    }
+    
     .name {
         gap: 10px;
         font-family: BasicHandwriting;

@@ -29,10 +29,37 @@ DraggableItem {
     overflow: visible;
 
     .sub-label {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        image-rendering: pixelated;
+        
+        display: none;
         opacity: 0;
     }
 
-    &.is-hovering-character {
+    .drop-label {
+        transition: opacity 0.4s ease-out;
+        display: flex;
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        background-image: url("ui/hud/delete_item_64_45deg.png");
+    }
+
+    .equip-label {
+        transition: opacity 0.2s ease-out;
+        display: flex;
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        
+        top: -5px;
+        left: -5px;
+        background-image: url("ui/hud/equip_item_64_30deg.png");
+    }
+    
+    &.is-hovering-character.can-drop {
         .equip-label {
             opacity: 1;
         }
@@ -44,6 +71,18 @@ DraggableItem {
         }
     }
 
+    &.should-trash {
+        .drop-label {
+            opacity: 1;
+        }
+        
+        .title-container {
+            .label {
+                opacity: 0;
+            }
+        }
+    }
+    
     .title-container {
         position: absolute;
         height: 44px; // sorry this is a constant now
@@ -58,6 +97,8 @@ DraggableItem {
         align-content: center;
         
         label {
+            transition: opacity 0.4s ease-out;
+            
             font-family: HabboExtended;
             margin-bottom: 5px;
             padding: 7px 10px 7px 10px;

@@ -1,3 +1,5 @@
+using Sauna.SFX;
+
 namespace Sauna;
 
 public class ShopItem : Component
@@ -13,6 +15,8 @@ public class ShopItem : Component
 	/// </summary>
 	[Property]
 	public bool HasBounds { get; set; } = false;
+
+	private LegacyParticles purchase;
 
 	protected override void OnStart()
 	{
@@ -33,6 +37,7 @@ public class ShopItem : Component
 			DynamicColor = () => Color.FromBytes( 116, 254, 64 ),
 			ShowWhenDisabled = () => true,
 		} );
+		purchase = LegacyParticles.Create( "particles/purchase.vpcf", GameObject.Transform.World );
 	}
 
 	private void PurchaseItem( Player interactor, GameObject obj )
@@ -47,6 +52,7 @@ public class ShopItem : Component
 
 		interactor.Money -= Price;
 		var receivedItem = interactor.Inventory.GiveItem( purchasedItem );
+		purchase.replay();
 		if ( !receivedItem )
 			o.Transform.Position = Transform.Position;
 	}

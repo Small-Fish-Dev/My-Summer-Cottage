@@ -1,9 +1,13 @@
 @namespace Sauna.UI
 @attribute [StyleSheet]
+@using Sandbox.Utility
 @inherits Panel
 
 <root>
-	<ScenePanel class="scene" @ref=_scenePanel />
+	<div class="scene-container">
+		<ScenePanel @ref=" _scenePanel"/>
+		<div class="scene-input-overlay" @ref=" SceneInputOverlayPanel"></div>
+	</div>
 	<div class="name">
 		<text>@Player.Local.Firstname</text>
 		<text style="font-size: 24px;">@Player.Local.Lastname</text>
@@ -18,29 +22,34 @@
 	private SceneModel[] _clothes;
 	private SceneLight _sceneLight;
 	private SceneDirectionalLight _sceneDirectionalLight;
+	private const float HoverEffectDuration = 0.2f;
+	private TimeUntil _hoverEffectActivation = HoverEffectDuration;
+	private TimeUntil _hoverEffectDeactivation = HoverEffectDuration;
+
 	private static float _yaw = 0f;
 	private bool _isDragging = false;
+	private Panel SceneInputOverlayPanel { get; set; }
 
-	public bool IsHoveredByMouse() => Box.Rect.IsInside( Mouse.Position );
+	public bool IsHoveredByMouse() => SceneInputOverlayPanel.Box.Rect.IsInside( Mouse.Position );
 
-	protected override void OnAfterTreeRender(bool firstTime)
+	protected override void OnAfterTreeRender( bool firstTime )
 	{
-		base.OnAfterTreeRender(firstTime);
+		base.OnAfterTreeRender( firstTime );
 
 		_sceneWorld ??= new SceneWorld();
 		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
 		_sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
-		_character ??= new SceneModel( _sceneWorld, "models/guy/guy.vmdl", new Transform(Vector3.Zero, Rotation.From(0, _yaw, 0)) );
+		_character ??= new SceneModel( _sceneWorld, "models/guy/guy.vmdl", new Transform( Vector3.Zero, Rotation.From( 0, _yaw, 0 ) ) );
 		if ( firstTime ) Refresh();
 
 		_scenePanel.World = _sceneWorld;
 		_scenePanel.Camera.FieldOfView = 5f;
 		_scenePanel.Camera.ZNear = 3;
-		_scenePanel.Camera.FitModel(_character);
+		_scenePanel.Camera.FitModel( _character );
 		_scenePanel.Camera.OnRenderPostProcess = () =>
 		{
-			if (_penoid != null)
-				SFX.EyeProtector.Render(_scenePanel.Camera, _penoid);
+			if ( _penoid != null )
+				SFX.EyeProtector.Render( _scenePanel.Camera, _penoid );
 		};
 
 		_sceneLight.Position = _scenePanel.Camera.Position + _scenePanel.Camera.Rotation.Forward * 500f;
@@ -98,14 +107,14 @@
 
 	private void Update()
 	{
-		_character.Update(RealTime.Delta);
-		_character.SetAnimParameter("height", Player.Local.Height);
-		_character.SetAnimParameter("weight", Player.Local.Fatness);
-		_character.Morphs.Set("fat", Player.Local.Fatness);
-		_character.SetAnimParameter("hold_type", (int)Player.Local.HoldType);
-		_character.Rotation = Rotation.From(0, _yaw, 0);
+		_character.Update( RealTime.Delta );
+		_character.SetAnimParameter( "height", Player.Local.Height );
+		_character.SetAnimParameter( "weight", Player.Local.Fatness );
+		_character.Morphs.Set( "fat", Player.Local.Fatness );
+		_character.SetAnimParameter( "hold_type", (int)Player.Local.HoldType );
+		_character.Rotation = Rotation.From( 0, _yaw, 0 );
 
-		_penoid?.Update(RealTime.Delta);
+		_penoid?.Update( RealTime.Delta );
 		if ( _clothes != null )
 		{
 			if ( Player.Local.Inventory.EquippedItems[(int)EquipSlot.Hand] is ItemEquipment hand && hand.UpdatePosition )
@@ -117,6 +126,25 @@
 				if ( clothing.IsValid() )
 					clothing?.Update( RealTime.Delta );
 		}
+
+		// i'm not sure how to make a fraction 0-1 where 0 is not hovered and 1 is hovered
+		// well i mean I'm doing it this way but I feel there's a better way
+		var isDropTarget = IsHoveredByMouse() && InventorySlot.CurrentDraggable != null && InventorySlot.CurrentDraggable.HasClass( "can-drop" );
+		float fraction;
+		if ( isDropTarget )
+		{
+			_hoverEffectDeactivation = HoverEffectDuration;
+			fraction = _hoverEffectActivation.Fraction;
+		}
+		else
+		{
+			_hoverEffectActivation = HoverEffectDuration;
+			fraction = 1 - _hoverEffectDeactivation.Fraction;
+		}
+
+		var multiplier = 4 + Easing.EaseIn( fraction ) * 55;
+		var sceneDirectionalLightColor = Color.White * multiplier;
+		_sceneDirectionalLight.LightColor = sceneDirectionalLightColor;
 	}
 
 	public override void OnButtonEvent( ButtonEvent e )
@@ -127,9 +155,9 @@
 		base.OnButtonEvent( e );
 	}
 
-	public override void Tick() 
+	public override void Tick()
 	{
-		if (_character is null)
+		if ( _character is null )
 			return;
 
 		if ( _isDragging )
@@ -137,4 +165,5 @@
 
 		Update();
 	}
+
 }
