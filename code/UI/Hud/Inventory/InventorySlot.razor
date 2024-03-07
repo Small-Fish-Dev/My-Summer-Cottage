@@ -180,6 +180,8 @@
 				inventory.SwapItems( fromSlot.EquipSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
 		}
 
+		PlaySound("drop");
+
 		// Update both slots
 		fromSlot.UpdateItem();
 		targetSlot.UpdateItem();

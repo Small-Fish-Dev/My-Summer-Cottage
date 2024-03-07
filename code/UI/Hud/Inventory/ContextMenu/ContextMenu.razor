@@ -40,6 +40,7 @@
 		_instance.Style.Left = Length.Fraction( fraction.x );
 		_instance.Style.Top = Length.Fraction( fraction.y );
 		_instance._item = item;
+		_instance.PlaySound("light_click");
 	
 		Hud.Instance.Panel.AddChild(_instance);
 	}
