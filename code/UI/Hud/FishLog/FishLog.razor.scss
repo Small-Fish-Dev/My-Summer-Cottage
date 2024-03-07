@@ -7,7 +7,7 @@ FishLog {
     background-color: $fullscreen-bg;
     backdrop-filter: $fullscreen-blur;
     pointer-events: all;
-    
+    font-family: HabboExtended;
     flex-direction: column;
 
     .container {
@@ -16,7 +16,6 @@ FishLog {
         flex-direction: column;
         gap: 10px;
         padding: 200px 5vw 0 5vw;
-
         flex-grow: 1;
 
         .fish-img {
@@ -41,59 +40,58 @@ FishLog {
         .content {
             flex-direction: row;
             flex-grow: 1;
-            
+
             .fishes {
                 overflow: scroll;
                 gap: 20px;
                 flex-wrap: wrap;
-                
                 flex-basis: 0;
                 flex-grow: 4;
             }
-    
+
             .fish-selected {
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: stretch;
-                
                 flex-basis: 0;
                 flex-grow: 5;
-                
+
                 .fish-info {
                     flex-direction: column;
                     align-items: stretch;
-                    
                     background-color: $black-bg;
-                    
+                    font-size: 16px;
                     .overview {
                         flex-direction: row;
                         align-items: center;
-                        
+
                         ScenePanel {
                             aspect-ratio: 1.25;
                             height: 384px;
                         }
-                        
+
                         .summary {
                             flex-direction: column;
                             gap: 10px;
-                            
+                            font-weight: bold;
+                            letter-spacing: 1px;
+
                             .fish-rarity {
                                 flex-direction: row;
                                 gap: 20px;
-                                
+
                                 .fish-stars {
                                     flex-direction: row;
                                     flex-wrap: nowrap;
                                     gap: 5px;
-                                    
+
                                     img {
                                         aspect-ratio: 1;
                                         image-rendering: pixelated;
                                     }
                                 }
                             }
-                            
+
                             .fish-best-catch {
                                 flex-direction: row;
                                 gap: 5px;
@@ -108,10 +106,11 @@ FishLog {
                             }
                         }
                     }
-                    
+
                     .description {
                         background-color: $black-bg;
-                        
+                        font-weight: bold;
+                        letter-spacing: 1px;
                         padding: 20px;
                     }
                 }
