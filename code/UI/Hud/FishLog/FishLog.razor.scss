@@ -61,6 +61,8 @@ FishLog {
                     align-items: stretch;
                     background-color: $black-bg;
                     font-size: 16px;
+                    padding-right: 10px;
+
                     .overview {
                         flex-direction: row;
                         align-items: center;
@@ -92,9 +94,8 @@ FishLog {
                                 }
                             }
 
-                            .fish-best-catch {
-                                flex-direction: row;
-                                gap: 5px;
+                            .statistic {
+                                white-space: pre;
                             }
 
                             .green {
@@ -103,6 +104,10 @@ FishLog {
 
                             .gold {
                                 color: $gold;
+                            }
+
+                            .mony {
+                                color: #ebbc5e;
                             }
                         }
                     }

@@ -72,18 +72,11 @@
 								</div>
 								@if ( _selectedFishRecord is FishRecord fr )
 								{
-									@* TODO: s&box hates the spaces between elements. fuck you, s&box! *@
-									<div>@($"You have caught {fr.Count} of these in total")</div>
-
-									<div class="fish-best-catch">
-										The Best Catch:
-										<div class="green">@fr.MaxWeight grams</div>
-										<div class="gold">(@((int)(fr.MaxWeight / 1000.0f * _selectedFish.CostPerKilo))mk)</div>
-										on
-										<text>
-											@fr.MaxWhen.ToLongDateString()
-										</text>
-									</div>
+									<div style="margin-bottom: 20px">@($"You have caught {fr.Count} of these in total")</div>
+									<div class="statistic gold">BEST CATCH</div>
+									<div class="statistic">Weight: <div class="green">@fr.MaxWeight grams</div></div> 
+									<div class="statistic">Price: <div class="mony">@((int)(fr.MaxWeight / 1000.0f * _selectedFish.CostPerKilo))mk</div></div>
+									<div class="statistic">Date: @fr.MaxWhen.ToLongDateString()</div>
 								}
 							</div>
 						</div>
