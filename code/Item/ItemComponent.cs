@@ -44,7 +44,7 @@ public class ItemComponent : Component
 
 	private int _maxStack;
 
-	[Property, Sync, HideIf( "MaxStack", 0 ), TargetSave] public int Count { get; set; }
+	[Property, Sync, HideIf( "MaxStack", 0 ), TargetSave( IgnoreIf = 0 )] public int Count { get; set; }
 	[Sync] public string Prefab { get; private set; }
 
 	public Texture IconTexture => Texture.Load( FileSystem.Mounted, Icon.Path );

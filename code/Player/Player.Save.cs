@@ -32,6 +32,7 @@ public struct PlayerSave
 [AttributeUsage( AttributeTargets.Property )]
 public class TargetSaveAttribute : Attribute
 {
+	public object IgnoreIf { get; set; }
 }
 
 partial class Player
@@ -105,7 +106,14 @@ partial class Player
 				var properties = GlobalGameNamespace.TypeLibrary
 					?.GetType( component.GetType() )
 					?.Properties
-					?.Where( x => x.HasAttribute<TargetSaveAttribute>() );
+					?.Where( property =>
+					{
+						var attribute = property.GetCustomAttribute<TargetSaveAttribute>();
+						if ( attribute == null ) return false;
+
+						var ignore = attribute?.IgnoreIf?.Equals( property.GetValue( component ) ) ?? false;
+						return !ignore;
+					} );
 
 				foreach ( var property in properties )
 				{
