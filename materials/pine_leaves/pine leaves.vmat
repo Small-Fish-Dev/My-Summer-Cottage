@@ -2,10 +2,11 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader_c"
+	shader "shaders/saunasimple.shader"
 
 	//---- Rendering ----
-	F_DO_NOT_CAST_SHADOWS 1
+	F_ALPHA_TEST 1
+	F_DETAILED_ALPHA_SHADOWS 1
 	F_RENDER_BACKFACES 1
 	F_TRANSPARENCY 1
 
@@ -17,8 +18,14 @@ Layer0
 
 	//---- Material ----
 	Color "materials/pine_leaves/pine leaves_color.png"
+	ColorTintMask "materials/default/default.tga"
+	Metalness "materials/default/default_metal.tga"
 	Normal "materials/default/default_normal.tga"
 	Roughness "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
 
 	//---- Transparency ----
 	TransparencyMask "materials/pine_leaves/pine_leaves_trans.png"

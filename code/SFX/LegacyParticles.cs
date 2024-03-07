@@ -22,7 +22,8 @@ public class LegacyParticles
 		var particle = new LegacyParticles()
 		{
 			GameObject = obj,
-			System = obj.Components.Create<LegacyParticleSystem>()
+			System = obj.Components.Create<LegacyParticleSystem>(),
+			Transform = transform
 		};
 
 		particle.System.Particles = ParticleSystem.Load( path );
