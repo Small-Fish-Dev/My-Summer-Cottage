@@ -1,3 +1,5 @@
+using Sauna.SFX;
+
 namespace Sauna;
 
 public enum WeaponType
@@ -150,7 +152,8 @@ public sealed class WeaponComponent : Component
 			return false;
 		}
 
-		var transform = Components.Get<SkinnedModelRenderer>( FindMode.DisabledInSelfAndChildren )?.GetAttachment( ExitAttachment )
+		// Get ray
+		var transform = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndChildren )?.GetAttachment( ExitAttachment )
 			?? new Transform( shooter.ViewRay.Position, Rotation.LookAt( shooter.ViewRay.Forward ) );
 
 		var ray = new Ray( transform.Position, transform.Rotation.Forward );
@@ -158,6 +161,12 @@ public sealed class WeaponComponent : Component
 			.IgnoreGameObjectHierarchy( shooter.GameObject )
 			.Run();
 
+		// Bullet trace
+		var particle = LegacyParticles.Create( "particles/bullet_tracer.vpcf", transform, deleteTime: 1500 );
+		particle.SetVector( 1, transform.Position );
+		particle.SetVector( 1, tr.EndPosition );
+
+		// Ragdoll hit player? :D
 		var target = tr.GameObject?.Components.Get<Player>( FindMode.EverythingInSelfAndAncestors );
 		if ( target != null )
 			target.SetRagdoll( true, duration: 2.5f, spin: 30 );

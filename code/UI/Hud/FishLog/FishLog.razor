@@ -72,18 +72,11 @@
 								</div>
 								@if ( _selectedFishRecord is FishRecord fr )
 								{
-									@* TODO: s&box hates the spaces between elements. fuck you, s&box! *@
-									<div>@($"You have caught {fr.Count} of these in total")</div>
-
-									<div class="fish-best-catch">
-										The Best Catch:
-										<div class="green">@fr.MaxWeight grams</div>
-										<div class="gold">(@((int)(fr.MaxWeight / 1000.0f * _selectedFish.CostPerKilo)) kr)</div>
-										on
-										<text>
-											@fr.MaxWhen.ToLongDateString()
-										</text>
-									</div>
+									<div style="margin-bottom: 20px">@($"You have caught {fr.Count} of these in total")</div>
+									<div class="statistic gold">BEST CATCH</div>
+									<div class="statistic">Weight: <div class="green">@fr.MaxWeight grams</div></div> 
+									<div class="statistic">Price: <div class="mony">@((int)(fr.MaxWeight / 1000.0f * _selectedFish.CostPerKilo))mk</div></div>
+									<div class="statistic">Date: @fr.MaxWhen.ToLongDateString()</div>
 								}
 							</div>
 						</div>
@@ -154,6 +147,10 @@
 			_selectedFishRecord = record;
 		else
 			_selectedFishRecord = null;
+
+		_model?.Delete();
+		_model = new SceneModel(_sceneWorld, _selectedFish.ModelPath, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)));
+		_model.SetMaterialGroup(_selectedFish.MaterialGroup);
 	}
 
 	protected override void OnAfterTreeRender( bool firstTime )
@@ -167,26 +164,12 @@
 		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
 		_sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, Rotation.From( 45, -45, 45 ), Color.White * 10f );
 
-		_model = new SceneModel( _sceneWorld, _selectedFish.ModelPath, new Transform( Vector3.Zero, Rotation.From( 0, 0, 0 ) ) );
+		_model ??= new SceneModel( _sceneWorld, _selectedFish.ModelPath, new Transform( Vector3.Zero, Rotation.From( 0, 0, 0 ) ) );
 		_model.SetMaterialGroup( _selectedFish.MaterialGroup );
 		_scenePanel.World = _sceneWorld;
-		_scenePanel.Camera.FieldOfView = 120f;
+		_scenePanel.Camera.FieldOfView = 50f;
 
-		if ( _cameraTransform.Position == Vector3.Zero )
-		{
-			var bounds = _model.Model.Bounds;
-			// var dist = radius / MathF.Sin( _scenePanel.Camera.FieldOfView.DegreeToRadian() );
-			var dist = bounds.Extents.Length * 1.25f;
-
-			var viewDirection = Vector3.Forward;
-			var pos = viewDirection * dist + bounds.Center;
-
-			_scenePanel.Camera.Position = pos;
-			_scenePanel.Camera.Rotation = Rotation.LookAt( bounds.Center - _scenePanel.Camera.Position ).RotateAroundAxis( -viewDirection, 90 );
-
-			_distance = _scenePanel.Camera.Position.Distance( _model.Model.Bounds.Center );
-			_cameraTransform = new Transform( _scenePanel.Camera.Position, _scenePanel.Camera.Rotation );
-		}
+		_scenePanel.Camera.FitModel( _model );
 	}
 
 	public override void Tick()
@@ -198,8 +181,12 @@
 
 		_cameraTransform.Position = _model.Model.Bounds.Center - _cameraTransform.Forward * _distance;
 
-		_scenePanel.Camera.Position = Vector3.Lerp( _scenePanel.Camera.Position, _cameraTransform.Position, RealTime.Delta * 40.0f );
-		_scenePanel.Camera.Rotation = Rotation.Lerp( _scenePanel.Camera.Rotation, _cameraTransform.Rotation, RealTime.Delta * 50.0f );
+		var transform = _model.Transform.RotateAround(0, Rotation.FromYaw(RealTime.Delta * 115f));
+		_model.Position = transform.Position ;
+		_model.Rotation = transform.Rotation;
+
+		_scenePanel.Camera.FitModel( _model );
+		_scenePanel.Camera.Position += Vector3.Forward * 10f;
 		_sceneLight.Position = _scenePanel.Camera.Position;
 
 		_model.Update( RealTime.Delta );
