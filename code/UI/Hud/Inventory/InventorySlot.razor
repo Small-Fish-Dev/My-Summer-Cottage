@@ -27,11 +27,13 @@
 	private DraggableItem ChildDraggable { get; set; }
 	private string HasChildDraggableClassSelector => ChildDraggable == null ? "" : "has-child-draggable";
 	private TimeUntil _childDraggableTrashTimer;
-	private const float TimeUntilChildDraggableCanBeTrashed = 0.2f;
-	
+	private TimeUntil _childDraggableTrashAnimationTimer;
+	private const float TimeUntilChildDraggableCanBeTrashed = 0.05f;
+	private const float TimeUntilChildDraggableCanBeTrashedAnimation = 0.33f;
+
 	// Current active draggable (available from anywhere)
 	public static DraggableItem CurrentDraggable { get; private set; }
-	
+
 	private Vector2 _lastMousePos;
 	private bool _isHoveringItem { get; set; } = false;
 	private TimeSince sinceClick;
@@ -176,10 +178,16 @@
 		{
 			// To backpack slot.
 			if ( targetSlot.BackpackSlotIndex is not null )
+			{
 				inventory.SwapItems( fromSlot.BackpackSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
+				PlaySound( "drop" );
+			}
 			// To equipment slot.
-			else if ( targetSlot.EquipSlotIndex is not null )
+			else if ( targetSlot.EquipSlotIndex is not null && fromSlot.Item is ItemEquipment itemEquipment && itemEquipment.Slot == targetSlot.EquipSlotIndex )
+			{
 				inventory.SwapItems( fromSlot.BackpackSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
+				PlaySound( "drop" );
+			}
 		}
 
 		// From equipment slot.
@@ -187,10 +195,11 @@
 		{
 			// To backpack slot.
 			if ( targetSlot.BackpackSlotIndex is not null )
+			{
 				inventory.SwapItems( fromSlot.EquipSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
+				PlaySound( "drop" );
+			}
 		}
-
-		PlaySound( "drop" );
 
 		// Update both slots
 		fromSlot.UpdateItem();
@@ -215,7 +224,7 @@
 		if ( ChildDraggable == null )
 			return;
 
-		if ( ChildDraggable.HasClass( "can-drop" ) )
+		// if ( ChildDraggable.HasClass( "can-drop" ) )
 		{
 			if ( ChildDraggable.HasClass( "is-hovering-slot" ) )
 			{
@@ -226,7 +235,7 @@
 			{
 				MoveOntoCharacter();
 			}
-			else if (ChildDraggable.HasClass( "should-trash" ))
+			else if ( _childDraggableTrashTimer )
 			{
 				// Not hovering anything, drop the item!
 				Player.Local.Inventory.DropItem( ChildDraggable.ItemComponent );
@@ -243,7 +252,7 @@
 	{
 		if ( ChildDraggable == null )
 			return;
-		
+
 		ChildDraggable.RemoveClass( "is-hovering-slot" );
 		ChildDraggable.RemoveClass( "is-hovering-character" );
 		ChildDraggable.RemoveClass( "should-trash" );
@@ -256,11 +265,13 @@
 		{
 			ChildDraggable.SetClass( "is-hovering-slot", true );
 			ChildDraggable.LastHoveredSlot = targetSlot;
+			
+			_childDraggableTrashAnimationTimer = TimeUntilChildDraggableCanBeTrashedAnimation;
 			_childDraggableTrashTimer = TimeUntilChildDraggableCanBeTrashed;
 
 			ChildDraggable.SetClass( "can-drop", true );
-            
-			if ( targetSlot.EquipSlotIndex != null && CurrentDraggable.ItemComponent is not ItemEquipment)
+
+			if ( targetSlot.EquipSlotIndex != null && (CurrentDraggable.ItemComponent is not ItemEquipment ie || ie.Slot != targetSlot.EquipSlotIndex) )
 			{
 				ChildDraggable.RemoveClass( "can-drop" );
 			}
@@ -268,24 +279,25 @@
 		else if ( rendererTarget != null )
 		{
 			ChildDraggable.SetClass( "is-hovering-character", true );
-			
+
+			_childDraggableTrashAnimationTimer = TimeUntilChildDraggableCanBeTrashedAnimation;
 			_childDraggableTrashTimer = TimeUntilChildDraggableCanBeTrashed;
-			
+
 			// Check if this can be equipped
 			if ( CurrentDraggable.ItemComponent is ItemEquipment )
 				ChildDraggable.SetClass( "can-drop", true );
 		}
 		else
 		{
-			if (_childDraggableTrashTimer)
+			if ( _childDraggableTrashAnimationTimer )
 				ChildDraggable.SetClass( "should-trash", true );
-			
+
 			ChildDraggable.SetClass( "can-drop", true );
 		}
 
 		ChildDraggable.StateHasChanged();
 	}
-	
+
 	protected override void OnMouseMove( MousePanelEvent e )
 	{
 		base.OnMouseMove( e );
@@ -307,7 +319,7 @@
 	public override void Tick()
 	{
 		base.Tick();
-		
+
 		if ( _childDraggableTrashTimer )
 			UpdateChildDraggableState();
 	}

@@ -59,12 +59,25 @@ DraggableItem {
         background-image: url("ui/hud/equip_item_64_30deg.png");
     }
     
-    &.is-hovering-character.can-drop {
-        .equip-label {
-            opacity: 1;
+    &.is-hovering-character {
+        .can-drop {
+            .equip-label {
+                opacity: 1;
+            }
         }
     }
 
+    &.is-hovering-character, &.is-hovering-slot {
+        &:not(.can-drop) { 
+            .title-container {
+                .label {
+                    background-color: rgba(#4c1c1b, 1);
+                    opacity: 0.2;
+                }
+            }
+        }
+    }
+    
     &.is-hovering-slot {
         .put-label {
             opacity: 1;
@@ -78,7 +91,7 @@ DraggableItem {
         
         .title-container {
             .label {
-                opacity: 0;
+                opacity: 0.2;
             }
         }
     }
@@ -97,7 +110,7 @@ DraggableItem {
         align-content: center;
         
         label {
-            transition: opacity 0.4s ease-out;
+            transition: opacity 0.2s ease-out, background-color 0.2s ease-out;
             
             font-family: HabboExtended;
             margin-bottom: 5px;
