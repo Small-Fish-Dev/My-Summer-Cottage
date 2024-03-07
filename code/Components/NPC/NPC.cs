@@ -42,6 +42,7 @@ public class NPC : Component
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
 	public float DesiredDistance { get; private set; } = 60f;
+	public float CurrentSpeed { get; private set; } = 60f;
 
 	protected override void OnStart()
 	{
@@ -49,6 +50,7 @@ public class NPC : Component
 		SetupCollider();
 
 		Tags.Set( "npc", true );
+		CurrentSpeed = WalkSpeed;
 	}
 
 	void SetupNavAgent()
@@ -202,6 +204,38 @@ public class NPC : Component
 		return position;
 	}
 
+	/// <summary>
+	/// Set the speed of the NPC
+	/// </summary>
+	/// <param name="speed"></param>
+	public void SetSpeed( float speed )
+	{
+		CurrentSpeed = speed;
+	}
+
+	/// <summary>
+	/// Set the NPC's speed to the RunSpeed
+	/// </summary>
+	/// <param name="isRunning"></param>
+	public void Running( bool isRunning = true )
+	{
+		SetSpeed( isRunning ? RunSpeed : WalkSpeed );
+	}
+
+	/// <summary>
+	/// Set the NPC's speed to the WalkSpeed
+	/// </summary>
+	/// <param name="isWalking"></param>
+	public void Walking( bool isWalking = true )
+	{
+		SetSpeed( isWalking ? WalkSpeed : RunSpeed );
+	}
+
+	/// <summary>
+	/// Where the NPC should find themselves when near the target
+	/// </summary>
+	/// <param name="target"></param>
+	/// <returns></returns>
 	public Vector3 GetPreferredTargetPosition( GameObject target )
 	{
 		if ( !target.IsValid() )
