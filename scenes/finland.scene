@@ -151,8 +151,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -263,8 +263,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -411,7 +411,11 @@
             "prefabs/fishes/pike.prefab",
             "prefabs/fishes/pike_rare.prefab",
             "prefabs/fishes/salmon.prefab",
-            "prefabs/fishes/salmon_rare.prefab"
+            "prefabs/fishes/salmon_rare.prefab",
+            "prefabs/fishes/trash/trash_boot.prefab",
+            "prefabs/fishes/trash/trash_bottle.prefab",
+            "prefabs/fishes/trash/trash_can.prefab",
+            "prefabs/fishes/trash/trash_crisps.prefab"
           ]
         }
       ]
@@ -426,7 +430,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.5812657,0,0.8137138",
+          "Rotation": "0,0.7774555,0,0.628938",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -811,9 +815,9 @@
                     "Id": 8,
                     "Type": "call",
                     "Properties": {
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "PlaySound",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_name": "PlaySound"
                     },
                     "UserData": {
                       "Position": "208,-0"
@@ -842,6 +846,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "Animation": "Interact"
             },
             {
@@ -864,9 +870,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "StopSound",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_name": "StopSound"
                     },
                     "UserData": {
                       "Position": "224,-0"
@@ -895,6 +901,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "Animation": "Interact"
             },
             {
@@ -917,9 +925,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "PlaySound",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_name": "PlaySound"
                     },
                     "UserData": {
                       "Position": "240,-0"
@@ -952,6 +960,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "Animation": "Interact"
             },
             {
@@ -974,9 +984,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "StopSound",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_name": "StopSound"
                     },
                     "UserData": {
                       "Position": "224,-0"
@@ -1009,6 +1019,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "Animation": "Interact"
             }
           ]
@@ -1381,6 +1393,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-07T05:30:53.1189361\u002B02:00",
+  "LastSaved": "2024-03-07T06:12:08.0794863\u002B02:00",
   "__references": []
 }
