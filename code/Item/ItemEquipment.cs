@@ -120,7 +120,7 @@ public class ItemEquipment : ItemComponent
 		}
 
 		// Remove
-		if ( parcelRenderer == null || iconWorldObject == null || parcelCollider ==  null || parcelBody == null )
+		if ( parcelRenderer == null || iconWorldObject == null || parcelCollider == null || parcelBody == null )
 			return;
 
 		parcelRenderer.Enabled = false;
@@ -176,6 +176,20 @@ public class ItemEquipment : ItemComponent
 
 		GameObject.Transform.World = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
 		GameObject.Transform.ClearLerp();
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( !Equipped || !Game.IsPlaying )
+			return;
+
+		var player = GameObject.Parent.Components.Get<Player>( true );
+		if ( player == null )
+			return;
+
+		var attachment = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
+		GameObject.Transform.Position = attachment.Position;
+		GameObject.Transform.Rotation = attachment.Rotation;
 	}
 
 	#region GIZMO STUFF

@@ -46,7 +46,7 @@ public sealed class WeaponComponent : Component
 			Keybind = "mouse1",
 			Action = Attack,
 			ShowWhenDisabled = () => true,
-			Disabled = () => Capacity > 0 && Ammo == 0,
+			Disabled = () => false,
 			InputMode = Mode,
 			Animation = Type == WeaponType.Ranged ? InteractAnimations.Shoot : InteractAnimations.Action
 		} );
@@ -56,7 +56,7 @@ public sealed class WeaponComponent : Component
 			Accessibility = AccessibleFrom.Hands,
 			Description = "Aim",
 			Keybind = "mouse2",
-			Action = (Player player, GameObject obj) => player.AimState = true,
+			Action = ( Player player, GameObject obj ) => player.AimState = true,
 			Disabled = () => Type != WeaponType.Ranged,
 			InputMode = InputMode.Down,
 			Animation = InteractAnimations.None
@@ -132,16 +132,7 @@ public sealed class WeaponComponent : Component
 
 	private bool Fire( Player shooter )
 	{
-		if ( !_canFire )
-			return false;
-
-		if ( Ammo <= 0 )
-		{
-			TryPlaySound( EmptySound );
-			return false;
-		}
-
-		var transform = Components.Get<SkinnedModelRenderer>( FindMode.DisabledInSelfAndChildren )?.GetAttachment( ExitAttachment ) 
+		var transform = Components.Get<SkinnedModelRenderer>( FindMode.DisabledInSelfAndChildren )?.GetAttachment( ExitAttachment )
 			?? new Transform( shooter.ViewRay.Position, Rotation.LookAt( shooter.ViewRay.Forward ) );
 
 		var ray = new Ray( transform.Position, transform.Rotation.Forward );
@@ -153,7 +144,7 @@ public sealed class WeaponComponent : Component
 		if ( target != null )
 			target.SetRagdoll( true, duration: 2.5f, spin: 30 );
 
-		TryPlaySound( FireSound, transform.Position, transform.Rotation );
+		TryPlaySound( FireSound );
 
 		return true;
 	}
@@ -190,21 +181,17 @@ public sealed class WeaponComponent : Component
 		}
 	}
 
-	private void TryPlaySound( SoundEvent @event, Vector3? position = null, Rotation? rotation = null )
+	private void TryPlaySound( SoundEvent @event )
 	{
 		if ( @event == null )
 			return;
 
-		var transform = GameObject.Parent.Transform;
-		BroadcastSound( @event.ResourceName, position ?? transform.Position, rotation ?? transform.Rotation );
+		BroadcastSound( @event.ResourceName );
 	}
 
-	[Broadcast] 
-	public void BroadcastSound( string file, Vector3 pos, Rotation rot )
+	[Broadcast]
+	public void BroadcastSound( string file )
 	{
-		var sound = Sound.Play( file );
-		sound.ListenLocal = false;
-		sound.Position = pos;
-		sound.Rotation = rot;
+		GameObject.PlaySound( file );
 	}
 }

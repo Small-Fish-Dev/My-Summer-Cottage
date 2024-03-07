@@ -1,5 +1,3 @@
-using Sauna.Util.Extensions;
-
 namespace Sauna;
 
 public class DialogueResponse
