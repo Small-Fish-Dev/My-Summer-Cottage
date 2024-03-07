@@ -186,6 +186,11 @@ public class Inventory : Component
 		return true;
 	}
 
+	private bool CanStack( ItemComponent first, ItemComponent second )
+		=> first.Prefab == second.Prefab
+		&& first.IsStackable && second.IsStackable
+		&& second.Count < second.MaxStack;
+
 	/// <summary>
 	/// A swap is performed from a backpack slot to another backpack slot.
 	/// </summary>
@@ -198,13 +203,50 @@ public class Inventory : Component
 		RemoveBackpackItem( firstItem, firstIndex );
 
 		var secondItem = _backpackItems.ElementAtOrDefault( secondIndex );
+		var invert = false;
+
 		if ( secondItem is not null )
 		{
 			RemoveBackpackItem( secondItem, secondIndex );
-			GiveBackpackItem( secondItem, firstIndex );
+
+			// Stacking
+			if ( CanStack( firstItem, secondItem ) )
+			{
+				var from = firstItem;
+				var to = secondItem;
+				invert = true;
+
+				var amount = Math.Abs( to.Count - to.MaxStack );
+				RemoveAmount( from, amount );
+				to.Count += amount;
+
+				if ( from == null || from.Count <= 0 )
+				{
+					GiveBackpackItem( to, secondIndex );
+					return true;
+				}
+			}
+			else if ( CanStack( secondItem, firstItem ) )
+			{
+				var from = secondItem;
+				var to = firstItem;
+				invert = true;
+
+				var amount = Math.Abs( to.Count - to.MaxStack );
+				RemoveAmount( from, amount );
+				to.Count += amount;
+
+				if ( from == null || from.Count <= 0 )
+				{
+					GiveBackpackItem( to, secondIndex );
+					return true;
+				}
+			}
+
+			GiveBackpackItem( secondItem, invert ? secondIndex : firstIndex );
 		}
 
-		GiveBackpackItem( firstItem, secondIndex );
+		GiveBackpackItem( firstItem, invert ? firstIndex : secondIndex );
 
 		return true;
 	}
@@ -242,6 +284,29 @@ public class Inventory : Component
 	{
 		SetOwner( item );
 		GiveBackpackItem( item, index );
+	}
+
+	/// <summary>
+	/// Removes a specific amount from an item if the item is stackable and has more than the amount.
+	/// </summary>
+	/// <param name="item"></param>
+	/// <param name="count"></param>
+	/// <param name="destroy"></param>
+	/// <returns></returns>
+	public bool RemoveAmount( ItemComponent item, int count = 1, bool destroy = true )
+	{
+		if ( !item.IsStackable || count > item.Count )
+			return false;
+
+		item.Count -= count;
+
+		if ( item.Count <= 0 )
+		{
+			ClearItem( item );
+			if ( destroy ) item?.GameObject?.Destroy();
+		}
+
+		return true;
 	}
 
 	/// <summary>

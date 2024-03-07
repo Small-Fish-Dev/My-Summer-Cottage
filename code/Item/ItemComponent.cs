@@ -29,7 +29,24 @@ public class ItemComponent : Component
 	/// </summary>
 	[Property, Sync] public int SellPrice { get; set; } = -1;
 
+	/// <summary>
+	/// Maximum amount of items in this stack, default is 0 for not stackable.
+	/// </summary>
+	[Property] public int MaxStack
+	{
+		get => _maxStack;
+		set
+		{
+			_maxStack = value;
+			Count = value;
+		}
+	}
+
+	private int _maxStack;
+
+	[Property, Sync, HideIf( "MaxStack", 0 ), TargetSave] public int Count { get; set; }
 	[Sync] public string Prefab { get; private set; }
+
 	public Texture IconTexture => Texture.Load( FileSystem.Mounted, Icon.Path );
 	public static implicit operator ItemComponent( GameObject obj )
 		=> obj.Components.Get<ItemComponent>();
@@ -46,6 +63,11 @@ public class ItemComponent : Component
 	/// Whether the item can be sold.
 	/// </summary>
 	public bool IsSellable => SellPrice != -1;
+
+	/// <summary>
+	/// Whether the item can be sold.
+	/// </summary>
+	public bool IsStackable => MaxStack >= 1 && this is not ItemEquipment;
 
 	/// <summary>
 	/// The last player that had this item parented to them.

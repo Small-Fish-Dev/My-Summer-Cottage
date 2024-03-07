@@ -9,6 +9,7 @@
 	{
 		<div class="item @HasChildDraggableClassSelector" onmouseover=@( () => OnItemHover() ) onmouseout=@( () => OnItemHoverExit() )>
 			<img src=@Item.IconTexture.ResourcePath/>
+			<text class="count @(!Item.IsStackable ? "hidden" : "")">@(Item.Count)x</text>
 		</div>
 	}
 	@if ( EquipSlotIndex is not null )

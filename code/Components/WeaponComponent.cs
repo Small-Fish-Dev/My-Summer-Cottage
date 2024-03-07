@@ -15,6 +15,7 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Projectile" ), Sync, TargetSave] public int Ammo { get; set; }
 	[Property, Category( "Projectile" )] public string ExitAttachment { get; set; }
 	[Property, Category( "Projectile" )] public int Capacity { get; set; }
+	[Property, Category( "Projectile" )] public float ReloadCooldown { get; set; }
 	[Property, Category( "Projectile" )] public PrefabFile Ammunition { get; set; }
 
 	[Property, Category( "Recoil" )] public bool HasRecoil { get; set; } = false;
@@ -29,6 +30,7 @@ public sealed class WeaponComponent : Component
 
 	private string _name;
 	private TimeUntil _canFire;
+	private TimeSince _lastReloaded;
 
 	protected override void OnAwake()
 	{
@@ -70,13 +72,17 @@ public sealed class WeaponComponent : Component
 			Action = Reload,
 			Disabled = Disabled,
 			ShowWhenDisabled = () => Type == WeaponType.Ranged,
+			InputMode = InputMode.Down,
 			Animation = InteractAnimations.Reload
 		} );
 	}
 
 	private bool Disabled()
 	{
-		if ( Capacity == 0 || Ammo > 0 )
+		if ( _lastReloaded < ReloadCooldown )
+			return true;
+
+		if ( Capacity == 0 || Ammo == Capacity )
 			return true;
 
 		var ammunition = Player.Local?.Inventory?.BackpackItems?.FirstOrDefault( x => x?.Prefab == Ammunition?.ResourcePath );
@@ -115,19 +121,22 @@ public sealed class WeaponComponent : Component
 
 	public void Reload( Player player, GameObject obj )
 	{
+		if ( _lastReloaded < ReloadCooldown )
+			return;
+
 		// Find ammunition.
 		var ammunition = player.Inventory?.BackpackItems?.FirstOrDefault( x => x?.Prefab == Ammunition?.ResourcePath );
 		if ( ammunition == null )
 			return;
 
 		// Reload magazine.
-		Ammo = Capacity;
+		Ammo++;
 		UpdateName();
 		TryPlaySound( ReloadSound );
+		_lastReloaded = 0f;
 
 		// Destroy ammunition object.
-		player.Inventory.ClearItem( ammunition );
-		ammunition.GameObject?.Destroy();
+		player.Inventory.RemoveAmount( ammunition, 1 );
 	}
 
 	private bool Fire( Player shooter )

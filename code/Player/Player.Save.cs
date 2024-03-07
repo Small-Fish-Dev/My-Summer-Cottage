@@ -1,6 +1,4 @@
-﻿using Sauna.Fishing;
-
-namespace Sauna;
+﻿namespace Sauna;
 
 public struct ItemSave
 {
@@ -111,9 +109,11 @@ partial class Player
 
 				foreach ( var property in properties )
 				{
-					var serialized = JsonSerializer.Serialize( property.GetValue( component ), property.PropertyType,
-						options );
-					data.Add( property.Name, serialized );
+					var serialized = JsonSerializer.Serialize( property.GetValue( component ), property.PropertyType, options );
+					if ( data.ContainsKey( property.Name ) )
+						data[property.Name] = serialized;
+					else
+						data.Add( property.Name, serialized );
 				}
 			}
 
@@ -177,6 +177,27 @@ partial class Player
 
 		player.SkinColor = save.SkinColor;
 
+		void ReadData( ItemSave data, GameObject obj )
+		{
+			var components = obj.Components.GetAll();
+			foreach ( var component in components )
+			{
+				var properties = GlobalGameNamespace.TypeLibrary
+					?.GetType( component.GetType() )
+					?.Properties
+					?.Where( x => x.HasAttribute<TargetSaveAttribute>() );
+
+				foreach ( var property in properties )
+				{
+					if ( data.Data == null || !data.Data.TryGetValue( property.Name, out var serialized ) )
+						continue;
+
+					var deserialized = JsonSerializer.Deserialize( serialized, property.PropertyType, options );
+					property.SetValue( component, deserialized );
+				}
+			}
+		}
+
 		// Go through all clothes.
 		if ( save.Clothes != null )
 			foreach ( var data in save.Clothes )
@@ -191,6 +212,7 @@ partial class Player
 					continue;
 
 				player.Inventory.EquipItemFromWorld( equipment );
+				ReadData( data, o );
 			}
 
 		// Go through all items.
@@ -207,25 +229,7 @@ partial class Player
 					continue;
 
 				player.Inventory.SetItem( item, data.Index );
-
-				// Read data kvp.
-				var components = o.Components.GetAll();
-				foreach ( var component in components )
-				{
-					var properties = GlobalGameNamespace.TypeLibrary
-						?.GetType( component.GetType() )
-						?.Properties
-						?.Where( x => x.HasAttribute<TargetSaveAttribute>() );
-
-					foreach ( var property in properties )
-					{
-						if ( !data.Data.TryGetValue( property.Name, out var serialized ) )
-							continue;
-
-						var deserialized = JsonSerializer.Deserialize( serialized, property.PropertyType, options );
-						property.SetValue( component, deserialized );
-					}
-				}
+				ReadData( data, o );
 			}
 
 		if ( save.FishesCaught != null )
