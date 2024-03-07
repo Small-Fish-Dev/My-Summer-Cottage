@@ -38,11 +38,23 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "ModelPhysics",
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
         "Locking": {},
-        "Model": "models/trash/trash_bottle.vmdl",
-        "Renderer": null,
-        "RigidbodyFlags": 0
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "CapsuleCollider",
+        "End": "0,0,5.199996",
+        "IsTrigger": false,
+        "Radius": 1.3000015,
+        "Start": "0,0,1.3",
+        "Static": false,
+        "Surface": null
       }
     ],
     "Children": []

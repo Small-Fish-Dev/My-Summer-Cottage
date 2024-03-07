@@ -226,20 +226,25 @@ public class FishingCell : Component
 
 		var fishInstance = SceneUtility.GetPrefabScene( fish.Fish ).Clone();
 		fishInstance.NetworkSpawn();
-		if ( fishInstance.Components.TryGet<ModelPhysics>( out var physics ) )
+
+		var from = bobber.Transform.Position;
+		var to = bobber.Rod.Owner.Transform.Position;
+		var dist = from.Distance( to );
+		var velocity = (to - from).Normal * dist + Vector3.Up * 400f;
+
+		if ( fishInstance.Components.TryGet<Rigidbody>( out var rigidbody ) )
+		{
+			fishInstance.Transform.Position = bobber.Transform.Position;
+			rigidbody.Velocity = velocity;
+		}
+		else if ( fishInstance.Components.TryGet<ModelPhysics>( out var physics ) )
 		{
 			fishInstance.Enabled = false;
 			fishInstance.Transform.Position = bobber.Transform.Position;
 			fishInstance.Enabled = true;
 
 			// TODO: should probably calculate a parabolic trajectory
-
-			var from = bobber.Transform.Position;
-			var to = bobber.Rod.Owner.Transform.Position;
-			var dist = from.Distance( to );
-			var velocity = (to - from).Normal * dist + Vector3.Up * 400f;
 			physics.PhysicsGroup?.AddVelocity( velocity );
-
 		}
 
 		var fishComponent = fishInstance.Components.Get<Fish>();
