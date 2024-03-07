@@ -41,7 +41,7 @@ public class NPC : Component
 
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
-	public float DesiredDistance { get; private set; } = 20f;
+	public float DesiredDistance { get; private set; } = 60f;
 
 	protected override void OnStart()
 	{
@@ -58,7 +58,7 @@ public class NPC : Component
 		Agent.Height = Height;
 		Agent.Radius = Radius;
 		Agent.MaxSpeed = WalkSpeed;
-		Agent.Separation = 0.5f;
+		Agent.Separation = 0.2f;
 		Agent.Acceleration = Acceleration;
 		Agent.UpdatePosition = true;
 		Agent.UpdateRotation = FaceTowardsVelocity;
@@ -75,9 +75,6 @@ public class NPC : Component
 	protected override void OnUpdate()
 	{
 		if ( Agent == null ) return;
-
-		CheckNewTarget();
-
 		if ( Model == null ) return;
 
 		var oldX = Model.GetFloat( "move_x" );
@@ -91,14 +88,36 @@ public class NPC : Component
 		Model.Set( "move_y", y );
 	}
 
-	void CheckNewTarget()
+	protected override void OnFixedUpdate()
 	{
-		if ( !TargetObject.IsValid() )
-		{
-			var desiredPosition = GetPreferredTargetPosition( TargetObject );
+		if ( Agent == null ) return;
 
-			if ( TargetPosition.Distance( desiredPosition ) >= DesiredDistance ) // Has our target moved?
-				MoveTo( desiredPosition );
+		CheckNewTargetPos();
+
+		if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player )
+			SetTarget( player.GameObject );
+
+		if ( TargetObject.IsValid() )
+		{
+			if ( IsWithinRange( TargetObject, DesiredDistance ) )
+			{
+				var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ) );
+				Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
+				Agent.UpdateRotation = false;
+			}
+			else
+				Agent.UpdateRotation = FaceTowardsVelocity;
+		}
+		else
+			Agent.UpdateRotation = FaceTowardsVelocity;
+	}
+
+	void CheckNewTargetPos()
+	{
+		if ( TargetObject.IsValid() )
+		{
+			if ( !IsWithinRange( TargetObject, DesiredDistance ) ) // Has our target moved?
+				MoveTo( GetPreferredTargetPosition( TargetObject ) );
 		}
 	}
 
@@ -113,6 +132,36 @@ public class NPC : Component
 	}
 
 	/// <summary>
+	/// Who should the NPC follow, set null to go back to manually setting the target position
+	/// </summary>
+	/// <param name="target"></param>
+	/// <param name="desiredDistance"></param>
+	public void SetTarget( GameObject target, float desiredDistance = 60f )
+	{
+		if ( TargetObject == target )
+		{
+			SetDesiredDistance( desiredDistance );
+			return;
+		}
+
+		TargetObject = target;
+		SetDesiredDistance( desiredDistance );
+
+		if ( TargetObject != null )
+			MoveTo( GetPreferredTargetPosition( TargetObject ) );
+	}
+
+
+	/// <summary>
+	/// How close to a target should the NPC get to
+	/// </summary>
+	/// <param name="desiredDistance"></param>
+	public void SetDesiredDistance( float desiredDistance )
+	{
+		DesiredDistance = desiredDistance;
+	}
+
+	/// <summary>
 	/// Is the object within the npc's reach
 	/// </summary>
 	/// <param name="target"></param>
@@ -122,7 +171,7 @@ public class NPC : Component
 	{
 		if ( !GameObject.IsValid() ) return false;
 
-		return target.Transform.Position.Distance( Transform.Position ) - DesiredDistance <= range;
+		return target.Transform.Position.Distance( Transform.Position ) <= range;
 	}
 
 	/// <summary>
@@ -155,9 +204,12 @@ public class NPC : Component
 
 	public Vector3 GetPreferredTargetPosition( GameObject target )
 	{
+		if ( !target.IsValid() )
+			return TargetPosition;
+
 		var targetPosition = target.Transform.Position;
 
-		var direction = (targetPosition - Transform.Position).Normal;
+		var direction = (Transform.Position - targetPosition).Normal;
 		var offset = direction * DesiredDistance;
 		var position = targetPosition + offset;
 		var closestObjectPoint = Scene.NavMesh?.GetClosestPoint( position );
@@ -166,15 +218,5 @@ public class NPC : Component
 			return closestObjectPoint.Value;
 		else
 			return position;
-	}
-
-	protected override void OnFixedUpdate()
-	{
-		if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player )
-		{
-			var diff = Transform.Position - player.Transform.Position;
-			var direction = diff.Normal;
-			TargetPosition = player.Transform.Position + direction * 80f;
-		}
 	}
 }
