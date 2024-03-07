@@ -30,6 +30,7 @@ COMMON
 {
 	#define S_TRANSLUCENT 0
 	#include "common/shared.hlsl"
+	StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );
 }
 
 //=========================================================================================================================
@@ -59,6 +60,8 @@ VS
 	{
 		PixelInput o = ProcessVertex( i );
 
+
+
         float3 vPositionWs = o.vPositionWs.xyz;
 		float dist = distance(g_vCameraPositionWs, vPositionWs);
 
@@ -84,7 +87,6 @@ PS
 	#define CUSTOM_TEXTURE_FILTERING
     SamplerState Sampler < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
 
-	StaticCombo( S_MODE_DEPTH, 0..1, Sys( ALL ) );
 	StaticCombo( S_EMISSIVE, F_EMISSIVE, Sys( ALL ) );
 
 	#define CUSTOM_MATERIAL_INPUTS
@@ -118,14 +120,19 @@ PS
     #include "common/pixel.hlsl"
     
 	#if ( S_TRANSPARENCY )
-		#if( !F_RENDER_BACKFACES )
+		#if( !F_RENDER_BACKFACES && !S_ALPHA_TEST )
 			#define BLEND_MODE_ALREADY_SET
 			RenderState( BlendEnable, true );
 			RenderState( SrcBlend, SRC_ALPHA );
 			RenderState( DstBlend, INV_SRC_ALPHA);
+			BoolAttribute( translucent, true );
 		#endif
 
-		BoolAttribute( translucent, true );
+		#if(S_ALPHA_TEST && !S_MODE_DEPTH)
+			RenderState( AlphaToCoverageEnable, true );
+		#endif
+
+		
 
 		CreateInputTexture2D( TransparencyMask, Linear, 8, "", "_trans", "Transparency,10/10", Default( 1 ) );
 		CreateTexture2DWithoutSampler( g_tTransparencyMask ) < Channel( R, Box( TransparencyMask ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
@@ -135,12 +142,16 @@ PS
 
 	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
 
+	#if( S_MODE_DEPTH && !S_ALPHA_TEST )
+		#define MainPs Disabled
+	#endif
+
 	//
 	// Main
 	//
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-		#if S_MODE_DEPTH
+		#if( S_MODE_DEPTH )
 		{
 			return 0;
 		}
@@ -155,7 +166,7 @@ PS
         m.Normal = TransformNormal( DecodeNormal( Tex2DS( g_tNormal, Sampler, UV.xy ).rgb ), i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
 		
 
-		
+
 		float2 rm = Tex2DS( g_tRm, Sampler, UV.xy ).rg;
         m.Roughness = rm.r;
         m.Metalness = rm.g;
