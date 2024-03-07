@@ -209,8 +209,9 @@ PS
 			float2(l_tSplatRoughness.g, l_tSplatColor_B.a), 
 			float2(l_tSplatRoughness.b, l_tSplatColor_C.a),
 			float2(l_tSplatRoughness.a, l_tSplatColor_D.a), l_tSplatData);
-        m.Roughness = lerp( m.Roughness, m.Roughness * 0.2, smoothstep( 2295, 2290, sin(g_flTime) + i.AbsolutePosition.z ) );
-        m.Metalness = lerp( 0, 0.65, smoothstep( 2295, 2285, sin(g_flTime) + i.AbsolutePosition.z ) );
+        // !!! RE-ENABLE WHEN DONE WITH THE MAP!
+		// m.Roughness = lerp( m.Roughness, m.Roughness * 0.2, smoothstep( 2295, 2290, sin(g_flTime) + i.AbsolutePosition.z ) );
+        //m.Metalness = lerp( 0, 0.65, smoothstep( 2295, 2285, sin(g_flTime) + i.AbsolutePosition.z ) );
         m.AmbientOcclusion = l_tGlobalNormal.a;
 
 		m.Normal = TransformNormal( globalnormal, i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
