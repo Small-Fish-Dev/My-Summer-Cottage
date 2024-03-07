@@ -51,4 +51,12 @@ public class SoundHandler : Component
 			sound.Rotation = GameObject.Transform.Rotation;
 		}
 	}
+
+	protected override void OnDestroy()
+	{
+		foreach ( var sound in _activeSounds.ToList() )
+		{
+			sound.Stop();
+		}
+	}
 }
