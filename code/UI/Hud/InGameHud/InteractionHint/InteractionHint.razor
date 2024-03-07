@@ -120,7 +120,7 @@
 		if (!interactionsAvailable && interactions.HideOnEmpty)
 			return false;
 
-		return true;
+		return interactionsAvailable;
 	}
 
 	private bool IsAccessible(Interaction interaction)
