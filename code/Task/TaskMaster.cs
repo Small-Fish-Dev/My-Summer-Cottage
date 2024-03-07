@@ -1,3 +1,6 @@
+using Microsoft.VisualBasic;
+using Sauna.Event;
+
 namespace Sauna;
 
 [Icon( "live_help" )]
@@ -330,7 +333,9 @@ public class TaskMaster : Component
 			{
 				if ( !task.Global && triggerer != Player.Local ) continue; // If this task isn't global and the triggerer isn't our player, ignore it
 
-				var activeSubtasks = task.Subtasks; // Current active subtasks
+				var currentOrder = task.CurrentSubtaskOrder;
+				var activeSubtasks = task.Subtasks
+					.Where( x => x.SubtaskOrder == currentOrder ); // Current active subtasks
 
 				foreach ( var subtask in activeSubtasks )
 				{
@@ -352,6 +357,7 @@ public class TaskMaster : Component
 					scriptedEvent.Completed = true;
 			}
 		}
+
 	}
 
 	/// <summary>

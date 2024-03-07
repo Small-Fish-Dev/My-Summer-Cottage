@@ -10,7 +10,7 @@ public sealed class EventInteractionTrigger : EventTrigger
 	/// Which interaction identifier triggers this
 	/// </summary>
 	[Property]
-	public string InteractionIdentifier { get; set; }
+	public Signal TriggeringInteraction { get; set; }
 
 	/// <summary>
 	/// Only check for interactions that happened inside of an area

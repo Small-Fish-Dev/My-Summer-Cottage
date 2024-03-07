@@ -246,7 +246,7 @@ public class EventMaster : Component
 
 		foreach ( var trigger in allTriggers )
 		{
-			if ( trigger.InteractionIdentifier == interaction )
+			if ( trigger.TriggeringInteraction == interaction )
 			{
 				if ( !trigger.InsideArea )
 					trigger.CallTrigger( foundPlayer, foundTarget );

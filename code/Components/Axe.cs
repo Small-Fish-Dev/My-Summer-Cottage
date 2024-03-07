@@ -9,6 +9,7 @@ public sealed class Axe : Component
 		var interactions = Components.GetOrCreate<Interactions>();
 		interactions.AddInteraction( new Interaction
 		{
+			Identifier = "item.used_1.Axe",
 			Accessibility = AccessibleFrom.Hands,
 			Action = ( Player player, GameObject obj ) =>
 			{

@@ -1,0 +1,27 @@
+{
+  "Name": "Log Pile",
+  "Subtitle": "Enter the log pile",
+  "Description": "Get to the log pile",
+  "TaskType": "Any",
+  "TaskRarity": "Any",
+  "IsPrimary": false,
+  "Global": false,
+  "SuccessSignal": "task.success.Log Pile",
+  "FailedSignal": "task.failed.Log Pile",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Piss on the log pile area",
+      "TriggerSignal": "log_pile.pissed",
+      "AmountToComplete": 1
+    }
+  ],
+  "__references": []
+}
