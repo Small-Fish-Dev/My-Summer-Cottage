@@ -430,7 +430,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.7774555,0,0.628938",
+          "Rotation": "0,0.1037745,0,0.9946008",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -815,8 +815,8 @@
                     "Id": 8,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySound"
                     },
                     "UserData": {
@@ -846,181 +846,28 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
-              "Animation": "Interact"
-            },
-            {
-              "Keybind": "Mouse1",
-              "Description": "",
-              "Action": {
+              "Disabled": {
                 "Version": 5,
                 "UserData": {
-                  "Title": "Action",
-                  "id": "065fc321-8104-45d7-a0a3-512c57d924ec",
+                  "Title": "Disabled",
+                  "id": "d5020a6c-acfe-4ca2-9a53-81f4a7145216",
                   "ReferencedComponentTypes": []
                 },
                 "Variables": [],
                 "Nodes": [
                   {
                     "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 1,
-                    "Type": "call",
-                    "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_isStatic": true,
-                      "_name": "StopSound"
-                    },
-                    "UserData": {
-                      "Position": "224,-0"
-                    }
+                    "Type": "output"
                   }
                 ],
                 "Links": [
                   {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 1,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "obj",
-                    "DstId": 1,
-                    "DstName": "obj"
-                  },
-                  {
-                    "Value": "test_drunk",
-                    "DstId": 1,
-                    "DstName": "sound"
+                    "Value": true,
+                    "DstId": 0,
+                    "DstName": "_result"
                   }
                 ]
               },
-              "InteractDistance": 75,
-              "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
-              "Animation": "Interact"
-            },
-            {
-              "Keybind": "use2",
-              "Description": "",
-              "Action": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Action",
-                  "id": "10e06ba3-5de3-432a-8d79-983948ab327c",
-                  "ReferencedComponentTypes": []
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 1,
-                    "Type": "call",
-                    "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_isStatic": true,
-                      "_name": "PlaySound"
-                    },
-                    "UserData": {
-                      "Position": "240,-0"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 1,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "obj",
-                    "DstId": 1,
-                    "DstName": "obj"
-                  },
-                  {
-                    "Value": {
-                      "$type": "Simple",
-                      "Type": "Sandbox.Engine/Sandbox.SoundEvent",
-                      "Value": "sounds/speech/test_drunk.sound"
-                    },
-                    "DstId": 1,
-                    "DstName": "sound"
-                  }
-                ]
-              },
-              "InteractDistance": 75,
-              "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
-              "Animation": "Interact"
-            },
-            {
-              "Keybind": "Mouse2",
-              "Description": "",
-              "Action": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Action",
-                  "id": "3ee23d6f-1811-4d12-aaf8-ab7a2d4e38f3",
-                  "ReferencedComponentTypes": []
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 2,
-                    "Type": "call",
-                    "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_isStatic": true,
-                      "_name": "StopSound"
-                    },
-                    "UserData": {
-                      "Position": "224,-0"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 2,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "obj",
-                    "DstId": 2,
-                    "DstName": "obj"
-                  },
-                  {
-                    "Value": {
-                      "$type": "Simple",
-                      "Type": "Sandbox.Engine/Sandbox.SoundEvent",
-                      "Value": "sounds/speech/test_drunk.sound"
-                    },
-                    "DstId": 2,
-                    "DstName": "sound"
-                  }
-                ]
-              },
-              "InteractDistance": 75,
-              "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "Animation": "Interact"
             }
           ]
@@ -1393,6 +1240,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-07T06:12:08.0794863\u002B02:00",
+  "LastSaved": "2024-03-06T23:56:59.7295023-05:00",
   "__references": []
 }

@@ -3,7 +3,7 @@
 @inherits Panel
 
 <root 
-	onclick=@(() => { if (!IsDisabled) OnClick?.Invoke(); if ( PlaySound ) CreatorOverlay.PlayUISound( "press" ); })
+	onclick=@(() => { if (!IsDisabled) OnClick?.Invoke(); if ( PlaySound ) CreatorOverlay.PlayUISound( "heavy_click" ); })
 	class="@(IsDisabled ? "disabled" : "") @(IsInverted ? "ltr" : "")"
 >
 	<image src=@ImagePath />
