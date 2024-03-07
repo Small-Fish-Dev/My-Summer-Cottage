@@ -11,7 +11,9 @@ FEATURES
     #include "common/features.hlsl"
     Feature( F_ALPHA_TEST, 0..1, "Rendering" );
 	Feature( F_TRANSPARENCY, 0..1, "Rendering" );
+	Feature( F_DETAILED_ALPHA_SHADOWS, 0..1, "Rendering")
 	FeatureRule( Requires1(F_ALPHA_TEST, F_TRANSPARENCY), "You might want to enable Transparency for this material first.");
+	FeatureRule( Requires1(F_DETAILED_ALPHA_SHADOWS, F_ALPHA_TEST), "This is used to have accurate shadows for alphatested materials.");
 	Feature( F_EMISSIVE, 0..1, "Rendering" );
 }
 
@@ -83,6 +85,7 @@ PS
 { 
 	StaticCombo( S_TRANSPARENCY, F_TRANSPARENCY, Sys( ALL ) );
     StaticCombo( S_ALPHA_TEST, F_ALPHA_TEST, Sys( ALL ) );
+	StaticCombo( S_DETAILED_ALPHA_SHADOWS, F_DETAILED_ALPHA_SHADOWS, Sys( ALL ) );
 	
 	#define CUSTOM_TEXTURE_FILTERING
     SamplerState Sampler < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
@@ -146,16 +149,13 @@ PS
 		#define MainPs Disabled
 	#endif
 
+
 	//
 	// Main
 	//
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-		#if( S_MODE_DEPTH )
-		{
-			return 0;
-		}
-		#endif
+		
 
 		float2 UV = i.vTextureCoords.xy;
 		float4 l_tColor = Tex2DS( g_tColor, Sampler, UV.xy ).rgba;
@@ -183,6 +183,15 @@ PS
 		#if( S_TRANSPARENCY )
 			float alpha = Tex2DS( g_tTransparencyMask, Sampler, UV.xy ).r;
 			result.a = max( alpha, floor( alpha + TransparencyRounding ) );
+		#endif
+
+		#if( S_MODE_DEPTH )
+		{
+			#if( S_DETAILED_ALPHA_SHADOWS )
+			{if ( result.a < 0.5 ) discard;}
+			#endif
+ 			return 0;
+		}
 		#endif
 
 		return result;
