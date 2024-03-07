@@ -48,7 +48,7 @@ public sealed class WeaponComponent : Component
 			Keybind = "mouse1",
 			Action = Attack,
 			ShowWhenDisabled = () => true,
-			Disabled = () => false,
+			Disabled = () => Capacity > 0 && Ammo == 0,
 			InputMode = Mode,
 			Animation = Type == WeaponType.Ranged ? InteractAnimations.Shoot : InteractAnimations.Action
 		} );
@@ -141,6 +141,15 @@ public sealed class WeaponComponent : Component
 
 	private bool Fire( Player shooter )
 	{
+		if ( !_canFire )
+			return false;
+
+		if ( Ammo <= 0 )
+		{
+			TryPlaySound( EmptySound );
+			return false;
+		}
+
 		var transform = Components.Get<SkinnedModelRenderer>( FindMode.DisabledInSelfAndChildren )?.GetAttachment( ExitAttachment )
 			?? new Transform( shooter.ViewRay.Position, Rotation.LookAt( shooter.ViewRay.Forward ) );
 

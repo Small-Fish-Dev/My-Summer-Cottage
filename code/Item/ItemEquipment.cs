@@ -167,7 +167,7 @@ public class ItemEquipment : ItemComponent
 
 	protected override void OnPreRender()
 	{
-		if ( !Equipped || !UpdatePosition || !Game.IsPlaying || GameObject == Scene )
+		if ( !Equipped || !Game.IsPlaying || GameObject == Scene )
 			return;
 
 		var player = GameObject.Parent.Components.Get<Player>( true );
@@ -176,20 +176,6 @@ public class ItemEquipment : ItemComponent
 
 		GameObject.Transform.World = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
 		GameObject.Transform.ClearLerp();
-	}
-
-	protected override void OnUpdate()
-	{
-		if ( !Equipped || !Game.IsPlaying )
-			return;
-
-		var player = GameObject.Parent.Components.Get<Player>( true );
-		if ( player == null )
-			return;
-
-		var attachment = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
-		GameObject.Transform.Position = attachment.Position;
-		GameObject.Transform.Rotation = attachment.Rotation;
 	}
 
 	#region GIZMO STUFF
