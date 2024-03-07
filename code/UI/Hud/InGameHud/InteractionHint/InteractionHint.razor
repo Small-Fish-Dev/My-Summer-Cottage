@@ -116,7 +116,7 @@
 		if (!_targetObject.Components.TryGet<Interactions>( out var interactions ))
 			return false;
 
-		var interactionsAvailable = interactions.AllInteractions.Where((i) => (!i.Disabled.InvokeOrDefault() || i.ShowWhenDisabled()) && WithinBounds(i) && WithinRange(i)).Any();
+		var interactionsAvailable = interactions.AllInteractions.Any( i => (!i.Disabled.InvokeOrDefault() || i.ShowWhenDisabled()) && WithinBounds(i) && WithinRange(i) );
 		if (!interactionsAvailable && interactions.HideOnEmpty)
 			return false;
 
