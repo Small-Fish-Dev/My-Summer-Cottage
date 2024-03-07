@@ -290,7 +290,6 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		var sound = Sound.Play( path, tr.HitPosition + tr.Normal * 5 );
 		sound.Volume *= e.Volume;
-		sound.Update();
 	}
 
 	/// <summary>

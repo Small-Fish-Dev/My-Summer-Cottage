@@ -329,6 +329,8 @@ public class Inventory : Component
 	{
 		item.GameObject.Network.TakeOwnership();
 		item.GameObject.Parent = Player.GameObject;
+		item.GameObject.Transform.Position = Player.GameObject.Transform.Position;
+		item.GameObject.Transform.Rotation = Player.GameObject.Transform.Rotation;
 		item.LastParent = Player;
 	}
 
