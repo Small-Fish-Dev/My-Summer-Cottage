@@ -177,6 +177,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		if ( Penoid is not null )
 			Penoid.Enabled = !HidePenoid;
+		
+		UpdateMovement();
 	}
 
 	protected override void OnFixedUpdate()
@@ -210,7 +212,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		IsPissing = Input.Down( "Piss" ) && !HidePenoid;
 
-		UpdateMovement();
+		// UpdateMovement();
 		UpdateInteractions();
 	}
 
