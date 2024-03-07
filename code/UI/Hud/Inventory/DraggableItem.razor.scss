@@ -1,58 +1,83 @@
 DraggableItem {
     position: absolute;
-    
+
     pointer-events: all;
     
     // Default sizes, but we want to have this set when it's created
     width: 80px;
     height: 80px;
-    
+
     img {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         image-rendering: pixelated;
-    
+
         //filter: drop-shadow(5px 5px 0px rgba(black, 0.2));
         filter: border-wrap(2px rgba(white, 0.5));
     }
 
     transition: left 0.06s ease-out,
-        top 0.08s ease-out,
-        opacity 0.11s ease-out,
-        transform 0.11s ease-out,
-        filter 0.2s ease;
-    
+    top 0.08s ease-out,
+    opacity 0.11s ease-out,
+    transform 0.11s ease-out,
+    filter 0.2s ease;
+
     z-index: 99;
     transform: scale(1);
     cursor: pointer;
     overflow: visible;
 
-    label {
-        font-family: HabboExtended;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 100%;
-        margin-bottom: 5px;
-        padding: 7px 10px 7px 10px;
-        color: white;
-        background-color: rgba(#1b1c1b, 1);
-        box-shadow: 4px 4px 0px black;
-        font-size: 16px;
-        font-weight: bold;
-        letter-spacing: 2px;
-        overflow: visible;
-        transform-origin: top;
-        text-shadow: 2px 2px 0px rgba(white, 0.5);
+    .sub-label {
+        opacity: 0;
     }
-    
+
+    &.is-hovering-character {
+        .equip-label {
+            opacity: 1;
+        }
+    }
+
+    &.is-hovering-slot {
+        .put-label {
+            opacity: 1;
+        }
+    }
+
+    .title-container {
+        position: absolute;
+        width: 300%;
+        height: 50px;
+        
+        bottom: 100%;
+        left: -100%;
+        
+        justify-content: center;
+        align-content: center;
+        
+        label {
+            font-family: HabboExtended;
+            margin-bottom: 5px;
+            padding: 7px 10px 7px 10px;
+            color: white;
+            background-color: rgba(#1b1c1b, 1);
+            box-shadow: 4px 4px 0px black;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            overflow: visible;
+            transform-origin: top;
+            text-shadow: 2px 2px 0px rgba(white, 0.5);
+        }
+
+    }
+
     &:intro {
         opacity: 0;
         transform: scale(0);
         filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.0));
     }
-    
+
     &:outro {
         pointer-events: none;
         opacity: 0;
