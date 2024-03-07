@@ -113,7 +113,7 @@
 		// Add shaking if we're dropping the item
 		if ( HasClass( "should-trash" ) )
 		{
-			_shakeValue += 0.03f;
+			_shakeValue += 4.3f * Time.Delta;
 			if ( _shakeValue > 1 )
 				_shakeValue = 0;
 			rotation.z += Easing.EaseInOut( _shakeValue ) * 30	;
