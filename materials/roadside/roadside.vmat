@@ -8,10 +8,17 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	Color "materials/default/default_color.tga"
+	Color "materials/roadside/roadside_basecolor.png"
 	ColorTintMask "materials/default/default.tga"
 	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
 	Metalness "materials/default/default_metal.tga"
-	Normal "materials/default/default_normal.tga"
-	Roughness "materials/default/default_rough.tga"
+	Normal "materials/roadside/roadside_normal.png"
+	Roughness "materials/roadside/roadside_roughness.png"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "dirt"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
 }
