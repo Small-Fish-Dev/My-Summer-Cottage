@@ -57,7 +57,10 @@
 	public override void Tick()
 	{
 		if ( Input.EscapePressed )
-			Toggle( FullScreenPanel.PauseMenu );
+			if ( ActivePanel == FullScreenPanel.InGameHud )
+				Toggle( FullScreenPanel.PauseMenu );
+			else
+				Toggle( FullScreenPanel.InGameHud );
 
 		if ( Input.Pressed( InputAction.Inventory ) )
 			Toggle( FullScreenPanel.Inventory );
