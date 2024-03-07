@@ -151,8 +151,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -263,8 +263,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -426,7 +426,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.9779614,0,-0.2087858",
+          "Rotation": "0,0.5812657,0,0.8137138",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -730,7 +730,6 @@
       "Name": "beer_bottle",
       "Position": "659.1287,-579.0093,27.00001",
       "Rotation": "-0.0000002682209,0.0000003657387,1,0.000001097216",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
@@ -738,7 +737,6 @@
       "Id": "4913524f-d5ca-49c9-b018-3596a4cb6932",
       "Name": "beer_bottle (1)",
       "Position": "670.0865,-571.3389,27",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
@@ -747,7 +745,6 @@
       "Name": "beer_crate",
       "Position": "634.5552,-583.0193,35.04873",
       "Rotation": "-0.00000037217,0.00000005960464,0.00000111651,0.9999999",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/beer_crate.prefab"
     },
@@ -814,9 +811,9 @@
                     "Id": 8,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "PlaySound"
+                      "_name": "PlaySound",
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "208,-0"
@@ -845,8 +842,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "Animation": "Interact"
             },
             {
@@ -869,9 +864,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "StopSound"
+                      "_name": "StopSound",
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "224,-0"
@@ -900,8 +895,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "Animation": "Interact"
             },
             {
@@ -924,9 +917,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "PlaySound"
+                      "_name": "PlaySound",
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "240,-0"
@@ -959,8 +952,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "Animation": "Interact"
             },
             {
@@ -983,9 +974,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "StopSound"
+                      "_name": "StopSound",
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "224,-0"
@@ -1018,8 +1009,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "Animation": "Interact"
             }
           ]
@@ -1034,7 +1023,6 @@
       "Name": "rifle",
       "Position": "580.2663,-566.476,45.18832",
       "Rotation": "-0.00000037217,0.00000005960464,0.00000111651,0.9999999",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/rifle.prefab"
     },
@@ -1194,7 +1182,6 @@
       "Id": "112b4de2-7a2c-42dd-ba8a-55c99bb184b6",
       "Name": "762ammo",
       "Position": "222.004,-1240.313,70",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/762ammo.prefab"
     },
@@ -1202,7 +1189,6 @@
       "Id": "44886576-44a7-400a-abe6-237850fa570b",
       "Name": "762ammo (1)",
       "Position": "220.7753,-1254.451,70",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/762ammo.prefab"
     },
@@ -1210,7 +1196,6 @@
       "Id": "14e95549-1aac-42b2-a8fc-6a8f531f3d7b",
       "Name": "762ammo (2)",
       "Position": "232.5932,-1246.998,70",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/762ammo.prefab"
     },
@@ -1218,7 +1203,6 @@
       "Id": "c6a3681c-e38b-4670-bc3b-0df71a310963",
       "Name": "762ammo (3)",
       "Position": "232.4974,-1258.359,70",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/762ammo.prefab"
     },
@@ -1226,7 +1210,6 @@
       "Id": "49085e5e-5d9d-40ba-9541-c81a0e995ea2",
       "Name": "beer_bottle (2)",
       "Position": "306.5836,-1250.511,67",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
@@ -1234,7 +1217,6 @@
       "Id": "72d2295b-468e-47d8-b425-8bb3b5bc2a4b",
       "Name": "beer_bottle (3)",
       "Position": "309.2408,-1260.364,66.99999",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
@@ -1242,7 +1224,6 @@
       "Id": "e276bfee-db5b-42cd-a843-367efe5eb27c",
       "Name": "beer_bottle (4)",
       "Position": "297.0365,-1251.676,67",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
@@ -1250,7 +1231,6 @@
       "Id": "e8776f20-bfd8-4f94-8efe-df83a0353e46",
       "Name": "beer_bottle (5)",
       "Position": "312.0887,-1237.255,67",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
@@ -1258,7 +1238,6 @@
       "Id": "1903bba1-0162-4f4a-a353-dfba8981b817",
       "Name": "beer_bottle (6)",
       "Position": "315.0217,-1251.54,67",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
@@ -1266,7 +1245,6 @@
       "Id": "a074a3f8-3bfb-4fe7-a5fa-1c38f0d39f40",
       "Name": "beer_crate (2)",
       "Position": "265.6155,-1252.515,66.86089",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/beer_crate.prefab"
     },
@@ -1274,7 +1252,6 @@
       "Id": "c5ee7493-4670-4791-9e63-e3fa9dba6190",
       "Name": "fishing_rod",
       "Position": "201.5256,-1143.861,69",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/fishing_rod.prefab"
     },
@@ -1282,7 +1259,6 @@
       "Id": "a3db4cf9-a01e-4126-a37f-9ab273caf455",
       "Name": "rifle (1)",
       "Position": "193.1826,-1234.466,69.25894",
-      "Networked": true,
       "Enabled": true,
       "__Prefab": "prefabs/items/rifle.prefab"
     },
@@ -1405,6 +1381,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-06T21:30:24.6459792-05:00",
+  "LastSaved": "2024-03-07T05:30:53.1189361\u002B02:00",
   "__references": []
 }
