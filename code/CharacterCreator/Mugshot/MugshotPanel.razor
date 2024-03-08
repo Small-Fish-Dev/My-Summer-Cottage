@@ -53,6 +53,7 @@
 		GameObject.Transform.World = transform;
 		GameObject.Transform.Position += transform.Rotation.Forward * 0.5f;
 
+		Model.Set( "weight", TabletPanel.Weight );
 		Model.Set( "mugshot", inConfirm );
 
 		if ( !inConfirm )
