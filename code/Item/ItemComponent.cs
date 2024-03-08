@@ -102,7 +102,7 @@ public class ItemComponent : Component
 	{
 		foreach ( var component in GameObject.Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 		{
-			if ( component is ItemComponent )
+			if ( component is ItemComponent or Interactions )
 				continue;
 			
 			component.Enabled = !InInventory;
@@ -120,8 +120,6 @@ public class ItemComponent : Component
 
 	protected override void OnStart()
 	{
-		GameObject.BreakFromPrefab();
-
 		if ( !Network.Active )
 			GameObject.NetworkSpawn();
 

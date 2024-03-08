@@ -122,8 +122,8 @@ public class Inventory : Component
 	{
 		if ( item is ItemEquipment equipment && equipment.Equipped )
 			RemoveEquipmentItem( equipment );
-
-		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
+		else
+			RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
 
 		TaskMaster.SubmitTriggerSignal( $"item.dropped.{item.Name}", Player );
 
