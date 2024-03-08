@@ -65,7 +65,8 @@ public partial class NPC : Component
 		if ( MoveHelper == null ) return;
 
 		if ( FaceTowardsVelocity )
-			Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ) ), Time.Delta * 5f );
+			if ( !MoveHelper.Velocity.IsNearlyZero( 1f ) )
+				Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ) ), Time.Delta * 10f );
 
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );

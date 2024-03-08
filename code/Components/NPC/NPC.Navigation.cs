@@ -3,7 +3,7 @@ using Sauna;
 
 public partial class NPC
 {
-	static int _totalDirections = 16;
+	static int _totalDirections = 8;
 	static Vector3[] _possibleDirections
 	{
 		get
@@ -31,18 +31,21 @@ public partial class NPC
 
 		if ( distanceToTarget >= MoveHelper.TraceRadius )
 		{
-			var movement3D = false; // TODO: Replace with property if we want flying NPCs
-			var positionDifference = TargetPosition - Transform.Position;
-			var wishDirection = (movement3D ? positionDifference.WithZ( 0f ) : positionDifference).Normal;
+			if ( Time.Now % (Time.Delta * 5) <= 1 )
+			{
+				var movement3D = false; // TODO: Replace with property if we want flying NPCs
+				var positionDifference = TargetPosition - Transform.Position;
+				var wishDirection = (movement3D ? positionDifference.WithZ( 0f ) : positionDifference).Normal;
 
-			var interestVector = getInterest( wishDirection );
-			var dangerVector = getDanger();
-			var preferredDirection = getPreferredDirection( interestVector, dangerVector );
-			var wishVelocity = preferredDirection * RunSpeed;
-			var steeringForce = wishVelocity - MoveHelper.Velocity;
+				var interestVector = getInterest( wishDirection );
+				var dangerVector = getDanger();
+				var preferredDirection = dangerVector.Max() == 0 ? wishDirection : getPreferredDirection( interestVector, dangerVector );
+				var wishVelocity = preferredDirection * RunSpeed;
+				var steeringForce = wishVelocity - MoveHelper.Velocity;
 
-			MoveHelper.WishVelocity = wishVelocity;
-			MoveHelper.WishVelocity += steeringForce;
+				MoveHelper.WishVelocity = wishVelocity;
+				MoveHelper.WishVelocity += steeringForce;
+			}
 		}
 
 		MoveHelper.Move();
