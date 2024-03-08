@@ -139,6 +139,8 @@ public class NPC : Component
 			if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player ) // TODO Remove
 				SetTarget( player.GameObject );
 
+			Velocity = Agent.Velocity;
+
 			if ( TargetObject.IsValid() )
 			{
 				if ( IsWithinRange( TargetObject, DesiredDistance ) )
@@ -147,15 +149,14 @@ public class NPC : Component
 					Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
 					Agent.UpdateRotation = false;
 
-					SetRagdoll( true );
+					SetRagdoll( true, spin: 100f );
+					WorldPunch( TargetObject.Transform.Position, 400f, 300f );
 				}
 				else
 					Agent.UpdateRotation = FaceTowardsVelocity;
 			}
 			else
 				Agent.UpdateRotation = FaceTowardsVelocity;
-
-			Velocity = Agent.Velocity;
 		}
 
 		if ( Ragdoll != null )
@@ -364,9 +365,31 @@ public class NPC : Component
 		}
 	}
 
+	/// <summary>
+	/// Send the NPC flying like an explosion
+	/// </summary>
+	/// <param name="force"></param>
+	public void LocalPunch( Vector3 force )
+	{
+		if ( Ragdoll != null )
+			Ragdoll.PhysicsGroup.Velocity = force;
+
+		if ( MoveHelper != null && MoveHelper.Enabled )
+			MoveHelper.Punch( force );
+	}
+
+	/// <summary>
+	/// Send the NPC flying towards like an explosion coming from source
+	/// </summary>
+	/// <param name="source"></param>
+	/// <param name="force"></param>
+	/// <param name="extraHeight"></param>
 	public void WorldPunch( Vector3 source, float force, float extraHeight = 50f )
 	{
+		var direction = (Transform.Position - source).Normal;
+		var appliedForce = direction * force + Vector3.Up * extraHeight;
 
+		LocalPunch( appliedForce );
 	}
 
 	void FollowRagdoll()
@@ -392,7 +415,7 @@ public class NPC : Component
 		var velocity = (Ragdoll.Transform.World.Position - _lastPosition);
 		_lastPosition = Ragdoll.Transform.World.Position;
 
-		if ( velocity.Length >= 10f )
+		if ( velocity.Length >= 10f && _unragdoll.Passed <= 0.2f )
 		{
 			var horizontalDirection = velocity.WithZ( 0f ).Normal;
 			var rotatedDirection = horizontalDirection.RotateAround( 0f, Rotation.FromYaw( 90f ) );
