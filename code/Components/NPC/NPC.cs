@@ -21,22 +21,13 @@ public enum NPCType
 public class NPC : Component
 {
 	[Property]
+	public MoveHelper MoveHelper { get; set; }
+	[Property]
 	public SkinnedModelRenderer Model { get; set; }
 
 	[Property]
 	[Title( "NPC Type" )]
 	public NPCType NPCType { get; set; } = NPCType.Medium;
-
-
-	[Property]
-	[Category( "Stats" )]
-	[Range( 8f, 128f, 4f )]
-	public float Height { get; set; } = 64f;
-
-	[Property]
-	[Category( "Stats" )]
-	[Range( 2f, 32f, 2f )]
-	public float Radius { get; set; } = 8f;
 
 	[Property]
 	[Category( "Stats" )]
@@ -50,16 +41,7 @@ public class NPC : Component
 
 	[Property]
 	[Category( "Stats" )]
-	[Range( 0f, 5000f, 10f )]
-	public float Acceleration { get; set; } = 1000f;
-
-	[Property]
-	[Category( "Stats" )]
 	public bool FaceTowardsVelocity { get; set; } = true;
-
-	public NavMeshAgent Agent { get; set; }
-	public MoveHelper MoveHelper { get; set; }
-	public CapsuleCollider Collider { get; set; }
 
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
@@ -68,12 +50,12 @@ public class NPC : Component
 	public bool IsOnGround { get; private set; } = true;
 	public Vector3 Velocity { get; set; }
 
+	protected override void DrawGizmos()
+	{
+	}
+
 	protected override void OnStart()
 	{
-		SetupNavAgent();
-		SetupCollider();
-		SetupMoveHelper();
-
 		Tags.Set( "npc", true );
 		CurrentSpeed = WalkSpeed;
 
@@ -81,46 +63,15 @@ public class NPC : Component
 			Model.OnFootstepEvent += OnFootstep;
 	}
 
-	void SetupNavAgent()
-	{
-		Agent = Components.Create<NavMeshAgent>();
-		Agent.Acceleration = Acceleration;
-		Agent.Height = Height;
-		Agent.Radius = Radius;
-		Agent.MaxSpeed = WalkSpeed;
-		Agent.Separation = 0.2f;
-		Agent.Acceleration = Acceleration;
-		Agent.UpdatePosition = true;
-		Agent.UpdateRotation = FaceTowardsVelocity;
-	}
-
-	void SetupMoveHelper()
-	{
-		MoveHelper = Components.Create<MoveHelper>();
-		MoveHelper.TraceRadius = Radius;
-		MoveHelper.StepHeight = Height;
-		MoveHelper.IgnoreTags.Add( "player" );
-		MoveHelper.IgnoreTags.Add( "trigger" );
-		MoveHelper.IgnoreTags.Add( "npc" );
-	}
-
-	void SetupCollider()
-	{
-		Collider = Components.Create<CapsuleCollider>();
-		Collider.Radius = Radius;
-		Collider.Start = Vector3.Up * Radius;
-		Collider.End = Vector3.Up * Math.Max( Height - Radius, Radius );
-	}
-
 	protected override void OnUpdate()
 	{
-		if ( Agent == null || !Agent.Enabled ) return;
 		if ( Model == null ) return;
+		if ( MoveHelper == null ) return;
 
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );
-		var newX = Vector3.Dot( Agent.Velocity, Model.Transform.Rotation.Forward ) / 100f;
-		var newY = Vector3.Dot( Agent.Velocity, Model.Transform.Rotation.Right ) / 100f;
+		var newX = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Forward ) / 100f;
+		var newY = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Right ) / 100f;
 		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
 		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
 
@@ -130,46 +81,31 @@ public class NPC : Component
 
 	protected override void OnFixedUpdate()
 	{
-		if ( Agent == null ) return;
+		if ( MoveHelper == null ) return;
 
-		if ( Agent.Enabled )
+		CheckNewTargetPos();
+
+		if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player ) // TODO Remove
+			SetTarget( player.GameObject );
+
+		Velocity = MoveHelper.Velocity;
+
+		if ( TargetObject.IsValid() )
 		{
-			CheckNewTargetPos();
-
-			if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player ) // TODO Remove
-				SetTarget( player.GameObject );
-
-			Velocity = Agent.Velocity;
-
-			if ( TargetObject.IsValid() )
+			if ( IsWithinRange( TargetObject, DesiredDistance ) )
 			{
-				if ( IsWithinRange( TargetObject, DesiredDistance ) )
-				{
-					var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ) );
-					Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
-					Agent.UpdateRotation = false;
+				var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ) );
+				Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
 
-					SetRagdoll( true, spin: 100f );
-					WorldPunch( TargetObject.Transform.Position, 400f, 300f );
-				}
-				else
-					Agent.UpdateRotation = FaceTowardsVelocity;
+				SetRagdoll( true, spin: 100f );
+				WorldPunch( TargetObject.Transform.Position, 400f, 300f );
 			}
-			else
-				Agent.UpdateRotation = FaceTowardsVelocity;
 		}
+
+		MoveHelper.Move();
 
 		if ( Ragdoll != null )
 			FollowRagdoll();
-
-		if ( MoveHelper != null )
-			if ( MoveHelper.Enabled )
-			{
-				if ( !MoveHelper.IsOnGround || !Agent.Enabled || Agent.Enabled && Agent.Velocity.Length <= 1f )
-					MoveHelper.Move(); // Movehelper to help if it gets punched
-
-				Agent.Enabled = MoveHelper.IsOnGround;
-			}
 	}
 
 	void CheckNewTargetPos()
@@ -188,7 +124,7 @@ public class NPC : Component
 	public void MoveTo( Vector3 targetPosition )
 	{
 		TargetPosition = targetPosition;
-		Agent.MoveTo( TargetPosition );
+		//Agent.MoveTo( TargetPosition );
 	}
 
 	/// <summary>
@@ -339,9 +275,6 @@ public class NPC : Component
 
 				newRagdoll.Enabled = false;
 				newRagdoll.Enabled = true; // Gotta call OnEnabled for it to update :)
-
-				if ( Agent != null )
-					Agent.Enabled = false;
 
 				newRagdoll.PhysicsGroup.Velocity = Velocity;
 
@@ -497,13 +430,7 @@ public class NPC : Component
 					foreach ( var clothing in Model.GameObject.Children )
 						clothing.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Clothing go offset too
 
-					var collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndChildren );
-					collider.Enabled = true;
-
 					_isTransitioning = false;
-
-					if ( Agent != null )
-						Agent.Enabled = true;
 				}
 			}
 		}

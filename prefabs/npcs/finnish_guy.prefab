@@ -7,26 +7,51 @@
     "Components": [
       {
         "__type": "NPC",
-        "Acceleration": 1000,
         "FaceTowardsVelocity": true,
-        "Height": 64,
         "Model": {
           "_type": "component",
           "go": "4e723424-6bd1-42ae-9c2f-d8e98b9176fb",
           "component_type": "SkinnedModelRenderer"
         },
+        "MoveHelper": {
+          "_type": "component",
+          "go": "0838c785-16cc-49ce-9481-8dbeb9b07027",
+          "component_type": "MoveHelper"
+        },
         "NPCType": "Medium",
-        "Radius": 8,
         "RunSpeed": 120,
         "WalkSpeed": 60
       },
       {
-        "__type": "BoxCollider",
-        "Center": "0,0,36",
-        "IsTrigger": false,
-        "Scale": "16,16,72",
-        "Static": false,
-        "Surface": null
+        "__type": "MoveHelper",
+        "AccelerationCurve": [
+          {
+            "y": 0.30000004
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 1,
+        "Collider": null,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 2000,
+        "GroundAngle": 60,
+        "GroundFriction": 30,
+        "IgnoreTags": "npc,player,trigger",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 20,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 64,
+        "TraceRadius": 8,
+        "TraceType": "Capsule",
+        "UseCollider": false,
+        "UseSceneGravity": true
       }
     ],
     "Children": [

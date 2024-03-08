@@ -151,8 +151,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -263,8 +263,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -430,7 +430,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.3355757,0,0.9420133",
+          "Rotation": "0,-0.9814714,0,0.1916089",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -815,9 +815,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithSubtitle",
-                      "_isStatic": true,
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_isStatic": true
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -855,8 +855,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "Animation": "Interact"
             },
             {
@@ -879,9 +877,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithNameAndSubtitle",
-                      "_isStatic": true,
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_isStatic": true
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -924,8 +922,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "Animation": "Interact"
             }
           ]
@@ -1241,6 +1237,15 @@
       "Rotation": "-0.00004148483,-0.00002393126,0.9659225,-0.2588314",
       "Enabled": true,
       "__Prefab": "prefabs/events/experience_toilet.prefab"
+    },
+    {
+      "Id": "25f8a611-1ce8-480a-83c9-d889671c3b9a",
+      "Name": "finnish_guy",
+      "Position": "695.9103,-714.4089,89.98727",
+      "Rotation": "-0.00004982948,-0.00005677342,0.9108707,-0.4126917",
+      "Tags": "npc",
+      "Enabled": true,
+      "__Prefab": "prefabs/npcs/finnish_guy.prefab"
     }
   ],
   "SceneProperties": {
@@ -1266,6 +1271,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-07T19:15:19.6475798-05:00",
+  "LastSaved": "2024-03-08T23:04:56.777361\u002B01:00",
   "__references": []
 }
