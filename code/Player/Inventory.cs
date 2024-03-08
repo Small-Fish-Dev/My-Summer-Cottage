@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace Sauna;
 
 public class Inventory : Component
@@ -90,6 +88,7 @@ public class Inventory : Component
 			return false;
 
 		SetOwner( item );
+		GiveBackpackItem( equipment, -1 );
 		GiveEquipmentItem( equipment );
 		TaskMaster.SubmitTriggerSignal( $"item.received.{item.Name}", Player );
 		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
@@ -121,15 +120,13 @@ public class Inventory : Component
 	/// </summary>
 	public bool DropItem( ItemComponent item )
 	{
-		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
-
 		if ( item is ItemEquipment equipment )
 		{
 			if ( equipment.Equipped )
 				RemoveEquipmentItem( equipment );
-
-			equipment.Equipped = false;
 		}
+
+		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
 
 		TaskMaster.SubmitTriggerSignal( $"item.dropped.{item.Name}", Player );
 
@@ -154,8 +151,6 @@ public class Inventory : Component
 			item.GameObject.Enabled = true;
 			modelPhysics.PhysicsGroup?.AddVelocity( velocity ); // todo: LOL WHY??
 		}
-
-		item.Network.DropOwnership();
 
 		return true;
 	}
@@ -340,7 +335,9 @@ public class Inventory : Component
 	private void GiveBackpackItem( ItemComponent item, int index )
 	{
 		item.InBackpack = true;
-		_backpackItems[index] = item;
+
+		if ( index >= 0 && index < _backpackItems.Count )
+			_backpackItems[index] = item;
 	}
 
 	/// <summary>
@@ -348,6 +345,7 @@ public class Inventory : Component
 	/// </summary>
 	private void RemoveBackpackItem( ItemComponent item, int index )
 	{
+		item.InBackpack = true;
 		item.InBackpack = false;
 
 		if ( index >= 0 && index < _backpackItems.Count )

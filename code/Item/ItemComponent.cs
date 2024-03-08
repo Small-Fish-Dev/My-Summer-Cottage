@@ -75,14 +75,27 @@ public class ItemComponent : Component
 	/// </summary>
 	public Player LastOwner { get; set; }
 
+	private bool _inBackpack;
+
 	/// <summary>
 	/// If the item is in the player's backpack (note not equipped!).
 	/// </summary>
 	[Sync]
 	public bool InBackpack
 	{
-		get => !GameObject.Enabled;
-		set => GameObject.Enabled = !value;
+		get => _inBackpack;
+		set
+		{
+			_inBackpack = value;
+
+			foreach ( var component in GameObject.Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
+			{
+				if ( component is not ItemComponent or ItemEquipment )
+					component.Enabled = !_inBackpack;
+			}
+
+			Log.Info( "backpack" );
+		}
 	}
 
 	protected override void OnAwake()
@@ -93,6 +106,8 @@ public class ItemComponent : Component
 
 	protected override void OnStart()
 	{
+		GameObject.BreakFromPrefab();
+
 		if ( !Network.Active )
 			GameObject.NetworkSpawn();
 

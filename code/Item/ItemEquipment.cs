@@ -40,18 +40,6 @@ public class ItemEquipment : ItemComponent
 	private GameObject iconWorldObject;
 
 	private bool _equipped = false;
-	private bool _inParcel = false;
-
-	[Sync]
-	public bool InParcel
-	{
-		get => _inParcel;
-		set
-		{
-			_inParcel = value && IsClothing; // Hacky, but for now don't put any hand items in parcel.
-			if ( IsClothing ) UpdateParcel( _inParcel );
-		}
-	}
 
 	public bool IsClothing => Slot != EquipSlot.Hand;
 
@@ -63,29 +51,7 @@ public class ItemEquipment : ItemComponent
 		{
 			_equipped = value;
 
-			// Put in parcel.
-			InParcel = !value;
-
-			if ( !InParcel && !InInventory ) ToggleRenderer( true );
-			else ToggleRenderer( value && !InParcel );
-
-			// Bonemerge
-			if ( Renderer is SkinnedModelRenderer skinned && !UpdatePosition )
-			{
-				skinned.BoneMergeTarget = value
-					? GameObject.Parent?.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInChildren )
-					: null;
-			}
-
-			// Disable rigidbody and collider.
-			if ( !IsClothing )
-			{
-				var body = GameObject?.Components.GetAll<Rigidbody>( FindMode.EverythingInSelfAndChildren ).FirstOrDefault( x => x != parcelBody );
-				if ( body != null ) body.Enabled = !value;
-
-				var collider = GameObject?.Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ).FirstOrDefault( x => x != parcelCollider );
-				if ( collider != null ) collider.Enabled = !value;
-			}
+			Log.Info( "equipped" );
 		}
 	}
 
