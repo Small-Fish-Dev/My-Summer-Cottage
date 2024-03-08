@@ -58,17 +58,21 @@ public class NPC : Component
 	public bool FaceTowardsVelocity { get; set; } = true;
 
 	public NavMeshAgent Agent { get; set; }
+	public MoveHelper MoveHelper { get; set; }
 	public CapsuleCollider Collider { get; set; }
 
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
 	public float DesiredDistance { get; private set; } = 60f;
 	public float CurrentSpeed { get; private set; } = 60f;
+	public bool IsOnGround { get; private set; } = true;
+	public Vector3 Velocity { get; set; }
 
 	protected override void OnStart()
 	{
 		SetupNavAgent();
 		SetupCollider();
+		SetupMoveHelper();
 
 		Tags.Set( "npc", true );
 		CurrentSpeed = WalkSpeed;
@@ -90,6 +94,16 @@ public class NPC : Component
 		Agent.UpdateRotation = FaceTowardsVelocity;
 	}
 
+	void SetupMoveHelper()
+	{
+		MoveHelper = Components.Create<MoveHelper>();
+		MoveHelper.TraceRadius = Radius;
+		MoveHelper.StepHeight = Height;
+		MoveHelper.IgnoreTags.Add( "player" );
+		MoveHelper.IgnoreTags.Add( "trigger" );
+		MoveHelper.IgnoreTags.Add( "npc" );
+	}
+
 	void SetupCollider()
 	{
 		Collider = Components.Create<CapsuleCollider>();
@@ -100,7 +114,7 @@ public class NPC : Component
 
 	protected override void OnUpdate()
 	{
-		if ( Agent == null ) return;
+		if ( Agent == null || !Agent.Enabled ) return;
 		if ( Model == null ) return;
 
 		var oldX = Model.GetFloat( "move_x" );
@@ -118,30 +132,44 @@ public class NPC : Component
 	{
 		if ( Agent == null ) return;
 
-		CheckNewTargetPos();
-
-		if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player )
-			SetTarget( player.GameObject );
-
-		if ( TargetObject.IsValid() )
+		if ( Agent.Enabled )
 		{
-			if ( IsWithinRange( TargetObject, DesiredDistance ) )
-			{
-				var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ) );
-				Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
-				Agent.UpdateRotation = false;
+			CheckNewTargetPos();
 
-				SetRagdoll( true );
+			if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player ) // TODO Remove
+				SetTarget( player.GameObject );
+
+			Velocity = Agent.Velocity;
+
+			if ( TargetObject.IsValid() )
+			{
+				if ( IsWithinRange( TargetObject, DesiredDistance ) )
+				{
+					var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ) );
+					Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
+					Agent.UpdateRotation = false;
+
+					SetRagdoll( true, spin: 100f );
+					WorldPunch( TargetObject.Transform.Position, 400f, 300f );
+				}
+				else
+					Agent.UpdateRotation = FaceTowardsVelocity;
 			}
 			else
 				Agent.UpdateRotation = FaceTowardsVelocity;
 		}
-		else
-			Agent.UpdateRotation = FaceTowardsVelocity;
 
 		if ( Ragdoll != null )
 			FollowRagdoll();
 
+		if ( MoveHelper != null )
+			if ( MoveHelper.Enabled )
+			{
+				if ( !MoveHelper.IsOnGround || !Agent.Enabled || Agent.Enabled && Agent.Velocity.Length <= 1f )
+					MoveHelper.Move(); // Movehelper to help if it gets punched
+
+				Agent.Enabled = MoveHelper.IsOnGround;
+			}
 	}
 
 	void CheckNewTargetPos()
@@ -284,8 +312,6 @@ public class NPC : Component
 			return position;
 	}
 
-	// RAGDOLL vvv
-
 	public ModelPhysics Ragdoll => Model.Components.Get<ModelPhysics>();
 	SkinnedModelRenderer _puppet;
 	bool _isTransitioning = false;
@@ -300,7 +326,7 @@ public class NPC : Component
 	/// <param name="duration">How long ragdoll state lasts</param>
 	/// <param name="spin">How fast it spins towards the given velocity</param>
 	[Broadcast( NetPermission.Anyone )]
-	public void SetRagdoll( bool ragdoll, float duration = 2f, float spin = 10f )
+	public void SetRagdoll( bool ragdoll, float duration = 2f, float spin = 0f )
 	{
 		if ( ragdoll )
 		{
@@ -315,7 +341,9 @@ public class NPC : Component
 				newRagdoll.Enabled = true; // Gotta call OnEnabled for it to update :)
 
 				if ( Agent != null )
-					newRagdoll.PhysicsGroup.Velocity = Agent.Velocity;
+					Agent.Enabled = false;
+
+				newRagdoll.PhysicsGroup.Velocity = Velocity;
 
 				_puppet = Model.GameObject.Parent.Components.Create<SkinnedModelRenderer>();
 				_puppet.Model = Model.Model;
@@ -337,11 +365,39 @@ public class NPC : Component
 		}
 	}
 
+	/// <summary>
+	/// Send the NPC flying like an explosion
+	/// </summary>
+	/// <param name="force"></param>
+	public void LocalPunch( Vector3 force )
+	{
+		if ( Ragdoll != null )
+			Ragdoll.PhysicsGroup.Velocity = force;
+
+		if ( MoveHelper != null && MoveHelper.Enabled )
+			MoveHelper.Punch( force );
+	}
+
+	/// <summary>
+	/// Send the NPC flying towards like an explosion coming from source
+	/// </summary>
+	/// <param name="source"></param>
+	/// <param name="force"></param>
+	/// <param name="extraHeight"></param>
+	public void WorldPunch( Vector3 source, float force, float extraHeight = 50f )
+	{
+		var direction = (Transform.Position - source).Normal;
+		var appliedForce = direction * force + Vector3.Up * extraHeight;
+
+		LocalPunch( appliedForce );
+	}
+
 	void FollowRagdoll()
 	{
 		if ( Ragdoll == null ) return;
 
 		var rootPosition = Transform.Position;
+		Velocity = Ragdoll.PhysicsGroup.Bodies.FirstOrDefault()?.Velocity ?? (MoveHelper?.Velocity ?? Vector3.Zero);
 
 		if ( Model.GetAttachment( "foot_L" ) != null )
 		{
@@ -359,10 +415,13 @@ public class NPC : Component
 		var velocity = (Ragdoll.Transform.World.Position - _lastPosition);
 		_lastPosition = Ragdoll.Transform.World.Position;
 
-		var horizontalDirection = velocity.WithZ( 0f ).Normal;
-		var rotatedDirection = horizontalDirection.RotateAround( 0f, Rotation.FromYaw( 90f ) );
+		if ( velocity.Length >= 10f && _unragdoll.Passed <= 0.2f )
+		{
+			var horizontalDirection = velocity.WithZ( 0f ).Normal;
+			var rotatedDirection = horizontalDirection.RotateAround( 0f, Rotation.FromYaw( 90f ) );
 
-		Ragdoll.PhysicsGroup.AngularVelocity = rotatedDirection * _spin;
+			Ragdoll.PhysicsGroup.AngularVelocity = rotatedDirection * _spin;
+		}
 
 		if ( _unragdoll )
 		{
@@ -442,6 +501,9 @@ public class NPC : Component
 					collider.Enabled = true;
 
 					_isTransitioning = false;
+
+					if ( Agent != null )
+						Agent.Enabled = true;
 				}
 			}
 		}

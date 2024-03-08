@@ -95,10 +95,13 @@ partial class Player
 		var velocity = (Ragdoll.Transform.World.Position - _lastPosition);
 		_lastPosition = Ragdoll.Transform.World.Position;
 
-		var horizontalDirection = velocity.WithZ( 0f ).Normal;
-		var rotatedDirection = horizontalDirection.RotateAround( 0f, Rotation.FromYaw( 90f ) );
+		if ( velocity.Length >= 10f )
+		{
+			var horizontalDirection = velocity.WithZ( 0f ).Normal;
+			var rotatedDirection = horizontalDirection.RotateAround( 0f, Rotation.FromYaw( 90f ) );
 
-		Ragdoll.PhysicsGroup.AngularVelocity = rotatedDirection * _spin;
+			Ragdoll.PhysicsGroup.AngularVelocity = rotatedDirection * _spin;
+		}
 
 		if ( _unragdoll )
 		{
