@@ -143,6 +143,8 @@
 			else
 				Player.Local.Inventory.EquipItemFromBackpack( equipment );
 
+			PlaySound("drop");
+
 			Inventory.Instance.OnChanged();
 			sinceClick = 0;
 
@@ -179,14 +181,14 @@
 			// To backpack slot.
 			if ( targetSlot.BackpackSlotIndex is not null )
 			{
-				inventory.SwapItems( fromSlot.BackpackSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
-				PlaySound( "drop" );
+				var res = inventory.SwapItems( fromSlot.BackpackSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
+				PlaySound( res ? "drop" : "serror" );
 			}
 			// To equipment slot.
-			else if ( targetSlot.EquipSlotIndex is not null && fromSlot.Item is ItemEquipment itemEquipment && itemEquipment.Slot == targetSlot.EquipSlotIndex )
+			else if ( targetSlot.EquipSlotIndex is not null && fromSlot.Item is ItemEquipment itemEquipment )
 			{
-				inventory.SwapItems( fromSlot.BackpackSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
-				PlaySound( "drop" );
+				var res = inventory.SwapItems( fromSlot.BackpackSlotIndex.Value, targetSlot.EquipSlotIndex.Value );
+				PlaySound( res ? "drop" : "serror" );
 			}
 		}
 
@@ -196,8 +198,8 @@
 			// To backpack slot.
 			if ( targetSlot.BackpackSlotIndex is not null )
 			{
-				inventory.SwapItems( fromSlot.EquipSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
-				PlaySound( "drop" );
+				var res = inventory.SwapItems( fromSlot.EquipSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
+				PlaySound( res ? "drop" : "serror" );
 			}
 		}
 
@@ -212,7 +214,8 @@
 		var inventory = Player.Local.Inventory;
 
 		if ( fromSlot.Item is ItemEquipment equipment )
-			inventory.EquipItemFromBackpack( equipment );
+			if (inventory.EquipItemFromBackpack( equipment ))
+				PlaySound("drop");
 
 		fromSlot.UpdateItem();
 	}
