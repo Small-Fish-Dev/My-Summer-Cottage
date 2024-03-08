@@ -908,36 +908,6 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "inspect_arms"
-						children = 
-						[
-							{
-								_class = "AnimSmoothLoop"
-								frames_from_start = 3
-								frames_from_end = 3
-							},
-						]
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/inspect_arms.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
 						name = "sitting_pose"
 						activity_name = ""
 						activity_weight = 1
@@ -952,28 +922,6 @@
 						disable_compression = false
 						enable_scale = false
 						source_filename = "models/guy/animations/sitting_pose.fbx"
-						start_frame = -1
-						end_frame = -1
-						framerate = -1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "mugshot_pose"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						enable_scale = false
-						source_filename = "models/guy/animations/mugshot_pose.fbx"
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
@@ -2410,6 +2358,167 @@
 							},
 						]
 					},
+					{
+						_class = "Folder"
+						name = "character_creator"
+						children = 
+						[
+							{
+								_class = "AnimFile"
+								name = "mugshot_turnleft"
+								children = 
+								[
+									{
+										_class = "ExtractMotion"
+										extract_tx = true
+										extract_ty = true
+										extract_tz = true
+										extract_rz = true
+										linear = false
+										quadratic = false
+										root_bone_name = "root"
+										motion_type = "Uniform"
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/mugshot_turnleft.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "mugshot_turnright"
+								children = 
+								[
+									{
+										_class = "ExtractMotion"
+										extract_tx = true
+										extract_ty = true
+										extract_tz = true
+										extract_rz = true
+										linear = false
+										quadratic = false
+										root_bone_name = "root"
+										motion_type = "Uniform"
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/mugshot_turnright.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "inspect_arms"
+								children = 
+								[
+									{
+										_class = "AnimSmoothLoop"
+										frames_from_start = 3
+										frames_from_end = 3
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/inspect_arms.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "mugshot_pose"
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/mugshot_pose.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
+								name = "mugshot_pose_delta"
+								children = 
+								[
+									{
+										_class = "AnimSubtract"
+										anim_name = "mugshot_pose"
+										frame = 1
+									},
+								]
+								activity_name = ""
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								enable_scale = false
+								source_filename = "models/guy/animations/mugshot_pose.fbx"
+								start_frame = -1
+								end_frame = -1
+								framerate = -1.0
+								take = 0
+								reverse = false
+							},
+						]
+					},
 				]
 				default_root_bone_name = ""
 			},
@@ -2495,6 +2604,15 @@
 						parent_bone = "hand_R"
 						relative_origin = [ 3.618608, 0.434778, -1.3619 ]
 						relative_angles = [ 0.0, -90.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "mugshot_sign"
+						parent_bone = "hand_R"
+						relative_origin = [ 6.497816, 8.797225, -6.638517 ]
+						relative_angles = [ -32.24855, 7.77372, -39.934181 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
