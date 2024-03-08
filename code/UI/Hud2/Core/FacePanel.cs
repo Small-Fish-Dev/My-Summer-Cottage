@@ -115,6 +115,15 @@ public class FacePanel : PanelComponent
 		Panel.Style.Left = Length.Pixels( ipx );
 		Panel.Style.Top = Length.Pixels( ipy );
 
+		// Set rotation (roll)
+		var gameObjectRotationRoll = GameObject.Transform.Rotation.Angles().roll;
+		if ( !gameObjectRotationRoll.AlmostEqual( 0.0f, 0.2f ) )
+		{
+			var tx = new PanelTransform();
+			tx.AddRotation( 0, 0, gameObjectRotationRoll );
+			Panel.Style.Transform = tx;
+		}
+
 		StateHasChanged();
 	}
 }
