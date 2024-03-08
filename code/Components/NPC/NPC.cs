@@ -64,6 +64,9 @@ public partial class NPC : Component
 		if ( Model == null ) return;
 		if ( MoveHelper == null ) return;
 
+		if ( FaceTowardsVelocity )
+			Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ) ), Time.Delta * 5f );
+
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );
 		var newX = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Forward ) / 100f;
@@ -78,8 +81,6 @@ public partial class NPC : Component
 	protected override void OnFixedUpdate()
 	{
 		if ( MoveHelper == null ) return;
-
-		CheckNewTargetPos();
 
 		if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player ) // TODO Remove
 			SetTarget( player.GameObject );
@@ -96,10 +97,10 @@ public partial class NPC : Component
 			}
 		}
 
-		MoveHelper.Move();
-
 		if ( Ragdoll != null )
 			FollowRagdoll();
+
+		ComputeNavigation();
 	}
 
 	/// <summary>
