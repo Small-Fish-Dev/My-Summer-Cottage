@@ -82,14 +82,7 @@ public class ItemComponent : Component
 	public bool InBackpack
 	{
 		get => !GameObject.Enabled;
-		set
-		{
-			GameObject.Enabled = !value;
-
-			// Make sure that the item is in a parcel before dropping.
-			if ( this is ItemEquipment itemEquipment && !itemEquipment.Equipped && !itemEquipment.InParcel && !value )
-				itemEquipment.InParcel = true;
-		}
+		set => GameObject.Enabled = !value;
 	}
 
 	protected override void OnAwake()

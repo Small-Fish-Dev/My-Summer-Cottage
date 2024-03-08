@@ -127,6 +127,8 @@ public class Inventory : Component
 		{
 			if ( equipment.Equipped )
 				RemoveEquipmentItem( equipment );
+
+			equipment.Equipped = false;
 		}
 
 		TaskMaster.SubmitTriggerSignal( $"item.dropped.{item.Name}", Player );
