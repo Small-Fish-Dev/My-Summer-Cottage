@@ -1,0 +1,29 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader"
+
+	//---- Rendering ----
+	F_ALPHA_TEST 1
+	F_RENDER_BACKFACES 1
+	F_TRANSPARENCY 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "models/consumables/bottle/bottle_blue_color.png"
+	ColorTintMask "materials/default/default.tga"
+	Metalness "materials/default/default_metal.tga"
+	Normal "models/consumables/bottle/bottle_blue_normal.png"
+	Roughness "models/consumables/bottle/bottle_blue_rough.png"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+
+	//---- Transparency ----
+	TransparencyMask "models/consumables/bottle/bottle_red_trans.png"
+	TransparencyRounding "0.000"
+}
