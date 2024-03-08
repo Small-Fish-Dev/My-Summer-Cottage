@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "c0c7966c-2d64-4f2c-bf3b-5fb1d11f2fb8",
+    "Id": "78b279ba-6d5e-4c16-8632-c9827ac04b10",
     "Name": "player",
     "Tags": "localplayer,player",
     "Enabled": true,
@@ -16,12 +16,12 @@
         "Money": 0,
         "MoveHelper": {
           "_type": "component",
-          "go": "c0c7966c-2d64-4f2c-bf3b-5fb1d11f2fb8",
+          "go": "78b279ba-6d5e-4c16-8632-c9827ac04b10",
           "component_type": "MoveHelper"
         },
         "Penoid": {
           "_type": "component",
-          "go": "a73ce02a-6073-4d6d-838f-814c3c46a659",
+          "go": "25ebf373-f3cb-4b55-ba41-a811a12b59c7",
           "component_type": "SkinnedModelRenderer"
         },
         "SkinColor": "1,1,1,1",
@@ -33,7 +33,7 @@
         "__type": "Inventory",
         "Player": {
           "_type": "component",
-          "go": "c0c7966c-2d64-4f2c-bf3b-5fb1d11f2fb8",
+          "go": "78b279ba-6d5e-4c16-8632-c9827ac04b10",
           "component_type": "Player"
         }
       },
@@ -96,7 +96,7 @@
     ],
     "Children": [
       {
-        "Id": "7bc4b31e-0ff0-4954-bf0e-f26c8a1c7795",
+        "Id": "08a61379-a0e7-4e96-a62b-59ca07aebbb8",
         "Name": "Camera",
         "Position": "5.991993,0.00007995074,66.42353",
         "Tags": "maincamera",
@@ -142,7 +142,7 @@
         ]
       },
       {
-        "Id": "53ef0bb9-c971-4ad1-b272-9709b32c2a84",
+        "Id": "d7ec8a02-a0e4-49c7-aa78-cb9cf8d024ba",
         "Name": "Model",
         "Enabled": true,
         "Components": [
@@ -155,13 +155,36 @@
             "MaterialGroup": null,
             "MaterialOverride": null,
             "Model": "models/guy/guy.vmdl",
-            "RenderType": "On",
+            "RenderType": "Off",
             "Tint": "1,1,1,1"
           }
         ]
       },
       {
-        "Id": "a73ce02a-6073-4d6d-838f-814c3c46a659",
+        "Id": "d34268ad-f34e-419c-a113-a95fb585fcb7",
+        "Name": "ShadowModel",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "AnimationGraph": null,
+            "BodyGroups": 341,
+            "BoneMergeTarget": {
+              "_type": "component",
+              "go": "d7ec8a02-a0e4-49c7-aa78-cb9cf8d024ba",
+              "component_type": "SkinnedModelRenderer"
+            },
+            "CreateBoneObjects": false,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "ShadowsOnly",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "Id": "25ebf373-f3cb-4b55-ba41-a811a12b59c7",
         "Name": "Penoid",
         "Enabled": true,
         "Components": [
@@ -171,7 +194,7 @@
             "BodyGroups": 18446744073709551615,
             "BoneMergeTarget": {
               "_type": "component",
-              "go": "53ef0bb9-c971-4ad1-b272-9709b32c2a84",
+              "go": "d7ec8a02-a0e4-49c7-aa78-cb9cf8d024ba",
               "component_type": "SkinnedModelRenderer"
             },
             "CreateBoneObjects": false,
@@ -187,7 +210,7 @@
         ],
         "Children": [
           {
-            "Id": "dacafe91-03b4-45f8-9e78-c1f63ef77f1a",
+            "Id": "bc27ee06-8c2c-4509-983e-133b8465074d",
             "Name": "Piss",
             "Position": "1.936967,0.0000001154522,34.7722",
             "Tags": "particles",
