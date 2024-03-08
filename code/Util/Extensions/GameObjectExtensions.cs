@@ -14,11 +14,39 @@ public static class GameObjectExtensions
 		return soundHandler.PlaySound( sound );
 	}
 
+	[Title( "Play Sound With Subtitles (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
+	public static SoundHandle PlaySoundWithSubtitle( this GameObject obj, string sound, string subtitle )
+	{
+		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
+		return soundHandler.PlaySoundWithSubtitle( sound, string.Empty, subtitle );
+	}
+
+	[Title( "Play Sound With Name and Subtitle (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
+	public static SoundHandle PlaySoundWithNameAndSubtitle( this GameObject obj, string sound, string name, string subtitle )
+	{
+		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
+		return soundHandler.PlaySoundWithSubtitle( sound, name, subtitle );
+	}
+
 	[Title( "Play Sound (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
 	public static SoundHandle PlaySound( this GameObject obj, SoundEvent sound )
 	{
 		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
 		return soundHandler.PlaySound( sound );
+	}
+
+	[Title( "Play Sound With Subtitles (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
+	public static SoundHandle PlaySoundWithSubtitle( this GameObject obj, SoundEvent sound, string subtitle )
+	{
+		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
+		return soundHandler.PlaySoundWithSubtitle( sound, string.Empty, subtitle );
+	}
+
+	[Title( "Play Sound With Name and Subtitle (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
+	public static SoundHandle PlaySoundWithNameAndSubtitle( this GameObject obj, SoundEvent sound, string name, string subtitle )
+	{
+		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
+		return soundHandler.PlaySoundWithSubtitle( sound, name, subtitle );
 	}
 
 	[Title( "Stop Sound (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]

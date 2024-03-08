@@ -1,0 +1,43 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	@if (!string.IsNullOrEmpty(Name))
+	{
+		<div class="name">@($"{Name}: ")</div>
+	}
+	<text class="text">@_message</text>
+</root>
+
+@code {
+	public String Name { get; set; } 
+	public String Text { get; set; }
+	public SoundHandle SoundHandle { get; set; }
+
+	private float MessageSpeed => 0.03f;
+	private String _message = "";
+	private TimeUntil _timeUntilNextLetter;
+
+	public override void Tick()
+	{
+		if (_timeUntilNextLetter)
+		{
+			_timeUntilNextLetter = MessageSpeed;
+
+			if (!string.IsNullOrEmpty(Text))
+			{
+				_message += Text[0];
+				Text = Text.Substring(1);
+			}
+		}
+
+		if (SoundHandle.IsStopped && string.IsNullOrEmpty(Text))
+			Delete();
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(_message.GetHashCode());
+	}
+}

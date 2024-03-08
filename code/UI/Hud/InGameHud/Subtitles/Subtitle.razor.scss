@@ -1,0 +1,29 @@
+@import "/UI/Style.scss";
+
+Subtitle {
+    font-size: 24px;
+    font-family: HabboExtended;
+    text-shadow: $text-shadow-sm;
+    padding: 14px;
+    transition: all 0.1s ease-out;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .name {
+        margin-right: 15px;
+        color: $orange;
+    }
+
+    .text {
+
+    }
+
+    &:intro {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    &:outro {
+        transform: scale(0);
+        opacity: 0;
+    }
+}

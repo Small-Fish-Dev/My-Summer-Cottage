@@ -1,3 +1,5 @@
+using Sauna.UI;
+
 namespace Sauna;
 
 public class SoundHandler : Component
@@ -11,6 +13,12 @@ public class SoundHandler : Component
 		return soundHandle;
 	}
 
+	public SoundHandle PlaySoundWithSubtitle( string sound, string name, string subtitle )
+	{
+		Subtitles.Add( name, subtitle, null );
+		return PlaySound( sound );
+	}
+
 	public SoundHandle PlaySound( SoundEvent sound )
 	{
 		var soundHandle = Sound.Play( sound );
@@ -18,9 +26,11 @@ public class SoundHandler : Component
 		return soundHandle;
 	}
 
-	public void PlaySoundWithSubtitle( string sound, string subtitle )
+	public SoundHandle PlaySoundWithSubtitle( SoundEvent sound, string name, string subtitle )
 	{
-		// TODO:
+		var soundHandle = PlaySound( sound );
+		Subtitles.Add( name, subtitle, soundHandle );
+		return soundHandle;
 	}
 
 	public void StopSound( string sound )
