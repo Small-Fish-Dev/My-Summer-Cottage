@@ -1,0 +1,36 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits PanelComponent
+@attribute [StyleSheet]
+
+<root>
+	<label>@PassportPanel.Firstname</label>
+	<label>@PassportPanel.Lastname</label>
+</root>
+
+@code {
+	[Property] public SkinnedModelRenderer Model { get; set; }
+	[Property] public SkinnedModelRenderer Mugshot { get; set; }
+
+	protected override void OnUpdate()
+	{
+		if ( Mugshot == null )
+			return;
+
+		var transform = Mugshot?.GetAttachment( "center" ) ?? global::Transform.Zero;
+		GameObject.Transform.World = transform.Add( transform.Rotation.Forward * 0.5f, true );
+
+		if ( Model != null )
+		{
+			var inConfirm = CreatorComponent.Current == CreatorStage.Confirmation;
+			Model.Set( "mugshot", inConfirm );
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( PassportPanel.Fullname );
+	}
+}

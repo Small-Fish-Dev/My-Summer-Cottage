@@ -216,6 +216,62 @@
                   "__type": "CensorComponent"
                 }
               ]
+            },
+            {
+              "Id": "2040c609-ac53-4b7a-a9b1-0264f7f8e62a",
+              "Name": "Mugshot",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SkinnedModelRenderer",
+                  "AnimationGraph": null,
+                  "BodyGroups": 18446744073709551615,
+                  "BoneMergeTarget": {
+                    "_type": "component",
+                    "go": "6f3f425b-eec4-40d2-8fd6-b1524721598a",
+                    "component_type": "SkinnedModelRenderer"
+                  },
+                  "CreateBoneObjects": false,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/character_setup/sauna_mugshot.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ],
+              "Children": [
+                {
+                  "Id": "95bbff91-458f-48dc-bb43-c55c2ebd9975",
+                  "Name": "Panel",
+                  "Position": "5.614877,-7.522766,28.84135",
+                  "Rotation": "-0.4923409,-0.7361335,-0.0913665,0.4553679",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "WorldPanel",
+                      "HorizontalAlign": "Center",
+                      "LookAtCamera": false,
+                      "PanelSize": "379.7995,94.20039",
+                      "RenderScale": 0.3,
+                      "VerticalAlign": "Center"
+                    },
+                    {
+                      "__type": "MugshotPanel",
+                      "Model": {
+                        "_type": "component",
+                        "go": "6f3f425b-eec4-40d2-8fd6-b1524721598a",
+                        "component_type": "SkinnedModelRenderer"
+                      },
+                      "Mugshot": {
+                        "_type": "component",
+                        "go": "2040c609-ac53-4b7a-a9b1-0264f7f8e62a",
+                        "component_type": "SkinnedModelRenderer"
+                      }
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -330,6 +386,6 @@
   },
   "Title": "creation",
   "Description": "",
-  "LastSaved": "2024-02-29T23:54:01.2603481\u002B02:00",
+  "LastSaved": "2024-03-08T03:11:51.5924724\u002B02:00",
   "__references": []
 }

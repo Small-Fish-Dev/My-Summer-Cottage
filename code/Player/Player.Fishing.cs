@@ -64,7 +64,7 @@ public partial class Player
 					GameTask.RunInThreadAsync( async () =>
 					{
 						await GameTask.Delay( delay );
-						Player.Local?.CaptureMemory( caption, "big_catch" );
+						CaptureMemory( caption, "big_catch" );
 					} );
 				}
 			}
