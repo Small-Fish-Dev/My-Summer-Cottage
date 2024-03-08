@@ -28,7 +28,8 @@ public partial class NPC
 			var positionDifference = TargetPosition - Transform.Position;
 			var wishDirection = (movement3D ? positionDifference.WithZ( 0f ) : positionDifference).Normal;
 
-			var interest = getInterest( wishDirection );
+			var interestVector = getInterest( wishDirection );
+			var dangerVector = getDanger();
 
 			MoveHelper.WishVelocity = wishDirection * WalkSpeed;
 		}
@@ -41,6 +42,37 @@ public partial class NPC
 		return _possibleDirections
 			.Select( x => direction.Dot( x ) )
 			.ToArray();
+	}
+
+	float[] getDanger()
+	{
+		var totalDirections = _possibleDirections.Length;
+		var directionDanger = new float[totalDirections];
+		var currentDirection = 0;
+
+		foreach ( var direction in _possibleDirections )
+		{
+			var startPosition = Transform.Position + Vector3.Up * (MoveHelper.StepHeight + MoveHelper.TraceRadius / 2f);
+			var endPosition = startPosition + direction * 100f;
+			var dangerTrace = Scene.Trace.Sphere( MoveHelper.TraceRadius, startPosition, endPosition )
+				.IgnoreGameObjectHierarchy( GameObject )
+				.Run();
+
+			directionDanger[currentDirection] = dangerTrace.Hit ? 5f : 0f;
+
+			if ( dangerTrace.Hit )
+			{
+				var directionToLeft = (currentDirection - 1 + totalDirections) % totalDirections;
+				var directionToRight = (currentDirection + 1) % totalDirections;
+
+				directionDanger[directionToLeft] += 2f;
+				directionDanger[directionToRight] += 2f;
+			}
+
+			currentDirection++;
+		}
+
+		return directionDanger;
 	}
 
 	void CheckNewTargetPos()
