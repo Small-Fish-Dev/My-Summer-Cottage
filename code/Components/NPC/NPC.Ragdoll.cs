@@ -21,7 +21,7 @@ public partial class NPC
 	{
 		if ( ragdoll )
 		{
-			if ( Ragdoll == null && Model != null )
+			if ( Ragdoll == null && Model != null && MoveHelper != null )
 			{
 				var newRagdoll = Model.Components.Create<ModelPhysics>();
 
@@ -31,7 +31,7 @@ public partial class NPC
 				newRagdoll.Enabled = false;
 				newRagdoll.Enabled = true; // Gotta call OnEnabled for it to update :)
 
-				newRagdoll.PhysicsGroup.Velocity = Velocity;
+				newRagdoll.PhysicsGroup.Velocity = MoveHelper.Velocity;
 
 				_puppet = Model.GameObject.Parent.Components.Create<SkinnedModelRenderer>();
 				_puppet.Model = Model.Model;
@@ -58,7 +58,6 @@ public partial class NPC
 		if ( Ragdoll == null ) return;
 
 		var rootPosition = Transform.Position;
-		Velocity = Ragdoll.PhysicsGroup.Bodies.FirstOrDefault()?.Velocity ?? (MoveHelper?.Velocity ?? Vector3.Zero);
 
 		if ( Model.GetAttachment( "foot_L" ) != null )
 		{

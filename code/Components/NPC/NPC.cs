@@ -46,9 +46,6 @@ public partial class NPC : Component
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
 	public float DesiredDistance { get; private set; } = 60f;
-	public float CurrentSpeed { get; private set; } = 60f;
-	public bool IsOnGround { get; private set; } = true;
-	public Vector3 Velocity { get; set; }
 
 	protected override void DrawGizmos()
 	{
@@ -57,7 +54,6 @@ public partial class NPC : Component
 	protected override void OnStart()
 	{
 		Tags.Set( "npc", true );
-		CurrentSpeed = WalkSpeed;
 
 		if ( Model != null )
 			Model.OnFootstepEvent += OnFootstep;
@@ -88,8 +84,6 @@ public partial class NPC : Component
 		if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player ) // TODO Remove
 			SetTarget( player.GameObject );
 
-		Velocity = MoveHelper.Velocity;
-
 		if ( TargetObject.IsValid() )
 		{
 			if ( IsWithinRange( TargetObject, DesiredDistance ) )
@@ -112,17 +106,12 @@ public partial class NPC : Component
 	/// Who should the NPC follow, set null to go back to manually setting the target position
 	/// </summary>
 	/// <param name="target"></param>
-	/// <param name="desiredDistance"></param>
-	public void SetTarget( GameObject target, float desiredDistance = 60f )
+	public void SetTarget( GameObject target )
 	{
 		if ( TargetObject == target )
-		{
-			SetDesiredDistance( desiredDistance );
 			return;
-		}
 
 		TargetObject = target;
-		SetDesiredDistance( desiredDistance );
 
 		if ( TargetObject != null )
 			MoveTo( GetPreferredTargetPosition( TargetObject ) );
@@ -168,7 +157,7 @@ public partial class NPC : Component
 			var randomDistance = Game.Random.Float( minRange, maxRange );
 			var randomPosition = position + randomDirection * randomDistance;
 
-			var randomPoint = Scene.NavMesh?.GetClosestPoint( position );
+			var randomPoint = Scene.NavMesh?.GetClosestPoint( position ); // TODO Change
 
 			if ( randomPoint != null )
 				position = randomPosition;
