@@ -11,14 +11,14 @@
 	<div class="weight">
 		<div class="text">
 			<label class="light">WEIGHT, KG</label>
-			<label class="dark">@(_weight) KG</label>
+			<label class="dark">@(DisplayedWeight) KG</label>
 		</div>
 		<slider 
 			class="slider"
-			minimum=@(60) maximum=@(125) default=@(_weight) 
+			minimum=@(60) maximum=@(125) default=@(DisplayedWeight) 
 			@onvalueset=@(value => {
-				_weight = (int)value.Value;
-				Weight = MathX.Remap( (float)_weight, 60, 125, 0, 1 );
+				DisplayedWeight = (int)value.Value;
+				Weight = MathX.Remap( (float)DisplayedWeight, 60, 125, 0, 1 );
 				Model.Morphs.Set( "fat", Weight );
 				Model.Update( Time.Delta );
 			})
@@ -50,14 +50,14 @@
 	<div class="height">
 		<div class="text">
 			<label class="light">HEIGHT, CM</label>
-			<label class="dark">@(_height) CM</label>
+			<label class="dark">@(DisplayedHeight) CM</label>
 		</div>
 		<slider 
 			class="slider"
-			minimum=@(150) maximum=@(195) default=@(_height) 
+			minimum=@(150) maximum=@(195) default=@(DisplayedHeight) 
 			@onvalueset=@(value => {
-				_height = (int)value.Value;
-				Height = MathX.Remap( (float)_height, 150, 195, -90, 80 );
+				DisplayedHeight = (int)value.Value;
+				Height = MathX.Remap( (float)DisplayedHeight, 150, 195, -90, 80 );
 				Model.SetAnimParameter( "height", Height );
 				Model.Update( Time.Delta );
 			})
@@ -75,8 +75,8 @@
 	public const int DEFAULT_WEIGHT = 70;
 	public const int DEFAULT_HEIGHT = 178;
 
-	private static int _weight = DEFAULT_WEIGHT;
-	private static int _height = DEFAULT_HEIGHT;
+	public static int DisplayedWeight = DEFAULT_WEIGHT;
+	public static int DisplayedHeight = DEFAULT_HEIGHT;
 	private static readonly Color[] _skinColors = new[]
 	{
 		Color.White,
@@ -106,6 +106,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( _weight, _height, SkinColor );
+		return HashCode.Combine( DisplayedWeight, DisplayedHeight, SkinColor );
 	}
 }

@@ -59,8 +59,8 @@
 	protected override void OnAwake()
 	{
 		footerText = $"P<FIN {name}> {generateGarbage( 34 - name.Length )}\n"
-				   + $"P<UID {steamid}> {generateGarbage( 34 - steamid.Length)}\n"
-				   + $"{generateGarbage(52 - steamid.Length)}><(((°>";
+							+ $"P<UID {steamid}> {generateGarbage( 34 - steamid.Length)}\n"
+							+ $"{generateGarbage(52 - steamid.Length)}><(((°>";
 	}
 
 	private void Initialize()
@@ -91,6 +91,13 @@
 
 	protected override void OnUpdate()
 	{
+		if ( CreatorComponent.Current != CreatorStage.Identification )
+		{
+			if ( entry.HasFocus )
+				entry.Blur();
+			return;
+		}
+
 		if ( entry == null )
 		{
 			if ( Overlay.Panel != null )
