@@ -80,12 +80,15 @@ public sealed class BeerCrate : Component
 					return;
 
 				GameObject beer;
+				beer = Beer.Clone();
+				beer.NetworkSpawn();
+
 				if ( inventory.EquippedItems[(int)EquipSlot.Hand] != null )
 				{
 					if ( !inventory.HasSpaceInBackpack() )
 						return;
 
-					beer = Beer.Clone();
+
 					beer.Enabled = true;
 					beer.BreakFromPrefab();
 					inventory.GiveItem( beer );
@@ -94,7 +97,6 @@ public sealed class BeerCrate : Component
 					return;
 				}
 
-				beer = Beer.Clone();
 				beer.BreakFromPrefab();
 				inventory.EquipItemFromWorld( beer );
 				Count--;
