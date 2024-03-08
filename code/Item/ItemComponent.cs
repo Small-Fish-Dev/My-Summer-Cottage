@@ -73,7 +73,7 @@ public class ItemComponent : Component
 	/// <summary>
 	/// The last player that had this item parented to them.
 	/// </summary>
-	public Player LastParent { get; set; }
+	public Player LastOwner { get; set; }
 
 	/// <summary>
 	/// If the item is in the player's backpack (note not equipped!).
@@ -86,6 +86,7 @@ public class ItemComponent : Component
 		{
 			GameObject.Enabled = !value;
 
+			// Make sure that the item is in a parcel before dropping.
 			if ( this is ItemEquipment itemEquipment && !itemEquipment.Equipped && !itemEquipment.InParcel && !value )
 				itemEquipment.InParcel = true;
 		}

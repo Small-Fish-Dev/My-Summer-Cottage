@@ -127,8 +127,6 @@ public class Inventory : Component
 		{
 			if ( equipment.Equipped )
 				RemoveEquipmentItem( equipment );
-
-			equipment.Equipped = false;
 		}
 
 		TaskMaster.SubmitTriggerSignal( $"item.dropped.{item.Name}", Player );
@@ -331,7 +329,7 @@ public class Inventory : Component
 		item.GameObject.Parent = Player.GameObject;
 		item.GameObject.Transform.Position = Player.GameObject.Transform.Position;
 		item.GameObject.Transform.Rotation = Player.GameObject.Transform.Rotation;
-		item.LastParent = Player;
+		item.LastOwner = Player;
 	}
 
 	/// <summary>

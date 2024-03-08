@@ -20,13 +20,13 @@ public sealed class EventSellAreaTrigger : EventTrigger
 	{
 		var items = Scene.FindInPhysics( WorldBBox )
 			?.Select( x => x.Components.Get<ItemComponent>() )
-			.Where( item => item != null && item.IsSellable && item.LastParent != null )
+			.Where( item => item != null && item.IsSellable && item.LastOwner != null )
 			.ToList();
 
 		foreach ( var item in items )
 		{
 			CallTrigger( item.GameObject );
-			item.LastParent.Money += item.SellPrice;
+			item.LastOwner.Money += item.SellPrice;
 			item.GameObject.Destroy();
 		}
 	}
