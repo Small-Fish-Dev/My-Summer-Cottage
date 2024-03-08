@@ -49,7 +49,10 @@ public class ItemEquipment : ItemComponent
 		set
 		{
 			_inParcel = value && GoesInParcel; // Hacky, but for now don't put any hand items in parcel.
-			if ( GoesInParcel ) UpdateParcel( _inParcel );
+			ToggleRenderer( !_inParcel );
+
+			if ( GoesInParcel )
+				UpdateParcel( _inParcel );
 		}
 	}
 
@@ -65,10 +68,6 @@ public class ItemEquipment : ItemComponent
 
 			// Put in parcel.
 			InParcel = !value;
-
-			// Toggle renderer
-			if ( !InParcel && !InInventory ) ToggleRenderer( true );
-			else ToggleRenderer( value && !InParcel );
 
 			// Bonemerge
 			if ( Renderer is SkinnedModelRenderer skinned && !UpdatePosition )
