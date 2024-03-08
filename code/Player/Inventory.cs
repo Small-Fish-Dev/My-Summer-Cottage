@@ -216,7 +216,7 @@ public class Inventory : Component
 				var to = secondItem;
 				invert = true;
 
-				var amount = Math.Abs( to.Count - to.MaxStack );
+				var amount = Math.Min( Math.Abs( to.Count - to.MaxStack ), from.Count );
 				RemoveAmount( from, amount );
 				to.Count += amount;
 
@@ -232,7 +232,7 @@ public class Inventory : Component
 				var to = firstItem;
 				invert = true;
 
-				var amount = Math.Abs( to.Count - to.MaxStack );
+				var amount = Math.Min( Math.Abs( to.Count - to.MaxStack ), from.Count );
 				RemoveAmount( from, amount );
 				to.Count += amount;
 
