@@ -430,7 +430,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.4913637,0,-0.8709545",
+          "Rotation": "0,-0.3355757,0,0.9420133",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -820,7 +820,7 @@
                       "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
-                      "Position": "288,0"
+                      "Position": "320,-0"
                     }
                   }
                 ],
@@ -841,7 +841,7 @@
                     "Value": {
                       "$type": "Simple",
                       "Type": "Sandbox.Engine/Sandbox.SoundEvent",
-                      "Value": "sounds/speech/test_drunk.sound"
+                      "Value": "sounds/rifle/rifle-shoot.sound"
                     },
                     "DstId": 2,
                     "DstName": "sound"
@@ -849,6 +849,75 @@
                   {
                     "Value": "Yo, what\u0027s up, it is me ubre!!",
                     "DstId": 2,
+                    "DstName": "subtitle"
+                  }
+                ]
+              },
+              "InteractDistance": 75,
+              "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
+              "Animation": "Interact"
+            },
+            {
+              "Keybind": "use2",
+              "Description": "subtitle with ubre",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "ae802e10-2812-4568-9982-056b609391f9",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input"
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "PlaySoundWithNameAndSubtitle",
+                      "_isStatic": true,
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                    },
+                    "UserData": {
+                      "Position": "224,16"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 1,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": "Ubre",
+                    "DstId": 1,
+                    "DstName": "name"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "obj",
+                    "DstId": 1,
+                    "DstName": "obj"
+                  },
+                  {
+                    "Value": {
+                      "$type": "Simple",
+                      "Type": "Sandbox.Engine/Sandbox.SoundEvent",
+                      "Value": "sounds/rifle/rifle-shoot.sound"
+                    },
+                    "DstId": 1,
+                    "DstName": "sound"
+                  },
+                  {
+                    "Value": "yo what\u0027s up!! I\u0027m an Italian!!",
+                    "DstId": 1,
                     "DstName": "subtitle"
                   }
                 ]
@@ -1197,6 +1266,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-07T19:08:06.9034419-05:00",
+  "LastSaved": "2024-03-07T19:15:19.6475798-05:00",
   "__references": []
 }
