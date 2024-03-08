@@ -45,6 +45,7 @@ public class Inventory : Component
 
 		SetOwner( item );
 		GiveBackpackItem( item, firstFreeSlot );
+		item.State = ItemState.Backpack;
 		TaskMaster.SubmitTriggerSignal( $"item.received.{item.Name}", Player );
 
 		return true;
@@ -71,9 +72,11 @@ public class Inventory : Component
 		{
 			RemoveEquipmentItem( previouslyEquippedItem as ItemEquipment );
 			GiveBackpackItem( previouslyEquippedItem, index );
+			previouslyEquippedItem.State = ItemState.Backpack;
 		}
 
 		GiveEquipmentItem( equipment );
+		equipment.State = ItemState.Equipped;
 		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
 
 		return true;
@@ -88,8 +91,8 @@ public class Inventory : Component
 			return false;
 
 		SetOwner( item );
-		GiveBackpackItem( equipment, -1 );
 		GiveEquipmentItem( equipment );
+		equipment.State = ItemState.Equipped;
 		TaskMaster.SubmitTriggerSignal( $"item.received.{item.Name}", Player );
 		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
 
@@ -110,6 +113,7 @@ public class Inventory : Component
 
 		RemoveEquipmentItem( equipment );
 		GiveBackpackItem( equipment, firstFreeSlot );
+		equipment.State = ItemState.Backpack;
 		TaskMaster.SubmitTriggerSignal( $"item.unequipped.{item.Name}", Player );
 
 		return true;
@@ -124,6 +128,8 @@ public class Inventory : Component
 			RemoveEquipmentItem( equipment );
 		else
 			RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
+
+		item.State = ItemState.None;
 
 		TaskMaster.SubmitTriggerSignal( $"item.dropped.{item.Name}", Player );
 
@@ -171,9 +177,11 @@ public class Inventory : Component
 		{
 			RemoveEquipmentItem( previouslyEquippedItem as ItemEquipment );
 			GiveBackpackItem( previouslyEquippedItem, index );
+			previouslyEquippedItem.State = ItemState.Backpack;
 		}
 
 		GiveEquipmentItem( equipment );
+		equipment.State = ItemState.Equipped;
 
 		return true;
 	}
@@ -262,9 +270,11 @@ public class Inventory : Component
 		{
 			RemoveBackpackItem( previousBackpackItem, index );
 			GiveEquipmentItem( previousBackpackItem as ItemEquipment );
+			previousBackpackItem.State = ItemState.Equipped;
 		}
 
 		GiveBackpackItem( item, index );
+		item.State = ItemState.Backpack;
 
 		return true;
 	}
@@ -276,6 +286,7 @@ public class Inventory : Component
 	{
 		SetOwner( item );
 		GiveBackpackItem( item, index );
+		item.State = ItemState.Backpack;
 	}
 
 	/// <summary>
@@ -295,7 +306,12 @@ public class Inventory : Component
 		if ( item.Count <= 0 )
 		{
 			ClearItem( item );
-			if ( destroy ) item?.GameObject?.Destroy();
+			if ( destroy )
+			{
+				item.State = ItemState.None;
+				item?.GameObject?.Destroy();
+				
+			}
 		}
 
 		return true;
@@ -310,6 +326,8 @@ public class Inventory : Component
 			_backpackItems[_backpackItems.IndexOf( item )] = null;
 		else if ( _equippedItems.Contains( item ) )
 			_equippedItems[_equippedItems.IndexOf( item )] = null;
+
+		item.State = ItemState.None;
 	}
 
 	public int GetTotalWeightInGrams()
@@ -331,8 +349,6 @@ public class Inventory : Component
 	/// </summary>
 	private void GiveBackpackItem( ItemComponent item, int index )
 	{
-		item.State = ItemState.Backpack;
-
 		if ( index >= 0 && index < _backpackItems.Count )
 			_backpackItems[index] = item;
 	}
@@ -342,8 +358,6 @@ public class Inventory : Component
 	/// </summary>
 	private void RemoveBackpackItem( ItemComponent item, int index )
 	{
-		item.State = ItemState.None;
-
 		if ( index >= 0 && index < _backpackItems.Count )
 			_backpackItems[index] = null;
 	}
@@ -353,7 +367,6 @@ public class Inventory : Component
 	/// </summary>
 	private void GiveEquipmentItem( ItemEquipment equipment )
 	{
-		equipment.State = ItemState.Equipped;
 		_equippedItems[(int)equipment.Slot] = equipment;
 		UpdateBodygroups();
 	}
@@ -363,7 +376,6 @@ public class Inventory : Component
 	/// </summary>
 	private void RemoveEquipmentItem( ItemEquipment equipment )
 	{
-		equipment.State = ItemState.None;
 		_equippedItems[(int)equipment.Slot] = null;
 		UpdateBodygroups();
 	}
