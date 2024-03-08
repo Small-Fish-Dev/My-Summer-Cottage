@@ -159,7 +159,8 @@ public sealed class BeerCrate : Component
 
 				var beerObject = new SceneObject( sceneObject.World, beerModel, transform );
 				sceneObject.AddChild( $"beer_{i}", beerObject );
-				beers.Add( i, beerObject );
+				if ( !beers.ContainsKey( i ) )
+					beers.Add( i, beerObject );
 			}
 
 			return;
