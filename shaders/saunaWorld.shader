@@ -126,7 +126,7 @@ PS
 		float4 l_tColor = Tex2DS( g_tColor, Sampler, UV.xy ).rgba;
 
         Material m = Material::Init();
-        m.Albedo = lerp(l_tColor.rgb, l_tColor.rgb * g_flColorTint, l_tColor.a );
+        m.Albedo = lerp(l_tColor.rgb, l_tColor.rgb * (g_flColorTint * i.vVertexColor), l_tColor.a );
         m.Normal = TransformNormal( DecodeNormal( Tex2DS( g_tNormal, Sampler, UV.xy ).rgb ), i.vNormalWs, i.vTangentUWs, i.vTangentVWs );
 		
 		float2 rm = Tex2DS( g_tRm, Sampler, UV.xy ).rg;
