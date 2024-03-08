@@ -103,6 +103,8 @@ public sealed class BeerCrate : Component
 			DynamicText = () => $"Take a beer",
 			Disabled = () => Count <= 0,
 		} );
+
+		BeerCountChanged( 0, Count );
 	}
 
 	protected override void OnEnabled()
