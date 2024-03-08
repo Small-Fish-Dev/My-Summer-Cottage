@@ -86,7 +86,7 @@ public class ItemComponent : Component
 		{
 			GameObject.Enabled = !value;
 
-			if ( this is ItemEquipment itemEquipment && !itemEquipment.InParcel )
+			if ( this is ItemEquipment itemEquipment && itemEquipment.IsClothing && !itemEquipment.InParcel )
 				itemEquipment.InParcel = true;
 		}
 	}
