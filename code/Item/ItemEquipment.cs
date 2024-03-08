@@ -135,7 +135,7 @@ public class ItemEquipment : ItemComponent
 			return;
 
 		iconWorldObject = new GameObject { Parent = GameObject };
-		iconWorldObject.Transform.LocalPosition = new Vector3( 0, 0, 10 );
+		iconWorldObject.Transform.LocalPosition = new Vector3( 0, 0, 5 );
 		iconWorldObject.Transform.LocalRotation = Rotation.FromPitch( 90 );
 		iconWorldObject.NetworkSpawn();
 		iconWorldObject.Components.GetOrCreate<Sandbox.WorldPanel>();
