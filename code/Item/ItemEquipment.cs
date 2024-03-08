@@ -44,7 +44,7 @@ public class ItemEquipment : ItemComponent
 
 	public void UpdateEquipped()
 	{
-		if ( Equipped ) ToggleRenderer( true );
+		ToggleRenderer( Equipped );
 
 		// Bonemerge
 		if ( Renderer is SkinnedModelRenderer skinned && !UpdatePosition )
@@ -62,7 +62,7 @@ public class ItemEquipment : ItemComponent
 			var collider = GameObject?.Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ).FirstOrDefault( x => x != parcelCollider );
 			if ( collider != null ) collider.Enabled = !Equipped;
 		}
-		else
+		else if ( State != ItemState.Backpack )
 			UpdateParcel( !InInventory );
 	}
 
