@@ -201,6 +201,12 @@
 				var res = inventory.SwapItems( fromSlot.EquipSlotIndex.Value, targetSlot.BackpackSlotIndex.Value );
 				PlaySound( res ? "drop" : "serror" );
 			}
+
+			// To inventory slot
+			if ( targetSlot.EquipSlotIndex is not null )
+			{
+				PlaySound("serror");
+			}
 		}
 
 		// Update both slots
