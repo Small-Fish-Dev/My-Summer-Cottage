@@ -5,6 +5,7 @@ TaskListElement {
     flex-shrink: 0;
     align-items: center;
     background-color: #7474740e;
+    transition: all 0.1s linear;
 
     .task-img {
         image-rendering: pixelated;
@@ -36,9 +37,12 @@ TaskListElement {
     &:hover {
         background-color: #7474743c;
         cursor: pointer;
+        sound-in: 'hover';
     }
 
     &:active {
+        sound-in: 'light_click';
+
         .task-img, .task-details {
             transform: scale(0.98);
         }

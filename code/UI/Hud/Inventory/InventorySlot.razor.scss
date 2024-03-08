@@ -29,6 +29,7 @@ InventorySlot {
     .item {
         height: 90%;
         width: 90%;
+        transition: background-color 0.1s ease-in-out;
 
         &.has-child-draggable {
             opacity: 0.3;
@@ -36,6 +37,8 @@ InventorySlot {
 
         &:hover {
             cursor: pointer;
+            sound-in: 'hover';
+            background-color: rgba(255, 255, 255, 0.02);
         }
 
         .count {
