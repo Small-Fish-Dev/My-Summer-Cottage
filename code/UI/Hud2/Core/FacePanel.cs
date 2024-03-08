@@ -7,6 +7,9 @@ public class FacePanel : PanelComponent
 {
 	[Property] public Vector2 Size { get; set; } = 24;
 
+	private PointerEvents _lastPointerEvents;
+	private DisplayMode _lastDisplayMode;
+	
 	private (Vector3 bottomLeft, Vector3 bottomRight, Vector3 topLeft, Vector3 topRight) _relativeCorners;
 
 	private void UpdateElementRelativeCorners()
@@ -48,7 +51,7 @@ public class FacePanel : PanelComponent
 
 		// Draw square
 		Gizmo.Draw.Line( _relativeCorners.bottomLeft, _relativeCorners.bottomRight );
-		Gizmo.Draw.Arrow( _relativeCorners.bottomLeft, _relativeCorners.topRight );
+		Gizmo.Draw.Line( _relativeCorners.bottomLeft, _relativeCorners.topRight );
 		Gizmo.Draw.Line( _relativeCorners.bottomLeft, _relativeCorners.topLeft );
 		Gizmo.Draw.Line( _relativeCorners.topLeft, _relativeCorners.topRight );
 		Gizmo.Draw.Line( _relativeCorners.topRight, _relativeCorners.bottomRight );
@@ -83,6 +86,27 @@ public class FacePanel : PanelComponent
 
 		if ( Panel == null )
 			return;
+
+		// Make sure we're not an exclusion in the current camera's render tags
+		if ( Game.ActiveScene?.Camera != null )
+		{
+			var activeCamera = Game.ActiveScene.Camera;
+			if ( (!activeCamera.RenderTags.IsEmpty && !activeCamera.RenderTags.HasAll( GameObject.Tags )) ||
+			     (!activeCamera.RenderExcludeTags.IsEmpty && activeCamera.RenderExcludeTags.HasAny( GameObject.Tags )) )
+			{
+				// The panel is excluded
+				_lastDisplayMode = Panel.ComputedStyle.Display ?? DisplayMode.Flex;
+				_lastPointerEvents = Panel.ComputedStyle.PointerEvents ?? PointerEvents.None;
+				Panel.Style.Display = DisplayMode.None;
+				Panel.Style.PointerEvents = PointerEvents.None;
+			}
+			else
+			{
+				// The panel isn't excluded
+				Panel.Style.Display = _lastDisplayMode;
+				Panel.Style.PointerEvents = _lastPointerEvents;
+			}
+		}
 
 		UpdateElementRelativeCorners();
 
