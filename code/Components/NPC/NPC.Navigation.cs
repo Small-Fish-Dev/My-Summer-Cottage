@@ -3,17 +3,24 @@ using Sauna;
 
 public partial class NPC
 {
-	static Vector3[] _possibleDirections =
+	static int _totalDirections = 16;
+	static Vector3[] _possibleDirections
 	{
-		Vector3.Forward,								// North
-		( Vector3.Forward + Vector3.Left ) / 2f,		// North-East
-		Vector3.Left,									// East
-		( Vector3.Left + Vector3.Backward ) / 2f,		// South-East
-		Vector3.Backward,								// South
-		( Vector3.Backward + Vector3.Right ) / 2f,		// South-West
-		Vector3.Right,									// West
-		( Vector3.Right + Vector3.Forward ) / 2f,		// North-West
-	};
+		get
+		{
+			var finalDirections = new Vector3[_totalDirections];
+			var angleSlice = 360 / _totalDirections;
+
+			for ( int direction = 0; direction < _totalDirections; direction++ )
+			{
+				var rotation = Rotation.FromYaw( direction * angleSlice ).Forward;
+				finalDirections[direction] = rotation;
+			}
+
+			return finalDirections;
+		}
+	}
+
 
 	public virtual void ComputeNavigation()
 	{
@@ -30,8 +37,12 @@ public partial class NPC
 
 			var interestVector = getInterest( wishDirection );
 			var dangerVector = getDanger();
+			var preferredDirection = getPreferredDirection( interestVector, dangerVector );
+			var wishVelocity = preferredDirection * RunSpeed;
+			var steeringForce = wishVelocity - MoveHelper.Velocity;
 
-			MoveHelper.WishVelocity = wishDirection * WalkSpeed;
+			MoveHelper.WishVelocity = wishVelocity;
+			MoveHelper.WishVelocity += steeringForce;
 		}
 
 		MoveHelper.Move();
@@ -73,6 +84,32 @@ public partial class NPC
 		}
 
 		return directionDanger;
+	}
+
+	Vector3 getPreferredDirection( float[] interest, float[] danger )
+	{
+		var totalDirections = _possibleDirections.Length;
+		var finalDirections = new float[totalDirections];
+		var currentDirection = 0;
+		var currentHighest = 0;
+		var currentValue = 0f;
+
+		foreach ( var interestDir in interest )
+		{
+			var dangerDir = danger[currentDirection];
+			var totalValue = interestDir - dangerDir;
+			finalDirections[currentDirection] = totalValue;
+
+			if ( totalValue > currentValue )
+			{
+				currentValue = totalValue;
+				currentHighest = currentDirection;
+			}
+
+			currentDirection++;
+		}
+
+		return _possibleDirections[currentHighest];
 	}
 
 	void CheckNewTargetPos()

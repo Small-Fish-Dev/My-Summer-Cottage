@@ -32,12 +32,12 @@ public partial class NPC : Component
 	[Property]
 	[Category( "Stats" )]
 	[Range( 0f, 600f, 10f )]
-	public float WalkSpeed { get; set; } = 60f;
+	public float WalkSpeed { get; set; } = 90f;
 
 	[Property]
 	[Category( "Stats" )]
 	[Range( 0f, 600f, 10f )]
-	public float RunSpeed { get; set; } = 120f;
+	public float RunSpeed { get; set; } = 180f;
 
 	[Property]
 	[Category( "Stats" )]
@@ -69,8 +69,8 @@ public partial class NPC : Component
 
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );
-		var newX = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Forward ) / 100f;
-		var newY = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Right ) / 100f;
+		var newX = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Forward ) / 150f;
+		var newY = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Right ) / 150f;
 		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
 		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
 
