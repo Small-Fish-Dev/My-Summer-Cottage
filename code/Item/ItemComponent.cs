@@ -1,5 +1,12 @@
 namespace Sauna;
 
+public enum ItemState
+{
+	None,
+	Backpack,
+	Equipped
+}
+
 public class ItemComponent : Component
 {
 	/// <summary>
@@ -57,7 +64,7 @@ public class ItemComponent : Component
 	/// </summary>
 	public bool InInventory
 	{
-		get => InBackpack || (this is ItemEquipment equipment && equipment.Equipped);
+		get => State != ItemState.None;
 	}
 
 	/// <summary>
@@ -75,27 +82,34 @@ public class ItemComponent : Component
 	/// </summary>
 	public Player LastOwner { get; set; }
 
-	private bool _inBackpack;
+	private ItemState _state;
 
 	/// <summary>
 	/// If the item is in the player's backpack (note not equipped!).
 	/// </summary>
 	[Sync]
-	public bool InBackpack
+	public ItemState State
 	{
-		get => _inBackpack;
+		get => _state;
 		set
 		{
-			_inBackpack = value;
-
-			foreach ( var component in GameObject.Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
-			{
-				if ( component is not ItemComponent or ItemEquipment )
-					component.Enabled = !_inBackpack;
-			}
-
-			Log.Info( "backpack" );
+			_state = value;
+			UpdateState();
 		}
+	}
+
+	private void UpdateState()
+	{
+		foreach ( var component in GameObject.Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
+		{
+			if ( component is ItemComponent )
+				continue;
+			
+			component.Enabled = !InInventory;
+		}
+
+		if ( this is ItemEquipment equipment )
+			equipment.UpdateEquipped();
 	}
 
 	protected override void OnAwake()

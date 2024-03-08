@@ -39,20 +39,31 @@ public class ItemEquipment : ItemComponent
 	private Rigidbody parcelBody;
 	private GameObject iconWorldObject;
 
-	private bool _equipped = false;
-
 	public bool IsClothing => Slot != EquipSlot.Hand;
+	public bool Equipped => State == ItemState.Equipped;
 
-	[Sync]
-	public bool Equipped
+	public void UpdateEquipped()
 	{
-		get => _equipped;
-		set
-		{
-			_equipped = value;
+		ToggleRenderer( Equipped );
 
-			Log.Info( "equipped" );
+		// Bonemerge
+		if ( Renderer is SkinnedModelRenderer skinned && !UpdatePosition )
+		{
+			skinned.BoneMergeTarget = Equipped
+				? GameObject.Parent?.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInChildren )
+				: null;
 		}
+
+		if ( !IsClothing )
+		{
+			var body = GameObject?.Components.GetAll<Rigidbody>( FindMode.EverythingInSelfAndChildren ).FirstOrDefault( x => x != parcelBody );
+			if ( body != null ) body.Enabled = !Equipped;
+
+			var collider = GameObject?.Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ).FirstOrDefault( x => x != parcelCollider );
+			if ( collider != null ) collider.Enabled = !Equipped;
+		}
+		else
+			UpdateParcel( !InInventory );
 	}
 
 	private void ToggleRenderer( bool value )
@@ -107,12 +118,6 @@ public class ItemEquipment : ItemComponent
 		iconWorldObject.Components.GetOrCreate<IconWorldPanel>().Icon = IconTexture;
 	}
 
-	protected override void OnAwake()
-	{
-		base.OnAwake();
-		Renderer ??= Components.GetAll<ModelRenderer>( FindMode.InSelf ).FirstOrDefault( x => x != parcelRenderer );
-	}
-
 	protected override void OnStart()
 	{
 		base.OnStart();
@@ -140,7 +145,7 @@ public class ItemEquipment : ItemComponent
 			return;
 
 		GameObject.Transform.World = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
-		GameObject.Transform.ClearLerp();
+		//GameObject.Transform.ClearLerp();
 	}
 
 	#region GIZMO STUFF

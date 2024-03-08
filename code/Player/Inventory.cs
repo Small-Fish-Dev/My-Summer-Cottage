@@ -120,11 +120,8 @@ public class Inventory : Component
 	/// </summary>
 	public bool DropItem( ItemComponent item )
 	{
-		if ( item is ItemEquipment equipment )
-		{
-			if ( equipment.Equipped )
-				RemoveEquipmentItem( equipment );
-		}
+		if ( item is ItemEquipment equipment && equipment.Equipped )
+			RemoveEquipmentItem( equipment );
 
 		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
 
@@ -334,7 +331,7 @@ public class Inventory : Component
 	/// </summary>
 	private void GiveBackpackItem( ItemComponent item, int index )
 	{
-		item.InBackpack = true;
+		item.State = ItemState.Backpack;
 
 		if ( index >= 0 && index < _backpackItems.Count )
 			_backpackItems[index] = item;
@@ -345,8 +342,7 @@ public class Inventory : Component
 	/// </summary>
 	private void RemoveBackpackItem( ItemComponent item, int index )
 	{
-		item.InBackpack = true;
-		item.InBackpack = false;
+		item.State = ItemState.None;
 
 		if ( index >= 0 && index < _backpackItems.Count )
 			_backpackItems[index] = null;
@@ -357,7 +353,7 @@ public class Inventory : Component
 	/// </summary>
 	private void GiveEquipmentItem( ItemEquipment equipment )
 	{
-		equipment.Equipped = true;
+		equipment.State = ItemState.Equipped;
 		_equippedItems[(int)equipment.Slot] = equipment;
 		UpdateBodygroups();
 	}
@@ -367,7 +363,7 @@ public class Inventory : Component
 	/// </summary>
 	private void RemoveEquipmentItem( ItemEquipment equipment )
 	{
-		equipment.Equipped = false;
+		equipment.State = ItemState.None;
 		_equippedItems[(int)equipment.Slot] = null;
 		UpdateBodygroups();
 	}
