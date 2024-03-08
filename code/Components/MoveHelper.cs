@@ -9,6 +9,7 @@ public enum TraceType
 	Capsule,
 }
 
+[Icon( "nordic_walking" )]
 public class MoveHelper : Component
 {
 	[Property]
