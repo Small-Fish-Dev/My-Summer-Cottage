@@ -75,10 +75,15 @@
 			Text = Firstname
 		} );
 
+		entry.AddEventListener("onchange", () => {
+			entry.PlaySound("light_click");
+		});
+
 		entry.AddEventListener( "onsubmit", () =>
 		{
 			onFirstname = !onFirstname;
 			entry.Text = onFirstname ? Firstname : Lastname;
+			entry.PlaySound("drop");
 		} );
 
 		entry.AddClass( "textentry" );
