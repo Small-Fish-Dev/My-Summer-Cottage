@@ -15,6 +15,7 @@
 @code {
 	private static Slider _target;
 	private Panel _knob;
+	private TimeUntil _timeUntilNextSound;
 
 	public int Minimum { get; set; } = 0;
 	public int Maximum { get; set; } = 100;
@@ -40,7 +41,7 @@
 		if ( e.MouseButton != MouseButtons.Left )
 			return;
 
-		CreatorOverlay.PlayUISound( "light_click" );
+		PlaySound( "light_click" );
 		_target = this;
 	}
 
@@ -50,7 +51,7 @@
 		if ( e.MouseButton != MouseButtons.Left )
 			return;
 
-		CreatorOverlay.PlayUISound( "light_click" );
+		PlaySound( "drop" );
 		_target = null;
 	}
 
@@ -79,6 +80,12 @@
 
 		Value = newValue;
 		CreateEvent( "onvalueset", Value );
+
+		if (_timeUntilNextSound)
+		{
+			_timeUntilNextSound = 0.05f;
+			PlaySound("hover");
+		}
 	}
 
 	protected override int BuildHash()

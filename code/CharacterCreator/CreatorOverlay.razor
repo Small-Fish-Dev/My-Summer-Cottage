@@ -146,13 +146,6 @@
 
 	private BodypartPanel[] panels;
 
-	public static void PlayUISound( string path )
-	{
-		var sound = Sound.Play( path );
-		sound.ListenLocal = true;
-		sound.Volume = 0.5f;
-	}
-
 	protected override void OnTreeFirstBuilt()
 	{
 		base.OnTreeFirstBuilt();
