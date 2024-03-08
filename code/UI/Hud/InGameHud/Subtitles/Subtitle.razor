@@ -1,0 +1,23 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	@if (!string.IsNullOrEmpty(Name))
+	{
+		<div class="name">@($"{Name}: ")</div>
+	}
+	<text class="text">@Text</text>
+</root>
+
+@code {
+	public String Name { get; set; } 
+	public String Text { get; set; }
+	public SoundHandle SoundHandle { get; set; }
+
+	public override void Tick()
+	{
+		if (SoundHandle.IsStopped)
+			Delete();
+	}
+}

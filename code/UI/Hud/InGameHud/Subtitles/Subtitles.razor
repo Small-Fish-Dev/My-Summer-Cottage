@@ -1,0 +1,29 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<div @ref=_container class="container">
+
+	</div>
+</root>
+
+@code {
+	private static Subtitles _instance;
+	private Panel _container;
+
+	public Subtitles()
+	{
+		_instance = this;
+	}
+
+	public static void Add(string name, string text, SoundHandle soundHandle)
+	{
+		_instance._container.AddChild(new Subtitle(){ Name = name, Text = text, SoundHandle = soundHandle });
+	}
+
+	public override void Tick()
+	{
+		
+	}
+}
