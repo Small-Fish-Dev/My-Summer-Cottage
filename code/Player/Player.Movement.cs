@@ -158,7 +158,10 @@ partial class Player
 	}
 
 	public void ApplyRecoil( Angles angle )
-		=> _currentRecoil += angle;
+	{
+		_currentRecoil += angle;
+		_previousRecoil = Angles.Zero;
+	}
 
 	public void SetAnimation( string param, Vector3 value )
 		=> Renderer.Set( param, value );
