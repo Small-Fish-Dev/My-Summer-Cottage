@@ -63,12 +63,6 @@
 			AddChild( new InspectItem( item ) );
 	}
 
-	private void DropItem( ItemComponent item ) 
-	{
-		if ( item is not null )
-			Player.Local.Inventory.DropItem( item );
-	}
-
 	public void OnChanged()
 	{
 		_renderer.Refresh();

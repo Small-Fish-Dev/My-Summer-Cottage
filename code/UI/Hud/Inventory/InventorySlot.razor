@@ -243,6 +243,7 @@
 				// Not hovering anything, drop the item!
 				Player.Local.Inventory.DropItem( ChildDraggable.ItemComponent );
 				Inventory.Instance?.OnChanged();
+				PlaySound("drop");
 			}
 		}
 
