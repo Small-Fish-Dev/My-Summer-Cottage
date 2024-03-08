@@ -48,12 +48,15 @@ public class ItemEquipment : ItemComponent
 		get => _inParcel;
 		set
 		{
-			_inParcel = value && GoesInParcel; // Hacky, but for now don't put any hand items in parcel.
-			if ( GoesInParcel ) UpdateParcel( _inParcel );
+			_inParcel = value && IsClothing; // Hacky, but for now don't put any hand items in parcel.
+			ToggleRenderer( !_inParcel );
+
+			if ( IsClothing )
+				UpdateParcel( _inParcel );
 		}
 	}
 
-	private bool GoesInParcel => Slot != EquipSlot.Hand;
+	public bool IsClothing => Slot != EquipSlot.Hand;
 
 	[Sync]
 	public bool Equipped
@@ -66,10 +69,6 @@ public class ItemEquipment : ItemComponent
 			// Put in parcel.
 			InParcel = !value;
 
-			// Toggle renderer
-			if ( !InParcel && !InInventory ) ToggleRenderer( true );
-			else ToggleRenderer( value && !InParcel );
-
 			// Bonemerge
 			if ( Renderer is SkinnedModelRenderer skinned && !UpdatePosition )
 			{
@@ -79,7 +78,7 @@ public class ItemEquipment : ItemComponent
 			}
 
 			// Disable rigidbody and collider.
-			if ( !GoesInParcel )
+			if ( !IsClothing )
 			{
 				var body = GameObject?.Components.GetAll<Rigidbody>( FindMode.EverythingInSelfAndChildren ).FirstOrDefault( x => x != parcelBody );
 				if ( body != null ) body.Enabled = !value;
@@ -90,7 +89,7 @@ public class ItemEquipment : ItemComponent
 		}
 	}
 
-	public void ToggleRenderer( bool value )
+	private void ToggleRenderer( bool value )
 	{
 		Renderer ??= Components.GetAll<ModelRenderer>( FindMode.InSelf ).FirstOrDefault( x => x != parcelRenderer );
 		Renderer.Enabled = value;

@@ -32,7 +32,8 @@ public class ItemComponent : Component
 	/// <summary>
 	/// Maximum amount of items in this stack, default is 0 for not stackable.
 	/// </summary>
-	[Property] public int MaxStack
+	[Property]
+	public int MaxStack
 	{
 		get => _maxStack;
 		set
@@ -81,7 +82,13 @@ public class ItemComponent : Component
 	public bool InBackpack
 	{
 		get => !GameObject.Enabled;
-		set => GameObject.Enabled = !value;
+		set
+		{
+			GameObject.Enabled = !value;
+
+			if ( this is ItemEquipment itemEquipment && itemEquipment.IsClothing && !itemEquipment.InParcel )
+				itemEquipment.InParcel = true;
+		}
 	}
 
 	protected override void OnAwake()
