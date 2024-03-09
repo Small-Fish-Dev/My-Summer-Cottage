@@ -20,7 +20,8 @@
 				<div class="equip-slot">
 					<div class="title">
 						<img src=@slot.GetIcon() />
-						@slot.ToString()
+						<div>@slot.ToString()</div>
+						<div class="count">@(defaultClothes[slot].Count) / @(counts[slot])</div>
 					</div>
 					<div class="row">
 
@@ -64,7 +65,7 @@
 	{
 		[EquipSlot.Head] = new List<string>() { "prefabs/clothes/cap.prefab", "prefabs/clothes/flat_cap.prefab", "prefabs/clothes/beanie.prefab" },
 		[EquipSlot.Face] = new List<string>() { "prefabs/clothes/glasses.prefab", "prefabs/clothes/round_glasses.prefab" },
-		[EquipSlot.Body] = new List<string>() { "prefabs/clothes/hoodie_zipper.prefab", "prefabs/clothes/wifebeater.prefab", "prefabs/clothes/jumper.prefab", "prefabs/clothes/hoodie.prefab", "prefabs/clothes/hoodie_pocket.prefab" },
+		[EquipSlot.Body] = new List<string>() { "prefabs/clothes/hoodie_zipper.prefab", "prefabs/clothes/wifebeater.prefab", "prefabs/clothes/jumper.prefab", "prefabs/clothes/hoodie_pocket.prefab" },
 		[EquipSlot.Legs] = new List<string>() { "prefabs/clothes/skinny_jeans.prefab", "prefabs/clothes/stripped_joggers.prefab", "prefabs/clothes/khakis.prefab", },
 		[EquipSlot.Feet] = new List<string>() { "prefabs/clothes/wellington_boots.prefab", "prefabs/clothes/socks.prefab", "prefabs/clothes/sandals.prefab", },
 	};
@@ -89,7 +90,8 @@
 	}
 	public SceneModel Model => Renderer.SceneModel;
 
-	private Dictionary<EquipSlot, List<ComponentDefinition>> clothes;
+	private static Dictionary<EquipSlot, int> counts = new();
+	private static Dictionary<EquipSlot, List<ComponentDefinition>> clothes;
 
 	private static Dictionary<EquipSlot, int> selections;
 	private static List<GameObject> clothingObjects = new();
@@ -155,6 +157,18 @@
 		var values = Enum.GetValues<EquipSlot>();
 		selections = values.ToDictionary( x => x, x => -1 );
 		clothes = new();
+
+		var all = PrefabLibrary.FindByComponent<ItemEquipment>();
+		foreach ( var prefab in all )
+		{
+			var component = prefab.GetComponent<ItemEquipment>();
+			if ( component == null )
+				continue;
+
+			var slot = component.Get<EquipSlot>( "Slot" );
+			if ( counts.ContainsKey( slot ) ) counts[slot]++;
+			else counts.Add( slot, 1 );
+		}
 
 		foreach ( var (slot, paths) in defaultClothes )
 		{
