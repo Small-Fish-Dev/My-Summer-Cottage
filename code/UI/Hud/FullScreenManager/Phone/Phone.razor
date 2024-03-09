@@ -1,0 +1,88 @@
+﻿@using Sauna.UI;
+
+@namespace Sauna
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<div class="input-info">
+		<InputHint hint="View messages" input="phone" />
+	</div>
+	<div class="unread @(Message.Unread > 0 ? "has" : "")">@Message.Unread</div>
+	<div class="screen">
+		<div class="signal bg-image" />
+		<div class="charge bg-image" />
+		<div class="time">@(TimeSpan.FromSeconds( time ).ToString( @"hh\:mm" ))</div>
+
+		<div class="message-count">
+			<div class="number">@Message.All.Count</div>
+			TOTAL MESSAGES
+		</div>
+		<div class="messages" @ref=_messages>
+			@foreach( var message in Message.All.Reverse() )
+			{
+				<div class="message">
+					<div class="sender">@message.Sender</div>
+					<div class="message">@message.Content</div>
+					@if ( message.Embed != null )
+					{
+						<div class="embed">
+							<TextureImage class="image" Image=@message.Embed />
+							<div class="filter" />
+						</div>
+					}
+				</div>
+			}
+		</div>
+	</div>
+</root>
+
+@code {
+	private int time => UI.Hud.Instance.GameTimeManager.InGameSeconds;
+	public bool Visible { get; set; }
+
+	private Panel _messages;
+
+	public Phone()
+	{
+		Message.Clear();
+	}
+
+	public override void Tick()
+	{
+		if ( _messages == null ) 
+			return;
+
+		if ( Input.Pressed( "Phone" ) ) 
+			Visible = !Visible;
+
+		if ( Visible && Message.Unread > 0 )
+		{
+			Message.Unread = 0;
+			_messages.ScrollOffset = 0;
+		}
+
+		var outOfMain = !FullScreenManager.Is( UI.FullScreenManager.FullScreenPanel.InGameHud );
+		if ( outOfMain ) 
+			Visible = false;
+
+		SetClass( "out-of-main", outOfMain );
+		SetClass( "visible", Visible );
+	}
+
+	protected override int BuildHash()
+	{
+		if ( Visible )
+			return HashCode.Combine( time, Message.All.Count );
+
+		return HashCode.Combine( Message.Unread );
+	}
+
+	// todo @ceitine: remove debug
+	[ConCmd]
+	public static void ReceiveMessage( string sender = "Wife", string content = "Shitty fucking husband KILL YOURSELF!!", string embed = null )
+	{
+		var image = Player.Local.CaptureMemory( "lol wife sent message" ).Texture;
+		Message.Receive( sender, content, image );
+	}
+}

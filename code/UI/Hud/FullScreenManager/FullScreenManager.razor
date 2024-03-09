@@ -28,6 +28,8 @@
 			default:
 				throw new ArgumentOutOfRangeException();
 		}
+
+	<Phone />
 </root>
 
 @code {
@@ -76,6 +78,9 @@
 		else
 			ActivePanel = panel;
 	}
+
+	public static bool Is( FullScreenPanel mode )
+		=> FullScreenManager.Instance?.ActivePanel == mode;
 
 	protected override int BuildHash()
 	{

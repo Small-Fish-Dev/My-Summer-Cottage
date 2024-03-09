@@ -1,0 +1,185 @@
+﻿@import "/UI/Style.scss";
+
+$border-gray: #111111;
+$screen-color: #87AE35;
+$screen-dark: #1F4100;
+
+Phone {
+    position: absolute;
+    z-index: 10;
+    bottom: 0px;
+    right: 50px;
+    width: 350px;
+    height: 500px;
+    background-color: $border-gray;
+    //filter: drop-shadow(0px 0px 4px black); // breaks overflow
+    transform: translateY(480px);
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    padding: 20px 5px 5px 5px;
+    font-family: HabboExtended;
+    font-weight: bold;
+    font-size: 18px;
+    overflow: visible;
+    color: $screen-dark;
+
+    .signal {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        background-image: url(ui/phone/phone_ui_signal.png);
+        width: 50px;
+        aspect-ratio: 0.45;
+    }
+
+    .charge {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        background-image: url(ui/phone/phone_ui_charge.png);
+        width: 12px;
+        aspect-ratio: 0.1;
+    }
+
+    .time {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        letter-spacing: 2px;
+    }
+
+    .message-count {
+        padding: 10px;
+        margin-bottom: 15px;
+        background-color: $screen-dark;
+        flex-direction: row;
+        color: $screen-color;
+        gap: 10px;
+        height: 50px;
+        align-items: center;
+
+        .number {
+            padding: 4px;
+            aspect-ratio: 1;
+            width: 24px;
+            justify-content: center;
+            color: $screen-dark;
+            background-color: $screen-color;
+        }
+    }
+
+    .messages {
+        overflow: scroll;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        gap: 10px;
+
+        .message {
+            letter-spacing: 1px;
+            padding: 10px;
+            color: $screen-color;
+            width: 100%;
+            background-color: $screen-dark;
+            flex-shrink: 0;
+            flex-grow: 0;
+            flex-direction: column;
+
+            .sender {
+                background-color: $screen-color;
+                color: $screen-dark;
+                flex-grow: 0;
+                padding: 5px;
+                margin-bottom: 5px;
+            }
+
+            .embed {
+                width: 100%;
+                aspect-ratio: 1;
+
+                .image {
+                    background-size: contain;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-image-tint: $screen-color;
+                }
+
+                .filter {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    backdrop-filter: brightness(500%);
+                }
+            }
+        }
+    }
+
+    .bg-image {
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        image-rendering: pixelated;
+    }
+
+    .input-info {
+        position: absolute;
+        bottom: 100%;
+        left: 0px;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 20px;
+        font-family: HabboExtended;
+        background: linear-gradient(to right, rgba(black, 0.9) 0%, rgba(black, 0.5) 70%, rgba(black, 0) 100%);
+        color: white;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+
+        .hint {
+            text-shadow: $text-shadow-sm;
+        }
+
+        .hint {
+            margin-right: 12px;
+        }
+    }
+
+    .unread {
+        position: absolute;
+        bottom: 100%;
+        margin-bottom: -10px;
+        right: 20px;
+        opacity: 0;
+        width: 32px;
+        height: 32px;
+        background-color: red;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 2px 2px 2px rgba(black, 0.5);
+        text-shadow: 2px 2px 2px black;
+        color: white;
+
+        &.has {
+            opacity: 1;
+        }
+    }
+
+    &.out-of-main {
+        opacity: 0.2;
+    }
+
+    &.visible {
+        pointer-events: all;
+        transform: translateY(0px);
+
+        .unread {
+            //transform: scale(0)
+        }
+    }
+
+    .screen {
+        width: 100%;
+        height: 100%;
+        background-color: $screen-color;
+        flex-direction: column;
+        padding: 35px 30px 30px 30px;
+    }
+}

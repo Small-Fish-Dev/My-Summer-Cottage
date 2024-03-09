@@ -1,0 +1,18 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+
+@namespace Sauna
+@inherits Image
+@attribute [StyleSheet]
+
+<root></root>
+
+@code {
+	public Texture Image { get; set; }
+
+	protected override void OnAfterTreeRender( bool firstTime )
+	{
+		base.OnAfterTreeRender( firstTime );
+		Texture = Image;
+	}
+}
