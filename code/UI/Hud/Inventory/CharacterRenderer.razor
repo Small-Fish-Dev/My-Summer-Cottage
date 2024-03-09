@@ -58,6 +58,9 @@
 	public void Refresh()
 	{
 		_penoid ??= new SceneModel( _sceneWorld, "models/guy/penoid.vmdl", global::Transform.Zero );
+		_penoid.Attributes.Set( "g_flColorTint", Player.Local.SkinColor );
+		_character.Attributes.Set( "g_flColorTint", Player.Local.SkinColor );
+
 		if ( _penoid.Parent != _character )
 			_character.AddChild( "penoid", _penoid );
 
@@ -107,6 +110,12 @@
 
 	private void Update()
 	{
+		var mousePos = MousePosition;
+        var headPos = _scenePanel.Camera.ToScreen( (_character.GetAttachment( "eyes" ) ?? Transform.Zero).Position );
+        var localPos = mousePos - headPos;
+
+        _character.SetAnimParameter( "lookat", new Vector3( 1000f, localPos.x, -localPos.y ) * _character.Rotation.Inverse );
+
 		_character.Update( RealTime.Delta );
 		_character.SetAnimParameter( "height", Player.Local.Height );
 		_character.SetAnimParameter( "weight", Player.Local.Fatness );
