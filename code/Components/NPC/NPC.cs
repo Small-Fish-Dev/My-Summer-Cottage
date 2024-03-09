@@ -25,6 +25,9 @@ public partial class NPC : Component
 	public SkinnedModelRenderer Model { get; set; }
 
 	[Property]
+	public HealthComponent Health { get; set; }
+
+	[Property]
 	public NavigationType NavigationType { get; set; } = NavigationType.Normal;
 
 	/// <summary>
@@ -205,6 +208,7 @@ public partial class NPC : Component
 		if ( Model == null ) return;
 		if ( MoveHelper == null ) return;
 		if ( Static ) return;
+		if ( Health != null && !Health.Alive ) return;
 
 		if ( FaceTowardsVelocity )
 			if ( !MoveHelper.Velocity.IsNearlyZero( 1f ) )
@@ -226,24 +230,32 @@ public partial class NPC : Component
 	protected override void OnFixedUpdate()
 	{
 		if ( MoveHelper == null ) return;
-		SetTarget( Scene.GetAllComponents<Player>().First().GameObject );
 
-		if ( TargetObject.IsValid() )
+		if ( Health != null && Health.Alive )
 		{
-			if ( IsWithinRange( TargetObject, Range ) )
-			{
-				var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ), Vector3.Up );
-				Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
+			SetTarget( Scene.GetAllComponents<Player>().First().GameObject );
 
-				SetRagdoll( true, 5f, 100f * ForceMultiplier );
-				WorldPunch( TargetObject.Transform.Position, 400f, 300f );
+			if ( TargetObject.IsValid() )
+			{
+				if ( IsWithinRange( TargetObject ) )
+				{
+					var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ), Vector3.Up );
+					Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
+
+					Health.Kill();
+				}
 			}
+
+			ComputeNavigation();
+		}
+		else
+		{
+			MoveHelper.WishVelocity = 0;
 		}
 
 		if ( Ragdoll != null )
 			FollowRagdoll();
 
-		ComputeNavigation();
 		MoveHelper.Move();
 	}
 
