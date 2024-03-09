@@ -9,9 +9,8 @@ Inventory {
     backdrop-filter: $fullscreen-blur;
     text-shadow: 2px 2px 0px black;
     pointer-events: all;
-
     flex-direction: row;
-    
+
     .section {
         width: 50%;
         flex-direction: column;
@@ -32,13 +31,30 @@ Inventory {
     .total-weight {
         font-family: HabboExtended;
         text-shadow: $text-shadow-sm;
-        font-size: 20px; 
+        font-size: 20px;
         gap: 10px;
-        
+        width: 100%;
+
+        .encumbrance {
+            animation: blink;
+            animation-iteration-count: infinite;
+            animation-duration: 0.5s;
+            font-weight: bold;
+            position: absolute;
+            opacity: 0;
+        }
+
+        &.encumbered {
+            .encumbrance {
+                position: relative;
+                opacity: 1;
+            }
+        }
+
         .active-weight {
             color: $orange;
         }
-    
+
         .max {
             color: $gray;
         }
@@ -55,5 +71,15 @@ Inventory {
 
     img {
         image-rendering: pixelated;
+    }
+}
+
+@keyframes blink {
+    0% {
+        color: white;
+    }
+
+    100% {
+        color: red;
     }
 }

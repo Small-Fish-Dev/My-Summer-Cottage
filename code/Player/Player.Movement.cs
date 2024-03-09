@@ -101,6 +101,15 @@ partial class Player
 		var wishSpeed = Ducking ? DuckSpeed : isWalking ? WalkSpeed : SprintSpeed;
 		var wishVelocity = Input.AnalogMove.Normal * wishSpeed * EyeAngles.WithPitch( 0f );
 
+		// Apply encumbarance.
+		if ( IsEncumbered )
+		{
+			var overweight = (Inventory.Weight - Inventory.MAX_WEIGHT_IN_GRAMS).ToKilograms();
+			Log.Error( overweight );
+			var multiplier = MathX.Clamp( 1 - overweight / 15f, 0.2f, 1f );
+			wishVelocity *= multiplier;
+		}
+
 		MoveHelper.WishVelocity = BlockInputs ? Vector3.Zero : wishVelocity;
 
 		if ( !BlockInputs && Input.Pressed( InputAction.Jump ) && MoveHelper.IsOnGround )

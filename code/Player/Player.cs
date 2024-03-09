@@ -122,6 +122,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 		7 => "South West",
 		_ => "None"
 	};
+
+	public bool IsEncumbered => Inventory.Weight > Inventory.MAX_WEIGHT_IN_GRAMS;
+
 	public Inventory Inventory { get; private set; }
 	protected CameraComponent Camera;
 	protected SkinnedModelRenderer Renderer;

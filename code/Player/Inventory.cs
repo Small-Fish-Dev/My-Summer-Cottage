@@ -7,6 +7,7 @@ public class Inventory : Component
 	public const int MAX_BACKPACK_SLOTS = 18;
 	public const int MAX_WEIGHT_IN_GRAMS = 30000;
 
+	public int Weight { get; private set; }
 	public IReadOnlyList<ItemComponent> BackpackItems => _backpackItems;
 	public IReadOnlyList<ItemComponent> EquippedItems => _equippedItems;
 
@@ -310,9 +311,10 @@ public class Inventory : Component
 			{
 				item.State = ItemState.None;
 				item?.GameObject?.Destroy();
-				
 			}
 		}
+
+		Weight = GetTotalWeightInGrams();
 
 		return true;
 	}
@@ -351,6 +353,8 @@ public class Inventory : Component
 	{
 		if ( index >= 0 && index < _backpackItems.Count )
 			_backpackItems[index] = item;
+
+		Weight = GetTotalWeightInGrams();
 	}
 
 	/// <summary>
@@ -360,6 +364,8 @@ public class Inventory : Component
 	{
 		if ( index >= 0 && index < _backpackItems.Count )
 			_backpackItems[index] = null;
+
+		Weight = GetTotalWeightInGrams();
 	}
 
 	/// <summary>
@@ -369,6 +375,8 @@ public class Inventory : Component
 	{
 		_equippedItems[(int)equipment.Slot] = equipment;
 		UpdateBodygroups();
+
+		Weight = GetTotalWeightInGrams();
 	}
 
 	/// <summary>
@@ -378,6 +386,8 @@ public class Inventory : Component
 	{
 		_equippedItems[(int)equipment.Slot] = null;
 		UpdateBodygroups();
+
+		Weight = GetTotalWeightInGrams();
 	}
 
 	private void UpdateBodygroups()
