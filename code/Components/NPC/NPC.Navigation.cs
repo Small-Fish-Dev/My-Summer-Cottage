@@ -1,10 +1,51 @@
 ﻿using Sandbox;
 using Sauna;
 
+public enum NavigationType
+{
+	[Icon( "💩" )]
+	[Description( "Dumb navigation, High performance" )]
+	Dumb,
+	[Icon( "🙂" )]
+	[Description( "Normal navigation, Medium performance" )]
+	Normal,
+	[Icon( "🤓" )]
+	[Description( "Smart navigation, Low performance" )]
+	Smart
+}
+
 public partial class NPC
 {
-	static int _totalDirections = 8;
-	static Vector3[] _possibleDirections
+
+	int _totalDirections
+	{
+		get
+		{
+			return NavigationType switch
+			{
+				NavigationType.Dumb => 5,
+				NavigationType.Normal => 10,
+				NavigationType.Smart => 16,
+				_ => 10,
+			};
+		}
+	}
+
+	int _tickToCheck
+	{
+		get
+		{
+			return NavigationType switch
+			{
+				NavigationType.Dumb => 30,
+				NavigationType.Normal => 8,
+				NavigationType.Smart => 2,
+				_ => 8,
+			};
+		}
+	}
+
+	Vector3[] _possibleDirections
 	{
 		get
 		{
@@ -25,30 +66,32 @@ public partial class NPC
 	public virtual void ComputeNavigation()
 	{
 		if ( MoveHelper == null ) return;
+
+		var currentTick = (int)(Time.Now / Time.Delta);
+
+		if ( currentTick % _tickToCheck != NpcId % _tickToCheck ) return;
+
 		CheckNewTargetPos();
 
 		var distanceToTarget = Transform.Position.Distance( TargetPosition );
 
 		if ( distanceToTarget >= MoveHelper.TraceRadius )
 		{
-			if ( Time.Now % (Time.Delta * 5) <= 1 )
-			{
-				var movement3D = false; // TODO: Replace with property if we want flying NPCs
-				var positionDifference = TargetPosition - Transform.Position;
-				var wishDirection = (movement3D ? positionDifference.WithZ( 0f ) : positionDifference).Normal;
+			var movement3D = false; // TODO: Replace with property if we want flying NPCs
+			var positionDifference = TargetPosition - Transform.Position;
+			var wishDirection = (movement3D ? positionDifference.WithZ( 0f ) : positionDifference).Normal;
 
-				var interestVector = getInterest( wishDirection );
-				var dangerVector = getDanger();
-				var preferredDirection = dangerVector.Max() == 0 ? wishDirection : getPreferredDirection( interestVector, dangerVector );
-				var wishVelocity = preferredDirection * RunSpeed;
-				var steeringForce = wishVelocity - MoveHelper.Velocity;
+			var interestVectors = getInterest( wishDirection );
+			var dangerVectors = getDanger();
+			var preferredVector = getPreferredDirection( interestVectors, dangerVectors, out var value );
+			var isGoingDirectPath = dangerVectors.Max() == 0 || preferredVector == interestVectors.Max();
+			var preferredDirection = isGoingDirectPath ? wishDirection : preferredVector;
+			var wishVelocity = preferredDirection * RunSpeed;
+			var steeringForce = wishVelocity - MoveHelper.Velocity;
 
-				MoveHelper.WishVelocity = wishVelocity;
-				MoveHelper.WishVelocity += steeringForce;
-			}
+			MoveHelper.WishVelocity = wishVelocity;
+			MoveHelper.WishVelocity += steeringForce;
 		}
-
-		MoveHelper.Move();
 	}
 
 	float[] getInterest( Vector3 direction )
@@ -60,14 +103,15 @@ public partial class NPC
 
 	float[] getDanger()
 	{
-		var totalDirections = _possibleDirections.Length;
+		var possibleDirections = _possibleDirections;
+		var totalDirections = possibleDirections.Length;
 		var directionDanger = new float[totalDirections];
 		var currentDirection = 0;
 
-		foreach ( var direction in _possibleDirections )
+		foreach ( var direction in possibleDirections )
 		{
 			var startPosition = Transform.Position + Vector3.Up * (MoveHelper.StepHeight + MoveHelper.TraceRadius / 2f);
-			var endPosition = startPosition + direction * 100f;
+			var endPosition = startPosition + direction * MoveHelper.TraceRadius * 2f;
 			var dangerTrace = Scene.Trace.Sphere( MoveHelper.TraceRadius, startPosition, endPosition )
 				.IgnoreGameObjectHierarchy( GameObject )
 				.Run();
@@ -89,9 +133,10 @@ public partial class NPC
 		return directionDanger;
 	}
 
-	Vector3 getPreferredDirection( float[] interest, float[] danger )
+	Vector3 getPreferredDirection( float[] interest, float[] danger, out float value )
 	{
-		var totalDirections = _possibleDirections.Length;
+		var possibleDirections = _possibleDirections;
+		var totalDirections = possibleDirections.Length;
 		var finalDirections = new float[totalDirections];
 		var currentDirection = 0;
 		var currentHighest = 0;
@@ -112,7 +157,8 @@ public partial class NPC
 			currentDirection++;
 		}
 
-		return _possibleDirections[currentHighest];
+		value = currentHighest;
+		return possibleDirections[currentHighest];
 	}
 
 	void CheckNewTargetPos()

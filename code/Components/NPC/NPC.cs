@@ -30,6 +30,9 @@ public partial class NPC : Component
 	public NPCType NPCType { get; set; } = NPCType.Medium;
 
 	[Property]
+	public NavigationType NavigationType { get; set; } = NavigationType.Normal;
+
+	[Property]
 	[Category( "Stats" )]
 	[Range( 0f, 600f, 10f )]
 	public float WalkSpeed { get; set; } = 90f;
@@ -43,6 +46,7 @@ public partial class NPC : Component
 	[Category( "Stats" )]
 	public bool FaceTowardsVelocity { get; set; } = true;
 
+	public int NpcId { get; set; }
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
 	public float DesiredDistance { get; private set; } = 60f;
@@ -57,6 +61,11 @@ public partial class NPC : Component
 
 		if ( Model != null )
 			Model.OnFootstepEvent += OnFootstep;
+
+		NpcId = Scene.GetAllComponents<NPC>().ToList().IndexOf( this );
+
+		if ( MoveHelper != null )
+			MoveHelper.AirFriction = 100f;
 	}
 
 	protected override void OnUpdate()
@@ -102,6 +111,7 @@ public partial class NPC : Component
 			FollowRagdoll();
 
 		ComputeNavigation();
+		MoveHelper.Move();
 	}
 
 	/// <summary>
