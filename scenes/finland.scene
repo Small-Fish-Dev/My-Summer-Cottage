@@ -151,8 +151,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -263,8 +263,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -430,7 +430,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.3325164,0,-0.9430975",
+          "Rotation": "0,0.1991621,0,0.9799666",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -815,9 +815,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "PlaySoundWithSubtitle"
+                      "_name": "PlaySoundWithSubtitle",
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -855,8 +855,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "Animation": "Interact"
             },
             {
@@ -879,9 +877,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "PlaySoundWithNameAndSubtitle"
+                      "_name": "PlaySoundWithNameAndSubtitle",
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -924,8 +922,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "Animation": "Interact"
             }
           ]
@@ -942,6 +938,54 @@
       "Rotation": "-0.00000037217,0.00000005960464,0.00000111651,0.9999999",
       "Enabled": true,
       "__Prefab": "prefabs/items/rifle.prefab"
+    },
+    {
+      "Id": "4e7fbb0d-b705-4ac3-8bd6-c849128dc60e",
+      "Name": "MooseTest",
+      "Position": "467.127,-568.0612,27.49162",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 16,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/fauna/elk/elk.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "MooseTest",
+          "AnimationSpeed": 50
+        }
+      ]
+    },
+    {
+      "Id": "f53b1b3c-80bd-4662-9281-be0b84d9d7bb",
+      "Name": "MooseTest (1)",
+      "Position": "465.8501,-647.155,27.49164",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "SkinnedModelRenderer",
+          "AnimationGraph": null,
+          "BodyGroups": 16,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/fauna/elk/elk.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "MooseTest",
+          "AnimationSpeed": 100
+        }
+      ]
     },
     {
       "Id": "4480e4d0-10a1-4c25-8730-0aee3d1e95f7",
@@ -1078,13 +1122,6 @@
       "__Prefab": "prefabs/items/beer_crate.prefab"
     },
     {
-      "Id": "c5ee7493-4670-4791-9e63-e3fa9dba6190",
-      "Name": "fishing_rod",
-      "Position": "201.5256,-1143.861,69",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/fishing_rod.prefab"
-    },
-    {
       "Id": "a3db4cf9-a01e-4126-a37f-9ab273caf455",
       "Name": "rifle (1)",
       "Position": "193.1826,-1234.466,69.25894",
@@ -1195,12 +1232,21 @@
       "__Prefab": "prefabs/events/experience_toilet.prefab"
     },
     {
-      "Id": "7aede1be-61ca-4a64-9fc3-00b114c9e1f3",
+      "Id": "68cd1efb-3300-4846-8ec1-20f99d0fb14b",
       "Name": "moose_male",
-      "Position": "511.0446,-429.1863,90.06908",
-      "Rotation": "-0.0002138913,-0.0002111495,0.7565064,-0.653986",
+      "Position": "733.1635,-556.118,90.02124",
+      "Rotation": "-0.00004252791,-0.00002543628,0.9639188,-0.2661966",
+      "Scale": "1.5,1.5,1.5",
       "Enabled": true,
       "__Prefab": "prefabs/npcs/moose_male.prefab"
+    },
+    {
+      "Id": "82bd53a5-08b6-43cf-b7fc-07912b86f169",
+      "Name": "fishing_rod",
+      "Position": "55.86787,-804.8507,84.86855",
+      "Rotation": "-0.01071164,0.01418209,0.6025711,0.7978673",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/fishing_rod.prefab"
     }
   ],
   "SceneProperties": {
@@ -1226,6 +1272,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-09T21:29:08.7842608\u002B01:00",
+  "LastSaved": "2024-03-09T17:38:48.3613525-05:00",
   "__references": []
 }

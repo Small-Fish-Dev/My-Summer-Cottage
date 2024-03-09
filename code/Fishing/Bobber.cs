@@ -17,18 +17,7 @@ public class Bobber : Component
 	protected override void OnFixedUpdate()
 	{
 		if ( !CurrentCell.IsValid() || !CurrentCell.Collider.Touching.Contains( _collider ) )
-		{
 			CurrentCell = null;
-		}
-		else
-		{
-			using ( Gizmo.Scope() )
-			{
-				Gizmo.Draw.IgnoreDepth = true;
-				Gizmo.Draw.Color = Color.Blue;
-				Gizmo.Draw.LineBBox( BBox.FromPositionAndSize( CurrentCell.Collider.Center + CurrentCell.Transform.Position, CurrentCell.Collider.Scale ) );
-			}
-		}
 	}
 
 	public void PullOut()

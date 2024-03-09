@@ -1,9 +1,31 @@
 {
   "RootObject": {
-    "Id": "41e00f3c-1123-4f06-a50d-30cf1c6410a7",
+    "Id": "a5595c5e-d9d2-410e-9ca7-fc2f8b59d5be",
     "Name": "fishing_rod",
     "Enabled": true,
     "Components": [
+      {
+        "__type": "ItemEquipment",
+        "Attachment": "hand_R",
+        "AttachmentTransform": {
+          "UniformScale": 1,
+          "Position": "2.801,-13.659,-0.765",
+          "Scale": "1,1,1",
+          "Rotation": "-0.6850817,-0.0549067,0.05191642,0.7245365"
+        },
+        "Count": 0,
+        "Description": "Looks pretty sturdy, can catch some big fish with this thing.",
+        "HideBodygroups": "None",
+        "HoldType": "FishingRod",
+        "Icon": {},
+        "MaxStack": 0,
+        "Name": "Fishing Rod",
+        "SellPrice": -1,
+        "Slot": "Hand",
+        "UpdatePosition": true,
+        "UseSkinTint": false,
+        "WeightInGrams": 150
+      },
       {
         "__type": "FishingRod",
         "BobberPrefab": {
@@ -14,36 +36,21 @@
         "ThrowForce": 1000,
         "Renderer": {
           "_type": "component",
-          "go": "41e00f3c-1123-4f06-a50d-30cf1c6410a7",
+          "go": "a5595c5e-d9d2-410e-9ca7-fc2f8b59d5be",
           "component_type": "SkinnedModelRenderer"
         }
       },
       {
-        "__type": "ItemEquipment",
-        "Attachment": "hand_R",
-        "AttachmentTransform": {
-          "UniformScale": 1,
-          "Position": "2.800744,-13.65857,-0.7652572",
-          "Scale": "1,1,1",
-          "Rotation": "-0.6850799,-0.05490911,0.05191869,0.7245392"
-        },
-        "Count": 0,
-        "Description": "Looks pretty sturdy, can catch some big fish with this thing.",
-        "HideBodygroups": "None",
-        "HoldType": "FishingRod",
-        "Icon": {
-          "Model": "models/fishingrod/saunarod.vmdl",
-          "MaterialGroup": "",
-          "Position": "2.25,17.4,3.75",
-          "Rotation": "0.2981895,0.008664448,0.2370221,0.9245694",
-          "Guid": "04ac2c4d-4ef9-4624-97d8-5fe9514efbd8"
-        },
-        "MaxStack": 0,
-        "Name": "Fishing Rod",
-        "SellPrice": -1,
-        "Slot": "Hand",
-        "UpdatePosition": true,
-        "WeightInGrams": 150
+        "__type": "SkinnedModelRenderer",
+        "AnimationGraph": null,
+        "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/fishingrod/saunarod.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
       },
       {
         "__type": "BoxCollider",
@@ -62,18 +69,6 @@
         "MassOverride": 0,
         "RigidbodyFlags": 0,
         "StartAsleep": false
-      },
-      {
-        "__type": "SkinnedModelRenderer",
-        "AnimationGraph": null,
-        "BodyGroups": 18446744073709551615,
-        "BoneMergeTarget": null,
-        "CreateBoneObjects": false,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
-        "Model": "models/fishingrod/saunarod.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
       }
     ],
     "Children": []
