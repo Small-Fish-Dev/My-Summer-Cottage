@@ -26,6 +26,7 @@ public class ItemEquipment : ItemComponent
 
 	[Property, Category( "Equipment" )] public EquipSlot Slot { get; set; } = EquipSlot.Hand;
 	[Property, Category( "Equipment" )] public HiddenBodyGroup HideBodygroups { get; set; }
+	[Property, Category( "Equipment" )] public bool UseSkinTint { get; set; }
 
 	[Property, Category( "Holding" ), ShowIf( "Slot", EquipSlot.Hand )] public HoldType HoldType { get; set; } = HoldType.Item;
 	[Property, Category( "Holding" )] public bool UpdatePosition { get; set; }
@@ -44,7 +45,13 @@ public class ItemEquipment : ItemComponent
 
 	public void UpdateEquipped()
 	{
-		if ( Equipped ) ToggleRenderer( Equipped );
+		if ( Equipped ) 
+			ToggleRenderer( Equipped );
+
+		// Use skin color as tint.
+		var player = GameObject.Parent?.Components?.Get<Player>( true );
+		if ( UseSkinTint && player != null ) 
+			Renderer.Tint = player.SkinColor;
 
 		// Bonemerge
 		if ( Renderer is SkinnedModelRenderer skinned && !UpdatePosition )
@@ -54,6 +61,7 @@ public class ItemEquipment : ItemComponent
 				: null;
 		}
 
+		// Toggle colliders and rigidbodies, update parcel
 		if ( !IsClothing )
 		{
 			var body = GameObject?.Components.GetAll<Rigidbody>( FindMode.EverythingInSelfAndChildren ).FirstOrDefault( x => x != parcelBody );
