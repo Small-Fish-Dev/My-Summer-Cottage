@@ -1,0 +1,24 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunaworld.shader"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/asphalt_a_transition/asphalt_a_transition_basecolor.png"
+	ColorTintMask "materials/default/default.tga"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/default/default_metal.tga"
+	Normal "materials/asphalt_a_transition/asphalt_a_transition_normal.png"
+	Roughness "materials/asphalt_a_transition/asphalt_a_transition_roughness.png"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "grass"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}
