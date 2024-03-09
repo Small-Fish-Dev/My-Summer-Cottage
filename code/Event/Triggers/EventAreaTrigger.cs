@@ -38,8 +38,8 @@ public sealed class EventAreaTrigger : EventTrigger
 	public override void PolledMethod()
 	{
 		var find = Scene.FindInPhysics( WorldBBox )
-			?.Where( x => x.Tags.HasAny( TagSet ) )
-			?.Where( x => TriggerPrefab.Count() == 0 || TriggerPrefab.Any( prefab => x.IsValid() && x.PrefabInstanceSource != null && prefab.ResourcePath == x.PrefabInstanceSource ) );
+			?.Where( x => x.IsValid() && x.Tags != null && TagSet != null && x.Tags.HasAny( TagSet ) )
+			?.Where( x => TriggerPrefab.Count() == 0 || TriggerPrefab.Any( prefab => prefab != null && x.IsValid() && x.PrefabInstanceSource != null && prefab.ResourcePath == x.PrefabInstanceSource ) );
 
 		foreach ( var found in find )
 			if ( !ObjectsInside.Contains( found ) ) // Has entered just now
