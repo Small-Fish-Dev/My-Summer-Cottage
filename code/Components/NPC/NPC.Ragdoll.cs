@@ -76,7 +76,14 @@ public partial class NPC
 			rootPosition = (leftFoot + rightFoot) / 2f;
 		}
 
-		Transform.Position = rootPosition;
+		var frontPosition = Ragdoll.PhysicsGroup.Pos + Vector3.Forward;
+
+		if ( Model.GetAttachment( "hand_L" ) != null )
+		{
+			var leftHand = Model.GetAttachment( "hand_L" ).Value.Position;
+			var rightHand = Model.GetAttachment( "hand_R" ).Value.Position;
+			frontPosition = (leftHand + rightHand) / 2f;
+		}
 
 		var velocity = (Ragdoll.Transform.World.Position - _lastPosition);
 		_lastPosition = Ragdoll.Transform.World.Position;
@@ -105,10 +112,13 @@ public partial class NPC
 				{
 					_isTransitioning = true;
 					Transform.Position = rootPosition;
+					_lastPosition = rootPosition;
+
+					MoveHelper.Velocity = 0f;
+					Transform.Rotation = Rotation.LookAt( frontPosition.WithZ( 0f ) - rootPosition.WithZ( 0f ), Vector3.Up );
 
 					foreach ( var body in Ragdoll.PhysicsGroup.Bodies )
 					{
-						body.GravityEnabled = false;
 						body.MotionEnabled = false;
 					}
 				}
@@ -130,6 +140,8 @@ public partial class NPC
 
 				if ( _unragdoll.Passed <= transition )
 				{
+					Transform.Position = _lastPosition;
+
 					var time = _unragdoll.Passed / transition;
 
 					foreach ( var bone in bones )
@@ -140,18 +152,6 @@ public partial class NPC
 
 							if ( body != null )
 							{
-								body.MotionEnabled = false;
-								body.GravityEnabled = false;
-								body.EnableSolidCollisions = false;
-								body.LinearDrag = 9999f;
-								body.AngularDrag = 9999f;
-
-								var oldTransform = bodyTransforms[body];
-								var newPos = oldTransform.Position.LerpTo( transform.Position, (float)time );
-								var newRot = Rotation.Lerp( oldTransform.Rotation, transform.Rotation, (float)time );
-
-								body.Position = newPos;
-								body.Rotation = newRot;
 							}
 						}
 					}
@@ -162,6 +162,9 @@ public partial class NPC
 						collider.Enabled = true;
 
 					MoveHelper.Enabled = true;
+
+					MoveHelper.Velocity = 0f;
+					Transform.Rotation = Rotation.LookAt( frontPosition.WithZ( 0f ) - rootPosition.WithZ( 0f ), Vector3.Up );
 
 					_puppet.Destroy();
 					Ragdoll?.Destroy();
