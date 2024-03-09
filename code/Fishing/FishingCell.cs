@@ -59,7 +59,7 @@ public class FishingCell : Component
 	private Dictionary<Bobber, CellFish> _bobbers = new();
 	private List<CellFish> CurrentFishes { get; set; } = new();
 
-	protected override void OnAwake()
+	protected override void OnStart()
 	{
 		if ( AvailableFish.Count == 0 )
 			GameObject.Destroy();

@@ -58,7 +58,6 @@ public sealed class FishingRod : Component
 			GameObject newBobber;
 			newBobber = BobberPrefab.Clone();
 			newBobber.NetworkSpawn();
-			newBobber.Enabled = true;
 			newBobber.Transform.Position = transform.Position + transform.Rotation.Forward * 10f;
 			newBobber.Components.Get<Rigidbody>().Velocity = player.Velocity + player.EyeAngles.Forward * ThrowForce;
 			CurrentBobber = newBobber.Components.Get<Bobber>();
