@@ -1,0 +1,29 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunaworld.shader"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/concrete_hs/concrete_hs_basecolor.png"
+	ColorTintMask "materials/default/default.tga"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/default/default_metal.tga"
+	Normal "materials/concrete_hs/concrete_hs_normal.png"
+	Roughness "materials/concrete_hs/concrete_hs_roughness.png"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "concrete"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+
+	ToolAttributes
+	{
+		SubrectDefinition "materials/shrimple_hs.rect"
+	}
+}
