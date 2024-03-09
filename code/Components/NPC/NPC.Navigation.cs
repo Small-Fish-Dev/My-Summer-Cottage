@@ -76,15 +76,14 @@ public partial class NPC
 
 		CheckNewTargetPos();
 
-		if ( TargetPosition.Distance( Transform.Position ) <= Range )
+		var distanceToTarget = Transform.Position.Distance( TargetPosition );
+
+		if ( distanceToTarget <= MoveHelper.TraceRadius / 2f )
 		{
 			MoveHelper.WishVelocity = Vector3.Zero;
 			return;
 		}
-
-		var distanceToTarget = Transform.Position.Distance( TargetPosition );
-
-		if ( distanceToTarget >= MoveHelper.TraceRadius )
+		else
 		{
 			var movement3D = false; // TODO: Replace with property if we want flying NPCs
 			var positionDifference = TargetPosition - Transform.Position;

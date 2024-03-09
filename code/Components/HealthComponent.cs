@@ -58,6 +58,9 @@ public sealed class HealthComponent : Component
 	[Sync]
 	public int Health { get; set; }
 
+	[Sync]
+	public bool Alive { get; set; } = true;
+
 	/// <summary>
 	/// Can this thing regenerate health over time
 	/// </summary>
@@ -109,6 +112,7 @@ public sealed class HealthComponent : Component
 	public void Damage( int amount, DamageType type, GameObject attacker = null, Vector3 worldHurtPosition = default, Vector3 forceDirection = default, float force = 0 )
 	{
 		if ( Immortal ) return;
+		if ( !Alive ) return;
 		if ( amount == 0 ) return;
 
 		var stunned = type >= StunnedBy && type != DamageType.Nothing; // Don't ragdoll if we're healing
@@ -149,9 +153,30 @@ public sealed class HealthComponent : Component
 		}
 	}
 
+	private void InternalKill( GameObject attacker = null )
+	{
+		Alive = false;
+
+		if ( Components.TryGet<Player>( out var player ) )
+			player.SetRagdoll( true, true, 9999999f );
+
+		if ( Components.TryGet<NPC>( out var npc ) )
+			npc.SetRagdoll( true, 9999999f );
+	}
+
+	/// <summary>
+	/// Kill this
+	/// </summary>
+	/// <param name="attacker"></param>
+	[Broadcast]
+	public void Kill( GameObject attacker = null )
+	{
+		InternalKill( attacker );
+	}
+
 	protected override void OnFixedUpdate()
 	{
-		if ( !Immortal )
+		if ( !Immortal && Alive )
 		{
 			if ( Health < MaxHealth )
 			{
