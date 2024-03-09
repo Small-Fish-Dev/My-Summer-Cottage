@@ -3,31 +3,27 @@
 @inherits PanelComponent
 
 <root>
-    <img class="title" src="ui/mainmenu/title.png" />
-
-    <MenuButton
-        Label="New Game"
-        Icon="ui/mainmenu/new_icon.png"
-        onclick=@(() => Log.Info("New Game Clicked"))
-    />
-
-    <MenuButton
-        Label="Load Game"
-        Icon="ui/mainmenu/load_icon.png" 
-    />
-
-    <MenuButton
-        Label="Statistics"
-        Icon="ui/mainmenu/stats_icon.png" 
-    />
-
-    <MenuButton
-        Label="Credits"
-        Icon="ui/mainmenu/credits_icon.png" 
-    />
-
-    <MenuButton
-        Label="Quit"
-        Icon="ui/mainmenu/quit_icon.png" 
-    />
+	<img class="title" src="ui/mainmenu/title.png" />
+	<div style="flex-direction: column; justify-content: center; top: 10%; gap: 15px;">
+		<SideButton
+			ImagePath="ui/mainmenu/new_icon.png"
+			Title="New Game"
+			Subtitle="Start a brand new game"
+		/>
+		<SideButton
+			ImagePath="ui/mainmenu/load_icon.png"
+			Title="Load Game"
+			Subtitle="Load a previous save file"
+		/>
+		<SideButton
+			ImagePath="ui/mainmenu/credits_icon.png"
+			Title="Credits"
+			Subtitle="Check out the folks that created this experience"
+		/>
+		<SideButton
+			ImagePath="ui/mainmenu/quit_icon.png"
+			Title="Quit"
+			Subtitle="Why? There aren't any other better games on s&box..."
+		/>
+	</div>
 </root>
