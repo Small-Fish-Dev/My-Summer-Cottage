@@ -16,6 +16,25 @@ public sealed class FishingRod : Component
 
 	public bool Casted => CurrentBobber.IsValid();
 
+	private bool _isCasted;
+
+	[Sync]
+	public bool IsCasted
+	{
+		get => _isCasted;
+		set
+		{
+			_isCasted = value;
+			if ( _isCasted )
+				_fishingLine = LegacyParticles.Create( "particles/basic_rope.vpcf", Transform.World );
+			else
+				_fishingLine?.Destroy();
+		}
+	}
+
+	[Sync]
+	private Vector3? BobberPosition { get; set; }
+
 	protected override void OnStart()
 	{
 		var interactions = Components.GetOrCreate<Interactions>();
@@ -31,40 +50,49 @@ public sealed class FishingRod : Component
 
 	protected override void OnUpdate()
 	{
+		if ( Owner is null )
+			return;
+
 		if ( Casted && CurrentBobber.Transform.Position.Distance( Owner.Transform.Position ) > RetractDistance )
 			RetractBobber( true );
 	}
 
 	protected override void OnPreRender()
 	{
-		if ( CurrentBobber.IsValid() && _fishingLine != null )
+		if ( !IsCasted )
+			return;
+
+		if ( CurrentBobber.IsValid() )
+			BobberPosition = CurrentBobber.Transform.Position;
+
+		if ( BobberPosition is not null && _fishingLine is not null && _fishingLine.GameObject.IsValid() )
 		{
 			_fishingLine.Transform = Renderer?.GetAttachment( "line" ) ?? global::Transform.Zero;
-			_fishingLine.SetVector( 1, CurrentBobber.Transform.Position );
+			_fishingLine.SetVector( 1, BobberPosition.Value );
 		}
 	}
 
 	private void OnInteract( Player player, GameObject obj )
 	{
 		if ( Casted )
-		{
 			RetractBobber();
-		}
 		else
-		{
-			Owner = player;
-			var transform = Renderer?.GetAttachment( "line" ) ?? global::Transform.Zero;
+			CastBobber( player );
+	}
 
-			GameObject newBobber;
-			newBobber = BobberPrefab.Clone();
-			newBobber.NetworkSpawn();
-			newBobber.Transform.Position = transform.Position + transform.Rotation.Forward * 10f;
-			newBobber.Components.Get<Rigidbody>().Velocity = player.Velocity + player.EyeAngles.Forward * ThrowForce;
-			CurrentBobber = newBobber.Components.Get<Bobber>();
-			CurrentBobber.Rod = this;
+	private void CastBobber( Player player )
+	{
+		IsCasted = true;
+		Owner = player;
+		GameObject newBobber;
+		newBobber = BobberPrefab.Clone();
+		newBobber.NetworkSpawn();
+		CurrentBobber = newBobber.Components.Get<Bobber>();
+		CurrentBobber.Rod = this;
 
-			_fishingLine = LegacyParticles.Create( "particles/basic_rope.vpcf", Transform.World );
-		}
+		var transform = Renderer?.GetAttachment( "line" ) ?? global::Transform.Zero;
+		CurrentBobber.Transform.Position = transform.Position + transform.Rotation.Forward * 10f;
+		CurrentBobber.Components.Get<Rigidbody>().Velocity = player.Velocity + player.EyeAngles.Forward * ThrowForce;
 	}
 
 	private void RetractBobber( bool force = false )
@@ -73,8 +101,15 @@ public sealed class FishingRod : Component
 			CurrentBobber.PullOut();
 
 		CurrentBobber.GameObject.Destroy();
-		CurrentBobber = null;
 		Owner = null;
-		_fishingLine?.Destroy();
+		IsCasted = false;
+	}
+
+	protected override void OnDestroy()
+	{
+		IsCasted = false;
+
+		if ( CurrentBobber.IsValid() )
+			CurrentBobber.GameObject.Destroy();
 	}
 }

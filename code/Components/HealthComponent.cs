@@ -28,14 +28,6 @@ public sealed class HealthComponent : Component
 	public DamageType StunnedBy { get; set; } = DamageType.Nothing;
 
 	/// <summary>
-	/// How many seconds it will remain ragdolled if the damage dealt was equal to max health (Ex. StunTime = 10f, Damage = 3f, Will be ragdolled for 3 seconds)
-	/// </summary>
-	[Property]
-	[HideIf( "StunnedBy", DamageType.Nothing )]
-	[Range( 0.1f, 10f, 0.1f, false )]
-	public float StunTime { get; set; } = 5f;
-
-	/// <summary>
 	/// Can this get damaged at all
 	/// </summary>
 	[Property]
@@ -85,7 +77,7 @@ public sealed class HealthComponent : Component
 	[Range( 0f, 5f, 0.1f )]
 	public float RegenerationCooldown { get; set; } = 2f;
 
-	public delegate void AttackerInfo( int damage, DamageType type, GameObject attacker = null, Vector3 localHurtPosition = default, float force = 0 );
+	public delegate void AttackerInfo( int damage, DamageType type, GameObject attacker = null, Vector3 localHurtPosition = default, Vector3 forceDirection = default, float force = 0 );
 
 	public AttackerInfo OnAttacked { get; set; }
 
@@ -109,9 +101,10 @@ public sealed class HealthComponent : Component
 	/// <param name="type">The type of damage dealth</param>
 	/// <param name="attacker">The person that attacked, null if not set</param>
 	/// <param name="worldHurtPosition">The world position of where the damage happened, (0,0,0) if not set</param>
+	/// <param name="forceDirection">The direction which the force will be applied, (0,0,0) if not set</param>
 	/// <param name="force">How much force was behind that damage, 0 by default</param>
 	[Broadcast]
-	public void Damage( int amount, DamageType type, GameObject attacker = null, Vector3 worldHurtPosition = default, float force = 0 )
+	public void Damage( int amount, DamageType type, GameObject attacker = null, Vector3 worldHurtPosition = default, Vector3 forceDirection = default, float force = 0 )
 	{
 		if ( amount == 0 ) return;
 
@@ -126,6 +119,8 @@ public sealed class HealthComponent : Component
 			{
 				LastDamaged = 0; // We were just attacked
 				_nextHeal = RegenerationTimer + RegenerationCooldown; // Reset the healtimer
+
+				OnAttacked?.Invoke( amount, type, attacker, worldHurtPosition == default ? worldHurtPosition : Transform.World.PointToLocal( worldHurtPosition ), forceDirection, force );
 			}
 		}
 
@@ -134,11 +129,19 @@ public sealed class HealthComponent : Component
 			if ( damaged && !StunWhenDamaged ) return;
 
 			var damageFrac = amount / MaxHealth;
-			var ragdollTime = StunTime * damageFrac;
+			var ragdollTime = damageFrac * 10f;
+			var ragdollVelocity = forceDirection * force + Vector3.Up * 50;
 
 			if ( Components.TryGet<Player>( out var player ) )
 			{
 				player.SetRagdoll( true, true, ragdollTime );
+				player.MoveHelper?.Punch( ragdollVelocity );
+			}
+
+			if ( Components.TryGet<NPC>( out var npc ) )
+			{
+				npc.SetRagdoll( true, ragdollTime, 50f );
+				npc.LocalPunch( ragdollVelocity );
 			}
 		}
 	}

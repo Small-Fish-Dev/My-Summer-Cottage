@@ -28,7 +28,7 @@ public partial class NPC : Component
 	public NavigationType NavigationType { get; set; } = NavigationType.Normal;
 
 	/// <summary>
-	/// How much this creature weights (So handle ragdolling and punch)
+	/// How much this creature weights (To handle ragdol force amount and duration)
 	/// </summary>
 	[Property]
 	[Category( "Stats" )]
@@ -42,21 +42,45 @@ public partial class NPC : Component
 	public bool ScaleStats { get; set; } = true;
 
 	/// <summary>
+	/// Doesn't move (Don't add a MoveHelper if this is on)
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	public bool Static { get; set; } = false;
+
+	/// <summary>
 	/// For animations. How many units per second the run animation is tuned to (This is automatically scaled by the scale)
 	/// </summary>
 	[Property]
 	[Category( "Stats" )]
+	[HideIf( "Static", true )]
 	public float MaxRunAnimationSpeed { get; set; } = 150f;
 
+	/// <summary>
+	/// How fast this NPC can walk
+	/// </summary>
 	[Property]
 	[Category( "Stats" )]
+	[HideIf( "Static", true )]
 	[Range( 0f, 600f, 10f )]
 	public float WalkSpeed { get; set; } = 90f;
 
+	/// <summary>
+	/// How fast this NPC can run
+	/// </summary>
 	[Property]
 	[Category( "Stats" )]
+	[HideIf( "Static", true )]
 	[Range( 0f, 600f, 10f )]
 	public float RunSpeed { get; set; } = 180f;
+
+	/// <summary>
+	/// Should we automatically make the NPC look towards its target
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	[HideIf( "Static", true )]
+	public bool FaceTowardsVelocity { get; set; } = true;
 
 	/// <summary>
 	/// How far the NPC can reach for attacks or navigation
@@ -65,10 +89,6 @@ public partial class NPC : Component
 	[Category( "Stats" )]
 	[Range( 30f, 200f, 10f )]
 	public float Range { get; private set; } = 60f;
-
-	[Property]
-	[Category( "Stats" )]
-	public bool FaceTowardsVelocity { get; set; } = true;
 
 	[Property]
 	[Category( "Triggers" )]
@@ -184,6 +204,7 @@ public partial class NPC : Component
 	{
 		if ( Model == null ) return;
 		if ( MoveHelper == null ) return;
+		if ( Static ) return;
 
 		if ( FaceTowardsVelocity )
 			if ( !MoveHelper.Velocity.IsNearlyZero( 1f ) )
@@ -214,7 +235,7 @@ public partial class NPC : Component
 				var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ), Vector3.Up );
 				Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
 
-				SetRagdoll( true, spin: 100f );
+				SetRagdoll( true, 100f * ForceMultiplier );
 				WorldPunch( TargetObject.Transform.Position, 400f, 300f );
 			}
 		}
@@ -336,7 +357,7 @@ public partial class NPC : Component
 			Ragdoll.PhysicsGroup.Velocity = force;
 
 		if ( MoveHelper != null && MoveHelper.Enabled )
-			MoveHelper.Punch( force );
+			MoveHelper.Punch( force * ForceMultiplier );
 	}
 
 	/// <summary>
