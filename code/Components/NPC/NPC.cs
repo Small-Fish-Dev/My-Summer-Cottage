@@ -135,6 +135,21 @@ public partial class NPC : Component
 	public int NpcId { get; set; }
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
+	public float ForceMultiplier
+	{
+		get
+		{
+			return Weight switch
+			{
+				WeightType.Feather => 3f,
+				WeightType.Light => 2f,
+				WeightType.Middle => 1f,
+				WeightType.Heavy => 0.5f,
+				WeightType.Massive => 0.33f,
+				_ => 1f
+			};
+		}
+	}
 
 	protected override void DrawGizmos()
 	{
