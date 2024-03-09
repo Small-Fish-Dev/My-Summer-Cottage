@@ -104,7 +104,7 @@ public partial class NPC : Component
 		if ( Model != null )
 			Model.OnFootstepEvent += OnFootstep;
 
-		NpcId = Scene.GetAllComponents<NPC>().ToList().IndexOf( this );
+		NpcId = Scene.GetAllComponents<NPC>().OrderByDescending( x => x.NpcId ).First().NpcId + 1;
 
 		if ( MoveHelper != null )
 			MoveHelper.AirFriction = 100f;
