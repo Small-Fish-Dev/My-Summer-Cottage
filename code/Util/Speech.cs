@@ -48,6 +48,17 @@ public struct Speech
 		return speech;
 	}
 
+	public void Stop()
+	{
+		if ( Stopped )
+			return;
+
+		foreach ( var sound in sounds )
+			sound?.Stop();
+
+		Stopped = true;
+	}
+
 	[ConCmd]
 	public static void TestSound( string input = "blablabla fuck you bithc!!!" )
 	{

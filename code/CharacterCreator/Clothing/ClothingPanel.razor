@@ -70,26 +70,6 @@
 		[EquipSlot.Feet] = new List<string>() { "prefabs/clothes/wellington_boots.prefab", "prefabs/clothes/socks.prefab", "prefabs/clothes/sandals.prefab", },
 	};
 
-	private SkinnedModelRenderer renderer;
-	private SkinnedModelRenderer penoid;
-	public SkinnedModelRenderer Renderer
-	{
-		get
-		{
-			if ( renderer != null )
-				return renderer;
-
-			renderer = CreatorComponent.All[CreatorStage.Appearance].GameObject
-				.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInDescendants );
-
-			penoid = renderer.GameObject.Children
-				.FirstOrDefault().Components.Get<SkinnedModelRenderer>( true );
-
-			return renderer;
-		}
-	}
-	public SceneModel Model => Renderer.SceneModel;
-
 	private static Dictionary<EquipSlot, int> counts = new();
 	private static Dictionary<EquipSlot, List<ComponentDefinition>> clothes;
 
@@ -110,8 +90,8 @@
 		renderer.Tint = color ?? Color.White;
 		renderer.Tint = renderer.Tint.WithAlpha(1);
 		renderer.MaterialGroup = materialGroup;
-		renderer.BoneMergeTarget = Renderer;
-		obj.Parent = Renderer.GameObject;
+		renderer.BoneMergeTarget = CreatorOverlay.Renderer;
+		obj.Parent = CreatorOverlay.Renderer.GameObject;
 
 		clothingObjects.Add( obj );
 	}
@@ -141,15 +121,15 @@
 			flags |= component.Get<HiddenBodyGroup>( "HideBodygroups" );
 		}
 
-		Renderer.SetBodyGroup( "head", flags.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 );
-		Renderer.SetBodyGroup( "torso", flags.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
-		Renderer.SetBodyGroup( "hands", flags.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 );
-		Renderer.SetBodyGroup( "legs", flags.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
-		Renderer.SetBodyGroup( "feet", flags.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
+		CreatorOverlay.Renderer.SetBodyGroup( "head", flags.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 );
+		CreatorOverlay.Renderer.SetBodyGroup( "torso", flags.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
+		CreatorOverlay.Renderer.SetBodyGroup( "hands", flags.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 );
+		CreatorOverlay.Renderer.SetBodyGroup( "legs", flags.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
+		CreatorOverlay.Renderer.SetBodyGroup( "feet", flags.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
 
-		Renderer.Set( "inspect", true );
+		CreatorOverlay.Renderer.Set( "inspect", true );
 
-		penoid.Enabled = selections[EquipSlot.Legs] == -1;
+		CreatorOverlay.Penoid.RenderingEnabled = selections[EquipSlot.Legs] == -1;
 	}
 
 	private void LoadClothes()

@@ -108,19 +108,27 @@
 </root>
 
 @code {
-	private SkinnedModelRenderer renderer;
-	public SkinnedModelRenderer Renderer
+	private static SkinnedModelRenderer renderer;
+	public static SkinnedModelRenderer Renderer
 	{
 		get
 		{
-			if (renderer != null)
+			if ( renderer != null )
 				return renderer;
 
-			return renderer = CreatorComponent.All[CreatorStage.Appearance].GameObject
-				.Components.Get<SkinnedModelRenderer>(FindMode.EverythingInDescendants);
+			renderer = CreatorComponent.All[CreatorStage.Appearance].GameObject
+				.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInDescendants );
+
+			Penoid = renderer.GameObject.Children
+				.FirstOrDefault().Components.Get<SkinnedModelRenderer>( true )
+				.SceneModel;
+
+			return renderer;
 		}
 	}
-	public SceneModel Model => Renderer.SceneModel;
+
+	public static SceneModel Model => Renderer.SceneModel;
+	public static SceneModel Penoid { get; private set; }
 
 	private int stageInteger => (int)CreatorComponent.Current + 1;
 
@@ -149,6 +157,9 @@
 	protected override void OnTreeFirstBuilt()
 	{
 		base.OnTreeFirstBuilt();
+
+		renderer = null;
+		Penoid = null;
 
 		var slots = Enum.GetValues<EquipSlot>();
 		panels = new BodypartPanel[slots.Length - 1];

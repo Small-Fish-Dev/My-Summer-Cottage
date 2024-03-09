@@ -19,8 +19,8 @@
 			@onvalueset=@(value => {
 				DisplayedWeight = (int)value.Value;
 				Weight = MathX.Remap( (float)DisplayedWeight, 60, 125, 0, 1 );
-				Model.Morphs.Set( "fat", Weight );
-				Model.Update( Time.Delta );
+				CreatorOverlay.Model.Morphs.Set( "fat", Weight );
+				CreatorOverlay.Model.Update( Time.Delta );
 			})
 		/>
 	</div>
@@ -37,7 +37,8 @@
 					class="color @(SkinColor == color ? "selected" : "")"
 					onclick=@(() => {
 						SkinColor = color;
-						Model.Attributes.Set( "g_flColorTint", SkinColor );
+						CreatorOverlay.Model.Attributes.Set( "g_flColorTint", SkinColor );
+						CreatorOverlay.Penoid.Attributes.Set( "g_flColorTint", SkinColor );
 						PlaySound( "light_click" );
 					})
 				>
@@ -58,8 +59,8 @@
 			@onvalueset=@(value => {
 				DisplayedHeight = (int)value.Value;
 				Height = MathX.Remap( (float)DisplayedHeight, 150, 195, -90, 80 );
-				Model.SetAnimParameter( "height", Height );
-				Model.Update( Time.Delta );
+				CreatorOverlay.Model.SetAnimParameter( "height", Height );
+				CreatorOverlay.Model.Update( Time.Delta );
 			})
 		/>
 	</div>
@@ -89,20 +90,6 @@
 	public static float Weight { get; set; }
 	public static float Height { get; set; }
 	public static Color SkinColor { get; set; } = _skinColors.FirstOrDefault();
-
-	private SceneModel model;
-	public SceneModel Model
-	{
-		get
-		{
-			if ( model != null )
-				return model;
-
-			return model = CreatorComponent.All[CreatorComponent.Current].GameObject
-				.Components.Get<SkinnedModelRenderer>( FindMode.EverythingInDescendants )
-				.SceneModel;
-		}
-	}
 
 	protected override int BuildHash()
 	{

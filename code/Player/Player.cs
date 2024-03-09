@@ -34,6 +34,12 @@ public partial class Player : Component, Component.ExecuteInEditor
 				Renderer.SceneModel.Attributes.Set( "g_flColorTint", _skinColor );
 				Renderer.SceneModel.Batchable = false;
 			}
+
+			if ( Penoid != null && Penoid.SceneModel.IsValid() )
+			{
+				Penoid.SceneModel.Attributes.Set( "g_flColorTint", _skinColor );
+				Penoid.SceneModel.Batchable = false;
+			}
 		}
 	}
 
