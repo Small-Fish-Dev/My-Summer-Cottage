@@ -96,9 +96,8 @@ partial class Player
 		if ( MoveHelper == null ) return;
 
 		var isWalking = Input.Down( InputAction.Walk );
-		var isDucking = Input.Down( InputAction.Duck );
 
-		var wishSpeed = isDucking ? DuckSpeed : isWalking ? WalkSpeed : SprintSpeed;
+		var wishSpeed = Ducking ? DuckSpeed : isWalking ? WalkSpeed : SprintSpeed;
 		var wishVelocity = Input.AnalogMove.Normal * wishSpeed * EyeAngles.WithPitch( 0f );
 
 		MoveHelper.WishVelocity = BlockInputs ? Vector3.Zero : wishVelocity;
@@ -110,8 +109,8 @@ partial class Player
 		}
 
 		// Ducking
-		var from = Transform.Position;
-		var to = from + Vector3.Up * HEIGHT;
+		var from = Transform.Position + Vector3.Up * 5f;
+		var to = from + Vector3.Up * (HEIGHT - 5f);
 
 		// If we block inputs let's just keep whatever ducking state you were in
 		if ( !BlockInputs )

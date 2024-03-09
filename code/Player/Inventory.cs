@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace Sauna;
 
 public class Inventory : Component
@@ -47,6 +45,7 @@ public class Inventory : Component
 
 		SetOwner( item );
 		GiveBackpackItem( item, firstFreeSlot );
+		item.State = ItemState.Backpack;
 		TaskMaster.SubmitTriggerSignal( $"item.received.{item.Name}", Player );
 
 		return true;
@@ -73,9 +72,11 @@ public class Inventory : Component
 		{
 			RemoveEquipmentItem( previouslyEquippedItem as ItemEquipment );
 			GiveBackpackItem( previouslyEquippedItem, index );
+			previouslyEquippedItem.State = ItemState.Backpack;
 		}
 
 		GiveEquipmentItem( equipment );
+		equipment.State = ItemState.Equipped;
 		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
 
 		return true;
@@ -91,6 +92,7 @@ public class Inventory : Component
 
 		SetOwner( item );
 		GiveEquipmentItem( equipment );
+		equipment.State = ItemState.Equipped;
 		TaskMaster.SubmitTriggerSignal( $"item.received.{item.Name}", Player );
 		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
 
@@ -111,6 +113,7 @@ public class Inventory : Component
 
 		RemoveEquipmentItem( equipment );
 		GiveBackpackItem( equipment, firstFreeSlot );
+		equipment.State = ItemState.Backpack;
 		TaskMaster.SubmitTriggerSignal( $"item.unequipped.{item.Name}", Player );
 
 		return true;
@@ -121,15 +124,12 @@ public class Inventory : Component
 	/// </summary>
 	public bool DropItem( ItemComponent item )
 	{
-		RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
+		if ( item is ItemEquipment equipment && equipment.Equipped )
+			RemoveEquipmentItem( equipment );
+		else
+			RemoveBackpackItem( item, _backpackItems.IndexOf( item ) );
 
-		if ( item is ItemEquipment equipment )
-		{
-			if ( equipment.Equipped )
-				RemoveEquipmentItem( equipment );
-
-			equipment.Equipped = false;
-		}
+		item.State = ItemState.None;
 
 		TaskMaster.SubmitTriggerSignal( $"item.dropped.{item.Name}", Player );
 
@@ -155,8 +155,6 @@ public class Inventory : Component
 			modelPhysics.PhysicsGroup?.AddVelocity( velocity ); // todo: LOL WHY??
 		}
 
-		item.Network.DropOwnership();
-
 		return true;
 	}
 
@@ -179,9 +177,11 @@ public class Inventory : Component
 		{
 			RemoveEquipmentItem( previouslyEquippedItem as ItemEquipment );
 			GiveBackpackItem( previouslyEquippedItem, index );
+			previouslyEquippedItem.State = ItemState.Backpack;
 		}
 
 		GiveEquipmentItem( equipment );
+		equipment.State = ItemState.Equipped;
 
 		return true;
 	}
@@ -270,9 +270,11 @@ public class Inventory : Component
 		{
 			RemoveBackpackItem( previousBackpackItem, index );
 			GiveEquipmentItem( previousBackpackItem as ItemEquipment );
+			previousBackpackItem.State = ItemState.Equipped;
 		}
 
 		GiveBackpackItem( item, index );
+		item.State = ItemState.Backpack;
 
 		return true;
 	}
@@ -284,6 +286,7 @@ public class Inventory : Component
 	{
 		SetOwner( item );
 		GiveBackpackItem( item, index );
+		item.State = ItemState.Backpack;
 	}
 
 	/// <summary>
@@ -303,7 +306,12 @@ public class Inventory : Component
 		if ( item.Count <= 0 )
 		{
 			ClearItem( item );
-			if ( destroy ) item?.GameObject?.Destroy();
+			if ( destroy )
+			{
+				item.State = ItemState.None;
+				item?.GameObject?.Destroy();
+				
+			}
 		}
 
 		return true;
@@ -318,6 +326,8 @@ public class Inventory : Component
 			_backpackItems[_backpackItems.IndexOf( item )] = null;
 		else if ( _equippedItems.Contains( item ) )
 			_equippedItems[_equippedItems.IndexOf( item )] = null;
+
+		item.State = ItemState.None;
 	}
 
 	public int GetTotalWeightInGrams()
@@ -339,8 +349,8 @@ public class Inventory : Component
 	/// </summary>
 	private void GiveBackpackItem( ItemComponent item, int index )
 	{
-		item.InBackpack = true;
-		_backpackItems[index] = item;
+		if ( index >= 0 && index < _backpackItems.Count )
+			_backpackItems[index] = item;
 	}
 
 	/// <summary>
@@ -348,8 +358,6 @@ public class Inventory : Component
 	/// </summary>
 	private void RemoveBackpackItem( ItemComponent item, int index )
 	{
-		item.InBackpack = false;
-
 		if ( index >= 0 && index < _backpackItems.Count )
 			_backpackItems[index] = null;
 	}
@@ -359,7 +367,6 @@ public class Inventory : Component
 	/// </summary>
 	private void GiveEquipmentItem( ItemEquipment equipment )
 	{
-		equipment.Equipped = true;
 		_equippedItems[(int)equipment.Slot] = equipment;
 		UpdateBodygroups();
 	}
@@ -369,7 +376,6 @@ public class Inventory : Component
 	/// </summary>
 	private void RemoveEquipmentItem( ItemEquipment equipment )
 	{
-		equipment.Equipped = false;
 		_equippedItems[(int)equipment.Slot] = null;
 		UpdateBodygroups();
 	}

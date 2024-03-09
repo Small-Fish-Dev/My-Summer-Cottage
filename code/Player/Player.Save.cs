@@ -127,7 +127,9 @@ partial class Player
 
 			return new ItemSave
 			{
-				Path = item.Prefab, Data = data.Count > 0 ? data : null, Index = player.Inventory.IndexOf( item )
+				Path = item.Prefab,
+				Data = data.Count > 0 ? data : null,
+				Index = player.Inventory.IndexOf( item )
 			};
 		}
 
@@ -236,7 +238,7 @@ partial class Player
 				if ( item == null )
 					continue;
 
-				player.Inventory.SetItem( item, data.Index );
+				player.Inventory.GiveItem( item );
 				ReadData( data, o );
 			}
 
