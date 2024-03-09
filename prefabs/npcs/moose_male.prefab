@@ -9,7 +9,7 @@
         "__type": "NPC",
         "AlertRange": 256,
         "FaceTowardsVelocity": true,
-        "MaxRunAnimationSpeed": 1.5,
+        "MaxRunAnimationSpeed": 150,
         "Model": {
           "_type": "component",
           "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
@@ -34,7 +34,8 @@
         "States": {
           "idle": null
         },
-        "WalkSpeed": 200
+        "WalkSpeed": 200,
+        "Weight": "Middle"
       },
       {
         "__type": "MoveHelper",
@@ -93,12 +94,14 @@
       {
         "__type": "HealthComponent",
         "CanRegenerate": true,
-        "DamagedBy": "Mild",
+        "DamagedBy": 0,
         "Immortal": false,
         "MaxHealth": 10,
         "RegenerationCooldown": 2,
         "RegenerationTimer": 5,
-        "StunnedBy": "Nothing"
+        "StunnedBy": "Serious",
+        "StunTime": 5,
+        "StunWhenDamaged": false
       }
     ],
     "Children": []

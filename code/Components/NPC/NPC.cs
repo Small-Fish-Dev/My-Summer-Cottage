@@ -1,6 +1,20 @@
 ﻿using Sandbox;
 using Sauna;
 
+public enum WeightType
+{
+	[Icon( "🐀" )]
+	Feather,
+	[Icon( "🐇" )]
+	Light,
+	[Icon( "🚶" )]
+	Middle,
+	[Icon( "🦌" )]
+	Heavy,
+	[Icon( "🐘" )]
+	Massive
+}
+
 [Icon( "smart_toy" )]
 public partial class NPC : Component
 {
@@ -14,7 +28,14 @@ public partial class NPC : Component
 	public NavigationType NavigationType { get; set; } = NavigationType.Normal;
 
 	/// <summary>
-	/// Should the stats scale linearly with the scale
+	/// How much this creature weights (So handle ragdolling and punch)
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	public WeightType Weight { get; set; } = WeightType.Middle;
+
+	/// <summary>
+	/// Should the stats scale linearly with the scale of the object
 	/// </summary>
 	[Property]
 	[Category( "Stats" )]
@@ -52,6 +73,8 @@ public partial class NPC : Component
 	[Property]
 	[Category( "Triggers" )]
 	public Action OnSpawn { get; set; }
+
+	public float Scale => ScaleStats ? MathF.Max( MathF.Max( GameObject.Transform.Scale.x, GameObject.Transform.Scale.y ), GameObject.Transform.Scale.z ) : 1f;
 
 	public delegate void NpcTrigger( GameObject provoker );
 
@@ -132,6 +155,16 @@ public partial class NPC : Component
 		OnSpawn?.Invoke();
 	}
 
+	protected override void OnAwake()
+	{
+		if ( MoveHelper == null ) return;
+
+		MoveHelper.StepHeight *= Scale;
+		MoveHelper.TraceRadius *= Scale;
+		MoveHelper.TraceHeight *= Scale;
+		MoveHelper.StopSpeed *= Scale;
+	}
+
 	protected override void OnUpdate()
 	{
 		if ( Model == null ) return;
@@ -143,8 +176,7 @@ public partial class NPC : Component
 
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );
-		var maxScale = MathF.Max( MathF.Max( GameObject.Transform.Scale.x, GameObject.Transform.Scale.y ), GameObject.Transform.Scale.z );
-		var scaledSpeed = MaxRunAnimationSpeed * maxScale; // Model is scaled uniformally by the max value on the scale it seems
+		var scaledSpeed = MaxRunAnimationSpeed * Scale; // Model is scaled uniformally by the max value on the scale it seems
 
 		var newX = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Forward ) / scaledSpeed;
 		var newY = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Right ) / scaledSpeed;

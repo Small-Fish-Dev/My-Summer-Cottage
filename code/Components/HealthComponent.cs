@@ -1,19 +1,20 @@
 ﻿using Sandbox;
+using Sauna;
 
 public enum DamageType
 {
 	[Icon( "🌬" )]
 	[Description( "Ex. Airsoft pellets" )]
-	Mild,
+	Mild = 1,
 	[Icon( "🗡️" )]
 	[Description( "Ex. Axe swing" )]
-	Average,
+	Average = 2,
 	[Icon( "💥" )]
 	[Description( "Ex. Rifle bullet" )]
-	Serious,
+	Serious = 3,
 	[Icon( "👼" )]
-	[Description( "None of the above or nothing at all" )]
-	Nothing
+	[Description( "None of the above or heal" )]
+	Nothing = 4
 }
 
 [Icon( "medication" )]
@@ -27,6 +28,14 @@ public sealed class HealthComponent : Component
 	public DamageType StunnedBy { get; set; } = DamageType.Nothing;
 
 	/// <summary>
+	/// How many seconds it will remain ragdolled if the damage dealt was equal to max health (Ex. StunTime = 10f, Damage = 3f, Will be ragdolled for 3 seconds)
+	/// </summary>
+	[Property]
+	[HideIf( "StunnedBy", DamageType.Nothing )]
+	[Range( 0.1f, 10f, 0.1f, false )]
+	public float StunTime { get; set; } = 5f;
+
+	/// <summary>
 	/// Can this get damaged at all
 	/// </summary>
 	[Property]
@@ -38,6 +47,13 @@ public sealed class HealthComponent : Component
 	[Property]
 	[HideIf( "Immortal", true )]
 	public DamageType DamagedBy { get; set; } = DamageType.Mild;
+
+	/// <summary>
+	/// Should this get ragdolled as well when the damage is greater or equal than both DamagedBy and StunnedBy
+	/// </summary>
+	[Property]
+	[HideIf( "Immortal", true )]
+	public bool StunWhenDamaged { get; set; } = false;
 
 	/// <summary>
 	/// How many hit points this has, usually 1 hit point comes from DamageType.Mild
@@ -69,6 +85,10 @@ public sealed class HealthComponent : Component
 	[Range( 0f, 5f, 0.1f )]
 	public float RegenerationCooldown { get; set; } = 2f;
 
+	public delegate void AttackerInfo( int damage, DamageType type, GameObject attacker = null, Vector3 localHurtPosition = default, float force = 0 );
+
+	public AttackerInfo OnAttacked { get; set; }
+
 	public TimeSince LastDamaged { get; set; }
 	TimeUntil _nextHeal { get; set; }
 
@@ -79,28 +99,47 @@ public sealed class HealthComponent : Component
 
 		Health = MaxHealth;
 
-		Damage( 4 );
+		Damage( 4, DamagedBy );
 	}
 
 	/// <summary>
 	/// How many hitpoints to remove (Negative will heal instead and not call the OnAttacked event)
 	/// </summary>
-	/// <param name="amount"></param>
-	/// <param name="attacker"></param>
-	/// <param name="hurtPosition"></param>
+	/// <param name="amount">The amount of damage dealth</param>
+	/// <param name="type">The type of damage dealth</param>
+	/// <param name="attacker">The person that attacked, null if not set</param>
+	/// <param name="worldHurtPosition">The world position of where the damage happened, (0,0,0) if not set</param>
+	/// <param name="force">How much force was behind that damage, 0 by default</param>
 	[Broadcast]
-	public void Damage( int amount, GameObject attacker = null, Vector3 hurtPosition = default )
+	public void Damage( int amount, DamageType type, GameObject attacker = null, Vector3 worldHurtPosition = default, float force = 0 )
 	{
 		if ( amount == 0 ) return;
 
-		var newHealth = Math.Clamp( Health - amount, 0, MaxHealth );
+		var stunned = type >= StunnedBy && type != DamageType.Nothing; // Don't ragdoll if we're healing
+		var damaged = type >= DamagedBy;
 
-		Health = newHealth;
-
-		if ( amount > 0 )
+		if ( damaged )
 		{
-			LastDamaged = 0; // We were just attacked
-			_nextHeal = RegenerationTimer + RegenerationCooldown; // Reset the healtimer
+			Health = Math.Clamp( Health - amount, 0, MaxHealth );
+
+			if ( amount > 0 )
+			{
+				LastDamaged = 0; // We were just attacked
+				_nextHeal = RegenerationTimer + RegenerationCooldown; // Reset the healtimer
+			}
+		}
+
+		if ( stunned )
+		{
+			if ( damaged && !StunWhenDamaged ) return;
+
+			var damageFrac = amount / MaxHealth;
+			var ragdollTime = StunTime * damageFrac;
+
+			if ( Components.TryGet<Player>( out var player ) )
+			{
+				player.SetRagdoll( true, true, ragdollTime );
+			}
 		}
 	}
 
@@ -110,7 +149,7 @@ public sealed class HealthComponent : Component
 		{
 			if ( _nextHeal )
 			{
-				Damage( -1 );
+				Damage( -1, DamageType.Nothing );
 				_nextHeal = RegenerationCooldown;
 			}
 		}

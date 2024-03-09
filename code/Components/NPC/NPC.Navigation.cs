@@ -16,6 +16,8 @@ public enum NavigationType
 
 public partial class NPC
 {
+	public bool IsRunning { get; set; } = false;
+	public float WishSpeed => (IsRunning ? RunSpeed : WalkSpeed) * Scale;
 
 	int _totalDirections
 	{
@@ -93,7 +95,7 @@ public partial class NPC
 			var preferredVector = getPreferredDirection( interestVectors, dangerVectors, out var value );
 			var isGoingDirectPath = dangerVectors.Max() == 0 || preferredVector == interestVectors.Max();
 			var preferredDirection = isGoingDirectPath ? wishDirection : preferredVector;
-			var wishVelocity = preferredDirection * RunSpeed;
+			var wishVelocity = preferredDirection * WishSpeed;
 			var steeringForce = wishVelocity - MoveHelper.Velocity;
 
 			MoveHelper.WishVelocity = wishVelocity;

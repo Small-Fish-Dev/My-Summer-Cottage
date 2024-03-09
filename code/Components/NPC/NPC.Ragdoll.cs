@@ -38,6 +38,7 @@ public partial class NPC
 				_puppet.Enabled = false;
 				_puppet.Enabled = true;
 				_puppet.SceneModel.RenderingEnabled = false;
+				_puppet.Transform.Scale = Scale;
 
 				foreach ( var collider in Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ) )
 					collider.Enabled = false;
