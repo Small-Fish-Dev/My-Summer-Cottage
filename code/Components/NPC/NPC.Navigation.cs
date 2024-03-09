@@ -37,10 +37,24 @@ public partial class NPC
 		{
 			return NavigationType switch
 			{
-				NavigationType.Dumb => 30,
+				NavigationType.Dumb => 20,
 				NavigationType.Normal => 8,
 				NavigationType.Smart => 2,
 				_ => 8,
+			};
+		}
+	}
+
+	float _steeringExtra
+	{
+		get
+		{
+			return NavigationType switch
+			{
+				NavigationType.Dumb => 1f,
+				NavigationType.Normal => 2f,
+				NavigationType.Smart => 3f,
+				_ => 2f,
 			};
 		}
 	}
@@ -90,7 +104,7 @@ public partial class NPC
 			var steeringForce = wishVelocity - MoveHelper.Velocity;
 
 			MoveHelper.WishVelocity = wishVelocity;
-			MoveHelper.WishVelocity += steeringForce;
+			MoveHelper.WishVelocity += steeringForce * _steeringExtra;
 		}
 	}
 
@@ -111,7 +125,7 @@ public partial class NPC
 		foreach ( var direction in possibleDirections )
 		{
 			var startPosition = Transform.Position + Vector3.Up * (MoveHelper.StepHeight + MoveHelper.TraceRadius / 2f);
-			var endPosition = startPosition + direction * MoveHelper.TraceRadius * 2f;
+			var endPosition = startPosition + direction * MoveHelper.TraceRadius * 4f;
 			var dangerTrace = Scene.Trace.Sphere( MoveHelper.TraceRadius, startPosition, endPosition )
 				.IgnoreGameObjectHierarchy( GameObject )
 				.Run();
