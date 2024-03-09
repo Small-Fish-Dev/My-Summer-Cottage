@@ -74,24 +74,14 @@ public class LeFisheSpawner : Component
 			}
 	}
 
-	protected override void OnUpdate()
-	{
-		if ( !Game.IsPlaying )
-			return;
-
-		using ( Gizmo.Scope() )
-		{
-			Gizmo.Draw.Color = Color.Blue;
-			Gizmo.Draw.IgnoreDepth = true;
-			Gizmo.Draw.LineBBox( _water.Bounds );
-
-			Gizmo.Draw.IgnoreDepth = false;
-			//
-			// 	Gizmo.Draw.Color = Color.Red;
-			// 	foreach ( var sweep in _debugFailedCells )
-			// 	{
-			// 		Gizmo.Draw.LineBBox( sweep );
-			// 	}
-		}
-	}
+	// protected override void OnUpdate()
+	// {
+	// 	using ( Gizmo.Scope() )
+	// 	{
+	// 		Gizmo.Draw.Color = Color.Blue;
+	// 		Gizmo.Draw.IgnoreDepth = true;
+	// 		Gizmo.Draw.LineBBox( _water.Bounds );
+	// 		Gizmo.Draw.IgnoreDepth = false;
+	// 	}
+	// }
 }

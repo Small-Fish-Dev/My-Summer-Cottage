@@ -163,11 +163,11 @@ public class FishingCell : Component
 		// Always clear the pool, though
 		CurrentFishes.RemoveAll( x => x.ShouldDie );
 
-		using ( Gizmo.Scope() )
-		{
-			Gizmo.Draw.Color = Color.Green;
-			Gizmo.Draw.LineBBox( BBox.FromPositionAndSize( Collider.Center + Transform.Position, Collider.Scale ) );
-		}
+		// using ( Gizmo.Scope() )
+		// {
+		// 	Gizmo.Draw.Color = Color.Green;
+		// 	Gizmo.Draw.LineBBox( BBox.FromPositionAndSize( Collider.Center + Transform.Position, Collider.Scale ) );
+		// }
 	}
 
 	private void FishSetTarget( CellFish fish, Bobber bobber )
