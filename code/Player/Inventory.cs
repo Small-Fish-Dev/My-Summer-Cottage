@@ -402,10 +402,11 @@ public class Inventory : Component
 		player.Inventory.UnequipItem( player.Inventory.EquippedItems[(int)EquipSlot.Body] );
 	}
 
+	// todo @ceitine: remove debug command
 	[ConCmd]
 	public static void GiveItem( string name )
 	{
-		var player = Game.ActiveScene.GetAllComponents<Player>().FirstOrDefault();
+		var player = Player.Local;
 		if ( player == null )
 			return;
 
