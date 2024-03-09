@@ -231,11 +231,11 @@ partial class Player
 			Renderer?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
 
 		// Hide face and head clothing.
-		var face = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Face ) as ItemEquipment)?.Renderer?.SceneObject;
-		if ( face != null ) face.RenderingEnabled = !HideHead;
+		var face = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Face ) as ItemEquipment)?.Renderer;
+		if ( face != null ) face.RenderType = HideHead ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
 
-		var head = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Head ) as ItemEquipment)?.Renderer?.SceneObject;
-		if ( head != null ) head.RenderingEnabled = !HideHead;
+		var head = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Head ) as ItemEquipment)?.Renderer;
+		if ( head != null ) head.RenderType = HideHead ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
 	}
 
 	protected void UpdateAnimation()
