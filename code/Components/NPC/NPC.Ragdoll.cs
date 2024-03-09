@@ -19,6 +19,13 @@ public partial class NPC
 	[Broadcast( NetPermission.Anyone )]
 	public void SetRagdoll( bool ragdoll, float duration = 2f, float spin = 0f )
 	{
+		InternalSetRagdoll( ragdoll, duration, spin );
+	}
+
+	async void InternalSetRagdoll( bool ragdoll, float duration = 2f, float spin = 0f )
+	{
+		await Task.Frame();
+
 		if ( ragdoll )
 		{
 			if ( Ragdoll == null && Model != null && MoveHelper != null )
@@ -90,7 +97,7 @@ public partial class NPC
 			{
 				_unragdoll = 0f;
 
-				var groundTrace = Scene.Trace.Ray( rootPosition, rootPosition + Vector3.Down * 10f )
+				var groundTrace = Scene.Trace.Ray( rootPosition, rootPosition + Vector3.Down * 20f )
 					.Size( 20f )
 					.IgnoreGameObjectHierarchy( GameObject )
 					.WithoutTags( "player", "trigger", "npc" )

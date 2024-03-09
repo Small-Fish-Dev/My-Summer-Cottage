@@ -161,11 +161,11 @@ public partial class NPC : Component
 		{
 			return Weight switch
 			{
-				WeightType.Feather => 3f,
-				WeightType.Light => 2f,
+				WeightType.Feather => 2f,
+				WeightType.Light => 1.5f,
 				WeightType.Middle => 1f,
-				WeightType.Heavy => 0.5f,
-				WeightType.Massive => 0.33f,
+				WeightType.Heavy => 0.75f,
+				WeightType.Massive => 0.5f,
 				_ => 1f
 			};
 		}
@@ -235,7 +235,7 @@ public partial class NPC : Component
 				var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ), Vector3.Up );
 				Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
 
-				SetRagdoll( true, 100f * ForceMultiplier );
+				SetRagdoll( true, 5f, 100f * ForceMultiplier );
 				WorldPunch( TargetObject.Transform.Position, 400f, 300f );
 			}
 		}
@@ -381,7 +381,7 @@ public partial class NPC : Component
 			return;
 
 		var pos = Transform.Position;
-		var tr = Scene.Trace.Ray( pos + Vector3.Up * 10, pos + Vector3.Down * 10 )
+		var tr = Scene.Trace.Ray( pos + Vector3.Up * 10f, pos + Vector3.Down * 10f )
 			.Radius( 1 )
 			.WithoutTags( "trigger" )
 			.IgnoreGameObjectHierarchy( GameObject )
@@ -401,5 +401,7 @@ public partial class NPC : Component
 
 		var sound = Sound.Play( path, tr.HitPosition + tr.Normal * 5 );
 		sound.Volume *= e.Volume;
+		sound.Volume *= ForceMultiplier * 4f;
+		sound.Decibels += ForceMultiplier;
 	}
 }
