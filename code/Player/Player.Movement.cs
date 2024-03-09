@@ -105,7 +105,6 @@ partial class Player
 		if ( IsEncumbered )
 		{
 			var overweight = (Inventory.Weight - Inventory.MAX_WEIGHT_IN_GRAMS).ToKilograms();
-			Log.Error( overweight );
 			var multiplier = MathX.Clamp( 1 - overweight / 15f, 0.2f, 1f );
 			wishVelocity *= multiplier;
 		}
