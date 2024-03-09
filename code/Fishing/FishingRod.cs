@@ -104,4 +104,12 @@ public sealed class FishingRod : Component
 		Owner = null;
 		IsCasted = false;
 	}
+
+	protected override void OnDestroy()
+	{
+		IsCasted = false;
+
+		if ( CurrentBobber.IsValid() )
+			CurrentBobber.GameObject.Destroy();
+	}
 }
