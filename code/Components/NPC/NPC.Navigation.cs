@@ -80,12 +80,19 @@ public partial class NPC
 	public virtual void ComputeNavigation()
 	{
 		if ( MoveHelper == null ) return;
+		if ( TargetPosition == Vector3.Zero ) return;
 
 		var currentTick = (int)(Time.Now / Time.Delta);
 
 		if ( currentTick % _tickToCheck != NpcId % _tickToCheck ) return;
 
 		CheckNewTargetPos();
+
+		if ( TargetPosition.Distance( Transform.Position ) <= DesiredDistance )
+		{
+			MoveHelper.WishVelocity = Vector3.Zero;
+			return;
+		}
 
 		var distanceToTarget = Transform.Position.Distance( TargetPosition );
 

@@ -46,6 +46,48 @@ public partial class NPC : Component
 	[Category( "Stats" )]
 	public bool FaceTowardsVelocity { get; set; } = true;
 
+	[Property]
+	[Category( "Triggers" )]
+	public Action OnSpawn { get; set; }
+
+	public delegate void NpcTrigger( GameObject provoker );
+
+	/// <summary>
+	/// If a GameObject has one of these tags it will be considered a provoker and can trigger alert state
+	/// </summary>
+	[Property]
+	[Category( "Triggers" )]
+	public TagSet ProvokerTags { get; set; }
+
+	/// <summary>
+	/// How close a provoker has to come to alert the NPC
+	/// </summary>
+	[Property]
+	[Category( "Triggers" )]
+	[Range( 0f, 1024f, 16f )]
+	public float AlertRange { get; set; } = 256f;
+
+	/// <summary>
+	/// When the provoker enters the alert area, or attacks the NPC, or a nearby NPC gets alerted
+	/// </summary>
+	[Property]
+	[Category( "Triggers" )]
+	public NpcTrigger OnAlerted { get; set; }
+
+	/// <summary>
+	/// When the NPC gets directly attacked
+	/// </summary>
+	[Property]
+	[Category( "Triggers" )]
+	public NpcTrigger OnAttacked { get; set; }
+
+	/// <summary>
+	/// When the provoker gets out of the AlertRange or dies
+	/// </summary>
+	[Property]
+	[Category( "Trigger" )]
+	public NpcTrigger OnProvokerEscaped { get; set; }
+
 	public int NpcId { get; set; }
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
@@ -75,7 +117,7 @@ public partial class NPC : Component
 
 		if ( FaceTowardsVelocity )
 			if ( !MoveHelper.Velocity.IsNearlyZero( 1f ) )
-				Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ) ), Time.Delta * 10f );
+				Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ), Vector3.Up ), Time.Delta * 10f );
 
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );
@@ -92,14 +134,11 @@ public partial class NPC : Component
 	{
 		if ( MoveHelper == null ) return;
 
-		if ( Scene.GetAllComponents<Player>().FirstOrDefault() is Player player ) // TODO Remove
-			SetTarget( player.GameObject );
-
 		if ( TargetObject.IsValid() )
 		{
 			if ( IsWithinRange( TargetObject, DesiredDistance ) )
 			{
-				var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ) );
+				var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ), Vector3.Up );
 				Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
 
 				SetRagdoll( true, spin: 100f );
@@ -161,23 +200,10 @@ public partial class NPC : Component
 	public Vector3 GetRandomPositionAround( float minRange = 50f, float maxRange = 300f )
 	{
 		var position = Transform.Position;
-		var tries = 0;
 
-		while ( tries <= 10 && position == Transform.Position )
-		{
-			var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
-			var randomDistance = Game.Random.Float( minRange, maxRange );
-			var randomPosition = position + randomDirection * randomDistance;
-
-			var randomPoint = Scene.NavMesh?.GetClosestPoint( position ); // TODO Change
-
-			if ( randomPoint != null )
-				position = randomPosition;
-
-			tries++;
-		}
-
-		return position;
+		var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
+		var randomDistance = Game.Random.Float( minRange, maxRange );
+		return position + randomDirection * randomDistance;
 	}
 
 	/// <summary>
@@ -194,13 +220,7 @@ public partial class NPC : Component
 
 		var direction = (Transform.Position - targetPosition).Normal;
 		var offset = direction * DesiredDistance;
-		var position = targetPosition + offset;
-		var closestObjectPoint = Scene.NavMesh?.GetClosestPoint( position ); // TODO Change
-
-		if ( closestObjectPoint != null )
-			return closestObjectPoint.Value;
-		else
-			return position;
+		return targetPosition + offset;
 	}
 
 	/// <summary>
