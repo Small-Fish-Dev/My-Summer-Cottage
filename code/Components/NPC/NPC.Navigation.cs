@@ -45,20 +45,6 @@ public partial class NPC
 		}
 	}
 
-	float _steeringExtra
-	{
-		get
-		{
-			return NavigationType switch
-			{
-				NavigationType.Dumb => 1f,
-				NavigationType.Normal => 2f,
-				NavigationType.Smart => 3f,
-				_ => 2f,
-			};
-		}
-	}
-
 	Vector3[] _possibleDirections
 	{
 		get
@@ -88,7 +74,7 @@ public partial class NPC
 
 		CheckNewTargetPos();
 
-		if ( TargetPosition.Distance( Transform.Position ) <= DesiredDistance )
+		if ( TargetPosition.Distance( Transform.Position ) <= Range )
 		{
 			MoveHelper.WishVelocity = Vector3.Zero;
 			return;
@@ -111,7 +97,7 @@ public partial class NPC
 			var steeringForce = wishVelocity - MoveHelper.Velocity;
 
 			MoveHelper.WishVelocity = wishVelocity;
-			MoveHelper.WishVelocity += steeringForce * _steeringExtra;
+			MoveHelper.WishVelocity += steeringForce;
 		}
 	}
 
@@ -186,7 +172,7 @@ public partial class NPC
 	{
 		if ( TargetObject.IsValid() )
 		{
-			if ( !IsWithinRange( TargetObject, DesiredDistance ) ) // Has our target moved?
+			if ( !IsWithinRange( TargetObject, Range ) ) // Has our target moved?
 				MoveTo( GetPreferredTargetPosition( TargetObject ) );
 		}
 	}

@@ -7,6 +7,7 @@
     "Components": [
       {
         "__type": "NPC",
+        "AlertRange": 256,
         "FaceTowardsVelocity": true,
         "Model": {
           "_type": "component",
@@ -20,7 +21,31 @@
         },
         "NavigationType": "Smart",
         "NPCType": "Medium",
+        "OnAlerted": null,
+        "OnAttacked": null,
+        "OnDestroyed": null,
+        "OnKilled": null,
+        "OnProvokerEscaped": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Provoker Escaped",
+            "id": "8d3eb9b3-7ff2-40e6-85ac-f9a9cc3088c6"
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            }
+          ],
+          "Links": []
+        },
+        "OnSpawn": null,
+        "ProvokerTags": null,
         "RunSpeed": 180,
+        "States": {
+          "idle": null
+        },
         "WalkSpeed": 90
       },
       {

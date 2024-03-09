@@ -1,0 +1,101 @@
+{
+  "RootObject": {
+    "Id": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+    "Name": "moose_male",
+    "Scale": "2,2,2",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "NPC",
+        "AlertRange": 256,
+        "FaceTowardsVelocity": true,
+        "MaxRunAnimationSpeed": 1.5,
+        "Model": {
+          "_type": "component",
+          "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "MoveHelper": {
+          "_type": "component",
+          "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+          "component_type": "MoveHelper"
+        },
+        "NavigationType": "Smart",
+        "NPCType": "Large",
+        "OnAlerted": null,
+        "OnAttacked": null,
+        "OnDestroyed": null,
+        "OnKilled": null,
+        "OnProvokerEscaped": null,
+        "OnSpawn": null,
+        "ProvokerTags": null,
+        "Range": 60,
+        "RunSpeed": 400,
+        "ScaleStats": true,
+        "States": {
+          "idle": null
+        },
+        "WalkSpeed": 200
+      },
+      {
+        "__type": "MoveHelper",
+        "AccelerationCurve": [
+          {
+            "y": 0.10000002
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "in": -2.6666658,
+            "out": 2.6666658
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 1,
+        "Collider": null,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 2000,
+        "GroundAngle": 70,
+        "GroundFriction": 30,
+        "IgnoreTags": "",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 24,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 52,
+        "TraceRadius": 16,
+        "TraceType": "Capsule",
+        "UseCollider": false,
+        "UseSceneGravity": true
+      },
+      {
+        "__type": "CapsuleCollider",
+        "End": "0,0,36",
+        "IsTrigger": false,
+        "Radius": 16,
+        "Start": "0,0,16",
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "SkinnedModelRenderer",
+        "AnimationGraph": null,
+        "BodyGroups": 16,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/fauna/elk/elk.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
