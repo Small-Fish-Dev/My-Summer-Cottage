@@ -100,14 +100,7 @@ public class ItemComponent : Component
 
 	private void UpdateState()
 	{
-		foreach ( var component in GameObject.Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
-		{
-			if ( component is ItemComponent or Interactions )
-				continue;
-			
-			component.Enabled = !InInventory;
-		}
-
+		GameObject.Enabled = State != ItemState.Backpack;
 		if ( this is ItemEquipment equipment )
 			equipment.UpdateEquipped();
 	}

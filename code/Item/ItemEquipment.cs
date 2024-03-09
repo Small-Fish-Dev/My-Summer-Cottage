@@ -44,7 +44,7 @@ public class ItemEquipment : ItemComponent
 
 	public void UpdateEquipped()
 	{
-		ToggleRenderer( Equipped );
+		if ( Equipped ) ToggleRenderer( Equipped );
 
 		// Bonemerge
 		if ( Renderer is SkinnedModelRenderer skinned && !UpdatePosition )
