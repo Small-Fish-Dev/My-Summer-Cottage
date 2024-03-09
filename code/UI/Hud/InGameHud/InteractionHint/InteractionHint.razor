@@ -103,9 +103,13 @@
 		if ( FromHands ) // No need to play use animation for held items.
 			return;
 
-		pos = pos.ToScreen().Clamp( -0.5f, 1.5f );
-        Style.Left = Length.Fraction( MathF.Floor( pos.x * 200f + 0.5f ) / 200f );
-        Style.Top = Length.Fraction( MathF.Floor( pos.y * 200f + 0.5f ) / 200f );
+		pos = Scene.Camera.PointToScreenPixels( pos );
+		pos *= ScaleFromScreen;
+		
+        Style.Left = Length.Pixels( pos.x );
+        Style.Top = Length.Pixels( pos.y );
+        
+        StateHasChanged();
 	}
 
 	private bool ShowHint()
