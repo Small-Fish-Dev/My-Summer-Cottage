@@ -63,7 +63,7 @@ public class ItemEquipment : ItemComponent
 			if ( collider != null ) collider.Enabled = !Equipped;
 		}
 		else if ( State != ItemState.Backpack )
-			UpdateParcel( !InInventory );
+			UpdateParcel( State == ItemState.None );
 	}
 
 	private void ToggleRenderer( bool value )
