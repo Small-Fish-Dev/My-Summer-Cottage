@@ -1,22 +1,6 @@
 ﻿using Sandbox;
 using Sauna;
 
-public enum NPCType
-{
-	[Icon( "🐇" )]
-	[Description( "Killed by low damage" )]
-	Small,
-	[Icon( "🧍" )]
-	[Description( "Stunned by low damage, killed by medium damage" )]
-	Medium,
-	[Icon( "🦌" )]
-	[Description( "Stunned by medium damage, killed by large damage" )]
-	Large,
-	[Icon( "👼" )]
-	[Description( "Can't be killed" )]
-	Immortal
-}
-
 [Icon( "smart_toy" )]
 public partial class NPC : Component
 {
@@ -25,10 +9,6 @@ public partial class NPC : Component
 
 	[Property]
 	public SkinnedModelRenderer Model { get; set; }
-
-	[Property]
-	[Title( "NPC Type" )]
-	public NPCType NPCType { get; set; } = NPCType.Medium;
 
 	[Property]
 	public NavigationType NavigationType { get; set; } = NavigationType.Normal;
@@ -76,7 +56,7 @@ public partial class NPC : Component
 	public delegate void NpcTrigger( GameObject provoker );
 
 	/// <summary>
-	/// When the provoker enters the alert area, or attacks the NPC, or a nearby NPC gets alerted. This won't get called if the NPC is already alerted.
+	/// When the provoker enters the alert area, or a nearby NPC gets alerted/attacked. This won't get called if the NPC is already alerted.
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
@@ -102,7 +82,7 @@ public partial class NPC : Component
 	public float AlertRange { get; set; } = 256f;
 
 	/// <summary>
-	/// When the NPC gets directly attacked. This won't get called if the NPC has been attacked and is in alerted status.
+	/// When the NPC gets directly attacked. This won't get called if the NPC has been attacked already and is in alerted status.
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
@@ -148,6 +128,8 @@ public partial class NPC : Component
 
 		if ( MoveHelper != null )
 			MoveHelper.AirFriction = 100f;
+
+		OnSpawn?.Invoke();
 	}
 
 	protected override void OnUpdate()
