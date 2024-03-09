@@ -7,12 +7,14 @@
       {
         "__type": "Fish",
         "CostPerKilo": 20,
+        "IsTrash": false,
         "MinimumWaterDepth": 15,
         "Rarity": 0.9,
         "WeightRange": "700.00,3100.00,1"
       },
       {
         "__type": "ItemComponent",
+        "Count": 0,
         "Description": "A carnivorous fish species commonly found in fresh water as well as moderately salty waters.",
         "Icon": {
           "Model": "models/fauna/fish/pike/pike.vmdl",
@@ -21,6 +23,7 @@
           "Rotation": "0.05273271,-0.1197391,0.4605533,0.8779365",
           "Guid": "22b21dc6-89fa-4fea-85d0-35f4c2964442"
         },
+        "MaxStack": 0,
         "Name": "Pike (rare)",
         "SellPrice": -1,
         "WeightInGrams": 0
@@ -38,15 +41,21 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "ModelPhysics",
-        "Locking": {},
+        "__type": "ModelCollider",
+        "IsTrigger": false,
         "Model": "models/fauna/fish/pike/pike.vmdl",
-        "Renderer": {
-          "_type": "component",
-          "go": "1144340d-028b-4220-8456-d8fe88a98504",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "RigidbodyFlags": 0
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
       }
     ],
     "Children": []

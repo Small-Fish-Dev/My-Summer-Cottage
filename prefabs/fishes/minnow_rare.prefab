@@ -7,12 +7,14 @@
       {
         "__type": "Fish",
         "CostPerKilo": 45,
+        "IsTrash": false,
         "MinimumWaterDepth": 15,
         "Rarity": 0.9,
         "WeightRange": "50.00,250.00,1"
       },
       {
         "__type": "ItemComponent",
+        "Count": 0,
         "Description": "A small fresh water fish.",
         "Icon": {
           "Model": "models/fauna/fish/minnow/minnow.vmdl",
@@ -20,6 +22,7 @@
           "Rotation": "0.03354711,-0.06802682,0.4410146,0.8942891",
           "Guid": "347ad092-9f1c-432d-9428-dc4f058e44ae"
         },
+        "MaxStack": 0,
         "Name": "Minnow (rare)",
         "SellPrice": -1,
         "WeightInGrams": 0
@@ -37,15 +40,21 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "ModelPhysics",
-        "Locking": {},
+        "__type": "ModelCollider",
+        "IsTrigger": false,
         "Model": "models/fauna/fish/minnow/minnow.vmdl",
-        "Renderer": {
-          "_type": "component",
-          "go": "63ab4376-3345-4d5f-afaa-67d6c3981015",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "RigidbodyFlags": 0
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
       }
     ],
     "Children": []

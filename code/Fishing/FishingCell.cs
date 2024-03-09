@@ -59,7 +59,7 @@ public class FishingCell : Component
 	private Dictionary<Bobber, CellFish> _bobbers = new();
 	private List<CellFish> CurrentFishes { get; set; } = new();
 
-	protected override void OnAwake()
+	protected override void OnStart()
 	{
 		if ( AvailableFish.Count == 0 )
 			GameObject.Destroy();
@@ -90,6 +90,9 @@ public class FishingCell : Component
 				for ( var i = 0; i < fishesToGenerate; i++ )
 				{
 					var fishPrefab = GetRandomFish();
+					if ( fishPrefab is null )
+						continue;
+
 					var fishWeight = (int)fishPrefab.AsDefinition().GetComponent<Fish>()
 						.Get<RangedFloat>( "WeightRange" )
 						.GetValue();
@@ -120,7 +123,6 @@ public class FishingCell : Component
 					}
 					else if ( !fish.ShouldChangeTarget && fish.ShouldPullBobber )
 					{
-						Log.Info( "pull!" );
 						// TODO: a hardcoded constant!
 						fish.TargetBobber.Rigidbody.Velocity += Vector3.Down * fish.Weight * 0.01f;
 						fish.ShouldPullBobber = FishBobberPullPeriod.GetValue();
@@ -133,7 +135,6 @@ public class FishingCell : Component
 					// If we already have a target, just let it go
 					if ( fish.TargetBobber.IsValid() )
 					{
-						Log.Info( "gave up" );
 						FishClearTarget( fish );
 						if ( fish.TargetBobber.IsValid() )
 							freeBobbers.Add( fish.TargetBobber );
@@ -217,8 +218,6 @@ public class FishingCell : Component
 
 	public void PullOutFish( GameObject bobberGameObject )
 	{
-		Log.Info( "pull out fish" );
-
 		var bobber = bobberGameObject.Components.Get<Bobber>();
 
 		if ( !_bobbers.TryGetValue( bobber, out var fish ) || fish?.Fish == null )
@@ -237,19 +236,10 @@ public class FishingCell : Component
 			fishInstance.Transform.Position = bobber.Transform.Position;
 			rigidbody.Velocity = velocity;
 		}
-		else if ( fishInstance.Components.TryGet<ModelPhysics>( out var physics ) )
-		{
-			fishInstance.Enabled = false;
-			fishInstance.Transform.Position = bobber.Transform.Position;
-			fishInstance.Enabled = true;
-
-			// TODO: should probably calculate a parabolic trajectory
-			physics.PhysicsGroup?.AddVelocity( velocity );
-		}
 
 		var fishComponent = fishInstance.Components.Get<Fish>();
 		fishComponent.AssignWeight( fish.Weight );
-		
+
 		if ( !IsProxy )
 			Player.Local.OnFishCaught( fish.Fish, fish.Weight );
 	}

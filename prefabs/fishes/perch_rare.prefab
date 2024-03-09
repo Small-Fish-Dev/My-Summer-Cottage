@@ -7,12 +7,14 @@
       {
         "__type": "Fish",
         "CostPerKilo": 18,
+        "IsTrash": false,
         "MinimumWaterDepth": 15,
         "Rarity": 0.9,
         "WeightRange": "500.00,2700.00,1"
       },
       {
         "__type": "ItemComponent",
+        "Count": 0,
         "Description": "One of Finland\u0027s most common fish species because they are very efficient at breeding. ",
         "Icon": {
           "Model": "models/fauna/fish/perch/perch.vmdl",
@@ -21,6 +23,7 @@
           "Rotation": "0.05895112,0.1559846,-0.5352533,0.8280685",
           "Guid": "5896fdda-cc89-4004-a1d6-2feed5768500"
         },
+        "MaxStack": 0,
         "Name": "Perch (rare)",
         "SellPrice": -1,
         "WeightInGrams": 0
@@ -38,15 +41,21 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "ModelPhysics",
-        "Locking": {},
+        "__type": "ModelCollider",
+        "IsTrigger": false,
         "Model": "models/fauna/fish/perch/perch.vmdl",
-        "Renderer": {
-          "_type": "component",
-          "go": "476ec15c-3c9c-4a23-a062-b8a9000f9b6a",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "RigidbodyFlags": 0
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
       }
     ],
     "Children": []

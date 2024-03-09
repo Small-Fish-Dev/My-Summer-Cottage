@@ -8,7 +8,7 @@
         "__type": "FishingRod",
         "BobberPrefab": {
           "_type": "gameobject",
-          "go": "56eaa0d7-71e6-426c-8117-58a1ec536e14"
+          "prefab": "prefabs/items/fishing_bobber.prefab"
         },
         "RetractDistance": 750,
         "ThrowForce": 1000,
@@ -27,6 +27,7 @@
           "Scale": "1,1,1",
           "Rotation": "-0.6850799,-0.05490911,0.05191869,0.7245392"
         },
+        "Count": 0,
         "Description": "Looks pretty sturdy, can catch some big fish with this thing.",
         "HideBodygroups": "None",
         "HoldType": "FishingRod",
@@ -37,6 +38,7 @@
           "Rotation": "0.2981895,0.008664448,0.2370221,0.9245694",
           "Guid": "04ac2c4d-4ef9-4624-97d8-5fe9514efbd8"
         },
+        "MaxStack": 0,
         "Name": "Fishing Rod",
         "SellPrice": -1,
         "Slot": "Hand",
@@ -74,50 +76,7 @@
         "Tint": "1,1,1,1"
       }
     ],
-    "Children": [
-      {
-        "Id": "56eaa0d7-71e6-426c-8117-58a1ec536e14",
-        "Name": "bobber",
-        "Tags": "bobber",
-        "Networked": true,
-        "Components": [
-          {
-            "__type": "Bobber"
-          },
-          {
-            "__type": "ModelRenderer",
-            "BodyGroups": 18446744073709551615,
-            "MaterialGroup": null,
-            "MaterialOverride": null,
-            "Model": "models/rodbobber/rodbobber.vmdl",
-            "RenderType": "On",
-            "Tint": "1,1,1,1"
-          },
-          {
-            "__type": "SphereCollider",
-            "Center": "0,0,0.5",
-            "IsTrigger": false,
-            "Radius": 1.8000016,
-            "Static": false,
-            "Surface": null
-          },
-          {
-            "__type": "Rigidbody",
-            "AngularDamping": 0,
-            "Gravity": true,
-            "LinearDamping": 0,
-            "Locking": {
-              "Pitch": true,
-              "Yaw": true,
-              "Roll": true
-            },
-            "MassOverride": 1,
-            "RigidbodyFlags": 0,
-            "StartAsleep": false
-          }
-        ]
-      }
-    ]
+    "Children": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

@@ -7,12 +7,14 @@
       {
         "__type": "Fish",
         "CostPerKilo": 18,
+        "IsTrash": false,
         "MinimumWaterDepth": 15,
         "Rarity": 0.05,
         "WeightRange": "100.00,1100.00,1"
       },
       {
         "__type": "ItemComponent",
+        "Count": 0,
         "Description": "A small but economically important fish species.",
         "Icon": {
           "Model": "models/fauna/fish/herring/herring.vmdl",
@@ -21,6 +23,7 @@
           "Rotation": "0.04871977,0.1154764,-0.3856568,0.91409",
           "Guid": "25425cfe-5020-4ad1-b565-e9a4c076d8b1"
         },
+        "MaxStack": 0,
         "Name": "Herring",
         "SellPrice": -1,
         "WeightInGrams": 0
@@ -38,15 +41,21 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "ModelPhysics",
-        "Locking": {},
+        "__type": "ModelCollider",
+        "IsTrigger": false,
         "Model": "models/fauna/fish/herring/herring.vmdl",
-        "Renderer": {
-          "_type": "component",
-          "go": "95a23287-0547-4773-8e11-9c2670fe0509",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "RigidbodyFlags": 0
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
       }
     ],
     "Children": []
