@@ -90,6 +90,9 @@ public class FishingCell : Component
 				for ( var i = 0; i < fishesToGenerate; i++ )
 				{
 					var fishPrefab = GetRandomFish();
+					if ( fishPrefab is null )
+						continue;
+
 					var fishWeight = (int)fishPrefab.AsDefinition().GetComponent<Fish>()
 						.Get<RangedFloat>( "WeightRange" )
 						.GetValue();
@@ -249,7 +252,7 @@ public class FishingCell : Component
 
 		var fishComponent = fishInstance.Components.Get<Fish>();
 		fishComponent.AssignWeight( fish.Weight );
-		
+
 		if ( !IsProxy )
 			Player.Local.OnFishCaught( fish.Fish, fish.Weight );
 	}

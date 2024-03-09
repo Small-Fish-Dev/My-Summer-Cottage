@@ -8,18 +8,17 @@ public sealed class FishingRod : Component
 	[Property] public GameObject BobberPrefab;
 	[Property] public float RetractDistance = 200;
 	[Property] public float ThrowForce = 100;
-	
+
 	public Player Owner { get; private set; }
 
 	private Bobber CurrentBobber { get; set; }
 	private LegacyParticles _fishingLine;
-	
+
 	public bool Casted => CurrentBobber.IsValid();
 
 	protected override void OnStart()
 	{
 		var interactions = Components.GetOrCreate<Interactions>();
-
 		interactions.AddInteraction( new Interaction
 		{
 			Accessibility = AccessibleFrom.Hands,
@@ -55,7 +54,9 @@ public sealed class FishingRod : Component
 		{
 			Owner = player;
 			var transform = Renderer?.GetAttachment( "line" ) ?? global::Transform.Zero;
-			var newBobber = BobberPrefab.Clone();
+
+			GameObject newBobber;
+			newBobber = BobberPrefab.Clone();
 			newBobber.NetworkSpawn();
 			newBobber.Enabled = true;
 			newBobber.Transform.Position = transform.Position + transform.Rotation.Forward * 10f;
