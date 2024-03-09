@@ -100,11 +100,13 @@
 			.Select( x => (Slot: x.Key, Path: defaultClothes[x.Key][x.Value]) )
 			.ToDictionary( x => x.Slot, x => x.Path );
 
-	private void CreateClothing( Model model, string materialGroup = "" )
+	private void CreateClothing( Model model, string materialGroup = "", Color? color = null )
 	{
 		var obj = Scene.CreateObject();
 		var renderer = obj.Components.Create<SkinnedModelRenderer>();
 		renderer.Model = model;
+		renderer.Tint = color ?? Color.White;
+		renderer.Tint = renderer.Tint.WithAlpha(1);
 		renderer.MaterialGroup = materialGroup;
 		renderer.BoneMergeTarget = Renderer;
 		obj.Parent = Renderer.GameObject;
@@ -133,7 +135,7 @@
 
 			var icon = component.Get<IconSettings>( "Icon" );
 			var model = Sandbox.Model.Load( icon.Model );
-			CreateClothing( model, icon.MaterialGroup );
+			CreateClothing( model, icon.MaterialGroup, icon.Colour );
 			flags |= component.Get<HiddenBodyGroup>( "HideBodygroups" );
 		}
 

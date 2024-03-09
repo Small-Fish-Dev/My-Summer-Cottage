@@ -11,6 +11,7 @@ public class IconEditor : GraphicsView
 	private SceneObject _obj;
 	private StringProperty _model;
 	private StringProperty _materialgroup;
+	private ColorProperty _color;
 	private AnglesProperty _angles;
 	private Vector3Property _position;
 	private SceneCamera _camera;
@@ -42,6 +43,7 @@ public class IconEditor : GraphicsView
 			{
 				Model = icon.Model,
 				MaterialGroup = icon.MaterialGroup,
+				Colour = icon.Colour,
 				Rotation = global::Rotation.Identity,
 				Position = Vector3.Zero,
 				Guid = Guid.NewGuid()
@@ -78,6 +80,10 @@ public class IconEditor : GraphicsView
 					? Model.Load( "models/dev/box.vmdl" )
 					: mdl;
 			};
+			_color = Layout.Add( new ColorProperty(this)
+			{
+				Value = icon.Colour.WithAlpha(1)
+			}, 0 );
 			_materialgroup = Layout.Add( new StringProperty( this )
 			{
 				Value = icon.MaterialGroup
@@ -118,6 +124,7 @@ public class IconEditor : GraphicsView
 					{
 						Model = _model.Value,
 						MaterialGroup = _materialgroup.Value,
+						Colour = _color.Value,
 						Position = _position.Value,
 						Rotation = _angles.Value,
 						Guid = icon.Guid,
@@ -154,5 +161,6 @@ public class IconEditor : GraphicsView
 		_light.Position = _camera.Position + _camera.Rotation.Backward * 20f;
 		_obj.Position = _position.Value;
 		_obj.Rotation = _angles.Value;
+		_obj.ColorTint = _color.Value;
 	}
 }
