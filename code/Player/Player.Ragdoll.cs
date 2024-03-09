@@ -117,6 +117,12 @@ partial class Player
 
 				if ( groundTrace.Hit )
 					_isTransitioning = true;
+
+				foreach ( var body in Ragdoll.PhysicsGroup.Bodies )
+				{
+					body.GravityEnabled = false;
+					body.MotionEnabled = false;
+				}
 			}
 			else
 			{

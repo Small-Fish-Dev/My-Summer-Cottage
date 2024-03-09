@@ -161,7 +161,10 @@ public sealed class HealthComponent : Component
 			player.SetRagdoll( true, true, 9999999f );
 
 		if ( Components.TryGet<NPC>( out var npc ) )
+		{
 			npc.SetRagdoll( true, 9999999f );
+			npc.OnKilled?.Invoke( attacker );
+		}
 	}
 
 	/// <summary>

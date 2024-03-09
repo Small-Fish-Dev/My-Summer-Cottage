@@ -210,7 +210,7 @@ public partial class NPC : Component
 		if ( Static ) return;
 		if ( Health != null && !Health.Alive ) return;
 
-		if ( FaceTowardsVelocity )
+		if ( Ragdoll == null && FaceTowardsVelocity )
 			if ( !MoveHelper.Velocity.IsNearlyZero( 1f ) )
 				Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ), Vector3.Up ), Time.Delta * 10f );
 
@@ -233,20 +233,26 @@ public partial class NPC : Component
 
 		if ( Health != null && Health.Alive )
 		{
-			SetTarget( Scene.GetAllComponents<Player>().First().GameObject );
-
-			if ( TargetObject.IsValid() )
+			if ( Ragdoll == null )
 			{
-				if ( IsWithinRange( TargetObject ) )
+				SetTarget( Scene.GetAllComponents<Player>().First().GameObject ); // TODO: Remove
+
+				if ( TargetObject.IsValid() )
 				{
-					var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ), Vector3.Up );
-					Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
+					if ( IsWithinRange( TargetObject ) )
+					{
+						var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ), Vector3.Up );
+						Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
 
-					Health.Kill();
+						SetRagdoll( true, 5f, 50f * ForceMultiplier );
+						WorldPunch( TargetObject.Transform.Position, 400f, 300f );
+						//Health.Kill();
+					}
 				}
-			}
 
-			ComputeNavigation();
+				ComputeNavigation();
+				MoveHelper.Move();
+			}
 		}
 		else
 		{
@@ -255,8 +261,6 @@ public partial class NPC : Component
 
 		if ( Ragdoll != null )
 			FollowRagdoll();
-
-		MoveHelper.Move();
 	}
 
 	/// <summary>
@@ -389,6 +393,8 @@ public partial class NPC : Component
 	private TimeSince lastStepped;
 	private void OnFootstep( SceneModel.FootstepEvent e )
 	{
+		if ( Health != null && !Health.Alive ) return;
+
 		if ( lastStepped < 0.2f )
 			return;
 
