@@ -49,6 +49,8 @@ public partial class NPC
 
 				foreach ( var collider in Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ) )
 					collider.Enabled = false;
+
+				MoveHelper.Enabled = false;
 			}
 
 			_unragdoll = duration;
@@ -65,7 +67,7 @@ public partial class NPC
 	{
 		if ( Ragdoll == null ) return;
 
-		var rootPosition = Transform.Position;
+		var rootPosition = Ragdoll.PhysicsGroup.Pos;
 
 		if ( Model.GetAttachment( "foot_L" ) != null )
 		{
@@ -74,11 +76,7 @@ public partial class NPC
 			rootPosition = (leftFoot + rightFoot) / 2f;
 		}
 
-		if ( !_isTransitioning )
-		{
-			Transform.Position = rootPosition; // Remember to set before Renderer!
-			Model.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Model goes offset
-		}
+		Transform.Position = rootPosition;
 
 		var velocity = (Ragdoll.Transform.World.Position - _lastPosition);
 		_lastPosition = Ragdoll.Transform.World.Position;
@@ -104,7 +102,16 @@ public partial class NPC
 					.Run();
 
 				if ( groundTrace.Hit )
+				{
 					_isTransitioning = true;
+					Transform.Position = rootPosition;
+
+					foreach ( var body in Ragdoll.PhysicsGroup.Bodies )
+					{
+						body.GravityEnabled = false;
+						body.MotionEnabled = false;
+					}
+				}
 			}
 			else
 			{
@@ -123,12 +130,6 @@ public partial class NPC
 
 				if ( _unragdoll.Passed <= transition )
 				{
-					if ( Components.TryGet<Character>( out var character, FindMode.EnabledInSelfAndChildren ) )
-					{
-						_puppet.SceneModel.Morphs.Set( "fat", character.Fatness );
-						_puppet.Set( "height", character.Height );
-					}
-
 					var time = _unragdoll.Passed / transition;
 
 					foreach ( var bone in bones )
@@ -157,13 +158,13 @@ public partial class NPC
 				}
 				else
 				{
+					foreach ( var collider in Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ) )
+						collider.Enabled = true;
+
+					MoveHelper.Enabled = true;
+
 					_puppet.Destroy();
 					Ragdoll?.Destroy();
-
-					Model.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Model goes offset
-
-					foreach ( var clothing in Model.GameObject.Children )
-						clothing.Transform.Local = new Transform( Vector3.Zero, Rotation.Identity ); // Clothing go offset too
 
 					_isTransitioning = false;
 				}

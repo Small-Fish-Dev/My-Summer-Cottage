@@ -39,7 +39,7 @@ public sealed class EventAreaTrigger : EventTrigger
 	{
 		var find = Scene.FindInPhysics( WorldBBox )
 			?.Where( x => x.Tags.HasAny( TagSet ) )
-			?.Where( x => TriggerPrefab.Count() == 0 || TriggerPrefab.Any( prefab => prefab.ResourcePath == x.PrefabInstanceSource ) );
+			?.Where( x => TriggerPrefab.Count() == 0 || TriggerPrefab.Any( prefab => x.IsValid() && x.PrefabInstanceSource != null && prefab.ResourcePath == x.PrefabInstanceSource ) );
 
 		foreach ( var found in find )
 			if ( !ObjectsInside.Contains( found ) ) // Has entered just now
