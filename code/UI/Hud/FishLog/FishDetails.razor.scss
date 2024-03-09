@@ -1,0 +1,70 @@
+@import "/UI/Style.scss";
+
+FishDetails {
+    background-color: $black-bg;
+    height: 100%;
+
+    .fish-info {
+        flex-direction: column;
+        align-items: stretch;
+        background-color: $black-bg;
+        font-size: 16px;
+        padding-right: 10px;
+
+        .overview {
+            flex-direction: row;
+            align-items: center;
+
+            ScenePanel {
+                aspect-ratio: 1.25;
+                height: 384px;
+            }
+
+            .summary {
+                flex-direction: column;
+                gap: 10px;
+                font-weight: bold;
+                letter-spacing: 1px;
+
+                .fish-rarity {
+                    flex-direction: row;
+                    gap: 20px;
+
+                    .fish-stars {
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        gap: 5px;
+
+                        img {
+                            aspect-ratio: 1;
+                            image-rendering: pixelated;
+                        }
+                    }
+                }
+
+                .statistic {
+                    white-space: pre;
+                }
+
+                .green {
+                    color: $green;
+                }
+
+                .gold {
+                    color: $gold;
+                }
+
+                .mony {
+                    color: #ebbc5e;
+                }
+            }
+        }
+
+        .description {
+            background-color: $black-bg;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 20px;
+        }
+    }
+}

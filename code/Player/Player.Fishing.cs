@@ -1,5 +1,3 @@
-using Sauna.Fishing;
-
 namespace Sauna;
 
 public struct FishRecord
@@ -49,7 +47,7 @@ public partial class Player
 					return;
 
 				var trash = definition.GetComponent<Fish>().Get<bool>( "IsTrash" );
-				if ( trash ) 
+				if ( trash )
 					return;
 
 				var range = definition.GetComponent<Fish>().Get<RangedFloat>( "WeightRange" );

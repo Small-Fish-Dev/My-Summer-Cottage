@@ -1,6 +1,6 @@
 ﻿using Sauna.SFX;
 
-namespace Sauna.Fishing;
+namespace Sauna;
 
 public sealed class FishingRod : Component
 {

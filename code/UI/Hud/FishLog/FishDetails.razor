@@ -1,0 +1,110 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<text>hello</text>
+</root>
+
+		@* <div class="fish-info">
+			<div class="overview">
+				<ScenePanel class="scene" @ref=" _scenePanel"/>
+				<div class="summary">
+					<text class="fish-title">@_selectedFish.Name</text>
+					<div class="fish-rarity">
+						Rarity:
+						<div class="fish-stars">
+							@{
+								var stars = (int)Math.Max( _selectedFish.Rarity * StarCount, 1 );
+								for ( var i = 0; i < stars; i++ )
+								{
+									<img src="ui/hud/fish_rarity.png"/>
+								}
+
+								for ( var i = stars; i < StarCount; i++ )
+								{
+									<img src="ui/hud/fish_rarity_empty.png"/>
+								}
+							}
+						</div>
+					</div>
+					@if ( _selectedFishRecord is FishRecord fr )
+					{
+						<div style="margin-bottom: 20px">@($"You have caught {fr.Count} of these in total")</div>
+						<div class="statistic gold">BEST CATCH</div>
+						<div class="statistic">Weight: <div class="green">@fr.MaxWeight grams</div></div> 
+						<div class="statistic">Price: <div class="mony">@((int)(fr.MaxWeight / 1000.0f * _selectedFish.CostPerKilo))mk</div></div>
+						<div class="statistic">Date: @fr.MaxWhen.ToLongDateString()</div>
+					}
+				</div>
+			</div>
+
+			<div class="description">
+				@_selectedFish.Description
+			</div>
+		</div> *@
+
+@code {
+	private FishLog.FishInfo _selectedFish;
+	private FishRecord? _selectedFishRecord;
+
+	private const int StarCount = 5;
+	private SceneWorld _sceneWorld;
+	private ScenePanel _scenePanel;
+	private SceneModel _model;
+	private SceneLight _sceneLight;
+	private SceneDirectionalLight _sceneDirectionalLight;
+	private Transform _cameraTransform;
+
+	private void SelectFish( FishLog.FishInfo fish )
+	{
+		_selectedFish = fish;
+		if ( Player.Local.FishesCaught.TryGetValue( fish.PrefabPath, out var record ) )
+			_selectedFishRecord = record;
+		else
+			_selectedFishRecord = null;
+
+		_model?.Delete();
+		_model = new SceneModel(_sceneWorld, _selectedFish.ModelPath, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)));
+		_model.SetMaterialGroup(_selectedFish.MaterialGroup);
+	}
+
+	protected override void OnAfterTreeRender( bool firstTime )
+	{
+		base.OnAfterTreeRender( firstTime );
+
+		if ( _selectedFish is null )
+			return;
+
+		_sceneWorld ??= new SceneWorld();
+		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
+		_sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, Rotation.From( 45, -45, 45 ), Color.White * 10f );
+
+		_model ??= new SceneModel( _sceneWorld, _selectedFish.ModelPath, new Transform( Vector3.Zero, Rotation.From( 0, 0, 0 ) ) );
+		_model.SetMaterialGroup( _selectedFish.MaterialGroup );
+		_scenePanel.World = _sceneWorld;
+		_scenePanel.Camera.FieldOfView = 50f;
+
+		_scenePanel.Camera.FitModel( _model );
+	}
+
+	public override void Tick()
+	{
+		if ( _model is null )
+			return;
+
+		_cameraTransform = _cameraTransform.RotateAround( _model.Model.Bounds.Center, Rotation.FromAxis( _cameraTransform.Up, -10f * RealTime.Delta ) );
+
+		_cameraTransform.Position = _model.Model.Bounds.Center - _cameraTransform.Forward;
+
+		var transform = _model.Transform.RotateAround(0, Rotation.FromYaw(RealTime.Delta * 115f));
+		_model.Position = transform.Position ;
+		_model.Rotation = transform.Rotation;
+
+		_scenePanel.Camera.FitModel( _model );
+		_scenePanel.Camera.Position += Vector3.Forward * 10f;
+		_sceneLight.Position = _scenePanel.Camera.Position;
+
+		_model.Update( RealTime.Delta );
+	}
+}

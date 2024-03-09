@@ -1,0 +1,45 @@
+@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<div class="header">
+		<img class="fish-img" src="ui/hud/fish_collection.png"/>
+		<div style="flex-direction: column;">
+			<text class="fish-title">FISH COLLECTION</text>
+			<text class="fish-subtitle">This is where you can keep track of all kinds of fish you've caught so far</text>
+		</div>
+	</div>
+	<div class="fishes">
+		@foreach ( var fishInfo in _fishesRepository )
+		{
+			<FishSlot Definition=@fishInfo />
+		}
+	</div>
+</root>
+
+@code {
+	private List<FishLog.FishInfo> _fishesRepository;
+
+	public FishList()
+	{
+		_fishesRepository = PrefabLibrary.FindByComponent<Fish>()
+			.Where( prefab => !prefab.GetComponent<Fish>().Get<bool>( "IsTrash" ) )
+			.Select( prefab =>
+			{
+				var fishComponent = prefab.GetComponent<Fish>();
+				var itemComponent = prefab.GetComponent<ItemComponent>();
+				var modelComponent = prefab.GetComponent<ModelRenderer>();
+				return new FishLog.FishInfo(
+					prefab.Path,
+					itemComponent.Get<string>( "Name" ),
+					itemComponent.Get<string>( "Description" ),
+					fishComponent.Get<float>( "Rarity" ),
+					fishComponent.Get<int>( "CostPerKilo" ),
+					Texture.Load( FileSystem.Mounted, itemComponent.Get<IconSettings>( "Icon" ).Path ),
+					modelComponent.Get<string>( "Model" ),
+					modelComponent.Get<string>( "MaterialGroup" )
+				);
+		} ).ToList();
+	}
+}

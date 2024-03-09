@@ -1,5 +1,3 @@
-using Sandbox.Citizen;
-using Sauna.Fishing;
 using Sauna.UI;
 
 namespace Sauna;
