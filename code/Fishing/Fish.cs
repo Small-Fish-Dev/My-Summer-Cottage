@@ -1,8 +1,8 @@
-﻿namespace Sauna.Fishing;
+﻿namespace Sauna;
 
 public class Fish : Component
 {
-	[Property] [Range( 0, 1 )] public float Rarity { get; set; }
+	[Property][Range( 0, 1 )] public float Rarity { get; set; }
 	[Property] public bool IsTrash { get; set; }
 
 	[Property] public float MinimumWaterDepth { get; set; } = 10;

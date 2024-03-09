@@ -1,0 +1,35 @@
+@import "/UI/Style.scss";
+
+FishList {
+    flex-direction: column;
+
+    .header {
+        position: absolute;
+        top: -85px;
+
+        .fish-img {
+            aspect-ratio: 1;
+            height: 60px;
+            image-rendering: pixelated;
+            margin-right: 20px;
+        }
+
+        .fish-title {
+            font-size: 28px;
+            font-family: BasicHandwriting;
+        }
+
+        .fish-subtitle {
+            font-size: 18px;
+            margin-top: 5px;
+            color: darken(white, 0.1);
+            font-family: HabboExtended;
+            width: 500px;
+        }
+    }
+
+    .fishes {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+}

@@ -1,4 +1,4 @@
-﻿namespace Sauna.Fishing;
+﻿namespace Sauna;
 
 public class FishingCell : Component
 {
