@@ -1,11 +1,16 @@
+// THIS FILE IS AUTO-GENERATED
 
 Layer0
 {
-	shader "shaders/complex.shader_c"
+	shader "shaders/saunasimple.shader"
 
-	TextureColor "models/clothes/cap/cap_color.png"
-	TextureAmbientOcclusion "materials/default/default_ao.tga"
-	TextureNormal "models/clothes/cap/cap_normal.png"
-	TextureRoughness "models/clothes/cap/cap_rough.png"
+	//---- Fog ----
+	g_bFogEnabled "1"
 
+	//---- Material ----
+	Color "models/clothes/cap/cap_twotone_color.png"
+	ColorTintMask "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/default/default_metal.tga"
+	Normal "models/clothes/cap/cap_twotone_normal.png"
+	Roughness "models/clothes/cap/cap_twotone_rough.png"
 }
