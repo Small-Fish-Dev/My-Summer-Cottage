@@ -123,7 +123,6 @@ public class FishingCell : Component
 					}
 					else if ( !fish.ShouldChangeTarget && fish.ShouldPullBobber )
 					{
-						Log.Info( "pull!" );
 						// TODO: a hardcoded constant!
 						fish.TargetBobber.Rigidbody.Velocity += Vector3.Down * fish.Weight * 0.01f;
 						fish.ShouldPullBobber = FishBobberPullPeriod.GetValue();
@@ -136,7 +135,6 @@ public class FishingCell : Component
 					// If we already have a target, just let it go
 					if ( fish.TargetBobber.IsValid() )
 					{
-						Log.Info( "gave up" );
 						FishClearTarget( fish );
 						if ( fish.TargetBobber.IsValid() )
 							freeBobbers.Add( fish.TargetBobber );
@@ -220,8 +218,6 @@ public class FishingCell : Component
 
 	public void PullOutFish( GameObject bobberGameObject )
 	{
-		Log.Info( "pull out fish" );
-
 		var bobber = bobberGameObject.Components.Get<Bobber>();
 
 		if ( !_bobbers.TryGetValue( bobber, out var fish ) || fish?.Fish == null )

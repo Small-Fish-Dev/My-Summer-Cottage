@@ -42,11 +42,7 @@ public class LeFisheSpawner : Component
 					.Box( bbox, center, center + Vector3.Up * 100 )
 					.Run();
 				if ( skyTrace.Hit )
-				{
-					// _debugFailedCells.Add( bbox + skyTrace.EndPosition );
-					// Log.Info( $"The sky is obscured by {skyTrace.Body.GetGameObject()}" );
 					continue;
-				}
 
 				var depthTrace = Scene.Trace
 					.Box( bbox, center, center + Vector3.Down * 100 )
