@@ -157,7 +157,6 @@ public class MoveHelper : Component
 	public Capsule CollisionCapsule;
 
 	public Vector3 InitialCameraPosition { get; private set; }
-	[Sync] public Angles EyeAngles { get; private set; }
 	[Sync] public Vector3 WishVelocity { get; set; }
 	[Sync] public Vector3 Velocity { get; set; }
 	[Sync] public bool IsOnGround { get; set; }

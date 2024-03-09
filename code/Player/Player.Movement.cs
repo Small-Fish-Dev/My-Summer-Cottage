@@ -61,9 +61,9 @@ partial class Player
 	[Range( 20f, 40f, 30f )]
 	public float Zoom { get; set; } = 30f;
 
+	public Vector3 Velocity => MoveHelper.Velocity;
 	[Sync] public bool Ducking { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
-	[Sync] public Vector3 Velocity { get; set; }
 	[Sync] public HoldType HoldType { get; set; } = HoldType.Idle;
 	[Sync] public bool AimState
 	{
@@ -95,6 +95,7 @@ partial class Player
 	{
 		if ( MoveHelper == null ) return;
 
+		var previousFallSpeed = Velocity.z;
 		var isWalking = Input.Down( InputAction.Walk );
 
 		var wishSpeed = Ducking ? DuckSpeed : isWalking ? WalkSpeed : SprintSpeed;
@@ -120,6 +121,13 @@ partial class Player
 		}
 
 		MoveHelper.Move();
+
+		var diff = MathF.Abs( Velocity.z - previousFallSpeed );
+		if ( diff > 600 && previousFallSpeed < Velocity.z )
+		{
+			var time = MathX.Clamp( 1, 4, diff / 250f );
+			SetRagdoll( true, duration: time );
+		}
 
 		/*
 		// Normal movement
