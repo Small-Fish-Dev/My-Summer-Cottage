@@ -21,14 +21,6 @@
 								from = "models/fauna/elk/materials/elk.vmat"
 								to = "models/fauna/elk/materials/elk.vmat"
 							},
-							{
-								from = "moose.vmat"
-								to = "models/fauna/elk/materials/moose.vmat"
-							},
-							{
-								from = "moose_antlers.vmat"
-								to = "models/fauna/elk/materials/moose_antlers.vmat"
-							},
 						]
 						use_global_default = false
 						global_default_material = ""
@@ -58,158 +50,6 @@
 								"elk",
 							]
 						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "elk_female"
-						filename = "models/fauna/elk/elk_female.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = true
-							exception_list = 
-							[
-								"elk",
-								"elk_female",
-								"elk_female_001",
-							]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "reindeer"
-						filename = "models/fauna/elk/reindeer.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "reindeer_female"
-						filename = "models/fauna/elk/reindeer_female.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "moose"
-						filename = "models/fauna/elk/moose.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "moose_female"
-						filename = "models/fauna/elk/moose_female.fbx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-				]
-			},
-			{
-				_class = "BodyGroupList"
-				children = 
-				[
-					{
-						_class = "BodyGroup"
-						name = "type"
-						children = 
-						[
-							{
-								_class = "BodyGroupChoice"
-								name = "reindeer"
-								meshes = 
-								[
-									"reindeer",
-								]
-							},
-							{
-								_class = "BodyGroupChoice"
-								name = "reindeer_female"
-								meshes = 
-								[
-									"reindeer_female",
-								]
-							},
-							{
-								_class = "BodyGroupChoice"
-								name = "elk"
-								meshes = 
-								[
-									"elk",
-								]
-							},
-							{
-								_class = "BodyGroupChoice"
-								name = "elk_female"
-								meshes = 
-								[
-									"elk_female",
-								]
-							},
-							{
-								_class = "BodyGroupChoice"
-								name = "moose"
-								meshes = 
-								[
-									"moose",
-								]
-							},
-							{
-								_class = "BodyGroupChoice"
-								name = "moose_female"
-								meshes = 
-								[
-									"moose_female",
-								]
-							},
-						]
-						hidden_in_tools = false
 					},
 				]
 			},
@@ -1267,6 +1107,21 @@
 						collision_tags = "solid"
 						radius = 4.76819
 						center = [ 0.0, 1.592672, -0.0 ]
+					},
+				]
+			},
+			{
+				_class = "ModelModifierList"
+				children = 
+				[
+					{
+						_class = "ModelModifier_ScaleAndMirror"
+						scale = 1.2
+						mirror_x = false
+						mirror_y = false
+						mirror_z = false
+						flip_bone_forward = false
+						swap_left_and_right_bones = false
 					},
 				]
 			},
