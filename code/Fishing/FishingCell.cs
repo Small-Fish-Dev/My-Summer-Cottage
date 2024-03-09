@@ -240,15 +240,6 @@ public class FishingCell : Component
 			fishInstance.Transform.Position = bobber.Transform.Position;
 			rigidbody.Velocity = velocity;
 		}
-		else if ( fishInstance.Components.TryGet<ModelPhysics>( out var physics ) )
-		{
-			fishInstance.Enabled = false;
-			fishInstance.Transform.Position = bobber.Transform.Position;
-			fishInstance.Enabled = true;
-
-			// TODO: should probably calculate a parabolic trajectory
-			physics.PhysicsGroup?.AddVelocity( velocity );
-		}
 
 		var fishComponent = fishInstance.Components.Get<Fish>();
 		fishComponent.AssignWeight( fish.Weight );

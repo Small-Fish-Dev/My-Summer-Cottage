@@ -7,12 +7,14 @@
       {
         "__type": "Fish",
         "CostPerKilo": 350,
+        "IsTrash": false,
         "MinimumWaterDepth": 15,
         "Rarity": 0.99,
         "WeightRange": "450.00,770.00,1"
       },
       {
         "__type": "ItemComponent",
+        "Count": 0,
         "Description": "A French delicacy, very sought after.",
         "Icon": {
           "Model": "models/fauna/fish/perch/perch.vmdl",
@@ -21,6 +23,7 @@
           "Rotation": "0,-0,-0.4725508,0.8813034",
           "Guid": "87e26071-c70d-46f0-b808-0b1ca7c764a1"
         },
+        "MaxStack": 0,
         "Name": "Le Fishe au Chocolat",
         "SellPrice": -1,
         "WeightInGrams": 0
@@ -38,15 +41,21 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "ModelPhysics",
-        "Locking": {},
+        "__type": "ModelCollider",
+        "IsTrigger": false,
         "Model": "models/fauna/fish/perch/perch.vmdl",
-        "Renderer": {
-          "_type": "component",
-          "go": "b31ebae6-4480-4350-98e7-0422a670f807",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "RigidbodyFlags": 0
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "Rigidbody",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
       }
     ],
     "Children": []
