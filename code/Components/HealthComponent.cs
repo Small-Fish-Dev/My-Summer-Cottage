@@ -51,6 +51,7 @@ public sealed class HealthComponent : Component
 	/// How many hit points this has, usually 1 hit point comes from DamageType.Mild
 	/// </summary>
 	[Property]
+	[HideIf( "Immortal", true )]
 	[Range( 1f, 100f, 1f, false )]
 	public int MaxHealth { get; set; } = 10;
 
@@ -61,12 +62,14 @@ public sealed class HealthComponent : Component
 	/// Can this thing regenerate health over time
 	/// </summary>
 	[Property]
+	[HideIf( "Immortal", true )]
 	public bool CanRegenerate { get; set; } = true;
 
 	/// <summary>
 	/// How much time passed since the last time its been damaged before it starts regenerating health
 	/// </summary>
 	[Property]
+	[HideIf( "Immortal", true )]
 	[Range( 0f, 10f, 0.1f )]
 	public float RegenerationTimer { get; set; } = 5f;
 
@@ -74,6 +77,7 @@ public sealed class HealthComponent : Component
 	/// How many seconds it takes to regenerate 1 hit point
 	/// </summary>
 	[Property]
+	[HideIf( "Immortal", true )]
 	[Range( 0f, 5f, 0.1f )]
 	public float RegenerationCooldown { get; set; } = 2f;
 
@@ -90,8 +94,6 @@ public sealed class HealthComponent : Component
 		_nextHeal = 0;
 
 		Health = MaxHealth;
-
-		Damage( 4, DamagedBy );
 	}
 
 	/// <summary>
@@ -106,6 +108,7 @@ public sealed class HealthComponent : Component
 	[Broadcast]
 	public void Damage( int amount, DamageType type, GameObject attacker = null, Vector3 worldHurtPosition = default, Vector3 forceDirection = default, float force = 0 )
 	{
+		if ( Immortal ) return;
 		if ( amount == 0 ) return;
 
 		var stunned = type >= StunnedBy && type != DamageType.Nothing; // Don't ragdoll if we're healing
@@ -148,12 +151,15 @@ public sealed class HealthComponent : Component
 
 	protected override void OnFixedUpdate()
 	{
-		if ( Health < MaxHealth )
+		if ( !Immortal )
 		{
-			if ( _nextHeal )
+			if ( Health < MaxHealth )
 			{
-				Damage( -1, DamageType.Nothing );
-				_nextHeal = RegenerationCooldown;
+				if ( _nextHeal )
+				{
+					Damage( -1, DamageType.Nothing );
+					_nextHeal = RegenerationCooldown;
+				}
 			}
 		}
 	}
