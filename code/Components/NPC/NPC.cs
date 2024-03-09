@@ -161,11 +161,11 @@ public partial class NPC : Component
 
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );
-		var scaledXSpeed = MaxRunAnimationSpeed * GameObject.Transform.Scale.x;
-		var scaledYSpeed = MaxRunAnimationSpeed * GameObject.Transform.Scale.y;
+		var maxScale = MathF.Max( MathF.Max( GameObject.Transform.Scale.x, GameObject.Transform.Scale.y ), GameObject.Transform.Scale.z );
+		var scaledSpeed = MaxRunAnimationSpeed * maxScale; // Model is scaled uniformally by the max value on the scale it seems
 
-		var newX = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Forward ) / scaledXSpeed;
-		var newY = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Right ) / scaledYSpeed;
+		var newX = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Forward ) / scaledSpeed;
+		var newY = Vector3.Dot( MoveHelper.Velocity, Model.Transform.Rotation.Right ) / scaledSpeed;
 		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
 		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
 
