@@ -1,10 +1,15 @@
 @import "/UI/Style.scss";
 
 ExperienceBar {
+    .hud {
+        padding: 15px 0px 20px 15px;
+        background: linear-gradient(to right, rgba($green, 0.7) 0%, rgba($green, 0.2) 70%, rgba($green, 0) 100%);
+    }
+
     .container {
         width: 800px;
         flex-direction: column;
-        transition: all 0.2s ease-out;
+        transition: all 0.4s ease-out;
 
         .level-details {
             width: 100%;
@@ -39,7 +44,7 @@ ExperienceBar {
 
         &.inactive {
             opacity: 0;
-            transform: translateY(20);
+            transform: translateX(-100%);
         }
     }
 }

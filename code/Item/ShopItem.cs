@@ -34,7 +34,7 @@ public class ShopItem : Component
 			Keybind = "use",
 			Disabled = () => Player.Local.Money < Price || !Player.Local.Inventory.HasSpaceInBackpack(),
 			DynamicText = () => Player.Local.Inventory.HasSpaceInBackpack() ? $"{Price}mk" : $"{Price}mk (Inventory full)",
-			DynamicColor = () => Color.FromBytes( 116, 254, 64 ),
+			DynamicColor = () => Color.FromBytes( 107, 157, 15 ),
 			ShowWhenDisabled = () => true,
 		} );
 		purchase = LegacyParticles.Create( "particles/purchase.vpcf", GameObject.Transform.World );

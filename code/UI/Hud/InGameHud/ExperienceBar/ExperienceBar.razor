@@ -3,7 +3,7 @@
 @inherits Panel
 
 <root>
-	<div @ref=_container class="container @(!IsInventoryScreen && _timeUntilHidden ? "inactive" : "")">
+	<div @ref=_container class="container @(!IsInventoryScreen ? "hud" : "") @(!IsInventoryScreen && _timeUntilHidden ? "inactive" : "")">
 		<div class="level-details">
 			<text class="level">@($"Lv. {@Player.Local.Level}")</text>
 			<text class="level-exp">@($"{Player.Local.Experience} / {Player.Local.ExpPerLevel} XP")</text>
@@ -44,7 +44,8 @@
 		expBar._timeUntilHidden = TIME_ON_SCREEN;
 		var popupExp = new PopupText($"+{delta} XP");
 		popupExp.Style.Right = Length.Pixels(0);
-		popupExp.Style.Top = Length.Pixels(-60);
+		popupExp.Style.Top = Length.Pixels(-40);
+		popupExp.PlaySound("success");
 		expBar._container.AddChild(popupExp);
 	}
 
@@ -56,8 +57,10 @@
 
 		expBar._timeUntilHidden = TIME_ON_SCREEN;
 		var popupLvl = new PopupText($"+1 LVL");
-		popupLvl.Style.Left = Length.Pixels(0);
-		popupLvl.Style.Top = Length.Pixels(-60);
+		popupLvl.Style.Left = Length.Pixels(5);
+		popupLvl.Style.Top = Length.Pixels(-40);
+		popupLvl.Style.FontFamily = "BasicHandwriting";
+		popupLvl.PlaySound("lvlup");
 		expBar._container.AddChild(popupLvl);
 	}
 
