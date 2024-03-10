@@ -1,4 +1,5 @@
 using Sauna.SFX;
+using static Sandbox.PhysicsContact;
 
 namespace Sauna;
 
@@ -14,6 +15,9 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Parameters" )] public float Range { get; set; } = 40f;
 	[Property, Category( "Parameters" )] public float FireSpeed { get; set; } = 0.5f;
 	[Property, Category( "Parameters" )] public InputMode Mode { get; set; } = InputMode.Pressed;
+	[Property, Category( "Parameters" )] public DamageType DamageType { get; set; } = DamageType.Average;
+	[Property, Category( "Parameters" )] public int Damage { get; set; } = 5;
+	[Property, Category( "Parameters" )] public float HitForce { get; set; } = 300;
 
 	[Property, Category( "Projectile" ), Sync, TargetSave] public int Ammo { get; set; }
 	[Property, Category( "Projectile" )] public string ExitAttachment { get; set; }
@@ -167,10 +171,16 @@ public sealed class WeaponComponent : Component
 		particle.SetVector( 0, transform.Position );
 		particle.SetVector( 1, tr.EndPosition );
 
-		// Ragdoll hit player? :D
-		var target = tr.GameObject?.Components.Get<Player>( FindMode.EverythingInSelfAndAncestors );
+		var target = tr.GameObject;
+
 		if ( target != null )
-			target.SetRagdoll( true, duration: 2.5f, spin: 30 );
+		{
+			if ( target.Components.TryGet<Rigidbody>( out var body ) )
+				body.ApplyImpulseAt( tr.HitPosition, tr.Direction * HitForce );
+
+			if ( target.Components.TryGet<HealthComponent>( out var health ) )
+				health.Damage( Damage, DamageType, shooter.GameObject, tr.HitPosition, tr.Direction, HitForce );
+		}
 
 		TryPlaySound( FireSound );
 
@@ -183,9 +193,16 @@ public sealed class WeaponComponent : Component
 			.IgnoreGameObjectHierarchy( attacker.GameObject )
 			.Run();
 
-		var target = tr.GameObject?.Components.Get<Player>( FindMode.EverythingInSelfAndAncestors );
+		var target = tr.GameObject;
+
 		if ( target != null )
-			target.SetRagdoll( true, duration: 0.5f, spin: 30 );
+		{
+			if ( target.Components.TryGet<Rigidbody>( out var body ) )
+				body.ApplyImpulseAt( tr.HitPosition, tr.Direction * HitForce );
+
+			if ( target.Components.TryGet<HealthComponent>( out var health ) )
+				health.Damage( Damage, DamageType, attacker.GameObject, tr.HitPosition, tr.Direction, HitForce );
+		}
 
 		return true;
 	}
