@@ -6,7 +6,7 @@
     "Components": [
       {
         "__type": "NPC",
-        "AlertRange": 256,
+        "AlertRange": 512,
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
@@ -25,7 +25,58 @@
           "component_type": "MoveHelper"
         },
         "NavigationType": "Normal",
-        "OnAlerted": null,
+        "OnAlerted": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Alerted",
+            "id": "2f91b130-8e48-421d-b4d1-61c4a66427ae",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-64,96"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "if",
+              "UserData": {
+                "Position": "272,96"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "op.isnotnull",
+              "UserData": {
+                "Position": "112,208"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "provoker",
+              "DstId": 2,
+              "DstName": "input"
+            }
+          ]
+        },
         "OnAttacked": null,
         "OnDestroyed": null,
         "OnKilled": null,
