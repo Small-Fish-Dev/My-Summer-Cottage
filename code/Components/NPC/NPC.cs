@@ -235,23 +235,10 @@ public partial class NPC : Component
 		{
 			if ( Ragdoll == null )
 			{
-				SetTarget( Scene.GetAllComponents<Player>().First().GameObject ); // TODO: Remove
-
-				if ( TargetObject.IsValid() )
-				{
-					if ( IsWithinRange( TargetObject ) )
-					{
-						var newRotation = Rotation.LookAt( TargetObject.Transform.Position.WithZ( 0f ) - Transform.Position.WithZ( 0f ), Vector3.Up );
-						Transform.Rotation = Rotation.Lerp( Transform.Rotation, newRotation, Time.Delta * 5f );
-
-						SetRagdoll( true, 5f, 50f * ForceMultiplier );
-						WorldPunch( TargetObject.Transform.Position, 400f, 300f );
-						//Health.Kill();
-					}
-				}
-
 				ComputeNavigation();
 				MoveHelper.Move();
+
+				DetectAround();
 			}
 		}
 		else
@@ -261,6 +248,37 @@ public partial class NPC : Component
 
 		if ( Ragdoll != null )
 			FollowRagdoll();
+	}
+
+	/// <summary>
+	/// Get all provokers inside of its detect area
+	/// </summary>
+	public IEnumerable<GameObject> ProvokersInArea { get; set; }
+
+	public void DetectAround()
+	{
+		var currentTick = (int)(Time.Now / Time.Delta);
+		if ( currentTick % 30 != NpcId % 30 ) return; // Check every 30 ticks
+
+		var foundAround = Scene.FindInPhysics( new Sphere( Transform.Position, AlertRange ) )
+			.Where( x => ProvokerTags != null && x.Tags.HasAny( ProvokerTags ) );
+
+		if ( TargetObject == null )
+		{
+			if ( foundAround.Any() )
+			{
+				TargetObject = foundAround.First();
+				OnAlerted?.Invoke( TargetObject );
+			}
+		}
+		else
+		{
+			if ( !foundAround.Any( x => x == TargetObject ) )
+			{
+				OnProvokerEscaped?.Invoke( TargetObject );
+				TargetObject = null;
+			}
+		}
 	}
 
 	/// <summary>
