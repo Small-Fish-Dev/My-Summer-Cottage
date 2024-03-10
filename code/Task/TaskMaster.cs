@@ -28,6 +28,9 @@ public class TaskMaster : Component
 		}
 	}
 
+	public static int IndexOf( SaunaTask task )
+		=> _instance.CurrentTasks.IndexOf( task );
+
 	/// <summary>
 	/// Get how many tasks the player has completed so far (From 0 to 1) - Fetching this runs a check so don't overuse it
 	/// </summary>
