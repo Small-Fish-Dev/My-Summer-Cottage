@@ -125,7 +125,7 @@ public partial class NPC : Component
 	/// How far away the NPC can see the enemy before losing sight
 	/// </summary>
 	[Property]
-	[Category( "TriggerStats" )]
+	[Category( "Stats" )]
 	[Range( 0f, 2024f, 16f )]
 	public float VisionRange { get; set; } = 512f;
 
@@ -136,31 +136,31 @@ public partial class NPC : Component
 	[Category( "Triggers" )]
 	public Action OnSpawn { get; set; }
 
-	public delegate void NpcTrigger( GameObject attacker );
+	public delegate void NpcTrigger( GameObject enemy );
 
 	/// <summary>
-	/// When an attacker enters the detect area or attacks the NPC, or a nearby NPC gets alerted. This won't get called if the NPC has been alerted already.
+	/// When an enemy enters the detect area or attacks the NPC, or a nearby NPC gets alerted. This won't get called if the NPC has been alerted already.
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
 	public NpcTrigger OnDetect { get; set; }
 
 	/// <summary>
-	/// When the attacker is within attack range and our cooldown is up
+	/// When the enemy is within attack range and our cooldown is up
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
 	public NpcTrigger OnAttack { get; set; }
 
 	/// <summary>
-	/// When the attacker gets out of the Vision Range or dies
+	/// When the enemy gets out of the Vision Range or dies
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
-	public NpcTrigger OnAttackerEscaped { get; set; }
+	public NpcTrigger OnEnemyEscaped { get; set; }
 
 	/// <summary>
-	/// When the NPC dies, attacker will be NULL if it died of natural causes (???)
+	/// When the NPC dies, enemy will be NULL if it died of natural causes (???)
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
@@ -354,7 +354,7 @@ public partial class NPC : Component
 
 	public void Undetected()
 	{
-		OnAttackerEscaped?.Invoke( TargetObject );
+		OnEnemyEscaped?.Invoke( TargetObject );
 
 		TargetObject = null;
 		TargetPosition = Transform.Position;
