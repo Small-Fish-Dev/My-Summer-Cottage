@@ -173,16 +173,11 @@ public partial class NPC
 
 	void CheckNewTargetPos()
 	{
-		if ( FollowingTargetObject )
+		if ( TargetObject.IsValid() )
 		{
-			if ( TargetObject.IsValid() )
+			if ( TargetPosition.Distance( GetPreferredTargetPosition( TargetObject ) ) >= AttackRange / 4f ) // Has our target moved?
 			{
-				if ( !IsWithinRange( TargetObject ) ) // Has our target moved?
-					MoveTo( GetPreferredTargetPosition( TargetObject ) );
-			}
-			else
-			{
-				SetTarget( null );
+				MoveTo( GetPreferredTargetPosition( TargetObject ) );
 			}
 		}
 	}

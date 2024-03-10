@@ -8,7 +8,7 @@
         "__type": "NPC",
         "AttackCooldown": 8,
         "AttackRange": 80,
-        "DetectRange": 700,
+        "DetectRange": 256,
         "EnemyTags": "player",
         "FaceTowardsVelocity": true,
         "Health": {
@@ -16,7 +16,10 @@
           "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
           "component_type": "HealthComponent"
         },
+        "Idle": true,
+        "MaximumIdleCooldown": 6,
         "MaxRunAnimationSpeed": 250,
+        "MinimumIdleCooldown": 4,
         "Model": {
           "_type": "component",
           "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
@@ -28,7 +31,7 @@
           "component_type": "MoveHelper"
         },
         "Name": "Moose (\u2642)",
-        "NavigationType": "Normal",
+        "NavigationType": "Smart",
         "OnAttack": {
           "Version": 5,
           "UserData": {
@@ -162,7 +165,8 @@
             "Title": "On Detect",
             "id": "eb215b18-ba3d-45d3-840b-2ac2f527d1dd",
             "ReferencedComponentTypes": [
-              "package.fish.sauna/NPC"
+              "package.fish.sauna/NPC",
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
             ]
           },
           "Variables": [],
@@ -175,7 +179,7 @@
               "Id": 2,
               "Type": "npc.startfollowing",
               "UserData": {
-                "Position": "304,32"
+                "Position": "352,16"
               }
             },
             {
@@ -186,6 +190,42 @@
               },
               "UserData": {
                 "Position": "96,112"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-176,-160"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              },
+              "UserData": {
+                "Position": "64,-160"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "496,-176"
               }
             }
           ],
@@ -213,6 +253,34 @@
               "SrcName": "_target",
               "DstId": 3,
               "DstName": "_this"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_target"
+            },
+            {
+              "Value": "eating",
+              "DstId": 10,
+              "DstName": "v"
+            },
+            {
+              "Value": false,
+              "DstId": 10,
+              "DstName": "value"
             }
           ]
         },
@@ -247,15 +315,23 @@
               "UserData": {
                 "Position": "128,112"
               }
+            },
+            {
+              "Id": 4,
+              "Type": "npc.stopescaping",
+              "UserData": {
+                "Position": "416,208"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "log.warning",
+              "UserData": {
+                "Position": "336,-0"
+              }
             }
           ],
           "Links": [
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 2,
-              "DstName": "_signal"
-            },
             {
               "SrcId": 3,
               "SrcName": "_result",
@@ -267,6 +343,236 @@
               "SrcName": "_target",
               "DstId": 3,
               "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 4,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 5,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "bye rar",
+              "DstId": 5,
+              "DstName": "format"
+            }
+          ]
+        },
+        "OnIdle": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Idle",
+            "id": "f2de72d1-71fb-4fde-9e75-7629fce59da5",
+            "ReferencedComponentTypes": [
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-496,-288"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "176,-240"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-496,-144",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "-176,-128"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "property.get",
+              "ParentId": 3,
+              "Properties": {
+                "_type": "package.fish.sauna/NPC",
+                "_name": "SpawnPosition"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              },
+              "UserData": {
+                "Position": "-576,-16",
+                "Labels": {
+                  "_result": "renderer"
+                }
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "-144,-384"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "544,-224"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "-96,-240"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 10,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "position"
+            },
+            {
+              "Value": 512,
+              "DstId": 4,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 0,
+              "DstId": 4,
+              "DstName": "minRange"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 7,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "Value": "eating",
+              "DstId": 7,
+              "DstName": "v"
+            },
+            {
+              "Value": false,
+              "DstId": 7,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "reachedDestination",
+              "DstId": 8,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_target"
+            },
+            {
+              "Value": "eating",
+              "DstId": 8,
+              "DstName": "v"
+            },
+            {
+              "Value": true,
+              "DstId": 8,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 1,
+              "DstId": 10,
+              "DstName": "seconds"
             }
           ]
         },

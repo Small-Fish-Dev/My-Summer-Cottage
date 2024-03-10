@@ -130,6 +130,33 @@ public partial class NPC : Component
 	public float VisionRange { get; set; } = 512f;
 
 	/// <summary>
+	/// When the NPC has no target it will sometimes fire off the idle event
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	public bool Idle { get; set; } = true;
+
+	/// <summary>
+	/// Maximum time in between idle events being called when there is no target
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	[ShowIf( "Idle", true )]
+	[Range( 0.1f, 10f, 0.1f )]
+	public float MinimumIdleCooldown { get; set; } = 4;
+
+	/// <summary>
+	/// Minimum time in between idle events being called when there is no target
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	[ShowIf( "Idle", true )]
+	[Range( 0.1f, 20f, 0.1f )]
+	public float MaximumIdleCooldown { get; set; } = 6;
+
+	public TimeUntil NextIdle { get; set; }
+
+	/// <summary>
 	/// When the NPC is first spawned in
 	/// </summary>
 	[Property]
@@ -165,6 +192,14 @@ public partial class NPC : Component
 	[Property]
 	[Category( "Triggers" )]
 	public NpcTrigger OnKilled { get; set; }
+
+	/// <summary>
+	/// When the NPC has no target it will occasionally fire this off
+	/// </summary>
+	[Property]
+	[Category( "Triggers" )]
+	[ShowIf( "Idle", true )]
+	public Action OnIdle { get; set; }
 
 	public int NpcId { get; set; }
 	public Vector3 TargetPosition { get; set; }
@@ -234,7 +269,7 @@ public partial class NPC : Component
 
 		if ( Ragdoll == null && FaceTowardsVelocity )
 			if ( !MoveHelper.Velocity.IsNearlyZero( 1f ) )
-				Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ), Vector3.Up ), Time.Delta * 10f );
+				Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ), Vector3.Up ), Time.Delta * 5f );
 
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );
@@ -255,6 +290,15 @@ public partial class NPC : Component
 		{
 			if ( Ragdoll == null ) // If we are not ragdolled
 			{
+				if ( TargetObject == null )
+				{
+					if ( NextIdle )
+					{
+						OnIdle?.Invoke();
+						NextIdle = Game.Random.Float( MinimumIdleCooldown, MaximumIdleCooldown );
+					}
+				}
+
 				if ( MoveHelper == null ) return;
 				{
 					ComputeNavigation();
@@ -365,7 +409,8 @@ public partial class NPC : Component
 	/// Who should the NPC follow, set null to go back to manually setting the target position
 	/// </summary>
 	/// <param name="target"></param>
-	public void SetTarget( GameObject target )
+	/// <param name="escapeFrom"></param>
+	public void SetTarget( GameObject target, bool escapeFrom = false )
 	{
 		if ( target == null )
 		{
@@ -378,8 +423,8 @@ public partial class NPC : Component
 		if ( TargetObject != null )
 		{
 			TargetObject = target;
+			FollowingTargetObject = !escapeFrom;
 			MoveTo( GetPreferredTargetPosition( TargetObject ) );
-			FollowingTargetObject = true;
 			ReachedDestination = false;
 		}
 	}
@@ -458,7 +503,7 @@ public partial class NPC : Component
 		var targetPosition = target.Transform.Position;
 
 		var direction = (Transform.Position - targetPosition).Normal;
-		var offset = direction * AttackRange * Scale / 2f;
+		var offset = FollowingTargetObject ? direction * AttackRange * Scale / 2f : direction * VisionRange * Scale;
 		var wishPos = targetPosition + offset;
 
 		var groundTrace = Scene.Trace.Ray( wishPos + Vector3.Up * 64f, wishPos + Vector3.Down * 64f )
@@ -467,7 +512,7 @@ public partial class NPC : Component
 			.WithoutTags( "player", "npc", "trigger" )
 			.Run();
 
-		return groundTrace.Hit && !groundTrace.StartedSolid ? groundTrace.HitPosition : targetPosition;
+		return groundTrace.Hit && !groundTrace.StartedSolid ? groundTrace.HitPosition : (FollowingTargetObject ? targetPosition : targetPosition + offset);
 	}
 
 	/// <summary>

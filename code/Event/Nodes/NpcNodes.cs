@@ -104,6 +104,30 @@ public static partial class NpcNodes
 	}
 
 	/// <summary>
+	/// Start escaping from whatever target you had
+	/// </summary>
+	[ActionGraphNode( "npc.startescaping" )]
+	[Title( "Start Escaping" ), Group( "NPC" ), Icon( "directions_run" )]
+	public static void StartEscaping( NPC npc, GameObject target )
+	{
+		if ( npc == null ) return;
+
+		npc.SetTarget( target, true );
+	}
+
+	/// <summary>
+	/// Stop escaping from whatever target you had
+	/// </summary>
+	[ActionGraphNode( "npc.stopescaping" )]
+	[Title( "Stop Escaping" ), Group( "NPC" ), Icon( "hail" )]
+	public static void StopEscaping( NPC npc )
+	{
+		if ( npc == null ) return;
+
+		npc.SetTarget( null );
+	}
+
+	/// <summary>
 	/// Deal damage to whatever, depending on damage type and force it will also ragdoll and punch
 	/// </summary>
 	[ActionGraphNode( "npc.damage" )]
