@@ -240,6 +240,7 @@ public partial class SaunaTask : GameResource
 		OnSuccess?.Invoke( Player.Local );
 		TaskMaster.SubmitTriggerSignal( SuccessSignal, Player.Local );
 		Log.Info( $"Submitted signal {SuccessSignal}" );
+		NotificationManager.Popup( this, completed: true );
 	}
 
 	/// <summary>
@@ -254,6 +255,7 @@ public partial class SaunaTask : GameResource
 
 		OnFail?.Invoke( Player.Local );
 		TaskMaster.SubmitTriggerSignal( FailedSignal, Player.Local );
+		NotificationManager.Popup( this, failed: true );
 	}
 
 	/// <summary>
