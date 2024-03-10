@@ -110,6 +110,13 @@ public class FishingCell : Component
 				ShouldUpdatePool = PoolUpdateRate;
 			}
 
+			// Remove the invalid bobbers
+			foreach ( var fish in CurrentFishes.Where( x =>
+				         !x.TargetBobber.IsValid() || !_bobbers.ContainsKey( x.TargetBobber ) ) )
+			{
+				FishClearTarget( fish );
+			}
+
 			var freeBobbers = _bobbers.Where( kv => kv.Value is null ).Select( kv => kv.Key ).ToList();
 			// This is where the fishes actually think
 			foreach ( var fish in CurrentFishes )
@@ -194,10 +201,7 @@ public class FishingCell : Component
 			if ( other.Tags.Has( "bobber" ) )
 			{
 				var bobber = other.Components.Get<Bobber>();
-				if ( _bobbers.TryGetValue( bobber, out var fish ) )
-					bobbers[bobber] = fish;
-				else
-					bobbers[bobber] = null;
+				bobbers[bobber] = _bobbers.GetValueOrDefault( bobber );
 				bobber.CurrentCell ??= this;
 			}
 			else if ( !_hasPlayersInside && other.Tags.Has( "player" ) )
