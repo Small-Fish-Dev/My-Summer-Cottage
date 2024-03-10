@@ -18,6 +18,7 @@ public partial class NPC
 {
 	public bool IsRunning { get; set; } = false;
 	public float WishSpeed => (IsRunning ? RunSpeed : WalkSpeed) * Scale;
+	public bool ReachedDestination { get; set; } = true;
 
 	int _totalDirections
 	{
@@ -81,6 +82,7 @@ public partial class NPC
 		if ( distanceToTarget <= MoveHelper.TraceRadius / 2f )
 		{
 			MoveHelper.WishVelocity = Vector3.Zero;
+			ReachedDestination = true;
 			return;
 		}
 		else
@@ -185,5 +187,6 @@ public partial class NPC
 	public void MoveTo( Vector3 targetPosition )
 	{
 		TargetPosition = targetPosition;
+		ReachedDestination = false;
 	}
 }
