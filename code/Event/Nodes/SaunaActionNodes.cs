@@ -36,4 +36,11 @@ public static partial class SaunaActionNodes
 	{
 		TaskMaster.SubmitTriggerSignal( signalIdentifier.Identifier, player );
 	}
+
+	[ActionGraphNode( "notification.popup" )]
+	[Title( "Create Popup" ), Group( "UI" ), Icon( "chat" )]
+	public static void Popup( string title, string description, Color theme, string icon = null, int? number = null, int time = 7 )
+	{
+		NotificationManager.Popup( title, description, theme, icon, number, time );
+	}
 }

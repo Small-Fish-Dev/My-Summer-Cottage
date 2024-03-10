@@ -1,0 +1,89 @@
+﻿@using Sauna.UI;
+
+@namespace Sauna
+@attribute [StyleSheet]
+@inherits Panel
+
+<root />
+
+@code {
+	private const int MAX_AMOUNT = 4;
+
+	private static NotificationManager _instance;
+	private Dictionary<Notification, TimeUntil> _notifications = new();
+
+	public NotificationManager()
+	{
+		_instance = this;
+	}
+
+	private static void DeleteOldest()
+	{
+		var notifications = _instance._notifications;
+		if ( notifications.Count < MAX_AMOUNT )
+			return;
+
+		var oldest = _instance.Children.FirstOrDefault() as Notification;
+		if ( oldest != null )
+		{
+			oldest.Delete();
+			notifications.Remove( oldest );
+		}
+	}
+
+	/// <summary>
+	/// Creates an unique styled notification popup.
+	/// </summary>
+	/// <param name="title"></param>
+	/// <param name="description"></param>
+	/// <param name="theme"></param>
+	/// <param name="icon"></param>
+	/// <param name="number"></param>
+	/// <param name="time"></param>
+	public static void Popup( string title, string description, Color theme, string icon = null, int? number = null, int time = 7 )
+	{
+		DeleteOldest();
+
+		// Create notification instance.
+		var notification = _instance.AddChild<Notification>();
+		notification.Title = title;
+		notification.Theme = theme;
+		notification.Description = description;
+		notification.Icon = icon;
+		notification.Number = number;
+		notification.Time = time;
+
+		_instance._notifications.Add( notification, notification.Time );
+	}
+
+	/// <summary>
+	/// Creates a notification popup for a task.
+	/// </summary>
+	/// <param name="task"></param>
+	public static void Popup( SaunaTask task )
+		=> Popup( 
+			 $"New {(task.IsPrimaryTask ? "story" : "side")} task",
+			 task.Subtitle,
+			 task.IsPrimaryTask ? "#bc4d2a" : "#0e599f",
+			 task.IsPrimaryTask ? "ui/hud/primary_task.png" : "ui/hud/substory_task.png",
+			 TaskMaster.IndexOf( task )
+		);
+
+	public override void Tick()
+	{
+		// Delete expired popups.
+		foreach ( var (notification, delete) in _notifications )
+		{
+			if ( delete )
+			{
+				if ( !notification.IsDeleting )
+					notification.Delete();
+
+				if ( !notification.IsValid() )
+					_notifications.Remove( notification );
+
+				break;
+			}
+		}
+	}
+}

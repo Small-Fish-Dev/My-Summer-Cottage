@@ -28,6 +28,9 @@ public class TaskMaster : Component
 		}
 	}
 
+	public static int IndexOf( SaunaTask task )
+		=> _instance.CurrentTasks.IndexOf( task );
+
 	/// <summary>
 	/// Get how many tasks the player has completed so far (From 0 to 1) - Fetching this runs a check so don't overuse it
 	/// </summary>
@@ -373,6 +376,8 @@ public class TaskMaster : Component
 		if ( sameTaskFound ) return _instance.CurrentTasks.Where( x => x.ResourceName == taskToAssign.ResourceName ).First(); // Bail if we have the same task already
 
 		_instance.CurrentTasks.Add( taskToAssign ); // Add the task
+		NotificationManager.Popup( taskToAssign );
+
 		return taskToAssign;
 	}
 
