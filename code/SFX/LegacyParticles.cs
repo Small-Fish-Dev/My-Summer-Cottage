@@ -13,11 +13,13 @@ public class LegacyParticles
 
 	private LegacyParticles() { }
 	
-	public static LegacyParticles Create( string path, Transform transform = default, List<ParticleControlPoint> controlPoints = null, int? deleteTime = null )
+	public static LegacyParticles Create( string path, Transform transform = default, GameObject parent = null, List<ParticleControlPoint> controlPoints = null, int? deleteTime = null )
 	{
 		var obj = Game.ActiveScene.CreateObject();
 		obj.Transform.World = transform;
 		obj.Name = $"Legacy Particles";
+
+		if ( parent != null ) obj.Parent = parent;
 
 		var particle = new LegacyParticles()
 		{
