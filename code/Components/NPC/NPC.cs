@@ -1,4 +1,6 @@
 ﻿using Sandbox;
+using Sandbox.Citizen;
+using Sandbox.ModelEditor;
 using Sauna;
 using System.Threading;
 
@@ -366,16 +368,10 @@ public partial class NPC : Component
 
 	public void Detected( GameObject target, bool alertOthers = false )
 	{
-		if ( target == null )
-		{
-			Undetected();
-			return;
-		}
-
+		if ( target == null ) return;
 		if ( target == TargetObject ) return;
 
-		TargetObject = target;
-
+		SetTarget( target );
 		OnDetect?.Invoke( TargetObject );
 
 		if ( alertOthers )
@@ -383,7 +379,9 @@ public partial class NPC : Component
 			var otherNpcs = Scene.GetAllComponents<NPC>()
 				.Where( x => x.Transform.Position.Distance( Transform.Position ) <= x.VisionRange * x.Scale ) // Find all nearby NPCs
 				.Where( x => x.Health?.Alive ?? true ) // Dead or undead
-				.Where( x => x.TargetObject == null ); // They don't have a target already
+				.Where( x => x.TargetObject == null ) // They don't have a target already
+				.Where( x => x != this ) // Not us
+				.Where( x => x.GameObject != null ); // And that don't have a target already
 
 			foreach ( var npc in otherNpcs )
 				npc.Detected( target, false );
@@ -419,8 +417,7 @@ public partial class NPC : Component
 			ReachedDestination = true;
 			TargetPosition = Transform.Position;
 		}
-
-		if ( TargetObject != null )
+		else
 		{
 			TargetObject = target;
 			FollowingTargetObject = !escapeFrom;
@@ -511,7 +508,8 @@ public partial class NPC : Component
 			.IgnoreGameObjectHierarchy( GameObject )
 			.WithoutTags( "player", "npc", "trigger" )
 			.Run();
-
+		//Log.Info( target.Transform.Position.Distance( groundTrace.Hit && !groundTrace.StartedSolid ? groundTrace.HitPosition : (FollowingTargetObject ? targetPosition : targetPosition + offset) ) );
+		//Log.Info( FollowingTargetObject );
 		return groundTrace.Hit && !groundTrace.StartedSolid ? groundTrace.HitPosition : (FollowingTargetObject ? targetPosition : targetPosition + offset);
 	}
 
