@@ -7,6 +7,7 @@
     "Components": [
       {
         "__type": "NPC",
+        "AlertOthers": false,
         "AttackCooldown": 10,
         "AttackRange": 40,
         "DetectRange": 0,
@@ -92,8 +93,8 @@
               "Type": "property.get",
               "ParentId": 8,
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Transform"
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
               },
               "UserData": {
                 "Visible": false
@@ -104,8 +105,8 @@
               "Type": "property.get",
               "ParentId": 9,
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameTransform",
-                "_name": "Position"
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
               }
             },
             {
@@ -119,9 +120,9 @@
               "Id": 14,
               "Type": "call",
               "Properties": {
-                "_isStatic": false,
+                "_name": "Destroy",
                 "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Destroy"
+                "_isStatic": false
               },
               "UserData": {
                 "Position": "976,48"
@@ -347,8 +348,8 @@
               "Type": "property.get",
               "ParentId": 3,
               "Properties": {
-                "_type": "package.fish.sauna/NPC",
-                "_name": "SpawnPosition"
+                "_name": "SpawnPosition",
+                "_type": "package.fish.sauna/NPC"
               }
             },
             {
@@ -368,9 +369,9 @@
               "Id": 7,
               "Type": "call",
               "Properties": {
-                "_isStatic": false,
+                "_name": "Set",
                 "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
-                "_name": "Set"
+                "_isStatic": false
               },
               "UserData": {
                 "Position": "-144,-384"
@@ -380,9 +381,9 @@
               "Id": 8,
               "Type": "call",
               "Properties": {
-                "_isStatic": false,
+                "_name": "Set",
                 "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
-                "_name": "Set"
+                "_isStatic": false
               },
               "UserData": {
                 "Position": "544,-224"

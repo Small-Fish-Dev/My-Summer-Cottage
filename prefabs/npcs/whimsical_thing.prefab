@@ -1,0 +1,922 @@
+{
+  "RootObject": {
+    "Id": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+    "Name": "whimsical_thing",
+    "Tags": "npc",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "NPC",
+        "AlertOthers": false,
+        "AttackCooldown": 1,
+        "AttackRange": 40,
+        "DetectRange": 800,
+        "EnemyTags": "player",
+        "FaceTowardsVelocity": true,
+        "Health": {
+          "_type": "component",
+          "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+          "component_type": "HealthComponent"
+        },
+        "Idle": false,
+        "MaximumIdleCooldown": 12,
+        "MaxRunAnimationSpeed": 0,
+        "MinimumIdleCooldown": 6,
+        "Model": {
+          "_type": "component",
+          "go": "2c15adeb-4401-47b4-ae4f-fbce7070b9a1",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "MoveHelper": {
+          "_type": "component",
+          "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+          "component_type": "MoveHelper"
+        },
+        "Name": "Whimsical Thing",
+        "OnAttack": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Attack",
+            "id": "e4b9ac1c-f91d-4e21-a093-061b7985801a",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/HealthComponent",
+              "package.fish.sauna/NPC",
+              "package.fish.sauna/MoveHelper"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Labels": {
+                  "enemy": "enemy"
+                },
+                "Position": "-80,-80"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "npc.damage",
+              "UserData": {
+                "Position": "384,-80"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "64,16"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "npc.startescaping",
+              "UserData": {
+                "Position": "688,16"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "call",
+              "Properties": {
+                "_name": "Destroy",
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "976,48"
+              }
+            },
+            {
+              "Id": 18,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001"
+                }
+              },
+              "UserData": {
+                "Position": "-80,160"
+              }
+            },
+            {
+              "Id": 19,
+              "Type": "property.get",
+              "ParentId": 18,
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 20,
+              "Type": "property.get",
+              "ParentId": 19,
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "scene.get",
+              "ParentId": 18,
+              "Properties": {
+                "T": "package.fish.sauna/NPC"
+              }
+            },
+            {
+              "Id": 22,
+              "Type": "scene.get",
+              "ParentId": 18,
+              "Properties": {
+                "T": "package.fish.sauna/MoveHelper"
+              }
+            },
+            {
+              "Id": 24,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "UseSceneGravity",
+                "_type": "package.fish.sauna/MoveHelper"
+              },
+              "UserData": {
+                "Position": "784,256"
+              }
+            },
+            {
+              "Id": 26,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Gravity",
+                "_type": "package.fish.sauna/MoveHelper"
+              },
+              "UserData": {
+                "Position": "816,400"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 1,
+              "DstId": 1,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 100,
+              "DstId": 1,
+              "DstName": "force"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "healthComponent"
+            },
+            {
+              "Value": "Mild",
+              "DstId": 1,
+              "DstName": "type"
+            },
+            {
+              "SrcId": 20,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "worldHurtPosition"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 2,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 13,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 13,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "succesfullyEscaped",
+              "DstId": 14,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_result",
+              "DstId": 19,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 19,
+              "SrcName": "_result",
+              "DstId": 20,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_result",
+              "DstId": 21,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_result",
+              "DstId": 22,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 24,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 22,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 24,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 26,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 22,
+              "SrcName": "_result",
+              "DstId": 26,
+              "DstName": "_target"
+            },
+            {
+              "Value": "0,0,60",
+              "DstId": 26,
+              "DstName": "_value"
+            }
+          ]
+        },
+        "OnDetect": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Detect",
+            "id": "7edeeb8b-e5d7-4567-ae19-337a1054c31f",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 2,
+              "Type": "npc.startfollowing",
+              "UserData": {
+                "Position": "256,-16"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "16,128"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 2,
+              "DstName": "target"
+            }
+          ]
+        },
+        "OnIdle": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Idle",
+            "id": "f2de72d1-71fb-4fde-9e75-7629fce59da5",
+            "ReferencedComponentTypes": [
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-496,-288"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "176,-240"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-496,-144",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "-176,-128"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "property.get",
+              "ParentId": 3,
+              "Properties": {
+                "_name": "SpawnPosition",
+                "_type": "package.fish.sauna/NPC"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              },
+              "UserData": {
+                "Position": "-576,-16",
+                "Labels": {
+                  "_result": "renderer"
+                }
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "call",
+              "Properties": {
+                "_name": "Set",
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "-144,-384"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "call",
+              "Properties": {
+                "_name": "Set",
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "544,-224"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "position"
+            },
+            {
+              "Value": 512,
+              "DstId": 4,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 0,
+              "DstId": 4,
+              "DstName": "minRange"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 7,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "Value": "eating",
+              "DstId": 7,
+              "DstName": "v"
+            },
+            {
+              "Value": false,
+              "DstId": 7,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "reachedDestination",
+              "DstId": 8,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_target"
+            },
+            {
+              "Value": "eating",
+              "DstId": 8,
+              "DstName": "v"
+            },
+            {
+              "Value": true,
+              "DstId": 8,
+              "DstName": "value"
+            }
+          ]
+        },
+        "RunningType": "Smart",
+        "RunSpeed": 80,
+        "ScaleStats": true,
+        "Static": false,
+        "VisionRange": 2000,
+        "WalkingType": "Dumb",
+        "WalkSpeed": 70,
+        "Weight": "Feather"
+      },
+      {
+        "__type": "MoveHelper",
+        "AccelerationCurve": [
+          {
+            "y": 0.26861703
+          },
+          {
+            "x": 1,
+            "y": 1
+          }
+        ],
+        "AirAcceleration": 1000,
+        "AirFriction": 1,
+        "Bounce": 0,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,60",
+        "GroundAcceleration": 3000,
+        "GroundAngle": 70,
+        "GroundFriction": 0,
+        "IgnoreTags": "",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 24,
+        "StickToGround": false,
+        "StopSpeed": 10,
+        "TraceHeight": 50,
+        "TraceRadius": 6,
+        "TraceType": "Capsule",
+        "UseCollider": false,
+        "UseSceneGravity": true
+      },
+      {
+        "__type": "CapsuleCollider",
+        "End": "0,0,44.63999",
+        "IsTrigger": false,
+        "Radius": 6,
+        "Start": "0,0,43.12001",
+        "Static": false
+      },
+      {
+        "__type": "HealthComponent",
+        "CanRegenerate": false,
+        "DamagedBy": "Mild",
+        "Immortal": true,
+        "MaxHealth": 3,
+        "RegenerationCooldown": 2,
+        "RegenerationTimer": 5,
+        "StunnedBy": "Mild",
+        "StunWhenDamaged": true
+      }
+    ],
+    "Children": [
+      {
+        "Id": "2c15adeb-4401-47b4-ae4f-fbce7070b9a1",
+        "Name": "Model",
+        "Position": "0,0,45.75998",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "BodyGroups": 18446744073709551615,
+            "CreateBoneObjects": false,
+            "Model": "models/whimsical_thing/whimsical_thing.vmdl",
+            "OnComponentUpdate": {
+              "Version": 5,
+              "UserData": {
+                "Title": "On Component Update",
+                "id": "2482453f-8167-47c7-84d4-7a86aa28b170",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 2,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "gameobject": {
+                      "_type": "gameobject",
+                      "go": "2c15adeb-4401-47b4-ae4f-fbce7070b9a1"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "-32,64"
+                  }
+                },
+                {
+                  "Id": 6,
+                  "Type": "call",
+                  "Properties": {
+                    "_name": "FromYaw",
+                    "_type": "Sandbox.System/Rotation",
+                    "_isStatic": true
+                  },
+                  "UserData": {
+                    "Position": "272,176"
+                  }
+                },
+                {
+                  "Id": 7,
+                  "Type": "time.now",
+                  "UserData": {
+                    "Position": "-240,208"
+                  }
+                },
+                {
+                  "Id": 8,
+                  "Type": "op.multiply",
+                  "UserData": {
+                    "Position": "-32,240"
+                  }
+                },
+                {
+                  "Id": 11,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_name": "Transform",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
+                  },
+                  "UserData": {
+                    "Position": "176,64"
+                  }
+                },
+                {
+                  "Id": 12,
+                  "Type": "property.set",
+                  "Properties": {
+                    "_name": "LocalRotation",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
+                  },
+                  "UserData": {
+                    "Position": "496,112"
+                  }
+                },
+                {
+                  "Id": 13,
+                  "Type": "math.sin",
+                  "UserData": {
+                    "Position": "128,352"
+                  }
+                },
+                {
+                  "Id": 14,
+                  "Type": "op.multiply",
+                  "UserData": {
+                    "Position": "320,400"
+                  }
+                },
+                {
+                  "Id": 15,
+                  "Type": "property.set",
+                  "Properties": {
+                    "_name": "LocalPosition",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
+                  },
+                  "UserData": {
+                    "Position": "784,288"
+                  }
+                },
+                {
+                  "Id": 16,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_name": "Up",
+                    "_type": "Sandbox.System/Vector3"
+                  },
+                  "UserData": {
+                    "Position": "272,320"
+                  }
+                },
+                {
+                  "Id": 17,
+                  "Type": "op.multiply",
+                  "UserData": {
+                    "Position": "464,352"
+                  }
+                },
+                {
+                  "Id": 19,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_name": "Up",
+                    "_type": "Sandbox.System/Vector3"
+                  },
+                  "UserData": {
+                    "Position": "336,528"
+                  }
+                },
+                {
+                  "Id": 20,
+                  "Type": "op.multiply",
+                  "UserData": {
+                    "Position": "512,544"
+                  }
+                },
+                {
+                  "Id": 21,
+                  "Type": "op.add",
+                  "UserData": {
+                    "Position": "720,528"
+                  }
+                },
+                {
+                  "Id": 22,
+                  "Type": "op.multiply",
+                  "UserData": {
+                    "Position": "-32,368"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 6,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 8,
+                  "SrcName": "_result",
+                  "DstId": 6,
+                  "DstName": "yaw"
+                },
+                {
+                  "SrcId": 7,
+                  "SrcName": "_result",
+                  "DstId": 8,
+                  "DstName": "a"
+                },
+                {
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "System.Private.CoreLib/System.Single",
+                    "Value": 360
+                  },
+                  "DstId": 8,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 2,
+                  "SrcName": "_result",
+                  "DstId": 11,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 6,
+                  "SrcName": "_signal",
+                  "DstId": 12,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 11,
+                  "SrcName": "_result",
+                  "DstId": 12,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 6,
+                  "SrcName": "_result",
+                  "DstId": 12,
+                  "DstName": "_value"
+                },
+                {
+                  "SrcId": 22,
+                  "SrcName": "_result",
+                  "DstId": 13,
+                  "DstName": "x"
+                },
+                {
+                  "SrcId": 13,
+                  "SrcName": "_result",
+                  "DstId": 14,
+                  "DstName": "a"
+                },
+                {
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "System.Private.CoreLib/System.Single",
+                    "Value": 3
+                  },
+                  "DstId": 14,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 15,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 11,
+                  "SrcName": "_result",
+                  "DstId": 15,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 21,
+                  "SrcName": "_result",
+                  "DstId": 15,
+                  "DstName": "_value"
+                },
+                {
+                  "SrcId": 16,
+                  "SrcName": "_result",
+                  "DstId": 17,
+                  "DstName": "a"
+                },
+                {
+                  "SrcId": 14,
+                  "SrcName": "_result",
+                  "DstId": 17,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 19,
+                  "SrcName": "_result",
+                  "DstId": 20,
+                  "DstName": "a"
+                },
+                {
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "Sandbox.System/Vector3",
+                    "Value": "0,0,54"
+                  },
+                  "DstId": 20,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 17,
+                  "SrcName": "_result",
+                  "DstId": 21,
+                  "DstName": "a"
+                },
+                {
+                  "SrcId": 20,
+                  "SrcName": "_result",
+                  "DstId": 21,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 7,
+                  "SrcName": "_result",
+                  "DstId": 22,
+                  "DstName": "a"
+                },
+                {
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "System.Private.CoreLib/System.Single",
+                    "Value": 5
+                  },
+                  "DstId": 22,
+                  "DstName": "b"
+                }
+              ]
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

@@ -137,6 +137,13 @@ public partial class NPC : Component
 	public float VisionRange { get; set; } = 512f;
 
 	/// <summary>
+	/// When detecting an enemy, alerts everyone closeby as well
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	public bool AlertOthers { get; set; } = true;
+
+	/// <summary>
 	/// When the NPC has no target it will sometimes fire off the idle event
 	/// </summary>
 	[Property]
@@ -383,7 +390,7 @@ public partial class NPC : Component
 		SetTarget( target );
 		OnDetect?.Invoke( TargetObject );
 
-		if ( alertOthers )
+		if ( alertOthers && AlertOthers )
 		{
 			var otherNpcs = Scene.GetAllComponents<NPC>()
 				.Where( x => x.Transform.Position.Distance( Transform.Position ) <= x.VisionRange * x.Scale ) // Find all nearby NPCs
