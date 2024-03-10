@@ -73,7 +73,7 @@ public static partial class NpcNodes
 	}
 
 	/// <summary>
-	/// Start following a gameobject
+	/// Start following a gameobject to attack it
 	/// </summary>
 	[ActionGraphNode( "npc.startfollowing" )]
 	[Title( "Start Following" ), Group( "NPC" ), Icon( "follow_the_signs" )]
@@ -92,7 +92,7 @@ public static partial class NpcNodes
 	}
 
 	/// <summary>
-	/// Stop following whatever
+	/// Stop following whatever target you had
 	/// </summary>
 	[ActionGraphNode( "npc.stopfollow" )]
 	[Title( "Stop Following" ), Group( "NPC" ), Icon( "dangerous" )]
@@ -101,6 +101,18 @@ public static partial class NpcNodes
 		if ( npc == null ) return;
 
 		npc.SetTarget( null );
+	}
+
+	/// <summary>
+	/// Deal damage to whatever, depending on damage type and force it will also ragdoll and punch
+	/// </summary>
+	[ActionGraphNode( "npc.damage" )]
+	[Title( "Damage" ), Group( "NPC" ), Icon( "whatshot" )]
+	public static void Damage( HealthComponent healthComponent, int amount, DamageType type = DamageType.Mild, GameObject attacker = null, Vector3 worldHurtPosition = default, Vector3 forceDirection = default, float force = 0 )
+	{
+		if ( healthComponent == null ) return;
+
+		healthComponent.Damage( amount, type, attacker, worldHurtPosition, forceDirection, force );
 	}
 
 	/// <summary>

@@ -6,9 +6,9 @@
     "Components": [
       {
         "__type": "NPC",
-        "AttackCooldown": 5,
+        "AttackCooldown": 8,
         "AttackRange": 80,
-        "DetectRange": 256,
+        "DetectRange": 700,
         "EnemyTags": "player",
         "FaceTowardsVelocity": true,
         "Health": {
@@ -29,15 +29,253 @@
         },
         "Name": "Moose (\u2642)",
         "NavigationType": "Normal",
-        "OnAttack": null,
-        "OnAttackerEscaped": null,
-        "OnDetect": null,
+        "OnAttack": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Attack",
+            "id": "e4b9ac1c-f91d-4e21-a093-061b7985801a",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/HealthComponent"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "npc.damage",
+              "UserData": {
+                "Position": "416,16"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "176,48"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001"
+                }
+              },
+              "UserData": {
+                "Position": "-112,96"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "property.get",
+              "ParentId": 8,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "property.get",
+              "ParentId": 9,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 5,
+              "DstId": 1,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 700,
+              "DstId": 1,
+              "DstName": "force"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "healthComponent"
+            },
+            {
+              "Value": "Serious",
+              "DstId": 1,
+              "DstName": "type"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "worldHurtPosition"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 2,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_target"
+            }
+          ]
+        },
+        "OnDetect": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Detect",
+            "id": "eb215b18-ba3d-45d3-840b-2ac2f527d1dd",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/NPC"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 2,
+              "Type": "npc.startfollowing",
+              "UserData": {
+                "Position": "304,32"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Position": "96,112"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 2,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 3,
+              "DstName": "_this"
+            }
+          ]
+        },
+        "OnEnemyEscaped": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Enemy Escaped",
+            "id": "691598ea-f02a-4a1f-ab36-a1bc91a9391a",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/NPC"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 2,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "384,80"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Position": "128,112"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 3,
+              "DstName": "_this"
+            }
+          ]
+        },
         "OnKilled": null,
         "OnSpawn": null,
         "RunSpeed": 300,
         "ScaleStats": true,
         "Static": false,
-        "VisionRange": 512,
+        "VisionRange": 1400,
         "WalkSpeed": 125,
         "Weight": "Heavy"
       },
