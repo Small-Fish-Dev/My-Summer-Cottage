@@ -2,7 +2,7 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root>
+<root class="@AdditionalClasses">
 	@if ( Number != null )
 	{
 		<div class="number" style="background-color: darken(@(Hex), 0.2); color: @(Hex);">##@Number</div>
@@ -27,6 +27,7 @@
 	public string Description { get; set; }
 	public int? Number { get; set; }
 	public int Time { get; set; } = 7;
+	public string AdditionalClasses { get; set; }
 	public Color Theme
 	{
 		get => Color.Parse( Hex ) ?? Color.Gray;
