@@ -121,7 +121,7 @@ public partial class NPC
 		foreach ( var direction in possibleDirections )
 		{
 			var startPosition = Transform.Position + Vector3.Up * (MoveHelper.StepHeight + MoveHelper.TraceRadius / 2f);
-			var endPosition = startPosition + direction * MoveHelper.TraceRadius * 4f;
+			var endPosition = startPosition + direction * MoveHelper.TraceRadius;
 			var dangerTrace = Scene.Trace.Sphere( MoveHelper.TraceRadius, startPosition, endPosition )
 				.IgnoreGameObjectHierarchy( GameObject )
 				.Run();
@@ -173,16 +173,11 @@ public partial class NPC
 
 	void CheckNewTargetPos()
 	{
-		if ( FollowingTargetObject )
+		if ( TargetObject.IsValid() )
 		{
-			if ( TargetObject.IsValid() )
+			if ( TargetPosition.Distance( GetPreferredTargetPosition( TargetObject ) ) >= AttackRange / 4f ) // Has our target moved?
 			{
-				if ( !IsWithinRange( TargetObject, Range + 5f ) ) // Has our target moved?
-					MoveTo( GetPreferredTargetPosition( TargetObject ) );
-			}
-			else
-			{
-				SetTarget( null );
+				MoveTo( GetPreferredTargetPosition( TargetObject ) );
 			}
 		}
 	}

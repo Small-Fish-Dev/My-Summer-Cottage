@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.Utility;
 using Sauna;
+using static NPC;
 using static Sandbox.PhysicsContact;
 
 public static partial class NpcNodes
@@ -66,34 +67,32 @@ public static partial class NpcNodes
 		while ( npc.IsValid() && !npc.ReachedDestination && currentPosition == npc.TargetPosition )
 			await GameTask.DelaySeconds( Time.Delta );
 
-		if ( npc.IsValid() && npc.ReachedDestination && currentPosition == npc.TargetPosition )
-			return reachedDestination?.Invoke();
-		else
-			return failedToReachDestination?.Invoke();
+		var success = npc.IsValid() && npc.ReachedDestination && currentPosition == npc.TargetPosition;
+
+		return success ? reachedDestination?.Invoke() : failedToReachDestination?.Invoke();
 	}
 
 	/// <summary>
-	/// Start following a gameobject
+	/// Start following a gameobject to attack it
 	/// </summary>
-	[ActionGraphNode( "npc.follow" )]
-	[Title( "Follow" ), Group( "NPC" ), Icon( "follow_the_signs" )]
-	public static async Task<Task> Follow( NPC npc, GameObject target, Body? reachedTarget, Body? failedToReachTarget )
+	[ActionGraphNode( "npc.startfollowing" )]
+	[Title( "Start Following" ), Group( "NPC" ), Icon( "follow_the_signs" )]
+	public static async Task<Task> StartFollowing( NPC npc, GameObject target, Body? failedToReachTarget )
 	{
 		if ( npc == null ) return Task.CompletedTask;
 
 		npc.SetTarget( target );
 
-		while ( npc.IsValid() && target.IsValid() && !npc.IsWithinRange( target, npc.Range + 5f ) && npc.FollowingTargetObject )
+		while ( npc.IsValid() && target.IsValid() && !npc.IsWithinRange( target ) && npc.FollowingTargetObject )
 			await GameTask.DelaySeconds( Time.Delta );
 
-		if ( npc.IsValid() && target.IsValid() && npc.IsWithinRange( target, npc.Range + 10f ) && npc.FollowingTargetObject )
-			return reachedTarget?.Invoke();
-		else
-			return failedToReachTarget?.Invoke();
+		var success = npc.IsValid() && target.IsValid() && npc.IsWithinRange( target ) && npc.FollowingTargetObject;
+
+		return success ? Task.CompletedTask : failedToReachTarget?.Invoke();
 	}
 
 	/// <summary>
-	/// Stop following whatever
+	/// Stop following whatever target you had
 	/// </summary>
 	[ActionGraphNode( "npc.stopfollow" )]
 	[Title( "Stop Following" ), Group( "NPC" ), Icon( "dangerous" )]
@@ -105,15 +104,52 @@ public static partial class NpcNodes
 	}
 
 	/// <summary>
-	/// Set the current state and invoke the state
+	/// Start escaping from whatever target you had
 	/// </summary>
-	[ActionGraphNode( "npc.gotostate" )]
-	[Title( "Go To State" ), Group( "NPC" ), Icon( "account_tree" )]
-	public static void GoToState( NPC npc, string stateIdentifier )
+	[ActionGraphNode( "npc.startescaping" )]
+	[Title( "Start Escaping" ), Group( "NPC" ), Icon( "directions_run" )]
+	public static void StartEscaping( NPC npc, GameObject target )
 	{
 		if ( npc == null ) return;
 
-		npc.SetState( stateIdentifier );
+		npc.SetTarget( target, true );
+	}
+
+	/// <summary>
+	/// Stop escaping from whatever target you had
+	/// </summary>
+	[ActionGraphNode( "npc.stopescaping" )]
+	[Title( "Stop Escaping" ), Group( "NPC" ), Icon( "hail" )]
+	public static void StopEscaping( NPC npc )
+	{
+		if ( npc == null ) return;
+
+		npc.SetTarget( null );
+	}
+
+	/// <summary>
+	/// Stop moving
+	/// </summary>
+	[ActionGraphNode( "npc.stopmoving" )]
+	[Title( "Stop Moving" ), Group( "NPC" ), Icon( "hail" )]
+	public static void StopMoving( NPC npc )
+	{
+		if ( npc == null ) return;
+
+		npc.TargetPosition = npc.Transform.Position;
+		npc.ReachedDestination = true;
+	}
+
+	/// <summary>
+	/// Deal damage to whatever, depending on damage type and force it will also ragdoll and punch
+	/// </summary>
+	[ActionGraphNode( "npc.damage" )]
+	[Title( "Damage" ), Group( "NPC" ), Icon( "whatshot" )]
+	public static void Damage( HealthComponent healthComponent, int amount, DamageType type = DamageType.Mild, GameObject attacker = null, Vector3 worldHurtPosition = default, Vector3 forceDirection = default, float force = 0 )
+	{
+		if ( healthComponent == null ) return;
+
+		healthComponent.Damage( amount, type, attacker, worldHurtPosition, forceDirection, force );
 	}
 
 	/// <summary>
@@ -122,10 +158,10 @@ public static partial class NpcNodes
 	/// <param name="position"></param>
 	/// <param name="minRange"></param>
 	/// <param name="maxRange"></param>
-	[ActionGraphNode( "npc.getrandomposaround" )]
+	[ActionGraphNode( "npc.getrandomposaround" ), Pure]
 	[Title( "Get Random Position Around" ), Group( "NPC" ), Icon( "photo_size_select_small" )]
-	public static void GetRandomPosAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
+	public static Vector3 GetRandomPosAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
 	{
-		NPC.GetRandomPositionAround( position, minRange, maxRange );
+		return NPC.GetRandomPositionAround( position, minRange, maxRange );
 	}
 }

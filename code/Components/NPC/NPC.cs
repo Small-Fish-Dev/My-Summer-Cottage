@@ -1,5 +1,8 @@
 ﻿using Sandbox;
+using Sandbox.Citizen;
+using Sandbox.ModelEditor;
 using Sauna;
+using System.Threading;
 
 public enum WeightType
 {
@@ -31,7 +34,12 @@ public partial class NPC : Component
 	public HealthComponent Health { get; set; }
 
 	[Property]
-	public NavigationType NavigationType { get; set; } = NavigationType.Normal;
+	public NavigationType WalkingType { get; set; } = NavigationType.Dumb;
+
+	[Property]
+	public NavigationType RunningType { get; set; } = NavigationType.Smart;
+
+	public NavigationType NavigationType => IsRunning ? RunningType : WalkingType;
 
 	/// <summary>
 	/// How much this creature weights (To handle ragdol force amount and duration)
@@ -46,6 +54,7 @@ public partial class NPC : Component
 	[Property]
 	[Category( "Stats" )]
 	public bool ScaleStats { get; set; } = true;
+	public float Scale => ScaleStats ? MathF.Max( MathF.Max( GameObject.Transform.Scale.x, GameObject.Transform.Scale.y ), GameObject.Transform.Scale.z ) : 1f;
 
 	/// <summary>
 	/// Doesn't move (Don't add a MoveHelper if this is on)
@@ -89,87 +98,120 @@ public partial class NPC : Component
 	public bool FaceTowardsVelocity { get; set; } = true;
 
 	/// <summary>
-	/// How far the NPC can reach for attacks or navigation
+	/// How far the NPC can reach to attack with the target
 	/// </summary>
 	[Property]
 	[Category( "Stats" )]
 	[Range( 30f, 200f, 10f )]
-	public float Range { get; private set; } = 60f;
-	public float Scale => ScaleStats ? MathF.Max( MathF.Max( GameObject.Transform.Scale.x, GameObject.Transform.Scale.y ), GameObject.Transform.Scale.z ) : 1f;
-
-	public delegate void NpcTrigger( GameObject provoker );
-
-	[Property]
-	[Category( "States" )]
-	public Dictionary<string, Action> States { get; set; } = new Dictionary<string, Action> { { "idle", () => { } } };
+	public float AttackRange { get; private set; } = 80f;
 
 	/// <summary>
-	/// If a GameObject has one of these tags it will be considered a provoker and can trigger alert state
+	/// How many seconds must pass before the NPC can attack with the target again
 	/// </summary>
 	[Property]
-	[Category( "Triggers" )]
-	public TagSet ProvokerTags { get; set; }
+	[Category( "Stats" )]
+	[Range( 0.5f, 10f, 0.1f )]
+	public float AttackCooldown { get; private set; } = 5f;
 
+	/// <summary>
+	/// If a GameObject has one of these tags it will be considered an enemy
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	public TagSet EnemyTags { get; set; }
+
+	/// <summary>
+	/// How far away the NPC can detect an enemy
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	[Range( 0f, 1024f, 16f )]
+	public float DetectRange { get; set; } = 256f;
+
+	/// <summary>
+	/// How far away the NPC can see the enemy before losing sight
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	[Range( 0f, 2024f, 16f )]
+	public float VisionRange { get; set; } = 512f;
+
+	/// <summary>
+	/// When the NPC has no target it will sometimes fire off the idle event
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	public bool Idle { get; set; } = true;
+
+	/// <summary>
+	/// Maximum time in between idle events being called when there is no target
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	[ShowIf( "Idle", true )]
+	[Range( 0.1f, 10f, 0.1f )]
+	public float MinimumIdleCooldown { get; set; } = 4;
+
+	/// <summary>
+	/// Minimum time in between idle events being called when there is no target
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
+	[ShowIf( "Idle", true )]
+	[Range( 0.1f, 20f, 0.1f )]
+	public float MaximumIdleCooldown { get; set; } = 6;
+
+	public TimeUntil NextIdle { get; set; }
+
+	/// <summary>
+	/// When the NPC is first spawned in
+	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
 	public Action OnSpawn { get; set; }
 
+	public delegate void NpcTrigger( GameObject enemy );
+
 	/// <summary>
-	/// How close a provoker has to come to alert the NPC
+	/// When an enemy enters the detect area or attacks the NPC, or a nearby NPC gets alerted. This won't get called if the NPC has been alerted already.
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
-	[Range( 0f, 1024f, 16f )]
-	public float AlertRange { get; set; } = 256f;
+	public NpcTrigger OnDetect { get; set; }
 
 	/// <summary>
-	/// How far a provoker has to go to lose the NPC
+	/// When the enemy is within attack range and our cooldown is up
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
-	[Range( 0f, 2024f, 16f )]
-	public float AlertEscapeRange { get; set; } = 512f;
+	public NpcTrigger OnAttack { get; set; }
 
 	/// <summary>
-	/// When the provoker enters the alert area, or a nearby NPC gets alerted/attacked. This won't get called if the NPC is already alerted.
+	/// When the enemy gets out of the Vision Range or dies
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
-	public NpcTrigger OnAlerted { get; set; }
+	public NpcTrigger OnEnemyEscaped { get; set; }
 
 	/// <summary>
-	/// When the NPC gets directly attacked. This won't get called if the NPC has been attacked already and is in alerted status.
-	/// </summary>
-	[Property]
-	[Category( "Triggers" )]
-	public NpcTrigger OnAttacked { get; set; }
-
-	/// <summary>
-	/// When the provoker gets out of the AlertRange or dies
-	/// </summary>
-	[Property]
-	[Category( "Triggers" )]
-	public NpcTrigger OnProvokerEscaped { get; set; }
-
-	/// <summary>
-	/// When the NPC dies, provoker will be NULL if it died of natural causes (???)
+	/// When the NPC dies, enemy will be NULL if it died of natural causes (???)
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
 	public NpcTrigger OnKilled { get; set; }
 
 	/// <summary>
-	/// When the NPC gets destroyed
+	/// When the NPC has no target it will occasionally fire this off
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
-	public Action OnDestroyed { get; set; }
+	[ShowIf( "Idle", true )]
+	public Action OnIdle { get; set; }
 
 	public int NpcId { get; set; }
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
 	public bool FollowingTargetObject { get; set; } = false;
-	public string CurrentState { get; set; } = "idle";
 	public Vector3 SpawnPosition { get; set; }
 	public float ForceMultiplier
 	{
@@ -234,7 +276,7 @@ public partial class NPC : Component
 
 		if ( Ragdoll == null && FaceTowardsVelocity )
 			if ( !MoveHelper.Velocity.IsNearlyZero( 1f ) )
-				Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ), Vector3.Up ), Time.Delta * 10f );
+				Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ), Vector3.Up ), Time.Delta * (IsRunning ? 10f : 5f) );
 
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );
@@ -251,14 +293,24 @@ public partial class NPC : Component
 
 	protected override void OnFixedUpdate()
 	{
-		if ( MoveHelper == null ) return;
-
-		if ( Health != null && Health.Alive )
+		if ( Health != null && Health.Alive ) // If we are still alive
 		{
-			if ( Ragdoll == null )
+			if ( Ragdoll == null ) // If we are not ragdolled
 			{
-				ComputeNavigation();
-				MoveHelper.Move();
+				if ( TargetObject == null )
+				{
+					if ( NextIdle )
+					{
+						OnIdle?.Invoke();
+						NextIdle = Game.Random.Float( MinimumIdleCooldown, MaximumIdleCooldown );
+					}
+				}
+
+				if ( MoveHelper == null ) return;
+				{
+					ComputeNavigation();
+					MoveHelper.Move();
+				}
 
 				DetectAround();
 			}
@@ -274,7 +326,6 @@ public partial class NPC : Component
 
 	protected override void OnDestroy()
 	{
-		OnDestroyed?.Invoke();
 	}
 
 	/// <summary>
@@ -282,74 +333,87 @@ public partial class NPC : Component
 	/// </summary>
 	public IEnumerable<GameObject> ProvokersInArea { get; set; }
 
+	public TimeUntil NextAttack = 0;
+
 	public void DetectAround()
 	{
-		var currentTick = (int)(Time.Now / Time.Delta);
-		if ( currentTick % 30 != NpcId % 30 ) return; // Check every 30 ticks
+		if ( TargetObject != null )
+		{
+			if ( IsWithinRange( TargetObject ) ) // Is the target within reach
+			{
+				if ( NextAttack )
+				{
+					OnAttack?.Invoke( TargetObject );
+					NextAttack = AttackCooldown;
+				}
+			}
+		}
 
-		var foundAround = Scene.FindInPhysics( new Sphere( Transform.Position, AlertRange ) )
-			.Where( x => ProvokerTags != null && x.Tags.HasAny( ProvokerTags ) )
-			.Where( x => x.Components.Get<HealthComponent>()?.Alive ?? true );
+		var currentTick = (int)(Time.Now / Time.Delta);
+		if ( currentTick % 20 != NpcId % 20 ) return; // Check every 20 ticks
+
+		var foundAround = Scene.FindInPhysics( new Sphere( Transform.Position, DetectRange * Scale ) ) // Find gameobjects nearby
+			.Where( x => EnemyTags != null && x.Tags.HasAny( EnemyTags ) ) // Do they have any of our enemy tags
+			.Where( x => x.Components.Get<HealthComponent>()?.Alive ?? true ); // Are they dead or undead
 
 		if ( TargetObject == null )
 		{
 			if ( foundAround.Any() )
-			{
-				Detected( foundAround.First(), true );
-			}
+				Detected( foundAround.First(), true ); // If we don't have any target yet, pick the first one around us
 		}
 		else
 		{
-			var targetAlive = !TargetObject.Components.Get<HealthComponent>()?.Alive ?? false;
-			var targetEscaped = TargetObject.Transform.Position.Distance( Transform.Position ) > AlertEscapeRange;
-			if ( targetEscaped || targetAlive )
+			var targetDead = !TargetObject.Components.Get<HealthComponent>()?.Alive ?? false; // Is our target dead or undead
+			var targetEscaped = TargetObject.Transform.Position.Distance( Transform.Position ) > VisionRange * Scale; // Did our target get out of vision range
+
+			if ( targetEscaped || targetDead ) // Did our target die or escape
 				Undetected();
 		}
 	}
 
 	public void Detected( GameObject target, bool alertOthers = false )
 	{
-		TargetObject = target;
-		OnAlerted?.Invoke( TargetObject );
+		if ( target == null ) return;
+		if ( target == TargetObject ) return;
+
+		SetTarget( target );
+		OnDetect?.Invoke( TargetObject );
 
 		if ( alertOthers )
 		{
 			var otherNpcs = Scene.GetAllComponents<NPC>()
-				.Where( x => x.Transform.Position.Distance( Transform.Position ) <= x.AlertEscapeRange )
-				.Where( x => x.Health?.Alive ?? false )
-				.Where( x => x.TargetObject == null );
+				.Where( x => x.Transform.Position.Distance( Transform.Position ) <= x.VisionRange * x.Scale ) // Find all nearby NPCs
+				.Where( x => x.Health?.Alive ?? true ) // Dead or undead
+				.Where( x => x.TargetObject == null ) // They don't have a target already
+				.Where( x => x != this ) // Not us
+				.Where( x => x.GameObject != null ); // And that don't have a target already
 
 			foreach ( var npc in otherNpcs )
 				npc.Detected( target, false );
 		}
 	}
 
+	public void Damaged( GameObject target )
+	{
+		if ( TargetObject == null && TargetObject != target )
+			Detected( target, true );
+	}
+
 	public void Undetected()
 	{
-		OnProvokerEscaped?.Invoke( TargetObject );
+		OnEnemyEscaped?.Invoke( TargetObject );
+
 		TargetObject = null;
 		TargetPosition = Transform.Position;
 		ReachedDestination = true;
 	}
 
 	/// <summary>
-	/// Invoke the actiongraph attached to that state
-	/// </summary>
-	/// <param name="identifier"></param>
-	public void SetState( string identifier )
-	{
-		if ( States.ContainsKey( identifier ) )
-		{
-			States[identifier]?.Invoke();
-			CurrentState = identifier;
-		}
-	}
-
-	/// <summary>
 	/// Who should the NPC follow, set null to go back to manually setting the target position
 	/// </summary>
 	/// <param name="target"></param>
-	public void SetTarget( GameObject target )
+	/// <param name="escapeFrom"></param>
+	public void SetTarget( GameObject target, bool escapeFrom = false )
 	{
 		if ( target == null )
 		{
@@ -358,18 +422,17 @@ public partial class NPC : Component
 			ReachedDestination = true;
 			TargetPosition = Transform.Position;
 		}
-
-		if ( TargetObject != null )
+		else
 		{
 			TargetObject = target;
+			FollowingTargetObject = !escapeFrom;
 			MoveTo( GetPreferredTargetPosition( TargetObject ) );
-			FollowingTargetObject = true;
 			ReachedDestination = false;
 		}
 	}
 
 	/// <summary>
-	/// Is the object within the npc's reach (Range) 
+	/// Is the object within the npc's reach (AttackRange) 
 	/// </summary>
 	/// <param name="target"></param>
 	/// <returns></returns>
@@ -377,11 +440,11 @@ public partial class NPC : Component
 	{
 		if ( !GameObject.IsValid() ) return false;
 
-		return target.Transform.Position.Distance( Transform.Position ) <= Range;
+		return IsWithinRange( target, AttackRange * Scale );
 	}
 
 	/// <summary>
-	/// Is the object within the npc's range
+	/// Is the object within the npc's range (Unscaled)
 	/// </summary>
 	/// <param name="target"></param>
 	/// <param name="range"></param>
@@ -412,12 +475,12 @@ public partial class NPC : Component
 			var randomDistance = Game.Random.Float( minRange, maxRange );
 			var randomPoint = position + randomDirection * randomDistance;
 
-			var groundTrace = Game.ActiveScene.Trace.Ray( randomPoint + Vector3.Up * 64f, randomPoint - Vector3.Up * 64f )
+			var groundTrace = Game.ActiveScene.Trace.Ray( randomPoint + Vector3.Up * 64f, randomPoint + Vector3.Down * 64f )
 				.Size( 5f )
 				.WithoutTags( "player", "npc", "trigger" )
 				.Run();
 
-			if ( groundTrace.Hit )
+			if ( groundTrace.Hit && !groundTrace.StartedSolid )
 			{
 				hitGround = true;
 				hitPosition = groundTrace.HitPosition;
@@ -442,16 +505,17 @@ public partial class NPC : Component
 		var targetPosition = target.Transform.Position;
 
 		var direction = (Transform.Position - targetPosition).Normal;
-		var offset = direction * Range / 2f;
+		var offset = FollowingTargetObject ? direction * AttackRange * Scale / 2f : direction * VisionRange * Scale;
 		var wishPos = targetPosition + offset;
 
-		var groundTrace = Scene.Trace.Ray( wishPos + Vector3.Up * 64f, wishPos - Vector3.Up * 64f )
+		var groundTrace = Scene.Trace.Ray( wishPos + Vector3.Up * 64f, wishPos + Vector3.Down * 64f )
 			.Size( 5f )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.WithoutTags( "player", "npc", "trigger" )
 			.Run();
-
-		return groundTrace.Hit ? groundTrace.HitPosition : wishPos;
+		//Log.Info( target.Transform.Position.Distance( groundTrace.Hit && !groundTrace.StartedSolid ? groundTrace.HitPosition : (FollowingTargetObject ? targetPosition : targetPosition + offset) ) );
+		//Log.Info( FollowingTargetObject );
+		return groundTrace.Hit && !groundTrace.StartedSolid ? groundTrace.HitPosition : (FollowingTargetObject ? targetPosition : targetPosition + offset);
 	}
 
 	/// <summary>

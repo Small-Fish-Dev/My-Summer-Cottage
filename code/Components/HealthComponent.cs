@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Sauna;
+using static NPC;
 
 public enum DamageType
 {
@@ -86,7 +87,8 @@ public sealed class HealthComponent : Component
 
 	public delegate void AttackerInfo( int damage, DamageType type, GameObject attacker = null, Vector3 localHurtPosition = default, Vector3 forceDirection = default, float force = 0 );
 
-	public AttackerInfo OnAttacked { get; set; }
+	[Property]
+	public AttackerInfo OnDamaged { get; set; }
 
 	public TimeSince LastDamaged { get; set; }
 	TimeUntil _nextHeal { get; set; }
@@ -108,47 +110,53 @@ public sealed class HealthComponent : Component
 	/// <param name="worldHurtPosition">The world position of where the damage happened, (0,0,0) if not set</param>
 	/// <param name="forceDirection">The direction which the force will be applied, (0,0,0) if not set</param>
 	/// <param name="force">How much force was behind that damage, 0 by default</param>
-	[Broadcast]
 	public void Damage( int amount, DamageType type, GameObject attacker = null, Vector3 worldHurtPosition = default, Vector3 forceDirection = default, float force = 0 )
 	{
-		if ( Immortal ) return;
 		if ( !Alive ) return;
 		if ( amount == 0 ) return;
 
 		var stunned = type >= StunnedBy && type != DamageType.Nothing; // Don't ragdoll if we're healing
 		var damaged = type >= DamagedBy;
+		var localWorld = Transform.World.Position - worldHurtPosition;
+		var realDirection = forceDirection != default ? forceDirection : localWorld.WithZ( 0f ).Normal;
 
-		if ( damaged )
+		if ( !Immortal )
 		{
-			Health = Math.Clamp( Health - amount, 0, MaxHealth );
-
-			if ( amount > 0 )
+			if ( damaged )
 			{
-				LastDamaged = 0; // We were just attacked
-				_nextHeal = RegenerationTimer + RegenerationCooldown; // Reset the healtimer
+				Health = Math.Clamp( Health - amount, 0, MaxHealth );
 
-				OnAttacked?.Invoke( amount, type, attacker, worldHurtPosition == default ? worldHurtPosition : Transform.World.PointToLocal( worldHurtPosition ), forceDirection, force );
+				if ( amount > 0 )
+				{
+					LastDamaged = 0; // We were just attacked
+					_nextHeal = RegenerationTimer + RegenerationCooldown; // Reset the healtimer
+
+					OnDamaged?.Invoke( amount, type, attacker, Transform.World.PointToLocal( worldHurtPosition ), realDirection, force );
+
+					if ( Components.TryGet<NPC>( out var npc ) )
+						npc.Damaged( attacker );
+				}
 			}
 		}
 
 		if ( stunned )
 		{
-			if ( damaged && !StunWhenDamaged ) return;
+			if ( damaged && !StunWhenDamaged && !Immortal ) return;
 
-			var damageFrac = amount / MaxHealth;
+			var damageFrac = (float)amount / (float)MaxHealth;
 			var ragdollTime = damageFrac * 10f;
-			var ragdollVelocity = forceDirection * force + Vector3.Up * 50;
+			var ragdollVelocity = realDirection * force + Vector3.Up * force;
 
 			if ( Components.TryGet<Player>( out var player ) )
 			{
-				player.SetRagdoll( true, true, ragdollTime );
 				player.MoveHelper?.Punch( ragdollVelocity );
+				player.SetRagdoll( true, true, ragdollTime );
 			}
 
 			if ( Components.TryGet<NPC>( out var npc ) )
 			{
-				npc.SetRagdoll( true, ragdollTime, 50f );
 				npc.LocalPunch( ragdollVelocity );
+				npc.SetRagdoll( true, ragdollTime, 50f );
 			}
 		}
 	}
@@ -163,6 +171,7 @@ public sealed class HealthComponent : Component
 		if ( Components.TryGet<NPC>( out var npc ) )
 		{
 			npc.SetRagdoll( true, 9999999f );
+
 			npc.OnKilled?.Invoke( attacker );
 		}
 	}
