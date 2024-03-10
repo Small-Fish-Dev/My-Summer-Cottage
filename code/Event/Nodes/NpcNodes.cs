@@ -119,7 +119,7 @@ public static partial class NpcNodes
 
 		var success = npc.IsValid() && target.IsValid() && !npc.IsWithinRange( target, npc.VisionRange ) && !npc.FollowingTargetObject;
 
-		return success ? Task.CompletedTask : succesfullyEscaped?.Invoke();
+		return success ? succesfullyEscaped?.Invoke() : Task.CompletedTask;
 	}
 
 	/// <summary>

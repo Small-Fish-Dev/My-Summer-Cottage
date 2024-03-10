@@ -324,7 +324,7 @@
                 }
               ],
               "RandomEvents": {
-                "Common": 3,
+                "Common": 15,
                 "Uncommon": 0,
                 "Rare": 0
               }
@@ -428,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.9927264,0,-0.1203924",
+          "Rotation": "0,0.9214563,0,0.3884822",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -471,148 +471,6 @@
               "LightColor": "0.31574,0.40645,0.55795,1",
               "Shadows": true,
               "SkyColor": "0.00784,0.03922,0.0902,1"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Id": "e515313b-9348-4f73-bb39-cf28f38bb0da",
-      "Name": "Object",
-      "Position": "864,-712.677,25.36256",
-      "Rotation": "0,0,0.9238795,0.3826834",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "SkinnedModelRenderer",
-          "BodyGroups": 351,
-          "CreateBoneObjects": false,
-          "Model": "models/guy/guy.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "Character",
-          "Clothes": [
-            "models/clothes/wives_undies/wives_panties.vmdl",
-            "models/clothes/wives_undies/wives_bra.vmdl"
-          ],
-          "Fatness": 0,
-          "Height": 0,
-          "HideBodyGroup": "None"
-        }
-      ],
-      "Children": [
-        {
-          "Id": "63e0f5fe-46a4-46c8-92a7-aaa8d1c8db8c",
-          "Name": "models/clothes/wives_undies/wives_panties.vmdl",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "SkinnedModelRenderer",
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": {
-                "_type": "component",
-                "go": "e515313b-9348-4f73-bb39-cf28f38bb0da",
-                "component_type": "SkinnedModelRenderer"
-              },
-              "CreateBoneObjects": false,
-              "Model": "models/clothes/wives_undies/wives_panties.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "Id": "07d838fb-4b3a-46ed-ba52-798bf85855bb",
-          "Name": "models/clothes/wives_undies/wives_bra.vmdl",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "SkinnedModelRenderer",
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": {
-                "_type": "component",
-                "go": "e515313b-9348-4f73-bb39-cf28f38bb0da",
-                "component_type": "SkinnedModelRenderer"
-              },
-              "CreateBoneObjects": false,
-              "Model": "models/clothes/wives_undies/wives_bra.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Id": "9c3edec3-a5ae-4b18-b2d4-f44b6018269a",
-      "Name": "Object (1)",
-      "Position": "838.9916,-737.6854,25.36256",
-      "Rotation": "0,0,0.9238795,0.3826834",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "SkinnedModelRenderer",
-          "BodyGroups": 351,
-          "CreateBoneObjects": false,
-          "Model": "models/guy/guy.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "Character",
-          "Clothes": [
-            "models/clothes/wives_undies/wives_bra.vmdl",
-            "models/clothes/wives_undies/wives_panties.vmdl"
-          ],
-          "Fatness": 1,
-          "Height": 0,
-          "HideBodyGroup": "None"
-        }
-      ],
-      "Children": [
-        {
-          "Id": "e9a3d7cc-5a79-49e5-9762-242f94725590",
-          "Name": "models/clothes/wives_undies/wives_bra.vmdl",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "SkinnedModelRenderer",
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": {
-                "_type": "component",
-                "go": "9c3edec3-a5ae-4b18-b2d4-f44b6018269a",
-                "component_type": "SkinnedModelRenderer"
-              },
-              "CreateBoneObjects": false,
-              "Model": "models/clothes/wives_undies/wives_bra.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "Id": "0b6c074c-cf11-461c-9e97-0f5e13961176",
-          "Name": "models/clothes/wives_undies/wives_panties.vmdl",
-          "Position": "0,0,0",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "SkinnedModelRenderer",
-              "BodyGroups": 18446744073709551615,
-              "BoneMergeTarget": {
-                "_type": "component",
-                "go": "9c3edec3-a5ae-4b18-b2d4-f44b6018269a",
-                "component_type": "SkinnedModelRenderer"
-              },
-              "CreateBoneObjects": false,
-              "Model": "models/clothes/wives_undies/wives_panties.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
             }
           ]
         }
@@ -821,7 +679,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -917,8 +774,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -980,39 +835,7 @@
     {
       "Id": "4480e4d0-10a1-4c25-8730-0aee3d1e95f7",
       "Name": "creepy_peeper",
-      "Position": "1166.102,-673.6249,24.08396",
-      "Rotation": "-0.0000000000000001593804,0.0000000008185648,1,0.0000001947072",
-      "Enabled": true,
-      "__Prefab": "prefabs/events/creepy_peeper.prefab"
-    },
-    {
-      "Id": "4296a28f-5a57-49d9-8a18-35eaa26ec211",
-      "Name": "creepy_peeper (1)",
-      "Position": "1161.622,-714.6598,24.08396",
-      "Rotation": "-0.0000000000000001593804,0.0000000008185648,1,0.0000001947072",
-      "Enabled": true,
-      "__Prefab": "prefabs/events/creepy_peeper.prefab"
-    },
-    {
-      "Id": "8b1be718-10e3-4e4f-9ff5-5c8b3574e602",
-      "Name": "creepy_peeper (2)",
-      "Position": "1168.399,-633.3151,24.08396",
-      "Rotation": "-0.0000000000000001593804,0.0000000008185648,1,0.0000001947072",
-      "Enabled": true,
-      "__Prefab": "prefabs/events/creepy_peeper.prefab"
-    },
-    {
-      "Id": "78430805-8d95-4218-959f-c78d5eb5b2e5",
-      "Name": "creepy_peeper (3)",
-      "Position": "1195.026,-693.4517,24.08396",
-      "Rotation": "-0.0000000000000001593804,0.0000000008185648,1,0.0000001947072",
-      "Enabled": true,
-      "__Prefab": "prefabs/events/creepy_peeper.prefab"
-    },
-    {
-      "Id": "dca05f09-317d-45e7-8d27-48ef10a748f6",
-      "Name": "creepy_peeper (4)",
-      "Position": "1202.617,-653.0145,24.08396",
+      "Position": "1162.476,-679.8868,24.08396",
       "Rotation": "-0.0000000000000001593804,0.0000000008185648,1,0.0000001947072",
       "Enabled": true,
       "__Prefab": "prefabs/events/creepy_peeper.prefab"
@@ -1272,15 +1095,6 @@
       "Rotation": "-0.0008578706,0.07325816,0.01167797,0.9972442",
       "Enabled": true,
       "__Prefab": "prefabs/npcs/reindeer_female.prefab"
-    },
-    {
-      "Id": "d7e5257f-60c2-42f4-ad84-1cb434f49c73",
-      "Name": "creepy_peeper (5)",
-      "Position": "1273.839,-604.0211,77.36858",
-      "Rotation": "0.0003113742,0.03536403,-0.008798959,0.9993358",
-      "Tags": "human,npc",
-      "Enabled": true,
-      "__Prefab": "prefabs/npcs/creepy_peeper.prefab"
     }
   ],
   "SceneProperties": {
@@ -1306,6 +1120,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-10T22:05:37.7915293\u002B01:00",
+  "LastSaved": "2024-03-10T22:41:53.0330712\u002B01:00",
   "__references": []
 }
