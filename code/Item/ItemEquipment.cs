@@ -147,14 +147,19 @@ public class ItemEquipment : ItemComponent
 
 	protected override void OnPreRender()
 	{
-		if ( !Equipped || !Game.IsPlaying || GameObject == Scene )
+		if ( !Equipped || !Game.IsPlaying || GameObject == Scene || IsClothing )
 			return;
 
 		var player = GameObject.Parent.Components.Get<Player>( true );
 		if ( player == null )
 			return;
 
-		GameObject.Transform.World = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
+		if ( Renderer != null && Renderer.SceneObject.IsValid() )
+		{
+			var transform = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
+			Renderer.SceneObject.Transform = transform;
+			(Renderer.SceneObject as SceneModel)?.Update( RealTime.Delta );
+		}
 		//GameObject.Transform.ClearLerp();
 	}
 
