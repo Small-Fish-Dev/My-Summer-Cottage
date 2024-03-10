@@ -96,6 +96,19 @@ public class Interaction
 	public Func<Color> DynamicColor { get; set; }
 
 	/// <summary>
+	/// Does this interaction have a cooldown
+	/// </summary>
+	[Property, Category( "Optional" )]
+	public bool Cooldown { get; set; } = false;
+
+	/// <summary>
+	/// How much the cooldown lasts
+	/// </summary>
+	[Property, Category( "Optional" ), ShowIf( "Cooldown", true )]
+	[Range( 0.1f, 5f, 0.1f )]
+	public float CooldownTime { get; set; } = 0.5f;
+
+	/// <summary>
 	/// Does this interaction use bounds?
 	/// </summary>
 	[Property]
@@ -126,13 +139,18 @@ public class Interaction
 	/// The text that should actually be displayed.
 	/// </summary>
 	[Hide, JsonIgnore]
-	public string Text => DynamicText?.Invoke() ?? Description;
+	public string Text => $"{DynamicText?.Invoke() ?? Description}{_cooldownText}";
+	[Hide, JsonIgnore]
+	string _cooldownText => $"{(Cooldown && !CooldownTimer ? $" ({MathF.Round( CooldownTime - CooldownTimer.Passed, 1 )}s)" : "")}";
 
 	/// <summary>
 	/// The color that should actually be displayed.
 	/// </summary>
 	[Hide, JsonIgnore]
 	public Color Color => DynamicColor?.Invoke() ?? Color.White;
+
+	[Hide, JsonIgnore]
+	public TimeUntil CooldownTimer;
 
 	/// <summary>
 	/// Uses the interactions input mode and gets the key state by input action

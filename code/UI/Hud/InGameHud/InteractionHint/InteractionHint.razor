@@ -17,7 +17,8 @@
 				if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
 					continue;
 
-				var canInteract = !interaction.Disabled.InvokeOrDefault();
+                var coolDown = !interaction.Cooldown || interaction.CooldownTimer;
+				var canInteract = !interaction.Disabled.InvokeOrDefault() && coolDown;
 				if ( canInteract || interaction.ShowWhenDisabled() )
 				{
 					var isActive = HasPriority( interaction.Keybind ) && canInteract;
@@ -32,62 +33,65 @@
 </root>
 
 @code {
-	public bool FromHands { get; set; }
+    public bool FromHands { get; set; }
 
-	private string DisplayName => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Name;
-	private GameObject _targetObject => FromHands
-		? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
-		: Player.Local?.TargetedGameObject;
+    private string DisplayName => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Name;
+    private GameObject _targetObject => FromHands
+        ? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
+        : Player.Local?.TargetedGameObject;
 
-	private static Dictionary<string, Interaction> priorityList = new();
-	private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
-	private bool WithinBounds(Interaction interaction) => !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
-	private bool HasPriority( string key ) => FromHands || !priorityList.ContainsKey( key.ToLower() );
-	private BBox GetInteractionBounds(Interaction interaction)
-		=> new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
-			.Transform(Player.Local.TargetedGameObject.Transform.World);
+    private static Dictionary<string, Interaction> priorityList = new();
+    private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
+    private bool WithinBounds(Interaction interaction) => !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
+    private bool HasPriority( string key ) => FromHands || !priorityList.ContainsKey( key.ToLower() );
+    private BBox GetInteractionBounds(Interaction interaction)
+        => new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
+            .Transform(Player.Local.TargetedGameObject.Transform.World);
 
-	private void AddToPriority( Interaction interaction, bool forced = false )
-	{
-		if ( !FromHands && !forced ) 
-			return;
+    private void AddToPriority( Interaction interaction, bool forced = false )
+    {
+        if ( !FromHands && !forced ) 
+            return;
 
-		var key = interaction.Keybind.ToLower();
-		var contains = priorityList.ContainsKey( key );
-		if ( contains ) 
-			return;
+        var key = interaction.Keybind.ToLower();
+        var contains = priorityList.ContainsKey( key );
+        if ( contains ) 
+            return;
 
-		priorityList.Add( key, interaction );
-	}
+        priorityList.Add( key, interaction );
+    }
 
-	public override void Tick() 
-	{	
-		if ( FromHands ) priorityList.Clear();
+    public override void Tick() 
+    {	
+        if ( FromHands ) priorityList.Clear();
 
-		SetClass( "visible", ShowHint() );
-		if (!HasClass("visible"))
-			return;
+        SetClass( "visible", ShowHint() );
+        if (!HasClass("visible"))
+            return;
 
-		var pos = FromHands ? 0 : Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
-		foreach ( var interaction in _interactions )
-		{
-			if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
-				continue;
+        var pos = FromHands ? 0 : Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
+        foreach ( var interaction in _interactions )
+        {
+            if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
+                continue;
 
-			var canInteract = !interaction.Disabled.InvokeOrDefault();
-			if ( canInteract )
-				AddToPriority( interaction );
+            var canInteract = !interaction.Disabled.InvokeOrDefault();
+            if ( canInteract )
+                AddToPriority( interaction );
 
-			if ( !HasPriority( interaction.Keybind ) )
-				continue;
+            if ( !HasPriority( interaction.Keybind ) )
+                continue;
 
-			if ( interaction.HasBounds && !FromHands )
-				pos = Player.Local.TargetedGameObject.Transform.Position + interaction.Position * Player.Local.TargetedGameObject.Transform.Rotation;
+            if ( interaction.HasBounds && !FromHands )
+                pos = Player.Local.TargetedGameObject.Transform.Position + interaction.Position * Player.Local.TargetedGameObject.Transform.Rotation;
 
-			if (canInteract && interaction.InputFunction(interaction.Keybind))
-			{
-				_targetObject?.Network.TakeOwnership();
-				interaction.Action?.Invoke(Player.Local, _targetObject);
+            var coolDown = !interaction.Cooldown || interaction.CooldownTimer;
+
+            if (canInteract && interaction.InputFunction(interaction.Keybind) && coolDown)
+            {
+                _targetObject?.Network.TakeOwnership();
+                interaction.Action?.Invoke(Player.Local, _targetObject);
+                interaction.CooldownTimer = interaction.CooldownTime;
 
 				if (interaction.InputMode != InputMode.Down)
 					Input.Clear(interaction.Keybind);
