@@ -70,7 +70,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Are any of the event components inside playing?
 	/// </summary>
-	public bool IsPlaying => Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren )
+	public bool IsPlaying => Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants )
 		.Any( x => x.IsPlaying );
 
 	/// <summary>
@@ -94,7 +94,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 
 			if ( _showToggle != shouldShow )
 			{
-				foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+				foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 				{
 					if ( component != this )
 						component.Enabled = shouldShow;
@@ -111,7 +111,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		{
 			if ( Game.IsEditor )
 			{
-				foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+				foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 				{
 					if ( component != this )
 						component.Enabled = false;
@@ -123,7 +123,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 			return;
 		}
 
-		foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren ) )
+		foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants ) )
 		{
 			foreach ( var trigger in eventComponent.Triggers )
 				trigger.OnTrigger += HasBeenTriggered;
@@ -142,7 +142,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	{
 		if ( !Game.IsPlaying ) return;
 
-		var nowFinished = Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndChildren )
+		var nowFinished = Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants )
 			.All( x => x.Finished || (!x.RequiredToFinish && !x.IsPlaying) || !x.Enabled );
 
 		if ( !IsFinished && nowFinished )
@@ -158,7 +158,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		if ( HasBeenPlayed )
 			Restart();
 
-		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndChildren ) )
+		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 			component.Enabled = true;
 
 		_eventMaster.CurrentEvents.Add( this );

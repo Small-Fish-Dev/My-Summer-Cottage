@@ -5,12 +5,12 @@
 <root>
 	<text class="title-container">TASKS JOURNAL</text>
 	<div class="tasks">
-		<div class="heading">PRIMARY TASKS</div>
+		<div class="heading primary">PRIMARY TASKS</div>
 		@foreach(var task in PrimaryTasks)
 		{
 			<TaskListElement TaskElement=@task onclick=@(() => OnTaskClick(task)) />
 		}
-		<div class="heading">SECONDARY TASKS</div>
+		<div class="heading secondary">SECONDARY TASKS</div>
 		@foreach(var task in SecondaryTasks)
 		{
 			<TaskListElement TaskElement=@task onclick=@(() => OnTaskClick(task)) />
