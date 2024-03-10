@@ -16,6 +16,9 @@ public sealed class Axe : Component
 		{
 			Identifier = "item.used_1.Axe",
 			Accessibility = AccessibleFrom.Hands,
+			Cooldown = true,
+			CooldownTime = 1f,
+			ShowWhenDisabled = () => true,
 			Action = ( Player player, GameObject obj ) =>
 			{
 				var target = player.TargetedGameObject ?? player.InteractionTrace.GameObject;
@@ -39,7 +42,6 @@ public sealed class Axe : Component
 
 					if ( target.Components.TryGet<HealthComponent>( out var health ) )
 					{
-						Log.Info( health.Health );
 						health.Damage( Damage, Type, player.GameObject, player.InteractionTrace.HitPosition, player.InteractionTrace.Direction, 400f );
 					}
 				}
@@ -54,6 +56,6 @@ public sealed class Axe : Component
 			},
 			Keybind = "mouse1",
 			Animation = InteractAnimations.Action
-		} );
+		} ); ;
 	}
 }
