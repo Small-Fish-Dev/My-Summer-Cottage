@@ -40,10 +40,11 @@ public sealed class Axe : Component
 						}
 					}
 
+					if ( target.Components.TryGet<Rigidbody>( out var body ) )
+						body.ApplyImpulseAt( player.InteractionTrace.HitPosition, player.InteractionTrace.Direction * 300f );
+
 					if ( target.Components.TryGet<HealthComponent>( out var health ) )
-					{
 						health.Damage( Damage, Type, player.GameObject, player.InteractionTrace.HitPosition, player.InteractionTrace.Direction, 400f );
-					}
 				}
 			},
 			DynamicText = () =>
