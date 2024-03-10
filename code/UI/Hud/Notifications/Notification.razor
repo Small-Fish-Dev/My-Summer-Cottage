@@ -1,0 +1,51 @@
+﻿@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	@if ( Number != null )
+	{
+		<div class="number" style="background-color: darken(@(Hex), 0.2); color: @(Hex);">##@Number</div>
+	}
+	<div class="content">
+		<div class="header" style="background-color: @(Hex);">
+			@if ( !string.IsNullOrWhiteSpace( Icon ) )
+			{
+				<img class="icon" src=@Icon />
+			}
+			<div class="title">@Title</div>
+		</div>
+		<div class="description">@Description</div>
+	</div>
+</root>
+
+@code {
+	public const string DEFAULT_THEME = "#bc4d2a";
+
+	public string Title { get; set; }
+	public string Icon { get; set; }
+	public string Description { get; set; }
+	public int? Number { get; set; }
+	public int Time { get; set; } = 7;
+	public Color Theme
+	{
+		get => Color.Parse( Hex ) ?? Color.Gray;
+		set
+		{
+			Hex = value.Hex;
+		}
+	}
+
+	public string Hex { get; set; } = DEFAULT_THEME;
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( 
+			Title, 
+			Icon, 
+			Description, 
+			Hex,
+			Number 
+		);
+	}
+}

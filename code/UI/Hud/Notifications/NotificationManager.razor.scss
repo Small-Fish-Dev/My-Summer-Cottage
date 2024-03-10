@@ -1,0 +1,19 @@
+﻿NotificationManager {
+    position: absolute;
+    top: 250px;
+    right: 0px;
+    flex-direction: column;
+    gap: 10px;
+
+    Notification {
+        transition: transform 0.5s ease-in-out;
+
+        &:intro {
+            transform: translate(100% -50%);
+        }
+
+        &:outro {
+            transform: translate(100% -50%);
+        }
+    }
+}
