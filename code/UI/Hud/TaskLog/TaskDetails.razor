@@ -47,10 +47,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="pin-details">
+		<div class="pin-details" onclick=@(() => Player.PinnedTask = Player.PinnedTask == SelectedTask ? null : SelectedTask)>
 			<img src="ui/hud/task_pin.png" />
 			<text>Pin this task to top right corner</text>
-			<Checkbox Enabled=@(SelectedTask == Player.PinnedTask) OnChange=@((bool pinned) => { Player.PinnedTask = pinned ? SelectedTask : null; }) />
+			<Checkbox Enabled=@(SelectedTask == Player.PinnedTask) />
 		</div>
 	}
 	else
