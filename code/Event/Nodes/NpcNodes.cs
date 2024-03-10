@@ -108,11 +108,18 @@ public static partial class NpcNodes
 	/// </summary>
 	[ActionGraphNode( "npc.startescaping" )]
 	[Title( "Start Escaping" ), Group( "NPC" ), Icon( "directions_run" )]
-	public static void StartEscaping( NPC npc, GameObject target )
+	public static async Task<Task> StartEscaping( NPC npc, GameObject target, Body? succesfullyEscaped )
 	{
-		if ( npc == null ) return;
+		if ( npc == null ) return Task.CompletedTask;
 
 		npc.SetTarget( target, true );
+
+		while ( npc.IsValid() && target.IsValid() && npc.IsWithinRange( target, npc.VisionRange ) && !npc.FollowingTargetObject )
+			await GameTask.DelaySeconds( Time.Delta );
+
+		var success = npc.IsValid() && target.IsValid() && !npc.IsWithinRange( target, npc.VisionRange ) && !npc.FollowingTargetObject;
+
+		return success ? Task.CompletedTask : succesfullyEscaped?.Invoke();
 	}
 
 	/// <summary>

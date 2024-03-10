@@ -299,7 +299,7 @@ public partial class NPC : Component
 			{
 				if ( TargetObject == null )
 				{
-					if ( NextIdle )
+					if ( Idle && NextIdle )
 					{
 						OnIdle?.Invoke();
 						NextIdle = Game.Random.Float( MinimumIdleCooldown, MaximumIdleCooldown );
@@ -389,7 +389,8 @@ public partial class NPC : Component
 				.Where( x => x.Health?.Alive ?? true ) // Dead or undead
 				.Where( x => x.TargetObject == null ) // They don't have a target already
 				.Where( x => x != this ) // Not us
-				.Where( x => x.GameObject != null ); // And that don't have a target already
+				.Where( x => x.GameObject != null ) // And that don't have a target already
+				.Where( x => !x.EnemyTags.HasAny( Tags ) ); // And we are friends
 
 			foreach ( var npc in otherNpcs )
 				npc.Detected( target, false );

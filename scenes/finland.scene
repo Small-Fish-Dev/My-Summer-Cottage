@@ -428,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.007872041,0,0.999969",
+          "Rotation": "0,0.9927264,0,-0.1203924",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -781,8 +781,8 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithSubtitle"
                     },
                     "UserData": {
@@ -821,6 +821,7 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -871,8 +872,8 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithNameAndSubtitle"
                     },
                     "UserData": {
@@ -916,6 +917,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1263,12 +1266,21 @@
       "__Prefab": "prefabs/npcs/reindeer_male.prefab"
     },
     {
-      "Id": "d5a6834d-8f6b-4b7e-84eb-82ec3b10f069",
+      "Id": "7b36108e-674f-483b-b933-8e90474c3363",
       "Name": "reindeer_female",
-      "Position": "-820.6632,-791.9029,95.97282",
-      "Rotation": "-0.03973547,0.04917195,0.6272658,0.776235",
+      "Position": "-812.2161,-857.4703,98.61575",
+      "Rotation": "-0.0008578706,0.07325816,0.01167797,0.9972442",
       "Enabled": true,
       "__Prefab": "prefabs/npcs/reindeer_female.prefab"
+    },
+    {
+      "Id": "d7e5257f-60c2-42f4-ad84-1cb434f49c73",
+      "Name": "creepy_peeper (5)",
+      "Position": "1273.839,-604.0211,77.36858",
+      "Rotation": "0.0003113742,0.03536403,-0.008798959,0.9993358",
+      "Tags": "human,npc",
+      "Enabled": true,
+      "__Prefab": "prefabs/npcs/creepy_peeper.prefab"
     }
   ],
   "SceneProperties": {
@@ -1294,6 +1306,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-10T21:28:06.6028234\u002B01:00",
+  "LastSaved": "2024-03-10T22:05:37.7915293\u002B01:00",
   "__references": []
 }

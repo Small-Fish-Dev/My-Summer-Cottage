@@ -73,6 +73,7 @@ public sealed class HealthComponent : Component
 	/// How much time passed since the last time its been damaged before it starts regenerating health
 	/// </summary>
 	[Property]
+	[ShowIf( "CanRegenerate", true )]
 	[HideIf( "Immortal", true )]
 	[Range( 0f, 10f, 0.1f )]
 	public float RegenerationTimer { get; set; } = 5f;
@@ -81,6 +82,7 @@ public sealed class HealthComponent : Component
 	/// How many seconds it takes to regenerate 1 hit point
 	/// </summary>
 	[Property]
+	[ShowIf( "CanRegenerate", true )]
 	[HideIf( "Immortal", true )]
 	[Range( 0f, 5f, 0.1f )]
 	public float RegenerationCooldown { get; set; } = 2f;
