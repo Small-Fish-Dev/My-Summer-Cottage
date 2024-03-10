@@ -144,7 +144,7 @@ public sealed class HealthComponent : Component
 			if ( damaged && !StunWhenDamaged && !Immortal ) return;
 
 			var damageFrac = (float)amount / (float)MaxHealth;
-			var ragdollTime = damageFrac * 10f;
+			var ragdollTime = damageFrac * 5f;
 			var ragdollVelocity = realDirection * force + Vector3.Up * force;
 
 			if ( Components.TryGet<Player>( out var player ) )
@@ -159,6 +159,12 @@ public sealed class HealthComponent : Component
 				npc.SetRagdoll( true, ragdollTime, 50f );
 			}
 		}
+
+		if ( Health <= 0 )
+		{
+			Kill( attacker );
+			return;
+		}
 	}
 
 	private void InternalKill( GameObject attacker = null )
@@ -170,7 +176,7 @@ public sealed class HealthComponent : Component
 
 		if ( Components.TryGet<NPC>( out var npc ) )
 		{
-			npc.SetRagdoll( true, 9999999f );
+			npc.SetRagdoll( true, 9999999f, 50f );
 
 			npc.OnKilled?.Invoke( attacker );
 		}
