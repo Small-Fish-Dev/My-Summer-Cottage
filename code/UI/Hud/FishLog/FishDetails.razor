@@ -6,7 +6,7 @@
 	@if (_displayedFishInfo is null)
 	{
 		<div class="header" style="padding: 70px;">
-			<img src="/ui/hud/fish_collection.png" style="image-rendering: pixelated;" />
+			<img src="/ui/hud/phish_unknown.png" style="image-rendering: pixelated;" />
 			<div style="flex-direction: column;">
 				<text class="title">Fishing Statistics</text>
 				<text class="subtitle">
@@ -43,10 +43,11 @@
 		{
 			<div class="description">
 				<div class="record">
-					<text class="key">Total caught:</text>
+					<text class="key">Total @_displayedFishInfo.Name caught:</text>
 					<text class="value">@_selectedFishRecord.Value.Count</text>
 				</div>
 				<div style="height: 20px;" />
+				<text class="best-catch">BEST CATCH</text>
 				<div class="record">
 					<text class="key">Caught on:</text>
 					<text class="value">@_selectedFishRecord.Value.MaxWhen.ToLongDateString()</text>
@@ -56,7 +57,7 @@
 					<text class="value weight">@_selectedFishRecord.Value.MaxWeight.ToKilograms() kg</text>
 				</div>
 				<div class="record">
-					<text class="key">Price:</text>
+					<text class="key">Record price:</text>
 					<text class="value money">@((int)(_selectedFishRecord.Value.MaxWeight / 1000.0f * _displayedFishInfo.CostPerKilo))mk</text>
 				</div>
 			</div>

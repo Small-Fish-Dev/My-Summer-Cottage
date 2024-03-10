@@ -8,12 +8,12 @@
 		<div class="heading">PRIMARY TASKS</div>
 		@foreach(var task in PrimaryTasks)
 		{
-			<TaskListElement Task=@task onclick=@(() => OnTaskClick(task)) />
+			<TaskListElement TaskElement=@task onclick=@(() => OnTaskClick(task)) />
 		}
 		<div class="heading">SECONDARY TASKS</div>
 		@foreach(var task in SecondaryTasks)
 		{
-			<TaskListElement Task=@task onclick=@(() => OnTaskClick(task)) />
+			<TaskListElement TaskElement=@task onclick=@(() => OnTaskClick(task)) />
 		}
 	</div>
 </root>

@@ -17,7 +17,7 @@
 		_instance = this;
 	}
 
-	public static void Add(string name, string text, SoundHandle soundHandle)
+	public static void AddSubtitle(string name, string text, SoundHandle soundHandle)
 	{
 		_instance._container.AddChild(new Subtitle(){ Name = name, Text = text, SoundHandle = soundHandle });
 	}
