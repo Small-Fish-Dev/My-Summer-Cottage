@@ -308,8 +308,11 @@ public partial class NPC : Component
 
 				if ( MoveHelper == null ) return;
 				{
-					ComputeNavigation();
-					MoveHelper.Move();
+					if ( !Static )
+					{
+						ComputeNavigation();
+						MoveHelper.Move();
+					}
 				}
 
 				DetectAround();

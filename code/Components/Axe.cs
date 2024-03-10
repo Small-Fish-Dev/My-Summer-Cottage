@@ -4,6 +4,11 @@ namespace Sauna;
 
 public sealed class Axe : Component
 {
+	[Property]
+	public DamageType Type { get; set; } = DamageType.Average;
+
+	[Property]
+	public int Damage { get; set; } = 5;
 	protected override void OnStart()
 	{
 		var interactions = Components.GetOrCreate<Interactions>();
@@ -13,9 +18,12 @@ public sealed class Axe : Component
 			Accessibility = AccessibleFrom.Hands,
 			Action = ( Player player, GameObject obj ) =>
 			{
-				var target = player.TargetedGameObject;
+				var target = player.TargetedGameObject ?? player.InteractionTrace.GameObject;
+
 				if ( target != null )
+				{
 					if ( target.Components.TryGet<ItemComponent>( out var item ) )
+					{
 						if ( item.Name == "Wooden Log" )
 						{
 							if ( PrefabLibrary.TryGetByPath( "prefabs/items/split_wooden_log.prefab", out var log ) )
@@ -27,6 +35,14 @@ public sealed class Axe : Component
 								TaskMaster.SubmitTriggerSignal( "item.used_1.Axe", player );
 							}
 						}
+					}
+
+					if ( target.Components.TryGet<HealthComponent>( out var health ) )
+					{
+						Log.Info( health.Health );
+						health.Damage( Damage, Type, player.GameObject, player.InteractionTrace.HitPosition, player.InteractionTrace.Direction, 400f );
+					}
+				}
 			},
 			DynamicText = () =>
 			{

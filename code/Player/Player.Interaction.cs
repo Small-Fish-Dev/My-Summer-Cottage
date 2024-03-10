@@ -2,7 +2,7 @@ namespace Sauna;
 
 public partial class Player
 {
-	private const float INTERACTION_DISTANCE = 1000f;
+	private const float INTERACTION_DISTANCE = 100f;
 	private const float INTERACTION_SIZE = 10f;
 
 	public Ray ViewRay => new( Camera.Transform.Position, Camera.Transform.Rotation.Forward );

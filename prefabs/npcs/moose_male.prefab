@@ -8,7 +8,7 @@
         "__type": "NPC",
         "AttackCooldown": 8,
         "AttackRange": 120,
-        "DetectRange": 700,
+        "DetectRange": 500,
         "EnemyTags": "player",
         "FaceTowardsVelocity": true,
         "Health": {
@@ -31,7 +31,6 @@
           "component_type": "MoveHelper"
         },
         "Name": "Moose (\u2642)",
-        "NavigationType": "Smart",
         "OnAttack": {
           "Version": 5,
           "UserData": {
@@ -763,10 +762,12 @@
             }
           ]
         },
+        "RunningType": "Smart",
         "RunSpeed": 450,
         "ScaleStats": true,
         "Static": false,
-        "VisionRange": 1400,
+        "VisionRange": 800,
+        "WalkingType": "Dumb",
         "WalkSpeed": 125,
         "Weight": "Massive"
       },
@@ -821,13 +822,13 @@
       {
         "__type": "HealthComponent",
         "CanRegenerate": true,
-        "DamagedBy": 0,
+        "DamagedBy": "Serious",
         "Immortal": false,
-        "MaxHealth": 10,
+        "MaxHealth": 50,
         "RegenerationCooldown": 2,
         "RegenerationTimer": 5,
-        "StunnedBy": "Serious",
-        "StunWhenDamaged": false
+        "StunnedBy": "Average",
+        "StunWhenDamaged": true
       }
     ],
     "Children": []
