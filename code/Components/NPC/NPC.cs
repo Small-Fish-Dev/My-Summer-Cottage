@@ -34,7 +34,12 @@ public partial class NPC : Component
 	public HealthComponent Health { get; set; }
 
 	[Property]
-	public NavigationType NavigationType { get; set; } = NavigationType.Normal;
+	public NavigationType WalkingType { get; set; } = NavigationType.Dumb;
+
+	[Property]
+	public NavigationType RunningType { get; set; } = NavigationType.Smart;
+
+	public NavigationType NavigationType => IsRunning ? RunningType : WalkingType;
 
 	/// <summary>
 	/// How much this creature weights (To handle ragdol force amount and duration)
