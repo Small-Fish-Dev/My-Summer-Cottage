@@ -102,7 +102,10 @@
                 }
               },
               "UserData": {
-                "Position": "-80,160"
+                "Position": "-80,160",
+                "Labels": {
+                  "_result": "thing"
+                }
               }
             },
             {
@@ -162,6 +165,29 @@
               },
               "UserData": {
                 "Position": "816,400"
+              }
+            },
+            {
+              "Id": 28,
+              "Type": "resource.ref",
+              "Properties": {
+                "T": "Sandbox.Engine/Sandbox.SoundEvent",
+                "value": "sounds/misc/finnishpenistwist.sound"
+              },
+              "UserData": {
+                "Position": "400,-256"
+              }
+            },
+            {
+              "Id": 30,
+              "Type": "call",
+              "Properties": {
+                "_name": "PlaySound",
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "736,-240"
               }
             }
           ],
@@ -292,6 +318,24 @@
               "Value": "0,0,60",
               "DstId": 26,
               "DstName": "_value"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 30,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_result",
+              "DstId": 30,
+              "DstName": "obj"
+            },
+            {
+              "SrcId": 28,
+              "SrcName": "_result",
+              "DstId": 30,
+              "DstName": "sound"
             }
           ]
         },
@@ -537,6 +581,77 @@
               "Value": true,
               "DstId": 8,
               "DstName": "value"
+            }
+          ]
+        },
+        "OnSpawn": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Spawn",
+            "id": "4c418366-dcaa-47ac-9a3e-fbed85c1b5a6",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 2,
+              "Type": "resource.ref",
+              "Properties": {
+                "T": "Sandbox.Engine/Sandbox.SoundEvent",
+                "value": "sounds/misc/penisgnome.sound"
+              },
+              "UserData": {
+                "Position": "-64,80"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001"
+                }
+              },
+              "UserData": {
+                "Position": "-96,224"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "call",
+              "Properties": {
+                "_name": "PlaySound",
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "304,128"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "obj"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "sound"
             }
           ]
         },
