@@ -3,11 +3,12 @@
 @inherits Panel
 
 <root class="@( Active ? "active" : "" )">
-	<img src=@Definition.Icon.ResourcePath/>
-
+	<div class="border"/>
+	<div class="background"/>
 	<div class="lock" style="display: @( Locked ? "flex" : "none" )">
 		<img src="ui/hud/blocked.png">
 	</div>
+	<img src=@Definition.Icon.ResourcePath/>
 </root>
 
 @code {

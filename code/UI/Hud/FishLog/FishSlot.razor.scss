@@ -1,41 +1,48 @@
 @import "/UI/Style.scss";
 
 FishSlot {
-    position: relative;
-    
-    aspect-ratio: 1;
-    height: 175px;
-    border: 2px $gray;
-    background-color: $black-bg;
-    
-    align-items: stretch;
-    
-    transition: border 0.2s ease, box-shadow 0.2s ease;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
+    align-items: center;
+    justify-content: center;
+
+    .border {
+        position: absolute;
+        background-image: linear-gradient(#989898, #4a4a4a);
+        height: 100%;
+        width: 100%;
+        mask-mode: alpha;
+        mask-image: url('/ui/hud/slot_mask_thin.png');
+        mask-size: 100%;
+        image-rendering: pixelated;
+    }
+
+    .background {
+        position: absolute;
+        background: radial-gradient(#00000047, #000000);
+        height: 100%;
+        width: 100%;
+        z-index: -10;
+    }
     
     &.active {
         border: 2px white;
     }
 
     img {
-        flex-grow: 1;
+        height: 90%;
+        width: 90%;
+        image-rendering: pixelated;
     }
-    
-    .lock {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        
-        padding: 10px;
-        
-        background-color: $black-bg;
-        
-        align-items: stretch;
-        
-        img {
-            image-rendering: pixelated;
-            flex-grow: 1;
-        }
+
+    &:hover {
+        cursor: pointer;
+        sound-in: 'hover';
+        background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    &:active {
+        sound-in: 'light_click';
     }
 }
