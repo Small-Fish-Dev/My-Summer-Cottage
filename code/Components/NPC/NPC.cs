@@ -363,6 +363,7 @@ public partial class NPC : Component
 		if ( currentTick % 20 != NpcId % 20 ) return; // Check every 20 ticks
 
 		var foundAround = Scene.FindInPhysics( new Sphere( Transform.Position, DetectRange * Scale ) ) // Find gameobjects nearby
+			.Where( x => x.Enabled )
 			.Where( x => EnemyTags != null && x.Tags.HasAny( EnemyTags ) ) // Do they have any of our enemy tags
 			.Where( x => x.Components.Get<HealthComponent>()?.Alive ?? true ); // Are they dead or undead
 
