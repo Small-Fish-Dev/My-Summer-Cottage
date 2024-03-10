@@ -1,14 +1,14 @@
 {
   "RootObject": {
     "Id": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
-    "Name": "elk_female",
+    "Name": "reindeer_female",
     "Enabled": true,
     "Components": [
       {
         "__type": "NPC",
         "AttackCooldown": 8,
         "AttackRange": 60,
-        "DetectRange": 400,
+        "DetectRange": 380,
         "EnemyTags": "player",
         "FaceTowardsVelocity": true,
         "Health": {
@@ -18,7 +18,7 @@
         },
         "Idle": true,
         "MaximumIdleCooldown": 12,
-        "MaxRunAnimationSpeed": 380,
+        "MaxRunAnimationSpeed": 400,
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
@@ -30,7 +30,7 @@
           "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
           "component_type": "MoveHelper"
         },
-        "Name": "Elk (\u26A8)",
+        "Name": "Reindeer (\u26A8)",
         "OnDetect": {
           "Version": 5,
           "UserData": {
@@ -466,12 +466,12 @@
           ]
         },
         "RunningType": "Smart",
-        "RunSpeed": 350,
+        "RunSpeed": 300,
         "ScaleStats": true,
         "Static": false,
         "VisionRange": 1000,
         "WalkingType": "Dumb",
-        "WalkSpeed": 80,
+        "WalkSpeed": 70,
         "Weight": "Middle"
       },
       {
@@ -492,7 +492,7 @@
         "Bounce": 0,
         "EnableUnstuck": true,
         "Gravity": "0,0,850",
-        "GroundAcceleration": 1600,
+        "GroundAcceleration": 1800,
         "GroundAngle": 70,
         "GroundFriction": 30,
         "IgnoreTags": "",
@@ -500,8 +500,8 @@
         "StepHeight": 24,
         "StickToGround": true,
         "StopSpeed": 10,
-        "TraceHeight": 45,
-        "TraceRadius": 14,
+        "TraceHeight": 40,
+        "TraceRadius": 12,
         "TraceType": "Capsule",
         "UseCollider": false,
         "UseSceneGravity": true
@@ -510,15 +510,15 @@
         "__type": "CapsuleCollider",
         "End": "0,0,36",
         "IsTrigger": false,
-        "Radius": 18,
-        "Start": "0,0,18",
+        "Radius": 15,
+        "Start": "0,0,15",
         "Static": false
       },
       {
         "__type": "SkinnedModelRenderer",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
-        "Model": "models/fauna/elk/elk_female.vmdl",
+        "Model": "models/fauna/elk/reindeer_female.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
@@ -527,7 +527,7 @@
         "CanRegenerate": true,
         "DamagedBy": "Average",
         "Immortal": false,
-        "MaxHealth": 20,
+        "MaxHealth": 10,
         "RegenerationCooldown": 2,
         "RegenerationTimer": 5,
         "StunnedBy": "Mild",
