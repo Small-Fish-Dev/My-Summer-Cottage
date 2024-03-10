@@ -34,6 +34,17 @@ public partial class Player
 	{
 		var path = fish.ResourcePath;
 		var date = DateTime.UtcNow;
+
+		var definition = fish.AsDefinition();
+		if ( definition == null )
+			return;
+
+		var trash = definition.GetComponent<Fish>().Get<bool>( "IsTrash" );
+		if ( trash )
+			return;
+
+		var species = definition.GetComponent<ItemComponent>().Get<string>( "Name" );
+
 		if ( FishesCaught.TryGetValue( path, out var record ) )
 		{
 			record.Count++;
@@ -42,16 +53,7 @@ public partial class Player
 				record.MaxWeight = weight;
 				record.MaxWhen = date;
 
-				var definition = fish.AsDefinition();
-				if ( definition == null )
-					return;
-
-				var trash = definition.GetComponent<Fish>().Get<bool>( "IsTrash" );
-				if ( trash )
-					return;
-
 				var range = definition.GetComponent<Fish>().Get<RangedFloat>( "WeightRange" );
-				var species = definition.GetComponent<ItemComponent>().Get<string>( "Name" );
 				if ( weight >= range.y * 0.3f ) // Has to be atleast 30% of max weight.
 				{
 					var caption = Game.Random.FromArray( fishingCaptions )
@@ -70,6 +72,7 @@ public partial class Player
 		else
 		{
 			FishesCaught[path] = new FishRecord { Count = 1, MaxWeight = weight, MaxWhen = date };
+			NotificationManager.Popup( "New catch!", $"{species} has been added to your collection", Color.FromBytes( 14, 89, 159 ), "/ui/hud/fish_collection.png", null );
 		}
 	}
 }
