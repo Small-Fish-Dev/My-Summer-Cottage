@@ -82,6 +82,9 @@
 	[ConCmd]
 	public static void ReceiveMessage( string sender = "Wife", string content = "Shitty fucking husband KILL YOURSELF!!", string embed = null )
 	{
+		// TODO: IMO everyone should hear this sound, getting calls or messages while chilling in da sauna is the most finnish experience
+		Player.Local.GameObject.PlaySound( "sounds/phone/nokla_notif.sound" );
+		
 		var image = Player.Local.CaptureMemory( "lol wife sent message" ).Texture;
 		Message.Receive( sender, content, image );
 	}
