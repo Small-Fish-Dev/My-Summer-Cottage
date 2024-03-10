@@ -107,13 +107,13 @@ public static partial class NpcNodes
 	/// <summary>
 	/// Set the current state and invoke the state
 	/// </summary>
-	[ActionGraphNode( "npc.gotostate" )]
+	[ActionGraphNode( "npc.gotostate", DefaultOutputSignal = false )]
 	[Title( "Go To State" ), Group( "NPC" ), Icon( "account_tree" )]
-	public static void GoToState( NPC npc, string stateIdentifier )
+	public static void GoToState( NPC npc, string stateIdentifier, float delayInSeconds = 0f )
 	{
 		if ( npc == null ) return;
 
-		npc.SetState( stateIdentifier );
+		npc.SetState( stateIdentifier, delayInSeconds );
 	}
 
 	/// <summary>
@@ -122,10 +122,10 @@ public static partial class NpcNodes
 	/// <param name="position"></param>
 	/// <param name="minRange"></param>
 	/// <param name="maxRange"></param>
-	[ActionGraphNode( "npc.getrandomposaround" )]
+	[ActionGraphNode( "npc.getrandomposaround" ), Pure]
 	[Title( "Get Random Position Around" ), Group( "NPC" ), Icon( "photo_size_select_small" )]
-	public static void GetRandomPosAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
+	public static Vector3 GetRandomPosAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
 	{
-		NPC.GetRandomPositionAround( position, minRange, maxRange );
+		return NPC.GetRandomPositionAround( position, minRange, maxRange );
 	}
 }

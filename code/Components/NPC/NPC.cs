@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Sauna;
+using System.Threading;
 
 public enum WeightType
 {
@@ -98,10 +99,26 @@ public partial class NPC : Component
 	public float Scale => ScaleStats ? MathF.Max( MathF.Max( GameObject.Transform.Scale.x, GameObject.Transform.Scale.y ), GameObject.Transform.Scale.z ) : 1f;
 
 	public delegate void NpcTrigger( GameObject provoker );
+	public class State
+	{
+		[JsonInclude]
+		public string Identifier;
+		[JsonInclude]
+		public Action Action;
+
+		public State() { }
+
+		public State( string identifier, Action action )
+		{
+			Identifier = identifier;
+			Action = action;
+		}
+	}
 
 	[Property]
 	[Category( "States" )]
-	public Dictionary<string, Action> States { get; set; } = new Dictionary<string, Action> { { "idle", () => { } } };
+	[JsonInclude]
+	public List<State> States { get; set; }
 
 	/// <summary>
 	/// If a GameObject has one of these tags it will be considered a provoker and can trigger alert state
@@ -169,7 +186,8 @@ public partial class NPC : Component
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
 	public bool FollowingTargetObject { get; set; } = false;
-	public string CurrentState { get; set; } = "idle";
+	public State CurrentState { get; set; }
+	public CancellationTokenSource CurrentStateToken { get; set; }
 	public Vector3 SpawnPosition { get; set; }
 	public float ForceMultiplier
 	{
@@ -333,16 +351,34 @@ public partial class NPC : Component
 	}
 
 	/// <summary>
-	/// Invoke the actiongraph attached to that state
+	/// Invoke the actiongraph attached to that state.
 	/// </summary>
 	/// <param name="identifier"></param>
-	public void SetState( string identifier )
+	/// <param name="delayInSeconds">How much to wait before setting the state</param>
+	public async void SetState( string identifier, float delayInSeconds = 0f )
 	{
-		if ( States.ContainsKey( identifier ) )
+		var foundStates = States.Where( x => x.Identifier == identifier );
+		var currentToken = CurrentStateToken.Token;
+
+		if ( foundStates.Any() )
 		{
-			States[identifier]?.Invoke();
-			CurrentState = identifier;
+			var foundState = foundStates.First();
+			TimeSince timer = 0;
+
+			while ( timer < delayInSeconds && !currentToken.IsCancellationRequested ) // If we forced another state change let's cancel this
+				await Task.Frame();
+
+			if ( !currentToken.IsCancellationRequested )
+			{
+				CurrentStateToken.Cancel();
+				CurrentStateToken.TryReset();
+
+				foundState.Action?.Invoke();
+				CurrentState = foundState;
+			}
 		}
+
+		return;
 	}
 
 	/// <summary>
