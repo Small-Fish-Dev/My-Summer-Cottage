@@ -26,26 +26,15 @@ public partial class Player : Component, Component.ExecuteInEditor
 		set
 		{
 			_skinColor = value;
-
-			if ( Renderer != null && Renderer.SceneModel.IsValid() )
-			{
-				Renderer.SceneModel.Attributes.Set( "g_flColorTint", _skinColor );
-				Renderer.SceneModel.Batchable = false;
-			}
-
-			if ( Penoid != null && Penoid.SceneModel.IsValid() )
-			{
-				Penoid.SceneModel.Attributes.Set( "g_flColorTint", _skinColor );
-				Penoid.SceneModel.Batchable = false;
-			}
+			_updateSkin = true;
 		}
 	}
 
-	[Property]
-	public SkinnedModelRenderer Penoid { get; set; }
+	public SkinnedModelRenderer Penoid { get; private set; }
 
 	Color _skinColor;
 	HiddenBodyGroup _hideBodygroups;
+	bool _updateSkin;
 
 	[Sync]
 	public HiddenBodyGroup HideBodygroups
@@ -151,6 +140,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		Inventory = Components.Get<Inventory>( FindMode.EverythingInSelfAndDescendants );
 
 		Renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+		Penoid = GameObject.Children.FirstOrDefault( x => x.Name == "Penoid" )?.Components?.Get<SkinnedModelRenderer>();
 		Collider = Components.Get<BoxCollider>( FindMode.EverythingInSelfAndDescendants );
 
 		PissEmitter = Components.Get<ParticleConeEmitter>( FindMode.EverythingInSelfAndDescendants );
@@ -178,6 +168,19 @@ public partial class Player : Component, Component.ExecuteInEditor
 			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
 			HidePenoid = Inventory.EquippedItems[(int)EquipSlot.Legs] != null;
 			HoldType = (Inventory.EquippedItems[(int)EquipSlot.Hand] as ItemEquipment)?.HoldType ?? HoldType.Idle;
+		}
+
+		if ( _updateSkin
+		  && Renderer != null && Renderer.SceneModel.IsValid()
+		  && Penoid != null && Penoid.SceneModel.IsValid() )
+		{
+			Renderer.SceneModel.Attributes.Set( "g_flColorTint", SkinColor );
+			Renderer.SceneModel.Batchable = false;
+
+			Penoid.SceneModel.Attributes.Set( "g_flColorTint", SkinColor );
+			Penoid.SceneModel.Batchable = false;
+
+			_updateSkin = false;
 		}
 
 		UpdateAnimation();

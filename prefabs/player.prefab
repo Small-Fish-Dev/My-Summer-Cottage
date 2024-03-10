@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "26211651-e923-45af-9401-913a1a90824b",
+    "Id": "7aa52c8a-bfb9-4c78-99fb-f4c76ef66064",
     "Name": "player",
     "Tags": "localplayer,player",
     "Enabled": true,
@@ -16,13 +16,8 @@
         "Money": 0,
         "MoveHelper": {
           "_type": "component",
-          "go": "26211651-e923-45af-9401-913a1a90824b",
+          "go": "7aa52c8a-bfb9-4c78-99fb-f4c76ef66064",
           "component_type": "MoveHelper"
-        },
-        "Penoid": {
-          "_type": "component",
-          "go": "662116f8-8bf6-4936-920f-d3a0d88b79f1",
-          "component_type": "SkinnedModelRenderer"
         },
         "SkinColor": "1,1,1,1",
         "SprintSpeed": 260,
@@ -33,7 +28,7 @@
         "__type": "Inventory",
         "Player": {
           "_type": "component",
-          "go": "26211651-e923-45af-9401-913a1a90824b",
+          "go": "7aa52c8a-bfb9-4c78-99fb-f4c76ef66064",
           "component_type": "Player"
         }
       },
@@ -92,22 +87,11 @@
         "MassOverride": 0,
         "RigidbodyFlags": 0,
         "StartAsleep": false
-      },
-      {
-        "__type": "HealthComponent",
-        "CanRegenerate": true,
-        "DamagedBy": "Mild",
-        "Immortal": true,
-        "MaxHealth": 10,
-        "RegenerationCooldown": 2,
-        "RegenerationTimer": 5,
-        "StunnedBy": "Mild",
-        "StunWhenDamaged": false
       }
     ],
     "Children": [
       {
-        "Id": "7d39c391-780b-4bcb-8a96-e44da6e5f774",
+        "Id": "cb624b0d-ef55-4c3a-baff-224f8043e406",
         "Name": "Camera",
         "Position": "5.991993,0.00007995074,66.42353",
         "Tags": "maincamera",
@@ -122,7 +106,7 @@
             "Orthographic": false,
             "OrthographicHeight": 1204,
             "Priority": 1,
-            "RenderExcludeTags": "",
+            "RenderExcludeTags": "ui2",
             "RenderTags": "",
             "TargetEye": "None",
             "Viewport": "0,0,1,1",
@@ -145,15 +129,23 @@
             "UseCameraDirection": true
           },
           {
-            "__type": "DitherHook"
+            "__type": "Vignette",
+            "Center": "0.5,0.5",
+            "Color": "0,0,0,1",
+            "Intensity": 0.65,
+            "Roundness": 0.35,
+            "Smoothness": 0.85
           },
           {
             "__type": "EyeProtector"
+          },
+          {
+            "__type": "DitherHook"
           }
         ]
       },
       {
-        "Id": "e298dce1-bb4d-4090-bb57-ee1189499673",
+        "Id": "74580322-bff5-4dca-8185-e3b6ce30223f",
         "Name": "Model",
         "Enabled": true,
         "Components": [
@@ -172,7 +164,7 @@
         ]
       },
       {
-        "Id": "9f88c1b2-2182-4ce8-bac0-adc97ce6748c",
+        "Id": "22427696-effd-4fb4-87cc-0e073d217cb0",
         "Name": "ShadowModel",
         "Enabled": true,
         "Components": [
@@ -182,7 +174,7 @@
             "BodyGroups": 341,
             "BoneMergeTarget": {
               "_type": "component",
-              "go": "e298dce1-bb4d-4090-bb57-ee1189499673",
+              "go": "74580322-bff5-4dca-8185-e3b6ce30223f",
               "component_type": "SkinnedModelRenderer"
             },
             "CreateBoneObjects": false,
@@ -195,7 +187,7 @@
         ]
       },
       {
-        "Id": "662116f8-8bf6-4936-920f-d3a0d88b79f1",
+        "Id": "1b0e9018-630c-438d-a3f4-276ab53a87ca",
         "Name": "Penoid",
         "Enabled": true,
         "Components": [
@@ -205,7 +197,7 @@
             "BodyGroups": 18446744073709551615,
             "BoneMergeTarget": {
               "_type": "component",
-              "go": "e298dce1-bb4d-4090-bb57-ee1189499673",
+              "go": "74580322-bff5-4dca-8185-e3b6ce30223f",
               "component_type": "SkinnedModelRenderer"
             },
             "CreateBoneObjects": false,
@@ -221,7 +213,7 @@
         ],
         "Children": [
           {
-            "Id": "1c653dc3-e690-495c-8e75-da7dd904ffb7",
+            "Id": "03222459-0393-4f9d-9faa-2e7a10b0d92d",
             "Name": "Piss",
             "Position": "1.936967,0.0000001154522,34.7722",
             "Tags": "particles",
