@@ -6,6 +6,7 @@ FishSlot {
     margin: 5px;
     align-items: center;
     justify-content: center;
+    transition: all 0.1s linear;
 
     .border {
         position: absolute;
@@ -25,23 +26,34 @@ FishSlot {
         width: 100%;
         z-index: -10;
     }
-    
-    &.active {
-        border: 2px white;
-    }
 
     img {
         height: 90%;
         width: 90%;
     }
 
-    &:hover {
+    &.locked {
+        img {
+            filter: brightness(0%) blur(1px);
+        }
+    }
+
+    &:hover.locked {
+        background-color: rgba(255, 0, 0, 0.1);
+    }
+
+    &:hover:not(.locked) {
         cursor: pointer;
         sound-in: 'hover';
         background-color: rgba(255, 255, 255, 0.02);
     }
 
-    &:active {
+    &:active:not(.locked) {
         sound-in: 'light_click';
+        transform: scale(0.95);
+    }
+
+    &:active.locked {
+        sound-in: 'serror';
     }
 }
