@@ -174,8 +174,8 @@ partial class Player
 
 	public void ApplyRecoil( Angles angle )
 	{
+		_previousRecoil = _currentRecoil;
 		_currentRecoil += angle;
-		_previousRecoil = Angles.Zero;
 	}
 
 	public void SetAnimation( string param, Vector3 value )

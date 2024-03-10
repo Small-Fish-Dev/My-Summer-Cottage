@@ -147,20 +147,20 @@ public class ItemEquipment : ItemComponent
 
 	protected override void OnPreRender()
 	{
-		if ( !Equipped || !Game.IsPlaying || GameObject == Scene || IsClothing )
+		if ( !Equipped || !UpdatePosition || !Game.IsPlaying || GameObject == Scene )
 			return;
 
 		var player = GameObject.Parent.Components.Get<Player>( true );
 		if ( player == null )
 			return;
 
-		if ( Renderer != null && Renderer.SceneObject.IsValid() )
-		{
-			var transform = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
-			Renderer.SceneObject.Transform = transform;
-			(Renderer.SceneObject as SceneModel)?.Update( RealTime.Delta );
-		}
-		//GameObject.Transform.ClearLerp();
+		var obj = Renderer?.SceneObject;
+		if ( !obj.IsValid() )
+			return;
+
+		var transform = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
+		obj.Transform = transform;
+		(obj as SceneModel)?.Update( RealTime.Delta );
 	}
 
 	#region GIZMO STUFF
