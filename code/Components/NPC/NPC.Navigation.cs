@@ -121,7 +121,7 @@ public partial class NPC
 		foreach ( var direction in possibleDirections )
 		{
 			var startPosition = Transform.Position + Vector3.Up * (MoveHelper.StepHeight + MoveHelper.TraceRadius / 2f);
-			var endPosition = startPosition + direction * MoveHelper.TraceRadius * 4f;
+			var endPosition = startPosition + direction * MoveHelper.TraceRadius;
 			var dangerTrace = Scene.Trace.Sphere( MoveHelper.TraceRadius, startPosition, endPosition )
 				.IgnoreGameObjectHierarchy( GameObject )
 				.Run();

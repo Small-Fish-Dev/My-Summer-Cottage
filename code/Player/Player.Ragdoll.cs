@@ -109,7 +109,7 @@ partial class Player
 			{
 				_unragdoll = 0f;
 
-				var groundTrace = Scene.Trace.Ray( rootPosition, rootPosition + Vector3.Down * 10f )
+				var groundTrace = Scene.Trace.Ray( rootPosition + Vector3.Up * 30f, rootPosition + Vector3.Down * 40f )
 					.Size( 20f )
 					.IgnoreGameObjectHierarchy( GameObject )
 					.WithoutTags( "player", "trigger", "npc" )

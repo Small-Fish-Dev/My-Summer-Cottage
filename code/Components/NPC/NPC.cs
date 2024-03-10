@@ -98,44 +98,26 @@ public partial class NPC : Component
 	public float Range { get; private set; } = 60f;
 	public float Scale => ScaleStats ? MathF.Max( MathF.Max( GameObject.Transform.Scale.x, GameObject.Transform.Scale.y ), GameObject.Transform.Scale.z ) : 1f;
 
-	public delegate void NpcTrigger( GameObject provoker );
-	public class State
-	{
-		[JsonInclude]
-		public string Identifier;
-		[JsonInclude]
-		public Action Action;
-
-		public State() { }
-
-		public State( string identifier, Action action )
-		{
-			Identifier = identifier;
-			Action = action;
-		}
-	}
-
-	[Property]
-	[Category( "States" )]
-	[JsonInclude]
-	public List<State> States { get; set; }
-
 	/// <summary>
 	/// If a GameObject has one of these tags it will be considered a provoker and can trigger alert state
 	/// </summary>
 	[Property]
-	[Category( "Triggers" )]
+	[Category( "TriggerStats" )]
 	public TagSet ProvokerTags { get; set; }
 
 	[Property]
 	[Category( "Triggers" )]
-	public Action OnSpawn { get; set; }
+	public NpcTrigger OnSpawn { get; set; }
+
+	[Property]
+	[Category( "Triggers" )]
+	public NpcTrigger OnIdle { get; set; }
 
 	/// <summary>
 	/// How close a provoker has to come to alert the NPC
 	/// </summary>
 	[Property]
-	[Category( "Triggers" )]
+	[Category( "TriggerStats" )]
 	[Range( 0f, 1024f, 16f )]
 	public float AlertRange { get; set; } = 256f;
 
@@ -143,9 +125,11 @@ public partial class NPC : Component
 	/// How far a provoker has to go to lose the NPC
 	/// </summary>
 	[Property]
-	[Category( "Triggers" )]
+	[Category( "TriggerStats" )]
 	[Range( 0f, 2024f, 16f )]
 	public float AlertEscapeRange { get; set; } = 512f;
+
+	public delegate void NpcTrigger( NPC npc, GameObject provoker );
 
 	/// <summary>
 	/// When the provoker enters the alert area, or a nearby NPC gets alerted/attacked. This won't get called if the NPC is already alerted.
@@ -169,6 +153,13 @@ public partial class NPC : Component
 	public NpcTrigger OnProvokerEscaped { get; set; }
 
 	/// <summary>
+	/// When the provoker is within range
+	/// </summary>
+	[Property]
+	[Category( "Triggers" )]
+	public NpcTrigger OnProvokerWithinRange { get; set; }
+
+	/// <summary>
 	/// When the NPC dies, provoker will be NULL if it died of natural causes (???)
 	/// </summary>
 	[Property]
@@ -186,8 +177,34 @@ public partial class NPC : Component
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
 	public bool FollowingTargetObject { get; set; } = false;
-	public State CurrentState { get; set; }
-	public CancellationTokenSource CurrentStateToken { get; set; }
+
+	public enum StateType
+	{
+		Spawn,
+		Idle,
+		Alerted,
+		Attacked,
+		ProvokerEscaped,
+		ProvokerWithinRange,
+		Killed
+	}
+
+	public NpcTrigger ToDelegate( StateType type )
+	{
+		return type switch
+		{
+			StateType.Spawn => OnSpawn,
+			StateType.Idle => OnIdle,
+			StateType.Alerted => OnAlerted,
+			StateType.Attacked => OnAttacked,
+			StateType.ProvokerEscaped => OnProvokerEscaped,
+			StateType.ProvokerWithinRange => OnProvokerWithinRange,
+			StateType.Killed => OnKilled,
+			_ => OnIdle
+		};
+	}
+
+	public StateType CurrentState { get; set; } = StateType.Spawn;
 	public Vector3 SpawnPosition { get; set; }
 	public float ForceMultiplier
 	{
@@ -240,7 +257,7 @@ public partial class NPC : Component
 			MoveHelper.StopSpeed *= Scale;
 		}
 
-		OnSpawn?.Invoke();
+		OnSpawn?.Invoke( this, null );
 	}
 
 	protected override void OnUpdate()
@@ -295,13 +312,37 @@ public partial class NPC : Component
 		OnDestroyed?.Invoke();
 	}
 
+	public void SetState( StateType state, StateType currentState, bool invoke = true )
+	{
+		if ( CurrentState != currentState ) return;
+
+		if ( invoke )
+			ToDelegate( state )?.Invoke( this, TargetObject );
+
+		CurrentState = state;
+	}
+
 	/// <summary>
 	/// Get all provokers inside of its detect area
 	/// </summary>
 	public IEnumerable<GameObject> ProvokersInArea { get; set; }
 
+	TimeUntil _nextDetect = 5f;
+
 	public void DetectAround()
 	{
+		if ( TargetObject != null )
+		{
+			if ( TargetObject.Transform.Position.Distance( Transform.Position ) <= Range )
+			{
+				if ( _nextDetect )
+				{
+					SetState( StateType.ProvokerWithinRange, CurrentState );
+					_nextDetect = 5f;
+				}
+			}
+		}
+
 		var currentTick = (int)(Time.Now / Time.Delta);
 		if ( currentTick % 30 != NpcId % 30 ) return; // Check every 30 ticks
 
@@ -318,9 +359,9 @@ public partial class NPC : Component
 		}
 		else
 		{
-			var targetAlive = !TargetObject.Components.Get<HealthComponent>()?.Alive ?? false;
+			var targetDead = !TargetObject.Components.Get<HealthComponent>()?.Alive ?? false;
 			var targetEscaped = TargetObject.Transform.Position.Distance( Transform.Position ) > AlertEscapeRange;
-			if ( targetEscaped || targetAlive )
+			if ( targetEscaped || targetDead )
 				Undetected();
 		}
 	}
@@ -328,7 +369,7 @@ public partial class NPC : Component
 	public void Detected( GameObject target, bool alertOthers = false )
 	{
 		TargetObject = target;
-		OnAlerted?.Invoke( TargetObject );
+		SetState( StateType.Alerted, CurrentState );
 
 		if ( alertOthers )
 		{
@@ -344,41 +385,10 @@ public partial class NPC : Component
 
 	public void Undetected()
 	{
-		OnProvokerEscaped?.Invoke( TargetObject );
+		SetState( StateType.ProvokerEscaped, CurrentState );
 		TargetObject = null;
 		TargetPosition = Transform.Position;
 		ReachedDestination = true;
-	}
-
-	/// <summary>
-	/// Invoke the actiongraph attached to that state.
-	/// </summary>
-	/// <param name="identifier"></param>
-	/// <param name="delayInSeconds">How much to wait before setting the state</param>
-	public async void SetState( string identifier, float delayInSeconds = 0f )
-	{
-		var foundStates = States.Where( x => x.Identifier == identifier );
-		var currentToken = CurrentStateToken.Token;
-
-		if ( foundStates.Any() )
-		{
-			var foundState = foundStates.First();
-			TimeSince timer = 0;
-
-			while ( timer < delayInSeconds && !currentToken.IsCancellationRequested ) // If we forced another state change let's cancel this
-				await Task.Frame();
-
-			if ( !currentToken.IsCancellationRequested )
-			{
-				CurrentStateToken.Cancel();
-				CurrentStateToken.TryReset();
-
-				foundState.Action?.Invoke();
-				CurrentState = foundState;
-			}
-		}
-
-		return;
 	}
 
 	/// <summary>

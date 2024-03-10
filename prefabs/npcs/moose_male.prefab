@@ -27,45 +27,85 @@
         },
         "Name": "Moose (\u2642)",
         "NavigationType": "Normal",
-        "OnAlerted": null,
-        "OnAttacked": null,
-        "OnDestroyed": null,
-        "OnKilled": null,
-        "OnProvokerEscaped": null,
-        "OnSpawn": {
+        "OnAlerted": {
           "Version": 5,
           "UserData": {
-            "Title": "On Spawn",
-            "id": "fd7be28a-0fcb-49d9-a8b5-ff51992ec3c1",
+            "Title": "On Alerted",
+            "id": "8565a036-0fc0-411d-9afd-aa7217d01183",
             "ReferencedComponentTypes": [
-              "package.fish.sauna/NPC"
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
             ]
           },
           "Variables": [],
           "Nodes": [
             {
               "Id": 0,
-              "Type": "input"
+              "Type": "input",
+              "UserData": {
+                "Labels": {
+                  "npc": "npc"
+                }
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "npc.follow",
+              "UserData": {
+                "Position": "448,0"
+              }
             },
             {
               "Id": 2,
               "Type": "scene.get",
               "Properties": {
-                "T": "package.fish.sauna/NPC"
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
               },
               "UserData": {
-                "Position": "0,160"
+                "Position": "144,224",
+                "Labels": {
+                  "_result": "renderer"
+                }
               }
             },
             {
               "Id": 3,
-              "Type": "npc.gotostate",
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set",
+                "_isStatic": false
+              },
               "UserData": {
-                "Position": "240,64"
+                "Position": "528,224"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "npc.setstate",
+              "UserData": {
+                "Position": "848,32"
               }
             }
           ],
           "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "npc",
+              "DstId": 1,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "provoker",
+              "DstId": 1,
+              "DstName": "target"
+            },
             {
               "SrcId": 0,
               "SrcName": "_target",
@@ -79,20 +119,617 @@
               "DstName": "_signal"
             },
             {
-              "Value": 1,
+              "SrcId": 2,
+              "SrcName": "_result",
               "DstId": 3,
-              "DstName": "delayInSeconds"
+              "DstName": "_target"
+            },
+            {
+              "Value": "charge",
+              "DstId": 3,
+              "DstName": "v"
+            },
+            {
+              "Value": true,
+              "DstId": 3,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "failedToReachTarget",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Alerted",
+              "DstId": 10,
+              "DstName": "currentState"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "npc",
+              "DstId": 10,
+              "DstName": "npc"
+            },
+            {
+              "Value": "Idle",
+              "DstId": 10,
+              "DstName": "state"
+            }
+          ]
+        },
+        "OnAttacked": null,
+        "OnDestroyed": null,
+        "OnIdle": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Idle",
+            "id": "7a750a9e-057c-4011-a23b-f349d9dd2a86",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-224,32",
+                "Labels": {
+                  "npc": "npc"
+                }
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "448,32"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "package.fish.sauna/NPC",
+                "_name": "SpawnPosition"
+              },
+              "UserData": {
+                "Position": "-32,192"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "176,192"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "npc.setstate",
+              "UserData": {
+                "Position": "1088,64"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "912,208"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "random.float",
+              "UserData": {
+                "Position": "704,192"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "npc",
+              "DstId": 1,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "npc",
+              "DstId": 2,
+              "DstName": "_target"
+            },
+            {
+              "Value": 512,
+              "DstId": 3,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 0,
+              "DstId": 3,
+              "DstName": "minRange"
             },
             {
               "SrcId": 2,
               "SrcName": "_result",
               "DstId": 3,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_signal",
+              "DstId": 4,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Idle",
+              "DstId": 4,
+              "DstName": "currentState"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "npc",
+              "DstId": 4,
               "DstName": "npc"
             },
             {
-              "Value": "idle",
+              "Value": "Idle",
+              "DstId": 4,
+              "DstName": "state"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "reachedDestination",
+              "DstId": 5,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "seconds"
+            },
+            {
+              "Value": 4,
+              "DstId": 6,
+              "DstName": "max"
+            },
+            {
+              "Value": 2,
+              "DstId": 6,
+              "DstName": "min"
+            }
+          ]
+        },
+        "OnKilled": null,
+        "OnProvokerEscaped": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Provoker Escaped",
+            "id": "803296ed-9734-4298-a5d2-79124935496f",
+            "ReferencedComponentTypes": [
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-16,0"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "336,-0"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "npc.setstate",
+              "UserData": {
+                "Position": "336,128"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "464,-176"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001"
+                }
+              },
+              "UserData": {
+                "Position": "-16,-176"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.get",
+              "ParentId": 4,
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "npc",
+              "DstId": 1,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "ProvokerEscaped",
+              "DstId": 2,
+              "DstName": "currentState"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "npc",
+              "DstId": 2,
+              "DstName": "npc"
+            },
+            {
+              "Value": "Idle",
+              "DstId": 2,
+              "DstName": "state"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
               "DstId": 3,
-              "DstName": "stateIdentifier"
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "Value": "charge",
+              "DstId": 3,
+              "DstName": "v"
+            },
+            {
+              "Value": false,
+              "DstId": 3,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "_this"
+            }
+          ]
+        },
+        "OnProvokerWithinRange": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Provoker Within Range",
+            "id": "af44e12c-075d-46af-93a3-c9ee9cb52dfc",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/HealthComponent",
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "320,16"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/HealthComponent",
+                "_name": "Damage",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "880,128"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "592,-128"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "npc.setstate",
+              "UserData": {
+                "Position": "1152,32"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001"
+                }
+              },
+              "UserData": {
+                "Position": "352,144"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "property.get",
+              "ParentId": 5,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "property.get",
+              "ParentId": 6,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001"
+                }
+              },
+              "UserData": {
+                "Position": "112,-128"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "scene.get",
+              "ParentId": 9,
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "992,-64"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "provoker",
+              "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "_target"
+            },
+            {
+              "Value": 5,
+              "DstId": 2,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 700,
+              "DstId": 2,
+              "DstName": "force"
+            },
+            {
+              "Value": "Serious",
+              "DstId": 2,
+              "DstName": "type"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "worldHurtPosition"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "Value": "charge",
+              "DstId": 3,
+              "DstName": "v"
+            },
+            {
+              "Value": false,
+              "DstId": 3,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 4,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "ProvokerWithinRange",
+              "DstId": 4,
+              "DstName": "currentState"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "npc",
+              "DstId": 4,
+              "DstName": "npc"
+            },
+            {
+              "Value": "Idle",
+              "DstId": 4,
+              "DstName": "state"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 11,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "npc",
+              "DstId": 11,
+              "DstName": "npc"
+            }
+          ]
+        },
+        "OnSpawn": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Spawn",
+            "id": "e36445a0-1c99-4f87-b264-d9d012663b0b",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-64,32"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "npc.setstate",
+              "UserData": {
+                "Position": "256,32"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Spawn",
+              "DstId": 1,
+              "DstName": "currentState"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "npc",
+              "DstId": 1,
+              "DstName": "npc"
+            },
+            {
+              "Value": "Idle",
+              "DstId": 1,
+              "DstName": "state"
             }
           ]
         },
@@ -100,147 +737,9 @@
         "Range": 120,
         "RunSpeed": 300,
         "ScaleStats": true,
-        "States": [
-          {
-            "Identifier": "idle",
-            "Action": {
-              "Version": 5,
-              "UserData": {
-                "Title": "Action",
-                "id": "b0d2a4f4-fd20-4a12-ad58-7abcf836dff8",
-                "ReferencedComponentTypes": [
-                  "package.fish.sauna/NPC"
-                ]
-              },
-              "Variables": [],
-              "Nodes": [
-                {
-                  "Id": 0,
-                  "Type": "input",
-                  "UserData": {
-                    "Position": "-64,-0"
-                  }
-                },
-                {
-                  "Id": 2,
-                  "Type": "scene.get",
-                  "Properties": {
-                    "T": "package.fish.sauna/NPC"
-                  },
-                  "UserData": {
-                    "Position": "-240,48",
-                    "Labels": {
-                      "_result": "npc"
-                    }
-                  }
-                },
-                {
-                  "Id": 3,
-                  "Type": "property.get",
-                  "ParentId": 2,
-                  "Properties": {
-                    "_name": "SpawnPosition",
-                    "_type": "package.fish.sauna/NPC"
-                  }
-                },
-                {
-                  "Id": 4,
-                  "Type": "npc.getrandomposaround",
-                  "UserData": {
-                    "Position": "48,96"
-                  }
-                },
-                {
-                  "Id": 5,
-                  "Type": "npc.moveto",
-                  "UserData": {
-                    "Position": "320,-32"
-                  }
-                },
-                {
-                  "Id": 6,
-                  "Type": "npc.gotostate",
-                  "UserData": {
-                    "Position": "640,16"
-                  }
-                }
-              ],
-              "Links": [
-                {
-                  "SrcId": 0,
-                  "SrcName": "_target",
-                  "DstId": 2,
-                  "DstName": "_this"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_result",
-                  "DstId": 3,
-                  "DstName": "_target"
-                },
-                {
-                  "Value": 512,
-                  "DstId": 4,
-                  "DstName": "maxRange"
-                },
-                {
-                  "Value": 0,
-                  "DstId": 4,
-                  "DstName": "minRange"
-                },
-                {
-                  "SrcId": 3,
-                  "SrcName": "_result",
-                  "DstId": 4,
-                  "DstName": "position"
-                },
-                {
-                  "SrcId": 0,
-                  "SrcName": "_signal",
-                  "DstId": 5,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_result",
-                  "DstId": 5,
-                  "DstName": "npc"
-                },
-                {
-                  "SrcId": 4,
-                  "SrcName": "_result",
-                  "DstId": 5,
-                  "DstName": "position"
-                },
-                {
-                  "SrcId": 5,
-                  "SrcName": "reachedDestination",
-                  "DstId": 6,
-                  "DstName": "_signal"
-                },
-                {
-                  "Value": 1,
-                  "DstId": 6,
-                  "DstName": "delayInSeconds"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_result",
-                  "DstId": 6,
-                  "DstName": "npc"
-                },
-                {
-                  "Value": "idle",
-                  "DstId": 6,
-                  "DstName": "stateIdentifier"
-                }
-              ]
-            }
-          }
-        ],
         "Static": false,
         "WalkSpeed": 125,
-        "Weight": "Light"
+        "Weight": "Heavy"
       },
       {
         "__type": "MoveHelper",
@@ -302,6 +801,7 @@
         "DamagedBy": 0,
         "Immortal": false,
         "MaxHealth": 10,
+        "OnDamaged": null,
         "RegenerationCooldown": 2,
         "RegenerationTimer": 5,
         "StunnedBy": "Serious",

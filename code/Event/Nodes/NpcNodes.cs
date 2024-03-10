@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.Utility;
 using Sauna;
+using static NPC;
 using static Sandbox.PhysicsContact;
 
 public static partial class NpcNodes
@@ -66,10 +67,9 @@ public static partial class NpcNodes
 		while ( npc.IsValid() && !npc.ReachedDestination && currentPosition == npc.TargetPosition )
 			await GameTask.DelaySeconds( Time.Delta );
 
-		if ( npc.IsValid() && npc.ReachedDestination && currentPosition == npc.TargetPosition )
-			return reachedDestination?.Invoke();
-		else
-			return failedToReachDestination?.Invoke();
+		var success = npc.IsValid() && npc.ReachedDestination && currentPosition == npc.TargetPosition;
+
+		return success ? reachedDestination?.Invoke() : failedToReachDestination?.Invoke();
 	}
 
 	/// <summary>
@@ -86,10 +86,9 @@ public static partial class NpcNodes
 		while ( npc.IsValid() && target.IsValid() && !npc.IsWithinRange( target, npc.Range + 5f ) && npc.FollowingTargetObject )
 			await GameTask.DelaySeconds( Time.Delta );
 
-		if ( npc.IsValid() && target.IsValid() && npc.IsWithinRange( target, npc.Range + 10f ) && npc.FollowingTargetObject )
-			return reachedTarget?.Invoke();
-		else
-			return failedToReachTarget?.Invoke();
+		var success = npc.IsValid() && target.IsValid() && npc.IsWithinRange( target, npc.Range + 10f ) && npc.FollowingTargetObject;
+
+		return success ? reachedTarget?.Invoke() : failedToReachTarget?.Invoke();
 	}
 
 	/// <summary>
@@ -105,18 +104,6 @@ public static partial class NpcNodes
 	}
 
 	/// <summary>
-	/// Set the current state and invoke the state
-	/// </summary>
-	[ActionGraphNode( "npc.gotostate", DefaultOutputSignal = false )]
-	[Title( "Go To State" ), Group( "NPC" ), Icon( "account_tree" )]
-	public static void GoToState( NPC npc, string stateIdentifier, float delayInSeconds = 0f )
-	{
-		if ( npc == null ) return;
-
-		npc.SetState( stateIdentifier, delayInSeconds );
-	}
-
-	/// <summary>
 	/// Get a random position around the position (Horizonal)
 	/// </summary>
 	/// <param name="position"></param>
@@ -127,5 +114,17 @@ public static partial class NpcNodes
 	public static Vector3 GetRandomPosAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
 	{
 		return NPC.GetRandomPositionAround( position, minRange, maxRange );
+	}
+
+	/// <summary>
+	/// Set and invoke the state
+	/// </summary>
+	[ActionGraphNode( "npc.setstate" )]
+	[Title( "Set State" ), Group( "NPC" ), Icon( "account_tree" )]
+	public static void SetState( NPC npc, StateType state, StateType currentState )
+	{
+		if ( npc == null ) return;
+
+		npc.SetState( state, currentState );
 	}
 }
