@@ -13,7 +13,7 @@
 	<div class="fishes">
 		@foreach ( var fishInfo in _fishesRepository )
 		{
-			<FishSlot Definition=@fishInfo onclick=@(() => OnFishClick(fishInfo)) />
+			<FishSlot IsLocked=@(!Player.Local.FishesCaught.ContainsKey( fishInfo.PrefabPath )) Definition=@fishInfo OnFishClick=@OnFishClick />
 		}
 	</div>
 </root>

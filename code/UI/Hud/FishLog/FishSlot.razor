@@ -2,19 +2,19 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root class="@( Active ? "active" : "" )">
+<root class="@(IsLocked ? "locked" : "")" onclick=@(() => { if (!IsLocked) OnFishClick(Definition); })>
 	<div class="border"/>
 	<div class="background"/>
-	<div class="lock" style="display: @( Locked ? "flex" : "none" )">
-		<img src="ui/hud/blocked.png">
-	</div>
 	<img src=@Definition.Icon.ResourcePath/>
 </root>
 
 @code {
-
+	public bool IsLocked { get; set; }
+	public Action<FishLog.FishInfo> OnFishClick { get; set; }
 	public FishLog.FishInfo Definition { get; set; }
-	public bool Active { get; set; }
-	public bool Locked { get; set; }
 
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(IsLocked);
+	}
 }
