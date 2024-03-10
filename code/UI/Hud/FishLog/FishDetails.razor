@@ -3,10 +3,10 @@
 @inherits Panel
 
 <root>
-	@if (SelectedFishInfo is null)
+	@if (_displayedFishInfo is null)
 	{
-		<div class="header">
-			<img src="/ui/hud/fish_collection.png" />
+		<div class="header" style="padding: 70px;">
+			<img src="/ui/hud/fish_collection.png" style="image-rendering: pixelated;" />
 			<div style="flex-direction: column;">
 				<text class="title">Fishing Statistics</text>
 				<text class="subtitle">
@@ -19,80 +19,78 @@
 	else
 	{
 		<div class="header">
-			<ScenePanel class="scene" @ref=_scenePanel />
+			<img src=@_displayedFishInfo.Icon.ResourcePath style="width: 30%; aspect-ratio: 1; margin: 20px;"  />
+			<div style="flex-direction: column; width: 70%;">
+				<text class="title">@_displayedFishInfo.Name</text>
+				<div class="fish-stars" style="margin-bottom: 10px;">
+					@{
+						var stars = (int)Math.Max( _displayedFishInfo.Rarity * StarCount, 1 );
+						for ( var i = 0; i < stars; i++ )
+						{
+							<img src="ui/hud/fish_rarity.png"/>
+						}
+						for ( var i = stars; i < StarCount; i++ )
+						{
+							<img src="ui/hud/fish_rarity_empty.png"/>
+						}
+					}
+				</div>
+				<div class="subtitle">@_displayedFishInfo.Description</div>
+			</div>
 		</div>
-		<div class="description">
-
-		</div>
+		@if (_selectedFishRecord is not null)
+		{
+			<div class="description">
+				<div class="record">
+					<text class="key">Total caught:</text>
+					<text class="value">@_selectedFishRecord.Value.Count</text>
+				</div>
+				<div style="height: 20px;" />
+				<div class="record">
+					<text class="key">Caught on:</text>
+					<text class="value">@_selectedFishRecord.Value.MaxWhen.ToLongDateString()</text>
+				</div>
+				<div class="record">
+					<text class="key">Record weight:</text>
+					<text class="value weight">@_selectedFishRecord.Value.MaxWeight.ToKilograms() kg</text>
+				</div>
+				<div class="record">
+					<text class="key">Price:</text>
+					<text class="value money">@((int)(_selectedFishRecord.Value.MaxWeight / 1000.0f * _displayedFishInfo.CostPerKilo))mk</text>
+				</div>
+			</div>
+		}
 	}
 </root>
 
 @code {
 	public FishLog.FishInfo SelectedFishInfo { get; set; }
+	private FishLog.FishInfo _displayedFishInfo { get; set; }
 	private FishRecord? _selectedFishRecord;
 
 	private const int StarCount = 5;
-	private SceneWorld _sceneWorld;
-	private ScenePanel _scenePanel;
-	private SceneModel _model;
-	private SceneLight _sceneLight;
-	private SceneDirectionalLight _sceneDirectionalLight;
-	private Transform _cameraTransform;
+
+	public override void Tick()
+	{
+		if (SelectedFishInfo is not null)
+			SelectFish(SelectedFishInfo);
+	}
 
 	private void SelectFish( FishLog.FishInfo fish )
 	{
-		SelectedFishInfo = fish;
+		if (_displayedFishInfo is not null && _displayedFishInfo.Name == fish.Name)
+			return;
+
+		_displayedFishInfo = fish;
+
 		if ( Player.Local.FishesCaught.TryGetValue( fish.PrefabPath, out var record ) )
 			_selectedFishRecord = record;
 		else
 			_selectedFishRecord = null;
-
-		_model?.Delete();
-		_model = new SceneModel(_sceneWorld, SelectedFishInfo.ModelPath, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)));
-		_model.SetMaterialGroup(SelectedFishInfo.MaterialGroup);
-	}
-
-	protected override void OnAfterTreeRender( bool firstTime )
-	{
-		base.OnAfterTreeRender( firstTime );
-
-		if ( SelectedFishInfo is null )
-			return;
-
-		_sceneWorld ??= new SceneWorld();
-		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
-		_sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, Rotation.From( 45, -45, 45 ), Color.White * 10f );
-
-		_model ??= new SceneModel( _sceneWorld, SelectedFishInfo.ModelPath, new Transform( Vector3.Zero, Rotation.From( 0, 0, 0 ) ) );
-		_model.SetMaterialGroup( SelectedFishInfo.MaterialGroup );
-		_scenePanel.World = _sceneWorld;
-		_scenePanel.Camera.FieldOfView = 50f;
-
-		_scenePanel.Camera.FitModel( _model );
-	}
-
-	public override void Tick()
-	{
-		if ( _model is null )
-			return;
-
-		_cameraTransform = _cameraTransform.RotateAround( _model.Model.Bounds.Center, Rotation.FromAxis( _cameraTransform.Up, -10f * RealTime.Delta ) );
-
-		_cameraTransform.Position = _model.Model.Bounds.Center - _cameraTransform.Forward;
-
-		var transform = _model.Transform.RotateAround(0, Rotation.FromYaw(RealTime.Delta * 115f));
-		_model.Position = transform.Position ;
-		_model.Rotation = transform.Rotation;
-
-		_scenePanel.Camera.FitModel( _model );
-		_scenePanel.Camera.Position += Vector3.Forward * 10f;
-		_sceneLight.Position = _scenePanel.Camera.Position;
-
-		_model.Update( RealTime.Delta );
 	}
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(SelectedFishInfo?.GetHashCode());
+		return HashCode.Combine(_displayedFishInfo?.GetHashCode());
 	}
 }

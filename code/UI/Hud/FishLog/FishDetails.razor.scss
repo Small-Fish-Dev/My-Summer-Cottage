@@ -10,13 +10,11 @@ FishDetails {
         height: 100%;
         justify-content: center;
         align-items: center;
-        padding: 90px;
 
         img {
             height: 100px;
             width: 100px;
             flex-shrink: 0;
-            image-rendering: pixelated;
             margin-right: 20px;
         }
 
@@ -28,11 +26,15 @@ FishDetails {
         .subtitle {
             font-size: 16px;
             color: $gray;
+            margin-right: 20px;
         }
 
-        .scene {
-            height: 300px;
-            width: 300px;
+        .fish-stars {
+            img {
+                height: 20px;
+                width: 20px;
+                image-rendering: pixelated;
+            }
         }
     }
 
@@ -40,5 +42,26 @@ FishDetails {
         width: 100%;
         height: 100%;
         background-color: #0000007a;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+
+        .record {
+            font-size: 20px;
+
+            .key {
+                color: $gray;
+                margin-right: 10px;
+            }
+
+            .weight {
+                color: $orange;
+            }
+
+            .money {
+                color: $green;
+            }
+        }
     }
 }
