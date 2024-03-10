@@ -269,7 +269,7 @@ public partial class NPC : Component
 
 		if ( Ragdoll == null && FaceTowardsVelocity )
 			if ( !MoveHelper.Velocity.IsNearlyZero( 1f ) )
-				Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ), Vector3.Up ), Time.Delta * 5f );
+				Transform.Rotation = Rotation.Lerp( Transform.Rotation, Rotation.LookAt( MoveHelper.Velocity.WithZ( 0f ), Vector3.Up ), Time.Delta * (IsRunning ? 10f : 5f) );
 
 		var oldX = Model.GetFloat( "move_x" );
 		var oldY = Model.GetFloat( "move_y" );

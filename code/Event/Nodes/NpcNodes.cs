@@ -128,6 +128,19 @@ public static partial class NpcNodes
 	}
 
 	/// <summary>
+	/// Stop moving
+	/// </summary>
+	[ActionGraphNode( "npc.stopmoving" )]
+	[Title( "Stop Moving" ), Group( "NPC" ), Icon( "hail" )]
+	public static void StopMoving( NPC npc )
+	{
+		if ( npc == null ) return;
+
+		npc.TargetPosition = npc.Transform.Position;
+		npc.ReachedDestination = true;
+	}
+
+	/// <summary>
 	/// Deal damage to whatever, depending on damage type and force it will also ragdoll and punch
 	/// </summary>
 	[ActionGraphNode( "npc.damage" )]

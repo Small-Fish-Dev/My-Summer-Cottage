@@ -7,8 +7,8 @@
       {
         "__type": "NPC",
         "AttackCooldown": 8,
-        "AttackRange": 80,
-        "DetectRange": 256,
+        "AttackRange": 120,
+        "DetectRange": 700,
         "EnemyTags": "player",
         "FaceTowardsVelocity": true,
         "Health": {
@@ -17,9 +17,9 @@
           "component_type": "HealthComponent"
         },
         "Idle": true,
-        "MaximumIdleCooldown": 6,
+        "MaximumIdleCooldown": 12,
         "MaxRunAnimationSpeed": 250,
-        "MinimumIdleCooldown": 4,
+        "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
           "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
@@ -173,13 +173,19 @@
           "Nodes": [
             {
               "Id": 0,
-              "Type": "input"
+              "Type": "input",
+              "UserData": {
+                "Position": "-288,-0",
+                "Labels": {
+                  "_signal": "signalStart"
+                }
+              }
             },
             {
               "Id": 2,
               "Type": "npc.startfollowing",
               "UserData": {
-                "Position": "352,16"
+                "Position": "448,16"
               }
             },
             {
@@ -189,7 +195,10 @@
                 "T": "package.fish.sauna/NPC"
               },
               "UserData": {
-                "Position": "96,112"
+                "Position": "-288,96",
+                "Labels": {
+                  "_result": "npc"
+                }
               }
             },
             {
@@ -203,7 +212,7 @@
                 }
               },
               "UserData": {
-                "Position": "-176,-160"
+                "Position": "-480,-336"
               }
             },
             {
@@ -213,7 +222,10 @@
                 "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
               },
               "UserData": {
-                "Position": "64,-160"
+                "Position": "-240,-336",
+                "Labels": {
+                  "_result": "renderer"
+                }
               }
             },
             {
@@ -225,13 +237,76 @@
                 "_isStatic": false
               },
               "UserData": {
-                "Position": "496,-176"
+                "Position": "144,-352"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "464,-208"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "144,-464"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "160,-96"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "sound.playat",
+              "UserData": {
+                "Position": "128,-208"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "property.get",
+              "ParentId": 6,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.Component",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 19,
+              "Type": "property.get",
+              "ParentId": 17,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 20,
+              "Type": "npc.stopmoving",
+              "UserData": {
+                "Position": "-80,-96"
               }
             }
           ],
           "Links": [
             {
-              "SrcId": 0,
+              "SrcId": 13,
               "SrcName": "_signal",
               "DstId": 2,
               "DstName": "_signal"
@@ -281,6 +356,102 @@
               "Value": false,
               "DstId": 10,
               "DstName": "value"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_signal",
+              "DstId": 11,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "_target"
+            },
+            {
+              "Value": "charge",
+              "DstId": 11,
+              "DstName": "v"
+            },
+            {
+              "Value": true,
+              "DstId": 11,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "_target"
+            },
+            {
+              "Value": "bugle",
+              "DstId": 12,
+              "DstName": "v"
+            },
+            {
+              "Value": true,
+              "DstId": 12,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 20,
+              "SrcName": "_signal",
+              "DstId": 13,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 3,
+              "DstId": 13,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 15,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 19,
+              "SrcName": "_result",
+              "DstId": 15,
+              "DstName": "position"
+            },
+            {
+              "Value": "sounds/door/door_creak.sound",
+              "DstId": 15,
+              "DstName": "soundEvent"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "_result",
+              "DstId": 19,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 20,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 20,
+              "DstName": "npc"
             }
           ]
         },
@@ -290,7 +461,8 @@
             "Title": "On Enemy Escaped",
             "id": "691598ea-f02a-4a1f-ab36-a1bc91a9391a",
             "ReferencedComponentTypes": [
-              "package.fish.sauna/NPC"
+              "package.fish.sauna/NPC",
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
             ]
           },
           "Variables": [],
@@ -303,7 +475,7 @@
               "Id": 2,
               "Type": "npc.stopfollow",
               "UserData": {
-                "Position": "384,80"
+                "Position": "368,48"
               }
             },
             {
@@ -317,21 +489,49 @@
               }
             },
             {
-              "Id": 4,
-              "Type": "npc.stopescaping",
+              "Id": 6,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+                  "component_type": "NPC"
+                }
+              },
               "UserData": {
-                "Position": "416,208"
+                "Position": "-176,-112"
               }
             },
             {
-              "Id": 5,
-              "Type": "log.warning",
+              "Id": 7,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              },
               "UserData": {
-                "Position": "336,-0"
+                "Position": "64,-112"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "512,-96"
               }
             }
           ],
           "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
             {
               "SrcId": 3,
               "SrcName": "_result",
@@ -345,27 +545,32 @@
               "DstName": "_this"
             },
             {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 4,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 3,
+              "SrcId": 6,
               "SrcName": "_result",
-              "DstId": 4,
-              "DstName": "npc"
+              "DstId": 7,
+              "DstName": "_this"
             },
             {
               "SrcId": 0,
               "SrcName": "_signal",
-              "DstId": 5,
+              "DstId": 8,
               "DstName": "_signal"
             },
             {
-              "Value": "bye rar",
-              "DstId": 5,
-              "DstName": "format"
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_target"
+            },
+            {
+              "Value": "charge",
+              "DstId": 8,
+              "DstName": "v"
+            },
+            {
+              "Value": false,
+              "DstId": 8,
+              "DstName": "value"
             }
           ]
         },
@@ -463,18 +668,11 @@
               "UserData": {
                 "Position": "544,-224"
               }
-            },
-            {
-              "Id": 10,
-              "Type": "time.delay",
-              "UserData": {
-                "Position": "-96,-240"
-              }
             }
           ],
           "Links": [
             {
-              "SrcId": 10,
+              "SrcId": 0,
               "SrcName": "_signal",
               "DstId": 1,
               "DstName": "_signal"
@@ -562,17 +760,6 @@
               "Value": true,
               "DstId": 8,
               "DstName": "value"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 10,
-              "DstName": "_signal"
-            },
-            {
-              "Value": 1,
-              "DstId": 10,
-              "DstName": "seconds"
             }
           ]
         },
