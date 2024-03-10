@@ -77,12 +77,12 @@
 			if ( delete )
 			{
 				if ( !notification.IsDeleting )
-				{
 					notification.Delete();
-					_notifications.Remove( notification );
-				}
 
-				continue;
+				if ( !notification.IsValid() )
+					_notifications.Remove( notification );
+
+				break;
 			}
 		}
 	}
