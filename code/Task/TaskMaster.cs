@@ -375,9 +375,9 @@ public class TaskMaster : Component
 
 		if ( sameTaskFound ) return _instance.CurrentTasks.Where( x => x.ResourceName == taskToAssign.ResourceName ).First(); // Bail if we have the same task already
 
+		_instance.CurrentTasks.Add( taskToAssign ); // Add the task
 		NotificationManager.Popup( taskToAssign );
 
-		_instance.CurrentTasks.Add( taskToAssign ); // Add the task
 		return taskToAssign;
 	}
 
