@@ -55,10 +55,7 @@ public sealed class FishingRod : Component
 
 		if ( Casted && CurrentBobber.Transform.Position.Distance( Owner.Transform.Position ) > RetractDistance )
 			RetractBobber( true );
-	}
 
-	protected override void OnPreRender()
-	{
 		if ( !IsCasted )
 			return;
 
