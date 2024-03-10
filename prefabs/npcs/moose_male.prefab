@@ -2,10 +2,12 @@
   "RootObject": {
     "Id": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
     "Name": "moose_male",
+    "Position": "0,0,-1",
     "Enabled": true,
     "Components": [
       {
         "__type": "NPC",
+        "AlertEscapeRange": 1024,
         "AlertRange": 512,
         "FaceTowardsVelocity": true,
         "Health": {
@@ -24,6 +26,7 @@
           "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
           "component_type": "MoveHelper"
         },
+        "Name": "Moose (\u2642)",
         "NavigationType": "Normal",
         "OnAlerted": {
           "Version": 5,
@@ -31,7 +34,8 @@
             "Title": "On Alerted",
             "id": "2f91b130-8e48-421d-b4d1-61c4a66427ae",
             "ReferencedComponentTypes": [
-              "package.fish.sauna/NPC"
+              "package.fish.sauna/NPC",
+              "package.fish.sauna/Sauna.Player"
             ]
           },
           "Variables": [],
@@ -68,24 +72,56 @@
               }
             },
             {
-              "Id": 11,
-              "Type": "log.warning",
-              "UserData": {
-                "Position": "960,160"
-              }
-            },
-            {
-              "Id": 12,
-              "Type": "log.warning",
-              "UserData": {
-                "Position": "960,272"
-              }
-            },
-            {
               "Id": 13,
               "Type": "npc.follow",
               "UserData": {
                 "Position": "512,96"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "event.ragdollplayer",
+              "UserData": {
+                "Position": "1248,304"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "560,288"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "event.worldpunchplayer",
+              "UserData": {
+                "Position": "928,336"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "352,416"
+              }
+            },
+            {
+              "Id": 18,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              },
+              "UserData": {
+                "Position": "560,448"
               }
             }
           ],
@@ -115,28 +151,6 @@
               "DstName": "input"
             },
             {
-              "SrcId": 13,
-              "SrcName": "reachedTarget",
-              "DstId": 11,
-              "DstName": "_signal"
-            },
-            {
-              "Value": "FUCK YEA I MADE IT",
-              "DstId": 11,
-              "DstName": "format"
-            },
-            {
-              "SrcId": 13,
-              "SrcName": "failedToReachTarget",
-              "DstId": 12,
-              "DstName": "_signal"
-            },
-            {
-              "Value": "Shit I got distracted",
-              "DstId": 12,
-              "DstName": "format"
-            },
-            {
               "SrcId": 1,
               "SrcName": "true",
               "DstId": 13,
@@ -153,6 +167,74 @@
               "SrcName": "provoker",
               "DstId": 13,
               "DstName": "target"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_signal",
+              "DstId": 14,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 5,
+              "DstId": 14,
+              "DstName": "duration"
+            },
+            {
+              "SrcId": 15,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "player"
+            },
+            {
+              "Value": 20,
+              "DstId": 14,
+              "DstName": "spin"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "provoker",
+              "DstId": 15,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "reachedTarget",
+              "DstId": 16,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 600,
+              "DstId": 16,
+              "DstName": "extraVerticalStrength"
+            },
+            {
+              "SrcId": 15,
+              "SrcName": "_result",
+              "DstId": 16,
+              "DstName": "player"
+            },
+            {
+              "Value": 900,
+              "DstId": 16,
+              "DstName": "strength"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_result",
+              "DstId": 16,
+              "DstName": "worldSource"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 17,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "_result",
+              "DstId": 18,
+              "DstName": "_target"
             }
           ]
         },

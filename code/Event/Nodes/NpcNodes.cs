@@ -103,4 +103,16 @@ public static partial class NpcNodes
 
 		npc.SetTarget( null );
 	}
+
+	/// <summary>
+	/// Set the current state and invoke the state
+	/// </summary>
+	[ActionGraphNode( "npc.gotostate" )]
+	[Title( "Go To State" ), Group( "NPC" ), Icon( "account_tree" )]
+	public static void GoToState( NPC npc, string stateIdentifier )
+	{
+		if ( npc == null ) return;
+
+		npc.SetState( stateIdentifier );
+	}
 }
