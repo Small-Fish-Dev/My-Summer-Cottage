@@ -13,6 +13,23 @@ TaskListElement {
         height: 70px;
         margin-right: 10px;
         transition: all 0.1s;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+        &.successful {
+            background-image: url('ui/hud/task_completed.png');
+            background-image-tint: $green;
+        }
+
+        &.failed {
+            background-image: url('ui/hud/task_failed.png');
+            background-image-tint: $blood-red;
+        }
+
+        &.started {
+            background-image: url('ui/hud/task_not_completed.png');
+        }
     }
 
     .task-details {

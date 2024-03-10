@@ -2,8 +2,8 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root class=@(TaskLog.SelectedTask?.ResourceId == TaskElement.ResourceId ? "selected" : "")>
-	<img class="task-img" src="ui/hud/task_completed.png" />
+<root class="@(TaskLog.SelectedTask?.ResourceId == TaskElement.ResourceId ? "selected" : "")">
+	<img class="task-img @GetTaskImage()" />
 	<div class="task-details">
 		<text class="task-title">@TaskElement.Name</text>
 		<text class="task-subtitle">@TaskElement.Subtitle</text>
@@ -13,8 +13,15 @@
 @code {
 	public SaunaTask TaskElement { get; set; }
 
+	private string GetTaskImage()
+	{
+		if (TaskElement.Completed)
+			return TaskElement.Successful ? "successful" : "failed";
+		return "started";
+	}
+
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(TaskElement.Name, TaskElement.Subtitle, TaskLog.SelectedTask?.GetHashCode());
+		return HashCode.Combine(TaskElement.Name, TaskElement.Completed, TaskElement.Successful, TaskElement.Subtitle, TaskLog.SelectedTask?.GetHashCode());
 	}
 }
