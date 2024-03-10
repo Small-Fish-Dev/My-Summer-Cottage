@@ -15,7 +15,7 @@ public class SoundHandler : Component
 
 	public SoundHandle PlaySoundWithSubtitle( string sound, string name, string subtitle )
 	{
-		Subtitles.Add( name, subtitle, null );
+		Subtitles.AddSubtitle( name, subtitle, null );
 		return PlaySound( sound );
 	}
 
@@ -29,7 +29,7 @@ public class SoundHandler : Component
 	public SoundHandle PlaySoundWithSubtitle( SoundEvent sound, string name, string subtitle )
 	{
 		var soundHandle = PlaySound( sound );
-		Subtitles.Add( name, subtitle, soundHandle );
+		Subtitles.AddSubtitle( name, subtitle, soundHandle );
 		return soundHandle;
 	}
 

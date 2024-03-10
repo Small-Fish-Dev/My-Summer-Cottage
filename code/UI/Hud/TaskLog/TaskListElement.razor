@@ -2,20 +2,20 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root class=@(SelectedTask?.ResourceId == Task.ResourceId ? "selected" : "")>
+<root class=@(SelectedTask?.ResourceId == TaskElement.ResourceId ? "selected" : "")>
 	<img class="task-img" src="ui/hud/task_completed.png" />
 	<div class="task-details">
-		<text class="task-title">@Task.Name</text>
-		<text class="task-subtitle">@Task.Subtitle</text>
+		<text class="task-title">@TaskElement.Name</text>
+		<text class="task-subtitle">@TaskElement.Subtitle</text>
 	</div>
 </root>
 
 @code {
 	public SaunaTask SelectedTask { get; set; }
-	public SaunaTask Task { get; set; }
+	public SaunaTask TaskElement { get; set; }
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(Task.Name, Task.Subtitle, SelectedTask?.ResourceId);
+		return HashCode.Combine(TaskElement.Name, TaskElement.Subtitle, SelectedTask?.ResourceId);
 	}
 }

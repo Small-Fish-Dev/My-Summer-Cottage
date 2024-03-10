@@ -19,7 +19,7 @@
 	public string ImagePath { get; set; } = "ui/hud/goback.png";
 	public bool IsDisabled { get; set; } = false;
 	public bool IsInverted { get; set; } = false;
-	public Action OnClick { get; set; }
+	new public Action OnClick { get; set; }
 
 	protected override int BuildHash()
 	{
