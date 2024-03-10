@@ -8,7 +8,7 @@
       {
         "__type": "NPC",
         "AttackCooldown": 10,
-        "AttackRange": 80,
+        "AttackRange": 40,
         "DetectRange": 600,
         "EnemyTags": "player",
         "FaceTowardsVelocity": true,
@@ -38,20 +38,27 @@
             "Title": "On Attack",
             "id": "e4b9ac1c-f91d-4e21-a093-061b7985801a",
             "ReferencedComponentTypes": [
-              "package.fish.sauna/HealthComponent"
+              "package.fish.sauna/HealthComponent",
+              "package.fish.sauna/NPC"
             ]
           },
           "Variables": [],
           "Nodes": [
             {
               "Id": 0,
-              "Type": "input"
+              "Type": "input",
+              "UserData": {
+                "Labels": {
+                  "enemy": "enemy"
+                },
+                "Position": "-80,-80"
+              }
             },
             {
               "Id": 1,
               "Type": "npc.damage",
               "UserData": {
-                "Position": "416,16"
+                "Position": "384,-80"
               }
             },
             {
@@ -61,7 +68,7 @@
                 "T": "package.fish.sauna/HealthComponent"
               },
               "UserData": {
-                "Position": "176,48"
+                "Position": "64,16"
               }
             },
             {
@@ -74,7 +81,10 @@
                 }
               },
               "UserData": {
-                "Position": "-112,96"
+                "Position": "-80,112",
+                "Labels": {
+                  "_result": "this"
+                }
               }
             },
             {
@@ -99,24 +109,10 @@
               }
             },
             {
-              "Id": 12,
-              "Type": "scene.ref",
-              "Properties": {
-                "component": {
-                  "_type": "component",
-                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
-                  "component_type": "NPC"
-                }
-              },
-              "UserData": {
-                "Position": "416,256"
-              }
-            },
-            {
               "Id": 13,
               "Type": "npc.startescaping",
               "UserData": {
-                "Position": "656,16"
+                "Position": "688,16"
               }
             },
             {
@@ -128,7 +124,20 @@
                 "_name": "Destroy"
               },
               "UserData": {
-                "Position": "960,96"
+                "Position": "976,48"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "scene.get",
+              "ParentId": 8,
+              "Properties": {
+                "T": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "npc"
+                }
               }
             }
           ],
@@ -197,7 +206,7 @@
               "DstName": "_signal"
             },
             {
-              "SrcId": 12,
+              "SrcId": 16,
               "SrcName": "_result",
               "DstId": 13,
               "DstName": "npc"
@@ -219,6 +228,12 @@
               "SrcName": "_result",
               "DstId": 14,
               "DstName": "_target"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 16,
+              "DstName": "_this"
             }
           ]
         },
@@ -255,32 +270,6 @@
               "UserData": {
                 "Position": "16,96"
               }
-            },
-            {
-              "Id": 7,
-              "Type": "call",
-              "Properties": {
-                "_isStatic": false,
-                "_type": "package.fish.sauna/HealthComponent",
-                "_name": "Kill"
-              },
-              "UserData": {
-                "Position": "560,32"
-              }
-            },
-            {
-              "Id": 9,
-              "Type": "scene.ref",
-              "Properties": {
-                "component": {
-                  "_type": "component",
-                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
-                  "component_type": "HealthComponent"
-                }
-              },
-              "UserData": {
-                "Position": "208,128"
-              }
             }
           ],
           "Links": [
@@ -301,24 +290,6 @@
               "SrcName": "enemy",
               "DstId": 2,
               "DstName": "target"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "failedToReachTarget",
-              "DstId": 7,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 9,
-              "SrcName": "_result",
-              "DstId": 7,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "enemy",
-              "DstId": 7,
-              "DstName": "attacker"
             }
           ]
         },
@@ -512,7 +483,7 @@
           ]
         },
         "RunningType": "Smart",
-        "RunSpeed": 600,
+        "RunSpeed": 800,
         "ScaleStats": true,
         "Static": false,
         "VisionRange": 2000,
