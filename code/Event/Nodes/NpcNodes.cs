@@ -75,20 +75,20 @@ public static partial class NpcNodes
 	/// <summary>
 	/// Start following a gameobject
 	/// </summary>
-	[ActionGraphNode( "npc.follow" )]
-	[Title( "Follow" ), Group( "NPC" ), Icon( "follow_the_signs" )]
-	public static async Task<Task> Follow( NPC npc, GameObject target, Body? reachedTarget, Body? failedToReachTarget )
+	[ActionGraphNode( "npc.startfollowing" )]
+	[Title( "Start Following" ), Group( "NPC" ), Icon( "follow_the_signs" )]
+	public static async Task<Task> StartFollowing( NPC npc, GameObject target, Body? failedToReachTarget )
 	{
 		if ( npc == null ) return Task.CompletedTask;
 
 		npc.SetTarget( target );
 
-		while ( npc.IsValid() && target.IsValid() && !npc.IsWithinRange( target, npc.Range + 5f ) && npc.FollowingTargetObject )
+		while ( npc.IsValid() && target.IsValid() && !npc.IsWithinRange( target ) && npc.FollowingTargetObject )
 			await GameTask.DelaySeconds( Time.Delta );
 
-		var success = npc.IsValid() && target.IsValid() && npc.IsWithinRange( target, npc.Range + 10f ) && npc.FollowingTargetObject;
+		var success = npc.IsValid() && target.IsValid() && npc.IsWithinRange( target ) && npc.FollowingTargetObject;
 
-		return success ? reachedTarget?.Invoke() : failedToReachTarget?.Invoke();
+		return success ? Task.CompletedTask : failedToReachTarget?.Invoke();
 	}
 
 	/// <summary>
@@ -114,17 +114,5 @@ public static partial class NpcNodes
 	public static Vector3 GetRandomPosAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
 	{
 		return NPC.GetRandomPositionAround( position, minRange, maxRange );
-	}
-
-	/// <summary>
-	/// Set and invoke the state
-	/// </summary>
-	[ActionGraphNode( "npc.setstate" )]
-	[Title( "Set State" ), Group( "NPC" ), Icon( "account_tree" )]
-	public static void SetState( NPC npc, StateType state, StateType currentState )
-	{
-		if ( npc == null ) return;
-
-		npc.SetState( state, currentState );
 	}
 }

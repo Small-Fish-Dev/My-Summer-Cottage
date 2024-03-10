@@ -134,9 +134,7 @@ public sealed class HealthComponent : Component
 					OnDamaged?.Invoke( amount, type, attacker, Transform.World.PointToLocal( worldHurtPosition ), realDirection, force );
 
 					if ( Components.TryGet<NPC>( out var npc ) )
-					{
-						npc.SetState( StateType.Attacked, npc.CurrentState );
-					}
+						npc.Damaged( attacker );
 				}
 			}
 		}
@@ -174,8 +172,7 @@ public sealed class HealthComponent : Component
 		{
 			npc.SetRagdoll( true, 9999999f );
 
-			npc.SetState( StateType.Killed, npc.CurrentState, false );
-			npc.OnKilled?.Invoke( npc, attacker );
+			npc.OnKilled?.Invoke( attacker );
 		}
 	}
 

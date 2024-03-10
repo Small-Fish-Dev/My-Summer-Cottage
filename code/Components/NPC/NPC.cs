@@ -47,6 +47,7 @@ public partial class NPC : Component
 	[Property]
 	[Category( "Stats" )]
 	public bool ScaleStats { get; set; } = true;
+	public float Scale => ScaleStats ? MathF.Max( MathF.Max( GameObject.Transform.Scale.x, GameObject.Transform.Scale.y ), GameObject.Transform.Scale.z ) : 1f;
 
 	/// <summary>
 	/// Doesn't move (Don't add a MoveHelper if this is on)
@@ -90,121 +91,85 @@ public partial class NPC : Component
 	public bool FaceTowardsVelocity { get; set; } = true;
 
 	/// <summary>
-	/// How far the NPC can reach for attacks or navigation
+	/// How far the NPC can reach to attack with the target
 	/// </summary>
 	[Property]
 	[Category( "Stats" )]
 	[Range( 30f, 200f, 10f )]
-	public float Range { get; private set; } = 60f;
-	public float Scale => ScaleStats ? MathF.Max( MathF.Max( GameObject.Transform.Scale.x, GameObject.Transform.Scale.y ), GameObject.Transform.Scale.z ) : 1f;
+	public float AttackRange { get; private set; } = 80f;
 
 	/// <summary>
-	/// If a GameObject has one of these tags it will be considered a provoker and can trigger alert state
+	/// How many seconds must pass before the NPC can attack with the target again
 	/// </summary>
 	[Property]
-	[Category( "TriggerStats" )]
-	public TagSet ProvokerTags { get; set; }
-
-	[Property]
-	[Category( "Triggers" )]
-	public NpcTrigger OnSpawn { get; set; }
-
-	[Property]
-	[Category( "Triggers" )]
-	public NpcTrigger OnIdle { get; set; }
+	[Category( "Stats" )]
+	[Range( 0.5f, 10f, 0.1f )]
+	public float AttackCooldown { get; private set; } = 5f;
 
 	/// <summary>
-	/// How close a provoker has to come to alert the NPC
+	/// If a GameObject has one of these tags it will be considered an enemy
 	/// </summary>
 	[Property]
-	[Category( "TriggerStats" )]
+	[Category( "Stats" )]
+	public TagSet EnemyTags { get; set; }
+
+	/// <summary>
+	/// How far away the NPC can detect an enemy
+	/// </summary>
+	[Property]
+	[Category( "Stats" )]
 	[Range( 0f, 1024f, 16f )]
-	public float AlertRange { get; set; } = 256f;
+	public float DetectRange { get; set; } = 256f;
 
 	/// <summary>
-	/// How far a provoker has to go to lose the NPC
+	/// How far away the NPC can see the enemy before losing sight
 	/// </summary>
 	[Property]
 	[Category( "TriggerStats" )]
 	[Range( 0f, 2024f, 16f )]
-	public float AlertEscapeRange { get; set; } = 512f;
-
-	public delegate void NpcTrigger( NPC npc, GameObject provoker );
+	public float VisionRange { get; set; } = 512f;
 
 	/// <summary>
-	/// When the provoker enters the alert area, or a nearby NPC gets alerted/attacked. This won't get called if the NPC is already alerted.
+	/// When the NPC is first spawned in
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
-	public NpcTrigger OnAlerted { get; set; }
+	public Action OnSpawn { get; set; }
+
+	public delegate void NpcTrigger( GameObject attacker );
 
 	/// <summary>
-	/// When the NPC gets directly attacked. This won't get called if the NPC has been attacked already and is in alerted status.
+	/// When an attacker enters the detect area or attacks the NPC, or a nearby NPC gets alerted. This won't get called if the NPC has been alerted already.
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
-	public NpcTrigger OnAttacked { get; set; }
+	public NpcTrigger OnDetect { get; set; }
 
 	/// <summary>
-	/// When the provoker gets out of the AlertRange or dies
+	/// When the attacker is within attack range and our cooldown is up
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
-	public NpcTrigger OnProvokerEscaped { get; set; }
+	public NpcTrigger OnAttack { get; set; }
 
 	/// <summary>
-	/// When the provoker is within range
+	/// When the attacker gets out of the Vision Range or dies
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
-	public NpcTrigger OnProvokerWithinRange { get; set; }
+	public NpcTrigger OnAttackerEscaped { get; set; }
 
 	/// <summary>
-	/// When the NPC dies, provoker will be NULL if it died of natural causes (???)
+	/// When the NPC dies, attacker will be NULL if it died of natural causes (???)
 	/// </summary>
 	[Property]
 	[Category( "Triggers" )]
 	public NpcTrigger OnKilled { get; set; }
 
-	/// <summary>
-	/// When the NPC gets destroyed
-	/// </summary>
-	[Property]
-	[Category( "Triggers" )]
-	public Action OnDestroyed { get; set; }
-
 	public int NpcId { get; set; }
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
 	public bool FollowingTargetObject { get; set; } = false;
-
-	public enum StateType
-	{
-		Spawn,
-		Idle,
-		Alerted,
-		Attacked,
-		ProvokerEscaped,
-		ProvokerWithinRange,
-		Killed
-	}
-
-	public NpcTrigger ToDelegate( StateType type )
-	{
-		return type switch
-		{
-			StateType.Spawn => OnSpawn,
-			StateType.Idle => OnIdle,
-			StateType.Alerted => OnAlerted,
-			StateType.Attacked => OnAttacked,
-			StateType.ProvokerEscaped => OnProvokerEscaped,
-			StateType.ProvokerWithinRange => OnProvokerWithinRange,
-			StateType.Killed => OnKilled,
-			_ => OnIdle
-		};
-	}
-
-	public StateType CurrentState { get; set; } = StateType.Spawn;
 	public Vector3 SpawnPosition { get; set; }
 	public float ForceMultiplier
 	{
@@ -257,7 +222,7 @@ public partial class NPC : Component
 			MoveHelper.StopSpeed *= Scale;
 		}
 
-		OnSpawn?.Invoke( this, null );
+		OnSpawn?.Invoke();
 	}
 
 	protected override void OnUpdate()
@@ -286,14 +251,15 @@ public partial class NPC : Component
 
 	protected override void OnFixedUpdate()
 	{
-		if ( MoveHelper == null ) return;
-
-		if ( Health != null && Health.Alive )
+		if ( Health != null && Health.Alive ) // If we are still alive
 		{
-			if ( Ragdoll == null )
+			if ( Ragdoll == null ) // If we are not ragdolled
 			{
-				ComputeNavigation();
-				MoveHelper.Move();
+				if ( MoveHelper == null ) return;
+				{
+					ComputeNavigation();
+					MoveHelper.Move();
+				}
 
 				DetectAround();
 			}
@@ -309,17 +275,6 @@ public partial class NPC : Component
 
 	protected override void OnDestroy()
 	{
-		OnDestroyed?.Invoke();
-	}
-
-	public void SetState( StateType state, StateType currentState, bool invoke = true )
-	{
-		if ( CurrentState != currentState ) return;
-
-		if ( invoke )
-			ToDelegate( state )?.Invoke( this, TargetObject );
-
-		CurrentState = state;
 	}
 
 	/// <summary>
@@ -327,65 +282,80 @@ public partial class NPC : Component
 	/// </summary>
 	public IEnumerable<GameObject> ProvokersInArea { get; set; }
 
-	TimeUntil _nextDetect = 5f;
+	public TimeUntil NextAttack = 0;
 
 	public void DetectAround()
 	{
 		if ( TargetObject != null )
 		{
-			if ( TargetObject.Transform.Position.Distance( Transform.Position ) <= Range )
+			if ( IsWithinRange( TargetObject ) ) // Is the target within reach
 			{
-				if ( _nextDetect )
+				if ( NextAttack )
 				{
-					SetState( StateType.ProvokerWithinRange, CurrentState );
-					_nextDetect = 5f;
+					OnAttack?.Invoke( TargetObject );
+					NextAttack = AttackCooldown;
 				}
 			}
 		}
 
 		var currentTick = (int)(Time.Now / Time.Delta);
-		if ( currentTick % 30 != NpcId % 30 ) return; // Check every 30 ticks
+		if ( currentTick % 20 != NpcId % 20 ) return; // Check every 20 ticks
 
-		var foundAround = Scene.FindInPhysics( new Sphere( Transform.Position, AlertRange ) )
-			.Where( x => ProvokerTags != null && x.Tags.HasAny( ProvokerTags ) )
-			.Where( x => x.Components.Get<HealthComponent>()?.Alive ?? true );
+		var foundAround = Scene.FindInPhysics( new Sphere( Transform.Position, DetectRange * Scale ) ) // Find gameobjects nearby
+			.Where( x => EnemyTags != null && x.Tags.HasAny( EnemyTags ) ) // Do they have any of our enemy tags
+			.Where( x => x.Components.Get<HealthComponent>()?.Alive ?? true ); // Are they dead or undead
 
 		if ( TargetObject == null )
 		{
 			if ( foundAround.Any() )
-			{
-				Detected( foundAround.First(), true );
-			}
+				Detected( foundAround.First(), true ); // If we don't have any target yet, pick the first one around us
 		}
 		else
 		{
-			var targetDead = !TargetObject.Components.Get<HealthComponent>()?.Alive ?? false;
-			var targetEscaped = TargetObject.Transform.Position.Distance( Transform.Position ) > AlertEscapeRange;
-			if ( targetEscaped || targetDead )
+			var targetDead = !TargetObject.Components.Get<HealthComponent>()?.Alive ?? false; // Is our target dead or undead
+			var targetEscaped = TargetObject.Transform.Position.Distance( Transform.Position ) > VisionRange * Scale; // Did our target get out of vision range
+
+			if ( targetEscaped || targetDead ) // Did our target die or escape
 				Undetected();
 		}
 	}
 
 	public void Detected( GameObject target, bool alertOthers = false )
 	{
+		if ( target == null )
+		{
+			Undetected();
+			return;
+		}
+
+		if ( target == TargetObject ) return;
+
 		TargetObject = target;
-		SetState( StateType.Alerted, CurrentState );
+
+		OnDetect?.Invoke( TargetObject );
 
 		if ( alertOthers )
 		{
 			var otherNpcs = Scene.GetAllComponents<NPC>()
-				.Where( x => x.Transform.Position.Distance( Transform.Position ) <= x.AlertEscapeRange )
-				.Where( x => x.Health?.Alive ?? false )
-				.Where( x => x.TargetObject == null );
+				.Where( x => x.Transform.Position.Distance( Transform.Position ) <= x.VisionRange * x.Scale ) // Find all nearby NPCs
+				.Where( x => x.Health?.Alive ?? true ) // Dead or undead
+				.Where( x => x.TargetObject == null ); // They don't have a target already
 
 			foreach ( var npc in otherNpcs )
 				npc.Detected( target, false );
 		}
 	}
 
+	public void Damaged( GameObject target )
+	{
+		if ( TargetObject == null && TargetObject != target )
+			Detected( target, true );
+	}
+
 	public void Undetected()
 	{
-		SetState( StateType.ProvokerEscaped, CurrentState );
+		OnAttackerEscaped?.Invoke( TargetObject );
+
 		TargetObject = null;
 		TargetPosition = Transform.Position;
 		ReachedDestination = true;
@@ -415,7 +385,7 @@ public partial class NPC : Component
 	}
 
 	/// <summary>
-	/// Is the object within the npc's reach (Range) 
+	/// Is the object within the npc's reach (AttackRange) 
 	/// </summary>
 	/// <param name="target"></param>
 	/// <returns></returns>
@@ -423,11 +393,11 @@ public partial class NPC : Component
 	{
 		if ( !GameObject.IsValid() ) return false;
 
-		return target.Transform.Position.Distance( Transform.Position ) <= Range;
+		return IsWithinRange( target, AttackRange * Scale );
 	}
 
 	/// <summary>
-	/// Is the object within the npc's range
+	/// Is the object within the npc's range (Unscaled)
 	/// </summary>
 	/// <param name="target"></param>
 	/// <param name="range"></param>
@@ -458,12 +428,12 @@ public partial class NPC : Component
 			var randomDistance = Game.Random.Float( minRange, maxRange );
 			var randomPoint = position + randomDirection * randomDistance;
 
-			var groundTrace = Game.ActiveScene.Trace.Ray( randomPoint + Vector3.Up * 64f, randomPoint - Vector3.Up * 64f )
+			var groundTrace = Game.ActiveScene.Trace.Ray( randomPoint + Vector3.Up * 64f, randomPoint + Vector3.Down * 64f )
 				.Size( 5f )
 				.WithoutTags( "player", "npc", "trigger" )
 				.Run();
 
-			if ( groundTrace.Hit )
+			if ( groundTrace.Hit && !groundTrace.StartedSolid )
 			{
 				hitGround = true;
 				hitPosition = groundTrace.HitPosition;
@@ -488,16 +458,16 @@ public partial class NPC : Component
 		var targetPosition = target.Transform.Position;
 
 		var direction = (Transform.Position - targetPosition).Normal;
-		var offset = direction * Range / 2f;
+		var offset = direction * AttackRange * Scale / 2f;
 		var wishPos = targetPosition + offset;
 
-		var groundTrace = Scene.Trace.Ray( wishPos + Vector3.Up * 64f, wishPos - Vector3.Up * 64f )
+		var groundTrace = Scene.Trace.Ray( wishPos + Vector3.Up * 64f, wishPos + Vector3.Down * 64f )
 			.Size( 5f )
 			.IgnoreGameObjectHierarchy( GameObject )
 			.WithoutTags( "player", "npc", "trigger" )
 			.Run();
 
-		return groundTrace.Hit ? groundTrace.HitPosition : wishPos;
+		return groundTrace.Hit && !groundTrace.StartedSolid ? groundTrace.HitPosition : targetPosition;
 	}
 
 	/// <summary>

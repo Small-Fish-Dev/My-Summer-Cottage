@@ -177,7 +177,7 @@ public partial class NPC
 		{
 			if ( TargetObject.IsValid() )
 			{
-				if ( !IsWithinRange( TargetObject, Range + 5f ) ) // Has our target moved?
+				if ( !IsWithinRange( TargetObject ) ) // Has our target moved?
 					MoveTo( GetPreferredTargetPosition( TargetObject ) );
 			}
 			else
