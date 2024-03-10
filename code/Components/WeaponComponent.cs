@@ -11,6 +11,7 @@ public enum WeaponType
 public sealed class WeaponComponent : Component
 {
 	[Property, Category( "Parameters" )] public WeaponType Type { get; set; }
+	[Property, Category( "Parameters" )] public float Range { get; set; } = 40f;
 	[Property, Category( "Parameters" )] public float FireSpeed { get; set; } = 0.5f;
 	[Property, Category( "Parameters" )] public InputMode Mode { get; set; } = InputMode.Pressed;
 
@@ -153,17 +154,17 @@ public sealed class WeaponComponent : Component
 		}
 
 		// Get ray
-		var transform = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndChildren )?.GetAttachment( ExitAttachment )
+		var transform = Components.GetInParent<SkinnedModelRenderer>( true )?.GetAttachment( ExitAttachment )
 			?? new Transform( shooter.ViewRay.Position, Rotation.LookAt( shooter.ViewRay.Forward ) );
 
 		var ray = new Ray( transform.Position, transform.Rotation.Forward );
-		var tr = Scene.Trace.Ray( ray, 5000f )
+		var tr = Scene.Trace.Ray( ray, Range )
 			.IgnoreGameObjectHierarchy( shooter.GameObject )
 			.Run();
 
 		// Bullet trace
 		var particle = LegacyParticles.Create( "particles/bullet_tracer.vpcf", transform, deleteTime: 1500 );
-		particle.SetVector( 1, transform.Position );
+		particle.SetVector( 0, transform.Position );
 		particle.SetVector( 1, tr.EndPosition );
 
 		// Ragdoll hit player? :D
@@ -178,7 +179,7 @@ public sealed class WeaponComponent : Component
 
 	private bool Swing( Player attacker )
 	{
-		var tr = Scene.Trace.Ray( attacker.ViewRay, 5000f )
+		var tr = Scene.Trace.Ray( attacker.ViewRay, Range )
 			.IgnoreGameObjectHierarchy( attacker.GameObject )
 			.Run();
 
