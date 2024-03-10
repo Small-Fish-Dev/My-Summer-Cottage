@@ -151,8 +151,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -263,8 +263,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -372,8 +372,6 @@
         {
           "__type": "MapInstance",
           "MapName": "sauna_forest",
-          "OnMapLoaded": null,
-          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
       ],
@@ -430,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.749822,0,0.6616397",
+          "Rotation": "0,-0.7902235,0,-0.6128187",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -487,12 +485,8 @@
       "Components": [
         {
           "__type": "SkinnedModelRenderer",
-          "AnimationGraph": null,
           "BodyGroups": 351,
-          "BoneMergeTarget": null,
           "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
           "Model": "models/guy/guy.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
@@ -505,8 +499,7 @@
           ],
           "Fatness": 0,
           "Height": 0,
-          "HideBodyGroup": "None",
-          "Player": null
+          "HideBodyGroup": "None"
         }
       ],
       "Children": [
@@ -518,7 +511,6 @@
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
               "BodyGroups": 18446744073709551615,
               "BoneMergeTarget": {
                 "_type": "component",
@@ -526,8 +518,6 @@
                 "component_type": "SkinnedModelRenderer"
               },
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/clothes/wives_undies/wives_panties.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
@@ -542,7 +532,6 @@
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
               "BodyGroups": 18446744073709551615,
               "BoneMergeTarget": {
                 "_type": "component",
@@ -550,8 +539,6 @@
                 "component_type": "SkinnedModelRenderer"
               },
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/clothes/wives_undies/wives_bra.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
@@ -569,12 +556,8 @@
       "Components": [
         {
           "__type": "SkinnedModelRenderer",
-          "AnimationGraph": null,
           "BodyGroups": 351,
-          "BoneMergeTarget": null,
           "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
           "Model": "models/guy/guy.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
@@ -587,8 +570,7 @@
           ],
           "Fatness": 1,
           "Height": 0,
-          "HideBodyGroup": "None",
-          "Player": null
+          "HideBodyGroup": "None"
         }
       ],
       "Children": [
@@ -600,7 +582,6 @@
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
               "BodyGroups": 18446744073709551615,
               "BoneMergeTarget": {
                 "_type": "component",
@@ -608,8 +589,6 @@
                 "component_type": "SkinnedModelRenderer"
               },
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/clothes/wives_undies/wives_bra.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
@@ -624,7 +603,6 @@
           "Components": [
             {
               "__type": "SkinnedModelRenderer",
-              "AnimationGraph": null,
               "BodyGroups": 18446744073709551615,
               "BoneMergeTarget": {
                 "_type": "component",
@@ -632,8 +610,6 @@
                 "component_type": "SkinnedModelRenderer"
               },
               "CreateBoneObjects": false,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
               "Model": "models/clothes/wives_undies/wives_panties.vmdl",
               "RenderType": "On",
               "Tint": "1,1,1,1"
@@ -655,8 +631,6 @@
           "Health": 0,
           "IsStatic": false,
           "Model": "models/nature/oak_tree_a/oak_tree_a.vmdl",
-          "OnPropBreak": null,
-          "OnPropTakeDamage": null,
           "ShowCreatedComponents": false
         }
       ]
@@ -694,8 +668,6 @@
         {
           "__type": "ModelRenderer",
           "BodyGroups": 11,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
           "Model": "models/beer_bottle/beer.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
@@ -704,8 +676,7 @@
           "__type": "ModelCollider",
           "IsTrigger": false,
           "Model": "models/beer_bottle/beer.vmdl",
-          "Static": false,
-          "Surface": null
+          "Static": false
         },
         {
           "__type": "Interactions",
@@ -766,17 +737,12 @@
           "Center": "0,0,4.25",
           "IsTrigger": false,
           "Scale": "31.40003,43.20007,8.5",
-          "Static": false,
-          "Surface": null
+          "Static": false
         },
         {
           "__type": "SkinnedModelRenderer",
-          "AnimationGraph": null,
           "BodyGroups": 18446744073709551615,
-          "BoneMergeTarget": null,
           "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
           "Model": "models/beer_crate/beer_crate.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
@@ -815,9 +781,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                      "_isStatic": true,
                       "_name": "PlaySoundWithSubtitle",
-                      "_isStatic": true
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -855,6 +821,34 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "ShowWhenDisabled": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Show When Disabled",
+                  "id": "f624953a-fa47-4b76-abd3-d3b43d1d5047",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "output"
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "input"
+                  }
+                ],
+                "Links": [
+                  {
+                    "Value": true,
+                    "DstId": 0,
+                    "DstName": "_result"
+                  }
+                ]
+              },
+              "Cooldown": true,
+              "CooldownTime": 3,
               "Animation": "Interact"
             },
             {
@@ -877,9 +871,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                      "_isStatic": true,
                       "_name": "PlaySoundWithNameAndSubtitle",
-                      "_isStatic": true
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -922,6 +916,7 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "CooldownTime": 0.5,
               "Animation": "Interact"
             }
           ]
@@ -947,12 +942,8 @@
       "Components": [
         {
           "__type": "SkinnedModelRenderer",
-          "AnimationGraph": null,
           "BodyGroups": 16,
-          "BoneMergeTarget": null,
           "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
           "Model": "models/fauna/elk/elk.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
@@ -971,12 +962,8 @@
       "Components": [
         {
           "__type": "SkinnedModelRenderer",
-          "AnimationGraph": null,
           "BodyGroups": 16,
-          "BoneMergeTarget": null,
           "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
           "Model": "models/fauna/elk/elk.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
@@ -1146,7 +1133,6 @@
           "Extents": "0,0,0",
           "MaxPollingRate": 5,
           "Offset": "0,0,0",
-          "TagSet": null,
           "TriggerPrefab": [],
           "TriggerSignalIdentifier": "sauna.entered_bathroom"
         },
@@ -1170,7 +1156,6 @@
           "Extents": "0,0,0",
           "MaxPollingRate": 5,
           "Offset": "0,0,0",
-          "TagSet": null,
           "TriggerPrefab": [],
           "TriggerSignalIdentifier": "lake.swimming_in_lake"
         },
@@ -1194,7 +1179,6 @@
               "Extents": "0,0,0",
               "MaxPollingRate": 5,
               "Offset": "0,0,0",
-              "TagSet": null,
               "TriggerPrefab": [],
               "TriggerSignalIdentifier": "lake.swimming_in_lake"
             },
@@ -1271,6 +1255,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-10T14:49:10.9115629\u002B01:00",
+  "LastSaved": "2024-03-10T17:50:28.3724618\u002B01:00",
   "__references": []
 }

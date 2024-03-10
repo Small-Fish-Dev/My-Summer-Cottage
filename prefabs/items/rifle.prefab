@@ -9,16 +9,16 @@
         "Ammo": 0,
         "Ammunition": "prefabs/items/762ammo.prefab",
         "Capacity": 5,
-        "EmptySound": null,
+        "Damage": 10,
+        "DamageType": "Serious",
         "ExitAttachment": "rifle_end",
         "FireSound": "sounds/rifle/rifle-shoot.sound",
         "FireSpeed": 2,
         "HasRecoil": true,
+        "HitForce": 300,
         "Mode": "Pressed",
-        "PostFireSound": null,
-        "Range": 5000,
+        "Range": 1500,
         "ReloadCooldown": 0.5,
-        "ReloadSound": null,
         "StrengthRange": "10.00,25.00,1",
         "Type": "Ranged"
       },
@@ -51,12 +51,8 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
-        "BoneMergeTarget": null,
         "CreateBoneObjects": false,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/rifle/m38.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -65,8 +61,7 @@
         "__type": "ModelCollider",
         "IsTrigger": false,
         "Model": "models/rifle/m38.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",

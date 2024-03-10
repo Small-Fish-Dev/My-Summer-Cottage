@@ -40,7 +40,7 @@
 	/// <param name="icon"></param>
 	/// <param name="number"></param>
 	/// <param name="time"></param>
-	public static void Popup( string title, string description, Color theme, string icon = null, int? number = null, int time = 7 )
+	public static void Popup( string title, string description, Color theme, string icon = null, int? number = null, int time = 7, string classes = null )
 	{
 		DeleteOldest();
 
@@ -52,6 +52,7 @@
 		notification.Icon = icon;
 		notification.Number = number;
 		notification.Time = time;
+		notification.AdditionalClasses = classes;
 
 		_instance._notifications.Add( notification, notification.Time );
 	}
@@ -68,7 +69,9 @@
 			 task.Subtitle,
 			 completed ? "#33cc33" : failed ? "#cc0000" : task.IsPrimaryTask ? "#bc4d2a" : "#0e599f",
 			 task.IsPrimaryTask ? "ui/hud/primary_task.png" : "ui/hud/substory_task.png",
-			 TaskMaster.IndexOf( task )
+			 TaskMaster.IndexOf( task ),
+			 7,
+			 failed ? "failed" : ""
 		);
 
 	public override void Tick()

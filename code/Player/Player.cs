@@ -218,7 +218,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		if ( IsProxy )
 			return;
 
-		IsPissing = Input.Down( "Piss" ) && !HidePenoid;
+		IsPissing = !BlockInputs && Input.Down( "Piss" ) && !HidePenoid;
 
 		UpdateMovement();
 		UpdateInteractions();
