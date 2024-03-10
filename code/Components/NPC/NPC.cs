@@ -377,6 +377,7 @@ public partial class NPC : Component
 	public void Detected( GameObject target, bool alertOthers = false )
 	{
 		if ( target == null ) return;
+		target = target.Parent == null || target.Parent == Scene ? target : target.Parent;
 		if ( target == TargetObject ) return;
 
 		SetTarget( target );
