@@ -170,6 +170,7 @@ public partial class NPC : Component
 	public GameObject TargetObject { get; private set; } = null;
 	public bool FollowingTargetObject { get; set; } = false;
 	public string CurrentState { get; set; } = "idle";
+	public Vector3 SpawnPosition { get; set; }
 	public float ForceMultiplier
 	{
 		get
@@ -201,18 +202,27 @@ public partial class NPC : Component
 
 		if ( MoveHelper != null )
 			MoveHelper.AirFriction = 100f;
-
-		OnSpawn?.Invoke();
 	}
 
 	protected override void OnAwake()
 	{
-		if ( MoveHelper == null ) return;
+		var spawnTrace = Scene.Trace.Ray( Transform.Position + Vector3.Up * 30f, Transform.Position - Vector3.Up * 200f )
+			.Size( 5f )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.WithoutTags( "player", "npc", "trigger" )
+			.Run();
 
-		MoveHelper.StepHeight *= Scale;
-		MoveHelper.TraceRadius *= Scale;
-		MoveHelper.TraceHeight *= Scale;
-		MoveHelper.StopSpeed *= Scale;
+		SpawnPosition = spawnTrace.Hit ? spawnTrace.HitPosition : Transform.Position;
+
+		if ( MoveHelper != null )
+		{
+			MoveHelper.StepHeight *= Scale;
+			MoveHelper.TraceRadius *= Scale;
+			MoveHelper.TraceHeight *= Scale;
+			MoveHelper.StopSpeed *= Scale;
+		}
+
+		OnSpawn?.Invoke();
 	}
 
 	protected override void OnUpdate()
@@ -384,18 +394,40 @@ public partial class NPC : Component
 	}
 
 	/// <summary>
-	/// Get a random position around the NPC (Horizonal)
+	/// Get a random position around the position (Horizonal)
 	/// </summary>
+	/// <param name="position"></param>
 	/// <param name="minRange"></param>
 	/// <param name="maxRange"></param>
 	/// <returns></returns>
-	public Vector3 GetRandomPositionAround( float minRange = 50f, float maxRange = 300f )
+	public Vector3 GetRandomPositionAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
 	{
-		var position = Transform.Position;
+		var tries = 0;
+		var hitGround = false;
+		var hitPosition = position;
 
-		var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
-		var randomDistance = Game.Random.Float( minRange, maxRange );
-		return position + randomDirection * randomDistance;
+		while ( hitGround == false && tries <= 10f )
+		{
+			var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
+			var randomDistance = Game.Random.Float( minRange, maxRange );
+			var randomPoint = position + randomDirection * randomDistance;
+
+			var groundTrace = Scene.Trace.Ray( randomPoint + Vector3.Up * 64f, randomPoint - Vector3.Up * 64f )
+				.Size( 5f )
+				.IgnoreGameObjectHierarchy( GameObject )
+				.WithoutTags( "player", "npc", "trigger" )
+				.Run();
+
+			if ( groundTrace.Hit )
+			{
+				hitGround = true;
+				hitPosition = groundTrace.HitPosition;
+			}
+
+			tries++;
+		}
+
+		return hitPosition;
 	}
 
 	/// <summary>
@@ -412,7 +444,15 @@ public partial class NPC : Component
 
 		var direction = (Transform.Position - targetPosition).Normal;
 		var offset = direction * Range / 2f;
-		return targetPosition + offset;
+		var wishPos = targetPosition + offset;
+
+		var groundTrace = Scene.Trace.Ray( wishPos + Vector3.Up * 64f, wishPos - Vector3.Up * 64f )
+			.Size( 5f )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.WithoutTags( "player", "npc", "trigger" )
+			.Run();
+
+		return groundTrace.Hit ? groundTrace.HitPosition : wishPos;
 	}
 
 	/// <summary>
