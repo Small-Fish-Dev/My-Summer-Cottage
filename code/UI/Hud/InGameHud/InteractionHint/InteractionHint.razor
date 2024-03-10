@@ -18,10 +18,11 @@
 					continue;
 
                 var coolDown = !interaction.Cooldown || interaction.CooldownTimer;
-				var canInteract = !interaction.Disabled.InvokeOrDefault() && coolDown;
+                var canInteract = !interaction.Disabled.InvokeOrDefault() && coolDown && !Player.Local.BlockInputs;
+
 				if ( canInteract || interaction.ShowWhenDisabled() )
 				{
-					var isActive = HasPriority( interaction.Keybind ) && canInteract;
+                    var isActive = HasPriority(interaction.Keybind) && canInteract;
 					<div class="interaction">
 						<inputhint class="hint" input=@interaction.Keybind DarkMode=@(!isActive) />
 						<text class="description" style="color: @(isActive ? @interaction.Color.Hex : "#883232")">@interaction.Text</text>
@@ -87,7 +88,7 @@
 
             var coolDown = !interaction.Cooldown || interaction.CooldownTimer;
 
-            if (canInteract && interaction.InputFunction(interaction.Keybind) && coolDown)
+            if (canInteract && interaction.InputFunction(interaction.Keybind) && coolDown && !Player.Local.BlockInputs)
             {
                 _targetObject?.Network.TakeOwnership();
                 interaction.Action?.Invoke(Player.Local, _targetObject);
