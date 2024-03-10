@@ -19,6 +19,9 @@ public enum WeightType
 public partial class NPC : Component
 {
 	[Property]
+	public string Name { get; set; } = "Default";
+
+	[Property]
 	public MoveHelper MoveHelper { get; set; }
 
 	[Property]
@@ -92,21 +95,13 @@ public partial class NPC : Component
 	[Category( "Stats" )]
 	[Range( 30f, 200f, 10f )]
 	public float Range { get; private set; } = 60f;
-
-	[Property]
-	[Category( "Triggers" )]
-	public Action OnSpawn { get; set; }
-
 	public float Scale => ScaleStats ? MathF.Max( MathF.Max( GameObject.Transform.Scale.x, GameObject.Transform.Scale.y ), GameObject.Transform.Scale.z ) : 1f;
 
 	public delegate void NpcTrigger( GameObject provoker );
 
-	/// <summary>
-	/// When the provoker enters the alert area, or a nearby NPC gets alerted/attacked. This won't get called if the NPC is already alerted.
-	/// </summary>
 	[Property]
-	[Category( "Triggers" )]
-	public NpcTrigger OnAlerted { get; set; }
+	[Category( "States" )]
+	public Dictionary<string, Action> States { get; set; } = new Dictionary<string, Action> { { "idle", () => { } } };
 
 	/// <summary>
 	/// If a GameObject has one of these tags it will be considered a provoker and can trigger alert state
@@ -116,8 +111,8 @@ public partial class NPC : Component
 	public TagSet ProvokerTags { get; set; }
 
 	[Property]
-	[Category( "States" )]
-	public Dictionary<string, Action> States { get; set; } = new Dictionary<string, Action> { { "idle", () => { } } };
+	[Category( "Triggers" )]
+	public Action OnSpawn { get; set; }
 
 	/// <summary>
 	/// How close a provoker has to come to alert the NPC
@@ -126,6 +121,21 @@ public partial class NPC : Component
 	[Category( "Triggers" )]
 	[Range( 0f, 1024f, 16f )]
 	public float AlertRange { get; set; } = 256f;
+
+	/// <summary>
+	/// How far a provoker has to go to lose the NPC
+	/// </summary>
+	[Property]
+	[Category( "Triggers" )]
+	[Range( 0f, 2024f, 16f )]
+	public float AlertEscapeRange { get; set; } = 512f;
+
+	/// <summary>
+	/// When the provoker enters the alert area, or a nearby NPC gets alerted/attacked. This won't get called if the NPC is already alerted.
+	/// </summary>
+	[Property]
+	[Category( "Triggers" )]
+	public NpcTrigger OnAlerted { get; set; }
 
 	/// <summary>
 	/// When the NPC gets directly attacked. This won't get called if the NPC has been attacked already and is in alerted status.
@@ -159,6 +169,8 @@ public partial class NPC : Component
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
 	public bool FollowingTargetObject { get; set; } = false;
+	public string CurrentState { get; set; } = "idle";
+	public Vector3 SpawnPosition { get; set; }
 	public float ForceMultiplier
 	{
 		get
@@ -190,18 +202,27 @@ public partial class NPC : Component
 
 		if ( MoveHelper != null )
 			MoveHelper.AirFriction = 100f;
-
-		OnSpawn?.Invoke();
 	}
 
 	protected override void OnAwake()
 	{
-		if ( MoveHelper == null ) return;
+		var spawnTrace = Scene.Trace.Ray( Transform.Position + Vector3.Up * 30f, Transform.Position - Vector3.Up * 200f )
+			.Size( 5f )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.WithoutTags( "player", "npc", "trigger" )
+			.Run();
 
-		MoveHelper.StepHeight *= Scale;
-		MoveHelper.TraceRadius *= Scale;
-		MoveHelper.TraceHeight *= Scale;
-		MoveHelper.StopSpeed *= Scale;
+		SpawnPosition = spawnTrace.Hit ? spawnTrace.HitPosition : Transform.Position;
+
+		if ( MoveHelper != null )
+		{
+			MoveHelper.StepHeight *= Scale;
+			MoveHelper.TraceRadius *= Scale;
+			MoveHelper.TraceHeight *= Scale;
+			MoveHelper.StopSpeed *= Scale;
+		}
+
+		OnSpawn?.Invoke();
 	}
 
 	protected override void OnUpdate()
@@ -251,6 +272,11 @@ public partial class NPC : Component
 			FollowRagdoll();
 	}
 
+	protected override void OnDestroy()
+	{
+		OnDestroyed?.Invoke();
+	}
+
 	/// <summary>
 	/// Get all provokers inside of its detect area
 	/// </summary>
@@ -262,26 +288,48 @@ public partial class NPC : Component
 		if ( currentTick % 30 != NpcId % 30 ) return; // Check every 30 ticks
 
 		var foundAround = Scene.FindInPhysics( new Sphere( Transform.Position, AlertRange ) )
-			.Where( x => ProvokerTags != null && x.Tags.HasAny( ProvokerTags ) );
+			.Where( x => ProvokerTags != null && x.Tags.HasAny( ProvokerTags ) )
+			.Where( x => x.Components.Get<HealthComponent>()?.Alive ?? true );
 
 		if ( TargetObject == null )
 		{
 			if ( foundAround.Any() )
 			{
-				TargetObject = foundAround.First();
-				OnAlerted?.Invoke( TargetObject );
+				Detected( foundAround.First(), true );
 			}
 		}
 		else
 		{
-			if ( !foundAround.Any( x => x == TargetObject ) )
-			{
-				OnProvokerEscaped?.Invoke( TargetObject );
-				TargetObject = null;
-				TargetPosition = Transform.Position;
-				ReachedDestination = true;
-			}
+			var targetAlive = !TargetObject.Components.Get<HealthComponent>()?.Alive ?? false;
+			var targetEscaped = TargetObject.Transform.Position.Distance( Transform.Position ) > AlertEscapeRange;
+			if ( targetEscaped || targetAlive )
+				Undetected();
 		}
+	}
+
+	public void Detected( GameObject target, bool alertOthers = false )
+	{
+		TargetObject = target;
+		OnAlerted?.Invoke( TargetObject );
+
+		if ( alertOthers )
+		{
+			var otherNpcs = Scene.GetAllComponents<NPC>()
+				.Where( x => x.Transform.Position.Distance( Transform.Position ) <= x.AlertEscapeRange )
+				.Where( x => x.Health?.Alive ?? false )
+				.Where( x => x.TargetObject == null );
+
+			foreach ( var npc in otherNpcs )
+				npc.Detected( target, false );
+		}
+	}
+
+	public void Undetected()
+	{
+		OnProvokerEscaped?.Invoke( TargetObject );
+		TargetObject = null;
+		TargetPosition = Transform.Position;
+		ReachedDestination = true;
 	}
 
 	/// <summary>
@@ -291,7 +339,10 @@ public partial class NPC : Component
 	public void SetState( string identifier )
 	{
 		if ( States.ContainsKey( identifier ) )
+		{
 			States[identifier]?.Invoke();
+			CurrentState = identifier;
+		}
 	}
 
 	/// <summary>
@@ -343,18 +394,39 @@ public partial class NPC : Component
 	}
 
 	/// <summary>
-	/// Get a random position around the NPC (Horizonal)
+	/// Get a random position around the position (Horizonal)
 	/// </summary>
+	/// <param name="position"></param>
 	/// <param name="minRange"></param>
 	/// <param name="maxRange"></param>
 	/// <returns></returns>
-	public Vector3 GetRandomPositionAround( float minRange = 50f, float maxRange = 300f )
+	public static Vector3 GetRandomPositionAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
 	{
-		var position = Transform.Position;
+		var tries = 0;
+		var hitGround = false;
+		var hitPosition = position;
 
-		var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
-		var randomDistance = Game.Random.Float( minRange, maxRange );
-		return position + randomDirection * randomDistance;
+		while ( hitGround == false && tries <= 10f )
+		{
+			var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
+			var randomDistance = Game.Random.Float( minRange, maxRange );
+			var randomPoint = position + randomDirection * randomDistance;
+
+			var groundTrace = Game.ActiveScene.Trace.Ray( randomPoint + Vector3.Up * 64f, randomPoint - Vector3.Up * 64f )
+				.Size( 5f )
+				.WithoutTags( "player", "npc", "trigger" )
+				.Run();
+
+			if ( groundTrace.Hit )
+			{
+				hitGround = true;
+				hitPosition = groundTrace.HitPosition;
+			}
+
+			tries++;
+		}
+
+		return hitPosition;
 	}
 
 	/// <summary>
@@ -370,8 +442,16 @@ public partial class NPC : Component
 		var targetPosition = target.Transform.Position;
 
 		var direction = (Transform.Position - targetPosition).Normal;
-		var offset = direction * Range;
-		return targetPosition + offset;
+		var offset = direction * Range / 2f;
+		var wishPos = targetPosition + offset;
+
+		var groundTrace = Scene.Trace.Ray( wishPos + Vector3.Up * 64f, wishPos - Vector3.Up * 64f )
+			.Size( 5f )
+			.IgnoreGameObjectHierarchy( GameObject )
+			.WithoutTags( "player", "npc", "trigger" )
+			.Run();
+
+		return groundTrace.Hit ? groundTrace.HitPosition : wishPos;
 	}
 
 	/// <summary>

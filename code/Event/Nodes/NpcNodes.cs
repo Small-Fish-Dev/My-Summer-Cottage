@@ -54,7 +54,7 @@ public static partial class NpcNodes
 	/// <summary>
 	/// Move to a position
 	/// </summary>
-	[ActionGraphNode( "npc.moveto" ), Pure]
+	[ActionGraphNode( "npc.moveto" )]
 	[Title( "Move To" ), Group( "NPC" ), Icon( "turn_right" )]
 	public static async Task<Task> MoveTo( NPC npc, Vector3 position, Body? reachedDestination, Body? failedToReachDestination )
 	{
@@ -75,7 +75,7 @@ public static partial class NpcNodes
 	/// <summary>
 	/// Start following a gameobject
 	/// </summary>
-	[ActionGraphNode( "npc.follow" ), Pure]
+	[ActionGraphNode( "npc.follow" )]
 	[Title( "Follow" ), Group( "NPC" ), Icon( "follow_the_signs" )]
 	public static async Task<Task> Follow( NPC npc, GameObject target, Body? reachedTarget, Body? failedToReachTarget )
 	{
@@ -85,7 +85,7 @@ public static partial class NpcNodes
 
 		while ( npc.IsValid() && target.IsValid() && !npc.IsWithinRange( target, npc.Range + 5f ) && npc.FollowingTargetObject )
 			await GameTask.DelaySeconds( Time.Delta );
-		Log.Info( npc.FollowingTargetObject );
+
 		if ( npc.IsValid() && target.IsValid() && npc.IsWithinRange( target, npc.Range + 10f ) && npc.FollowingTargetObject )
 			return reachedTarget?.Invoke();
 		else
@@ -95,12 +95,37 @@ public static partial class NpcNodes
 	/// <summary>
 	/// Stop following whatever
 	/// </summary>
-	[ActionGraphNode( "npc.stopfollow" ), Pure]
+	[ActionGraphNode( "npc.stopfollow" )]
 	[Title( "Stop Following" ), Group( "NPC" ), Icon( "dangerous" )]
 	public static void StopFollowing( NPC npc )
 	{
 		if ( npc == null ) return;
 
 		npc.SetTarget( null );
+	}
+
+	/// <summary>
+	/// Set the current state and invoke the state
+	/// </summary>
+	[ActionGraphNode( "npc.gotostate" )]
+	[Title( "Go To State" ), Group( "NPC" ), Icon( "account_tree" )]
+	public static void GoToState( NPC npc, string stateIdentifier )
+	{
+		if ( npc == null ) return;
+
+		npc.SetState( stateIdentifier );
+	}
+
+	/// <summary>
+	/// Get a random position around the position (Horizonal)
+	/// </summary>
+	/// <param name="position"></param>
+	/// <param name="minRange"></param>
+	/// <param name="maxRange"></param>
+	[ActionGraphNode( "npc.getrandomposaround" )]
+	[Title( "Get Random Position Around" ), Group( "NPC" ), Icon( "photo_size_select_small" )]
+	public static void GetRandomPosAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
+	{
+		NPC.GetRandomPositionAround( position, minRange, maxRange );
 	}
 }
