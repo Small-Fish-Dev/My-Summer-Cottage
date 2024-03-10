@@ -13,12 +13,13 @@
 	<div class="fishes">
 		@foreach ( var fishInfo in _fishesRepository )
 		{
-			<FishSlot Definition=@fishInfo />
+			<FishSlot Definition=@fishInfo onclick=@(() => OnFishClick(fishInfo)) />
 		}
 	</div>
 </root>
 
 @code {
+	public Action<FishLog.FishInfo> OnFishClick { get; set; }
 	private List<FishLog.FishInfo> _fishesRepository;
 
 	public FishList()

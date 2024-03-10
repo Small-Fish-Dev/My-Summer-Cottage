@@ -3,49 +3,32 @@
 @inherits Panel
 
 <root>
-	<text>hello</text>
+	@if (SelectedFishInfo is null)
+	{
+		<div class="header">
+			<img src="/ui/hud/fish_collection.png" />
+			<div style="flex-direction: column;">
+				<text class="title">Fishing Statistics</text>
+				<text class="subtitle">
+					Here is some information regarding your fishing adventures! 
+					You can click on fish you've caught to view additional details.
+				</text>
+			</div>
+		</div>
+	}
+	else
+	{
+		<div class="header">
+			<ScenePanel class="scene" @ref=_scenePanel />
+		</div>
+		<div class="description">
+
+		</div>
+	}
 </root>
 
-		@* <div class="fish-info">
-			<div class="overview">
-				<ScenePanel class="scene" @ref=" _scenePanel"/>
-				<div class="summary">
-					<text class="fish-title">@_selectedFish.Name</text>
-					<div class="fish-rarity">
-						Rarity:
-						<div class="fish-stars">
-							@{
-								var stars = (int)Math.Max( _selectedFish.Rarity * StarCount, 1 );
-								for ( var i = 0; i < stars; i++ )
-								{
-									<img src="ui/hud/fish_rarity.png"/>
-								}
-
-								for ( var i = stars; i < StarCount; i++ )
-								{
-									<img src="ui/hud/fish_rarity_empty.png"/>
-								}
-							}
-						</div>
-					</div>
-					@if ( _selectedFishRecord is FishRecord fr )
-					{
-						<div style="margin-bottom: 20px">@($"You have caught {fr.Count} of these in total")</div>
-						<div class="statistic gold">BEST CATCH</div>
-						<div class="statistic">Weight: <div class="green">@fr.MaxWeight grams</div></div> 
-						<div class="statistic">Price: <div class="mony">@((int)(fr.MaxWeight / 1000.0f * _selectedFish.CostPerKilo))mk</div></div>
-						<div class="statistic">Date: @fr.MaxWhen.ToLongDateString()</div>
-					}
-				</div>
-			</div>
-
-			<div class="description">
-				@_selectedFish.Description
-			</div>
-		</div> *@
-
 @code {
-	private FishLog.FishInfo _selectedFish;
+	public FishLog.FishInfo SelectedFishInfo { get; set; }
 	private FishRecord? _selectedFishRecord;
 
 	private const int StarCount = 5;
@@ -58,30 +41,30 @@
 
 	private void SelectFish( FishLog.FishInfo fish )
 	{
-		_selectedFish = fish;
+		SelectedFishInfo = fish;
 		if ( Player.Local.FishesCaught.TryGetValue( fish.PrefabPath, out var record ) )
 			_selectedFishRecord = record;
 		else
 			_selectedFishRecord = null;
 
 		_model?.Delete();
-		_model = new SceneModel(_sceneWorld, _selectedFish.ModelPath, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)));
-		_model.SetMaterialGroup(_selectedFish.MaterialGroup);
+		_model = new SceneModel(_sceneWorld, SelectedFishInfo.ModelPath, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)));
+		_model.SetMaterialGroup(SelectedFishInfo.MaterialGroup);
 	}
 
 	protected override void OnAfterTreeRender( bool firstTime )
 	{
 		base.OnAfterTreeRender( firstTime );
 
-		if ( _selectedFish is null )
+		if ( SelectedFishInfo is null )
 			return;
 
 		_sceneWorld ??= new SceneWorld();
 		_sceneLight ??= new SceneLight( _sceneWorld, Vector3.Forward * 15f, 1000f, Color.White * 4f );
 		_sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, Rotation.From( 45, -45, 45 ), Color.White * 10f );
 
-		_model ??= new SceneModel( _sceneWorld, _selectedFish.ModelPath, new Transform( Vector3.Zero, Rotation.From( 0, 0, 0 ) ) );
-		_model.SetMaterialGroup( _selectedFish.MaterialGroup );
+		_model ??= new SceneModel( _sceneWorld, SelectedFishInfo.ModelPath, new Transform( Vector3.Zero, Rotation.From( 0, 0, 0 ) ) );
+		_model.SetMaterialGroup( SelectedFishInfo.MaterialGroup );
 		_scenePanel.World = _sceneWorld;
 		_scenePanel.Camera.FieldOfView = 50f;
 
@@ -106,5 +89,10 @@
 		_sceneLight.Position = _scenePanel.Camera.Position;
 
 		_model.Update( RealTime.Delta );
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine(SelectedFishInfo?.GetHashCode());
 	}
 }

@@ -10,8 +10,8 @@
 		OnClick=@( () => FullScreenManager.Instance.Display( FullScreenManager.FullScreenPanel.PauseMenu ) )
 		style="position: absolute; top: 50px;"/>
 	<div class="content">
-		<FishList class="section" />
-		<FishDetails class="section" />
+		<FishList class="section" OnFishClick=@((FishInfo info) => { SelectedFishInfo = info; }) />
+		<FishDetails class="section" SelectedFishInfo=@SelectedFishInfo />
 	</div>
 </root>
 
@@ -25,6 +25,8 @@
 		Texture Icon,
 		string ModelPath,
 		string MaterialGroup );
+
+	private FishInfo SelectedFishInfo { get; set; }
 
 	protected override int BuildHash() => HashCode.Combine( Player.Local.FishesCaught );
 }
