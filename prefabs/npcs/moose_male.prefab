@@ -30,7 +30,9 @@
           "UserData": {
             "Title": "On Alerted",
             "id": "2f91b130-8e48-421d-b4d1-61c4a66427ae",
-            "ReferencedComponentTypes": []
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/NPC"
+            ]
           },
           "Variables": [],
           "Nodes": [
@@ -49,10 +51,41 @@
               }
             },
             {
-              "Id": 2,
+              "Id": 4,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Position": "288,224"
+              }
+            },
+            {
+              "Id": 6,
               "Type": "op.isnotnull",
               "UserData": {
-                "Position": "112,208"
+                "Position": "112,192"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "log.warning",
+              "UserData": {
+                "Position": "960,160"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "log.warning",
+              "UserData": {
+                "Position": "960,272"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "npc.follow",
+              "UserData": {
+                "Position": "512,96"
               }
             }
           ],
@@ -64,16 +97,62 @@
               "DstName": "_signal"
             },
             {
-              "SrcId": 2,
+              "SrcId": 6,
               "SrcName": "_result",
               "DstId": 1,
               "DstName": "condition"
             },
             {
               "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 4,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
               "SrcName": "provoker",
-              "DstId": 2,
+              "DstId": 6,
               "DstName": "input"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "reachedTarget",
+              "DstId": 11,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "FUCK YEA I MADE IT",
+              "DstId": 11,
+              "DstName": "format"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "failedToReachTarget",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Shit I got distracted",
+              "DstId": 12,
+              "DstName": "format"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "true",
+              "DstId": 13,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "provoker",
+              "DstId": 13,
+              "DstName": "target"
             }
           ]
         },
@@ -82,7 +161,7 @@
         "OnKilled": null,
         "OnProvokerEscaped": null,
         "OnSpawn": null,
-        "ProvokerTags": null,
+        "ProvokerTags": "player",
         "Range": 120,
         "RunSpeed": 300,
         "ScaleStats": true,

@@ -158,6 +158,7 @@ public partial class NPC : Component
 	public int NpcId { get; set; }
 	public Vector3 TargetPosition { get; set; }
 	public GameObject TargetObject { get; private set; } = null;
+	public bool FollowingTargetObject { get; set; } = false;
 	public float ForceMultiplier
 	{
 		get
@@ -277,6 +278,8 @@ public partial class NPC : Component
 			{
 				OnProvokerEscaped?.Invoke( TargetObject );
 				TargetObject = null;
+				TargetPosition = Transform.Position;
+				ReachedDestination = true;
 			}
 		}
 	}
@@ -292,36 +295,26 @@ public partial class NPC : Component
 	}
 
 	/// <summary>
-	/// Start following a gameobject and get within its range, await this to wait until the npc is in range
-	/// </summary>
-	/// <param name="target"></param>
-	/// <returns></returns>
-	public async Task Follow( GameObject target )
-	{
-		if ( target != null )
-			SetTarget( target );
-
-		while ( target != null && !IsWithinRange( target ) && GameObject.IsValid() )
-		{
-			await Task.Frame();
-		}
-
-		return;
-	}
-
-	/// <summary>
 	/// Who should the NPC follow, set null to go back to manually setting the target position
 	/// </summary>
 	/// <param name="target"></param>
 	public void SetTarget( GameObject target )
 	{
-		if ( TargetObject == target )
-			return;
-
-		TargetObject = target;
+		if ( target == null )
+		{
+			TargetObject = null;
+			FollowingTargetObject = false;
+			ReachedDestination = true;
+			TargetPosition = Transform.Position;
+		}
 
 		if ( TargetObject != null )
+		{
+			TargetObject = target;
 			MoveTo( GetPreferredTargetPosition( TargetObject ) );
+			FollowingTargetObject = true;
+			ReachedDestination = false;
+		}
 	}
 
 	/// <summary>

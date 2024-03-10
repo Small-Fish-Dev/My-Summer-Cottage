@@ -16,7 +16,7 @@ public enum NavigationType
 
 public partial class NPC
 {
-	public bool IsRunning { get; set; } = false;
+	public bool IsRunning => TargetObject != null;
 	public float WishSpeed => (IsRunning ? RunSpeed : WalkSpeed) * Scale;
 	public bool ReachedDestination { get; set; } = true;
 
@@ -173,10 +173,17 @@ public partial class NPC
 
 	void CheckNewTargetPos()
 	{
-		if ( TargetObject.IsValid() )
+		if ( FollowingTargetObject )
 		{
-			if ( !IsWithinRange( TargetObject, Range ) ) // Has our target moved?
-				MoveTo( GetPreferredTargetPosition( TargetObject ) );
+			if ( TargetObject.IsValid() )
+			{
+				if ( !IsWithinRange( TargetObject, Range + 5f ) ) // Has our target moved?
+					MoveTo( GetPreferredTargetPosition( TargetObject ) );
+			}
+			else
+			{
+				SetTarget( null );
+			}
 		}
 	}
 

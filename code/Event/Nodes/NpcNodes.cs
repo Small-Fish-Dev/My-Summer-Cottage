@@ -49,20 +49,58 @@ public static partial class NpcNodes
 		return;
 	}
 
+	public delegate Task Body();
+
 	/// <summary>
-	/// Move to a position, signal will fire once it reached the destination
+	/// Move to a position
 	/// </summary>
 	[ActionGraphNode( "npc.moveto" ), Pure]
 	[Title( "Move To" ), Group( "NPC" ), Icon( "turn_right" )]
-	public static async Task MoveTo( NPC npc, Vector3 position )
+	public static async Task<Task> MoveTo( NPC npc, Vector3 position, Body? reachedDestination, Body? failedToReachDestination )
+	{
+		if ( npc == null ) return Task.CompletedTask;
+
+		npc.MoveTo( position );
+		var currentPosition = npc.TargetPosition;
+
+		while ( npc.IsValid() && !npc.ReachedDestination && currentPosition == npc.TargetPosition )
+			await GameTask.DelaySeconds( Time.Delta );
+
+		if ( npc.IsValid() && npc.ReachedDestination && currentPosition == npc.TargetPosition )
+			return reachedDestination?.Invoke();
+		else
+			return failedToReachDestination?.Invoke();
+	}
+
+	/// <summary>
+	/// Start following a gameobject
+	/// </summary>
+	[ActionGraphNode( "npc.follow" ), Pure]
+	[Title( "Follow" ), Group( "NPC" ), Icon( "follow_the_signs" )]
+	public static async Task<Task> Follow( NPC npc, GameObject target, Body? reachedTarget, Body? failedToReachTarget )
+	{
+		if ( npc == null ) return Task.CompletedTask;
+
+		npc.SetTarget( target );
+
+		while ( npc.IsValid() && target.IsValid() && !npc.IsWithinRange( target, npc.Range + 5f ) && npc.FollowingTargetObject )
+			await GameTask.DelaySeconds( Time.Delta );
+		Log.Info( npc.FollowingTargetObject );
+		if ( npc.IsValid() && target.IsValid() && npc.IsWithinRange( target, npc.Range + 10f ) && npc.FollowingTargetObject )
+			return reachedTarget?.Invoke();
+		else
+			return failedToReachTarget?.Invoke();
+	}
+
+	/// <summary>
+	/// Stop following whatever
+	/// </summary>
+	[ActionGraphNode( "npc.stopfollow" ), Pure]
+	[Title( "Stop Following" ), Group( "NPC" ), Icon( "dangerous" )]
+	public static void StopFollowing( NPC npc )
 	{
 		if ( npc == null ) return;
 
-		npc.MoveTo( position );
-
-		while ( !npc.ReachedDestination )
-			await GameTask.DelaySeconds( Time.Delta );
-
-		return;
+		npc.SetTarget( null );
 	}
 }
