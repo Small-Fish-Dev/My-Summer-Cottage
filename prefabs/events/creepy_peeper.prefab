@@ -120,6 +120,27 @@
                   "UserData": {
                     "Position": "400,-128"
                   }
+                },
+                {
+                  "Id": 35,
+                  "Type": "event.finished",
+                  "UserData": {
+                    "Position": "704,0"
+                  }
+                },
+                {
+                  "Id": 37,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "component": {
+                      "_type": "component",
+                      "go": "d54f1ec7-aff8-49ce-9075-f7552953e849",
+                      "component_type": "EventComponent"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "432,80"
+                  }
                 }
               ],
               "Links": [
@@ -146,6 +167,18 @@
                   "SrcName": "triggerer",
                   "DstId": 34,
                   "DstName": "target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 35,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 37,
+                  "SrcName": "_result",
+                  "DstId": 35,
+                  "DstName": "component"
                 }
               ]
             },
@@ -226,9 +259,9 @@
                   "Id": 12,
                   "Type": "call",
                   "Properties": {
-                    "_isStatic": false,
+                    "_name": "RotateAroundAxis",
                     "_type": "Sandbox.System/Rotation",
-                    "_name": "RotateAroundAxis"
+                    "_isStatic": false
                   },
                   "UserData": {
                     "Position": "496,-16"
@@ -299,10 +332,10 @@
                   "Id": 20,
                   "Type": "call",
                   "Properties": {
-                    "_name": "Get",
                     "T": "package.fish.sauna/Sauna.Player",
-                    "_isStatic": false,
-                    "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                    "_name": "Get",
+                    "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                    "_isStatic": false
                   },
                   "UserData": {
                     "Position": "-128,-320",
@@ -339,8 +372,8 @@
                   "Type": "property.get",
                   "ParentId": 24,
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameObject",
-                    "_name": "Transform"
+                    "_name": "Transform",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
                   }
                 },
                 {
@@ -348,8 +381,8 @@
                   "Type": "property.get",
                   "ParentId": 25,
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameTransform",
-                    "_name": "Rotation"
+                    "_name": "Rotation",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
                   },
                   "UserData": {
                     "Labels": {
@@ -362,8 +395,8 @@
                   "Type": "property.get",
                   "ParentId": 25,
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameTransform",
-                    "_name": "Position"
+                    "_name": "Position",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
                   },
                   "UserData": {
                     "Labels": {
@@ -376,8 +409,8 @@
                   "Type": "property.get",
                   "ParentId": 3,
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameObject",
-                    "_name": "Transform"
+                    "_name": "Transform",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
                   }
                 },
                 {
@@ -385,8 +418,8 @@
                   "Type": "property.get",
                   "ParentId": 28,
                   "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameTransform",
-                    "_name": "Position"
+                    "_name": "Position",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
                   }
                 }
               ],
