@@ -115,4 +115,17 @@ public static partial class NpcNodes
 
 		npc.SetState( stateIdentifier );
 	}
+
+	/// <summary>
+	/// Get a random position around the position (Horizonal)
+	/// </summary>
+	/// <param name="position"></param>
+	/// <param name="minRange"></param>
+	/// <param name="maxRange"></param>
+	[ActionGraphNode( "npc.getrandomposaround" )]
+	[Title( "Get Random Position Around" ), Group( "NPC" ), Icon( "photo_size_select_small" )]
+	public static void GetRandomPosAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
+	{
+		NPC.GetRandomPositionAround( position, minRange, maxRange );
+	}
 }

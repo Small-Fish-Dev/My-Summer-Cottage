@@ -400,7 +400,7 @@ public partial class NPC : Component
 	/// <param name="minRange"></param>
 	/// <param name="maxRange"></param>
 	/// <returns></returns>
-	public Vector3 GetRandomPositionAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
+	public static Vector3 GetRandomPositionAround( Vector3 position, float minRange = 50f, float maxRange = 300f )
 	{
 		var tries = 0;
 		var hitGround = false;
@@ -412,9 +412,8 @@ public partial class NPC : Component
 			var randomDistance = Game.Random.Float( minRange, maxRange );
 			var randomPoint = position + randomDirection * randomDistance;
 
-			var groundTrace = Scene.Trace.Ray( randomPoint + Vector3.Up * 64f, randomPoint - Vector3.Up * 64f )
+			var groundTrace = Game.ActiveScene.Trace.Ray( randomPoint + Vector3.Up * 64f, randomPoint - Vector3.Up * 64f )
 				.Size( 5f )
-				.IgnoreGameObjectHierarchy( GameObject )
 				.WithoutTags( "player", "npc", "trigger" )
 				.Run();
 
