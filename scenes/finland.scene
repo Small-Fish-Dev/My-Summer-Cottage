@@ -151,8 +151,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -263,8 +263,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -428,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.8568547,0,-0.5155581",
+          "Rotation": "0,-0.2749394,0,-0.9614615",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -781,9 +781,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "PlaySoundWithSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_name": "PlaySoundWithSubtitle"
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -872,9 +872,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true,
-                      "_name": "PlaySoundWithNameAndSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_name": "PlaySoundWithNameAndSubtitle"
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -1241,6 +1241,21 @@
       "Rotation": "-0.0369941,-0.03069371,0.7687082,-0.6377906",
       "Enabled": true,
       "__Prefab": "prefabs/npcs/moose_female.prefab"
+    },
+    {
+      "Id": "35334add-c15b-48cf-bcfb-391fdd280c10",
+      "Name": "elk_male",
+      "Position": "855.9393,-1600.235,90.00015",
+      "Rotation": "-0.000002771616,0.00001253152,1,0.00003759455",
+      "Enabled": true,
+      "__Prefab": "prefabs/npcs/elk_male.prefab"
+    },
+    {
+      "Id": "d13949ab-9a66-47ae-a0d4-8544ba4eb1df",
+      "Name": "elk_female",
+      "Position": "957.9998,-1783.205,91",
+      "Enabled": true,
+      "__Prefab": "prefabs/npcs/elk_female.prefab"
     }
   ],
   "SceneProperties": {
@@ -1266,6 +1281,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-10T21:06:11.2651133\u002B01:00",
+  "LastSaved": "2024-03-10T21:18:48.942526\u002B01:00",
   "__references": []
 }
