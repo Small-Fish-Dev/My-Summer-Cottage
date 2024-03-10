@@ -44,10 +44,18 @@ InteractionHint {
 
     .interaction {
         flex-direction: row;
-        align-items: flex-start;
+        align-items: center;
+        justify-content: space-between;
         font-size: 20px;
         font-family: HabboExtended;
         margin-left: 10px;
+
+        .circle {
+            image-rendering: pixelated;
+            margin-right: 2px;
+            width: 26px;
+            aspect-ratio: 1;
+        }
 
         .description {
             text-shadow: $text-shadow-sm;

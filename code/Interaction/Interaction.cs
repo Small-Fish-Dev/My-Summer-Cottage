@@ -139,9 +139,7 @@ public class Interaction
 	/// The text that should actually be displayed.
 	/// </summary>
 	[Hide, JsonIgnore]
-	public string Text => $"{DynamicText?.Invoke() ?? Description}{_cooldownText}";
-	[Hide, JsonIgnore]
-	string _cooldownText => $"{(Cooldown && !CooldownTimer ? $" ({MathF.Round( CooldownTime - CooldownTimer.Passed, 1 )}s)" : "")}";
+	public string Text => DynamicText?.Invoke() ?? Description;
 
 	/// <summary>
 	/// The color that should actually be displayed.

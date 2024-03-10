@@ -24,8 +24,15 @@
 				{
                     var isActive = HasPriority(interaction.Keybind) && canInteract;
 					<div class="interaction">
-						<inputhint class="hint" input=@interaction.Keybind DarkMode=@(!isActive) />
-						<text class="description" style="color: @(isActive ? @interaction.Color.Hex : "#883232")">@interaction.Text</text>
+						<div>
+							<inputhint class="hint" input=@interaction.Keybind DarkMode=@(!isActive) />
+							<text class="description" style="color: @(isActive ? @interaction.Color.Hex : "#883232")">@interaction.Text</text>
+						</div>
+
+						@if( interaction.Cooldown && !interaction.CooldownTimer )
+						{
+							<img class="circle" src="ui/hud/circle/circle_@(TimerIndex(interaction)).png" />
+						}
 					</div>
 				}
 			}
@@ -40,7 +47,7 @@
     private GameObject _targetObject => FromHands
         ? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
         : Player.Local?.TargetedGameObject;
-
+		
     private static Dictionary<string, Interaction> priorityList = new();
     private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
     private bool WithinBounds(Interaction interaction) => !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
@@ -48,6 +55,9 @@
     private BBox GetInteractionBounds(Interaction interaction)
         => new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
             .Transform(Player.Local.TargetedGameObject.Transform.World);
+
+	private int TimerIndex( Interaction interaction )
+		=> (int)(MathX.Remap( interaction.CooldownTimer.Passed, 0, interaction.CooldownTime, 8, 0 ) + 0.5f);
 
     private void AddToPriority( Interaction interaction, bool forced = false )
     {
@@ -154,7 +164,7 @@
 		(
 			DisplayName, 
 			_targetObject.IsValid(),
-			_interactions.HashCombine(i => HashCode.Combine(i.Text, i.Disabled.InvokeOrDefault(), WithinBounds(i), HasPriority(i.Keybind)))
+			_interactions.HashCombine(i => HashCode.Combine(i.Text, i.Disabled.InvokeOrDefault(), (bool)i.CooldownTimer, TimerIndex(i), WithinBounds(i), HasPriority(i.Keybind)))
 		);
 	}
 }
