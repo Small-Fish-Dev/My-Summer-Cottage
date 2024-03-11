@@ -1,5 +1,5 @@
 {
-  "Id": "5305e742-d69e-4ba5-a816-2b76d873d2b7",
+  "Id": "e1d705e0-3ed0-494d-909a-a5f89a84eaf0",
   "GameObjects": [
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -151,8 +151,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -263,8 +263,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -428,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.2200714,0,0.9754838",
+          "Rotation": "0,0.5918441,0,0.8060524",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -639,8 +639,8 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithSubtitle",
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true
                     },
                     "UserData": {
@@ -707,7 +707,29 @@
               },
               "Cooldown": true,
               "CooldownTime": 3,
-              "Animation": "Interact"
+              "Animation": "Interact",
+              "Sound": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Sound",
+                  "id": "8c332f34-8d27-4c6b-b1a7-acd5915cf4ab",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "output"
+                  }
+                ],
+                "Links": [
+                  {
+                    "Value": "sounds/speech/test_drunk.sound",
+                    "DstId": 0,
+                    "DstName": "_result"
+                  }
+                ]
+              }
             },
             {
               "Keybind": "use2",
@@ -729,8 +751,8 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithNameAndSubtitle",
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true
                     },
                     "UserData": {
@@ -831,6 +853,14 @@
           "AnimationSpeed": 100
         }
       ]
+    },
+    {
+      "Id": "4480e4d0-10a1-4c25-8730-0aee3d1e95f7",
+      "Name": "creepy_peeper",
+      "Position": "1162.476,-679.8868,24.08396",
+      "Rotation": "-0.0000000000000001593804,0.0000000008185648,1,0.0000001947072",
+      "Enabled": true,
+      "__Prefab": "prefabs/events/creepy_peeper.prefab"
     },
     {
       "Id": "0c0b72f9-c7a4-412d-82ac-98e1641cf9dd",
@@ -1040,43 +1070,6 @@
       "Rotation": "-0.01071164,0.01418209,0.6025711,0.7978673",
       "Enabled": true,
       "__Prefab": "prefabs/items/fishing_rod.prefab"
-    },
-    {
-      "Id": "63d09065-6418-4f06-a2fd-131d7cd6a65d",
-      "Name": "NPCSpawnArea",
-      "Position": "1192.319,167.2373,9.780305",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "NpcSpawnArea",
-          "Height": 128.72002,
-          "NpcPool": [
-            {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/moose_female.prefab"
-              },
-              "SpawnChance": 0.7
-            },
-            {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/moose_male.prefab"
-              },
-              "SpawnChance": 0.7
-            }
-          ],
-          "Radius": 269.19943
-        }
-      ]
-    },
-    {
-      "Id": "936ca26b-82c1-47d5-939f-36349d351178",
-      "Name": "creepy_peeper",
-      "Position": "1166.545,-681.0285,23.13061",
-      "Rotation": "0.03393662,-0.01344857,0.9926752,0.1151673",
-      "Enabled": true,
-      "__Prefab": "prefabs/events/creepy_peeper.prefab"
     }
   ],
   "SceneProperties": {
@@ -1102,6 +1095,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-11T03:26:13.7918254\u002B01:00",
+  "LastSaved": "2024-03-10T23:08:58.6512721-04:00",
   "__references": []
 }

@@ -111,7 +111,7 @@
 					EventMaster.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
 
 				var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
-				Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ), interaction.Animation );
+				Player.Local.BroadcastInteraction( vector, Rotation.LookAt( vector.Normal ), interaction.Animation, _targetObject.Id, interaction.Sound.InvokeOrDefault() );
 			}
 		}
 

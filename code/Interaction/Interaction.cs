@@ -130,6 +130,12 @@ public class Interaction
 	public InteractAnimations Animation { get; set; } = InteractAnimations.Interact;
 
 	/// <summary>
+	/// The sound to play when this interaction occurs.
+	/// </summary>
+	[Property, Category( "Optional" )]
+	public Func<SoundEvent> Sound { get; set; }
+
+	/// <summary>
 	/// What context should the input be called in
 	/// </summary>
 	[Property, Category( "Optional" )]
