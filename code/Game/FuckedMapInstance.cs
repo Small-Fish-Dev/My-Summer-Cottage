@@ -2,6 +2,17 @@
 
 public class FuckedMapInstance : MapInstance
 {
+	const string MAP_NAME = "untitled_2";
+
+	protected override void OnStart()
+	{
+		if ( !Connection.Local.IsHost )
+		{
+			MapName = MAP_NAME;
+			base.OnUpdate();
+		}
+	}
+
 	protected override void OnUpdate()
 	{
 		// Calls the map reloading, so only allow in editor.
