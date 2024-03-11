@@ -34,7 +34,7 @@
 
 	protected override int BuildHash()
 	{
-		if (Player is null)
+		if (Player is null || Player.Connection is null)
 			return -1;
 
 		return HashCode.Combine(Player.Level, Player.Connection.IsHost, Player.Firstname.GetHashCode());

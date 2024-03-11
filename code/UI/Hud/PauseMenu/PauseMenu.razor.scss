@@ -20,6 +20,26 @@ PauseMenu {
         margin-top: 100px;
     }
 
+    .invite {
+        height: 75px;
+        width: 75px;
+        background-color: rgba(white, 0.2);
+        opacity: 0.5;
+        box-shadow: $box-shadow-sm;
+        color: rgba(white, 0.7);
+        font-size: 72px;
+        font-family: HabboExtended;
+        justify-content: center;
+        padding-left: 5px;
+        //text-align: center;
+        pointer-events: all;
+
+        &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+    }
+
     .portraits {
         position: absolute;
         width: 100%;
@@ -38,5 +58,6 @@ PauseMenu {
         right: 50px;
         top: 75%;
         justify-content: flex-end;
+        text-shadow: $text-shadow-sm;
     }
 }

@@ -49,6 +49,11 @@
 				{
 					<PlayerPortrait Player=@player />
 				}
+
+				if ( players.Count() < 5 )
+				{
+					<div class="invite" @onclick=@(() => { Log.Error( "invite" ); } )>+</div>
+				}
 			}
 		</div>
 
