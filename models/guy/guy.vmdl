@@ -220,11 +220,11 @@
 								},
 								{
 									name = "neck"
-									weight = 0.5
+									weight = 0.4
 								},
 								{
 									name = "spine2"
-									weight = 0.5
+									weight = 0.4
 								},
 								{
 									name = "spine1"
@@ -341,6 +341,64 @@
 								{
 									name = "neck"
 									weight = 0.4
+								},
+							]
+						}
+					},
+					{
+						_class = "LookAtChain"
+						name = "lookat_spine_weak"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "head"
+									weight = 0.5
+								},
+								{
+									name = "neck"
+									weight = 0.25
+								},
+								{
+									name = "spine2"
+									weight = 0.5
+								},
+								{
+									name = "spine1"
+									weight = 0.2
+								},
+							]
+						}
+					},
+					{
+						_class = "LookAtChain"
+						name = "lookat_torsoweak"
+						lookat_chain = 
+						{
+							name = ""
+							bones = 
+							[
+								{
+									name = "head"
+									weight = 1.0
+								},
+								{
+									name = "neck"
+									weight = 1.0
+								},
+								{
+									name = "spine2"
+									weight = 0.7
+								},
+								{
+									name = "spine1"
+									weight = 0.25
+								},
+								{
+									name = "spine0"
+									weight = 0.1
 								},
 							]
 						}
@@ -2153,14 +2211,6 @@
 							{
 								_class = "AnimFile"
 								name = "hold_consume"
-								children = 
-								[
-									{
-										_class = "AnimSubtract"
-										anim_name = "hold_consume"
-										frame = 0
-									},
-								]
 								activity_name = ""
 								activity_weight = 1
 								weight_list_name = ""
