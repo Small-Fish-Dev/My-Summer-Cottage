@@ -27,9 +27,9 @@ public class LeFisheSpawner : Component
 		var countX = (int)Math.Ceiling( _water.Bounds.Size.x / GridCellSize );
 		var countY = (int)Math.Ceiling( _water.Bounds.Size.y / GridCellSize );
 
-		var begX = _water.Bounds.Mins.x;
-		var begY = _water.Bounds.Mins.y;
-		var waterTop = _water.Bounds.Maxs.z;
+		var begX = Transform.World.PointToWorld( _water.Bounds.Mins ).x;
+		var begY = Transform.World.PointToWorld( _water.Bounds.Mins ).y;
+		var waterTop = Transform.World.PointToWorld( _water.Bounds.Maxs ).z; ;
 
 		for ( var x = 0; x < countX; x++ )
 			for ( var y = 0; y < countY; y++ )
