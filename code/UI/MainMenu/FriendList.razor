@@ -3,39 +3,105 @@
 @inherits Panel
 
 <root>
-	<div class="header">@lobbies.Count friend(s) playing</div>
+	<div class="header">Join your friends!</div>
+
 	<div class="friends">
-		@foreach ( var lobby in lobbies )
+		@if ( lobbies.Count > 0 )
 		{
-			var host = new Friend( (long)lobby.OwnerId );
-			Log.Error(string.Join( ',', lobby.Data.Values ));
-			Log.Error(lobby.Name);
-			Log.Error(lobby.Map);
-			<div class="friend">
-				<img class="avatar" />
-				<div class="content">
-					@lobby.Name
+			foreach ( var data in lobbies )
+			{
+				<div class="friend">
+					<div class="container">
+						<div class="avatar">
+							<img src="avatarbig:@data.Host.Id" />
+						</div>
+
+						<div class="user">
+							<div>@data.Host.Name</div>
+							<div class="small">currently in lobby @(data.Players)/@(maxPlayers)</div>
+						</div>
+					</div>
+					<div class="join @(data.Players >= maxPlayers ? "disabled" : "")" @onclick=@(() => JoinGame( data ))>
+						@(data.Players >= maxPlayers ? "FULL LOBBY" : "JOIN")
+					</div>
 				</div>
-			</div>
+			}
+		} 
+		else
+		{
+			<div class="no-friends">you have no friends lozzer. ://</div>
 		}
+	</div>
+
+	<div class="footer">
+		<p class="orange">IMPORTANT:</p>
+		As a lobby member, you cannot take part in the host's story tasks and will only be able to continue the story at your own cottage.
 	</div>
 </root>
 
 @code {
+	private int maxPlayers => NetworkManager.MAX_PLAYERS;
 	private struct LobbyData
 	{
 		public Friend Host;
 		public ulong ServerId;
+		public int Players;
 	}
 
 	private const float QUERY_DELAY = 10f;
-	private List<LobbyInformation> lobbies = new();
+	private List<LobbyData> lobbies = new();
 	TimeUntil _nextQuery;
+	bool _connecting;
+
+	private async void JoinGame( LobbyData data )
+	{
+		if ( _connecting )
+			return;
+
+		_connecting = true;
+
+		if ( MainMenuHud.SaveData.Has )
+		{
+			LoadingScreen.Title = "Connecting to server...";
+			var success = await GameNetworkSystem.TryConnectSteamId( data.ServerId );
+		} 
+		else
+		{
+			// todo: go in character creation
+		}
+
+		_connecting = false;
+	}
 
 	private void Query() => 
 		new Action( async () => 
 		{
-			lobbies = (await Networking.QueryLobbies());
+			var all = await Networking.QueryLobbies();
+			lobbies.Clear();
+			foreach ( var lobby in all )
+			{
+				long id;
+				try
+				{
+					id = Convert.ToInt64( lobby.Map );
+				}
+				catch ( Exception ex )
+				{
+					Log.Error( $"Ignoring invalid lobby {lobby.Map}!" );
+					continue;
+				}
+
+				var user = new Friend( id );
+				if ( !user.IsFriend || user.IsMe || lobbies.Any( x => x.Host.Id == user.Id ) )
+					continue;
+
+				lobbies.Add( new LobbyData
+				{
+					Host = user,
+					ServerId = lobby.LobbyId,
+					Players = lobby.Members
+				} );
+			}
 		} ).Invoke();
 
 	public override void Tick()
@@ -49,6 +115,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( lobbies.HashCombine( x => x.OwnerId ) );
+		return HashCode.Combine( lobbies.HashCombine( x => x.ServerId ) );
 	}
 }

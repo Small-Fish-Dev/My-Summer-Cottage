@@ -1,41 +1,117 @@
 ﻿@import "/UI/Style.scss";
 
+$online-green: #afee7d;
+$disabled-red: #953d3d;
+$opacity: 0.8;
+
 FriendList {
     flex-direction: column;
-    width: 400px;
-    box-shadow: $box-shadow-sm;
+    width: 600px;
+    //box-shadow: $box-shadow-sm;
     font-size: 18px;
     color: white;
+    font-family: BasicHandwriting;
 
     .header {
-        background-color: black;
+        background-image: url(ui/hud/dialogue_name.png);
+        background-image-tint: rgba(white, $opacity);
+        background-size: 100%;
+        image-rendering: pixelated;
         font-size: 28px;
         color: white;
         text-shadow: 1px 1px 0px darken(white, 0.85);
-        padding: 10px;
+        padding: 20px 10px 10px 20px;
+        font-family: BasicHandwriting;
+        max-width: 400px;
+    }
+
+    .footer {
+        background-color: rgba(#111111, $opacity);
+        padding: 15px;
         font-family: HabboExtended;
-        justify-content: center;
+        font-weight: bold;
+        letter-spacing: 1px;
+        flex-direction: column;
+
+        .orange {
+            justify-content: center;
+            margin-bottom: 5px;
+            color: $gold;
+        }
     }
 
     .friends {
         width: 100%;
         max-height: 400px;
+        min-height: 60px;
         flex-direction: column;
-        overflow: scroll;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background-color: rgba(black, $opacity);
         gap: 10px;
+        padding: 10px;
+
+        .no-friends {
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
 
         .friend {
             flex-shrink: 0;
             flex-grow: 0;
-            height: 60px;
-            background-color: red;
+            height: 90px;
             padding: 10px;
+            font-size: 22px;
+            color: $online-green;
+            justify-content: space-between;
+            align-items: center;
+
+            .container {
+                align-items: center;
+            }
+
+            .join {
+                padding: 10px 25px 10px 25px;
+                font-size: 16px;
+                height: 50px;
+                width: 170px;
+                background-color: white;
+                color: black;
+                font-family: HabboExtended;
+                align-items: center;
+                font-weight: bold;
+                letter-spacing: 1px;
+                justify-content: center;
+                pointer-events: all;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &.disabled {
+                    background-color: $disabled-red;
+                    color: white;
+                }
+            }
 
             .avatar {
                 height: 100%;
                 aspect-ratio: 1;
-                border: 4px black;
-                background-color: white;
+                border: 4px $online-green;
+                padding: 4px;
+            }
+
+            .user {
+                flex-direction: column;
+                gap: 5px;
+                margin-left: 20px;
+
+                .small {
+                    font-size: 16px;
+                    font-family: HabboExtended;
+                }
             }
         }
     }
