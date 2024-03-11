@@ -29,19 +29,12 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 		// Someone report this bug, for some reason the static list doesn't get cleared on restart!
 		Player._internalPlayers.Clear();
-	}
 
-	protected override async Task OnLoad()
-	{
 		if ( !GameNetworkSystem.IsActive )
-		{
-			LoadingScreen.Title = "Creating Lobby";
-			await Task.DelayRealtimeSeconds( 0.1f );
 			GameNetworkSystem.CreateLobby();
-		}
 	}
 
-	void INetworkListener.OnActive( Connection connection )
+	public void OnActive( Connection connection )
 	{
 		Scene.Title = Steam.SteamId.ToString();
 		Scene.Name = Steam.SteamId.ToString();
