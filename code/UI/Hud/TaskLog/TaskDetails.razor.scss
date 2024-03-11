@@ -73,11 +73,33 @@ TaskDetails {
         font-family: HabboExtended;
         font-size: 20px;
         gap: 10px;
+        transition: all 0.1s linear;
 
         img {
             image-rendering: pixelated;
             height: 25px;
             width: 25px;
+        }
+
+        &:hover {
+            sound-in: 'hover';
+            cursor: pointer;
+
+            img {
+                opacity: 0.6;
+            }
+
+            checkbox {
+                opacity: 0.6;
+            }
+
+            text {
+                opacity: 0.6;
+            }
+        }
+
+        &:active {
+            sound-in: 'light_click';
         }
     }
 }
