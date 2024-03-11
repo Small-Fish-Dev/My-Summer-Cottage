@@ -21,13 +21,6 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 	{
 	}*/
 
-	protected override void OnAwake()
-	{
-		// thx cameron, nice hack :; -- - D
-		Scene.Title = Steam.SteamId.ToString();
-		Scene.Name = Steam.SteamId.ToString();
-	}
-
 	protected override void OnStart()
 	{
 		if ( !allowList.Contains( Connection.Local.SteamId ) )
@@ -43,6 +36,10 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 	void INetworkListener.OnActive( Connection connection )
 	{
+		// thx cameron, nice hack :; -- - D
+		Scene.Title = Steam.SteamId.ToString();
+		Scene.Name = Steam.SteamId.ToString();
+
 		var obj = Prefab.Clone();
 		var player = obj.Components.Get<Player>( FindMode.EverythingInSelfAndDescendants );
 		obj.NetworkSpawn( connection );
