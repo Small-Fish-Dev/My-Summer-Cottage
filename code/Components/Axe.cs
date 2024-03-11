@@ -9,6 +9,9 @@ public sealed class Axe : Component
 
 	[Property]
 	public int Damage { get; set; } = 5;
+
+	private readonly SoundEvent _swingSound = ResourceLibrary.Get<SoundEvent>( "sounds/axe/axe_swing.sound" );
+
 	protected override void OnStart()
 	{
 		var interactions = Components.GetOrCreate<Interactions>();
@@ -56,7 +59,8 @@ public sealed class Axe : Component
 				return "Swing axe";
 			},
 			Keybind = "mouse1",
-			Animation = InteractAnimations.Action
+			Animation = InteractAnimations.Action,
+			Sound = () => _swingSound,
 		} ); ;
 	}
 }
