@@ -12,7 +12,6 @@ public sealed class Flashlight : Component
 
 	SpotLight _spotLight;
 	ItemEquipment _itemEquipment;
-	Player _equipper;
 
 	protected override void OnStart()
 	{
@@ -47,12 +46,11 @@ public sealed class Flashlight : Component
 
 		if ( _itemEquipment != null && _itemEquipment.Equipped )
 		{
-			if ( _equipper == null )
-				_equipper = Scene.GetAllComponents<Player>().Where( x => x.Inventory.EquippedItems.Any( item => item == _itemEquipment ) ).FirstOrDefault();
+			var equipper = GameObject.Parent.Components.Get<Player>();
 
-			if ( _equipper != null )
+			if ( equipper != null )
 			{
-				var model = _equipper.Renderer;
+				var model = equipper.Renderer;
 
 				if ( model != null )
 				{
@@ -68,7 +66,6 @@ public sealed class Flashlight : Component
 		}
 		else
 		{
-			_equipper = null;
 			_spotLight.Transform.LocalPosition = new Vector3( 0f, 7.7f, 0f );
 			_spotLight.Transform.LocalRotation = Rotation.FromYaw( 90f );
 		}
