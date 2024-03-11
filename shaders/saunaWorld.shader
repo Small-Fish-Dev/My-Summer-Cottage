@@ -150,7 +150,7 @@ PS
 		#if( S_MODE_DEPTH )
 		{
 			#if( S_DETAILED_ALPHA_SHADOWS )
-			{if ( result.a < 0.5 ) discard;}
+			{if ( result.a < 0.95 ) discard;}
 			#endif
  			return 0;
 		}
