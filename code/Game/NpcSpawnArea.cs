@@ -1,4 +1,5 @@
 using Sandbox;
+using Sauna;
 
 [Icon( "groups" )]
 public sealed class NpcSpawnArea : Component
@@ -57,13 +58,13 @@ public sealed class NpcSpawnArea : Component
 
 				while ( tries <= 10 )
 				{
-					var randomDirection = Rotation.FromYaw( Game.Random.Float( 360 ) ).Forward;
+					var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
 					var randomPosition = Transform.Position + randomDirection * Game.Random.Float( Radius );
 					var startPos = randomPosition.WithZ( Transform.Position.z + Height / 2f );
 					var endPos = randomPosition.WithZ( Transform.Position.z - Height / 2f );
 
 					var groundTrace = Game.ActiveScene.Trace.Ray( startPos, endPos )
-						.Size( 50f )
+						.Size( 5f )
 						.WithoutTags( "player", "npc", "trigger" )
 						.Run();
 
@@ -71,7 +72,7 @@ public sealed class NpcSpawnArea : Component
 					{
 						if ( Vector3.GetAngle( Vector3.Up, groundTrace.Normal ) <= 60f )
 						{
-							var clone = npc.Npc.Clone( groundTrace.HitPosition );
+							var clone = npc.Npc.Clone( groundTrace.HitPosition, Rotation.FromYaw( Game.Random.Float( 360f ) ) );
 
 							if ( clone != null )
 								SpawnedNpcs.Add( clone );
@@ -91,6 +92,24 @@ public sealed class NpcSpawnArea : Component
 		foreach ( var npc in SpawnedNpcs )
 		{
 			npc?.Destroy();
+		}
+	}
+
+	protected override void OnFixedUpdate()
+	{
+		foreach ( var npc in SpawnedNpcs )
+		{
+			if ( npc.Components.TryGet<NPC>( out var component, FindMode.EverythingInSelf ) )
+			{
+				var currentTick = (int)(Time.Now / Time.Delta);
+
+				if ( currentTick % 20 == component.NpcId % 20 )
+				{
+					var anyNearby = Player.All.Any( x => x.Transform.Position.Distance( npc.Transform.Position ) <= 4000f );
+
+					component.Enabled = anyNearby;
+				}
+			}
 		}
 	}
 }
