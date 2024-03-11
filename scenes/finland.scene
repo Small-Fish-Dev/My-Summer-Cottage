@@ -1,5 +1,5 @@
 {
-  "Id": "5305e742-d69e-4ba5-a816-2b76d873d2b7",
+  "Id": "e1d705e0-3ed0-494d-909a-a5f89a84eaf0",
   "GameObjects": [
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -428,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.857259,0,0.5148854",
+          "Rotation": "0,0.9548151,0,0.2972004",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -679,6 +679,7 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -707,7 +708,33 @@
               },
               "Cooldown": true,
               "CooldownTime": 3,
-              "Animation": "Interact"
+              "Animation": "Interact",
+              "Sound": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Sound",
+                  "id": "8c332f34-8d27-4c6b-b1a7-acd5915cf4ab",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "output"
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "input"
+                  }
+                ],
+                "Links": [
+                  {
+                    "Value": "sounds/speech/test_drunk.sound",
+                    "DstId": 0,
+                    "DstName": "_result"
+                  }
+                ]
+              }
             },
             {
               "Keybind": "use2",
@@ -774,6 +801,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -831,6 +860,14 @@
           "AnimationSpeed": 100
         }
       ]
+    },
+    {
+      "Id": "4480e4d0-10a1-4c25-8730-0aee3d1e95f7",
+      "Name": "creepy_peeper",
+      "Position": "1162.476,-679.8868,24.08396",
+      "Rotation": "-0.0000000000000001593804,0.0000000008185648,1,0.0000001947072",
+      "Enabled": true,
+      "__Prefab": "prefabs/events/creepy_peeper.prefab"
     },
     {
       "Id": "0c0b72f9-c7a4-412d-82ac-98e1641cf9dd",
@@ -1014,40 +1051,7 @@
     {
       "Id": "f3237755-c1b0-4230-802d-85fb40725b2c",
       "Name": "wooden_log",
-      "Position": "586.6498,-759.0098,38.90081",
-      "Rotation": "0,-0.7071068,0,0.7071068",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/wooden_log.prefab"
-    },
-    {
-      "Id": "82bb2e03-aeeb-4c6c-9f08-27efbd7f4fce",
-      "Name": "wooden_log (4)",
-      "Position": "569.4738,-759.0098,38.90091",
-      "Rotation": "0,-0.7071068,0,0.7071068",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/wooden_log.prefab"
-    },
-    {
-      "Id": "2f63afb3-20ea-4e6b-9920-f5a03aeee5f1",
-      "Name": "wooden_log (1)",
-      "Position": "598.5406,-772.9713,38.90081",
-      "Rotation": "0,-0.7071067,0,0.7071068",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/wooden_log.prefab"
-    },
-    {
-      "Id": "9650245d-38b0-4feb-adfe-2081d24abdff",
-      "Name": "wooden_log (2)",
-      "Position": "614.7146,-755.6601,38.90081",
-      "Rotation": "0,-0.7071067,0,0.7071068",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/wooden_log.prefab"
-    },
-    {
-      "Id": "b3289eb3-bbd3-4b0c-b72e-8eab6ef109e0",
-      "Name": "wooden_log (3)",
-      "Position": "633.5405,-779.1575,38.90081",
-      "Rotation": "0,-0.7071067,0,0.7071068",
+      "Position": "586.6499,-759.0098,31",
       "Enabled": true,
       "__Prefab": "prefabs/items/wooden_log.prefab"
     },
@@ -1075,41 +1079,60 @@
       "__Prefab": "prefabs/items/fishing_rod.prefab"
     },
     {
-      "Id": "63d09065-6418-4f06-a2fd-131d7cd6a65d",
-      "Name": "NPCSpawnArea",
-      "Position": "1192.319,167.2373,9.780305",
+      "Id": "ef7b5553-6d45-44cb-86e0-bde433417add",
+      "Name": "bread",
+      "Position": "812.0539,-736.1166,27.00385",
+      "Rotation": "-0.00004982948,-0.00005677342,0.9108707,-0.4126917",
       "Enabled": true,
-      "Components": [
-        {
-          "__type": "NpcSpawnArea",
-          "Height": 128.72002,
-          "NpcPool": [
-            {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/moose_female.prefab"
-              },
-              "SpawnChance": 0.7
-            },
-            {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/moose_male.prefab"
-              },
-              "SpawnChance": 0.7
-            }
-          ],
-          "Radius": 269.19943
-        }
-      ]
+      "__Prefab": "prefabs/items/bread.prefab"
     },
     {
-      "Id": "936ca26b-82c1-47d5-939f-36349d351178",
-      "Name": "creepy_peeper",
-      "Position": "1166.545,-681.0285,23.13061",
-      "Rotation": "0.03393662,-0.01344857,0.9926752,0.1151673",
+      "Id": "ae80ddac-b970-49b0-9d4f-b47e963fda55",
+      "Name": "butter",
+      "Position": "815.3644,-753.1194,27.00093",
+      "Rotation": "-0.00004982948,-0.00005677342,0.9108707,-0.4126917",
       "Enabled": true,
-      "__Prefab": "prefabs/events/creepy_peeper.prefab"
+      "__Prefab": "prefabs/items/butter.prefab"
+    },
+    {
+      "Id": "4ef682d2-cb7d-4cfb-8382-befa78b8d57c",
+      "Name": "can_of_fish",
+      "Position": "817.3846,-766.9289,26.99844",
+      "Rotation": "-0.00004982948,-0.00005677342,0.9108707,-0.4126917",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/can_of_fish.prefab"
+    },
+    {
+      "Id": "6822c982-1335-4f0b-ab89-d1b18688767a",
+      "Name": "can_of_meat",
+      "Position": "821.6657,-778.0955,26.99691",
+      "Rotation": "-0.00004982948,-0.00005677342,0.9108707,-0.4126917",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/can_of_meat.prefab"
+    },
+    {
+      "Id": "28933d94-5389-4217-bfed-62d8d773246d",
+      "Name": "can_of_soup",
+      "Position": "824.1156,-793.2914,26.99421",
+      "Rotation": "-0.00004982948,-0.00005677342,0.9108707,-0.4126917",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/can_of_soup.prefab"
+    },
+    {
+      "Id": "ffd6315d-82ae-4e61-8ef4-5b920fcf6372",
+      "Name": "cereal_ape_bites",
+      "Position": "829.1163,-807.452,26.99219",
+      "Rotation": "-0.00004982948,-0.00005677342,0.9108707,-0.4126917",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/cereal_ape_bites.prefab"
+    },
+    {
+      "Id": "133c67bf-36b6-4a09-a16c-1a190bc2fda0",
+      "Name": "cereal_daves",
+      "Position": "835.9921,-826.7447,26.98944",
+      "Rotation": "-0.00004982948,-0.00005677342,0.9108707,-0.4126917",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/cereal_daves.prefab"
     }
   ],
   "SceneProperties": {
@@ -1135,6 +1158,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-11T14:33:19.9092818\u002B01:00",
+  "LastSaved": "2024-03-11T09:56:27.2322025-04:00",
   "__references": []
 }

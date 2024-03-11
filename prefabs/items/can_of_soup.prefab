@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "28933d94-5389-4217-bfed-62d8d773246d",
     "Name": "can_of_soup",
     "Enabled": true,
     "Components": [
@@ -113,10 +113,31 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "e6a2a2f8-ce22-4dc3-8566-b43e3ea481c9",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/slurp.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },

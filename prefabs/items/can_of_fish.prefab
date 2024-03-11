@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "4ef682d2-cb7d-4cfb-8382-befa78b8d57c",
     "Name": "can_of_fish",
     "Enabled": true,
     "Components": [
@@ -113,8 +113,33 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "9392cf44-1956-4ca0-8609-b99366388d57",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/eat.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },
