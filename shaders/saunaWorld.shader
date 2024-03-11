@@ -11,6 +11,9 @@ FEATURES
     #include "common/features.hlsl"
     Feature( F_ALPHA_TEST, 0..1, "Rendering" );
 	Feature( F_TRANSPARENCY, 0..1, "Rendering" );
+	Feature( F_DETAILED_ALPHA_SHADOWS, 0..1, "Rendering")
+	FeatureRule( Requires1(F_DETAILED_ALPHA_SHADOWS, F_ALPHA_TEST), "This works only when alpha test is enabled buddy");
+
 }
 
 //=========================================================================================================================
@@ -66,7 +69,8 @@ PS
 { 
 	StaticCombo( S_TRANSPARENCY, F_TRANSPARENCY, Sys( ALL ) );
     StaticCombo( S_ALPHA_TEST, F_ALPHA_TEST, Sys( ALL ) );
-	
+	StaticCombo( S_DETAILED_ALPHA_SHADOWS, F_DETAILED_ALPHA_SHADOWS, Sys( ALL ) );
+
 	#define CUSTOM_TEXTURE_FILTERING
     SamplerState Sampler < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
 
@@ -113,9 +117,9 @@ PS
 
 	RenderState( CullMode, F_RENDER_BACKFACES ? NONE : DEFAULT );
 
-	#if ( S_MODE_DEPTH )
-        #define MainPs Disabled
-    #endif
+	#if( S_MODE_DEPTH && !S_ALPHA_TEST )
+		#define MainPs Disabled
+	#endif
 
 	//
 	// Main
@@ -141,6 +145,15 @@ PS
 			float alpha = Tex2DS( g_tTransparencyMask, Sampler, UV.xy ).r;
 			m.Opacity = alpha;
 			result.a = max( alpha, floor( alpha + TransparencyRounding ) );
+		#endif
+
+		#if( S_MODE_DEPTH )
+		{
+			#if( S_DETAILED_ALPHA_SHADOWS )
+			{if ( result.a < 0.5 ) discard;}
+			#endif
+ 			return 0;
+		}
 		#endif
 
 		return result;
