@@ -186,7 +186,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 				Sun.LightColor = SkyDayColor.Evaluate( daytimePercent );
 
 			if ( Fog != null )
-				Fog.Color = SkyDayColor.Evaluate( daytimePercent );
+				Fog.Color = SkyDayColor.Evaluate( daytimePercent ) * new Color( 90f / 255f, 90f / 255f, 120f / 255f ); // Multiply by color of our skybox
 
 			if ( Skybox != null )
 				Skybox.Tint = SkyDayColor.Evaluate( daytimePercent ) * 2f;
