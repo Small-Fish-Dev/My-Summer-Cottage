@@ -2,6 +2,9 @@
 @attribute [StyleSheet]
 @inherits Panel
 
+@if ( Player.Local == null )
+	return;
+
 <root>
 	<div @ref=_container class="container @(!IsInventoryScreen ? "hud" : "") @(!IsInventoryScreen && _timeUntilHidden ? "inactive" : "")">
 		<div class="level-details">
@@ -66,6 +69,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( Player.Local.Experience, Player.Local.ExpPerLevel, (bool)_timeUntilHidden );
+		return HashCode.Combine( Player.Local?.Experience, Player.Local?.ExpPerLevel, (bool)_timeUntilHidden );
 	}
 }
