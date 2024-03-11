@@ -46,6 +46,12 @@ public sealed class EventAreaFinder : EventTrigger
 			ObjectsInside = find.ToList();
 	}
 
+	protected override void OnAwake()
+	{
+		base.OnAwake();
+		Tags.Set( "trigger", true );
+	}
+
 	public override void Clear()
 	{
 		ObjectsInside.Clear();
