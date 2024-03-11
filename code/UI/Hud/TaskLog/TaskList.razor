@@ -6,15 +6,25 @@
 	<text class="title-container">TASKS JOURNAL</text>
 	<div class="tasks">
 		<div class="heading primary">PRIMARY TASKS</div>
-		@foreach(var task in PrimaryTasks)
+		@foreach(var task in Filter(PrimaryTasks))
 		{
 			<TaskListElement TaskElement=@task onclick=@(() => OnTaskClick(task)) />
 		}
 		<div class="heading secondary">SECONDARY TASKS</div>
-		@foreach(var task in SecondaryTasks)
+		@foreach(var task in Filter(SecondaryTasks))
 		{
 			<TaskListElement TaskElement=@task onclick=@(() => OnTaskClick(task)) />
 		}
+	</div>
+	<div class="pins">
+		<div class="pin completed" onclick=@(() => HideCompletedTasks = !HideCompletedTasks)>
+			<Checkbox Enabled=@HideCompletedTasks  />
+			<text>Hide completed</text>
+		</div>
+		<div class="pin failed" onclick=@(() => HideFailedTasks = !HideFailedTasks)>
+			<Checkbox Enabled=@HideFailedTasks />
+			<text>Hide failed</text>
+		</div>
 	</div>
 </root>
 
@@ -23,8 +33,24 @@
 	private IEnumerable<SaunaTask> PrimaryTasks => TaskMaster.ActiveTasks.Where((t) => t.IsPrimaryTask);
 	private IEnumerable<SaunaTask> SecondaryTasks => TaskMaster.ActiveTasks.Where((t) => !t.IsPrimaryTask);
 
+	private static bool HideCompletedTasks = false;
+	private static bool HideFailedTasks = false;
+
+	private IEnumerable<SaunaTask> Filter(IEnumerable<SaunaTask> tasks)
+	{
+		var result = tasks;
+
+		if (HideCompletedTasks)
+			result = result.Where((t) => !t.Completed || !t.Successful);
+
+		if (HideFailedTasks)
+			result = result.Where((t) => !t.Completed || t.Successful);
+
+		return result;
+	}
+
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(TaskMaster.ActiveTasks.HashCombine((t) => t.ResourceId));
+		return HashCode.Combine(TaskMaster.ActiveTasks.HashCombine((t) => t.ResourceId), HideCompletedTasks, HideFailedTasks);
 	}
 }
