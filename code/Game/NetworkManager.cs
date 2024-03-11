@@ -38,9 +38,6 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 	{
 		var obj = Prefab.Clone();
 		var player = obj.Components.Get<Player>( FindMode.EverythingInSelfAndDescendants );
-		obj.NetworkSpawn( connection );
-		player.SetupConnection( connection );
-
 		var foundSpawners = Scene.GetAllComponents<PlayerSpawner>().ToList();
 
 		if ( foundSpawners.Count > 0 )
@@ -51,6 +48,9 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		}
 		else
 			player.Transform.Position = Transform.Position;
+
+		obj.NetworkSpawn( connection );
+		player.SetupConnection( connection );
 	}
 
 	void INetworkListener.OnDisconnected( Connection connection )
