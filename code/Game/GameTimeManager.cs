@@ -10,6 +10,8 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 	[Property][Category( "Visuals" )] public Gradient SkyDayColor { get; set; }
 
+	[Property][Category( "Visuals" )] public Curve DaylightIntensity { get; set; }
+
 	[Property][Category( "Visuals" )] public Color SkyNightColor { get; set; }
 
 	/// <summary>
@@ -98,7 +100,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 	[HostSync] public bool IsDayOver { get; private set; } = false;
 
-	[HostSync] private RealTimeSince InGameTime { get; set; }
+	[HostSync] private TimeSince InGameTime { get; set; }
 	[HostSync] private float? FrozenTime { get; set; }
 	private Angles _cloudAngle = new();
 
@@ -183,7 +185,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 			sunRotation = Rotation.From( SunOrbit.WithRoll( daytimePercent * 180 ) );
 
 			if ( Sun != null )
-				Sun.LightColor = SkyDayColor.Evaluate( daytimePercent );
+				Sun.LightColor = SkyDayColor.Evaluate( daytimePercent ) * (DaylightIntensity.EvaluateDelta( daytimePercent ) + 0.01f);
 
 			if ( Fog != null )
 				Fog.Color = SkyDayColor.Evaluate( daytimePercent ) * new Color( 90f / 255f, 90f / 255f, 120f / 255f ); // Multiply by color of our skybox
@@ -217,13 +219,13 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 			sunRotation = Rotation.From( SunOrbit.WithRoll( nightPercent * 180 + 180 ) );
 
 			if ( Sun != null )
-				Sun.LightColor = SkyNightColor;
+				Sun.LightColor = new Color( 0.001f, 0.001f, 0.001f, 1 );
 
 			if ( Fog != null )
-				Fog.Color = SkyNightColor;
+				Fog.Color = SkyNightColor * new Color( 90f / 255f, 90f / 255f, 120f / 255f );
 
 			if ( Skybox != null )
-				Skybox.Tint = SkyNightColor;
+				Skybox.Tint = SkyNightColor * 2;
 		}
 
 

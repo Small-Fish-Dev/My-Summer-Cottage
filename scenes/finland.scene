@@ -1,5 +1,5 @@
 {
-  "Id": "5305e742-d69e-4ba5-a816-2b76d873d2b7",
+  "Id": "c07db25c-432e-452c-9bc0-a22c921b0b10",
   "GameObjects": [
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -20,6 +20,32 @@
           "CloudSpeed": "1,0,0",
           "Day": 1,
           "DayLength": 1200,
+          "DaylightIntensity": [
+            {},
+            {
+              "x": 0.09347181,
+              "y": 0.6837796,
+              "in": -1.8949492,
+              "out": 1.8949492
+            },
+            {
+              "x": 0.25667655,
+              "y": 1
+            },
+            {
+              "x": 0.53115726,
+              "y": 1
+            },
+            {
+              "x": 0.8293769,
+              "y": 0.66683763,
+              "in": 1.6178701,
+              "out": -1.6178701
+            },
+            {
+              "x": 1
+            }
+          ],
           "EndTime": 10800,
           "Fog": {
             "_type": "component",
@@ -34,11 +60,11 @@
           "SkyDayColor": {
             "color": [
               {
-                "c": "0.06275,0.15686,0.3098,1"
+                "c": "0.02745,0.0902,0.18431,1"
               },
               {
                 "t": 0.0491453,
-                "c": "0.10055,0.20999,0.38605,1"
+                "c": "0.0805,0.16179,0.28372,1"
               },
               {
                 "t": 0.1388889,
@@ -66,16 +92,16 @@
               },
               {
                 "t": 0.9380342,
-                "c": "0.09804,0.20784,0.38431,1"
+                "c": "0.07843,0.16078,0.28235,1"
               },
               {
                 "t": 1,
-                "c": "0.06275,0.15686,0.3098,1"
+                "c": "0.02745,0.0902,0.18431,1"
               }
             ],
             "alpha": []
           },
-          "SkyNightColor": "0.06378,0.15879,0.31163,1",
+          "SkyNightColor": "0.03029,0.08999,0.18605,1",
           "StartTime": 33600,
           "Sun": {
             "_type": "component",
@@ -387,7 +413,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.7733428,0,-0.6339881",
+          "Rotation": "0,-0.171634,0,0.9851608",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -427,9 +453,9 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.31574,0.40645,0.55795,1",
+              "LightColor": "0.26567,0.34199,0.46946,0.84141",
               "Shadows": true,
-              "SkyColor": "0.06378,0.15879,0.31163,1"
+              "SkyColor": "0.03029,0.08999,0.18605,1"
             }
           ]
         }
@@ -558,9 +584,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_isStatic": true,
                       "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_name": "PlaySoundWithSubtitle"
+                      "_name": "PlaySoundWithSubtitle",
+                      "_isStatic": true
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -598,6 +624,7 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -648,9 +675,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_isStatic": true,
                       "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_name": "PlaySoundWithNameAndSubtitle"
+                      "_name": "PlaySoundWithNameAndSubtitle",
+                      "_isStatic": true
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -693,6 +720,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1055,6 +1084,14 @@
           ]
         }
       ]
+    },
+    {
+      "Id": "c41149f3-b8a0-4dff-8ab2-191ddf80fb48",
+      "Name": "flashlight",
+      "Position": "2235.942,-2596.522,2458.412",
+      "Rotation": "-0.004094645,0.01162842,0.3320982,0.9431642",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/flashlight.prefab"
     }
   ],
   "SceneProperties": {
@@ -1080,6 +1117,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-11T20:02:40.9816802\u002B01:00",
+  "LastSaved": "2024-03-11T21:38:56.6536885\u002B01:00",
   "__references": []
 }
