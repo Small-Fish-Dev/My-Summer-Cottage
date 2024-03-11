@@ -10,6 +10,8 @@ public class ShopItem : Component
 	[Property]
 	public int Price { get; set; }
 
+	private readonly SoundEvent _purchaseSound = ResourceLibrary.Get<SoundEvent>( "sounds/misc/purchase.sound" );
+
 	/// <summary>
 	/// Does this interaction use bounds?
 	/// </summary>
@@ -36,6 +38,7 @@ public class ShopItem : Component
 			DynamicText = () => Player.Local.Inventory.HasSpaceInBackpack() ? $"{Price}mk" : $"{Price}mk (Inventory full)",
 			DynamicColor = () => Color.FromBytes( 107, 157, 15 ),
 			ShowWhenDisabled = () => true,
+			Sound = () => _purchaseSound,
 		} );
 		purchase = LegacyParticles.Create( "particles/purchase.vpcf", GameObject.Transform.World );
 	}

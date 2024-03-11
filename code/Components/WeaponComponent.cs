@@ -165,7 +165,7 @@ public sealed class WeaponComponent : Component
 		if ( !shooter.AimState ) // weird ass pose if you shoot while not aiming
 			shooter.ForceHoldTypeBroadcast( HoldType.Flashlight, 0.2f );
 
-		var transform = string.IsNullOrWhiteSpace( ExitAttachment ) 
+		var transform = string.IsNullOrWhiteSpace( ExitAttachment )
 			? new Transform( shooter.ViewRay.Position, Rotation.LookAt( shooter.ViewRay.Forward ) )
 			: shooter.GetAttachment( ExitAttachment );
 
