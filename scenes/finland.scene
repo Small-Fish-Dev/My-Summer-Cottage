@@ -5,8 +5,8 @@
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
       "Name": "GameManager",
       "Position": "2144.363,-2511.369,2464.302",
-      "Networked": true,
       "Enabled": true,
+      "NetworkMode": 1,
       "Components": [
         {
           "__type": "NetworkManager",
@@ -368,6 +368,7 @@
           "Name": "HUD",
           "Position": "0,0,0",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "ScreenPanel",
@@ -392,6 +393,7 @@
           "Position": "59.32935,-34.14404,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "PlayerSpawner"
@@ -404,6 +406,7 @@
           "Position": "26.50977,6.496338,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "PlayerSpawner"
@@ -416,6 +419,7 @@
           "Position": "59.86963,48.84277,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "PlayerSpawner"
@@ -428,6 +432,7 @@
           "Position": "91.56421,6.345215,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "PlayerSpawner"
@@ -442,9 +447,10 @@
       "Position": "155.32,241.9772,-76.84572",
       "Tags": "world",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
-          "__type": "MapInstance",
+          "__type": "FuckedMapInstance",
           "MapName": "untitled_2",
           "UseMapFromLaunch": false
         }
@@ -456,14 +462,16 @@
       "Name": "Ambient",
       "Position": "2158.045,-3163.895,2861.889",
       "Enabled": true,
+      "NetworkMode": 2,
       "Children": [
         {
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.8410649,0,-0.5409343",
+          "Rotation": "0,0.3887629,0,0.9213378",
           "Tags": "skybox",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SkyBox2D",
@@ -477,6 +485,7 @@
           "Name": "Fog",
           "Position": "0,0,20",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "GradientFog",
@@ -496,6 +505,7 @@
           "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
           "Tags": "light_directional,light",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "DirectionalLight",
@@ -514,6 +524,7 @@
       "Name": "Cottage",
       "Position": "1024.928,-748.9748,2886.176",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "EventAreaTrigger",
@@ -530,8 +541,8 @@
       "Id": "b21f3811-be00-47a4-ad66-2294fdd6ff07",
       "Name": "Buy Beer Bottle",
       "Position": "458.7336,-214.3331,2836.93",
-      "Networked": true,
       "Enabled": true,
+      "NetworkMode": 1,
       "Components": [
         {
           "__type": "ShopItem",
@@ -564,6 +575,7 @@
       "Name": "sell_zone",
       "Position": "708.5266,-42.11619,2853.886",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "EventSellAreaTrigger",
@@ -580,8 +592,8 @@
       "Position": "2806.878,-2437.796,2472.671",
       "Rotation": "0.5880175,-0.157559,-0.2053349,0.7663213",
       "Scale": "1,1,2.148212",
-      "Networked": true,
       "Enabled": true,
+      "NetworkMode": 1,
       "Components": [
         {
           "__type": "BoxCollider",
@@ -672,6 +684,7 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -767,6 +780,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -781,6 +796,7 @@
       "Id": "7845a61f-5e7f-413b-baef-4d22a3bf1183",
       "Name": "Water",
       "Enabled": true,
+      "NetworkMode": 2,
       "Children": [
         {
           "Id": "b385450f-885f-4df0-9d56-dc81af88e4ca",
@@ -788,6 +804,7 @@
           "Position": "876.837,-7934.518,2282.054",
           "Tags": "water",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "WaterComponent",
@@ -831,18 +848,21 @@
       "Position": "2097.232,-2595.18,2463.451",
       "Rotation": "-0.0824227,0.02611236,-0.3008852,0.949733",
       "Enabled": true,
+      "NetworkMode": 2,
       "__Prefab": "prefabs/objects/car.prefab"
     },
     {
       "Id": "73df85dc-6c8b-4f29-ad40-900d7448c1ed",
       "Name": "NPC Spawn Zones",
       "Enabled": true,
+      "NetworkMode": 2,
       "Children": [
         {
           "Id": "63d09065-6418-4f06-a2fd-131d7cd6a65d",
           "Name": "Moose",
           "Position": "2456.57,4268.883,2655.931",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NpcSpawnArea",
@@ -872,6 +892,7 @@
           "Name": "Reindeer",
           "Position": "6357.683,-1119.06,2655.931",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NpcSpawnArea",
@@ -901,6 +922,7 @@
           "Name": "Reindeer",
           "Position": "6427.602,-10187.55,2655.932",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NpcSpawnArea",
@@ -930,6 +952,7 @@
           "Name": "Reindeer",
           "Position": "-8868.885,-5585.536,2046.7",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NpcSpawnArea",
@@ -959,6 +982,7 @@
           "Name": "Reindeer",
           "Position": "-3109.291,9317.375,2807.527",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NpcSpawnArea",
@@ -988,6 +1012,7 @@
           "Name": "Elk",
           "Position": "-1694.46,3835.503,2807.527",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NpcSpawnArea",
@@ -1017,6 +1042,7 @@
           "Name": "Elk",
           "Position": "4457.693,10155.6,3601.776",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NpcSpawnArea",
@@ -1046,6 +1072,7 @@
           "Name": "Elk",
           "Position": "9074.902,5294.054,3601.776",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NpcSpawnArea",
@@ -1075,6 +1102,7 @@
           "Name": "Elk",
           "Position": "-2190.306,-2765.781,2692.589",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NpcSpawnArea",
@@ -1104,6 +1132,7 @@
           "Name": "Moose",
           "Position": "10466.22,10129.71,3294.639",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "NpcSpawnArea",
@@ -1136,6 +1165,7 @@
       "Position": "2235.942,-2596.522,2458.412",
       "Rotation": "-0.004094645,0.01162842,0.3320982,0.9431642",
       "Enabled": true,
+      "NetworkMode": 2,
       "__Prefab": "prefabs/items/flashlight.prefab"
     }
   ],
@@ -1162,6 +1192,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-11T22:11:32.2712424\u002B01:00",
+  "LastSaved": "2024-03-11T23:14:12.836978\u002B02:00",
   "__references": []
 }
