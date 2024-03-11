@@ -6,7 +6,7 @@ public sealed class FishingRod : Component
 {
 	[Property] public SkinnedModelRenderer Renderer { get; set; }
 	[Property] public GameObject BobberPrefab;
-	[Property] public float RetractDistance = 750;
+	[Property] public float RetractDistance = 1250;
 	[Property] public float ThrowForce = 1000;
 	[Property] public SoundEvent CastSound { get; set; }
 

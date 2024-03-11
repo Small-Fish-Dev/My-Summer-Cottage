@@ -53,15 +53,11 @@ public class Inventory : Component
 	}
 
 	/// <summary>
-	/// The item is cloned and given to the inventory system if they have free slots.
+	/// The item is created from the prefab file and given to the inventory system if they have free slots.
 	/// </summary>
-	public bool CloneGiveItem( GameObject gameObject )
+	public bool GiveItem( PrefabFile prefabFile )
 	{
-		if ( gameObject.Components.Get<ItemComponent>() is null )
-			return false;
-
-		GameObject obj;
-		obj = gameObject.Clone();
+		var obj = SceneUtility.GetPrefabScene( prefabFile ).Clone();
 		obj.NetworkSpawn();
 
 		var res = GiveItem( obj.Components.Get<ItemComponent>() );
