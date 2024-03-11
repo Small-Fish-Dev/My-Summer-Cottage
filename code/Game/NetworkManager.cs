@@ -21,6 +21,13 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 	{
 	}*/
 
+	protected override void OnAwake()
+	{
+		// thx cameron, nice hack :; -- - D
+		Scene.Title = Steam.SteamId.ToString();
+		Scene.Name = Steam.SteamId.ToString();
+	}
+
 	protected override void OnStart()
 	{
 		if ( !allowList.Contains( Connection.Local.SteamId ) )
