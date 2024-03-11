@@ -14,7 +14,7 @@ public sealed class FishingRod : Component
 	private Bobber CurrentBobber { get; set; }
 	private LegacyParticles _fishingLine;
 
-	public bool Casted => CurrentBobber.IsValid();
+	private readonly SoundEvent _castSound = ResourceLibrary.Get<SoundEvent>( "sounds/fishingrod/fishingrod_cast.sound" );
 
 	private bool _isCasted;
 
@@ -42,9 +42,13 @@ public sealed class FishingRod : Component
 		{
 			Accessibility = AccessibleFrom.Hands,
 			Action = OnInteract,
-			DynamicText = () => Casted ? "Pull back" : "Cast",
+			DynamicText = () => IsCasted ? "Pull back" : "Cast",
 			Keybind = "mouse1",
-			Animation = InteractAnimations.Action
+			Animation = InteractAnimations.Action,
+			Sound = () => _castSound,
+			Cooldown = true,
+			CooldownTime = 1f,
+			ShowWhenDisabled = () => true,
 		} );
 	}
 
@@ -53,7 +57,7 @@ public sealed class FishingRod : Component
 		if ( Owner is null )
 			return;
 
-		if ( Casted && CurrentBobber.Transform.Position.Distance( Owner.Transform.Position ) > RetractDistance )
+		if ( IsCasted && CurrentBobber.Transform.Position.Distance( Owner.Transform.Position ) > RetractDistance )
 			RetractBobber( true );
 
 		if ( !IsCasted )
@@ -71,7 +75,7 @@ public sealed class FishingRod : Component
 
 	private void OnInteract( Player player, GameObject obj )
 	{
-		if ( Casted )
+		if ( IsCasted )
 			RetractBobber();
 		else
 			CastBobber( player );

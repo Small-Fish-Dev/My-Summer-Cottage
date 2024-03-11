@@ -82,7 +82,7 @@ public class ItemComponent : Component
 	/// </summary>
 	public Player LastOwner { get; set; }
 
-	private SoundEvent _pickupSound => ResourceLibrary.Get<SoundEvent>( "sounds/misc/pickup.sound" );
+	private readonly SoundEvent _pickupSound = ResourceLibrary.Get<SoundEvent>( "sounds/misc/pickup.sound" );
 
 	private ItemState _state;
 
