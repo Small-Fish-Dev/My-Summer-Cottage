@@ -43,7 +43,7 @@ public partial class Player
 	}
 
 	[Broadcast]
-	public void BroadcastInteraction( Vector3 position, Rotation rotation, InteractAnimations animation, Guid interactionObjectId, SoundEvent sound )
+	public void BroadcastInteraction( Vector3 position, Rotation rotation, InteractAnimations animation, Guid interactionObjectId, int soundResourceId )
 	{
 		if ( animation == InteractAnimations.Interact )
 		{
@@ -67,11 +67,17 @@ public partial class Player
 			Renderer.Set( "reload", true );
 		}
 
+		var soundEvent = ResourceLibrary.Get<SoundEvent>( soundResourceId );
+		if ( soundEvent is null )
+			return;
+
 		var interactionGameObject = Game.ActiveScene.GetAllObjects( true )
 			.Where( x => x.Id == interactionObjectId )
 			.FirstOrDefault();
 
-		if ( sound is not null && interactionGameObject is not null )
-			interactionGameObject.PlaySound( sound );
+		if ( interactionGameObject is null )
+			return;
+
+		interactionGameObject.PlaySound( soundEvent );
 	}
 }
