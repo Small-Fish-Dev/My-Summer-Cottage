@@ -52,6 +52,23 @@
             "go": "74c6edc7-2832-4482-8f0f-c8312c6f4e77",
             "component_type": "GradientFog"
           },
+          "FogIntensity": [
+            {
+              "y": 1
+            },
+            {
+              "x": 0.28665486,
+              "y": 0.4498198
+            },
+            {
+              "x": 0.7062315,
+              "y": 0.44973552
+            },
+            {
+              "x": 1,
+              "y": 1
+            }
+          ],
           "Skybox": {
             "_type": "component",
             "go": "7f2477ff-54a5-4127-a102-c905b031713e",
@@ -102,7 +119,7 @@
             "alpha": []
           },
           "SkyNightColor": "0.03029,0.08999,0.18605,1",
-          "StartTime": 33600,
+          "StartTime": 32600,
           "Sun": {
             "_type": "component",
             "go": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
@@ -450,7 +467,7 @@
       "NetworkMode": 2,
       "Components": [
         {
-          "__type": "FuckedMapInstance",
+          "__type": "MapInstance",
           "MapName": "untitled_2",
           "UseMapFromLaunch": false
         }
@@ -468,7 +485,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.3887629,0,0.9213378",
+          "Rotation": "0,0.08985148,0,0.9959552",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -476,7 +493,7 @@
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "0.63149,0.8129,1.1159,2"
+              "Tint": "0.43342,0.69024,1.0409,2"
             }
           ]
         },
@@ -489,11 +506,11 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.11144,0.14345,0.26257,1",
-              "EndDistance": 10000,
-              "FalloffExponent": 1.5,
+              "Color": "0.07649,0.12181,0.24492,1",
+              "EndDistance": 5354.08,
+              "FalloffExponent": 1,
               "Height": 4000,
-              "StartDistance": 100,
+              "StartDistance": 0,
               "VerticalFalloffExponent": 1.5
             }
           ]
@@ -502,7 +519,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
+          "Rotation": "-0.1081386,-0.1486497,0.578253,-0.7948791",
           "Tags": "light_directional,light",
           "Enabled": true,
           "NetworkMode": 2,
@@ -511,7 +528,7 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.26567,0.34199,0.46946,0.84141",
+              "LightColor": "0.172,0.27391,0.41306,0.79366",
               "Shadows": true,
               "SkyColor": "0.03029,0.08999,0.18605,1"
             }
@@ -1192,6 +1209,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-11T23:14:12.836978\u002B02:00",
+  "LastSaved": "2024-03-11T22:49:22.0558301\u002B01:00",
   "__references": []
 }

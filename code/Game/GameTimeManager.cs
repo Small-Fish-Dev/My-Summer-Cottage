@@ -10,9 +10,11 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 	[Property][Category( "Visuals" )] public Gradient SkyDayColor { get; set; }
 
+	[Property][Category( "Visuals" )] public Color SkyNightColor { get; set; }
+
 	[Property][Category( "Visuals" )] public Curve DaylightIntensity { get; set; }
 
-	[Property][Category( "Visuals" )] public Color SkyNightColor { get; set; }
+	[Property][Category( "Visuals" )] public Curve FogIntensity { get; set; }
 
 	/// <summary>
 	/// Imagine it like the angle of a big pole sticking out of the Earth, and the Sun is spinning around it.
@@ -188,8 +190,11 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 				Sun.LightColor = SkyDayColor.Evaluate( daytimePercent ) * (DaylightIntensity.EvaluateDelta( daytimePercent ) + 0.01f);
 
 			if ( Fog != null )
-				Fog.Color = SkyDayColor.Evaluate( daytimePercent ) * new Color( 90f / 255f, 90f / 255f, 120f / 255f ); // Multiply by color of our skybox
-
+			{
+				var fogIntensity = FogIntensity.EvaluateDelta( daytimePercent );
+				Fog.Color = (SkyDayColor.Evaluate( daytimePercent ) * new Color( 90f / 255f, 90f / 255f, 120f / 255f )).WithAlpha( Math.Min( fogIntensity * 2f, 1f ) ); // Multiply by color of our skybox
+				Fog.EndDistance = 1500f + 15000f * (1f - fogIntensity);
+			}
 			if ( Skybox != null )
 				Skybox.Tint = SkyDayColor.Evaluate( daytimePercent ) * 2f;
 		}
@@ -222,7 +227,10 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 				Sun.LightColor = new Color( 0.001f, 0.001f, 0.001f, 1 );
 
 			if ( Fog != null )
-				Fog.Color = SkyNightColor * new Color( 90f / 255f, 90f / 255f, 120f / 255f );
+			{
+				var fogIntensity = FogIntensity.EvaluateDelta( 0 );
+				Fog.Color = (SkyNightColor * new Color( 90f / 255f, 90f / 255f, 120f / 255f )).WithAlpha( Math.Min( fogIntensity * 2f, 1f ) );
+			}
 
 			if ( Skybox != null )
 				Skybox.Tint = SkyNightColor * 2;
