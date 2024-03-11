@@ -2,6 +2,8 @@
 
 public sealed class NetworkManager : Component, Component.INetworkListener
 {
+	public const int MAX_PLAYERS = 4;
+
 	private static readonly List<ulong> allowList = new List<ulong>()
 	{
 		76561198007664020, // cyber
@@ -17,12 +19,14 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 	[Property] public GameObject Prefab { get; set; }
 
-	/*void INetworkListener.OnConnected( Connection connection )
-	{
-	}*/
-	
 	protected override void OnStart()
 	{
+		if ( Player.All.Count >= MAX_PLAYERS )
+		{
+			GameNetworkSystem.Disconnect();
+			return;
+		}
+
 		if ( !allowList.Contains( Connection.Local.SteamId ) )
 			while ( true ) { } // todo: REMOVE
 							   // For the love of God all mighty please remember to remove this PLEASE
@@ -36,6 +40,9 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 	void INetworkListener.OnActive( Connection connection )
 	{
+		if ( Player.All.Count >= MAX_PLAYERS )
+			return;
+
 		var obj = Prefab.Clone();
 		var player = obj.Components.Get<Player>( FindMode.EverythingInSelfAndDescendants );
 		var foundSpawners = Scene.GetAllComponents<PlayerSpawner>().ToList();
