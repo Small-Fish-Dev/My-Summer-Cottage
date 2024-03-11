@@ -20,6 +20,10 @@ public class FuckedMapInstance : MapInstance
 	protected override async Task OnLoad()
 	{
 		await base.OnLoad();
+
+		if ( !Game.IsPlaying )
+			return;
+
 		realMap = MapName;
 		MapName = Steam.SteamId.ToString();
 		set = true;
