@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "6d8a8159-6024-4bad-aee5-1ef1d39b19b9",
+    "Id": "ff7a7c89-3683-49dc-8d73-2107fddeb714",
     "Name": "split_wooden_log",
     "Enabled": true,
     "Components": [
@@ -23,8 +23,6 @@
       {
         "__type": "ModelRenderer",
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/logchopped/logchopped.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -40,12 +38,10 @@
         "StartAsleep": false
       },
       {
-        "__type": "BoxCollider",
-        "Center": "0,-1.68,0",
+        "__type": "ModelCollider",
         "IsTrigger": false,
-        "Scale": "18.55998,4.559994,7.759994",
-        "Static": false,
-        "Surface": null
+        "Model": "models/logchopped/logchopped.vmdl",
+        "Static": false
       }
     ],
     "Children": []

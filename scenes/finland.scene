@@ -1,5 +1,5 @@
 {
-  "Id": "e1d705e0-3ed0-494d-909a-a5f89a84eaf0",
+  "Id": "5305e742-d69e-4ba5-a816-2b76d873d2b7",
   "GameObjects": [
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -428,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.5918441,0,0.8060524",
+          "Rotation": "0,-0.9645631,0,0.2638525",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -707,29 +707,7 @@
               },
               "Cooldown": true,
               "CooldownTime": 3,
-              "Animation": "Interact",
-              "Sound": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Sound",
-                  "id": "8c332f34-8d27-4c6b-b1a7-acd5915cf4ab",
-                  "ReferencedComponentTypes": []
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "output"
-                  }
-                ],
-                "Links": [
-                  {
-                    "Value": "sounds/speech/test_drunk.sound",
-                    "DstId": 0,
-                    "DstName": "_result"
-                  }
-                ]
-              }
+              "Animation": "Interact"
             },
             {
               "Keybind": "use2",
@@ -853,14 +831,6 @@
           "AnimationSpeed": 100
         }
       ]
-    },
-    {
-      "Id": "4480e4d0-10a1-4c25-8730-0aee3d1e95f7",
-      "Name": "creepy_peeper",
-      "Position": "1162.476,-679.8868,24.08396",
-      "Rotation": "-0.0000000000000001593804,0.0000000008185648,1,0.0000001947072",
-      "Enabled": true,
-      "__Prefab": "prefabs/events/creepy_peeper.prefab"
     },
     {
       "Id": "0c0b72f9-c7a4-412d-82ac-98e1641cf9dd",
@@ -1044,7 +1014,40 @@
     {
       "Id": "f3237755-c1b0-4230-802d-85fb40725b2c",
       "Name": "wooden_log",
-      "Position": "586.6499,-759.0098,31",
+      "Position": "586.6498,-759.0098,38.90081",
+      "Rotation": "0,-0.7071068,0,0.7071068",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/wooden_log.prefab"
+    },
+    {
+      "Id": "82bb2e03-aeeb-4c6c-9f08-27efbd7f4fce",
+      "Name": "wooden_log (4)",
+      "Position": "569.4738,-759.0098,38.90091",
+      "Rotation": "0,-0.7071068,0,0.7071068",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/wooden_log.prefab"
+    },
+    {
+      "Id": "2f63afb3-20ea-4e6b-9920-f5a03aeee5f1",
+      "Name": "wooden_log (1)",
+      "Position": "598.5406,-772.9713,38.90081",
+      "Rotation": "0,-0.7071067,0,0.7071068",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/wooden_log.prefab"
+    },
+    {
+      "Id": "9650245d-38b0-4feb-adfe-2081d24abdff",
+      "Name": "wooden_log (2)",
+      "Position": "614.7146,-755.6601,38.90081",
+      "Rotation": "0,-0.7071067,0,0.7071068",
+      "Enabled": true,
+      "__Prefab": "prefabs/items/wooden_log.prefab"
+    },
+    {
+      "Id": "b3289eb3-bbd3-4b0c-b72e-8eab6ef109e0",
+      "Name": "wooden_log (3)",
+      "Position": "633.5405,-779.1575,38.90081",
+      "Rotation": "0,-0.7071067,0,0.7071068",
       "Enabled": true,
       "__Prefab": "prefabs/items/wooden_log.prefab"
     },
@@ -1070,6 +1073,50 @@
       "Rotation": "-0.01071164,0.01418209,0.6025711,0.7978673",
       "Enabled": true,
       "__Prefab": "prefabs/items/fishing_rod.prefab"
+    },
+    {
+      "Id": "63d09065-6418-4f06-a2fd-131d7cd6a65d",
+      "Name": "NPCSpawnArea",
+      "Position": "1192.319,167.2373,9.780305",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "NpcSpawnArea",
+          "Height": 128.72002,
+          "NpcPool": [
+            {
+              "Npc": {
+                "_type": "gameobject",
+                "prefab": "prefabs/npcs/moose_female.prefab"
+              },
+              "SpawnChance": 0.7
+            },
+            {
+              "Npc": {
+                "_type": "gameobject",
+                "prefab": "prefabs/npcs/moose_male.prefab"
+              },
+              "SpawnChance": 0.7
+            }
+          ],
+          "Radius": 269.19943
+        }
+      ]
+    },
+    {
+      "Id": "936ca26b-82c1-47d5-939f-36349d351178",
+      "Name": "creepy_peeper",
+      "Position": "1166.545,-681.0285,23.13061",
+      "Rotation": "0.03393662,-0.01344857,0.9926752,0.1151673",
+      "Enabled": true,
+      "__Prefab": "prefabs/events/creepy_peeper.prefab"
+    },
+    {
+      "Id": "78bb45ac-a907-4d91-84ab-26a11bcb9ebd",
+      "Name": "random_dwarves",
+      "Position": "951.958,-1631.107,28.58704",
+      "Enabled": true,
+      "__Prefab": "prefabs/events/random_dwarves.prefab"
     }
   ],
   "SceneProperties": {
@@ -1095,6 +1142,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-10T23:08:58.6512721-04:00",
+  "LastSaved": "2024-03-11T14:32:25.8234727\u002B01:00",
   "__references": []
 }

@@ -1,0 +1,355 @@
+{
+  "RootObject": {
+    "Id": "8ed806c9-ca30-4215-98f9-beeb1742cd95",
+    "Name": "dwarf",
+    "Tags": "npc",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "NPC",
+        "AlertOthers": false,
+        "AttackCooldown": 5,
+        "AttackRange": 50,
+        "DetectRange": 1024,
+        "EnemyTags": "player",
+        "FaceTowardsVelocity": true,
+        "Health": {
+          "_type": "component",
+          "go": "8ed806c9-ca30-4215-98f9-beeb1742cd95",
+          "component_type": "HealthComponent"
+        },
+        "Idle": true,
+        "MaximumIdleCooldown": 6,
+        "MaxRunAnimationSpeed": 180,
+        "MinimumIdleCooldown": 4,
+        "Model": {
+          "_type": "component",
+          "go": "6f04072c-5a89-4343-a076-5f6ec6c6cdc5",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "MoveHelper": {
+          "_type": "component",
+          "go": "8ed806c9-ca30-4215-98f9-beeb1742cd95",
+          "component_type": "MoveHelper"
+        },
+        "Name": "Dwarf",
+        "OnAttack": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Attack",
+            "id": "5176ba41-5f39-4764-b40a-c23c298505c9",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/HealthComponent"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-32,16"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "144,80"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_name": "Damage",
+                "_type": "package.fish.sauna/HealthComponent",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "448,0"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "8ed806c9-ca30-4215-98f9-beeb1742cd95"
+                }
+              },
+              "UserData": {
+                "Position": "32,192"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "property.get",
+              "ParentId": 5,
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "property.get",
+              "ParentId": 6,
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 2,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "Value": 5,
+              "DstId": 3,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 400,
+              "DstId": 3,
+              "DstName": "force"
+            },
+            {
+              "Value": "Average",
+              "DstId": 3,
+              "DstName": "type"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "worldHurtPosition"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            }
+          ]
+        },
+        "OnDetect": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Detect",
+            "id": "0159af43-7731-416d-aac0-524974f65a63",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-48,48"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "npc.startfollowing",
+              "UserData": {
+                "Position": "256,32"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "8ed806c9-ca30-4215-98f9-beeb1742cd95",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "16,144"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 4,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 4,
+              "DstName": "target"
+            }
+          ]
+        },
+        "OnEnemyEscaped": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Enemy Escaped",
+            "id": "278f8b41-a5c2-4d93-8a1b-70a1cd8fc0a7",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "336,-0"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "8ed806c9-ca30-4215-98f9-beeb1742cd95",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "48,96"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "npc"
+            }
+          ]
+        },
+        "RunningType": "Smart",
+        "RunSpeed": 300,
+        "ScaleStats": true,
+        "Static": false,
+        "VisionRange": 2048,
+        "WalkingType": "Dumb",
+        "WalkSpeed": 90,
+        "Weight": "Light"
+      },
+      {
+        "__type": "MoveHelper",
+        "AccelerationCurve": [
+          {
+            "y": 1
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 0,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 1000,
+        "GroundAngle": 70,
+        "GroundFriction": 30,
+        "IgnoreTags": "player,npc,trigger",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 18,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 50,
+        "TraceRadius": 8,
+        "TraceType": "Capsule",
+        "UseCollider": false,
+        "UseSceneGravity": true
+      },
+      {
+        "__type": "HealthComponent",
+        "CanRegenerate": false,
+        "DamagedBy": "Average",
+        "Immortal": false,
+        "MaxHealth": 10,
+        "RegenerationCooldown": 2,
+        "RegenerationTimer": 5,
+        "StunnedBy": "Mild",
+        "StunWhenDamaged": true
+      }
+    ],
+    "Children": [
+      {
+        "Id": "6f04072c-5a89-4343-a076-5f6ec6c6cdc5",
+        "Name": "Model",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "BodyGroups": 341,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Character",
+            "Clothes": [
+              "models/clothes/sauna_boss_hat/sauna_boss.vmdl"
+            ],
+            "Fatness": 0.9,
+            "Height": -100,
+            "HideBodyGroup": "None"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

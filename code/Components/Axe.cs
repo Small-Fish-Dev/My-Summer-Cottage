@@ -41,8 +41,12 @@ public sealed class Axe : Component
 		} ); ;
 	}
 
-	private void OnSwing( Player player, GameObject obj )
+	private async void OnSwing( Player player, GameObject obj )
 	{
+		await Task.Delay( 300 );
+
+		if ( !player.IsValid() ) return;
+
 		var target = player.TargetedGameObject ?? player.InteractionTrace.GameObject;
 		if ( target is null )
 			return;
@@ -54,8 +58,14 @@ public sealed class Axe : Component
 				if ( PrefabLibrary.TryGetByPath( "prefabs/items/split_wooden_log.prefab", out var log ) )
 				{
 					GameObject.PlaySound( WoodImpactSound );
-					SceneUtility.GetPrefabScene( log.Prefab ).Clone( target.Transform.Position, target.Transform.Rotation );
-					SceneUtility.GetPrefabScene( log.Prefab ).Clone( target.Transform.Position, target.Transform.Rotation.RotateAroundAxis( Vector3.Forward, 180f ) );
+					var left = SceneUtility.GetPrefabScene( log.Prefab ).Clone( target.Transform.Position, target.Transform.Rotation );
+					var right = SceneUtility.GetPrefabScene( log.Prefab ).Clone( target.Transform.Position, target.Transform.Rotation.RotateAroundAxis( Vector3.Forward, 180f ) );
+
+					if ( left.Components.TryGet<Rigidbody>( out var leftBody ) )
+						leftBody.Velocity = left.Transform.Rotation * Vector3.Right * 100f;
+					if ( right.Components.TryGet<Rigidbody>( out var rightBody ) )
+						rightBody.Velocity = right.Transform.Rotation * Vector3.Right * 100f;
+
 					target.Destroy();
 
 					TaskMaster.SubmitTriggerSignal( "item.used_1.Axe", player );
