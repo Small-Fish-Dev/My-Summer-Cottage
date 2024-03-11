@@ -1,13 +1,14 @@
 {
   "RootObject": {
-    "Id": "45adc244-2ae2-4228-8536-be17171b45dc",
+    "Id": "aff7614d-dade-45f3-b297-7d58f16ecab8",
     "Name": "player",
     "Tags": "localplayer,player",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "Player",
-        "DuckSpeed": 60,
+        "DuckSpeed": 80,
         "Experience": 0,
         "Fatness": 0,
         "Height": 0,
@@ -16,7 +17,7 @@
         "Money": 0,
         "MoveHelper": {
           "_type": "component",
-          "go": "45adc244-2ae2-4228-8536-be17171b45dc",
+          "go": "aff7614d-dade-45f3-b297-7d58f16ecab8",
           "component_type": "MoveHelper"
         },
         "SkinColor": "1,1,1,1",
@@ -28,7 +29,7 @@
         "__type": "Inventory",
         "Player": {
           "_type": "component",
-          "go": "45adc244-2ae2-4228-8536-be17171b45dc",
+          "go": "aff7614d-dade-45f3-b297-7d58f16ecab8",
           "component_type": "Player"
         }
       },
@@ -100,11 +101,12 @@
     ],
     "Children": [
       {
-        "Id": "ffcf1e9a-3cd4-4667-81b9-c41ca39dbfa6",
+        "Id": "a2f49f2d-1a3b-4138-966c-d00400deba09",
         "Name": "Camera",
         "Position": "5.991993,0.00007995074,66.42353",
         "Tags": "maincamera",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "CameraComponent",
@@ -153,9 +155,10 @@
         ]
       },
       {
-        "Id": "791de312-547d-4b43-937f-f186efc956bc",
+        "Id": "0617590e-a8ca-44dc-adb6-25eb887e68cd",
         "Name": "Model",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "SkinnedModelRenderer",
@@ -168,16 +171,17 @@
         ]
       },
       {
-        "Id": "6ca3eccf-e9af-4913-a39d-22c0b3c0a55f",
+        "Id": "b5fd7219-c2a6-4551-98e3-71b74f1f753c",
         "Name": "ShadowModel",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "SkinnedModelRenderer",
             "BodyGroups": 341,
             "BoneMergeTarget": {
               "_type": "component",
-              "go": "791de312-547d-4b43-937f-f186efc956bc",
+              "go": "0617590e-a8ca-44dc-adb6-25eb887e68cd",
               "component_type": "SkinnedModelRenderer"
             },
             "CreateBoneObjects": false,
@@ -188,16 +192,17 @@
         ]
       },
       {
-        "Id": "268bf97b-e3a5-4a3e-8283-1523b1d17d4b",
+        "Id": "710db86c-e614-464b-a1c0-b9e956f35fcf",
         "Name": "Penoid",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "SkinnedModelRenderer",
             "BodyGroups": 18446744073709551615,
             "BoneMergeTarget": {
               "_type": "component",
-              "go": "791de312-547d-4b43-937f-f186efc956bc",
+              "go": "0617590e-a8ca-44dc-adb6-25eb887e68cd",
               "component_type": "SkinnedModelRenderer"
             },
             "CreateBoneObjects": false,
@@ -211,11 +216,12 @@
         ],
         "Children": [
           {
-            "Id": "8d514c24-b204-4146-8187-2ccf495ed4a8",
+            "Id": "a67ee56f-6e84-4dd1-9f5d-1c55514bfa09",
             "Name": "Piss",
             "Position": "1.936967,0.0000001154522,34.7722",
             "Tags": "particles",
             "Enabled": true,
+            "NetworkMode": 2,
             "Components": [
               {
                 "__type": "ParticleEffect",

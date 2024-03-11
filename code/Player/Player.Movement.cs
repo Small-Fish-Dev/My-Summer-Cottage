@@ -65,7 +65,8 @@ partial class Player
 	[Sync] public bool Ducking { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
 	[Sync] public HoldType HoldType { get; set; } = HoldType.Idle;
-	[Sync] public bool AimState
+	[Sync]
+	public bool AimState
 	{
 		get => _aimState;
 		set
@@ -260,8 +261,8 @@ partial class Player
 
 		var oldX = Renderer.GetFloat( "move_x" );
 		var oldY = Renderer.GetFloat( "move_y" );
-		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 140f;
-		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 140f;
+		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 120f;
+		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 120f;
 		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
 		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
 
@@ -278,7 +279,7 @@ partial class Player
 		Renderer.Set( "weight", Fatness );
 
 		// Handle aiming.
-		if ( holdType == HoldType.Rifle ) 
+		if ( holdType == HoldType.Rifle )
 			Renderer.Set( "aiming", AimState );
 
 		if ( !IsProxy && _lastAimed > 0.1f && AimState )
