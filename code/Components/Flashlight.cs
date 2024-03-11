@@ -11,9 +11,12 @@ public sealed class Flashlight : Component
 	[Property, Sync] public Color Color { get; set; } = Color.White;
 
 	SpotLight _spotLight;
+	ItemEquipment _itemEquipment;
+	Player _equipper;
 
 	protected override void OnStart()
 	{
+		_itemEquipment = Components.Get<ItemEquipment>( FindMode.EverythingInSelfAndChildren );
 		_spotLight = Components.GetOrCreate<SpotLight>( FindMode.EverythingInChildren );
 
 		var interactions = Components.GetOrCreate<Interactions>();
@@ -41,5 +44,33 @@ public sealed class Flashlight : Component
 		_spotLight.Radius = Distance;
 		_spotLight.Attenuation = Brightness;
 		_spotLight.LightColor = Color * Strength;
+
+		if ( _itemEquipment != null && _itemEquipment.Equipped )
+		{
+			if ( _equipper == null )
+				_equipper = Scene.GetAllComponents<Player>().Where( x => x.Inventory.EquippedItems.Any( item => item == _itemEquipment ) ).FirstOrDefault();
+
+			if ( _equipper != null )
+			{
+				var model = _equipper.Renderer;
+
+				if ( model != null )
+				{
+					var attachment = model.GetAttachment( "hand_R" );
+
+					if ( attachment != null )
+					{
+						_spotLight.Transform.Position = attachment.Value.PointToWorld( new Vector3( 0f, -10f, 0f ) );
+						_spotLight.Transform.Rotation = attachment.Value.Rotation.RotateAroundAxis( Vector3.Down, 90f );
+					}
+				}
+			}
+		}
+		else
+		{
+			_equipper = null;
+			_spotLight.Transform.LocalPosition = new Vector3( 0f, 7.7f, 0f );
+			_spotLight.Transform.LocalRotation = Rotation.FromYaw( 90f );
+		}
 	}
 }
