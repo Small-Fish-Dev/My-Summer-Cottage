@@ -8,6 +8,9 @@
 		@foreach ( var lobby in lobbies )
 		{
 			var host = new Friend( (long)lobby.OwnerId );
+			Log.Error(string.Join( ',', lobby.Data.Values ));
+			Log.Error(lobby.Name);
+			Log.Error(lobby.Map);
 			<div class="friend">
 				<img class="avatar" />
 				<div class="content">
