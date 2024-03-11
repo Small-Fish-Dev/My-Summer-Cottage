@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "394eab29-5c8e-440e-be8f-8dc8f4fa6206",
     "Name": "beer_bottle",
     "Enabled": true,
     "Components": [
@@ -58,9 +58,9 @@
                   "Id": 1,
                   "Type": "call",
                   "Properties": {
-                    "_isStatic": false,
                     "_name": "Destroy",
-                    "_type": "Sandbox.Game/Sandbox.GameObject"
+                    "_type": "Sandbox.Game/Sandbox.GameObject",
+                    "_isStatic": false
                   },
                   "UserData": {
                     "Position": "224,-16"
@@ -70,9 +70,9 @@
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
-                    "_isStatic": false,
                     "_name": "AddExperience",
-                    "_type": "package.fish.sauna/Sauna.Player"
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_isStatic": false
                   },
                   "UserData": {
                     "Position": "224,48"
@@ -113,8 +113,32 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "e16f4c0e-d8fd-4c37-88ad-1104615ad171"
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/beer/burp.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },

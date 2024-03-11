@@ -42,8 +42,16 @@ public partial class Player
 			InteractionBounds = TargetedGameObject.GetBounds().Translate( -TargetedGameObject.Transform.Position );
 	}
 
+	// A lot of parameters! We should fix this up at a later point.
 	[Broadcast]
-	public void BroadcastInteraction( Vector3 position, Rotation rotation, InteractAnimations animation, Guid interactionObjectId, int soundResourceId )
+	public void BroadcastInteraction(
+		Vector3 position,
+		Rotation rotation,
+		InteractAnimations animation,
+		Guid interactionObjectId,
+		int soundResourceId,
+		bool playSoundFromPlayer
+	)
 	{
 		if ( animation == InteractAnimations.Interact )
 		{
@@ -75,7 +83,7 @@ public partial class Player
 			.Where( x => x.Id == interactionObjectId )
 			.FirstOrDefault();
 
-		if ( interactionGameObject is null )
+		if ( interactionGameObject is null || playSoundFromPlayer )
 			GameObject.PlaySound( soundEvent );
 		else
 			interactionGameObject.PlaySound( soundEvent );
