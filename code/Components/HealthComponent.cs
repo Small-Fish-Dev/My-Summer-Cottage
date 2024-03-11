@@ -87,6 +87,12 @@ public sealed class HealthComponent : Component
 	[Range( 0f, 5f, 0.1f )]
 	public float RegenerationCooldown { get; set; } = 2f;
 
+	/// <summary>
+	/// What gets spawned (Preferably an item) when this dies (Not when it gets destroyed)
+	/// </summary>
+	[Property]
+	public GameObject DropOnDeath { get; set; }
+
 	public delegate void AttackerInfo( int damage, DamageType type, GameObject attacker = null, Vector3 localHurtPosition = default, Vector3 forceDirection = default, float force = 0 );
 
 	[Property]
@@ -181,6 +187,16 @@ public sealed class HealthComponent : Component
 			npc.SetRagdoll( true, 9999999f, 50f );
 
 			npc.OnKilled?.Invoke( attacker );
+		}
+
+		if ( DropOnDeath != null )
+		{
+			var droppedItem = DropOnDeath.Clone( Transform.Position, Transform.Rotation );
+
+			if ( droppedItem != null )
+			{
+				droppedItem.NetworkSpawn();
+			}
 		}
 	}
 
