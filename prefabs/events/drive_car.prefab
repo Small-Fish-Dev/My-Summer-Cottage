@@ -18,8 +18,15 @@
         "Type": "Random"
       },
       {
+        "__type": "BoxCollider",
+        "Center": "101.7,0,34.50003",
+        "IsTrigger": false,
+        "Scale": "50,50,50",
+        "Static": true
+      },
+      {
         "__type": "Interactions",
-        "HideOnEmpty": false,
+        "HideOnEmpty": true,
         "ObjectInteractions": [
           {
             "Identifier": "event.steal_drive",
@@ -51,18 +58,6 @@
                   }
                 },
                 {
-                  "Id": 2,
-                  "Type": "call",
-                  "Properties": {
-                    "_isStatic": false,
-                    "_type": "package.fish.sauna/Sauna.Inventory",
-                    "_name": "GiveItem"
-                  },
-                  "UserData": {
-                    "Position": "528,0"
-                  }
-                },
-                {
                   "Id": 14,
                   "Type": "property.set",
                   "Properties": {
@@ -71,19 +66,6 @@
                   },
                   "UserData": {
                     "Position": "992,-32"
-                  }
-                },
-                {
-                  "Id": 16,
-                  "Type": "scene.ref",
-                  "Properties": {
-                    "gameobject": {
-                      "_type": "gameobject",
-                      "go": "72015ed0-b488-47d7-9130-8380c0ad4a76"
-                    }
-                  },
-                  "UserData": {
-                    "Position": "160,240"
                   }
                 },
                 {
@@ -98,6 +80,29 @@
                   "UserData": {
                     "Position": "544,-160"
                   }
+                },
+                {
+                  "Id": 20,
+                  "Type": "resource.ref",
+                  "Properties": {
+                    "value": "prefabs/clothes/drive_jacket.prefab",
+                    "T": "Sandbox.Engine/Sandbox.PrefabFile"
+                  },
+                  "UserData": {
+                    "Position": "160,416"
+                  }
+                },
+                {
+                  "Id": 21,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_type": "package.fish.sauna/Sauna.Inventory",
+                    "_name": "GiveItem"
+                  },
+                  "UserData": {
+                    "Position": "512,80"
+                  }
                 }
               ],
               "Links": [
@@ -108,25 +113,7 @@
                   "DstName": "_this"
                 },
                 {
-                  "SrcId": 0,
-                  "SrcName": "_signal",
-                  "DstId": 2,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 1,
-                  "SrcName": "_result",
-                  "DstId": 2,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 16,
-                  "SrcName": "_result",
-                  "DstId": 2,
-                  "DstName": "item"
-                },
-                {
-                  "SrcId": 2,
+                  "SrcId": 21,
                   "SrcName": "_signal",
                   "DstId": 14,
                   "DstName": "_signal"
@@ -141,26 +128,133 @@
                   "Value": false,
                   "DstId": 14,
                   "DstName": "_value"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 21,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 21,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 20,
+                  "SrcName": "_result",
+                  "DstId": 21,
+                  "DstName": "prefabFile"
                 }
               ]
             },
-            "InteractDistance": 75,
+            "InteractDistance": 200,
             "Accessibility": "World",
+            "Disabled": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Disabled",
+                "id": "74b818f9-55e8-4780-afe9-55ae19f85d9a",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output",
+                  "UserData": {
+                    "Position": "64,-32"
+                  }
+                },
+                {
+                  "Id": 4,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "gameobject": {
+                      "_type": "gameobject",
+                      "go": "916f0aa1-4274-4d0a-a2de-33aac80b502b"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "-560,-32"
+                  }
+                },
+                {
+                  "Id": 8,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "Sandbox.Game/Sandbox.GameObject",
+                    "_name": "Enabled"
+                  },
+                  "UserData": {
+                    "Position": "-336,-32"
+                  }
+                },
+                {
+                  "Id": 9,
+                  "Type": "op.not",
+                  "UserData": {
+                    "Position": "-80,96"
+                  }
+                },
+                {
+                  "Id": 10,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 9,
+                  "SrcName": "_result",
+                  "DstId": 0,
+                  "DstName": "_result"
+                },
+                {
+                  "SrcId": 4,
+                  "SrcName": "_result",
+                  "DstId": 8,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 8,
+                  "SrcName": "_result",
+                  "DstId": 9,
+                  "DstName": "a"
+                }
+              ]
+            },
             "CooldownTime": 0.5,
-            "Position": "89.89992,0,21.50005",
-            "Extents": "61.59988,59.4,47.19991",
+            "Position": "89.89992,0,28.70008",
+            "Extents": "105.8995,93.09996,75.59973",
             "Animation": "Interact"
           }
         ]
-      },
-      {
-        "__type": "ModelCollider",
-        "IsTrigger": false,
-        "Model": "models/old_red_lada/old_red_lada.vmdl",
-        "Static": false
       }
     ],
     "Children": [
+      {
+        "Id": "dc254cec-7b09-4f31-9d56-a6c08bac7b95",
+        "Name": "wheel",
+        "Position": "-40,-71.99996,4.902691",
+        "Rotation": "-0.7071067,0,0,0.7071068",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/car_wheel/car_wheel.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "ModelCollider",
+            "IsTrigger": false,
+            "Model": "models/car_wheel/car_wheel.vmdl",
+            "Static": true
+          }
+        ]
+      },
       {
         "Id": "87d157ae-b035-44b6-9c3b-5a9b770953f3",
         "Name": "car",
@@ -179,169 +273,6 @@
             "IsTrigger": false,
             "Model": "models/old_red_lada/old_red_lada.vmdl",
             "Static": true
-          },
-          {
-            "__type": "Interactions",
-            "__enabled": false,
-            "HideOnEmpty": false,
-            "ObjectInteractions": [
-              {
-                "Identifier": "event.steal_drive",
-                "Keybind": "Use",
-                "Description": "Steal the jacket",
-                "Action": {
-                  "Version": 5,
-                  "UserData": {
-                    "Title": "Action",
-                    "id": "e9ac7c29-ff9f-4c3c-8d9d-7228c4711248",
-                    "ReferencedComponentTypes": [
-                      "package.fish.sauna/Sauna.Inventory"
-                    ]
-                  },
-                  "Variables": [],
-                  "Nodes": [
-                    {
-                      "Id": 0,
-                      "Type": "input"
-                    },
-                    {
-                      "Id": 1,
-                      "Type": "scene.get",
-                      "Properties": {
-                        "T": "package.fish.sauna/Sauna.Inventory"
-                      },
-                      "UserData": {
-                        "Position": "192,96"
-                      }
-                    },
-                    {
-                      "Id": 2,
-                      "Type": "call",
-                      "Properties": {
-                        "_isStatic": false,
-                        "_type": "package.fish.sauna/Sauna.Inventory",
-                        "_name": "GiveItem"
-                      },
-                      "UserData": {
-                        "Position": "528,0"
-                      }
-                    },
-                    {
-                      "Id": 14,
-                      "Type": "property.set",
-                      "Properties": {
-                        "_type": "Sandbox.Game/Sandbox.GameObject",
-                        "_name": "Enabled"
-                      },
-                      "UserData": {
-                        "Position": "992,-32"
-                      }
-                    },
-                    {
-                      "Id": 16,
-                      "Type": "scene.ref",
-                      "Properties": {
-                        "gameobject": {
-                          "_type": "gameobject",
-                          "go": "72015ed0-b488-47d7-9130-8380c0ad4a76"
-                        }
-                      },
-                      "UserData": {
-                        "Position": "160,240"
-                      }
-                    },
-                    {
-                      "Id": 18,
-                      "Type": "scene.ref",
-                      "Properties": {
-                        "gameobject": {
-                          "_type": "gameobject",
-                          "go": "916f0aa1-4274-4d0a-a2de-33aac80b502b"
-                        }
-                      },
-                      "UserData": {
-                        "Position": "544,-160"
-                      }
-                    }
-                  ],
-                  "Links": [
-                    {
-                      "SrcId": 0,
-                      "SrcName": "interactor",
-                      "DstId": 1,
-                      "DstName": "_this"
-                    },
-                    {
-                      "SrcId": 0,
-                      "SrcName": "_signal",
-                      "DstId": 2,
-                      "DstName": "_signal"
-                    },
-                    {
-                      "SrcId": 1,
-                      "SrcName": "_result",
-                      "DstId": 2,
-                      "DstName": "_target"
-                    },
-                    {
-                      "SrcId": 16,
-                      "SrcName": "_result",
-                      "DstId": 2,
-                      "DstName": "item"
-                    },
-                    {
-                      "SrcId": 2,
-                      "SrcName": "_signal",
-                      "DstId": 14,
-                      "DstName": "_signal"
-                    },
-                    {
-                      "SrcId": 18,
-                      "SrcName": "_result",
-                      "DstId": 14,
-                      "DstName": "_target"
-                    },
-                    {
-                      "Value": false,
-                      "DstId": 14,
-                      "DstName": "_value"
-                    }
-                  ]
-                },
-                "InteractDistance": 75,
-                "Accessibility": "All",
-                "Disabled": null,
-                "ShowWhenDisabled": null,
-                "CooldownTime": 0.5,
-                "Position": "89.89992,0,21.50005",
-                "Extents": "61.59988,59.4,47.19991",
-                "Animation": "Interact"
-              }
-            ]
-          }
-        ],
-        "Children": [
-          {
-            "Id": "dc254cec-7b09-4f31-9d56-a6c08bac7b95",
-            "Name": "wheel",
-            "Position": "-40,-71.99996,4.902691",
-            "Rotation": "-0.7071067,0,0,0.7071068",
-            "Enabled": true,
-            "Components": [
-              {
-                "__type": "ModelRenderer",
-                "BodyGroups": 18446744073709551615,
-                "Model": "models/car_wheel/car_wheel.vmdl",
-                "RenderType": "On",
-                "Tint": "1,1,1,1"
-              },
-              {
-                "__type": "ModelCollider",
-                "IsTrigger": false,
-                "Model": "models/car_wheel/car_wheel.vmdl",
-                "Static": true
-              }
-            ]
           }
         ]
       },
@@ -405,21 +336,8 @@
                 "Tint": "1,1,1,1"
               }
             ]
-          },
-          {
-            "Id": "478769ed-1756-46d1-99ce-b3cbecc3d6cf",
-            "Name": "trigger",
-            "Position": "0,0,0",
-            "Enabled": true
           }
         ]
-      },
-      {
-        "Id": "72015ed0-b488-47d7-9130-8380c0ad4a76",
-        "Name": "drive_jacket (1)",
-        "Position": "0,0,-16",
-        "Enabled": true,
-        "__Prefab": "prefabs/clothes/drive_jacket.prefab"
       }
     ]
   },
