@@ -1,7 +1,7 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
-    "Name": "water_aqua",
+    "Id": "e69cf4fb-3cef-4266-abcc-aea6e8052398",
+    "Name": "water_fresh",
     "Enabled": true,
     "Components": [
       {
@@ -113,8 +113,33 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "081a76c2-44bb-41ba-9590-00b54fd379d1",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/slurp.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },

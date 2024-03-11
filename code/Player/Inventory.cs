@@ -53,6 +53,21 @@ public class Inventory : Component
 	}
 
 	/// <summary>
+	/// The item is created from the prefab file and given to the inventory system if they have free slots.
+	/// </summary>
+	public bool GiveItem( PrefabFile prefabFile )
+	{
+		var obj = SceneUtility.GetPrefabScene( prefabFile ).Clone();
+		obj.NetworkSpawn();
+
+		var res = GiveItem( obj.Components.Get<ItemComponent>() );
+		if ( !res )
+			obj.Destroy();
+
+		return res;
+	}
+
+	/// <summary>
 	/// The item is equipped from the backpack and swaps out any previously equipped item.
 	/// </summary>
 	public bool EquipItemFromBackpack( ItemComponent item )

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "133c67bf-36b6-4a09-a16c-1a190bc2fda0",
     "Name": "cereal_daves",
     "Enabled": true,
     "Components": [
@@ -9,9 +9,9 @@
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "6.709973,-6.663707,-1.352904",
+          "Position": "5.109127,-6.676703,-1.885941",
           "Scale": "1,1,1",
-          "Rotation": "-0.4274588,-0.5631443,-0.4285558,0.5625721"
+          "Rotation": "-0.4822457,0.5171452,0.4822457,0.5171452"
         },
         "Count": 0,
         "Description": "Daves Oats, dave really has the best oats out there!",
@@ -40,7 +40,7 @@
           {
             "Identifier": "beer_bottle.drink",
             "Keybind": "Mouse1",
-            "Description": "Drink",
+            "Description": "Eat",
             "Action": {
               "Version": 5,
               "UserData": {
@@ -113,10 +113,35 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "3bafd475-3b6f-45b8-b214-7958bf85f0d2",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/eat.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },

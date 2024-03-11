@@ -105,11 +105,18 @@ public sealed class NpcSpawnArea : Component
 			{
 				var currentTick = (int)(Time.Now / Time.Delta);
 
-				if ( currentTick % 20 == component.NpcId % 20 )
+				if ( currentTick % 30 == component.NpcId % 30 )
 				{
 					var anyNearby = Player.All.Any( x => x.Transform.Position.Distance( npc.Transform.Position ) <= 4000f );
 
 					component.Enabled = anyNearby;
+				}
+
+				if ( currentTick % 60 == component.NpcId % 60 )
+				{
+					var anyNearby = Player.All.Any( x => x.Transform.Position.Distance( npc.Transform.Position ) <= 7000f );
+
+					component.Model.Enabled = anyNearby;
 				}
 			}
 		}

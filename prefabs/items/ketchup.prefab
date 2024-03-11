@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "08e1ce93-568a-407e-89e0-8584c25d02e7",
     "Name": "ketchup",
     "Enabled": true,
     "Components": [
@@ -9,9 +9,9 @@
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "1.365984,-3.040578,-0.2954199",
+          "Position": "2.2,-2,-0.3",
           "Scale": "1,1,1",
-          "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
+          "Rotation": "-0.4353384,0.5572077,0.5792279,0.4055798"
         },
         "Count": 0,
         "Description": "Ketchup, i could drink it from the bottle right now if i wanted to.",
@@ -116,7 +116,34 @@
             "Disabled": null,
             "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "d7878a31-9eb7-41fe-8ce3-a2e2e8e66512",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/slurp.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },

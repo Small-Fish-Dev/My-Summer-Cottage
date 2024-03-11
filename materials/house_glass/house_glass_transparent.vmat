@@ -1,0 +1,38 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunaworld.shader"
+
+	//---- Rendering ----
+	F_ALPHA_TEST 1
+	F_DETAILED_ALPHA_SHADOWS 1
+	F_RENDER_BACKFACES 1
+	F_TRANSPARENCY 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/house_glass/house_glass_basecolor.png"
+	ColorTintMask "materials/house_glass/house_glass_tint.png"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/default/default_metal.tga"
+	Normal "materials/house_glass/house_glass_normal.png"
+	Roughness "materials/house_glass/house_glass_roughness.png"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+
+	//---- Transparency ----
+	TransparencyMask "materials/house_glass/house_glass_opacity.png"
+	TransparencyRounding "0.000"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "glass"
+		WorldMappingWidth "128"
+		WorldMappingHeight "128"
+	}
+}
