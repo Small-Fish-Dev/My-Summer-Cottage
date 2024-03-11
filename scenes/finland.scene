@@ -1,5 +1,5 @@
 {
-  "Id": "e1d705e0-3ed0-494d-909a-a5f89a84eaf0",
+  "Id": "5305e742-d69e-4ba5-a816-2b76d873d2b7",
   "GameObjects": [
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -151,8 +151,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -263,8 +263,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -428,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.8416073,0,-0.5400898",
+          "Rotation": "0,-0.4141864,0,-0.9101921",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -639,8 +639,8 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_name": "PlaySoundWithSubtitle",
                       "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                      "_name": "PlaySoundWithSubtitle",
                       "_isStatic": true
                     },
                     "UserData": {
@@ -679,7 +679,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -730,8 +729,8 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_name": "PlaySoundWithNameAndSubtitle",
                       "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                      "_name": "PlaySoundWithNameAndSubtitle",
                       "_isStatic": true
                     },
                     "UserData": {
@@ -775,8 +774,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1051,6 +1048,35 @@
       "Rotation": "-0.01071164,0.01418209,0.6025711,0.7978673",
       "Enabled": true,
       "__Prefab": "prefabs/items/fishing_rod.prefab"
+    },
+    {
+      "Id": "63d09065-6418-4f06-a2fd-131d7cd6a65d",
+      "Name": "NPCSpawnArea",
+      "Position": "1192.319,167.2373,9.780305",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "NpcSpawnArea",
+          "Height": 128.72002,
+          "NpcPool": [
+            {
+              "Npc": {
+                "_type": "gameobject",
+                "prefab": "prefabs/npcs/moose_female.prefab"
+              },
+              "SpawnChance": 0.7
+            },
+            {
+              "Npc": {
+                "_type": "gameobject",
+                "prefab": "prefabs/npcs/moose_male.prefab"
+              },
+              "SpawnChance": 0.7
+            }
+          ],
+          "Radius": 269.19943
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -1076,6 +1102,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-11T00:19:09.7868478\u002B01:00",
+  "LastSaved": "2024-03-11T03:04:15.9867004\u002B01:00",
   "__references": []
 }

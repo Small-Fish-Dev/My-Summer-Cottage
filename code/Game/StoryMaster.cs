@@ -192,6 +192,18 @@ public class StoryMaster : Component
 		SetGameDay( nextGameDay );
 	}
 
+	public void LoadNPCs()
+	{
+		foreach ( var spawner in Scene.GetAllComponents<NpcSpawnArea>() )
+			spawner.SpawnNPCs();
+	}
+
+	public void UnloadNPCs()
+	{
+		foreach ( var spawner in Scene.GetAllComponents<NpcSpawnArea>() )
+			spawner.RemoveNPCs();
+	}
+
 	public void LoadStoryProgression()
 	{
 		if ( FileSystem.Data.FileExists( "story.json" ) )
@@ -302,6 +314,8 @@ public class StoryMaster : Component
 		storyMaster._eventMaster.UnloadAllEvents();
 
 		storyMaster.LoadEventPool();
+
+		storyMaster.LoadNPCs();
 		Log.Info( "Session started" );
 	}
 
@@ -321,6 +335,9 @@ public class StoryMaster : Component
 		}
 
 		storyMaster._eventMaster.UnloadAllEvents();
+
+		storyMaster.UnloadNPCs();
+
 		storyMaster.SaveGame();
 	}
 
