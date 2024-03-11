@@ -1,0 +1,51 @@
+﻿@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	<div class="header">@lobbies.Count friend(s) playing</div>
+	<div class="friends">
+		@foreach ( var lobby in lobbies )
+		{
+			var host = new Friend( (long)lobby.OwnerId );
+			<div class="friend">
+				<img class="avatar" />
+				<div class="content">
+					@lobby.Name
+				</div>
+			</div>
+		}
+	</div>
+</root>
+
+@code {
+	private struct LobbyData
+	{
+		public Friend Host;
+		public ulong ServerId;
+	}
+
+	private const float QUERY_DELAY = 10f;
+	private List<LobbyInformation> lobbies = new();
+	TimeUntil _nextQuery;
+
+	private void Query() => 
+		new Action( async () => 
+		{
+			lobbies = (await Networking.QueryLobbies());
+		} ).Invoke();
+
+	public override void Tick()
+	{
+		if ( _nextQuery )
+		{
+			Query();
+			_nextQuery = QUERY_DELAY;
+		}
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( lobbies.HashCombine( x => x.OwnerId ) );
+	}
+}

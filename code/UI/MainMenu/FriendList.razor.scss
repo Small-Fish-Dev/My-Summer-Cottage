@@ -1,0 +1,42 @@
+﻿@import "/UI/Style.scss";
+
+FriendList {
+    flex-direction: column;
+    width: 400px;
+    box-shadow: $box-shadow-sm;
+    font-size: 18px;
+    color: white;
+
+    .header {
+        background-color: black;
+        font-size: 28px;
+        color: white;
+        text-shadow: 1px 1px 0px darken(white, 0.85);
+        padding: 10px;
+        font-family: HabboExtended;
+        justify-content: center;
+    }
+
+    .friends {
+        width: 100%;
+        max-height: 400px;
+        flex-direction: column;
+        overflow: scroll;
+        gap: 10px;
+
+        .friend {
+            flex-shrink: 0;
+            flex-grow: 0;
+            height: 60px;
+            background-color: red;
+            padding: 10px;
+
+            .avatar {
+                height: 100%;
+                aspect-ratio: 1;
+                border: 4px black;
+                background-color: white;
+            }
+        }
+    }
+}

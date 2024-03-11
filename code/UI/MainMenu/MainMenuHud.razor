@@ -5,16 +5,22 @@
 <root>
 	<img class="title" src="ui/mainmenu/title.png" />
 	<div style="flex-direction: column; justify-content: center; top: 10%; gap: 15px;">
-		<SideButton
-			ImagePath="ui/mainmenu/new_icon.png"
-			Title="New Game"
-			Subtitle="Start a brand new game"
-		/>
-		<SideButton
-			ImagePath="ui/mainmenu/load_icon.png"
-			Title="Load Game"
-			Subtitle="Load a previous save file"
-		/>
+		@if ( !saveData.Has )
+		{
+			<SideButton
+				ImagePath="ui/mainmenu/new_icon.png"
+				Title="New Game"
+				Subtitle="Start a brand new game"
+			/>
+		}
+		else
+		{
+			<SideButton
+				ImagePath="ui/mainmenu/load_icon.png"
+				Title="Continue"
+				Subtitle="Keep on going..."
+			/>	
+		}
 		<SideButton
 			ImagePath="ui/mainmenu/credits_icon.png"
 			Title="Credits"
@@ -26,4 +32,24 @@
 			Subtitle="Why? There aren't any other better games on s&box..."
 		/>
 	</div>
+
+	<FriendList class="friendList" />
 </root>
+
+@code {
+	(PlayerSave Save, bool Has) saveData;
+	SoundHandle _loopStart;
+	SoundHandle _loop;
+
+	protected override void OnStart()
+	{
+		saveData = Player.GetSave();
+		_loopStart = Sound.Play( "sounds/music/zakkujo-ero_vaimosta-loop_start.sound" );
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( _loop == null && _loopStart.Finished )
+			_loop = Sound.Play( "sounds/music/zakkujo-ero_vaimosta-loop.sound" );
+	}
+}
