@@ -11,6 +11,9 @@ public sealed class BeerCrate : Component
 	[Property]
 	public GameObject Beer { get; set; }
 
+	[Property]
+	public SoundEvent BeerGrabSound { get; set; }
+
 	/// <summary>
 	/// The amount of beers still in the crate.
 	/// </summary>
@@ -57,8 +60,6 @@ public sealed class BeerCrate : Component
 	private Model beerModel = Model.Load( "models/beer_bottle/beer.vmdl" );
 	private SkinnedModelRenderer renderer;
 	private ItemComponent itemComponent;
-
-	private readonly SoundEvent _grabSound = ResourceLibrary.Get<SoundEvent>( "sounds/beer/beer_grab.sound" );
 
 	protected override void OnAwake()
 	{
@@ -107,7 +108,7 @@ public sealed class BeerCrate : Component
 			DynamicText = () => $"Take a beer",
 			Disabled = () => Count <= 0 || Player.Local.Inventory.IsSlotOccupied( EquipSlot.Hand ),
 			ShowWhenDisabled = () => true,
-			Sound = () => _grabSound,
+			Sound = () => BeerGrabSound,
 		} );
 
 		BeerCountChanged( 0, Count );

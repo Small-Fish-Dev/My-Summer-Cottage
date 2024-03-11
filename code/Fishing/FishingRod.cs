@@ -8,13 +8,12 @@ public sealed class FishingRod : Component
 	[Property] public GameObject BobberPrefab;
 	[Property] public float RetractDistance = 750;
 	[Property] public float ThrowForce = 1000;
+	[Property] public SoundEvent CastSound { get; set; }
 
 	public Player Owner { get; private set; }
 
 	private Bobber CurrentBobber { get; set; }
 	private LegacyParticles _fishingLine;
-
-	private readonly SoundEvent _castSound = ResourceLibrary.Get<SoundEvent>( "sounds/fishingrod/fishingrod_cast.sound" );
 
 	private bool _isCasted;
 
@@ -45,7 +44,7 @@ public sealed class FishingRod : Component
 			DynamicText = () => IsCasted ? "Pull back" : "Cast",
 			Keybind = "mouse1",
 			Animation = InteractAnimations.Action,
-			Sound = () => _castSound,
+			Sound = () => CastSound,
 			Cooldown = true,
 			CooldownTime = 1f,
 			ShowWhenDisabled = () => true,

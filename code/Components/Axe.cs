@@ -10,8 +10,11 @@ public sealed class Axe : Component
 	[Property]
 	public int Damage { get; set; } = 5;
 
-	private readonly SoundEvent _swingSound = ResourceLibrary.Get<SoundEvent>( "sounds/axe/axe_swing.sound" );
-	private readonly SoundEvent _swingWoodSound = ResourceLibrary.Get<SoundEvent>( "sounds/axe/axe_swing_wood.sound" );
+	[Property]
+	public SoundEvent SwingSound { get; set; }
+
+	[Property]
+	public SoundEvent WoodImpactSound { get; set; }
 
 	protected override void OnStart()
 	{
@@ -34,7 +37,7 @@ public sealed class Axe : Component
 			},
 			Keybind = "mouse1",
 			Animation = InteractAnimations.Action,
-			Sound = () => _swingSound,
+			Sound = () => SwingSound,
 		} ); ;
 	}
 
@@ -50,7 +53,7 @@ public sealed class Axe : Component
 			{
 				if ( PrefabLibrary.TryGetByPath( "prefabs/items/split_wooden_log.prefab", out var log ) )
 				{
-					GameObject.PlaySound( _swingWoodSound );
+					GameObject.PlaySound( WoodImpactSound );
 					SceneUtility.GetPrefabScene( log.Prefab ).Clone( target.Transform.Position, target.Transform.Rotation );
 					SceneUtility.GetPrefabScene( log.Prefab ).Clone( target.Transform.Position, target.Transform.Rotation.RotateAroundAxis( Vector3.Forward, 180f ) );
 					target.Destroy();

@@ -12,6 +12,7 @@
           "Scale": "1,1,1",
           "Rotation": "-0.4697728,-0.5304011,-0.4801148,0.5171829"
         },
+        "Count": 0,
         "Description": "Use this axe to chop wood or enemies.",
         "HideBodygroups": "None",
         "HoldType": "Melee",
@@ -22,17 +23,17 @@
           "Rotation": "-0.2933853,0.01961521,-0.06376025,0.9536639",
           "Guid": "c5577401-fa81-4093-bbc0-6ba644a08258"
         },
+        "MaxStack": 0,
         "Name": "Axe",
         "SellPrice": 50,
         "Slot": "Hand",
         "UpdatePosition": true,
+        "UseSkinTint": false,
         "WeightInGrams": 1900
       },
       {
         "__type": "ModelRenderer",
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/saunaaxe/cabinaxe.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -42,8 +43,7 @@
         "Center": "1.68,3.760001,6.880002",
         "IsTrigger": false,
         "Scale": "2.959997,15.19999,43.03998",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
@@ -56,7 +56,11 @@
         "StartAsleep": false
       },
       {
-        "__type": "Axe"
+        "__type": "Axe",
+        "Damage": 5,
+        "SwingSound": "sounds/axe/axe_swing.sound",
+        "Type": "Average",
+        "WoodImpactSound": "sounds/axe/axe_swing_wood.sound"
       }
     ],
     "Children": []

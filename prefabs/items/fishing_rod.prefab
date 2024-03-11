@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "a5595c5e-d9d2-410e-9ca7-fc2f8b59d5be",
+    "Id": "6b1c3f66-ac50-458d-8976-22cdd2275aba",
     "Name": "fishing_rod",
     "Enabled": true,
     "Components": [
@@ -41,20 +41,17 @@
         },
         "RetractDistance": 750,
         "ThrowForce": 1000,
+        "CastSound": "sounds/fishingrod/fishingrod_cast.sound",
         "Renderer": {
           "_type": "component",
-          "go": "a5595c5e-d9d2-410e-9ca7-fc2f8b59d5be",
+          "go": "6b1c3f66-ac50-458d-8976-22cdd2275aba",
           "component_type": "SkinnedModelRenderer"
         }
       },
       {
         "__type": "SkinnedModelRenderer",
-        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
-        "BoneMergeTarget": null,
         "CreateBoneObjects": false,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/fishingrod/saunarod.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -64,8 +61,7 @@
         "Center": "0,0,35.75",
         "IsTrigger": false,
         "Scale": "1.5,1.5,71.5",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
