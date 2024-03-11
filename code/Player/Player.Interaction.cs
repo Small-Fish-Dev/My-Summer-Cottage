@@ -76,8 +76,8 @@ public partial class Player
 			.FirstOrDefault();
 
 		if ( interactionGameObject is null )
-			return;
-
-		interactionGameObject.PlaySound( soundEvent );
+			GameObject.PlaySound( soundEvent );
+		else
+			interactionGameObject.PlaySound( soundEvent );
 	}
 }

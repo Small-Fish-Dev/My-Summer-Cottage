@@ -82,6 +82,8 @@ public class ItemComponent : Component
 	/// </summary>
 	public Player LastOwner { get; set; }
 
+	private SoundEvent _pickupSound => ResourceLibrary.Get<SoundEvent>( "sounds/misc/pickup.sound" );
+
 	private ItemState _state;
 
 	/// <summary>
@@ -131,6 +133,7 @@ public class ItemComponent : Component
 			Disabled = () => !Player.Local.Inventory.HasSpaceInBackpack(),
 			ShowWhenDisabled = () => true,
 			Accessibility = AccessibleFrom.World,
+			Sound = () => _pickupSound,
 		} );
 	}
 
