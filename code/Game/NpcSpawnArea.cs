@@ -28,7 +28,8 @@ public sealed class NpcSpawnArea : Component
 	public List<NpcChance> NpcPool { get; set; }
 
 	[JsonIgnore]
-	public List<GameObject> SpawnedNpcs { get; set; } = new();
+	[Sync]
+	public NetList<GameObject> SpawnedNpcs { get; set; } = new();
 
 	protected override void DrawGizmos()
 	{
@@ -73,6 +74,7 @@ public sealed class NpcSpawnArea : Component
 						if ( Vector3.GetAngle( Vector3.Up, groundTrace.Normal ) <= 60f )
 						{
 							var clone = npc.Npc.Clone( groundTrace.HitPosition, Rotation.FromYaw( Game.Random.Float( 360f ) ) );
+							clone.NetworkSpawn();
 
 							if ( clone != null )
 								SpawnedNpcs.Add( clone );
