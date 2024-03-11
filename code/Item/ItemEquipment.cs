@@ -40,17 +40,19 @@ public class ItemEquipment : ItemComponent
 	private Rigidbody parcelBody;
 	private GameObject iconWorldObject;
 
+	private readonly SoundEvent _equipSound = ResourceLibrary.Get<SoundEvent>( "sounds/misc/pickup.sound" );
+
 	public bool IsClothing => Slot != EquipSlot.Hand;
 	public bool Equipped => State == ItemState.Equipped;
 
 	public void UpdateEquipped()
 	{
-		if ( Equipped ) 
+		if ( Equipped )
 			ToggleRenderer( Equipped );
 
 		// Use skin color as tint.
 		var player = GameObject.Parent?.Components?.Get<Player>( true );
-		if ( UseSkinTint && player != null ) 
+		if ( UseSkinTint && player != null )
 			Renderer.Tint = player.SkinColor;
 
 		// Bonemerge
@@ -142,6 +144,7 @@ public class ItemEquipment : ItemComponent
 			Disabled = () => Player.Local.Inventory.IsSlotOccupied( Slot ),
 			ShowWhenDisabled = () => true,
 			Accessibility = AccessibleFrom.World,
+			Sound = () => _equipSound,
 		} );
 	}
 
