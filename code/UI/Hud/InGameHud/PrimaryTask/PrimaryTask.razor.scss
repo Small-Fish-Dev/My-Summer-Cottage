@@ -1,3 +1,5 @@
+@import "/UI/Style.scss";
+
 PrimaryTask {
     position: absolute;
     right: 0;
@@ -29,6 +31,14 @@ PrimaryTask {
                 font-family: HabboExtended;
                 font-size: 18px;
                 margin-bottom: 5px;
+
+                &.primary {
+                    color: $orange;
+                }
+
+                &.secondary {
+                    color: $blue;
+                }
             }
 
             .task-title {
@@ -39,7 +49,15 @@ PrimaryTask {
 
             .task-description {
                 font-family: HabboExtended;
-                font-size: 14px;
+                font-size: 18px;
+
+                &.completed {
+                    color: $green;
+                }
+
+                &.failed {
+                    color: $blood-red;
+                }
             }
         }
 

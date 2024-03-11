@@ -190,6 +190,11 @@ public partial class SaunaTask : GameResource
 	[Property]
 	public List<Subtask> Subtasks { get; set; } = new();
 
+	// Technically there is no order, but we want this for UI purposes.
+	[Hide]
+	[JsonIgnore]
+	public Subtask NextSubtaskToComplete => Subtasks.Where( ( t ) => !t.Completed ).FirstOrDefault();
+
 	[Hide]
 	[JsonIgnore]
 	public int CurrentSubtaskOrder { get; set; } = 0;
