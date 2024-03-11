@@ -100,14 +100,23 @@ public sealed class FishingRod : Component
 		if ( !force )
 			CurrentBobber.PullOut();
 
-		CurrentBobber.GameObject.Destroy();
-		Owner = null;
-		IsCasted = false;
+		Cleanup();
+	}
+
+	protected override void OnDisabled()
+	{
+		Cleanup();
 	}
 
 	protected override void OnDestroy()
 	{
+		Cleanup();
+	}
+
+	private void Cleanup()
+	{
 		IsCasted = false;
+		Owner = null;
 
 		if ( CurrentBobber.IsValid() )
 			CurrentBobber.GameObject.Destroy();
