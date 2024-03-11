@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 namespace Sauna;
 
 public enum InputMode
@@ -134,6 +136,12 @@ public class Interaction
 	/// </summary>
 	[Property, Category( "Optional" )]
 	public Func<SoundEvent> Sound { get; set; }
+
+	/// <summary>
+	/// The sound will play from the player instead of the interaction item.
+	/// </summary>
+	[Property, Category( "Optional" )]
+	public bool PlaySoundFromPlayer { get; set; }
 
 	/// <summary>
 	/// What context should the input be called in
