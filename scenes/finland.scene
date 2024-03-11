@@ -177,8 +177,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -289,8 +289,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -385,6 +385,54 @@
               }
             }
           ]
+        },
+        {
+          "Id": "d09666df-e617-422e-915c-9cbf381b592c",
+          "Name": "Spawner",
+          "Position": "59.32935,-34.14404,-7.923096",
+          "Rotation": "0,0,0.1305262,0.9914449",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "PlayerSpawner"
+            }
+          ]
+        },
+        {
+          "Id": "65b73d71-edfe-4eea-9d88-8819da3b4a51",
+          "Name": "Spawner",
+          "Position": "26.50977,6.496338,-7.923096",
+          "Rotation": "0,0,0.1305262,0.9914449",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "PlayerSpawner"
+            }
+          ]
+        },
+        {
+          "Id": "c5fe7faf-abe6-4e2d-88fe-fadc8da17fcb",
+          "Name": "Spawner",
+          "Position": "59.86963,48.84277,-7.923096",
+          "Rotation": "0,0,0.1305262,0.9914449",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "PlayerSpawner"
+            }
+          ]
+        },
+        {
+          "Id": "9e8a633d-d61a-433e-a690-4b6ce18d0b9c",
+          "Name": "Spawner",
+          "Position": "91.56421,6.345215,-7.923096",
+          "Rotation": "0,0,0.1305262,0.9914449",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "PlayerSpawner"
+            }
+          ]
         }
       ]
     },
@@ -413,7 +461,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.171634,0,0.9851608",
+          "Rotation": "0,-0.8410649,0,-0.5409343",
           "Tags": "skybox",
           "Enabled": true,
           "Components": [
@@ -584,9 +632,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                      "_isStatic": true,
                       "_name": "PlaySoundWithSubtitle",
-                      "_isStatic": true
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -624,7 +672,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -675,9 +722,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                      "_isStatic": true,
                       "_name": "PlaySoundWithNameAndSubtitle",
-                      "_isStatic": true
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -720,8 +767,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1117,6 +1162,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-11T21:38:56.6536885\u002B01:00",
+  "LastSaved": "2024-03-11T22:11:32.2712424\u002B01:00",
   "__references": []
 }

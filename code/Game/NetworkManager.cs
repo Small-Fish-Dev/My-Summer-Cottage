@@ -43,7 +43,17 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		var player = obj.Components.Get<Player>( FindMode.EverythingInSelfAndDescendants );
 		obj.NetworkSpawn( connection );
 		player.SetupConnection( connection );
-		player.Transform.Position = Transform.Position;
+
+		var foundSpawners = Scene.GetAllComponents<PlayerSpawner>().ToList();
+
+		if ( foundSpawners.Count > 0 )
+		{
+			var randomSpawner = Game.Random.FromList( foundSpawners );
+			player.Transform.Position = randomSpawner.Transform.Position;
+			player.Transform.Rotation = randomSpawner.Transform.Rotation;
+		}
+		else
+			player.Transform.Position = Transform.Position;
 	}
 
 	void INetworkListener.OnDisconnected( Connection connection )
