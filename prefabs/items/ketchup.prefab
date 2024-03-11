@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
-    "Name": "beer_bottle",
+    "Name": "ketchup",
     "Enabled": true,
     "Components": [
       {
@@ -14,19 +14,19 @@
           "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
         },
         "Count": 0,
-        "Description": "This item has a really long description because I\u0027d like to test out the UI",
+        "Description": "Ketchup, i could drink it from the bottle right now if i wanted to.",
         "HideBodygroups": "None",
         "HoldType": "Item",
         "Icon": {
-          "Model": "models/beer_bottle/beer.vmdl",
-          "MaterialGroup": "",
+          "Model": "models/consumables/condiment_bottle/condiment_bottle.vmdl",
+          "MaterialGroup": "ketchup",
           "Colour": "1,1,1,1",
-          "Position": "-2.25,1.95,0.75",
-          "Rotation": "0.1938814,-0.1557454,0.7551184,0.6065885",
-          "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
+          "Position": "-1.5,2.25,1.2",
+          "Rotation": "0.257585,-0.01090191,-0.1973934,0.9458155",
+          "Guid": "8ec4fdf9-2cbb-4af0-b463-ddd7f95d8d5b"
         },
         "MaxStack": 0,
-        "Name": "Beer Bottle",
+        "Name": "Ketchup",
         "SellPrice": 10,
         "Slot": "Hand",
         "UpdatePosition": true,
@@ -113,6 +113,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action"
           }
@@ -121,14 +123,15 @@
       {
         "__type": "ModelRenderer",
         "BodyGroups": 11,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "MaterialGroup": "ketchup",
+        "Model": "models/consumables/condiment_bottle/condiment_bottle.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "ModelCollider",
         "IsTrigger": false,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "Model": "models/consumables/condiment_bottle/condiment_bottle.vmdl",
         "Static": false
       },
       {

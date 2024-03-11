@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
-    "Name": "beer_bottle",
+    "Name": "yogurt_tub",
     "Enabled": true,
     "Components": [
       {
@@ -9,24 +9,24 @@
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "1.365984,-3.040578,-0.2954199",
+          "Position": "4.558745,0.1671476,-1.5399",
           "Scale": "1,1,1",
-          "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
+          "Rotation": "-0.500085,-0.5187567,0.4992111,0.4812428"
         },
         "Count": 0,
-        "Description": "This item has a really long description because I\u0027d like to test out the UI",
+        "Description": "This yogurt genuinely sucks, its not tasty at all.",
         "HideBodygroups": "None",
         "HoldType": "Item",
         "Icon": {
-          "Model": "models/beer_bottle/beer.vmdl",
-          "MaterialGroup": "",
+          "Model": "models/consumables/round_tub/round_tub.vmdl",
+          "MaterialGroup": "black",
           "Colour": "1,1,1,1",
-          "Position": "-2.25,1.95,0.75",
-          "Rotation": "0.1938814,-0.1557454,0.7551184,0.6065885",
-          "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
+          "Position": "-1.65,1.2,0.15",
+          "Rotation": "0.2406035,0.04157643,-0.2823922,0.9277046",
+          "Guid": "c9468c85-18a7-4075-bdda-fa4673ac6e73"
         },
         "MaxStack": 0,
-        "Name": "Beer Bottle",
+        "Name": "Plain Yogurt",
         "SellPrice": 10,
         "Slot": "Hand",
         "UpdatePosition": true,
@@ -113,6 +113,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action"
           }
@@ -121,14 +123,15 @@
       {
         "__type": "ModelRenderer",
         "BodyGroups": 11,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "MaterialGroup": "black",
+        "Model": "models/consumables/round_tub/round_tub.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "ModelCollider",
         "IsTrigger": false,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "Model": "models/consumables/round_tub/round_tub.vmdl",
         "Static": false
       },
       {

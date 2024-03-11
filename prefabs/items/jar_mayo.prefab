@@ -1,7 +1,8 @@
 {
   "RootObject": {
     "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
-    "Name": "beer_bottle",
+    "Name": "jar_mayo",
+    "Rotation": "0,0,-0.8660253,0.5000001",
     "Enabled": true,
     "Components": [
       {
@@ -9,24 +10,24 @@
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "1.365984,-3.040578,-0.2954199",
+          "Position": "1.334938,-7.712587,-3.046965",
           "Scale": "1,1,1",
-          "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
+          "Rotation": "-0.06396737,-0.9655446,0.2377719,0.08424047"
         },
         "Count": 0,
-        "Description": "This item has a really long description because I\u0027d like to test out the UI",
+        "Description": "Something seems really wrong with this mayonnaise.",
         "HideBodygroups": "None",
         "HoldType": "Item",
         "Icon": {
-          "Model": "models/beer_bottle/beer.vmdl",
-          "MaterialGroup": "",
+          "Model": "models/consumables/jar/jar.vmdl",
+          "MaterialGroup": "mayo",
           "Colour": "1,1,1,1",
-          "Position": "-2.25,1.95,0.75",
-          "Rotation": "0.1938814,-0.1557454,0.7551184,0.6065885",
-          "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
+          "Position": "-3.75,2.1,0.75",
+          "Rotation": "-0.1194525,-0.236192,0.8957933,-0.3570697",
+          "Guid": "7ada56cf-aa83-4179-8118-92c2f817e99c"
         },
         "MaxStack": 0,
-        "Name": "Beer Bottle",
+        "Name": "Mayonnaise",
         "SellPrice": 10,
         "Slot": "Hand",
         "UpdatePosition": true,
@@ -113,6 +114,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action"
           }
@@ -121,14 +124,15 @@
       {
         "__type": "ModelRenderer",
         "BodyGroups": 11,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "MaterialGroup": "mayo",
+        "Model": "models/consumables/jar/jar.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "ModelCollider",
         "IsTrigger": false,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "Model": "models/consumables/jar/jar.vmdl",
         "Static": false
       },
       {

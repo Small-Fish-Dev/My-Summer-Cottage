@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
-    "Name": "beer_bottle",
+    "Name": "cereal_ape_bites",
     "Enabled": true,
     "Components": [
       {
@@ -9,24 +9,24 @@
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "1.365984,-3.040578,-0.2954199",
+          "Position": "6.709973,-6.663707,-1.352904",
           "Scale": "1,1,1",
-          "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
+          "Rotation": "-0.4274588,-0.5631443,-0.4285558,0.5625721"
         },
         "Count": 0,
-        "Description": "This item has a really long description because I\u0027d like to test out the UI",
+        "Description": "Little chocolate puffs? A monkey/ape mascot? Sounds original to me!",
         "HideBodygroups": "None",
         "HoldType": "Item",
         "Icon": {
-          "Model": "models/beer_bottle/beer.vmdl",
-          "MaterialGroup": "",
+          "Model": "models/consumables/cereal_box/cereal_box.vmdl",
+          "MaterialGroup": "green",
           "Colour": "1,1,1,1",
-          "Position": "-2.25,1.95,0.75",
-          "Rotation": "0.1938814,-0.1557454,0.7551184,0.6065885",
-          "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
+          "Position": "-6.9,-0.15,0.15",
+          "Rotation": "-0.00397233,0.01654598,0.2334116,0.9722291",
+          "Guid": "9eb12d34-09eb-4204-afc0-396e66feacc4"
         },
         "MaxStack": 0,
-        "Name": "Beer Bottle",
+        "Name": "Ape Bites",
         "SellPrice": 10,
         "Slot": "Hand",
         "UpdatePosition": true,
@@ -113,6 +113,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action"
           }
@@ -121,14 +123,15 @@
       {
         "__type": "ModelRenderer",
         "BodyGroups": 11,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "MaterialGroup": "green",
+        "Model": "models/consumables/cereal_box/cereal_box.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "ModelCollider",
         "IsTrigger": false,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "Model": "models/consumables/cereal_box/cereal_box.vmdl",
         "Static": false
       },
       {

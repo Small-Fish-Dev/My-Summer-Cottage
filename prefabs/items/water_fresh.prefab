@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
-    "Name": "beer_bottle",
+    "Name": "water_aqua",
     "Enabled": true,
     "Components": [
       {
@@ -14,19 +14,19 @@
           "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
         },
         "Count": 0,
-        "Description": "This item has a really long description because I\u0027d like to test out the UI",
+        "Description": "Fresh, spring water, natural from. somewhere?",
         "HideBodygroups": "None",
         "HoldType": "Item",
         "Icon": {
-          "Model": "models/beer_bottle/beer.vmdl",
-          "MaterialGroup": "",
+          "Model": "models/consumables/bottle/bottle.vmdl",
+          "MaterialGroup": "red",
           "Colour": "1,1,1,1",
           "Position": "-2.25,1.95,0.75",
           "Rotation": "0.1938814,-0.1557454,0.7551184,0.6065885",
-          "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
+          "Guid": "943f43fb-51da-48ec-b00e-9261a3f97bab"
         },
         "MaxStack": 0,
-        "Name": "Beer Bottle",
+        "Name": "Aqua Water",
         "SellPrice": 10,
         "Slot": "Hand",
         "UpdatePosition": true,
@@ -121,14 +121,15 @@
       {
         "__type": "ModelRenderer",
         "BodyGroups": 11,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "MaterialGroup": "blue",
+        "Model": "models/consumables/bottle/bottle.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "ModelCollider",
         "IsTrigger": false,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "Model": "models/consumables/bottle/bottle.vmdl",
         "Static": false
       },
       {

@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
-    "Name": "beer_bottle",
+    "Name": "can_of_soup",
     "Enabled": true,
     "Components": [
       {
@@ -14,24 +14,24 @@
           "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
         },
         "Count": 0,
-        "Description": "This item has a really long description because I\u0027d like to test out the UI",
+        "Description": "This is the... worst... soup....",
         "HideBodygroups": "None",
         "HoldType": "Item",
         "Icon": {
-          "Model": "models/beer_bottle/beer.vmdl",
-          "MaterialGroup": "",
+          "Model": "models/consumables/can/can.vmdl",
+          "MaterialGroup": "green",
           "Colour": "1,1,1,1",
           "Position": "-2.25,1.95,0.75",
-          "Rotation": "0.1938814,-0.1557454,0.7551184,0.6065885",
-          "Guid": "08129899-0d99-4d86-9c03-e3844e30895b"
+          "Rotation": "0.3423476,0.1027193,-0.4275031,0.8303542",
+          "Guid": "6cbb0e08-86cb-43fe-9542-79c2bb64bacd"
         },
         "MaxStack": 0,
-        "Name": "Beer Bottle",
-        "SellPrice": 10,
+        "Name": "Can of soup",
+        "SellPrice": 5,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
-        "WeightInGrams": 100
+        "WeightInGrams": 50
       },
       {
         "__type": "Interactions",
@@ -113,6 +113,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action"
           }
@@ -121,14 +123,15 @@
       {
         "__type": "ModelRenderer",
         "BodyGroups": 11,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "MaterialGroup": "green",
+        "Model": "models/consumables/can/can.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "ModelCollider",
         "IsTrigger": false,
-        "Model": "models/beer_bottle/beer.vmdl",
+        "Model": "models/consumables/can/can.vmdl",
         "Static": false
       },
       {
