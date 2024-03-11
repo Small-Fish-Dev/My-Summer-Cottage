@@ -111,6 +111,18 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 		SetTimeFromSeconds( StartTime );
 		OnDayStart?.Invoke();
+
+		foreach ( var sun in Scene.GetAllComponents<DirectionalLight>() )
+		{
+			if ( sun != Sun )
+				sun.Enabled = false;
+		}
+
+		foreach ( var obj in Scene.GetAllObjects( true ) )
+		{
+			if ( obj.Name == "light_environment" )
+				obj.Enabled = false;
+		}
 	}
 
 	protected override void DrawGizmos()
