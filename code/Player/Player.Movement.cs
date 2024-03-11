@@ -85,6 +85,10 @@ partial class Player
 	private TimeSince _lastAimed;
 	private bool _aimState;
 
+	[Broadcast]
+	public void ForceHoldTypeBroadcast( HoldType type, float time )
+		=> ForceHoldType( type, time );
+
 	public void ForceHoldType( HoldType type, float time )
 	{
 		_targetHoldType = type;

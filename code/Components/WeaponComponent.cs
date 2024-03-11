@@ -162,8 +162,15 @@ public sealed class WeaponComponent : Component
 		}
 
 		// Get ray
-		var transform = Components.GetInParent<SkinnedModelRenderer>( true )?.GetAttachment( ExitAttachment )
-			?? new Transform( shooter.ViewRay.Position, Rotation.LookAt( shooter.ViewRay.Forward ) );
+		if ( !shooter.AimState ) // weird ass pose if you shoot while not aiming
+			shooter.ForceHoldTypeBroadcast( HoldType.Flashlight, 0.2f );
+
+		var transform = string.IsNullOrWhiteSpace( ExitAttachment ) 
+			? new Transform( shooter.ViewRay.Position, Rotation.LookAt( shooter.ViewRay.Forward ) )
+			: shooter.GetAttachment( ExitAttachment );
+
+		if ( !string.IsNullOrWhiteSpace( ExitAttachment ) && transform == global::Transform.Zero )
+			Log.Warning( $"Exit attachment \"{ExitAttachment}\" not found." );
 
 		var ray = new Ray( transform.Position, transform.Rotation.Forward );
 		var tr = Scene.Trace.Ray( ray, Range )
@@ -176,7 +183,6 @@ public sealed class WeaponComponent : Component
 		particle.SetVector( 1, tr.EndPosition );
 
 		var target = tr.GameObject;
-
 		if ( target != null )
 		{
 			if ( target.Components.TryGet<Rigidbody>( out var body ) )
