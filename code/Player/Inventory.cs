@@ -53,6 +53,25 @@ public class Inventory : Component
 	}
 
 	/// <summary>
+	/// The item is cloned and given to the inventory system if they have free slots.
+	/// </summary>
+	public bool CloneGiveItem( GameObject gameObject )
+	{
+		if ( gameObject.Components.Get<ItemComponent>() is null )
+			return false;
+
+		GameObject obj;
+		obj = gameObject.Clone();
+		obj.NetworkSpawn();
+
+		var res = GiveItem( obj.Components.Get<ItemComponent>() );
+		if ( !res )
+			obj.Destroy();
+
+		return res;
+	}
+
+	/// <summary>
 	/// The item is equipped from the backpack and swaps out any previously equipped item.
 	/// </summary>
 	public bool EquipItemFromBackpack( ItemComponent item )
