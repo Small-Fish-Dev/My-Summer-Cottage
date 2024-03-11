@@ -58,6 +58,8 @@ public sealed class BeerCrate : Component
 	private SkinnedModelRenderer renderer;
 	private ItemComponent itemComponent;
 
+	private readonly SoundEvent _grabSound = ResourceLibrary.Get<SoundEvent>( "sounds/beer/beer_grab.sound" );
+
 	protected override void OnAwake()
 	{
 		renderer = Components.Get<SkinnedModelRenderer>( FindMode.EverythingInSelfAndDescendants );
@@ -105,6 +107,7 @@ public sealed class BeerCrate : Component
 			DynamicText = () => $"Take a beer",
 			Disabled = () => Count <= 0 || Player.Local.Inventory.IsSlotOccupied( EquipSlot.Hand ),
 			ShowWhenDisabled = () => true,
+			Sound = () => _grabSound,
 		} );
 
 		BeerCountChanged( 0, Count );
