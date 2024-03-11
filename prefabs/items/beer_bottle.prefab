@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "1a1a8e1c-43d7-4d82-a2ec-d3f7b1baf37b",
+    "Id": "dc2d7efa-df23-4e59-bd4f-efdf2cf97c9c",
     "Name": "beer_bottle",
     "Enabled": true,
     "Components": [
@@ -58,11 +58,11 @@
                   "Type": "call",
                   "Properties": {
                     "_isStatic": false,
-                    "_name": "Destroy",
-                    "_type": "Sandbox.Game/Sandbox.GameObject"
+                    "_type": "Sandbox.Game/Sandbox.GameObject",
+                    "_name": "Destroy"
                   },
                   "UserData": {
-                    "Position": "224,-16"
+                    "Position": "384,-144"
                   }
                 },
                 {
@@ -70,17 +70,24 @@
                   "Type": "call",
                   "Properties": {
                     "_isStatic": false,
-                    "_name": "AddExperience",
-                    "_type": "package.fish.sauna/Sauna.Player"
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_name": "AddExperience"
                   },
                   "UserData": {
                     "Position": "224,48"
+                  }
+                },
+                {
+                  "Id": 3,
+                  "Type": "time.delay",
+                  "UserData": {
+                    "Position": "240,-144"
                   }
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 0,
+                  "SrcId": 3,
                   "SrcName": "_signal",
                   "DstId": 1,
                   "DstName": "_signal"
@@ -107,22 +114,79 @@
                   "Value": 20,
                   "DstId": 2,
                   "DstName": "exp"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 3,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": 0.3,
+                  "DstId": 3,
+                  "DstName": "seconds"
                 }
               ]
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
-            "Animation": "Action"
+            "ShowWhenDisabled": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Show When Disabled",
+                "id": "a8f0e378-e1b5-424f-a259-2ae63d9b9e4f",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": true,
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "Cooldown": true,
+            "CooldownTime": 0.3,
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "e3f1eba4-fbf4-44f4-bafd-a07f1b14d2e3",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/beer/burp.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            }
           }
         ]
       },
       {
         "__type": "ModelRenderer",
         "BodyGroups": 11,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/beer_bottle/beer.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -131,8 +195,7 @@
         "__type": "ModelCollider",
         "IsTrigger": false,
         "Model": "models/beer_bottle/beer.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
