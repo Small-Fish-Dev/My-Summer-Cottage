@@ -1,12 +1,14 @@
 {
   "RootObject": {
-    "Id": "7b36108e-674f-483b-b933-8e90474c3363",
+    "Id": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
     "Name": "reindeer_female",
     "Tags": "animal,npc",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "NPC",
+        "AlertOthers": true,
         "AttackCooldown": 8,
         "AttackRange": 60,
         "DetectRange": 380,
@@ -14,7 +16,7 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "go": "7b36108e-674f-483b-b933-8e90474c3363",
+          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -23,12 +25,12 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "go": "7b36108e-674f-483b-b933-8e90474c3363",
+          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "go": "7b36108e-674f-483b-b933-8e90474c3363",
+          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
           "component_type": "MoveHelper"
         },
         "Name": "Reindeer (\u26A8)",
@@ -73,7 +75,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "7b36108e-674f-483b-b933-8e90474c3363",
+                  "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
                   "component_type": "NPC"
                 }
               },
@@ -308,7 +310,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "7b36108e-674f-483b-b933-8e90474c3363",
+                  "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
                   "component_type": "NPC"
                 }
               },
@@ -503,7 +505,7 @@
         "StopSpeed": 10,
         "TraceHeight": 40,
         "TraceRadius": 12,
-        "TraceType": "Capsule",
+        "TraceType": "BBox",
         "UseCollider": false,
         "UseSceneGravity": true
       },

@@ -4,6 +4,7 @@
     "Name": "creepy_peeper",
     "Tags": "npc",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "NPC",
@@ -518,7 +519,7 @@
         "StopSpeed": 10,
         "TraceHeight": 70,
         "TraceRadius": 10,
-        "TraceType": "Capsule",
+        "TraceType": "BBox",
         "UseCollider": false,
         "UseSceneGravity": true
       },
@@ -547,6 +548,7 @@
         "Id": "b6786b84-12ab-4d16-a506-e04fe52d9378",
         "Name": "Model",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "SkinnedModelRenderer",

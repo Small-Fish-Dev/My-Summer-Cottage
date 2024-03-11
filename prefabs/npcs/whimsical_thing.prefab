@@ -4,6 +4,7 @@
     "Name": "whimsical_thing",
     "Tags": "npc",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "NPC",
@@ -690,7 +691,7 @@
         "StopSpeed": 10,
         "TraceHeight": 50,
         "TraceRadius": 6,
-        "TraceType": "Capsule",
+        "TraceType": "BBox",
         "UseCollider": false,
         "UseSceneGravity": true
       },
@@ -720,6 +721,7 @@
         "Name": "Model",
         "Position": "0,0,45.75998",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "SkinnedModelRenderer",
@@ -756,9 +758,9 @@
                   "Id": 6,
                   "Type": "call",
                   "Properties": {
-                    "_name": "FromYaw",
+                    "_isStatic": true,
                     "_type": "Sandbox.System/Rotation",
-                    "_isStatic": true
+                    "_name": "FromYaw"
                   },
                   "UserData": {
                     "Position": "272,176"
@@ -818,8 +820,8 @@
                   "Id": 15,
                   "Type": "property.set",
                   "Properties": {
-                    "_name": "LocalPosition",
-                    "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    "_type": "Sandbox.Game/Sandbox.GameTransform",
+                    "_name": "LocalPosition"
                   },
                   "UserData": {
                     "Position": "784,288"
