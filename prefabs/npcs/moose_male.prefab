@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "e8aea27f-9ca8-4e59-b7ab-a97e8d697ec6",
+    "Id": "40954725-8286-4e36-aea8-251c5e5e6cf0",
     "Name": "moose_male",
     "Tags": "animal,npc",
     "Enabled": true,
@@ -15,7 +15,7 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "go": "e8aea27f-9ca8-4e59-b7ab-a97e8d697ec6",
+          "go": "40954725-8286-4e36-aea8-251c5e5e6cf0",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -24,12 +24,12 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "go": "e8aea27f-9ca8-4e59-b7ab-a97e8d697ec6",
+          "go": "40954725-8286-4e36-aea8-251c5e5e6cf0",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "go": "e8aea27f-9ca8-4e59-b7ab-a97e8d697ec6",
+          "go": "40954725-8286-4e36-aea8-251c5e5e6cf0",
           "component_type": "MoveHelper"
         },
         "Name": "Moose (\u2642)",
@@ -71,7 +71,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "e8aea27f-9ca8-4e59-b7ab-a97e8d697ec6"
+                  "go": "40954725-8286-4e36-aea8-251c5e5e6cf0"
                 }
               },
               "UserData": {
@@ -181,7 +181,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "e8aea27f-9ca8-4e59-b7ab-a97e8d697ec6",
+                  "go": "40954725-8286-4e36-aea8-251c5e5e6cf0",
                   "component_type": "NPC"
                 }
               },
@@ -217,7 +217,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "e8aea27f-9ca8-4e59-b7ab-a97e8d697ec6",
+                  "go": "40954725-8286-4e36-aea8-251c5e5e6cf0",
                   "component_type": "MoveHelper"
                 }
               },
@@ -257,8 +257,15 @@
               "Type": "property.get",
               "ParentId": 1,
               "Properties": {
-                "_name": "WalkSpeed",
-                "_type": "package.fish.sauna/NPC"
+                "_type": "package.fish.sauna/NPC",
+                "_name": "WalkSpeed"
+              }
+            },
+            {
+              "Id": 58,
+              "Type": "op.multiply",
+              "UserData": {
+                "Position": "240,240"
               }
             }
           ],
@@ -311,7 +318,7 @@
               "DstName": "a"
             },
             {
-              "SrcId": 57,
+              "SrcId": 58,
               "SrcName": "_result",
               "DstId": 49,
               "DstName": "b"
@@ -321,6 +328,21 @@
               "SrcName": "_result",
               "DstId": 57,
               "DstName": "_target"
+            },
+            {
+              "SrcId": 57,
+              "SrcName": "_result",
+              "DstId": 58,
+              "DstName": "a"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "System.Private.CoreLib/System.Single",
+                "Value": 1.5
+              },
+              "DstId": 58,
+              "DstName": "b"
             }
           ]
         },
@@ -372,7 +394,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "e8aea27f-9ca8-4e59-b7ab-a97e8d697ec6",
+                  "go": "40954725-8286-4e36-aea8-251c5e5e6cf0",
                   "component_type": "NPC"
                 }
               },
@@ -653,7 +675,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "e8aea27f-9ca8-4e59-b7ab-a97e8d697ec6",
+                  "go": "40954725-8286-4e36-aea8-251c5e5e6cf0",
                   "component_type": "NPC"
                 }
               },

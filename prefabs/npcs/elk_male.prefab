@@ -251,8 +251,8 @@
               "Type": "property.get",
               "ParentId": 15,
               "Properties": {
-                "_name": "WalkSpeed",
-                "_type": "package.fish.sauna/NPC"
+                "_type": "package.fish.sauna/NPC",
+                "_name": "WalkSpeed"
               }
             },
             {
@@ -262,6 +262,13 @@
               "Properties": {
                 "_name": "Velocity",
                 "_type": "package.fish.sauna/MoveHelper"
+              }
+            },
+            {
+              "Id": 18,
+              "Type": "op.multiply",
+              "UserData": {
+                "Position": "144,240"
               }
             }
           ],
@@ -308,7 +315,7 @@
               "DstName": "a"
             },
             {
-              "SrcId": 16,
+              "SrcId": 18,
               "SrcName": "_result",
               "DstId": 6,
               "DstName": "b"
@@ -324,6 +331,21 @@
               "SrcName": "_result",
               "DstId": 17,
               "DstName": "_target"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_result",
+              "DstId": 18,
+              "DstName": "a"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "System.Private.CoreLib/System.Single",
+                "Value": 1.5
+              },
+              "DstId": 18,
+              "DstName": "b"
             }
           ]
         },
