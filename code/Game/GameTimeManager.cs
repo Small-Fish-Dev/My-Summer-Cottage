@@ -100,7 +100,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 	[HostSync] public bool IsDayOver { get; private set; } = false;
 
-	[HostSync] private TimeSince InGameTime { get; set; }
+	[HostSync] private RealTimeSince InGameTime { get; set; }
 	[HostSync] private float? FrozenTime { get; set; }
 	private Angles _cloudAngle = new();
 
