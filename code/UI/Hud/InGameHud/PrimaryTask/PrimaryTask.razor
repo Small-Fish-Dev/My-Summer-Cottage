@@ -13,7 +13,7 @@
 			<div class="icon"></div>
 			<div class="text-container">
 				<div style="flex-direction: row-reverse">
-					<div class="task-type">
+					<div class="task-type @(Player.PinnedTask.IsPrimaryTask ? "primary" : "secondary")">
 						@(Player.PinnedTask.IsPrimaryTask ? "PRIMARY TASK" : "SECONDARY TASK")
 					</div>
 				</div>
@@ -24,10 +24,26 @@
 					</div>
 				</div>
 
-				<div style="flex-direction: row-reverse">
-					<div class="task-description">
-						@Player.PinnedTask.Subtitle
-					</div>
+				<div style="flex-direction: row-reverse; gap: 8px;">
+					@if (Player.PinnedTask.Completed)
+					{
+						@if (Player.PinnedTask.Successful)
+						{
+							<div class="task-description completed">COMPLETED</div>
+						}
+						else
+						{
+							<div class="task-description failed">FAILED</div>
+						}
+					}
+					else
+					{
+						@if (Player.PinnedTask.NextSubtaskToComplete is not null)
+						{
+							<div class="task-description">@Player.PinnedTask.NextSubtaskToComplete.Description</div>
+							<Checkbox Enabled=@(Player.PinnedTask.NextSubtaskToComplete.Completed) />
+						}
+					}
 				</div>
 			</div>
 		}
@@ -37,6 +53,13 @@
 @code {
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( Player.PinnedTask?.ResourceId );
+		return HashCode.Combine
+		( 
+			Player.PinnedTask?.ResourceId, 
+			Player.PinnedTask?.Completed,
+			Player.PinnedTask?.Successful,
+			Player.PinnedTask?.NextSubtaskToComplete?.Completed,
+			Player.PinnedTask?.NextSubtaskToComplete?.GetHashCode()
+		);
 	}
 }
