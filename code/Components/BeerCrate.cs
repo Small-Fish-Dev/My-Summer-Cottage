@@ -157,10 +157,12 @@ public sealed class BeerCrate : Component
 				var transform = new Transform( pos, rot )
 					.RotateAround( sceneObject.Position, sceneObject.Rotation ); // Make sure the beers are properly rotated.
 
+				if ( beers.ContainsKey( i ) )
+					continue;
+
 				var beerObject = new SceneObject( sceneObject.World, beerModel, transform );
 				sceneObject.AddChild( $"beer_{i}", beerObject );
-				if ( !beers.ContainsKey( i ) )
-					beers.Add( i, beerObject );
+				beers.Add( i, beerObject );
 			}
 
 			return;
