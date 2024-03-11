@@ -103,7 +103,8 @@ public sealed class BeerCrate : Component
 			},
 			Keybind = "use2",
 			DynamicText = () => $"Take a beer",
-			Disabled = () => Count <= 0,
+			Disabled = () => Count <= 0 || Player.Local.Inventory.IsSlotOccupied( EquipSlot.Hand ),
+			ShowWhenDisabled = () => true,
 		} );
 
 		BeerCountChanged( 0, Count );

@@ -128,7 +128,9 @@ public class ItemComponent : Component
 			Action = ( Player interactor, GameObject obj ) => interactor.Inventory.GiveItem( this ),
 			Keybind = "use",
 			Description = "Pickup",
-			Disabled = () => InInventory,
+			Disabled = () => !Player.Local.Inventory.HasSpaceInBackpack(),
+			ShowWhenDisabled = () => true,
+			Accessibility = AccessibleFrom.World,
 		} );
 	}
 
