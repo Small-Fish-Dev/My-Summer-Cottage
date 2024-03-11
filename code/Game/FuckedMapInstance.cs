@@ -2,17 +2,11 @@
 
 public class FuckedMapInstance : MapInstance
 {
-	bool set = false;
-	string realMap = "";
-
 	protected override void OnUpdate()
 	{
 		// Calls the map reloading, so only allow in editor.
-		if ( set || Game.IsPlaying )
+		if ( Game.IsPlaying )
 			return;
-
-		if ( !string.IsNullOrEmpty( realMap ) ) 
-			MapName = realMap;
 
 		base.OnUpdate(); 
 	}
@@ -24,8 +18,6 @@ public class FuckedMapInstance : MapInstance
 		if ( !Game.IsPlaying )
 			return;
 
-		realMap = MapName;
 		MapName = Steam.SteamId.ToString();
-		set = true;
 	}
 }
