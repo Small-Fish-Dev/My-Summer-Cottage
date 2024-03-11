@@ -19,6 +19,7 @@ public class CreatorComponent : Component
 
 	public static CreatorStage Current { get; private set; } = CreatorStage.Identification;
 	public static CameraComponent TargetCamera { get; private set; }
+	public static ulong? LobbyId { get; set; }
 
 	[Property] public CreatorStage Stage { get; set; }
 	[Property] public CameraComponent Camera { get; set; }
