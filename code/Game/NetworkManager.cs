@@ -20,6 +20,18 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 	/*void INetworkListener.OnConnected( Connection connection )
 	{
 	}*/
+	protected override async Task OnLoad()
+	{
+		if ( Scene.IsEditor )
+			return;
+
+		if ( !GameNetworkSystem.IsActive )
+		{
+			LoadingScreen.Title = "Creating Lobby";
+			await Task.DelayRealtimeSeconds( 0.1f );
+			GameNetworkSystem.CreateLobby();
+		}
+	}
 
 	protected override void OnStart()
 	{
@@ -36,7 +48,6 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 	void INetworkListener.OnActive( Connection connection )
 	{
-		// thx cameron, nice hack :; -- - D
 		Scene.Title = Steam.SteamId.ToString();
 		Scene.Name = Steam.SteamId.ToString();
 
