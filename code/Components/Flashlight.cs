@@ -9,6 +9,7 @@ public sealed class Flashlight : Component
 	[Property, Sync] public float Brightness { get; set; } = 1.0f;
 	[Property, Sync] public float Strength { get; set; } = 15f;
 	[Property, Sync] public Color Color { get; set; } = Color.White;
+	[Property] public SoundEvent ToggleSound { get; set; }
 
 	SpotLight _spotLight;
 	ItemEquipment _itemEquipment;
@@ -29,7 +30,8 @@ public sealed class Flashlight : Component
 			},
 			DynamicText = () => On ? "Turn off" : "Turn on",
 			Keybind = "mouse1",
-			Animation = InteractAnimations.Action
+			Animation = InteractAnimations.Action,
+			Sound = () => ToggleSound
 		} );
 	}
 

@@ -2,6 +2,9 @@
 @attribute [StyleSheet]
 @inherits Panel
 
+@if ( GameTimeManager == null )
+	return;
+
 <root>
 	<div class="item">
 		<div class="icon day"></div>
@@ -30,7 +33,7 @@
 
 	public override void Tick()
 	{
-		if (Player.Local is null)
+		if ( Player.Local is null )
 			return;
 
 		if (_lastBalance != Player.Local.Money)
@@ -50,6 +53,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( GameTimeManager.Day, Player.Local.Money, _lastBalance, (bool)_timeUntilRevert );
+		return HashCode.Combine( GameTimeManager?.Day, Player.Local?.Money, _lastBalance, (bool)_timeUntilRevert );
 	}
 }

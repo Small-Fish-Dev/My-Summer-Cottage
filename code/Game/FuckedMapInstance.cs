@@ -2,6 +2,8 @@
 
 public class FuckedMapInstance : MapInstance
 {
+	// todo @ceitine: make loading screen
+	public static bool Loaded { get; private set; } = false;
 	const string MAP_NAME = "untitled_2";
 
 	protected override void OnUpdate()
@@ -18,11 +20,13 @@ public class FuckedMapInstance : MapInstance
 		if ( !Connection.Local.IsHost )
 			MapName = MAP_NAME;
 
+		Loaded = false;
 		await base.OnLoad();
 
 		if ( !Game.IsPlaying )
 			return;
 
 		MapName = Steam.SteamId.ToString();
+		Loaded = true;
 	}
 }

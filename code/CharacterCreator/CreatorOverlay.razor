@@ -97,7 +97,7 @@
 				Title="Confirm" 
 				Subtitle="Begin your cottage story."
 				ImagePath="ui/hud/confirm.png"
-				OnClick=@Save
+				OnClick=@Finish
 				IsDisabled=@false
 				IsInverted=@true
 				style="position:absolute; right: 0px; bottom: 50px;"
@@ -136,7 +136,9 @@
 		string.IsNullOrEmpty( PassportPanel.Firstname ) 
 		|| string.IsNullOrEmpty( PassportPanel.Lastname );
 
-	private void Save() =>
+	private async void Finish()
+	{
+		// todo @ceitine: walk off animation and fade out
 		Player.WriteSave( 
 			new() {
 				Firstname = PassportPanel.Firstname.ToLower().ToTitleCase(),
@@ -151,6 +153,11 @@
 					.ToArray()
 			} 
 		);
+
+		await GameTask.DelayRealtimeSeconds( 1 );
+
+		SceneHandler.ChangeScene( SaunaScene.Game, CreatorComponent.LobbyId );
+	}
 
 	private BodypartPanel[] panels;
 

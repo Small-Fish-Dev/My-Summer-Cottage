@@ -11,6 +11,7 @@
 				ImagePath="ui/mainmenu/new_icon.png"
 				Title="New Game"
 				Subtitle="Start your own cottage story.."
+				OnClick=@(() => { SceneHandler.ChangeScene( SaunaScene.Creation ); })
 			/>
 		}
 		else
@@ -19,6 +20,7 @@
 				ImagePath="ui/mainmenu/load_icon.png"
 				Title="Continue"
 				Subtitle="Get back to enjoying life at the cottage.."
+				OnClick=@(() => { SceneHandler.ChangeScene( SaunaScene.Game ); })
 			/>	
 		}
 		<SideButton
@@ -30,6 +32,7 @@
 			ImagePath="ui/mainmenu/quit_icon.png"
 			Title="Quit"
 			Subtitle="Why? There aren't any other better games on s&box..."
+			OnClick=@(() => { Game.Close(); })
 		/>
 	</div>
 
@@ -38,9 +41,16 @@
 </root>
 
 @code {
+	public enum Scene
+	{
+		Creation,
+		Game
+	}
+
 	public static (PlayerSave Save, bool Has) SaveData { get; private set; }
 	SoundHandle _loopStart;
 	SoundHandle _loop;
+
 
 	protected override void OnStart()
 	{
