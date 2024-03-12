@@ -87,6 +87,7 @@ public sealed class FishingRod : Component
 		Owner = player;
 		GameObject newBobber;
 		newBobber = BobberPrefab.Clone();
+		newBobber.NetworkMode = NetworkMode.Object;
 		newBobber.NetworkSpawn();
 		CurrentBobber = newBobber.Components.Get<Bobber>();
 		CurrentBobber.Rod = this;

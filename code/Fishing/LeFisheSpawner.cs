@@ -246,6 +246,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 			return;
 
 		var fishInstance = SceneUtility.GetPrefabScene( fish.Fish ).Clone();
+		fishInstance.NetworkMode = NetworkMode.Object;
 		fishInstance.NetworkSpawn();
 
 		var from = bobber.Transform.Position;

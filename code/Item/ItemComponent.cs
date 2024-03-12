@@ -115,12 +115,7 @@ public class ItemComponent : Component
 
 	protected override void OnStart()
 	{
-		if ( !Network.Active )
-			GameObject.NetworkSpawn();
-
-		//GameObject.Name = Name;
-		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
-		Network.SetOrphanedMode( NetworkOrphaned.ClearOwner );
+		GameObject.SetupNetworking();
 
 		// Pickup
 		var interactions = Components.GetOrCreate<Interactions>();

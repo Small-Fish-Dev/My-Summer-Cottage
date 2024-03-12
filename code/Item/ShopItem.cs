@@ -22,11 +22,9 @@ public class ShopItem : Component
 
 	protected override void OnStart()
 	{
-		if ( !Network.Active )
-			GameObject.NetworkSpawn();
+		GameObject.SetupNetworking();
 
 		GameObject.Name = $"Buy {PrefabLibrary.AsDefinition( Item ).GetComponent<ItemComponent>().Get<string>( "Name" )}";
-		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 
 		var interactions = Components.GetOrCreate<Interactions>();
 		interactions.AddInteraction( new Interaction()

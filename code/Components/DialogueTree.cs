@@ -81,11 +81,7 @@ public class DialogueTree : Component
 
 	protected override void OnStart()
 	{
-		if ( !Network.Active )
-			GameObject.NetworkSpawn();
-
-		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
-		Network.SetOrphanedMode( NetworkOrphaned.ClearOwner );
+		GameObject.SetupNetworking();
 
 		var interactions = Components.GetOrCreate<Interactions>();
 		for ( int i = 0; i < DialogueStages.Count; ++i )

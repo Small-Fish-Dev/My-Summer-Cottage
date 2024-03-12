@@ -27,11 +27,7 @@ public class DoorComponent : Component
 
 	protected override void OnStart()
 	{
-		if ( !Network.Active )
-			GameObject.NetworkSpawn();
-
-		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
-		Network.SetOrphanedMode( NetworkOrphaned.Host );
+		GameObject.SetupNetworking( orphaned: NetworkOrphaned.Host );
 
 		var interactions = Components.GetOrCreate<Interactions>();
 		interactions.AddInteraction( new Interaction()

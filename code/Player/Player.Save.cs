@@ -220,7 +220,8 @@ partial class Player
 					continue;
 
 				var o = SceneUtility.GetPrefabScene( prefab ).Clone();
-				o.NetworkSpawn();
+				o.NetworkMode = NetworkMode.Object;
+				if ( !o.Network.Active ) o.NetworkSpawn();
 				var equipment = o.Components.Get<ItemEquipment>();
 				if ( equipment == null )
 					continue;
@@ -237,7 +238,8 @@ partial class Player
 					continue;
 
 				var o = SceneUtility.GetPrefabScene( prefab ).Clone();
-				o.NetworkSpawn();
+				o.NetworkMode = NetworkMode.Object;
+				if ( !o.Network.Active ) o.NetworkSpawn();
 				var item = o.Components.Get<ItemComponent>();
 				if ( item == null )
 					continue;

@@ -201,11 +201,7 @@ public partial class SlotMachine : Component
 	{
 		Wheels = new WheelMode { a = 1, b = 1, c = 1 };
 
-		if ( !Network.Active )
-			GameObject.NetworkSpawn();
-
-		Network.SetOwnerTransfer( OwnerTransfer.Takeover );
-		Network.SetOrphanedMode( NetworkOrphaned.ClearOwner );
+		GameObject.SetupNetworking();
 
 		UpdateBodygroups();
 	}

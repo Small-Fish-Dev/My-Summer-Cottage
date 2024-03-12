@@ -84,6 +84,7 @@ public sealed class BeerCrate : Component
 
 				GameObject beer;
 				beer = Beer.Clone();
+				beer.NetworkMode = NetworkMode.Object;
 				beer.NetworkSpawn();
 
 				if ( inventory.EquippedItems[(int)EquipSlot.Hand] != null )
