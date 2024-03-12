@@ -2,7 +2,7 @@
 
 public class Bobber : Component
 {
-	public FishingCell CurrentCell { get; set; }
+	public LeFisheSpawner CurrentSpawner { get; set; }
 	public FishingRod Rod { get; set; }
 	public Rigidbody Rigidbody { get; private set; }
 
@@ -14,15 +14,9 @@ public class Bobber : Component
 		_collider = Components.Get<SphereCollider>();
 	}
 
-	protected override void OnFixedUpdate()
-	{
-		if ( !CurrentCell.IsValid() || !CurrentCell.Collider.Touching.Contains( _collider ) )
-			CurrentCell = null;
-	}
-
 	public void PullOut()
 	{
-		if ( CurrentCell.IsValid() )
-			CurrentCell.PullOutFish( GameObject );
+		if ( CurrentSpawner.IsValid() )
+			CurrentSpawner.PullOutFish( GameObject );
 	}
 }
