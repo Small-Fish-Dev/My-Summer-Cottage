@@ -51,7 +51,7 @@ public class SoundHandler : Component
 	{
 		foreach ( var sound in _activeSounds.ToList() )
 		{
-			if ( sound.IsStopped )
+			if ( sound is null || sound.IsStopped )
 			{
 				_activeSounds.Remove( sound );
 				continue;
