@@ -1,0 +1,185 @@
+{
+  "RootObject": {
+    "Id": "7147a6b8-60eb-4127-841b-236d67076e5f",
+    "Name": "steam",
+    "Tags": "particles",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ParticleEffect",
+        "Alpha": {
+          "Type": "Curve",
+          "CurveA": [
+            {
+              "in": -0.5000002,
+              "out": 0.5000002
+            },
+            {
+              "x": 0.10119046,
+              "y": 0.08355064,
+              "in": -0.8301908,
+              "out": 0.8301908
+            },
+            {
+              "x": 0.49964088,
+              "y": 0.05319149,
+              "in": 0.27008173,
+              "out": -0.27008173
+            },
+            {
+              "x": 0.8348214,
+              "mode": "Flat"
+            }
+          ],
+          "Constants": "1,0,0,0"
+        },
+        "ApplyColor": true,
+        "ApplyRotation": true,
+        "ApplyShape": true,
+        "Bounce": {
+          "Constants": "4,0,0,0"
+        },
+        "Brightness": {
+          "Constants": "1.2,0,0,0"
+        },
+        "Bumpiness": {},
+        "Collision": true,
+        "CollisionRadius": 1,
+        "Damping": {},
+        "DieOnCollisionChance": {},
+        "Force": true,
+        "ForceDirection": "0,0,-3",
+        "ForceScale": {
+          "Constants": "1,0,0,0"
+        },
+        "Friction": {
+          "Constants": "1,0,0,0"
+        },
+        "Gradient": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "GradientA": {
+            "color": [
+              {
+                "t": 0.5,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "GradientB": {
+            "color": [
+              {
+                "t": 0.5,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "ConstantA": "1,1,1,1",
+          "ConstantB": "0.79535,0.79535,0.79535,1"
+        },
+        "Lifetime": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "Constants": "10,15,0,0"
+        },
+        "MaxParticles": 100,
+        "PerParticleTimeScale": {
+          "Constants": "1,0.4,0,0"
+        },
+        "PreWarm": 0,
+        "PushStrength": {},
+        "Roll": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "Constants": "0,360,0,0"
+        },
+        "Scale": {
+          "Type": "Curve",
+          "CurveA": {
+            "rangey": "0,3",
+            "frames": [
+              {
+                "in": -2.0000007,
+                "out": 2.0000007
+              },
+              {
+                "x": 0.35914406,
+                "y": 0.55851066,
+                "in": -1.7484555E-07,
+                "out": 1.7484555E-07
+              },
+              {
+                "x": 0.7619048,
+                "y": 0.14083067,
+                "in": 1.0366281,
+                "out": -1.0366281
+              },
+              {
+                "x": 1,
+                "mode": "Flat"
+              }
+            ]
+          },
+          "Constants": "1,0,0,0"
+        },
+        "SequenceId": {},
+        "SequenceSpeed": {
+          "Constants": "0.3,0,0,0"
+        },
+        "SequenceTime": {
+          "Constants": "1,0,0,0"
+        },
+        "SheetSequence": true,
+        "Space": "World",
+        "StartVelocity": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "Constants": "10,50,0,0"
+        },
+        "Stretch": {},
+        "TimeScale": 1,
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ParticleSpriteRenderer",
+        "Additive": false,
+        "BlurAmount": 0.98,
+        "BlurOpacity": 0.69,
+        "BlurSpacing": 1,
+        "DepthFeather": 50,
+        "FaceVelocity": false,
+        "FogStrength": 0.81,
+        "LeadingTrail": true,
+        "MotionBlur": true,
+        "Opaque": false,
+        "RotationOffset": 0,
+        "Scale": 35,
+        "Shadows": false,
+        "SortMode": "ByDistance",
+        "Texture": "textures/rain/cloud.vtex"
+      },
+      {
+        "__type": "ParticleConeEmitter",
+        "Burst": 0,
+        "ConeAngle": 42.58,
+        "ConeFar": 50,
+        "ConeNear": 10,
+        "Delay": 0,
+        "DestroyOnEnd": false,
+        "Duration": 3,
+        "InVolume": false,
+        "Loop": true,
+        "OnEdge": false,
+        "Rate": 20
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
