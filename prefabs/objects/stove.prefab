@@ -6,7 +6,12 @@
     "NetworkMode": 2,
     "Components": [
       {
-        "__type": "Stove"
+        "__type": "Stove",
+        "PlayersInArea": {
+          "_type": "component",
+          "go": "3061e558-aafa-46db-a90a-d461a81179cd",
+          "component_type": "EventAreaTrigger"
+        }
       },
       {
         "__type": "SkinnedModelRenderer",
@@ -23,7 +28,25 @@
         "Static": false
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "Id": "3061e558-aafa-46db-a90a-d461a81179cd",
+        "Name": "Trigger",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "EventAreaTrigger",
+            "Extents": "191.3593,163.4399,122.24",
+            "MaxPollingRate": 10,
+            "Offset": "-91.1201,-45.75999,56.64001",
+            "TagSet": "player",
+            "TriggerPrefab": [],
+            "TriggerSignalIdentifier": "sauna.entered_sauna"
+          }
+        ]
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,

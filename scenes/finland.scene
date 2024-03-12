@@ -430,7 +430,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.9647807,0,-0.2630553",
+          "Rotation": "0,0.9496459,0,0.3133252",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -646,7 +646,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -742,8 +741,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1194,14 +1191,6 @@
       "__Prefab": "prefabs/items/axe.prefab"
     },
     {
-      "Id": "5fae56a0-fcc9-421d-a6cf-9dbf5ed2278d",
-      "Name": "Stove",
-      "Position": "3579.69,-2957.25,2433.257",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/objects/stove.prefab"
-    },
-    {
       "Id": "70e11655-f958-45c7-8eaf-40c411866039",
       "Name": "car_speeding",
       "Position": "-7744,6640,2440",
@@ -1210,22 +1199,97 @@
       "__Prefab": "prefabs/events/car_speeding.prefab"
     },
     {
-      "Id": "228c1dd9-a826-45ae-8624-e85ba99407ad",
-      "Name": "ladel",
-      "Position": "3507.749,-2929.589,2437.424",
-      "Rotation": "0.4829629,-0.1294095,-0.2241438,0.8365164",
+      "Id": "ce6db557-3fca-42b8-9ad8-1f079f737aef",
+      "Name": "Sauna",
+      "Position": "3590.354,-3156.362,2476.77",
       "Enabled": true,
       "NetworkMode": 2,
-      "__Prefab": "prefabs/items/ladel.prefab"
-    },
-    {
-      "Id": "158291d2-adc1-4f2d-a3a4-5896684ced3f",
-      "Name": "water_bucket",
-      "Position": "3513.302,-2916.854,2427.931",
-      "Rotation": "-0.01174103,0.03774813,0.2967681,0.9541309",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/objects/water_bucket.prefab"
+      "Children": [
+        {
+          "Id": "5fae56a0-fcc9-421d-a6cf-9dbf5ed2278d",
+          "Name": "Stove",
+          "Position": "30.47339,86.6084,-15.03516",
+          "Rotation": "0,0,0.3826834,0.9238796",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "Stove",
+              "Door": {
+                "_type": "component",
+                "go": "ad648568-ff05-4e08-91ae-28a978624815",
+                "component_type": "DoorComponent"
+              },
+              "PlayersInArea": {
+                "_type": "component",
+                "go": "e5222989-3e10-45ac-9620-3b4ea89e1942",
+                "component_type": "EventAreaTrigger"
+              }
+            },
+            {
+              "__type": "SkinnedModelRenderer",
+              "BodyGroups": 3,
+              "CreateBoneObjects": false,
+              "Model": "models/stove/stove.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "ModelCollider",
+              "IsTrigger": false,
+              "Model": "models/stove/stove.vmdl",
+              "Static": false
+            }
+          ],
+          "Children": [
+            {
+              "Id": "e5222989-3e10-45ac-9620-3b4ea89e1942",
+              "Name": "Trigger",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "Components": [
+                {
+                  "__type": "EventAreaTrigger",
+                  "Extents": "158.1591,111.7599,122.24",
+                  "MaxPollingRate": 10,
+                  "Offset": "-91.1201,-45.75999,56.64001",
+                  "TagSet": "player",
+                  "TriggerPrefab": [],
+                  "TriggerSignalIdentifier": "sauna.entered_sauna"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Id": "158291d2-adc1-4f2d-a3a4-5896684ced3f",
+          "Name": "water_bucket",
+          "Position": "47.5625,50.22119,-16.03027",
+          "Rotation": "-0.01174103,0.03774813,0.2967681,0.9541309",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/objects/water_bucket.prefab"
+        },
+        {
+          "Id": "228c1dd9-a826-45ae-8624-e85ba99407ad",
+          "Name": "ladel",
+          "Position": "42.00952,37.48633,-6.53833",
+          "Rotation": "0.4829629,-0.1294095,-0.2241438,0.8365164",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/items/ladel.prefab"
+        },
+        {
+          "Id": "ad648568-ff05-4e08-91ae-28a978624815",
+          "Name": "Door",
+          "Position": "-94.10425,-98.73193,-12.89941",
+          "Rotation": "0,0,-0.9311098,0.3647387",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "__Prefab": "prefabs/objects/door.prefab"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -1251,6 +1315,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-12T21:56:31.4329494\u002B01:00",
+  "LastSaved": "2024-03-12T22:22:42.8215732\u002B01:00",
   "__references": []
 }
