@@ -39,6 +39,7 @@ public partial class RadioComponent : Component
 	public string Title { get; private set; }
 
 	MusicPlayer _player;
+	SoundHandle _handle;
 	bool _on;
 	int _channelIndex;
 
@@ -91,23 +92,41 @@ public partial class RadioComponent : Component
 		} );
 	}
 
-	private void StartMusic()
+	private async void StartMusic()
 	{
 		StopMusic();
-		_player = MusicPlayer.PlayUrl( Channel.URL );
-		_player.Repeat = true;
-		_player.ListenLocal = false;
-		_player.Volume = 0.05f;
+
+		if ( !Channel.Local )
+		{
+			_player = MusicPlayer.PlayUrl( Channel.URL );
+			_player.Repeat = true;
+			_player.ListenLocal = false;
+			_player.Volume = 0.05f;
+		}
+		else
+		{
+			var file = SoundFile.Load( Channel.URL );
+			await file.LoadAsync();
+
+			_handle = Sound.PlayFile( file );
+			_handle.ListenLocal = false;
+			_handle.Volume = 0.05f;
+			_handle.Decibels = 70;
+			_handle.OcclusionRadius = 512;
+		}
 
 		Title = _player != null && !string.IsNullOrWhiteSpace( _player.Title )
-			? $"{Channel.Name} - {_player.Title}"
-			: Channel.Name;
+				? $"{Channel.Name} - {_player.Title}"
+				: Channel.Name;
 
 		Title = Title.RemoveDiacritics();
 	}
 
 	private void StopMusic()
 	{
+		_handle?.Stop();
+		_handle = null;
+
 		_player?.Stop();
 		_player = null;
 	}
@@ -124,9 +143,9 @@ public partial class RadioComponent : Component
 
 	protected override void OnUpdate()
 	{
-		if ( _player == null )
-			return;
-
-		_player.Position = Transform.Position;
+		if ( _player != null )
+			_player.Position = Transform.Position;
+		else if ( _handle != null )
+			_handle.Position = Transform.Position;
 	}
 }

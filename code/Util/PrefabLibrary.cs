@@ -85,7 +85,11 @@ public static class PrefabLibrary
 				var name = root["Name"]?.GetValue<string>();
 
 				// Go through all of the prefab's components.
-				foreach ( var component in prefab.RootObject?["Components"].AsArray() )
+				var rootComponents = prefab.RootObject?["Components"]?.AsArray();
+				if ( rootComponents == null )
+					return null;
+
+				foreach ( var component in rootComponents )
 				{
 					var obj = component.AsObject();
 					var typeName = obj?["__type"]?.GetValue<string>();
