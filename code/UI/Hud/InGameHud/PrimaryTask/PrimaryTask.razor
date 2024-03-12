@@ -3,6 +3,7 @@
 @inherits Panel
 
 <root>
+	<div class="bg" />
 	<div class="main">
 		@if (Pinned is null)
 		{
@@ -10,7 +11,6 @@
 		}
 		else
 		{
-			<div class="icon"></div>
 			<div class="text-container">
 				<div style="flex-direction: row-reverse">
 					<div class="task-type @(Pinned.IsPrimaryTask ? "primary" : "secondary")">
@@ -36,20 +36,24 @@
 					{
 						@if (Pinned.Successful)
 						{
-							<div class="task-description completed">COMPLETED</div>
+							<div class="task-state completed">COMPLETED</div>
 						}
 						else
 						{
-							<div class="task-description failed">FAILED</div>
+							<div class="task-state failed">FAILED</div>
                         }
 					}
 					else
                     {
-						@if (Pinned.NextSubtaskToComplete is not null)
-						{
-                            <div class="task-description">@Pinned.NextSubtaskToComplete.Description (@Pinned.NextSubtaskToComplete.CurrentAmount/@Pinned.NextSubtaskToComplete.AmountToComplete)</div>
-							<Checkbox Enabled=@(Pinned.NextSubtaskToComplete.Completed) />
-                        }
+						<div class="subtasks">
+							@foreach(var subtask in Pinned.ActiveSubtasks)
+							{
+								<div class="subtask">
+									<div class="subtask-description">@subtask.Description (@subtask.CurrentAmount/@subtask.AmountToComplete)</div>
+									<Checkbox Enabled=@(subtask.Completed) />
+								</div>
+							}
+						</div>
                     }
 				</div>
 			</div>
@@ -75,10 +79,8 @@
 			Pinned?.ResourceId, 
 			Pinned?.Completed,
 			Pinned?.Successful,
-            Pinned?.NextSubtaskToComplete?.Completed,
-            Pinned?.NextSubtaskToComplete?.CurrentAmount,
             Pinned?.TaskTimer.Passed,
-			Pinned?.NextSubtaskToComplete?.GetHashCode()
+			Pinned?.OrderedSubtasks.HashCombine((subtask) => HashCode.Combine(subtask.CurrentAmount, subtask.Completed))
 		);
 	}
 }

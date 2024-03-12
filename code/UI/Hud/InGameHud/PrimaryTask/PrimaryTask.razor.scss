@@ -3,26 +3,29 @@
 PrimaryTask {
     position: absolute;
     right: 0;
-    width: 620px;
     height: 230px;
     flex-direction: column;
-    padding: 10px 0px 0px 0px;
+    padding: 20px 25px 20px 20px;
     text-shadow: 2px 2px 0px black;
-    background-image: url("ui/hud/right.png");
-    background-image-tint: rgba(white, 0.85);
-    background-repeat: no-repeat;
-    background-position: right top;
-    background-size: 70% 100%;
-    image-rendering: pixelated;
+
+    .bg {
+        position: absolute;
+        right: 0px;
+        width: 700px;
+        height: 200px;
+        background-image: url("ui/hud/right.png");
+        background-image-tint: rgba(white, 0.85);
+        background-repeat: no-repeat;
+        background-position: right top;
+        image-rendering: pixelated;
+    }
 
     .main {
-        width: 100%;
         flex-direction: row-reverse;
 
         .text-container {
-            width: 80%;
             height: 100%;
-            padding: 10px;
+            padding: 10px 25px;
             text-align: right;
             flex-direction: column;
 
@@ -47,7 +50,29 @@ PrimaryTask {
                 margin-bottom: 5px;
             }
 
-            .task-description {
+            .subtasks {
+                flex-direction: column;
+                gap: 10px;
+
+                .subtask {
+                    gap: 10px;
+                    justify-content: flex-end;
+
+                    .subtask-description {
+                        font-family: HabboExtended;
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            .task-timer {
+                font-family: HabboExtended;
+                font-size: 18px;
+                color: $blood-red;
+                padding: 0px 0px 8px 0px;
+            }
+
+            .task-state {
                 font-family: HabboExtended;
                 font-size: 18px;
 
@@ -59,23 +84,6 @@ PrimaryTask {
                     color: $blood-red;
                 }
             }
-
-            .task-timer {
-                font-family: HabboExtended;
-                font-size: 18px;
-                color: $blood-red;
-                padding: 0px 0px 8px 0px;
-            }
-        }
-
-        .icon {
-            image-rendering: pixelated;
-            background-image: url("ui/hud/tablet.png");
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            width: 50px;
-            margin: 10px 25px 25px 13px;
         }
     }
 }
