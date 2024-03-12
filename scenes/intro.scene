@@ -1,0 +1,65 @@
+{
+  "Id": "030f59e1-f11c-43fb-8d9e-b185210c883f",
+  "GameObjects": [
+    {
+      "Id": "ce89152d-d0cb-4328-80aa-e2ec7152dc8e",
+      "Name": "Screen",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "ScreenPanel",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "IntroComponent",
+          "ForceShowIntro": false,
+          "IntroPanel": {
+            "_type": "component",
+            "go": "ce89152d-d0cb-4328-80aa-e2ec7152dc8e",
+            "component_type": "IntroPanel"
+          },
+          "MenuScene": "scenes/menu.scene"
+        },
+        {
+          "__type": "IntroPanel",
+          "__enabled": false,
+          "IntroComponent": {
+            "_type": "component",
+            "go": "ce89152d-d0cb-4328-80aa-e2ec7152dc8e",
+            "component_type": "IntroComponent"
+          },
+          "IntroSound": "sounds/ui/smallfishintro_temp_fix.sound"
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "Lerping": true,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "intro",
+  "Description": "",
+  "LastSaved": "2024-03-12T11:09:28.4374708\u002B03:00",
+  "__references": []
+}
