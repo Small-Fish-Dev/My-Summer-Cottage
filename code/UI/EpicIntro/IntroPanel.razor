@@ -1,0 +1,110 @@
+﻿@namespace Sauna.UI.EpicIntro
+@attribute [StyleSheet]
+@attribute [Category( "Intro" )]
+@inherits PanelComponent
+
+<root>
+	<div class="disclaimer-container" style="opacity: @( _state == IntroState.Disclaimer ? 1 : 0 )">
+		<h1>WARNING</h1>
+		<div class="text">This game contains topics that are not suitable for the players under 18.</div>
+		<div class="list">
+			<div>Living in Finland</div>
+			<div>Naked men</div>
+			<div>Penis gnomes</div>
+			<div>Fishing</div>
+			<div>Gambling and actually winning</div>
+			<div>Cryptids</div>
+			<div>Alcohol</div>
+			<div>Drinking and driving</div>
+			<div>Drinking and fishing</div>
+			<div>Drinking and hunting for the finnish cryptids</div>
+			<div>Pissing in the sauna heater</div>
+		</div>
+		<div class="text">By holding down the button below you confirm that you are 18 y/o or older.</div>
+		<div class="confirm-button"
+		     onmousedown="@( () => ConfirmMouseDown() )"
+		     onmouseup="@( () => ConfirmMouseUp() )"
+		     onmouseleave="@( () => ConfirmMouseUp() )"
+		     style="background-color: @( (_holdingButton ? Color.Lerp( Color.Green, Color.Transparent, _confirmTimeOut / ConfirmHoldTime ) : Color.Black).Hex )">
+			<div class="inner-border">
+				I AM OVER 18
+			</div>
+		</div>
+	</div>
+
+	@if ( _state == IntroState.Logo )
+	{
+		<div class="video-container">
+			@* TODO:  *@
+			<VideoPanel Source="ui/intro/smallfishintro.mp4"/>
+		</div>
+	}
+</root>
+
+@code {
+
+	private enum IntroState
+	{
+		Logo,
+		Disclaimer,
+		Next
+	}
+
+	[Property] public IntroComponent IntroComponent;
+	[Property] public SoundEvent IntroSound;
+
+	private const float IntroTime = 4f;
+	public const float ConfirmHoldTime = 1.5f;
+
+	private IntroState _state = IntroState.Logo;
+	private TimeUntil _introIsOver = IntroTime;
+	private TimeUntil _confirmTimeOut;
+	private bool _holdingButton;
+
+	protected override void OnAwake()
+	{
+		Sound.Play( IntroSound );
+	}
+
+	protected override void OnUpdate()
+	{
+		switch ( _state )
+		{
+			case IntroState.Logo:
+				if ( _introIsOver )
+					_state = IntroState.Disclaimer;
+				break;
+
+			case IntroState.Disclaimer:
+				if ( _holdingButton && _confirmTimeOut )
+					IntroComponent.GoToMenu();
+				break;
+
+			case IntroState.Next:
+				break;
+
+			default:
+				throw new ArgumentOutOfRangeException();
+		}
+	}
+
+	private void ConfirmMouseDown()
+	{
+		if ( _state != IntroState.Disclaimer )
+			return;
+
+		_confirmTimeOut = ConfirmHoldTime;
+		_holdingButton = true;
+	}
+
+	private void ConfirmMouseUp()
+	{
+		if ( _state != IntroState.Disclaimer )
+			return;
+
+		_holdingButton = false;
+	}
+
+	protected override int BuildHash() => HashCode.Combine( _state, _holdingButton ? (float)_confirmTimeOut : 0f );
+
+}
