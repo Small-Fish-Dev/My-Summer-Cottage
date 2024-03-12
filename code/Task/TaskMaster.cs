@@ -286,7 +286,7 @@ public class TaskMaster : Component
 
 			if ( !task.Completed )
 			{
-				var activeSubtasks = task.Subtasks.Where( x => x.SubtaskOrder == task.CurrentSubtaskOrder ); // Current active subtasks
+				var activeSubtasks = task.ActiveSubtasks;
 
 				// Check if the subtasks have met the conditions (Previous subtask orders will always remain completed)
 				foreach ( var subtask in activeSubtasks )
