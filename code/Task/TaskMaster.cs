@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic;
 using Sauna.Event;
+using Sauna.UI;
 
 namespace Sauna;
 
@@ -377,7 +378,10 @@ public class TaskMaster : Component
 		if ( sameTaskFound ) return _instance.CurrentTasks.Where( x => x.ResourceName == taskToAssign.ResourceName ).First(); // Bail if we have the same task already
 
 		_instance.CurrentTasks.Add( taskToAssign ); // Add the task
+
 		NotificationManager.Popup( taskToAssign );
+		if ( PrimaryTask.Pinned is null && taskToAssign.IsPrimary )
+			PrimaryTask.PinTask( taskToAssign );
 
 		return taskToAssign;
 	}

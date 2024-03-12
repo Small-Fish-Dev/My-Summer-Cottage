@@ -51,7 +51,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="pin-details" onclick=@(() => PrimaryTask.Pinned = PrimaryTask.Pinned == SelectedTask ? null : SelectedTask)>
+		<div class="pin-details" onclick=@(() => PrimaryTask.PinTask(PrimaryTask.Pinned == SelectedTask ? null : SelectedTask))>
 			<img src="ui/hud/task_pin.png" />
 			<text>Pin this task to top right corner</text>
 			<Checkbox Enabled=@(SelectedTask == PrimaryTask.Pinned) />

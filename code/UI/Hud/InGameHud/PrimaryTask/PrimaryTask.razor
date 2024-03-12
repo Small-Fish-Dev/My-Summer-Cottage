@@ -13,8 +13,8 @@
 		{
 			<div class="text-container">
 				<div style="flex-direction: row-reverse">
-					<div class="task-type @(Pinned.IsPrimaryTask ? "primary" : "secondary")">
-						@(Pinned.IsPrimaryTask ? "PRIMARY TASK" : "SECONDARY TASK")
+					<div class="task-type @(Pinned.IsPrimary ? "primary" : "secondary")">
+						@(Pinned.IsPrimary ? "PRIMARY TASK" : "SECONDARY TASK")
 					</div>
 				</div>
 
@@ -62,7 +62,7 @@
 </root>
 
 @code {
-	public static SaunaTask Pinned { get; set; }
+	public static SaunaTask Pinned { get; private set; }
 
 	public PrimaryTask()
 	{
@@ -70,6 +70,11 @@
 		// that is no longer active, remove it. 
 		if (Pinned is not null && !TaskMaster.ActiveTasks.Contains(Pinned))
 			Pinned = null;
+	}
+
+	public static void PinTask(SaunaTask task)
+	{
+		Pinned = task;
 	}
 
 	protected override int BuildHash()

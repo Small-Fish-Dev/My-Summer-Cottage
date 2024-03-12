@@ -125,9 +125,6 @@ public partial class SaunaTask : GameResource
 	[Property]
 	public TaskType TaskType { get; set; } = TaskType.Any;
 
-	[Hide, JsonIgnore]
-	public bool IsPrimaryTask => IsPrimary;
-
 	/// <summary>
 	/// How frequently this taks will be given out
 	/// </summary>

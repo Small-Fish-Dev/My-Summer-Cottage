@@ -65,10 +65,10 @@
 	/// <param name="failed"></param>
 	public static void Popup( SaunaTask task, bool completed = false, bool failed = false )
 		=> Popup( 
-			 $"{(completed ? "Completed" : failed ? "Failed" : "New")} {(task.IsPrimaryTask ? "story" : "side")} task",
+			 $"{(completed ? "Completed" : failed ? "Failed" : "New")} {(task.IsPrimary ? "story" : "side")} task",
 			 task.Subtitle,
-			 completed ? "#33cc33" : failed ? "#cc0000" : task.IsPrimaryTask ? "#bc4d2a" : "#0e599f",
-			 task.IsPrimaryTask ? "ui/hud/primary_task.png" : "ui/hud/substory_task.png",
+			 completed ? "#33cc33" : failed ? "#cc0000" : task.IsPrimary ? "#bc4d2a" : "#0e599f",
+			 task.IsPrimary ? "ui/hud/primary_task.png" : "ui/hud/substory_task.png",
 			 TaskMaster.IndexOf( task ),
 			 7,
 			 failed ? "failed" : ""

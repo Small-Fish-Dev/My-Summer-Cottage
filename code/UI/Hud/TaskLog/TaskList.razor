@@ -30,8 +30,8 @@
 
 @code {
 	public Action<SaunaTask> OnTaskClick { get; set; }
-	private IEnumerable<SaunaTask> PrimaryTasks => TaskMaster.ActiveTasks.Where((t) => t.IsPrimaryTask);
-	private IEnumerable<SaunaTask> SecondaryTasks => TaskMaster.ActiveTasks.Where((t) => !t.IsPrimaryTask);
+	private IEnumerable<SaunaTask> PrimaryTasks => TaskMaster.ActiveTasks.Where((t) => t.IsPrimary);
+	private IEnumerable<SaunaTask> SecondaryTasks => TaskMaster.ActiveTasks.Where((t) => !t.IsPrimary);
 
 	private static bool HideCompletedTasks = false;
 	private static bool HideFailedTasks = false;
