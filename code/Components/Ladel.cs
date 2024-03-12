@@ -23,18 +23,19 @@ public sealed class Ladel : Component
 			CooldownTime = 0.5f,
 			ShowWhenDisabled = () => true,
 			Action = LadelInteract,
+			InteractDistance = 80,
 			DynamicText = () =>
 			{
 				var toReturn = "Swing";
 
 				if ( HasWater )
 				{
+					toReturn = "Throw water";
+
 					if ( Player.Local.TargetedGameObject != null )
 						if ( Player.Local.TargetedGameObject.Components.TryGet<Stove>( out var stove ) )
 							if ( !stove.HasWater && stove.HasWood )
 								toReturn = "Pour water";
-
-					toReturn = "Throw water";
 				}
 				else
 				{
