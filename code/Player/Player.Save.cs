@@ -244,7 +244,7 @@ partial class Player
 				if ( item == null )
 					continue;
 
-				player.Inventory.GiveItem( item );
+				player.Inventory.SetItem( item, data.Index );
 				ReadData( data, o );
 			}
 
