@@ -1,5 +1,5 @@
 {
-  "Id": "c07db25c-432e-452c-9bc0-a22c921b0b10",
+  "Id": "8e1d2fc7-1ba7-4ea6-aad9-b51a0bd99388",
   "GameObjects": [
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -201,8 +201,8 @@
                         "Type": "call",
                         "Properties": {
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive",
-                          "_isStatic": true
+                          "_isStatic": true,
+                          "_name": "Receive"
                         },
                         "UserData": {
                           "Position": "432,-80"
@@ -350,7 +350,7 @@
         {
           "Id": "d09666df-e617-422e-915c-9cbf381b592c",
           "Name": "Spawner",
-          "Position": "59.32935,-34.14404,-7.923096",
+          "Position": "1100.658,-642.5198,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
           "Enabled": true,
           "NetworkMode": 2,
@@ -363,7 +363,7 @@
         {
           "Id": "65b73d71-edfe-4eea-9d88-8819da3b4a51",
           "Name": "Spawner",
-          "Position": "26.50977,6.496338,-7.923096",
+          "Position": "1067.838,-601.8794,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
           "Enabled": true,
           "NetworkMode": 2,
@@ -376,7 +376,7 @@
         {
           "Id": "c5fe7faf-abe6-4e2d-88fe-fadc8da17fcb",
           "Name": "Spawner",
-          "Position": "59.86963,48.84277,-7.923096",
+          "Position": "1101.198,-559.533,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
           "Enabled": true,
           "NetworkMode": 2,
@@ -389,7 +389,7 @@
         {
           "Id": "9e8a633d-d61a-433e-a690-4b6ce18d0b9c",
           "Name": "Spawner",
-          "Position": "91.56421,6.345215,-7.923096",
+          "Position": "1132.893,-602.0305,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
           "Enabled": true,
           "NetworkMode": 2,
@@ -428,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.386555,0,-0.9222663",
+          "Rotation": "0,0.9254845,0,0.3787854",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -605,8 +605,8 @@
                     "Type": "call",
                     "Properties": {
                       "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_name": "PlaySoundWithSubtitle",
-                      "_isStatic": true
+                      "_isStatic": true,
+                      "_name": "PlaySoundWithSubtitle"
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -695,8 +695,8 @@
                     "Type": "call",
                     "Properties": {
                       "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_name": "PlaySoundWithNameAndSubtitle",
-                      "_isStatic": true
+                      "_isStatic": true,
+                      "_name": "PlaySoundWithNameAndSubtitle"
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -1140,6 +1140,1069 @@
       "Enabled": true,
       "NetworkMode": 1,
       "__Prefab": "prefabs/objects/door.prefab"
+    },
+    {
+      "Id": "d17d8a78-2e4d-44f8-b632-9494a33981c1",
+      "Name": "WoodPile",
+      "Position": "3490.215,-3095.327,2435.073",
+      "Rotation": "-0.02007881,0.008316913,-0.382593,0.9236614",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "BoxCollider",
+          "Center": "0,36.79999,10.4",
+          "IsTrigger": false,
+          "Scale": "19.91999,82.32008,79.20003",
+          "Static": false
+        },
+        {
+          "__type": "Interactions",
+          "HideOnEmpty": false,
+          "ObjectInteractions": [
+            {
+              "Identifier": "wood_pile.get_log",
+              "Keybind": "Use",
+              "Description": "Get a log",
+              "Action": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Action",
+                  "id": "8661a9bc-bd5f-4209-8e55-301382f9c3ef",
+                  "ReferencedComponentTypes": [
+                    "package.fish.sauna/Sauna.Inventory"
+                  ]
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input"
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "scene.get",
+                    "Properties": {
+                      "T": "package.fish.sauna/Sauna.Inventory"
+                    },
+                    "UserData": {
+                      "Position": "224,-0"
+                    }
+                  },
+                  {
+                    "Id": 5,
+                    "Type": "resource.ref",
+                    "Properties": {
+                      "value": "prefabs/items/wooden_log.prefab",
+                      "T": "Sandbox.Engine/Sandbox.PrefabFile"
+                    },
+                    "UserData": {
+                      "Position": "0,160"
+                    }
+                  },
+                  {
+                    "Id": 8,
+                    "Type": "scene.instantiate",
+                    "UserData": {
+                      "Position": "240,160"
+                    }
+                  },
+                  {
+                    "Id": 10,
+                    "Type": "call",
+                    "Properties": {
+                      "_type": "package.fish.sauna/Sauna.Inventory",
+                      "_isStatic": false,
+                      "_name": "EquipItemFromWorld"
+                    },
+                    "UserData": {
+                      "Position": "528,64"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 0,
+                    "SrcName": "interactor",
+                    "DstId": 1,
+                    "DstName": "_this"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 8,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 5,
+                    "SrcName": "_result",
+                    "DstId": 8,
+                    "DstName": "prefab"
+                  },
+                  {
+                    "SrcId": 8,
+                    "SrcName": "_signal",
+                    "DstId": 10,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_result",
+                    "DstId": 10,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 8,
+                    "SrcName": "_result",
+                    "DstId": 10,
+                    "DstName": "item"
+                  }
+                ]
+              },
+              "InteractDistance": 90,
+              "Accessibility": "World",
+              "CooldownTime": 0.5,
+              "Animation": "Interact"
+            }
+          ]
+        }
+      ],
+      "Children": [
+        {
+          "Id": "4994dec7-0f92-4f1c-af85-428ff7c1a58a",
+          "Name": "Object",
+          "Position": "0,0,3.616943",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "405ad9d6-d515-4c0e-9738-b6cf6fbf0298",
+          "Name": "Object",
+          "Position": "0,7.477783,3.785645",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "3e5c78df-3889-488a-8d2f-91d22eb2e78c",
+          "Name": "Object",
+          "Position": "0,4.414307,10.41992",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "bb5fd588-6d72-4d7b-aea7-7bcd548f39f6",
+          "Name": "Object",
+          "Position": "0,15.10767,4.030762",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "9ba203d4-3101-44dd-9d8a-00232f1b7f0a",
+          "Name": "Object",
+          "Position": "0,7.821533,17.3584",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "be33ec9a-c542-4ffa-a272-4a0e797c4d5d",
+          "Name": "Object",
+          "Position": "0,12.04419,10.66504",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "b8c4d83f-8371-49e0-afd4-573f012469a6",
+          "Name": "Object",
+          "Position": "0,22.48438,3.996094",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "e035f0bb-ccfc-4903-94c0-267ea5cebf26",
+          "Name": "Object",
+          "Position": "0,15.19824,17.32373",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "bda23a65-4c66-43b5-869d-ed32529d708a",
+          "Name": "Object",
+          "Position": "0,19.4209,10.63037",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "e166656b-7c20-4aff-a7c6-6e688f6507f7",
+          "Name": "Object",
+          "Position": "0,12.13477,23.95801",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "6ec8869b-8b53-4ed1-9ac1-5dd0969a3da2",
+          "Name": "Object",
+          "Position": "0,51.80103,4.416992",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "cdd127cf-eaf8-4d65-a046-1693f10097a0",
+          "Name": "Object",
+          "Position": "0,44.51489,17.74463",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "4fac19a3-664c-47af-b806-f45b6c0d1623",
+          "Name": "Object",
+          "Position": "0,48.73755,11.05127",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "e4c09c2f-485b-4eb8-a885-b2e787979b8a",
+          "Name": "Object",
+          "Position": "0,41.45142,24.37891",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "7df783f6-f524-432b-87c7-6fff544e0e56",
+          "Name": "Object",
+          "Position": "0,38.63013,31.21826",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "dfdb38f0-3740-4dfd-9ecd-6c3b457f08fb",
+          "Name": "Object",
+          "Position": "0,34.77515,38.37036",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "99f8a839-08ec-46e3-b163-fb93514ae46a",
+          "Name": "Object",
+          "Position": "0,30.92017,45.06763",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "40d79599-6489-4f85-8eae-1fb402870da3",
+          "Name": "Object",
+          "Position": "0,29.89819,3.770508",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "a8dbd331-f39f-4d35-b2e2-b9012c8e08d6",
+          "Name": "Object",
+          "Position": "0,22.61206,17.09814",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "c33076fa-3dde-401f-91c0-7864ede33cb4",
+          "Name": "Object",
+          "Position": "0,26.83472,10.40479",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "1c9119f0-c6df-49e9-9221-0a114c06f897",
+          "Name": "Object",
+          "Position": "0,19.54858,23.73242",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "a898ba4b-249a-406d-8c05-8d60de11061d",
+          "Name": "Object",
+          "Position": "0,16.72729,30.57178",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "fc805c9d-fffb-40dc-ba2d-8ceecb2fb3ea",
+          "Name": "Object",
+          "Position": "0,59.21484,4.191406",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "76173320-eaba-44b6-85c3-fe4dc529bd62",
+          "Name": "Object",
+          "Position": "0,51.92871,17.51904",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "809f713a-9cef-4236-a48a-876533974ab2",
+          "Name": "Object",
+          "Position": "0,56.15137,10.82568",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "3818d29f-e0a3-432b-afe0-2e3866e12bde",
+          "Name": "Object",
+          "Position": "0,48.86523,24.15332",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "960cabb6-5df2-4189-9583-84c01667d10e",
+          "Name": "Object",
+          "Position": "0,46.04395,30.99268",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "b19bdc8d-bd0d-4e0b-84a0-307c83446af3",
+          "Name": "Object",
+          "Position": "0,42.18896,38.14478",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "2c2c649f-10e5-4887-af0e-d034b0a709e4",
+          "Name": "Object",
+          "Position": "0,38.33398,44.84204",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "1bfbcfbe-ba70-4d48-9fcc-39442e2601b3",
+          "Name": "Object",
+          "Position": "0,37.40479,4.288574",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "631a0f92-54b0-4d59-acb0-b0ebbbcc71eb",
+          "Name": "Object",
+          "Position": "0,30.11865,17.61621",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "bd758e04-cf2c-413c-bd50-77160c17cf5b",
+          "Name": "Object",
+          "Position": "0,34.34131,10.92285",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "9bdff6ec-fd26-427b-a58f-e7488472bfdc",
+          "Name": "Object",
+          "Position": "0,27.05518,24.25049",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "fd4ce773-5e09-4707-9763-520b565f55d4",
+          "Name": "Object",
+          "Position": "0,24.23389,31.08984",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "72153587-44a3-4f1d-ae1d-720942541bdd",
+          "Name": "Object",
+          "Position": "0,20.37891,38.24194",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "fac0f478-0e6e-4739-a84c-882421158acb",
+          "Name": "Object",
+          "Position": "0,66.72144,4.709473",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "0a6e1e71-f8a1-46b1-b968-84ea757ee542",
+          "Name": "Object",
+          "Position": "0,59.4353,18.03711",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "fbc610b7-aca0-457d-9dfe-735043d2b501",
+          "Name": "Object",
+          "Position": "0,63.65796,11.34375",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "0caab643-2be5-4c61-8a0c-c6546ef2ca05",
+          "Name": "Object",
+          "Position": "0,56.37183,24.67139",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "1445d875-9491-4821-bb59-972b6709f905",
+          "Name": "Object",
+          "Position": "0,53.55054,31.51074",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "29323061-80ee-46e0-9d9f-fd863373e72e",
+          "Name": "Object",
+          "Position": "0,49.69556,38.66284",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "88bb3b3f-d402-41cd-98fd-d142a0be0dac",
+          "Name": "Object",
+          "Position": "0,45.84058,45.36011",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "d36a5259-be8a-4e62-9d9f-1714a19d5117",
+          "Name": "Object",
+          "Position": "0,44.55835,4.462158",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "617a802d-b134-4ee4-927d-5abab36ba7aa",
+          "Name": "Object",
+          "Position": "0,37.27222,17.78979",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "5f701414-8a29-435c-8948-50afef1d11cb",
+          "Name": "Object",
+          "Position": "0,41.49487,11.09644",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "3c5cc6aa-590c-40cd-9634-f104165d0c09",
+          "Name": "Object",
+          "Position": "0,34.20874,24.42407",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "c229df76-1103-4231-8c47-abac8d258c6b",
+          "Name": "Object",
+          "Position": "0,31.38745,31.26343",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "8c0afafb-66ec-497f-81c1-6a7c82b3ac69",
+          "Name": "Object",
+          "Position": "0,27.53247,38.41553",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "4ce3f9d5-de10-41ab-a57a-02f91f8a7b2f",
+          "Name": "Object",
+          "Position": "0,23.67749,45.11279",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "70a73d4f-b0e0-4c25-8a51-a4227c037a86",
+          "Name": "Object",
+          "Position": "0,73.875,4.883057",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "edac79a3-6481-4864-b347-e42d7e0d2745",
+          "Name": "Object",
+          "Position": "0,66.58887,18.21069",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "164db22e-9db8-4753-866f-03dc5ae60737",
+          "Name": "Object",
+          "Position": "0,70.81152,11.51733",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "d3edc3de-34d4-4b49-a3ce-4f353782abe0",
+          "Name": "Object",
+          "Position": "0,63.52539,24.84497",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "535bf156-3361-4de1-8a21-590fb81706e2",
+          "Name": "Object",
+          "Position": "0,60.7041,31.68433",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "707a1e09-d23d-4738-b45b-f8fd349f26d1",
+          "Name": "Object",
+          "Position": "0,56.84912,38.83643",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        },
+        {
+          "Id": "9abe608f-25bb-4b70-8c0d-224afed542db",
+          "Name": "Object",
+          "Position": "0,52.99414,45.53369",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/log/saunalog.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Id": "7e2a4434-79ef-47a2-a2c0-951450c0171a",
+      "Name": "Object",
+      "Position": "3449.392,-2988.885,2433.626",
+      "Scale": "0.5,0.5,0.8",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/logchopbase/logchopperbase.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "HullCollider",
+          "BoxSize": "50,50,50",
+          "Center": "0,0,0",
+          "Height": 45.279995,
+          "IsTrigger": false,
+          "Radius": 32.759995,
+          "Radius2": 0,
+          "Slices": 16,
+          "Static": false,
+          "Type": "Cylinder"
+        }
+      ]
+    },
+    {
+      "Id": "150d407b-01ef-4a3b-b859-7d8b564237cc",
+      "Name": "axe",
+      "Position": "3441.088,-2989.255,2454.929",
+      "Rotation": "0,0.7071066,0,0.7071068",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/axe.prefab"
     }
   ],
   "SceneProperties": {
@@ -1165,6 +2228,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-12T17:31:38.2333881\u002B02:00",
+  "LastSaved": "2024-03-12T17:27:01.2770615\u002B01:00",
   "__references": []
 }

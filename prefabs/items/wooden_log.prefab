@@ -1,29 +1,42 @@
 {
   "RootObject": {
-    "Id": "f3237755-c1b0-4230-802d-85fb40725b2c",
+    "Id": "e258a518-f56e-426a-9a28-24aef0e06725",
     "Name": "wooden_log",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
-        "__type": "ItemComponent",
+        "__type": "ItemEquipment",
+        "Attachment": "hand_R",
+        "AttachmentTransform": {
+          "UniformScale": 1,
+          "Position": "3.28,-4.8,-1.119999",
+          "Scale": "1,1,1",
+          "Rotation": "-0.002741201,-0.004045692,0.8278546,0.5609215"
+        },
         "Count": 0,
-        "Description": "Uncut wood, ready to be chopped. burned even.",
+        "Description": "Perfect for burning. Just needs to be chopped.",
+        "HideBodygroups": "None",
+        "HoldType": "Item",
         "Icon": {
           "Model": "models/log/saunalog.vmdl",
           "MaterialGroup": "",
-          "Position": "-5.85,1.2,0",
-          "Rotation": "-0.08378317,0.237349,-0.4007522,0.8809333",
-          "Guid": "17a6bedf-c1c2-47b3-963d-ff61fd824855"
+          "Colour": "0,0,0,1",
+          "Position": "-4.2,1.65,0",
+          "Rotation": "0.07805127,0.1283928,-0.3873547,0.9096041",
+          "Guid": "b588be14-f0c5-4f6f-a0f3-b775f6277c18"
         },
         "MaxStack": 0,
         "Name": "Wooden Log",
         "SellPrice": -1,
+        "Slot": "Hand",
+        "UpdatePosition": true,
+        "UseSkinTint": false,
         "WeightInGrams": 800
       },
       {
         "__type": "ModelRenderer",
-        "BodyGroups": 18446744073709551615,
+        "BodyGroups": 11,
         "Model": "models/log/saunalog.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -43,6 +56,377 @@
         "MassOverride": 0,
         "RigidbodyFlags": 0,
         "StartAsleep": false
+      },
+      {
+        "__type": "Interactions",
+        "HideOnEmpty": false,
+        "ObjectInteractions": [
+          {
+            "Identifier": "wooden_log.placed",
+            "Keybind": "Mouse1",
+            "Description": "Place down",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "dd50709f-17fd-47c5-bf71-5558eb3f4ffa",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_name": "Inventory",
+                    "_type": "package.fish.sauna/Sauna.Player"
+                  },
+                  "UserData": {
+                    "Position": "256,96"
+                  }
+                },
+                {
+                  "Id": 3,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_name": "InteractionTrace",
+                    "_type": "package.fish.sauna/Sauna.Player"
+                  },
+                  "UserData": {
+                    "Position": "352,224"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_name": "HitPosition",
+                    "_type": "Sandbox.Game/Sandbox.SceneTraceResult"
+                  },
+                  "UserData": {
+                    "Position": "688,352"
+                  }
+                },
+                {
+                  "Id": 7,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_name": "Transform",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
+                  },
+                  "UserData": {
+                    "Position": "592,128"
+                  }
+                },
+                {
+                  "Id": 8,
+                  "Type": "property.set",
+                  "Properties": {
+                    "_name": "Position",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
+                  },
+                  "UserData": {
+                    "Position": "1280,176"
+                  }
+                },
+                {
+                  "Id": 9,
+                  "Type": "call",
+                  "Properties": {
+                    "_name": "DropItem",
+                    "_type": "package.fish.sauna/Sauna.Inventory",
+                    "_isStatic": false
+                  },
+                  "UserData": {
+                    "Position": "528,-16"
+                  }
+                },
+                {
+                  "Id": 10,
+                  "Type": "if",
+                  "UserData": {
+                    "Position": "752,224"
+                  }
+                },
+                {
+                  "Id": 11,
+                  "Type": "property.get",
+                  "ParentId": 3,
+                  "Properties": {
+                    "_name": "Hit",
+                    "_type": "Sandbox.Game/Sandbox.SceneTraceResult"
+                  }
+                },
+                {
+                  "Id": 12,
+                  "Type": "property.set",
+                  "Properties": {
+                    "_name": "Position",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
+                  },
+                  "UserData": {
+                    "Position": "1280,288"
+                  }
+                },
+                {
+                  "Id": 13,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_name": "StartPosition",
+                    "_type": "Sandbox.Game/Sandbox.SceneTraceResult"
+                  },
+                  "UserData": {
+                    "Position": "688,448"
+                  }
+                },
+                {
+                  "Id": 14,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_name": "Direction",
+                    "_type": "Sandbox.Game/Sandbox.SceneTraceResult"
+                  },
+                  "UserData": {
+                    "Position": "704,528"
+                  }
+                },
+                {
+                  "Id": 15,
+                  "Type": "op.multiply",
+                  "UserData": {
+                    "Position": "976,528"
+                  }
+                },
+                {
+                  "Id": 16,
+                  "Type": "op.add",
+                  "UserData": {
+                    "Position": "976,432"
+                  }
+                },
+                {
+                  "Id": 17,
+                  "Type": "property.set",
+                  "Properties": {
+                    "_name": "Rotation",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
+                  },
+                  "UserData": {
+                    "Position": "1072,16"
+                  }
+                },
+                {
+                  "Id": 18,
+                  "Type": "op.add",
+                  "UserData": {
+                    "Position": "992,352"
+                  }
+                },
+                {
+                  "Id": 19,
+                  "Type": "op.add",
+                  "UserData": {
+                    "Position": "1168,464"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 1,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 3,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 7,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 10,
+                  "SrcName": "true",
+                  "DstId": 8,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 7,
+                  "SrcName": "_result",
+                  "DstId": 8,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 18,
+                  "SrcName": "_result",
+                  "DstId": 8,
+                  "DstName": "_value"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 9,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 9,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 9,
+                  "DstName": "item"
+                },
+                {
+                  "SrcId": 9,
+                  "SrcName": "_signal",
+                  "DstId": 10,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 11,
+                  "SrcName": "_result",
+                  "DstId": 10,
+                  "DstName": "condition"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 11,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 10,
+                  "SrcName": "false",
+                  "DstId": 12,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 7,
+                  "SrcName": "_result",
+                  "DstId": 12,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 19,
+                  "SrcName": "_result",
+                  "DstId": 12,
+                  "DstName": "_value"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 13,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 14,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 14,
+                  "SrcName": "_result",
+                  "DstId": 15,
+                  "DstName": "a"
+                },
+                {
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "System.Private.CoreLib/System.Single",
+                    "Value": 80
+                  },
+                  "DstId": 15,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 13,
+                  "SrcName": "_result",
+                  "DstId": 16,
+                  "DstName": "a"
+                },
+                {
+                  "SrcId": 15,
+                  "SrcName": "_result",
+                  "DstId": 16,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 9,
+                  "SrcName": "_signal",
+                  "DstId": 17,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 7,
+                  "SrcName": "_result",
+                  "DstId": 17,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": "0,-0.7071068,0,0.7071068",
+                  "DstId": 17,
+                  "DstName": "_value"
+                },
+                {
+                  "SrcId": 5,
+                  "SrcName": "_result",
+                  "DstId": 18,
+                  "DstName": "a"
+                },
+                {
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "Sandbox.System/Vector3",
+                    "Value": "0,0,20"
+                  },
+                  "DstId": 18,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 16,
+                  "SrcName": "_result",
+                  "DstId": 19,
+                  "DstName": "a"
+                },
+                {
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "Sandbox.System/Vector3",
+                    "Value": "0,0,20"
+                  },
+                  "DstId": 19,
+                  "DstName": "b"
+                }
+              ]
+            },
+            "InteractDistance": 75,
+            "Accessibility": "Hands",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
+            "CooldownTime": 0.5,
+            "Animation": "Interact"
+          }
+        ]
       }
     ],
     "Children": []
