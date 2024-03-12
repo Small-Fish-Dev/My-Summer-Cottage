@@ -89,7 +89,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 		{
 			Gizmo.Draw.Color = Color.Blue;
 			Gizmo.Draw.IgnoreDepth = true;
-			Gizmo.Draw.LineBBox( _water.Bounds );
+			Gizmo.Draw.LineBBox( _water.Bounds + _water.Transform.Position );
 			Gizmo.Draw.IgnoreDepth = false;
 		}
 
@@ -99,6 +99,10 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 		// Update the fish pool only if we have any bobbers
 		if ( _bobbers.Count > 0 )
 		{
+			_bobbers = _bobbers
+				.Where( kv => kv.Key.IsValid() )
+				.ToDictionary( kv => kv.Key, kv => kv.Value );
+
 			if ( _shouldUpdatePool )
 			{
 				var fishesToGenerate = FishAmount - CurrentFishes.Count;
@@ -140,27 +144,27 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 			// This is where the fishes actually think
 			foreach ( var fish in CurrentFishes )
 			{
-				if ( fish.TargetBobber.IsValid() )
+				if ( IsBobberValid( fish.TargetBobber ) )
 				{
-					// If the bobber does not exist or is already pulled by some other fish
-					if ( !_bobbers.TryGetValue( fish.TargetBobber, out var fishBobber ) || fishBobber != fish )
+					if ( !fish.ShouldChangeTarget && fish.ShouldPullBobber )
 					{
-						fish.TargetBobber = null;
-					}
-					else if ( !fish.ShouldChangeTarget && fish.ShouldPullBobber )
-					{
+						Log.Info( "pull!" );
 						// TODO: a hardcoded constant!
 						// TODO: @ubre @luke @everyone a ripple effect
-						fish.TargetBobber.Rigidbody.Velocity += Vector3.Down * fish.Weight * 0.01f;
+						fish.TargetBobber.Rigidbody.ApplyForce( Vector3.Down * fish.Weight * 10 );
 						fish.ShouldPullBobber = FishBobberPullPeriod.GetValue();
 					}
+				}
+				else
+				{
+					fish.TargetBobber = null;
 				}
 
 				// We need to check it once again in case it became invalid in the previous if statement
 				if ( fish.ShouldChangeTarget )
 				{
 					// If we already have a target, just let it go
-					if ( fish.TargetBobber.IsValid() )
+					if ( IsBobberValid( fish.TargetBobber ) )
 					{
 						FishClearTarget( fish );
 						if ( fish.TargetBobber.IsValid() )
@@ -198,6 +202,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 	{
 		if ( other.Tags.Has( "bobber" ) )
 		{
+			Log.Info( "bobber enter" );
 			TryAddBobber( other.GameObject.Components.Get<Bobber>() );
 		}
 	}
@@ -206,6 +211,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 	{
 		if ( other.Tags.Has( "bobber" ) )
 		{
+			Log.Info( "bobber exit" );
 			var bobber = other.GameObject.Components.Get<Bobber>();
 			if ( !_bobbers.ContainsKey( bobber ) )
 				return;
@@ -219,6 +225,8 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 		}
 	}
 
+	private bool IsBobberValid( Bobber bobber ) => bobber.IsValid() && _bobbers.ContainsKey( bobber );
+
 	private void TryAddBobber( Bobber bobber )
 	{
 		var skyTrace = Scene.Trace.PhysicsTrace
@@ -227,6 +235,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 		if ( skyTrace.Hit )
 			return;
 
+		bobber.CurrentSpawner = this;
 		_bobbers.Add( bobber, null );
 	}
 
