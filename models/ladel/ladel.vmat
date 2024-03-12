@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader_c"
+	shader "shaders/saunasimple.shader"
 
 	//---- Texture Filtering ----
 	F_TEXTURE_FILTERING 4 // Nearest Neighbour
@@ -12,6 +12,8 @@ Layer0
 
 	//---- Material ----
 	Color "models/ladel/ladel_color.png"
-	Normal "[0.501961 0.501961 1.000000 0.000000]"
-	Roughness "materials/default/default_rough.tga"
+	ColorTintMask "materials/default/default.tga"
+	Metalness "materials/default/default_metal.tga"
+	Normal "models/ladel/ladel_normal.png"
+	Roughness "models/ladel/ladel_rough.png"
 }

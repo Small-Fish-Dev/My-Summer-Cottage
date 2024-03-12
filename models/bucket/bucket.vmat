@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/saunasimple.shader_c"
+	shader "shaders/saunasimple.shader"
 
 	//---- Texture Filtering ----
 	F_TEXTURE_FILTERING 4 // Nearest Neighbour
@@ -12,6 +12,8 @@ Layer0
 
 	//---- Material ----
 	Color "models/bucket/bucket_color.png"
-	Normal "materials/default/default_normal.tga"
-	Roughness "materials/default/default_rough.tga"
+	ColorTintMask "materials/default/default.tga"
+	Metalness "[0.000000 0.000000 0.000000 0.000000]"
+	Normal "models/bucket/bucket_normal.png"
+	Roughness "models/bucket/bucket_rough.png"
 }
