@@ -1,0 +1,36 @@
+{
+  "RootObject": {
+    "Id": "44f61157-fd23-4435-b27f-76351013edd4",
+    "Name": "Door",
+    "Rotation": "0,-0,-0.7071068,0.7071068",
+    "Enabled": true,
+    "NetworkMode": 1,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "BodyGroups": 18446744073709551615,
+        "Model": "models/door_big_window/door_big_window.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "DoorComponent",
+        "Angle": 100,
+        "OpenTime": 0.25,
+        "Pivot": "0.000003607557,-20.17492,0",
+        "State": "Close"
+      },
+      {
+        "__type": "ModelCollider",
+        "IsTrigger": false,
+        "Model": "models/door_big_window/door_big_window.vmdl",
+        "Static": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
