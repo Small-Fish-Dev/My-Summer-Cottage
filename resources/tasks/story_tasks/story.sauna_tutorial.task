@@ -25,9 +25,20 @@
       "AmountToComplete": 1
     },
     {
-      "Description": "Equip the axe",
-      "SubtaskOrder": 1,
+      "Description": "Place the log",
+      "TriggerSignal": "item.dropped.Wooden Log",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Equip the Axe",
+      "SubtaskOrder": 2,
       "TriggerSignal": "item.equipped.Axe",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Chop the wood",
+      "SubtaskOrder": 3,
+      "TriggerSignal": "item.used_2.Axe",
       "AmountToComplete": 1
     }
   ],
