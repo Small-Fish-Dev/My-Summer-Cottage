@@ -9,6 +9,9 @@ public sealed class Stove : Component
 	[Sync]
 	public bool HasWood { get; set; } = false;
 
+	[Sync]
+	public bool IsRunning { get; set; } = false;
+
 	protected override void OnStart()
 	{
 		Model = Components.Get<SkinnedModelRenderer>( FindMode.EnabledInSelfAndChildren );
@@ -31,7 +34,7 @@ public sealed class Stove : Component
 	{
 		Model.Set( "b_open", !HasWood );
 
-		GameObject.Name = $"Stove{(HasWood ? "" : " (Needs wood)")}";
+		GameObject.Name = $"Stove{(IsRunning ? "" : $" (Needs{(HasWood ? "" : " wood and")} water)")}";
 	}
 
 	void PlaceWood( Player interactor )
