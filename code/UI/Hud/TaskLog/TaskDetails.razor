@@ -80,7 +80,8 @@
 		return HashCode.Combine(
 			SelectedTask.ResourceId,
 			SelectedTask.Completed,
-			SelectedTask.Successful,
+            SelectedTask.Successful,
+            SelectedTask.Subtasks.HashCombine((subtask) => HashCode.Combine(subtask.CurrentAmount)),
             SelectedTask.TaskTimer.Passed,
 			SelectedTask.Subtasks.HashCombine((subtask) => HashCode.Combine(subtask.Completed))
 		);
