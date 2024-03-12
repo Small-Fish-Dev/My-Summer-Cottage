@@ -11,7 +11,6 @@ public class SaunaScriptedEvent
 	/// When the scripted event plays in in-game hours (Ex. 7.5 = 07:30, 23.25 = 23:15, 0.5 = 00:30).
 	/// </summary>
 	[Property]
-	[HideIf( "TriggerOnNewSession", true )]
 	public RangedFloat TriggerTimeslot { get; set; } = new RangedFloat( 10.5f, 12.0f );
 
 	[Hide]
