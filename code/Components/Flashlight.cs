@@ -60,7 +60,7 @@ public sealed class Flashlight : Component
 
 					if ( attachment != null )
 					{
-						_spotLight.Transform.Position = attachment.Value.PointToWorld( new Vector3( 0f, -10f, 0f ) );
+						_spotLight.Transform.Position = attachment.Value.PointToWorld( new Vector3( 0f, -13f, 0f ) );
 						_spotLight.Transform.Rotation = attachment.Value.Rotation.RotateAroundAxis( Vector3.Down, 90f );
 					}
 				}
