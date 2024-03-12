@@ -191,8 +191,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -202,9 +202,9 @@
                         "Id": 8,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "432,-80"
@@ -215,8 +215,8 @@
                         "Type": "property.get",
                         "ParentId": 3,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -224,8 +224,8 @@
                         "Type": "property.get",
                         "ParentId": 3,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -430,7 +430,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.9983035,0,0.05822566",
+          "Rotation": "0,0.2546185,0,0.9670416",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -606,9 +606,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_isStatic": true,
+                      "_name": "PlaySoundWithSubtitle",
                       "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_name": "PlaySoundWithSubtitle"
+                      "_isStatic": true
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -696,9 +696,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_isStatic": true,
+                      "_name": "PlaySoundWithNameAndSubtitle",
                       "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_name": "PlaySoundWithNameAndSubtitle"
+                      "_isStatic": true
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -1205,6 +1205,30 @@
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/events/car_speeding.prefab"
+    },
+    {
+      "Id": "1b3aaf26-d142-445a-a04b-59a64888e04b",
+      "Name": "WaterBucket",
+      "Position": "3554.624,-2926.079,2425.123",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/bucket/bucket.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "Id": "228c1dd9-a826-45ae-8624-e85ba99407ad",
+      "Name": "ladel",
+      "Position": "3541.97,-2911.638,2450.003",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/ladel.prefab"
     }
   ],
   "SceneProperties": {
@@ -1230,6 +1254,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-12T20:39:52.5536748\u002B01:00",
+  "LastSaved": "2024-03-12T20:57:11.4285334\u002B01:00",
   "__references": []
 }
