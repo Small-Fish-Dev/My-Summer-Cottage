@@ -46,7 +46,7 @@
               "x": 1
             }
           ],
-          "EndTime": 10800,
+          "EndTime": 18000,
           "Fog": {
             "_type": "component",
             "go": "74c6edc7-2832-4482-8f0f-c8312c6f4e77",
@@ -119,7 +119,7 @@
             "alpha": []
           },
           "SkyNightColor": "0.03029,0.08999,0.18605,1",
-          "StartTime": 32600,
+          "StartTime": 28800,
           "Sun": {
             "_type": "component",
             "go": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
@@ -200,8 +200,8 @@
                         "Id": 8,
                         "Type": "call",
                         "Properties": {
-                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
+                          "_name": "Receive",
                           "_isStatic": true
                         },
                         "UserData": {
@@ -213,8 +213,8 @@
                         "Type": "property.get",
                         "ParentId": 3,
                         "Properties": {
-                          "_name": "Message",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Message"
                         }
                       },
                       {
@@ -222,8 +222,8 @@
                         "Type": "property.get",
                         "ParentId": 3,
                         "Properties": {
-                          "_name": "Giver",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Giver"
                         }
                       }
                     ],
@@ -428,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.8639385,0,0.5035973",
+          "Rotation": "0,-0.386555,0,-0.9222663",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -436,7 +436,7 @@
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "0.43348,0.69031,1.041,2"
+              "Tint": "0.21532,0.39669,0.66185,2"
             }
           ]
         },
@@ -449,8 +449,8 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.0765,0.12182,0.24494,1",
-              "EndDistance": 5354.878,
+              "Color": "0.038,0.07,0.15573,1",
+              "EndDistance": 2631.488,
               "FalloffExponent": 1,
               "Height": 4000,
               "StartDistance": 0,
@@ -462,7 +462,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.1081503,-0.148671,0.5782368,-0.7948853",
+          "Rotation": "-0.05746004,-0.06978711,0.6330277,-0.7688329",
           "Tags": "light_directional,light",
           "Enabled": true,
           "NetworkMode": 2,
@@ -471,7 +471,7 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.17203,0.27395,0.41313,0.79371",
+              "LightColor": "0.05722,0.10542,0.17588,0.53149",
               "Shadows": true,
               "SkyColor": "0.03029,0.08999,0.18605,1"
             }
@@ -644,7 +644,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -740,8 +739,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1150,6 +1147,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-12T14:42:39.856665\u002B01:00",
+  "LastSaved": "2024-03-12T14:59:11.5006412\u002B01:00",
   "__references": []
 }
