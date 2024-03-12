@@ -3,6 +3,10 @@
 @inherits Panel
 
 <root class="@(TaskLog.SelectedTask?.ResourceId == TaskElement.ResourceId ? "selected" : "")">
+	@if (Player.PinnedTask?.ResourceId == TaskElement.ResourceId)
+	{
+		<img src="ui/hud/task_pin.png" class="pin" />
+	}
 	<img class="task-img @GetTaskImage()" />
 	<div class="task-details">
 		<text class="task-title">@TaskElement.Name</text>
@@ -22,6 +26,13 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(TaskElement.Name, TaskElement.Completed, TaskElement.Successful, TaskElement.Subtitle, TaskLog.SelectedTask?.GetHashCode());
+		return HashCode.Combine(
+			TaskElement.Name, 
+			TaskElement.Completed, 
+			TaskElement.Successful, 
+			TaskElement.Subtitle, 
+			TaskLog.SelectedTask?.GetHashCode(),
+			Player.PinnedTask?.GetHashCode()
+		);
 	}
 }
