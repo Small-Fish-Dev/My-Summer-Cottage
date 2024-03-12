@@ -3,11 +3,12 @@
     "Id": "f3237755-c1b0-4230-802d-85fb40725b2c",
     "Name": "wooden_log",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemComponent",
         "Count": 0,
-        "Description": "Uncut wood, ready to be chopped.",
+        "Description": "Uncut wood, ready to be chopped. burned even.",
         "Icon": {
           "Model": "models/log/saunalog.vmdl",
           "MaterialGroup": "",
@@ -23,8 +24,6 @@
       {
         "__type": "ModelRenderer",
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/log/saunalog.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -33,8 +32,7 @@
         "__type": "ModelCollider",
         "IsTrigger": false,
         "Model": "models/log/saunalog.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
