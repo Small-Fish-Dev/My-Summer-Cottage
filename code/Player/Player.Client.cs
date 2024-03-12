@@ -9,6 +9,7 @@ partial class Player
 	public static SaunaTask PinnedTask { get; set; }
 
 	private Guid _guid;
+
 	[HostSync]
 	public Guid ConnectionID
 	{

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "cef8be5e-5d12-45fe-8f29-c15d634056d1",
     "Name": "crisps_talons",
     "Enabled": true,
     "Components": [
@@ -9,9 +9,9 @@
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "2.084177,0.07470044,-4.001803",
+          "Position": "5.287158,0.1357894,0.8127514",
           "Scale": "1,1,1",
-          "Rotation": "-0.2173259,0.1748535,-0.6631757,0.6945457"
+          "Rotation": "-0.7997514,0.552532,0.1547019,-0.17656"
         },
         "Count": 0,
         "Description": "The flavour of these sure are addictive",
@@ -40,7 +40,7 @@
           {
             "Identifier": "beer_bottle.drink",
             "Keybind": "Mouse1",
-            "Description": "Drink",
+            "Description": "Eat",
             "Action": {
               "Version": 5,
               "UserData": {
@@ -113,8 +113,37 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "520b5e61-b000-4144-b66b-df3514de9da7",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/eat.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },

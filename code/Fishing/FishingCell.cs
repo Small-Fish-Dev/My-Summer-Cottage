@@ -112,7 +112,7 @@ public class FishingCell : Component
 
 			// Remove the invalid bobbers
 			foreach ( var fish in CurrentFishes.Where( x =>
-				         !x.TargetBobber.IsValid() || !_bobbers.ContainsKey( x.TargetBobber ) ) )
+						 !x.TargetBobber.IsValid() || !_bobbers.ContainsKey( x.TargetBobber ) ) )
 			{
 				FishClearTarget( fish );
 			}
@@ -169,12 +169,12 @@ public class FishingCell : Component
 
 		// Always clear the pool, though
 		CurrentFishes.RemoveAll( x => x.ShouldDie );
+	}
 
-		// using ( Gizmo.Scope() )
-		// {
-		// 	Gizmo.Draw.Color = Color.Green;
-		// 	Gizmo.Draw.LineBBox( BBox.FromPositionAndSize( Collider.Center + Transform.Position, Collider.Scale ) );
-		// }
+	protected override void DrawGizmos()
+	{
+		Gizmo.Draw.Color = Color.Green;
+		Gizmo.Draw.LineBBox( new BBox( Collider.Center, Collider.Scale ) );
 	}
 
 	private void FishSetTarget( CellFish fish, Bobber bobber )

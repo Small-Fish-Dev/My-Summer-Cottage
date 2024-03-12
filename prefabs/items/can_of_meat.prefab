@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "6822c982-1335-4f0b-ab89-d1b18688767a",
     "Name": "can_of_meat",
     "Enabled": true,
     "Components": [
@@ -40,7 +40,7 @@
           {
             "Identifier": "beer_bottle.drink",
             "Keybind": "Mouse1",
-            "Description": "Drink",
+            "Description": "Eat",
             "Action": {
               "Version": 5,
               "UserData": {
@@ -116,7 +116,34 @@
             "Disabled": null,
             "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "e60d3b0c-17a6-4966-988a-a775ae943bcf",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/eat.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },

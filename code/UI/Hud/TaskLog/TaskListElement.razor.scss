@@ -8,6 +8,15 @@ TaskListElement {
     transition: all 0.1s linear;
     text-shadow: $text-shadow-sm;
 
+    .pin {
+        position: absolute;
+        height: 25px;
+        width: 25px;
+        image-rendering: pixelated;
+        right: 5px;
+        top: 10px;
+    }
+
     .task-img {
         image-rendering: pixelated;
         aspect-ratio: 1;

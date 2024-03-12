@@ -1,12 +1,12 @@
 {
-  "Id": "5305e742-d69e-4ba5-a816-2b76d873d2b7",
+  "Id": "c07db25c-432e-452c-9bc0-a22c921b0b10",
   "GameObjects": [
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
       "Name": "GameManager",
-      "Position": "654.5014,-857.5838,200",
-      "Networked": true,
+      "Position": "2144.363,-2511.369,2464.302",
       "Enabled": true,
+      "NetworkMode": 1,
       "Components": [
         {
           "__type": "NetworkManager",
@@ -20,12 +20,55 @@
           "CloudSpeed": "1,0,0",
           "Day": 1,
           "DayLength": 1200,
+          "DaylightIntensity": [
+            {},
+            {
+              "x": 0.09347181,
+              "y": 0.6837796,
+              "in": -1.8949492,
+              "out": 1.8949492
+            },
+            {
+              "x": 0.25667655,
+              "y": 1
+            },
+            {
+              "x": 0.53115726,
+              "y": 1
+            },
+            {
+              "x": 0.8293769,
+              "y": 0.66683763,
+              "in": 1.6178701,
+              "out": -1.6178701
+            },
+            {
+              "x": 1
+            }
+          ],
           "EndTime": 10800,
           "Fog": {
             "_type": "component",
             "go": "74c6edc7-2832-4482-8f0f-c8312c6f4e77",
             "component_type": "GradientFog"
           },
+          "FogIntensity": [
+            {
+              "y": 1
+            },
+            {
+              "x": 0.28665486,
+              "y": 0.4498198
+            },
+            {
+              "x": 0.7062315,
+              "y": 0.44973552
+            },
+            {
+              "x": 1,
+              "y": 1
+            }
+          ],
           "Skybox": {
             "_type": "component",
             "go": "7f2477ff-54a5-4127-a102-c905b031713e",
@@ -34,11 +77,11 @@
           "SkyDayColor": {
             "color": [
               {
-                "c": "0.00784,0.03922,0.0902,1"
+                "c": "0.02745,0.0902,0.18431,1"
               },
               {
                 "t": 0.0491453,
-                "c": "0.01961,0.09804,0.22745,1"
+                "c": "0.0805,0.16179,0.28372,1"
               },
               {
                 "t": 0.1388889,
@@ -66,17 +109,17 @@
               },
               {
                 "t": 0.9380342,
-                "c": "0.03312,0.115,0.24759,1"
+                "c": "0.07843,0.16078,0.28235,1"
               },
               {
                 "t": 1,
-                "c": "0.00784,0.03922,0.0902,1"
+                "c": "0.02745,0.0902,0.18431,1"
               }
             ],
             "alpha": []
           },
-          "SkyNightColor": "0.00784,0.03922,0.0902,1",
-          "StartTime": 33600,
+          "SkyNightColor": "0.03029,0.08999,0.18605,1",
+          "StartTime": 32600,
           "Sun": {
             "_type": "component",
             "go": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
@@ -340,8 +383,9 @@
         {
           "Id": "79a42b52-3dd6-4018-a1c6-cb514e3de500",
           "Name": "HUD",
-          "Position": "0,-89.9234,-159.244",
+          "Position": "0,0,0",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "ScreenPanel",
@@ -359,6 +403,58 @@
               }
             }
           ]
+        },
+        {
+          "Id": "d09666df-e617-422e-915c-9cbf381b592c",
+          "Name": "Spawner",
+          "Position": "59.32935,-34.14404,-7.923096",
+          "Rotation": "0,0,0.1305262,0.9914449",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "PlayerSpawner"
+            }
+          ]
+        },
+        {
+          "Id": "65b73d71-edfe-4eea-9d88-8819da3b4a51",
+          "Name": "Spawner",
+          "Position": "26.50977,6.496338,-7.923096",
+          "Rotation": "0,0,0.1305262,0.9914449",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "PlayerSpawner"
+            }
+          ]
+        },
+        {
+          "Id": "c5fe7faf-abe6-4e2d-88fe-fadc8da17fcb",
+          "Name": "Spawner",
+          "Position": "59.86963,48.84277,-7.923096",
+          "Rotation": "0,0,0.1305262,0.9914449",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "PlayerSpawner"
+            }
+          ]
+        },
+        {
+          "Id": "9e8a633d-d61a-433e-a690-4b6ce18d0b9c",
+          "Name": "Spawner",
+          "Position": "91.56421,6.345215,-7.923096",
+          "Rotation": "0,0,0.1305262,0.9914449",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "PlayerSpawner"
+            }
+          ]
         }
       ]
     },
@@ -368,74 +464,36 @@
       "Position": "155.32,241.9772,-76.84572",
       "Tags": "world",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
-          "__type": "MapInstance",
-          "MapName": "sauna_forest",
+          "__type": "FuckedMapInstance",
+          "MapName": "untitled_2",
           "UseMapFromLaunch": false
         }
       ],
       "Children": []
     },
     {
-      "Id": "b385450f-885f-4df0-9d56-dc81af88e4ca",
-      "Name": "Water",
-      "Position": "0,0,-7.5",
-      "Tags": "water",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "WaterComponent",
-          "BobberDrag": 0.8,
-          "Color": "0.45076,0.57209,0.36986,0.9",
-          "Maxs": "415,515,-10",
-          "Mins": "-745,-790,-150",
-          "TextureScale": 0.4
-        },
-        {
-          "__type": "LeFisheSpawner",
-          "FishesDepthIncrement": 10,
-          "FishesPerDepth": 2,
-          "GridCellSize": 70,
-          "MinimumDepth": 10,
-          "Fishes": [
-            "prefabs/fishes/herring.prefab",
-            "prefabs/fishes/herring_rare.prefab",
-            "prefabs/fishes/le_fishe_au_chocolat.prefab",
-            "prefabs/fishes/minnow.prefab",
-            "prefabs/fishes/minnow_rare.prefab",
-            "prefabs/fishes/perch.prefab",
-            "prefabs/fishes/perch_rare.prefab",
-            "prefabs/fishes/pike.prefab",
-            "prefabs/fishes/pike_rare.prefab",
-            "prefabs/fishes/salmon.prefab",
-            "prefabs/fishes/salmon_rare.prefab",
-            "prefabs/fishes/trash/trash_boot.prefab",
-            "prefabs/fishes/trash/trash_bottle.prefab",
-            "prefabs/fishes/trash/trash_can.prefab",
-            "prefabs/fishes/trash/trash_crisps.prefab"
-          ]
-        }
-      ]
-    },
-    {
       "Id": "b60318fc-dbb8-45c3-b9d4-1347270ab4b5",
       "Name": "Ambient",
-      "Position": "357.8161,0.0000213275,258.2727",
+      "Position": "2158.045,-3163.895,2861.889",
       "Enabled": true,
+      "NetworkMode": 2,
       "Children": [
         {
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.857259,0,0.5148854",
+          "Rotation": "0,0.2934603,0,0.9559712",
           "Tags": "skybox",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "0.63149,0.8129,1.1159,2"
+              "Tint": "0.43342,0.69024,1.0409,2"
             }
           ]
         },
@@ -444,15 +502,16 @@
           "Name": "Fog",
           "Position": "0,0,20",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.31574,0.40645,0.55795,1",
-              "EndDistance": 10000,
+              "Color": "0.07649,0.12181,0.24492,1",
+              "EndDistance": 5354.08,
               "FalloffExponent": 1,
-              "Height": 10000,
+              "Height": 4000,
               "StartDistance": 0,
-              "VerticalFalloffExponent": 1
+              "VerticalFalloffExponent": 1.5
             }
           ]
         },
@@ -460,44 +519,29 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.1193698,-0.1701235,0.5618362,-0.8007178",
+          "Rotation": "-0.1081386,-0.1486497,0.578253,-0.7948791",
           "Tags": "light_directional,light",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.31574,0.40645,0.55795,1",
+              "LightColor": "0.172,0.27391,0.41306,0.79366",
               "Shadows": true,
-              "SkyColor": "0.00784,0.03922,0.0902,1"
+              "SkyColor": "0.03029,0.08999,0.18605,1"
             }
           ]
         }
       ]
     },
     {
-      "Id": "8e4eb9c9-1991-4591-91ff-7feba30f2050",
-      "Name": "oak_tree_a",
-      "Position": "441.9283,-710.48,-589033.5",
-      "Rotation": "0.00009629934,0.03252056,-0.002959586,0.9994667",
-      "Scale": "2.174943,2.174943,2.174943",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Prop",
-          "Health": 0,
-          "IsStatic": false,
-          "Model": "models/nature/oak_tree_a/oak_tree_a.vmdl",
-          "ShowCreatedComponents": false
-        }
-      ]
-    },
-    {
       "Id": "6256e00d-b380-4ebb-b468-35255ab4b86c",
       "Name": "Cottage",
-      "Position": "1024.928,-748.9748,76.24623",
+      "Position": "1024.928,-748.9748,2886.176",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "EventAreaTrigger",
@@ -513,9 +557,9 @@
     {
       "Id": "b21f3811-be00-47a4-ad66-2294fdd6ff07",
       "Name": "Buy Beer Bottle",
-      "Position": "458.7336,-214.3331,27",
-      "Networked": true,
+      "Position": "458.7336,-214.3331,2836.93",
       "Enabled": true,
+      "NetworkMode": 1,
       "Components": [
         {
           "__type": "ShopItem",
@@ -546,8 +590,9 @@
     {
       "Id": "444e5e65-8c75-46f1-8186-dffaa5904730",
       "Name": "sell_zone",
-      "Position": "708.5266,-42.11619,43.9567",
+      "Position": "708.5266,-42.11619,2853.886",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "EventSellAreaTrigger",
@@ -559,36 +604,13 @@
       ]
     },
     {
-      "Id": "3b45c2a9-5055-4e08-be32-9402fa22f8cf",
-      "Name": "beer_bottle",
-      "Position": "659.1287,-579.0093,27.00001",
-      "Rotation": "-0.0000002682209,0.0000003657387,1,0.000001097216",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/beer_bottle.prefab"
-    },
-    {
-      "Id": "4913524f-d5ca-49c9-b018-3596a4cb6932",
-      "Name": "beer_bottle (1)",
-      "Position": "670.0865,-571.3389,27",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/beer_bottle.prefab"
-    },
-    {
-      "Id": "669d6c8d-539e-482d-8bb6-822b2ca09d14",
-      "Name": "beer_crate",
-      "Position": "634.5552,-583.0193,35.04873",
-      "Rotation": "-0.00000037217,0.00000005960464,0.00000111651,0.9999999",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/beer_crate.prefab"
-    },
-    {
       "Id": "1c8b362f-fdf3-48dc-b8ec-a7e247c53f71",
       "Name": "NPC (local)",
-      "Position": "899.8499,-783.2751,56.00232",
-      "Rotation": "0.4999992,-0.5000003,-0.4999995,0.5000008",
+      "Position": "2806.878,-2437.796,2472.671",
+      "Rotation": "0.5880175,-0.157559,-0.2053349,0.7663213",
       "Scale": "1,1,2.148212",
-      "Networked": true,
       "Enabled": true,
+      "NetworkMode": 1,
       "Components": [
         {
           "__type": "BoxCollider",
@@ -639,9 +661,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
+                      "_isStatic": true,
                       "_name": "PlaySoundWithSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_isStatic": true
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -729,9 +751,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
+                      "_isStatic": true,
                       "_name": "PlaySoundWithNameAndSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_isStatic": true
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -785,331 +807,380 @@
       ]
     },
     {
-      "Id": "1fd8ba8f-1e11-479d-8156-b44ced9310d9",
-      "Name": "rifle",
-      "Position": "580.2663,-566.476,45.18832",
-      "Rotation": "-0.00000037217,0.00000005960464,0.00000111651,0.9999999",
+      "Id": "7845a61f-5e7f-413b-baef-4d22a3bf1183",
+      "Name": "Water",
       "Enabled": true,
-      "__Prefab": "prefabs/items/rifle.prefab"
-    },
-    {
-      "Id": "4e7fbb0d-b705-4ac3-8bd6-c849128dc60e",
-      "Name": "MooseTest",
-      "Position": "467.127,-568.0612,27.49162",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "SkinnedModelRenderer",
-          "BodyGroups": 16,
-          "CreateBoneObjects": false,
-          "Model": "models/fauna/elk/elk.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "MooseTest",
-          "AnimationSpeed": 50
-        }
-      ]
-    },
-    {
-      "Id": "f53b1b3c-80bd-4662-9281-be0b84d9d7bb",
-      "Name": "MooseTest (1)",
-      "Position": "465.8501,-647.155,27.49164",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "SkinnedModelRenderer",
-          "BodyGroups": 16,
-          "CreateBoneObjects": false,
-          "Model": "models/fauna/elk/elk.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "MooseTest",
-          "AnimationSpeed": 100
-        }
-      ]
-    },
-    {
-      "Id": "0c0b72f9-c7a4-412d-82ac-98e1641cf9dd",
-      "Name": "banana_peel (4)",
-      "Position": "371.7489,-699.2628,36.67146",
-      "Rotation": "-0.03000528,0.04623824,0.5435286,0.837579",
-      "Enabled": true,
-      "__Prefab": "prefabs/events/banana_peel.prefab"
-    },
-    {
-      "Id": "c26b76a2-14ee-4ac1-b17f-e789e70b62ba",
-      "Name": "banana_peel (6)",
-      "Position": "325.727,-734.6227,41.05711",
-      "Rotation": "-0.01888785,0.01691484,0.74471,0.6669064",
-      "Enabled": true,
-      "__Prefab": "prefabs/events/banana_peel.prefab"
-    },
-    {
-      "Id": "f1bdc728-67ca-44f9-a33f-291bb5fa162e",
-      "Name": "Slot Machine",
-      "Position": "202.9279,-145.6154,9.137436",
-      "Networked": true,
-      "Enabled": true,
-      "__Prefab": "prefabs/objects/slot_machine.prefab"
-    },
-    {
-      "Id": "112b4de2-7a2c-42dd-ba8a-55c99bb184b6",
-      "Name": "762ammo",
-      "Position": "222.004,-1240.313,70",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/762ammo.prefab"
-    },
-    {
-      "Id": "44886576-44a7-400a-abe6-237850fa570b",
-      "Name": "762ammo (1)",
-      "Position": "220.7753,-1254.451,70",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/762ammo.prefab"
-    },
-    {
-      "Id": "14e95549-1aac-42b2-a8fc-6a8f531f3d7b",
-      "Name": "762ammo (2)",
-      "Position": "232.5932,-1246.998,70",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/762ammo.prefab"
-    },
-    {
-      "Id": "c6a3681c-e38b-4670-bc3b-0df71a310963",
-      "Name": "762ammo (3)",
-      "Position": "232.4974,-1258.359,70",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/762ammo.prefab"
-    },
-    {
-      "Id": "49085e5e-5d9d-40ba-9541-c81a0e995ea2",
-      "Name": "beer_bottle (2)",
-      "Position": "306.5836,-1250.511,67",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/beer_bottle.prefab"
-    },
-    {
-      "Id": "72d2295b-468e-47d8-b425-8bb3b5bc2a4b",
-      "Name": "beer_bottle (3)",
-      "Position": "309.2408,-1260.364,66.99999",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/beer_bottle.prefab"
-    },
-    {
-      "Id": "e276bfee-db5b-42cd-a843-367efe5eb27c",
-      "Name": "beer_bottle (4)",
-      "Position": "297.0365,-1251.676,67",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/beer_bottle.prefab"
-    },
-    {
-      "Id": "e8776f20-bfd8-4f94-8efe-df83a0353e46",
-      "Name": "beer_bottle (5)",
-      "Position": "312.0887,-1237.255,67",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/beer_bottle.prefab"
-    },
-    {
-      "Id": "1903bba1-0162-4f4a-a353-dfba8981b817",
-      "Name": "beer_bottle (6)",
-      "Position": "315.0217,-1251.54,67",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/beer_bottle.prefab"
-    },
-    {
-      "Id": "a074a3f8-3bfb-4fe7-a5fa-1c38f0d39f40",
-      "Name": "beer_crate (2)",
-      "Position": "265.6155,-1252.515,66.86089",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/beer_crate.prefab"
-    },
-    {
-      "Id": "a3db4cf9-a01e-4126-a37f-9ab273caf455",
-      "Name": "rifle (1)",
-      "Position": "193.1826,-1234.466,69.25894",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/rifle.prefab"
-    },
-    {
-      "Id": "23622d84-5944-4616-bbe5-9898b856d66e",
-      "Name": "Car",
-      "Position": "728.8416,-1016.331,27.00001",
-      "Enabled": true,
-      "__Prefab": "prefabs/objects/car.prefab"
-    },
-    {
-      "Id": "792301f2-20a9-4734-a726-e3b904b3f892",
-      "Name": "Bathroom",
-      "Position": "723.7906,-524.1287,137.5402",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "EventAreaTrigger",
-          "Extents": "0,0,0",
-          "MaxPollingRate": 5,
-          "Offset": "0,0,0",
-          "TriggerPrefab": [],
-          "TriggerSignalIdentifier": "sauna.entered_bathroom"
-        },
-        {
-          "__type": "EventPissTrigger",
-          "Extents": "0,0,0",
-          "MaxPollingRate": 5,
-          "Offset": "0,0,0",
-          "TriggerSignalIdentifier": "sauna.piss_in_bathroom"
-        }
-      ]
-    },
-    {
-      "Id": "ffa21fdc-0a76-4e80-a2d1-283c43759a0f",
-      "Name": "Lake",
-      "Position": "723.7906,-524.1287,137.5402",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "EventAreaTrigger",
-          "Extents": "0,0,0",
-          "MaxPollingRate": 5,
-          "Offset": "0,0,0",
-          "TriggerPrefab": [],
-          "TriggerSignalIdentifier": "lake.swimming_in_lake"
-        },
-        {
-          "__type": "EventPissTrigger",
-          "Extents": "0,0,0",
-          "MaxPollingRate": 5,
-          "Offset": "0,0,0",
-          "TriggerSignalIdentifier": "lake.piss_in_lake"
-        }
-      ],
+      "NetworkMode": 2,
       "Children": [
         {
-          "Id": "96e8fdbc-4978-4c23-8e5c-d50d8c21ebe3",
-          "Name": "Lake (1)",
-          "Position": "0,0,0",
+          "Id": "b385450f-885f-4df0-9d56-dc81af88e4ca",
+          "Name": "Cottage Lake",
+          "Position": "876.837,-7934.518,2282.054",
+          "Tags": "water",
           "Enabled": true,
+          "NetworkMode": 2,
           "Components": [
             {
-              "__type": "EventAreaTrigger",
-              "Extents": "0,0,0",
-              "MaxPollingRate": 5,
-              "Offset": "0,0,0",
-              "TriggerPrefab": [],
-              "TriggerSignalIdentifier": "lake.swimming_in_lake"
+              "__type": "WaterComponent",
+              "BobberDrag": 0.8,
+              "Color": "0.45076,0.57209,0.36986,0.9",
+              "Maxs": "2650.04,2790.837,11.03999",
+              "Mins": "-3353.239,-2560.32,-387.76",
+              "TextureScale": 0.4
             },
             {
-              "__type": "EventPissTrigger",
-              "Extents": "0,0,0",
-              "MaxPollingRate": 5,
-              "Offset": "0,0,0",
-              "TriggerSignalIdentifier": "lake.piss_in_lake"
+              "__type": "LeFisheSpawner",
+              "FishesDepthIncrement": 10,
+              "FishesPerDepth": 2,
+              "GridCellSize": 200,
+              "MinimumDepth": 10,
+              "Fishes": [
+                "prefabs/fishes/herring.prefab",
+                "prefabs/fishes/herring_rare.prefab",
+                "prefabs/fishes/le_fishe_au_chocolat.prefab",
+                "prefabs/fishes/minnow.prefab",
+                "prefabs/fishes/minnow_rare.prefab",
+                "prefabs/fishes/perch.prefab",
+                "prefabs/fishes/perch_rare.prefab",
+                "prefabs/fishes/pike.prefab",
+                "prefabs/fishes/pike_rare.prefab",
+                "prefabs/fishes/salmon.prefab",
+                "prefabs/fishes/salmon_rare.prefab",
+                "prefabs/fishes/trash/trash_boot.prefab",
+                "prefabs/fishes/trash/trash_bottle.prefab",
+                "prefabs/fishes/trash/trash_can.prefab",
+                "prefabs/fishes/trash/trash_crisps.prefab"
+              ]
             }
           ]
         }
       ]
     },
     {
-      "Id": "f3237755-c1b0-4230-802d-85fb40725b2c",
-      "Name": "wooden_log",
-      "Position": "586.6498,-759.0098,38.90081",
-      "Rotation": "0,-0.7071068,0,0.7071068",
+      "Id": "7a37f831-1108-421e-a055-9d3176ccb783",
+      "Name": "Car",
+      "Position": "2097.232,-2595.18,2463.451",
+      "Rotation": "-0.0824227,0.02611236,-0.3008852,0.949733",
       "Enabled": true,
-      "__Prefab": "prefabs/items/wooden_log.prefab"
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/objects/car.prefab"
     },
     {
-      "Id": "82bb2e03-aeeb-4c6c-9f08-27efbd7f4fce",
-      "Name": "wooden_log (4)",
-      "Position": "569.4738,-759.0098,38.90091",
-      "Rotation": "0,-0.7071068,0,0.7071068",
+      "Id": "73df85dc-6c8b-4f29-ad40-900d7448c1ed",
+      "Name": "NPC Spawn Zones",
       "Enabled": true,
-      "__Prefab": "prefabs/items/wooden_log.prefab"
-    },
-    {
-      "Id": "2f63afb3-20ea-4e6b-9920-f5a03aeee5f1",
-      "Name": "wooden_log (1)",
-      "Position": "598.5406,-772.9713,38.90081",
-      "Rotation": "0,-0.7071067,0,0.7071068",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/wooden_log.prefab"
-    },
-    {
-      "Id": "9650245d-38b0-4feb-adfe-2081d24abdff",
-      "Name": "wooden_log (2)",
-      "Position": "614.7146,-755.6601,38.90081",
-      "Rotation": "0,-0.7071067,0,0.7071068",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/wooden_log.prefab"
-    },
-    {
-      "Id": "b3289eb3-bbd3-4b0c-b72e-8eab6ef109e0",
-      "Name": "wooden_log (3)",
-      "Position": "633.5405,-779.1575,38.90081",
-      "Rotation": "0,-0.7071067,0,0.7071068",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/wooden_log.prefab"
-    },
-    {
-      "Id": "21b56154-12b1-42dd-819e-bb804f8936fc",
-      "Name": "axe",
-      "Position": "578.8717,-809.8823,41",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/axe.prefab"
-    },
-    {
-      "Id": "eaa80493-9040-43c6-87ca-3e3369a17450",
-      "Name": "experience_toilet",
-      "Position": "1044.996,-1042.852,27.43528",
-      "Rotation": "-0.00004148483,-0.00002393126,0.9659225,-0.2588314",
-      "Enabled": true,
-      "__Prefab": "prefabs/events/experience_toilet.prefab"
-    },
-    {
-      "Id": "82bd53a5-08b6-43cf-b7fc-07912b86f169",
-      "Name": "fishing_rod",
-      "Position": "55.86787,-804.8507,84.86855",
-      "Rotation": "-0.01071164,0.01418209,0.6025711,0.7978673",
-      "Enabled": true,
-      "__Prefab": "prefabs/items/fishing_rod.prefab"
-    },
-    {
-      "Id": "63d09065-6418-4f06-a2fd-131d7cd6a65d",
-      "Name": "NPCSpawnArea",
-      "Position": "1192.319,167.2373,9.780305",
-      "Enabled": true,
-      "Components": [
+      "NetworkMode": 2,
+      "Children": [
         {
-          "__type": "NpcSpawnArea",
-          "Height": 128.72002,
-          "NpcPool": [
+          "Id": "63d09065-6418-4f06-a2fd-131d7cd6a65d",
+          "Name": "Moose",
+          "Position": "2456.57,4268.883,2655.931",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
             {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/moose_female.prefab"
-              },
-              "SpawnChance": 0.7
-            },
-            {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/moose_male.prefab"
-              },
-              "SpawnChance": 0.7
+              "__type": "NpcSpawnArea",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/moose_female.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/moose_male.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 1681.3597
             }
-          ],
-          "Radius": 269.19943
+          ]
+        },
+        {
+          "Id": "04df8c6d-1dd5-4d8f-bc94-c693891f4de8",
+          "Name": "Reindeer",
+          "Position": "6357.683,-1119.06,2655.931",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/reindeer_female.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/reindeer_male.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 2417.6008
+            }
+          ]
+        },
+        {
+          "Id": "3b796ce9-656b-43b5-b61a-fd0d28dc6fd4",
+          "Name": "Reindeer",
+          "Position": "6427.602,-10187.55,2655.932",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/reindeer_female.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/reindeer_male.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 2417.6008
+            }
+          ]
+        },
+        {
+          "Id": "d2e443dd-2c31-47c9-8f60-52a5d857fd59",
+          "Name": "Reindeer",
+          "Position": "-8868.885,-5585.536,2046.7",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/reindeer_female.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/reindeer_male.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 2417.6008
+            }
+          ]
+        },
+        {
+          "Id": "a7d2f9c4-130f-48f1-ac39-7bd400c66a98",
+          "Name": "Reindeer",
+          "Position": "-3109.291,9317.375,2807.527",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/reindeer_male.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/reindeer_female.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 2417.6008
+            }
+          ]
+        },
+        {
+          "Id": "2e988a31-e0a1-49db-a860-c75d0e0a546a",
+          "Name": "Elk",
+          "Position": "-1694.46,3835.503,2807.527",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/elk_female.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/elk_female.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 2417.6008
+            }
+          ]
+        },
+        {
+          "Id": "a5523286-2ff3-4e1c-b750-7a002743fcbf",
+          "Name": "Elk",
+          "Position": "4457.693,10155.6,3601.776",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "Height": 2508.8794,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/elk_female.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/elk_female.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 2417.6008
+            }
+          ]
+        },
+        {
+          "Id": "528de2eb-5121-49c7-ab1e-d331c2600f8b",
+          "Name": "Elk",
+          "Position": "9074.902,5294.054,3601.776",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "Height": 2508.8794,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/elk_female.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/elk_female.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 2417.6008
+            }
+          ]
+        },
+        {
+          "Id": "f1a77762-a6e9-41b3-944b-0aeca697cf24",
+          "Name": "Elk",
+          "Position": "-2190.306,-2765.781,2692.589",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "Height": 2508.8794,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/elk_female.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/elk_female.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 2417.6008
+            }
+          ]
+        },
+        {
+          "Id": "d8c646f6-09dd-4da3-bf30-f00aea8172a6",
+          "Name": "Moose",
+          "Position": "10466.22,10129.71,3294.639",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/moose_female.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/moose_male.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 1681.3597
+            }
+          ]
         }
       ]
     },
     {
-      "Id": "936ca26b-82c1-47d5-939f-36349d351178",
-      "Name": "creepy_peeper",
-      "Position": "1166.545,-681.0285,23.13061",
-      "Rotation": "0.03393662,-0.01344857,0.9926752,0.1151673",
+      "Id": "c41149f3-b8a0-4dff-8ab2-191ddf80fb48",
+      "Name": "flashlight",
+      "Position": "2235.942,-2596.522,2458.412",
+      "Rotation": "-0.004094645,0.01162842,0.3320982,0.9431642",
       "Enabled": true,
-      "__Prefab": "prefabs/events/creepy_peeper.prefab"
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/flashlight.prefab"
     }
   ],
   "SceneProperties": {
@@ -1135,6 +1206,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-11T14:33:19.9092818\u002B01:00",
+  "LastSaved": "2024-03-11T23:55:23.0690683\u002B02:00",
   "__references": []
 }

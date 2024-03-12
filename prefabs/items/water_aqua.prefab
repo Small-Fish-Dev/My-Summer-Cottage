@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "c53ad5ba-f714-411e-8c96-9dafad27ce7f",
     "Name": "water_aqua",
     "Enabled": true,
     "Components": [
@@ -114,14 +114,41 @@
             "InteractDistance": 75,
             "Accessibility": "All",
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "2f906141-57ed-459d-b686-894072a4e867",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/slurp.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },
       {
         "__type": "ModelRenderer",
         "BodyGroups": 11,
-        "MaterialGroup": "blue",
+        "MaterialGroup": "red",
         "Model": "models/consumables/bottle/bottle.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"

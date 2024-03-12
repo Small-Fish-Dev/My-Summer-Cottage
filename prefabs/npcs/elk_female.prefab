@@ -1,12 +1,14 @@
 {
   "RootObject": {
-    "Id": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+    "Id": "3b8ea40c-00ca-4763-95f8-f0d060f6b002",
     "Name": "elk_female",
     "Tags": "animal,npc",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "NPC",
+        "AlertOthers": true,
         "AttackCooldown": 8,
         "AttackRange": 60,
         "DetectRange": 400,
@@ -14,7 +16,7 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+          "go": "3b8ea40c-00ca-4763-95f8-f0d060f6b002",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -23,12 +25,12 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+          "go": "3b8ea40c-00ca-4763-95f8-f0d060f6b002",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+          "go": "3b8ea40c-00ca-4763-95f8-f0d060f6b002",
           "component_type": "MoveHelper"
         },
         "Name": "Elk (\u26A8)",
@@ -73,7 +75,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+                  "go": "3b8ea40c-00ca-4763-95f8-f0d060f6b002",
                   "component_type": "NPC"
                 }
               },
@@ -308,7 +310,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+                  "go": "3b8ea40c-00ca-4763-95f8-f0d060f6b002",
                   "component_type": "NPC"
                 }
               },
@@ -503,7 +505,7 @@
         "StopSpeed": 10,
         "TraceHeight": 45,
         "TraceRadius": 14,
-        "TraceType": "Capsule",
+        "TraceType": "BBox",
         "UseCollider": false,
         "UseSceneGravity": true
       },

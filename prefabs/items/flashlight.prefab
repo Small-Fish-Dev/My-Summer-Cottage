@@ -3,6 +3,7 @@
     "Id": "8aef03ed-d62d-40d4-a9df-34d959fb81d6",
     "Name": "flashlight",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
@@ -13,6 +14,7 @@
           "Scale": "1,1,1",
           "Rotation": "-0.0001244777,-0.04183946,0.999118,0.002972504"
         },
+        "Count": 0,
         "Description": "Great! This is perfect for ghost hunting.",
         "HideBodygroups": "None",
         "HoldType": "Flashlight",
@@ -23,10 +25,12 @@
           "Rotation": "0.1319351,-0.0494598,-0.3475227,0.9270247",
           "Guid": "46bfdec0-a2cd-430e-88e0-e0d3e0c91be1"
         },
+        "MaxStack": 0,
         "Name": "Flashlight",
         "SellPrice": -1,
         "Slot": "Hand",
         "UpdatePosition": true,
+        "UseSkinTint": false,
         "WeightInGrams": 225
       },
       {
@@ -36,13 +40,12 @@
         "Distance": 1000,
         "On": false,
         "Radius": 30,
-        "Strength": 15
+        "Strength": 15,
+        "ToggleSound": "sounds/misc/switch.sound"
       },
       {
         "__type": "ModelRenderer",
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/flashlight/flashlight.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -52,8 +55,7 @@
         "Center": "0,1.75,0",
         "IsTrigger": false,
         "Scale": "3,10.5,3",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
@@ -74,13 +76,13 @@
         "Rotation": "0.00000003090862,-0.00000003090862,0.7071068,0.7071068",
         "Tags": "light_spot,light",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "SpotLight",
             "Attenuation": 1,
             "ConeInner": 15,
             "ConeOuter": 45,
-            "Cookie": null,
             "FogMode": "Enabled",
             "FogStrength": 1,
             "LightColor": "0.91373,0.98039,1,1",

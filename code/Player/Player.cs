@@ -114,7 +114,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	public Inventory Inventory { get; private set; }
 	protected CameraComponent Camera;
-	protected SkinnedModelRenderer Renderer;
+	public SkinnedModelRenderer Renderer;
 	protected BoxCollider Collider;
 	protected ParticleConeEmitter PissEmitter;
 	protected ParticleEffect PissParticles;

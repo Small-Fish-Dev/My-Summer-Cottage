@@ -29,4 +29,47 @@ TaskList {
             }
         }
     }
+
+    .pins {
+        position: absolute;
+        bottom: -65px;
+        justify-content: center;
+        align-items: center;
+        font-family: HabboExtended;
+        font-size: 20px;
+        transition: all 0.1s linear;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 0px 5px;
+
+        .pin {
+            gap: 6px;
+            text-shadow: $text-shadow-sm;
+            align-items: center;
+            transition: all 0.1s linear;
+
+            &:hover {
+                sound-in: 'hover';
+                cursor: pointer;
+    
+                img {
+                    opacity: 0.6;
+                }
+    
+                checkbox {
+                    opacity: 0.6;
+                }
+    
+                text {
+                    opacity: 0.6;
+                }
+            }
+
+            &:active {
+                transform: scale(0.98);
+            }
+        }
+    }
 }

@@ -1,7 +1,7 @@
 {
   "RootObject": {
-    "Id": "91028a1e-d6d2-4409-9a34-3cc4ecbccc1e",
-    "Name": "car",
+    "Id": "7a37f831-1108-421e-a055-9d3176ccb783",
+    "Name": "Car",
     "Enabled": true,
     "Components": [
       {
@@ -145,7 +145,7 @@
                   "Properties": {
                     "component": {
                       "_type": "component",
-                      "go": "b5cfdeb8-a0b4-46fd-ba71-d0c74c933069",
+                      "go": "1699a99b-a08c-439d-af3f-beff4e6af009",
                       "component_type": "EventAreaFinder"
                     }
                   },
@@ -293,7 +293,7 @@
                   "Properties": {
                     "component": {
                       "_type": "component",
-                      "go": "b5cfdeb8-a0b4-46fd-ba71-d0c74c933069",
+                      "go": "1699a99b-a08c-439d-af3f-beff4e6af009",
                       "component_type": "EventAreaFinder"
                     }
                   },
@@ -419,46 +419,39 @@
                 }
               ]
             },
+            "CooldownTime": 0.5,
             "HasBounds": true,
-            "Position": "0,0,29.44",
+            "Position": "0,0,29.45043",
             "Extents": "160.8,83.11999,61.68002",
             "Animation": "Interact"
           }
         ]
       },
       {
+        "__type": "ModelRenderer",
+        "BodyGroups": 1,
+        "MaterialGroup": "default",
+        "Model": "models/old_red_lada/old_red_lada.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
         "__type": "ModelCollider",
         "IsTrigger": false,
         "Model": "models/old_red_lada/old_red_lada.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       }
     ],
     "Children": [
       {
-        "Id": "20524fe5-a996-471d-b5f9-d574d01797ef",
-        "Name": "Model",
-        "Enabled": true,
-        "Components": [
-          {
-            "__type": "ModelRenderer",
-            "BodyGroups": 18446744073709551615,
-            "MaterialGroup": "default",
-            "MaterialOverride": null,
-            "Model": "models/old_red_lada/old_red_lada.vmdl",
-            "RenderType": "On",
-            "Tint": "1,1,1,1"
-          }
-        ]
-      },
-      {
-        "Id": "b5cfdeb8-a0b4-46fd-ba71-d0c74c933069",
+        "Id": "1699a99b-a08c-439d-af3f-beff4e6af009",
         "Name": "PlayerTrigger",
+        "Position": "0,0,-0.4049997",
         "Enabled": true,
         "Components": [
           {
             "__type": "EventAreaFinder",
-            "Extents": "400,400,200",
+            "Extents": "626.08,589.84,200",
             "MaxPollingRate": 10,
             "Offset": "0,0,50",
             "TagSet": "player",

@@ -5,12 +5,13 @@
 <root>
 	<img class="title" src="ui/mainmenu/title.png" />
 	<div style="flex-direction: column; justify-content: center; top: 10%; gap: 15px;">
-		@if ( !saveData.Has )
+		@if ( !SaveData.Has )
 		{
 			<SideButton
 				ImagePath="ui/mainmenu/new_icon.png"
 				Title="New Game"
-				Subtitle="Start a brand new game"
+				Subtitle="Start your own cottage story.."
+				OnClick=@(() => { SceneHandler.ChangeScene( SaunaScene.Creation ); })
 			/>
 		}
 		else
@@ -18,32 +19,42 @@
 			<SideButton
 				ImagePath="ui/mainmenu/load_icon.png"
 				Title="Continue"
-				Subtitle="Keep on going..."
+				Subtitle="Get back to enjoying life at the cottage.."
+				OnClick=@(() => { SceneHandler.ChangeScene( SaunaScene.Game ); })
 			/>	
 		}
 		<SideButton
 			ImagePath="ui/mainmenu/credits_icon.png"
 			Title="Credits"
-			Subtitle="Check out the folks that created this experience"
+			Subtitle="Check out the folks that created this experience!"
 		/>
 		<SideButton
 			ImagePath="ui/mainmenu/quit_icon.png"
 			Title="Quit"
 			Subtitle="Why? There aren't any other better games on s&box..."
+			OnClick=@(() => { Game.Close(); })
 		/>
 	</div>
 
 	<FriendList class="friendList" />
+	<NotificationManager />
 </root>
 
 @code {
-	(PlayerSave Save, bool Has) saveData;
+	public enum Scene
+	{
+		Creation,
+		Game
+	}
+
+	public static (PlayerSave Save, bool Has) SaveData { get; private set; }
 	SoundHandle _loopStart;
 	SoundHandle _loop;
 
+
 	protected override void OnStart()
 	{
-		saveData = Player.GetSave();
+		SaveData = Player.GetSave();
 		_loopStart = Sound.Play( "sounds/music/zakkujo-ero_vaimosta-loop_start.sound" );
 	}
 

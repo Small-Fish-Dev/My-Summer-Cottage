@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "b67909b1-46b2-4b84-969d-b1cfb805e5bf",
     "Name": "liqourice_packet",
     "Enabled": true,
     "Components": [
@@ -9,9 +9,9 @@
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "1.977756,0.1204168,-1.49512",
+          "Position": "2.391829,0.9767182,0.2978323",
           "Scale": "1,1,1",
-          "Rotation": "-0.1172967,0.08413253,-0.6970983,0.7022943"
+          "Rotation": "-0.6201431,0.7532796,0.1201006,-0.1832159"
         },
         "Count": 0,
         "Description": "Its salty too! My favourite snack!",
@@ -40,7 +40,7 @@
           {
             "Identifier": "beer_bottle.drink",
             "Keybind": "Mouse1",
-            "Description": "Drink",
+            "Description": "Eat",
             "Action": {
               "Version": 5,
               "UserData": {
@@ -113,8 +113,37 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "d8fdc112-0a91-4f30-944d-79b646a459b3",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/eat.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },

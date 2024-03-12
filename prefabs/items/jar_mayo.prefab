@@ -1,8 +1,7 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "81e39819-7601-4a4a-af10-a7e8032436dc",
     "Name": "jar_mayo",
-    "Rotation": "0,0,-0.8660253,0.5000001",
     "Enabled": true,
     "Components": [
       {
@@ -10,9 +9,9 @@
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "1.334938,-7.712587,-3.046965",
+          "Position": "2.938,-2.938,-0.5",
           "Scale": "1,1,1",
-          "Rotation": "-0.06396737,-0.9655446,0.2377719,0.08424047"
+          "Rotation": "-0.7363411,0.02678831,0.09355348,0.6695759"
         },
         "Count": 0,
         "Description": "Something seems really wrong with this mayonnaise.",
@@ -41,7 +40,7 @@
           {
             "Identifier": "beer_bottle.drink",
             "Keybind": "Mouse1",
-            "Description": "Drink",
+            "Description": "Eat",
             "Action": {
               "Version": 5,
               "UserData": {
@@ -117,7 +116,34 @@
             "Disabled": null,
             "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "936ab990-199a-4a1b-8d02-6dbbbcfb8c6b",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/eat.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "ebace190-6a65-4da7-8af2-eb3053a6830d",
     "Name": "crisps_hamsteria",
     "Enabled": true,
     "Components": [
@@ -9,9 +9,9 @@
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "2.084177,0.07470044,-4.001803",
+          "Position": "4.430052,1.674834,0.9988156",
           "Scale": "1,1,1",
-          "Rotation": "-0.2173259,0.1748535,-0.6631757,0.6945457"
+          "Rotation": "0.7997509,-0.5525317,-0.1547033,0.1765621"
         },
         "Count": 0,
         "Description": "These are from that amazing restraunt? Hamsteria!",
@@ -40,7 +40,7 @@
           {
             "Identifier": "beer_bottle.drink",
             "Keybind": "Mouse1",
-            "Description": "Drink",
+            "Description": "Eat",
             "Action": {
               "Version": 5,
               "UserData": {
@@ -113,8 +113,37 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "bff0f08f-0a33-423b-bac2-fd5ed8236c1c",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/eat.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },

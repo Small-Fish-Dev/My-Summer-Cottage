@@ -1,9 +1,10 @@
 {
   "RootObject": {
-    "Id": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+    "Id": "beeacd1f-0272-4a59-9a68-34e898271c1b",
     "Name": "moose_male",
     "Tags": "animal,npc",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "NPC",
@@ -15,7 +16,7 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+          "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -24,12 +25,12 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+          "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+          "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
           "component_type": "MoveHelper"
         },
         "Name": "Moose (\u2642)",
@@ -71,7 +72,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001"
+                  "go": "beeacd1f-0272-4a59-9a68-34e898271c1b"
                 }
               },
               "UserData": {
@@ -160,6 +161,192 @@
             }
           ]
         },
+        "OnComponentFixedUpdate": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Component Fixed Update",
+            "id": "b0440131-10d7-4453-9501-f8b7adfe5de9",
+            "ReferencedComponentTypes": [
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "16,96"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              },
+              "UserData": {
+                "Position": "256,96"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_name": "Set",
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "704,112"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
+                  "component_type": "MoveHelper"
+                }
+              },
+              "UserData": {
+                "Position": "-32,320"
+              }
+            },
+            {
+              "Id": 47,
+              "Type": "property.get",
+              "ParentId": 5,
+              "Properties": {
+                "_name": "Velocity",
+                "_type": "package.fish.sauna/MoveHelper"
+              }
+            },
+            {
+              "Id": 48,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Length",
+                "_type": "Sandbox.System/Vector3"
+              },
+              "UserData": {
+                "Position": "272,368"
+              }
+            },
+            {
+              "Id": 49,
+              "Type": "op.greaterthanorequal",
+              "UserData": {
+                "Position": "496,272"
+              }
+            },
+            {
+              "Id": 57,
+              "Type": "property.get",
+              "ParentId": 1,
+              "Properties": {
+                "_type": "package.fish.sauna/NPC",
+                "_name": "WalkSpeed"
+              }
+            },
+            {
+              "Id": 58,
+              "Type": "op.multiply",
+              "UserData": {
+                "Position": "240,240"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "Value": "charge",
+              "DstId": 3,
+              "DstName": "v"
+            },
+            {
+              "SrcId": 49,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 47,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 47,
+              "SrcName": "_result",
+              "DstId": 48,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 48,
+              "SrcName": "_result",
+              "DstId": 49,
+              "DstName": "a"
+            },
+            {
+              "SrcId": 58,
+              "SrcName": "_result",
+              "DstId": 49,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 57,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 57,
+              "SrcName": "_result",
+              "DstId": 58,
+              "DstName": "a"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "System.Private.CoreLib/System.Single",
+                "Value": 2.5
+              },
+              "DstId": 58,
+              "DstName": "b"
+            }
+          ]
+        },
         "OnDetect": {
           "Version": 5,
           "UserData": {
@@ -208,7 +395,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+                  "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
                   "component_type": "NPC"
                 }
               },
@@ -242,18 +429,6 @@
               }
             },
             {
-              "Id": 11,
-              "Type": "call",
-              "Properties": {
-                "_isStatic": false,
-                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
-                "_name": "Set"
-              },
-              "UserData": {
-                "Position": "464,-208"
-              }
-            },
-            {
               "Id": 12,
               "Type": "call",
               "Properties": {
@@ -263,13 +438,6 @@
               },
               "UserData": {
                 "Position": "144,-464"
-              }
-            },
-            {
-              "Id": 13,
-              "Type": "time.delay",
-              "UserData": {
-                "Position": "160,-96"
               }
             },
             {
@@ -307,7 +475,7 @@
           ],
           "Links": [
             {
-              "SrcId": 13,
+              "SrcId": 20,
               "SrcName": "_signal",
               "DstId": 2,
               "DstName": "_signal"
@@ -359,28 +527,6 @@
               "DstName": "value"
             },
             {
-              "SrcId": 13,
-              "SrcName": "_signal",
-              "DstId": 11,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 8,
-              "SrcName": "_result",
-              "DstId": 11,
-              "DstName": "_target"
-            },
-            {
-              "Value": "charge",
-              "DstId": 11,
-              "DstName": "v"
-            },
-            {
-              "Value": true,
-              "DstId": 11,
-              "DstName": "value"
-            },
-            {
               "SrcId": 0,
               "SrcName": "_signal",
               "DstId": 12,
@@ -401,17 +547,6 @@
               "Value": true,
               "DstId": 12,
               "DstName": "value"
-            },
-            {
-              "SrcId": 20,
-              "SrcName": "_signal",
-              "DstId": 13,
-              "DstName": "_signal"
-            },
-            {
-              "Value": 3,
-              "DstId": 13,
-              "DstName": "seconds"
             },
             {
               "SrcId": 0,
@@ -462,8 +597,7 @@
             "Title": "On Enemy Escaped",
             "id": "691598ea-f02a-4a1f-ab36-a1bc91a9391a",
             "ReferencedComponentTypes": [
-              "package.fish.sauna/NPC",
-              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              "package.fish.sauna/NPC"
             ]
           },
           "Variables": [],
@@ -488,42 +622,6 @@
               "UserData": {
                 "Position": "128,112"
               }
-            },
-            {
-              "Id": 6,
-              "Type": "scene.ref",
-              "Properties": {
-                "component": {
-                  "_type": "component",
-                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
-                  "component_type": "NPC"
-                }
-              },
-              "UserData": {
-                "Position": "-176,-112"
-              }
-            },
-            {
-              "Id": 7,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
-              },
-              "UserData": {
-                "Position": "64,-112"
-              }
-            },
-            {
-              "Id": 8,
-              "Type": "call",
-              "Properties": {
-                "_isStatic": false,
-                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
-                "_name": "Set"
-              },
-              "UserData": {
-                "Position": "512,-96"
-              }
             }
           ],
           "Links": [
@@ -544,34 +642,6 @@
               "SrcName": "_target",
               "DstId": 3,
               "DstName": "_this"
-            },
-            {
-              "SrcId": 6,
-              "SrcName": "_result",
-              "DstId": 7,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 8,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 7,
-              "SrcName": "_result",
-              "DstId": 8,
-              "DstName": "_target"
-            },
-            {
-              "Value": "charge",
-              "DstId": 8,
-              "DstName": "v"
-            },
-            {
-              "Value": false,
-              "DstId": 8,
-              "DstName": "value"
             }
           ]
         },
@@ -606,7 +676,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+                  "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
                   "component_type": "NPC"
                 }
               },
@@ -801,7 +871,7 @@
         "StopSpeed": 10,
         "TraceHeight": 64,
         "TraceRadius": 24,
-        "TraceType": "Capsule",
+        "TraceType": "BBox",
         "UseCollider": false,
         "UseSceneGravity": true
       },

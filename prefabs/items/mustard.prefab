@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3fd6cb94-0137-4c55-9cd8-44e881059f5f",
+    "Id": "0e20fdc1-f2a1-4635-9b06-96a94cb5cb52",
     "Name": "mustard",
     "Enabled": true,
     "Components": [
@@ -9,9 +9,9 @@
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "1.365984,-3.040578,-0.2954199",
+          "Position": "2.2,-2,-0.3",
           "Scale": "1,1,1",
-          "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
+          "Rotation": "0.4353384,-0.5572078,-0.579228,-0.4055797"
         },
         "Count": 0,
         "Description": "God i wanna slather it all over a hotdog and gulp it down.",
@@ -114,7 +114,34 @@
             "InteractDistance": 75,
             "Accessibility": "All",
             "CooldownTime": 0.5,
-            "Animation": "Action"
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "f2c415b4-d3cc-4f58-93df-1cfd54301c68",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/slurp.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
           }
         ]
       },
