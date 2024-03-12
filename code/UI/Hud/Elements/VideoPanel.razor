@@ -4,46 +4,45 @@
 @attribute [StyleSheet]
 @inherits Sandbox.UI.Panel
 
-<root class="videopanel">
-</root>
+<root class="videopanel" />
 
 @code 
 {
-    string _source;
+	string _source;
 
-    public string Source 
-    { 
-        get => _source; 
+	public string Source 
+	{ 
+		get => _source; 
 
-        set
-        {
-            if (_source == value) return;
+		set
+		{
+			if (_source == value) return;
 
-            _source = value;
+			_source = value;
 
-            videoPlayer.Play( FileSystem.Mounted, Source );
-        }
-    }
+			videoPlayer.Play( FileSystem.Mounted, Source );
+		}
+	}
 
-    public bool Repeat
-    {
-        set
-        {
-            videoPlayer.Repeat = value;
-        }
-    }
+	public bool Repeat
+	{
+		set
+		{
+			videoPlayer.Repeat = value;
+		}
+	}
 
-    Sandbox.VideoPlayer videoPlayer;
+	Sandbox.VideoPlayer videoPlayer;
 
-    public VideoPanel()
-    {
-        videoPlayer = new VideoPlayer();
-        videoPlayer.Muted = false;
+	public VideoPanel()
+	{
+		videoPlayer = new VideoPlayer();
+		videoPlayer.Muted = true;
 
 		// TODO: Let the user decide how audio is played
 		// videoPlayer.OnAudioReady = () => videoPlayer.PlayAudio();
-
-        Repeat = false;
+		
+		Repeat = false;
         Style.AspectRatio = 16.0f / 9.0f;
     }
 
@@ -77,7 +76,8 @@
 
         // todo - change the UV so we can do object-fit: cover
         Graphics.Attributes.Set("Texture", tex );
-        Graphics.DrawQuad( Box.Rect, Material.UI.Basic, Color.White );
+		Log.Error( Opacity);
+        Graphics.DrawQuad( Box.Rect, Material.UI.Basic, Color.White.WithAlpha( Opacity ) );
     }
 
 }

@@ -35,13 +35,10 @@
 		</div>
 	</div>
 
-	@if ( _state == IntroState.Logo )
-	{
-		<div class="video-container">
-			@* TODO:  *@
-			<VideoPanel Source="ui/intro/smallfishintro.mp4"/>
-		</div>
-	}
+	<div class="video-container @(_state != IntroState.Logo ? "hidden" : "")">
+		@* TODO:  *@
+		<VideoPanel Source="ui/intro/smallfishintro.mp4"/>
+	</div>
 </root>
 
 @code {
@@ -51,7 +48,7 @@
 		Disclaimer,
 		Next
 	}
-
+	
 	[Property] public MainMenuHud MainMenu { get; set; }
 	[Property] public SoundEvent IntroSound { get; set; }
 
