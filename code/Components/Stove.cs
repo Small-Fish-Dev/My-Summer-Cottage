@@ -12,7 +12,7 @@ public sealed class Stove : Component
 	[Sync]
 	public bool HasWater { get; set; } = false;
 
-	public bool IsRunning => HasWood && HasWater;
+	public bool IsRunning { get; set; }
 
 	protected override void OnStart()
 	{
@@ -36,7 +36,7 @@ public sealed class Stove : Component
 	{
 		Model.Set( "b_open", !HasWood );
 
-		GameObject.Name = $"Stove{(HasWater ? "" : $" (Needs{(HasWood ? "" : " wood and")} water)")}";
+		GameObject.Name = $"Stove{(HasWater && HasWater ? " (Ready)" : (HasWater ? "" : $" (Needs{(HasWood ? "" : " wood and")} water)"))}";
 	}
 
 	void PlaceWood( Player interactor )

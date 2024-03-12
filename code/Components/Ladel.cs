@@ -65,6 +65,7 @@ public sealed class Ladel : Component
 					{
 						HasWater = false;
 						stove.HasWater = true;
+						TaskMaster.SubmitTriggerSignal( "item.used_2.Ladel", player );
 					}
 
 			HasWater = false;
@@ -73,7 +74,10 @@ public sealed class Ladel : Component
 		{
 			if ( target != null )
 				if ( target.Components.TryGet<WaterBucket>( out var bucket ) )
+				{
+					TaskMaster.SubmitTriggerSignal( "item.used_1.Ladel", player );
 					HasWater = true;
+				}
 		}
 
 		if ( target.Components.TryGet<HealthComponent>( out var health ) )
