@@ -1,12 +1,19 @@
 {
   "Name": "Wife Needs Ammo...",
+  "Subtitle": "Kindly do the needful",
   "Description": "I don\u0027t know why",
+  "Giver": "Wife",
+  "Message": "Get me some ammo now, or else I\u0027ll do it myself and use it on you.",
   "TaskType": "GivenByWife",
   "TaskRarity": "Uncommon",
   "IsPrimary": true,
   "Global": false,
+  "SuccessSignal": "task.success.Wife Needs Ammo...",
+  "FailedSignal": "task.failed.Wife Needs Ammo...",
   "TimeLimited": true,
   "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": true,
+  "RunOnStartEverySession": false,
   "OnStart": null,
   "OnSuccess": null,
   "OnFail": null,
@@ -15,15 +22,8 @@
     {
       "Description": "Get ammo",
       "TriggerSignal": "item.received.Box of 7.62x53mmR",
-      "AmountToComplete": 1
+      "AmountToComplete": 10
     }
   ],
-  "CurrentSubtaskOrder": 0,
-  "Successful": false,
-  "Started": false,
-  "Completed": false,
-  "TaskTimer": {
-    "Fraction": "NaN"
-  },
   "__references": []
 }

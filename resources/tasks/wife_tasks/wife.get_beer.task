@@ -2,14 +2,18 @@
   "Name": "Wife Needs Beer",
   "Subtitle": "Kindly do the needful",
   "Description": "I don\u0027t know why",
+  "Giver": "Wife",
+  "Message": "Go get me some beer you useless excuse of a husband!",
   "TaskType": "GivenByWife",
   "TaskRarity": "Common",
   "IsPrimary": true,
   "Global": false,
-  "TimeLimited": true,
   "SuccessSignal": "task.success.Wife Needs Beer",
   "FailedSignal": "task.failed.Wife Needs Beer",
+  "TimeLimited": true,
   "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": true,
+  "RunOnStartEverySession": false,
   "OnStart": null,
   "OnSuccess": null,
   "OnFail": null,
@@ -18,7 +22,7 @@
     {
       "Description": "Get beer",
       "TriggerSignal": "item.received.Beer Bottle",
-      "AmountToComplete": 1
+      "AmountToComplete": 10
     }
   ],
   "__references": []

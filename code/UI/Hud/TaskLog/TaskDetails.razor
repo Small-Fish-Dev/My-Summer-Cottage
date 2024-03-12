@@ -20,7 +20,11 @@
 						{
 							<div class="success failed">FAILED</div>
 						}
-					}
+                    }
+                    @if (SelectedTask.TimeLimited && !SelectedTask.TaskTimer )
+                    {
+                        <div class="success failed">@(MathF.Round( SelectedTask.TimeLimitInSeconds - SelectedTask.TaskTimer.Passed )) seconds left...</div>
+                    }
 				</div>
 				<text class="subtitle">@SelectedTask.Subtitle</text>
 				@if (SelectedTask == Player.PinnedTask)
@@ -32,7 +36,7 @@
 		<div class="task-additional-details">
 			<div style="flex-direction: column; margin-bottom: 40px; flex-shrink: 0;">
 				<text class="title">Task Details:</text>
-				<text style="font-size: 20px;">@SelectedTask.Description</text>
+				<text style="font-size: 20px;">@SelectedTask.Description </text>
 			</div>
 			<div style="flex-direction: column; flex-shrink: 0;">
 				<text class="title">Task Requirements:</text>
@@ -41,7 +45,7 @@
 					{
 						<div class="requirement">
 							<Checkbox Interactable=@false Enabled=@subtask.Completed />
-							<text class="requirement-details">@subtask.Description</text>
+							<text class="requirement-details">@subtask.Description (@subtask.CurrentAmount/@subtask.AmountToComplete)</text>
 						</div>
 					}
 				</div>
@@ -77,6 +81,7 @@
 			SelectedTask.ResourceId,
 			SelectedTask.Completed,
 			SelectedTask.Successful,
+            SelectedTask.TaskTimer.Passed,
 			SelectedTask.Subtasks.HashCombine((subtask) => HashCode.Combine(subtask.Completed))
 		);
 	}

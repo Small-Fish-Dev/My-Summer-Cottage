@@ -24,6 +24,13 @@
 					</div>
 				</div>
 
+                <div style="flex-direction: row-reverse; gap: 8px;">
+                    @if (Player.PinnedTask.TimeLimited && !Player.PinnedTask.TaskTimer)
+                    {
+                        <div class="task-timer">@(MathF.Round(Player.PinnedTask.TimeLimitInSeconds - Player.PinnedTask.TaskTimer.Passed)) seconds left...</div>
+                    }
+                </div>
+
 				<div style="flex-direction: row-reverse; gap: 8px;">
 					@if (Player.PinnedTask.Completed)
 					{
@@ -34,16 +41,16 @@
 						else
 						{
 							<div class="task-description failed">FAILED</div>
-						}
+                        }
 					}
 					else
-					{
+                    {
 						@if (Player.PinnedTask.NextSubtaskToComplete is not null)
 						{
-							<div class="task-description">@Player.PinnedTask.NextSubtaskToComplete.Description</div>
+                            <div class="task-description">@Player.PinnedTask.NextSubtaskToComplete.Description (@Player.PinnedTask.NextSubtaskToComplete.CurrentAmount/@Player.PinnedTask.NextSubtaskToComplete.AmountToComplete)</div>
 							<Checkbox Enabled=@(Player.PinnedTask.NextSubtaskToComplete.Completed) />
-						}
-					}
+                        }
+                    }
 				</div>
 			</div>
 		}
@@ -59,6 +66,7 @@
 			Player.PinnedTask?.Completed,
 			Player.PinnedTask?.Successful,
 			Player.PinnedTask?.NextSubtaskToComplete?.Completed,
+            Player.PinnedTask?.TaskTimer.Passed,
 			Player.PinnedTask?.NextSubtaskToComplete?.GetHashCode()
 		);
 	}

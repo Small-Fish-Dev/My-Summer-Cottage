@@ -108,13 +108,25 @@ public partial class SaunaTask : GameResource
 	public string Description { get; set; } = "We need you to do x immediately, right now! If you don't I am going to start punching myself.";
 
 	/// <summary>
+	/// If you want to give this task out as a message, write the person giving it here
+	/// </summary>
+	[Property]
+	public string Giver { get; set; } = "Friend";
+
+	/// <summary>
+	/// If you want to give this task out as a message, write it here to retrieve it
+	/// </summary>
+	[Property]
+	public string Message { get; set; } = "Hey buddy can you do this for me";
+
+	/// <summary>
 	/// Who gave this task (Used to fetch tasks to give)
 	/// </summary>
 	[Property]
 	public TaskType TaskType { get; set; } = TaskType.Any;
 
 	[Hide, JsonIgnore]
-	public bool IsPrimaryTask => TaskType == TaskType.GivenByStory;
+	public bool IsPrimaryTask => IsPrimary;
 
 	/// <summary>
 	/// How frequently this taks will be given out

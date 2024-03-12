@@ -19,7 +19,7 @@
           "__type": "GameTimeManager",
           "CloudSpeed": "1,0,0",
           "Day": 1,
-          "DayLength": 1200,
+          "DayLength": 120,
           "DaylightIntensity": [
             {},
             {
@@ -134,12 +134,7 @@
         },
         {
           "__type": "TaskMaster",
-          "CurrentTasks": [
-            "resources/tasks/random_tasks/random.get_money.task",
-            "resources/tasks/random_tasks/random.get_beer.task",
-            "resources/tasks/random_tasks/random.enter_sauna.task",
-            "resources/tasks/random_tasks/random.gamble_money.task"
-          ]
+          "CurrentTasks": []
         },
         {
           "__type": "EventMaster",
@@ -194,11 +189,23 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "224,224"
+                        }
+                      },
+                      {
+                        "Id": 6,
+                        "Type": "call",
+                        "Properties": {
+                          "_type": "package.fish.sauna/Sauna.Phone",
+                          "_name": "ReceiveMessage",
+                          "_isStatic": true
+                        },
+                        "UserData": {
+                          "Position": "432,-80"
                         }
                       }
                     ],
@@ -249,6 +256,12 @@
                         "SrcName": "_result",
                         "DstId": 5,
                         "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_signal",
+                        "DstId": 6,
+                        "DstName": "_signal"
                       }
                     ]
                   }
@@ -306,8 +319,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "160,192"
@@ -485,7 +498,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.8261887,0,0.5633934",
+          "Rotation": "0,-0.05016386,0,-0.998741",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -493,7 +506,7 @@
             {
               "__type": "SkyBox2D",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
-              "Tint": "0.43342,0.69024,1.0409,2"
+              "Tint": "0.43348,0.69031,1.041,2"
             }
           ]
         },
@@ -506,8 +519,8 @@
           "Components": [
             {
               "__type": "GradientFog",
-              "Color": "0.07649,0.12181,0.24492,1",
-              "EndDistance": 5354.08,
+              "Color": "0.0765,0.12182,0.24494,1",
+              "EndDistance": 5354.878,
               "FalloffExponent": 1,
               "Height": 4000,
               "StartDistance": 0,
@@ -519,7 +532,7 @@
           "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
-          "Rotation": "-0.1081386,-0.1486497,0.578253,-0.7948791",
+          "Rotation": "-0.1081503,-0.148671,0.5782368,-0.7948853",
           "Tags": "light_directional,light",
           "Enabled": true,
           "NetworkMode": 2,
@@ -528,7 +541,7 @@
               "__type": "DirectionalLight",
               "FogMode": "Enabled",
               "FogStrength": 1,
-              "LightColor": "0.172,0.27391,0.41306,0.79366",
+              "LightColor": "0.17203,0.27395,0.41313,0.79371",
               "Shadows": true,
               "SkyColor": "0.03029,0.08999,0.18605,1"
             }
@@ -661,9 +674,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_isStatic": true,
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_isStatic": true
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -701,7 +714,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -752,9 +764,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_isStatic": true,
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithNameAndSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_isStatic": true
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -797,8 +809,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -833,9 +843,7 @@
             },
             {
               "__type": "LeFisheSpawner",
-              "FishesDepthIncrement": 10,
-              "FishesPerDepth": 2,
-              "GridCellSize": 150,
+              "FishAmount": 20,
               "MinimumDepth": 5,
               "Fishes": [
                 "prefabs/fishes/herring.prefab",
@@ -1209,6 +1217,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-12T12:45:36.6878994\u002B03:00",
+  "LastSaved": "2024-03-12T12:47:40.9504512\u002B01:00",
   "__references": []
 }
