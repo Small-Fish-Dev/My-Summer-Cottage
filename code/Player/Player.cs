@@ -233,6 +233,12 @@ public partial class Player : Component, Component.ExecuteInEditor
 		return true;
 	}
 
+	public bool GiveMoney( int amount )
+	{
+		Money += amount;
+		return true;
+	}
+
 	[Icon( "camera" )]
 	public SweetMemory CaptureMemory( string caption, string identifier = null, float distance = 100f, int maxTries = 20 )
 	{

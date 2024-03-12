@@ -1,0 +1,989 @@
+{
+  "RootObject": {
+    "Id": "aaa35264-e42c-4845-bd55-40949e10aa6a",
+    "Name": "wealthy_guy",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "NPC",
+        "AlertOthers": false,
+        "AttackCooldown": 5,
+        "AttackRange": 60,
+        "DetectRange": 400,
+        "EnemyTags": "player,human",
+        "FaceTowardsVelocity": true,
+        "Health": {
+          "_type": "component",
+          "go": "aaa35264-e42c-4845-bd55-40949e10aa6a",
+          "component_type": "HealthComponent"
+        },
+        "Idle": true,
+        "MaximumIdleCooldown": 6,
+        "MaxRunAnimationSpeed": 150,
+        "MinimumIdleCooldown": 4,
+        "Model": {
+          "_type": "component",
+          "go": "1cbbcc57-6963-4726-a6a6-429c638d3e73",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "MoveHelper": {
+          "_type": "component",
+          "go": "aaa35264-e42c-4845-bd55-40949e10aa6a",
+          "component_type": "MoveHelper"
+        },
+        "Name": "Wealthy Man",
+        "OnAttack": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Attack",
+            "id": "52e29232-ca78-4c17-806c-ceac2eaa6f7b",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/Sauna.Player",
+              "package.fish.sauna/HealthComponent"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-192,-80",
+                "Labels": {
+                  "enemy": "enemy"
+                }
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "random.int",
+              "UserData": {
+                "Position": "256,-224"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_name": "PlaySoundWithNameAndSubtitle",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "832,-144"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "aaa35264-e42c-4845-bd55-40949e10aa6a",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-16,-512",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "GiveMoney",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "432,-144"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "npc.startescaping",
+              "UserData": {
+                "Position": "1280,-128"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "-16,-352",
+                "Labels": {
+                  "_result": "player"
+                }
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "Money"
+              },
+              "UserData": {
+                "Position": "-16,-272",
+                "Labels": {
+                  "_result": "money"
+                }
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "op.lessthan",
+              "UserData": {
+                "Position": "-80,16"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "if",
+              "UserData": {
+                "Position": "80,-80"
+              }
+            },
+            {
+              "Id": 23,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/HealthComponent",
+                "_name": "Damage",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "320,64"
+              }
+            },
+            {
+              "Id": 28,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "aaa35264-e42c-4845-bd55-40949e10aa6a"
+                }
+              },
+              "UserData": {
+                "Position": "0,-640",
+                "Labels": {
+                  "_result": "npc object"
+                }
+              }
+            },
+            {
+              "Id": 29,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_name": "PlaySoundWithNameAndSubtitle",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "672,64"
+              }
+            },
+            {
+              "Id": 57,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "-16,-432",
+                "Labels": {
+                  "_result": "enenmy health"
+                }
+              }
+            },
+            {
+              "Id": 58,
+              "Type": "property.get",
+              "ParentId": 28,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 59,
+              "Type": "property.get",
+              "ParentId": 58,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "npc position"
+                }
+              }
+            },
+            {
+              "Id": 60,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "-0,-160"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "Value": 500,
+              "DstId": 3,
+              "DstName": "max"
+            },
+            {
+              "Value": 200,
+              "DstId": 3,
+              "DstName": "min"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_signal",
+              "DstId": 7,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Wealthy Man",
+              "DstId": 7,
+              "DstName": "name"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 7,
+              "DstName": "obj"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "Sandbox.Engine/Sandbox.SoundEvent",
+                "Value": "sounds/speech/1.sound"
+              },
+              "DstId": 7,
+              "DstName": "sound"
+            },
+            {
+              "Value": "Take this money you filthy poor man...",
+              "DstId": 7,
+              "DstName": "subtitle"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "true",
+              "DstId": 11,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_signal",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 12,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 13,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 16,
+              "DstName": "a"
+            },
+            {
+              "Value": 10,
+              "DstId": 16,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 17,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "false",
+              "DstId": 23,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 57,
+              "SrcName": "_result",
+              "DstId": 23,
+              "DstName": "_target"
+            },
+            {
+              "Value": 2,
+              "DstId": 23,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 28,
+              "SrcName": "_result",
+              "DstId": 23,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 200,
+              "DstId": 23,
+              "DstName": "force"
+            },
+            {
+              "Value": "Average",
+              "DstId": 23,
+              "DstName": "type"
+            },
+            {
+              "SrcId": 59,
+              "SrcName": "_result",
+              "DstId": 23,
+              "DstName": "worldHurtPosition"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "_signal",
+              "DstId": 29,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Wealthy Man",
+              "DstId": 29,
+              "DstName": "name"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 29,
+              "DstName": "obj"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "Sandbox.Engine/Sandbox.SoundEvent",
+                "Value": "sounds/speech/1.sound"
+              },
+              "DstId": 29,
+              "DstName": "sound"
+            },
+            {
+              "Value": "Back off you disgusting bum, You have enough money.",
+              "DstId": 29,
+              "DstName": "subtitle"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 57,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 28,
+              "SrcName": "_result",
+              "DstId": 58,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 58,
+              "SrcName": "_result",
+              "DstId": 59,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 60,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 60,
+              "DstName": "npc"
+            }
+          ]
+        },
+        "OnDetect": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Detect",
+            "id": "cb7f45e6-0d4b-4a5c-913c-824c0ee00f73",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/Sauna.Player"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-80,-16",
+                "Labels": {
+                  "enemy": "enemy"
+                }
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "npc.startfollowing",
+              "UserData": {
+                "Position": "992,-160"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "aaa35264-e42c-4845-bd55-40949e10aa6a",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "0,-336",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "1280,-144"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "0,-176",
+                "Labels": {
+                  "_result": "player"
+                }
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "Money"
+              },
+              "UserData": {
+                "Position": "-0,-256",
+                "Labels": {
+                  "_result": "money"
+                }
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "op.lessthan",
+              "UserData": {
+                "Position": "-16,96"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "if",
+              "UserData": {
+                "Position": "144,-16"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_name": "PlaySoundWithNameAndSubtitle",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "576,-160"
+              }
+            },
+            {
+              "Id": 19,
+              "Type": "npc.startescaping",
+              "UserData": {
+                "Position": "448,32"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 14,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 1,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "failedToReachTarget",
+              "DstId": 6,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 7,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "a"
+            },
+            {
+              "Value": 10,
+              "DstId": 9,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "true",
+              "DstId": 14,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Wealthy Man",
+              "DstId": 14,
+              "DstName": "name"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 14,
+              "DstName": "obj"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "Sandbox.Engine/Sandbox.SoundEvent",
+                "Value": "sounds/ui/serror/serror.sound"
+              },
+              "DstId": 14,
+              "DstName": "sound"
+            },
+            {
+              "Value": "Hey you! over there! You look poor, and disgusting! take this money!",
+              "DstId": 14,
+              "DstName": "subtitle"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "false",
+              "DstId": 19,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 19,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 19,
+              "DstName": "target"
+            }
+          ]
+        },
+        "OnIdle": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Idle",
+            "id": "9ff25f1d-8422-4d0c-9f68-1b0d40096bd0",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "aaa35264-e42c-4845-bd55-40949e10aa6a",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-144,176"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "package.fish.sauna/NPC",
+                "_name": "SpawnPosition"
+              },
+              "UserData": {
+                "Position": "32,224"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "544,48"
+              }
+            },
+            {
+              "Id": 176,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "256,192"
+              }
+            },
+            {
+              "Id": 177,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "960,128"
+              }
+            },
+            {
+              "Id": 178,
+              "Type": "random.int",
+              "UserData": {
+                "Position": "512,400"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 7,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 176,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "position"
+            },
+            {
+              "Value": 500,
+              "DstId": 176,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 50,
+              "DstId": 176,
+              "DstName": "minRange"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 176,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "reachedDestination",
+              "DstId": 177,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 178,
+              "SrcName": "_result",
+              "DstId": 177,
+              "DstName": "seconds"
+            },
+            {
+              "Value": 10,
+              "DstId": 178,
+              "DstName": "max"
+            },
+            {
+              "Value": 2,
+              "DstId": 178,
+              "DstName": "min"
+            }
+          ]
+        },
+        "RunningType": "Smart",
+        "RunSpeed": 180,
+        "ScaleStats": true,
+        "Static": false,
+        "VisionRange": 400,
+        "WalkingType": "Dumb",
+        "WalkSpeed": 90,
+        "Weight": "Middle"
+      },
+      {
+        "__type": "MoveHelper",
+        "AccelerationCurve": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 0.3,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 2000,
+        "GroundAngle": 45,
+        "GroundFriction": 30,
+        "IgnoreTags": "",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 18,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 72,
+        "TraceRadius": 16,
+        "TraceType": "Capsule",
+        "UseCollider": false,
+        "UseSceneGravity": true
+      },
+      {
+        "__type": "HealthComponent",
+        "CanRegenerate": true,
+        "DamagedBy": "Mild",
+        "Immortal": false,
+        "MaxHealth": 40,
+        "RegenerationCooldown": 2,
+        "RegenerationTimer": 5,
+        "StunnedBy": "Mild",
+        "StunWhenDamaged": false
+      },
+      {
+        "__type": "CapsuleCollider",
+        "End": "0,0,62",
+        "IsTrigger": false,
+        "Radius": 12.500008,
+        "Start": "0,0,12",
+        "Static": false
+      }
+    ],
+    "Children": [
+      {
+        "Id": "1cbbcc57-6963-4726-a6a6-429c638d3e73",
+        "Name": "body",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "BodyGroups": 341,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Character",
+            "Clothes": [],
+            "Fatness": 0.6,
+            "Height": -20,
+            "HideBodyGroup": "Torso, Legs, Feet"
+          }
+        ],
+        "Children": [
+          {
+            "Id": "438e2858-e21e-41c1-bb4f-6e95ab6c24e8",
+            "Name": "Object",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "go": "1cbbcc57-6963-4726-a6a6-429c638d3e73",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "MaterialGroup": "black_formal",
+                "Model": "models/clothes/skinny_trousers/skinny_trousers.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "Id": "5f70bdd5-0546-44cf-8a4c-6311bae96760",
+            "Name": "Object",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "go": "1cbbcc57-6963-4726-a6a6-429c638d3e73",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "MaterialGroup": "black",
+                "Model": "models/clothes/oxford_shoes/oxford_shoes.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "Id": "0f1c7d77-8207-437e-a784-681c106a6e1b",
+            "Name": "Object",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "go": "1cbbcc57-6963-4726-a6a6-429c638d3e73",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/clothes/suit_jacket/suit_jacket.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "Id": "cff29b78-8c91-486d-ba1e-3630683abdd1",
+            "Name": "Object",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "go": "1cbbcc57-6963-4726-a6a6-429c638d3e73",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/clothes/tophat/tophat.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
