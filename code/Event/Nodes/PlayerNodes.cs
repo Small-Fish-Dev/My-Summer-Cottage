@@ -58,7 +58,7 @@ public static partial class PlayerNodes
 	/// <summary>
 	/// Fades to black
 	/// </summary>
-	[ActionGraphNode( "event.blackscreen" ), Pure]
+	[ActionGraphNode( "event.blackscreen" )]
 	[Title( "Black Screen" ), Group( "Events" ), Icon( "blinds" )]
 	public static async Task BlackScreen( Player player, float startingTransition = 2f, float blackTransition = 2f, float endingTransition = 1f )
 	{

@@ -128,6 +128,23 @@
 							]
 						}
 					},
+					{
+						_class = "RenderMeshFile"
+						name = "penoid"
+						filename = "models/guy/penoid.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
 				]
 			},
 			{
@@ -980,6 +997,36 @@
 						disable_compression = false
 						enable_scale = false
 						source_filename = "models/guy/animations/sitting_pose.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "penoid"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "penoid"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/guy/penoid.fbx"
 						start_frame = -1
 						end_frame = -1
 						framerate = -1.0
@@ -2936,6 +2983,13 @@
 						ignore_rotation = false
 						do_not_discard = true
 					},
+					{
+						_class = "BoneMarkup"
+						target_bone = "root"
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = true
+					},
 				]
 				bone_cull_type = "None"
 			},
@@ -3029,6 +3083,25 @@
 								meshes = 
 								[
 									"feet",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "penoid"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"penoid",
 								]
 							},
 							{
