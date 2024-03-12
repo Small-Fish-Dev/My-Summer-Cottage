@@ -358,7 +358,7 @@ public class MoveHelper : Component
 	public BBox DefineBBox()
 	{
 		if ( !UseCollider || Collider == null || Collider is not BoxCollider box )
-			return new BBox( new Vector3( 0f - TraceRadius, 0f - TraceRadius, 0f ), new Vector3( TraceRadius, TraceRadius, TraceHeight ) );
+			return new BBox( new Vector3( 0f - TraceRadius / 2f, 0f - TraceRadius / 2f, 0f ), new Vector3( TraceRadius / 2f, TraceRadius / 2f, TraceHeight ) );
 		else
 			return new BBox( box.Center - box.Scale / 2f, box.Center + box.Scale / 2f );
 	}
