@@ -1,0 +1,1022 @@
+{
+  "RootObject": {
+    "Id": "70e11655-f958-45c7-8eaf-40c411866039",
+    "Name": "car_speeding",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "AddToEventPool": true,
+        "EventName": "car_speeding_event",
+        "EventSignals": [
+          null
+        ],
+        "Rarity": "Common",
+        "ReinstantiateOnRestart": false,
+        "Stackable": true,
+        "Type": "Zone"
+      },
+      {
+        "__type": "EventComponent",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "d149da58-b798-47a7-9087-9f5e57a4366d",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-96,-80"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "3250ee80-2c93-49c0-a14a-d3da77f3ebd9"
+                }
+              },
+              "UserData": {
+                "Position": "0,96",
+                "Labels": {
+                  "_result": "car"
+                }
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "property.get",
+              "ParentId": 2,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "fe044501-1c9b-4544-a898-506990cc458b"
+                }
+              },
+              "UserData": {
+                "Position": "0,224"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "property.get",
+              "ParentId": 6,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "event.interpolateposition",
+              "UserData": {
+                "Position": "320,-0"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "property.get",
+              "ParentId": 4,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "car_pos"
+                }
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "property.get",
+              "ParentId": 6,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "property.get",
+              "ParentId": 12,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "ecfb3d31-8d1b-4f12-87ae-220ca622af5c"
+                }
+              },
+              "UserData": {
+                "Position": "-0,320"
+              }
+            },
+            {
+              "Id": 22,
+              "Type": "property.get",
+              "ParentId": 17,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 23,
+              "Type": "property.get",
+              "ParentId": 22,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 24,
+              "Type": "property.get",
+              "ParentId": 22,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "LocalRotation"
+              }
+            },
+            {
+              "Id": 29,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "ab5b8af6-a703-4dc6-b7d6-d3b34a70c754"
+                }
+              },
+              "UserData": {
+                "Position": "-0,432"
+              }
+            },
+            {
+              "Id": 30,
+              "Type": "property.get",
+              "ParentId": 29,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 31,
+              "Type": "property.get",
+              "ParentId": 30,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 32,
+              "Type": "property.get",
+              "ParentId": 30,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "LocalRotation"
+              }
+            },
+            {
+              "Id": 33,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "28ae72b9-d868-4e48-a798-6e4a8e093a7b"
+                }
+              },
+              "UserData": {
+                "Position": "0,544"
+              }
+            },
+            {
+              "Id": 34,
+              "Type": "property.get",
+              "ParentId": 33,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 35,
+              "Type": "property.get",
+              "ParentId": 34,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 36,
+              "Type": "property.get",
+              "ParentId": 34,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "LocalRotation"
+              }
+            },
+            {
+              "Id": 37,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "f09f9d72-9f46-4a28-b5d5-b2a984750e30"
+                }
+              },
+              "UserData": {
+                "Position": "0,656"
+              }
+            },
+            {
+              "Id": 38,
+              "Type": "property.get",
+              "ParentId": 37,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 39,
+              "Type": "property.get",
+              "ParentId": 38,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 40,
+              "Type": "property.get",
+              "ParentId": 38,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "LocalRotation"
+              }
+            },
+            {
+              "Id": 47,
+              "Type": "event.interpolateposition",
+              "UserData": {
+                "Position": "560,176"
+              }
+            },
+            {
+              "Id": 48,
+              "Type": "event.interpolaterotation",
+              "UserData": {
+                "Position": "560,336"
+              }
+            },
+            {
+              "Id": 49,
+              "Type": "property.get",
+              "ParentId": 4,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Rotation"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "car_rot"
+                }
+              }
+            },
+            {
+              "Id": 50,
+              "Type": "event.interpolateposition",
+              "UserData": {
+                "Position": "816,176"
+              }
+            },
+            {
+              "Id": 51,
+              "Type": "event.interpolaterotation",
+              "UserData": {
+                "Position": "816,336"
+              }
+            },
+            {
+              "Id": 52,
+              "Type": "event.interpolateposition",
+              "UserData": {
+                "Position": "1056,176"
+              }
+            },
+            {
+              "Id": 53,
+              "Type": "event.interpolaterotation",
+              "UserData": {
+                "Position": "1056,336"
+              }
+            },
+            {
+              "Id": 54,
+              "Type": "event.interpolateposition",
+              "UserData": {
+                "Position": "1296,176"
+              }
+            },
+            {
+              "Id": 55,
+              "Type": "event.interpolaterotation",
+              "UserData": {
+                "Position": "1296,336"
+              }
+            },
+            {
+              "Id": 58,
+              "Type": "event.finished",
+              "UserData": {
+                "Position": "1808,240"
+              }
+            },
+            {
+              "Id": 60,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "70e11655-f958-45c7-8eaf-40c411866039",
+                  "component_type": "EventComponent"
+                }
+              },
+              "UserData": {
+                "Position": "1728,448"
+              }
+            },
+            {
+              "Id": 63,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_isStatic": false,
+                "_name": "Destroy"
+              },
+              "UserData": {
+                "Position": "1552,208"
+              }
+            },
+            {
+              "Id": 64,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "80,-80"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 64,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 2,
+              "DstId": 10,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 10,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 12,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "_result",
+              "DstId": 22,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 22,
+              "SrcName": "_result",
+              "DstId": 23,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 22,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 29,
+              "SrcName": "_result",
+              "DstId": 30,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 30,
+              "SrcName": "_result",
+              "DstId": 31,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 30,
+              "SrcName": "_result",
+              "DstId": 32,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 33,
+              "SrcName": "_result",
+              "DstId": 34,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 34,
+              "SrcName": "_result",
+              "DstId": 35,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 34,
+              "SrcName": "_result",
+              "DstId": 36,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 37,
+              "SrcName": "_result",
+              "DstId": 38,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 38,
+              "SrcName": "_result",
+              "DstId": 39,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 38,
+              "SrcName": "_result",
+              "DstId": 40,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_signal",
+              "DstId": 47,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.5,
+              "DstId": 47,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 47,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 47,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 47,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "_result",
+              "DstId": 47,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_signal",
+              "DstId": 48,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.5,
+              "DstId": 48,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 48,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 49,
+              "SrcName": "_result",
+              "DstId": 48,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 48,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 24,
+              "SrcName": "_result",
+              "DstId": 48,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 49,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 47,
+              "SrcName": "_signal",
+              "DstId": 50,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.5,
+              "DstId": 50,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 50,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 50,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 50,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 31,
+              "SrcName": "_result",
+              "DstId": 50,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 48,
+              "SrcName": "_signal",
+              "DstId": 51,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.5,
+              "DstId": 51,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 51,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 49,
+              "SrcName": "_result",
+              "DstId": 51,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 51,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 32,
+              "SrcName": "_result",
+              "DstId": 51,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 50,
+              "SrcName": "_signal",
+              "DstId": 52,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.8,
+              "DstId": 52,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 52,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 52,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 52,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 35,
+              "SrcName": "_result",
+              "DstId": 52,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 51,
+              "SrcName": "_signal",
+              "DstId": 53,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.8,
+              "DstId": 53,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 53,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 49,
+              "SrcName": "_result",
+              "DstId": 53,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 53,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 36,
+              "SrcName": "_result",
+              "DstId": 53,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 52,
+              "SrcName": "_signal",
+              "DstId": 54,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 3,
+              "DstId": 54,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 54,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 54,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 54,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 39,
+              "SrcName": "_result",
+              "DstId": 54,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 53,
+              "SrcName": "_signal",
+              "DstId": 55,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 3,
+              "DstId": 55,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 55,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 49,
+              "SrcName": "_result",
+              "DstId": 55,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 55,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 40,
+              "SrcName": "_result",
+              "DstId": 55,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 63,
+              "SrcName": "_signal",
+              "DstId": 58,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 60,
+              "SrcName": "_result",
+              "DstId": 58,
+              "DstName": "component"
+            },
+            {
+              "SrcId": 54,
+              "SrcName": "_signal",
+              "DstId": 63,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 63,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 64,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 64,
+              "DstName": "_target"
+            },
+            {
+              "Value": true,
+              "DstId": 64,
+              "DstName": "_value"
+            }
+          ]
+        },
+        "RequiredToFinish": true,
+        "TriggerCooldown": 1,
+        "TriggerOnce": true,
+        "Triggers": [
+          {
+            "_type": "component",
+            "go": "d2e9c9ee-5191-47c2-a464-4615e2f48d04",
+            "component_type": "EventAreaTrigger"
+          }
+        ]
+      }
+    ],
+    "Children": [
+      {
+        "Id": "d2e9c9ee-5191-47c2-a464-4615e2f48d04",
+        "Name": "car_speeding_trigger",
+        "Position": "0,-86.64551,64",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "EventAreaTrigger",
+            "Extents": "256,3000,128",
+            "MaxPollingRate": 5,
+            "Offset": "0,0,0",
+            "TagSet": "player",
+            "TriggerPrefab": [],
+            "TriggerSignalIdentifier": null
+          }
+        ]
+      },
+      {
+        "Id": "3250ee80-2c93-49c0-a14a-d3da77f3ebd9",
+        "Name": "Car",
+        "Position": "0,-3966.646,0",
+        "Rotation": "0,0,0.7071067,0.7071068",
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "BodyGroups": 1,
+            "MaterialGroup": "normal",
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "RenderType": "On",
+            "Tint": "0.05116,0.05116,0.05116,1"
+          },
+          {
+            "__type": "ModelCollider",
+            "IsTrigger": false,
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "Static": false
+          }
+        ],
+        "Children": [
+          {
+            "Id": "4709ea9d-a34f-450c-9c64-86aeca19c352",
+            "Name": "Spot Light",
+            "Position": "80,-22.64551,24",
+            "Rotation": "0,0,-0.07050124,0.9975117",
+            "Tags": "light_spot,light",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SpotLight",
+                "Attenuation": 0.64,
+                "ConeInner": 36.02,
+                "ConeOuter": 22.8,
+                "FogMode": "Enabled",
+                "FogStrength": 1,
+                "LightColor": "1,0.88279,0.70698,1",
+                "Radius": 4000,
+                "Shadows": true
+              }
+            ]
+          },
+          {
+            "Id": "cbd04a91-17d8-4f58-aa25-6ec0bb552531",
+            "Name": "Spot Light",
+            "Position": "80,17.35449,24",
+            "Rotation": "0,0,0.09230856,0.9957304",
+            "Tags": "light_spot,light",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SpotLight",
+                "Attenuation": 0.64,
+                "ConeInner": 36.02,
+                "ConeOuter": 22.8,
+                "FogMode": "Enabled",
+                "FogStrength": 1,
+                "LightColor": "1,0.88279,0.70698,1",
+                "Radius": 4000,
+                "Shadows": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "Id": "fe044501-1c9b-4544-a898-506990cc458b",
+        "Name": "destination",
+        "Position": "0,2544,0",
+        "Enabled": true,
+        "NetworkMode": 2
+      },
+      {
+        "Id": "ecfb3d31-8d1b-4f12-87ae-220ca622af5c",
+        "Name": "destination1",
+        "Position": "0,4008,560",
+        "Rotation": "0.5,0,0,0.8660254",
+        "Enabled": true,
+        "NetworkMode": 2
+      },
+      {
+        "Id": "ab5b8af6-a703-4dc6-b7d6-d3b34a70c754",
+        "Name": "destination2",
+        "Position": "0,6776,1288",
+        "Rotation": "-0.258819,0,0,0.9659258",
+        "Enabled": true,
+        "NetworkMode": 2
+      },
+      {
+        "Id": "28ae72b9-d868-4e48-a798-6e4a8e093a7b",
+        "Name": "destination3",
+        "Position": "0,10520,2032",
+        "Rotation": "-0.9659258,0,0,0.2588191",
+        "Enabled": true,
+        "NetworkMode": 2
+      },
+      {
+        "Id": "f09f9d72-9f46-4a28-b5d5-b2a984750e30",
+        "Name": "destination4",
+        "Position": "0,20384,1384",
+        "Rotation": "-0.9914448,0,0,0.1305263",
+        "Enabled": true,
+        "NetworkMode": 2
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
