@@ -1,8 +1,9 @@
 {
   "RootObject": {
     "Id": "7a37f831-1108-421e-a055-9d3176ccb783",
-    "Name": "Car",
+    "Name": "car",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "Interactions",
@@ -29,14 +30,7 @@
                   "Id": 1,
                   "Type": "event.endsession",
                   "UserData": {
-                    "Position": "240,16"
-                  }
-                },
-                {
-                  "Id": 2,
-                  "Type": "time.delay",
-                  "UserData": {
-                    "Position": "480,16"
+                    "Position": "608,16"
                   }
                 },
                 {
@@ -57,37 +51,26 @@
                   }
                 },
                 {
-                  "Id": 5,
-                  "Type": "event.startsession",
-                  "UserData": {
-                    "Position": "672,32"
-                  }
-                },
-                {
                   "Id": 6,
                   "Type": "foreach",
                   "UserData": {
                     "Position": "192,160"
                   }
+                },
+                {
+                  "Id": 7,
+                  "Type": "time.delay",
+                  "UserData": {
+                    "Position": "400,16"
+                  }
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 0,
+                  "SrcId": 7,
                   "SrcName": "_signal",
                   "DstId": 1,
                   "DstName": "_signal"
-                },
-                {
-                  "SrcId": 1,
-                  "SrcName": "_signal",
-                  "DstId": 2,
-                  "DstName": "_signal"
-                },
-                {
-                  "Value": 2,
-                  "DstId": 2,
-                  "DstName": "seconds"
                 },
                 {
                   "SrcId": 6,
@@ -102,12 +85,6 @@
                   "DstName": "player"
                 },
                 {
-                  "SrcId": 2,
-                  "SrcName": "_signal",
-                  "DstId": 5,
-                  "DstName": "_signal"
-                },
-                {
                   "SrcId": 0,
                   "SrcName": "_signal",
                   "DstId": 6,
@@ -118,6 +95,17 @@
                   "SrcName": "_result",
                   "DstId": 6,
                   "DstName": "enumerable"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 7,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": 3,
+                  "DstId": 7,
+                  "DstName": "seconds"
                 }
               ]
             },
@@ -448,6 +436,7 @@
         "Name": "PlayerTrigger",
         "Position": "0,0,-0.4049997",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "EventAreaFinder",

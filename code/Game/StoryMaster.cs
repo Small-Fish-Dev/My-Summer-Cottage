@@ -135,6 +135,7 @@ public class StoryMaster : Component
 
 	TaskMaster _taskMaster => Components.Get<TaskMaster>();
 	EventMaster _eventMaster => Components.Get<EventMaster>();
+	GameTimeManager _timeManager => Components.Get<GameTimeManager>();
 
 	/// <summary>
 	/// Start the story day
@@ -150,6 +151,8 @@ public class StoryMaster : Component
 			else
 				scriptedEvent.TriggerTime = Game.Random.Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
 		}
+
+
 	}
 
 	/// <summary>
@@ -308,11 +311,10 @@ public class StoryMaster : Component
 		if ( storyMaster == null ) return;
 
 		storyMaster.LoadStoryProgression();
-
 		storyMaster.StartStoryDay();
+		storyMaster._timeManager.StartDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
-
 		storyMaster.LoadEventPool();
 
 		storyMaster.LoadNPCs();
@@ -328,9 +330,15 @@ public class StoryMaster : Component
 
 		Log.Info( "Ending Session" );
 
+		storyMaster._timeManager.EndDay();
+
 		if ( storyMaster.CurrentSaunaDay.Completed )
 		{
 			storyMaster.NextStoryDay();
+			storyMaster.NextGameDay();
+		}
+		else
+		{
 			storyMaster.NextGameDay();
 		}
 

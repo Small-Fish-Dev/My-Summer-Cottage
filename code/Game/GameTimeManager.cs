@@ -307,15 +307,12 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	}
 
 	/// <summary>
-	/// Advances to the next day.
+	/// Starts tge dat
 	/// Unfreezes the time if it's frozen.
-	/// Increases the day count if required (e.g. if ended the day at 10 PM).
 	/// </summary>
 	[Broadcast( NetPermission.HostOnly )]
-	public void AdvanceToNextDay()
+	public void StartDay()
 	{
-		if ( InGameSeconds > StartTime )
-			Day++;
 		SetTimeFromSeconds( StartTime );
 
 		FrozenTime = null;
