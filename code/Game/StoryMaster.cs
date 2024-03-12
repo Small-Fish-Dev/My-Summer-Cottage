@@ -184,8 +184,6 @@ public class StoryMaster : Component
 	{
 		StoryProgression.GameDay = dayNumber;
 		SaveStoryProgression();
-		Log.Info( "SET TO" );
-		Log.Info( dayNumber );
 	}
 
 	/// <summary>
@@ -308,6 +306,7 @@ public class StoryMaster : Component
 	}
 
 	[ConCmd]
+	[Broadcast( NetPermission.HostOnly )]
 	public static void StartSession()
 	{
 		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().First();
@@ -323,9 +322,15 @@ public class StoryMaster : Component
 
 		storyMaster.LoadNPCs();
 		Log.Info( "Session started" );
+
+		Game.ActiveScene.TimeScale = 1;
+
+		foreach ( var player in Player.All )
+			player.Respawn();
 	}
 
 	[ConCmd]
+	[Broadcast( NetPermission.HostOnly )]
 	public static void EndSession()
 	{
 		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().First();
@@ -349,8 +354,9 @@ public class StoryMaster : Component
 		storyMaster._eventMaster.UnloadAllEvents();
 
 		storyMaster.UnloadNPCs();
-
 		storyMaster.SaveGame();
+
+		Game.ActiveScene.TimeScale = 0;
 	}
 
 	public void SaveGame()

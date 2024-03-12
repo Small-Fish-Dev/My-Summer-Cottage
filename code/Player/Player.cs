@@ -224,6 +224,27 @@ public partial class Player : Component, Component.ExecuteInEditor
 		UpdateInteractions();
 	}
 
+	[Broadcast]
+	public void Respawn()
+	{
+		var foundSpawners = Scene.GetAllComponents<PlayerSpawner>().ToList();
+
+		if ( foundSpawners.Count > 0 )
+		{
+			var randomSpawner = Game.Random.FromList( foundSpawners );
+			Transform.Position = randomSpawner.Transform.Position;
+			Transform.Rotation = randomSpawner.Transform.Rotation;
+		}
+		else
+			Transform.Position = Transform.Position;
+	}
+
+	[ConCmd( "Respawn" )]
+	static void RespawnCommand()
+	{
+		Player.Local.Respawn();
+	}
+
 	public bool TakeMoney( int amount )
 	{
 		if ( Money < amount )

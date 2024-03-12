@@ -45,16 +45,7 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 		var obj = Prefab.Clone();
 		var player = obj.Components.Get<Player>( FindMode.EverythingInSelfAndDescendants );
-		var foundSpawners = Scene.GetAllComponents<PlayerSpawner>().ToList();
-
-		if ( foundSpawners.Count > 0 )
-		{
-			var randomSpawner = Game.Random.FromList( foundSpawners );
-			player.Transform.Position = randomSpawner.Transform.Position;
-			player.Transform.Rotation = randomSpawner.Transform.Rotation;
-		}
-		else
-			player.Transform.Position = Transform.Position;
+		player.Respawn();
 
 		obj.NetworkSpawn( connection );
 		player.SetupConnection( connection );
