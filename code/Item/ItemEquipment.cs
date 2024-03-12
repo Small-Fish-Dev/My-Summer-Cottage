@@ -161,8 +161,6 @@ public class ItemEquipment : ItemComponent
 		if ( !obj.IsValid() )
 			return;
 
-		Log.Info( "called" );
-
 		var transform = player.GetAttachment( Attachment, true ).ToWorld( AttachmentTransform );
 		obj.Transform = transform;
 		(obj as SceneModel)?.Update( RealTime.Delta );
