@@ -1,26 +1,29 @@
-﻿@namespace Sauna.UI.EpicIntro
+﻿@namespace Sauna.UI
 @attribute [StyleSheet]
-@attribute [Category( "Intro" )]
 @inherits PanelComponent
 
 <root>
 	<div class="disclaimer-container" style="opacity: @( _state == IntroState.Disclaimer ? 1 : 0 )">
-		<h1>WARNING</h1>
-		<div class="text">This game contains topics that are not suitable for the players under 18.</div>
+		<div class="header">
+			<h1>WARNING</h1>
+			<div class="text">This game contains topics that are not suitable for the players under 16.</div>
+		</div>
+
+		<div class="text">Gameplay may contain the following:</div>
 		<div class="list">
 			<div>Living in Finland</div>
 			<div>Naked men</div>
-			<div>Penis gnomes</div>
-			<div>Fishing</div>
+			<div>Bodily fluids and censored genitalia</div>
+			<div>Illegal fishing practices</div>
 			<div>Gambling and actually winning</div>
 			<div>Cryptids</div>
-			<div>Alcohol</div>
+			<div>Unrealistic amounts of alcohol consumption</div>
+			<div>Dealing with dysfunctional marriage</div>
 			<div>Drinking and driving</div>
 			<div>Drinking and fishing</div>
-			<div>Drinking and hunting for the finnish cryptids</div>
-			<div>Pissing in the sauna heater</div>
+			<div>Drinking and ... +256</div>
 		</div>
-		<div class="text">By holding down the button below you confirm that you are 18 y/o or older.</div>
+		<div class="text">Hold the button to confirm your age.</div>
 		<div class="confirm-button"
 		     onmousedown="@( () => ConfirmMouseDown() )"
 		     onmouseup="@( () => ConfirmMouseUp() )"
@@ -42,7 +45,6 @@
 </root>
 
 @code {
-
 	private enum IntroState
 	{
 		Logo,
@@ -50,8 +52,8 @@
 		Next
 	}
 
-	[Property] public IntroComponent IntroComponent;
-	[Property] public SoundEvent IntroSound;
+	[Property] public MainMenuHud MainMenu { get; set; }
+	[Property] public SoundEvent IntroSound { get; set; }
 
 	private const float IntroTime = 4f;
 	public const float ConfirmHoldTime = 1.5f;
@@ -72,15 +74,24 @@
 		{
 			case IntroState.Logo:
 				if ( _introIsOver )
-					_state = IntroState.Disclaimer;
+					_state = FileSystem.Data.FileExists( PlayerSave.FILE_PATH ) 
+						? IntroState.Next
+						: IntroState.Disclaimer;
 				break;
 
 			case IntroState.Disclaimer:
 				if ( _holdingButton && _confirmTimeOut )
-					IntroComponent.GoToMenu();
+					_state = IntroState.Next;
+
 				break;
 
 			case IntroState.Next:
+				if ( Panel != null && !Panel.IsDeleting )
+				{
+					MainMenu.Initialize();
+					Panel.Delete();
+				}
+
 				break;
 
 			default:

@@ -1,0 +1,105 @@
+﻿@import "/UI/Style.scss";
+
+$white: #ffffff;
+$black: #0f0f0f;
+$small-fish-blue: #2446f7;
+
+IntroPanel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-family: HabboExtended;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 16px;
+    pointer-events: all;
+    text-shadow: $text-shadow-sm;
+    z-index: 99;
+
+    .video-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        justify-content: center;
+        align-items: center;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+
+        &:outro {
+            opacity: 0;
+        }
+    }
+
+    .disclaimer-container {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-grow: 1;
+        color: $white;
+        background-color: rgba($black, 0.95);
+        backdrop-filter: blur(10px);
+
+        .header {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: BasicHandwriting;
+            font-size: 64px;
+            color: $blood-red;
+        }
+
+        .text {
+            color: darken(white, 0.15);
+        }
+
+        .list {
+            color: $white;
+            background-color: rgba(black, 0.8);
+            flex-direction: column;
+            flex-wrap: nowrap;
+            padding: 30px;
+            gap: 15px;
+
+            div {
+                background-image: url(ui/hud/task_completed.png);
+                background-size: contain;
+                height: 32px;
+                align-items: center;
+                padding-left: 45px;
+                background-repeat: no-repeat;
+            }
+        }
+
+        .confirm-button {
+            flex-wrap: nowrap;
+            align-items: stretch;
+            min-width: 200px;
+            min-height: 75px;
+            padding: 5px;
+            transition: transform 0.25s ease-in-out;
+
+            .inner-border {
+                flex-grow: 1;
+                padding: 5px;
+                border: 5px white solid;
+                justify-content: center;
+                align-items: center;
+            }
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.1);
+            }
+        }
+    }
+}

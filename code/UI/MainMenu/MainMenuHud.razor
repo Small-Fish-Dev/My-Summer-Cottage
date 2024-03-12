@@ -41,25 +41,25 @@
 </root>
 
 @code {
-	public enum Scene
-	{
-		Creation,
-		Game
-	}
-
 	public static (PlayerSave Save, bool Has) SaveData { get; private set; }
 	SoundHandle _loopStart;
 	SoundHandle _loop;
+	private bool init;
 
-
-	protected override void OnStart()
+	public void Initialize()
 	{
 		SaveData = Player.GetSave();
 		_loopStart = Sound.Play( "sounds/music/zakkujo-ero_vaimosta-loop_start.sound" );
+		_loop = Sound.Play( "sounds/music/zakkujo-ero_vaimosta-loop.sound" );
+		_loop.Volume = 0;
+
+		init = true;
 	}
 
 	protected override void OnUpdate()
 	{
+		if ( !init ) return;
+
 		if ( _loop == null && _loopStart.Finished )
 			_loop = Sound.Play( "sounds/music/zakkujo-ero_vaimosta-loop.sound" );
 	}

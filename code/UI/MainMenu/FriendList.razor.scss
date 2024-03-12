@@ -55,7 +55,7 @@ FriendList {
             width: 100%;
             justify-content: center;
             align-items: center;
-            margin-top: 10px;
+            padding: 10px;
         }
 
         .friend {
@@ -85,14 +85,18 @@ FriendList {
                 letter-spacing: 1px;
                 justify-content: center;
                 pointer-events: all;
+                box-shadow: $box-shadow-sm;
+                transition: transform 0.2s ease-in-out;
 
                 &:hover {
+                    transform: scale(1.05);
                     cursor: pointer;
                 }
 
                 &.disabled {
                     background-color: $disabled-red;
                     color: white;
+                    pointer-events: none;
                 }
             }
 

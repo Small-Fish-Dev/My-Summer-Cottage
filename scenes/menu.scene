@@ -8,6 +8,7 @@
       "Rotation": "0,0,-0.2588191,0.9659259",
       "Tags": "maincamera",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "CameraComponent",
@@ -32,12 +33,11 @@
       "Name": "Background",
       "Position": "-708.5555,-812.1717,356.4269",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "MapInstance",
           "MapName": "sauna_forest",
-          "OnMapLoaded": null,
-          "OnMapUnloaded": null,
           "UseMapFromLaunch": false
         }
       ],
@@ -50,6 +50,7 @@
       "Rotation": "-0.1830126,0.25,-0.1830127,0.9330128",
       "Tags": "light_directional,light",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "DirectionalLight",
@@ -66,6 +67,7 @@
       "Name": "Hud",
       "Position": "845.0969,-692.9158,72.12822",
       "Enabled": true,
+      "NetworkMode": 2,
       "Components": [
         {
           "__type": "ScreenPanel",
@@ -76,6 +78,15 @@
         },
         {
           "__type": "MainMenuHud"
+        },
+        {
+          "__type": "IntroPanel",
+          "IntroSound": "sounds/ui/smallfishintro_temp_fix.sound",
+          "MainMenu": {
+            "_type": "component",
+            "go": "ff1b16c4-2f07-4b41-8d8b-08ba7bbb9b16",
+            "component_type": "MainMenuHud"
+          }
         }
       ]
     }
@@ -103,6 +114,6 @@
   },
   "Title": "menu",
   "Description": "",
-  "LastSaved": "2024-02-16T20:52:48.8803464-05:00",
+  "LastSaved": "2024-03-12T14:09:38.5923865\u002B02:00",
   "__references": []
 }
