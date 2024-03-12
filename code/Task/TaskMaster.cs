@@ -328,6 +328,7 @@ public class TaskMaster : Component
 	/// <param name="triggerer"></param>
 	public static void SubmitTriggerSignal( string signalIdentifier, Player triggerer )
 	{
+		Log.Info( signalIdentifier );
 		if ( _instance != null )
 		{
 			var allActiveTasks = _instance.CurrentTasks.Where( x => !x.Completed ); // Get active tasks
