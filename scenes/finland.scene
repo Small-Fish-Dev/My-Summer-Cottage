@@ -134,9 +134,7 @@
         },
         {
           "__type": "TaskMaster",
-          "CurrentTasks": [
-            "resources/tasks/story_tasks/story.sauna_tutorial.task"
-          ]
+          "CurrentTasks": []
         },
         {
           "__type": "EventMaster",
@@ -148,7 +146,7 @@
             "1": {
               "ScriptedEvents": [
                 {
-                  "TriggerTimeslot": "10.50,12.00,1",
+                  "TriggerTimeslot": "15.00,16.00,1",
                   "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
@@ -309,6 +307,118 @@
                       }
                     ]
                   }
+                },
+                {
+                  "TriggerTimeslot": "9.10,10.00,0",
+                  "CompletionNecessary": true,
+                  "Setup": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Setup",
+                      "id": "142b3123-fcab-4b6f-ae1d-02507d19a441",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 0,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "-16,32"
+                        }
+                      },
+                      {
+                        "Id": 1,
+                        "Type": "output",
+                        "UserData": {
+                          "Position": "480,32"
+                        }
+                      },
+                      {
+                        "Id": 2,
+                        "Type": "call",
+                        "Properties": {
+                          "_isStatic": true,
+                          "_name": "AssignEveryoneNewTask",
+                          "_type": "package.fish.sauna/Sauna.TaskMaster"
+                        },
+                        "UserData": {
+                          "Position": "240,112"
+                        }
+                      },
+                      {
+                        "Id": 4,
+                        "Type": "resource.ref",
+                        "Properties": {
+                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                        },
+                        "UserData": {
+                          "Position": "-240,192"
+                        }
+                      },
+                      {
+                        "Id": 5,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                        },
+                        "UserData": {
+                          "Position": "240,304"
+                        }
+                      },
+                      {
+                        "Id": 7,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "ResourcePath",
+                          "_type": "Sandbox.Engine/Sandbox.Resource"
+                        },
+                        "UserData": {
+                          "Position": "16,176"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_result",
+                        "DstId": 1,
+                        "DstName": "_result"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_signal",
+                        "DstId": 1,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 2,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 7,
+                        "SrcName": "_result",
+                        "DstId": 2,
+                        "DstName": "filePath"
+                      },
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_result",
+                        "DstId": 5,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_result",
+                        "DstId": 7,
+                        "DstName": "_target"
+                      }
+                    ]
+                  }
                 }
               ],
               "RandomEvents": {
@@ -430,7 +540,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.4157017,0,0.909501",
+          "Rotation": "0,-0.356993,0,0.9341071",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -646,7 +756,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -742,8 +851,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1318,6 +1425,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-12T23:15:29.6249125\u002B01:00",
+  "LastSaved": "2024-03-12T23:53:48.4453778\u002B01:00",
   "__references": []
 }

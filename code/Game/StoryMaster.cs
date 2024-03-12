@@ -8,12 +8,6 @@ namespace Sauna;
 public class SaunaScriptedEvent
 {
 	/// <summary>
-	/// Does this scripted event instantly start at the new session instead of a timeframe? 
-	/// </summary>
-	[Property]
-	public bool TriggerOnNewSession { get; set; } = false;
-
-	/// <summary>
 	/// When the scripted event plays in in-game hours (Ex. 7.5 = 07:30, 23.25 = 23:15, 0.5 = 00:30).
 	/// </summary>
 	[Property]
@@ -145,14 +139,7 @@ public class StoryMaster : Component
 		if ( CurrentSaunaDay == null ) return;
 
 		foreach ( var scriptedEvent in CurrentSaunaDay.ScriptedEvents )
-		{
-			if ( scriptedEvent.TriggerOnNewSession )
-				scriptedEvent.TriggerTime = 0f;
-			else
-				scriptedEvent.TriggerTime = Game.Random.Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
-		}
-
-
+			scriptedEvent.TriggerTime = Game.Random.Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
 	}
 
 	/// <summary>
@@ -216,8 +203,6 @@ public class StoryMaster : Component
 			StoryProgression = new();
 			SaveStoryProgression();
 		}
-
-		Log.Info( StoryProgression.GameDay );
 	}
 
 	/// <summary>
@@ -321,7 +306,6 @@ public class StoryMaster : Component
 		storyMaster.LoadEventPool();
 
 		storyMaster.LoadNPCs();
-		Log.Info( "Session started" );
 
 		Game.ActiveScene.TimeScale = 1;
 
@@ -394,7 +378,7 @@ public class StoryMaster : Component
 			{
 				if ( !scriptedEvent.Triggered )
 				{
-					if ( scriptedEvent.TriggerTime <= currentHour )
+					if ( scriptedEvent.TriggerTime <= currentHour || scriptedEvent.TriggerTimeslot.FixedValue <= currentHour )
 					{
 						scriptedEvent.Triggered = true;
 						BeginScriptedEvent( scriptedEvent );
