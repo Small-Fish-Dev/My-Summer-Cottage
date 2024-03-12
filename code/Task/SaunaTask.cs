@@ -143,6 +143,12 @@ public partial class SaunaTask : GameResource
 	[Property]
 	public bool Global { get; set; } = false;
 
+	/// <summary>
+	/// How much XP is given to the player once they complete this task
+	/// </summary>
+	[Property]
+	public int ExperienceGiven { get; set; } = 50;
+
 	public string SuccessSignal => $"task.success.{Name}";
 	public string FailedSignal => $"task.failed.{Name}";
 
@@ -264,7 +270,16 @@ public partial class SaunaTask : GameResource
 		TaskMaster.SubmitTriggerSignal( SuccessSignal, Player.Local );
 		Log.Info( $"Submitted signal {SuccessSignal}" );
 		NotificationManager.Popup( this, completed: true );
+
+		GiveExperience();
 	}
+
+	void GiveExperience()
+	{
+		if ( ExperienceGiven > 0 )
+			Player.Local.AddExperience( ExperienceGiven );
+	}
+
 
 	/// <summary>
 	/// Task not completed

@@ -189,8 +189,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "224,224"
@@ -200,9 +200,9 @@
                         "Id": 8,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_type": "package.fish.sauna/Sauna.Message",
                           "_name": "Receive",
-                          "_type": "package.fish.sauna/Sauna.Message"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "432,-80"
@@ -213,8 +213,8 @@
                         "Type": "property.get",
                         "ParentId": 3,
                         "Properties": {
-                          "_name": "Message",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Message"
                         }
                       },
                       {
@@ -222,8 +222,8 @@
                         "Type": "property.get",
                         "ParentId": 3,
                         "Properties": {
-                          "_name": "Giver",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Giver"
                         }
                       }
                     ],
@@ -338,9 +338,9 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_type": "package.fish.sauna/Sauna.TaskMaster",
                           "_name": "AssignEveryoneNewTask",
-                          "_type": "package.fish.sauna/Sauna.TaskMaster"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "240,112"
@@ -361,8 +361,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "240,304"
@@ -372,8 +372,8 @@
                         "Id": 7,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "ResourcePath",
-                          "_type": "Sandbox.Engine/Sandbox.Resource"
+                          "_type": "Sandbox.Engine/Sandbox.Resource",
+                          "_name": "ResourcePath"
                         },
                         "UserData": {
                           "Position": "16,176"
@@ -540,7 +540,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.385545,0,-0.922689",
+          "Rotation": "0,0.9999502,0,-0.009983298",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -689,6 +689,7 @@
           "LinearDamping": 0,
           "Locking": {},
           "MassOverride": 0,
+          "MotionEnabled": true,
           "RigidbodyFlags": 0,
           "StartAsleep": false
         },
@@ -716,9 +717,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_isStatic": true,
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_isStatic": true
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -756,6 +757,7 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -806,9 +808,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_isStatic": true,
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithNameAndSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_isStatic": true
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -851,6 +853,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1425,6 +1429,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-13T00:15:42.0608836\u002B01:00",
+  "LastSaved": "2024-03-13T00:55:12.2341699\u002B01:00",
   "__references": []
 }

@@ -88,9 +88,11 @@ public sealed class Stove : Component
 			return $"Start the sauna.";
 	}
 
-	void BeginSauna( Player interactor )
+	async void BeginSauna( Player interactor )
 	{
 		IsRunning = true;
+
+		await Task.Delay( 1000 );
 
 		foreach ( var player in Player.All )
 		{
