@@ -58,22 +58,57 @@
 			{
 				key = 
 				{
-					m_id = 1441975605
+					m_id = 1253869363
 				}
 				value = 
 				{
-					_class = "CSequenceAnimNode"
+					_class = "CBlend2DAnimNode"
 					m_sName = "Unnamed"
 					m_vecPosition = [ -272.0, 0.0 ]
 					m_nNodeID = 
 					{
-						m_id = 1441975605
+						m_id = 1253869363
 					}
 					m_sNote = ""
-					m_tagSpans = [  ]
-					m_sequenceName = "idle"
-					m_playbackSpeed = 1.0
+					m_items = 
+					[
+						{
+							_class = "CBlend2DItem"
+							m_tagSpans = [  ]
+							m_sequenceName = "idle"
+							m_blendValue = [ 0.0, 0.0 ]
+						},
+						{
+							_class = "CBlend2DItem"
+							m_tagSpans = [  ]
+							m_sequenceName = "run"
+							m_blendValue = [ 1.0, 1.0 ]
+						},
+					]
+					m_blendSourceX = "Parameter"
+					m_paramX = 
+					{
+						m_id = 176492636
+					}
+					m_blendSourceY = "Parameter"
+					m_paramY = 
+					{
+						m_id = 176492636
+					}
 					m_bLoop = true
+					m_bLockBlendOnReset = false
+					m_bLockWhenWaning = true
+					m_playbackSpeed = 1.0
+					m_damping = 
+					{
+						_class = "CAnimInputDamping"
+						m_speedFunction = "NoDamping"
+						m_fSpeedScale = 1.0
+						m_fMinSpeed = 10.0
+						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
+					}
 				}
 			},
 			{
@@ -142,7 +177,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 1441975605
+									m_id = 1253869363
 								}
 								m_outputID = 
 								{
@@ -175,7 +210,7 @@
 											m_bIsFinished = true
 										},
 									]
-									m_blendDuration = 0.4
+									m_blendDuration = 0.6
 									m_destState = 
 									{
 										m_id = 552069684
@@ -243,6 +278,20 @@
 				m_bUseMostRecentValue = false
 				m_bAutoReset = true
 				m_bDefaultValue = false
+			},
+			{
+				_class = "CFloatAnimParameter"
+				m_name = "move_x"
+				m_id = 
+				{
+					m_id = 176492636
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bUseMostRecentValue = false
+				m_bAutoReset = false
+				m_fDefaultValue = 0.0
+				m_fMinValue = 0.0
+				m_fMaxValue = 1.0
 			},
 		]
 	}
