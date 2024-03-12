@@ -11,6 +11,9 @@ public enum DoorState
 public class DoorComponent : Component
 {
 	[Sync, Property] public DoorState State { get; set; } = DoorState.Close;
+	[Sync] public bool Inverted { get; set; }
+
+	[Property] public bool BothSides { get; set; } = true;
 	[Property] public float OpenTime { get; set; } = 0.25f;
 	[Property] public float Angle { get; set; } = 100f;
 	[Property] public Vector3 Pivot { get; set; }
@@ -43,6 +46,9 @@ public class DoorComponent : Component
 			Action = ( Player player, GameObject obj ) => 
 			{
 				// todo: door sound
+				var dot = Vector3.Dot( InitialTransform.Rotation.Backward, (Transform.Position - player.Transform.Position).Normal );
+				Inverted = BothSides && dot <= 0;
+
 				State = State == DoorState.Close ? DoorState.Opening : DoorState.Closing;
 			},
 			ShowWhenDisabled = () => true,
@@ -88,7 +94,7 @@ public class DoorComponent : Component
 		var direction = State == DoorState.Opening ? 1 : -1;
 		var defaultAngles = InitialTransform.Rotation.Angles();
 		var targetYaw = direction == 1
-			? Angle
+			? !Inverted ? Angle : -Angle
 			: 0;
 
 		var targetRotation = defaultAngles
