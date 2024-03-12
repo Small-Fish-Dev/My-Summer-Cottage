@@ -62,7 +62,7 @@
 			_messages.ScrollOffset = 0;
 		}
 
-		var outOfMain = !FullScreenManager.Is( UI.FullScreenManager.FullScreenPanel.InGameHud );
+		var outOfMain = !FullScreenManager.Is( UI.FullScreenManager.FullScreenPanel.InGameHud ) || Hud.Instance.GameTimeManager.IsDayOver;
 		if ( outOfMain ) 
 			Visible = false;
 

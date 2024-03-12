@@ -66,10 +66,9 @@
 					<text class="xp-text">@Player.Local.Experience / @Player.Local.ExpPerLevel</text>
 				</div>
             </div>
-            <div class="section">
-                <div class="continueButton" onclick=@(() => StoryMaster.StartSession())>CONTINUE</div>
-            </div>
 		</div>
+
+		<div class="continue" onclick=@(() => StoryMaster.StartSession())>CONTINUE</div>
 	</div>
 </root>
 
