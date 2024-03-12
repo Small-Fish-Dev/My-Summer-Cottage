@@ -23,7 +23,7 @@
 		if ( notifications.Count < MAX_AMOUNT )
 			return;
 
-		var oldest = _instance.Children.FirstOrDefault() as Notification;
+		var oldest = _instance.Children?.FirstOrDefault() as Notification;
 		if ( oldest != null )
 		{
 			oldest.Delete();
