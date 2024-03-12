@@ -33,7 +33,8 @@ public class Inventory : Component
 	public bool HasSpaceInBackpack()
 		=> _backpackItems.IndexOf( null ) != -1;
 
-	public bool IsSlotOccupied( EquipSlot slot ) => _equippedItems.ElementAtOrDefault( (int)slot ) is not null;
+	public ItemComponent GetItemInSlot( EquipSlot slot ) => _equippedItems.ElementAtOrDefault( (int)slot );
+	public bool IsSlotOccupied( EquipSlot slot ) => GetItemInSlot( slot ) is not null;
 
 	/// <summary>
 	/// Item is given to the inventory system if they have free slots.
@@ -99,13 +100,18 @@ public class Inventory : Component
 		return true;
 	}
 
-	public bool EquipItemFromWorld( ItemComponent item )
+	public bool EquipItemFromWorld( ItemComponent item, bool forceReplace = false )
 	{
 		if ( item is not ItemEquipment equipment )
 			return false;
 
-		if ( IsSlotOccupied( equipment.Slot ) )
+		if ( IsSlotOccupied( equipment.Slot ) && !forceReplace )
 			return false;
+
+		if ( IsSlotOccupied( equipment.Slot ) && forceReplace )
+		{
+			UnequipItem( GetItemInSlot( equipment.Slot ) );
+		}
 
 		SetOwner( item );
 		GiveEquipmentItem( equipment );

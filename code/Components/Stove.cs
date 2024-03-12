@@ -5,6 +5,8 @@ using System.Xml.Linq;
 public sealed class Stove : Component
 {
 	public SkinnedModelRenderer Model { get; set; }
+
+	[Sync]
 	public bool HasWood { get; set; } = false;
 
 	protected override void OnStart()
@@ -25,9 +27,11 @@ public sealed class Stove : Component
 		} );
 	}
 
-	protected override void OnUpdate()
+	protected override void OnFixedUpdate()
 	{
 		Model.Set( "b_open", !HasWood );
+
+		GameObject.Name = $"Stove{(HasWood ? "" : " (Needs wood)")}";
 	}
 
 	void PlaceWood( Player interactor )
