@@ -1,10 +1,10 @@
 {
   "RootObject": {
-    "Id": "56eaa0d7-71e6-426c-8117-58a1ec536e14",
+    "Id": "4783a6c4-78f6-446b-994a-fb84c6f20ac4",
     "Name": "fishing_bobber",
     "Tags": "bobber",
-    "Networked": true,
     "Enabled": true,
+    "NetworkMode": 1,
     "Components": [
       {
         "__type": "Bobber"
@@ -12,8 +12,6 @@
       {
         "__type": "ModelRenderer",
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/rodbobber/rodbobber.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -22,9 +20,8 @@
         "__type": "SphereCollider",
         "Center": "0,0,0.5",
         "IsTrigger": false,
-        "Radius": 1.8000016,
-        "Static": false,
-        "Surface": null
+        "Radius": 4,
+        "Static": false
       },
       {
         "__type": "Rigidbody",
@@ -36,7 +33,7 @@
           "Yaw": true,
           "Roll": true
         },
-        "MassOverride": 1,
+        "MassOverride": 5,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

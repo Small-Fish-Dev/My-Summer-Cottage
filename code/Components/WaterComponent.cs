@@ -53,9 +53,8 @@ public sealed class WaterComponent : Component
 	protected override void OnAwake()
 	{
 		_collider = Components.GetOrCreate<BoxCollider>();
-		var bbox = new BBox( Mins - Transform.Position, Maxs - Transform.Position );
-		_collider.Center = bbox.Center;
-		_collider.Scale = bbox.Size;
+		_collider.Center = Bounds.Center;
+		_collider.Scale = Bounds.Size;
 		_collider.IsTrigger = true;
 	}
 
@@ -66,12 +65,12 @@ public sealed class WaterComponent : Component
 			if ( other.Tags.Has( "bobber" ) )
 			{
 				var bounds = other.Rigidbody.PhysicsBody.GetBounds();
-				var depth = Maxs.z - bounds.Mins.z;
+				var depth = Maxs.z + Transform.Position - bounds.Mins.z;
 				var bobberHeight = bounds.Size.z;
 				var percentInWater = depth.Clamp( 0, bobberHeight ) / bobberHeight;
 
 				other.Rigidbody.Velocity = other.Rigidbody.Velocity * BobberDrag
-				                           + Vector3.Up * other.Rigidbody.MassOverride * 100 * percentInWater
+				                           + Vector3.Up * other.Rigidbody.PhysicsBody.Mass * 25 * percentInWater
 				                           // Simulating the waves
 				                           * ((float)Math.Sin( Time.Now * 5 )).Remap( -1, 1, 0.5f, 1 );
 			}
