@@ -62,7 +62,7 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 	void INetworkListener.OnDisconnected( Connection connection )
 	{
-		Player._internalPlayers.RemoveAll( ( p ) => p.Connection.Id == connection.Id );
+		Player._internalPlayers.RemoveAll( ( p ) => p is null || p.Connection.Id == connection.Id );
 	}
 
 	/*void INetworkListener.OnBecameHost( Connection previousHost )
