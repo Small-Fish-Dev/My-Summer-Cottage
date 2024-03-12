@@ -72,7 +72,7 @@ public sealed class Stove : Component
 		if ( IsRunning ) return (false, "Running...");
 		if ( !HasWood ) return (false, "There is no wood!");
 		if ( !HasWater ) return (false, "There is no water!");
-		if ( Door != null && Door.State != DoorState.Close ) return (false, "The door is open!");
+		if ( Door != null && Door.State != DoorState.Close ) return (false, "The front door is open!");
 		if ( PlayersInArea != null && PlayersInArea.ObjectsInside.Count < Player.All.Count() ) return (false, "Everyone must be inside!");
 
 		return (true, "Start the sauna.");
