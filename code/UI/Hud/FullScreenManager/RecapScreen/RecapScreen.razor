@@ -65,7 +65,10 @@
 					<text>Lv. @Player.Local.Level</text>
 					<text class="xp-text">@Player.Local.Experience / @Player.Local.ExpPerLevel</text>
 				</div>
-			</div>
+            </div>
+            <div class="section">
+                <div class="continueButton" onclick=@(() => StoryMaster.EndSession());>CONTINUE</div>
+            </div>
 		</div>
 	</div>
 </root>
