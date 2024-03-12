@@ -340,11 +340,15 @@ public class Inventory : Component
 	public void ClearItem( ItemComponent item )
 	{
 		if ( _backpackItems.Contains( item ) )
+		{
 			_backpackItems[_backpackItems.IndexOf( item )] = null;
+			item.State = ItemState.None;
+		}
 		else if ( _equippedItems.Contains( item ) )
+		{
 			_equippedItems[_equippedItems.IndexOf( item )] = null;
-
-		item.State = ItemState.None;
+			item.State = ItemState.None;
+		}
 	}
 
 	public int GetTotalWeightInGrams()
