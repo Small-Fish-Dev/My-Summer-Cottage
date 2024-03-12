@@ -43,31 +43,45 @@
 @code {
 	public static float Volume { get; set; } = 0.025f;
 	public static (PlayerSave Save, bool Has) SaveData { get; private set; }
+
+	(SoundFile start, SoundFile loop) sounds;
+
 	SoundHandle _loopStart;
 	SoundHandle _loop;
+
+	TimeUntil playLoop;
 
 	public void Initialize()
 	{
 		SaveData = Player.GetSave();
 
 		// Start music.
-		new Action( async () =>
+		sounds.start = SoundFile.Load( "sounds/music/zakkujo-ero_vaimosta-loop_start.sound" );
+		sounds.start.LoadAsync();
+
+		sounds.loop = SoundFile.Load( "sounds/music/zakkujo-ero_vaimosta-loop.sound" );
+		sounds.loop.LoadAsync();
+
+		_loopStart = Sound.PlayFile( sounds.start );
+		_loopStart.ListenLocal = true;
+		_loopStart.Volume = Volume;
+		playLoop = sounds.start.Duration;
+	}
+
+	protected override void OnUpdate()
+	{
+		if ( playLoop && _loop == null && sounds.loop != null )
 		{
-			var start = SoundFile.Load( "sounds/music/zakkujo-ero_vaimosta-loop_start.sound" );
-			await start.LoadAsync();
-
-			var loop = SoundFile.Load( "sounds/music/zakkujo-ero_vaimosta-loop.sound" );
-			await loop.LoadAsync();
-			
-			_loopStart = Sound.PlayFile( start );
-			_loopStart.ListenLocal = true;
-			_loopStart.Volume = Volume;
-
-			await GameTask.DelaySeconds( start.Duration );
-
-			_loop = Sound.PlayFile( loop );
+			_loop = Sound.PlayFile( sounds.loop );
 			_loop.ListenLocal = true;
 			_loop.Volume = Volume;
-		} ).Invoke();
+		}
+	}
+
+
+	protected override void OnDestroy()
+	{
+		_loopStart?.Stop();
+		_loop?.Stop();
 	}
 }
