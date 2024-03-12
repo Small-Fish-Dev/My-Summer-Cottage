@@ -224,14 +224,13 @@ public partial class Player : Component, Component.ExecuteInEditor
 		UpdateInteractions();
 	}
 
-	[Broadcast]
 	public void Respawn()
 	{
-		var foundSpawners = Scene.GetAllComponents<PlayerSpawner>().ToList();
+		var foundSpawners = Scene.GetAllComponents<PlayerSpawner>();
 
-		if ( foundSpawners.Count > 0 )
+		if ( foundSpawners.Any() )
 		{
-			var randomSpawner = Game.Random.FromList( foundSpawners );
+			var randomSpawner = Game.Random.FromList( foundSpawners.ToList() );
 			Transform.Position = randomSpawner.Transform.Position;
 			Transform.Rotation = randomSpawner.Transform.Rotation;
 		}

@@ -326,7 +326,10 @@ public class StoryMaster : Component
 		Game.ActiveScene.TimeScale = 1;
 
 		foreach ( var player in Player.All )
-			player.Respawn();
+		{
+			if ( player.IsValid() )
+				player.Respawn();
+		}
 	}
 
 	[ConCmd]

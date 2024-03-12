@@ -45,10 +45,10 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 		var obj = Prefab.Clone();
 		var player = obj.Components.Get<Player>( FindMode.EverythingInSelfAndDescendants );
-		player.Respawn();
 
 		obj.NetworkSpawn( connection );
 		player.SetupConnection( connection );
+		player.Respawn();
 	}
 
 	void INetworkListener.OnDisconnected( Connection connection )
