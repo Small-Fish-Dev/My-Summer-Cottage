@@ -30,82 +30,16 @@
                   "Id": 1,
                   "Type": "event.endsession",
                   "UserData": {
-                    "Position": "608,16"
-                  }
-                },
-                {
-                  "Id": 3,
-                  "Type": "event.geteverycomponent",
-                  "Properties": {
-                    "T": "package.fish.sauna/Sauna.Player"
-                  },
-                  "UserData": {
-                    "Position": "-96,144"
-                  }
-                },
-                {
-                  "Id": 4,
-                  "Type": "event.blackscreen",
-                  "UserData": {
-                    "Position": "448,144"
-                  }
-                },
-                {
-                  "Id": 6,
-                  "Type": "foreach",
-                  "UserData": {
-                    "Position": "192,160"
-                  }
-                },
-                {
-                  "Id": 7,
-                  "Type": "time.delay",
-                  "UserData": {
-                    "Position": "400,16"
+                    "Position": "176,-0"
                   }
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 7,
+                  "SrcId": 0,
                   "SrcName": "_signal",
                   "DstId": 1,
                   "DstName": "_signal"
-                },
-                {
-                  "SrcId": 6,
-                  "SrcName": "body",
-                  "DstId": 4,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 6,
-                  "SrcName": "body.value",
-                  "DstId": 4,
-                  "DstName": "player"
-                },
-                {
-                  "SrcId": 0,
-                  "SrcName": "_signal",
-                  "DstId": 6,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 3,
-                  "SrcName": "_result",
-                  "DstId": 6,
-                  "DstName": "enumerable"
-                },
-                {
-                  "SrcId": 0,
-                  "SrcName": "_signal",
-                  "DstId": 7,
-                  "DstName": "_signal"
-                },
-                {
-                  "Value": 3,
-                  "DstId": 7,
-                  "DstName": "seconds"
                 }
               ]
             },
