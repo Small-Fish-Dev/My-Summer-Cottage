@@ -58,6 +58,7 @@ public class Inventory : Component
 	public bool GiveItem( PrefabFile prefabFile )
 	{
 		var obj = SceneUtility.GetPrefabScene( prefabFile ).Clone();
+		obj.NetworkMode = NetworkMode.Object;
 		obj.NetworkSpawn();
 
 		var res = GiveItem( obj.Components.Get<ItemComponent>() );
@@ -452,6 +453,7 @@ public class Inventory : Component
 		}
 
 		var obj = SceneUtility.GetPrefabScene( item ).Clone();
+		obj.NetworkMode = NetworkMode.Object;
 		obj.NetworkSpawn();
 		player.Inventory.GiveItem( obj );
 	}

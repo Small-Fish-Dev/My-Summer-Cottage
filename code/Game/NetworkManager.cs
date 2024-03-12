@@ -34,7 +34,7 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		// Someone report this bug, for some reason the static list doesn't get cleared on restart!
 		Player._internalPlayers.Clear();
 
-		if ( !GameNetworkSystem.IsActive )
+		if ( !GameNetworkSystem.IsActive && Connection.Local.IsHost )
 			GameNetworkSystem.CreateLobby();
 	}
 
@@ -45,10 +45,10 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 		var obj = Prefab.Clone();
 		var player = obj.Components.Get<Player>( FindMode.EverythingInSelfAndDescendants );
-
+		player.Respawn();
+		obj.NetworkMode = NetworkMode.Object;
 		obj.NetworkSpawn( connection );
 		player.SetupConnection( connection );
-		player.Respawn();
 	}
 
 	void INetworkListener.OnDisconnected( Connection connection )

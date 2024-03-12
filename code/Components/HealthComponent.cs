@@ -194,9 +194,7 @@ public sealed class HealthComponent : Component
 			var droppedItem = DropOnDeath.Clone( Transform.Position, Transform.Rotation );
 
 			if ( droppedItem != null )
-			{
-				droppedItem.NetworkSpawn();
-			}
+				droppedItem.SetupNetworking();
 		}
 	}
 

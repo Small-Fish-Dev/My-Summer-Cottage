@@ -74,6 +74,7 @@ public sealed class NpcSpawnArea : Component
 						if ( Vector3.GetAngle( Vector3.Up, groundTrace.Normal ) <= 60f )
 						{
 							var clone = npc.Npc.Clone( groundTrace.HitPosition, Rotation.FromYaw( Game.Random.Float( 360f ) ) );
+							clone.NetworkMode = NetworkMode.Object;
 							clone.NetworkSpawn();
 
 							if ( clone != null )
