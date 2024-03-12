@@ -1,4 +1,5 @@
 using Sauna.UI;
+using static EventComponent;
 
 namespace Sauna;
 
@@ -7,6 +8,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Sync] public string Firstname { get; set; }
 	[Sync] public string Lastname { get; set; }
 	[Sync] public bool HidePenoid { get; set; }
+	[Sync] public float PenoidSize { get; set; }
 
 	[Property, Sync, Category( "Parameters" )]
 	public int Money { get; set; }
@@ -34,7 +36,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 	Color _skinColor;
 	HiddenBodyGroup _hideBodygroups;
-	bool _updateSkin;
+	bool _updateSkin = true;
 
 	[Sync]
 	public HiddenBodyGroup HideBodygroups
@@ -122,6 +124,35 @@ public partial class Player : Component, Component.ExecuteInEditor
 	public Transform GetAttachment( string attachment, bool world = true )
 		=> Renderer.GetAttachment( attachment, world ) ?? global::Transform.Zero;
 
+	/// <summary>
+	/// Size of penoid shaped object in centimeters.
+	/// </summary>
+	public float Endowment => PenoidSize
+		* GetAttachment( "penoid_start", false ).Position.Distance( GetAttachment( "penoid_max", false ).Position )
+		* 2.54f; // Inches to centimeters.
+
+	/// <summary>
+	/// Get the transform of the penoid.
+	/// </summary>
+	/// <returns></returns>
+	public Transform GetPenoidTransform()
+	{
+		if ( Penoid == null || !Penoid.IsValid ) // Something went wrong, penoid is invalid.
+			return default;
+
+		// Size of penice.
+		var morph = Penoid?.SceneModel?.Morphs.Get( "size" ) ?? 0f;
+
+		// Size of smallest possible penice.
+		var smallAttachment = GetAttachment( "penoid_min" );
+
+		// Size of biggest possible penice.
+		var bigAttachment = GetAttachment( "penoid_max" );
+
+		// Lerp between the two values to get actual position of penice tip.
+		return global::Transform.Lerp( smallAttachment, bigAttachment, morph, true );
+	}
+
 	protected override void DrawGizmos()
 	{
 	}
@@ -186,7 +217,12 @@ public partial class Player : Component, Component.ExecuteInEditor
 		UpdateAnimation();
 
 		if ( Penoid is not null )
+		{
 			Penoid.Enabled = !HidePenoid;
+		}
+
+		// todo: fix ://
+		// Renderer.Set( "penoid", PenoidSize );
 	}
 
 	protected override void OnFixedUpdate()

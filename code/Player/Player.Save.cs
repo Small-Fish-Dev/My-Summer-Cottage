@@ -13,6 +13,7 @@ public struct PlayerSave
 
 	[JsonInclude] public string Firstname;
 	[JsonInclude] public string Lastname;
+	[JsonInclude] public float PenoidSize;
 
 	[JsonInclude] public int Money;
 	[JsonInclude] public int Experience;
@@ -84,6 +85,7 @@ partial class Player
 			{
 				Firstname = player.Firstname,
 				Lastname = player.Lastname,
+				PenoidSize = player.PenoidSize,
 				Fatness = player.Fatness,
 				Height = player.Height,
 				SkinColor = player.SkinColor
@@ -135,6 +137,7 @@ partial class Player
 
 		_saveData = save with
 		{
+			PenoidSize = player.PenoidSize,
 			Money = player.Money,
 			Experience = player.Experience,
 			Level = player.Level,
@@ -177,6 +180,7 @@ partial class Player
 
 		player.Firstname = save.Firstname.ToLower().ToTitleCase();
 		player.Lastname = save.Lastname.ToLower().ToTitleCase();
+		player.PenoidSize = save.PenoidSize;
 
 		player.Money = save.Money;
 		player.Experience = save.Experience;

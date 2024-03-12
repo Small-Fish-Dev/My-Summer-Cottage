@@ -39,6 +39,7 @@ public class DoorComponent : Component
 			Keybind = "use",
 			Cooldown = true,
 			CooldownTime = 1f,
+			InteractDistance = 100f,
 			Action = ( Player player, GameObject obj ) => 
 			{
 				// todo: door sound

@@ -139,10 +139,14 @@
 	private async void Finish()
 	{
 		// todo @ceitine: walk off animation and fade out
+
+		var rand = new Random( (int)(Steam.SteamId % int.MaxValue) );
+		var size = rand.Next( 0, 100 ) / 100f;
 		Player.WriteSave( 
 			new() {
 				Firstname = PassportPanel.Firstname.ToLower().ToTitleCase(),
 				Lastname = PassportPanel.Lastname.ToLower().ToTitleCase(),
+				PenoidSize = size,
 				Fatness = TabletPanel.Weight,
 				Height = TabletPanel.Height,
 				SkinColor = TabletPanel.SkinColor,
