@@ -1,0 +1,159 @@
+{
+  "RootObject": {
+    "Id": "89483209-a6c0-4f43-b645-71611b065123",
+    "Name": "skin_walker",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "NPC",
+        "AlertOthers": true,
+        "AttackCooldown": 5,
+        "AttackRange": 80,
+        "DetectRange": 1024,
+        "FaceTowardsVelocity": true,
+        "Health": {
+          "_type": "component",
+          "go": "89483209-a6c0-4f43-b645-71611b065123",
+          "component_type": "HealthComponent"
+        },
+        "Idle": true,
+        "MaximumIdleCooldown": 6,
+        "MaxRunAnimationSpeed": 400,
+        "MinimumIdleCooldown": 4,
+        "Model": {
+          "_type": "component",
+          "go": "af433514-fdf2-47d0-b252-72a0406a5c24",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "MoveHelper": {
+          "_type": "component",
+          "go": "89483209-a6c0-4f43-b645-71611b065123",
+          "component_type": "MoveHelper"
+        },
+        "Name": "Default",
+        "OnIdle": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Idle",
+            "id": "3f25edde-1db2-4319-945a-79f4ac290e73"
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            }
+          ],
+          "Links": []
+        },
+        "RunningType": "Smart",
+        "RunSpeed": 600,
+        "ScaleStats": true,
+        "Static": false,
+        "VisionRange": 2016,
+        "WalkingType": "Dumb",
+        "WalkSpeed": 400,
+        "Weight": "Middle"
+      },
+      {
+        "__type": "HealthComponent",
+        "CanRegenerate": true,
+        "DamagedBy": "Mild",
+        "Immortal": false,
+        "MaxHealth": 50,
+        "RegenerationCooldown": 2,
+        "RegenerationTimer": 1,
+        "StunnedBy": "Mild",
+        "StunWhenDamaged": true
+      },
+      {
+        "__type": "MoveHelper",
+        "AccelerationCurve": {
+          "rangex": "0,0",
+          "rangey": "0,0"
+        },
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 0.3,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 2000,
+        "GroundAngle": 45,
+        "GroundFriction": 30,
+        "IgnoreTags": "",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 18,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 72,
+        "TraceRadius": 16,
+        "TraceType": "Capsule",
+        "UseCollider": false,
+        "UseSceneGravity": true
+      },
+      {
+        "__type": "CapsuleCollider",
+        "End": "0,0,135",
+        "IsTrigger": false,
+        "Radius": 30,
+        "Start": "0,0,30",
+        "Static": false
+      }
+    ],
+    "Children": [
+      {
+        "Id": "af433514-fdf2-47d0-b252-72a0406a5c24",
+        "Name": "actual_body",
+        "Scale": "2,2,2",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "BodyGroups": 1024,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Character",
+            "Clothes": [],
+            "Fatness": 0,
+            "Height": 100,
+            "HideBodyGroup": "Head, Torso, Hands, Legs, Feet"
+          }
+        ],
+        "Children": [
+          {
+            "Id": "563393ac-2a52-4f91-b318-5762b7b0e954",
+            "Name": "fake_skin",
+            "Scale": "0.5,0.5,0.4999999",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "go": "af433514-fdf2-47d0-b252-72a0406a5c24",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/fauna/elk/reindeer.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
