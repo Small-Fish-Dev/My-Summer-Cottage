@@ -12,8 +12,13 @@ public sealed class Stove : Component
 	[Sync]
 	public bool HasWater { get; set; } = false;
 
-	[Sync]
-	public bool IsRunning { get; set; } = false;
+	[Property]
+	public EventAreaTrigger PlayersInArea { get; set; }
+
+	[Property]
+	public DoorComponent Door { get; set; }
+
+	public bool IsRunning { get; set; }
 
 	protected override void OnStart()
 	{
@@ -24,7 +29,7 @@ public sealed class Stove : Component
 		{
 			Identifier = $"stove.wood_put_in",
 			Action = ( Player interactor, GameObject obj ) => PlaceWood( interactor ),
-			Keybind = "mouse2",
+			Keybind = "use2",
 			Description = "Insert split log",
 			Disabled = () => HasWood || !Player.Local.Inventory.BackpackItems.Any( x => x.IsValid() && x.Name == "Split Log" ),
 			InteractDistance = 120,
@@ -34,13 +39,14 @@ public sealed class Stove : Component
 
 		interactions.AddInteraction( new Interaction()
 		{
-			Identifier = $"stove.wood_put_in",
-			Action = ( Player interactor, GameObject obj ) => PlaceWood( interactor ),
-			Keybind = "mouse2",
-			Description = "Insert split log",
-			Disabled = () => HasWood || !Player.Local.Inventory.BackpackItems.Any( x => x.IsValid() && x.Name == "Split Log" ),
+			Identifier = $"stove.begin_sauna",
+			Action = ( Player interactor, GameObject obj ) => BeginSauna( interactor ),
+			Keybind = "use",
+			Description = "Begin sauna",
+			Disabled = () => !CanSauna().Item1,
+			DynamicText = () => SaunaDescription(),
 			InteractDistance = 120,
-			ShowWhenDisabled = () => false,
+			ShowWhenDisabled = () => true,
 			Accessibility = AccessibleFrom.World
 		} );
 	}
@@ -49,7 +55,7 @@ public sealed class Stove : Component
 	{
 		Model.Set( "b_open", !HasWood );
 
-		GameObject.Name = $"Stove{(HasWater ? "" : $" (Needs{(HasWood ? "" : " wood and")} water)")}";
+		GameObject.Name = $"Stove{(HasWater && HasWood && !IsRunning ? " (Ready)" : (HasWater ? "" : $" (Needs{(HasWood ? "" : " wood and")} water)"))}";
 	}
 
 	void PlaceWood( Player interactor )
@@ -61,12 +67,29 @@ public sealed class Stove : Component
 			.Destroy();
 	}
 
-	void PlaceWater( Player interactor )
+	(bool, string) CanSauna()
 	{
-		HasWood = true;
-		interactor.Inventory.BackpackItems
-			.Where( x => x.IsValid() && x.Name == "Split Log" )
-			.FirstOrDefault()
-			.Destroy();
+		if ( IsRunning ) return (false, "Running...");
+		if ( !HasWood ) return (false, "There is no wood!");
+		if ( !HasWater ) return (false, "There is no water!");
+		if ( Door != null && Door.State != DoorState.Close ) return (false, "The door is open!");
+		if ( PlayersInArea != null && PlayersInArea.ObjectsInside.Count < Player.All.Count() ) return (false, "Everyone must be inside!");
+
+		return (true, "Start the sauna.");
+	}
+
+	string SaunaDescription()
+	{
+		var canSauna = CanSauna();
+
+		if ( !canSauna.Item1 )
+			return canSauna.Item2;
+		else
+			return $"Start the sauna.";
+	}
+
+	void BeginSauna( Player interactor )
+	{
+		IsRunning = true;
 	}
 }

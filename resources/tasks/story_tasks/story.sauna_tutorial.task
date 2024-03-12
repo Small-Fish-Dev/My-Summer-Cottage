@@ -52,6 +52,30 @@
       "SubtaskOrder": 6,
       "TriggerSignal": "stove.wood_put_in",
       "AmountToComplete": 1
+    },
+    {
+      "Description": "Equip the ladel near the bucket",
+      "SubtaskOrder": 6,
+      "TriggerSignal": "item.equipped.Ladel",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Collect water from the bucket",
+      "SubtaskOrder": 7,
+      "TriggerSignal": "item.used_1.Ladel",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Pour water on the furnace",
+      "SubtaskOrder": 8,
+      "TriggerSignal": "item.used_2.Ladel",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Start the sauna",
+      "SubtaskOrder": 9,
+      "TriggerSignal": "stove.begin_sauna",
+      "AmountToComplete": 1
     }
   ],
   "__references": []
