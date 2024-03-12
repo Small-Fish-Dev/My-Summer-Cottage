@@ -27,7 +27,7 @@
                     }
 				</div>
 				<text class="subtitle">@SelectedTask.Subtitle</text>
-				@if (SelectedTask == Player.PinnedTask)
+				@if (SelectedTask == PrimaryTask.Pinned)
 				{
 					<div class="pinned">( PINNED )</div>
 				}
@@ -51,10 +51,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="pin-details" onclick=@(() => Player.PinnedTask = Player.PinnedTask == SelectedTask ? null : SelectedTask)>
+		<div class="pin-details" onclick=@(() => PrimaryTask.Pinned = PrimaryTask.Pinned == SelectedTask ? null : SelectedTask)>
 			<img src="ui/hud/task_pin.png" />
 			<text>Pin this task to top right corner</text>
-			<Checkbox Enabled=@(SelectedTask == Player.PinnedTask) />
+			<Checkbox Enabled=@(SelectedTask == PrimaryTask.Pinned) />
 		</div>
 	}
 	else

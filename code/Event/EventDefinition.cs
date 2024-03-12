@@ -196,14 +196,14 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 					child.Destroy();
 
 			var substitute = new GameObject( true, GameObject.Name );
-			var networked = GameObject.Networked;
+			var networked = GameObject.NetworkMode;
 			var parent = GameObject.Parent;
 			var worldTransform = Transform.World;
 
 			GameObject.DestroyImmediate();
 
 			substitute.Deserialize( _initialState );
-			substitute.Networked = networked;
+			substitute.NetworkMode = networked;
 			substitute.SetParent( parent );
 			substitute.Transform.World = worldTransform;
 		}

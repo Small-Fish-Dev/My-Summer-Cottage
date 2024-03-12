@@ -91,5 +91,10 @@ public sealed class Stove : Component
 	void BeginSauna( Player interactor )
 	{
 		IsRunning = true;
+
+		foreach ( var player in Player.All )
+		{
+			player.AddExperience( 300 );
+		}
 	}
 }

@@ -2,8 +2,8 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root class="@(TaskLog.SelectedTask?.ResourceId == TaskElement.ResourceId ? "selected" : "")">
-	@if (Player.PinnedTask?.ResourceId == TaskElement.ResourceId)
+<root class="@(TaskLog.SelectedTask == TaskElement ? "selected" : "")">
+	@if (PrimaryTask.Pinned == TaskElement)
 	{
 		<img src="ui/hud/task_pin.png" class="pin" />
 	}
@@ -32,7 +32,7 @@
 			TaskElement.Successful, 
 			TaskElement.Subtitle, 
 			TaskLog.SelectedTask?.GetHashCode(),
-			Player.PinnedTask?.GetHashCode()
+			PrimaryTask.Pinned?.GetHashCode()
 		);
 	}
 }

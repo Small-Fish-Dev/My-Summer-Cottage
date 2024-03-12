@@ -19,6 +19,14 @@
 @code {
 	public static SaunaTask SelectedTask { get; set; }
 
+	public TaskLog()
+	{
+		// s&box doesn't reset statics between launches of the game, if we have selected a task
+		// that is no longer active, remove it. 
+		if (SelectedTask is not null && !TaskMaster.ActiveTasks.Contains(SelectedTask))
+			SelectedTask = null;
+	}
+
 	protected override int BuildHash()
 	{
 		return HashCode.Combine(SelectedTask?.ResourceId);

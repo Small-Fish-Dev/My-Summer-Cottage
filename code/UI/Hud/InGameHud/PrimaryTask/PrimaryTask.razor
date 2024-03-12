@@ -4,7 +4,7 @@
 
 <root>
 	<div class="main">
-		@if (Player.PinnedTask is null)
+		@if (Pinned is null)
 		{
 
 		}
@@ -13,28 +13,28 @@
 			<div class="icon"></div>
 			<div class="text-container">
 				<div style="flex-direction: row-reverse">
-					<div class="task-type @(Player.PinnedTask.IsPrimaryTask ? "primary" : "secondary")">
-						@(Player.PinnedTask.IsPrimaryTask ? "PRIMARY TASK" : "SECONDARY TASK")
+					<div class="task-type @(Pinned.IsPrimaryTask ? "primary" : "secondary")">
+						@(Pinned.IsPrimaryTask ? "PRIMARY TASK" : "SECONDARY TASK")
 					</div>
 				</div>
 
 				<div style="flex-direction: row-reverse">
 					<div class="task-title">
-						@Player.PinnedTask.Name
+						@Pinned.Name
 					</div>
 				</div>
 
                 <div style="flex-direction: row-reverse; gap: 8px;">
-                    @if (Player.PinnedTask.TimeLimited && !Player.PinnedTask.TaskTimer)
+                    @if (Pinned.TimeLimited && !Pinned.TaskTimer)
                     {
-                        <div class="task-timer">@(MathF.Round(Player.PinnedTask.TimeLimitInSeconds - Player.PinnedTask.TaskTimer.Passed)) seconds left...</div>
+                        <div class="task-timer">@(MathF.Round(Pinned.TimeLimitInSeconds - Pinned.TaskTimer.Passed)) seconds left...</div>
                     }
                 </div>
 
 				<div style="flex-direction: row-reverse; gap: 8px;">
-					@if (Player.PinnedTask.Completed)
+					@if (Pinned.Completed)
 					{
-						@if (Player.PinnedTask.Successful)
+						@if (Pinned.Successful)
 						{
 							<div class="task-description completed">COMPLETED</div>
 						}
@@ -45,10 +45,10 @@
 					}
 					else
                     {
-						@if (Player.PinnedTask.NextSubtaskToComplete is not null)
+						@if (Pinned.NextSubtaskToComplete is not null)
 						{
-                            <div class="task-description">@Player.PinnedTask.NextSubtaskToComplete.Description (@Player.PinnedTask.NextSubtaskToComplete.CurrentAmount/@Player.PinnedTask.NextSubtaskToComplete.AmountToComplete)</div>
-							<Checkbox Enabled=@(Player.PinnedTask.NextSubtaskToComplete.Completed) />
+                            <div class="task-description">@Pinned.NextSubtaskToComplete.Description (@Pinned.NextSubtaskToComplete.CurrentAmount/@Pinned.NextSubtaskToComplete.AmountToComplete)</div>
+							<Checkbox Enabled=@(Pinned.NextSubtaskToComplete.Completed) />
                         }
                     }
 				</div>
@@ -58,17 +58,27 @@
 </root>
 
 @code {
+	public static SaunaTask Pinned { get; set; }
+
+	public PrimaryTask()
+	{
+		// s&box doesn't reset statics between launches of the game, if we have pinned a task
+		// that is no longer active, remove it. 
+		if (Pinned is not null && !TaskMaster.ActiveTasks.Contains(Pinned))
+			Pinned = null;
+	}
+
 	protected override int BuildHash()
 	{
 		return HashCode.Combine
 		( 
-			Player.PinnedTask?.ResourceId, 
-			Player.PinnedTask?.Completed,
-			Player.PinnedTask?.Successful,
-            Player.PinnedTask?.NextSubtaskToComplete?.Completed,
-            Player.PinnedTask?.NextSubtaskToComplete?.CurrentAmount,
-            Player.PinnedTask?.TaskTimer.Passed,
-			Player.PinnedTask?.NextSubtaskToComplete?.GetHashCode()
+			Pinned?.ResourceId, 
+			Pinned?.Completed,
+			Pinned?.Successful,
+            Pinned?.NextSubtaskToComplete?.Completed,
+            Pinned?.NextSubtaskToComplete?.CurrentAmount,
+            Pinned?.TaskTimer.Passed,
+			Pinned?.NextSubtaskToComplete?.GetHashCode()
 		);
 	}
 }
