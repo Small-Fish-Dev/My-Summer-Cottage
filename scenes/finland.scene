@@ -430,7 +430,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.4751091,0,-0.8799269",
+          "Rotation": "0,0.1216506,0,0.992573",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1157,7 +1157,7 @@
     },
     {
       "Id": "7e2a4434-79ef-47a2-a2c0-951450c0171a",
-      "Name": "Object",
+      "Name": "Chopping Base",
       "Position": "3449.392,-2988.885,2433.626",
       "Scale": "0.6,0.6,0.6",
       "Enabled": true,
@@ -1192,6 +1192,32 @@
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/items/axe.prefab"
+    },
+    {
+      "Id": "5fae56a0-fcc9-421d-a6cf-9dbf5ed2278d",
+      "Name": "Stove",
+      "Position": "3579.69,-2957.25,2433.257",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "Stove"
+        },
+        {
+          "__type": "SkinnedModelRenderer",
+          "BodyGroups": 3,
+          "CreateBoneObjects": false,
+          "Model": "models/stove/stove.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "ModelCollider",
+          "IsTrigger": false,
+          "Model": "models/stove/stove.vmdl",
+          "Static": false
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -1217,6 +1243,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-12T18:05:03.0817806\u002B01:00",
+  "LastSaved": "2024-03-12T18:18:01.890628\u002B01:00",
   "__references": []
 }
