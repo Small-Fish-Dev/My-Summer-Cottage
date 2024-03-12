@@ -95,7 +95,6 @@ public class Inventory : Component
 
 		GiveEquipmentItem( equipment );
 		equipment.State = ItemState.Equipped;
-		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
 
 		return true;
 	}
@@ -117,7 +116,6 @@ public class Inventory : Component
 		GiveEquipmentItem( equipment );
 		equipment.State = ItemState.Equipped;
 		TaskMaster.SubmitTriggerSignal( $"item.received.{item.Name}", Player );
-		TaskMaster.SubmitTriggerSignal( $"item.equipped.{item.Name}", Player );
 
 		return true;
 	}
@@ -400,6 +398,7 @@ public class Inventory : Component
 	private void GiveEquipmentItem( ItemEquipment equipment )
 	{
 		_equippedItems[(int)equipment.Slot] = equipment;
+		TaskMaster.SubmitTriggerSignal( $"item.equipped.{equipment.Name}", Player );
 		UpdateBodygroups();
 
 		Weight = GetTotalWeightInGrams();
