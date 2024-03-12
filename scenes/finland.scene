@@ -197,15 +197,33 @@
                         }
                       },
                       {
-                        "Id": 6,
+                        "Id": 8,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.Phone",
-                          "_name": "ReceiveMessage",
+                          "_name": "Receive",
+                          "_type": "package.fish.sauna/Sauna.Message",
                           "_isStatic": true
                         },
                         "UserData": {
                           "Position": "432,-80"
+                        }
+                      },
+                      {
+                        "Id": 9,
+                        "Type": "property.get",
+                        "ParentId": 3,
+                        "Properties": {
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                        }
+                      },
+                      {
+                        "Id": 10,
+                        "Type": "property.get",
+                        "ParentId": 3,
+                        "Properties": {
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -260,8 +278,32 @@
                       {
                         "SrcId": 2,
                         "SrcName": "_signal",
-                        "DstId": 6,
+                        "DstId": 8,
                         "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 9,
+                        "SrcName": "_result",
+                        "DstId": 8,
+                        "DstName": "content"
+                      },
+                      {
+                        "SrcId": 10,
+                        "SrcName": "_result",
+                        "DstId": 8,
+                        "DstName": "sender"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_result",
+                        "DstId": 9,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_result",
+                        "DstId": 10,
+                        "DstName": "_target"
                       }
                     ]
                   }
@@ -386,7 +428,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.08080246,0,0.9967301",
+          "Rotation": "0,0.8639385,0,0.5035973",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1108,6 +1150,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-12T14:16:25.8872577\u002B01:00",
+  "LastSaved": "2024-03-12T14:42:39.856665\u002B01:00",
   "__references": []
 }
