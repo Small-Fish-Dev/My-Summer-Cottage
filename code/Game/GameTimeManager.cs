@@ -301,7 +301,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	}
 
 	/// <summary>
-	/// Starts tge dat
+	/// Starts the day
 	/// Unfreezes the time if it's frozen.
 	/// </summary>
 	[Broadcast( NetPermission.HostOnly )]
