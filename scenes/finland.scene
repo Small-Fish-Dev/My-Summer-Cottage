@@ -202,9 +202,9 @@
                         "Id": 8,
                         "Type": "call",
                         "Properties": {
+                          "_isStatic": true,
                           "_name": "Receive",
-                          "_type": "package.fish.sauna/Sauna.Message",
-                          "_isStatic": true
+                          "_type": "package.fish.sauna/Sauna.Message"
                         },
                         "UserData": {
                           "Position": "432,-80"
@@ -430,7 +430,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.005740158,0,-0.9999835",
+          "Rotation": "0,-0.598342,0,-0.8012408",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -606,9 +606,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
+                      "_isStatic": true,
                       "_name": "PlaySoundWithSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_isStatic": true
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -646,6 +646,7 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -696,9 +697,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
+                      "_isStatic": true,
                       "_name": "PlaySoundWithNameAndSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                      "_isStatic": true
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -741,6 +742,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1207,31 +1210,21 @@
       "__Prefab": "prefabs/events/car_speeding.prefab"
     },
     {
-      "Id": "1b3aaf26-d142-445a-a04b-59a64888e04b",
-      "Name": "WaterBucket",
-      "Position": "3554.624,-2926.079,2425.123",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "Components": [
-        {
-          "__type": "ModelRenderer",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/bucket/bucket.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "WaterBucket"
-        }
-      ]
-    },
-    {
       "Id": "228c1dd9-a826-45ae-8624-e85ba99407ad",
       "Name": "ladel",
       "Position": "3541.97,-2911.638,2450.003",
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/items/ladel.prefab"
+    },
+    {
+      "Id": "158291d2-adc1-4f2d-a3a4-5896684ced3f",
+      "Name": "water_bucket",
+      "Position": "3513.302,-2916.854,2427.931",
+      "Rotation": "-0.01174103,0.03774813,0.2967681,0.9541309",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/objects/water_bucket.prefab"
     }
   ],
   "SceneProperties": {
@@ -1257,6 +1250,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-12T21:11:40.6010562\u002B01:00",
+  "LastSaved": "2024-03-12T21:48:05.766896\u002B01:00",
   "__references": []
 }
