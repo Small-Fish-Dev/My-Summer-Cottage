@@ -111,8 +111,9 @@ public partial class RadioComponent : Component
 			_handle = Sound.PlayFile( file );
 			_handle.ListenLocal = false;
 			_handle.Volume = 0.05f;
-			_handle.Decibels = 70;
-			_handle.OcclusionRadius = 512;
+			_handle.Decibels = 50;
+			_handle.DistanceAttenuation = true;
+			_handle.Occlusion = false;
 		}
 
 		Title = _player != null && !string.IsNullOrWhiteSpace( _player.Title )
