@@ -80,8 +80,9 @@ public sealed class FishingRod : Component
 			CastBobber( player );
 	}
 
-	private void CastBobber( Player player )
+	private async void CastBobber( Player player )
 	{
+		await Task.Delay( 700 );
 		IsCasted = true;
 		Owner = player;
 		GameObject newBobber;
