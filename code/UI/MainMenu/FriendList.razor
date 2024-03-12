@@ -93,7 +93,7 @@
 				}
 				catch ( Exception ex )
 				{
-					Log.Error( $"Ignoring invalid lobby {lobby.Map}!" );
+					Log.Error( $"Ignoring invalid lobby {lobby.Map}! - {ex.Message}" );
 					continue;
 				}
 
