@@ -4020,7 +4020,7 @@
 				{
 					_class = "CRootAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ 1040.0, 48.0 ]
+					m_vecPosition = [ 1248.0, 48.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1244631145
@@ -4030,12 +4030,82 @@
 					{
 						m_nodeID = 
 						{
-							m_id = 380776460
+							m_id = 2129989775
 						}
 						m_outputID = 
 						{
 							m_id = 4294967295
 						}
+					}
+				}
+			},
+			{
+				key = 
+				{
+					m_id = 1310569756
+				}
+				value = 
+				{
+					_class = "CBlendAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ 832.0, 176.0 ]
+					m_nNodeID = 
+					{
+						m_id = 1310569756
+					}
+					m_sNote = ""
+					m_children = 
+					[
+						{
+							m_inputConnection = 
+							{
+								m_nodeID = 
+								{
+									m_id = 2144776562
+								}
+								m_outputID = 
+								{
+									m_id = 4294967295
+								}
+							}
+							m_name = "Min"
+							m_blendValue = 0.0
+						},
+						{
+							m_inputConnection = 
+							{
+								m_nodeID = 
+								{
+									m_id = 1546371983
+								}
+								m_outputID = 
+								{
+									m_id = 4294967295
+								}
+							}
+							m_name = "Max"
+							m_blendValue = 1.0
+						},
+					]
+					m_blendValueSource = "Parameter"
+					m_param = 
+					{
+						m_id = 1994053627
+					}
+					m_blendKeyType = "BlendKey_UserValue"
+					m_bLockBlendOnReset = false
+					m_bSyncCycles = true
+					m_bLoop = true
+					m_bLockWhenWaning = true
+					m_damping = 
+					{
+						_class = "CAnimInputDamping"
+						m_speedFunction = "NoDamping"
+						m_fSpeedScale = 1.0
+						m_fMinSpeed = 10.0
+						m_fMaxTension = 1000.0
+						m_fTension = 100.0
+						m_fDamping = 5.0
 					}
 				}
 			},
@@ -4988,6 +5058,26 @@
 					m_sequenceName = "jump"
 					m_playbackSpeed = 0.6
 					m_bLoop = false
+				}
+			},
+			{
+				key = 
+				{
+					m_id = 1546371983
+				}
+				value = 
+				{
+					_class = "CSingleFrameAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ 640.0, 224.0 ]
+					m_nNodeID = 
+					{
+						m_id = 1546371983
+					}
+					m_sNote = ""
+					m_sequenceName = "penoid"
+					m_nFrameIndex = 30
+					m_tagSpans = [  ]
 				}
 			},
 			{
@@ -10641,6 +10731,71 @@
 			{
 				key = 
 				{
+					m_id = 2129989775
+				}
+				value = 
+				{
+					_class = "CAddAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ 1040.0, 48.0 ]
+					m_nNodeID = 
+					{
+						m_id = 2129989775
+					}
+					m_sNote = ""
+					m_baseInput = 
+					{
+						m_nodeID = 
+						{
+							m_id = 380776460
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_additiveInput = 
+					{
+						m_nodeID = 
+						{
+							m_id = 1310569756
+						}
+						m_outputID = 
+						{
+							m_id = 4294967295
+						}
+					}
+					m_timingBehavior = "UseChild1"
+					m_flTimingBlend = 0.5
+					m_footMotionTiming = "Child1"
+					m_bResetBase = false
+					m_bResetAdditive = true
+					m_bApplyChannelsSeparately = true
+				}
+			},
+			{
+				key = 
+				{
+					m_id = 2144776562
+				}
+				value = 
+				{
+					_class = "CSingleFrameAnimNode"
+					m_sName = "Unnamed"
+					m_vecPosition = [ 640.0, 176.0 ]
+					m_nNodeID = 
+					{
+						m_id = 2144776562
+					}
+					m_sNote = ""
+					m_sequenceName = "penoid"
+					m_nFrameIndex = 0
+					m_tagSpans = [  ]
+				}
+			},
+			{
+				key = 
+				{
 					m_id = 2146246641
 				}
 				value = 
@@ -10923,6 +11078,20 @@
 				m_bUseMostRecentValue = false
 				m_bAutoReset = false
 				m_bDefaultValue = false
+			},
+			{
+				_class = "CFloatAnimParameter"
+				m_name = "penoid"
+				m_id = 
+				{
+					m_id = 1994053627
+				}
+				m_previewButton = "ANIMPARAM_BUTTON_NONE"
+				m_bUseMostRecentValue = false
+				m_bAutoReset = false
+				m_fDefaultValue = 0.0
+				m_fMinValue = 0.0
+				m_fMaxValue = 1.0
 			},
 		]
 	}
