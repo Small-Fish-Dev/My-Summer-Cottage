@@ -1,0 +1,36 @@
+{
+  "RootObject": {
+    "Id": "1b3aaf26-d142-445a-a04b-59a64888e04b",
+    "Name": "water_bucket",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "BodyGroups": 18446744073709551615,
+        "Model": "models/bucket/bucket.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "WaterBucket"
+      },
+      {
+        "__type": "ModelCollider",
+        "IsTrigger": false,
+        "Model": "models/bucket/bucket.vmdl",
+        "Static": false
+      },
+      {
+        "__type": "Interactions",
+        "HideOnEmpty": true,
+        "ObjectInteractions": []
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

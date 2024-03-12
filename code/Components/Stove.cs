@@ -12,26 +12,13 @@ public sealed class Stove : Component
 	[Sync]
 	public bool HasWater { get; set; } = false;
 
-	[Sync]
-	public bool IsRunning { get; set; } = false;
+	public bool IsRunning => HasWood && HasWater;
 
 	protected override void OnStart()
 	{
 		Model = Components.Get<SkinnedModelRenderer>( FindMode.EnabledInSelfAndChildren );
 
 		var interactions = Components.GetOrCreate<Interactions>();
-		interactions.AddInteraction( new Interaction()
-		{
-			Identifier = $"stove.wood_put_in",
-			Action = ( Player interactor, GameObject obj ) => PlaceWood( interactor ),
-			Keybind = "mouse2",
-			Description = "Insert split log",
-			Disabled = () => HasWood || !Player.Local.Inventory.BackpackItems.Any( x => x.IsValid() && x.Name == "Split Log" ),
-			InteractDistance = 120,
-			ShowWhenDisabled = () => false,
-			Accessibility = AccessibleFrom.World
-		} );
-
 		interactions.AddInteraction( new Interaction()
 		{
 			Identifier = $"stove.wood_put_in",
@@ -53,15 +40,6 @@ public sealed class Stove : Component
 	}
 
 	void PlaceWood( Player interactor )
-	{
-		HasWood = true;
-		interactor.Inventory.BackpackItems
-			.Where( x => x.IsValid() && x.Name == "Split Log" )
-			.FirstOrDefault()
-			.Destroy();
-	}
-
-	void PlaceWater( Player interactor )
 	{
 		HasWood = true;
 		interactor.Inventory.BackpackItems
