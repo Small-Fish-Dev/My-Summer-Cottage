@@ -29,7 +29,7 @@ public sealed class Stove : Component
 		{
 			Identifier = $"stove.wood_put_in",
 			Action = ( Player interactor, GameObject obj ) => PlaceWood( interactor ),
-			Keybind = "use",
+			Keybind = "use2",
 			Description = "Insert split log",
 			Disabled = () => HasWood || !Player.Local.Inventory.BackpackItems.Any( x => x.IsValid() && x.Name == "Split Log" ),
 			InteractDistance = 120,
