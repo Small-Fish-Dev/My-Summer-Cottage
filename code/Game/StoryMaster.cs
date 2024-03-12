@@ -184,6 +184,8 @@ public class StoryMaster : Component
 	{
 		StoryProgression.GameDay = dayNumber;
 		SaveStoryProgression();
+		Log.Info( "SET TO" );
+		Log.Info( dayNumber );
 	}
 
 	/// <summary>
@@ -216,6 +218,8 @@ public class StoryMaster : Component
 			StoryProgression = new();
 			SaveStoryProgression();
 		}
+
+		Log.Info( StoryProgression.GameDay );
 	}
 
 	/// <summary>

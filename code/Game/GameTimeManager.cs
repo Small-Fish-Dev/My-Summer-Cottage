@@ -80,11 +80,6 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	[Category( "Time" )]
 	public int Day
 	{
-		set
-		{
-			if ( value != 0 )
-				_storyMaster.SetGameDay( value );
-		}
 		get => _storyMaster?.CurrentGameDay ?? 1;
 	}
 
@@ -300,7 +295,6 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 		while ( newInGameTime >= DayLength )
 		{
 			newInGameTime -= DayLength;
-			Day++;
 		}
 
 		InGameTime = newInGameTime;
