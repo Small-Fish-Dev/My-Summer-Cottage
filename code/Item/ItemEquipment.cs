@@ -137,7 +137,7 @@ public class ItemEquipment : ItemComponent
 		var interactions = Components.GetOrCreate<Interactions>();
 		interactions.AddInteraction( new Interaction()
 		{
-			Identifier = "item.equip",
+			Identifier = $"item.equipped.{Name}",
 			Action = ( Player interactor, GameObject obj ) => interactor.Inventory.EquipItemFromWorld( this ),
 			Keybind = "use2",
 			Description = "Equip",

@@ -18,6 +18,18 @@
   "OnSuccess": null,
   "OnFail": null,
   "FailConditionCheck": null,
-  "Subtasks": [],
+  "Subtasks": [
+    {
+      "Description": "Take wood out of the pile",
+      "TriggerSignal": "wood_pile.get_log",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Equip the axe",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.equipped.Axe",
+      "AmountToComplete": 1
+    }
+  ],
   "__references": []
 }

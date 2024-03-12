@@ -47,7 +47,7 @@
     private GameObject _targetObject => FromHands
         ? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
         : Player.Local?.TargetedGameObject;
-		
+
     private static Dictionary<string, Interaction> priorityList = new();
     private IEnumerable<Interaction> _interactions => _targetObject?.GetInteractions() ?? new List<Interaction>();
     private bool WithinBounds(Interaction interaction) => !interaction.HasBounds || GetInteractionBounds(interaction).Contains(Player.Local.InteractionTrace.EndPosition);
@@ -56,8 +56,8 @@
         => new BBox(interaction.Position - interaction.Extents / 2f, interaction.Position + interaction.Extents / 2f)
             .Transform(Player.Local.TargetedGameObject.Transform.World);
 
-	private int TimerIndex( Interaction interaction )
-		=> (int)(MathX.Remap( interaction.CooldownTimer.Passed, 0, interaction.CooldownTime, 8, 0 ) + 0.5f);
+    private int TimerIndex( Interaction interaction )
+        => (int)(MathX.Remap( interaction.CooldownTimer.Passed, 0, interaction.CooldownTime, 8, 0 ) + 0.5f);
 
     private void AddToPriority( Interaction interaction, bool forced = false )
     {
@@ -102,6 +102,8 @@
             {
                 _targetObject?.Network.TakeOwnership();
                 interaction.Action?.Invoke(Player.Local, _targetObject);
+                Log.Info(interaction.Identifier);
+
                 interaction.CooldownTimer = interaction.CooldownTime;
 
 				if (interaction.InputMode != InputMode.Down)
@@ -116,7 +118,7 @@
 					Rotation.LookAt( vector.Normal ), 
 					interaction.Animation, 
 					_targetObject.Id, 
-					interaction.Sound.InvokeOrDefault()?.ResourceId ?? -1,
+					interaction.Sound?.InvokeOrDefault()?.ResourceId ?? -1,
 					interaction.PlaySoundFromPlayer
 				);
 			}

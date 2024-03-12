@@ -68,7 +68,7 @@ public sealed class Axe : Component
 
 					target.Destroy();
 
-					TaskMaster.SubmitTriggerSignal( "item.used_1.Axe", player );
+					TaskMaster.SubmitTriggerSignal( "item.used_2.Axe", player );
 				}
 			}
 		}

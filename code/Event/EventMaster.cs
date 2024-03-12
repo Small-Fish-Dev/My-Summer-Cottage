@@ -236,6 +236,7 @@ public class EventMaster : Component
 	[Broadcast]
 	public static void InteractionInvoked( string interaction, Guid target, Guid player )
 	{
+		Log.Info( interaction );
 		var allTriggers = Game.ActiveScene.GetAllComponents<EventInteractionTrigger>();
 		var foundTarget = Game.ActiveScene.GetAllObjects( true )
 			.Where( x => x.Id == target )
