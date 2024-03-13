@@ -1,4 +1,5 @@
 using Microsoft.VisualBasic;
+using Sandbox;
 using Sauna.Event;
 using Sauna.UI;
 
@@ -332,18 +333,46 @@ public class TaskMaster : Component
 		}
 	}
 
+	[Broadcast( NetPermission.Anyone )]
+	static void SubmitTriggerNetworked( string signalIdentifier, Guid playerid )
+	{
+		var player = Player.GetByID( playerid );
+
+		if ( player.IsValid() )
+		{
+			if ( player != Player.Local )
+			{
+				SubmitTriggerSignal( signalIdentifier, player, false );
+			}
+		}
+	}
+
+	TimeSince _lastTrigger = 0;
+	string _lastId;
+	Player _lastPlayer;
 	/// <summary>
 	/// Let all the tasks know a trigger has been activated
 	/// </summary>
 	/// <param name="signalIdentifier"></param>
 	/// <param name="triggerer"></param>
-	public static void SubmitTriggerSignal( string signalIdentifier, Player triggerer )
+	/// <param name="network"></param>
+	public static void SubmitTriggerSignal( string signalIdentifier, Player triggerer, bool network = true )
 	{
 		Log.Info( signalIdentifier );
 		if ( signalIdentifier == null || signalIdentifier == "" || signalIdentifier == String.Empty || signalIdentifier == "null" ) return;
 
+
 		if ( _instance != null )
 		{
+			if ( _instance._lastTrigger <= 0.05f && _instance._lastId == signalIdentifier && _instance._lastPlayer == triggerer ) return;
+
+			_instance._lastTrigger = 0;
+			_instance._lastId = signalIdentifier;
+			_instance._lastPlayer = triggerer;
+
+			if ( network )
+				SubmitTriggerNetworked( signalIdentifier, triggerer.ConnectionID );
+
 			var allActiveTasks = _instance.CurrentTasks.Where( x => !x.Completed ); // Get active tasks
 
 			foreach ( var task in allActiveTasks )
@@ -360,28 +389,27 @@ public class TaskMaster : Component
 						subtask.CurrentAmount++;
 				}
 			}
-		}
 
-		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
+			var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault(); // Find the story master
 
-		if ( storyMaster != null )
-		{
-			var allActiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Completed && x.Triggered ); // Get all active scripted events
-
-			foreach ( var scriptedEvent in allActiveScriptedEvents )
+			if ( storyMaster != null )
 			{
-				if ( scriptedEvent.SignalToComplete == signalIdentifier )
-					scriptedEvent.Completed = true;
-			}
+				var allActiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Completed && x.Triggered ); // Get all active scripted events
 
-			var allInactiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Triggered && (x.SignalToTrigger != null || x.SignalToTrigger != "" || x.SignalToTrigger != String.Empty) );
-			foreach ( var inactiveEvent in allInactiveScriptedEvents )
-			{
-				if ( inactiveEvent.SignalToTrigger == signalIdentifier )
-					storyMaster.BeginScriptedEvent( inactiveEvent, inactiveEvent.TriggerDelay );
+				foreach ( var scriptedEvent in allActiveScriptedEvents )
+				{
+					if ( scriptedEvent.SignalToComplete == signalIdentifier )
+						scriptedEvent.Completed = true;
+				}
+
+				var allInactiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Triggered && (x.SignalToTrigger != null || x.SignalToTrigger != "" || x.SignalToTrigger != String.Empty) );
+				foreach ( var inactiveEvent in allInactiveScriptedEvents )
+				{
+					if ( inactiveEvent.SignalToTrigger == signalIdentifier )
+						storyMaster.BeginScriptedEvent( inactiveEvent, inactiveEvent.TriggerDelay );
+				}
 			}
 		}
-
 	}
 
 	/// <summary>
