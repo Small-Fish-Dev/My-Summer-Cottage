@@ -5,7 +5,6 @@ Layer0
 	shader "shaders/saunaworld.shader"
 
 	//---- Rendering ----
-	F_ALPHA_TEST 1
 	F_DO_NOT_CAST_SHADOWS 1
 	F_TRANSPARENCY 1
 
@@ -13,19 +12,15 @@ Layer0
 	g_bFogEnabled "1"
 
 	//---- Material ----
-	Color "materials/dirt_decals/dirt_decals_basecolor.png"
-	ColorTintMask "materials/default/default.tga"
+	Color "materials/leafs_decal/leaves_pile_basecolor.png"
+	ColorTintMask "[1.000000 1.000000 1.000000 0.000000]"
 	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
 	Metalness "materials/default/default_metal.tga"
-	Normal "materials/dirt_decals/dirt_decals_normal.png"
-	Roughness "materials/dirt_decals/dirt_decals_roughness.png"
-
-	//---- Translucent ----
-	g_flAlphaTestReference "0.500"
-	g_flAntiAliasedEdgeStrength "1.000"
+	Normal "materials/leafs_decal/leaves_pile_normal.png"
+	Roughness "materials/leafs_decal/leaves_pile_roughness.png"
 
 	//---- Transparency ----
-	TransparencyMask "materials/dirt_decals/dirt_decals_opacity.png"
+	TransparencyMask "materials/leafs_decal/leaves_pile_opacity.png"
 	TransparencyRounding "0.000"
 
 	SystemAttributes
