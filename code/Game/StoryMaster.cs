@@ -328,6 +328,9 @@ public class StoryMaster : Component
 
 		if ( storyMaster == null ) return;
 
+		if ( storyMaster.CurrentSaunaDay.Completed )
+			storyMaster.NextStoryDay();
+
 		storyMaster.LoadStoryProgression();
 		storyMaster.StartStoryDay();
 		storyMaster._timeManager.StartDay();
@@ -358,15 +361,7 @@ public class StoryMaster : Component
 
 		storyMaster._timeManager.EndDay();
 
-		if ( storyMaster.CurrentSaunaDay.Completed )
-		{
-			storyMaster.NextStoryDay();
-			storyMaster.NextGameDay();
-		}
-		else
-		{
-			storyMaster.NextGameDay();
-		}
+		storyMaster.NextGameDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
 
