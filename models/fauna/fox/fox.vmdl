@@ -11,9 +11,21 @@
 				[
 					{
 						_class = "DefaultMaterialGroup"
+						name = "red"
 						remaps = [  ]
 						use_global_default = true
 						global_default_material = "models/fauna/fox/fox.vmat"
+					},
+					{
+						_class = "MaterialGroup"
+						name = "arctic"
+						remaps = 
+						[
+							{
+								from = "models/fauna/fox/fox.vmat"
+								to = "models/fauna/fox/fox_arctic.vmat"
+							},
+						]
 					},
 				]
 			},
