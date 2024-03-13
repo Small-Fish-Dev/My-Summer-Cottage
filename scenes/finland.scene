@@ -170,21 +170,21 @@
                         "Id": 1,
                         "Type": "output",
                         "UserData": {
-                          "Position": "448,96"
+                          "Position": "752,128"
                         }
                       },
                       {
                         "Id": 2,
                         "Type": "event.assigntaskto",
                         "UserData": {
-                          "Position": "224,64"
+                          "Position": "512,128"
                         }
                       },
                       {
                         "Id": 3,
                         "Type": "event.getrandomtask",
                         "UserData": {
-                          "Position": "-32,208"
+                          "Position": "32,-32"
                         }
                       },
                       {
@@ -195,7 +195,7 @@
                           "_name": "SuccessSignal"
                         },
                         "UserData": {
-                          "Position": "224,224"
+                          "Position": "464,288"
                         }
                       },
                       {
@@ -207,7 +207,7 @@
                           "_name": "Receive"
                         },
                         "UserData": {
-                          "Position": "432,-80"
+                          "Position": "512,-96"
                         }
                       },
                       {
@@ -227,6 +227,43 @@
                           "_type": "package.fish.sauna/Sauna.SaunaTask",
                           "_name": "Giver"
                         }
+                      },
+                      {
+                        "Id": 11,
+                        "Type": "call",
+                        "Properties": {
+                          "_isStatic": true,
+                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                          "_name": "PlaySoundWithSubtitle"
+                        },
+                        "UserData": {
+                          "Position": "1072,-128"
+                        }
+                      },
+                      {
+                        "Id": 13,
+                        "Type": "resource.ref",
+                        "Properties": {
+                          "T": "Sandbox.Engine/Sandbox.SoundEvent",
+                          "value": "sounds/speech/1.sound"
+                        },
+                        "UserData": {
+                          "Position": "864,-48"
+                        }
+                      },
+                      {
+                        "Id": 14,
+                        "Type": "time.delay",
+                        "UserData": {
+                          "Position": "304,144"
+                        }
+                      },
+                      {
+                        "Id": 15,
+                        "Type": "time.delay",
+                        "UserData": {
+                          "Position": "736,-112"
+                        }
                       }
                     ],
                     "Links": [
@@ -243,7 +280,7 @@
                         "DstName": "_signal"
                       },
                       {
-                        "SrcId": 3,
+                        "SrcId": 14,
                         "SrcName": "_signal",
                         "DstId": 2,
                         "DstName": "_signal"
@@ -278,7 +315,7 @@
                         "DstName": "_target"
                       },
                       {
-                        "SrcId": 2,
+                        "SrcId": 3,
                         "SrcName": "_signal",
                         "DstId": 8,
                         "DstName": "_signal"
@@ -306,6 +343,51 @@
                         "SrcName": "_result",
                         "DstId": 10,
                         "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 15,
+                        "SrcName": "_signal",
+                        "DstId": 11,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_target",
+                        "DstId": 11,
+                        "DstName": "obj"
+                      },
+                      {
+                        "SrcId": 13,
+                        "SrcName": "_result",
+                        "DstId": 11,
+                        "DstName": "sound"
+                      },
+                      {
+                        "Value": "Shit it\u0027s my nagging wife again...",
+                        "DstId": 11,
+                        "DstName": "subtitle"
+                      },
+                      {
+                        "SrcId": 3,
+                        "SrcName": "_signal",
+                        "DstId": 14,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 3,
+                        "DstId": 14,
+                        "DstName": "seconds"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_signal",
+                        "DstId": 15,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 1,
+                        "DstId": 15,
+                        "DstName": "seconds"
                       }
                     ]
                   }
@@ -353,8 +435,8 @@
                         "Id": 4,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task",
-                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task"
                         },
                         "UserData": {
                           "Position": "-240,192"
@@ -661,8 +743,8 @@
                         "Id": 9,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task",
-                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task"
                         },
                         "UserData": {
                           "Position": "-240,368"
@@ -714,21 +796,6 @@
                 "Common": 2,
                 "Uncommon": 1,
                 "Rare": 0
-              }
-            },
-            "3": {
-              "ScriptedEvents": [
-                {
-                  "SignalToTrigger": "item.equipped.Browline Glasses",
-                  "TriggerDelay": 1,
-                  "TriggerTimeslot": "31.46,12.00,1",
-                  "CompletionNecessary": true
-                }
-              ],
-              "RandomEvents": {
-                "Common": 3,
-                "Uncommon": 2,
-                "Rare": 1
               }
             }
           },
@@ -844,7 +911,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.8606839,0,0.5091398",
+          "Rotation": "0,-0.3974857,0,-0.9176084",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1883,6 +1950,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-13T03:13:46.2616205\u002B01:00",
+  "LastSaved": "2024-03-13T03:21:02.6874826\u002B01:00",
   "__references": []
 }
