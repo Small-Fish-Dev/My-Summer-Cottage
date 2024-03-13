@@ -1,3 +1,5 @@
+using System;
+
 namespace Sauna;
 
 public class DialogueResponse
@@ -48,6 +50,26 @@ public class DialogueResponse
 
 public class DialogueStage
 {
+	/// <summary>
+	/// Is this stage the first of a conversation. Used to pick random dialogue options.
+	/// </summary>
+	[Property]
+	public bool IsInitial { get; set; } = false;
+
+	/// <summary>
+	/// Make this dialogue randomly pickable at the start of the day
+	/// </summary>
+	[Property]
+	[HideIf( "IsInitial", false )]
+	public bool AddToDialoguePool { get; set; } = false;
+
+	/// <summary>
+	/// How often will this dialogue be picked (10f = 10x times more often than one with 1f)
+	/// </summary>
+	[Property]
+	[HideIf( "IsInitial", false )]
+	public float DialoguePoolWeight { get; set; } = 1f;
+
 	[Property]
 	public List<DialogueResponse> AvailableResponses { get; set; }
 }
@@ -109,6 +131,37 @@ public class DialogueTree : Component
 					}
 				);
 			}
+		}
+
+		SelectRandomDialogue();
+	}
+
+	public void SelectRandomDialogue()
+	{
+		var options = DialogueStages.Where( x => x.IsInitial && x.AddToDialoguePool );
+
+		var totalWeight = options?
+			.Select( x => x.DialoguePoolWeight )?
+			.Sum() ?? 0f;
+
+		var rng = Game.Random.Float( totalWeight );
+		DialogueStage picked = null;
+
+		foreach ( var dialogue in options )
+		{
+			if ( rng < dialogue.DialoguePoolWeight )
+			{
+				picked = dialogue;
+				break;
+			}
+			else
+				rng -= dialogue.DialoguePoolWeight;
+		}
+
+		if ( picked != null )
+		{
+			var stage = DialogueStages.IndexOf( picked );
+			SendToDialogueStage( stage );
 		}
 	}
 
