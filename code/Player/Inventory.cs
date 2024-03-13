@@ -319,10 +319,43 @@ public class Inventory : Component
 	/// <param name="item"></param>
 	/// <param name="count"></param>
 	/// <param name="destroy"></param>
+	/// <param name="predicate"></param>
 	/// <returns></returns>
-	public bool RemoveAmount( ItemComponent item, int count = 1, bool destroy = true )
+	public bool RemoveAmount( ItemComponent item, int count = 1, bool destroy = true, Func<ItemComponent, bool> predicate = null )
 	{
-		if ( !item.IsStackable || count > item.Count )
+		// Non stackables.
+		if ( !item.IsStackable )
+		{
+			var items = BackpackItems
+				.Where( x => x != item && x?.Prefab == item?.Prefab && (predicate?.Invoke( x ) ?? true) )
+				.ToList();
+
+			if ( count > items.Count + 1 )
+				return false;
+
+			ClearItem( item );
+			if ( destroy )
+			{
+				item.State = ItemState.None;
+				item?.GameObject?.Destroy();
+			}
+
+			for ( int i = 0; i < count - 1; i++ )
+			{
+				var target = items[i];
+				ClearItem( target );
+				if ( destroy )
+				{
+					target.State = ItemState.None;
+					target?.GameObject?.Destroy();
+				}
+			}
+
+			return true;
+		}
+
+		// Stackables.
+		if ( count > item.Count )
 			return false;
 
 		item.Count -= count;
@@ -440,13 +473,6 @@ public class Inventory : Component
 	public bool HasItem( string name )
 	{
 		return BackpackItems.Any( x => x.Name == name );
-	}
-
-	[ConCmd]
-	public static void UnEquip( int index )
-	{
-		var player = Game.ActiveScene.GetAllComponents<Player>().FirstOrDefault();
-		player.Inventory.UnequipItem( player.Inventory.EquippedItems[(int)EquipSlot.Body] );
 	}
 
 	// todo @ceitine: remove debug command
