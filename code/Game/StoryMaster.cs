@@ -207,9 +207,12 @@ public class StoryMaster : Component
 	/// <summary>
 	/// Save the story progression (Story Day and Game Day)
 	/// </summary>
-	public void SaveStoryProgression()
+	public void SaveStoryProgression( bool print = true )
 	{
 		FileSystem.Data.WriteJson( "story.json", StoryProgression );
+
+		if ( print )
+			Log.Info( "Story saved..." );
 	}
 
 	/// <summary>
@@ -218,7 +221,8 @@ public class StoryMaster : Component
 	public void ResetStoryProgression()
 	{
 		StoryProgression = new();
-		SaveStoryProgression();
+		SaveStoryProgression( false );
+		Log.Info( "Story reset!" );
 	}
 
 	public void LoadEventPool()
@@ -350,8 +354,7 @@ public class StoryMaster : Component
 		SaveStoryProgression();
 		_taskMaster.SaveTasksProgression();
 		_eventMaster.SaveEventsProgression();
-
-		Log.Info( "Game Saved" );
+		Player.Save();
 	}
 
 	protected override void OnStart()
@@ -398,5 +401,54 @@ public class StoryMaster : Component
 	{
 		var signalToComplete = await scriptedEvent.Setup?.Invoke( Player.Local );
 		scriptedEvent.SignalToComplete = signalToComplete;
+	}
+
+	[ConCmd( "sauna_save" )]
+	public static void SaveGameCmd()
+	{
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster != null )
+			storyMaster.SaveGame();
+	}
+
+	[ConCmd( "sauna_reset" )]
+	public static void DeleteSave()
+	{
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster != null )
+		{
+			storyMaster.ResetStoryProgression();
+			storyMaster._taskMaster.ResetTasksProgression();
+			storyMaster._eventMaster.ResetEventsProgression();
+		}
+	}
+
+	[ConCmd( "sauna_reset_story" )]
+	public static void DeleteStory()
+	{
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster != null )
+			storyMaster.ResetStoryProgression();
+	}
+
+	[ConCmd( "sauna_reset_tasks" )]
+	public static void DeleteTasks()
+	{
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster != null )
+			storyMaster._taskMaster.ResetTasksProgression();
+	}
+
+	[ConCmd( "sauna_reset_events" )]
+	public static void DeleteEvents()
+	{
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster != null )
+			storyMaster._eventMaster.ResetEventsProgression();
 	}
 }

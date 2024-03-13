@@ -162,7 +162,7 @@ public class EventMaster : Component
 	/// <summary>
 	/// Save the events current triggered and completion progress/amount
 	/// </summary>
-	public void SaveEventsProgression()
+	public void SaveEventsProgression( bool print = true )
 	{
 		var allEvents = Scene.Components.GetAll<EventDefinition>()
 				.DistinctBy( x => x.EventName ); // Avoid multiple event definitions
@@ -171,6 +171,9 @@ public class EventMaster : Component
 		foreach ( var @event in allEvents )
 			if ( !EventsProgression.Events.Any( x => x.Event == @event.EventName ) )
 				AddEventProgression( @event.EventName );
+
+		if ( print )
+			Log.Info( "Events saved..." );
 
 		FileSystem.Data.WriteJson( "events.json", EventsProgression );
 	}
@@ -188,7 +191,9 @@ public class EventMaster : Component
 		foreach ( var @event in allEvents )
 			AddEventProgression( @event.EventName );
 
-		SaveEventsProgression();
+		Log.Info( "Events reset!" );
+
+		SaveEventsProgression( false );
 	}
 
 	public void UnloadAllEvents()

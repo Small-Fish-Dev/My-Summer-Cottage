@@ -243,7 +243,7 @@ public class TaskMaster : Component
 	/// <summary>
 	/// Save the tasks current triggered and completion progress/amount
 	/// </summary>
-	public void SaveTasksProgression()
+	public void SaveTasksProgression( bool print = true )
 	{
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
 
@@ -257,6 +257,9 @@ public class TaskMaster : Component
 			if ( task.PersistThroughSessions )
 				UpdateTaskProgression( task );
 		}
+
+		if ( print )
+			Log.Info( "Tasks saved..." );
 
 		FileSystem.Data.WriteJson( "tasks.json", TasksProgression );
 	}
@@ -274,7 +277,10 @@ public class TaskMaster : Component
 			AddTaskProgression( task.ResourcePath );
 
 		if ( save )
-			SaveTasksProgression();
+		{
+			SaveTasksProgression( false );
+			Log.Info( "Tasks reset!" );
+		}
 	}
 
 

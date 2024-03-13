@@ -157,7 +157,7 @@ partial class Player
 	}
 
 	[ConCmd]
-	public static void SaveGame()
+	public static void SavePlayer()
 	{
 		Save();
 	}
