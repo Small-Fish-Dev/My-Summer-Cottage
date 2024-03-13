@@ -1,12 +1,13 @@
 {
   "RootObject": {
-    "Id": "e258a518-f56e-426a-9a28-24aef0e06725",
+    "Id": "f91d3630-4d60-48eb-b449-90812b883707",
     "Name": "wooden_log",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "Id": "b1e9632c-8c6e-4110-97fe-1683fe566e1a",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -23,8 +24,8 @@
           "MaterialGroup": "",
           "Colour": "0,0,0,1",
           "Position": "-4.2,1.65,0",
-          "Rotation": "0.07805127,0.1283928,-0.3873547,0.9096041",
-          "Guid": "b588be14-f0c5-4f6f-a0f3-b775f6277c18"
+          "Rotation": "0.07805128,0.1283928,-0.3873547,0.909604",
+          "Guid": "07516236-0e64-4e1e-8d20-5f6014eea791"
         },
         "MaxStack": 0,
         "Name": "Wooden Log",
@@ -36,6 +37,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "Id": "9bded6d1-9297-4f47-9238-de440bc85898",
         "BodyGroups": 11,
         "Model": "models/log/saunalog.vmdl",
         "RenderType": "On",
@@ -43,22 +45,26 @@
       },
       {
         "__type": "ModelCollider",
+        "Id": "1f4c096b-57b2-4f4c-814c-efe464fa8a13",
         "IsTrigger": false,
         "Model": "models/log/saunalog.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "Id": "314491d7-8070-4bd9-8236-8688bcbe05b7",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
       {
         "__type": "Interactions",
+        "Id": "dff62e03-e98c-4bbb-901c-47ea53e734bd",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -421,8 +427,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "Hands",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Interact"
           }

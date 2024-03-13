@@ -80,7 +80,8 @@
         if (!HasClass("visible"))
             return;
 
-        var pos = FromHands ? 0 : Player.Local.TargetedGameObject.Transform.Position + Player.Local.InteractionBounds?.Center ?? 0;
+        var pos = FromHands ? 0 : (Player.Local.InteractionBounds == null ? Player.Local.TargetedGameObject.Transform.Position : Player.Local.TargetedGameObject.Transform.World.PointToWorld( Player.Local.InteractionBounds.Value.Center ) );
+
         foreach ( var interaction in _interactions )
         {
             if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
@@ -105,30 +106,30 @@
 
                 interaction.CooldownTimer = interaction.CooldownTime;
 
-				if (interaction.InputMode != InputMode.Down)
-					Input.Clear(interaction.Keybind);
+                if (interaction.InputMode != InputMode.Down)
+                    Input.Clear(interaction.Keybind);
 
-				if ( interaction.Identifier != String.Empty )
-					EventMaster.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
+                if ( interaction.Identifier != String.Empty )
+                    EventMaster.InteractionInvoked( interaction.Identifier, _targetObject.Id, Player.Local.GameObject.Id ); // Pass off this interaction for events to find
 
-				var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
-				Player.Local.BroadcastInteraction( 
-					vector, 
-					Rotation.LookAt( vector.Normal ), 
-					interaction.Animation, 
-					_targetObject.Id, 
-					interaction.Sound?.InvokeOrDefault()?.ResourceId ?? -1,
-					interaction.PlaySoundFromPlayer
-				);
-			}
-		}
+                var vector = (pos - Player.Local.Transform.Position) * Player.Local.Transform.Rotation.Inverse;
+                Player.Local.BroadcastInteraction( 
+                    vector, 
+                    Rotation.LookAt( vector.Normal ), 
+                    interaction.Animation, 
+                    _targetObject.Id, 
+                    interaction.Sound?.InvokeOrDefault()?.ResourceId ?? -1,
+                    interaction.PlaySoundFromPlayer
+                );
+            }
+        }
 
-		if ( FromHands ) // No need to play use animation for held items.
-			return;
+        if ( FromHands ) // No need to play use animation for held items.
+            return;
 
-		pos = Scene.Camera.PointToScreenPixels( pos );
+        pos = Scene.Camera.PointToScreenPixels( pos );
 		pos *= ScaleFromScreen;
-		
+
         Style.Left = Length.Pixels( pos.x );
         Style.Top = Length.Pixels( pos.y );
         

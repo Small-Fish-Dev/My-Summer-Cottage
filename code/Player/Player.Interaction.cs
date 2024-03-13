@@ -22,6 +22,15 @@ public partial class Player
 			InteractionTrace = thinTrace;
 			InteractionBounds = thinTrace.GameObject != TargetedGameObject ? null : InteractionBounds;
 			TargetedGameObject = thinTrace.GameObject;
+
+			if ( InteractionBounds == null && TargetedGameObject.IsValid() )
+			{
+				if ( TargetedGameObject.Components.TryGet<BoxCollider>( out var box ) )
+					InteractionBounds = new BBox( 0, box.Scale );
+
+				if ( TargetedGameObject.Components.TryGet<CapsuleCollider>( out var capsule ) )
+					InteractionBounds = new BBox( capsule.Start - capsule.Radius, capsule.End + capsule.Radius );
+			}
 		}
 		else
 		{
@@ -35,8 +44,16 @@ public partial class Player
 
 			InteractionBounds = InteractionTrace.GameObject != TargetedGameObject ? null : InteractionBounds;
 			TargetedGameObject = obj;
-		}
 
+			if ( InteractionBounds == null && TargetedGameObject.IsValid() )
+			{
+				if ( TargetedGameObject.Components.TryGet<BoxCollider>( out var box ) )
+					InteractionBounds = new BBox( 0, box.Scale );
+
+				if ( TargetedGameObject.Components.TryGet<CapsuleCollider>( out var capsule ) )
+					InteractionBounds = new BBox( capsule.Start - capsule.Radius, capsule.End + capsule.Radius );
+			}
+		}
 		// Get bounds again.
 		if ( InteractionBounds == null && TargetedGameObject != null )
 			InteractionBounds = TargetedGameObject.GetBounds().Translate( -TargetedGameObject.Transform.Position );

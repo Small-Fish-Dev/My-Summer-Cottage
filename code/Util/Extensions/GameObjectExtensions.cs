@@ -2,9 +2,9 @@ namespace Sauna;
 
 public static class GameObjectExtensions
 {
-	public static void SetupNetworking( 
-		this GameObject obj, 
-		OwnerTransfer transfer = OwnerTransfer.Takeover, 
+	public static void SetupNetworking(
+		this GameObject obj,
+		OwnerTransfer transfer = OwnerTransfer.Takeover,
 		NetworkOrphaned orphaned = NetworkOrphaned.ClearOwner )
 	{
 		obj.NetworkMode = NetworkMode.Object;
@@ -29,14 +29,14 @@ public static class GameObjectExtensions
 	}
 
 	[Title( "Play Sound With Subtitles (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
-	public static SoundHandle PlaySoundWithSubtitle( this GameObject obj, string sound, string subtitle )
+	public static SoundHandle PlaySoundWithSubtitle( this GameObject obj, string sound = "", string subtitle = "" )
 	{
 		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
 		return soundHandler.PlaySoundWithSubtitle( sound, string.Empty, subtitle );
 	}
 
 	[Title( "Play Sound With Name and Subtitle (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
-	public static SoundHandle PlaySoundWithNameAndSubtitle( this GameObject obj, string sound, string name, string subtitle )
+	public static SoundHandle PlaySoundWithNameAndSubtitle( this GameObject obj, string sound = "", string name = "", string subtitle = "" )
 	{
 		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
 		return soundHandler.PlaySoundWithSubtitle( sound, name, subtitle );
@@ -50,14 +50,14 @@ public static class GameObjectExtensions
 	}
 
 	[Title( "Play Sound With Subtitles (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
-	public static SoundHandle PlaySoundWithSubtitle( this GameObject obj, SoundEvent sound, string subtitle )
+	public static SoundHandle PlaySoundWithSubtitle( this GameObject obj, SoundEvent sound = null, string subtitle = "" )
 	{
 		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
 		return soundHandler.PlaySoundWithSubtitle( sound, string.Empty, subtitle );
 	}
 
 	[Title( "Play Sound With Name and Subtitle (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
-	public static SoundHandle PlaySoundWithNameAndSubtitle( this GameObject obj, SoundEvent sound, string name, string subtitle )
+	public static SoundHandle PlaySoundWithNameAndSubtitle( this GameObject obj, SoundEvent sound = null, string name = "", string subtitle = "" )
 	{
 		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
 		return soundHandler.PlaySoundWithSubtitle( sound, name, subtitle );
