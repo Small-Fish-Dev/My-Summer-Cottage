@@ -1,0 +1,173 @@
+{
+  "RootObject": {
+    "Id": "eafd2559-7172-41a2-a31e-c3b02d463d5b",
+    "Name": "dust_cloud",
+    "Tags": "particles",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ParticleEffect",
+        "Alpha": {
+          "Type": "Curve",
+          "CurveA": [
+            {
+              "in": 0.04545452,
+              "out": -0.04545452
+            },
+            {
+              "x": 0.069940455,
+              "y": 0.061170213,
+              "in": -0.06557357,
+              "out": 0.06557357
+            },
+            {
+              "x": 0.7202381
+            }
+          ],
+          "Constants": "1,0,0,0"
+        },
+        "ApplyColor": true,
+        "ApplyRotation": false,
+        "ApplyShape": true,
+        "Bounce": {
+          "Constants": "1,0,0,0"
+        },
+        "Brightness": {
+          "Constants": "0.7,0,0,0"
+        },
+        "Bumpiness": {},
+        "Collision": false,
+        "CollisionRadius": 1,
+        "Damping": {
+          "Constants": "0.2,0,0,0"
+        },
+        "DieOnCollisionChance": {},
+        "Force": true,
+        "ForceDirection": "0,0,-30",
+        "ForceScale": {
+          "Constants": "1,0,0,0"
+        },
+        "Friction": {
+          "Constants": "1,0,0,0"
+        },
+        "Gradient": {
+          "Type": "Gradient",
+          "Evaluation": "Particle",
+          "GradientA": {
+            "color": [
+              {
+                "c": "0.23256,0.20669,0.1947,1"
+              },
+              {
+                "t": 0.53205127,
+                "c": "0.42791,0.37961,0.31645,1"
+              },
+              {
+                "t": 1,
+                "c": "0.70233,0.63226,0.59453,1"
+              }
+            ],
+            "alpha": []
+          },
+          "GradientB": {
+            "color": [
+              {
+                "t": 0.5,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "ConstantA": "0.19907,0.28949,0.4,1",
+          "ConstantB": "1,1,1,1"
+        },
+        "Lifetime": {
+          "Constants": "2,1,0,0"
+        },
+        "MaxParticles": 5000,
+        "PerParticleTimeScale": {
+          "Constants": "1,0.4,0,0"
+        },
+        "PreWarm": 0,
+        "PushStrength": {},
+        "Roll": {
+          "Constants": "0,360,0,0"
+        },
+        "Scale": {
+          "Type": "Curve",
+          "CurveA": {
+            "rangey": "0,20",
+            "frames": [
+              {
+                "in": -1.7484555E-07,
+                "out": 1.7484555E-07
+              },
+              {
+                "x": 0.052083343,
+                "y": 0.60074526,
+                "in": -1.4633244,
+                "out": 1.4633244
+              },
+              {
+                "x": 1,
+                "y": 0.9361702
+              }
+            ]
+          },
+          "Constants": "1,0,0,0"
+        },
+        "SequenceId": {},
+        "SequenceSpeed": {
+          "Constants": "0.5,0,0,0"
+        },
+        "SequenceTime": {},
+        "SheetSequence": true,
+        "Space": "World",
+        "StartVelocity": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "Constants": "2,15,0,0"
+        },
+        "Stretch": {},
+        "TimeScale": 1,
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ParticleSpriteRenderer",
+        "Additive": false,
+        "BlurAmount": 0.37,
+        "BlurOpacity": 0.88,
+        "BlurSpacing": 0.11,
+        "DepthFeather": 50,
+        "FaceVelocity": false,
+        "FogStrength": 1,
+        "LeadingTrail": true,
+        "MotionBlur": true,
+        "Opaque": false,
+        "RotationOffset": 0,
+        "Scale": 0.78,
+        "Shadows": false,
+        "SortMode": "ByDistance",
+        "Texture": "textures/rain/cloud.vtex"
+      },
+      {
+        "__type": "ParticleSphereEmitter",
+        "Burst": 20,
+        "Delay": 0,
+        "DestroyOnEnd": true,
+        "Duration": 10,
+        "Loop": false,
+        "OnEdge": false,
+        "Radius": 1,
+        "Rate": 0,
+        "Velocity": 2
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
