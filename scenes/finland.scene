@@ -1,5 +1,5 @@
 {
-  "Id": "8e1d2fc7-1ba7-4ea6-aad9-b51a0bd99388",
+  "Id": "be1bc182-041e-4972-9c57-33b22f57dc1d",
   "GameObjects": [
     {
       "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -426,6 +426,290 @@
                 "Uncommon": 0,
                 "Rare": 0
               }
+            },
+            "2": {
+              "ScriptedEvents": [
+                {
+                  "TriggerTimeslot": "10.50,12.00,1",
+                  "CompletionNecessary": true,
+                  "Setup": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Setup",
+                      "id": "5dc1a896-264a-4146-bb73-2e43e8258a01",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 2,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "-240,176"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "output",
+                        "UserData": {
+                          "Position": "432,176"
+                        }
+                      },
+                      {
+                        "Id": 4,
+                        "Type": "event.assigntaskto",
+                        "UserData": {
+                          "Position": "208,144"
+                        }
+                      },
+                      {
+                        "Id": 5,
+                        "Type": "event.getrandomtask",
+                        "UserData": {
+                          "Position": "-48,288"
+                        }
+                      },
+                      {
+                        "Id": 6,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
+                        },
+                        "UserData": {
+                          "Position": "208,304"
+                        }
+                      },
+                      {
+                        "Id": 7,
+                        "Type": "call",
+                        "Properties": {
+                          "_type": "package.fish.sauna/Sauna.Message",
+                          "_name": "Receive",
+                          "_isStatic": true
+                        },
+                        "UserData": {
+                          "Position": "416,-0"
+                        }
+                      },
+                      {
+                        "Id": 8,
+                        "Type": "property.get",
+                        "ParentId": 5,
+                        "Properties": {
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Message"
+                        }
+                      },
+                      {
+                        "Id": 9,
+                        "Type": "property.get",
+                        "ParentId": 5,
+                        "Properties": {
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Giver"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 6,
+                        "SrcName": "_result",
+                        "DstId": 3,
+                        "DstName": "_result"
+                      },
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_signal",
+                        "DstId": 3,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_signal",
+                        "DstId": 4,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "player",
+                        "DstId": 4,
+                        "DstName": "player"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_result",
+                        "DstId": 4,
+                        "DstName": "taskToAdd"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_signal",
+                        "DstId": 5,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": "GivenByWife",
+                        "DstId": 5,
+                        "DstName": "taskType"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_result",
+                        "DstId": 6,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_signal",
+                        "DstId": 7,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_result",
+                        "DstId": 7,
+                        "DstName": "content"
+                      },
+                      {
+                        "SrcId": 9,
+                        "SrcName": "_result",
+                        "DstId": 7,
+                        "DstName": "sender"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_result",
+                        "DstId": 8,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_result",
+                        "DstId": 9,
+                        "DstName": "_target"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "TriggerTimeslot": "9.25,12.00,0",
+                  "CompletionNecessary": true,
+                  "Setup": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Setup",
+                      "id": "b46dbf1f-6781-47c5-b8fd-f8c4ec84b425",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 2,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "0,176"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "output",
+                        "UserData": {
+                          "Position": "496,176"
+                        }
+                      },
+                      {
+                        "Id": 4,
+                        "Type": "call",
+                        "Properties": {
+                          "_type": "package.fish.sauna/Sauna.TaskMaster",
+                          "_name": "AssignEveryoneNewTask",
+                          "_isStatic": true
+                        },
+                        "UserData": {
+                          "Position": "256,256"
+                        }
+                      },
+                      {
+                        "Id": 6,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                        },
+                        "UserData": {
+                          "Position": "256,448"
+                        }
+                      },
+                      {
+                        "Id": 7,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "ResourcePath",
+                          "_type": "Sandbox.Engine/Sandbox.Resource"
+                        },
+                        "UserData": {
+                          "Position": "32,320"
+                        }
+                      },
+                      {
+                        "Id": 9,
+                        "Type": "resource.ref",
+                        "Properties": {
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task"
+                        },
+                        "UserData": {
+                          "Position": "-240,368"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 6,
+                        "SrcName": "_result",
+                        "DstId": 3,
+                        "DstName": "_result"
+                      },
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_signal",
+                        "DstId": 3,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_signal",
+                        "DstId": 4,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 7,
+                        "SrcName": "_result",
+                        "DstId": 4,
+                        "DstName": "filePath"
+                      },
+                      {
+                        "SrcId": 9,
+                        "SrcName": "_result",
+                        "DstId": 6,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 9,
+                        "SrcName": "_result",
+                        "DstId": 7,
+                        "DstName": "_target"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "RandomEvents": {
+                "Common": 2,
+                "Uncommon": 1,
+                "Rare": 0
+              }
             }
           },
           "StoryProgression": {
@@ -540,7 +824,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.9999502,0,-0.009983298",
+          "Rotation": "0,0.4395757,0,0.8982055",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1404,6 +1688,159 @@
           "__Prefab": "prefabs/objects/door.prefab"
         }
       ]
+    },
+    {
+      "Id": "a1fb770f-00ec-4c6d-b154-2089b2c942b7",
+      "Name": "beer_bottle",
+      "Position": "3350.328,-2900.282,2432.219",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "80cfbcfa-bdb5-4681-a36c-eca20322433e",
+      "Name": "beer_bottle (1)",
+      "Position": "3349.089,-2904.664,2432.374",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "3471b6d7-c7ae-4ea1-9067-6bcf306092a6",
+      "Name": "beer_bottle (2)",
+      "Position": "3350.979,-2913.747,2432.612",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "70405b78-3ce5-4fe0-affc-1665bd9db318",
+      "Name": "beer_bottle (3)",
+      "Position": "3368.416,-2902.642,2431.948",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "32f0b6a5-ed59-4081-8952-ac4b532f2680",
+      "Name": "beer_bottle (4)",
+      "Position": "3365.17,-2890.439,2431.641",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "839e241d-a709-46ad-8943-cd0ce265cb5e",
+      "Name": "beer_bottle (5)",
+      "Position": "3355.883,-2892.44,2431.877",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "1d10648c-d9b6-4ae6-b631-94817f4d4a8b",
+      "Name": "beer_bottle (6)",
+      "Position": "3349.942,-2881.131,2431.649",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "46c0cebf-3807-440e-a697-a1b00240a4a0",
+      "Name": "beer_bottle (7)",
+      "Position": "3344.365,-2893.036,2432.113",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "7d91ea99-be9c-452c-91dc-bbe8547e147f",
+      "Name": "beer_bottle (8)",
+      "Position": "3360.99,-2881.991,2431.466",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "409889d4-68ff-47f2-bb99-b4e50a3e89f1",
+      "Name": "beer_bottle (9)",
+      "Position": "3360.621,-2869.062,2431.084",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "5b6123e5-5655-4263-8188-d872b9c612bd",
+      "Name": "beer_bottle (10)",
+      "Position": "3350.859,-2875.547,2431.464",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/beer_bottle.prefab"
+    },
+    {
+      "Id": "ffadc6f2-1a36-459f-941b-f8a4f76ee019",
+      "Name": "762ammo",
+      "Position": "3295.809,-2815.871,2433.709",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/762ammo.prefab"
+    },
+    {
+      "Id": "d3982d86-3a4c-4ea0-a41d-20fdfee95d2b",
+      "Name": "762ammo (1)",
+      "Position": "3302.386,-2824.895,2433.856",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/762ammo.prefab"
+    },
+    {
+      "Id": "74d4a873-ae4e-46d1-bd58-0bebdd5cd0c2",
+      "Name": "762ammo (2)",
+      "Position": "3291.738,-2827.256,2434.129",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/762ammo.prefab"
+    },
+    {
+      "Id": "b8bf3e33-3041-4bce-879b-9f62ecadd096",
+      "Name": "762ammo (3)",
+      "Position": "3287.952,-2808.83,2433.646",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/762ammo.prefab"
+    },
+    {
+      "Id": "23f000a8-9d1c-46b5-a6e6-7c1b59ab52e3",
+      "Name": "762ammo (4)",
+      "Position": "3281.552,-2824.606,2434.242",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/762ammo.prefab"
+    },
+    {
+      "Id": "4b871fa8-b91b-4276-9d0e-8e71b7dddfe2",
+      "Name": "rifle",
+      "Position": "3324.594,-2821.722,2440.795",
+      "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/rifle.prefab"
     }
   ],
   "SceneProperties": {
@@ -1429,6 +1866,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-13T00:55:12.2341699\u002B01:00",
+  "LastSaved": "2024-03-13T02:12:50.9239224\u002B01:00",
   "__references": []
 }
