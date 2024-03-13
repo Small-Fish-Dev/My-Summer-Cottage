@@ -91,7 +91,7 @@ public sealed class HealthComponent : Component
 	/// What gets spawned (Preferably an item) when this dies (Not when it gets destroyed)
 	/// </summary>
 	[Property]
-	public GameObject DropOnDeath { get; set; }
+	public List<GameObject> DropOnDeath { get; set; }
 
 	public delegate void AttackerInfo( int damage, DamageType type, GameObject attacker = null, Vector3 localHurtPosition = default, Vector3 forceDirection = default, float force = 0 );
 
@@ -191,10 +191,13 @@ public sealed class HealthComponent : Component
 
 		if ( DropOnDeath != null )
 		{
-			var droppedItem = DropOnDeath.Clone( Transform.Position, Transform.Rotation );
+			foreach ( var item in DropOnDeath )
+			{
+				var droppedItem = item.Clone( Transform.Position + Vector3.Up * 30f, Transform.Rotation );
 
-			if ( droppedItem != null )
-				droppedItem.SetupNetworking();
+				if ( droppedItem != null )
+					droppedItem.SetupNetworking();
+			}
 		}
 	}
 
