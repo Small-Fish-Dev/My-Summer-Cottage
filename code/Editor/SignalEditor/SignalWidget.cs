@@ -188,6 +188,40 @@ internal class SignalWidget : ControlWidget
 					} );
 			} );
 
+
+		var allPrefabDialogues = PrefabLibrary.All
+			.SelectMany( prefab =>
+			{
+				var components = prefab.Value.GetComponents<DialogueTree>();
+				Log.Info( components.Count() );
+				return components
+					.SelectMany( component =>
+					{
+						List<SignalOption> options = new();
+
+						Log.Info( "fuck" );
+						var stages = component.Get<List<DialogueStage>>( "DialogueStages" ) ?? null;
+
+						if ( stages != null )
+						{
+							var stageid = 0;
+							foreach ( var stage in stages )
+							{
+								foreach ( var response in stage.AvailableResponses )
+								{
+									if ( response.Identifier != null || response.Identifier != "" || response.Identifier != String.Empty )
+									{
+										options.Add( GetSignalOption( response.Identifier, $"Stage: {stageid}", component.Get<string>( "Name" ), "Dialogues" ) );
+									}
+								}
+								stageid++;
+							}
+						}
+
+						return options;
+					} );
+			} );
+
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>()
 			.SelectMany( x =>
 			{
@@ -231,6 +265,7 @@ internal class SignalWidget : ControlWidget
 		sceneTriggers = sceneTriggers.Concat( allItems );
 		sceneTriggers = sceneTriggers.Concat( allEvents );
 		sceneTriggers = sceneTriggers.Concat( allInteractions );
+		sceneTriggers = sceneTriggers.Concat( allPrefabDialogues );
 
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;

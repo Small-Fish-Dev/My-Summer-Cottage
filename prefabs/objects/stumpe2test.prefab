@@ -1,0 +1,54 @@
+{
+  "RootObject": {
+    "Id": "7e2a4434-79ef-47a2-a2c0-951450c0171a",
+    "Name": "stumpe2test",
+    "Scale": "0.6,0.6,1",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "BodyGroups": 18446744073709551615,
+        "Model": "models/logchopbase/logchopperbase.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "HullCollider",
+        "BoxSize": "50,50,50",
+        "Center": "0,0,0",
+        "Height": 45,
+        "IsTrigger": false,
+        "Radius": 20.4,
+        "Radius2": 0,
+        "Slices": 16,
+        "Static": false,
+        "Type": "Cylinder"
+      },
+      {
+        "__type": "DialogueTree",
+        "DialogueStages": [
+          {
+            "AvailableResponses": [
+              {
+                "Identifier": "tree_stump_speak",
+                "Keybind": "Use",
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          }
+        ],
+        "HostOnly": false,
+        "Name": "Tree Stump the Second",
+        "Networked": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

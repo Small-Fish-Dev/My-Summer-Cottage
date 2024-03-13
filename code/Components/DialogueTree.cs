@@ -54,6 +54,9 @@ public class DialogueStage
 
 public class DialogueTree : Component
 {
+	[Property]
+	public string Name { get; set; } = "Speaker";
+
 	/// <summary>
 	/// Only the host can perform this dialogue.
 	/// </summary>
