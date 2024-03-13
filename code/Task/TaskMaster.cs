@@ -397,7 +397,8 @@ public class TaskMaster : Component
 		_instance.CurrentTasks.Add( taskToAssign ); // Add the task
 
 		NotificationManager.Popup( taskToAssign );
-		if ( PrimaryTask.Pinned is null && taskToAssign.IsPrimary )
+
+		if ( PrimaryTask.Pinned is null && taskToAssign.IsPrimary || PrimaryTask.Pinned != null && PrimaryTask.Pinned.Completed && taskToAssign.IsPrimary )
 			PrimaryTask.PinTask( taskToAssign );
 
 		return taskToAssign;
