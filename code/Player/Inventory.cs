@@ -109,7 +109,10 @@ public class Inventory : Component
 
 		if ( IsSlotOccupied( equipment.Slot ) && forceReplace )
 		{
-			UnequipItem( GetItemInSlot( equipment.Slot ) );
+			var equippedItem = GetItemInSlot( equipment.Slot );
+			var placedInBackpack = UnequipItem( equippedItem );
+			if ( !placedInBackpack )
+				DropItem( equippedItem );
 		}
 
 		SetOwner( item );
