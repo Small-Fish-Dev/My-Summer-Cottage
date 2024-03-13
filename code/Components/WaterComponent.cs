@@ -3,7 +3,7 @@
 public sealed class WaterComponent : Component
 {
 	private const string MATERIAL_PATH = "materials/water/water.vmat";
-	private const int SUBDIVISIONS = 32;
+	private const int MIN_SUBDIVISIONS = 32;
 
 	[Property] [Range( 0, 1 )] public float BobberDrag { get; set; } = 0.8f;
 	[Property] public Vector3 Mins { get; set; } = -25;
@@ -108,35 +108,40 @@ public sealed class WaterComponent : Component
 			new( Maxs.x, Mins.y, 0f )
 		};
 
+		var fraction = 0.02f;
+		var sy = (Bounds.Size.y * fraction).FloorToInt();
+		var subdivisions = (Bounds.Size.x * fraction).FloorToInt();
+		subdivisions = Math.Min( MIN_SUBDIVISIONS, sy > subdivisions ? sy : subdivisions );
+
 		var verts = new List<SimpleVertex>();
 		var indices = new List<int>();
 
 		var start = new Vector2( positions[0] );
-		var stepSize = new Vector2( positions[0].Abs() + positions[3].Abs() ) / SUBDIVISIONS;
+		var stepSize = new Vector2( positions[0].Abs() + positions[3].Abs() ) / subdivisions;
 
-		for ( var x = 0; x < SUBDIVISIONS; x++ )
-		for ( var y = 0; y < SUBDIVISIONS; y++ )
+		for ( var x = 0; x < subdivisions; x++ )
+		for ( var y = 0; y < subdivisions; y++ )
 		{
 			verts.Add( new SimpleVertex()
 			{
 				position = new Vector3( start + stepSize * new Vector2( x, y ) ),
 				normal = Vector3.Up,
 				tangent = Vector3.Cross( Vector3.Up, Vector3.Forward ),
-				texcoord = new Vector2( x, y ) / SUBDIVISIONS
+				texcoord = new Vector2( x, y ) / subdivisions
 			} );
 		}
 
-		for ( int y = 0; y < (SUBDIVISIONS - 1); y++ )
-		for ( int x = 0; x < (SUBDIVISIONS - 1); x++ )
+		for ( int y = 0; y < (subdivisions - 1); y++ )
+		for ( int x = 0; x < (subdivisions - 1); x++ )
 		{
-			var quad = y * SUBDIVISIONS + x;
+			var quad = y * subdivisions + x;
 
 			indices.Add( quad );
-			indices.Add( quad + SUBDIVISIONS );
-			indices.Add( quad + SUBDIVISIONS + 1 );
+			indices.Add( quad + subdivisions );
+			indices.Add( quad + subdivisions + 1 );
 
 			indices.Add( quad );
-			indices.Add( quad + SUBDIVISIONS + 1 );
+			indices.Add( quad + subdivisions + 1 );
 			indices.Add( quad + 1 );
 		}
 
