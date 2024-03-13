@@ -364,12 +364,19 @@ public class TaskMaster : Component
 
 		if ( storyMaster != null )
 		{
-			var allActiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Completed ); // Get all active scripted events
+			var allActiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Completed && x.Triggered ); // Get all active scripted events
 
 			foreach ( var scriptedEvent in allActiveScriptedEvents )
 			{
 				if ( scriptedEvent.SignalToComplete == signalIdentifier )
 					scriptedEvent.Completed = true;
+			}
+
+			var allInactiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Triggered && (x.SignalToTrigger != null || x.SignalToTrigger != "" || x.SignalToTrigger != String.Empty) );
+			foreach ( var inactiveEvent in allInactiveScriptedEvents )
+			{
+				if ( inactiveEvent.SignalToTrigger == signalIdentifier )
+					storyMaster.BeginScriptedEvent( inactiveEvent, inactiveEvent.TriggerDelay );
 			}
 		}
 

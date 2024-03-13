@@ -8,9 +8,34 @@ namespace Sauna;
 public class SaunaScriptedEvent
 {
 	/// <summary>
+	/// Does this scripted event get triggered at a certain time or with a signal
+	/// </summary>
+	[Property]
+	[JsonInclude]
+	public bool TriggerByTime { get; set; } = true;
+
+	/// <summary>
+	/// Which signal is going to trigger this event
+	/// </summary>
+	[Property]
+	[JsonInclude]
+	[HideIf( "TriggerByTime", true )]
+	public Signal SignalToTrigger { get; set; }
+
+	/// <summary>
+	/// How many seconds to wait after the signal to trigger this scripted event
+	/// </summary>
+	[Property]
+	[JsonInclude]
+	[HideIf( "TriggerByTime", true )]
+	public float TriggerDelay { get; set; } = 0f;
+
+	/// <summary>
 	/// When the scripted event plays in in-game hours (Ex. 7.5 = 07:30, 23.25 = 23:15, 0.5 = 00:30).
 	/// </summary>
 	[Property]
+	[JsonInclude]
+	[ShowIf( "TriggerByTime", true )]
 	public RangedFloat TriggerTimeslot { get; set; } = new RangedFloat( 10.5f, 12.0f );
 
 	[Hide]
@@ -21,6 +46,7 @@ public class SaunaScriptedEvent
 	/// This scripted event needs to be completed for the story to progress
 	/// </summary>
 	[Property]
+	[JsonInclude]
 	public bool CompletionNecessary { get; set; } = true;
 
 	public delegate Task<string> ScriptedAction( Player player );
@@ -30,6 +56,7 @@ public class SaunaScriptedEvent
 	/// Output Result is a string defining which signal trigger is the one needed to complete this scripted action
 	/// </summary>
 	[Property]
+	[JsonInclude]
 	public ScriptedAction Setup { get; set; }
 
 	[Hide]
@@ -405,7 +432,6 @@ public class StoryMaster : Component
 				{
 					if ( scriptedEvent.TriggerTime <= currentHour || scriptedEvent.TriggerTimeslot.FixedValue <= currentHour )
 					{
-						scriptedEvent.Triggered = true;
 						BeginScriptedEvent( scriptedEvent );
 					}
 				}
@@ -420,8 +446,11 @@ public class StoryMaster : Component
 		}
 	}
 
-	internal async void BeginScriptedEvent( SaunaScriptedEvent scriptedEvent )
+	internal async void BeginScriptedEvent( SaunaScriptedEvent scriptedEvent, float delay = 0f )
 	{
+		scriptedEvent.Triggered = true;
+
+		await Task.DelaySeconds( delay );
 		var signalToComplete = await scriptedEvent.Setup?.Invoke( Player.Local );
 		scriptedEvent.SignalToComplete = signalToComplete;
 	}
