@@ -1,0 +1,269 @@
+{
+  "RootObject": {
+    "Id": "b1b9ef35-4dc9-4ee2-ba04-5c6c9c114057",
+    "Name": "joe_mama",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "DialogueTree",
+        "Id": "88d11683-2732-4f5d-89a1-167e9a0ff50e",
+        "DialogueStages": [
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "ccf1c572-d3e0-490f-b526-8817066c0c34",
+                    "ReferencedComponentTypes": []
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "input"
+                    },
+                    {
+                      "Id": 2,
+                      "Type": "scene.ref",
+                      "Properties": {
+                        "component": {
+                          "_type": "component",
+                          "component_id": "88d11683-2732-4f5d-89a1-167e9a0ff50e",
+                          "go": "b1b9ef35-4dc9-4ee2-ba04-5c6c9c114057",
+                          "component_type": "DialogueTree"
+                        }
+                      },
+                      "UserData": {
+                        "Position": "-16,128"
+                      }
+                    },
+                    {
+                      "Id": 4,
+                      "Type": "property.get",
+                      "ParentId": 2,
+                      "Properties": {
+                        "_name": "Name",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      }
+                    },
+                    {
+                      "Id": 5,
+                      "Type": "call",
+                      "Properties": {
+                        "_name": "PlaySoundWithNameAndSubtitle",
+                        "_isStatic": true,
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      },
+                      "UserData": {
+                        "Position": "304,-16"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 2,
+                      "SrcName": "_result",
+                      "DstId": 4,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_signal",
+                      "DstId": 5,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 4,
+                      "SrcName": "_result",
+                      "DstId": 5,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_target",
+                      "DstId": 5,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "",
+                      "DstId": 5,
+                      "DstName": "sound"
+                    },
+                    {
+                      "Value": "Hello human, I am Joe, Mama.",
+                      "DstId": 5,
+                      "DstName": "subtitle"
+                    }
+                  ]
+                },
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          },
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "86112947-4de3-43e8-a272-c8189af6b0ae",
+                    "ReferencedComponentTypes": []
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "input",
+                      "UserData": {
+                        "Position": "-64,0"
+                      }
+                    },
+                    {
+                      "Id": 1,
+                      "Type": "call",
+                      "Properties": {
+                        "_name": "PlaySoundWithNameAndSubtitle",
+                        "_isStatic": true,
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      },
+                      "UserData": {
+                        "Position": "288,-16"
+                      }
+                    },
+                    {
+                      "Id": 3,
+                      "Type": "scene.ref",
+                      "Properties": {
+                        "component": {
+                          "_type": "component",
+                          "component_id": "88d11683-2732-4f5d-89a1-167e9a0ff50e",
+                          "go": "b1b9ef35-4dc9-4ee2-ba04-5c6c9c114057",
+                          "component_type": "DialogueTree"
+                        }
+                      },
+                      "UserData": {
+                        "Position": "-32,144"
+                      }
+                    },
+                    {
+                      "Id": 4,
+                      "Type": "property.get",
+                      "ParentId": 3,
+                      "Properties": {
+                        "_name": "Name",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_signal",
+                      "DstId": 1,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 4,
+                      "SrcName": "_result",
+                      "DstId": 1,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_target",
+                      "DstId": 1,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "",
+                      "DstId": 1,
+                      "DstName": "sound"
+                    },
+                    {
+                      "Value": "Leave me alone human, I am busy mewing.",
+                      "DstId": 1,
+                      "DstName": "subtitle"
+                    },
+                    {
+                      "SrcId": 3,
+                      "SrcName": "_result",
+                      "DstId": 4,
+                      "DstName": "_target"
+                    }
+                  ]
+                },
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          }
+        ],
+        "HasRandomDialogues": true,
+        "HostOnly": false,
+        "Name": "Joe Mama",
+        "Networked": false
+      },
+      {
+        "__type": "CapsuleCollider",
+        "Id": "a11cb139-09e8-48ca-9ce3-84b3dc5dd1a3",
+        "End": "0,0,68",
+        "IsTrigger": false,
+        "Radius": 12,
+        "Start": "0,0,12",
+        "Static": false
+      }
+    ],
+    "Children": [
+      {
+        "Id": "2ad944d0-47d6-4fe9-adea-ca06340ac50e",
+        "Name": "Model",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "Character",
+            "Id": "9e6555d8-b44a-458c-bf9c-8b93252b7500",
+            "Clothes": [
+              "models/clothes/alien_head/alien_head.vmdl",
+              "models/clothes/boots/boots.vmdl",
+              "models/clothes/skinny_trousers/skinny_trousers.vmdl"
+            ],
+            "Fatness": 0,
+            "Height": 100,
+            "HideBodyGroup": "Head, Legs, Feet"
+          },
+          {
+            "__type": "SkinnedModelRenderer",
+            "Id": "888b824c-255b-496b-bd1d-2aac0bb5895f",
+            "BodyGroups": 1365,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

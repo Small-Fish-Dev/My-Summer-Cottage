@@ -1,12 +1,13 @@
 {
   "RootObject": {
-    "Id": "8aef03ed-d62d-40d4-a9df-34d959fb81d6",
+    "__guid": "8aef03ed-d62d-40d4-a9df-34d959fb81d6",
     "Name": "flashlight",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "1abf106a-1a57-4539-b271-a2954f03da5f",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -35,16 +36,18 @@
       },
       {
         "__type": "Flashlight",
+        "__guid": "c11f3403-786f-489b-b6b7-2caeee621c2a",
         "Brightness": 1,
         "Color": "1,1,1,1",
         "Distance": 1000,
         "On": false,
         "Radius": 30,
         "Strength": 15,
-        "ToggleSound": "sounds/misc/switch.sound"
+        "ToggleSound": "sounds/misc/switch_press.sound"
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "7fb30473-7a92-4e99-b5cd-abe2f36923c9",
         "BodyGroups": 18446744073709551615,
         "Model": "models/flashlight/flashlight.vmdl",
         "RenderType": "On",
@@ -52,6 +55,7 @@
       },
       {
         "__type": "BoxCollider",
+        "__guid": "7ba4ba05-d906-4ae5-a1e5-85a81c946660",
         "Center": "0,1.75,0",
         "IsTrigger": false,
         "Scale": "3,10.5,3",
@@ -59,18 +63,20 @@
       },
       {
         "__type": "Rigidbody",
+        "__guid": "f85e019c-bc90-43cb-926f-436499180121",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }
     ],
     "Children": [
       {
-        "Id": "98754f52-c672-4324-96e7-83eeb5f89938",
+        "__guid": "98754f52-c672-4324-96e7-83eeb5f89938",
         "Name": "Light",
         "Position": "0.000001466949,7.740213,0.0000006477052",
         "Rotation": "0.00000003090862,-0.00000003090862,0.7071068,0.7071068",
@@ -80,6 +86,7 @@
         "Components": [
           {
             "__type": "SpotLight",
+            "__guid": "17c22820-56a4-4e00-b329-6dba636dae5c",
             "Attenuation": 1,
             "ConeInner": 15,
             "ConeOuter": 45,

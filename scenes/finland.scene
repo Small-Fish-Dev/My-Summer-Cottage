@@ -1,8 +1,8 @@
 {
-  "Id": "be1bc182-041e-4972-9c57-33b22f57dc1d",
+  "Id": "95f8fb81-ad3b-4e97-8eb9-3d7d08497600",
   "GameObjects": [
     {
-      "Id": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
+      "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
       "Name": "GameManager",
       "Position": "2144.363,-2511.369,2464.302",
       "Enabled": true,
@@ -10,6 +10,7 @@
       "Components": [
         {
           "__type": "NetworkManager",
+          "__guid": "306edd5c-d671-4988-aab1-d64fb8c36729",
           "Prefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
@@ -17,6 +18,7 @@
         },
         {
           "__type": "GameTimeManager",
+          "__guid": "f817dd63-e9bb-4486-ae9b-c403e56e61fc",
           "CloudSpeed": "1,0,0",
           "Day": 1,
           "DayLength": 1200,
@@ -49,6 +51,7 @@
           "EndTime": 18000,
           "Fog": {
             "_type": "component",
+            "component_id": "4949ec72-1aac-4689-893c-504de7868e2c",
             "go": "74c6edc7-2832-4482-8f0f-c8312c6f4e77",
             "component_type": "GradientFog"
           },
@@ -71,6 +74,7 @@
           ],
           "Skybox": {
             "_type": "component",
+            "component_id": "c7fee5fb-1f05-4d46-b722-303a4d09c32a",
             "go": "7f2477ff-54a5-4127-a102-c905b031713e",
             "component_type": "SkyBox2D"
           },
@@ -122,6 +126,7 @@
           "StartTime": 32400,
           "Sun": {
             "_type": "component",
+            "component_id": "a9cb56a7-ff29-472d-8088-ebbe7d9450dc",
             "go": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
             "component_type": "DirectionalLight"
           },
@@ -130,18 +135,22 @@
           "SunsetTime": 79200
         },
         {
-          "__type": "PrefabInitializer"
+          "__type": "PrefabInitializer",
+          "__guid": "01ddba17-ab58-42b7-8831-44fc7f39618b"
         },
         {
           "__type": "TaskMaster",
+          "__guid": "d2a393cf-ef36-4245-862f-f27007570807",
           "CurrentTasks": []
         },
         {
           "__type": "EventMaster",
+          "__guid": "0a63a10f-5aa3-4e45-892d-31b38a1a1785",
           "CurrentEvents": []
         },
         {
           "__type": "StoryMaster",
+          "__guid": "782f73c0-3aa8-4e42-9636-68338640fc4b",
           "StoryDays": {
             "1": {
               "ScriptedEvents": [
@@ -192,8 +201,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "464,288"
@@ -204,8 +213,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_name": "Receive",
-                          "_type": "package.fish.sauna/Sauna.Message"
+                          "_type": "package.fish.sauna/Sauna.Message",
+                          "_name": "Receive"
                         },
                         "UserData": {
                           "Position": "512,-96"
@@ -216,8 +225,8 @@
                         "Type": "property.get",
                         "ParentId": 3,
                         "Properties": {
-                          "_name": "Message",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Message"
                         }
                       },
                       {
@@ -225,8 +234,8 @@
                         "Type": "property.get",
                         "ParentId": 3,
                         "Properties": {
-                          "_name": "Giver",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Giver"
                         }
                       },
                       {
@@ -234,8 +243,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_name": "PlaySoundWithSubtitle",
-                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                          "_name": "PlaySoundWithSubtitle"
                         },
                         "UserData": {
                           "Position": "1072,-128"
@@ -245,8 +254,8 @@
                         "Id": 13,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "sounds/speech/1.sound",
-                          "T": "Sandbox.Engine/Sandbox.SoundEvent"
+                          "T": "Sandbox.Engine/Sandbox.SoundEvent",
+                          "value": "sounds/speech/1.sound"
                         },
                         "UserData": {
                           "Position": "864,-48"
@@ -425,8 +434,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_name": "AssignEveryoneNewTask",
-                          "_type": "package.fish.sauna/Sauna.TaskMaster"
+                          "_type": "package.fish.sauna/Sauna.TaskMaster",
+                          "_name": "AssignEveryoneNewTask"
                         },
                         "UserData": {
                           "Position": "240,112"
@@ -436,8 +445,8 @@
                         "Id": 4,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task",
-                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task"
                         },
                         "UserData": {
                           "Position": "-240,192"
@@ -447,8 +456,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "240,304"
@@ -458,8 +467,8 @@
                         "Id": 7,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "ResourcePath",
-                          "_type": "Sandbox.Engine/Sandbox.Resource"
+                          "_type": "Sandbox.Engine/Sandbox.Resource",
+                          "_name": "ResourcePath"
                         },
                         "UserData": {
                           "Position": "16,176"
@@ -560,8 +569,8 @@
                         "Id": 6,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "208,304"
@@ -572,8 +581,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_name": "Receive",
-                          "_type": "package.fish.sauna/Sauna.Message"
+                          "_type": "package.fish.sauna/Sauna.Message",
+                          "_name": "Receive"
                         },
                         "UserData": {
                           "Position": "416,-0"
@@ -584,8 +593,8 @@
                         "Type": "property.get",
                         "ParentId": 5,
                         "Properties": {
-                          "_name": "Message",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Message"
                         }
                       },
                       {
@@ -593,8 +602,8 @@
                         "Type": "property.get",
                         "ParentId": 5,
                         "Properties": {
-                          "_name": "Giver",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Giver"
                         }
                       }
                     ],
@@ -711,8 +720,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_name": "AssignEveryoneNewTask",
-                          "_type": "package.fish.sauna/Sauna.TaskMaster"
+                          "_type": "package.fish.sauna/Sauna.TaskMaster",
+                          "_name": "AssignEveryoneNewTask"
                         },
                         "UserData": {
                           "Position": "256,256"
@@ -722,8 +731,8 @@
                         "Id": 6,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "SuccessSignal",
-                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "SuccessSignal"
                         },
                         "UserData": {
                           "Position": "256,448"
@@ -733,8 +742,8 @@
                         "Id": 7,
                         "Type": "property.get",
                         "Properties": {
-                          "_name": "ResourcePath",
-                          "_type": "Sandbox.Engine/Sandbox.Resource"
+                          "_type": "Sandbox.Engine/Sandbox.Resource",
+                          "_name": "ResourcePath"
                         },
                         "UserData": {
                           "Position": "32,320"
@@ -744,8 +753,8 @@
                         "Id": 9,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task",
-                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task"
                         },
                         "UserData": {
                           "Position": "-240,368"
@@ -808,7 +817,7 @@
       ],
       "Children": [
         {
-          "Id": "79a42b52-3dd6-4018-a1c6-cb514e3de500",
+          "__guid": "79a42b52-3dd6-4018-a1c6-cb514e3de500",
           "Name": "HUD",
           "Position": "0,0,0",
           "Enabled": true,
@@ -816,6 +825,7 @@
           "Components": [
             {
               "__type": "ScreenPanel",
+              "__guid": "3d6921fb-4247-4c58-be0a-d598a7e1061f",
               "AutoScreenScale": true,
               "Opacity": 1,
               "Scale": 1,
@@ -823,8 +833,10 @@
             },
             {
               "__type": "Hud",
+              "__guid": "12619f95-bc41-46e7-aadd-a55f573e6a5e",
               "GameTimeManager": {
                 "_type": "component",
+                "component_id": "f817dd63-e9bb-4486-ae9b-c403e56e61fc",
                 "go": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
                 "component_type": "GameTimeManager"
               }
@@ -832,7 +844,7 @@
           ]
         },
         {
-          "Id": "d09666df-e617-422e-915c-9cbf381b592c",
+          "__guid": "d09666df-e617-422e-915c-9cbf381b592c",
           "Name": "Spawner",
           "Position": "1100.658,-642.5198,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
@@ -840,12 +852,13 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "PlayerSpawner"
+              "__type": "PlayerSpawner",
+              "__guid": "f521a8ad-b72b-4cfb-b6c6-bf00288152fb"
             }
           ]
         },
         {
-          "Id": "65b73d71-edfe-4eea-9d88-8819da3b4a51",
+          "__guid": "65b73d71-edfe-4eea-9d88-8819da3b4a51",
           "Name": "Spawner",
           "Position": "1067.838,-601.8794,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
@@ -853,12 +866,13 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "PlayerSpawner"
+              "__type": "PlayerSpawner",
+              "__guid": "52872276-432b-4209-b7c6-852fc12acbba"
             }
           ]
         },
         {
-          "Id": "c5fe7faf-abe6-4e2d-88fe-fadc8da17fcb",
+          "__guid": "c5fe7faf-abe6-4e2d-88fe-fadc8da17fcb",
           "Name": "Spawner",
           "Position": "1101.198,-559.533,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
@@ -866,12 +880,13 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "PlayerSpawner"
+              "__type": "PlayerSpawner",
+              "__guid": "7c64673e-eb6c-4745-908d-4c65989839a6"
             }
           ]
         },
         {
-          "Id": "9e8a633d-d61a-433e-a690-4b6ce18d0b9c",
+          "__guid": "9e8a633d-d61a-433e-a690-4b6ce18d0b9c",
           "Name": "Spawner",
           "Position": "1132.893,-602.0305,-7.923096",
           "Rotation": "0,0,0.1305262,0.9914449",
@@ -879,14 +894,15 @@
           "NetworkMode": 2,
           "Components": [
             {
-              "__type": "PlayerSpawner"
+              "__type": "PlayerSpawner",
+              "__guid": "0392cf73-6c6e-4d0c-bdd5-3d50d00dcd15"
             }
           ]
         }
       ]
     },
     {
-      "Id": "339226ca-b793-4a15-8131-0cf90a9f4357",
+      "__guid": "339226ca-b793-4a15-8131-0cf90a9f4357",
       "Name": "Map",
       "Position": "155.32,241.9772,-76.84572",
       "Tags": "world",
@@ -895,6 +911,7 @@
       "Components": [
         {
           "__type": "MapInstance",
+          "__guid": "6f2ac915-3aaa-4057-adde-19d20ea40b4d",
           "MapName": "untitled_2",
           "UseMapFromLaunch": false
         }
@@ -902,30 +919,31 @@
       "Children": []
     },
     {
-      "Id": "b60318fc-dbb8-45c3-b9d4-1347270ab4b5",
+      "__guid": "b60318fc-dbb8-45c3-b9d4-1347270ab4b5",
       "Name": "Ambient",
       "Position": "2158.045,-3163.895,2861.889",
       "Enabled": true,
       "NetworkMode": 2,
       "Children": [
         {
-          "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
+          "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.4039468,0,0.9147825",
+          "Rotation": "0,0.9865422,0,0.1635071",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
           "Components": [
             {
               "__type": "SkyBox2D",
+              "__guid": "c7fee5fb-1f05-4d46-b722-303a4d09c32a",
               "SkyMaterial": "materials/sky/cloudy_day.vmat",
               "Tint": "0.422,0.67486,1.02105,2"
             }
           ]
         },
         {
-          "Id": "74c6edc7-2832-4482-8f0f-c8312c6f4e77",
+          "__guid": "74c6edc7-2832-4482-8f0f-c8312c6f4e77",
           "Name": "Fog",
           "Position": "0,0,20",
           "Enabled": true,
@@ -933,6 +951,7 @@
           "Components": [
             {
               "__type": "GradientFog",
+              "__guid": "4949ec72-1aac-4689-893c-504de7868e2c",
               "Color": "0.07447,0.11909,0.24025,1",
               "EndDistance": 5195.461,
               "FalloffExponent": 1.2000014,
@@ -943,7 +962,7 @@
           ]
         },
         {
-          "Id": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
+          "__guid": "9d72fac3-8eeb-41b9-9563-fd8f8c0dd708",
           "Name": "Sun",
           "Position": "0,0,40",
           "Rotation": "-0.1057893,-0.1444111,0.5814101,-0.7936726",
@@ -953,6 +972,7 @@
           "Components": [
             {
               "__type": "DirectionalLight",
+              "__guid": "a9cb56a7-ff29-472d-8088-ebbe7d9450dc",
               "FogMode": "Enabled",
               "FogStrength": 1,
               "LightColor": "0.16549,0.26465,0.4004,0.7843",
@@ -964,7 +984,7 @@
       ]
     },
     {
-      "Id": "1c8b362f-fdf3-48dc-b8ec-a7e247c53f71",
+      "__guid": "1c8b362f-fdf3-48dc-b8ec-a7e247c53f71",
       "Name": "NPC (local)",
       "Position": "2806.878,-2437.796,2472.671",
       "Rotation": "0.5880175,-0.157559,-0.2053349,0.7663213",
@@ -974,6 +994,7 @@
       "Components": [
         {
           "__type": "BoxCollider",
+          "__guid": "5402c77b-4084-4a8a-903a-e04b17f3c1b8",
           "Center": "0,0,4.25",
           "IsTrigger": false,
           "Scale": "31.40003,43.20007,8.5",
@@ -981,6 +1002,7 @@
         },
         {
           "__type": "SkinnedModelRenderer",
+          "__guid": "082ead44-2f02-4d83-8bd6-d4c34bcc6825",
           "BodyGroups": 18446744073709551615,
           "CreateBoneObjects": false,
           "Model": "models/beer_crate/beer_crate.vmdl",
@@ -989,6 +1011,7 @@
         },
         {
           "__type": "Rigidbody",
+          "__guid": "50309fe6-9562-4a84-a37e-d422f81be09d",
           "AngularDamping": 0,
           "Gravity": true,
           "LinearDamping": 0,
@@ -1000,6 +1023,7 @@
         },
         {
           "__type": "Interactions",
+          "__guid": "711f3729-4e3b-4622-b6a3-454f0a45cee2",
           "HideOnEmpty": false,
           "ObjectInteractions": [
             {
@@ -1023,8 +1047,8 @@
                     "Type": "call",
                     "Properties": {
                       "_isStatic": true,
-                      "_name": "PlaySoundWithSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                      "_name": "PlaySoundWithSubtitle"
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -1114,8 +1138,8 @@
                     "Type": "call",
                     "Properties": {
                       "_isStatic": true,
-                      "_name": "PlaySoundWithNameAndSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                      "_name": "PlaySoundWithNameAndSubtitle"
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -1166,18 +1190,19 @@
           ]
         },
         {
-          "__type": "SoundHandler"
+          "__type": "SoundHandler",
+          "__guid": "1923d863-6d5a-4120-ba79-e05a63bc7268"
         }
       ]
     },
     {
-      "Id": "7845a61f-5e7f-413b-baef-4d22a3bf1183",
+      "__guid": "7845a61f-5e7f-413b-baef-4d22a3bf1183",
       "Name": "Water",
       "Enabled": true,
       "NetworkMode": 2,
       "Children": [
         {
-          "Id": "b385450f-885f-4df0-9d56-dc81af88e4ca",
+          "__guid": "b385450f-885f-4df0-9d56-dc81af88e4ca",
           "Name": "Cottage Lake",
           "Position": "876.837,-7934.518,2282.054",
           "Tags": "water",
@@ -1186,6 +1211,7 @@
           "Components": [
             {
               "__type": "WaterComponent",
+              "__guid": "4ab65f96-9b70-4f25-b0a5-1adb249fc878",
               "BobberDrag": 0.8,
               "Color": "0.45076,0.57209,0.36986,0.9",
               "Maxs": "2650.04,2790.837,11.03999",
@@ -1194,6 +1220,7 @@
             },
             {
               "__type": "LeFisheSpawner",
+              "__guid": "9db691b2-0ec9-41da-b342-315fce266303",
               "FishAmount": 20,
               "MinimumDepth": 5,
               "Fishes": [
@@ -1219,7 +1246,7 @@
       ]
     },
     {
-      "Id": "7a37f831-1108-421e-a055-9d3176ccb783",
+      "__guid": "7a37f831-1108-421e-a055-9d3176ccb783",
       "Name": "Car",
       "Position": "2097.232,-2595.18,2463.451",
       "Rotation": "-0.0824227,0.02611236,-0.3008852,0.949733",
@@ -1228,13 +1255,13 @@
       "__Prefab": "prefabs/objects/car.prefab"
     },
     {
-      "Id": "73df85dc-6c8b-4f29-ad40-900d7448c1ed",
+      "__guid": "73df85dc-6c8b-4f29-ad40-900d7448c1ed",
       "Name": "NPC Spawn Zones",
       "Enabled": true,
       "NetworkMode": 2,
       "Children": [
         {
-          "Id": "63d09065-6418-4f06-a2fd-131d7cd6a65d",
+          "__guid": "63d09065-6418-4f06-a2fd-131d7cd6a65d",
           "Name": "Moose",
           "Position": "2456.57,4268.883,2655.931",
           "Enabled": true,
@@ -1242,6 +1269,7 @@
           "Components": [
             {
               "__type": "NpcSpawnArea",
+              "__guid": "a33c0dfc-413c-4474-b85b-4f67bd69ff91",
               "Height": 1490.9595,
               "NpcPool": [
                 {
@@ -1264,7 +1292,7 @@
           ]
         },
         {
-          "Id": "04df8c6d-1dd5-4d8f-bc94-c693891f4de8",
+          "__guid": "04df8c6d-1dd5-4d8f-bc94-c693891f4de8",
           "Name": "Reindeer",
           "Position": "6357.683,-1119.06,2655.931",
           "Enabled": true,
@@ -1272,6 +1300,7 @@
           "Components": [
             {
               "__type": "NpcSpawnArea",
+              "__guid": "5761224f-3db4-423e-b498-4686dfc79f1a",
               "Height": 1490.9595,
               "NpcPool": [
                 {
@@ -1294,7 +1323,7 @@
           ]
         },
         {
-          "Id": "3b796ce9-656b-43b5-b61a-fd0d28dc6fd4",
+          "__guid": "3b796ce9-656b-43b5-b61a-fd0d28dc6fd4",
           "Name": "Reindeer",
           "Position": "6427.602,-10187.55,2655.932",
           "Enabled": true,
@@ -1302,6 +1331,7 @@
           "Components": [
             {
               "__type": "NpcSpawnArea",
+              "__guid": "3e5e429f-0ee4-4e5d-9f4c-25cd0a2d6532",
               "Height": 1490.9595,
               "NpcPool": [
                 {
@@ -1324,7 +1354,7 @@
           ]
         },
         {
-          "Id": "d2e443dd-2c31-47c9-8f60-52a5d857fd59",
+          "__guid": "d2e443dd-2c31-47c9-8f60-52a5d857fd59",
           "Name": "Reindeer",
           "Position": "-8868.885,-5585.536,2046.7",
           "Enabled": true,
@@ -1332,6 +1362,7 @@
           "Components": [
             {
               "__type": "NpcSpawnArea",
+              "__guid": "6a2fe27f-5668-479e-8210-6bbac5341ec7",
               "Height": 1490.9595,
               "NpcPool": [
                 {
@@ -1354,7 +1385,7 @@
           ]
         },
         {
-          "Id": "a7d2f9c4-130f-48f1-ac39-7bd400c66a98",
+          "__guid": "a7d2f9c4-130f-48f1-ac39-7bd400c66a98",
           "Name": "Reindeer",
           "Position": "-3109.291,9317.375,2807.527",
           "Enabled": true,
@@ -1362,6 +1393,7 @@
           "Components": [
             {
               "__type": "NpcSpawnArea",
+              "__guid": "786962fb-8c34-4dcc-8ff4-82b5d18b7575",
               "Height": 1490.9595,
               "NpcPool": [
                 {
@@ -1384,7 +1416,7 @@
           ]
         },
         {
-          "Id": "2e988a31-e0a1-49db-a860-c75d0e0a546a",
+          "__guid": "2e988a31-e0a1-49db-a860-c75d0e0a546a",
           "Name": "Elk",
           "Position": "-1694.46,3835.503,2807.527",
           "Enabled": true,
@@ -1392,6 +1424,7 @@
           "Components": [
             {
               "__type": "NpcSpawnArea",
+              "__guid": "53f14282-ba9a-458f-b85c-5bb7bc1ac51b",
               "Height": 1490.9595,
               "NpcPool": [
                 {
@@ -1414,7 +1447,7 @@
           ]
         },
         {
-          "Id": "a5523286-2ff3-4e1c-b750-7a002743fcbf",
+          "__guid": "a5523286-2ff3-4e1c-b750-7a002743fcbf",
           "Name": "Elk",
           "Position": "4457.693,10155.6,3601.776",
           "Enabled": true,
@@ -1422,6 +1455,7 @@
           "Components": [
             {
               "__type": "NpcSpawnArea",
+              "__guid": "e596fbe3-d0b2-42d3-a79c-3588a546ab39",
               "Height": 2508.8794,
               "NpcPool": [
                 {
@@ -1444,7 +1478,7 @@
           ]
         },
         {
-          "Id": "528de2eb-5121-49c7-ab1e-d331c2600f8b",
+          "__guid": "528de2eb-5121-49c7-ab1e-d331c2600f8b",
           "Name": "Elk",
           "Position": "9074.902,5294.054,3601.776",
           "Enabled": true,
@@ -1452,6 +1486,7 @@
           "Components": [
             {
               "__type": "NpcSpawnArea",
+              "__guid": "68d9762e-c391-4850-be6c-b2ad4d1c2969",
               "Height": 2508.8794,
               "NpcPool": [
                 {
@@ -1474,7 +1509,7 @@
           ]
         },
         {
-          "Id": "f1a77762-a6e9-41b3-944b-0aeca697cf24",
+          "__guid": "f1a77762-a6e9-41b3-944b-0aeca697cf24",
           "Name": "Elk",
           "Position": "-2190.306,-2765.781,2692.589",
           "Enabled": true,
@@ -1482,6 +1517,7 @@
           "Components": [
             {
               "__type": "NpcSpawnArea",
+              "__guid": "49373557-eb2d-4f84-bd91-eaa1a097bd48",
               "Height": 2508.8794,
               "NpcPool": [
                 {
@@ -1504,7 +1540,7 @@
           ]
         },
         {
-          "Id": "d8c646f6-09dd-4da3-bf30-f00aea8172a6",
+          "__guid": "d8c646f6-09dd-4da3-bf30-f00aea8172a6",
           "Name": "Moose",
           "Position": "10466.22,10129.71,3294.639",
           "Enabled": true,
@@ -1512,6 +1548,7 @@
           "Components": [
             {
               "__type": "NpcSpawnArea",
+              "__guid": "0c0d362d-d674-4460-accc-c5eeb6046253",
               "Height": 1490.9595,
               "NpcPool": [
                 {
@@ -1536,7 +1573,7 @@
       ]
     },
     {
-      "Id": "c41149f3-b8a0-4dff-8ab2-191ddf80fb48",
+      "__guid": "c41149f3-b8a0-4dff-8ab2-191ddf80fb48",
       "Name": "flashlight",
       "Position": "2235.942,-2596.522,2458.412",
       "Rotation": "-0.004094645,0.01162842,0.3320982,0.9431642",
@@ -1545,16 +1582,16 @@
       "__Prefab": "prefabs/items/flashlight.prefab"
     },
     {
-      "Id": "d17d8a78-2e4d-44f8-b632-9494a33981c1",
+      "__guid": "d17d8a78-2e4d-44f8-b632-9494a33981c1",
       "Name": "WoodPile",
-      "Position": "3490.215,-3095.327,2435.073",
-      "Rotation": "-0.02007881,0.008316913,-0.382593,0.9236614",
+      "Position": "3488.2,-3096.921,2433.824",
+      "Rotation": "-0.005849727,0.01420882,-0.3824195,0.9238611",
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/objects/wood_pile.prefab"
     },
     {
-      "Id": "7e2a4434-79ef-47a2-a2c0-951450c0171a",
+      "__guid": "7e2a4434-79ef-47a2-a2c0-951450c0171a",
       "Name": "Chopping Base",
       "Position": "3449.392,-2988.885,2433.722",
       "Scale": "0.6,0.6,1",
@@ -1563,16 +1600,16 @@
       "__Prefab": "prefabs/objects/stump.prefab"
     },
     {
-      "Id": "150d407b-01ef-4a3b-b859-7d8b564237cc",
+      "__guid": "150d407b-01ef-4a3b-b859-7d8b564237cc",
       "Name": "axe",
-      "Position": "3478.423,-3072.65,2448.606",
+      "Position": "3481.919,-3074.922,2448.606",
       "Rotation": "0,0.2588189,0,0.9659256",
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/items/axe.prefab"
     },
     {
-      "Id": "70e11655-f958-45c7-8eaf-40c411866039",
+      "__guid": "70e11655-f958-45c7-8eaf-40c411866039",
       "Name": "car_speeding",
       "Position": "-7744,6640,2440",
       "Enabled": true,
@@ -1580,14 +1617,14 @@
       "__Prefab": "prefabs/events/car_speeding.prefab"
     },
     {
-      "Id": "ce6db557-3fca-42b8-9ad8-1f079f737aef",
+      "__guid": "ce6db557-3fca-42b8-9ad8-1f079f737aef",
       "Name": "Sauna",
       "Position": "3590.354,-3156.362,2476.77",
       "Enabled": true,
       "NetworkMode": 2,
       "Children": [
         {
-          "Id": "5fae56a0-fcc9-421d-a6cf-9dbf5ed2278d",
+          "__guid": "5fae56a0-fcc9-421d-a6cf-9dbf5ed2278d",
           "Name": "Stove",
           "Position": "30.47339,86.6084,-15.03516",
           "Rotation": "0,0,0.3826834,0.9238796",
@@ -1596,19 +1633,23 @@
           "Components": [
             {
               "__type": "Stove",
+              "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
+                "component_id": "2434582b-106d-4553-a6d0-6d5f6897c28b",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
               "PlayersInArea": {
                 "_type": "component",
+                "component_id": "8d670e13-bd21-4a4d-a5ae-c89d3bcb2c89",
                 "go": "e5222989-3e10-45ac-9620-3b4ea89e1942",
                 "component_type": "EventAreaTrigger"
               }
             },
             {
               "__type": "SkinnedModelRenderer",
+              "__guid": "c8ce7c37-afa2-47ef-955a-2111df814774",
               "BodyGroups": 3,
               "CreateBoneObjects": false,
               "Model": "models/stove/stove.vmdl",
@@ -1617,6 +1658,7 @@
             },
             {
               "__type": "ModelCollider",
+              "__guid": "88b6286c-bb99-4ba9-a163-cee1de6ff487",
               "IsTrigger": false,
               "Model": "models/stove/stove.vmdl",
               "Static": false
@@ -1624,7 +1666,7 @@
           ],
           "Children": [
             {
-              "Id": "e5222989-3e10-45ac-9620-3b4ea89e1942",
+              "__guid": "e5222989-3e10-45ac-9620-3b4ea89e1942",
               "Name": "Trigger",
               "Position": "0,0,0",
               "Enabled": true,
@@ -1632,6 +1674,7 @@
               "Components": [
                 {
                   "__type": "EventAreaTrigger",
+                  "__guid": "8d670e13-bd21-4a4d-a5ae-c89d3bcb2c89",
                   "Extents": "158.1591,111.7599,122.24",
                   "MaxPollingRate": 10,
                   "Offset": "-91.1201,-45.75999,56.64001",
@@ -1644,7 +1687,7 @@
           ]
         },
         {
-          "Id": "158291d2-adc1-4f2d-a3a4-5896684ced3f",
+          "__guid": "158291d2-adc1-4f2d-a3a4-5896684ced3f",
           "Name": "water_bucket",
           "Position": "47.5625,50.22119,-16.03027",
           "Rotation": "-0.01174103,0.03774813,0.2967681,0.9541309",
@@ -1653,7 +1696,7 @@
           "__Prefab": "prefabs/objects/water_bucket.prefab"
         },
         {
-          "Id": "228c1dd9-a826-45ae-8624-e85ba99407ad",
+          "__guid": "228c1dd9-a826-45ae-8624-e85ba99407ad",
           "Name": "ladel",
           "Position": "42.00952,37.48633,-6.53833",
           "Rotation": "0.4829629,-0.1294095,-0.2241438,0.8365164",
@@ -1662,7 +1705,7 @@
           "__Prefab": "prefabs/items/ladel.prefab"
         },
         {
-          "Id": "ad648568-ff05-4e08-91ae-28a978624815",
+          "__guid": "ad648568-ff05-4e08-91ae-28a978624815",
           "Name": "Door",
           "Position": "-94.10425,-98.73193,-12.89941",
           "Rotation": "0,0,-0.9311098,0.3647387",
@@ -1673,7 +1716,7 @@
       ]
     },
     {
-      "Id": "a1fb770f-00ec-4c6d-b154-2089b2c942b7",
+      "__guid": "a1fb770f-00ec-4c6d-b154-2089b2c942b7",
       "Name": "beer_bottle",
       "Position": "3350.328,-2900.282,2432.219",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1682,7 +1725,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "80cfbcfa-bdb5-4681-a36c-eca20322433e",
+      "__guid": "80cfbcfa-bdb5-4681-a36c-eca20322433e",
       "Name": "beer_bottle (1)",
       "Position": "3349.089,-2904.664,2432.374",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1691,7 +1734,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "3471b6d7-c7ae-4ea1-9067-6bcf306092a6",
+      "__guid": "3471b6d7-c7ae-4ea1-9067-6bcf306092a6",
       "Name": "beer_bottle (2)",
       "Position": "3350.979,-2913.747,2432.612",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1700,7 +1743,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "70405b78-3ce5-4fe0-affc-1665bd9db318",
+      "__guid": "70405b78-3ce5-4fe0-affc-1665bd9db318",
       "Name": "beer_bottle (3)",
       "Position": "3368.416,-2902.642,2431.948",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1709,7 +1752,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "32f0b6a5-ed59-4081-8952-ac4b532f2680",
+      "__guid": "32f0b6a5-ed59-4081-8952-ac4b532f2680",
       "Name": "beer_bottle (4)",
       "Position": "3365.17,-2890.439,2431.641",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1718,7 +1761,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "839e241d-a709-46ad-8943-cd0ce265cb5e",
+      "__guid": "839e241d-a709-46ad-8943-cd0ce265cb5e",
       "Name": "beer_bottle (5)",
       "Position": "3355.883,-2892.44,2431.877",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1727,7 +1770,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "1d10648c-d9b6-4ae6-b631-94817f4d4a8b",
+      "__guid": "1d10648c-d9b6-4ae6-b631-94817f4d4a8b",
       "Name": "beer_bottle (6)",
       "Position": "3349.942,-2881.131,2431.649",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1736,7 +1779,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "46c0cebf-3807-440e-a697-a1b00240a4a0",
+      "__guid": "46c0cebf-3807-440e-a697-a1b00240a4a0",
       "Name": "beer_bottle (7)",
       "Position": "3344.365,-2893.036,2432.113",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1745,7 +1788,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "7d91ea99-be9c-452c-91dc-bbe8547e147f",
+      "__guid": "7d91ea99-be9c-452c-91dc-bbe8547e147f",
       "Name": "beer_bottle (8)",
       "Position": "3360.99,-2881.991,2431.466",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1754,7 +1797,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "409889d4-68ff-47f2-bb99-b4e50a3e89f1",
+      "__guid": "409889d4-68ff-47f2-bb99-b4e50a3e89f1",
       "Name": "beer_bottle (9)",
       "Position": "3360.621,-2869.062,2431.084",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1763,7 +1806,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "5b6123e5-5655-4263-8188-d872b9c612bd",
+      "__guid": "5b6123e5-5655-4263-8188-d872b9c612bd",
       "Name": "beer_bottle (10)",
       "Position": "3350.859,-2875.547,2431.464",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1772,7 +1815,7 @@
       "__Prefab": "prefabs/items/beer_bottle.prefab"
     },
     {
-      "Id": "ffadc6f2-1a36-459f-941b-f8a4f76ee019",
+      "__guid": "ffadc6f2-1a36-459f-941b-f8a4f76ee019",
       "Name": "762ammo",
       "Position": "3295.809,-2815.871,2433.709",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1781,7 +1824,7 @@
       "__Prefab": "prefabs/items/762ammo.prefab"
     },
     {
-      "Id": "d3982d86-3a4c-4ea0-a41d-20fdfee95d2b",
+      "__guid": "d3982d86-3a4c-4ea0-a41d-20fdfee95d2b",
       "Name": "762ammo (1)",
       "Position": "3302.386,-2824.895,2433.856",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1790,7 +1833,7 @@
       "__Prefab": "prefabs/items/762ammo.prefab"
     },
     {
-      "Id": "74d4a873-ae4e-46d1-bd58-0bebdd5cd0c2",
+      "__guid": "74d4a873-ae4e-46d1-bd58-0bebdd5cd0c2",
       "Name": "762ammo (2)",
       "Position": "3291.738,-2827.256,2434.129",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1799,7 +1842,7 @@
       "__Prefab": "prefabs/items/762ammo.prefab"
     },
     {
-      "Id": "b8bf3e33-3041-4bce-879b-9f62ecadd096",
+      "__guid": "b8bf3e33-3041-4bce-879b-9f62ecadd096",
       "Name": "762ammo (3)",
       "Position": "3287.952,-2808.83,2433.646",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1808,7 +1851,7 @@
       "__Prefab": "prefabs/items/762ammo.prefab"
     },
     {
-      "Id": "23f000a8-9d1c-46b5-a6e6-7c1b59ab52e3",
+      "__guid": "23f000a8-9d1c-46b5-a6e6-7c1b59ab52e3",
       "Name": "762ammo (4)",
       "Position": "3281.552,-2824.606,2434.242",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1817,7 +1860,7 @@
       "__Prefab": "prefabs/items/762ammo.prefab"
     },
     {
-      "Id": "4b871fa8-b91b-4276-9d0e-8e71b7dddfe2",
+      "__guid": "4b871fa8-b91b-4276-9d0e-8e71b7dddfe2",
       "Name": "rifle",
       "Position": "3324.594,-2821.722,2440.795",
       "Rotation": "-0.008599117,0.01555201,0.4838057,0.874995",
@@ -1826,7 +1869,7 @@
       "__Prefab": "prefabs/items/rifle.prefab"
     },
     {
-      "Id": "0a072b49-e373-4560-874c-f738315fb3d8",
+      "__guid": "0a072b49-e373-4560-874c-f738315fb3d8",
       "Name": "outer_area",
       "Position": "-6348.808,-9026.849,11772.6",
       "Rotation": "0,0,-0.7071067,0.7071068",
@@ -1836,6 +1879,7 @@
       "Components": [
         {
           "__type": "ModelRenderer",
+          "__guid": "d4b55594-5fea-41da-8fe0-8dd3a09b9581",
           "BodyGroups": 18446744073709551615,
           "Model": "models/terrain/outer_area.vmdl",
           "RenderType": "On",
@@ -1844,7 +1888,7 @@
       ]
     },
     {
-      "Id": "309325f1-10d4-4399-9316-6636a332b578",
+      "__guid": "309325f1-10d4-4399-9316-6636a332b578",
       "Name": "fishing_rod",
       "Position": "3340.382,-2993.729,2488.04",
       "Rotation": "-0.007513285,0.01452562,0.4593677,0.8880956",
@@ -1853,7 +1897,7 @@
       "__Prefab": "prefabs/items/fishing_rod.prefab"
     },
     {
-      "Id": "dbc2244e-3763-4622-8687-d9469d01c875",
+      "__guid": "dbc2244e-3763-4622-8687-d9469d01c875",
       "Name": "floor_steam",
       "Position": "3589.186,-3165.098,2488",
       "Rotation": "0,0,0.3826834,0.9238796",
@@ -1862,13 +1906,40 @@
       "__Prefab": "prefabs/particles/floor_steam.prefab"
     },
     {
-      "Id": "2d3c76b9-0730-4a16-ac5e-c44b77fa03d5",
+      "__guid": "2d3c76b9-0730-4a16-ac5e-c44b77fa03d5",
       "Name": "steam",
       "Position": "3604.131,-3093.587,2511.518",
       "Rotation": "0.4242512,0.1757306,0.8207097,-0.3399491",
       "Tags": "particles",
       "NetworkMode": 2,
       "__Prefab": "prefabs/particles/steam.prefab"
+    },
+    {
+      "__guid": "ec710a45-3101-43e0-985f-f1ddf269f4cd",
+      "Name": "Joe Mama 1st",
+      "Position": "3217.898,-2926.47,2434.284",
+      "Rotation": "-0.01429655,-0.01055549,0.80436,-0.5938764",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/npcs/people/joe_mama.prefab"
+    },
+    {
+      "__guid": "484b8e2e-b95c-4fe6-83b0-382510bbb581",
+      "Name": "Joe Mama 1.5sd",
+      "Position": "3188.729,-2894.802,2434.284",
+      "Rotation": "-0.01429655,-0.01055549,0.80436,-0.5938764",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/npcs/people/joe_mama.prefab"
+    },
+    {
+      "__guid": "37382cf6-6fe5-4016-a6a6-3ad2727b117a",
+      "Name": "Joe Mama 2nd",
+      "Position": "3145.749,-2929.011,2434.284",
+      "Rotation": "-0.01429655,-0.01055549,0.80436,-0.5938764",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/npcs/people/joe_mama.prefab"
     }
   ],
   "SceneProperties": {
@@ -1894,6 +1965,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-13T14:56:57.6970057\u002B00:00",
+  "LastSaved": "2024-03-13T21:47:49.1342675\u002B01:00",
   "__references": []
 }

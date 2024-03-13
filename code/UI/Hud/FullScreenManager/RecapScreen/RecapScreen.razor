@@ -68,7 +68,10 @@
             </div>
 		</div>
 
-		<div class="continue" onclick=@(() => StoryMaster.StartSession())>CONTINUE</div>
+		@if (Player.Local.Connection.IsHost)
+		{
+			<div class="continue" onclick=@(() => StoryMaster.StartSession())>CONTINUE</div>
+		}
 	</div>
 </root>
 

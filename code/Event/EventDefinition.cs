@@ -182,7 +182,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 			eventComponent.IsPlaying = false;
 		}
 
-		_eventMaster.CurrentEvents.Remove( this );
+		_eventMaster?.CurrentEvents?.Remove( this );
 	}
 
 	public void Restart()
