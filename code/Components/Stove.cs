@@ -87,17 +87,8 @@ public sealed class Stove : Component
 			{
 				if ( obj.Components.TryGet<Player>( out var player ) )
 				{
-					if ( player.Components.TryGet<Inventory>( out var inventory ) )
-					{
-						foreach ( var item in inventory.EquippedItems )
-						{
-							if ( item is ItemEquipment equipped )
-							{
-								if ( equipped.Slot == EquipSlot.Body )
-									return (false, "Everyone must take their shirt off!");
-							}
-						}
-					}
+					if ( player.HasShirt )
+						return (false, "Everyone must take their shirt off!");
 				}
 			}
 		}

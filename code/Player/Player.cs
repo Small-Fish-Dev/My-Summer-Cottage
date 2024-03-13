@@ -32,6 +32,24 @@ public partial class Player : Component, Component.ExecuteInEditor
 		}
 	}
 
+	[Sync, MakeDirty]
+	public bool HasShirt
+	{
+		get
+		{
+			foreach ( var item in Inventory.EquippedItems )
+			{
+				if ( item is ItemEquipment equipped )
+				{
+					if ( equipped.Slot == EquipSlot.Body )
+						return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
 	public SkinnedModelRenderer Penoid { get; private set; }
 
 	Color _skinColor;
@@ -233,9 +251,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 		if ( PissEmitter != null )
 		{
 			PissEmitter.Enabled = IsPissing;
-			var pissRot = EyeAngles.WithRoll(0).WithYaw(0);
+			var pissRot = EyeAngles.WithRoll( 0 ).WithYaw( 0 );
 
-			PissEmitter.GameObject.Transform.LocalRotation =  pissRot.WithPitch( (pissRot.pitch -40).Clamp(-80,50));
+			PissEmitter.GameObject.Transform.LocalRotation = pissRot.WithPitch( (pissRot.pitch - 40).Clamp( -80, 50 ) );
 
 			if ( PissParticles != null )
 			{
