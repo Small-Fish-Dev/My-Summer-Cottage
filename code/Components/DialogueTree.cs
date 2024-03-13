@@ -93,6 +93,12 @@ public class DialogueTree : Component
 	public bool Networked { get; set; }
 
 	/// <summary>
+	/// If this has random dialogues set up and if at the start of the session it should pick a random one
+	/// </summary>
+	[Property]
+	public bool HasRandomDialogues { get; set; } = false;
+
+	/// <summary>
 	/// Each dialogue stage within the list are the possible interactions that can be performed.
 	/// Ex. The first element in the list has the options "Accept" and "Decline"
 	/// You can use SendToDialogueStage(...) and provide the index of the dialogue stage you'd like to move to.
@@ -132,8 +138,6 @@ public class DialogueTree : Component
 				);
 			}
 		}
-
-		SelectRandomDialogue();
 	}
 
 	public void SelectRandomDialogue()

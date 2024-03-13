@@ -339,6 +339,7 @@ public class StoryMaster : Component
 		storyMaster.LoadEventPool();
 
 		storyMaster.LoadNPCs();
+		storyMaster.SetRandomDialogues();
 
 		Game.ActiveScene.TimeScale = 1;
 
@@ -371,6 +372,15 @@ public class StoryMaster : Component
 		storyMaster.SaveGame();
 
 		Game.ActiveScene.TimeScale = 0;
+	}
+
+	public void SetRandomDialogues()
+	{
+		var allDialogues = Scene.GetAllComponents<DialogueTree>()
+			.Where( x => x.HasRandomDialogues );
+
+		foreach ( var dialogue in allDialogues )
+			dialogue.SelectRandomDialogue();
 	}
 
 	public void ClearTriggeredEvents()
