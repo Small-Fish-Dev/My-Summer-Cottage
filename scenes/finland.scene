@@ -146,6 +146,7 @@
             "1": {
               "ScriptedEvents": [
                 {
+                  "TriggerByTime": true,
                   "SignalToTrigger": "stove.begin_sauna",
                   "TriggerDelay": 5,
                   "TriggerTimeslot": "15.00,16.00,1",
@@ -911,7 +912,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.3974857,0,-0.9176084",
+          "Rotation": "0,-0.6549496,0,-0.7556726",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -934,10 +935,10 @@
               "__type": "GradientFog",
               "Color": "0.07447,0.11909,0.24025,1",
               "EndDistance": 5195.461,
-              "FalloffExponent": 1,
-              "Height": 4000,
-              "StartDistance": 0,
-              "VerticalFalloffExponent": 1.5
+              "FalloffExponent": 1.2000014,
+              "Height": 50000,
+              "StartDistance": 200,
+              "VerticalFalloffExponent": 1
             }
           ]
         },
@@ -1925,6 +1926,24 @@
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/items/rifle.prefab"
+    },
+    {
+      "Id": "0a072b49-e373-4560-874c-f738315fb3d8",
+      "Name": "outer_area",
+      "Position": "-6348.808,-9026.849,11772.6",
+      "Rotation": "0,0,-0.7071067,0.7071068",
+      "Scale": "2.947095,2.947095,3.401206",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/terrain/outer_area.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -1950,6 +1969,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-13T11:31:33.4373954\u002B02:00",
+  "LastSaved": "2024-03-13T13:13:31.7743888\u002B03:00",
   "__references": []
 }
