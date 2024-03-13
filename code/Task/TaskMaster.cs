@@ -270,11 +270,15 @@ public class TaskMaster : Component
 	public void ResetTasksProgression( bool save = true )
 	{
 		TasksProgression.Tasks?.Clear();
+		CurrentTasks.Clear();
 
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
 
 		foreach ( var task in allTasks )
+		{
+			task.Reset();
 			AddTaskProgression( task.ResourcePath );
+		}
 
 		if ( save )
 		{

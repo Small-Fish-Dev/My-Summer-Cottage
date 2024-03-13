@@ -420,7 +420,7 @@ public class StoryMaster : Component
 		if ( storyMaster != null )
 		{
 			storyMaster.ResetStoryProgression();
-			storyMaster._taskMaster.ResetTasksProgression();
+			storyMaster._taskMaster.ResetTasksProgression( true );
 			storyMaster._eventMaster.ResetEventsProgression();
 		}
 	}
@@ -440,7 +440,7 @@ public class StoryMaster : Component
 		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
 
 		if ( storyMaster != null )
-			storyMaster._taskMaster.ResetTasksProgression();
+			storyMaster._taskMaster.ResetTasksProgression( true );
 	}
 
 	[ConCmd( "sauna_reset_events" )]
