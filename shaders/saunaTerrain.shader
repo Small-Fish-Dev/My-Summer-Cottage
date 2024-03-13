@@ -201,8 +201,9 @@ PS
         Material m = Material::Init();
 
 		m.Albedo = ApplyWithSplatdata( l_tSplatColor_A, l_tSplatColor_B, l_tSplatColor_C, l_tSplatColor_D, l_tSplatData );	// Pass 1 - apply terrain textures according to splat maps
-		m.Albedo = lerp( m.Albedo, l_tSplatColor_LOD, smoothstep(550, 1000, scaleFactor));									// Pass 2 - render LOD texture with smooth transition
-		m.Albedo = lerp( m.Albedo, m.Albedo * 0.5, smoothstep( shoremin, shoremax, i.AbsolutePosition.z ));					// Pass 3 - height-based darkening effect
+		// m.Albedo = lerp( m.Albedo, l_tSplatColor_LOD, smoothstep(550, 1000, scaleFactor));									// Pass 2 - render LOD texture with smooth transition
+		// Re-enable later!
+		// m.Albedo = lerp( m.Albedo, m.Albedo * 0.5, smoothstep( shoremin, shoremax, i.AbsolutePosition.z ));					// Pass 3 - height-based darkening effect
 
 		m.Roughness = ApplyWithSplatdataBNW( 
 			float2(l_tSplatRoughness.r, l_tSplatColor_A.a), 
