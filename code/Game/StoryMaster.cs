@@ -435,9 +435,12 @@ public class StoryMaster : Component
 			{
 				if ( !scriptedEvent.Triggered )
 				{
-					if ( scriptedEvent.TriggerTime <= currentHour || scriptedEvent.TriggerTimeslot.FixedValue <= currentHour )
+					if ( scriptedEvent.SignalToTrigger == null || scriptedEvent.SignalToTrigger == "" || scriptedEvent.SignalToTrigger == String.Empty )
 					{
-						BeginScriptedEvent( scriptedEvent );
+						if ( scriptedEvent.TriggerTime <= currentHour || scriptedEvent.TriggerTimeslot.FixedValue <= currentHour )
+						{
+							BeginScriptedEvent( scriptedEvent );
+						}
 					}
 				}
 			}
