@@ -1,7 +1,9 @@
 {
   "RootObject": {
-    "Id": "ecb7f126-1720-4d80-97d0-dc384d09501c",
-    "Name": "steam",
+    "Id": "825786fb-90c0-456f-8533-c71423cffe0b",
+    "Name": "floor_steam",
+    "Position": "3589.186,-3165.098,2488",
+    "Rotation": "0,0,0.3826834,0.9238796",
     "Tags": "particles",
     "Enabled": true,
     "NetworkMode": 2,
@@ -10,49 +12,41 @@
         "__type": "ParticleEffect",
         "Alpha": {
           "Type": "Curve",
-          "CurveA": {
-            "rangey": "0,0.2",
-            "frames": [
-              {
-                "in": -0.5000002,
-                "out": 0.5000002
-              },
-              {
-                "x": 0.10119046,
-                "y": 0.08355064,
-                "in": -0.8301908,
-                "out": 0.8301908
-              },
-              {
-                "x": 0.49964088,
-                "y": 0.05319149,
-                "in": 0.27008173,
-                "out": -0.27008173
-              },
-              {
-                "x": 0.8348214,
-                "mode": "Flat"
-              }
-            ]
-          },
+          "CurveA": [
+            {
+              "in": -2.5333347,
+              "out": 2.5333347
+            },
+            {
+              "x": 0.3509852,
+              "y": 0.40585107,
+              "in": 0.12054352,
+              "out": -0.12054352
+            },
+            {
+              "x": 1
+            }
+          ],
           "Constants": "1,0,0,0"
         },
         "ApplyColor": true,
         "ApplyRotation": true,
         "ApplyShape": true,
         "Bounce": {
-          "Constants": "4,0,0,0"
+          "Constants": "1,0,0,0"
         },
         "Brightness": {
           "Constants": "1.2,0,0,0"
         },
         "Bumpiness": {},
-        "Collision": true,
+        "Collision": false,
         "CollisionRadius": 1,
-        "Damping": {},
+        "Damping": {
+          "Constants": "0.9,0,0,0"
+        },
         "DieOnCollisionChance": {},
         "Force": true,
-        "ForceDirection": "0,0,2",
+        "ForceDirection": "0,0,100",
         "ForceScale": {
           "Constants": "1,0,0,0"
         },
@@ -80,13 +74,13 @@
             ],
             "alpha": []
           },
-          "ConstantA": "1,1,1,1",
-          "ConstantB": "0.79535,0.79535,0.79535,1"
+          "ConstantA": "0.86512,0.86512,0.86512,1",
+          "ConstantB": "1,1,1,1"
         },
         "Lifetime": {
           "Type": "Range",
           "Evaluation": "Particle",
-          "Constants": "10,15,0,0"
+          "Constants": "3,5,0,0"
         },
         "MaxParticles": 100,
         "PerParticleTimeScale": {
@@ -100,37 +94,16 @@
           "Constants": "0,360,0,0"
         },
         "Scale": {
-          "Type": "Curve",
-          "CurveA": {
-            "rangey": "0,3",
-            "frames": [
-              {
-                "in": -2.0000007,
-                "out": 2.0000007
-              },
-              {
-                "x": 0.35914406,
-                "y": 0.55851066,
-                "in": -1.7484555E-07,
-                "out": 1.7484555E-07
-              },
-              {
-                "x": 0.7619048,
-                "y": 0.14083067,
-                "in": 1.0366281,
-                "out": -1.0366281
-              },
-              {
-                "x": 1,
-                "mode": "Flat"
-              }
-            ]
-          },
-          "Constants": "1,0,0,0"
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "CurveA": [
+            {}
+          ],
+          "Constants": "50,60,0,0"
         },
         "SequenceId": {},
         "SequenceSpeed": {
-          "Constants": "0.3,0,0,0"
+          "Constants": "0.5,0,0,0"
         },
         "SequenceTime": {
           "Constants": "1,0,0,0"
@@ -138,48 +111,84 @@
         "SheetSequence": true,
         "Space": "World",
         "StartVelocity": {
-          "Type": "Range",
-          "Evaluation": "Particle",
-          "Constants": "10,15,0,0"
+          "Type": "Curve",
+          "CurveA": {
+            "rangey": "0,5",
+            "frames": [
+              {
+                "y": 0.09840426,
+                "in": -0.80701774,
+                "out": 0.80701774
+              },
+              {
+                "x": 0.5848214,
+                "y": 0.30643803,
+                "in": -1.1238737,
+                "out": 1.1238737
+              },
+              {
+                "x": 0.8943452,
+                "y": 0.34807107,
+                "in": 1.3214444,
+                "out": -1.3214444
+              },
+              {
+                "x": 1,
+                "y": 0.15159558
+              }
+            ]
+          },
+          "Constants": "10,70,0,0"
         },
-        "Stretch": {},
+        "Stretch": {
+          "Type": "Curve",
+          "CurveA": [
+            {},
+            {
+              "x": 0.6458333,
+              "y": 0.6469147,
+              "in": -2.8608034,
+              "out": 2.8608034
+            },
+            {
+              "x": 1,
+              "y": 1
+            }
+          ]
+        },
         "TimeScale": 1,
         "Tint": "1,1,1,1"
       },
       {
         "__type": "ParticleSpriteRenderer",
         "Additive": false,
-        "BlurAmount": 0.98,
-        "BlurOpacity": 0.69,
-        "BlurSpacing": 1,
+        "BlurAmount": 0.5,
+        "BlurOpacity": 0.91,
+        "BlurSpacing": 0.73,
         "DepthFeather": 50,
         "FaceVelocity": false,
-        "FogStrength": 0.81,
+        "FogStrength": 1,
         "LeadingTrail": true,
-        "MotionBlur": true,
+        "MotionBlur": false,
         "Opaque": false,
         "RotationOffset": 0,
-        "Scale": 10,
+        "Scale": 1,
         "Shadows": false,
-        "SortMode": "ByDistance",
+        "SortMode": "Unsorted",
         "Texture": "textures/rain/cloud.vtex"
       },
       {
-        "__type": "ParticleConeEmitter",
+        "__type": "ParticleBoxEmitter",
         "Burst": 0,
-        "ConeAngle": 16.83,
-        "ConeFar": 50,
-        "ConeNear": 10,
         "Delay": 0,
         "DestroyOnEnd": false,
-        "Duration": 3,
-        "InVolume": false,
+        "Duration": 10,
         "Loop": true,
         "OnEdge": false,
-        "Rate": 5
+        "Rate": 10,
+        "Size": "240,159.9,2"
       }
-    ],
-    "Children": []
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,

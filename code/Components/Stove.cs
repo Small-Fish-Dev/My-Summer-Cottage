@@ -74,6 +74,26 @@ public sealed class Stove : Component
 		if ( !HasWater ) return (false, "There is no water!");
 		if ( Door != null && Door.State != DoorState.Close ) return (false, "The front door is open!");
 		if ( PlayersInArea != null && PlayersInArea.ObjectsInside.Count < Player.All.Count() ) return (false, "Everyone must be inside!");
+		if ( PlayersInArea != null )
+		{
+			foreach ( var obj in PlayersInArea.ObjectsInside )
+			{
+				if ( obj.Components.TryGet<Player>( out var player ) )
+				{
+					if ( player.Components.TryGet<Inventory>( out var inventory ) )
+					{
+						foreach ( var item in inventory.EquippedItems )
+						{
+							if ( item is ItemEquipment equipped )
+							{
+								if ( equipped.Slot == EquipSlot.Body )
+									return (false, "Everyone must take their shirt off!");
+							}
+						}
+					}
+				}
+			}
+		}
 
 		return (true, "Start the sauna.");
 	}

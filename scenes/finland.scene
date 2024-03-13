@@ -912,7 +912,7 @@
           "Id": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.940773,0,-0.3390373",
+          "Rotation": "0,0.4039468,0,0.9147825",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1545,24 +1545,6 @@
       "__Prefab": "prefabs/items/flashlight.prefab"
     },
     {
-      "Id": "cf9c95d2-4396-4e97-b90e-5aa097952197",
-      "Name": "Door",
-      "Position": "2758.465,-2552.061,2453.448",
-      "Rotation": "0,0,-0.8660254,0.5000001",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "__Prefab": "prefabs/objects/door.prefab"
-    },
-    {
-      "Id": "f0a035d0-4cdc-4d37-9973-5a805425e665",
-      "Name": "Door",
-      "Position": "3080.018,-2630.501,2453.448",
-      "Rotation": "0,0,-0.2774571,0.9607379",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "__Prefab": "prefabs/objects/door.prefab"
-    },
-    {
       "Id": "d17d8a78-2e4d-44f8-b632-9494a33981c1",
       "Name": "WoodPile",
       "Position": "3490.215,-3095.327,2435.073",
@@ -1578,27 +1560,7 @@
       "Scale": "0.6,0.6,1",
       "Enabled": true,
       "NetworkMode": 2,
-      "Components": [
-        {
-          "__type": "ModelRenderer",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/logchopbase/logchopperbase.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "HullCollider",
-          "BoxSize": "50,50,50",
-          "Center": "0,0,0",
-          "Height": 45,
-          "IsTrigger": false,
-          "Radius": 20.4,
-          "Radius2": 0,
-          "Slices": 16,
-          "Static": false,
-          "Type": "Cylinder"
-        }
-      ]
+      "__Prefab": "prefabs/objects/stump.prefab"
     },
     {
       "Id": "150d407b-01ef-4a3b-b859-7d8b564237cc",
@@ -1882,16 +1844,6 @@
       ]
     },
     {
-      "Id": "89f1b0a3-3487-4525-bab4-2565456b1411",
-      "Name": "elk_female",
-      "Position": "3662.861,-2310.624,2472.044",
-      "Rotation": "0.002083458,0.01772273,-0.1167298,0.9930034",
-      "Tags": "animal,npc",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/npcs/elk_female.prefab"
-    },
-    {
       "Id": "309325f1-10d4-4399-9316-6636a332b578",
       "Name": "fishing_rod",
       "Position": "3340.382,-2993.729,2488.04",
@@ -1899,6 +1851,24 @@
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/items/fishing_rod.prefab"
+    },
+    {
+      "Id": "dbc2244e-3763-4622-8687-d9469d01c875",
+      "Name": "floor_steam",
+      "Position": "3589.186,-3165.098,2488",
+      "Rotation": "0,0,0.3826834,0.9238796",
+      "Tags": "particles",
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/particles/floor_steam.prefab"
+    },
+    {
+      "Id": "2d3c76b9-0730-4a16-ac5e-c44b77fa03d5",
+      "Name": "steam",
+      "Position": "3604.131,-3093.587,2511.518",
+      "Rotation": "0.4242512,0.1757306,0.8207097,-0.3399491",
+      "Tags": "particles",
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/particles/steam.prefab"
     }
   ],
   "SceneProperties": {
@@ -1924,6 +1894,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-13T14:22:32.5024662\u002B01:00",
+  "LastSaved": "2024-03-13T14:56:57.6970057\u002B00:00",
   "__references": []
 }
