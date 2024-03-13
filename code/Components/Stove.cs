@@ -98,5 +98,11 @@ public sealed class Stove : Component
 		{
 			player.AddExperience( 300 );
 		}
+
+		await Task.Delay( 10000 );
+
+		IsRunning = false;
+		HasWood = false;
+		HasWood = false;
 	}
 }
