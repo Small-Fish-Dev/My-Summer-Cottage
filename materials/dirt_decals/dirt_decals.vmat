@@ -5,6 +5,7 @@ Layer0
 	shader "shaders/saunaworld.shader"
 
 	//---- Rendering ----
+	F_ALPHA_TEST 1
 	F_DO_NOT_CAST_SHADOWS 1
 	F_TRANSPARENCY 1
 
@@ -18,6 +19,10 @@ Layer0
 	Metalness "materials/default/default_metal.tga"
 	Normal "materials/dirt_decals/dirt_decals_normal.png"
 	Roughness "materials/dirt_decals/dirt_decals_roughness.png"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
 
 	//---- Transparency ----
 	TransparencyMask "materials/dirt_decals/dirt_decals_opacity.png"
