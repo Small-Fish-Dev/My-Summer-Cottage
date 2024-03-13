@@ -28,7 +28,7 @@ public sealed class Stove : Component
 		interactions.AddInteraction( new Interaction()
 		{
 			Identifier = $"stove.wood_put_in",
-			Action = ( Player interactor, GameObject obj ) => PlaceWood( interactor ),
+			Action = ( Player interactor, GameObject obj ) => PlaceWood( interactor.ConnectionID ),
 			Keybind = "use2",
 			Description = "Insert split log",
 			Disabled = () => HasWood || !Player.Local.Inventory.BackpackItems.Any( x => x.IsValid() && x.Name == "Split Log" ),
@@ -40,7 +40,7 @@ public sealed class Stove : Component
 		interactions.AddInteraction( new Interaction()
 		{
 			Identifier = $"stove.begin_sauna",
-			Action = ( Player interactor, GameObject obj ) => BeginSauna( interactor ),
+			Action = ( Player interactor, GameObject obj ) => BeginSauna( interactor.ConnectionID ),
 			Keybind = "use",
 			Description = "Begin sauna",
 			Disabled = () => !CanSauna().Item1,
@@ -58,13 +58,20 @@ public sealed class Stove : Component
 		GameObject.Name = $"Stove{(HasWater && HasWood && !IsRunning ? " (Ready)" : (HasWater ? "" : $" (Needs{(HasWood ? "" : " wood and")} water)"))}";
 	}
 
-	void PlaceWood( Player interactor )
+	[Broadcast( NetPermission.Anyone )]
+	void PlaceWood( Guid interactor )
 	{
-		HasWood = true;
-		interactor.Inventory.BackpackItems
-			.Where( x => x.IsValid() && x.Name == "Split Log" )
-			.FirstOrDefault()
-			.Destroy();
+		var player = Player.GetByID( interactor );
+
+		if ( player.IsValid() )
+		{
+			HasWood = true;
+
+			player.Inventory.BackpackItems
+				.Where( x => x.IsValid() && x.Name == "Split Log" )
+				.FirstOrDefault()
+				.Destroy();
+		}
 	}
 
 	(bool, string) CanSauna()
@@ -80,17 +87,8 @@ public sealed class Stove : Component
 			{
 				if ( obj.Components.TryGet<Player>( out var player ) )
 				{
-					if ( player.Components.TryGet<Inventory>( out var inventory ) )
-					{
-						foreach ( var item in inventory.EquippedItems )
-						{
-							if ( item is ItemEquipment equipped )
-							{
-								if ( equipped.Slot == EquipSlot.Body )
-									return (false, "Everyone must take their shirt off!");
-							}
-						}
-					}
+					if ( player.HasShirt )
+						return (false, "Everyone must take their shirt off!");
 				}
 			}
 		}
@@ -108,10 +106,21 @@ public sealed class Stove : Component
 			return $"Start the sauna.";
 	}
 
-	async void BeginSauna( Player interactor )
+	[Broadcast( NetPermission.Anyone )]
+	void BeginSauna( Guid interactor )
 	{
-		IsRunning = true;
+		var player = Player.GetByID( interactor );
 
+		if ( player.IsValid() )
+		{
+			IsRunning = true;
+
+			BeginSaunaDelay( player );
+		}
+	}
+
+	async void BeginSaunaDelay( Player interactor )
+	{
 		await Task.Delay( 1000 );
 
 		foreach ( var player in Player.All )

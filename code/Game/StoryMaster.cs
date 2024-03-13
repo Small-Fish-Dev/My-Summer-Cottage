@@ -220,6 +220,18 @@ public class StoryMaster : Component
 			spawner.RemoveNPCs();
 	}
 
+	public void LoadItems()
+	{
+		foreach ( var spawner in Scene.GetAllComponents<ItemSpawnArea>() )
+			spawner.SpawnItems();
+	}
+
+	public void UnloadItems()
+	{
+		foreach ( var spawner in Scene.GetAllComponents<ItemSpawnArea>() )
+			spawner.RemoveItems();
+	}
+
 	public void LoadStoryProgression()
 	{
 		if ( FileSystem.Data.FileExists( "story.json" ) )
@@ -339,6 +351,7 @@ public class StoryMaster : Component
 		storyMaster.LoadEventPool();
 
 		storyMaster.LoadNPCs();
+		storyMaster.LoadItems();
 		storyMaster.SetRandomDialogues();
 
 		Game.ActiveScene.TimeScale = 1;
@@ -367,6 +380,7 @@ public class StoryMaster : Component
 		storyMaster._eventMaster.UnloadAllEvents();
 
 		storyMaster.UnloadNPCs();
+		storyMaster.UnloadItems();
 		storyMaster.ClearTasks();
 		storyMaster.ClearTriggeredEvents();
 		storyMaster.SaveGame();
