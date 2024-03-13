@@ -3,6 +3,7 @@
     "Id": "b31ebae6-4480-4350-98e7-0422a670f807",
     "Name": "le_fishe_au_chocolat",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "Fish",
@@ -30,12 +31,9 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
-        "BoneMergeTarget": null,
         "CreateBoneObjects": false,
         "MaterialGroup": "poop",
-        "MaterialOverride": null,
         "Model": "models/fauna/fish/perch/perch.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -44,16 +42,18 @@
         "__type": "ModelCollider",
         "IsTrigger": false,
         "Model": "models/fauna/fish/perch/perch.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
-        "Locking": {},
+        "Locking": {
+          "Roll": true
+        },
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

@@ -1,8 +1,9 @@
 {
   "RootObject": {
-    "Id": "e315af50-406b-4152-8f98-a1ce4db7a756",
+    "Id": "309325f1-10d4-4399-9316-6636a332b578",
     "Name": "fishing_rod",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
@@ -39,12 +40,12 @@
           "_type": "gameobject",
           "prefab": "prefabs/items/fishing_bobber.prefab"
         },
-        "RetractDistance": 1250,
+        "RetractDistance": 2500,
         "ThrowForce": 1000,
         "CastSound": "sounds/fishingrod/fishingrod_cast.sound",
         "Renderer": {
           "_type": "component",
-          "go": "e315af50-406b-4152-8f98-a1ce4db7a756",
+          "go": "309325f1-10d4-4399-9316-6636a332b578",
           "component_type": "SkinnedModelRenderer"
         }
       },
@@ -70,6 +71,7 @@
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

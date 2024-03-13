@@ -3,6 +3,7 @@
     "Id": "c93cd111-a34f-4aec-a030-11fffbbca4c9",
     "Name": "salmon_rare",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "Fish",
@@ -30,12 +31,9 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
-        "BoneMergeTarget": null,
         "CreateBoneObjects": false,
         "MaterialGroup": "rare",
-        "MaterialOverride": null,
         "Model": "models/fauna/fish/salmon/salmon.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -44,16 +42,18 @@
         "__type": "ModelCollider",
         "IsTrigger": false,
         "Model": "models/fauna/fish/salmon/salmon.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
-        "Locking": {},
+        "Locking": {
+          "Roll": true
+        },
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

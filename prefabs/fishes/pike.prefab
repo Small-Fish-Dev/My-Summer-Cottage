@@ -3,6 +3,7 @@
     "Id": "b4ad2da0-8ce3-4440-97f1-e3d32e3de3ea",
     "Name": "pike",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "Fish",
@@ -30,12 +31,8 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
-        "BoneMergeTarget": null,
         "CreateBoneObjects": false,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/fauna/fish/pike/pike.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -44,16 +41,18 @@
         "__type": "ModelCollider",
         "IsTrigger": false,
         "Model": "models/fauna/fish/pike/pike.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
-        "Locking": {},
+        "Locking": {
+          "Roll": true
+        },
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

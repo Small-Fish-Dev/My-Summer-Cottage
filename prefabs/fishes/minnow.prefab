@@ -3,6 +3,7 @@
     "Id": "e5497e1e-355c-4ea3-99d6-e626291a8b57",
     "Name": "minnow",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "Fish",
@@ -29,12 +30,8 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "AnimationGraph": null,
         "BodyGroups": 18446744073709551615,
-        "BoneMergeTarget": null,
         "CreateBoneObjects": false,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/fauna/fish/minnow/minnow.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
@@ -43,16 +40,18 @@
         "__type": "ModelCollider",
         "IsTrigger": false,
         "Model": "models/fauna/fish/minnow/minnow.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
-        "Locking": {},
+        "Locking": {
+          "Roll": true
+        },
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }
