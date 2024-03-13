@@ -49,28 +49,28 @@
 	SoundHandle _loopStart;
 	SoundHandle _loop;
 
-	TimeUntil playLoop;
+	RealTimeUntil _playLoop;
 
-	public void Initialize()
+	public async void Initialize()
 	{
 		SaveData = Player.GetSave();
 
 		// Start music.
 		sounds.start = SoundFile.Load( "sounds/music/zakkujo-ero_vaimosta-loop_start.sound" );
-		sounds.start.LoadAsync();
+		await sounds.start.LoadAsync();
 
 		sounds.loop = SoundFile.Load( "sounds/music/zakkujo-ero_vaimosta-loop.sound" );
-		sounds.loop.LoadAsync();
+		await sounds.loop.LoadAsync();
 
 		_loopStart = Sound.PlayFile( sounds.start );
 		_loopStart.ListenLocal = true;
 		_loopStart.Volume = Volume;
-		playLoop = sounds.start.Duration;
+		_playLoop = sounds.start.Duration;
 	}
 
 	protected override void OnUpdate()
 	{
-		if ( playLoop && _loop == null && sounds.loop != null )
+		if ( _playLoop && _loop == null && sounds.loop != null )
 		{
 			_loop = Sound.PlayFile( sounds.loop );
 			_loop.ListenLocal = true;

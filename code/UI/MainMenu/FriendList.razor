@@ -1,4 +1,4 @@
-﻿@namespace Sauna.UI
+@namespace Sauna.UI
 @attribute [StyleSheet]
 @inherits Panel
 
@@ -86,22 +86,11 @@
 			lobbies.Clear();
 			foreach ( var lobby in all )
 			{
-				long id;
-				try
-				{
-					id = Convert.ToInt64( lobby.Map );
-				}
-				catch ( Exception ex )
-				{
-					Log.Error( $"Ignoring invalid lobby {lobby.Map}! - {ex.Message}" );
-					continue;
-				}
-
-				var user = new Friend( id );
+				var user = new Friend( (long)lobby.OwnerId );
 				if ( !user.IsFriend || user.IsMe || lobbies.Any( x => x.Host.Id == user.Id ) )
 					continue;
 
-				lobbies.Add( new LobbyData
+				lobbies.Add( new LobbyData	
 				{
 					Host = user,
 					ServerId = lobby.LobbyId,
