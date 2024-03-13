@@ -432,6 +432,15 @@ public class Inventory : Component
 		Player.HideBodygroups = bodygroups;
 	}
 
+	public int GetTotalItemCount( string name )
+	{
+		return BackpackItems.Where( x => x.Name == name ).Count();
+	}
+
+	public bool HasItem( string name )
+	{
+		return BackpackItems.Any( x => x.Name == name );
+	}
 
 	[ConCmd]
 	public static void UnEquip( int index )
