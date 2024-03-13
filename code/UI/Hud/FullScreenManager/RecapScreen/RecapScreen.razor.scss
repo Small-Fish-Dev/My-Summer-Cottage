@@ -13,6 +13,7 @@ RecapScreen {
     gap: 30px;
     font-weight: bold;
     letter-spacing: 1px;
+    transition: opacity 0.5s ease-in-out;
 
     .title {
         margin-top: 70px;
@@ -216,11 +217,20 @@ RecapScreen {
         justify-content: center;
         align-items: center;
         font-size: 24px;
-        transition: transform 0.25s ease-in-out;
+        transition: transform 0.15s ease-out;
 
         &:hover {
             cursor: pointer;
             transform: scale(1.1);
+            sound-in: 'hover';
         }
+
+        &:active {
+            sound-in: 'light_click';
+        }
+    }
+
+    &:intro {
+        opacity: 0;
     }
 }
