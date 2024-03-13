@@ -344,9 +344,32 @@ public class StoryMaster : Component
 		storyMaster._eventMaster.UnloadAllEvents();
 
 		storyMaster.UnloadNPCs();
+		storyMaster.ClearTasks();
+		storyMaster.ClearTriggeredEvents();
 		storyMaster.SaveGame();
 
 		Game.ActiveScene.TimeScale = 0;
+	}
+
+	public void ClearTriggeredEvents()
+	{
+		foreach ( var @event in CurrentSaunaDay.ScriptedEvents )
+		{
+			@event.Triggered = false;
+		}
+	}
+
+	public void ClearTasks()
+	{
+
+		foreach ( var task in ActiveTasks.ToList() )
+		{
+			if ( task.Completed || !task.PersistThroughSessions )
+			{
+				task.Reset();
+				_taskMaster.CurrentTasks.Remove( task );
+			}
+		}
 	}
 
 	public void SaveGame()
