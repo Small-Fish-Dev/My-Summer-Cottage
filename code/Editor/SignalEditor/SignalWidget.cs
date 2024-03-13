@@ -189,6 +189,7 @@ internal class SignalWidget : ControlWidget
 			} );
 
 
+		/* CAN'T SERIALIZE AND DESERIALIZE Interaction.InteractionEvent AND I DON'T HAVE TIME TO FIX IT
 		var allPrefabDialogues = PrefabLibrary.All
 			.SelectMany( prefab =>
 			{
@@ -220,7 +221,7 @@ internal class SignalWidget : ControlWidget
 
 						return options;
 					} );
-			} );
+			} );*/
 
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>()
 			.SelectMany( x =>
@@ -265,7 +266,7 @@ internal class SignalWidget : ControlWidget
 		sceneTriggers = sceneTriggers.Concat( allItems );
 		sceneTriggers = sceneTriggers.Concat( allEvents );
 		sceneTriggers = sceneTriggers.Concat( allInteractions );
-		sceneTriggers = sceneTriggers.Concat( allPrefabDialogues );
+		//sceneTriggers = sceneTriggers.Concat( allPrefabDialogues ); READ ABOVE
 
 		_menu = new Menu();
 		_menu.DeleteOnClose = true;
