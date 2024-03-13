@@ -50,9 +50,9 @@
 					<PlayerPortrait Player=@player />
 				}
 
-				if ( players.Count() < 5 )
+				if ( players.Count() < NetworkManager.MAX_PLAYERS )
 				{
-					<div class="invite" @onclick=@(() => { Log.Error( "invite" ); } )>+</div>
+					<div class="invite">+</div>
 				}
 			}
 		</div>
