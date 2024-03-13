@@ -25,7 +25,7 @@
 				</div>
 
                 <div style="flex-direction: row-reverse; gap: 8px;">
-                    @if (Pinned.TimeLimited && !Pinned.TaskTimer)
+                    @if (Pinned.TimeLimited && !Pinned.TaskTimer && !Pinned.Completed)
                     {
                         <div class="task-timer">@(MathF.Round(Pinned.TimeLimitInSeconds - Pinned.TaskTimer.Passed)) seconds left...</div>
                     }

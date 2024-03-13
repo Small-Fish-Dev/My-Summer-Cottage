@@ -21,7 +21,7 @@
 							<div class="success failed">FAILED</div>
 						}
                     }
-                    @if (SelectedTask.TimeLimited && !SelectedTask.TaskTimer )
+                    @if (SelectedTask.TimeLimited && !SelectedTask.TaskTimer && !SelectedTask.Completed)
                     {
                         <div class="success failed">@(MathF.Round( SelectedTask.TimeLimitInSeconds - SelectedTask.TaskTimer.Passed )) seconds left...</div>
                     }
