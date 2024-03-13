@@ -170,7 +170,10 @@ public class Inventory : Component
 
 		var velocity = Player.Velocity + Player.ViewRay.Forward * 150f;
 		if ( item.GameObject.Components.TryGet<Rigidbody>( out var rigidbody, FindMode.EverythingInSelf ) )
+		{
 			rigidbody.Velocity = velocity;
+			rigidbody.MotionEnabled = true;
+		}
 		else if ( item.GameObject.Components.TryGet<ModelPhysics>( out var modelPhysics, FindMode.EverythingInSelf ) )
 		{
 			item.GameObject.Enabled = false;
