@@ -29,35 +29,54 @@
         "__type": "DialogueTree",
         "DialogueStages": [
           {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 0.1,
             "AvailableResponses": [
               {
-                "Identifier": "tree_stump_speak",
                 "Keybind": "Use",
-                "InteractDistance": 125,
-                "DynamicColor": null,
-                "Disabled": null
-              },
-              {
-                "Identifier": "fuckyoubitch",
-                "Keybind": "Use",
-                "InteractDistance": 125,
-                "DynamicColor": null,
-                "Disabled": null
+                "Description": "WTF",
+                "InteractDistance": 125
               }
             ]
           },
           {
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
             "AvailableResponses": [
               {
-                "Identifier": "hello",
                 "Keybind": "Use",
-                "InteractDistance": 125,
-                "DynamicColor": null,
-                "Disabled": null
+                "Description": "HELLO 1",
+                "InteractDistance": 125
+              }
+            ]
+          },
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "HELLO 2",
+                "InteractDistance": 125
+              }
+            ]
+          },
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "HELLO 3",
+                "InteractDistance": 125
               }
             ]
           }
         ],
+        "HasRandomDialogues": false,
         "HostOnly": false,
         "Name": "Tree Stump",
         "Networked": false

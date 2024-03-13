@@ -1,7 +1,7 @@
 {
   "RootObject": {
-    "Id": "2d3c76b9-0730-4a16-ac5e-c44b77fa03d5",
-    "Name": "whisical_sparkles",
+    "Id": "726a9f8e-3cca-49e1-9aa6-eb5e0f1f1d7e",
+    "Name": "coins",
     "Tags": "particles",
     "Enabled": true,
     "NetworkMode": 2,
@@ -12,23 +12,14 @@
           "Type": "Curve",
           "CurveA": [
             {
-              "in": -0.5000002,
-              "out": 0.5000002
+              "y": 1
             },
             {
-              "x": 0.18005951,
-              "y": 0.32823148,
-              "in": -2.1910403,
-              "out": 2.1910403
+              "x": 0.70238096,
+              "y": 1
             },
             {
-              "x": 0.7689861,
-              "y": 0.41223404,
-              "in": 1.3916038,
-              "out": -1.3916038
-            },
-            {
-              "x": 0.9970238,
+              "x": 1,
               "mode": "Flat"
             }
           ],
@@ -38,58 +29,35 @@
         "ApplyRotation": true,
         "ApplyShape": true,
         "Bounce": {
-          "Constants": "4,0,0,0"
+          "Constants": "3,0,0,0"
         },
         "Brightness": {
-          "Constants": "2,0,0,0"
+          "Constants": "1,0,0,0"
         },
         "Bumpiness": {},
         "Collision": true,
+        "CollisionIgnore": "localplayer",
         "CollisionRadius": 1,
         "Damping": {
-          "Constants": "0.05,0,0,0"
+          "Constants": "2,0,0,0"
         },
-        "DieOnCollisionChance": {
-          "Constants": "1,0,0,0"
-        },
+        "DieOnCollisionChance": {},
         "Force": true,
-        "ForceDirection": "0,0,-1",
+        "ForceDirection": "0,0,-600",
         "ForceScale": {
           "Constants": "1,0,0,0"
         },
         "Friction": {
-          "Constants": "1,0,0,0"
+          "Constants": "100,0,0,0"
         },
         "Gradient": {
+          "Type": "Range",
           "Evaluation": "Particle",
           "GradientA": {
             "color": [
               {
-                "c": "1,0,0,1"
-              },
-              {
-                "t": 0.16452992,
-                "c": "0.77237,0.06186,0.95,1"
-              },
-              {
-                "t": 0.38675213,
-                "c": "0.12744,0.06512,1,1"
-              },
-              {
-                "t": 0.5641026,
-                "c": "0,1,0.85,1"
-              },
-              {
-                "t": 0.71581197,
-                "c": "0.33333,1,0,1"
-              },
-              {
-                "t": 0.85683763,
-                "c": "1,0.9,0,1"
-              },
-              {
-                "t": 1,
-                "c": "1,0.5,0,1"
+                "t": 0.5,
+                "c": "1,1,1,1"
               }
             ],
             "alpha": []
@@ -104,19 +72,21 @@
             "alpha": []
           },
           "ConstantA": "1,1,1,1",
-          "ConstantB": "0.83333,1,0,1"
+          "ConstantB": "0.48372,0.43846,0.32398,1"
         },
         "Lifetime": {
           "Type": "Range",
           "Evaluation": "Particle",
-          "Constants": "5,7,0,0"
+          "Constants": "2,3,0,0"
         },
-        "MaxParticles": 100,
+        "MaxParticles": 200,
         "PerParticleTimeScale": {
           "Constants": "1,0.4,0,0"
         },
         "PreWarm": 0,
-        "PushStrength": {},
+        "PushStrength": {
+          "Constants": "5,0,0,0"
+        },
         "Roll": {
           "Type": "Range",
           "Evaluation": "Particle",
@@ -125,27 +95,21 @@
         "Scale": {
           "Type": "Curve",
           "CurveA": {
-            "rangey": "0,0.5",
+            "rangey": "1,2",
             "frames": [
               {
-                "in": -2.0000007,
-                "out": 2.0000007
+                "y": 0.95478725
               },
               {
-                "x": 0.19991787,
-                "y": 0.37765962,
-                "in": -0.57965827,
-                "out": 0.57965827
-              },
-              {
-                "x": 0.8229167,
-                "y": 0.25785196,
-                "in": 1.0366281,
-                "out": -1.0366281
+                "x": 0.69345236,
+                "y": 0.9468085,
+                "in": 0.06779674,
+                "out": -0.06779674
               },
               {
                 "x": 1,
-                "mode": "Flat"
+                "in": 4.6315794,
+                "out": -4.6315794
               }
             ]
           },
@@ -153,7 +117,7 @@
         },
         "SequenceId": {},
         "SequenceSpeed": {
-          "Constants": "0.3,0,0,0"
+          "Constants": "0.6,0,0,0"
         },
         "SequenceTime": {
           "Constants": "1,0,0,0"
@@ -163,7 +127,7 @@
         "StartVelocity": {
           "Type": "Range",
           "Evaluation": "Particle",
-          "Constants": "10,15,0,0"
+          "Constants": "100,200,0,0"
         },
         "Stretch": {},
         "TimeScale": 1,
@@ -171,35 +135,35 @@
       },
       {
         "__type": "ParticleSpriteRenderer",
-        "Additive": true,
-        "BlurAmount": 0.98,
-        "BlurOpacity": 0.93,
-        "BlurSpacing": 1,
+        "Additive": false,
+        "BlurAmount": 0,
+        "BlurOpacity": 0,
+        "BlurSpacing": 0,
         "DepthFeather": 50,
         "FaceVelocity": false,
-        "FogStrength": 0.81,
+        "FogStrength": 1,
         "LeadingTrail": true,
         "MotionBlur": true,
         "Opaque": false,
         "RotationOffset": 0,
-        "Scale": 3,
+        "Scale": 1,
         "Shadows": false,
         "SortMode": "ByDistance",
-        "Texture": "materials/particles/shapes/star1.vtex"
+        "Texture": "textures/markka.vtex"
       },
       {
         "__type": "ParticleConeEmitter",
         "Burst": 0,
-        "ConeAngle": 16.83,
-        "ConeFar": 50,
-        "ConeNear": 10,
+        "ConeAngle": 22.03,
+        "ConeFar": 13.499808,
+        "ConeNear": 0,
         "Delay": 0,
-        "DestroyOnEnd": false,
-        "Duration": 3,
+        "DestroyOnEnd": true,
+        "Duration": 10,
         "InVolume": false,
         "Loop": true,
         "OnEdge": false,
-        "Rate": 10
+        "Rate": 50
       }
     ],
     "Children": []
