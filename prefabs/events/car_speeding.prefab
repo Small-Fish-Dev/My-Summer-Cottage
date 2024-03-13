@@ -888,6 +888,127 @@
             "component_type": "EventAreaTrigger"
           }
         ]
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "b7991858-ff05-4443-b4fb-775f8420e772",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "57cc7097-85d6-493a-b88c-4fcafe67244c",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/Sauna.Player",
+              "package.fish.sauna/HealthComponent"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "192,96"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "432,96"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_name": "Damage",
+                "_isStatic": false,
+                "_type": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "704,16"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "triggerer",
+              "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "Value": 10,
+              "DstId": 3,
+              "DstName": "amount"
+            },
+            {
+              "Value": {
+                "_type": "gameobject",
+                "go": "3250ee80-2c93-49c0-a14a-d3da77f3ebd9"
+              },
+              "DstId": 3,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 900,
+              "DstId": 3,
+              "DstName": "force"
+            },
+            {
+              "Value": "0,0,1",
+              "DstId": 3,
+              "DstName": "forceDirection"
+            },
+            {
+              "Value": "Serious",
+              "DstId": 3,
+              "DstName": "type"
+            }
+          ]
+        },
+        "RequiredToFinish": false,
+        "TriggerCooldown": 1,
+        "TriggerOnce": false,
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "82069422-a500-47c6-8636-095cd6cc845b",
+            "go": "8cde3867-69c2-41ba-8ddd-c3f6a4afec23",
+            "component_type": "EventAreaTrigger"
+          }
+        ]
       }
     ],
     "Children": [
@@ -992,11 +1113,12 @@
               {
                 "__type": "EventAreaTrigger",
                 "__guid": "82069422-a500-47c6-8636-095cd6cc845b",
-                "Extents": "0,0,0",
-                "MaxPollingRate": 5,
-                "Offset": "0,0,0",
+                "Extents": "191.2001,97.92001,114.4",
+                "MaxPollingRate": 1,
+                "Offset": "59.35998,0,30.08",
+                "TagSet": "player",
                 "TriggerPrefab": [],
-                "TriggerSignalIdentifier": null
+                "TriggerSignalIdentifier": "cat_hit_player"
               }
             ]
           }
