@@ -17,6 +17,7 @@ public class DoorComponent : Component
 	[Property] public float OpenTime { get; set; } = 0.25f;
 	[Property] public float Angle { get; set; } = 100f;
 	[Property] public Vector3 Pivot { get; set; }
+	[Property] public SoundEvent Sound { get; set; }
 
 	[HostSync] private Transform InitialTransform { get; set; }
 
@@ -39,7 +40,7 @@ public class DoorComponent : Component
 			Cooldown = true,
 			CooldownTime = 1f,
 			InteractDistance = 100f,
-			Action = ( Player player, GameObject obj ) => 
+			Action = ( Player player, GameObject obj ) =>
 			{
 				// todo: door sound
 				var dot = Vector3.Dot( InitialTransform.Rotation.Backward, (Transform.Position - player.Transform.Position).Normal );
@@ -49,7 +50,8 @@ public class DoorComponent : Component
 			},
 			ShowWhenDisabled = () => true,
 			Disabled = () => State == DoorState.Closing || State == DoorState.Opening,
-			Animation = InteractAnimations.Interact
+			Animation = InteractAnimations.Interact,
+			Sound = () => Sound
 		} );
 	}
 

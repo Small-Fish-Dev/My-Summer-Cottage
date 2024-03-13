@@ -1,13 +1,13 @@
 {
   "RootObject": {
-    "Id": "44f61157-fd23-4435-b27f-76351013edd4",
-    "Name": "Door",
-    "Rotation": "0,-0,-0.7071068,0.7071068",
+    "__guid": "44f61157-fd23-4435-b27f-76351013edd4",
+    "Name": "door",
     "Enabled": true,
     "NetworkMode": 1,
     "Components": [
       {
         "__type": "ModelRenderer",
+        "__guid": "a6d67cd0-d0e8-4931-ab73-e3b18ade96b7",
         "BodyGroups": 18446744073709551615,
         "Model": "models/door_big_window/door_big_window.vmdl",
         "RenderType": "On",
@@ -15,13 +15,17 @@
       },
       {
         "__type": "DoorComponent",
+        "__guid": "e03f4a5d-6a2f-45ed-b715-bbff943a976e",
         "Angle": 100,
+        "BothSides": true,
         "OpenTime": 0.25,
         "Pivot": "0.000003607557,-20.17492,0",
+        "Sound": "sounds/door/door_creak.sound",
         "State": "Close"
       },
       {
         "__type": "ModelCollider",
+        "__guid": "da092631-edf4-4c74-a2b0-32616924e261",
         "IsTrigger": false,
         "Model": "models/door_big_window/door_big_window.vmdl",
         "Static": false
