@@ -26,8 +26,8 @@ public partial class NPC
 		{
 			return NavigationType switch
 			{
-				NavigationType.Dumb => 5,
-				NavigationType.Normal => 10,
+				NavigationType.Dumb => 7,
+				NavigationType.Normal => 11,
 				NavigationType.Smart => 16,
 				_ => 10,
 			};
@@ -40,8 +40,8 @@ public partial class NPC
 		{
 			return NavigationType switch
 			{
-				NavigationType.Dumb => 20,
-				NavigationType.Normal => 8,
+				NavigationType.Dumb => 10,
+				NavigationType.Normal => 5,
 				NavigationType.Smart => 2,
 				_ => 8,
 			};
