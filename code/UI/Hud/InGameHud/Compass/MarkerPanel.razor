@@ -1,0 +1,25 @@
+﻿@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+	@if ( !string.IsNullOrEmpty( Marker?.Texture ) )
+	{
+		<img class="icon" src=@Marker.Texture />
+	}
+</root>
+
+@code {
+	public Marker Marker { get; set; }
+
+	public override void OnParentChanged()
+	{
+		base.OnParentChanged();
+		StateHasChanged();
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Marker != null, Marker?.Texture, Marker?.Name );
+	}
+}

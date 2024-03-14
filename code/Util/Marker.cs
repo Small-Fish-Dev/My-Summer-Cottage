@@ -17,18 +17,19 @@ public class Marker
 
 	public string Name;
 	public Vector3 Position;
-	public string Texture;
+	public MarkerIcon Icon;
+	public string Texture => Icon switch
+	{
+		MarkerIcon.Home => "ui/hud/home.png",
+		MarkerIcon.Primary => "ui/hud/primary_task.png",
+		_ => "ui/hud/substory_task.png",
+	};
 
 	private Marker( string name, Vector3 position, MarkerIcon icon )
 	{
 		Name = name;
 		Position = position;
-		Texture = icon switch
-		{
-			MarkerIcon.Home => "ui/hud/home.png",
-			MarkerIcon.Primary => "ui/hud/primary_task.png",
-			_ => "ui/hud/substory_task.png",
-		};
+		Icon = icon;
 	}
 
 	/// <summary>

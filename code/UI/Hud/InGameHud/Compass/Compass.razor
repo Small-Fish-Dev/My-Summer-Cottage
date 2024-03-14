@@ -12,52 +12,40 @@
 
 @code {
 	public static Compass Instance { get; private set; }
-	
-	public GameTimeManager GameTimeManager { get; set; }
-	
-	private float ContainerWidth => 650f;
 
-	private struct MarkerData
-	{
-		public Panel Panel;
-		public Marker Marker;
-	}
+	public GameTimeManager GameTimeManager { get; set; }
+
+	private static float ContainerWidth => 650f;
 
 	private Panel _container;
 	private Panel _line;
-	private List<MarkerData> _markers;
+	private static List<MarkerPanel> _markers;
 
 	public Compass()
 	{
+		if ( _markers != null )
+			foreach ( var marker in _markers )
+				if ( marker.Marker == null )
+					_markers.Remove( marker );
+
 		Instance = this;
 	}
 
 	public void InitializeMarker( Marker marker )
 	{
-		var panel = _line.AddChild<Panel>( "marker" );
-		if ( !string.IsNullOrEmpty( marker.Texture ) )
-		{
-			var img = panel.AddChild<Image>( "icon" );
-			img.SetTexture( marker.Texture );
-		}
-		Log.Error(panel);
-		_markers.Add( new MarkerData
-		{
-			Panel = panel,
-			Marker = marker,
-		} );
+		var panel = _line.AddChild<MarkerPanel>( "marker" );
+		panel.Marker = marker;
+		_markers.Add( panel );
 	}
 
 	public void RemoveMarker( Marker marker )
 	{
-		var data = _markers?.FirstOrDefault( m => marker == m.Marker );
-		if ( data == null )
+		var panel = _markers?.FirstOrDefault( m => marker == m.Marker );
+		if ( panel == null )
 			return;
 
-		data?.Panel?.Delete();
-
-		if ( data.HasValue )
-			_markers.Remove( data.Value );
+		panel.Delete();
+		_markers.Remove( panel );
 	}
 
 	protected override void OnAfterTreeRender( bool firstTime )
@@ -69,18 +57,9 @@
 
 		_markers ??= Marker.All.Select( marker =>
 		{
-			var panel = _line.AddChild<Panel>( "marker" );
-			if ( !string.IsNullOrEmpty( marker.Texture ) )
-			{
-				var img = panel.AddChild<Image>( "icon" );
-				img.SetTexture( marker.Texture );
-			}
-
-			return new MarkerData
-			{
-				Panel = panel,
-				Marker = marker,
-			};
+			var panel = _line.AddChild<MarkerPanel>( "marker" );
+			panel.Marker = marker;
+			return panel;
 		} ).ToList();
 
 		if ( Player.Local == null || _markers == null )
@@ -92,11 +71,10 @@
 
 		for ( int i = 0; i < _markers.Count; i++ )
 		{
-			var data = _markers[i];
-			var panel = data.Panel;
-			var marker = data.Marker;
+			var panel = _markers[i];
+			var marker = panel.Marker;
 
-			if ( panel?.Parent == null )
+			if ( panel?.Parent != _line )
 				_line.AddChild( panel );
 
 			var diff = Rotation.LookAt( marker.Position - Player.Local.Transform.Position ).Yaw();
@@ -122,6 +100,6 @@
 		return HashCode.Combine(
 			// Update every minute
 			GameTimeManager.InGameSeconds / 60,
-			Player.Local?.EyeAngles.yaw, Player.Local?.Transform.Position, _markers.Count );
+			Player.Local?.EyeAngles.yaw, Player.Local?.Transform.Position, _markers?.Count );
 	}
 }
