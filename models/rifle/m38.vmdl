@@ -17,6 +17,10 @@
 								from = "m38.vmat"
 								to = "models/rifle/m38.vmat"
 							},
+							{
+								from = "airsoft_tip.vmat"
+								to = "models/rifle/airsoft_tip.vmat"
+							},
 						]
 						use_global_default = false
 						global_default_material = ""
@@ -43,6 +47,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
+						name = "M38"
 						filename = "models/rifle/M38.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -56,6 +61,63 @@
 							exclude_by_default = false
 							exception_list = [  ]
 						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "tip"
+						filename = "models/rifle/airsoft_tip.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "BodyGroup"
+						name = "rifle"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"M38",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "airsoft"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"tip",
+								]
+							},
+						]
+						hidden_in_tools = false
 					},
 				]
 			},
