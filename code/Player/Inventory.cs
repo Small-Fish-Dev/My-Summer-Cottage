@@ -470,7 +470,8 @@ public class Inventory : Component
 
 	public int GetTotalItemCount( string name )
 	{
-		return BackpackItems.Where( x => x.Name == name ).Count();
+		Log.Info( BackpackItems.Where( x => x.Name.ToLower() == name.ToLower() ) );
+		return BackpackItems.Where( x => x.Name.ToLower() == name.ToLower() ).Count();
 	}
 
 	public bool HasItem( string name )

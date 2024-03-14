@@ -1,12 +1,13 @@
 {
   "RootObject": {
-    "Id": "7a37f831-1108-421e-a055-9d3176ccb783",
+    "__guid": "7a37f831-1108-421e-a055-9d3176ccb783",
     "Name": "car",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "Interactions",
+        "__guid": "0d7b9a69-43a9-48f9-b46d-43086510a542",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -30,16 +31,34 @@
                   "Id": 1,
                   "Type": "event.endsession",
                   "UserData": {
-                    "Position": "176,-0"
+                    "Position": "448,16"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "time.delay",
+                  "UserData": {
+                    "Position": "272,128"
                   }
                 }
               ],
               "Links": [
                 {
-                  "SrcId": 0,
+                  "SrcId": 2,
                   "SrcName": "_signal",
                   "DstId": 1,
                   "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": 0.5,
+                  "DstId": 2,
+                  "DstName": "seconds"
                 }
               ]
             },
@@ -351,6 +370,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "170f0926-03be-4810-847d-e421e6de6fb1",
         "BodyGroups": 1,
         "MaterialGroup": "default",
         "Model": "models/old_red_lada/old_red_lada.vmdl",
@@ -359,6 +379,7 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "d25acfd6-3e80-496c-a7f0-83c810df5e0d",
         "IsTrigger": false,
         "Model": "models/old_red_lada/old_red_lada.vmdl",
         "Static": false
@@ -366,7 +387,7 @@
     ],
     "Children": [
       {
-        "Id": "1699a99b-a08c-439d-af3f-beff4e6af009",
+        "__guid": "1699a99b-a08c-439d-af3f-beff4e6af009",
         "Name": "PlayerTrigger",
         "Position": "0,0,-0.4049997",
         "Enabled": true,
@@ -374,6 +395,7 @@
         "Components": [
           {
             "__type": "EventAreaFinder",
+            "__guid": "5c502e2c-f304-4f5d-a54c-98f9abed5757",
             "Extents": "626.08,589.84,200",
             "MaxPollingRate": 10,
             "Offset": "0,0,50",

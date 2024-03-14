@@ -155,7 +155,6 @@
             "1": {
               "ScriptedEvents": [
                 {
-                  "TriggerByTime": true,
                   "SignalToTrigger": "stove.begin_sauna",
                   "TriggerDelay": 5,
                   "TriggerTimeslot": "15.00,16.00,1",
@@ -191,13 +190,6 @@
                         }
                       },
                       {
-                        "Id": 3,
-                        "Type": "event.getrandomtask",
-                        "UserData": {
-                          "Position": "32,-32"
-                        }
-                      },
-                      {
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
@@ -218,24 +210,6 @@
                         },
                         "UserData": {
                           "Position": "512,-96"
-                        }
-                      },
-                      {
-                        "Id": 9,
-                        "Type": "property.get",
-                        "ParentId": 3,
-                        "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
-                        }
-                      },
-                      {
-                        "Id": 10,
-                        "Type": "property.get",
-                        "ParentId": 3,
-                        "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
                         }
                       },
                       {
@@ -274,6 +248,35 @@
                         "UserData": {
                           "Position": "736,-112"
                         }
+                      },
+                      {
+                        "Id": 17,
+                        "Type": "resource.ref",
+                        "Properties": {
+                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                        },
+                        "UserData": {
+                          "Position": "0,224"
+                        }
+                      },
+                      {
+                        "Id": 18,
+                        "Type": "property.get",
+                        "ParentId": 17,
+                        "Properties": {
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Giver"
+                        }
+                      },
+                      {
+                        "Id": 19,
+                        "Type": "property.get",
+                        "ParentId": 17,
+                        "Properties": {
+                          "_type": "package.fish.sauna/Sauna.SaunaTask",
+                          "_name": "Message"
+                        }
                       }
                     ],
                     "Links": [
@@ -302,57 +305,34 @@
                         "DstName": "player"
                       },
                       {
-                        "SrcId": 3,
+                        "SrcId": 17,
                         "SrcName": "_result",
                         "DstId": 2,
                         "DstName": "taskToAdd"
                       },
                       {
-                        "SrcId": 0,
-                        "SrcName": "_signal",
-                        "DstId": 3,
-                        "DstName": "_signal"
-                      },
-                      {
-                        "Value": "GivenByWife",
-                        "DstId": 3,
-                        "DstName": "taskType"
-                      },
-                      {
-                        "SrcId": 3,
+                        "SrcId": 17,
                         "SrcName": "_result",
                         "DstId": 5,
                         "DstName": "_target"
                       },
                       {
-                        "SrcId": 3,
+                        "SrcId": 0,
                         "SrcName": "_signal",
                         "DstId": 8,
                         "DstName": "_signal"
                       },
                       {
-                        "SrcId": 9,
+                        "SrcId": 19,
                         "SrcName": "_result",
                         "DstId": 8,
                         "DstName": "content"
                       },
                       {
-                        "SrcId": 10,
+                        "SrcId": 18,
                         "SrcName": "_result",
                         "DstId": 8,
                         "DstName": "sender"
-                      },
-                      {
-                        "SrcId": 3,
-                        "SrcName": "_result",
-                        "DstId": 9,
-                        "DstName": "_target"
-                      },
-                      {
-                        "SrcId": 3,
-                        "SrcName": "_result",
-                        "DstId": 10,
-                        "DstName": "_target"
                       },
                       {
                         "SrcId": 15,
@@ -378,7 +358,7 @@
                         "DstName": "subtitle"
                       },
                       {
-                        "SrcId": 3,
+                        "SrcId": 0,
                         "SrcName": "_signal",
                         "DstId": 14,
                         "DstName": "_signal"
@@ -398,6 +378,18 @@
                         "Value": 1,
                         "DstId": 15,
                         "DstName": "seconds"
+                      },
+                      {
+                        "SrcId": 17,
+                        "SrcName": "_result",
+                        "DstId": 18,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 17,
+                        "SrcName": "_result",
+                        "DstId": 19,
+                        "DstName": "_target"
                       }
                     ]
                   }
@@ -929,7 +921,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.9106089,0,-0.4132691",
+          "Rotation": "0,0.5877546,0,0.8090393",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1086,6 +1078,7 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -1181,6 +1174,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1678,7 +1673,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "a7eea751-d5f1-4d45-bf63-8ea14d1e697e",
+                "component_id": "baeddbf3-49fd-4819-bfc6-4ae5fcd4c968",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -2299,6 +2294,63 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "13de70ab-8013-4a25-9a1d-8f95a72b329b",
+      "Name": "Supermarket",
+      "Position": "-8302.423,8635.603,2455.557",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "__guid": "a6ffb30f-519a-41bc-92fd-49566af4934e",
+          "Extents": "642.0801,341.4399,155.28",
+          "MaxPollingRate": 20,
+          "Offset": "-14.72,-69.12003,63.27997",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "supermarket.entered"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "d2de7660-6669-4833-bc9d-a70c819a6541",
+          "Name": "shop_bread",
+          "Position": "-2.658203,-38.13184,49.50513",
+          "Rotation": "0,0,0.3826833,0.9238794",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "03f8257e-bb82-427f-b1da-b0abdee430ab",
+          "Name": "shop_bread (1)",
+          "Position": "-2.933594,-22.7334,49.50513",
+          "Rotation": "0,0,0.3826833,0.9238794",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "456a80ea-5d41-41cd-b529-b348dc8c45bd",
+          "Name": "shop_bread (2)",
+          "Position": "-3.571289,-7.158203,49.50513",
+          "Rotation": "0,0,0.3826833,0.9238794",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "58a928a4-c6e7-4ac0-bf60-e5d057692f62",
+          "Name": "shop_bread (3)",
+          "Position": "-2.814453,7.467773,49.50513",
+          "Rotation": "0,0,0.3826833,0.9238794",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -2324,6 +2376,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-14T04:37:52.5420881\u002B01:00",
+  "LastSaved": "2024-03-14T05:44:44.7302568\u002B01:00",
   "__references": []
 }

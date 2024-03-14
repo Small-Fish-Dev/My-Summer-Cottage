@@ -68,4 +68,11 @@ public static partial class PlayerNodes
 
 		await GameTask.DelaySeconds( startingTransition + blackTransition + endingTransition );
 	}
+
+	[ActionGraphNode( "inventory.amountofitem" ), Pure]
+	[Title( "Amount of Item in Inventory" ), Group( "Player" ), Icon( "categories" )]
+	public static int AmountInInventory( Inventory inventory, string nameOfItem )
+	{
+		return inventory.GetTotalItemCount( nameOfItem );
+	}
 }
