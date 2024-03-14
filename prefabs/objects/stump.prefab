@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "7e2a4434-79ef-47a2-a2c0-951450c0171a",
+    "__guid": "7e2a4434-79ef-47a2-a2c0-951450c0171a",
     "Name": "stump",
     "Scale": "0.6,0.6,1",
     "Enabled": true,
@@ -8,6 +8,7 @@
     "Components": [
       {
         "__type": "ModelRenderer",
+        "__guid": "8ace9aaf-d2df-4575-a3c2-3018fcfe6fef",
         "BodyGroups": 18446744073709551615,
         "Model": "models/logchopbase/logchopperbase.vmdl",
         "RenderType": "On",
@@ -15,6 +16,7 @@
       },
       {
         "__type": "HullCollider",
+        "__guid": "efc36c19-0531-4398-817d-7f6e5cc3c11a",
         "BoxSize": "50,50,50",
         "Center": "0,0,0",
         "Height": 45,
@@ -24,62 +26,6 @@
         "Slices": 16,
         "Static": false,
         "Type": "Cylinder"
-      },
-      {
-        "__type": "DialogueTree",
-        "DialogueStages": [
-          {
-            "IsInitial": true,
-            "AddToDialoguePool": true,
-            "DialoguePoolWeight": 0.1,
-            "AvailableResponses": [
-              {
-                "Keybind": "Use",
-                "Description": "WTF",
-                "InteractDistance": 125
-              }
-            ]
-          },
-          {
-            "AddToDialoguePool": true,
-            "DialoguePoolWeight": 1,
-            "AvailableResponses": [
-              {
-                "Keybind": "Use",
-                "Description": "HELLO 1",
-                "InteractDistance": 125
-              }
-            ]
-          },
-          {
-            "IsInitial": true,
-            "AddToDialoguePool": true,
-            "DialoguePoolWeight": 1,
-            "AvailableResponses": [
-              {
-                "Keybind": "Use",
-                "Description": "HELLO 2",
-                "InteractDistance": 125
-              }
-            ]
-          },
-          {
-            "IsInitial": true,
-            "AddToDialoguePool": true,
-            "DialoguePoolWeight": 1,
-            "AvailableResponses": [
-              {
-                "Keybind": "Use",
-                "Description": "HELLO 3",
-                "InteractDistance": 125
-              }
-            ]
-          }
-        ],
-        "HasRandomDialogues": false,
-        "HostOnly": false,
-        "Name": "Tree Stump",
-        "Networked": false
       }
     ],
     "Children": []
@@ -87,5 +33,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }
