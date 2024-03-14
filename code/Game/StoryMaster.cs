@@ -336,7 +336,6 @@ public class StoryMaster : Component
 	[Broadcast( NetPermission.HostOnly )]
 	public static void StartSession()
 	{
-		Log.Info( "WTF" );
 		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().First();
 
 		if ( storyMaster == null ) return;
@@ -354,8 +353,6 @@ public class StoryMaster : Component
 		storyMaster.LoadNPCs();
 		storyMaster.LoadItems();
 		storyMaster.SetRandomDialogues();
-
-		Game.ActiveScene.TimeScale = 1;
 
 		foreach ( var player in Player.All )
 		{
@@ -385,8 +382,6 @@ public class StoryMaster : Component
 		storyMaster.ClearTasks();
 		storyMaster.ClearTriggeredEvents();
 		storyMaster.SaveGame();
-
-		Game.ActiveScene.TimeScale = 0;
 	}
 
 	public void SetRandomDialogues()
