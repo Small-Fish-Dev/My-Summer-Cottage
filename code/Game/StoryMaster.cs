@@ -358,6 +358,9 @@ public class StoryMaster : Component
 		if ( storyMaster.CurrentSaunaDay.Completed )
 			storyMaster.NextStoryDay();
 
+		if ( storyMaster._taskMaster != null && TaskMaster._instance != null )
+			storyMaster.ClearTasks();
+
 		storyMaster.LoadStoryProgression();
 		storyMaster.StartStoryDay();
 		storyMaster._timeManager.StartDay();
@@ -391,7 +394,6 @@ public class StoryMaster : Component
 
 		storyMaster.UnloadNPCs();
 		storyMaster.UnloadItems();
-		storyMaster.ClearTasks();
 		storyMaster.ClearTriggeredEvents();
 		storyMaster.SaveGame();
 	}
