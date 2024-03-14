@@ -56,7 +56,7 @@ public partial class Player
 		if ( oldLevel != Level )
 		{
 			OnLevelUp?.Invoke( Level );
-			GiveMoney( 5 + Level * 5 );
+			GiveMoney( 10 + Level * 5 );
 		}
 	}
 }
