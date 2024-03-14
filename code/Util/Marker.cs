@@ -1,19 +1,17 @@
 ﻿namespace Sauna;
 
-public enum MarkerIcon 
+public enum MarkerIcon
 {
 	Home,
 	Sub,
-	Primary
+	Primary,
+	Event
 }
 
 public class Marker
 {
 	public static IReadOnlyList<Marker> All => all;
-	private static List<Marker> all = new List<Marker>
-	{
-		new( "Sauna", new Vector3( 1040f, -840f, 89f ), MarkerIcon.Home ),
-	};
+	private static List<Marker> all = new();
 
 	public string Name;
 	public Vector3 Position;
@@ -22,6 +20,7 @@ public class Marker
 	{
 		MarkerIcon.Home => "ui/hud/home.png",
 		MarkerIcon.Primary => "ui/hud/primary_task.png",
+		MarkerIcon.Event => "ui/hud/question_mark.png",
 		_ => "ui/hud/substory_task.png",
 	};
 
@@ -42,7 +41,7 @@ public class Marker
 	public static Marker Create( string name, Vector3 position, MarkerIcon icon = MarkerIcon.Sub )
 	{
 		var marker = new Marker( name, position, icon );
-		UI.Compass.Instance.InitializeMarker( marker );
+		UI.Compass.Instance?.InitializeMarker( marker );
 		return marker;
 	}
 
