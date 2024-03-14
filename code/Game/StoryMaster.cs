@@ -248,7 +248,7 @@ public class StoryMaster : Component
 	/// </summary>
 	public void SaveStoryProgression( bool print = true )
 	{
-		if ( !Player.Local.Connection.IsHost )
+		if ( !Connection.Local.IsHost )
 			return;
 
 		FileSystem.Data.WriteJson( "story.json", StoryProgression );
@@ -335,7 +335,6 @@ public class StoryMaster : Component
 		}
 	}
 
-	[ConCmd]
 	[Broadcast( NetPermission.HostOnly )]
 	public static void StartSession()
 	{
@@ -358,22 +357,26 @@ public class StoryMaster : Component
 
 		if ( storyMaster == null ) return;
 
-		if ( storyMaster.CurrentSaunaDay.Completed )
-			storyMaster.NextStoryDay();
-
-		if ( storyMaster._taskMaster != null && TaskMaster._instance != null )
+		if ( storyMaster._taskMaster != null && _instance != null )
 			storyMaster.ClearTasks();
 
-		storyMaster.LoadStoryProgression();
 		storyMaster.StartStoryDay();
 		storyMaster._timeManager.StartDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
 		storyMaster.LoadEventPool();
 
-		storyMaster.LoadNPCs();
-		storyMaster.LoadItems();
 		storyMaster.SetRandomDialogues();
+
+		if ( Connection.Local.IsHost )
+		{
+			if ( storyMaster.CurrentSaunaDay.Completed )
+				storyMaster.NextStoryDay();
+
+			storyMaster.LoadStoryProgression();
+			storyMaster.LoadNPCs();
+			storyMaster.LoadItems();
+		}
 
 		if ( Player.Local.IsValid() )
 			Player.Local.Respawn();
@@ -420,7 +423,6 @@ public class StoryMaster : Component
 
 	public void ClearTasks()
 	{
-
 		foreach ( var task in ActiveTasks.ToList() )
 		{
 			if ( task.Completed || !task.PersistThroughSessions )
@@ -442,9 +444,9 @@ public class StoryMaster : Component
 	protected override void OnStart()
 	{
 		if ( Scene.IsEditor ) return;
-		if ( IsProxy ) return;
 
-		StartSession();
+		if ( Connection.Local.IsHost )
+			StartSession();
 	}
 
 	protected override void OnFixedUpdate()

@@ -68,7 +68,7 @@
             </div>
 		</div>
 
-		@if (Player.Local.Connection.IsHost)
+		@if (Connection.Local.IsHost)
 		{
 			<div class="continue" onclick=@(() => { if (!_clickedContinue) StartNextDay(); _clickedContinue = true; })>CONTINUE</div>
 		}
