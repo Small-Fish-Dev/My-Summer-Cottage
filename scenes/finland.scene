@@ -229,8 +229,8 @@
                         "Id": 13,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "sounds/speech/1.sound",
-                          "T": "Sandbox.Engine/Sandbox.SoundEvent"
+                          "T": "Sandbox.Engine/Sandbox.SoundEvent",
+                          "value": "sounds/speech/1.sound"
                         },
                         "UserData": {
                           "Position": "864,-48"
@@ -254,8 +254,8 @@
                         "Id": 17,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task",
-                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task"
                         },
                         "UserData": {
                           "Position": "0,224"
@@ -438,8 +438,8 @@
                         "Id": 4,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task",
-                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task"
                         },
                         "UserData": {
                           "Position": "-240,192"
@@ -746,8 +746,8 @@
                         "Id": 9,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task",
-                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task"
                         },
                         "UserData": {
                           "Position": "-240,368"
@@ -922,7 +922,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.7740721,0,-0.6330975",
+          "Rotation": "0,-0.8312706,0,0.5558679",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1578,7 +1578,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "9117c59d-8ffd-436e-bab5-619f99a896f6",
+                "component_id": "bb1cc7d5-dd44-4935-89e7-b6b292b4b38c",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -1706,6 +1706,174 @@
           "Enabled": true,
           "NetworkMode": 1,
           "__Prefab": "prefabs/objects/door.prefab"
+        },
+        {
+          "__guid": "47fb30c0-a903-43d3-b87e-fe56f2b5b4d6",
+          "Name": "Bench",
+          "Position": "26.24707,-76.70947,16.19263",
+          "Rotation": "0,0,0.9238795,0.3826834",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "ad23d398-3810-43f4-8314-13b720c5eb49",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "d1bc1efd-d751-4635-8aeb-b372e6db5a83",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "a2fbda21-7bd6-442f-b626-c7104e198639",
+          "Name": "Bench",
+          "Position": "52.34619,-50.6123,16.19263",
+          "Rotation": "0,0,0.9238795,0.3826834",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "4588391d-26f2-4ac2-b055-865be919d7c9",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "3089fe8c-4f95-4bf6-8e41-9408e09ef3f7",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "1fd897ed-e837-4c9b-adae-973fe3a6d751",
+          "Name": "Bench",
+          "Position": "-100.6467,-5.723389,10.51074",
+          "Rotation": "0,0,0.3826836,-0.9238795",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "9d5e9f42-a440-4bd5-a88e-ce3dcdd50e7f",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "96362a58-0c35-4708-b12c-d9ebd16b89b9",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "af739918-cb0b-4fbc-868f-f102393a7822",
+          "Name": "Bench",
+          "Position": "82.66992,-20.29004,16.19263",
+          "Rotation": "0,0,0.9238795,0.3826834",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "38e116b8-ba54-48d7-b77f-4476b6dd52ec",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "cdbf5b59-38e5-4047-a993-c98539dc0bfd",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "00b321a4-7bad-40d0-bc66-148a26ac11eb",
+          "Name": "Bench",
+          "Position": "-70.32349,24.59863,10.51074",
+          "Rotation": "0,0,0.3826836,-0.9238795",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "64e497ca-38c2-4575-8fb5-f98a39af2aea",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "de4a5a1a-af32-4ba2-8373-66af1bc6668d",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "6d07ed40-1c8a-40b8-8c0b-44f7687f58b4",
+          "Name": "Bench",
+          "Position": "84.97656,39.31763,16.19263",
+          "Rotation": "0,0,0.9238796,-0.3826834",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "9616dc9f-43fa-47f1-a2c8-e4ae68c260f5",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "96f5fe58-bfd4-41c6-9aad-2edb5532785a",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
         }
       ]
     },
@@ -3283,7 +3451,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-14T22:31:09.2564631\u002B01:00",
+  "LastSaved": "2024-03-14T23:06:09.0322962\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
