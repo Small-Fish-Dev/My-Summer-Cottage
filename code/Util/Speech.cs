@@ -32,7 +32,7 @@ public struct Speech
 			Settings = settings,
 			Duration = (float)text.Length / settings.Accuracy * settings.Delay / 1000f
 		};
-		Log.Error( speech.Duration );
+
 		var characters = text
 			.ToLower()
 			.RemoveDiacritics()
