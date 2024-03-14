@@ -27,9 +27,12 @@ public static class SceneHandler
 		if ( scene == SaunaScene.Game )
 		{
 			// Connect to lobby.
-			var connected = await GameNetworkSystem.TryConnectSteamId( lobby.Value );
-			if ( connected )
-				return;
+			if ( lobby.HasValue )
+			{
+				var connected = await GameNetworkSystem.TryConnectSteamId( lobby.Value );
+				if ( connected )
+					return;
+			}
 
 			// Connect to local.
 			Game.ActiveScene.LoadFromFile( path );
