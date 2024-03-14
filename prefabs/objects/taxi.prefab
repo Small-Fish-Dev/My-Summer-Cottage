@@ -1,0 +1,156 @@
+{
+  "RootObject": {
+    "__guid": "5f0cbb3d-80fe-4c19-b5ab-82bd0c2340e7",
+    "Name": "taxi",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "__guid": "ce11fe69-6703-435e-9a93-721907fac104",
+        "BodyGroups": 1,
+        "MaterialGroup": "normal",
+        "Model": "models/old_red_lada/old_red_lada.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ModelCollider",
+        "__guid": "6aa0dfdc-85d9-439a-a69a-11e829b93f6d",
+        "IsTrigger": false,
+        "Model": "models/old_red_lada/old_red_lada.vmdl",
+        "Static": false
+      },
+      {
+        "__type": "EventAreaTrigger",
+        "__guid": "9f6b03a4-8fd5-4d5b-b110-09e9131a6cca",
+        "Extents": "97.67995,59.51995,48.07989",
+        "MaxPollingRate": 1,
+        "Offset": "47.12004,0,22.88",
+        "TagSet": "player,npc",
+        "TriggerPrefab": [],
+        "TriggerSignalIdentifier": null
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "661539b0-f29c-4bb6-a71e-71da89df87ef",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "b003520e-420b-4b68-ba57-38598dea6068",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/HealthComponent"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/HealthComponent",
+                "_name": "Damage",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "880,112"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "5f0cbb3d-80fe-4c19-b5ab-82bd0c2340e7"
+                }
+              },
+              "UserData": {
+                "Position": "320,192"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "416,80"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "Value": 10,
+              "DstId": 3,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 300,
+              "DstId": 3,
+              "DstName": "force"
+            },
+            {
+              "Value": "0,0,1",
+              "DstId": 3,
+              "DstName": "forceDirection"
+            },
+            {
+              "Value": "Serious",
+              "DstId": 3,
+              "DstName": "type"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "triggerer",
+              "DstId": 6,
+              "DstName": "_this"
+            }
+          ]
+        },
+        "RequiredToFinish": false,
+        "TriggerCooldown": 0.5,
+        "TriggerOnce": false,
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "9f6b03a4-8fd5-4d5b-b110-09e9131a6cca",
+            "go": "5f0cbb3d-80fe-4c19-b5ab-82bd0c2340e7",
+            "component_type": "EventAreaTrigger"
+          }
+        ]
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
