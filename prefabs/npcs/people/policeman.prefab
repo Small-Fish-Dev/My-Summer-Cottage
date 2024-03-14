@@ -1,0 +1,1546 @@
+{
+  "RootObject": {
+    "__guid": "e33fe8b5-d797-4761-9aa2-c993b017117b",
+    "Name": "policeman",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "NPC",
+        "__guid": "d71533e2-8e3b-4074-b301-989dc1ea545d",
+        "AlertOthers": true,
+        "AttackCooldown": 2,
+        "AttackRange": 50,
+        "DetectRange": 256,
+        "EnemyTags": "player",
+        "FaceTowardsVelocity": true,
+        "Health": {
+          "_type": "component",
+          "component_id": "db2f47b8-9dfc-4662-a8c2-f8e63a63d4c3",
+          "go": "e33fe8b5-d797-4761-9aa2-c993b017117b",
+          "component_type": "HealthComponent"
+        },
+        "Idle": true,
+        "MaximumIdleCooldown": 13,
+        "MaxRunAnimationSpeed": 150,
+        "MinimumIdleCooldown": 7,
+        "Model": {
+          "_type": "component",
+          "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+          "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "MoveHelper": {
+          "_type": "component",
+          "component_id": "26e681ec-b4d2-438f-9ac2-5141abeb326c",
+          "go": "e33fe8b5-d797-4761-9aa2-c993b017117b",
+          "component_type": "MoveHelper"
+        },
+        "Name": "Default",
+        "OnAttack": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Attack",
+            "id": "488dc240-ada0-459a-b0e2-4c10c4115ba8",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/HealthComponent"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 10,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                }
+              },
+              "UserData": {
+                "Position": "-16,-192"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                }
+              },
+              "UserData": {
+                "Position": "-16,-192"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set"
+              },
+              "UserData": {
+                "Position": "320,-192"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "0,128"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "package.fish.sauna/HealthComponent",
+                "_name": "Damage"
+              },
+              "UserData": {
+                "Position": "336,48"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "e33fe8b5-d797-4761-9aa2-c993b017117b"
+                }
+              },
+              "UserData": {
+                "Position": "-16,-128"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 13,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 12,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "_target"
+            },
+            {
+              "Value": "action",
+              "DstId": 13,
+              "DstName": "v"
+            },
+            {
+              "Value": true,
+              "DstId": 13,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 14,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 15,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 15,
+              "DstName": "_target"
+            },
+            {
+              "Value": 3,
+              "DstId": 15,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "_result",
+              "DstId": 15,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 10,
+              "DstId": 15,
+              "DstName": "force"
+            },
+            {
+              "Value": "Average",
+              "DstId": 15,
+              "DstName": "type"
+            }
+          ]
+        },
+        "OnDetect": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Detect",
+            "id": "409efedd-363e-4b43-b565-7dd4f1863bcb",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/Sauna.Player"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Labels": {
+                  "enemy": "enemy"
+                }
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "112,128"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "property.get",
+              "ParentId": 1,
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "HidePenoid"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "if",
+              "UserData": {
+                "Position": "480,128"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "d71533e2-8e3b-4074-b301-989dc1ea545d",
+                  "go": "e33fe8b5-d797-4761-9aa2-c993b017117b",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-0,-128",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "928,-128"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "e33fe8b5-d797-4761-9aa2-c993b017117b"
+                }
+              },
+              "UserData": {
+                "Position": "-32,-288"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "property.get",
+              "ParentId": 16,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 18,
+              "Type": "property.get",
+              "ParentId": 17,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "432,-80"
+              }
+            },
+            {
+              "Id": 22,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "704,48"
+              }
+            },
+            {
+              "Id": 23,
+              "Type": "npc.startfollowing",
+              "UserData": {
+                "Position": "928,256"
+              }
+            },
+            {
+              "Id": 24,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "1216,272"
+              }
+            },
+            {
+              "Id": 26,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                }
+              },
+              "UserData": {
+                "Position": "416,368"
+              }
+            },
+            {
+              "Id": 28,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                }
+              },
+              "UserData": {
+                "Position": "416,368"
+              }
+            },
+            {
+              "Id": 29,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set"
+              },
+              "UserData": {
+                "Position": "640,272"
+              }
+            },
+            {
+              "Id": 30,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                }
+              },
+              "UserData": {
+                "Position": "1232,480"
+              }
+            },
+            {
+              "Id": 31,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set"
+              },
+              "UserData": {
+                "Position": "1456,384"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 22,
+              "SrcName": "_signal",
+              "DstId": 14,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "_result",
+              "DstId": 18,
+              "DstName": "_target"
+            },
+            {
+              "Value": 100,
+              "DstId": 21,
+              "DstName": "maxRange"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_result",
+              "DstId": 21,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "true",
+              "DstId": 22,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 22,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "false",
+              "DstId": 23,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 23,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 23,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "failedToReachTarget",
+              "DstId": 24,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "false",
+              "DstId": 29,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 28,
+              "SrcName": "_result",
+              "DstId": 29,
+              "DstName": "_target"
+            },
+            {
+              "Value": "hold_type",
+              "DstId": 29,
+              "DstName": "v"
+            },
+            {
+              "Value": 5,
+              "DstId": 29,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 24,
+              "SrcName": "_signal",
+              "DstId": 31,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 30,
+              "SrcName": "_result",
+              "DstId": 31,
+              "DstName": "_target"
+            },
+            {
+              "Value": "hold_type",
+              "DstId": 31,
+              "DstName": "v"
+            },
+            {
+              "Value": 0,
+              "DstId": 31,
+              "DstName": "value"
+            }
+          ]
+        },
+        "OnEnemyEscaped": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Enemy Escaped",
+            "id": "f7181236-04d8-4441-bfe0-c6aace9cdd41",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set"
+              },
+              "UserData": {
+                "Position": "288,32"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                }
+              },
+              "UserData": {
+                "Position": "-48,128"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                }
+              },
+              "UserData": {
+                "Position": "-48,128"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                }
+              },
+              "UserData": {
+                "Position": "-48,128"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "304,-32"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "d71533e2-8e3b-4074-b301-989dc1ea545d",
+                  "go": "e33fe8b5-d797-4761-9aa2-c993b017117b",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "32,-96"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "d71533e2-8e3b-4074-b301-989dc1ea545d",
+                  "go": "e33fe8b5-d797-4761-9aa2-c993b017117b",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "32,-96"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "d71533e2-8e3b-4074-b301-989dc1ea545d",
+                  "go": "e33fe8b5-d797-4761-9aa2-c993b017117b",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "32,-96"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "_target"
+            },
+            {
+              "Value": "hold_type",
+              "DstId": 1,
+              "DstName": "v"
+            },
+            {
+              "Value": 0,
+              "DstId": 1,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 8,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "npc"
+            }
+          ]
+        },
+        "OnIdle": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Idle",
+            "id": "d174cab5-7a05-476c-a545-4db2fd685032",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-144,80"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "d71533e2-8e3b-4074-b301-989dc1ea545d",
+                  "go": "e33fe8b5-d797-4761-9aa2-c993b017117b",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "48,-320",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 83,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "992,80"
+              }
+            },
+            {
+              "Id": 85,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/NPC",
+                "_isStatic": true,
+                "_name": "GetRandomPositionAround"
+              },
+              "UserData": {
+                "Position": "768,80"
+              }
+            },
+            {
+              "Id": 130,
+              "Type": "random.int",
+              "UserData": {
+                "Position": "-144,240"
+              }
+            },
+            {
+              "Id": 131,
+              "Type": "if",
+              "UserData": {
+                "Position": "208,144"
+              }
+            },
+            {
+              "Id": 132,
+              "Type": "op.equal",
+              "UserData": {
+                "Position": "64,160"
+              }
+            },
+            {
+              "Id": 144,
+              "Type": "op.equal",
+              "UserData": {
+                "Position": "64,240"
+              }
+            },
+            {
+              "Id": 145,
+              "Type": "op.equal",
+              "UserData": {
+                "Position": "64,320"
+              }
+            },
+            {
+              "Id": 146,
+              "Type": "if",
+              "UserData": {
+                "Position": "208,240"
+              }
+            },
+            {
+              "Id": 147,
+              "Type": "if",
+              "UserData": {
+                "Position": "208,336"
+              }
+            },
+            {
+              "Id": 152,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "976,256"
+              }
+            },
+            {
+              "Id": 154,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/NPC",
+                "_isStatic": true,
+                "_name": "GetRandomPositionAround"
+              },
+              "UserData": {
+                "Position": "768,256"
+              }
+            },
+            {
+              "Id": 156,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "992,432"
+              }
+            },
+            {
+              "Id": 158,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/NPC",
+                "_isStatic": true,
+                "_name": "GetRandomPositionAround"
+              },
+              "UserData": {
+                "Position": "768,432"
+              }
+            },
+            {
+              "Id": 160,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "992,608"
+              }
+            },
+            {
+              "Id": 162,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/NPC",
+                "_isStatic": true,
+                "_name": "GetRandomPositionAround"
+              },
+              "UserData": {
+                "Position": "768,608"
+              }
+            },
+            {
+              "Id": 165,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "61a8a6c9-5ea8-4465-8fb4-d1ef29ba59bb"
+                }
+              },
+              "UserData": {
+                "Position": "48,-256"
+              }
+            },
+            {
+              "Id": 166,
+              "Type": "property.get",
+              "ParentId": 165,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 167,
+              "Type": "property.get",
+              "ParentId": 166,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "bar"
+                }
+              }
+            },
+            {
+              "Id": 169,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "1049d831-2e6d-4333-b971-7a2512192136"
+                }
+              },
+              "UserData": {
+                "Position": "48,-176"
+              }
+            },
+            {
+              "Id": 170,
+              "Type": "property.get",
+              "ParentId": 169,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 171,
+              "Type": "property.get",
+              "ParentId": 170,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "fishing"
+                }
+              }
+            },
+            {
+              "Id": 173,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "7809cefb-d856-4cb3-a042-f846f221792b"
+                }
+              },
+              "UserData": {
+                "Position": "48,-96"
+              }
+            },
+            {
+              "Id": 174,
+              "Type": "property.get",
+              "ParentId": 173,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 175,
+              "Type": "property.get",
+              "ParentId": 174,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "rest"
+                }
+              }
+            },
+            {
+              "Id": 177,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "eb51995f-2856-4414-ac2f-f35a9e8bd340"
+                }
+              },
+              "UserData": {
+                "Position": "48,-16"
+              }
+            },
+            {
+              "Id": 178,
+              "Type": "property.get",
+              "ParentId": 177,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 179,
+              "Type": "property.get",
+              "ParentId": 178,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "store"
+                }
+              }
+            },
+            {
+              "Id": 184,
+              "Type": "log.info",
+              "UserData": {
+                "Position": "976,-80"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 85,
+              "SrcName": "_signal",
+              "DstId": 83,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 83,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 85,
+              "SrcName": "_result",
+              "DstId": 83,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 131,
+              "SrcName": "true",
+              "DstId": 85,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 20,
+              "DstId": 85,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 10,
+              "DstId": 85,
+              "DstName": "minRange"
+            },
+            {
+              "SrcId": 167,
+              "SrcName": "_result",
+              "DstId": 85,
+              "DstName": "position"
+            },
+            {
+              "Value": 4,
+              "DstId": 130,
+              "DstName": "max"
+            },
+            {
+              "Value": 1,
+              "DstId": 130,
+              "DstName": "min"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 131,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 132,
+              "SrcName": "_result",
+              "DstId": 131,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 130,
+              "SrcName": "_result",
+              "DstId": 132,
+              "DstName": "a"
+            },
+            {
+              "Value": 1,
+              "DstId": 132,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 130,
+              "SrcName": "_result",
+              "DstId": 144,
+              "DstName": "a"
+            },
+            {
+              "Value": 2,
+              "DstId": 144,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 130,
+              "SrcName": "_result",
+              "DstId": 145,
+              "DstName": "a"
+            },
+            {
+              "Value": 3,
+              "DstId": 145,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 131,
+              "SrcName": "false",
+              "DstId": 146,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 144,
+              "SrcName": "_result",
+              "DstId": 146,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 146,
+              "SrcName": "false",
+              "DstId": 147,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 145,
+              "SrcName": "_result",
+              "DstId": 147,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 154,
+              "SrcName": "_signal",
+              "DstId": 152,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 152,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 154,
+              "SrcName": "_result",
+              "DstId": 152,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 146,
+              "SrcName": "true",
+              "DstId": 154,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 20,
+              "DstId": 154,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 10,
+              "DstId": 154,
+              "DstName": "minRange"
+            },
+            {
+              "SrcId": 171,
+              "SrcName": "_result",
+              "DstId": 154,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 158,
+              "SrcName": "_signal",
+              "DstId": 156,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 156,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 158,
+              "SrcName": "_result",
+              "DstId": 156,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 147,
+              "SrcName": "true",
+              "DstId": 158,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 10,
+              "DstId": 158,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 10,
+              "DstId": 158,
+              "DstName": "minRange"
+            },
+            {
+              "SrcId": 175,
+              "SrcName": "_result",
+              "DstId": 158,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 162,
+              "SrcName": "_signal",
+              "DstId": 160,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 160,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 162,
+              "SrcName": "_result",
+              "DstId": 160,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 147,
+              "SrcName": "false",
+              "DstId": 162,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 20,
+              "DstId": 162,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 10,
+              "DstId": 162,
+              "DstName": "minRange"
+            },
+            {
+              "SrcId": 179,
+              "SrcName": "_result",
+              "DstId": 162,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 165,
+              "SrcName": "_result",
+              "DstId": 166,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 166,
+              "SrcName": "_result",
+              "DstId": 167,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 169,
+              "SrcName": "_result",
+              "DstId": 170,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 170,
+              "SrcName": "_result",
+              "DstId": 171,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 173,
+              "SrcName": "_result",
+              "DstId": 174,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 174,
+              "SrcName": "_result",
+              "DstId": 175,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 177,
+              "SrcName": "_result",
+              "DstId": 178,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 178,
+              "SrcName": "_result",
+              "DstId": 179,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 184,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "DOING NEW IDLE",
+              "DstId": 184,
+              "DstName": "args",
+              "DstIndex": 0
+            }
+          ]
+        },
+        "RunningType": "Smart",
+        "RunSpeed": 220,
+        "ScaleStats": true,
+        "Static": false,
+        "VisionRange": 512,
+        "WalkingType": "Dumb",
+        "WalkSpeed": 150,
+        "Weight": "Middle"
+      },
+      {
+        "__type": "MoveHelper",
+        "__guid": "26e681ec-b4d2-438f-9ac2-5141abeb326c",
+        "AccelerationCurve": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 0.3,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 2000,
+        "GroundAngle": 45,
+        "GroundFriction": 30,
+        "IgnoreTags": "",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 18,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 72,
+        "TraceRadius": 16,
+        "TraceType": "Capsule",
+        "UseCollider": false,
+        "UseSceneGravity": true
+      },
+      {
+        "__type": "CapsuleCollider",
+        "__guid": "18a25668-9597-49ea-9ae6-eefe06766cdf",
+        "End": "0,0,60",
+        "IsTrigger": false,
+        "Radius": 12,
+        "Start": "0,0,12",
+        "Static": false
+      },
+      {
+        "__type": "HealthComponent",
+        "__guid": "db2f47b8-9dfc-4662-a8c2-f8e63a63d4c3",
+        "CanRegenerate": true,
+        "DamagedBy": "Mild",
+        "DropOnDeath": [],
+        "Immortal": true,
+        "MaxHealth": 40,
+        "RegenerationCooldown": 5,
+        "RegenerationTimer": 0.8,
+        "StunnedBy": "Average",
+        "StunWhenDamaged": true
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+        "Name": "body",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+            "BodyGroups": 1041,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Character",
+            "__guid": "49395fee-2016-44d8-80b1-6762948ba232",
+            "Clothes": [],
+            "Fatness": 0,
+            "Height": 70,
+            "HideBodyGroup": "Torso, Legs, Feet"
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "53888644-34cd-433b-9bc4-7de82185fb16",
+            "Name": "shoes",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "b25c1d13-dd25-4fd5-8b14-3cea504ef31d",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/clothes/boots/boots.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "__guid": "5b850a86-3263-45b4-97b9-8b46f256af58",
+            "Name": "pants",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "8a3f8e9e-3b0d-4844-847c-a5e5f03d0d33",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/clothes/police_trousers/police_trousers.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "__guid": "47fc7fc2-c58f-4e54-91fc-9ec7e4eab4bf",
+            "Name": "shirt",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "d3f8b8cc-ad92-427c-849f-cfc5d762f817",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/clothes/police_jacket/police_jacket.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "__guid": "b04e2953-7efe-474b-b297-a002e2b3c233",
+            "Name": "shirt",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "4e157f76-b3b0-4677-924c-5ee7ef1055c7",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/clothes/police_jacket/police_belt.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "__guid": "33538570-a3ce-4ac1-86cd-151c93f6434d",
+            "Name": "hat",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "ec662fb1-ef85-48f2-a793-684c560b1286",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "1de00072-b1f9-435f-9876-4a8fb2f6957c",
+                  "go": "baa83fdd-c0d6-4852-b0b8-7f6fa41b1ee7",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "MaterialGroup": "police",
+                "Model": "models/clothes/beanie/beanie.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
