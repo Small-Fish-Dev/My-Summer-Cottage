@@ -21,15 +21,15 @@
 							<div class="success failed">FAILED</div>
 						}
                     }
-                    @if (SelectedTask.TimeLimited && !SelectedTask.TaskTimer && !SelectedTask.Completed)
-                    {
-                        <div class="success failed">@(MathF.Round( SelectedTask.TimeLimitInSeconds - SelectedTask.TaskTimer.Passed )) seconds left...</div>
-                    }
 				</div>
 				<text class="subtitle">@SelectedTask.Subtitle</text>
 				@if (SelectedTask == PrimaryTask.Pinned)
 				{
 					<div class="pinned">( PINNED )</div>
+				}
+				@if (SelectedTask.TimeLimited && !SelectedTask.TaskTimer && !SelectedTask.Completed)
+				{
+					<div class="timer">@(MathF.Round( SelectedTask.TimeLimitInSeconds - SelectedTask.TaskTimer.Passed ).Timer()) remaining...</div>
 				}
 			</div>
 		</div>

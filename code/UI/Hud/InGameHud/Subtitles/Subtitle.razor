@@ -32,7 +32,7 @@
             }
         }
 
-        if (SoundHandle?.IsStopped ?? false && string.IsNullOrEmpty(Text))
+        if (SoundHandle?.IsStopped ?? true && string.IsNullOrEmpty(Text))
             Delete();
     }
 
