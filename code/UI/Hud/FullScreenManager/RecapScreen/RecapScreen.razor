@@ -2,7 +2,7 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root>
+<root class="@(_clickedContinue ? "inactive" : "")">
 	<div class="title">Day @(Hud.Instance.GameTimeManager.Day - 1) completed!</div>
 	<div class="information">
 		<div class="sweet-memories" @ref=_memoryContainer >
@@ -96,11 +96,8 @@
 
 	private static async Task TransitionToNextDay()
 	{
-		Player.Local.BlackScreen(1f, 5f, 1f);
+		Player.Local.BlackScreen(1f, 2f, 1f);
 		await GameTask.DelayRealtimeSeconds( 2f );
-		Hud.Instance.Panel.PlaySound("car_intro");
-		await GameTask.DelayRealtimeSeconds( 2f );
-
 		StoryMaster.StartSession();
 	}
 

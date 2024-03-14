@@ -150,9 +150,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// Size of penoid shaped object in centimeters.
 	/// </summary>
 	public float Endowment => PenoidSize
-	                          * GetAttachment( "penoid_start", false ).Position
-		                          .Distance( GetAttachment( "penoid_max", false ).Position )
-	                          * 2.54f; // Inches to centimeters.
+							  * GetAttachment( "penoid_start", false ).Position
+								  .Distance( GetAttachment( "penoid_max", false ).Position )
+							  * 2.54f; // Inches to centimeters.
 
 	/// <summary>
 	/// Get the transform of the penoid.
@@ -225,8 +225,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 		}
 
 		if ( _updateSkin
-		     && Renderer != null && Renderer.SceneModel.IsValid()
-		     && Penoid != null && Penoid.SceneModel.IsValid() )
+			 && Renderer != null && Renderer.SceneModel.IsValid()
+			 && Penoid != null && Penoid.SceneModel.IsValid() )
 		{
 			Renderer.SceneModel.Attributes.Set( "g_flColorTint", SkinColor );
 			Renderer.SceneModel.Batchable = false;

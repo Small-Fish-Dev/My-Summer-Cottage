@@ -336,6 +336,21 @@ public class StoryMaster : Component
 	[Broadcast( NetPermission.HostOnly )]
 	public static void StartSession()
 	{
+		_ = PlayIntro();
+	}
+
+	private static async Task PlayIntro()
+	{
+		// TODO: Uncomment this before release.
+		// Player.Local.BlackScreen( 0f, 4f, 1f );
+		// UI.Hud.Instance.Panel.PlaySound( "car_intro" );
+		// await GameTask.DelayRealtimeSeconds( 2f );
+
+		SetupSession();
+	}
+
+	private static void SetupSession()
+	{
 		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().First();
 
 		if ( storyMaster == null ) return;
@@ -354,11 +369,8 @@ public class StoryMaster : Component
 		storyMaster.LoadItems();
 		storyMaster.SetRandomDialogues();
 
-		foreach ( var player in Player.All )
-		{
-			if ( player.IsValid() )
-				player.Respawn();
-		}
+		if ( Player.Local.IsValid() )
+			Player.Local.Respawn();
 	}
 
 	[ConCmd]
