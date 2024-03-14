@@ -16,7 +16,7 @@ partial class Player
 		set
 		{
 			_guid = value;
-			Connection = Networking.FindConnection( _guid );
+			Connection = Connection.Find( _guid );
 			if ( !_internalPlayers.Contains( this ) )
 				_internalPlayers.Add( this );
 
