@@ -1,3 +1,5 @@
+using Sandbox.Diagnostics;
+using Sauna.Components;
 using Sauna.UI;
 using static EventComponent;
 
@@ -9,6 +11,22 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Sync] public string Lastname { get; set; }
 	[Sync] public bool HidePenoid { get; set; }
 	[Sync] public float PenoidSize { get; set; }
+
+	/// <summary>
+	/// Actually means sitting, but I thought it'd be funny if it said shitting instead.
+	/// </summary>
+	[Sync] public Transform? Shitting
+	{
+		get => _shitting;
+		set
+		{
+			if ( Seat.Target.IsValid() )
+				Seat.Target.IsOccupied = false;
+
+			_shitting = value;
+		}
+	}
+	private Transform? _shitting;
 
 	[Property, Sync, Category( "Parameters" )]
 	public int Money { get; set; } = 37;
@@ -282,10 +300,17 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		IsPissing = !BlockInputs && Input.Down( "Piss" ) && !HidePenoid;
 
-		if ( !CurrentSeat.IsValid() )
+		if ( Shitting == null )
 			UpdateMovement();
-		else
-			UpdateSit();
+		else if ( Input.AnalogMove.Length > 0.1f || Input.Pressed( "Jump" ) )
+			Shitting = null;
+
+		if ( Input.Pressed( "Ragdoll" ) && CanRagdoll )
+		{
+			Shitting = null;
+			SetRagdoll( !IsRagdolled );
+		}
+
 		UpdateInteractions();
 	}
 

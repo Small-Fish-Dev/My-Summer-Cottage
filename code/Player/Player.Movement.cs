@@ -79,8 +79,6 @@ partial class Player
 		}
 	}
 
-	public Seat CurrentSeat { get; set; }
-
 	public BBox Bounds => new BBox( Collider.Center - Collider.Scale / 2f, Collider.Center + Collider.Scale / 2f );
 
 	private Angles _currentRecoil;
@@ -99,25 +97,6 @@ partial class Player
 	{
 		_targetHoldType = type;
 		_resetHoldType = time;
-	}
-
-	protected void UpdateSit()
-	{
-		Assert.IsValid( CurrentSeat );
-
-		var kneesTransform = CurrentSeat.KneesPosition.Transform;
-		const float rate = 0.8f;
-		Transform.Position = Transform.Position.LerpTo( kneesTransform.Position, rate );
-		Transform.Rotation = Rotation.Slerp( Transform.Rotation, kneesTransform.Rotation, rate );
-
-		if ( Input.Pressed( "Ragdoll" ) && CanRagdoll )
-		{
-			SetRagdoll( !IsRagdolled );
-			CurrentSeat.StandUp();
-		}
-
-		if ( Input.Pressed( InputAction.Jump ) )
-			CurrentSeat.StandUp();
 	}
 
 	protected void UpdateMovement()
@@ -197,9 +176,6 @@ partial class Player
 		MoveHelper.CollisionBBox = new BBox( bbox.Mins, bbox.Maxs.WithZ( height ) );
 		Collider.Scale = Collider.Scale.WithZ( height );
 		Collider.Center = Vector3.Up * height / 2f;
-
-		if ( Input.Pressed( "Ragdoll" ) && CanRagdoll )
-			SetRagdoll( !IsRagdolled );
 	}
 
 	public void ApplyRecoil( Angles angle )
@@ -230,11 +206,6 @@ partial class Player
 		ang += _currentRecoil - _previousRecoil; // Apply recoil to eye angles.
 		ang.pitch = ang.pitch.Clamp( -89, 89 );
 
-		if ( CurrentSeat.IsValid() )
-		{
-			// TODO: limit the camera movement
-		}
-		
 		EyeAngles = ang;
 
 		// Calculate recoil.
@@ -291,20 +262,6 @@ partial class Player
 		if ( Renderer == null || Renderer.SceneModel == null || MoveHelper == null )
 			return;
 
-		Renderer.Set( "sitting", CurrentSeat.IsValid() );
-		Renderer.Set( "grounded", MoveHelper.IsOnGround );
-		Renderer.Set( "crouching", Ducking );
-
-		var oldX = Renderer.GetFloat( "move_x" );
-		var oldY = Renderer.GetFloat( "move_y" );
-		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 120f;
-		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 120f;
-		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
-		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
-
-		Renderer.Set( "move_x", x );
-		Renderer.Set( "move_y", y );
-
 		Renderer.SceneModel.Morphs.Set( "fat", Fatness );
 		Renderer.Set( "height", Height );
 
@@ -323,6 +280,29 @@ partial class Player
 			Renderer.Set( "aiming", false );
 			AimState = false;
 		}
+
+		Renderer.Set( "sitting", Shitting != null );
+		if ( Shitting != null )
+		{
+			const float rate = 0.8f;
+			Transform.Position = Transform.Position.LerpTo( Shitting.Value.Position, rate );
+			Transform.Rotation = Rotation.Slerp( Transform.Rotation, Shitting.Value.Rotation, rate );
+
+			return;
+		}
+
+		Renderer.Set( "grounded", MoveHelper.IsOnGround );
+		Renderer.Set( "crouching", Ducking );
+
+		var oldX = Renderer.GetFloat( "move_x" );
+		var oldY = Renderer.GetFloat( "move_y" );
+		var newX = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Forward ) / 120f;
+		var newY = Vector3.Dot( MoveHelper.Velocity, Transform.Rotation.Right ) / 120f;
+		var x = MathX.Lerp( oldX, newX, Time.Delta * 5f );
+		var y = MathX.Lerp( oldY, newY, Time.Delta * 5f );
+
+		Renderer.Set( "move_x", x );
+		Renderer.Set( "move_y", y );
 	}
 
 	private void OnJumpEvent( SceneModel.GenericEvent e )

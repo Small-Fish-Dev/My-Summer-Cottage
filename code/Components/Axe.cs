@@ -38,7 +38,7 @@ public sealed class Axe : Component
 			Keybind = "mouse1",
 			Animation = InteractAnimations.Action,
 			Sound = () => SwingSound,
-		} ); ;
+		} );
 	}
 
 	private async void OnSwing( Player player, GameObject obj )

@@ -31,6 +31,7 @@ public struct Speech
 					continue;
 				}
 
+				Game.SetRandomSeed( (byte)character );
 				var index = Game.Random.Int( 1, SOUNDS );
 				var sound = Sound.PlayFile( SoundFile.Load( $"sounds/speech/{index}.sound" ) ); // Figure out something better for this cuz dis shit sucks!
 				sound.Rotation = handle?.Rotation ?? default;
