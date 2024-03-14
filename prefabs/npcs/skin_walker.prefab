@@ -1,65 +1,331 @@
 {
   "RootObject": {
-    "Id": "89483209-a6c0-4f43-b645-71611b065123",
+    "__guid": "89483209-a6c0-4f43-b645-71611b065123",
     "Name": "skin_walker",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "NPC",
+        "__guid": "60b4ef92-dcd5-4f12-bf04-9682606d79b8",
         "AlertOthers": true,
         "AttackCooldown": 5,
         "AttackRange": 80,
-        "DetectRange": 1024,
+        "DetectRange": 500,
+        "EnemyTags": "player",
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
+          "component_id": "93646c2f-56f2-40e5-a8f0-36aa0e5790ee",
           "go": "89483209-a6c0-4f43-b645-71611b065123",
           "component_type": "HealthComponent"
         },
         "Idle": true,
-        "MaximumIdleCooldown": 6,
+        "MaximumIdleCooldown": 20,
         "MaxRunAnimationSpeed": 400,
-        "MinimumIdleCooldown": 4,
+        "MinimumIdleCooldown": 10,
         "Model": {
           "_type": "component",
+          "component_id": "d7eca01e-c146-4533-94bc-2945db361ca4",
           "go": "af433514-fdf2-47d0-b252-72a0406a5c24",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
+          "component_id": "087ef866-b6b4-40c0-a215-6aaa0c78965e",
           "go": "89483209-a6c0-4f43-b645-71611b065123",
           "component_type": "MoveHelper"
         },
         "Name": "Default",
+        "OnDetect": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Detect",
+            "id": "20cd0586-eceb-4f2c-b399-4273e0e00bc0",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-128,-0"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "call",
+              "Properties": {
+                "_name": "PlaySound",
+                "_isStatic": true,
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+              },
+              "UserData": {
+                "Position": "256,16"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "60b4ef92-dcd5-4f12-bf04-9682606d79b8",
+                  "go": "89483209-a6c0-4f43-b645-71611b065123",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-16,128",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "property.get",
+              "ParentId": 0,
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "property.get",
+              "ParentId": 8,
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "npc.startescaping",
+              "UserData": {
+                "Position": "496,96"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 1,
+              "DstName": "obj"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "Sandbox.Engine/Sandbox.SoundEvent",
+                "Value": "sounds/wood/wooden_impact.sound"
+              },
+              "DstId": 1,
+              "DstName": "sound"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 8,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 11,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 11,
+              "DstName": "target"
+            }
+          ]
+        },
         "OnIdle": {
           "Version": 5,
           "UserData": {
             "Title": "On Idle",
-            "id": "3f25edde-1db2-4319-945a-79f4ac290e73"
+            "id": "3f25edde-1db2-4319-945a-79f4ac290e73",
+            "ReferencedComponentTypes": []
           },
           "Variables": [],
           "Nodes": [
             {
               "Id": 0,
               "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "416,32"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "89483209-a6c0-4f43-b645-71611b065123"
+                }
+              },
+              "UserData": {
+                "Position": "-160,96"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "property.get",
+              "ParentId": 3,
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "property.get",
+              "ParentId": 4,
+              "Properties": {
+                "_name": "World",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "property.get",
+              "ParentId": 4,
+              "Properties": {
+                "_name": "Local",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "property.get",
+              "ParentId": 4,
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "60b4ef92-dcd5-4f12-bf04-9682606d79b8",
+                  "go": "89483209-a6c0-4f43-b645-71611b065123",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "192,-80"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "144,160"
+              }
             }
           ],
-          "Links": []
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "Value": 100,
+              "DstId": 10,
+              "DstName": "maxRange"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "position"
+            }
+          ]
         },
         "RunningType": "Smart",
-        "RunSpeed": 600,
+        "RunSpeed": 1200,
         "ScaleStats": true,
         "Static": false,
-        "VisionRange": 2016,
+        "VisionRange": 700,
         "WalkingType": "Dumb",
-        "WalkSpeed": 400,
+        "WalkSpeed": 700,
         "Weight": "Middle"
       },
       {
         "__type": "HealthComponent",
+        "__guid": "93646c2f-56f2-40e5-a8f0-36aa0e5790ee",
         "CanRegenerate": true,
         "DamagedBy": "Mild",
+        "DropOnDeath": [],
         "Immortal": false,
         "MaxHealth": 50,
         "RegenerationCooldown": 2,
@@ -69,10 +335,13 @@
       },
       {
         "__type": "MoveHelper",
-        "AccelerationCurve": {
-          "rangex": "0,0",
-          "rangey": "0,0"
-        },
+        "__guid": "087ef866-b6b4-40c0-a215-6aaa0c78965e",
+        "AccelerationCurve": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
         "AirAcceleration": 800,
         "AirFriction": 1,
         "Bounce": 0.3,
@@ -94,23 +363,24 @@
       },
       {
         "__type": "CapsuleCollider",
-        "End": "0,0,135",
+        "__guid": "87814170-2def-4d06-8168-a4431797d8de",
+        "End": "0,0,64",
         "IsTrigger": false,
-        "Radius": 30,
-        "Start": "0,0,30",
+        "Radius": 16,
+        "Start": "0,0,16",
         "Static": false
       }
     ],
     "Children": [
       {
-        "Id": "af433514-fdf2-47d0-b252-72a0406a5c24",
+        "__guid": "af433514-fdf2-47d0-b252-72a0406a5c24",
         "Name": "actual_body",
-        "Scale": "2,2,2",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "SkinnedModelRenderer",
+            "__guid": "d7eca01e-c146-4533-94bc-2945db361ca4",
             "BodyGroups": 1024,
             "CreateBoneObjects": false,
             "Model": "models/guy/guy.vmdl",
@@ -119,6 +389,7 @@
           },
           {
             "__type": "Character",
+            "__guid": "62be05b7-88a4-42b7-9105-0a0beda36109",
             "Clothes": [],
             "Fatness": 0,
             "Height": 100,
@@ -127,7 +398,7 @@
         ],
         "Children": [
           {
-            "Id": "563393ac-2a52-4f91-b318-5762b7b0e954",
+            "__guid": "563393ac-2a52-4f91-b318-5762b7b0e954",
             "Name": "fake_skin",
             "Scale": "0.5,0.5,0.4999999",
             "Enabled": true,
@@ -135,9 +406,11 @@
             "Components": [
               {
                 "__type": "SkinnedModelRenderer",
+                "__guid": "4bc09498-5c43-4d8b-9460-b299bdad2b6b",
                 "BodyGroups": 18446744073709551615,
                 "BoneMergeTarget": {
                   "_type": "component",
+                  "component_id": "d7eca01e-c146-4533-94bc-2945db361ca4",
                   "go": "af433514-fdf2-47d0-b252-72a0406a5c24",
                   "component_type": "SkinnedModelRenderer"
                 },
