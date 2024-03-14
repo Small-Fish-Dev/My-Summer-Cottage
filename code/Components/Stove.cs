@@ -18,6 +18,18 @@ public sealed class Stove : Component
 	[Property]
 	public DoorComponent Door { get; set; }
 
+	[Property]
+	public GameObject FloorSteam { get; set; }
+
+	[Property]
+	public GameObject Steam { get; set; }
+
+	[Property]
+	public GameObject Light { get; set; }
+
+	public TimeUntil StopWorking;
+
+
 	public bool IsRunning { get; set; }
 
 	protected override void OnStart()
@@ -55,7 +67,23 @@ public sealed class Stove : Component
 	{
 		Model.Set( "b_open", !HasWood );
 
+		if ( Steam != null )
+			Steam.Enabled = IsRunning;
+
+		if ( Light != null )
+			Light.Enabled = IsRunning;
+
+		if ( FloorSteam != null )
+			FloorSteam.Enabled = IsRunning && (Door.IsValid() && Door.State == DoorState.Close);
+
 		GameObject.Name = $"Stove{(HasWater && HasWood && !IsRunning ? " (Ready)" : (HasWater ? "" : $" (Needs{(HasWood ? "" : " wood and")} water)"))}";
+
+		if ( StopWorking )
+		{
+			HasWater = false;
+			HasWood = false;
+			IsRunning = false;
+		}
 	}
 
 	[Broadcast( NetPermission.Anyone )]
@@ -114,6 +142,7 @@ public sealed class Stove : Component
 		if ( player.IsValid() )
 		{
 			IsRunning = true;
+			StopWorking = 120; // 2 minutes
 
 			BeginSaunaDelay( player );
 		}
@@ -124,11 +153,5 @@ public sealed class Stove : Component
 		await Task.Delay( 1000 );
 
 		Player.Local.AddExperience( 100 );
-
-		await Task.Delay( 10000 );
-
-		IsRunning = false;
-		HasWood = false;
-		HasWood = false;
 	}
 }

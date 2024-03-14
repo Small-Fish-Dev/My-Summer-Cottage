@@ -205,8 +205,8 @@
                         "Id": 8,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
                           "_name": "Receive",
+                          "_isStatic": true,
                           "_type": "package.fish.sauna/Sauna.Message"
                         },
                         "UserData": {
@@ -217,8 +217,8 @@
                         "Id": 11,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
                           "_name": "PlaySoundWithSubtitle",
+                          "_isStatic": true,
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                         },
                         "UserData": {
@@ -426,8 +426,8 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
                           "_name": "AssignEveryoneNewTask",
+                          "_isStatic": true,
                           "_type": "package.fish.sauna/Sauna.TaskMaster"
                         },
                         "UserData": {
@@ -573,8 +573,8 @@
                         "Id": 7,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
                           "_name": "Receive",
+                          "_isStatic": true,
                           "_type": "package.fish.sauna/Sauna.Message"
                         },
                         "UserData": {
@@ -712,8 +712,8 @@
                         "Id": 4,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
                           "_name": "AssignEveryoneNewTask",
+                          "_isStatic": true,
                           "_type": "package.fish.sauna/Sauna.TaskMaster"
                         },
                         "UserData": {
@@ -935,7 +935,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.7151133,0,-0.6990085",
+          "Rotation": "0,-0.4052486,0,-0.9142066",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1591,15 +1591,27 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "3ce00744-b189-4bee-a10f-2439d9b96d9c",
+                "component_id": "84ca0088-de63-4031-9857-ca7be7621221",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
+              },
+              "FloorSteam": {
+                "_type": "gameobject",
+                "go": "27b558b0-ebf2-4e8e-9a95-0742109e114c"
+              },
+              "Light": {
+                "_type": "gameobject",
+                "go": "7f8d6d6a-24d6-414b-aba1-c4dc0c918377"
               },
               "PlayersInArea": {
                 "_type": "component",
                 "component_id": "8d670e13-bd21-4a4d-a5ae-c89d3bcb2c89",
                 "go": "e5222989-3e10-45ac-9620-3b4ea89e1942",
                 "component_type": "EventAreaTrigger"
+              },
+              "Steam": {
+                "_type": "gameobject",
+                "go": "7e452b07-b4bd-49ae-8c2c-bedf3a5b8930"
               }
             },
             {
@@ -1636,6 +1648,46 @@
                   "TagSet": "player",
                   "TriggerPrefab": [],
                   "TriggerSignalIdentifier": "sauna.entered_sauna"
+                }
+              ]
+            },
+            {
+              "__guid": "27b558b0-ebf2-4e8e-9a95-0742109e114c",
+              "Name": "floor_steam (2)",
+              "Position": "-93.87774,-43.66801,0",
+              "Rotation": "0,0,0.9999999,-0.0000001192093",
+              "Tags": "particles",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "__Prefab": "prefabs/particles/floor_steam.prefab"
+            },
+            {
+              "__guid": "7e452b07-b4bd-49ae-8c2c-bedf3a5b8930",
+              "Name": "steam (2)",
+              "Position": "1.812824,-0.9959221,52.13916",
+              "Rotation": "0.0000001490116,-0.7071069,0.0000001490116,0.7071069",
+              "Tags": "particles",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "__Prefab": "prefabs/particles/steam_direct.prefab"
+            },
+            {
+              "__guid": "7f8d6d6a-24d6-414b-aba1-c4dc0c918377",
+              "Name": "Point Light",
+              "Position": "-32.44163,1.801939,22.94824",
+              "Tags": "light_point,light",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "Components": [
+                {
+                  "__type": "PointLight",
+                  "__guid": "2b679726-17c3-4ee6-bd39-44e60a5fc67c",
+                  "Attenuation": 5.8,
+                  "FogMode": "Enabled",
+                  "FogStrength": 1,
+                  "LightColor": "5,4.16667,0,1",
+                  "Radius": 40.56004,
+                  "Shadows": true
                 }
               ]
             }
@@ -3442,7 +3494,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-14T20:45:20.4187387\u002B01:00",
+  "LastSaved": "2024-03-14T21:00:08.1949939\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
