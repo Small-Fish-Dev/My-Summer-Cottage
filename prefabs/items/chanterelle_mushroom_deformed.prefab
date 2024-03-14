@@ -1,0 +1,188 @@
+{
+  "RootObject": {
+    "__guid": "37badec1-d317-4b0d-baef-721dcef82e68",
+    "Name": "chanterelle_mushroom_deformed",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ItemEquipment",
+        "__guid": "9e6fe6e0-4c00-4e06-8452-703af5a09947",
+        "Attachment": "hand_R",
+        "AttachmentTransform": {
+          "UniformScale": 1,
+          "Position": "0.730431,-2.160666,-0.1258457",
+          "Scale": "1,1,1",
+          "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
+        },
+        "Count": 0,
+        "Description": "Its not the most ideal chanterelle, but it should still be worth a bit!",
+        "HideBodygroups": "None",
+        "HoldType": "Item",
+        "Icon": {
+          "Model": "models/mushroom/new/mushroom2_tilted.vmdl",
+          "MaterialGroup": "",
+          "Colour": "1,1,1,1",
+          "Position": "-3.15,2.1,0",
+          "Rotation": "0.3267195,-0.02655052,-0.04064789,0.9438735",
+          "Guid": "7fda2f0a-31b4-4542-b20d-6b2e19a43b33"
+        },
+        "MaxStack": 0,
+        "Name": "Deformed Chanterelle Mushroom",
+        "SellPrice": 12,
+        "Slot": "Hand",
+        "UpdatePosition": true,
+        "UseSkinTint": false,
+        "WeightInGrams": 20
+      },
+      {
+        "__type": "Interactions",
+        "__guid": "ff96d904-4b81-42bd-87dd-b99535b46e47",
+        "HideOnEmpty": false,
+        "ObjectInteractions": [
+          {
+            "Identifier": "",
+            "Keybind": "Mouse1",
+            "Description": "Eat",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "ac577e47-fb94-4546-a0f3-085a86043b2e",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_name": "Destroy",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
+                  },
+                  "UserData": {
+                    "Position": "224,-16"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_name": "AddExperience",
+                    "_type": "package.fish.sauna/Sauna.Player"
+                  },
+                  "UserData": {
+                    "Position": "224,48"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 1,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 1,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": 20,
+                  "DstId": 2,
+                  "DstName": "exp"
+                }
+              ]
+            },
+            "InteractDistance": 75,
+            "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
+            "CooldownTime": 0.5,
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "9392cf44-1956-4ca0-8609-b99366388d57",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/eat.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
+          }
+        ]
+      },
+      {
+        "__type": "ModelRenderer",
+        "__guid": "529a0c20-ae82-4d0f-9863-aeb729a536a6",
+        "BodyGroups": 11,
+        "MaterialGroup": "blue",
+        "Model": "models/mushroom/new/mushroom2_tilted.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ModelCollider",
+        "__guid": "127b1916-c9ff-4a8a-b1a4-25db763f76a9",
+        "IsTrigger": false,
+        "Model": "models/mushroom/new/mushroom2_tilted.vmdl",
+        "Static": false
+      },
+      {
+        "__type": "Rigidbody",
+        "__guid": "7086c4a7-b212-42a3-97ac-22cf9e0165e0",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

@@ -75,7 +75,7 @@ public class ItemComponent : Component
 	/// <summary>
 	/// Whether the item can be sold.
 	/// </summary>
-	public bool IsStackable => MaxStack >= 1 && this is not ItemEquipment;
+	public bool IsStackable => MaxStack >= 1;
 
 	/// <summary>
 	/// The last player that had this item parented to them.

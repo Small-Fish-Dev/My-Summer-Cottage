@@ -1,0 +1,186 @@
+{
+  "RootObject": {
+    "__guid": "02543d94-08c7-4e85-8f4b-737c48de00d4",
+    "Name": "wide_mushroom_normal",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ItemEquipment",
+        "__guid": "a8b0fc19-cd5b-4dee-98fd-7f0d1e322505",
+        "Attachment": "hand_R",
+        "AttachmentTransform": {
+          "UniformScale": 1,
+          "Position": "1.323759,-2.126494,0.5300177",
+          "Scale": "1,1,1",
+          "Rotation": "-0.7045112,-0.01548458,0.03058353,0.7088668"
+        },
+        "Count": 0,
+        "Description": "This is a bigger wider mushroom, more bang for your buck!",
+        "HideBodygroups": "None",
+        "HoldType": "Item",
+        "Icon": {
+          "Model": "models/mushroom/new/mushroom_alt.vmdl",
+          "MaterialGroup": "",
+          "Colour": "1,1,1,1",
+          "Position": "-3.15,2.1,0.15",
+          "Rotation": "0.3267195,-0.02655052,-0.04064789,0.9438735",
+          "Guid": "25d04bc7-f4f0-4825-addd-c4a1738c32d9"
+        },
+        "MaxStack": 0,
+        "Name": "Wide Mushroom",
+        "SellPrice": 7,
+        "Slot": "Hand",
+        "UpdatePosition": true,
+        "UseSkinTint": false,
+        "WeightInGrams": 25
+      },
+      {
+        "__type": "Interactions",
+        "__guid": "3f011f19-fa8f-4b82-90f7-a6eaa7b0afe9",
+        "HideOnEmpty": false,
+        "ObjectInteractions": [
+          {
+            "Identifier": "",
+            "Keybind": "Mouse1",
+            "Description": "Eat",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "ac577e47-fb94-4546-a0f3-085a86043b2e",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_name": "Destroy",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
+                  },
+                  "UserData": {
+                    "Position": "224,-16"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_name": "AddExperience",
+                    "_type": "package.fish.sauna/Sauna.Player"
+                  },
+                  "UserData": {
+                    "Position": "224,48"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 1,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 1,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": 20,
+                  "DstId": 2,
+                  "DstName": "exp"
+                }
+              ]
+            },
+            "InteractDistance": 75,
+            "Accessibility": "All",
+            "CooldownTime": 0.5,
+            "Animation": "Action",
+            "Sound": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Sound",
+                "id": "9392cf44-1956-4ca0-8609-b99366388d57",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
+                }
+              ],
+              "Links": [
+                {
+                  "Value": "sounds/misc/eat.sound",
+                  "DstId": 0,
+                  "DstName": "_result"
+                }
+              ]
+            },
+            "PlaySoundFromPlayer": true
+          }
+        ]
+      },
+      {
+        "__type": "ModelRenderer",
+        "__guid": "4388a714-ca4c-489d-ab66-a8b0c51de49b",
+        "BodyGroups": 11,
+        "MaterialGroup": "blue",
+        "Model": "models/mushroom/new/mushroom_alt.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ModelCollider",
+        "__guid": "7208fe16-baa3-4039-9cdf-45daf06a6a0a",
+        "IsTrigger": false,
+        "Model": "models/mushroom/new/mushroom_alt.vmdl",
+        "Static": false
+      },
+      {
+        "__type": "Rigidbody",
+        "__guid": "4783855d-dd12-4726-80c4-a1697669a01c",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
