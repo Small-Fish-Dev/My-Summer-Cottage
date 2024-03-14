@@ -25,8 +25,12 @@
 	{
 		if ( _markers != null )
 			foreach ( var marker in _markers )
-				if ( marker.Marker == null )
-					_markers.Remove( marker );
+			{
+				if ( marker.Marker != null )
+					continue;
+
+				_markers.Remove( marker );
+			}
 
 		Instance = this;
 	}
