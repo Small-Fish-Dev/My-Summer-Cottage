@@ -37,6 +37,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	{
 		get
 		{
+			if ( !Inventory.IsValid() || Inventory == null ) return false;
+
 			foreach ( var item in Inventory.EquippedItems )
 			{
 				if ( item is ItemEquipment equipped )
