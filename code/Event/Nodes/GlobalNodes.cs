@@ -91,4 +91,53 @@ public static partial class GlobalNodes
 	{
 		StoryMaster.StartSession();
 	}
+
+	/// <summary>
+	/// Put a market on the target
+	/// </summary>
+	[ActionGraphNode( "event.addmarker" )]
+	[Title( "Set Marker" ), Group( "Events" ), Icon( "push_pin" )]
+	public static void SetMarket( GameObject target, MarkerIcon icon )
+	{
+		if ( target == null ) return;
+
+		var currentMarker = target.Components.Get<MarkerComponent>();
+
+		if ( currentMarker != null ) return;
+
+		var newMarker = target.Components.Create<MarkerComponent>();
+		newMarker.Icon = icon;
+	}
+
+	/// <summary>
+	/// Remove the market on the target
+	/// </summary>
+	[ActionGraphNode( "event.removemarker" )]
+	[Title( "Remove Marker" ), Group( "Events" ), Icon( "push_pin" )]
+	public static void RemoverMarker( GameObject target )
+	{
+		if ( target == null ) return;
+
+		var currentMarker = target.Components.Get<MarkerComponent>();
+
+		if ( currentMarker != null )
+			currentMarker.Destroy();
+	}
+
+	/// <summary>
+	/// Find the game object with that name in the scene
+	/// </summary>
+	[ActionGraphNode( "event.findobject" )]
+	[Title( "Find Object in Scene" ), Group( "Events" ), Icon( "travel_explore" )]
+	public static GameObject FindObjectByName( string name )
+	{
+		var objectFound = Game.ActiveScene?.GetAllObjects( true )?
+			.Where( x => x.Name.ToLower() == name.ToLower() )?
+			.FirstOrDefault() ?? null;
+
+		if ( objectFound != null )
+			return objectFound;
+
+		return null;
+	}
 }

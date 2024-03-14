@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "28933d94-5389-4217-bfed-62d8d773246d",
+    "__guid": "28933d94-5389-4217-bfed-62d8d773246d",
     "Name": "can_of_soup",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "bd943a84-431f-43f5-8351-9f109075a197",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Can of soup",
-        "SellPrice": 5,
+        "SellPrice": 1,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "af301b64-9d37-4e81-a3ac-ee3e249bad95",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,6 +116,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -127,6 +132,10 @@
                 {
                   "Id": 0,
                   "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
                 }
               ],
               "Links": [
@@ -143,6 +152,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "fbcb2fe8-c720-4c7a-a9b3-33aa805b910d",
         "BodyGroups": 11,
         "MaterialGroup": "green",
         "Model": "models/consumables/can/can.vmdl",
@@ -151,17 +161,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "3716e3b2-7d2e-41d9-a2a2-0110c87aadc6",
         "IsTrigger": false,
         "Model": "models/consumables/can/can.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "7176c59c-eaa7-43af-b685-7671693ed76a",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

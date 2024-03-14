@@ -287,6 +287,7 @@ partial class Player
 			const float rate = 0.8f;
 			Transform.Position = Transform.Position.LerpTo( Shitting.Value.Position, rate );
 			Transform.Rotation = Rotation.Slerp( Transform.Rotation, Shitting.Value.Rotation, rate );
+			Renderer.Set( "lookat", (EyeAngles.ToRotation() * Transform.Rotation.Inverse).Forward );
 
 			return;
 		}

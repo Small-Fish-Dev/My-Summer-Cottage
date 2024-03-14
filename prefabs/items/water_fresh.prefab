@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "e69cf4fb-3cef-4266-abcc-aea6e8052398",
+    "__guid": "e69cf4fb-3cef-4266-abcc-aea6e8052398",
     "Name": "water_fresh",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "c9d797d1-a536-4b0b-a481-abe9b02ef142",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Aqua Water",
-        "SellPrice": 10,
+        "SellPrice": 0,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "759bbc55-342a-4056-854f-9af79d989225",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -129,6 +130,10 @@
                 {
                   "Id": 0,
                   "Type": "output"
+                },
+                {
+                  "Id": 1,
+                  "Type": "input"
                 }
               ],
               "Links": [
@@ -145,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "406efffb-acf6-46c1-9155-8ec53d68e66e",
         "BodyGroups": 11,
         "MaterialGroup": "blue",
         "Model": "models/consumables/bottle/bottle.vmdl",
@@ -153,17 +159,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "c099a61a-fef5-4814-be6c-772adea0c985",
         "IsTrigger": false,
         "Model": "models/consumables/bottle/bottle.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "584f7af8-cc82-4e1c-9cd8-cf28b5612e9b",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

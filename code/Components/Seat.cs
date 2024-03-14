@@ -22,9 +22,13 @@ public sealed class Seat : Component
 			Identifier = "chair.sit",
 			Accessibility = AccessibleFrom.World,
 			Description = "Sit",
+			ShowWhenDisabled = () => true,
 			Disabled = () => IsOccupied,
 			Action = ( Player player, GameObject obj ) =>
 			{
+				if ( IsOccupied )
+					return;
+
 				player.Shitting = GlobalTransform;
 				Target = this;
 				IsOccupied = true;
@@ -52,8 +56,6 @@ public sealed class Seat : Component
 
 	protected override void DrawGizmos()
 	{
-		// TODO: draw the player in a sitting position
-
 		var model = GetModel();
 		if ( model is null )
 			return;

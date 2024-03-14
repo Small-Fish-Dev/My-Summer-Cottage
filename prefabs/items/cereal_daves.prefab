@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "133c67bf-36b6-4a09-a16c-1a190bc2fda0",
+    "__guid": "133c67bf-36b6-4a09-a16c-1a190bc2fda0",
     "Name": "cereal_daves",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "880e37a2-cf49-4da2-b531-fb203ab10fc7",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Daves Oats",
-        "SellPrice": 10,
+        "SellPrice": 3,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "950c8cad-f3a8-4e9d-b04d-d96620225c85",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,6 +116,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -147,6 +152,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "e6a94867-6e5b-4b47-98e7-7470b8d0a2fb",
         "BodyGroups": 11,
         "MaterialGroup": "brown",
         "Model": "models/consumables/cereal_box/cereal_box.vmdl",
@@ -155,17 +161,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "2a3d4d0a-1c12-464f-ae58-99ce85a13c88",
         "IsTrigger": false,
         "Model": "models/consumables/cereal_box/cereal_box.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "25066416-9089-4a2a-b22e-2c21cdb2717c",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

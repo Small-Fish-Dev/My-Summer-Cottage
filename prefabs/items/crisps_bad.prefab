@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "d6a1e9f2-4fbf-4b30-88a8-07aa13336704",
+    "__guid": "d6a1e9f2-4fbf-4b30-88a8-07aa13336704",
     "Name": "crisps_bad",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "67ac54bb-ef9c-459f-9348-b25d2b877682",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Bad crisps",
-        "SellPrice": 10,
+        "SellPrice": 0,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "2e8094f0-71c7-4713-82af-43fc2d578082",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "6f6432eb-88e7-414e-998d-d99c678ec7c7",
         "BodyGroups": 11,
         "MaterialGroup": "bad",
         "Model": "models/consumables/crisps/crisps.vmdl",
@@ -157,17 +159,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "7dd9bf07-6f5e-4816-a254-b4ae57c5d342",
         "IsTrigger": false,
         "Model": "models/consumables/crisps/crisps.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "7e5e0216-e402-48d9-92bd-67f906832c61",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

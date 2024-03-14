@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "0e20fdc1-f2a1-4635-9b06-96a94cb5cb52",
+    "__guid": "0e20fdc1-f2a1-4635-9b06-96a94cb5cb52",
     "Name": "mustard",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "4dd5fe35-cff1-457c-b239-c49145b769c3",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Mustard",
-        "SellPrice": 10,
+        "SellPrice": 1,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "547db3fb-3ccf-4db2-b6ea-fbf5c5d2757b",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,6 +116,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -147,6 +152,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "deb76dd1-7d2d-4b94-93f0-e74bf890b75a",
         "BodyGroups": 11,
         "MaterialGroup": "mustard",
         "Model": "models/consumables/condiment_bottle/condiment_bottle.vmdl",
@@ -155,17 +161,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "c01ee30f-1f7c-46e0-8b7b-17f7f706a9a7",
         "IsTrigger": false,
         "Model": "models/consumables/condiment_bottle/condiment_bottle.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "bca10a65-a20b-4c1f-b913-c53aa033dbb0",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

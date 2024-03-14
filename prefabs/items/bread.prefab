@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "ef7b5553-6d45-44cb-86e0-bde433417add",
+    "__guid": "ef7b5553-6d45-44cb-86e0-bde433417add",
     "Name": "bread",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "8c1f2d75-b158-4634-aea2-a306847936f4",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Loaf of bread",
-        "SellPrice": 10,
+        "SellPrice": 1,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "7b1d8369-5a35-4bea-8f89-c189627a524c",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "b61a2bb4-57e9-42e0-be2e-e70b22e8bf98",
         "BodyGroups": 11,
         "Model": "models/consumables/bread/bread.vmdl",
         "RenderType": "On",
@@ -156,17 +158,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "6527b2e7-3ef7-4bcc-a634-53d8765cf545",
         "IsTrigger": false,
         "Model": "models/consumables/bread/bread.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "c16be733-6922-43cb-a9e4-899a87451213",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

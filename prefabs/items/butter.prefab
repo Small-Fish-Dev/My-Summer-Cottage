@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "ae80ddac-b970-49b0-9d4f-b47e963fda55",
+    "__guid": "ae80ddac-b970-49b0-9d4f-b47e963fda55",
     "Name": "butter",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "945a3b53-738b-4de6-b219-adb9a05f30c4",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Butter",
-        "SellPrice": 10,
+        "SellPrice": 2,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "cc04b8ba-5fba-46ef-8b7d-c4658ec069e3",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,6 +116,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -147,6 +152,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "8d56a4a3-6102-48cb-80a5-696d8e7ab8a6",
         "BodyGroups": 11,
         "MaterialGroup": "yellow",
         "Model": "models/consumables/square_tub/sqaure_tub.vmdl",
@@ -155,17 +161,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "45fabf64-1a78-4cd1-beff-51c52e225767",
         "IsTrigger": false,
         "Model": "models/consumables/square_tub/sqaure_tub.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "e17b78d3-5fd4-4499-a4a5-1ea5c869dd14",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

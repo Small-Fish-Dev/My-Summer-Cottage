@@ -1,5 +1,5 @@
 {
-  "__guid": "95f8fb81-ad3b-4e97-8eb9-3d7d08497600",
+  "Id": "248aeaed-e4c4-4c1f-b147-02a84f05b351",
   "GameObjects": [
     {
       "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -141,9 +141,7 @@
         {
           "__type": "TaskMaster",
           "__guid": "d2a393cf-ef36-4245-862f-f27007570807",
-          "CurrentTasks": [
-            "resources/tasks/testtest.task"
-          ]
+          "CurrentTasks": []
         },
         {
           "__type": "EventMaster",
@@ -196,8 +194,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "464,288"
@@ -207,9 +205,9 @@
                         "Id": 8,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.Message",
+                          "_isStatic": true,
                           "_name": "Receive",
-                          "_isStatic": true
+                          "_type": "package.fish.sauna/Sauna.Message"
                         },
                         "UserData": {
                           "Position": "512,-96"
@@ -219,9 +217,9 @@
                         "Id": 11,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                          "_isStatic": true,
                           "_name": "PlaySoundWithSubtitle",
-                          "_isStatic": true
+                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                         },
                         "UserData": {
                           "Position": "1072,-128"
@@ -256,8 +254,8 @@
                         "Id": 17,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task",
-                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task"
                         },
                         "UserData": {
                           "Position": "0,224"
@@ -268,8 +266,8 @@
                         "Type": "property.get",
                         "ParentId": 17,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -277,8 +275,8 @@
                         "Type": "property.get",
                         "ParentId": 17,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -428,9 +426,9 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.TaskMaster",
+                          "_isStatic": true,
                           "_name": "AssignEveryoneNewTask",
-                          "_isStatic": true
+                          "_type": "package.fish.sauna/Sauna.TaskMaster"
                         },
                         "UserData": {
                           "Position": "240,112"
@@ -451,8 +449,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "240,304"
@@ -462,8 +460,8 @@
                         "Id": 7,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "Sandbox.Engine/Sandbox.Resource",
-                          "_name": "ResourcePath"
+                          "_name": "ResourcePath",
+                          "_type": "Sandbox.Engine/Sandbox.Resource"
                         },
                         "UserData": {
                           "Position": "16,176"
@@ -564,8 +562,8 @@
                         "Id": 6,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "208,304"
@@ -575,9 +573,9 @@
                         "Id": 7,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.Message",
+                          "_isStatic": true,
                           "_name": "Receive",
-                          "_isStatic": true
+                          "_type": "package.fish.sauna/Sauna.Message"
                         },
                         "UserData": {
                           "Position": "416,-0"
@@ -588,8 +586,8 @@
                         "Type": "property.get",
                         "ParentId": 5,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -597,8 +595,8 @@
                         "Type": "property.get",
                         "ParentId": 5,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -714,9 +712,9 @@
                         "Id": 4,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.TaskMaster",
+                          "_isStatic": true,
                           "_name": "AssignEveryoneNewTask",
-                          "_isStatic": true
+                          "_type": "package.fish.sauna/Sauna.TaskMaster"
                         },
                         "UserData": {
                           "Position": "256,256"
@@ -726,8 +724,8 @@
                         "Id": 6,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "256,448"
@@ -737,8 +735,8 @@
                         "Id": 7,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "Sandbox.Engine/Sandbox.Resource",
-                          "_name": "ResourcePath"
+                          "_name": "ResourcePath",
+                          "_type": "Sandbox.Engine/Sandbox.Resource"
                         },
                         "UserData": {
                           "Position": "32,320"
@@ -893,6 +891,19 @@
               "__guid": "0392cf73-6c6e-4d0c-bdd5-3d50d00dcd15"
             }
           ]
+        },
+        {
+          "__guid": "43b921b4-1ce8-433c-b613-6c74df905ab3",
+          "Name": "Spawner",
+          "Position": "-9569.465,10501.88,-8.302002",
+          "Rotation": "0,0,0.1305262,0.9914449",
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "PlayerSpawner",
+              "__guid": "fa80cee5-3de3-4ccb-ac3f-b93e725b902f"
+            }
+          ]
         }
       ]
     },
@@ -924,7 +935,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.4449005,0,0.89558",
+          "Rotation": "0,0.5438513,0,0.8391816",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1041,9 +1052,9 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                      "_isStatic": true,
                       "_name": "PlaySoundWithSubtitle",
-                      "_isStatic": true
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "320,-0"
@@ -1081,6 +1092,7 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -1131,9 +1143,9 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                      "_isStatic": true,
                       "_name": "PlaySoundWithNameAndSubtitle",
-                      "_isStatic": true
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                     },
                     "UserData": {
                       "Position": "224,16"
@@ -1176,6 +1188,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1208,7 +1222,7 @@
               "Color": "0.45076,0.57209,0.36986,0.9",
               "Maxs": "2650.04,2790.837,11.03999",
               "Mins": "-3353.239,-2560.32,-387.76",
-              "TextureScale": 0.01
+              "TextureScale": 0.4
             },
             {
               "__type": "LeFisheSpawner",
@@ -1673,7 +1687,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "951a80d1-b756-431e-8923-896a590cfa5b",
+                "component_id": "d2ffbccc-1280-43ca-b02c-9f6e4413dc6a",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -2320,7 +2334,70 @@
           "__guid": "d2de7660-6669-4833-bc9d-a70c819a6541",
           "Name": "shop_bread",
           "Position": "-2.658203,-38.13184,49.50513",
-          "Rotation": "0,0,0.3826833,0.9238794",
+          "Rotation": "0,0,-0.1454777,0.9893613",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "cbd84281-3fb8-40ad-82d9-d9f84fcb78c7",
+          "Name": "shop_bread",
+          "Position": "-33.06348,-38.13184,49.50513",
+          "Rotation": "0,0,-0.1454777,0.9893613",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "65613bc0-ecd6-4d10-a095-acd32460a971",
+          "Name": "shop_bread",
+          "Position": "-2.658203,-38.13184,66.77637",
+          "Rotation": "0,0,0.2359025,0.9717765",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "f5866841-8b4d-49b6-8c24-16147fef3a4d",
+          "Name": "shop_bread",
+          "Position": "-33.06348,-38.13184,66.77637",
+          "Rotation": "0,0,0.2359025,0.9717765",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "ddc83a88-fae3-46eb-995e-b827f58f2144",
+          "Name": "shop_bread",
+          "Position": "-2.658203,-110.9453,66.77637",
+          "Rotation": "0,0,0.956646,0.2912523",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "51b94c6f-daaa-42ea-be3c-1796e5ec4739",
+          "Name": "shop_bread",
+          "Position": "-33.06348,-110.9453,66.77637",
+          "Rotation": "0,0,0.956646,0.2912523",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "b829cc0c-6dbb-44f5-862f-af468d319e4c",
+          "Name": "shop_bread",
+          "Position": "-2.658203,-110.9453,49.5957",
+          "Rotation": "0,0,0.07130376,0.9974544",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "c536e50d-e17e-4f10-a4b5-c89fb934d04f",
+          "Name": "shop_bread",
+          "Position": "-33.06348,-110.9453,49.5957",
+          "Rotation": "0,0,0.07130376,0.9974544",
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_bread.prefab"
@@ -2329,7 +2406,70 @@
           "__guid": "03f8257e-bb82-427f-b1da-b0abdee430ab",
           "Name": "shop_bread (1)",
           "Position": "-2.933594,-22.7334,49.50513",
-          "Rotation": "0,0,0.3826833,0.9238794",
+          "Rotation": "0,0,0.03724596,0.999306",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "09938e79-3e88-40a5-97e2-f2dad3355687",
+          "Name": "shop_bread (1)",
+          "Position": "-33.33887,-22.7334,49.50513",
+          "Rotation": "0,0,0.03724596,0.999306",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "f708a765-5071-46c2-97b3-2bdfb4ffb00a",
+          "Name": "shop_bread (1)",
+          "Position": "-2.933594,-22.7334,66.77637",
+          "Rotation": "0,0,0.0375911,0.999293",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "e21455f0-bbca-44ed-8c30-a4d75e512239",
+          "Name": "shop_bread (1)",
+          "Position": "-33.33887,-22.7334,66.77637",
+          "Rotation": "0,0,0.0375911,0.999293",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "23a1bc2a-5d2e-4d24-bdba-da6e24dc6ee8",
+          "Name": "shop_bread (1)",
+          "Position": "-2.933594,-95.54688,66.77637",
+          "Rotation": "0,0,0.1298213,0.9915372",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "18502ff0-fc9d-4db9-9999-020f7db4c0fe",
+          "Name": "shop_bread (1)",
+          "Position": "-33.33887,-95.54688,66.77637",
+          "Rotation": "0,0,0.1298213,0.9915372",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "23fe0c30-2200-474e-82ee-11e49642ba63",
+          "Name": "shop_bread (1)",
+          "Position": "-2.933594,-95.54688,49.5957",
+          "Rotation": "0,0,0.9784204,0.2066232",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "967f77dd-6a2b-4b69-b507-d30714f0d4b3",
+          "Name": "shop_bread (1)",
+          "Position": "-33.33887,-95.54688,49.5957",
+          "Rotation": "0,0,0.9784204,0.2066232",
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_bread.prefab"
@@ -2344,15 +2484,922 @@
           "__Prefab": "prefabs/shop/shop_bread.prefab"
         },
         {
-          "__guid": "58a928a4-c6e7-4ac0-bf60-e5d057692f62",
-          "Name": "shop_bread (3)",
-          "Position": "-2.814453,7.467773,49.50513",
+          "__guid": "8abb7c47-3888-4236-af9f-1bf7a460db2e",
+          "Name": "shop_bread (2)",
+          "Position": "-33.97656,-7.158203,49.50513",
           "Rotation": "0,0,0.3826833,0.9238794",
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "a7341716-94f3-40a8-a6c5-4bdb0bdf2a46",
+          "Name": "shop_bread (2)",
+          "Position": "-3.571289,-7.158203,66.77637",
+          "Rotation": "0,0,0.9569823,0.2901458",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "2691f93e-5efb-4e5f-976c-ef62e14031cf",
+          "Name": "shop_bread (2)",
+          "Position": "-33.97656,-7.158203,66.77637",
+          "Rotation": "0,0,0.9569823,0.2901458",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "ce61b0ec-78e2-468d-ac7d-5d2e7d61fc88",
+          "Name": "shop_bread (2)",
+          "Position": "-3.571289,-79.97168,66.77637",
+          "Rotation": "0,0,0.02370444,0.9997188",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "41e298e0-1d14-447b-97fe-2903dca0e282",
+          "Name": "shop_bread (2)",
+          "Position": "-33.97656,-79.97168,66.77637",
+          "Rotation": "0,0,0.02370444,0.9997188",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "dff5c415-6561-42c0-a471-b2b4f5e8bc37",
+          "Name": "shop_bread (2)",
+          "Position": "-3.571289,-79.97168,49.5957",
+          "Rotation": "-0.0002857508,-0.0006216983,-0.1331083,0.9911011",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "7a445f41-4076-43a5-b3d5-098e1c03cf19",
+          "Name": "shop_bread (2)",
+          "Position": "-33.97656,-79.97168,49.5957",
+          "Rotation": "-0.0002857508,-0.0006216983,-0.1331083,0.9911011",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "58a928a4-c6e7-4ac0-bf60-e5d057692f62",
+          "Name": "shop_bread (3)",
+          "Position": "-2.814453,7.467773,49.50513",
+          "Rotation": "0,0,0.9864855,0.1638474",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "d9f0b213-958f-4ac0-bc51-2883d328314b",
+          "Name": "shop_bread (3)",
+          "Position": "-33.21973,7.467773,49.50513",
+          "Rotation": "0,0,0.9864855,0.1638474",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "58193ca9-997d-457b-9672-1986527e4e5a",
+          "Name": "shop_bread (3)",
+          "Position": "-2.814453,7.467773,66.77637",
+          "Rotation": "0,0,0.1564211,0.9876903",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "9e083a9f-bc8f-4353-9024-0a701077379f",
+          "Name": "shop_bread (3)",
+          "Position": "-33.21973,7.467773,66.77637",
+          "Rotation": "0,0,0.1564211,0.9876903",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "3b0b11a1-f6cd-497c-93c2-b32a439fbafc",
+          "Name": "shop_bread (3)",
+          "Position": "-2.814453,-65.3457,66.77637",
+          "Rotation": "0,0,0.9982195,-0.05964321",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "33af0cf7-8142-41e0-8307-4f03d659e4c0",
+          "Name": "shop_bread (3)",
+          "Position": "-33.21973,-65.3457,66.77637",
+          "Rotation": "0,0,0.9982195,-0.05964321",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "b03ff9c2-8ea5-459a-a919-39ef2d790b15",
+          "Name": "shop_bread (3)",
+          "Position": "-2.814453,-65.3457,49.5957",
+          "Rotation": "-0.0006622342,0.0001720703,0.9522948,0.3051783",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "01f29605-9486-4088-87aa-8667913410c8",
+          "Name": "shop_bread (3)",
+          "Position": "-33.21973,-65.3457,49.5957",
+          "Rotation": "-0.0006622342,0.0001720703,0.9522948,0.3051783",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "704a5c28-3572-41f7-8cec-484368259122",
+          "Name": "shop_cereal_ape",
+          "Position": "58.53906,-195.6025,66.85107",
+          "Rotation": "0,0,0.6775844,0.735445",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_ape.prefab"
+        },
+        {
+          "__guid": "505686d8-5945-4fd9-b100-af62afe8b730",
+          "Name": "shop_cereal_ape",
+          "Position": "58.53906,-195.6025,49.32373",
+          "Rotation": "0,0,0.6775844,0.735445",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_ape.prefab"
+        },
+        {
+          "__guid": "e637aceb-1434-478a-a83c-1b35c1b75b2d",
+          "Name": "shop_cereal_ape",
+          "Position": "14.20117,-195.6025,66.85107",
+          "Rotation": "0,0,0.608563,0.7935055",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_ape.prefab"
+        },
+        {
+          "__guid": "051e3121-c68f-494c-a65f-1d764e5c4814",
+          "Name": "shop_cereal_ape",
+          "Position": "14.20117,-195.6025,49.32373",
+          "Rotation": "0,0,0.608563,0.7935055",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_ape.prefab"
+        },
+        {
+          "__guid": "d486e62b-8625-470b-9a6b-03af8dae1d89",
+          "Name": "shop_cereal_ape",
+          "Position": "44.58105,-195.6025,66.85107",
+          "Rotation": "0,0,0.7055898,0.7086204",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_ape.prefab"
+        },
+        {
+          "__guid": "a8eb1e0a-b975-4e09-bdf3-d6e0dfc57a53",
+          "Name": "shop_cereal_ape",
+          "Position": "44.58105,-195.6025,49.32373",
+          "Rotation": "0,0,0.7055898,0.7086204",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_ape.prefab"
+        },
+        {
+          "__guid": "3b22807d-0739-4405-b89f-27ee23edf4af",
+          "Name": "shop_cereal_ape",
+          "Position": "29.14453,-195.6025,66.85107",
+          "Rotation": "0,0,0.7280539,0.6855197",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_ape.prefab"
+        },
+        {
+          "__guid": "f1de5066-31e1-477f-8b42-bf1728cd35dd",
+          "Name": "shop_cereal_ape",
+          "Position": "29.14453,-195.6025,49.32373",
+          "Rotation": "0,0,0.7280539,0.6855197",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_ape.prefab"
+        },
+        {
+          "__guid": "ca54c6c8-b660-4509-8042-5683ebef2351",
+          "Name": "shop_cereal_daves (7)",
+          "Position": "-16.66113,-194.0791,49.33008",
+          "Rotation": "0,0,0.6682765,0.7439128",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_daves.prefab"
+        },
+        {
+          "__guid": "1adac6e1-a89a-4f62-9423-ef3dfbf8a8b1",
+          "Name": "shop_cereal_daves (1)",
+          "Position": "-31.47363,-195.7598,66.85718",
+          "Rotation": "0,0,0.7428079,0.6695044",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_daves.prefab"
+        },
+        {
+          "__guid": "0c674dab-7c93-47ff-84c1-b96157ca0a95",
+          "Name": "shop_cereal_daves (6)",
+          "Position": "-31.47363,-195.7598,49.33008",
+          "Rotation": "0,0,0.7428079,0.6695044",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_daves.prefab"
+        },
+        {
+          "__guid": "47a5a8e5-b177-4f8f-b229-08a960b26b64",
+          "Name": "shop_cereal_daves (2)",
+          "Position": "-48.40137,-194.0791,66.85718",
+          "Rotation": "0,0,0.7226208,0.6912445",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_daves.prefab"
+        },
+        {
+          "__guid": "e00ae644-b003-49aa-9656-5a97451ffee8",
+          "Name": "shop_cereal_daves (5)",
+          "Position": "-48.40137,-194.0791,49.33008",
+          "Rotation": "0,0,0.7226208,0.6912445",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_daves.prefab"
+        },
+        {
+          "__guid": "732ce8f4-bf6b-4ca0-abdb-96c403217f4d",
+          "Name": "shop_cereal_daves (3)",
+          "Position": "-64.24512,-194.0791,66.85718",
+          "Rotation": "0,0,0.6682765,0.7439128",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_daves.prefab"
+        },
+        {
+          "__guid": "8c8a89af-acfa-4f4a-856e-02e72386eab5",
+          "Name": "shop_cereal_daves (4)",
+          "Position": "-64.24512,-194.0791,49.33008",
+          "Rotation": "0,0,0.6682765,0.7439128",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_daves.prefab"
+        },
+        {
+          "__guid": "b227fa0e-7053-4549-b8e6-55d673fec8b8",
+          "Name": "shop_cereal_wheatleyos",
+          "Position": "-169.5771,-195.6025,66.68701",
+          "Rotation": "0,0,0.6508864,0.7591751",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_wheatleyos.prefab"
+        },
+        {
+          "__guid": "56e659a6-5c62-456b-a9fb-ba67969c858d",
+          "Name": "shop_cereal_wheatleyos (7)",
+          "Position": "-169.5771,-195.6025,49.16016",
+          "Rotation": "0,0,0.6508864,0.7591751",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_wheatleyos.prefab"
+        },
+        {
+          "__guid": "3a64e915-c550-476d-be0c-2d852409b80f",
+          "Name": "shop_cereal_wheatleyos (1)",
+          "Position": "-217.6523,-195.6025,66.68701",
+          "Rotation": "0,0,0.7287468,0.6847832",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_wheatleyos.prefab"
+        },
+        {
+          "__guid": "90197d20-47c4-4557-b734-f1a4d2fc5597",
+          "Name": "shop_cereal_wheatleyos (4)",
+          "Position": "-217.6523,-195.6025,49.16016",
+          "Rotation": "0,0,0.7287468,0.6847832",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_wheatleyos.prefab"
+        },
+        {
+          "__guid": "44e393c7-8d8f-4979-8e91-2d54b8aea02e",
+          "Name": "shop_cereal_wheatleyos (2)",
+          "Position": "-185.5762,-195.6025,66.68701",
+          "Rotation": "0,0,0.752878,0.6581602",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_wheatleyos.prefab"
+        },
+        {
+          "__guid": "68efe9cc-c9c5-48bd-b500-2be6ae11cdce",
+          "Name": "shop_cereal_wheatleyos (6)",
+          "Position": "-185.5762,-195.6025,49.16016",
+          "Rotation": "0,0,0.752878,0.6581602",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_wheatleyos.prefab"
+        },
+        {
+          "__guid": "0559930f-0a8d-4bcc-9d11-4bb44bbd67ba",
+          "Name": "shop_cereal_wheatleyos (3)",
+          "Position": "-201.2939,-195.6025,66.68701",
+          "Rotation": "0,0,0.7114403,0.7027465",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_wheatleyos.prefab"
+        },
+        {
+          "__guid": "500d6958-2343-4d3e-8d13-93952c1804df",
+          "Name": "shop_cereal_wheatleyos (5)",
+          "Position": "-201.2939,-195.6025,49.16016",
+          "Rotation": "0,0,0.7114403,0.7027465",
+          "Scale": "0.9,0.9,0.9",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_wheatleyos.prefab"
+        },
+        {
+          "__guid": "a00d4e7e-2f91-4ec2-a7fb-c3fa54b7f719",
+          "Name": "shop_jam",
+          "Position": "-0.1503906,-39.80762,33.73413",
+          "Rotation": "0,0,0.8522843,-0.523079",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_jam.prefab"
+        },
+        {
+          "__guid": "be631bbf-5419-4721-89c0-7573ba0a3b1b",
+          "Name": "shop_jam (1)",
+          "Position": "-2.989258,-27.70117,33.73413",
+          "Rotation": "0,0,0.8522843,-0.523079",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_jam.prefab"
+        },
+        {
+          "__guid": "75b8e93a-0675-44a7-a85b-83ebf95cee80",
+          "Name": "shop_jam (2)",
+          "Position": "-6.203125,7.90332,33.73413",
+          "Rotation": "0,0,0.8522843,-0.523079",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_jam.prefab"
+        },
+        {
+          "__guid": "9f404aa2-8fa4-4a1a-a68a-f3cbab37e4b3",
+          "Name": "shop_jam (3)",
+          "Position": "-1.884766,-5.098633,33.73413",
+          "Rotation": "0,0,0.8522843,-0.523079",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_jam.prefab"
+        },
+        {
+          "__guid": "7a74bc41-320a-404d-9602-d89459a4a455",
+          "Name": "shop_jam (4)",
+          "Position": "-5.037109,-0.2822266,15.37305",
+          "Rotation": "0,0,0.8522843,-0.523079",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_jam.prefab"
+        },
+        {
+          "__guid": "725e06dc-29b7-445d-9bae-92a76368de4d",
+          "Name": "shop_jam (5)",
+          "Position": "-1.882812,-10.13574,15.37305",
+          "Rotation": "0,0,0.8522843,-0.523079",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_jam.prefab"
+        },
+        {
+          "__guid": "85e33e9c-4cfc-4377-aad4-d7c58de43a9b",
+          "Name": "shop_jam (6)",
+          "Position": "-7.079102,-32.45605,15.37305",
+          "Rotation": "0,0,0.8522843,-0.523079",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_jam.prefab"
+        },
+        {
+          "__guid": "1f2f9d49-02be-471c-8dc7-83fc7264357f",
+          "Name": "shop_jam (7)",
+          "Position": "-1.795898,-23.84766,15.37305",
+          "Rotation": "0,0,0.8522843,-0.523079",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_jam.prefab"
+        },
+        {
+          "__guid": "c656f7ab-2028-4de5-bf45-0863987c6f30",
+          "Name": "shop_jam (8)",
+          "Position": "-0.3310547,-42.32227,15.37305",
+          "Rotation": "0,0,0.8522843,-0.523079",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_jam.prefab"
+        },
+        {
+          "__guid": "03d8f024-f51c-445f-a459-c8226cb32199",
+          "Name": "shop_mayo",
+          "Position": "-0.4794922,-63.39941,-1.609863",
+          "Rotation": "0,0,0.7722319,-0.6353406",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mayo.prefab"
+        },
+        {
+          "__guid": "cfc1b270-79e9-424c-a24b-044dc7e02ccd",
+          "Name": "shop_mayo (1)",
+          "Position": "-6.779297,-72.86523,-1.609863",
+          "Rotation": "0,0,0.7722319,-0.6353406",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mayo.prefab"
+        },
+        {
+          "__guid": "9560a041-bca9-4efd-9e97-1919a67258bb",
+          "Name": "shop_mayo (2)",
+          "Position": "-0.3603516,-82.02539,-1.609863",
+          "Rotation": "0,0,0.7722319,-0.6353406",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mayo.prefab"
+        },
+        {
+          "__guid": "092c7ea4-f731-4890-8409-5da700f7fa21",
+          "Name": "shop_mayo (3)",
+          "Position": "-7.317383,-113.3701,-1.609863",
+          "Rotation": "0,0,0.7722319,-0.6353406",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mayo.prefab"
+        },
+        {
+          "__guid": "d27c0068-99ec-444d-91a5-7a2230e676d0",
+          "Name": "shop_mayo (4)",
+          "Position": "-1.367188,-102.8633,-1.609863",
+          "Rotation": "0,0,0.7722319,-0.6353406",
+          "Scale": "1.3,1.3,1.3",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mayo.prefab"
+        },
+        {
+          "__guid": "00ff5121-ffad-4c1e-b12f-dbef813a9573",
+          "Name": "shop_ketchup",
+          "Position": "-1.577148,-59.60254,15.68408",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_ketchup.prefab"
+        },
+        {
+          "__guid": "6a3ee222-aa36-432f-b776-0cf5416db65e",
+          "Name": "shop_ketchup (1)",
+          "Position": "-4.207031,-70.0918,15.68408",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_ketchup.prefab"
+        },
+        {
+          "__guid": "91519f63-497e-4906-86a9-755f9fc0b691",
+          "Name": "shop_ketchup (2)",
+          "Position": "-4.918945,-109.8447,15.68408",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_ketchup.prefab"
+        },
+        {
+          "__guid": "36ad2439-9106-459a-a546-2fbdd97051ac",
+          "Name": "shop_ketchup (3)",
+          "Position": "0.953125,-97.99121,15.68408",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_ketchup.prefab"
+        },
+        {
+          "__guid": "8a506e32-3def-4399-9526-35a674e65f4d",
+          "Name": "shop_ketchup (4)",
+          "Position": "-5.876953,-86.32422,15.68408",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_ketchup.prefab"
+        },
+        {
+          "__guid": "a8209509-b236-445d-917c-a96aaa37405a",
+          "Name": "shop_mustard",
+          "Position": "-0.9511719,-111.4268,32.73413",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mustard.prefab"
+        },
+        {
+          "__guid": "2a6fbec7-2a36-4d70-b02c-176d8c859535",
+          "Name": "shop_mustard (1)",
+          "Position": "-5.072266,-98.64355,32.73413",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mustard.prefab"
+        },
+        {
+          "__guid": "8610f96b-6d49-4fdf-890b-837d6f613f79",
+          "Name": "shop_mustard (2)",
+          "Position": "0.3320312,-89.98828,32.73413",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mustard.prefab"
+        },
+        {
+          "__guid": "b6e81df0-c7ac-47ee-8fda-cfa4ee3594fd",
+          "Name": "shop_mustard (3)",
+          "Position": "-5.787109,-63.20605,32.73413",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mustard.prefab"
+        },
+        {
+          "__guid": "6e681920-93e3-43d1-82e8-d62c499dfe5f",
+          "Name": "shop_mustard (4)",
+          "Position": "-1.046875,-70.90723,32.73413",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mustard.prefab"
+        },
+        {
+          "__guid": "1f86faa9-a7f3-4e91-8340-0e6f56357612",
+          "Name": "shop_can_of_fish",
+          "Position": "-34.99512,7.125,32.43018",
+          "Rotation": "0,0,0.9606771,0.2776676",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_fish.prefab"
+        },
+        {
+          "__guid": "142d2b24-42df-4447-85dc-cd38cffbf639",
+          "Name": "shop_can_of_fish (6)",
+          "Position": "-34.99512,7.125,15.28003",
+          "Rotation": "0,0,0.9606771,0.2776676",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_fish.prefab"
+        },
+        {
+          "__guid": "995d5ce7-21a7-483b-a37c-ceff6cda6b27",
+          "Name": "shop_can_of_fish (1)",
+          "Position": "-32.95605,-8.423828,32.43018",
+          "Rotation": "0,0,0.9606771,0.2776676",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_fish.prefab"
+        },
+        {
+          "__guid": "6676a303-fc16-4a06-99c7-0abe59bd1f6b",
+          "Name": "shop_can_of_fish (7)",
+          "Position": "-32.36816,-3.177734,15.28003",
+          "Rotation": "0,0,0.9606771,0.2776676",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_fish.prefab"
+        },
+        {
+          "__guid": "c47a3031-1288-4482-a384-ba7968c53abe",
+          "Name": "shop_can_of_fish (8)",
+          "Position": "-28.62891,-17.46191,15.28003",
+          "Rotation": "0,0,0.9606771,0.2776676",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_fish.prefab"
+        },
+        {
+          "__guid": "a57833f0-50ce-4518-abbf-cfeae80b5225",
+          "Name": "shop_can_of_fish (2)",
+          "Position": "-36.47363,-16.59082,32.43018",
+          "Rotation": "0,0,0.9606771,0.2776676",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_fish.prefab"
+        },
+        {
+          "__guid": "ce582922-d836-495e-9d6a-6a74b5277815",
+          "Name": "shop_can_of_fish (5)",
+          "Position": "-33.97461,-27.11523,15.28003",
+          "Rotation": "0,0,0.9606771,0.2776676",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_fish.prefab"
+        },
+        {
+          "__guid": "293cd56a-cbb3-4f8d-b88c-8c512de2683a",
+          "Name": "shop_can_of_fish (3)",
+          "Position": "-34.33984,-33.18555,32.43018",
+          "Rotation": "0,0,0.9606771,0.2776676",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_fish.prefab"
+        },
+        {
+          "__guid": "d4db57df-c139-467b-a4ac-3a796ef27d9c",
+          "Name": "shop_can_of_fish (4)",
+          "Position": "-31.5459,-38.5293,15.28003",
+          "Rotation": "0,0,0.9606771,0.2776676",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_fish.prefab"
+        },
+        {
+          "__guid": "7eb6951a-9dd1-49b8-b54e-8a356a50cf75",
+          "Name": "shop_can_of_meat",
+          "Position": "-35.08398,8.548828,-1.744873",
+          "Rotation": "0,0,0.9997788,0.02102954",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "ba77da4d-c1de-4061-a1f9-70c188149c2a",
+          "Name": "shop_can_of_meat (1)",
+          "Position": "-30.12598,-2.080078,-1.744873",
+          "Rotation": "0,0,0.9997788,0.02102954",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "d98efa0a-4478-495a-b527-af42a0d5aa90",
+          "Name": "shop_can_of_meat (2)",
+          "Position": "-37.00586,-42.32031,-1.744873",
+          "Rotation": "0,0,0.9997788,0.02102954",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "561a800a-7bad-44d3-b5f9-677ba6ba19bb",
+          "Name": "shop_can_of_meat (5)",
+          "Position": "-33.35645,-72.68359,-1.744873",
+          "Rotation": "0,0,0.9997788,0.02102954",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "313eabbd-ba47-4efb-b689-5848ad46ffa8",
+          "Name": "shop_can_of_meat (6)",
+          "Position": "-28.77832,-84.69727,-1.744873",
+          "Rotation": "0,0,0.9997788,0.02102954",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "d8344e0a-790b-4f9e-b1f0-a3005eb5bffb",
+          "Name": "shop_can_of_meat (7)",
+          "Position": "-31.37305,-112.8564,-1.744873",
+          "Rotation": "0,0,0.9997788,0.02102954",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "8ea4a196-6129-4073-a5a9-5ceb0904c12e",
+          "Name": "shop_can_of_meat (8)",
+          "Position": "-34.2373,-102.8008,-1.744873",
+          "Rotation": "0,0,0.9997788,0.02102954",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "0045d5cc-f300-4fe1-afd7-8557262f4fa1",
+          "Name": "shop_can_of_meat (3)",
+          "Position": "-29.67578,-32.55469,-1.744873",
+          "Rotation": "0,0,0.9997788,0.02102954",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "cfabe86b-d85c-4b15-8824-98782d8da04a",
+          "Name": "shop_can_of_meat (4)",
+          "Position": "-36.99707,-23.48242,-1.744873",
+          "Rotation": "0,0,0.9997788,0.02102954",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "04bb686a-ecdf-456e-a6fb-77d1e127778c",
+          "Name": "shop_can_of_soup",
+          "Position": "-37.61914,-62.02637,15.55005",
+          "Rotation": "0,0,0.9521082,0.3057612",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_soup.prefab"
+        },
+        {
+          "__guid": "03ec8118-5d9e-4384-9ace-0ab30e260aa1",
+          "Name": "shop_can_of_soup (1)",
+          "Position": "-29.7334,-73.00586,15.55005",
+          "Rotation": "0,0,0.9521082,0.3057612",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_soup.prefab"
+        },
+        {
+          "__guid": "1bbea45d-134e-4931-91ff-9229e95ce6b8",
+          "Name": "shop_can_of_soup (7)",
+          "Position": "-30.02441,-79.08594,32.63013",
+          "Rotation": "0,0,0.9521082,0.3057612",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_soup.prefab"
+        },
+        {
+          "__guid": "432503e8-10ec-453e-afb9-91db6520b10a",
+          "Name": "shop_can_of_soup (2)",
+          "Position": "-35.6543,-83.17676,15.55005",
+          "Rotation": "0,0,0.9521082,0.3057612",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_soup.prefab"
+        },
+        {
+          "__guid": "d72d9892-afcc-4ffc-a7bc-bce127e3bc55",
+          "Name": "shop_can_of_soup (6)",
+          "Position": "-35.13672,-103.0615,32.63013",
+          "Rotation": "0,0,0.9521082,0.3057612",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_soup.prefab"
+        },
+        {
+          "__guid": "2d37e28b-c492-4d73-b1e8-c1eef7a26e67",
+          "Name": "shop_can_of_soup (3)",
+          "Position": "-28.63086,-115.0361,15.55005",
+          "Rotation": "0,0,0.9521082,0.3057612",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_soup.prefab"
+        },
+        {
+          "__guid": "577bf648-d76f-462c-a2fe-7d36c05af5c6",
+          "Name": "shop_can_of_soup (4)",
+          "Position": "-33.38184,-105.6992,15.55005",
+          "Rotation": "0,0,0.9521082,0.3057612",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_soup.prefab"
+        },
+        {
+          "__guid": "bef1bb58-a78d-409a-b639-2be80c4d0661",
+          "Name": "shop_can_of_soup (5)",
+          "Position": "-29.52344,-112.7197,32.63013",
+          "Rotation": "0,0,0.9521082,0.3057612",
+          "Scale": "1.5,1.5,1.5",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_can_of_soup.prefab"
+        },
+        {
+          "__guid": "5ea84334-5800-42f9-b803-b2ec890a82ac",
+          "Name": "shop_crisps_bad",
+          "Position": "58.8623,-204.999,38.89917",
+          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
+        },
+        {
+          "__guid": "aaf935d1-6807-46d4-87de-841a64a89758",
+          "Name": "shop_crisps_bad (5)",
+          "Position": "53.0293,-204.999,21.98315",
+          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
+        },
+        {
+          "__guid": "b50bae18-2330-4714-b289-71529e87a62d",
+          "Name": "shop_crisps_bad (1)",
+          "Position": "47.43555,-204.999,38.89917",
+          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
+        },
+        {
+          "__guid": "3289f28b-24a4-462f-bd14-269ac33adcfb",
+          "Name": "shop_crisps_bad (4)",
+          "Position": "37.3418,-204.999,21.98315",
+          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
+        },
+        {
+          "__guid": "3c859e0f-982e-4196-91de-cf3c5c87e467",
+          "Name": "shop_crisps_bad (2)",
+          "Position": "23.875,-204.999,38.89917",
+          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
+        },
+        {
+          "__guid": "0704148d-b4e6-44ab-8f81-dd2b17eb9d35",
+          "Name": "shop_crisps_bad (3)",
+          "Position": "13.78125,-204.999,21.98315",
+          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
+        },
+        {
+          "__guid": "e1e0b163-04e3-4132-902c-e5837fe2efb0",
+          "Name": "shop_cereal_daves",
+          "Position": "-16.66113,-194.0791,66.85718",
+          "Rotation": "0,0,0.6682765,0.7439128",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_cereal_daves.prefab"
         }
       ]
+    },
+    {
+      "__guid": "0ba2b064-d9ed-474d-a3ce-0f3255447c26",
+      "Name": "seat test",
+      "Position": "3153.648,-3133.637,2449.951",
+      "Rotation": "-0.01824996,0.02770507,0.5497935,0.8346415",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/seat.prefab"
     },
     {
       "__guid": "6891de28-661c-41eb-9af0-fcbca4ed3a97",
@@ -2448,24 +3495,6 @@
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/events/crazy_attack_deer.prefab"
-    },
-    {
-      "__guid": "e49b6dc2-6756-4c31-b3ee-21c9d2fe02cf",
-      "Name": "Seat",
-      "Position": "3141.069,-3091.207,2446.81",
-      "Rotation": "-0.01824996,0.02770507,0.5497935,0.8346415",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/objects/seat.prefab"
-    },
-    {
-      "__guid": "e3bb002a-1375-4adc-928a-6b078a73790d",
-      "Name": "Seat",
-      "Position": "3160.293,-3053.411,2444.774",
-      "Rotation": "-0.02683113,-0.01951212,-0.8591826,0.5105925",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/objects/seat.prefab"
     }
   ],
   "SceneProperties": {
@@ -2491,8 +3520,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-14T17:20:10.0692776\u002B02:00",
-  "ResourceVersion": 1,
-  "__version": 1,
+  "LastSaved": "2024-03-14T15:54:26.1977425\u002B00:00",
   "__references": []
 }
