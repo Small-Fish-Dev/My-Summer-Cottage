@@ -1,0 +1,163 @@
+{
+  "Name": "Catch some fish",
+  "Subtitle": "Wife wants fish",
+  "Description": "The nagging wife is asking for a fish, but we can catch one instead!",
+  "Giver": "Wife",
+  "Message": "I wanna eat fish tonight, go buy one and make it quick!",
+  "TaskType": "GivenByStory",
+  "TaskRarity": "Any",
+  "IsPrimary": true,
+  "Global": false,
+  "ExperienceGiven": 50,
+  "SuccessSignal": "task.success.Catch some fish",
+  "FailedSignal": "task.failed.Catch some fish",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Equip the fishing rod",
+      "TriggerSignal": "item.equipped.Fishing Rod",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Go to the lake",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "lake.reached",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "6b7afe82-4c07-4f8a-8b95-ebd70798c944",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "512,16"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "256,64"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "target"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "FishingSpot",
+            "DstId": 2,
+            "DstName": "name"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "7ce56eef-7d31-4c15-85fd-9ccd6a70b029",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "256,96"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "560,96"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "FishingSpot",
+            "DstId": 2,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "target"
+          }
+        ]
+      }
+    },
+    {
+      "Description": "Cast your fishing hook into the lake",
+      "SubtaskOrder": 2,
+      "TriggerSignal": "item.used_1.Fishing Rod",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Obtain 1 Herring (Wait for bobber to move)",
+      "SubtaskOrder": 3,
+      "TriggerSignal": "item.received.Herring",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

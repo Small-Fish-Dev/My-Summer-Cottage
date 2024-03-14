@@ -41,6 +41,7 @@ public sealed class FishingRod : Component
 		{
 			Accessibility = AccessibleFrom.Hands,
 			Action = OnInteract,
+			InteractDistance = 160,
 			DynamicText = () => IsCasted ? "Pull back" : "Cast",
 			Keybind = "mouse1",
 			Animation = InteractAnimations.Action,
@@ -95,6 +96,8 @@ public sealed class FishingRod : Component
 		var transform = Renderer?.GetAttachment( "line" ) ?? global::Transform.Zero;
 		CurrentBobber.Transform.Position = transform.Position + transform.Rotation.Forward * 10f;
 		CurrentBobber.Components.Get<Rigidbody>().Velocity = player.Velocity + player.EyeAngles.Forward * ThrowForce;
+
+		TaskMaster.SubmitTriggerSignal( "item.used_1.Fishing Rod", player );
 	}
 
 	private void RetractBobber( bool force = false )
