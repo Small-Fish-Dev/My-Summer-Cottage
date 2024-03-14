@@ -1,0 +1,25 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunasimple.shader"
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+	F_RENDER_BACKFACES 1
+	F_TRANSPARENCY 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/nature/spruce_tree_b/spruce_tree_b_billboard_color.png"
+	ColorTintMask "materials/default/default.tga"
+	Metalness "materials/default/default_metal.tga"
+	Normal "materials/nature/spruce_tree_b/spruce_tree_b_billboard_normal.png"
+	Roughness "[0.797000 0.797000 0.797000 0.000000]"
+
+	//---- Transparency ----
+	TransparencyMask "materials/nature/spruce_tree_b/spruce_tree_b_billboard_opacity.png"
+	TransparencyRounding "0.316"
+}
