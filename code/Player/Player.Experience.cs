@@ -42,7 +42,7 @@ public partial class Player
 	public void AddExperience( int exp )
 	{
 		Experience += exp;
-		
+
 		var oldLevel = Level;
 		while ( Experience >= ExpPerLevel )
 		{
@@ -56,6 +56,7 @@ public partial class Player
 		if ( oldLevel != Level )
 		{
 			OnLevelUp?.Invoke( Level );
+			GiveMoney( 5 + Level * 5 );
 		}
 	}
 }

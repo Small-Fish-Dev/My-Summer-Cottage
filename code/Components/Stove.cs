@@ -123,7 +123,7 @@ public sealed class Stove : Component
 	{
 		await Task.Delay( 1000 );
 
-		Player.Local.AddExperience( 300 );
+		Player.Local.AddExperience( 100 );
 
 		await Task.Delay( 10000 );
 
