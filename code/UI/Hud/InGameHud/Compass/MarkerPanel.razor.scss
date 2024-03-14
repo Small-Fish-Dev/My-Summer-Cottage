@@ -18,4 +18,19 @@
         background-position: center;
         transform: translateX(-50%);
     }
+
+    .distance {
+        position: absolute;
+        top: 100%;
+        margin-top: 35px;
+        font-size: 18px;
+        transform: translateX(-50%);
+        left: 50%;
+        transition: opacity 0.25s ease-in-out;
+        opacity: 0;
+
+        &.show {
+            opacity: 1;
+        }
+    }
 }
