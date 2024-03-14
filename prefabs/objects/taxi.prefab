@@ -1,13 +1,13 @@
 {
   "RootObject": {
-    "__guid": "5f0cbb3d-80fe-4c19-b5ab-82bd0c2340e7",
+    "__guid": "a1cfc01c-860e-4331-a97c-4afbc3f94c9b",
     "Name": "taxi",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "ModelRenderer",
-        "__guid": "ce11fe69-6703-435e-9a93-721907fac104",
+        "__guid": "d9b42cd4-ce3b-4135-89ac-83f77ca6d6ec",
         "BodyGroups": 1,
         "MaterialGroup": "normal",
         "Model": "models/old_red_lada/old_red_lada.vmdl",
@@ -16,24 +16,24 @@
       },
       {
         "__type": "ModelCollider",
-        "__guid": "6aa0dfdc-85d9-439a-a69a-11e829b93f6d",
+        "__guid": "16ac32a0-673e-4025-b598-b11130a4acfb",
         "IsTrigger": false,
         "Model": "models/old_red_lada/old_red_lada.vmdl",
         "Static": false
       },
       {
         "__type": "EventAreaTrigger",
-        "__guid": "9f6b03a4-8fd5-4d5b-b110-09e9131a6cca",
-        "Extents": "97.67995,59.51995,48.07989",
+        "__guid": "040e380f-d1a8-4bff-bb8b-b15e433e4b33",
+        "Extents": "123.2799,75.03992,81.11991",
         "MaxPollingRate": 1,
         "Offset": "47.12004,0,22.88",
-        "TagSet": "player,npc",
+        "TagSet": "npc",
         "TriggerPrefab": [],
         "TriggerSignalIdentifier": null
       },
       {
         "__type": "EventComponent",
-        "__guid": "661539b0-f29c-4bb6-a71e-71da89df87ef",
+        "__guid": "16f8b136-5dd9-45ef-8a02-22d6ed9e5b77",
         "DisabledWhilePlaying": [],
         "DisableOnTrigger": [],
         "Event": {
@@ -56,11 +56,11 @@
               "Type": "call",
               "Properties": {
                 "_type": "package.fish.sauna/HealthComponent",
-                "_name": "Damage",
-                "_isStatic": false
+                "_isStatic": false,
+                "_name": "Damage"
               },
               "UserData": {
-                "Position": "880,112"
+                "Position": "1232,160"
               }
             },
             {
@@ -69,7 +69,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "5f0cbb3d-80fe-4c19-b5ab-82bd0c2340e7"
+                  "go": "a1cfc01c-860e-4331-a97c-4afbc3f94c9b"
                 }
               },
               "UserData": {
@@ -84,6 +84,94 @@
               },
               "UserData": {
                 "Position": "416,80"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "resource.ref",
+              "Properties": {
+                "value": "sounds/rifle/rifle-shoot.sound",
+                "T": "Sandbox.Engine/Sandbox.SoundEvent"
+              },
+              "UserData": {
+                "Position": "544,336"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "928,432"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "log.warning",
+              "UserData": {
+                "Position": "352,-96"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "a1cfc01c-860e-4331-a97c-4afbc3f94c9b"
+                }
+              },
+              "UserData": {
+                "Position": "624,-128"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "property.get",
+              "ParentId": 12,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "property.get",
+              "ParentId": 13,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Rotation"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "property.get",
+              "ParentId": 14,
+              "Properties": {
+                "_type": "Sandbox.System/Rotation",
+                "_name": "Forward"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "property.get",
+              "ParentId": 14,
+              "Properties": {
+                "_type": "Sandbox.System/Rotation",
+                "_name": "Up"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "op.add",
+              "UserData": {
+                "Position": "1184,0"
+              }
+            },
+            {
+              "Id": 18,
+              "Type": "op.multiply",
+              "UserData": {
+                "Position": "992,-112"
               }
             }
           ],
@@ -101,7 +189,7 @@
               "DstName": "_target"
             },
             {
-              "Value": 10,
+              "Value": 999,
               "DstId": 3,
               "DstName": "amount"
             },
@@ -117,7 +205,8 @@
               "DstName": "force"
             },
             {
-              "Value": "0,0,1",
+              "SrcId": 17,
+              "SrcName": "_result",
               "DstId": 3,
               "DstName": "forceDirection"
             },
@@ -131,17 +220,99 @@
               "SrcName": "triggerer",
               "DstId": 6,
               "DstName": "_this"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "soundEvent"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "triggerer",
+              "DstId": 10,
+              "DstName": "args",
+              "DstIndex": 0
+            },
+            {
+              "SrcId": 12,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 15,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 16,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "a"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 15,
+              "SrcName": "_result",
+              "DstId": 18,
+              "DstName": "a"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "System.Private.CoreLib/System.Single",
+                "Value": 3
+              },
+              "DstId": 18,
+              "DstName": "b"
             }
           ]
         },
         "RequiredToFinish": false,
-        "TriggerCooldown": 0.5,
+        "TriggerCooldown": 0,
         "TriggerOnce": false,
         "Triggers": [
           {
             "_type": "component",
-            "component_id": "9f6b03a4-8fd5-4d5b-b110-09e9131a6cca",
-            "go": "5f0cbb3d-80fe-4c19-b5ab-82bd0c2340e7",
+            "component_id": "040e380f-d1a8-4bff-bb8b-b15e433e4b33",
+            "go": "a1cfc01c-860e-4331-a97c-4afbc3f94c9b",
             "component_type": "EventAreaTrigger"
           }
         ]
@@ -152,5 +323,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

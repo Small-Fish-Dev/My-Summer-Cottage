@@ -151,7 +151,7 @@ public sealed class HealthComponent : Component
 		{
 			if ( damaged && !StunWhenDamaged && !Immortal ) return;
 
-			var damageFrac = (float)amount / (float)MaxHealth;
+			var damageFrac = Math.Min( (float)amount / (float)MaxHealth, 1f );
 			var ragdollTime = damageFrac * 5f;
 			var ragdollVelocity = realDirection * force + Vector3.Up * force;
 

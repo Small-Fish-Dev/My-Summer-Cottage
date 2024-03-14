@@ -1,3 +1,5 @@
+using static Sauna.BusStop;
+
 namespace Sauna;
 
 public sealed class BusStop : Component
@@ -140,6 +142,7 @@ public sealed class BusStop : Component
 
 				taxi.Car.Transform.Position += taxi.Car.Transform.Rotation.Forward * taxi.Speed * Time.Delta;
 
+				taxi.Player.Components.Get<HealthComponent>().StunnedBy = DamageType.Nothing;
 				taxi.Player.RagdollDisable = true;
 
 				if ( taxi.Car.Transform.Position.Distance( currentEndPosition ) <= 100f )
@@ -154,6 +157,11 @@ public sealed class BusStop : Component
 
 					foreach ( var renderer in taxi.Player.Components.GetAll<SkinnedModelRenderer>( FindMode.EnabledInSelfAndDescendants ) )
 						renderer.Enabled = false;
+
+					if ( taxi.Player.Components.TryGet<MoveHelper>( out var moveHelper ) )
+					{
+						moveHelper.Enabled = false;
+					}
 				}
 			}
 			else
@@ -166,6 +174,11 @@ public sealed class BusStop : Component
 
 				foreach ( var renderer in taxi.Player.Components.GetAll<SkinnedModelRenderer>( FindMode.DisabledInSelfAndDescendants ) )
 					renderer.Enabled = true;
+
+				if ( taxi.Player.Components.TryGet<MoveHelper>( out var moveHelper, FindMode.EverythingInSelfAndChildren ) )
+				{
+					moveHelper.Enabled = true;
+				}
 
 				DisableRagdollAfter( taxi.Player );
 			}
@@ -182,6 +195,7 @@ public sealed class BusStop : Component
 		await Task.Delay( 1000 );
 
 		player.RagdollDisable = false;
+		player.Components.Get<HealthComponent>().StunnedBy = DamageType.Mild;
 	}
 
 	public BusStop FindBusStop( Stop type )
@@ -210,6 +224,17 @@ public sealed class BusStop : Component
 
 		var newTaxi = new Taxi( player, car, this, destination, timeToTravel );
 		_activeTaxis.Add( newTaxi );
+
+		if ( PrefabLibrary.TryGetByPath( "prefabs/npcs/elk_female.prefab", out var prefab ) )
+		{
+			var deer = SceneUtility.GetPrefabScene( prefab.Prefab ).Clone();
+
+			if ( deer != null )
+			{
+				deer.Transform.Position = _waypoints[4];
+				deer.Components.Get<NPC>().NextIdle = 999f;
+			}
+		}
 
 		player.TakeMoney( Price );
 	}
