@@ -73,7 +73,8 @@
                 "Title": "Event",
                 "id": "a969da17-b92b-46f0-8887-71fffb339db2",
                 "ReferencedComponentTypes": [
-                  "package.fish.sauna/NPC"
+                  "package.fish.sauna/NPC",
+                  "package.fish.sauna/Sauna.Player"
                 ]
               },
               "Variables": [],
@@ -134,6 +135,35 @@
                   "UserData": {
                     "Position": "432,80"
                   }
+                },
+                {
+                  "Id": 38,
+                  "Type": "time.delay",
+                  "UserData": {
+                    "Position": "752,-224"
+                  }
+                },
+                {
+                  "Id": 39,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_name": "CaptureMemory",
+                    "_type": "package.fish.sauna/Sauna.Player"
+                  },
+                  "UserData": {
+                    "Position": "992,-176"
+                  }
+                },
+                {
+                  "Id": 40,
+                  "Type": "scene.get",
+                  "Properties": {
+                    "T": "package.fish.sauna/Sauna.Player"
+                  },
+                  "UserData": {
+                    "Position": "704,-128"
+                  }
                 }
               ],
               "Links": [
@@ -172,6 +202,50 @@
                   "SrcName": "_result",
                   "DstId": 35,
                   "DstName": "component"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 38,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": 1,
+                  "DstId": 38,
+                  "DstName": "seconds"
+                },
+                {
+                  "SrcId": 38,
+                  "SrcName": "_signal",
+                  "DstId": 39,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 40,
+                  "SrcName": "_result",
+                  "DstId": 39,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": "Some creep was staring at me through the window of my sauna!",
+                  "DstId": 39,
+                  "DstName": "caption"
+                },
+                {
+                  "Value": 200,
+                  "DstId": 39,
+                  "DstName": "distance"
+                },
+                {
+                  "Value": "creepy.peeper",
+                  "DstId": 39,
+                  "DstName": "identifier"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "triggerer",
+                  "DstId": 40,
+                  "DstName": "_this"
                 }
               ]
             },
