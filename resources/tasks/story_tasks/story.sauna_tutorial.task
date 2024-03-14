@@ -16,7 +16,62 @@
   "PersistThroughSessions": false,
   "RunOnStartEverySession": false,
   "OnStart": null,
-  "OnSuccess": null,
+  "OnSuccess": {
+    "Version": 5,
+    "UserData": {
+      "Title": "On Success",
+      "id": "7c4618ae-7333-4492-9cf6-313bf0a97abf",
+      "ReferencedComponentTypes": []
+    },
+    "Variables": [],
+    "Nodes": [
+      {
+        "Id": 0,
+        "Type": "input"
+      },
+      {
+        "Id": 1,
+        "Type": "call",
+        "Properties": {
+          "_type": "package.fish.sauna/Sauna.Player",
+          "_name": "CaptureMemory",
+          "_isStatic": false
+        },
+        "UserData": {
+          "Position": "416,32"
+        }
+      }
+    ],
+    "Links": [
+      {
+        "SrcId": 0,
+        "SrcName": "_signal",
+        "DstId": 1,
+        "DstName": "_signal"
+      },
+      {
+        "SrcId": 0,
+        "SrcName": "player",
+        "DstId": 1,
+        "DstName": "_target"
+      },
+      {
+        "Value": "My first sauna ever since the incident.",
+        "DstId": 1,
+        "DstName": "caption"
+      },
+      {
+        "Value": 60,
+        "DstId": 1,
+        "DstName": "distance"
+      },
+      {
+        "Value": "first_sauna",
+        "DstId": 1,
+        "DstName": "identifier"
+      }
+    ]
+  },
   "OnFail": null,
   "FailConditionCheck": null,
   "Subtasks": [
@@ -79,5 +134,7 @@
       "AmountToComplete": 1
     }
   ],
+  "ResourceVersion": 0,
+  "__version": 0,
   "__references": []
 }

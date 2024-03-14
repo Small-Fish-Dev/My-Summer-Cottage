@@ -2,14 +2,12 @@
   "RootObject": {
     "__guid": "70e11655-f958-45c7-8eaf-40c411866039",
     "Name": "car_speeding",
-    "Position": "-7744,6640,2440",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "EventDefinition",
-        "__guid": "5ac2dc51-8735-4331-be22-70fd9502de0f",
-        "__enabled": false,
+        "__guid": "30b7986c-49db-40d9-a93a-b51994c246d0",
         "AddToEventPool": true,
         "EventName": "car_speeding_event",
         "EventSignals": [
@@ -22,7 +20,7 @@
       },
       {
         "__type": "EventComponent",
-        "__guid": "7b921fe6-ea75-4d2a-aaab-e6ab1962f7b9",
+        "__guid": "9d8ecf85-fa3e-4fc0-ab90-ded6b7c1b854",
         "DisabledWhilePlaying": [],
         "DisableOnTrigger": [],
         "Event": {
@@ -47,7 +45,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "bdf42396-9a38-44b7-b89e-763838727e40"
+                  "go": "3250ee80-2c93-49c0-a14a-d3da77f3ebd9"
                 }
               },
               "UserData": {
@@ -72,7 +70,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "ba258911-b20e-488c-a7e4-e07fa34d60f5"
+                  "go": "fe044501-1c9b-4544-a898-506990cc458b"
                 }
               },
               "UserData": {
@@ -139,7 +137,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "58a282de-a98a-4bec-a202-6dddfe07890d"
+                  "go": "ecfb3d31-8d1b-4f12-87ae-220ca622af5c"
                 }
               },
               "UserData": {
@@ -182,7 +180,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "f8e37981-5622-4e77-8892-793a7067732a"
+                  "go": "ab5b8af6-a703-4dc6-b7d6-d3b34a70c754"
                 }
               },
               "UserData": {
@@ -225,7 +223,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "6dda3ffc-a02b-4f21-bb7e-24c991f02d93"
+                  "go": "28ae72b9-d868-4e48-a798-6e4a8e093a7b"
                 }
               },
               "UserData": {
@@ -268,7 +266,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "a93027d0-feb5-4117-96ad-d867f3b504be"
+                  "go": "f09f9d72-9f46-4a28-b5d5-b2a984750e30"
                 }
               },
               "UserData": {
@@ -379,7 +377,7 @@
               "Id": 58,
               "Type": "event.finished",
               "UserData": {
-                "Position": "2288,304"
+                "Position": "1808,240"
               }
             },
             {
@@ -388,25 +386,25 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "7b921fe6-ea75-4d2a-aaab-e6ab1962f7b9",
+                  "component_id": "9d8ecf85-fa3e-4fc0-ab90-ded6b7c1b854",
                   "go": "70e11655-f958-45c7-8eaf-40c411866039",
                   "component_type": "EventComponent"
                 }
               },
               "UserData": {
-                "Position": "2208,512"
+                "Position": "1728,448"
               }
             },
             {
               "Id": 63,
               "Type": "call",
               "Properties": {
-                "_isStatic": false,
                 "_name": "Destroy",
+                "_isStatic": false,
                 "_type": "Sandbox.Game/Sandbox.GameObject"
               },
               "UserData": {
-                "Position": "2032,272"
+                "Position": "1552,208"
               }
             },
             {
@@ -418,120 +416,6 @@
               },
               "UserData": {
                 "Position": "80,-80"
-              }
-            },
-            {
-              "Id": 65,
-              "Type": "scene.ref",
-              "Properties": {
-                "gameobject": {
-                  "_type": "gameobject",
-                  "go": "b437ae98-ea18-4f06-b013-ae1d527b2ae8"
-                }
-              },
-              "UserData": {
-                "Position": "0,768"
-              }
-            },
-            {
-              "Id": 66,
-              "Type": "property.get",
-              "ParentId": 65,
-              "Properties": {
-                "_name": "Transform",
-                "_type": "Sandbox.Game/Sandbox.GameObject"
-              },
-              "UserData": {
-                "Visible": false
-              }
-            },
-            {
-              "Id": 67,
-              "Type": "property.get",
-              "ParentId": 66,
-              "Properties": {
-                "_name": "Position",
-                "_type": "Sandbox.Game/Sandbox.GameTransform"
-              }
-            },
-            {
-              "Id": 68,
-              "Type": "property.get",
-              "ParentId": 66,
-              "Properties": {
-                "_name": "LocalRotation",
-                "_type": "Sandbox.Game/Sandbox.GameTransform"
-              }
-            },
-            {
-              "Id": 69,
-              "Type": "scene.ref",
-              "Properties": {
-                "gameobject": {
-                  "_type": "gameobject",
-                  "go": "c0789d90-4863-4124-b388-e53a0464ded1"
-                }
-              },
-              "UserData": {
-                "Position": "0,880"
-              }
-            },
-            {
-              "Id": 70,
-              "Type": "property.get",
-              "ParentId": 69,
-              "Properties": {
-                "_name": "Transform",
-                "_type": "Sandbox.Game/Sandbox.GameObject"
-              },
-              "UserData": {
-                "Visible": false
-              }
-            },
-            {
-              "Id": 71,
-              "Type": "property.get",
-              "ParentId": 70,
-              "Properties": {
-                "_name": "Position",
-                "_type": "Sandbox.Game/Sandbox.GameTransform"
-              }
-            },
-            {
-              "Id": 72,
-              "Type": "property.get",
-              "ParentId": 70,
-              "Properties": {
-                "_name": "LocalRotation",
-                "_type": "Sandbox.Game/Sandbox.GameTransform"
-              }
-            },
-            {
-              "Id": 73,
-              "Type": "event.interpolateposition",
-              "UserData": {
-                "Position": "1536,176"
-              }
-            },
-            {
-              "Id": 74,
-              "Type": "event.interpolaterotation",
-              "UserData": {
-                "Position": "1536,336"
-              }
-            },
-            {
-              "Id": 75,
-              "Type": "event.interpolateposition",
-              "UserData": {
-                "Position": "1792,176"
-              }
-            },
-            {
-              "Id": 76,
-              "Type": "event.interpolaterotation",
-              "UserData": {
-                "Position": "1792,336"
               }
             }
           ],
@@ -679,7 +563,7 @@
               "DstName": "_signal"
             },
             {
-              "Value": 0.2,
+              "Value": 0.5,
               "DstId": 47,
               "DstName": "duration"
             },
@@ -713,7 +597,7 @@
               "DstName": "_signal"
             },
             {
-              "Value": 0.2,
+              "Value": 0.5,
               "DstId": 48,
               "DstName": "duration"
             },
@@ -753,7 +637,7 @@
               "DstName": "_signal"
             },
             {
-              "Value": 0.2,
+              "Value": 0.5,
               "DstId": 50,
               "DstName": "duration"
             },
@@ -787,7 +671,7 @@
               "DstName": "_signal"
             },
             {
-              "Value": 0.2,
+              "Value": 0.5,
               "DstId": 51,
               "DstName": "duration"
             },
@@ -821,7 +705,7 @@
               "DstName": "_signal"
             },
             {
-              "Value": 0.5,
+              "Value": 0.8,
               "DstId": 52,
               "DstName": "duration"
             },
@@ -855,7 +739,7 @@
               "DstName": "_signal"
             },
             {
-              "Value": 0.5,
+              "Value": 0.8,
               "DstId": 53,
               "DstName": "duration"
             },
@@ -889,7 +773,7 @@
               "DstName": "_signal"
             },
             {
-              "Value": 0.7,
+              "Value": 3,
               "DstId": 54,
               "DstName": "duration"
             },
@@ -923,7 +807,7 @@
               "DstName": "_signal"
             },
             {
-              "Value": 0.7,
+              "Value": 3,
               "DstId": 55,
               "DstName": "duration"
             },
@@ -963,7 +847,7 @@
               "DstName": "component"
             },
             {
-              "SrcId": 75,
+              "SrcId": 54,
               "SrcName": "_signal",
               "DstId": 63,
               "DstName": "_signal"
@@ -990,178 +874,6 @@
               "Value": true,
               "DstId": 64,
               "DstName": "_value"
-            },
-            {
-              "SrcId": 65,
-              "SrcName": "_result",
-              "DstId": 66,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 66,
-              "SrcName": "_result",
-              "DstId": 67,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 66,
-              "SrcName": "_result",
-              "DstId": 68,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 69,
-              "SrcName": "_result",
-              "DstId": 70,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 70,
-              "SrcName": "_result",
-              "DstId": 71,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 70,
-              "SrcName": "_result",
-              "DstId": 72,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 54,
-              "SrcName": "_signal",
-              "DstId": 73,
-              "DstName": "_signal"
-            },
-            {
-              "Value": 0.8,
-              "DstId": 73,
-              "DstName": "duration"
-            },
-            {
-              "Value": "Linear",
-              "DstId": 73,
-              "DstName": "easer"
-            },
-            {
-              "SrcId": 11,
-              "SrcName": "_result",
-              "DstId": 73,
-              "DstName": "from"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_result",
-              "DstId": 73,
-              "DstName": "target"
-            },
-            {
-              "SrcId": 67,
-              "SrcName": "_result",
-              "DstId": 73,
-              "DstName": "to"
-            },
-            {
-              "SrcId": 55,
-              "SrcName": "_signal",
-              "DstId": 74,
-              "DstName": "_signal"
-            },
-            {
-              "Value": 0.8,
-              "DstId": 74,
-              "DstName": "duration"
-            },
-            {
-              "Value": "Linear",
-              "DstId": 74,
-              "DstName": "easer"
-            },
-            {
-              "SrcId": 49,
-              "SrcName": "_result",
-              "DstId": 74,
-              "DstName": "from"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_result",
-              "DstId": 74,
-              "DstName": "target"
-            },
-            {
-              "SrcId": 68,
-              "SrcName": "_result",
-              "DstId": 74,
-              "DstName": "to"
-            },
-            {
-              "SrcId": 73,
-              "SrcName": "_signal",
-              "DstId": 75,
-              "DstName": "_signal"
-            },
-            {
-              "Value": 0.6,
-              "DstId": 75,
-              "DstName": "duration"
-            },
-            {
-              "Value": "Linear",
-              "DstId": 75,
-              "DstName": "easer"
-            },
-            {
-              "SrcId": 11,
-              "SrcName": "_result",
-              "DstId": 75,
-              "DstName": "from"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_result",
-              "DstId": 75,
-              "DstName": "target"
-            },
-            {
-              "SrcId": 71,
-              "SrcName": "_result",
-              "DstId": 75,
-              "DstName": "to"
-            },
-            {
-              "SrcId": 74,
-              "SrcName": "_signal",
-              "DstId": 76,
-              "DstName": "_signal"
-            },
-            {
-              "Value": 0.6,
-              "DstId": 76,
-              "DstName": "duration"
-            },
-            {
-              "Value": "Linear",
-              "DstId": 76,
-              "DstName": "easer"
-            },
-            {
-              "SrcId": 49,
-              "SrcName": "_result",
-              "DstId": 76,
-              "DstName": "from"
-            },
-            {
-              "SrcId": 2,
-              "SrcName": "_result",
-              "DstId": 76,
-              "DstName": "target"
-            },
-            {
-              "SrcId": 72,
-              "SrcName": "_result",
-              "DstId": 76,
-              "DstName": "to"
             }
           ]
         },
@@ -1171,15 +883,15 @@
         "Triggers": [
           {
             "_type": "component",
-            "component_id": "e0a5e52d-df41-4780-8977-747ea570e23b",
-            "go": "a519b2bf-75a3-4705-a231-7f2f1761a05b",
+            "component_id": "f2d6b05d-4471-4782-b4b1-acdc3da82889",
+            "go": "d2e9c9ee-5191-47c2-a464-4615e2f48d04",
             "component_type": "EventAreaTrigger"
           }
         ]
       },
       {
         "__type": "EventComponent",
-        "__guid": "2a050ac2-942d-4a23-9dcc-26f6f394bed0",
+        "__guid": "b7991858-ff05-4443-b4fb-775f8420e772",
         "DisabledWhilePlaying": [],
         "DisableOnTrigger": [],
         "Event": {
@@ -1222,12 +934,31 @@
               "Id": 3,
               "Type": "call",
               "Properties": {
-                "_isStatic": false,
+                "_type": "package.fish.sauna/HealthComponent",
                 "_name": "Damage",
-                "_type": "package.fish.sauna/HealthComponent"
+                "_isStatic": false
               },
               "UserData": {
                 "Position": "704,16"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "CaptureMemory",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "1168,-16"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "976,-112"
               }
             }
           ],
@@ -1264,7 +995,7 @@
             {
               "Value": {
                 "_type": "gameobject",
-                "go": "bdf42396-9a38-44b7-b89e-763838727e40"
+                "go": "3250ee80-2c93-49c0-a14a-d3da77f3ebd9"
               },
               "DstId": 3,
               "DstName": "attacker"
@@ -1283,6 +1014,44 @@
               "Value": "Serious",
               "DstId": 3,
               "DstName": "type"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_signal",
+              "DstId": 4,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "_target"
+            },
+            {
+              "Value": "Some idiot ran me over, luckily I\u0027m finnish.",
+              "DstId": 4,
+              "DstName": "caption"
+            },
+            {
+              "Value": 200,
+              "DstId": 4,
+              "DstName": "distance"
+            },
+            {
+              "Value": "car_ran_over",
+              "DstId": 4,
+              "DstName": "identifier"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 5,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.03,
+              "DstId": 5,
+              "DstName": "seconds"
             }
           ]
         },
@@ -1292,8 +1061,8 @@
         "Triggers": [
           {
             "_type": "component",
-            "component_id": "bb79cb98-dea5-4e33-940c-37f9f8fc42d8",
-            "go": "15bb614d-d0fc-49f7-ad18-6a29ec282d5b",
+            "component_id": "82069422-a500-47c6-8636-095cd6cc845b",
+            "go": "8cde3867-69c2-41ba-8ddd-c3f6a4afec23",
             "component_type": "EventAreaTrigger"
           }
         ]
@@ -1301,16 +1070,16 @@
     ],
     "Children": [
       {
-        "__guid": "a519b2bf-75a3-4705-a231-7f2f1761a05b",
+        "__guid": "d2e9c9ee-5191-47c2-a464-4615e2f48d04",
         "Name": "car_speeding_trigger",
-        "Position": "0,632,64",
+        "Position": "0,-86.64551,64",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "EventAreaTrigger",
-            "__guid": "e0a5e52d-df41-4780-8977-747ea570e23b",
-            "Extents": "256,3200,128",
+            "__guid": "f2d6b05d-4471-4782-b4b1-acdc3da82889",
+            "Extents": "256,3000,128",
             "MaxPollingRate": 5,
             "Offset": "0,0,0",
             "TagSet": "player",
@@ -1320,7 +1089,7 @@
         ]
       },
       {
-        "__guid": "bdf42396-9a38-44b7-b89e-763838727e40",
+        "__guid": "3250ee80-2c93-49c0-a14a-d3da77f3ebd9",
         "Name": "Car",
         "Position": "0,-3966.646,0",
         "Rotation": "0,0,0.7071067,0.7071068",
@@ -1328,7 +1097,7 @@
         "Components": [
           {
             "__type": "ModelRenderer",
-            "__guid": "6edfe8ed-1d23-4a58-b015-cb3d07abd390",
+            "__guid": "da856591-ace0-4ee0-8dba-304003b52b4b",
             "BodyGroups": 1,
             "MaterialGroup": "normal",
             "Model": "models/old_red_lada/old_red_lada.vmdl",
@@ -1337,7 +1106,7 @@
           },
           {
             "__type": "ModelCollider",
-            "__guid": "49da659d-6c47-4ed7-af74-21cff93535e0",
+            "__guid": "33653013-dd67-4946-a29a-5e7448527fd3",
             "IsTrigger": false,
             "Model": "models/old_red_lada/old_red_lada.vmdl",
             "Static": false
@@ -1345,7 +1114,7 @@
         ],
         "Children": [
           {
-            "__guid": "8ff3cdc6-0a5d-461e-aaad-508534a02baa",
+            "__guid": "4709ea9d-a34f-450c-9c64-86aeca19c352",
             "Name": "Spot Light",
             "Position": "80,-22.64551,24",
             "Rotation": "0,0,-0.07050124,0.9975117",
@@ -1355,7 +1124,7 @@
             "Components": [
               {
                 "__type": "SpotLight",
-                "__guid": "9a2eefd5-1712-4609-ac94-0966078de6dd",
+                "__guid": "ab9bfe7b-b65d-4599-a1c7-2803f714ac08",
                 "Attenuation": 0.64,
                 "ConeInner": 36.02,
                 "ConeOuter": 22.8,
@@ -1368,7 +1137,7 @@
             ]
           },
           {
-            "__guid": "67781fef-81c3-4214-8404-77909af395f6",
+            "__guid": "cbd04a91-17d8-4f58-aa25-6ec0bb552531",
             "Name": "Spot Light",
             "Position": "80,17.35449,24",
             "Rotation": "0,0,0.09230856,0.9957304",
@@ -1378,7 +1147,7 @@
             "Components": [
               {
                 "__type": "SpotLight",
-                "__guid": "07dd6eba-fd1d-4974-85ed-c21d9ecf20ee",
+                "__guid": "2562538a-68b8-490f-bc4f-553e6fe4092c",
                 "Attenuation": 0.64,
                 "ConeInner": 36.02,
                 "ConeOuter": 22.8,
@@ -1391,7 +1160,7 @@
             ]
           },
           {
-            "__guid": "15bb614d-d0fc-49f7-ad18-6a29ec282d5b",
+            "__guid": "8cde3867-69c2-41ba-8ddd-c3f6a4afec23",
             "Name": "HitPlayer",
             "Position": "0,0,0",
             "Enabled": true,
@@ -1399,7 +1168,7 @@
             "Components": [
               {
                 "__type": "EventAreaTrigger",
-                "__guid": "bb79cb98-dea5-4e33-940c-37f9f8fc42d8",
+                "__guid": "82069422-a500-47c6-8636-095cd6cc845b",
                 "Extents": "191.2001,97.92001,114.4",
                 "MaxPollingRate": 1,
                 "Offset": "59.35998,0,30.08",
@@ -1412,57 +1181,41 @@
         ]
       },
       {
-        "__guid": "ba258911-b20e-488c-a7e4-e07fa34d60f5",
+        "__guid": "fe044501-1c9b-4544-a898-506990cc458b",
         "Name": "destination",
-        "Position": "16,2280,0",
+        "Position": "0,2544,0",
         "Enabled": true,
         "NetworkMode": 2
       },
       {
-        "__guid": "58a282de-a98a-4bec-a202-6dddfe07890d",
+        "__guid": "ecfb3d31-8d1b-4f12-87ae-220ca622af5c",
         "Name": "destination1",
-        "Position": "-311.0752,2687.487,21.05713",
-        "Rotation": "0.154998,-0.08380713,0.8658853,0.4681824",
+        "Position": "0,4008,560",
+        "Rotation": "0.5,0,0,0.8660254",
         "Enabled": true,
         "NetworkMode": 2
       },
       {
-        "__guid": "f8e37981-5622-4e77-8892-793a7067732a",
+        "__guid": "ab5b8af6-a703-4dc6-b7d6-d3b34a70c754",
         "Name": "destination2",
-        "Position": "-804.0537,3442.315,354.5059",
-        "Rotation": "0.04065131,-0.02198008,0.8787088,0.475116",
+        "Position": "0,6776,1288",
+        "Rotation": "-0.258819,0,0,0.9659258",
         "Enabled": true,
         "NetworkMode": 2
       },
       {
-        "__guid": "6dda3ffc-a02b-4f21-bb7e-24c991f02d93",
+        "__guid": "28ae72b9-d868-4e48-a798-6e4a8e093a7b",
         "Name": "destination3",
-        "Position": "-1534.442,4558.462,362.1943",
-        "Rotation": "-0.07439099,0.04022304,0.8764974,0.4739203",
+        "Position": "0,10520,2032",
+        "Rotation": "-0.9659258,0,0,0.2588191",
         "Enabled": true,
         "NetworkMode": 2
       },
       {
-        "__guid": "a93027d0-feb5-4117-96ad-d867f3b504be",
+        "__guid": "f09f9d72-9f46-4a28-b5d5-b2a984750e30",
         "Name": "destination4",
-        "Position": "-2169.202,5528.475,93.40991",
-        "Rotation": "-0.1881604,0.1017379,0.8592889,0.4646157",
-        "Enabled": true,
-        "NetworkMode": 2
-      },
-      {
-        "__guid": "b437ae98-ea18-4f06-b013-ae1d527b2ae8",
-        "Name": "destination5",
-        "Position": "-2896.47,6639.859,-57.07056",
-        "Rotation": "-0.06079783,0.03287327,0.8775451,0.4744868",
-        "Enabled": true,
-        "NetworkMode": 2
-      },
-      {
-        "__guid": "c0789d90-4863-4124-b388-e53a0464ded1",
-        "Name": "destination6",
-        "Position": "-3940.992,8236.045,-395.3596",
-        "Rotation": "-0.06079783,0.03287327,0.8775451,0.4744868",
+        "Position": "0,20384,1384",
+        "Rotation": "-0.9914448,0,0,0.1305263",
         "Enabled": true,
         "NetworkMode": 2
       }
@@ -1471,5 +1224,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }
