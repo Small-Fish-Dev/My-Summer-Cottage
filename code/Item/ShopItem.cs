@@ -12,19 +12,15 @@ public class ShopItem : Component
 
 	private readonly SoundEvent _purchaseSound = ResourceLibrary.Get<SoundEvent>( "sounds/misc/purchase.sound" );
 
-	/// <summary>
-	/// Does this interaction use bounds?
-	/// </summary>
-	[Property]
-	public bool HasBounds { get; set; } = false;
-
 	private LegacyParticles purchase;
 
 	protected override void OnStart()
 	{
 		GameObject.SetupNetworking();
-
 		GameObject.Name = $"Buy {PrefabLibrary.AsDefinition( Item ).GetComponent<ItemComponent>().Get<string>( "Name" )}";
+
+		if ( IsParcel() )
+			CreateWorldIcon();
 
 		var interactions = Components.GetOrCreate<Interactions>();
 		interactions.AddInteraction( new Interaction()
@@ -56,5 +52,19 @@ public class ShopItem : Component
 		purchase.replay();
 		if ( !receivedItem )
 			o.Transform.Position = Transform.Position;
+	}
+
+	private bool IsParcel()
+	{
+		return Components.GetOrCreate<ModelRenderer>().Model.Name.Contains( "clothing" );
+	}
+
+	private void CreateWorldIcon()
+	{
+		var iconWorldObject = new GameObject { Parent = GameObject };
+		iconWorldObject.Transform.LocalPosition = new Vector3( 0, 0, 5 );
+		iconWorldObject.Transform.LocalRotation = Rotation.FromPitch( 90 );
+		iconWorldObject.Components.GetOrCreate<Sandbox.WorldPanel>();
+		iconWorldObject.Components.GetOrCreate<IconWorldPanel>().Icon = Texture.Load( FileSystem.Mounted, PrefabLibrary.AsDefinition( Item ).GetComponent<ItemComponent>().Get<IconSettings>( "Icon" ).Path );
 	}
 }
