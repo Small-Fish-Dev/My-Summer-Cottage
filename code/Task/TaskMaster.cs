@@ -257,6 +257,9 @@ public class TaskMaster : Component
 	/// </summary>
 	public void SaveTasksProgression( bool print = true )
 	{
+		if ( !Player.Local.Connection.IsHost )
+			return;
+
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
 
 		// If future updates contain new tasks or we're live adding newer ones, save those to the file too

@@ -248,6 +248,9 @@ public class StoryMaster : Component
 	/// </summary>
 	public void SaveStoryProgression( bool print = true )
 	{
+		if ( !Player.Local.Connection.IsHost )
+			return;
+
 		FileSystem.Data.WriteJson( "story.json", StoryProgression );
 
 		if ( print )

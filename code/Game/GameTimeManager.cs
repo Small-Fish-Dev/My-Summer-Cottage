@@ -254,7 +254,6 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// End the day. Freezes the time and emits the OnDayEnd event.
 	/// </summary>
-	[Broadcast( NetPermission.HostOnly )]
 	public void EndDay()
 	{
 		if ( Scene.IsEditor && !Game.IsPlaying ) return;
@@ -304,7 +303,6 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	/// Starts the day
 	/// Unfreezes the time if it's frozen.
 	/// </summary>
-	[Broadcast( NetPermission.HostOnly )]
 	public void StartDay()
 	{
 		SetTimeFromSeconds( StartTime );
