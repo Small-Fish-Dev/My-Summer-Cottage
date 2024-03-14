@@ -51,6 +51,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
+						name = "fence"
 						filename = "models/props/wood_fence/wood_fence.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -64,6 +65,45 @@
 							exclude_by_default = false
 							exception_list = [  ]
 						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "cull"
+						filename = "models/hacky_bullshit.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						meshes = 
+						[
+							"fence",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 125.0
+						meshes = 
+						[
+							"cull",
+						]
 					},
 				]
 			},

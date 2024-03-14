@@ -53,6 +53,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
+						name = "skibidi"
 						filename = "models/props/toilet/toilet.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -69,6 +70,45 @@
 								"Cube_056",
 							]
 						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "aaaa"
+						filename = "models/hacky_bullshit.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						meshes = 
+						[
+							"skibidi",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 45.0
+						meshes = 
+						[
+							"aaaa",
+						]
 					},
 				]
 			},
