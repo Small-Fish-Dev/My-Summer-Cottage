@@ -1,3 +1,5 @@
+namespace Sauna;
+
 using Sauna.Event;
 
 [Icon( "highlight_alt" )]
@@ -37,7 +39,9 @@ public sealed class EventAreaTrigger : EventTrigger
 
 	public override void PolledMethod()
 	{
-		var find = Scene.FindInPhysics( WorldBBox )
+		var find = Scene.GetAllComponents<Collider>()
+			?.Where( x => BBox.Translate( -Offset ).Contains( Transform.World.PointToLocal( x.Transform.Position ) ) )
+			?.Select( x => x.GameObject )
 			?.Where( x => x.IsValid() && x.Tags != null && TagSet != null && x.Tags.HasAny( TagSet ) )
 			?.Where( x => TriggerPrefab.Count() == 0 || TriggerPrefab.Any( prefab => prefab != null && x.IsValid() && x.PrefabInstanceSource != null && prefab.ResourcePath == x.PrefabInstanceSource ) );
 
