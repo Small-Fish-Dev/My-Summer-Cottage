@@ -1,4 +1,7 @@
-﻿namespace Sauna;
+﻿using Sandbox.Diagnostics;
+using Sauna.Components;
+
+namespace Sauna;
 
 partial class Player
 {
@@ -15,11 +18,10 @@ partial class Player
 			Local?.Renderer?.SceneModel?.Update( RealTime.Delta );
 		}
 	}
+
 	private static bool _hideHead = true;
 
-	[Property]
-	[Category( "Movement" )]
-	public MoveHelper MoveHelper { get; set; }
+	[Property] [Category( "Movement" )] public MoveHelper MoveHelper { get; set; }
 
 	/// <summary>
 	/// How fast you move when holding the sprint button
@@ -65,6 +67,7 @@ partial class Player
 	[Sync] public bool Ducking { get; set; }
 	[Sync] public Angles EyeAngles { get; set; }
 	[Sync] public HoldType HoldType { get; set; } = HoldType.Idle;
+
 	[Sync]
 	public bool AimState
 	{
@@ -75,6 +78,8 @@ partial class Player
 			_lastAimed = 0f;
 		}
 	}
+
+	public Seat CurrentSeat { get; set; }
 
 	public BBox Bounds => new BBox( Collider.Center - Collider.Scale / 2f, Collider.Center + Collider.Scale / 2f );
 
@@ -94,6 +99,25 @@ partial class Player
 	{
 		_targetHoldType = type;
 		_resetHoldType = time;
+	}
+
+	protected void UpdateSit()
+	{
+		Assert.IsValid( CurrentSeat );
+
+		var kneesTransform = CurrentSeat.KneesPosition.Transform;
+		const float rate = 0.8f;
+		Transform.Position = Transform.Position.LerpTo( kneesTransform.Position, rate );
+		Transform.Rotation = Rotation.Slerp( Transform.Rotation, kneesTransform.Rotation, rate );
+
+		if ( Input.Pressed( "Ragdoll" ) && CanRagdoll )
+		{
+			SetRagdoll( !IsRagdolled );
+			CurrentSeat.StandUp();
+		}
+
+		if ( Input.Pressed( InputAction.Jump ) )
+			CurrentSeat.StandUp();
 	}
 
 	protected void UpdateMovement()
@@ -129,8 +153,9 @@ partial class Player
 		// If we block inputs let's just keep whatever ducking state you were in
 		if ( !BlockInputs )
 		{
-			Ducking = (Ducking && Scene.Trace.Ray( in from, in to ).Size( Collider.Scale.WithZ( 0f ) ).IgnoreGameObjectHierarchy( GameObject ).WithoutTags( "trigger" ).Run().Hit)
-				|| Input.Down( InputAction.Duck ); // Beautiful.
+			Ducking = (Ducking && Scene.Trace.Ray( in from, in to ).Size( Collider.Scale.WithZ( 0f ) )
+				          .IgnoreGameObjectHierarchy( GameObject ).WithoutTags( "trigger" ).Run().Hit)
+			          || Input.Down( InputAction.Duck ); // Beautiful.
 		}
 
 		MoveHelper.Move();
@@ -149,7 +174,7 @@ partial class Player
 
 		var tr = Scene.Trace.Box( Bounds, Transform.Position, Transform.Position )
 			.IgnoreGameObjectHierarchy( GameObject );
-		
+
 		var helper = new CharacterControllerHelper( tr, Transform.Position, Velocity );
 		helper.TryMove( Time.Delta );
 
@@ -204,6 +229,12 @@ partial class Player
 		ang += Input.AnalogLook;
 		ang += _currentRecoil - _previousRecoil; // Apply recoil to eye angles.
 		ang.pitch = ang.pitch.Clamp( -89, 89 );
+
+		if ( CurrentSeat.IsValid() )
+		{
+			// TODO: limit the camera movement
+		}
+		
 		EyeAngles = ang;
 
 		// Calculate recoil.
@@ -213,6 +244,7 @@ partial class Player
 	}
 
 	Rotation _lastRot;
+
 	protected void UpdateCamera()
 	{
 		if ( Camera == null )
@@ -241,14 +273,17 @@ partial class Player
 		var rot = Transform.Rotation;
 
 		if ( HideHead )
-			Renderer?.SceneModel?.SetBoneWorldTransform( 7, new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
+			Renderer?.SceneModel?.SetBoneWorldTransform( 7,
+				new Transform( eyes.Position + rot.Backward * 10, Rotation.Identity, 0 ) );
 
 		// Hide face and head clothing.
 		var face = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Face ) as ItemEquipment)?.Renderer;
-		if ( face != null ) face.RenderType = HideHead ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
+		if ( face != null )
+			face.RenderType = HideHead ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
 
 		var head = (Inventory.EquippedItems?.ElementAtOrDefault( (int)EquipSlot.Head ) as ItemEquipment)?.Renderer;
-		if ( head != null ) head.RenderType = HideHead ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
+		if ( head != null )
+			head.RenderType = HideHead ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
 	}
 
 	protected void UpdateAnimation()
@@ -256,6 +291,7 @@ partial class Player
 		if ( Renderer == null || Renderer.SceneModel == null || MoveHelper == null )
 			return;
 
+		Renderer.Set( "sitting", CurrentSeat.IsValid() );
 		Renderer.Set( "grounded", MoveHelper.IsOnGround );
 		Renderer.Set( "crouching", Ducking );
 

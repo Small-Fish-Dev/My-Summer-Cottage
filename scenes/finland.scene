@@ -155,6 +155,7 @@
             "1": {
               "ScriptedEvents": [
                 {
+                  "TriggerByTime": true,
                   "SignalToTrigger": "stove.begin_sauna",
                   "TriggerDelay": 5,
                   "TriggerTimeslot": "15.00,16.00,1",
@@ -193,8 +194,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "464,288"
@@ -204,8 +205,8 @@
                         "Id": 8,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.Message",
                           "_name": "Receive",
+                          "_type": "package.fish.sauna/Sauna.Message",
                           "_isStatic": true
                         },
                         "UserData": {
@@ -216,8 +217,8 @@
                         "Id": 11,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                           "_name": "PlaySoundWithSubtitle",
+                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                           "_isStatic": true
                         },
                         "UserData": {
@@ -253,8 +254,8 @@
                         "Id": 17,
                         "Type": "resource.ref",
                         "Properties": {
-                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task",
-                          "T": "package.fish.sauna/Sauna.SaunaTask"
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task"
                         },
                         "UserData": {
                           "Position": "0,224"
@@ -265,8 +266,8 @@
                         "Type": "property.get",
                         "ParentId": 17,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -274,8 +275,8 @@
                         "Type": "property.get",
                         "ParentId": 17,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -425,8 +426,8 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.TaskMaster",
                           "_name": "AssignEveryoneNewTask",
+                          "_type": "package.fish.sauna/Sauna.TaskMaster",
                           "_isStatic": true
                         },
                         "UserData": {
@@ -448,8 +449,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "240,304"
@@ -459,8 +460,8 @@
                         "Id": 7,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "Sandbox.Engine/Sandbox.Resource",
-                          "_name": "ResourcePath"
+                          "_name": "ResourcePath",
+                          "_type": "Sandbox.Engine/Sandbox.Resource"
                         },
                         "UserData": {
                           "Position": "16,176"
@@ -561,8 +562,8 @@
                         "Id": 6,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "208,304"
@@ -572,8 +573,8 @@
                         "Id": 7,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.Message",
                           "_name": "Receive",
+                          "_type": "package.fish.sauna/Sauna.Message",
                           "_isStatic": true
                         },
                         "UserData": {
@@ -585,8 +586,8 @@
                         "Type": "property.get",
                         "ParentId": 5,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -594,8 +595,8 @@
                         "Type": "property.get",
                         "ParentId": 5,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -711,8 +712,8 @@
                         "Id": 4,
                         "Type": "call",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.TaskMaster",
                           "_name": "AssignEveryoneNewTask",
+                          "_type": "package.fish.sauna/Sauna.TaskMaster",
                           "_isStatic": true
                         },
                         "UserData": {
@@ -723,8 +724,8 @@
                         "Id": 6,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "256,448"
@@ -734,8 +735,8 @@
                         "Id": 7,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "Sandbox.Engine/Sandbox.Resource",
-                          "_name": "ResourcePath"
+                          "_name": "ResourcePath",
+                          "_type": "Sandbox.Engine/Sandbox.Resource"
                         },
                         "UserData": {
                           "Position": "32,320"
@@ -921,7 +922,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.5877546,0,0.8090393",
+          "Rotation": "0,0.991704,0,-0.1285426",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1038,8 +1039,8 @@
                     "Id": 2,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithSubtitle",
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true
                     },
                     "UserData": {
@@ -1129,8 +1130,8 @@
                     "Id": 1,
                     "Type": "call",
                     "Properties": {
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_name": "PlaySoundWithNameAndSubtitle",
+                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                       "_isStatic": true
                     },
                     "UserData": {
@@ -1673,7 +1674,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "baeddbf3-49fd-4819-bfc6-4ae5fcd4c968",
+                "component_id": "328d8cfd-08de-4baf-a822-d2c601f83149",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -2073,6 +2074,7 @@
             {
               "__type": "BusStop",
               "__guid": "5f3bbb3d-3a60-42bc-b230-9ad753616723",
+              "Price": 5,
               "Car": {
                 "_type": "gameobject",
                 "prefab": "prefabs/objects/taxi.prefab"
@@ -2149,6 +2151,7 @@
             {
               "__type": "BusStop",
               "__guid": "a7d4a1bd-be84-4ea3-935b-3a2b469c9a01",
+              "Price": 5,
               "Car": {
                 "_type": "gameobject",
                 "prefab": "prefabs/objects/taxi.prefab"
@@ -2351,6 +2354,15 @@
           "__Prefab": "prefabs/shop/shop_bread.prefab"
         }
       ]
+    },
+    {
+      "__guid": "0ba2b064-d9ed-474d-a3ce-0f3255447c26",
+      "Name": "seat test",
+      "Position": "3153.648,-3133.637,2449.951",
+      "Rotation": "-0.01824996,0.02770507,0.5497935,0.8346415",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/seat.prefab"
     }
   ],
   "SceneProperties": {
@@ -2376,6 +2388,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-14T05:44:44.7302568\u002B01:00",
+  "LastSaved": "2024-03-14T13:06:31.5606143\u002B03:00",
   "__references": []
 }

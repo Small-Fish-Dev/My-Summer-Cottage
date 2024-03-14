@@ -282,7 +282,10 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		IsPissing = !BlockInputs && Input.Down( "Piss" ) && !HidePenoid;
 
-		UpdateMovement();
+		if ( !CurrentSeat.IsValid() )
+			UpdateMovement();
+		else
+			UpdateSit();
 		UpdateInteractions();
 	}
 
