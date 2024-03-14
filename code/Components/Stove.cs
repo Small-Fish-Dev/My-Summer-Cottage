@@ -123,10 +123,7 @@ public sealed class Stove : Component
 	{
 		await Task.Delay( 1000 );
 
-		foreach ( var player in Player.All )
-		{
-			player.AddExperience( 300 );
-		}
+		Player.Local.AddExperience( 300 );
 
 		await Task.Delay( 10000 );
 
