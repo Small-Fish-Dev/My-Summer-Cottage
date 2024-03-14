@@ -64,12 +64,12 @@ public sealed class BusStop : Component
 				{
 					Identifier = $"taxi.travel.{Type}",
 					Keybind = "use",
-					Description = $"Travel to {(Type == Stop.Suburbs ? "city" : "suburbs")}",
+					Description = $"Travel to {(Type == Stop.Suburbs ? "city" : "suburbs")} (-5mk)",
 					Action = ( Player player, GameObject target ) =>
 					{
 						CreateCar( player, FindBusStop( Type == Stop.Suburbs ? Stop.City : Stop.Suburbs ), 1000f );
 					},
-					Disabled = () => Taxis.Cast<Taxi>().Any( x => x.Player == Player.Local ),
+					Disabled = () => Player.Local.Money < 5 || Taxis.Cast<Taxi>().Any( x => x.Player == Player.Local ),
 					ShowWhenDisabled = () => true,
 					Animation = InteractAnimations.None,
 					InteractDistance = 150f,
@@ -210,5 +210,7 @@ public sealed class BusStop : Component
 
 		var newTaxi = new Taxi( player, car, this, destination, timeToTravel );
 		Taxis.Add( newTaxi );
+
+		player.TakeMoney( 5 );
 	}
 }
