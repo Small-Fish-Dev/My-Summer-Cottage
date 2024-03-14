@@ -929,7 +929,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.3923504,0,-0.9198158",
+          "Rotation": "0,-0.9106089,0,-0.4132691",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -2061,70 +2061,242 @@
       ]
     },
     {
-      "__guid": "d38dcda0-ffb2-4e90-a6c9-1d4c8747f5bd",
-      "Name": "BusStopSuburbs",
-      "Position": "2186.489,-1686.378,2440.786",
-      "Rotation": "0,0,0.5,0.8660254",
+      "__guid": "8b19070f-f195-47ec-8547-114ea55bfcfe",
+      "Name": "Bus Stops",
+      "Position": "-7492.254,3646.739,2464.869",
       "Enabled": true,
       "NetworkMode": 2,
-      "Components": [
+      "Children": [
         {
-          "__type": "BusStop",
-          "__guid": "a7d4a1bd-be84-4ea3-935b-3a2b469c9a01",
-          "Car": {
-            "_type": "gameobject",
-            "prefab": "prefabs/objects/taxi.prefab"
-          },
-          "Type": "Suburbs"
+          "__guid": "c2d8fa16-dfe4-448b-b7ed-3f94ec630df1",
+          "Name": "BusStopCity",
+          "Position": "54.92969,1706.512,-24.0835",
+          "Rotation": "0,0,-0.7071066,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BusStop",
+              "__guid": "5f3bbb3d-3a60-42bc-b230-9ad753616723",
+              "Car": {
+                "_type": "gameobject",
+                "prefab": "prefabs/objects/taxi.prefab"
+              },
+              "Type": "City",
+              "Waypoints": [
+                {
+                  "_type": "gameobject",
+                  "go": "1f43eb14-cf03-4093-a4e3-22b3f6e005d8"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "f826075d-44b4-465f-8747-bc4d3a04bdc1"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "004534ea-8c2c-4c34-b44d-896cc9e0bd6b"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "de9381a9-01aa-4e72-8e7e-60f812208b96"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "a414fc4a-92ee-4d06-85cd-bf481f17a349"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "0e98dcab-ed85-4e8f-92c0-30a0f3f24d67"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "2bc97e2b-8cf0-4dd1-89ac-0f3d1d91f9a5"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "ad790e09-68b3-48a6-968d-44494b9e6cda"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "26bbb69a-e5ad-45d9-953e-1e350df37fd5"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "ced6e57b-bd6d-4408-b6b8-620115505617"
+                }
+              ]
+            },
+            {
+              "__type": "ModelRenderer",
+              "__guid": "c3fed6ed-922f-4e4a-98f5-80413386b4fa",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/props/bus_stop/bus_stop.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "ModelCollider",
+              "__guid": "45edbedb-b45b-4e2d-8515-058148c7a32e",
+              "IsTrigger": false,
+              "Model": "models/props/bus_stop/bus_stop.vmdl",
+              "Static": false
+            }
+          ]
         },
         {
-          "__type": "ModelRenderer",
-          "__guid": "47602d8b-258d-4550-8cb6-e0d8c986fcec",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/props/bus_stop/bus_stop.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
+          "__guid": "d38dcda0-ffb2-4e90-a6c9-1d4c8747f5bd",
+          "Name": "BusStopSuburbs",
+          "Position": "9678.743,-5333.117,-24.0835",
+          "Rotation": "0,0,0.5,0.8660254",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BusStop",
+              "__guid": "a7d4a1bd-be84-4ea3-935b-3a2b469c9a01",
+              "Car": {
+                "_type": "gameobject",
+                "prefab": "prefabs/objects/taxi.prefab"
+              },
+              "Type": "Suburbs",
+              "Waypoints": [
+                {
+                  "_type": "gameobject",
+                  "go": "ced6e57b-bd6d-4408-b6b8-620115505617"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "26bbb69a-e5ad-45d9-953e-1e350df37fd5"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "ad790e09-68b3-48a6-968d-44494b9e6cda"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "2bc97e2b-8cf0-4dd1-89ac-0f3d1d91f9a5"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "0e98dcab-ed85-4e8f-92c0-30a0f3f24d67"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "a414fc4a-92ee-4d06-85cd-bf481f17a349"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "de9381a9-01aa-4e72-8e7e-60f812208b96"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "004534ea-8c2c-4c34-b44d-896cc9e0bd6b"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "f826075d-44b4-465f-8747-bc4d3a04bdc1"
+                },
+                {
+                  "_type": "gameobject",
+                  "go": "1f43eb14-cf03-4093-a4e3-22b3f6e005d8"
+                }
+              ]
+            },
+            {
+              "__type": "ModelRenderer",
+              "__guid": "47602d8b-258d-4550-8cb6-e0d8c986fcec",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/props/bus_stop/bus_stop.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "ModelCollider",
+              "__guid": "7fd98db8-0dda-4aed-a1b9-ca8bdf6461ef",
+              "IsTrigger": false,
+              "Model": "models/props/bus_stop/bus_stop.vmdl",
+              "Static": false
+            }
+          ]
         },
         {
-          "__type": "ModelCollider",
-          "__guid": "7fd98db8-0dda-4aed-a1b9-ca8bdf6461ef",
-          "IsTrigger": false,
-          "Model": "models/props/bus_stop/bus_stop.vmdl",
-          "Static": false
-        }
-      ]
-    },
-    {
-      "__guid": "c2d8fa16-dfe4-448b-b7ed-3f94ec630df1",
-      "Name": "BusStopCity",
-      "Position": "-7437.324,5353.251,2440.786",
-      "Rotation": "0,0,-0.7071066,0.7071068",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "Components": [
-        {
-          "__type": "BusStop",
-          "__guid": "5f3bbb3d-3a60-42bc-b230-9ad753616723",
-          "Car": {
-            "_type": "gameobject",
-            "prefab": "prefabs/objects/taxi.prefab"
-          },
-          "Type": "City"
-        },
-        {
-          "__type": "ModelRenderer",
-          "__guid": "c3fed6ed-922f-4e4a-98f5-80413386b4fa",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/props/bus_stop/bus_stop.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "ModelCollider",
-          "__guid": "45edbedb-b45b-4e2d-8515-058148c7a32e",
-          "IsTrigger": false,
-          "Model": "models/props/bus_stop/bus_stop.vmdl",
-          "Static": false
+          "__guid": "fe2f1dd5-1815-433c-861b-972bbba92ffa",
+          "Name": "Waypoints",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Children": [
+            {
+              "__guid": "1f43eb14-cf03-4093-a4e3-22b3f6e005d8",
+              "Name": "Object",
+              "Position": "549.2705,-782.509,-0.0002441406",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "f826075d-44b4-465f-8747-bc4d3a04bdc1",
+              "Name": "Object",
+              "Position": "1837.377,-1819.231,0",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "004534ea-8c2c-4c34-b44d-896cc9e0bd6b",
+              "Name": "Object",
+              "Position": "2131.254,-2748.548,0.0002441406",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "de9381a9-01aa-4e72-8e7e-60f812208b96",
+              "Name": "Object",
+              "Position": "3127.715,-2467.744,0.0002441406",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "a414fc4a-92ee-4d06-85cd-bf481f17a349",
+              "Name": "Object",
+              "Position": "4257.487,-2413.885,0.0004882812",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "0e98dcab-ed85-4e8f-92c0-30a0f3f24d67",
+              "Name": "Object",
+              "Position": "4870.176,-2783.034,0.0004882812",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "2bc97e2b-8cf0-4dd1-89ac-0f3d1d91f9a5",
+              "Name": "Object",
+              "Position": "6143.124,-2731.987,0.0004882812",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "ad790e09-68b3-48a6-968d-44494b9e6cda",
+              "Name": "Object",
+              "Position": "7304.191,-2850.142,0.0004882812",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "26bbb69a-e5ad-45d9-953e-1e350df37fd5",
+              "Name": "Object",
+              "Position": "8183.935,-3764.212,0.0004882812",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "ced6e57b-bd6d-4408-b6b8-620115505617",
+              "Name": "Object",
+              "Position": "8689.464,-4553.493,0.0004882812",
+              "Enabled": true,
+              "NetworkMode": 2
+            }
+          ]
         }
       ]
     }
@@ -2152,6 +2324,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-14T04:05:48.3928156\u002B01:00",
+  "LastSaved": "2024-03-14T04:37:52.5420881\u002B01:00",
   "__references": []
 }

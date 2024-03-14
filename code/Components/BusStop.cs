@@ -1,4 +1,5 @@
 using Sandbox;
+using System.Linq;
 using System.Numerics;
 using static Sauna.BusStop;
 
@@ -13,36 +14,38 @@ public sealed class BusStop : Component
 	}
 
 	[Property]
+	[JsonInclude]
 	public Stop Type { get; set; } = Stop.Suburbs;
 
 	[Property]
+	[JsonIgnore]
 	public GameObject Car { get; set; }
+
+	[Property]
+	[JsonInclude]
+	public List<GameObject> Waypoints { get; set; }
+
+	List<Vector3> _waypoints;
 
 	public Vector3 TaxiPosition => Transform.World.PointToWorld( Vector3.Forward * 120f );
 
-	public struct Taxi
+	public class Taxi
 	{
 		public Player Player;
 		public GameObject Car;
 		public BusStop From;
 		public BusStop To;
-		public TimeUntil Arrival;
-		public TimeUntil GotToPlayer = 3f;
-		public float TimeToArrive;
-		public TimeSince TimeStarted;
-		public Vector3 StartPos;
+		public float Speed;
+		public int CurrentWaypoint = -1;
 
 		public Taxi() { }
-		public Taxi( Player player, GameObject car, BusStop from, BusStop to, float timeToTravel )
+		public Taxi( Player player, GameObject car, BusStop from, BusStop to, float speed )
 		{
 			Player = player;
 			Car = car;
 			From = from;
 			To = to;
-			Arrival = timeToTravel + 3f;
-			GotToPlayer = 3f;
-			TimeStarted = -3f;
-			TimeToArrive = timeToTravel;
+			Speed = speed;
 		}
 	}
 
@@ -64,7 +67,7 @@ public sealed class BusStop : Component
 					Description = $"Travel to {(Type == Stop.Suburbs ? "city" : "suburbs")}",
 					Action = ( Player player, GameObject target ) =>
 					{
-						CreateCar( player, FindBusStop( Type == Stop.Suburbs ? Stop.City : Stop.Suburbs ), 15f );
+						CreateCar( player, FindBusStop( Type == Stop.Suburbs ? Stop.City : Stop.Suburbs ), 1000f );
 					},
 					Disabled = () => Taxis.Cast<Taxi>().Any( x => x.Player == Player.Local ),
 					ShowWhenDisabled = () => true,
@@ -72,6 +75,10 @@ public sealed class BusStop : Component
 					InteractDistance = 150f,
 				}
 			);
+
+		_waypoints = new();
+		_waypoints = _waypoints.Concat( Waypoints.Select( x => x.Transform.Position ) ).ToList();
+		_waypoints.Add( FindBusStop( Type == Stop.Suburbs ? Stop.City : Stop.Suburbs ).TaxiPosition );
 	}
 
 	protected override void OnUpdate()
@@ -80,12 +87,13 @@ public sealed class BusStop : Component
 
 		foreach ( var taxi in Taxis )
 		{
-			if ( !taxi.Arrival )
+			if ( taxi.CurrentWaypoint < _waypoints.Count() )
 			{
-				var currentEndPosition = !taxi.GotToPlayer ? taxi.Player.Transform.Position : taxi.To.TaxiPosition;
-				var currentGoal = !taxi.GotToPlayer ? taxi.StartPos.LerpTo( taxi.Player.Transform.Position, taxi.GotToPlayer.Fraction ) : taxi.From.TaxiPosition.LerpTo( taxi.To.TaxiPosition, taxi.TimeStarted.Relative / taxi.TimeToArrive );
-				var startPosition = currentGoal + Vector3.Up * 2000f;
-				var endPosition = currentGoal + Vector3.Down * 2000f;
+				Log.Info( Waypoints.Count );
+				var currentEndPosition = taxi.CurrentWaypoint == -1 ? taxi.Player.Transform.Position : _waypoints[taxi.CurrentWaypoint];
+
+				var startPosition = taxi.Car.Transform.Position + Vector3.Up * 2000f;
+				var endPosition = taxi.Car.Transform.Position + Vector3.Down * 2000f;
 
 				var trace = Scene.Trace.Ray( startPosition, endPosition )
 					.Size( 50f )
@@ -95,9 +103,21 @@ public sealed class BusStop : Component
 
 				var oldRotation = taxi.Car.Transform.Rotation;
 
-				taxi.Car.Transform.Position = trace.Hit ? trace.HitPosition - Vector3.Up * 25f : currentGoal;
-				var travelDirection = currentEndPosition - taxi.Car.Transform.Position;
+				taxi.Car.Transform.Position = trace.Hit ? trace.HitPosition - Vector3.Up * 25f : taxi.Car.Transform.Position;
+
+				var travelDirection = (currentEndPosition - taxi.Car.Transform.Position).Normal;
 				taxi.Car.Transform.Rotation = Rotation.LookAt( travelDirection, Vector3.Up );
+
+				startPosition = taxi.Car.Transform.Position + Vector3.Up * 2000f;
+				endPosition = taxi.Car.Transform.Position + Vector3.Down * 2000f;
+
+				trace = Scene.Trace.Ray( startPosition, endPosition )
+					.Size( 50f )
+					.IgnoreGameObjectHierarchy( taxi.Car )
+					.WithoutTags( "player", "trigger", "npc" )
+					.Run();
+
+				taxi.Car.Transform.Position = trace.Hit ? trace.HitPosition - Vector3.Up * 25f : taxi.Car.Transform.Position;
 
 				var front = taxi.Car.Transform.World.PointToWorld( Vector3.Forward * 50f );
 				var frontTrace = Scene.Trace.Ray( front + Vector3.Up * 500f, front + Vector3.Down * 500f )
@@ -115,11 +135,18 @@ public sealed class BusStop : Component
 
 				var desiredDirection = (frontTrace.Hit ? frontTrace.HitPosition : frontTrace.EndPosition) - (backTrace.Hit ? backTrace.HitPosition : backTrace.EndPosition);
 				taxi.Car.Transform.Rotation = Rotation.LookAt( desiredDirection, Vector3.Up );
-				taxi.Car.Transform.Rotation = Rotation.Lerp( oldRotation, taxi.Car.Transform.Rotation, Time.Delta * 10f );
+				taxi.Car.Transform.Rotation = Rotation.Lerp( oldRotation, taxi.Car.Transform.Rotation, Time.Delta * 4f );
+
+				taxi.Car.Transform.Position += taxi.Car.Transform.Rotation.Forward * taxi.Speed * Time.Delta;
 
 				taxi.Player.RagdollDisable = true;
 
-				if ( taxi.GotToPlayer )
+				if ( taxi.Car.Transform.Position.Distance( currentEndPosition ) <= 100f )
+				{
+					taxi.CurrentWaypoint++;
+				}
+
+				if ( taxi.CurrentWaypoint >= 0 )
 				{
 					taxi.Player.Transform.Position = taxi.Car.Transform.Position + Vector3.Up * 100f;
 					taxi.Player.BlockInputs = true;
@@ -182,7 +209,6 @@ public sealed class BusStop : Component
 		car.NetworkSpawn();
 
 		var newTaxi = new Taxi( player, car, this, destination, timeToTravel );
-		newTaxi.StartPos = car.Transform.Position;
 		Taxis.Add( newTaxi );
 	}
 }
