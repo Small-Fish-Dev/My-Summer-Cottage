@@ -161,6 +161,7 @@
 		await GameTask.DelayRealtimeSeconds( 1 );
 
 		SceneHandler.ChangeScene( SaunaScene.Game, CreatorComponent.LobbyId );
+		CreatorComponent.LobbyId = null;
 	}
 
 	private BodypartPanel[] panels;

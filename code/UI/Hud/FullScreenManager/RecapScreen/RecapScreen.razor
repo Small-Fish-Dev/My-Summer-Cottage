@@ -70,7 +70,7 @@
 
 		@if (Player.Local.Connection.IsHost)
 		{
-			<div class="continue" onclick=@(() => StoryMaster.StartSession())>CONTINUE</div>
+			<div class="continue" onclick=@(() => { if (!_clickedContinue) StartNextDay(); _clickedContinue = true; })>CONTINUE</div>
 		}
 	</div>
 </root>
@@ -85,6 +85,24 @@
 	int _currentMemory;
 	Panel _memoryContainer;
 	MemoryPanel _currentPanel;
+	private bool _clickedContinue;
+
+	[ConCmd]
+	[Broadcast( NetPermission.HostOnly )]
+	private static void StartNextDay()
+	{
+		_ = TransitionToNextDay();
+	}
+
+	private static async Task TransitionToNextDay()
+	{
+		Player.Local.BlackScreen(1f, 5f, 1f);
+		await GameTask.DelayRealtimeSeconds( 2f );
+		Hud.Instance.Panel.PlaySound("car_intro");
+		await GameTask.DelayRealtimeSeconds( 2f );
+
+		StoryMaster.StartSession();
+	}
 
 	public override void Tick()
 	{
@@ -110,6 +128,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( _currentMemory );
+		return HashCode.Combine( _currentMemory, _clickedContinue );
 	}
 }

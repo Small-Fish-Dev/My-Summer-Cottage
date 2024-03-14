@@ -16,6 +16,8 @@ partial class Player
 	/// </summary>
 	public bool CanRagdoll { get; set; } = true;
 
+	public bool RagdollDisable { get; set; } = false;
+
 	public ModelPhysics Ragdoll => Renderer.Components.Get<ModelPhysics>();
 	SkinnedModelRenderer _puppet;
 	bool _isTransitioning = false;
@@ -35,6 +37,8 @@ partial class Player
 	[Broadcast( NetPermission.Anyone )]
 	public void SetRagdoll( bool ragdoll, bool forced = true, float duration = 2f, float spin = 10f )
 	{
+		if ( RagdollDisable ) return;
+
 		if ( ragdoll )
 		{
 			if ( Ragdoll == null )

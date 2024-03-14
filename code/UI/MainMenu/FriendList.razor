@@ -73,7 +73,7 @@
 		else
 		{
 			CreatorComponent.LobbyId = data.ServerId;
-			SceneHandler.ChangeScene( SaunaScene.Creation );
+			SceneHandler.ChangeScene( SaunaScene.Creation, stopSound: false );
 		}
 
 		_connecting = false;

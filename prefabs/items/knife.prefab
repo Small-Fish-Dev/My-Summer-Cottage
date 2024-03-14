@@ -1,20 +1,22 @@
 {
   "RootObject": {
-    "Id": "860fb93d-ccb8-4db7-bfca-85aedaa4101c",
+    "__guid": "860fb93d-ccb8-4db7-bfca-85aedaa4101c",
     "Name": "knife",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "3cad8ab7-7fd3-4f7f-b129-006a72d959ee",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
           "Position": "0.4961429,-3.004699,-0.6501392",
           "Scale": "1,1,1",
-          "Rotation": "-0.6116995,-0.07833033,-0.05117183,0.7855377"
+          "Rotation": "-0.1075026,-0.6210392,-0.7728842,0.07350998"
         },
         "Count": 0,
-        "Description": "For all your needs",
+        "Description": "You can skin your pray with this knife.",
         "HideBodygroups": "None",
         "HoldType": "Item",
         "Icon": {
@@ -31,10 +33,11 @@
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
-        "WeightInGrams": 5
+        "WeightInGrams": 900
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "848e63b9-a2cc-4cd1-bd46-82fcfb8f7502",
         "BodyGroups": 18446744073709551615,
         "Model": "models/knife/knife.vmdl",
         "RenderType": "On",
@@ -42,17 +45,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "a6b8fd9c-9127-4ce7-ae60-23dd8415ecff",
         "IsTrigger": false,
         "Model": "models/knife/knife.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "c4404e2a-eef5-4f64-b54a-906277cada34",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

@@ -1,0 +1,98 @@
+{
+  "Name": "Buy some bread",
+  "Subtitle": "Wife wants bread",
+  "Description": "The nagging wife is asking for bread, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "We\u0027re out of bread, go get some at the store.",
+  "TaskType": "GivenByStory",
+  "TaskRarity": "Any",
+  "IsPrimary": true,
+  "Global": false,
+  "ExperienceGiven": 50,
+  "SuccessSignal": "task.success.Buy some bread",
+  "FailedSignal": "task.failed.Buy some bread",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Take a taxi to the city.",
+      "TriggerSignal": "taxi.travel.Suburbs",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Go to the supermarket",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy some bread",
+      "SubtaskOrder": 2,
+      "TriggerSignal": "item.received.Loaf of bread",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Bring bread home.",
+      "SubtaskOrder": 3,
+      "AmountToComplete": 1,
+      "EvaluateOnTick": {
+        "Version": 5,
+        "UserData": {
+          "Title": "Evaluate On Tick",
+          "id": "c4b481ed-ca32-488d-9c85-27093782c6c9",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input",
+            "UserData": {
+              "Position": "-80,16"
+            }
+          },
+          {
+            "Id": 1,
+            "Type": "output",
+            "UserData": {
+              "Position": "656,16"
+            }
+          },
+          {
+            "Id": 5,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "208,48"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 5,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "_result"
+          },
+          {
+            "Value": "loaf of bread",
+            "DstId": 5,
+            "DstName": "nameOfItem"
+          }
+        ]
+      }
+    },
+    {
+      "Description": "Go home.",
+      "SubtaskOrder": 3,
+      "TriggerSignal": "sauna.endsession",
+      "AmountToComplete": 1
+    }
+  ],
+  "__references": []
+}

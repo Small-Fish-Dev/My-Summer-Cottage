@@ -11,7 +11,7 @@
 				ImagePath="ui/mainmenu/new_icon.png"
 				Title="New Game"
 				Subtitle="Start your own cottage story.."
-				OnClick=@(() => { SceneHandler.ChangeScene( SaunaScene.Creation ); })
+				OnClick=@(() => { SceneHandler.ChangeScene( SaunaScene.Creation, stopSound: false ); })
 			/>
 		}
 		else
@@ -49,7 +49,7 @@
 	SoundHandle _loopStart;
 	SoundHandle _loop;
 
-	RealTimeUntil _playLoop;
+	RealTimeUntil _playLoop = 999;
 
 	public async void Initialize()
 	{
@@ -78,9 +78,8 @@
 		}
 	}
 
-	protected override void OnDestroy()
+	protected override int BuildHash()
 	{
-		_loopStart?.Stop();
-		_loop?.Stop();
+		return HashCode.Combine( SaveData );
 	}
 }

@@ -354,8 +354,6 @@ public class StoryMaster : Component
 		storyMaster.LoadItems();
 		storyMaster.SetRandomDialogues();
 
-		Game.ActiveScene.TimeScale = 1;
-
 		foreach ( var player in Player.All )
 		{
 			if ( player.IsValid() )
@@ -384,8 +382,6 @@ public class StoryMaster : Component
 		storyMaster.ClearTasks();
 		storyMaster.ClearTriggeredEvents();
 		storyMaster.SaveGame();
-
-		Game.ActiveScene.TimeScale = 0;
 	}
 
 	public void SetRandomDialogues()
@@ -429,6 +425,7 @@ public class StoryMaster : Component
 	protected override void OnStart()
 	{
 		if ( Scene.IsEditor ) return;
+		if ( IsProxy ) return;
 
 		StartSession();
 	}

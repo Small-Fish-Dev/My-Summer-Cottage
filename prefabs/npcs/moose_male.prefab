@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "beeacd1f-0272-4a59-9a68-34e898271c1b",
+    "__guid": "a7408311-d998-4de7-b1f0-f3eda52be0da",
     "Name": "moose_male",
     "Tags": "animal,npc",
     "Enabled": true,
@@ -8,6 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
+        "__guid": "b2504682-2dcc-4101-ab3e-43baa8e85adf",
         "AlertOthers": true,
         "AttackCooldown": 8,
         "AttackRange": 120,
@@ -16,7 +17,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
+          "component_id": "d543a854-ef20-40ae-bc54-37dd9893560a",
+          "go": "a7408311-d998-4de7-b1f0-f3eda52be0da",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -25,12 +27,14 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
+          "component_id": "8c90fda9-2e7e-4d89-b911-a303ac86f805",
+          "go": "a7408311-d998-4de7-b1f0-f3eda52be0da",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
+          "component_id": "f3aa3cee-83de-4a8f-a5d9-6790eed31ad0",
+          "go": "a7408311-d998-4de7-b1f0-f3eda52be0da",
           "component_type": "MoveHelper"
         },
         "Name": "Moose (\u2642)",
@@ -72,7 +76,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "beeacd1f-0272-4a59-9a68-34e898271c1b"
+                  "go": "a7408311-d998-4de7-b1f0-f3eda52be0da"
                 }
               },
               "UserData": {
@@ -182,7 +186,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
+                  "go": "a7408311-d998-4de7-b1f0-f3eda52be0da",
                   "component_type": "NPC"
                 }
               },
@@ -218,7 +222,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
+                  "go": "a7408311-d998-4de7-b1f0-f3eda52be0da",
                   "component_type": "MoveHelper"
                 }
               },
@@ -395,7 +399,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
+                  "go": "a7408311-d998-4de7-b1f0-f3eda52be0da",
                   "component_type": "NPC"
                 }
               },
@@ -676,7 +680,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "beeacd1f-0272-4a59-9a68-34e898271c1b",
+                  "go": "a7408311-d998-4de7-b1f0-f3eda52be0da",
                   "component_type": "NPC"
                 }
               },
@@ -845,6 +849,7 @@
       },
       {
         "__type": "MoveHelper",
+        "__guid": "f3aa3cee-83de-4a8f-a5d9-6790eed31ad0",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -877,6 +882,7 @@
       },
       {
         "__type": "CapsuleCollider",
+        "__guid": "e1c900b8-a9ed-4149-8a43-7500850c5757",
         "End": "0,0,54",
         "IsTrigger": false,
         "Radius": 32,
@@ -885,6 +891,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
+        "__guid": "8c90fda9-2e7e-4d89-b911-a303ac86f805",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/elk/moose.vmdl",
@@ -893,12 +900,10 @@
       },
       {
         "__type": "HealthComponent",
+        "__guid": "d543a854-ef20-40ae-bc54-37dd9893560a",
         "CanRegenerate": true,
         "DamagedBy": "Serious",
-        "DropOnDeath": {
-          "_type": "gameobject",
-          "prefab": "prefabs/items/wooden_log.prefab"
-        },
+        "DropOnDeath": [],
         "Immortal": false,
         "MaxHealth": 60,
         "RegenerationCooldown": 2,

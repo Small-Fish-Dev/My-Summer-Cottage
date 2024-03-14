@@ -8,7 +8,7 @@ public enum SaunaScene
 
 public static class SceneHandler
 {
-	public static void ChangeScene( SaunaScene scene, ulong? lobby = null )
+	public static async void ChangeScene( SaunaScene scene, ulong? lobby = null, bool stopSound = true )
 	{
 		var path = scene switch
 		{
@@ -20,17 +20,16 @@ public static class SceneHandler
 		if ( string.IsNullOrEmpty( path ) )
 			return;
 
-		Sound.StopAll( 0.5f );
+		if ( stopSound )
+			Sound.StopAll( 5f );
 
 		// If is game.
 		if ( scene == SaunaScene.Game )
 		{
 			// Connect to lobby.
-			if ( lobby != null )
-			{
-				GameNetworkSystem.Connect( lobby.Value );
+			var connected = await GameNetworkSystem.TryConnectSteamId( lobby.Value );
+			if ( connected )
 				return;
-			}
 
 			// Connect to local.
 			Game.ActiveScene.LoadFromFile( path );
@@ -39,5 +38,6 @@ public static class SceneHandler
 		}
 
 		Game.ActiveScene.LoadFromFile( path );
+		return;
 	}
 }

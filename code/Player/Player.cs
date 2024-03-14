@@ -11,7 +11,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Sync] public float PenoidSize { get; set; }
 
 	[Property, Sync, Category( "Parameters" )]
-	public int Money { get; set; }
+	public int Money { get; set; } = 37;
 
 	[Property, Sync, Category( "Appearance" )]
 	[Range( 0f, 1f, 0.05f )]
@@ -37,6 +37,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	{
 		get
 		{
+			if ( !Inventory.IsValid() || Inventory == null ) return false;
+
 			foreach ( var item in Inventory.EquippedItems )
 			{
 				if ( item is ItemEquipment equipped )

@@ -26,7 +26,7 @@ public partial class Player
 			if ( InteractionBounds == null && TargetedGameObject.IsValid() )
 			{
 				if ( TargetedGameObject.Components.TryGet<BoxCollider>( out var box ) )
-					InteractionBounds = new BBox( 0, box.Scale );
+					InteractionBounds = new BBox( box.Center - box.Scale / 2f, box.Center + box.Scale / 2f );
 
 				if ( TargetedGameObject.Components.TryGet<CapsuleCollider>( out var capsule ) )
 					InteractionBounds = new BBox( capsule.Start - capsule.Radius, capsule.End + capsule.Radius );
@@ -48,7 +48,7 @@ public partial class Player
 			if ( InteractionBounds == null && TargetedGameObject.IsValid() )
 			{
 				if ( TargetedGameObject.Components.TryGet<BoxCollider>( out var box ) )
-					InteractionBounds = new BBox( 0, box.Scale );
+					InteractionBounds = new BBox( box.Center - box.Scale / 2f, box.Center + box.Scale / 2f );
 
 				if ( TargetedGameObject.Components.TryGet<CapsuleCollider>( out var capsule ) )
 					InteractionBounds = new BBox( capsule.Start - capsule.Radius, capsule.End + capsule.Radius );

@@ -8,8 +8,9 @@ Notification {
     font-size: 22px;
     flex-direction: row;
     transition: transform 0.5s ease-in-out;
+    color: white;
 
-    .number {
+    .notif-number {
         height: $header-height;
         aspect-ratio: 2;
         //background-color: darken($orange, 0.2);
@@ -19,14 +20,14 @@ Notification {
         align-items: center;
     }
 
-    .content {
+    .notif-content {
         flex-direction: column;
         text-shadow: 2px 2px 0px rgba(black, 0.8);
 
-        .header {
+        .notif-header {
             padding: 10px;
 
-            .icon {
+            .notif-icon {
                 height: 100%;
                 aspect-ratio: 1;
                 image-rendering: pixelated;
@@ -40,12 +41,13 @@ Notification {
             gap: 10px;
             padding-left: 10px;
 
-            .title {
+            .notif-title {
                 white-space: pre;
+                font-size: 24px;
             }
         }
 
-        .description {
+        .notif-description {
             padding: 10px;
             background: linear-gradient(to left, rgba(black, 0.5) 0%, rgba(black, 0.3) 70%, rgba(black, 0) 100%);
         }
