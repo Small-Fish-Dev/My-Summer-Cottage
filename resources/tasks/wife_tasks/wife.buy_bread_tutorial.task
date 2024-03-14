@@ -46,7 +46,9 @@
         "UserData": {
           "Title": "Evaluate On Tick",
           "id": "c4b481ed-ca32-488d-9c85-27093782c6c9",
-          "ReferencedComponentTypes": []
+          "ReferencedComponentTypes": [
+            "package.fish.sauna/Sauna.Inventory"
+          ]
         },
         "Variables": [],
         "Nodes": [
@@ -61,27 +63,49 @@
             "Id": 1,
             "Type": "output",
             "UserData": {
-              "Position": "656,16"
+              "Position": "752,96"
             }
           },
           {
-            "Id": 5,
+            "Id": 6,
+            "Type": "scene.get",
+            "Properties": {
+              "T": "package.fish.sauna/Sauna.Inventory"
+            },
+            "UserData": {
+              "Position": "128,32"
+            }
+          },
+          {
+            "Id": 10,
             "Type": "inventory.amountofitem",
             "UserData": {
-              "Position": "208,48"
+              "Position": "496,96"
             }
           }
         ],
         "Links": [
           {
-            "SrcId": 5,
+            "SrcId": 10,
             "SrcName": "_result",
             "DstId": 1,
             "DstName": "_result"
           },
           {
-            "Value": "loaf of bread",
-            "DstId": 5,
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 6,
+            "DstName": "_this"
+          },
+          {
+            "SrcId": 6,
+            "SrcName": "_result",
+            "DstId": 10,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Loaf of bread",
+            "DstId": 10,
             "DstName": "nameOfItem"
           }
         ]
@@ -94,5 +118,7 @@
       "AmountToComplete": 1
     }
   ],
+  "ResourceVersion": 0,
+  "__version": 0,
   "__references": []
 }

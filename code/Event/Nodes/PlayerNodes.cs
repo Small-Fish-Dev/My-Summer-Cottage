@@ -71,8 +71,8 @@ public static partial class PlayerNodes
 
 	[ActionGraphNode( "inventory.amountofitem" ), Pure]
 	[Title( "Amount of Item in Inventory" ), Group( "Player" ), Icon( "categories" )]
-	public static int AmountInInventory( string nameOfItem )
+	public static int AmountInInventory( Inventory inventory, string nameOfItem )
 	{
-		return Player.Local.Inventory.GetTotalItemCount( nameOfItem );
+		return inventory.GetTotalItemCount( nameOfItem );
 	}
 }
