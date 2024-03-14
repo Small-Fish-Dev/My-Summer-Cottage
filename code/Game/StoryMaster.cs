@@ -336,6 +336,7 @@ public class StoryMaster : Component
 	[Broadcast( NetPermission.HostOnly )]
 	public static void StartSession()
 	{
+		Log.Info( "WTF" );
 		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().First();
 
 		if ( storyMaster == null ) return;
@@ -429,6 +430,7 @@ public class StoryMaster : Component
 	protected override void OnStart()
 	{
 		if ( Scene.IsEditor ) return;
+		if ( IsProxy ) return;
 
 		StartSession();
 	}
