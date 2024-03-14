@@ -59,12 +59,19 @@ public partial class SaunaTask : GameResource
 		public int AmountToComplete { get; set; } = 1;
 
 		public delegate int TaskRequirement( Player player );
+		public delegate void TaskEvent( Player player );
 
 		/// <summary>
 		/// When the condition needs to be constantly checked instead of requiring triggers (Return the int amount used with AmountToComplete)
 		/// </summary>
 		[Property]
 		public TaskRequirement EvaluateOnTick { get; set; }
+
+		[Property]
+		public TaskEvent OnStart { get; set; }
+
+		[Property]
+		public TaskEvent OnEnd { get; set; }
 
 		[Hide]
 		[JsonIgnore]
@@ -85,6 +92,8 @@ public partial class SaunaTask : GameResource
 					Log.Info( $"Completed the '{Description}' subtask ({CurrentAmount}/{AmountToComplete})" );
 				else
 					Log.Info( $"Uncompleted the '{Description}' subtask ({CurrentAmount}/{AmountToComplete})" );
+
+				OnEnd?.Invoke( Player.Local );
 			}
 		}
 	}
@@ -254,6 +263,11 @@ public partial class SaunaTask : GameResource
 
 		foreach ( var subtask in Subtasks )
 			Log.Info( $"New subtask: '{subtask.Description}' ({subtask.CurrentAmount}/{subtask.AmountToComplete})" );
+
+		foreach ( var subtask in ActiveSubtasks )
+		{
+			subtask.OnStart?.Invoke( Player.Local );
+		}
 	}
 
 	/// <summary>
@@ -294,6 +308,14 @@ public partial class SaunaTask : GameResource
 		OnFail?.Invoke( Player.Local );
 		TaskMaster.SubmitTriggerSignal( FailedSignal, Player.Local );
 		NotificationManager.Popup( this, failed: true );
+
+		foreach ( var subtask in Subtasks )
+		{
+			subtask.CurrentAmount = 0;
+
+			if ( subtask.Completed )
+				subtask.SetComplete( false );
+		}
 	}
 
 	/// <summary>
@@ -310,7 +332,9 @@ public partial class SaunaTask : GameResource
 		foreach ( var subtask in Subtasks )
 		{
 			subtask.CurrentAmount = 0;
-			subtask.Completed = false;
+
+			if ( subtask.Completed )
+				subtask.SetComplete( false );
 		}
 	}
 

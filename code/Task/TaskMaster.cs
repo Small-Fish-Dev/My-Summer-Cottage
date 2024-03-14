@@ -2,6 +2,7 @@ using Microsoft.VisualBasic;
 using Sandbox;
 using Sauna.Event;
 using Sauna.UI;
+using System.Threading.Tasks;
 
 namespace Sauna;
 
@@ -14,6 +15,8 @@ public class TaskMaster : Component
 
 	[Property]
 	public List<SaunaTask> CurrentTasks { get; set; }
+
+	public bool HasStarted { get; set; } = false;
 
 	/// <summary>
 	/// Get how many tasks the player has triggered so far (From 0 to 1) - Fetching this runs a check so don't overuse it
@@ -88,7 +91,15 @@ public class TaskMaster : Component
 	{
 		_instance = this;
 		LoadTasksProgression();
+		DelayStart();
 	}
+
+	async void DelayStart()
+	{
+		await Task.Delay( 1000 );
+		HasStarted = true;
+	}
+
 	protected override void OnDestroy()
 	{
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
@@ -291,6 +302,8 @@ public class TaskMaster : Component
 
 	protected override void OnFixedUpdate()
 	{
+		if ( !HasStarted ) return;
+
 		foreach ( var task in CurrentTasks )
 		{
 			if ( !task.Started ) // Start the task if it has been added
@@ -328,7 +341,14 @@ public class TaskMaster : Component
 					task.Fail();
 
 				if ( activeSubtasks.All( x => x.Completed ) )
+				{
 					task.CurrentSubtaskOrder++;
+
+					foreach ( var subtask in task.ActiveSubtasks )
+					{
+						subtask.OnStart?.Invoke( Player.Local );
+					}
+				}
 			}
 		}
 	}
