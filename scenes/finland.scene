@@ -929,7 +929,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.7286778,0,0.6848567",
+          "Rotation": "0,0.4346362,0,0.9006062",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1086,6 +1086,7 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -1181,6 +1182,8 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
+              "Disabled": null,
+              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1578,7 +1581,36 @@
               "__type": "NpcSpawnArea",
               "__guid": "e3917007-1b85-4be5-9f70-124df524182a",
               "Height": 200,
-              "NpcPool": [],
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_01.prefab"
+                  },
+                  "SpawnChance": 0.8
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_02.prefab"
+                  },
+                  "SpawnChance": 0.8
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/policeman.prefab"
+                  },
+                  "SpawnChance": 1
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/policeman.prefab"
+                  },
+                  "SpawnChance": 1
+                }
+              ],
               "Radius": 1028
             }
           ]
@@ -1649,7 +1681,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "aa655393-f814-4a97-a049-f1085468a096",
+                "component_id": "8130e8a3-cb2a-4353-bde6-2783dae9b294",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -1986,6 +2018,50 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "01977dc0-2fd5-41b3-b26b-500657f3142f",
+      "Name": "npc_movement_points",
+      "Position": "-7348.872,8477.018,5232.552",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Children": [
+        {
+          "__guid": "3c317de9-d8e4-4f6f-be89-0525bbe7881c",
+          "Name": "fishing_store",
+          "Position": "-139.1284,-2333.018,-2784.552",
+          "Enabled": true,
+          "NetworkMode": 2
+        },
+        {
+          "__guid": "a0f3e5fc-ab16-4c3f-ab9f-a61dc9355057",
+          "Name": "bar",
+          "Position": "-755.1284,-2373.018,-2784.552",
+          "Enabled": true,
+          "NetworkMode": 2
+        },
+        {
+          "__guid": "9dc81302-c6ed-42d4-ac87-2336c9d72602",
+          "Name": "resting",
+          "Position": "-923.1284,-669.0176,-2784.552",
+          "Enabled": true,
+          "NetworkMode": 2
+        },
+        {
+          "__guid": "9dd94a22-3277-4ffb-a796-72e59340d21d",
+          "Name": "store",
+          "Position": "-971.1284,522.9824,-2784.552",
+          "Enabled": true,
+          "NetworkMode": 2
+        },
+        {
+          "__guid": "55d698fb-9181-4da9-85c9-3f3b2a6e1f35",
+          "Name": "parking_lot",
+          "Position": "-1211.128,1354.982,-2784.552",
+          "Enabled": true,
+          "NetworkMode": 2
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -2011,6 +2087,6 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-14T00:20:27.5805035\u002B00:00",
+  "LastSaved": "2024-03-14T00:25:16.4802639\u002B00:00",
   "__references": []
 }
