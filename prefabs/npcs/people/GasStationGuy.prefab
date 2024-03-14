@@ -1,0 +1,268 @@
+{
+  "RootObject": {
+    "__guid": "d4520984-7762-4548-98c7-0f99c8c66f97",
+    "Name": "gasstationguy",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "DialogueTree",
+        "__guid": "4484269c-f845-4141-9e51-2dac9bc258a8",
+        "DialogueStages": [
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "ccf1c572-d3e0-490f-b526-8817066c0c34",
+                    "ReferencedComponentTypes": []
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "input"
+                    },
+                    {
+                      "Id": 2,
+                      "Type": "scene.ref",
+                      "Properties": {
+                        "component": {
+                          "_type": "component",
+                          "component_id": "4484269c-f845-4141-9e51-2dac9bc258a8",
+                          "go": "d4520984-7762-4548-98c7-0f99c8c66f97",
+                          "component_type": "DialogueTree"
+                        }
+                      },
+                      "UserData": {
+                        "Position": "-16,128"
+                      }
+                    },
+                    {
+                      "Id": 4,
+                      "Type": "property.get",
+                      "ParentId": 2,
+                      "Properties": {
+                        "_name": "Name",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      }
+                    },
+                    {
+                      "Id": 5,
+                      "Type": "call",
+                      "Properties": {
+                        "_name": "PlaySoundWithNameAndSubtitle",
+                        "_isStatic": true,
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      },
+                      "UserData": {
+                        "Position": "304,-16"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 2,
+                      "SrcName": "_result",
+                      "DstId": 4,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_signal",
+                      "DstId": 5,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 4,
+                      "SrcName": "_result",
+                      "DstId": 5,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_target",
+                      "DstId": 5,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "",
+                      "DstId": 5,
+                      "DstName": "sound"
+                    },
+                    {
+                      "Value": "Hello human, I am Joe, Mama.",
+                      "DstId": 5,
+                      "DstName": "subtitle"
+                    }
+                  ]
+                },
+                "InteractDistance": 125
+              }
+            ]
+          },
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "86112947-4de3-43e8-a272-c8189af6b0ae",
+                    "ReferencedComponentTypes": []
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "input",
+                      "UserData": {
+                        "Position": "-64,0"
+                      }
+                    },
+                    {
+                      "Id": 1,
+                      "Type": "call",
+                      "Properties": {
+                        "_name": "PlaySoundWithNameAndSubtitle",
+                        "_isStatic": true,
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      },
+                      "UserData": {
+                        "Position": "288,-16"
+                      }
+                    },
+                    {
+                      "Id": 3,
+                      "Type": "scene.ref",
+                      "Properties": {
+                        "component": {
+                          "_type": "component",
+                          "component_id": "4484269c-f845-4141-9e51-2dac9bc258a8",
+                          "go": "d4520984-7762-4548-98c7-0f99c8c66f97",
+                          "component_type": "DialogueTree"
+                        }
+                      },
+                      "UserData": {
+                        "Position": "-32,144"
+                      }
+                    },
+                    {
+                      "Id": 4,
+                      "Type": "property.get",
+                      "ParentId": 3,
+                      "Properties": {
+                        "_name": "Name",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_signal",
+                      "DstId": 1,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 4,
+                      "SrcName": "_result",
+                      "DstId": 1,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_target",
+                      "DstId": 1,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "",
+                      "DstId": 1,
+                      "DstName": "sound"
+                    },
+                    {
+                      "Value": "Leave me alone human, I am busy mewing.",
+                      "DstId": 1,
+                      "DstName": "subtitle"
+                    },
+                    {
+                      "SrcId": 3,
+                      "SrcName": "_result",
+                      "DstId": 4,
+                      "DstName": "_target"
+                    }
+                  ]
+                },
+                "InteractDistance": 125
+              }
+            ]
+          }
+        ],
+        "HasRandomDialogues": true,
+        "HostOnly": false,
+        "Name": "Hunting Shop Guy",
+        "Networked": false
+      },
+      {
+        "__type": "CapsuleCollider",
+        "__guid": "e0ffd7c2-812a-4e7b-907c-66f1bbcdffab",
+        "End": "0,0,68",
+        "IsTrigger": false,
+        "Radius": 12,
+        "Start": "0,0,12",
+        "Static": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "9ba788b3-7f9d-442a-9353-38e42fc54e85",
+        "Name": "Model",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "Character",
+            "__guid": "27e23746-732e-4ecf-aef0-5848dbe0fb83",
+            "Clothes": [
+              "models/clothes/beanie/beanie.vmdl",
+              "models/clothes/oxford_shoes/oxford_shoes.vmdl",
+              "models/clothes/baggy_trousers/cargo_trousers.vmdl",
+              "models/clothes/long_shirt/long_shirt.vmdl"
+            ],
+            "Fatness": 0,
+            "Height": 23,
+            "HideBodyGroup": "Torso, Legs, Feet"
+          },
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "c60637f1-126b-48fa-9e62-85c219d5d4d3",
+            "BodyGroups": 1365,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
