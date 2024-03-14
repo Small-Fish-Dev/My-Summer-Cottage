@@ -80,7 +80,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// Block both inputs and mouse aiming
 	/// </summary>
-	[Sync] public bool BlockMovements { get; set; } = false;
+	[Sync]
+	public bool BlockMovements { get; set; } = false;
 
 	bool _blockMouseAim = false;
 
@@ -115,6 +116,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// Where you're pissing on
 	/// </summary>
 	public Vector3 PissingPosition { get; set; }
+
 	public TimeSince LastPiss { get; set; } = 0f;
 
 	[Sync] public bool IsPissing { get; set; }
@@ -148,8 +150,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 	/// Size of penoid shaped object in centimeters.
 	/// </summary>
 	public float Endowment => PenoidSize
-		* GetAttachment( "penoid_start", false ).Position.Distance( GetAttachment( "penoid_max", false ).Position )
-		* 2.54f; // Inches to centimeters.
+	                          * GetAttachment( "penoid_start", false ).Position
+		                          .Distance( GetAttachment( "penoid_max", false ).Position )
+	                          * 2.54f; // Inches to centimeters.
 
 	/// <summary>
 	/// Get the transform of the penoid.
@@ -222,8 +225,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 		}
 
 		if ( _updateSkin
-		  && Renderer != null && Renderer.SceneModel.IsValid()
-		  && Penoid != null && Penoid.SceneModel.IsValid() )
+		     && Renderer != null && Renderer.SceneModel.IsValid()
+		     && Penoid != null && Penoid.SceneModel.IsValid() )
 		{
 			Renderer.SceneModel.Attributes.Set( "g_flColorTint", SkinColor );
 			Renderer.SceneModel.Batchable = false;
@@ -279,7 +282,10 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		IsPissing = !BlockInputs && Input.Down( "Piss" ) && !HidePenoid;
 
-		UpdateMovement();
+		if ( !CurrentSeat.IsValid() )
+			UpdateMovement();
+		else
+			UpdateSit();
 		UpdateInteractions();
 	}
 
@@ -319,7 +325,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 	}
 
 	[Icon( "camera" )]
-	public SweetMemory CaptureMemory( string caption, string identifier = null, float distance = 100f, int maxTries = 20 )
+	public SweetMemory CaptureMemory( string caption, string identifier = null, float distance = 100f,
+		int maxTries = 20 )
 	{
 		var center = Bounds.Center + Transform.Position + Vector3.Up * 10f;
 		var position = center + Transform.Rotation.Backward * distance; // Default
@@ -359,6 +366,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	}
 
 	private TimeSince lastStepped;
+
 	private void OnFootstep( SceneModel.FootstepEvent e )
 	{
 		if ( lastStepped < 0.2f )
@@ -406,5 +414,11 @@ public partial class Player : Component, Component.ExecuteInEditor
 		blackScreen.BlackTransition = blackTransition;
 		blackScreen.EndingTransition = endingTransition;
 		blackScreen.Start();
+	}
+
+	[Broadcast( NetPermission.OwnerOnly )]
+	public void PlayNoklaSound()
+	{
+		GameObject.PlaySound( "sounds/phone/nokla_notif.sound" );
 	}
 }
