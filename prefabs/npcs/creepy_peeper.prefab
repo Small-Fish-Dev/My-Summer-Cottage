@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
+    "__guid": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
     "Name": "creepy_peeper",
     "Tags": "npc",
     "Enabled": true,
@@ -8,6 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
+        "__guid": "0a612e88-ba49-44d7-a731-13808e8b9dc9",
         "AlertOthers": false,
         "AttackCooldown": 10,
         "AttackRange": 40,
@@ -16,6 +17,7 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
+          "component_id": "cf731caf-4db6-4dab-9b1b-ea3b89551ecd",
           "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
           "component_type": "HealthComponent"
         },
@@ -25,11 +27,13 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
+          "component_id": "784ed089-c4ab-4c3a-994a-51d2d3470673",
           "go": "b6786b84-12ab-4d16-a506-e04fe52d9378",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
+          "component_id": "fbf34991-cd2e-4efb-95c0-a81b15355d0c",
           "go": "8248c4ae-eb03-4ca9-846e-8a82c8af9001",
           "component_type": "MoveHelper"
         },
@@ -485,7 +489,7 @@
           ]
         },
         "RunningType": "Smart",
-        "RunSpeed": 800,
+        "RunSpeed": 600,
         "ScaleStats": true,
         "Static": false,
         "VisionRange": 2000,
@@ -495,6 +499,7 @@
       },
       {
         "__type": "MoveHelper",
+        "__guid": "fbf34991-cd2e-4efb-95c0-a81b15355d0c",
         "AccelerationCurve": [
           {
             "y": 1
@@ -525,6 +530,7 @@
       },
       {
         "__type": "CapsuleCollider",
+        "__guid": "d9c77ef3-49f4-4232-9d8a-0d4c424209e5",
         "End": "0,0,62",
         "IsTrigger": false,
         "Radius": 12,
@@ -533,6 +539,7 @@
       },
       {
         "__type": "HealthComponent",
+        "__guid": "cf731caf-4db6-4dab-9b1b-ea3b89551ecd",
         "CanRegenerate": false,
         "DamagedBy": "Mild",
         "Immortal": false,
@@ -545,13 +552,14 @@
     ],
     "Children": [
       {
-        "Id": "b6786b84-12ab-4d16-a506-e04fe52d9378",
+        "__guid": "b6786b84-12ab-4d16-a506-e04fe52d9378",
         "Name": "Model",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "SkinnedModelRenderer",
+            "__guid": "784ed089-c4ab-4c3a-994a-51d2d3470673",
             "BodyGroups": 341,
             "CreateBoneObjects": false,
             "Model": "models/guy/guy.vmdl",
@@ -560,6 +568,7 @@
           },
           {
             "__type": "Character",
+            "__guid": "7170fe7d-8e5b-4a7b-8560-3c45daf769ec",
             "Clothes": [
               "models/clothes/underwear/underwear.vmdl",
               "models/clothes/wives_undies/wives_bra.vmdl",
@@ -577,5 +586,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }
