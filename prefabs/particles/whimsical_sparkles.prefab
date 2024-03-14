@@ -1,7 +1,7 @@
 {
   "RootObject": {
-    "Id": "ecb7f126-1720-4d80-97d0-dc384d09501c",
-    "Name": "steam",
+    "Id": "2d3c76b9-0730-4a16-ac5e-c44b77fa03d5",
+    "Name": "whisical_sparkles",
     "Tags": "particles",
     "Enabled": true,
     "NetworkMode": 2,
@@ -10,31 +10,28 @@
         "__type": "ParticleEffect",
         "Alpha": {
           "Type": "Curve",
-          "CurveA": {
-            "rangey": "0,0.2",
-            "frames": [
-              {
-                "in": -0.5000002,
-                "out": 0.5000002
-              },
-              {
-                "x": 0.10119046,
-                "y": 0.08355064,
-                "in": -0.8301908,
-                "out": 0.8301908
-              },
-              {
-                "x": 0.49964088,
-                "y": 0.05319149,
-                "in": 0.27008173,
-                "out": -0.27008173
-              },
-              {
-                "x": 0.8348214,
-                "mode": "Flat"
-              }
-            ]
-          },
+          "CurveA": [
+            {
+              "in": -0.5000002,
+              "out": 0.5000002
+            },
+            {
+              "x": 0.18005951,
+              "y": 0.32823148,
+              "in": -2.1910403,
+              "out": 2.1910403
+            },
+            {
+              "x": 0.7689861,
+              "y": 0.41223404,
+              "in": 1.3916038,
+              "out": -1.3916038
+            },
+            {
+              "x": 0.9970238,
+              "mode": "Flat"
+            }
+          ],
           "Constants": "1,0,0,0"
         },
         "ApplyColor": true,
@@ -44,15 +41,19 @@
           "Constants": "4,0,0,0"
         },
         "Brightness": {
-          "Constants": "1.2,0,0,0"
+          "Constants": "2,0,0,0"
         },
         "Bumpiness": {},
         "Collision": true,
         "CollisionRadius": 1,
-        "Damping": {},
-        "DieOnCollisionChance": {},
+        "Damping": {
+          "Constants": "0.05,0,0,0"
+        },
+        "DieOnCollisionChance": {
+          "Constants": "1,0,0,0"
+        },
         "Force": true,
-        "ForceDirection": "0,0,2",
+        "ForceDirection": "0,0,-1",
         "ForceScale": {
           "Constants": "1,0,0,0"
         },
@@ -60,13 +61,35 @@
           "Constants": "1,0,0,0"
         },
         "Gradient": {
-          "Type": "Range",
           "Evaluation": "Particle",
           "GradientA": {
             "color": [
               {
-                "t": 0.5,
-                "c": "1,1,1,1"
+                "c": "1,0,0,1"
+              },
+              {
+                "t": 0.16452992,
+                "c": "0.77237,0.06186,0.95,1"
+              },
+              {
+                "t": 0.38675213,
+                "c": "0.12744,0.06512,1,1"
+              },
+              {
+                "t": 0.5641026,
+                "c": "0,1,0.85,1"
+              },
+              {
+                "t": 0.71581197,
+                "c": "0.33333,1,0,1"
+              },
+              {
+                "t": 0.85683763,
+                "c": "1,0.9,0,1"
+              },
+              {
+                "t": 1,
+                "c": "1,0.5,0,1"
               }
             ],
             "alpha": []
@@ -81,12 +104,12 @@
             "alpha": []
           },
           "ConstantA": "1,1,1,1",
-          "ConstantB": "0.79535,0.79535,0.79535,1"
+          "ConstantB": "0.83333,1,0,1"
         },
         "Lifetime": {
           "Type": "Range",
           "Evaluation": "Particle",
-          "Constants": "10,15,0,0"
+          "Constants": "5,7,0,0"
         },
         "MaxParticles": 100,
         "PerParticleTimeScale": {
@@ -102,21 +125,21 @@
         "Scale": {
           "Type": "Curve",
           "CurveA": {
-            "rangey": "0,3",
+            "rangey": "0,0.5",
             "frames": [
               {
                 "in": -2.0000007,
                 "out": 2.0000007
               },
               {
-                "x": 0.35914406,
-                "y": 0.55851066,
-                "in": -1.7484555E-07,
-                "out": 1.7484555E-07
+                "x": 0.19991787,
+                "y": 0.37765962,
+                "in": -0.57965827,
+                "out": 0.57965827
               },
               {
-                "x": 0.7619048,
-                "y": 0.14083067,
+                "x": 0.8229167,
+                "y": 0.25785196,
                 "in": 1.0366281,
                 "out": -1.0366281
               },
@@ -148,9 +171,9 @@
       },
       {
         "__type": "ParticleSpriteRenderer",
-        "Additive": false,
+        "Additive": true,
         "BlurAmount": 0.98,
-        "BlurOpacity": 0.69,
+        "BlurOpacity": 0.93,
         "BlurSpacing": 1,
         "DepthFeather": 50,
         "FaceVelocity": false,
@@ -159,10 +182,10 @@
         "MotionBlur": true,
         "Opaque": false,
         "RotationOffset": 0,
-        "Scale": 10,
+        "Scale": 3,
         "Shadows": false,
         "SortMode": "ByDistance",
-        "Texture": "textures/rain/cloud.vtex"
+        "Texture": "materials/particles/shapes/star1.vtex"
       },
       {
         "__type": "ParticleConeEmitter",
@@ -176,7 +199,7 @@
         "InVolume": false,
         "Loop": true,
         "OnEdge": false,
-        "Rate": 5
+        "Rate": 10
       }
     ],
     "Children": []
