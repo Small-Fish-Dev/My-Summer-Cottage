@@ -56,7 +56,7 @@ public class ShopItem : Component
 
 	private bool IsParcel()
 	{
-		return Components.GetOrCreate<ModelRenderer>().Model.Name.Contains( "clothing" );
+		return Components.GetOrCreate<ModelRenderer>().Model.Name.Contains( "parcel" );
 	}
 
 	private void CreateWorldIcon()
