@@ -5,17 +5,17 @@
 <root class="@AdditionalClasses">
 	@if ( Number != null )
 	{
-		<div class="number" style="background-color: darken(@(Hex), 0.3); color: @(Hex);">##@Number</div>
+		<div class="notif-number" style="background-color: darken(@(Hex), 0.3); color: @(Hex);">##@Number</div>
 	}
-	<div class="content">
-		<div class="header" style="background-color: @(Hex);">
+	<div class="notif-content">
+		<div class="notif-header" style="background-color: @(Hex);">
 			@if ( !string.IsNullOrWhiteSpace( Icon ) )
 			{
-				<img class="icon" src=@Icon />
+				<img class="notif-icon" src=@Icon />
 			}
-			<div class="title">@Title</div>
+			<div class="notif-title">@Title</div>
 		</div>
-		<div class="description">@Description</div>
+		<div class="notif-description">@Description</div>
 	</div>
 </root>
 

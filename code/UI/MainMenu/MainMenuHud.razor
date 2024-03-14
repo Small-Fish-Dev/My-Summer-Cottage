@@ -11,7 +11,7 @@
 				ImagePath="ui/mainmenu/new_icon.png"
 				Title="New Game"
 				Subtitle="Start your own cottage story.."
-				OnClick=@(() => { SceneHandler.ChangeScene( SaunaScene.Creation ); })
+				OnClick=@(() => { SceneHandler.ChangeScene( SaunaScene.Creation, stopSound: false ); })
 			/>
 		}
 		else
@@ -76,12 +76,6 @@
 			_loop.ListenLocal = true;
 			_loop.Volume = Volume;
 		}
-	}
-
-	protected override void OnDestroy()
-	{
-		_loopStart?.Stop();
-		_loop?.Stop();
 	}
 
 	protected override int BuildHash()
