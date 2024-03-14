@@ -19,6 +19,12 @@ public class SoundHandler : Component
 		return PlaySound( sound );
 	}
 
+	public Speech SpeakWithSubtitle( string name, string subtitle, SpeechSettings settings = default )
+	{
+		Subtitles.AddSubtitle( name, subtitle, null );
+		return Speech.Create( subtitle, settings );
+	}
+
 	public SoundHandle PlaySound( SoundEvent sound )
 	{
 		var soundHandle = Sound.Play( sound );
