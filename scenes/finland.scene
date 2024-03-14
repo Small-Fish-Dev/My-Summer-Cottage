@@ -812,7 +812,7 @@
         {
           "__guid": "79a42b52-3dd6-4018-a1c6-cb514e3de500",
           "Name": "HUD",
-          "Position": "0,0,0",
+          "Position": "922.249,-633.9585,190.2996",
           "Enabled": true,
           "NetworkMode": 2,
           "Components": [
@@ -935,7 +935,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.3488863,0,0.9371651",
+          "Rotation": "0,0.7151133,0,-0.6990085",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -990,218 +990,6 @@
       ]
     },
     {
-      "__guid": "1c8b362f-fdf3-48dc-b8ec-a7e247c53f71",
-      "Name": "NPC (local)",
-      "Position": "2806.878,-2437.796,2472.671",
-      "Rotation": "0.5880175,-0.157559,-0.2053349,0.7663213",
-      "Scale": "1,1,2.148212",
-      "Enabled": true,
-      "NetworkMode": 1,
-      "Components": [
-        {
-          "__type": "BoxCollider",
-          "__guid": "5402c77b-4084-4a8a-903a-e04b17f3c1b8",
-          "Center": "0,0,4.25",
-          "IsTrigger": false,
-          "Scale": "31.40003,43.20007,8.5",
-          "Static": false
-        },
-        {
-          "__type": "SkinnedModelRenderer",
-          "__guid": "082ead44-2f02-4d83-8bd6-d4c34bcc6825",
-          "BodyGroups": 18446744073709551615,
-          "CreateBoneObjects": false,
-          "Model": "models/beer_crate/beer_crate.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "Rigidbody",
-          "__guid": "50309fe6-9562-4a84-a37e-d422f81be09d",
-          "AngularDamping": 0,
-          "Gravity": true,
-          "LinearDamping": 0,
-          "Locking": {},
-          "MassOverride": 0,
-          "MotionEnabled": true,
-          "RigidbodyFlags": 0,
-          "StartAsleep": false
-        },
-        {
-          "__type": "Interactions",
-          "__guid": "711f3729-4e3b-4622-b6a3-454f0a45cee2",
-          "HideOnEmpty": false,
-          "ObjectInteractions": [
-            {
-              "Keybind": "Use",
-              "Description": "subtitle",
-              "Action": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Action",
-                  "id": "da8f297b-4009-4803-b4ff-0106d5b4154f",
-                  "ReferencedComponentTypes": []
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 2,
-                    "Type": "call",
-                    "Properties": {
-                      "_isStatic": true,
-                      "_name": "PlaySoundWithSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
-                    },
-                    "UserData": {
-                      "Position": "320,-0"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 2,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "obj",
-                    "DstId": 2,
-                    "DstName": "obj"
-                  },
-                  {
-                    "Value": {
-                      "$type": "Simple",
-                      "Type": "Sandbox.Engine/Sandbox.SoundEvent",
-                      "Value": "sounds/rifle/rifle-shoot.sound"
-                    },
-                    "DstId": 2,
-                    "DstName": "sound"
-                  },
-                  {
-                    "Value": "Yo, what\u0027s up, it is me ubre!!",
-                    "DstId": 2,
-                    "DstName": "subtitle"
-                  }
-                ]
-              },
-              "InteractDistance": 75,
-              "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Show When Disabled",
-                  "id": "f624953a-fa47-4b76-abd3-d3b43d1d5047",
-                  "ReferencedComponentTypes": []
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "output"
-                  },
-                  {
-                    "Id": 1,
-                    "Type": "input"
-                  }
-                ],
-                "Links": [
-                  {
-                    "Value": true,
-                    "DstId": 0,
-                    "DstName": "_result"
-                  }
-                ]
-              },
-              "Cooldown": true,
-              "CooldownTime": 3,
-              "Animation": "Interact"
-            },
-            {
-              "Keybind": "use2",
-              "Description": "subtitle with ubre",
-              "Action": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Action",
-                  "id": "ae802e10-2812-4568-9982-056b609391f9",
-                  "ReferencedComponentTypes": []
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 1,
-                    "Type": "call",
-                    "Properties": {
-                      "_isStatic": true,
-                      "_name": "PlaySoundWithNameAndSubtitle",
-                      "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
-                    },
-                    "UserData": {
-                      "Position": "224,16"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 1,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": "Ubre",
-                    "DstId": 1,
-                    "DstName": "name"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "obj",
-                    "DstId": 1,
-                    "DstName": "obj"
-                  },
-                  {
-                    "Value": {
-                      "$type": "Simple",
-                      "Type": "Sandbox.Engine/Sandbox.SoundEvent",
-                      "Value": "sounds/rifle/rifle-shoot.sound"
-                    },
-                    "DstId": 1,
-                    "DstName": "sound"
-                  },
-                  {
-                    "Value": "yo what\u0027s up!! I\u0027m an Italian!!",
-                    "DstId": 1,
-                    "DstName": "subtitle"
-                  }
-                ]
-              },
-              "InteractDistance": 75,
-              "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
-              "CooldownTime": 0.5,
-              "Animation": "Interact"
-            }
-          ]
-        },
-        {
-          "__type": "SoundHandler",
-          "__guid": "1923d863-6d5a-4120-ba79-e05a63bc7268"
-        }
-      ]
-    },
-    {
       "__guid": "7845a61f-5e7f-413b-baef-4d22a3bf1183",
       "Name": "Water",
       "Enabled": true,
@@ -1250,15 +1038,6 @@
           ]
         }
       ]
-    },
-    {
-      "__guid": "7a37f831-1108-421e-a055-9d3176ccb783",
-      "Name": "Car",
-      "Position": "2097.232,-2595.18,2463.451",
-      "Rotation": "-0.0824227,0.02611236,-0.3008852,0.949733",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/objects/car.prefab"
     },
     {
       "__guid": "73df85dc-6c8b-4f29-ad40-900d7448c1ed",
@@ -1749,15 +1528,6 @@
       ]
     },
     {
-      "__guid": "c41149f3-b8a0-4dff-8ab2-191ddf80fb48",
-      "Name": "flashlight",
-      "Position": "2235.942,-2596.522,2458.412",
-      "Rotation": "-0.004094645,0.01162842,0.3320982,0.9431642",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/items/flashlight.prefab"
-    },
-    {
       "__guid": "d17d8a78-2e4d-44f8-b632-9494a33981c1",
       "Name": "WoodPile",
       "Position": "3513.14,-3071.946,2433.059",
@@ -1798,6 +1568,15 @@
       "Position": "3590.354,-3156.362,2476.77",
       "Enabled": true,
       "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "MarkerComponent",
+          "__guid": "4561e96b-3b92-4323-8c05-33bdc677c97d",
+          "Icon": "Home",
+          "Networked": true,
+          "Title": "Sauna"
+        }
+      ],
       "Children": [
         {
           "__guid": "5fae56a0-fcc9-421d-a6cf-9dbf5ed2278d",
@@ -1812,7 +1591,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "23ab76c2-2bb2-474b-b6a1-ce7c7c80d59d",
+                "component_id": "3ce00744-b189-4bee-a10f-2439d9b96d9c",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -3620,6 +3399,24 @@
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/events/crazy_attack_deer.prefab"
+    },
+    {
+      "__guid": "8e633767-b0bd-4ecb-a3e3-36244fbfd35a",
+      "Name": "GoHomeCar",
+      "Position": "3131.493,-3327.159,2484.738",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Children": [
+        {
+          "__guid": "7a37f831-1108-421e-a055-9d3176ccb783",
+          "Name": "Car",
+          "Position": "-9.223633,12.29956,-27.99902",
+          "Rotation": "0.0000000006519307,0.000000003667803,-0.4238632,0.9057261",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/objects/car.prefab"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -3645,7 +3442,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-14T17:43:40.0088508\u002B00:00",
+  "LastSaved": "2024-03-14T20:45:20.4187387\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
