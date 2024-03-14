@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "08e1ce93-568a-407e-89e0-8584c25d02e7",
+    "__guid": "08e1ce93-568a-407e-89e0-8584c25d02e7",
     "Name": "ketchup",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "a945f9f7-518d-499e-a3c7-c3a6b6bda3bd",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Ketchup",
-        "SellPrice": 10,
+        "SellPrice": 1,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "65f7067c-4b2b-4023-bc5a-9dcaaa0e4182",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "81a1c035-6bf8-401b-80bd-acdb38f63c08",
         "BodyGroups": 11,
         "MaterialGroup": "ketchup",
         "Model": "models/consumables/condiment_bottle/condiment_bottle.vmdl",
@@ -157,17 +159,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "7d1bbd49-653c-4504-b4fe-165f7cc700a5",
         "IsTrigger": false,
         "Model": "models/consumables/condiment_bottle/condiment_bottle.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "f4d76d4c-0da7-4cb9-81dc-57a436f52e81",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

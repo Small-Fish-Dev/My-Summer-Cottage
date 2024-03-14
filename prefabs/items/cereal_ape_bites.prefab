@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "ffd6315d-82ae-4e61-8ef4-5b920fcf6372",
+    "__guid": "ffd6315d-82ae-4e61-8ef4-5b920fcf6372",
     "Name": "cereal_ape_bites",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "0e67b9eb-85cf-4af4-996b-eb53c50482a5",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Ape Bites",
-        "SellPrice": 10,
+        "SellPrice": 2,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "bba916e8-3add-4338-9b09-97d402c66a3e",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,6 +116,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -147,6 +152,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "71ec12c4-352d-4603-a46b-9c4468599711",
         "BodyGroups": 11,
         "MaterialGroup": "green",
         "Model": "models/consumables/cereal_box/cereal_box.vmdl",
@@ -155,17 +161,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "48dfa51f-010e-4402-adab-7fd7d14267c0",
         "IsTrigger": false,
         "Model": "models/consumables/cereal_box/cereal_box.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "70d0e093-c127-4979-9c37-7fbb494493c3",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

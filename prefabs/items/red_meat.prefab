@@ -1,43 +1,43 @@
 {
   "RootObject": {
-    "__guid": "b67909b1-46b2-4b84-969d-b1cfb805e5bf",
-    "Name": "liqourice_packet",
+    "__guid": "ef7b5553-6d45-44cb-86e0-bde433417add",
+    "Name": "red_meat",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
-        "__guid": "37d9bb5e-7ce0-4e86-9331-bd2a39c0cb97",
+        "__guid": "4531b3ef-006f-4368-a4a3-ace00f1dac4e",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
-          "Position": "2.391829,0.9767182,0.2978323",
+          "Position": "1.593723,-0.02998789,-0.2276375",
           "Scale": "1,1,1",
-          "Rotation": "-0.6201431,0.7532796,0.1201006,-0.1832159"
+          "Rotation": "0.1333921,0.09936881,0.3374558,0.926529"
         },
         "Count": 0,
-        "Description": "Its salty too! My favourite snack!",
+        "Description": "generic unknown red meat.",
         "HideBodygroups": "None",
         "HoldType": "Item",
         "Icon": {
-          "Model": "models/consumables/crisps/crisps_small.vmdl",
-          "MaterialGroup": "black",
+          "Model": "models/meat/meat.vmdl",
+          "MaterialGroup": "",
           "Colour": "1,1,1,1",
-          "Position": "-7.05,-0.3,1.05",
-          "Rotation": "0.2732333,0.5700904,0.2216642,0.7424322",
-          "Guid": "5d795757-d168-4d7a-84db-13f0e741cfe5"
+          "Position": "-2.25,-0.3,0.3",
+          "Rotation": "0.5987729,-0.1123936,0.7672371,0.2004645",
+          "Guid": "c20ee99a-a0a2-4080-859e-69bf0bbe3a83"
         },
         "MaxStack": 0,
-        "Name": "Liqourice",
-        "SellPrice": 2,
+        "Name": "Red Meat",
+        "SellPrice": 7,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
-        "WeightInGrams": 100
+        "WeightInGrams": 80
       },
       {
         "__type": "Interactions",
-        "__guid": "6d2ec060-9e18-4b78-8ce6-9119d7b9fb01",
+        "__guid": "ef096cab-a73e-4d79-a487-47ce44042c86",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -116,13 +116,15 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
               "Version": 5,
               "UserData": {
                 "Title": "Sound",
-                "id": "d8fdc112-0a91-4f30-944d-79b646a459b3",
+                "id": "11850e01-e607-4c86-9f52-258b4ec8de0c",
                 "ReferencedComponentTypes": []
               },
               "Variables": [],
@@ -150,23 +152,22 @@
       },
       {
         "__type": "ModelRenderer",
-        "__guid": "58fb5a0d-5422-47c2-9b6c-e9a61a1c438f",
+        "__guid": "9f693067-e4c3-49e2-9d6c-44b73509122d",
         "BodyGroups": 11,
-        "MaterialGroup": "black",
-        "Model": "models/consumables/crisps/crisps_small.vmdl",
+        "Model": "models/meat/meat.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "ModelCollider",
-        "__guid": "2602778d-0800-4a2e-a692-f541a630787d",
+        "__guid": "76901f8b-2781-4cbd-bf89-c71661c696e1",
         "IsTrigger": false,
-        "Model": "models/consumables/crisps/crisps_small.vmdl",
+        "Model": "models/meat/meat.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
-        "__guid": "05269641-445b-4603-ba65-73f2ba5bcd8f",
+        "__guid": "dd729a3f-da95-4d83-bb2b-2c18f603e250",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,

@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "81e39819-7601-4a4a-af10-a7e8032436dc",
+    "__guid": "81e39819-7601-4a4a-af10-a7e8032436dc",
     "Name": "jar_mayo",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "ad111d84-8b96-4b54-ab71-d1c7faf18c79",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Mayonnaise",
-        "SellPrice": 10,
+        "SellPrice": 2,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "1d7a54c7-bf3b-42be-b455-e9009612d8f0",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "da43275d-24d2-401d-be6c-5c29230dae79",
         "BodyGroups": 11,
         "MaterialGroup": "mayo",
         "Model": "models/consumables/jar/jar.vmdl",
@@ -157,17 +159,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "dc4835db-5ae4-47ec-8624-82586232b010",
         "IsTrigger": false,
         "Model": "models/consumables/jar/jar.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "ea68efa7-f244-4240-bec6-6ce6fdca0d3a",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

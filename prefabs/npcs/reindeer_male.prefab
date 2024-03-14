@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "c832c935-a7df-48af-b0c9-04d0602ca94f",
+    "__guid": "c832c935-a7df-48af-b0c9-04d0602ca94f",
     "Name": "reindeer_male",
     "Tags": "animal,npc",
     "Enabled": true,
@@ -8,6 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
+        "__guid": "732fa48f-e7e7-485d-9aea-2f5050fd1403",
         "AlertOthers": true,
         "AttackCooldown": 6,
         "AttackRange": 80,
@@ -16,6 +17,7 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
+          "component_id": "78949555-4a9c-4837-b247-1e0f4f060891",
           "go": "c832c935-a7df-48af-b0c9-04d0602ca94f",
           "component_type": "HealthComponent"
         },
@@ -25,11 +27,13 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
+          "component_id": "e2cbf490-a6ed-4b4f-854c-8506ddbd6960",
           "go": "c832c935-a7df-48af-b0c9-04d0602ca94f",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
+          "component_id": "30982775-c431-488b-9cf3-e9ec00ff205a",
           "go": "c832c935-a7df-48af-b0c9-04d0602ca94f",
           "component_type": "MoveHelper"
         },
@@ -866,6 +870,7 @@
       },
       {
         "__type": "MoveHelper",
+        "__guid": "30982775-c431-488b-9cf3-e9ec00ff205a",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -898,6 +903,7 @@
       },
       {
         "__type": "CapsuleCollider",
+        "__guid": "2e88c6d5-83ef-40d7-a392-8532ffca1308",
         "End": "0,0,42",
         "IsTrigger": false,
         "Radius": 20,
@@ -906,6 +912,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
+        "__guid": "e2cbf490-a6ed-4b4f-854c-8506ddbd6960",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/elk/reindeer.vmdl",
@@ -914,8 +921,27 @@
       },
       {
         "__type": "HealthComponent",
+        "__guid": "78949555-4a9c-4837-b247-1e0f4f060891",
         "CanRegenerate": true,
         "DamagedBy": "Average",
+        "DropOnDeath": [
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/items/red_meat.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/items/red_meat.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/items/red_meat.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/items/red_meat.prefab"
+          }
+        ],
         "Immortal": false,
         "MaxHealth": 15,
         "RegenerationCooldown": 2,

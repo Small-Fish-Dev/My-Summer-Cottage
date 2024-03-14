@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "6822c982-1335-4f0b-ab89-d1b18688767a",
+    "__guid": "6822c982-1335-4f0b-ab89-d1b18688767a",
     "Name": "can_of_meat",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "e7b6af42-d7e9-446a-abe6-d2338e6f816f",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Can of meat",
-        "SellPrice": 5,
+        "SellPrice": 2,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "49292159-ef95-45e7-a1d9-82f77422718a",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "4025598d-2d7b-4880-b459-93ee83bc0f9d",
         "BodyGroups": 11,
         "MaterialGroup": "black",
         "Model": "models/consumables/can/can.vmdl",
@@ -157,17 +159,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "0fc3b3d5-ef1a-4ceb-a267-577dc7440ad5",
         "IsTrigger": false,
         "Model": "models/consumables/can/can.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "31bca1bb-8d9e-416b-a4ea-03362cc29848",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }
