@@ -30,7 +30,12 @@ IntroPanel {
         justify-content: center;
         align-items: center;
         opacity: 1;
+        transition: opacity 0.5s ease-in-out;
         //background-color: $small-fish-blue;
+
+        &.hidden {
+            opacity: 0;
+        }
     }
 
     .disclaimer-container {

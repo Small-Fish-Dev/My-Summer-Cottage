@@ -3,7 +3,7 @@
 @inherits PanelComponent
 
 <root>
-	<div class="disclaimer-container" style="opacity: @( _state == IntroState.Disclaimer ? 1 : 0 )">
+	<div class="disclaimer-container">
 		<div class="header">
 			<h1>WARNING</h1>
 			<div class="text">This game contains topics that are not suitable for the players under 18.</div>
@@ -48,7 +48,7 @@
 		Disclaimer,
 		Next
 	}
-	
+
 	[Property] public MainMenuHud MainMenu { get; set; }
 	[Property] public SoundEvent IntroSound { get; set; }
 
@@ -67,6 +67,7 @@
 
 	protected override void OnUpdate()
 	{
+		Log.Error(_state);
 		switch ( _state )
 		{
 			case IntroState.Logo:

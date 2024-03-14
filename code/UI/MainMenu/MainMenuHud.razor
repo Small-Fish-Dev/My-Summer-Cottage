@@ -49,7 +49,7 @@
 	SoundHandle _loopStart;
 	SoundHandle _loop;
 
-	RealTimeUntil _playLoop;
+	RealTimeUntil _playLoop = 999;
 
 	public async void Initialize()
 	{
@@ -82,5 +82,10 @@
 	{
 		_loopStart?.Stop();
 		_loop?.Stop();
+	}
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( SaveData );
 	}
 }
