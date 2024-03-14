@@ -26,10 +26,9 @@ public struct Message
 			Day = timeManager.Day.ToString()
 		};
 		all.Add( message );
-		
-		// TODO: IMO everyone should hear this sound, getting calls or messages while chilling in da sauna is the most finnish experience
-		Player.Local.GameObject.PlaySound( "sounds/phone/nokla_notif.sound" );
-		
+
+		Player.Local.PlayNoklaSound();
+
 		return message;
 	}
 
