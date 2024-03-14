@@ -1,0 +1,420 @@
+{
+  "RootObject": {
+    "__guid": "de88d319-e4ad-4143-b5b4-e37ae58d16c8",
+    "Name": "skibidi",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "fb46cab8-bce9-4771-b74a-da1b3f0d3b97",
+        "AddToEventPool": true,
+        "EventName": "Experience Toilet",
+        "EventSignals": [],
+        "Rarity": "Common",
+        "ReinstantiateOnRestart": false,
+        "Stackable": true,
+        "Type": "Interaction"
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "3ddcd168-664d-43d0-810f-3b3ae9444b24",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "f65f2d06-7c8c-4b09-b901-176039d5d261",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 3,
+              "Type": "event.finished",
+              "UserData": {
+                "Position": "1616,48"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "63853ad3-5b90-4676-b77b-a96603d3b833"
+                }
+              },
+              "UserData": {
+                "Position": "-48,-144",
+                "Labels": {
+                  "_result": "skibidi_head"
+                }
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Enabled",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "176,-0"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "112,-288",
+                "Labels": {
+                  "_result": "skbidi_transform"
+                }
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "property.get",
+              "ParentId": 10,
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "skbidi_pos"
+                }
+              }
+            },
+            {
+              "Id": 19,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Enabled",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "1360,48"
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "3ddcd168-664d-43d0-810f-3b3ae9444b24",
+                  "go": "de88d319-e4ad-4143-b5b4-e37ae58d16c8",
+                  "component_type": "EventComponent"
+                }
+              },
+              "UserData": {
+                "Position": "1488,256"
+              }
+            },
+            {
+              "Id": 24,
+              "Type": "property.get",
+              "ParentId": 10,
+              "Properties": {
+                "_name": "Local",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 25,
+              "Type": "property.get",
+              "ParentId": 10,
+              "Properties": {
+                "_name": "LocalPosition",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "skbidi_local_pos"
+                }
+              }
+            },
+            {
+              "Id": 34,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "LocalPosition",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              },
+              "UserData": {
+                "Position": "544,-48"
+              }
+            },
+            {
+              "Id": 35,
+              "Type": "call",
+              "Properties": {
+                "_name": "WithZ",
+                "_isStatic": false,
+                "_type": "Sandbox.System/Vector3"
+              },
+              "UserData": {
+                "Position": "368,128"
+              }
+            },
+            {
+              "Id": 36,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "LocalPosition",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              },
+              "UserData": {
+                "Position": "1024,-48"
+              }
+            },
+            {
+              "Id": 37,
+              "Type": "call",
+              "Properties": {
+                "_name": "WithZ",
+                "_isStatic": false,
+                "_type": "Sandbox.System/Vector3"
+              },
+              "UserData": {
+                "Position": "800,128"
+              }
+            },
+            {
+              "Id": 38,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "816,-48"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 19,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "component"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_target"
+            },
+            {
+              "Value": true,
+              "DstId": 9,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 36,
+              "SrcName": "_signal",
+              "DstId": 19,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 19,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 19,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 25,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_signal",
+              "DstId": 34,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 34,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 35,
+              "SrcName": "_result",
+              "DstId": 34,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 25,
+              "SrcName": "_result",
+              "DstId": 35,
+              "DstName": "_target"
+            },
+            {
+              "Value": -43,
+              "DstId": 35,
+              "DstName": "z"
+            },
+            {
+              "SrcId": 38,
+              "SrcName": "_signal",
+              "DstId": 36,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 36,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 37,
+              "SrcName": "_result",
+              "DstId": 36,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 25,
+              "SrcName": "_result",
+              "DstId": 37,
+              "DstName": "_target"
+            },
+            {
+              "Value": -64,
+              "DstId": 37,
+              "DstName": "z"
+            },
+            {
+              "SrcId": 34,
+              "SrcName": "_signal",
+              "DstId": 38,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.2,
+              "DstId": 38,
+              "DstName": "seconds"
+            }
+          ]
+        },
+        "RequiredToFinish": true,
+        "TriggerCooldown": 0.2,
+        "TriggerOnce": false,
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "0e6838e6-9b19-4266-982f-a8ee08891753",
+            "go": "71e0a4f1-1f69-4d9b-9074-1705376b1d2a",
+            "component_type": "EventPissTrigger"
+          }
+        ]
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "63853ad3-5b90-4676-b77b-a96603d3b833",
+        "Name": "skibidi_head",
+        "Position": "2.984693,0.0000001779016,-64",
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "8be97d67-8196-46f8-af95-703daf3a453b",
+            "BodyGroups": 1025,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "__guid": "65b23e98-a62a-4f12-969e-7691f33c7d6d",
+        "Name": "Toilet",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__guid": "583e775b-bdc2-4e94-b772-37071cfb0b8a",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/props/toilet/toilet.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "ModelCollider",
+            "__guid": "d7a5f430-9d8c-49dd-a901-88c733ae9d2f",
+            "IsTrigger": false,
+            "Model": "models/props/toilet/toilet.vmdl",
+            "Static": false
+          }
+        ]
+      },
+      {
+        "__guid": "71e0a4f1-1f69-4d9b-9074-1705376b1d2a",
+        "Name": "Trigger",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "EventPissTrigger",
+            "__guid": "0e6838e6-9b19-4266-982f-a8ee08891753",
+            "Extents": "20.95999,20.31999,16.88",
+            "MaxPollingRate": 3,
+            "Offset": "3.679998,0,18.88",
+            "TriggerSignalIdentifier": null
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
