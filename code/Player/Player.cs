@@ -20,8 +20,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 		get => _shitting;
 		set
 		{
-			if ( Seat.Target.IsValid() && value == null )
-				Seat.Target.IsOccupied = false;
+			if ( value == null && this == Local && Seat.Target.IsValid() && Seat.Target.Network.IsOwner )
+				Seat.Target.Network.DropOwnership();
 
 			_shitting = value;
 		}
@@ -302,7 +302,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		if ( Shitting == null )
 			UpdateMovement();
-		else if ( Input.AnalogMove.Length > 0.1f || Input.Pressed( "Jump" ) )
+		else if ( Shitting.HasValue && (Input.AnalogMove.Length > 0.1f || Input.Pressed( "Jump" )) )
 			Shitting = null;
 
 		if ( Input.Pressed( "Ragdoll" ) && CanRagdoll )

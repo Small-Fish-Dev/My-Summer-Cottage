@@ -4,7 +4,6 @@ public sealed class Seat : Component
 {
 	public static Seat Target { get; private set; }
 
-	[Sync] public bool IsOccupied { get; set; }
 	[Property] public Transform SeatTransform { get; set; } = global::Transform.Zero;
 
 	public Transform GlobalTransform => new Transform( Transform.Position + SeatTransform.Position * Transform.Rotation, Transform.Rotation * SeatTransform.Rotation );
@@ -15,23 +14,25 @@ public sealed class Seat : Component
 	{
 		GameObject.SetupNetworking();
 
+		if ( Network.IsOwner ) 
+			Network.DropOwnership();
+
 		var interactions = Components.GetOrCreate<Interactions>();
-		interactions.HideOnEmpty = true;
 		interactions.AddInteraction( new Interaction
 		{
 			Identifier = "chair.sit",
 			Accessibility = AccessibleFrom.World,
 			Description = "Sit",
 			ShowWhenDisabled = () => true,
-			Disabled = () => IsOccupied,
+			Disabled = () => Network.OwnerConnection != null,
 			Action = ( Player player, GameObject obj ) =>
 			{
-				if ( IsOccupied )
-					return;
-
+				if ( Target.IsValid() && Target.Network.IsOwner )
+					Target.Network.DropOwnership();
+				
+				Network.TakeOwnership();
 				player.Shitting = GlobalTransform;
 				Target = this;
-				IsOccupied = true;
 			},
 			Keybind = "use",
 			Animation = InteractAnimations.None
