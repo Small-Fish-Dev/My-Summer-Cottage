@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "18083d17-30a8-4bf4-b1dc-b57e370e99ac",
+    "__guid": "18083d17-30a8-4bf4-b1dc-b57e370e99ac",
     "Name": "gas_canister",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "6b224d50-5d65-44b6-b3b4-de56b1840877",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -21,6 +23,7 @@
           "Model": "models/gas_canister/gas_canister.vmdl",
           "MaterialGroup": "",
           "Colour": "1,1,1,1",
+          "Position": "-6.45,0.6,0",
           "Rotation": "0,-0,-0.596225,0.8028174",
           "Guid": "164afe99-4ee1-479c-8252-d1f809db59b6"
         },
@@ -34,6 +37,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "4a3cbf5e-f23f-4620-8c62-36156d20a106",
         "BodyGroups": 18446744073709551615,
         "Model": "models/gas_canister/gas_canister.vmdl",
         "RenderType": "On",
@@ -41,17 +45,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "72985440-3fd8-44c1-82a3-48592683aaaf",
         "IsTrigger": false,
         "Model": "models/gas_canister/gas_canister.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "67b467ee-0ccd-48ef-ba08-de0a746e75db",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

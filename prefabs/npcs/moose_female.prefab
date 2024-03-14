@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
+    "__guid": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
     "Name": "moose_female",
     "Tags": "animal,npc",
     "Enabled": true,
@@ -8,6 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
+        "__guid": "5d65395b-2178-4e4a-8386-a3c03a1cb983",
         "AlertOthers": true,
         "AttackCooldown": 8,
         "AttackRange": 120,
@@ -16,6 +17,7 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
+          "component_id": "d2e67546-226d-481f-bc9d-a1323a690bd7",
           "go": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
           "component_type": "HealthComponent"
         },
@@ -25,11 +27,13 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
+          "component_id": "dcafda01-23eb-4bdf-8973-28e472d2ec0c",
           "go": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
+          "component_id": "9cf97e1d-8d88-4739-9d5d-0c096c7c5555",
           "go": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
           "component_type": "MoveHelper"
         },
@@ -479,6 +483,7 @@
       },
       {
         "__type": "MoveHelper",
+        "__guid": "9cf97e1d-8d88-4739-9d5d-0c096c7c5555",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -511,6 +516,7 @@
       },
       {
         "__type": "CapsuleCollider",
+        "__guid": "ff53e01a-b2cd-4fe8-912f-95f980749ed2",
         "End": "0,0,42",
         "IsTrigger": false,
         "Radius": 26,
@@ -519,6 +525,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
+        "__guid": "dcafda01-23eb-4bdf-8973-28e472d2ec0c",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/elk/moose_female.vmdl",
@@ -527,8 +534,23 @@
       },
       {
         "__type": "HealthComponent",
+        "__guid": "d2e67546-226d-481f-bc9d-a1323a690bd7",
         "CanRegenerate": true,
         "DamagedBy": "Serious",
+        "DropOnDeath": [
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/items/red_meat.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/items/red_meat.prefab"
+          },
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/items/red_meat.prefab"
+          }
+        ],
         "Immortal": false,
         "MaxHealth": 40,
         "RegenerationCooldown": 2,

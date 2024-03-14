@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "4ef682d2-cb7d-4cfb-8382-befa78b8d57c",
+    "__guid": "4ef682d2-cb7d-4cfb-8382-befa78b8d57c",
     "Name": "can_of_fish",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "837b4bea-b9bc-4d42-8504-5ee3577a29e6",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Can of fish",
-        "SellPrice": 5,
+        "SellPrice": 2,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "2539e81d-1466-43f0-acdb-1dc5dbb84710",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,6 +116,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -147,6 +152,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "f797fff2-09a3-4af6-8cf5-96b7995b1df7",
         "BodyGroups": 11,
         "MaterialGroup": "blue",
         "Model": "models/consumables/can/can.vmdl",
@@ -155,17 +161,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "f5fb78ea-988b-4b9b-8f4d-c470bc088b22",
         "IsTrigger": false,
         "Model": "models/consumables/can/can.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "dd956751-b284-4027-9d83-33a98a449647",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }
