@@ -450,7 +450,7 @@ public class StoryMaster : Component
 
 		if ( timeManager == null ) return;
 
-		if ( CurrentSaunaDay != null )
+		if ( CurrentSaunaDay != null && !timeManager.IsDayOver )
 		{
 			var currentHour = timeManager.InGameHours;
 
