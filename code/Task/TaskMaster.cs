@@ -9,7 +9,7 @@ namespace Sauna;
 [Icon( "live_help" )]
 public class TaskMaster : Component
 {
-	private static TaskMaster _instance;
+	public static TaskMaster _instance;
 
 	public static IReadOnlyList<SaunaTask> ActiveTasks => _instance.CurrentTasks;
 

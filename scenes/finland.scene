@@ -1,5 +1,5 @@
 {
-  "Id": "248aeaed-e4c4-4c1f-b147-02a84f05b351",
+  "__guid": "248aeaed-e4c4-4c1f-b147-02a84f05b351",
   "GameObjects": [
     {
       "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -935,7 +935,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.5438513,0,0.8391816",
+          "Rotation": "0,-0.1946188,0,-0.9808789",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1092,7 +1092,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
               "ShowWhenDisabled": {
                 "Version": 5,
                 "UserData": {
@@ -1188,8 +1187,6 @@
               },
               "InteractDistance": 75,
               "Accessibility": "All",
-              "Disabled": null,
-              "ShowWhenDisabled": null,
               "CooldownTime": 0.5,
               "Animation": "Interact"
             }
@@ -1578,8 +1575,8 @@
         },
         {
           "__guid": "c71c184f-eb46-43aa-ab43-edbb8006f296",
-          "Name": "Object",
-          "Position": "-7640,7600,2448",
+          "Name": "Townspeople",
+          "Position": "-7952,7808,2536",
           "Enabled": true,
           "NetworkMode": 2,
           "Components": [
@@ -1591,33 +1588,158 @@
                 {
                   "Npc": {
                     "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/policeman.prefab"
+                  },
+                  "SpawnChance": 1
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/policeman.prefab"
+                  },
+                  "SpawnChance": 0.5
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_01.prefab"
                   },
-                  "SpawnChance": 0.8
+                  "SpawnChance": 0.4
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_02.prefab"
                   },
-                  "SpawnChance": 0.8
+                  "SpawnChance": 0.4
                 },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_03.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_04.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 400
+            }
+          ]
+        },
+        {
+          "__guid": "51ddb7fd-9c6b-4310-a529-d6e813c061b5",
+          "Name": "Townspeople",
+          "Position": "-8800,9488,2536",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "__guid": "eb94c5de-e05f-4164-9955-8ebf6590e98f",
+              "Height": 200,
+              "NpcPool": [
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/policeman.prefab"
                   },
-                  "SpawnChance": 1
+                  "SpawnChance": 0.5
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_01.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_02.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_03.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_04.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 400
+            }
+          ]
+        },
+        {
+          "__guid": "314de622-9984-4554-a217-9c1e42754a41",
+          "Name": "Townspeople",
+          "Position": "-7744,6112,2536",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "__guid": "33c5d533-633e-462f-99a2-d6ebc4e0e37f",
+              "Height": 200,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/policeman.prefab"
+                  },
+                  "SpawnChance": 0.5
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_01.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_02.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_03.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/bystander_04.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/rude_drunkman.prefab"
                   },
                   "SpawnChance": 1
                 }
               ],
-              "Radius": 1028
+              "Radius": 400
             }
           ]
         }
@@ -1687,7 +1809,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "d2ffbccc-1280-43ca-b02c-9f6e4413dc6a",
+                "component_id": "b2c948d8-cb5e-4616-84f2-af569eac9e06",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -3520,6 +3642,8 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-14T15:54:26.1977425\u002B00:00",
+  "LastSaved": "2024-03-14T17:37:58.9339864\u002B00:00",
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

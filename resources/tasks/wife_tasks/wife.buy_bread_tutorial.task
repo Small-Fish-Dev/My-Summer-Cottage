@@ -23,19 +23,296 @@
     {
       "Description": "Take a taxi to the city.",
       "TriggerSignal": "taxi.travel.Suburbs",
-      "AmountToComplete": 1
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "d7e7779e-f0f2-41ef-8b2c-d928ee14c3f0",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "496,-16"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "240,32"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "target"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "BusStopSuburbs",
+            "DstId": 2,
+            "DstName": "name"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "833e8c56-6ef2-409f-a531-749a2ea45f2f",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "208,64"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "512,128"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "BusStopSuburbs",
+            "DstId": 2,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "target"
+          }
+        ]
+      }
     },
     {
       "Description": "Go to the supermarket",
       "SubtaskOrder": 1,
       "TriggerSignal": "supermarket.entered",
-      "AmountToComplete": 1
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "6b7afe82-4c07-4f8a-8b95-ebd70798c944",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "512,16"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "256,64"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "target"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Supermarket",
+            "DstId": 2,
+            "DstName": "name"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "7ce56eef-7d31-4c15-85fd-9ccd6a70b029",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "256,96"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "560,96"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Supermarket",
+            "DstId": 2,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "target"
+          }
+        ]
+      }
     },
     {
       "Description": "Buy some bread",
       "SubtaskOrder": 2,
       "TriggerSignal": "item.received.Loaf of bread",
-      "AmountToComplete": 1
+      "AmountToComplete": 1,
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "ac6fca11-f2f0-4e18-91f7-d27fe0807a41",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "call",
+            "Properties": {
+              "_type": "package.fish.sauna/Sauna.Player",
+              "_name": "CaptureMemory",
+              "_isStatic": false
+            },
+            "UserData": {
+              "Position": "336,32"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 1,
+            "DstName": "_target"
+          },
+          {
+            "Value": "Buying bread for the nagging wife.",
+            "DstId": 1,
+            "DstName": "caption"
+          },
+          {
+            "Value": "bought_bread",
+            "DstId": 1,
+            "DstName": "identifier"
+          }
+        ]
+      }
     },
     {
       "Description": "Bring bread home.",

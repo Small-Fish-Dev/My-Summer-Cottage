@@ -40,13 +40,6 @@ public partial class NPC
 
 				newRagdoll.PhysicsGroup.Velocity = MoveHelper.Velocity;
 
-				_puppet = Model.GameObject.Parent.Components.Create<SkinnedModelRenderer>();
-				_puppet.Model = Model.Model;
-				_puppet.Enabled = false;
-				_puppet.Enabled = true;
-				_puppet.SceneModel.RenderingEnabled = false;
-				_puppet.Transform.Scale = Scale;
-
 				foreach ( var collider in Components.GetAll<Collider>( FindMode.EverythingInSelfAndChildren ) )
 					collider.Enabled = false;
 
@@ -125,6 +118,16 @@ public partial class NPC
 			}
 			else
 			{
+				if ( _puppet == null )
+				{
+					_puppet = Model.GameObject.Parent.Components.Create<SkinnedModelRenderer>();
+					_puppet.Model = Model.Model;
+					_puppet.Enabled = false;
+					_puppet.Enabled = true;
+					_puppet.SceneModel.RenderingEnabled = false;
+					_puppet.Transform.Scale = Scale;
+				}
+
 				var transition = 0.15f;
 
 				var bones = _puppet.Model.Bones.AllBones;
@@ -166,7 +169,7 @@ public partial class NPC
 					MoveHelper.Velocity = 0f;
 					Transform.Rotation = Rotation.LookAt( frontPosition.WithZ( 0f ) - rootPosition.WithZ( 0f ), Vector3.Up );
 
-					_puppet.Destroy();
+					_puppet?.Destroy();
 					Ragdoll?.Destroy();
 
 					_isTransitioning = false;

@@ -29,6 +29,7 @@
 				if ( marker.Marker != null )
 					continue;
 
+				marker.Delete();
 				_markers.Remove( marker );
 			}
 
@@ -93,7 +94,8 @@
 				? 1 - (len - ContainerWidth / 2f) / ContainerWidth * 2f
 				: len / ContainerWidth * 2;
 			var opacity = MathX.Lerp( 0, distOpacity, centerOpacity );
-
+			
+			panel.ShowDistance = centerOpacity > 0.8f;
 			panel.Style.Left = len;
 			panel.Style.Opacity = opacity;
 		}

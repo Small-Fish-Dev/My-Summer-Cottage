@@ -7,10 +7,15 @@
 	{
 		<img class="icon" src=@Marker.Texture />
 	}
+
+	<p class="distance @(ShowDistance ? "show" : "")">@($"{(_distance / 254f):N0}")m</p>
 </root>
 
 @code {
 	public Marker Marker { get; set; }
+	public bool ShowDistance { get; set; }
+	private float _distance => (Player.Local?.Transform.Position ?? 0).Distance( Marker?.Position ?? 1 );
+
 
 	public override void OnParentChanged()
 	{
@@ -20,6 +25,6 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( Marker != null, Marker?.Texture, Marker?.Name );
+		return HashCode.Combine( Marker != null, ShowDistance ? _distance : 0, Marker?.Texture, Marker?.Name );
 	}
 }
