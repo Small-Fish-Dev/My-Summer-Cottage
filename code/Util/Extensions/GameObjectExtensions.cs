@@ -21,6 +21,13 @@ public static class GameObjectExtensions
 		return obj.Components.Get<Interactions>( FindMode.EverythingInSelf )?.AllInteractions;
 	}
 
+	[Title( "Speak with Subtitle" ), Group( "Audio" ), Icon( "volume_up" )]
+	public static Speech SpeakWithSubtitle( this GameObject obj, string name, string subtitle )
+	{
+		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
+		return soundHandler.SpeakWithSubtitle( name, subtitle );
+	}
+
 	[Title( "Play Sound (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
 	public static SoundHandle PlaySound( this GameObject obj, string sound )
 	{
