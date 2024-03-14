@@ -88,6 +88,7 @@ public class Character : Component, Component.ExecuteInEditor
 
 			foreach ( var piece in _clothing.Values )
 			{
+				if ( !piece.IsValid() ) continue;
 				piece.SetAnimParameter( "height", Height ); // Bone mergine doesn't work? Tried it even with a normal skinned model renderer
 				piece.Update( Time.Delta );
 			}
@@ -189,6 +190,8 @@ public class Character : Component, Component.ExecuteInEditor
 		{
 			if ( piece.Key < Clothes.Count() && Clothes[piece.Key] != null )
 			{
+				if ( !piece.Value.IsValid() ) continue;
+
 				if ( Clothes[piece.Key] != piece.Value.Model )
 				{
 					toDelete.Add( piece.Key );
