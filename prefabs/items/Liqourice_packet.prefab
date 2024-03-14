@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "b67909b1-46b2-4b84-969d-b1cfb805e5bf",
+    "__guid": "b67909b1-46b2-4b84-969d-b1cfb805e5bf",
     "Name": "liqourice_packet",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "37d9bb5e-7ce0-4e86-9331-bd2a39c0cb97",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Liqourice",
-        "SellPrice": 10,
+        "SellPrice": 2,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "6d2ec060-9e18-4b78-8ce6-9119d7b9fb01",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "58fb5a0d-5422-47c2-9b6c-e9a61a1c438f",
         "BodyGroups": 11,
         "MaterialGroup": "black",
         "Model": "models/consumables/crisps/crisps_small.vmdl",
@@ -157,17 +159,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "2602778d-0800-4a2e-a692-f541a630787d",
         "IsTrigger": false,
         "Model": "models/consumables/crisps/crisps_small.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "05269641-445b-4603-ba65-73f2ba5bcd8f",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

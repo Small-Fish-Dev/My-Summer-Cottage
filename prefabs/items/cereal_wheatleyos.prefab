@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "f32b1dd3-57ce-4303-9446-82c625aa7fb1",
+    "__guid": "f32b1dd3-57ce-4303-9446-82c625aa7fb1",
     "Name": "cereal_wheatleyos",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "132e3367-20e8-4009-9964-b52ba767f6bf",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Wheatey\u0027Os",
-        "SellPrice": 10,
+        "SellPrice": 4,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "9e3721cc-4705-46e2-a033-7236e02b77e9",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "755f71a5-b44b-433d-9685-9bb455ec46cc",
         "BodyGroups": 11,
         "MaterialGroup": "default",
         "Model": "models/consumables/cereal_box/cereal_box.vmdl",
@@ -157,17 +159,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "99241cbb-8828-4bf5-b7e9-69f310fa3c36",
         "IsTrigger": false,
         "Model": "models/consumables/cereal_box/cereal_box.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "a8eb273e-1ecb-4953-bba9-ea20cde2c338",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

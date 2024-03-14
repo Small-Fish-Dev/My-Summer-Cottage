@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "cef8be5e-5d12-45fe-8f29-c15d634056d1",
+    "__guid": "cef8be5e-5d12-45fe-8f29-c15d634056d1",
     "Name": "crisps_talons",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "8e14542b-05f9-4de5-9cbf-2734bce01e4c",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Talon Munch",
-        "SellPrice": 10,
+        "SellPrice": 3,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "3268a19e-2251-405f-8d35-a51671f0b07a",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "c02c4159-6105-465a-b49b-a166cdb0a361",
         "BodyGroups": 11,
         "MaterialGroup": "eagle",
         "Model": "models/consumables/crisps/crisps.vmdl",
@@ -157,17 +159,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "a7173c38-8d13-4e37-b3fd-23587563c91e",
         "IsTrigger": false,
         "Model": "models/consumables/crisps/crisps.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "c518ff9a-f137-412e-80b3-4fd7ceef08d8",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "ebace190-6a65-4da7-8af2-eb3053a6830d",
+    "__guid": "ebace190-6a65-4da7-8af2-eb3053a6830d",
     "Name": "crisps_hamsteria",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "d8929488-9c49-4b54-88e6-3d7bd51c4ac5",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Hamsteria Crisps",
-        "SellPrice": 10,
+        "SellPrice": 2,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "5d3c1b0b-ff58-459d-9b63-a6f422948e59",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "0f2f7e5a-d4e2-433d-9513-72dea9f9fa4c",
         "BodyGroups": 11,
         "MaterialGroup": "green",
         "Model": "models/consumables/crisps/crisps.vmdl",
@@ -157,17 +159,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "753ecb5d-e4c5-4092-8932-aa5dabdc0a6e",
         "IsTrigger": false,
         "Model": "models/consumables/crisps/crisps.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "ab095e9d-95d8-4f64-99d9-cf06230ab42c",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

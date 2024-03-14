@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "bcbc56b9-3f05-4eed-aaac-276961e04b3b",
+    "__guid": "bcbc56b9-3f05-4eed-aaac-276961e04b3b",
     "Name": "yogurt_tub",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "e2b2e2d6-471d-4f3f-b2b5-248210efd5c1",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Plain Yogurt",
-        "SellPrice": 10,
+        "SellPrice": 1,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "ca93c13c-7efe-4e57-aa3e-70272a6e2978",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,6 +116,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -147,6 +152,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "0063bc75-8c12-4a63-ad29-4c060bb5c3f5",
         "BodyGroups": 11,
         "MaterialGroup": "black",
         "Model": "models/consumables/round_tub/round_tub.vmdl",
@@ -155,17 +161,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "47b3b646-da33-45f6-9efe-7cdfc8704355",
         "IsTrigger": false,
         "Model": "models/consumables/round_tub/round_tub.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "93a37c43-59cd-41b4-8dae-aeed1765efa9",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

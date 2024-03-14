@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "c53ad5ba-f714-411e-8c96-9dafad27ce7f",
+    "__guid": "11e220ed-2086-4906-90a9-9f5cf2353790",
     "Name": "water_aqua",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "c1ad5f7a-9143-4ce2-bd63-80f22680aaa2",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Fresh Water",
-        "SellPrice": 10,
+        "SellPrice": 1,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "af549e03-1868-4325-a86d-596858e0cc09",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,6 +116,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -147,6 +152,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "7bff002b-fc4f-4c59-b825-39b873615320",
         "BodyGroups": 11,
         "MaterialGroup": "red",
         "Model": "models/consumables/bottle/bottle.vmdl",
@@ -155,17 +161,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "b43cf241-1474-440c-a93a-349cb25d20fb",
         "IsTrigger": false,
         "Model": "models/consumables/bottle/bottle.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "ee4232e3-e2f7-4d6b-b5c9-86d11bbd4867",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

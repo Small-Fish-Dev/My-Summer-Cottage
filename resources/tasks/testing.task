@@ -1,0 +1,148 @@
+{
+  "Name": "tet",
+  "Subtitle": "teste",
+  "Description": "testt",
+  "Giver": "Friend",
+  "Message": "Hey buddy can you do this for me",
+  "TaskType": "Any",
+  "TaskRarity": "Any",
+  "IsPrimary": true,
+  "Global": false,
+  "ExperienceGiven": 50,
+  "SuccessSignal": "task.success.tet",
+  "FailedSignal": "task.failed.tet",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Do that testte",
+      "TriggerSignal": "item.received.Split Log",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "7cd2624d-caa3-491f-ab86-4875551ed2fa",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input",
+            "UserData": {
+              "Position": "-80,0"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "384,112"
+            }
+          },
+          {
+            "Id": 5,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "128,160"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 5,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Sub",
+            "DstId": 4,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_result",
+            "DstId": 4,
+            "DstName": "target"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 5,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Supermarket",
+            "DstId": 5,
+            "DstName": "name"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "0eee50b9-b7c6-4815-b02e-0b73c3d3add5",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "272,112"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "480,112"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Supermarket",
+            "DstId": 2,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "target"
+          }
+        ]
+      }
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

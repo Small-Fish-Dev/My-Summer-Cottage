@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "d9b5f193-d0c2-4733-a102-438577a7f308",
+    "__guid": "d9b5f193-d0c2-4733-a102-438577a7f308",
     "Name": "jar_jam",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "b2cae776-e2b3-403e-b819-ede93ed1c622",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Strawberry Jam",
-        "SellPrice": 10,
+        "SellPrice": 1,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "3b628ed0-a6cf-4072-a87f-1e5d23fb35ff",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,6 +116,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -147,6 +152,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "b45e4f7a-9eae-4da9-b513-1379cbeb830f",
         "BodyGroups": 11,
         "MaterialGroup": "jam",
         "Model": "models/consumables/jar/jar.vmdl",
@@ -155,17 +161,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "6729ad95-240d-4aec-a2f1-bb0ecd5a782e",
         "IsTrigger": false,
         "Model": "models/consumables/jar/jar.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "e36e1aa1-6132-453d-baab-df2fc10564d6",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

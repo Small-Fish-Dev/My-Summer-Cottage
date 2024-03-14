@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "46e2444f-fa22-41b1-9c49-2a4bd7b661b1",
+    "__guid": "46e2444f-fa22-41b1-9c49-2a4bd7b661b1",
     "Name": "protein_yogurt",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "d4a20330-1a3f-4095-8280-1a07fa6888bb",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Protein Yogurt",
-        "SellPrice": 10,
+        "SellPrice": 2,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "f14b3402-4649-4553-a593-ce403288df4c",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,8 +116,6 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
-            "Disabled": null,
-            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,6 +150,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "98516005-17ed-4cee-93d6-3f198ba35502",
         "BodyGroups": 11,
         "MaterialGroup": "red",
         "Model": "models/consumables/round_tub/round_tub.vmdl",
@@ -157,17 +159,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "36757451-8c8e-4169-b728-61c369e0559f",
         "IsTrigger": false,
         "Model": "models/consumables/round_tub/round_tub.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "eb67cf45-51b4-4387-a54f-f27308aecbc8",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }

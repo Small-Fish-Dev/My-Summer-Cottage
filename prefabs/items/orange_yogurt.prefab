@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "707d53c2-472a-4abe-a72f-47df6d41b670",
+    "__guid": "707d53c2-472a-4abe-a72f-47df6d41b670",
     "Name": "orange_yogurt",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "6bd23ed9-6e23-4441-8f2c-a68eebb43696",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -27,7 +29,7 @@
         },
         "MaxStack": 0,
         "Name": "Orange Yogurt",
-        "SellPrice": 10,
+        "SellPrice": 2,
         "Slot": "Hand",
         "UpdatePosition": true,
         "UseSkinTint": false,
@@ -35,6 +37,7 @@
       },
       {
         "__type": "Interactions",
+        "__guid": "0ec99f90-bffe-40b0-b7c4-2a468a32af69",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -113,6 +116,8 @@
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -147,6 +152,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "1371c04a-f474-487d-b9bd-3544c77cd9c4",
         "BodyGroups": 11,
         "MaterialGroup": "orange",
         "Model": "models/consumables/round_tub/round_tub.vmdl",
@@ -155,17 +161,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "6324ce0e-cbb7-480a-b250-fc1ba5119166",
         "IsTrigger": false,
         "Model": "models/consumables/round_tub/round_tub.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "1f2a5950-0b38-49a6-8ceb-4fb06189c376",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }
