@@ -54,9 +54,12 @@ public partial class Player
 					InteractionBounds = new BBox( capsule.Start - capsule.Radius, capsule.End + capsule.Radius );
 			}
 		}
+
 		// Get bounds again.
 		if ( InteractionBounds == null && TargetedGameObject != null )
-			InteractionBounds = TargetedGameObject.GetBounds().Translate( -TargetedGameObject.Transform.Position );
+		{
+			InteractionBounds = BBox.FromPositionAndSize( 0, 50f );
+		}
 	}
 
 	// A lot of parameters! We should fix this up at a later point.
