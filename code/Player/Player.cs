@@ -20,7 +20,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		get => _shitting;
 		set
 		{
-			if ( Seat.Target.IsValid() )
+			if ( Seat.Target.IsValid() && value == null )
 				Seat.Target.IsOccupied = false;
 
 			_shitting = value;
