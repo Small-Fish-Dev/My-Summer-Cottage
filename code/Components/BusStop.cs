@@ -1,8 +1,3 @@
-using Sandbox;
-using System.Linq;
-using System.Numerics;
-using static Sauna.BusStop;
-
 namespace Sauna;
 
 public sealed class BusStop : Component
@@ -25,6 +20,9 @@ public sealed class BusStop : Component
 	[JsonInclude]
 	public List<GameObject> Waypoints { get; set; }
 
+	[Property]
+	public int Price = 5;
+
 	List<Vector3> _waypoints;
 
 	public Vector3 TaxiPosition => Transform.World.PointToWorld( Vector3.Forward * 120f );
@@ -37,6 +35,7 @@ public sealed class BusStop : Component
 		public BusStop To;
 		public float Speed;
 		public int CurrentWaypoint = -1;
+		public SoundHandle DriveSound;
 
 		public Taxi() { }
 		public Taxi( Player player, GameObject car, BusStop from, BusStop to, float speed )
@@ -49,7 +48,8 @@ public sealed class BusStop : Component
 		}
 	}
 
-	public List<Taxi> Taxis { get; set; } = new();
+	private readonly SoundEvent _driveSound = ResourceLibrary.Get<SoundEvent>( "sounds/misc/car_constant_drive.sound" );
+	private readonly List<Taxi> _activeTaxis = new();
 
 	protected override void OnStart()
 	{
@@ -63,12 +63,12 @@ public sealed class BusStop : Component
 				{
 					Identifier = $"taxi.travel.{Type}",
 					Keybind = "use",
-					Description = $"Travel to {(Type == Stop.Suburbs ? "city" : "suburbs")} (-5mk)",
+					Description = $"Travel to {(Type == Stop.Suburbs ? "city" : "suburbs")} ({Price}mk)",
 					Action = ( Player player, GameObject target ) =>
 					{
 						CreateCar( player, FindBusStop( Type == Stop.Suburbs ? Stop.City : Stop.Suburbs ), 1000f );
 					},
-					Disabled = () => Player.Local.Money < 5 || Taxis.Any( x => x.Player == Player.Local ),
+					Disabled = () => Player.Local.Money < Price || _activeTaxis.Any( x => x.Player == Player.Local ),
 					ShowWhenDisabled = () => true,
 					Animation = InteractAnimations.None,
 					InteractDistance = 150f,
@@ -84,10 +84,13 @@ public sealed class BusStop : Component
 	{
 		var toRemove = new List<Taxi>();
 
-		foreach ( var taxi in Taxis )
+		foreach ( var taxi in _activeTaxis )
 		{
-			if ( taxi.CurrentWaypoint < _waypoints.Count() )
+			if ( taxi.CurrentWaypoint < _waypoints.Count )
 			{
+				if ( taxi.DriveSound is null || taxi.DriveSound.IsStopped )
+					taxi.DriveSound = taxi.Car.PlaySound( _driveSound );
+
 				var currentEndPosition = taxi.CurrentWaypoint == -1 ? taxi.Player.Transform.Position : _waypoints[taxi.CurrentWaypoint];
 
 				var startPosition = taxi.Car.Transform.Position + Vector3.Up * 2000f;
@@ -170,7 +173,7 @@ public sealed class BusStop : Component
 
 		foreach ( var taxi in toRemove )
 		{
-			Taxis.Remove( taxi );
+			_activeTaxis.Remove( taxi );
 		}
 	}
 
@@ -186,10 +189,9 @@ public sealed class BusStop : Component
 		return Scene.GetAllComponents<BusStop>().Where( x => x.Type == type ).FirstOrDefault();
 	}
 
-	// TODO Network?
 	public void CreateCar( Player player, BusStop destination, float timeToTravel )
 	{
-		if ( Taxis.Any( x => x.Player == player ) ) return;
+		if ( _activeTaxis.Any( x => x.Player == player ) ) return;
 
 		var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
 		var randomPosition = TaxiPosition + randomDirection * 2000f;
@@ -207,8 +209,8 @@ public sealed class BusStop : Component
 		car.NetworkSpawn();
 
 		var newTaxi = new Taxi( player, car, this, destination, timeToTravel );
-		Taxis.Add( newTaxi );
+		_activeTaxis.Add( newTaxi );
 
-		player.TakeMoney( 5 );
+		player.TakeMoney( Price );
 	}
 }
