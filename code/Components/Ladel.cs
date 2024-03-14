@@ -57,34 +57,37 @@ public sealed class Ladel : Component
 
 		var target = player.TargetedGameObject;
 
-		if ( HasWater )
+		if ( target != null )
 		{
-			if ( target != null )
-				if ( target.Components.TryGet<Stove>( out var stove ) )
-					if ( !stove.HasWater && stove.HasWood )
+			if ( HasWater )
+			{
+				if ( target != null )
+					if ( target.Components.TryGet<Stove>( out var stove ) )
+						if ( !stove.HasWater && stove.HasWood )
+						{
+							HasWater = false;
+							stove.HasWater = true;
+							TaskMaster.SubmitTriggerSignal( "item.used_2.Ladel", player );
+						}
+
+				HasWater = false;
+			}
+			else
+			{
+				if ( target != null )
+					if ( target.Components.TryGet<WaterBucket>( out var bucket ) )
 					{
-						HasWater = false;
-						stove.HasWater = true;
-						TaskMaster.SubmitTriggerSignal( "item.used_2.Ladel", player );
+						TaskMaster.SubmitTriggerSignal( "item.used_1.Ladel", player );
+						HasWater = true;
 					}
+			}
 
-			HasWater = false;
+			if ( target.Components.TryGet<HealthComponent>( out var health ) )
+				health.Damage( 1, DamageType.Mild, player.GameObject, player.InteractionTrace.HitPosition, player.InteractionTrace.Direction, 200f );
+
+			if ( target.Components.TryGet<Rigidbody>( out var body ) )
+				body.ApplyImpulseAt( player.InteractionTrace.HitPosition, player.InteractionTrace.Direction * 100f );
 		}
-		else
-		{
-			if ( target != null )
-				if ( target.Components.TryGet<WaterBucket>( out var bucket ) )
-				{
-					TaskMaster.SubmitTriggerSignal( "item.used_1.Ladel", player );
-					HasWater = true;
-				}
-		}
-
-		if ( target.Components.TryGet<HealthComponent>( out var health ) )
-			health.Damage( 1, DamageType.Mild, player.GameObject, player.InteractionTrace.HitPosition, player.InteractionTrace.Direction, 200f );
-
-		if ( target.Components.TryGet<Rigidbody>( out var body ) )
-			body.ApplyImpulseAt( player.InteractionTrace.HitPosition, player.InteractionTrace.Direction * 100f );
 	}
 
 	protected override void OnFixedUpdate()
