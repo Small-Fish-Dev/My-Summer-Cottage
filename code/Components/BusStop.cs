@@ -49,8 +49,7 @@ public sealed class BusStop : Component
 		}
 	}
 
-	[Sync]
-	public NetList<Taxi> Taxis { get; set; } = new();
+	public List<Taxi> Taxis { get; set; } = new();
 
 	protected override void OnStart()
 	{
@@ -69,7 +68,7 @@ public sealed class BusStop : Component
 					{
 						CreateCar( player, FindBusStop( Type == Stop.Suburbs ? Stop.City : Stop.Suburbs ), 1000f );
 					},
-					Disabled = () => Player.Local.Money < 5 || Taxis.Cast<Taxi>().Any( x => x.Player == Player.Local ),
+					Disabled = () => Player.Local.Money < 5 || Taxis.Any( x => x.Player == Player.Local ),
 					ShowWhenDisabled = () => true,
 					Animation = InteractAnimations.None,
 					InteractDistance = 150f,
@@ -89,7 +88,6 @@ public sealed class BusStop : Component
 		{
 			if ( taxi.CurrentWaypoint < _waypoints.Count() )
 			{
-				Log.Info( Waypoints.Count );
 				var currentEndPosition = taxi.CurrentWaypoint == -1 ? taxi.Player.Transform.Position : _waypoints[taxi.CurrentWaypoint];
 
 				var startPosition = taxi.Car.Transform.Position + Vector3.Up * 2000f;
@@ -191,7 +189,7 @@ public sealed class BusStop : Component
 	// TODO Network?
 	public void CreateCar( Player player, BusStop destination, float timeToTravel )
 	{
-		if ( Taxis.Cast<Taxi>().Any( x => x.Player == player ) ) return;
+		if ( Taxis.Any( x => x.Player == player ) ) return;
 
 		var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
 		var randomPosition = TaxiPosition + randomDirection * 2000f;
