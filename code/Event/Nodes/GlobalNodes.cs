@@ -14,7 +14,7 @@ public static partial class GlobalNodes
 	[Title( "Is Single Player" ), Group( "Events" ), Icon( "emoji_people" )]
 	public static bool IsSingleplayer()
 	{
-		return Connection.All.Count == 1;
+		return Networking.Connections.Count == 1;
 	}
 
 	/// <summary>
