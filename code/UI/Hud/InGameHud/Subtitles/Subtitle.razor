@@ -18,6 +18,7 @@
     private float MessageSpeed => 0.03f;
     private String _message = "";
     private TimeUntil _timeUntilNextLetter;
+    private bool _isDeleting = false;
 
     public override void Tick()
     {
@@ -32,8 +33,17 @@
             }
         }
 
-        if (SoundHandle?.IsStopped ?? true && string.IsNullOrEmpty(Text))
-            Delete();
+        if (SoundHandle?.IsStopped ?? true && string.IsNullOrEmpty(Text) && !_isDeleting)
+        {
+            _isDeleting = true;
+            StartDelete();
+        }
+    }
+
+    async void StartDelete()
+    {
+        await Task.Delay( 500 + _message.Length * 50 );
+        Delete();
     }
 
     protected override int BuildHash()

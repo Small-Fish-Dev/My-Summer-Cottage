@@ -224,6 +224,12 @@ public class StoryMaster : Component
 	{
 		foreach ( var spawner in Scene.GetAllComponents<NpcSpawnArea>() )
 			spawner.RemoveNPCs();
+
+		foreach ( var npc in Scene.GetAllComponents<NPC>() )
+		{
+			if ( npc.IsValid() && npc.Health != null && !npc.Health.Alive )
+				npc.Destroy();
+		}
 	}
 
 	public void LoadItems()
