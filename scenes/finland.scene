@@ -1247,7 +1247,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.5407436,0,0.8411874",
+          "Rotation": "0,-0.2951508,0,-0.9554507",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -2528,6 +2528,15 @@
           "TagSet": "player",
           "TriggerPrefab": [],
           "TriggerSignalIdentifier": "supermarket.entered"
+        },
+        {
+          "__type": "EventSellAreaTrigger",
+          "__guid": "7d7af7de-49a7-4ebe-870a-ee891050b9b6",
+          "Extents": "642.08,341.44,155.28",
+          "MaxPollingRate": 15,
+          "Offset": "0,0,0",
+          "TagsToDeny": "fish,meat",
+          "TriggerSignalIdentifier": "supermarket.sold"
         }
       ],
       "Children": [
@@ -3995,6 +4004,15 @@
           "TagSet": "player",
           "TriggerPrefab": [],
           "TriggerSignalIdentifier": "huntingshop.entered"
+        },
+        {
+          "__type": "EventSellAreaTrigger",
+          "__guid": "d732c33c-6921-4960-be3b-74682b362fb8",
+          "Extents": "250,400,300",
+          "MaxPollingRate": 10,
+          "Offset": "0,0,0",
+          "TagsToAccept": "meat,fish",
+          "TriggerSignalIdentifier": "huntingshop_sold"
         }
       ],
       "Children": [
@@ -4327,7 +4345,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T07:12:46.0394943\u002B01:00",
+  "LastSaved": "2024-03-15T07:18:43.3040096\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

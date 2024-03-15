@@ -12,10 +12,16 @@ public sealed class EventSellAreaTrigger : EventTrigger
 	public Vector3 Extents { get; set; }
 
 	/// <summary>
-	/// Accepts only items with these tags
+	/// Accepts only items with these tags, leave empty to accept all EXCEPT TagsToDeny
 	/// </summary>
 	[Property]
 	public TagSet TagsToAccept { get; set; }
+
+	/// <summary>
+	/// Accepts only items without these tags
+	/// </summary>
+	[Property]
+	public TagSet TagsToDeny { get; set; }
 
 	public BBox BBox => new BBox( Offset - Extents / 2f, Offset + Extents / 2f );
 	public BBox WorldBBox => BBox.Transform( GameObject.Transform.World );
@@ -27,7 +33,8 @@ public sealed class EventSellAreaTrigger : EventTrigger
 		var items = Scene.FindInPhysics( WorldBBox )
 			?.Select( x => x.Components.Get<ItemComponent>() )
 			.Where( item => item != null && item.IsSellable && item.LastOwner != null )
-			.Where( item => item.Tags.HasAny( TagsToAccept ) )
+			.Where( item => TagsToAccept == null || item.Tags.HasAny( TagsToAccept ) )
+			.Where( item => TagsToDeny == null || TagsToDeny.IsEmpty || TagsToDeny != null && !item.Tags.HasAny( TagsToDeny ) )
 			.ToList();
 
 		foreach ( var item in items )
