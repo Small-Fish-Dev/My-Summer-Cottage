@@ -22,10 +22,10 @@ public static class GameObjectExtensions
 	}
 
 	[Title( "Speak with Subtitle" ), Group( "Audio" ), Icon( "volume_up" )]
-	public static Speech SpeakWithSubtitle( this GameObject obj, string name, string subtitle )
+	public static Speech SpeakWithSubtitle( this GameObject obj, string name, string subtitle, SpeechSettings? settings = null )
 	{
 		var soundHandler = obj.Components.GetOrCreate<SoundHandler>();
-		return soundHandler.SpeakWithSubtitle( name, subtitle );
+		return soundHandler.SpeakWithSubtitle( name, subtitle, settings );
 	}
 
 	[Title( "Play Sound (Custom)" ), Group( "Audio" ), Icon( "volume_up" )]
