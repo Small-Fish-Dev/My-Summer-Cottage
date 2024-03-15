@@ -298,14 +298,14 @@ public partial class Player : Component, Component.ExecuteInEditor
 		if ( IsProxy )
 			return;
 
-		IsPissing = !BlockInputs && Input.Down( "Piss" ) && !HidePenoid;
+		IsPissing = !BlockInputs && Input.Down( InputAction.Piss ) && !HidePenoid;
 
 		if ( Shitting == null )
 			UpdateMovement();
-		else if ( Shitting.HasValue && (Input.AnalogMove.Length > 0.1f || Input.Pressed( "Jump" )) )
+		else if ( Shitting.HasValue && (Input.AnalogMove.Length > 0.1f || Input.Pressed( InputAction.Jump )) )
 			Shitting = null;
 
-		if ( Input.Pressed( "Ragdoll" ) && CanRagdoll )
+		if ( Input.Pressed( InputAction.Ragdoll ) && CanRagdoll )
 		{
 			Shitting = null;
 			SetRagdoll( !IsRagdolled );

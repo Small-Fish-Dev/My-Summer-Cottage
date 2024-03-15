@@ -43,7 +43,7 @@
         if ( Model == null )
             return;
 
-        if ( Input.Pressed( "mouse1" ) )
+        if ( Input.Pressed( InputAction.LeftClick ) )
             RotateGuy( 1 );
 
         var targetRotation = Rotation.FromYaw( 90f + rotated * 90f );
