@@ -490,9 +490,13 @@ public class StoryMaster : Component
 		"You can drag items on your character to equip them.",
 		"You can drag items off the inventory to drop them.",
 		"Some shops won't buy certain items.",
-		"You can zoom by pressing the C key.",
+		"You can zoom by holding the C key.",
+		"You can walk by holding the ALT key.",
+		"You can crouch by holding the CTRL key.",
 		"Don't bother shooting humans they don't drop anything.",
-		"Run."
+		"Run.",
+		"The day will automatically end in the middle of the night.",
+		"Try to go back home before 3am, weird things happen.",
 	};
 
 	TimeSince _lastTipAttempt = 0f;
