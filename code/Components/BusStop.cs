@@ -225,14 +225,17 @@ public sealed class BusStop : Component
 		var newTaxi = new Taxi( player, car, this, destination, timeToTravel );
 		_activeTaxis.Add( newTaxi );
 
-		if ( PrefabLibrary.TryGetByPath( "prefabs/npcs/elk_female.prefab", out var prefab ) )
+		if ( Game.Random.Float( 100 ) <= 40f )
 		{
-			var deer = SceneUtility.GetPrefabScene( prefab.Prefab ).Clone();
-
-			if ( deer != null )
+			if ( PrefabLibrary.TryGetByPath( "prefabs/npcs/elk_female_actor.prefab", out var prefab ) )
 			{
-				deer.Transform.Position = _waypoints[4];
-				deer.Components.Get<NPC>().NextIdle = 999f;
+				var deer = SceneUtility.GetPrefabScene( prefab.Prefab ).Clone();
+
+				if ( deer != null )
+				{
+					deer.Transform.Position = _waypoints[4];
+					deer.Components.Get<NPC>().NextIdle = 999f;
+				}
 			}
 		}
 
