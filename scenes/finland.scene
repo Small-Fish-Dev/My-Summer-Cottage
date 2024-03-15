@@ -194,8 +194,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "464,288"
@@ -205,9 +205,9 @@
                         "Id": 8,
                         "Type": "call",
                         "Properties": {
+                          "_name": "Receive",
                           "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_type": "package.fish.sauna/Sauna.Message"
                         },
                         "UserData": {
                           "Position": "512,-96"
@@ -217,9 +217,9 @@
                         "Id": 11,
                         "Type": "call",
                         "Properties": {
+                          "_name": "PlaySoundWithSubtitle",
                           "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "PlaySoundWithSubtitle"
+                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                         },
                         "UserData": {
                           "Position": "1072,-128"
@@ -266,8 +266,8 @@
                         "Type": "property.get",
                         "ParentId": 17,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -275,8 +275,8 @@
                         "Type": "property.get",
                         "ParentId": 17,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -426,9 +426,9 @@
                         "Id": 2,
                         "Type": "call",
                         "Properties": {
+                          "_name": "AssignEveryoneNewTask",
                           "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.TaskMaster",
-                          "_name": "AssignEveryoneNewTask"
+                          "_type": "package.fish.sauna/Sauna.TaskMaster"
                         },
                         "UserData": {
                           "Position": "240,112"
@@ -449,8 +449,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "240,304"
@@ -460,8 +460,8 @@
                         "Id": 7,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "Sandbox.Engine/Sandbox.Resource",
-                          "_name": "ResourcePath"
+                          "_name": "ResourcePath",
+                          "_type": "Sandbox.Engine/Sandbox.Resource"
                         },
                         "UserData": {
                           "Position": "16,176"
@@ -548,8 +548,8 @@
                         "Id": 3,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task"
+                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-64,208"
@@ -671,8 +671,8 @@
                         "Id": 19,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "Sandbox.Engine/Sandbox.SoundEvent",
-                          "value": "sounds/speech/1.sound"
+                          "value": "sounds/speech/1.sound",
+                          "T": "Sandbox.Engine/Sandbox.SoundEvent"
                         },
                         "UserData": {
                           "Position": "768,-112"
@@ -717,8 +717,8 @@
                         "Id": 28,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/wife_tasks/wife.catch_fish_tutorial.task"
+                          "value": "resources/tasks/wife_tasks/wife.catch_fish_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-80,224"
@@ -865,7 +865,6 @@
                   }
                 },
                 {
-                  "TriggerByTime": true,
                   "SignalToTrigger": "task.success.Catch some fish",
                   "TriggerDelay": 8,
                   "TriggerTimeslot": "10.50,12.00,1",
@@ -927,8 +926,8 @@
                         "Id": 7,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "Sandbox.Engine/Sandbox.SoundEvent",
-                          "value": "sounds/speech/1.sound"
+                          "value": "sounds/speech/1.sound",
+                          "T": "Sandbox.Engine/Sandbox.SoundEvent"
                         },
                         "UserData": {
                           "Position": "528,16"
@@ -973,8 +972,8 @@
                         "Id": 12,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/wife_tasks/wife.catch_fish_tutorial.task"
+                          "value": "resources/tasks/wife_tasks/wife.hunt_rabbit_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-320,352"
@@ -1247,7 +1246,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.790197,0,0.6128529",
+          "Rotation": "0,0.9962851,0,0.08611593",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1903,7 +1902,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "e076b7b7-1cb1-4cf5-9c09-de7305170cae",
+                "component_id": "73da8896-6be3-4946-8ba1-73f007c6259e",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -3827,63 +3826,48 @@
     },
     {
       "__guid": "a10aab51-6d8a-40a8-b959-a122cc7c86e7",
-      "Name": "rabbit",
-      "Position": "3848.52,-2612.665,2400.367",
+      "Name": "TutorialRabbit1",
+      "Position": "6824.24,-4314.113,2493.067",
       "Rotation": "0.002684619,0.02420625,-0.1101976,0.9936112",
       "Tags": "animal,npc,prey",
-      "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/npcs/rabbit.prefab"
     },
     {
       "__guid": "a15864b3-4fce-4f78-8c6f-82f10998c3c6",
-      "Name": "rabbit (1)",
-      "Position": "3911.863,-2503.294,2400.367",
+      "Name": "TutorialRabbit2",
+      "Position": "6887.583,-4204.742,2493.067",
       "Rotation": "0.002684619,0.02420625,-0.1101976,0.9936112",
       "Tags": "animal,npc,prey",
-      "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/npcs/rabbit.prefab"
     },
     {
       "__guid": "68615a8a-a7a9-48be-b729-934fa6d356d3",
-      "Name": "rabbit (2)",
-      "Position": "3834.791,-2436.961,2400.367",
+      "Name": "TutorialRabbit3",
+      "Position": "6810.511,-4138.409,2493.067",
       "Rotation": "0.002684619,0.02420625,-0.1101976,0.9936112",
       "Tags": "animal,npc,prey",
-      "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/npcs/rabbit.prefab"
     },
     {
       "__guid": "aaa81319-f191-4b94-958f-88bd1260cc8e",
-      "Name": "rabbit (3)",
-      "Position": "4026.229,-2414.186,2400.367",
+      "Name": "TutorialRabbit4",
+      "Position": "7001.949,-4115.634,2493.067",
       "Rotation": "0.002684619,0.02420625,-0.1101976,0.9936112",
       "Tags": "animal,npc,prey",
-      "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/npcs/rabbit.prefab"
     },
     {
       "__guid": "abd1c0fd-e55e-4bc6-882b-21920c452444",
-      "Name": "rabbit (4)",
-      "Position": "3983.664,-2604.816,2400.367",
+      "Name": "TutorialRabbit5",
+      "Position": "6959.384,-4306.264,2493.067",
       "Rotation": "0.002684619,0.02420625,-0.1101976,0.9936112",
       "Tags": "animal,npc,prey",
-      "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/npcs/rabbit.prefab"
-    },
-    {
-      "__guid": "20ce91c2-4db4-43f8-b927-ab96651db845",
-      "Name": "fox",
-      "Position": "4116.509,-2938.236,2387.678",
-      "Rotation": "-0.0009850729,0.02473995,0.03977337,0.9989018",
-      "Tags": "animal,npc,predator",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/npcs/fox.prefab"
     }
   ],
   "SceneProperties": {
@@ -3909,7 +3893,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T03:44:38.9626009\u002B01:00",
+  "LastSaved": "2024-03-15T05:43:33.0111013\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

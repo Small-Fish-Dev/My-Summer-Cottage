@@ -21,128 +21,15 @@
   "FailConditionCheck": null,
   "Subtasks": [
     {
-      "Description": "Equip the fishing rod",
-      "TriggerSignal": "item.equipped.Fishing Rod",
+      "Description": "Equip the Airsoft Rifle",
+      "TriggerSignal": "item.equipped.Airsoft Rifle",
       "AmountToComplete": 1
     },
     {
-      "Description": "Go to the lake",
+      "Description": "Obtain the BB Pellets",
       "SubtaskOrder": 1,
-      "TriggerSignal": "lake.reached",
-      "AmountToComplete": 1,
-      "OnStart": {
-        "Version": 5,
-        "UserData": {
-          "Title": "On Start",
-          "id": "6b7afe82-4c07-4f8a-8b95-ebd70798c944",
-          "ReferencedComponentTypes": []
-        },
-        "Variables": [],
-        "Nodes": [
-          {
-            "Id": 0,
-            "Type": "input"
-          },
-          {
-            "Id": 1,
-            "Type": "event.addmarker",
-            "UserData": {
-              "Position": "512,16"
-            }
-          },
-          {
-            "Id": 2,
-            "Type": "event.findobject",
-            "UserData": {
-              "Position": "256,64"
-            }
-          }
-        ],
-        "Links": [
-          {
-            "SrcId": 2,
-            "SrcName": "_signal",
-            "DstId": 1,
-            "DstName": "_signal"
-          },
-          {
-            "Value": "Primary",
-            "DstId": 1,
-            "DstName": "icon"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_result",
-            "DstId": 1,
-            "DstName": "target"
-          },
-          {
-            "SrcId": 0,
-            "SrcName": "_signal",
-            "DstId": 2,
-            "DstName": "_signal"
-          },
-          {
-            "Value": "FishingSpot",
-            "DstId": 2,
-            "DstName": "name"
-          }
-        ]
-      },
-      "OnEnd": {
-        "Version": 5,
-        "UserData": {
-          "Title": "On End",
-          "id": "7ce56eef-7d31-4c15-85fd-9ccd6a70b029",
-          "ReferencedComponentTypes": []
-        },
-        "Variables": [],
-        "Nodes": [
-          {
-            "Id": 0,
-            "Type": "input"
-          },
-          {
-            "Id": 2,
-            "Type": "event.findobject",
-            "UserData": {
-              "Position": "256,96"
-            }
-          },
-          {
-            "Id": 3,
-            "Type": "event.removemarker",
-            "UserData": {
-              "Position": "560,96"
-            }
-          }
-        ],
-        "Links": [
-          {
-            "SrcId": 0,
-            "SrcName": "_signal",
-            "DstId": 2,
-            "DstName": "_signal"
-          },
-          {
-            "Value": "FishingSpot",
-            "DstId": 2,
-            "DstName": "name"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_signal",
-            "DstId": 3,
-            "DstName": "_signal"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_result",
-            "DstId": 3,
-            "DstName": "target"
-          }
-        ]
-      }
+      "TriggerSignal": "item.received.Airsoft BB Pellets",
+      "AmountToComplete": 1
     },
     {
       "Description": "Go to a rabbit spawning area",
@@ -264,10 +151,10 @@
       }
     },
     {
-      "Description": "Catch 1 Fish (Wait for bobber to move)",
+      "Description": "Kill a rabbit and gather its meat.",
       "SubtaskOrder": 3,
       "TriggerSignal": "",
-      "AmountToComplete": 1,
+      "AmountToComplete": 2,
       "EvaluateOnTick": {
         "Version": 5,
         "UserData": {
@@ -290,7 +177,7 @@
             "Id": 1,
             "Type": "output",
             "UserData": {
-              "Position": "1376,80"
+              "Position": "656,80"
             }
           },
           {
@@ -307,139 +194,13 @@
             "Id": 3,
             "Type": "inventory.amountofitem",
             "UserData": {
-              "Position": "416,-320"
-            }
-          },
-          {
-            "Id": 4,
-            "Type": "inventory.amountofitem",
-            "UserData": {
-              "Position": "416,-240"
-            }
-          },
-          {
-            "Id": 5,
-            "Type": "inventory.amountofitem",
-            "UserData": {
-              "Position": "416,-144"
-            }
-          },
-          {
-            "Id": 6,
-            "Type": "inventory.amountofitem",
-            "UserData": {
-              "Position": "416,-64"
-            }
-          },
-          {
-            "Id": 7,
-            "Type": "inventory.amountofitem",
-            "UserData": {
-              "Position": "416,32"
-            }
-          },
-          {
-            "Id": 8,
-            "Type": "inventory.amountofitem",
-            "UserData": {
-              "Position": "416,112"
-            }
-          },
-          {
-            "Id": 9,
-            "Type": "inventory.amountofitem",
-            "UserData": {
-              "Position": "416,208"
-            }
-          },
-          {
-            "Id": 10,
-            "Type": "inventory.amountofitem",
-            "UserData": {
-              "Position": "416,288"
-            }
-          },
-          {
-            "Id": 11,
-            "Type": "inventory.amountofitem",
-            "UserData": {
-              "Position": "416,384"
-            }
-          },
-          {
-            "Id": 12,
-            "Type": "inventory.amountofitem",
-            "UserData": {
-              "Position": "416,464"
-            }
-          },
-          {
-            "Id": 13,
-            "Type": "op.add",
-            "UserData": {
-              "Position": "640,-272"
-            }
-          },
-          {
-            "Id": 14,
-            "Type": "op.add",
-            "UserData": {
-              "Position": "640,-96"
-            }
-          },
-          {
-            "Id": 15,
-            "Type": "op.add",
-            "UserData": {
-              "Position": "640,80"
-            }
-          },
-          {
-            "Id": 16,
-            "Type": "op.add",
-            "UserData": {
-              "Position": "640,256"
-            }
-          },
-          {
-            "Id": 17,
-            "Type": "op.add",
-            "UserData": {
-              "Position": "640,432"
-            }
-          },
-          {
-            "Id": 18,
-            "Type": "op.add",
-            "UserData": {
-              "Position": "832,-176"
-            }
-          },
-          {
-            "Id": 19,
-            "Type": "op.add",
-            "UserData": {
-              "Position": "816,176"
-            }
-          },
-          {
-            "Id": 20,
-            "Type": "op.add",
-            "UserData": {
-              "Position": "992,16"
-            }
-          },
-          {
-            "Id": 21,
-            "Type": "op.add",
-            "UserData": {
-              "Position": "1168,96"
+              "Position": "384,80"
             }
           }
         ],
         "Links": [
           {
-            "SrcId": 21,
+            "SrcId": 3,
             "SrcName": "_result",
             "DstId": 1,
             "DstName": "_result"
@@ -457,216 +218,281 @@
             "DstName": "inventory"
           },
           {
-            "Value": "Herring",
+            "Value": "Red Meat",
             "DstId": 3,
             "DstName": "nameOfItem"
+          }
+        ]
+      },
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "46a2bea9-eb90-4bf7-8516-6bc9c174f7a3",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
           },
           {
-            "SrcId": 2,
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "304,-192"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "property.set",
+            "Properties": {
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
+            },
+            "UserData": {
+              "Position": "544,-192"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "304,-96"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "property.set",
+            "Properties": {
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
+            },
+            "UserData": {
+              "Position": "544,-96"
+            }
+          },
+          {
+            "Id": 5,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "304,-0"
+            }
+          },
+          {
+            "Id": 6,
+            "Type": "property.set",
+            "Properties": {
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
+            },
+            "UserData": {
+              "Position": "544,-0"
+            }
+          },
+          {
+            "Id": 7,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "304,96"
+            }
+          },
+          {
+            "Id": 8,
+            "Type": "property.set",
+            "Properties": {
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
+            },
+            "UserData": {
+              "Position": "544,96"
+            }
+          },
+          {
+            "Id": 9,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "304,192"
+            }
+          },
+          {
+            "Id": 10,
+            "Type": "property.set",
+            "Properties": {
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
+            },
+            "UserData": {
+              "Position": "544,192"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": false,
+            "DstId": 1,
+            "DstName": "enabled"
+          },
+          {
+            "Value": "TutorialRabbit1",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 1,
             "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "_target"
+          },
+          {
+            "Value": true,
+            "DstId": 2,
+            "DstName": "_value"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": false,
+            "DstId": 3,
+            "DstName": "enabled"
+          },
+          {
+            "Value": "TutorialRabbit2",
+            "DstId": 3,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_signal",
             "DstId": 4,
-            "DstName": "inventory"
-          },
-          {
-            "Value": "Herring (rare)",
-            "DstId": 4,
-            "DstName": "nameOfItem"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_result",
-            "DstId": 5,
-            "DstName": "inventory"
-          },
-          {
-            "Value": "Minnow",
-            "DstId": 5,
-            "DstName": "nameOfItem"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_result",
-            "DstId": 6,
-            "DstName": "inventory"
-          },
-          {
-            "Value": "Minnow (rare)",
-            "DstId": 6,
-            "DstName": "nameOfItem"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_result",
-            "DstId": 7,
-            "DstName": "inventory"
-          },
-          {
-            "Value": "Perch",
-            "DstId": 7,
-            "DstName": "nameOfItem"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_result",
-            "DstId": 8,
-            "DstName": "inventory"
-          },
-          {
-            "Value": "Perch (rare)",
-            "DstId": 8,
-            "DstName": "nameOfItem"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_result",
-            "DstId": 9,
-            "DstName": "inventory"
-          },
-          {
-            "Value": "Pike",
-            "DstId": 9,
-            "DstName": "nameOfItem"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_result",
-            "DstId": 10,
-            "DstName": "inventory"
-          },
-          {
-            "Value": "Pike (rare)",
-            "DstId": 10,
-            "DstName": "nameOfItem"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_result",
-            "DstId": 11,
-            "DstName": "inventory"
-          },
-          {
-            "Value": "Salmon",
-            "DstId": 11,
-            "DstName": "nameOfItem"
-          },
-          {
-            "SrcId": 2,
-            "SrcName": "_result",
-            "DstId": 12,
-            "DstName": "inventory"
-          },
-          {
-            "Value": "Salmon (rare)",
-            "DstId": 12,
-            "DstName": "nameOfItem"
+            "DstName": "_signal"
           },
           {
             "SrcId": 3,
             "SrcName": "_result",
-            "DstId": 13,
-            "DstName": "a"
+            "DstId": 4,
+            "DstName": "_target"
           },
           {
-            "SrcId": 4,
-            "SrcName": "_result",
-            "DstId": 13,
-            "DstName": "b"
+            "Value": true,
+            "DstId": 4,
+            "DstName": "_value"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 5,
+            "DstName": "_signal"
+          },
+          {
+            "Value": false,
+            "DstId": 5,
+            "DstName": "enabled"
+          },
+          {
+            "Value": "TutorialRabbit3",
+            "DstId": 5,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_signal",
+            "DstId": 6,
+            "DstName": "_signal"
           },
           {
             "SrcId": 5,
             "SrcName": "_result",
-            "DstId": 14,
-            "DstName": "a"
+            "DstId": 6,
+            "DstName": "_target"
           },
           {
-            "SrcId": 6,
-            "SrcName": "_result",
-            "DstId": 14,
-            "DstName": "b"
+            "Value": true,
+            "DstId": 6,
+            "DstName": "_value"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 7,
+            "DstName": "_signal"
+          },
+          {
+            "Value": false,
+            "DstId": 7,
+            "DstName": "enabled"
+          },
+          {
+            "Value": "TutorialRabbit4",
+            "DstId": 7,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 7,
+            "SrcName": "_signal",
+            "DstId": 8,
+            "DstName": "_signal"
           },
           {
             "SrcId": 7,
             "SrcName": "_result",
-            "DstId": 15,
-            "DstName": "a"
+            "DstId": 8,
+            "DstName": "_target"
           },
           {
-            "SrcId": 8,
-            "SrcName": "_result",
-            "DstId": 15,
-            "DstName": "b"
+            "Value": true,
+            "DstId": 8,
+            "DstName": "_value"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 9,
+            "DstName": "_signal"
+          },
+          {
+            "Value": false,
+            "DstId": 9,
+            "DstName": "enabled"
+          },
+          {
+            "Value": "TutorialRabbit5",
+            "DstId": 9,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 9,
+            "SrcName": "_signal",
+            "DstId": 10,
+            "DstName": "_signal"
           },
           {
             "SrcId": 9,
             "SrcName": "_result",
-            "DstId": 16,
-            "DstName": "a"
+            "DstId": 10,
+            "DstName": "_target"
           },
           {
-            "SrcId": 10,
-            "SrcName": "_result",
-            "DstId": 16,
-            "DstName": "b"
-          },
-          {
-            "SrcId": 11,
-            "SrcName": "_result",
-            "DstId": 17,
-            "DstName": "a"
-          },
-          {
-            "SrcId": 12,
-            "SrcName": "_result",
-            "DstId": 17,
-            "DstName": "b"
-          },
-          {
-            "SrcId": 13,
-            "SrcName": "_result",
-            "DstId": 18,
-            "DstName": "a"
-          },
-          {
-            "SrcId": 14,
-            "SrcName": "_result",
-            "DstId": 18,
-            "DstName": "b"
-          },
-          {
-            "SrcId": 15,
-            "SrcName": "_result",
-            "DstId": 19,
-            "DstName": "a"
-          },
-          {
-            "SrcId": 16,
-            "SrcName": "_result",
-            "DstId": 19,
-            "DstName": "b"
-          },
-          {
-            "SrcId": 18,
-            "SrcName": "_result",
-            "DstId": 20,
-            "DstName": "a"
-          },
-          {
-            "SrcId": 19,
-            "SrcName": "_result",
-            "DstId": 20,
-            "DstName": "b"
-          },
-          {
-            "SrcId": 20,
-            "SrcName": "_result",
-            "DstId": 21,
-            "DstName": "a"
-          },
-          {
-            "SrcId": 17,
-            "SrcName": "_result",
-            "DstId": 21,
-            "DstName": "b"
+            "Value": true,
+            "DstId": 10,
+            "DstName": "_value"
           }
         ]
       }
