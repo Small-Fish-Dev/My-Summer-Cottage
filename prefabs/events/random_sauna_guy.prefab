@@ -1,0 +1,379 @@
+{
+  "RootObject": {
+    "__guid": "53c35969-fa1b-48b5-b2d7-e5d412004e8c",
+    "Name": "Random sauna guy",
+    "Position": "3572.714,-3102.197,2464",
+    "Rotation": "0,0,-0.5493481,0.8355936",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "dbaca3c0-96b0-42b6-9a7d-e0e8aad0951e",
+        "AddToEventPool": true,
+        "EventName": "random_sauna_guy",
+        "EventSignals": [],
+        "Rarity": "Common",
+        "ReinstantiateOnRestart": false,
+        "Stackable": true,
+        "Type": "Random"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "a20b8111-456f-4726-b0dd-c39c168a73e2",
+        "Name": "Random Dude",
+        "Position": "0,0,0",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "DialogueTree",
+            "__guid": "5ef2a0cc-8c42-4ae2-9439-b73b5d650b4d",
+            "DialogueStages": [
+              {
+                "IsInitial": true,
+                "DialoguePoolWeight": 1,
+                "AvailableResponses": [
+                  {
+                    "Keybind": "Use",
+                    "Action": {
+                      "Version": 5,
+                      "UserData": {
+                        "Title": "Action",
+                        "id": "433696a1-1166-4944-a497-3901b6607da9"
+                      },
+                      "Variables": [],
+                      "Nodes": [
+                        {
+                          "Id": 0,
+                          "Type": "input"
+                        },
+                        {
+                          "Id": 1,
+                          "Type": "call",
+                          "Properties": {
+                            "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                            "_isStatic": true,
+                            "_name": "SpeakWithSubtitle"
+                          },
+                          "UserData": {
+                            "Position": "320,32"
+                          }
+                        },
+                        {
+                          "Id": 3,
+                          "Type": "scene.ref",
+                          "Properties": {
+                            "gameobject": {
+                              "_type": "gameobject",
+                              "go": "a20b8111-456f-4726-b0dd-c39c168a73e2"
+                            }
+                          },
+                          "UserData": {
+                            "Position": "-32,176"
+                          }
+                        },
+                        {
+                          "Id": 4,
+                          "Type": "property.get",
+                          "ParentId": 3,
+                          "Properties": {
+                            "_type": "Sandbox.Game/Sandbox.GameObject",
+                            "_name": "Name"
+                          }
+                        }
+                      ],
+                      "Links": [
+                        {
+                          "SrcId": 0,
+                          "SrcName": "_signal",
+                          "DstId": 1,
+                          "DstName": "_signal"
+                        },
+                        {
+                          "SrcId": 4,
+                          "SrcName": "_result",
+                          "DstId": 1,
+                          "DstName": "name"
+                        },
+                        {
+                          "SrcId": 0,
+                          "SrcName": "_target",
+                          "DstId": 1,
+                          "DstName": "obj"
+                        },
+                        {
+                          "Value": "Hey friend! Cousin! Brother! Ahahaha! pretty nice sauna you got here!",
+                          "DstId": 1,
+                          "DstName": "subtitle"
+                        },
+                        {
+                          "SrcId": 3,
+                          "SrcName": "_result",
+                          "DstId": 4,
+                          "DstName": "_target"
+                        }
+                      ]
+                    },
+                    "InteractDistance": 125
+                  }
+                ]
+              },
+              {
+                "IsInitial": true,
+                "AddToDialoguePool": true,
+                "DialoguePoolWeight": 1,
+                "AvailableResponses": [
+                  {
+                    "Keybind": "Use",
+                    "Action": {
+                      "Version": 5,
+                      "UserData": {
+                        "Title": "Action",
+                        "id": "edcd1cc0-8d47-4937-9d03-631e3f0256e1",
+                        "ReferencedComponentTypes": []
+                      },
+                      "Variables": [],
+                      "Nodes": [
+                        {
+                          "Id": 0,
+                          "Type": "input"
+                        },
+                        {
+                          "Id": 3,
+                          "Type": "call",
+                          "Properties": {
+                            "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                            "_isStatic": true,
+                            "_name": "SpeakWithSubtitle"
+                          },
+                          "UserData": {
+                            "Position": "320,32"
+                          }
+                        },
+                        {
+                          "Id": 5,
+                          "Type": "scene.ref",
+                          "Properties": {
+                            "gameobject": {
+                              "_type": "gameobject",
+                              "go": "a20b8111-456f-4726-b0dd-c39c168a73e2"
+                            }
+                          },
+                          "UserData": {
+                            "Position": "-32,144"
+                          }
+                        },
+                        {
+                          "Id": 6,
+                          "Type": "property.get",
+                          "ParentId": 5,
+                          "Properties": {
+                            "_type": "Sandbox.Game/Sandbox.GameObject",
+                            "_name": "Name"
+                          }
+                        }
+                      ],
+                      "Links": [
+                        {
+                          "SrcId": 0,
+                          "SrcName": "_signal",
+                          "DstId": 3,
+                          "DstName": "_signal"
+                        },
+                        {
+                          "SrcId": 6,
+                          "SrcName": "_result",
+                          "DstId": 3,
+                          "DstName": "name"
+                        },
+                        {
+                          "SrcId": 0,
+                          "SrcName": "_target",
+                          "DstId": 3,
+                          "DstName": "obj"
+                        },
+                        {
+                          "Value": "Ahaha brother friend! have you ever rubbed bellies with another sauna lover?",
+                          "DstId": 3,
+                          "DstName": "subtitle"
+                        },
+                        {
+                          "SrcId": 5,
+                          "SrcName": "_result",
+                          "DstId": 6,
+                          "DstName": "_target"
+                        }
+                      ]
+                    },
+                    "InteractDistance": 125
+                  },
+                  {
+                    "Keybind": "Use",
+                    "Action": {
+                      "Version": 5,
+                      "UserData": {
+                        "Title": "Action",
+                        "id": "9b212247-3b0b-4118-a78a-0c4cb12e3bec",
+                        "ReferencedComponentTypes": []
+                      },
+                      "Variables": [],
+                      "Nodes": [
+                        {
+                          "Id": 0,
+                          "Type": "input"
+                        },
+                        {
+                          "Id": 2,
+                          "Type": "call",
+                          "Properties": {
+                            "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                            "_isStatic": true,
+                            "_name": "SpeakWithSubtitle"
+                          },
+                          "UserData": {
+                            "Position": "336,16"
+                          }
+                        },
+                        {
+                          "Id": 4,
+                          "Type": "scene.ref",
+                          "Properties": {
+                            "gameobject": {
+                              "_type": "gameobject",
+                              "go": "a3d68299-c8b6-4995-90f3-107ef925288d"
+                            }
+                          },
+                          "UserData": {
+                            "Position": "96,144"
+                          }
+                        },
+                        {
+                          "Id": 5,
+                          "Type": "property.get",
+                          "ParentId": 4,
+                          "Properties": {
+                            "_type": "Sandbox.Game/Sandbox.GameObject",
+                            "_name": "Name"
+                          }
+                        }
+                      ],
+                      "Links": [
+                        {
+                          "SrcId": 0,
+                          "SrcName": "_signal",
+                          "DstId": 2,
+                          "DstName": "_signal"
+                        },
+                        {
+                          "SrcId": 5,
+                          "SrcName": "_result",
+                          "DstId": 2,
+                          "DstName": "name"
+                        },
+                        {
+                          "SrcId": 0,
+                          "SrcName": "_target",
+                          "DstId": 2,
+                          "DstName": "obj"
+                        },
+                        {
+                          "Value": "I love feeling the steam seap into every nook and crany of my body...",
+                          "DstId": 2,
+                          "DstName": "subtitle"
+                        },
+                        {
+                          "SrcId": 4,
+                          "SrcName": "_result",
+                          "DstId": 5,
+                          "DstName": "_target"
+                        }
+                      ]
+                    },
+                    "InteractDistance": 125
+                  }
+                ]
+              }
+            ],
+            "HasRandomDialogues": true,
+            "HostOnly": false,
+            "Name": "Speaker",
+            "Networked": false
+          },
+          {
+            "__type": "CapsuleCollider",
+            "__guid": "425809f5-bad4-4270-b5b5-8026e04a4e00",
+            "End": "0,0,64",
+            "IsTrigger": false,
+            "Radius": 16,
+            "Start": "0,0,16",
+            "Static": false
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "a3d68299-c8b6-4995-90f3-107ef925288d",
+            "Name": "Object",
+            "Position": "0,0,0",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "357825e3-77d3-4d03-845e-f43187836c86",
+                "BodyGroups": 1365,
+                "CreateBoneObjects": false,
+                "Model": "models/guy/guy.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              },
+              {
+                "__type": "Character",
+                "__guid": "ff0f35fd-33d5-4d1e-b59f-2d62fb7c093d",
+                "Clothes": [
+                  "models/clothes/towel/towel.vmdl"
+                ],
+                "Fatness": 1,
+                "Height": -48,
+                "HideBodyGroup": "None"
+              }
+            ],
+            "Children": [
+              {
+                "__guid": "e6c12dc9-0a65-4366-b0c2-65abdd4a0d3d",
+                "Name": "models/clothes/towel/towel.vmdl",
+                "Position": "0,0,0",
+                "Enabled": true,
+                "NetworkMode": 2,
+                "Components": [
+                  {
+                    "__type": "SkinnedModelRenderer",
+                    "__guid": "f3fed4df-8541-4841-8682-e5094b0593af",
+                    "BodyGroups": 18446744073709551615,
+                    "BoneMergeTarget": {
+                      "_type": "component",
+                      "component_id": "357825e3-77d3-4d03-845e-f43187836c86",
+                      "go": "a3d68299-c8b6-4995-90f3-107ef925288d",
+                      "component_type": "SkinnedModelRenderer"
+                    },
+                    "CreateBoneObjects": false,
+                    "Model": "models/clothes/towel/towel.vmdl",
+                    "RenderType": "On",
+                    "Tint": "1,1,1,1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
