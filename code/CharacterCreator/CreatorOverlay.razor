@@ -138,6 +138,9 @@
 
 	private async void Finish()
 	{
+		Panel.Delete();
+		MugshotPanel.StopRotation = true;
+
 		// todo @ceitine: walk off animation and fade out
 
 		var rand = new Random( (int)(Steam.SteamId % int.MaxValue) );
@@ -158,7 +161,7 @@
 			} 
 		);
 
-		await GameTask.DelayRealtimeSeconds( 1 );
+		await GameTask.DelayRealtimeSeconds( 3 );
 
 		SceneHandler.ChangeScene( SaunaScene.Game, CreatorComponent.LobbyId );
 		CreatorComponent.LobbyId = null;

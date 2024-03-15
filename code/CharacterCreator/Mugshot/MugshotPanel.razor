@@ -1,4 +1,4 @@
-﻿@using Sandbox;
+@using Sandbox;
 @using Sandbox.UI;
 
 @namespace Sauna
@@ -12,37 +12,55 @@
 </root>
 
 @code {
-    private const float ROTATE_DELAY = 3f;
+	private const float ROTATE_DELAY = 3f;
 
-    [Property] public SkinnedModelRenderer Model { get; set; }
+	public static bool StopRotation { get; set; }
+	[Property] public SkinnedModelRenderer Model { get; set; }
 
-    RealTimeSince lastRotated;
-    int rotated;
-    bool invert;
+	RealTimeSince lastRotated;
+	int rotated;
+	bool invert;
 
-    private int getAnim( int direction ) => direction switch
-    {
-        1 => 1,
-        -1 => 2,
-        _ => 0
-    };
+	private int getAnim( int direction ) => direction switch
+	{
+		1 => 1,
+		-1 => 2,
+		_ => 0
+	};
 
-    public void RotateGuy( int amount )
-    {
-        if ( Model.GetInt( "turn" ) != 0 )
-            return;
+	public MugshotPanel()
+	{
+		StopRotation = false;
+	}
 
-        rotated += amount;
-        Model.Set( "turn", getAnim( amount ) );
-        lastRotated = 0f;
-    }
+	public void RotateGuy( int amount )
+	{
+		if ( Model.GetInt( "turn" ) != 0 )
+			return;
 
-    protected override void OnUpdate()
-    {
+		rotated += amount;
+		Model.Set( "turn", getAnim( amount ) );
+		lastRotated = 0f;
+	}
+
+	private void ResetRotation()
+	{
+		if( rotated != 0 && Model.GetInt("turn") == 0 )
+		{
+			var direction = -Math.Sign(rotated);
+			Model.Set("turn", getAnim(direction));
+			rotated = 0;
+		}
+	}
+
+	protected override void OnUpdate()
+	{
         var inConfirm = CreatorComponent.Current == CreatorStage.Confirmation;
         if ( Model == null )
             return;
 
+        var targetRotation = Rotation.FromYaw( 90f + rotated * 90f );
+        Model.Transform.Rotation = Rotation.Slerp( Model.Transform.Rotation, targetRotation, 4f * Time.Delta );
         if ( Input.Pressed( InputAction.LeftClick ) )
             RotateGuy( 1 );
 
@@ -61,15 +79,18 @@
         Model.Set( "weight", TabletPanel.Weight );
 		Model.Set( "mugshot", inConfirm );
 
+		if ( StopRotation )
+		{
+			ResetRotation();
+			return;
+		}
+
+		if ( Input.Pressed( InputAction.LeftClick ) )
+            RotateGuy( 1 );
+
 		if ( !inConfirm )
 		{
-			if ( rotated != 0 && Model.GetInt( "turn" ) == 0 )
-			{
-				var direction = -Math.Sign( rotated );
-				Model.Set( "turn", getAnim( direction ) );
-				rotated = 0;
-			}
-
+			ResetRotation();
 			lastRotated = 0f;
 
 			return;
