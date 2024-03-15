@@ -101,12 +101,32 @@ public sealed class HealthComponent : Component
 	public TimeSince LastDamaged { get; set; }
 	TimeUntil _nextHeal { get; set; }
 
+	GameObject _bloodParticle;
+	public List<ParticleEmitter> BloodEmitters = new();
+
 	protected override void OnStart()
 	{
 		LastDamaged = 0;
 		_nextHeal = 0;
 
 		Health = MaxHealth;
+
+		if ( PrefabLibrary.TryGetByPath( "prefabs/particles/blood_splat.prefab", out var prefabFile ) )
+		{
+			var prefab = SceneUtility.GetPrefabScene( prefabFile.Prefab ).Clone();
+
+			if ( prefab != null )
+			{
+				prefab.Transform.World = GameObject.Transform.World;
+				prefab.SetParent( GameObject );
+				_bloodParticle = prefab;
+
+				BloodEmitters = prefab.Components.GetAll<ParticleEmitter>( FindMode.EnabledInSelfAndDescendants ).ToList();
+
+				_bloodParticle.Enabled = false;
+			}
+		}
+
 	}
 
 	/// <summary>
@@ -140,6 +160,16 @@ public sealed class HealthComponent : Component
 					_nextHeal = RegenerationTimer + RegenerationCooldown; // Reset the healtimer
 
 					OnDamaged?.Invoke( amount, type, attacker, Transform.World.PointToLocal( worldHurtPosition ), realDirection, force );
+
+					if ( _bloodParticle != null )
+					{
+						_bloodParticle.Enabled = true;
+						_bloodParticle.Transform.Rotation = Rotation.Identity;
+						_bloodParticle.Transform.Position = Transform.Position; // worldHurtPosition is like skewed or some shit
+
+						foreach ( var emitter in BloodEmitters )
+							emitter.ResetEmitter();
+					}
 
 					if ( Components.TryGet<NPC>( out var npc ) )
 						npc.Damaged( attacker );

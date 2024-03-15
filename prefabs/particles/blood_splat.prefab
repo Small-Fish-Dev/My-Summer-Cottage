@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "eafd2559-7172-41a2-a31e-c3b02d463d5b",
+    "__guid": "eafd2559-7172-41a2-a31e-c3b02d463d5b",
     "Name": "blood_splat",
     "Tags": "particles",
     "Enabled": true,
@@ -8,6 +8,7 @@
     "Components": [
       {
         "__type": "ParticleEffect",
+        "__guid": "e530d6cf-5c52-45f6-808f-5a3a8c79b780",
         "Alpha": {
           "Type": "Curve",
           "CurveA": [
@@ -97,7 +98,7 @@
         "Scale": {
           "Type": "Curve",
           "CurveA": {
-            "rangey": "0,10",
+            "rangey": "0,20",
             "frames": [
               {
                 "y": 0.19414894,
@@ -136,6 +137,7 @@
       },
       {
         "__type": "ParticleSpriteRenderer",
+        "__guid": "007e9a80-81c5-405f-a3dd-ebe61981551b",
         "Additive": false,
         "BlurAmount": 0.37,
         "BlurOpacity": 0.88,
@@ -154,26 +156,28 @@
       },
       {
         "__type": "ParticleSphereEmitter",
+        "__guid": "b31df402-33f6-4916-bef1-e3be4d1e6ce8",
         "Burst": 50,
         "Delay": 0,
-        "DestroyOnEnd": true,
+        "DestroyOnEnd": false,
         "Duration": 10,
         "Loop": false,
         "OnEdge": false,
-        "Radius": 3,
+        "Radius": 5,
         "Rate": 0,
         "Velocity": 10
       }
     ],
     "Children": [
       {
-        "Id": "c9131191-0843-4443-98dc-9d04d24903dc",
+        "__guid": "c9131191-0843-4443-98dc-9d04d24903dc",
         "Name": "Burst",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "ParticleEffect",
+            "__guid": "a60b0f68-7a47-40b1-911a-c8b07fc24f82",
             "Alpha": {
               "Type": "Curve",
               "CurveA": {
@@ -265,12 +269,12 @@
             "Scale": {
               "Type": "Curve",
               "CurveA": {
-                "rangey": "0,20",
+                "rangey": "0,40",
                 "frames": [
                   {},
                   {
                     "x": 0.14285715,
-                    "y": 0.42990157,
+                    "y": 0.42990154,
                     "in": -2.1428518,
                     "out": 2.1428518
                   },
@@ -302,6 +306,7 @@
           },
           {
             "__type": "ParticleSpriteRenderer",
+            "__guid": "aa441e04-4352-4a66-8413-40808d817a48",
             "Additive": false,
             "BlurAmount": 0.5,
             "BlurOpacity": 0.91,
@@ -320,13 +325,14 @@
           },
           {
             "__type": "ParticleSphereEmitter",
+            "__guid": "0688858b-d5c3-431b-bc4c-fe120f503359",
             "Burst": 10,
             "Delay": 0,
             "DestroyOnEnd": true,
             "Duration": 5,
             "Loop": false,
             "OnEdge": false,
-            "Radius": 5,
+            "Radius": 8,
             "Rate": 0,
             "Velocity": 10
           }
@@ -337,5 +343,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }
