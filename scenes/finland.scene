@@ -1319,7 +1319,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.05804895,0,-0.9983137",
+          "Rotation": "0,-0.7234727,0,-0.690353",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -5917,6 +5917,25 @@
           "Radius": 400
         }
       ]
+    },
+    {
+      "__guid": "ac9390ab-7533-4ad5-a7b9-09ac9d66c90b",
+      "Name": "MushroomArea",
+      "Position": "4787.381,-1971.978,2664.124",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "__guid": "7c4daa15-af6f-4edf-a7f4-b16ad5b97292",
+          "Extents": "3000,3000,500",
+          "MaxPollingRate": 5,
+          "Offset": "0,0,0",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "mushrooms_area.entered"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -5942,7 +5961,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T23:41:45.9100344\u002B01:00",
+  "LastSaved": "2024-03-16T00:00:35.7719901\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
