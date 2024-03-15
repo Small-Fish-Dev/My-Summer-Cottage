@@ -1,0 +1,24 @@
+﻿@namespace Sauna.UI
+@attribute [StyleSheet]
+@inherits Panel
+
+@if ( _heldWeapon == null )
+	return;
+
+<root>
+	<div class="container">
+		@for ( int i = 0; i < _heldWeapon.Capacity; i++ )
+		{
+			<div class="ammo @(_heldWeapon.Ammo <= i ? "empty" : "")" />
+		}
+	</div>
+</root>
+
+@code {
+	private WeaponComponent _heldWeapon => Player.Local?.Inventory?.EquippedItems[(int)EquipSlot.Hand]?.Components.Get<WeaponComponent>( true );
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( _heldWeapon, _heldWeapon?.Ammo );
+	}
+}
