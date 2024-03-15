@@ -402,6 +402,7 @@ public class Inventory : Component
 
 	private void SetOwner( ItemComponent item )
 	{
+		item.GameObject.SetupNetworking();
 		item.GameObject.Network.TakeOwnership();
 		item.GameObject.Parent = Player.GameObject;
 		item.GameObject.Transform.Position = Player.GameObject.Transform.Position;
