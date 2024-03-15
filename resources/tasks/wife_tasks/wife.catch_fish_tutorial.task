@@ -23,7 +23,80 @@
     {
       "Description": "Equip the fishing rod",
       "TriggerSignal": "item.equipped.Fishing Rod",
-      "AmountToComplete": 1
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "8abb1bd5-3a8a-409b-b47b-6850290a80cb",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "448,32"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "192,32"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Free fishing rod near your sauna.",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 5,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          }
+        ]
+      }
     },
     {
       "Description": "Go to the lake",
@@ -56,6 +129,20 @@
             "UserData": {
               "Position": "256,64"
             }
+          },
+          {
+            "Id": 3,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "480,192"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "224,192"
+            }
           }
         ],
         "Links": [
@@ -86,6 +173,48 @@
             "Value": "FishingSpot",
             "DstId": 2,
             "DstName": "name"
+          },
+          {
+            "SrcId": 4,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "The lake is in front of the sauna.",
+            "DstId": 3,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 3,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 3,
+            "DstName": "theme"
+          },
+          {
+            "Value": 5,
+            "DstId": 3,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 3,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 4,
+            "DstName": "seconds"
           }
         ]
       },
@@ -148,10 +277,83 @@
       "Description": "Cast your fishing hook into the lake",
       "SubtaskOrder": 2,
       "TriggerSignal": "item.used_1.Fishing Rod",
-      "AmountToComplete": 1
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "50bda4b5-dc8a-4d0d-9347-9fde7b183cbe",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "480,96"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "224,96"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "The deeper the water the better the fish.",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 6,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          }
+        ]
+      }
     },
     {
-      "Description": "Catch 1 Fish (Wait for bobber to move)",
+      "Description": "Catch 1 Fish",
       "SubtaskOrder": 3,
       "TriggerSignal": "",
       "AmountToComplete": 1,
@@ -554,6 +756,78 @@
             "SrcName": "_result",
             "DstId": 21,
             "DstName": "b"
+          }
+        ]
+      },
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "9f1f3077-29c0-4505-8679-a9b17552639a"
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "464,48"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "208,48"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Wait for your bobber to move and then click again.",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 8,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
           }
         ]
       }
