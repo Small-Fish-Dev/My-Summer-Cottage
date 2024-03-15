@@ -54,7 +54,7 @@ public sealed class Stove : Component
 		interactions.AddInteraction( new Interaction()
 		{
 			Identifier = $"stove.begin_sauna",
-			Action = ( Player interactor, GameObject obj ) => BeginSauna( interactor ),
+			Action = ( Player interactor, GameObject obj ) => BeginSauna(),
 			Keybind = "use",
 			Description = "Begin sauna",
 			Disabled = () => !CanSauna().Item1,
@@ -129,16 +129,23 @@ public sealed class Stove : Component
 			return $"Start the sauna.";
 	}
 
-	void BeginSauna( Player interactor )
+	void BeginSauna()
 	{
 		IsRunning = true;
 		StopWorking = 120;
-		BeginSaunaDelay( interactor );
+
+		GiveExp();
 	}
 
-	async void BeginSaunaDelay( Player interactor )
+	[Broadcast]
+	void GiveExp()
 	{
-		await Task.Delay( 1000 );
-		interactor.AddExperience( 100 );
+		_ = GiveExpDelay();
+	}
+
+	async Task GiveExpDelay()
+	{
+		await GameTask.DelayRealtimeSeconds( 1 );
+		Player.Local.AddExperience( 100 );
 	}
 }
