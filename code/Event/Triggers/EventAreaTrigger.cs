@@ -43,10 +43,11 @@ public sealed class EventAreaTrigger : EventTrigger
 			?.Where( x => BBox.Translate( -Offset ).Contains( Transform.World.PointToLocal( x.Transform.Position ) ) )
 			?.Select( x => x.GameObject )
 			?.Where( x => x.IsValid() && x.Tags != null && TagSet != null && x.Tags.HasAny( TagSet ) )
-			?.Where( x => TriggerPrefab.Count() == 0 || TriggerPrefab.Any( prefab => prefab != null && x.IsValid() && x.PrefabInstanceSource != null && prefab.ResourcePath == x.PrefabInstanceSource ) );
+			?.Where( x => TriggerPrefab.Count == 0 || TriggerPrefab.Any( prefab => prefab != null && x.IsValid() && x.PrefabInstanceSource != null && prefab.ResourcePath == x.PrefabInstanceSource ) );
 
+		var objs = ObjectsInside.ToList();
 		foreach ( var found in find )
-			if ( !ObjectsInside.Contains( found ) ) // Has entered just now
+			if ( !objs.Contains( found ) ) // Has entered just now
 				CallTrigger( found );
 
 		ObjectsInside = find.ToList();
