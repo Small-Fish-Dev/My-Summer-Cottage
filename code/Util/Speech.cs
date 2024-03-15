@@ -38,12 +38,14 @@ public struct Speech
 			.RemoveDiacritics()
 			.ToCharArray();
 
+		var accuracy = Math.Max( settings.Accuracy, 1 );
+
 		// Begin generating speech.
 		new Action( async () =>
 		{
-			for ( int i = 0; i < characters.Length / settings.Accuracy; i++ )
+			for ( int i = 0; i < characters.Length / accuracy; i++ )
 			{
-				var character = characters[Math.Min( i * settings.Accuracy, characters.Length - 1 )];
+				var character = characters[Math.Min( i * accuracy, characters.Length - 1 )];
 				if ( char.IsWhiteSpace( character ) )
 				{
 					await GameTask.Delay( settings.Delay );
