@@ -14,7 +14,7 @@
 @code {
 	private const float ROTATE_DELAY = 3f;
 
-	public static bool StopRotation { get; set; }
+	public static bool Leave { get; set; }
 	[Property] public SkinnedModelRenderer Model { get; set; }
 
 	RealTimeSince lastRotated;
@@ -30,7 +30,7 @@
 
 	public MugshotPanel()
 	{
-		StopRotation = false;
+		Leave = false;
 	}
 
 	public void RotateGuy( int amount )
@@ -55,35 +55,39 @@
 
 	protected override void OnUpdate()
 	{
-        var inConfirm = CreatorComponent.Current == CreatorStage.Confirmation;
-        if ( Model == null )
-            return;
+		var inConfirm = CreatorComponent.Current == CreatorStage.Confirmation;
+		if ( Model == null )
+			return;
 
-        var targetRotation = Rotation.FromYaw( 90f + rotated * 90f );
-        Model.Transform.Rotation = Rotation.Slerp( Model.Transform.Rotation, targetRotation, 4f * Time.Delta );
-        if ( Input.Pressed( InputAction.LeftClick ) )
-            RotateGuy( 1 );
+		var targetRotation = Rotation.FromYaw( 90f + rotated * 90f );
+		Model.Transform.Rotation = Rotation.Slerp( Model.Transform.Rotation, targetRotation, 4f * Time.Delta );
+		if ( Input.Pressed( InputAction.LeftClick ) )
+			RotateGuy( 1 );
 
-        Model.Transform.Rotation *= Model.RootMotion.Rotation;
+		Model.Transform.Rotation *= Model.RootMotion.Rotation;
 
-        var transform = Model?.GetAttachment( "mugshot_sign" ) ?? global::Transform.Zero;
-        GameObject.Transform.World = transform;
-        GameObject.Transform.Position += transform.Rotation.Forward * 0.5f;
+		var transform = Model?.GetAttachment( "mugshot_sign" ) ?? global::Transform.Zero;
+		GameObject.Transform.World = transform;
+		GameObject.Transform.Position += transform.Rotation.Forward * 0.5f;
 
-        var mousePos = Mouse.Position;
-        var headPos = Scene.Camera.PointToScreenPixels( Model.GetAttachment("eyes").Value.Position );
-        var localPos = mousePos - headPos;
+		var mousePos = Mouse.Position;
+		var headPos = Scene.Camera.PointToScreenPixels( Model.GetAttachment("eyes").Value.Position );
+		var localPos = mousePos - headPos;
 
+		Model.Set( "weight", TabletPanel.Weight );
 
-        Model.Set("lookat", new Vector3( 1000f, localPos.x, -localPos.y));
-        Model.Set( "weight", TabletPanel.Weight );
-		Model.Set( "mugshot", inConfirm );
-
-		if ( StopRotation )
+		if ( Leave )
 		{
-			ResetRotation();
+			if ( rotated != 1 )
+				ResetRotation();
+
+			rotated = 1;
 			return;
 		}
+
+		Model.Set("mugshot", inConfirm);
+		Model.Set("lookat", new Vector3( 1000f, localPos.x, -localPos.y));
+
 
 		if ( Input.Pressed( InputAction.LeftClick ) )
             RotateGuy( 1 );
