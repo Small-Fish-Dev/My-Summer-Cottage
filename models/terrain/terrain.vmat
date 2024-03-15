@@ -7,10 +7,6 @@ Layer0
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- Shoreline Wetness ----
-	shoremax "25.000"
-	shoremin "0.000"
-
 	//---- Spalt Map ----
 	Splat_GlobalAO "models/terrain/aomap.png"
 
@@ -45,4 +41,9 @@ Layer0
 	TextureBlending "10.000"
 	TextureScale "1.000"
 	TextureTiling "2.000"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "dirt"
+	}
 }
