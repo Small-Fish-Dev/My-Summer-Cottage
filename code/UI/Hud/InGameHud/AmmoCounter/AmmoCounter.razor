@@ -2,7 +2,7 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-@if ( _heldWeapon == null )
+@if ( _heldWeapon == null || _heldWeapon.Capacity <= 0 )
 	return;
 
 <root>
