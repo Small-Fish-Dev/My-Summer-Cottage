@@ -200,7 +200,7 @@ public sealed class HealthComponent : Component
 
 		if ( Health <= 0 )
 		{
-			Kill( attacker );
+			Kill( attacker.Id );
 			return;
 		}
 	}
@@ -224,9 +224,7 @@ public sealed class HealthComponent : Component
 			foreach ( var item in DropOnDeath )
 			{
 				var droppedItem = item.Clone( Transform.Position + Vector3.Up * 30f, Transform.Rotation );
-
-				if ( droppedItem != null )
-					droppedItem.SetupNetworking();
+				droppedItem?.SetupNetworking();
 			}
 		}
 	}
@@ -234,11 +232,15 @@ public sealed class HealthComponent : Component
 	/// <summary>
 	/// Kill this
 	/// </summary>
-	/// <param name="attacker"></param>
+	/// <param name="attackerId"></param>
 	[Broadcast]
-	public void Kill( GameObject attacker = null )
+	public void Kill( Guid attackerId )
 	{
-		InternalKill( attacker );
+		var attackerObj = Game.ActiveScene.GetAllObjects( true )
+			.Where( x => x.Id == attackerId )
+			.FirstOrDefault();
+
+		InternalKill( attackerObj );
 	}
 
 	protected override void OnFixedUpdate()

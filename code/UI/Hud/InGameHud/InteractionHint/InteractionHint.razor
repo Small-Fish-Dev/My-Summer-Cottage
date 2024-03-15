@@ -106,6 +106,10 @@
 
 				interaction.CooldownTimer = interaction.CooldownTime;
 
+				@* For some reason need another null check here :/ *@
+				if (!_targetObject.IsValid())
+					return;
+
 				if (interaction.InputMode != InputMode.Down)
 					Input.Clear(interaction.Keybind);
 
