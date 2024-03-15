@@ -862,6 +862,261 @@
                       }
                     ]
                   }
+                },
+                {
+                  "SignalToTrigger": "task.success.Catch some fish",
+                  "TriggerDelay": 8,
+                  "TriggerTimeslot": "10.50,12.00,1",
+                  "CompletionNecessary": true,
+                  "Setup": {
+                    "Version": 5,
+                    "UserData": {
+                      "Title": "Setup",
+                      "id": "c1b93c9e-8fb7-4bab-85fd-babfdb3b1070",
+                      "ReferencedComponentTypes": []
+                    },
+                    "Variables": [],
+                    "Nodes": [
+                      {
+                        "Id": 2,
+                        "Type": "input",
+                        "UserData": {
+                          "Position": "-320,48"
+                        }
+                      },
+                      {
+                        "Id": 3,
+                        "Type": "output",
+                        "UserData": {
+                          "Position": "416,192"
+                        }
+                      },
+                      {
+                        "Id": 4,
+                        "Type": "event.assigntaskto",
+                        "UserData": {
+                          "Position": "176,192"
+                        }
+                      },
+                      {
+                        "Id": 5,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                        },
+                        "UserData": {
+                          "Position": "128,352"
+                        }
+                      },
+                      {
+                        "Id": 6,
+                        "Type": "call",
+                        "Properties": {
+                          "_name": "Receive",
+                          "_isStatic": true,
+                          "_type": "package.fish.sauna/Sauna.Message"
+                        },
+                        "UserData": {
+                          "Position": "176,-32"
+                        }
+                      },
+                      {
+                        "Id": 7,
+                        "Type": "resource.ref",
+                        "Properties": {
+                          "T": "Sandbox.Engine/Sandbox.SoundEvent",
+                          "value": "sounds/speech/1.sound"
+                        },
+                        "UserData": {
+                          "Position": "528,16"
+                        }
+                      },
+                      {
+                        "Id": 8,
+                        "Type": "time.delay",
+                        "UserData": {
+                          "Position": "-32,208"
+                        }
+                      },
+                      {
+                        "Id": 9,
+                        "Type": "time.delay",
+                        "UserData": {
+                          "Position": "400,-48"
+                        }
+                      },
+                      {
+                        "Id": 10,
+                        "Type": "call",
+                        "Properties": {
+                          "_name": "PlaySoundWithNameAndSubtitle",
+                          "_isStatic": true,
+                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                        },
+                        "UserData": {
+                          "Position": "736,-64"
+                        }
+                      },
+                      {
+                        "Id": 11,
+                        "Type": "property.get",
+                        "ParentId": 2,
+                        "Properties": {
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
+                        }
+                      },
+                      {
+                        "Id": 12,
+                        "Type": "resource.ref",
+                        "Properties": {
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/wife_tasks/wife.catch_fish_tutorial.task"
+                        },
+                        "UserData": {
+                          "Position": "-320,352"
+                        }
+                      },
+                      {
+                        "Id": 13,
+                        "Type": "property.get",
+                        "ParentId": 12,
+                        "Properties": {
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                        }
+                      },
+                      {
+                        "Id": 14,
+                        "Type": "property.get",
+                        "ParentId": 12,
+                        "Properties": {
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                        }
+                      }
+                    ],
+                    "Links": [
+                      {
+                        "SrcId": 5,
+                        "SrcName": "_result",
+                        "DstId": 3,
+                        "DstName": "_result"
+                      },
+                      {
+                        "SrcId": 4,
+                        "SrcName": "_signal",
+                        "DstId": 3,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_signal",
+                        "DstId": 4,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "player",
+                        "DstId": 4,
+                        "DstName": "player"
+                      },
+                      {
+                        "SrcId": 12,
+                        "SrcName": "_result",
+                        "DstId": 4,
+                        "DstName": "taskToAdd"
+                      },
+                      {
+                        "SrcId": 12,
+                        "SrcName": "_result",
+                        "DstId": 5,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_signal",
+                        "DstId": 6,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 14,
+                        "SrcName": "_result",
+                        "DstId": 6,
+                        "DstName": "content"
+                      },
+                      {
+                        "SrcId": 13,
+                        "SrcName": "_result",
+                        "DstId": 6,
+                        "DstName": "sender"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "_signal",
+                        "DstId": 8,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 3,
+                        "DstId": 8,
+                        "DstName": "seconds"
+                      },
+                      {
+                        "SrcId": 6,
+                        "SrcName": "_signal",
+                        "DstId": 9,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "Value": 1,
+                        "DstId": 9,
+                        "DstName": "seconds"
+                      },
+                      {
+                        "SrcId": 9,
+                        "SrcName": "_signal",
+                        "DstId": 10,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 11,
+                        "SrcName": "_result",
+                        "DstId": 10,
+                        "DstName": "obj"
+                      },
+                      {
+                        "SrcId": 7,
+                        "SrcName": "_result",
+                        "DstId": 10,
+                        "DstName": "sound"
+                      },
+                      {
+                        "Value": "After all I\u0027ve gone through. I hate her so much.",
+                        "DstId": 10,
+                        "DstName": "subtitle"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "player",
+                        "DstId": 11,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 12,
+                        "SrcName": "_result",
+                        "DstId": 13,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 12,
+                        "SrcName": "_result",
+                        "DstId": 14,
+                        "DstName": "_target"
+                      }
+                    ]
+                  }
                 }
               ],
               "RandomEvents": {
@@ -990,7 +1245,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.7691444,0,0.639075",
+          "Rotation": "0,-0.8961006,0,0.4438511",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1697,9 +1952,9 @@
                 {
                   "__type": "EventAreaTrigger",
                   "__guid": "8d670e13-bd21-4a4d-a5ae-c89d3bcb2c89",
-                  "Extents": "158.1591,111.7599,122.24",
+                  "Extents": "219.3591,169.5199,127.76",
                   "MaxPollingRate": 10,
-                  "Offset": "0,0,0",
+                  "Offset": "-95.68001,-41.75999,45.52",
                   "TagSet": "player",
                   "TriggerPrefab": [],
                   "TriggerSignalIdentifier": "sauna.entered_sauna"
@@ -3582,7 +3837,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T01:55:15.5693692\u002B01:00",
+  "LastSaved": "2024-03-15T02:22:52.0891206\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
