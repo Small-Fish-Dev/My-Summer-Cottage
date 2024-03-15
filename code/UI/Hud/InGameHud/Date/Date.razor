@@ -46,8 +46,12 @@
 
 	private string GetBalanceClass()
 	{
+		if (Player.Local is null)
+			return string.Empty;
+
 		if (_lastBalance != Player.Local.Money || !_timeUntilRevert)
 			return _delta > 0 ? "increment" : "decrement";
+
 		return string.Empty;
 	}
 
