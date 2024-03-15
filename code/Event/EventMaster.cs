@@ -164,7 +164,7 @@ public class EventMaster : Component
 	/// </summary>
 	public void SaveEventsProgression( bool print = true )
 	{
-		if ( !Player.Local.Connection.IsHost )
+		if ( !Connection.Local.IsHost )
 			return;
 
 		var allEvents = Scene.Components.GetAll<EventDefinition>()
