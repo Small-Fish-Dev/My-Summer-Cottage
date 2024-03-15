@@ -227,7 +227,7 @@ public class StoryMaster : Component
 
 		foreach ( var npc in Scene.GetAllComponents<NPC>() )
 		{
-			if ( npc.Health != null && !npc.Health.Alive )
+			if ( npc.IsValid() && npc.Health != null && !npc.Health.Alive )
 				npc.Destroy();
 		}
 	}
