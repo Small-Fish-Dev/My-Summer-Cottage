@@ -78,7 +78,7 @@ public sealed class Stove : Component
 
 		GameObject.Name = $"Stove{(HasWater && HasWood && !IsRunning ? " (Ready)" : (HasWater ? "" : $" (Needs{(HasWood ? "" : " wood and")} water)"))}";
 
-		if ( StopWorking )
+		if ( StopWorking && IsRunning )
 		{
 			HasWater = false;
 			HasWood = false;
