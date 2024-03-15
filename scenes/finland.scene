@@ -1247,7 +1247,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.988026,0,0.1542872",
+          "Rotation": "0,0.7915248,0,0.611137",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1903,7 +1903,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "0e44083b-ac9b-45af-9191-ca82869e8920",
+                "component_id": "9de527e6-6e73-4708-9967-60dc4d63fa40",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -2196,31 +2196,271 @@
     {
       "__guid": "609d9899-4d24-471c-a28f-a68cb435e31d",
       "Name": "Item Spawn Zones",
+      "Position": "2198.542,-682.6738,2452.171",
       "Enabled": true,
       "NetworkMode": 2,
       "Children": [
         {
-          "__guid": "e6202dbf-bd42-4f96-bf1a-b308fa0863f4",
-          "Name": "Bread",
-          "Position": "3825.838,-2248.535,2538.347",
+          "__guid": "555e8344-7e83-4dfb-907a-a39e56e65f23",
+          "Name": "Chanterelle Mushroom",
+          "Position": "2553.501,-1347.772,0",
           "Enabled": true,
           "NetworkMode": 2,
           "Components": [
             {
               "__type": "ItemSpawnArea",
-              "__guid": "2d28ccb0-b5cb-4124-bfe9-d242cade09b1",
-              "Height": 321.6799,
+              "__guid": "9d1271a5-faec-4352-98a4-579ec3b6813f",
+              "Height": 500,
               "ItemPool": [
                 {
                   "Item": {
                     "_type": "gameobject",
-                    "prefab": "prefabs/items/bread.prefab"
+                    "prefab": "prefabs/items/chanterelle_mushroom.prefab"
                   },
-                  "AmountToSpawn": 13,
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                },
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/chanterelle_mushroom_deformed.prefab"
+                  },
+                  "AmountToSpawn": 5,
                   "StartFrozen": true
                 }
               ],
-              "Radius": 527.67993
+              "Radius": 1200
+            }
+          ]
+        },
+        {
+          "__guid": "760543d4-02a5-41ed-8e5b-5629e341cc12",
+          "Name": "Chanterelle Mushroom",
+          "Position": "-3495.993,3050.443,0.0007324219",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ItemSpawnArea",
+              "__guid": "44e1c408-5d91-4814-a2a1-3595c90b836f",
+              "Height": 500,
+              "ItemPool": [
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/chanterelle_mushroom.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                },
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/chanterelle_mushroom_deformed.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                }
+              ],
+              "Radius": 1200
+            }
+          ]
+        },
+        {
+          "__guid": "5fe7bf12-89a6-4c54-bf77-862e3d1c11ce",
+          "Name": "Mushroom",
+          "Position": "-5189.34,-6650.411,0.0004882812",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ItemSpawnArea",
+              "__guid": "7c284c5e-faae-4564-adc3-41492c948bce",
+              "Height": 500,
+              "ItemPool": [
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/mushroom_deformed.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                },
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/mushroom_normal.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                }
+              ],
+              "Radius": 1200
+            }
+          ]
+        },
+        {
+          "__guid": "1b9220d1-bc7a-43d7-a189-7bf5d7cd6f51",
+          "Name": "Mushroom",
+          "Position": "2519.191,-6589.57,0.001464844",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ItemSpawnArea",
+              "__guid": "7c790d97-871a-4a4e-b003-a49e35c32c23",
+              "Height": 500,
+              "ItemPool": [
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/mushroom_deformed.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                },
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/mushroom_normal.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                }
+              ],
+              "Radius": 1200
+            }
+          ]
+        },
+        {
+          "__guid": "ac77f92f-4c11-472c-b273-1689f8eb433b",
+          "Name": "Mushroom",
+          "Position": "4752.391,5231.78,587.5605",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ItemSpawnArea",
+              "__guid": "4a7a7314-5287-42c8-a049-96cb32b0686f",
+              "Height": 800,
+              "ItemPool": [
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/mushroom_deformed.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                },
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/mushroom_normal.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                }
+              ],
+              "Radius": 1500
+            }
+          ]
+        },
+        {
+          "__guid": "c35b4b05-e27b-4129-ad4d-f938cf1a0c83",
+          "Name": "Wide Mushroom",
+          "Position": "-5600.403,-69.56543,161.5361",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ItemSpawnArea",
+              "__guid": "e8a97ed6-7f21-4afa-9eff-fd5eadbd3d33",
+              "Height": 800,
+              "ItemPool": [
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/wide_mushroom_deformed.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                },
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/wide_mushroom_normal.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                }
+              ],
+              "Radius": 1500
+            }
+          ]
+        },
+        {
+          "__guid": "125f22e4-910b-41ae-a210-07c220833b45",
+          "Name": "Wide Mushroom",
+          "Position": "-5665.053,10538.94,161.5376",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ItemSpawnArea",
+              "__guid": "705f4aa3-645b-4062-b34d-be5f8af0ee42",
+              "Height": 800,
+              "ItemPool": [
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/wide_mushroom_deformed.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                },
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/wide_mushroom_normal.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                }
+              ],
+              "Radius": 1500
+            }
+          ]
+        },
+        {
+          "__guid": "7a2f34fc-626b-484d-a313-d835bbb4dffb",
+          "Name": "Wide Mushroom",
+          "Position": "3163.25,9967.45,1123.532",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "ItemSpawnArea",
+              "__guid": "92fe28ae-a7c4-48f7-8081-13666628f68c",
+              "Height": 1200,
+              "ItemPool": [
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/wide_mushroom_deformed.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                },
+                {
+                  "Item": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/items/wide_mushroom_normal.prefab"
+                  },
+                  "AmountToSpawn": 5,
+                  "StartFrozen": true
+                }
+              ],
+              "Radius": 1500
             }
           ]
         }
@@ -3987,6 +4227,24 @@
               "Shadows": true
             }
           ]
+        },
+        {
+          "__guid": "aa145841-e52f-44c9-8ffa-216ea647383c",
+          "Name": "slot_machine (1)",
+          "Position": "66.40723,404.6719,-5.457031",
+          "Rotation": "0,0,-0.7071067,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/objects/slot_machine.prefab"
+        },
+        {
+          "__guid": "6cdde554-6c51-488b-b166-041406915765",
+          "Name": "slot_machine",
+          "Position": "11.95703,404.6719,-5.457031",
+          "Rotation": "0,0,-0.7071067,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/objects/slot_machine.prefab"
         }
       ]
     },
@@ -4322,24 +4580,6 @@
           ]
         }
       ]
-    },
-    {
-      "__guid": "6cdde554-6c51-488b-b166-041406915765",
-      "Name": "slot_machine",
-      "Position": "-8342.028,6648.96,2447.953",
-      "Rotation": "0,0,-0.7071067,0.7071068",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/objects/slot_machine.prefab"
-    },
-    {
-      "__guid": "aa145841-e52f-44c9-8ffa-216ea647383c",
-      "Name": "slot_machine (1)",
-      "Position": "-8287.578,6648.96,2447.953",
-      "Rotation": "0,0,-0.7071067,0.7071068",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/objects/slot_machine.prefab"
     }
   ],
   "SceneProperties": {
@@ -4365,7 +4605,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T07:37:04.5542985\u002B01:00",
+  "LastSaved": "2024-03-15T07:41:56.1874477\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
