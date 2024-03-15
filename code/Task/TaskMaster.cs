@@ -429,7 +429,7 @@ public class TaskMaster : Component
 				var allInactiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Triggered && (x.SignalToTrigger != null || x.SignalToTrigger != "" || x.SignalToTrigger != String.Empty) );
 				foreach ( var inactiveEvent in allInactiveScriptedEvents )
 				{
-					if ( inactiveEvent.SignalToTrigger == signalIdentifier )
+					if ( inactiveEvent.SignalToTrigger == signalIdentifier || inactiveEvent != null && inactiveEvent.SignalToTrigger != null && signalIdentifier.Contains( inactiveEvent.SignalToTrigger ) )
 						storyMaster.BeginScriptedEvent( inactiveEvent, inactiveEvent.TriggerDelay );
 				}
 			}
