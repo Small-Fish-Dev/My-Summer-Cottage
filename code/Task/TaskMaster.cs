@@ -422,7 +422,11 @@ public class TaskMaster : Component
 
 				foreach ( var scriptedEvent in allActiveScriptedEvents )
 				{
-					if ( scriptedEvent.SignalToComplete == signalIdentifier || scriptedEvent != null && scriptedEvent.SignalToTrigger != null && signalIdentifier.Contains( scriptedEvent.SignalToComplete ) )
+					if ( scriptedEvent == null ) continue;
+					if ( scriptedEvent.SignalToComplete == null ) continue;
+					if ( signalIdentifier == null ) continue;
+
+					if ( scriptedEvent.SignalToComplete == signalIdentifier || signalIdentifier.Contains( scriptedEvent.SignalToComplete ) )
 						scriptedEvent.Completed = true;
 				}
 
