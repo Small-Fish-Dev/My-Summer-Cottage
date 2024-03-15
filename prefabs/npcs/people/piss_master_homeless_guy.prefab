@@ -1,0 +1,1165 @@
+{
+  "RootObject": {
+    "__guid": "30204349-70f4-4f73-8dd7-68ef0803e816",
+    "Name": "piss_master_homeless_guy",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "NPC",
+        "__guid": "75c40a7d-98c5-43b5-81db-22a5e77bb7bc",
+        "AlertOthers": true,
+        "AttackCooldown": 4,
+        "AttackRange": 50,
+        "DetectRange": 256,
+        "EnemyTags": "player",
+        "FaceTowardsVelocity": true,
+        "Health": {
+          "_type": "component",
+          "component_id": "d0ff66f9-01ed-47af-a60a-eeb05f14f3c9",
+          "go": "30204349-70f4-4f73-8dd7-68ef0803e816",
+          "component_type": "HealthComponent"
+        },
+        "Idle": true,
+        "MaximumIdleCooldown": 13,
+        "MaxRunAnimationSpeed": 150,
+        "MinimumIdleCooldown": 7,
+        "Model": {
+          "_type": "component",
+          "component_id": "ab4c0324-81e4-45c6-9725-7e83b4438ba0",
+          "go": "50ccc52a-ffcf-4003-95fc-4224b3209ef9",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "MoveHelper": {
+          "_type": "component",
+          "component_id": "4f2df812-58ed-4b7a-903c-0eed25a382a0",
+          "go": "30204349-70f4-4f73-8dd7-68ef0803e816",
+          "component_type": "MoveHelper"
+        },
+        "Name": "Default",
+        "OnAttack": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Attack",
+            "id": "488dc240-ada0-459a-b0e2-4c10c4115ba8",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/Sauna.Player",
+              "package.fish.sauna/HealthComponent"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-416,16",
+                "Labels": {
+                  "enemy": "enemy"
+                }
+              }
+            },
+            {
+              "Id": 26,
+              "Type": "if",
+              "UserData": {
+                "Position": "-160,0"
+              }
+            },
+            {
+              "Id": 27,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "-464,96"
+              }
+            },
+            {
+              "Id": 28,
+              "Type": "property.get",
+              "ParentId": 27,
+              "Properties": {
+                "_name": "HidePenoid",
+                "_type": "package.fish.sauna/Sauna.Player"
+              }
+            },
+            {
+              "Id": 29,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "64,-64"
+              }
+            },
+            {
+              "Id": 32,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "75c40a7d-98c5-43b5-81db-22a5e77bb7bc",
+                  "go": "30204349-70f4-4f73-8dd7-68ef0803e816",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-320,-192",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 34,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "cb40f856-8952-4a9e-9879-40f8d1ebbc6b"
+                }
+              },
+              "UserData": {
+                "Position": "32,-144"
+              }
+            },
+            {
+              "Id": 35,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Enabled",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "288,-64"
+              }
+            },
+            {
+              "Id": 36,
+              "Type": "call",
+              "Properties": {
+                "_name": "Damage",
+                "_isStatic": false,
+                "_type": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "48,144"
+              }
+            },
+            {
+              "Id": 38,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "30204349-70f4-4f73-8dd7-68ef0803e816"
+                }
+              },
+              "UserData": {
+                "Position": "-320,-128",
+                "Labels": {
+                  "_result": "piss_master"
+                }
+              }
+            },
+            {
+              "Id": 39,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "-464,224"
+              }
+            },
+            {
+              "Id": 40,
+              "Type": "call",
+              "Properties": {
+                "_name": "SpeakWithSubtitle",
+                "_isStatic": true,
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+              },
+              "UserData": {
+                "Position": "336,160"
+              }
+            },
+            {
+              "Id": 41,
+              "Type": "call",
+              "Properties": {
+                "_name": "SpeakWithSubtitle",
+                "_isStatic": true,
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+              },
+              "UserData": {
+                "Position": "784,-64"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 26,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 28,
+              "SrcName": "_result",
+              "DstId": 26,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 27,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 27,
+              "SrcName": "_result",
+              "DstId": 28,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 26,
+              "SrcName": "true",
+              "DstId": 29,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 32,
+              "SrcName": "_result",
+              "DstId": 29,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 29,
+              "SrcName": "_signal",
+              "DstId": 35,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 34,
+              "SrcName": "_result",
+              "DstId": 35,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 35,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 26,
+              "SrcName": "false",
+              "DstId": 36,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 39,
+              "SrcName": "_result",
+              "DstId": 36,
+              "DstName": "_target"
+            },
+            {
+              "Value": 10,
+              "DstId": 36,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 38,
+              "SrcName": "_result",
+              "DstId": 36,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 20,
+              "DstId": 36,
+              "DstName": "force"
+            },
+            {
+              "Value": "Mild",
+              "DstId": 36,
+              "DstName": "type"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 39,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 36,
+              "SrcName": "_signal",
+              "DstId": 40,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Homeless Pissmaster",
+              "DstId": 40,
+              "DstName": "name"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 40,
+              "DstName": "obj"
+            },
+            {
+              "Value": {
+                "Volume": 1,
+                "Position": "0,0,0",
+                "Rotation": "0,0,0,1",
+                "Pitch": 1.3,
+                "Decibels": 70,
+                "ListenLocal": false,
+                "Delay": 90,
+                "Accuracy": 2
+              },
+              "DstId": 40,
+              "DstName": "settings"
+            },
+            {
+              "Value": "I am the Pissmaster, you shall not defeat me!",
+              "DstId": 40,
+              "DstName": "subtitle"
+            },
+            {
+              "SrcId": 35,
+              "SrcName": "_signal",
+              "DstId": 41,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Homeless Pissmaster",
+              "DstId": 41,
+              "DstName": "name"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 41,
+              "DstName": "obj"
+            },
+            {
+              "Value": {
+                "Volume": 1,
+                "Position": "0,0,0",
+                "Rotation": "0,0,0,1",
+                "Pitch": 1.3,
+                "Decibels": 70,
+                "ListenLocal": false,
+                "Delay": 90,
+                "Accuracy": 2
+              },
+              "DstId": 41,
+              "DstName": "settings"
+            },
+            {
+              "Value": "I am this camps Pissmaster! I have won yet again!",
+              "DstId": 41,
+              "DstName": "subtitle"
+            }
+          ]
+        },
+        "OnDetect": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Detect",
+            "id": "409efedd-363e-4b43-b565-7dd4f1863bcb",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/Sauna.Player"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Labels": {
+                  "enemy": "enemy"
+                }
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "112,128"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "property.get",
+              "ParentId": 1,
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "HidePenoid"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "if",
+              "UserData": {
+                "Position": "480,128"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "75c40a7d-98c5-43b5-81db-22a5e77bb7bc",
+                  "go": "30204349-70f4-4f73-8dd7-68ef0803e816",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-0,-128",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "928,-128"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "30204349-70f4-4f73-8dd7-68ef0803e816"
+                }
+              },
+              "UserData": {
+                "Position": "-32,-288"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "property.get",
+              "ParentId": 16,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 18,
+              "Type": "property.get",
+              "ParentId": 17,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "432,-80"
+              }
+            },
+            {
+              "Id": 22,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "704,48"
+              }
+            },
+            {
+              "Id": 23,
+              "Type": "npc.startfollowing",
+              "UserData": {
+                "Position": "928,256"
+              }
+            },
+            {
+              "Id": 24,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "1216,272"
+              }
+            },
+            {
+              "Id": 32,
+              "Type": "call",
+              "Properties": {
+                "_name": "SpeakWithSubtitle",
+                "_isStatic": true,
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+              },
+              "UserData": {
+                "Position": "976,112"
+              }
+            },
+            {
+              "Id": 34,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "cb40f856-8952-4a9e-9879-40f8d1ebbc6b"
+                }
+              },
+              "UserData": {
+                "Position": "544,352"
+              }
+            },
+            {
+              "Id": 35,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Enabled",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "848,400"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "condition"
+            },
+            {
+              "SrcId": 22,
+              "SrcName": "_signal",
+              "DstId": 14,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "_result",
+              "DstId": 18,
+              "DstName": "_target"
+            },
+            {
+              "Value": 100,
+              "DstId": 21,
+              "DstName": "maxRange"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_result",
+              "DstId": 21,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "true",
+              "DstId": 22,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 22,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "false",
+              "DstId": 23,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 23,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 23,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "failedToReachTarget",
+              "DstId": 24,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "false",
+              "DstId": 32,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Homeless Pissmaster",
+              "DstId": 32,
+              "DstName": "name"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 32,
+              "DstName": "obj"
+            },
+            {
+              "Value": {
+                "Volume": 1,
+                "Position": "0,0,0",
+                "Rotation": "0,0,0,1",
+                "Pitch": 1.3,
+                "Decibels": 70,
+                "ListenLocal": false,
+                "Delay": 90,
+                "Accuracy": 2
+              },
+              "DstId": 32,
+              "DstName": "settings"
+            },
+            {
+              "Value": "ARE YOU HERE TO CHALLENGE ME?!?",
+              "DstId": 32,
+              "DstName": "subtitle"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "false",
+              "DstId": 35,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 34,
+              "SrcName": "_result",
+              "DstId": 35,
+              "DstName": "_target"
+            },
+            {
+              "Value": true,
+              "DstId": 35,
+              "DstName": "_value"
+            }
+          ]
+        },
+        "OnEnemyEscaped": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Enemy Escaped",
+            "id": "f7181236-04d8-4441-bfe0-c6aace9cdd41",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 8,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "304,-32"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "75c40a7d-98c5-43b5-81db-22a5e77bb7bc",
+                  "go": "30204349-70f4-4f73-8dd7-68ef0803e816",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "32,-112"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "cb40f856-8952-4a9e-9879-40f8d1ebbc6b"
+                }
+              },
+              "UserData": {
+                "Position": "224,-208"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Enabled",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "512,-32"
+              }
+            },
+            {
+              "Id": 18,
+              "Type": "call",
+              "Properties": {
+                "_name": "SpeakWithSubtitle",
+                "_isStatic": true,
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+              },
+              "UserData": {
+                "Position": "880,-32"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 8,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_signal",
+              "DstId": 17,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 17,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "_signal",
+              "DstId": 18,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Homeless Pissmaster",
+              "DstId": 18,
+              "DstName": "name"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 18,
+              "DstName": "obj"
+            },
+            {
+              "Value": {
+                "Volume": 1,
+                "Position": "0,0,0",
+                "Rotation": "0,0,0,1",
+                "Pitch": 1.3,
+                "Decibels": 70,
+                "ListenLocal": false,
+                "Delay": 90,
+                "Accuracy": 2
+              },
+              "DstId": 18,
+              "DstName": "settings"
+            },
+            {
+              "Value": "Yeah flee from Pissmaster you coward! Your piss will never defeat me!",
+              "DstId": 18,
+              "DstName": "subtitle"
+            }
+          ]
+        },
+        "OnIdle": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Idle",
+            "id": "d174cab5-7a05-476c-a545-4db2fd685032",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-144,80"
+              }
+            },
+            {
+              "Id": 197,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "75c40a7d-98c5-43b5-81db-22a5e77bb7bc",
+                  "go": "30204349-70f4-4f73-8dd7-68ef0803e816",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-176,-128",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 198,
+              "Type": "property.get",
+              "ParentId": 197,
+              "Properties": {
+                "_name": "SpawnPosition",
+                "_type": "package.fish.sauna/NPC"
+              }
+            },
+            {
+              "Id": 199,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "144,-80"
+              }
+            },
+            {
+              "Id": 200,
+              "Type": "call",
+              "Properties": {
+                "_name": "MoveTo",
+                "_isStatic": false,
+                "_type": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Position": "464,48"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 197,
+              "SrcName": "_result",
+              "DstId": 198,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 198,
+              "SrcName": "_result",
+              "DstId": 199,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 200,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 197,
+              "SrcName": "_result",
+              "DstId": 200,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 199,
+              "SrcName": "_result",
+              "DstId": 200,
+              "DstName": "targetPosition"
+            }
+          ]
+        },
+        "RunningType": "Smart",
+        "RunSpeed": 220,
+        "ScaleStats": true,
+        "Static": false,
+        "VisionRange": 512,
+        "WalkingType": "Dumb",
+        "WalkSpeed": 150,
+        "Weight": "Middle"
+      },
+      {
+        "__type": "MoveHelper",
+        "__guid": "4f2df812-58ed-4b7a-903c-0eed25a382a0",
+        "AccelerationCurve": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 0.3,
+        "Collider": {
+          "_type": "component",
+          "component_id": "760ed443-3754-471c-8ba8-4353f24d6142",
+          "go": "30204349-70f4-4f73-8dd7-68ef0803e816",
+          "component_type": "BoxCollider"
+        },
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 2000,
+        "GroundAngle": 45,
+        "GroundFriction": 30,
+        "IgnoreTags": "",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 18,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 72,
+        "TraceRadius": 16,
+        "TraceType": "Capsule",
+        "UseCollider": true,
+        "UseSceneGravity": true
+      },
+      {
+        "__type": "HealthComponent",
+        "__guid": "d0ff66f9-01ed-47af-a60a-eeb05f14f3c9",
+        "CanRegenerate": true,
+        "DamagedBy": "Mild",
+        "DropOnDeath": [],
+        "Immortal": true,
+        "MaxHealth": 40,
+        "RegenerationCooldown": 5,
+        "RegenerationTimer": 0.8,
+        "StunnedBy": "Average",
+        "StunWhenDamaged": true
+      },
+      {
+        "__type": "BoxCollider",
+        "__guid": "760ed443-3754-471c-8ba8-4353f24d6142",
+        "Center": "0,0,32",
+        "IsTrigger": false,
+        "Scale": "7.400019,20,64",
+        "Static": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "50ccc52a-ffcf-4003-95fc-4224b3209ef9",
+        "Name": "body",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "ab4c0324-81e4-45c6-9725-7e83b4438ba0",
+            "BodyGroups": 1041,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Character",
+            "__guid": "4237bf2b-a9e0-48ab-a931-19ad38618c65",
+            "Clothes": [],
+            "Fatness": 0,
+            "Height": -56,
+            "HideBodyGroup": "Torso, Hands, Feet"
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "a72f35cb-44da-4847-96a5-227739b6bdf3",
+            "Name": "shoes",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "01a0235c-223c-4566-8292-5d4fe91d3f39",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "ab4c0324-81e4-45c6-9725-7e83b4438ba0",
+                  "go": "50ccc52a-ffcf-4003-95fc-4224b3209ef9",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/clothes/wellington_boots/wellington_boots.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "__guid": "e7cf4df9-d633-4916-989b-a565040261e6",
+            "Name": "shirt",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "6f80aecf-3858-4649-a2ec-39a9648abefd",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "ab4c0324-81e4-45c6-9725-7e83b4438ba0",
+                  "go": "50ccc52a-ffcf-4003-95fc-4224b3209ef9",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/clothes/parka/parka.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "__guid": "a898e231-fddb-45ee-a229-3a01d75a6ca5",
+            "Name": "shirt",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "63a1a061-7275-49c2-b4b0-39f8364bcf0f",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "ab4c0324-81e4-45c6-9725-7e83b4438ba0",
+                  "go": "50ccc52a-ffcf-4003-95fc-4224b3209ef9",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "Model": "models/clothes/gloves/gloves.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "__guid": "7ee233c5-a191-4090-836e-7c335483b1f9",
+            "Name": "hat",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "e16192ab-c99c-4615-bd8f-25e73a8037e4",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "ab4c0324-81e4-45c6-9725-7e83b4438ba0",
+                  "go": "50ccc52a-ffcf-4003-95fc-4224b3209ef9",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "MaterialGroup": "default",
+                "Model": "models/clothes/beanie/beanie.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          },
+          {
+            "__guid": "45298220-7633-487e-95a7-b4a6e7f91ff4",
+            "Name": "penoid",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "7f4a72da-2273-49ee-aab8-1cfe87ee5c43",
+                "BodyGroups": 18446744073709551615,
+                "BoneMergeTarget": {
+                  "_type": "component",
+                  "component_id": "ab4c0324-81e4-45c6-9725-7e83b4438ba0",
+                  "go": "50ccc52a-ffcf-4003-95fc-4224b3209ef9",
+                  "component_type": "SkinnedModelRenderer"
+                },
+                "CreateBoneObjects": false,
+                "MaterialGroup": "default",
+                "Model": "models/guy/penoid.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              },
+              {
+                "__type": "CensorComponent",
+                "__guid": "d3f8099d-1930-48f5-8be9-f9a09fca2e3f"
+              }
+            ],
+            "Children": [
+              {
+                "__guid": "cb40f856-8952-4a9e-9879-40f8d1ebbc6b",
+                "Name": "piss (1)",
+                "Position": "5.601646,0,32",
+                "Tags": "particles",
+                "NetworkMode": 2,
+                "__Prefab": "prefabs/particles/piss.prefab"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
