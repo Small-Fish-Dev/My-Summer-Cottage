@@ -50,6 +50,20 @@
             "UserData": {
               "Position": "240,32"
             }
+          },
+          {
+            "Id": 3,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "480,176"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "224,176"
+            }
           }
         ],
         "Links": [
@@ -80,6 +94,48 @@
             "Value": "BusStopSuburbs",
             "DstId": 2,
             "DstName": "name"
+          },
+          {
+            "SrcId": 4,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "You can call a taxi at the bus stop.",
+            "DstId": 3,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 3,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 3,
+            "DstName": "theme"
+          },
+          {
+            "Value": 5,
+            "DstId": 3,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 3,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 4,
+            "DstName": "seconds"
           }
         ]
       },
@@ -169,6 +225,20 @@
             "UserData": {
               "Position": "256,64"
             }
+          },
+          {
+            "Id": 3,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "496,192"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "240,192"
+            }
           }
         ],
         "Links": [
@@ -199,6 +269,48 @@
             "Value": "Supermarket",
             "DstId": 2,
             "DstName": "name"
+          },
+          {
+            "SrcId": 4,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "The supermarket is at the other side of the town.",
+            "DstId": 3,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 3,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 3,
+            "DstName": "theme"
+          },
+          {
+            "Value": 5,
+            "DstId": 3,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 3,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 4,
+            "DstName": "seconds"
           }
         ]
       },
@@ -262,6 +374,79 @@
       "SubtaskOrder": 2,
       "TriggerSignal": "item.received.Loaf of bread",
       "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "c3504aa4-c444-4ab8-be1f-5fad6a92b634",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "432,32"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "176,32"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Find the bread on the shelves.",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 5,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          }
+        ]
+      },
       "OnEnd": {
         "Version": 5,
         "UserData": {
@@ -384,6 +569,79 @@
             "Value": "Loaf of bread",
             "DstId": 10,
             "DstName": "nameOfItem"
+          }
+        ]
+      },
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "8a0e9749-8f17-456d-a278-a33c6a9905c3",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "448,16"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "192,16"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Make your way back to the sauna.",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 5,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
           }
         ]
       }

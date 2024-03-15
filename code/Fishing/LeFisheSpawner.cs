@@ -88,10 +88,10 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 		if ( Game.IsPlaying || !Gizmo.HasSelected )
 			return;
 
-		Gizmo.Draw.Color = Color.Blue;
-		Gizmo.Draw.IgnoreDepth = true;
-		Gizmo.Draw.LineBBox( _water.Bounds + _water.Transform.Position );
-		Gizmo.Draw.IgnoreDepth = false;
+		//Gizmo.Draw.Color = Color.Blue;
+		//Gizmo.Draw.IgnoreDepth = true;
+		//Gizmo.Draw.LineBBox( _water.Bounds + _water.Transform.Position );
+		//Gizmo.Draw.IgnoreDepth = false;
 	}
 
 	protected override void OnUpdate()
@@ -138,7 +138,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 
 			// Remove the invalid bobbers
 			foreach ( var fish in CurrentFishes.Where( x =>
-				         !x.TargetBobber.IsValid() || !_bobbers.ContainsKey( x.TargetBobber ) ) )
+						 !x.TargetBobber.IsValid() || !_bobbers.ContainsKey( x.TargetBobber ) ) )
 			{
 				FishClearTarget( fish );
 			}
