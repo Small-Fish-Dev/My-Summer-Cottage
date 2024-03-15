@@ -1,7 +1,9 @@
 ﻿namespace Sauna;
 
-public class SpeechSettings
+public struct SpeechSettings
 {
+	public static SpeechSettings Default = new SpeechSettings();
+
 	public float Volume { get; set; } = 1;
 	public Vector3 Position { get; set; } = 0;
 	public Rotation Rotation { get; set; } = Rotation.Identity;
@@ -11,6 +13,8 @@ public class SpeechSettings
 	public int Delay { get; set; } = 180;
 	public int Accuracy { get; set; } = 2;
 	public GameObject GameObject { get; set; }
+
+	public SpeechSettings() { }
 }
 
 public class Speech
@@ -22,8 +26,9 @@ public class Speech
 	public bool Stopped { get; private set; }
 	public float Duration { get; private set; }
 
-	public static Speech Create( string text, SpeechSettings settings = default )
+	public static Speech Create( string text, SpeechSettings? nsettings = null )
 	{
+		var settings = nsettings ?? SpeechSettings.Default;
 		var speech = new Speech()
 		{
 			sounds = new(),
@@ -90,6 +95,6 @@ public class Speech
 	[ConCmd]
 	public static void TestSound( string input = "blablabla fuck you bithc!!!" )
 	{
-		Create( input, settings: new() { GameObject = Player.Local.GameObject, Pitch = 0.7f } );
+		Create( input, SpeechSettings.Default with { GameObject = Player.Local.GameObject } );
 	}
 }
