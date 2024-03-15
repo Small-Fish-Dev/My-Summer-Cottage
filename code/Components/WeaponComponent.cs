@@ -50,7 +50,7 @@ public sealed class WeaponComponent : Component
 			CooldownTime = FireSpeed,
 			Action = Attack,
 			ShowWhenDisabled = () => true,
-			Disabled = () => Capacity > 0 && Ammo == 0,
+			Disabled = () => Capacity > 0 && (Ammo == 0 || !Player.Local.AimState),
 			InputMode = Mode,
 			Animation = InteractAnimations.Action
 		} );
