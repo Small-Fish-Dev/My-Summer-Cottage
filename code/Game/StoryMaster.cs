@@ -267,9 +267,11 @@ public class StoryMaster : Component
 		Log.Info( "Story reset!" );
 	}
 
-	public void LoadEventPool()
+	public void LoadEventPool( int randomSeed )
 	{
 		if ( CurrentSaunaDay == null ) return;
+
+		Game.SetRandomSeed( randomSeed );
 
 		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Common ) )
 		{
@@ -286,6 +288,8 @@ public class StoryMaster : Component
 					var chosenEvent = Game.Random.FromList( availableCommonEvents );
 					chosenEvent.Enable();
 					eventsPicked++;
+
+					Log.Info( chosenEvent );
 				}
 			}
 
@@ -364,9 +368,8 @@ public class StoryMaster : Component
 		storyMaster._timeManager.StartDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
-		storyMaster.LoadEventPool();
-
-		storyMaster.SetRandomDialogues();
+		storyMaster.LoadEventPool( (int)storyMaster._timeManager.RandomSeed );
+		storyMaster.SetRandomDialogues( (int)storyMaster._timeManager.RandomSeed );
 
 		if ( Connection.Local.IsHost )
 		{
@@ -382,7 +385,6 @@ public class StoryMaster : Component
 			Player.Local.Respawn();
 	}
 
-	[ConCmd]
 	[Broadcast( NetPermission.HostOnly )]
 	public static void EndSession()
 	{
@@ -404,10 +406,12 @@ public class StoryMaster : Component
 		storyMaster.SaveGame();
 	}
 
-	public void SetRandomDialogues()
+	public void SetRandomDialogues( int randomSeed )
 	{
 		var allDialogues = Scene.GetAllComponents<DialogueTree>()
 			.Where( x => x.HasRandomDialogues );
+
+		Game.SetRandomSeed( randomSeed );
 
 		foreach ( var dialogue in allDialogues )
 			dialogue.SelectRandomDialogue();

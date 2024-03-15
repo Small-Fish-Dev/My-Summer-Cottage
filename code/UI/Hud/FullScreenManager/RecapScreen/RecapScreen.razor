@@ -98,7 +98,9 @@
 	{
 		Player.Local.BlackScreen(1f, 2f, 1f);
 		await GameTask.DelayRealtimeSeconds( 2f );
-		StoryMaster.StartSession();
+
+		if (Connection.Local.IsHost)
+			StoryMaster.StartSession();
 	}
 
 	public override void Tick()
