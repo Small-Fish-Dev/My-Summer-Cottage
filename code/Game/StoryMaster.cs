@@ -288,8 +288,6 @@ public class StoryMaster : Component
 					var chosenEvent = Game.Random.FromList( availableCommonEvents );
 					chosenEvent.Enable();
 					eventsPicked++;
-
-					Log.Info( chosenEvent );
 				}
 			}
 
