@@ -48,7 +48,7 @@ public class LegacyParticles
 		return particle;
 	}
 
-	public void replay()
+	public void Replay()
 	{
 		System.Enabled = false;
 		System.Enabled = true;
