@@ -47,8 +47,11 @@ public sealed class EventAreaTrigger : EventTrigger
 
 		var objs = ObjectsInside.ToList();
 		foreach ( var found in find )
+		{
+			if ( !found.IsValid() || objs == null ) continue;
 			if ( !objs.Contains( found ) ) // Has entered just now
 				CallTrigger( found );
+		}
 
 		ObjectsInside = find.ToList();
 	}
