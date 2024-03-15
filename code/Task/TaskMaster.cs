@@ -409,7 +409,7 @@ public class TaskMaster : Component
 
 				foreach ( var subtask in activeSubtasks )
 				{
-					if ( subtask.TriggerSignal.Identifier == signalIdentifier || signalIdentifier.Contains( subtask.TriggerSignal.Identifier ) ) // If the given signal is the one we're looking for, increase the subtask's progress
+					if ( subtask.TriggerSignal.Identifier == signalIdentifier || subtask != null && subtask.TriggerSignal != null && signalIdentifier.Contains( subtask.TriggerSignal.Identifier ) ) // If the given signal is the one we're looking for, increase the subtask's progress
 						subtask.CurrentAmount++;
 				}
 			}
@@ -422,14 +422,14 @@ public class TaskMaster : Component
 
 				foreach ( var scriptedEvent in allActiveScriptedEvents )
 				{
-					if ( scriptedEvent.SignalToComplete == signalIdentifier || signalIdentifier.Contains( scriptedEvent.SignalToComplete ) )
+					if ( scriptedEvent.SignalToComplete == signalIdentifier || scriptedEvent != null && scriptedEvent.SignalToTrigger != null && signalIdentifier.Contains( scriptedEvent.SignalToComplete ) )
 						scriptedEvent.Completed = true;
 				}
 
 				var allInactiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Triggered && (x.SignalToTrigger != null || x.SignalToTrigger != "" || x.SignalToTrigger != String.Empty) );
 				foreach ( var inactiveEvent in allInactiveScriptedEvents )
 				{
-					if ( inactiveEvent.SignalToTrigger == signalIdentifier || signalIdentifier.Contains( inactiveEvent.SignalToComplete ) )
+					if ( inactiveEvent.SignalToTrigger == signalIdentifier || inactiveEvent != null && inactiveEvent.SignalToTrigger != null && signalIdentifier.Contains( inactiveEvent.SignalToComplete ) )
 						storyMaster.BeginScriptedEvent( inactiveEvent, inactiveEvent.TriggerDelay );
 				}
 			}
