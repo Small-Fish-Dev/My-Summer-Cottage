@@ -95,7 +95,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 	public float InGameHours => MathX.Remap( InGameSeconds, 0, 86400, 0f, 24f );
 
-	[HostSync] public RealTimeSince RandomSeed { get; private set; }
+	[HostSync] public int RandomSeed { get; private set; } // In the future we use something else, RealTimeSince doesn't sync.
 	[HostSync] public bool IsDayOver { get; private set; } = false;
 	[HostSync] private RealTimeSince InGameTime { get; set; }
 	[HostSync] private float? FrozenTime { get; set; }
@@ -267,6 +267,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 		FreezeTime();
 
 		IsDayOver = true;
+		RandomSeed += 1;
 
 		OnDayEnd?.Invoke();
 	}
