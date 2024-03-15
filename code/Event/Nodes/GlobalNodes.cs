@@ -129,9 +129,9 @@ public static partial class GlobalNodes
 	/// </summary>
 	[ActionGraphNode( "event.findobject" )]
 	[Title( "Find Object in Scene" ), Group( "Events" ), Icon( "travel_explore" )]
-	public static GameObject FindObjectByName( string name )
+	public static GameObject FindObjectByName( string name, bool enabled = true )
 	{
-		var objectFound = Game.ActiveScene?.GetAllObjects( true )?
+		var objectFound = Game.ActiveScene?.GetAllObjects( enabled )?
 			.Where( x => x.Name.ToLower() == name.ToLower() )?
 			.FirstOrDefault() ?? null;
 
