@@ -158,6 +158,11 @@ public sealed class BusStop : Component
 					foreach ( var renderer in taxi.Player.Components.GetAll<SkinnedModelRenderer>( FindMode.EnabledInSelfAndDescendants ) )
 						renderer.Enabled = false;
 
+					foreach ( var renderer in taxi.Player.Components.GetAll<ModelRenderer>( FindMode.EnabledInSelfAndDescendants ) )
+						renderer.Enabled = false;
+
+					taxi.Player.ForceHidePenoid = true;
+
 					if ( taxi.Player.Components.TryGet<MoveHelper>( out var moveHelper ) )
 					{
 						moveHelper.Enabled = false;
@@ -174,6 +179,11 @@ public sealed class BusStop : Component
 
 				foreach ( var renderer in taxi.Player.Components.GetAll<SkinnedModelRenderer>( FindMode.DisabledInSelfAndDescendants ) )
 					renderer.Enabled = true;
+
+				foreach ( var renderer in taxi.Player.Components.GetAll<ModelRenderer>( FindMode.DisabledInSelfAndDescendants ) )
+					renderer.Enabled = true;
+
+				taxi.Player.ForceHidePenoid = false;
 
 				if ( taxi.Player.Components.TryGet<MoveHelper>( out var moveHelper, FindMode.EverythingInSelfAndChildren ) )
 				{
