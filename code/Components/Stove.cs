@@ -95,7 +95,7 @@ public sealed class Stove : Component
 		{
 			HasWood = true;
 
-			player.Inventory.BackpackItems
+			player.Inventory?.BackpackItems?
 				.Where( x => x.IsValid() && x.Name == "Split Log" )
 				.FirstOrDefault()
 				.Destroy();
