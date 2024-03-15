@@ -1245,7 +1245,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.8961006,0,0.4438511",
+          "Rotation": "0,0.5788018,0,-0.8154683",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3812,6 +3812,25 @@
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/items/bbammo.prefab"
+    },
+    {
+      "__guid": "649b8ecd-3620-4cc6-8481-98596d295c13",
+      "Name": "HuntingGround",
+      "Position": "6818.797,-4233.991,2413.23",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "__guid": "8adadb5c-a16c-4dfd-9180-0d10753c9e25",
+          "Extents": "1800,1800,500",
+          "MaxPollingRate": 15,
+          "Offset": "0,0,0",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "hunting_ground.entered"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -3837,7 +3856,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T02:22:52.0891206\u002B01:00",
+  "LastSaved": "2024-03-15T02:40:19.1887451\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
