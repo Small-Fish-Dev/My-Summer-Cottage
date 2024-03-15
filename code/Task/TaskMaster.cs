@@ -446,7 +446,8 @@ public class TaskMaster : Component
 	/// <param name="taskToAssign"></param>
 	public static SaunaTask AssignNewTask( SaunaTask taskToAssign )
 	{
-		if ( _instance == null ) return null;
+		if ( _instance is null ) return null;
+		if ( taskToAssign is null ) return null;
 
 		var sameTaskFound = _instance.CurrentTasks.Where( x => x.ResourceName == taskToAssign.ResourceName )?.Any() ?? false;
 
@@ -475,24 +476,14 @@ public class TaskMaster : Component
 	}
 
 	[Broadcast( NetPermission.Anyone )]
-	internal static void InternalAssignNewTask( SaunaTask taskToAssign, Guid playerId )
+	internal static void InternalAssignNewTask( int taskId, Guid playerId )
 	{
 		var player = Player.GetByID( playerId );
+		var task = ResourceLibrary.Get<SaunaTask>( taskId );
 
-		if ( player != null )
+		if ( player is not null && task is not null )
 			if ( Player.Local == player )
-				AssignNewTask( taskToAssign );
-	}
-
-	[Broadcast( NetPermission.Anyone )]
-	internal static void InternalAssignNewTask( string filePath, Guid playerId )
-	{
-		var player = Player.GetByID( playerId );
-
-		if ( player != null )
-			if ( Player.Local == player )
-				if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
-					AssignNewTask( foundTask );
+				AssignNewTask( task );
 	}
 
 	/// <summary>
@@ -500,28 +491,14 @@ public class TaskMaster : Component
 	/// </summary>
 	/// <param name="taskToAssign"></param>
 	/// <param name="player"></param>
-	public static void AssignNewTask( SaunaTask taskToAssign, Player player ) => InternalAssignNewTask( taskToAssign, player.ConnectionID );
-
-	/// <summary>
-	/// Assign a new task to the specified player, doesn't work if the task already exists
-	/// </summary>
-	/// <param name="filePath"></param>
-	/// <param name="player"></param>
-	public static void AssignNewTask( string filePath, Player player ) => InternalAssignNewTask( filePath, player.ConnectionID );
+	public static void AssignNewTask( SaunaTask taskToAssign, Player player ) => InternalAssignNewTask( taskToAssign.ResourceId, player.ConnectionID );
 
 	/// <summary>
 	/// Assign everyone in the server a new task
 	/// </summary>
-	/// <param name="taskToAssign"></param>
+	/// <param name="taskId"></param>
 	[Broadcast( NetPermission.Anyone )]
-	public static void AssignEveryoneNewTask( SaunaTask taskToAssign ) => AssignNewTask( taskToAssign );
-
-	/// <summary>
-	/// Assign everyone in the server a new task
-	/// </summary>
-	/// <param name="filePath"></param>
-	[Broadcast( NetPermission.Anyone )]
-	public static void AssignEveryoneNewTask( string filePath ) => AssignNewTask( filePath );
+	public static void AssignEveryoneNewTask( int taskId ) => AssignNewTask( ResourceLibrary.Get<SaunaTask>( taskId ) );
 
 	/// <summary>
 	/// Removes the found task from the local player, doesn't work if the task doesn't exists
@@ -529,7 +506,8 @@ public class TaskMaster : Component
 	/// <param name="taskToRemove"></param>
 	public static void RemoveTask( SaunaTask taskToRemove )
 	{
-		if ( _instance == null ) return;
+		if ( taskToRemove is null ) return;
+		if ( _instance is null ) return;
 
 		var sameTaskFound = _instance.CurrentTasks.Where( x => x.ResourceName == taskToRemove.ResourceName )?.FirstOrDefault() ?? null;
 
@@ -549,24 +527,14 @@ public class TaskMaster : Component
 	}
 
 	[Broadcast( NetPermission.Anyone )]
-	internal static void InternalRemoveTask( SaunaTask taskToRemove, Guid playerId )
+	internal static void InternalRemoveTask( int taskId, Guid playerId )
 	{
 		var player = Player.GetByID( playerId );
+		var task = ResourceLibrary.Get<SaunaTask>( taskId );
 
-		if ( player != null )
+		if ( player is not null && task is not null )
 			if ( Player.Local == player )
-				RemoveTask( taskToRemove );
-	}
-
-	[Broadcast( NetPermission.Anyone )]
-	internal static void InternalRemoveTask( string filePath, Guid playerId )
-	{
-		var player = Player.GetByID( playerId );
-
-		if ( player != null )
-			if ( Player.Local == player )
-				if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
-					RemoveTask( foundTask );
+				RemoveTask( task );
 	}
 
 	/// <summary>
@@ -574,28 +542,14 @@ public class TaskMaster : Component
 	/// </summary>
 	/// <param name="taskToRemove"></param>
 	/// <param name="player"></param>
-	public static void RemoveTask( SaunaTask taskToRemove, Player player ) => InternalRemoveTask( taskToRemove, player.ConnectionID );
-
-	/// <summary>
-	/// Remove the task from the targetted player, doesn't work if the task doesn't exists
-	/// </summary>
-	/// <param name="filePath"></param>
-	/// <param name="player"></param>
-	public static void RemoveTask( string filePath, Player player ) => InternalRemoveTask( filePath, player.ConnectionID );
+	public static void RemoveTask( SaunaTask taskToRemove, Player player ) => InternalRemoveTask( taskToRemove.ResourceId, player.ConnectionID );
 
 	/// <summary>
 	/// Remove the task from everyone in the server
 	/// </summary>
-	/// <param name="taskToRemove"></param>
+	/// <param name="taskId"></param>
 	[Broadcast( NetPermission.Anyone )]
-	public static void RemoveEveryoneTask( SaunaTask taskToRemove ) => RemoveTask( taskToRemove );
-
-	/// <summary>
-	/// Remove the task from everyone in the server
-	/// </summary>
-	/// <param name="filePath"></param>
-	[Broadcast( NetPermission.Anyone )]
-	public static void RemoveEveryoneTask( string filePath ) => RemoveTask( filePath );
+	public static void RemoveEveryoneTask( int taskId ) => RemoveTask( ResourceLibrary.Get<SaunaTask>( taskId ) );
 
 	/// <summary>
 	/// Resets the found task for the local player, doesn't work if the task doesn't exists
@@ -603,7 +557,8 @@ public class TaskMaster : Component
 	/// <param name="taskToReset"></param>
 	public static void ResetTask( SaunaTask taskToReset )
 	{
-		if ( _instance == null ) return;
+		if ( taskToReset is null ) return;
+		if ( _instance is null ) return;
 
 		var sameTaskFound = _instance.CurrentTasks.Where( x => x.ResourceName == taskToReset.ResourceName )?.FirstOrDefault() ?? null;
 
@@ -623,24 +578,14 @@ public class TaskMaster : Component
 	}
 
 	[Broadcast( NetPermission.Anyone )]
-	internal static void InternalResetTask( SaunaTask taskToReset, Guid playerId )
+	internal static void InternalResetTask( int taskId, Guid playerId )
 	{
 		var player = Player.GetByID( playerId );
+		var task = ResourceLibrary.Get<SaunaTask>( taskId );
 
-		if ( player != null )
+		if ( player is not null && task is not null )
 			if ( Player.Local == player )
-				ResetTask( taskToReset );
-	}
-
-	[Broadcast( NetPermission.Anyone )]
-	internal static void InternalResetTask( string filePath, Guid playerId )
-	{
-		var player = Player.GetByID( playerId );
-
-		if ( player != null )
-			if ( Player.Local == player )
-				if ( ResourceLibrary.TryGet<SaunaTask>( filePath, out var foundTask ) )
-					ResetTask( foundTask );
+				ResetTask( task );
 	}
 
 	/// <summary>
@@ -648,26 +593,12 @@ public class TaskMaster : Component
 	/// </summary>
 	/// <param name="taskToReset"></param>
 	/// <param name="player"></param>
-	public static void ResetTask( SaunaTask taskToReset, Player player ) => InternalResetTask( taskToReset, player.ConnectionID );
-
-	/// <summary>
-	/// Resets the found task for the targetted player, doesn't work if the task doesn't exists
-	/// </summary>
-	/// <param name="filePath"></param>
-	/// <param name="player"></param>
-	public static void ResetTask( string filePath, Player player ) => InternalResetTask( filePath, player.ConnectionID );
+	public static void ResetTask( SaunaTask taskToReset, Player player ) => InternalResetTask( taskToReset.ResourceId, player.ConnectionID );
 
 	/// <summary>
 	/// Resets the task for everyone in the server
 	/// </summary>
-	/// <param name="taskToReset"></param>
+	/// <param name="taskId"></param>
 	[Broadcast( NetPermission.Anyone )]
-	public static void ResetEveryoneTask( SaunaTask taskToReset ) => ResetTask( taskToReset );
-
-	/// <summary>
-	/// Resets the task for everyone in the server
-	/// </summary>
-	/// <param name="filePath"></param>
-	[Broadcast( NetPermission.Anyone )]
-	public static void ResetEveryoneTask( string filePath ) => ResetTask( filePath );
+	public static void ResetEveryoneTask( int taskId ) => ResetTask( ResourceLibrary.Get<SaunaTask>( taskId ) );
 }

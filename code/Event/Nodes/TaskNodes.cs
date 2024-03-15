@@ -26,7 +26,7 @@ public static partial class TaskNodes
 	[Title( "Assign Everyone New Task" ), Group( "Events" ), Icon( "edit_calendar" )]
 	public static void AssignTaskToEveryone( SaunaTask taskToAdd )
 	{
-		TaskMaster.AssignEveryoneNewTask( taskToAdd );
+		TaskMaster.AssignEveryoneNewTask( taskToAdd.ResourceId );
 	}
 
 	/// <summary>
@@ -50,7 +50,7 @@ public static partial class TaskNodes
 	[Title( "Remove Task From Everyone" ), Group( "Events" ), Icon( "event_busy" )]
 	public static void RemoveTaskFromEveryone( SaunaTask taskToRemove )
 	{
-		TaskMaster.RemoveEveryoneTask( taskToRemove );
+		TaskMaster.RemoveEveryoneTask( taskToRemove.ResourceId );
 	}
 
 	/// <summary>
@@ -74,7 +74,7 @@ public static partial class TaskNodes
 	[Title( "Reset Task On Everyone" ), Group( "Events" ), Icon( "event_repeat" )]
 	public static void ResetTaskOnEveryone( SaunaTask taskToReset )
 	{
-		TaskMaster.ResetEveryoneTask( taskToReset );
+		TaskMaster.ResetEveryoneTask( taskToReset.ResourceId );
 	}
 
 	/// <summary>
