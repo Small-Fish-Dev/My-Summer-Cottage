@@ -1,0 +1,504 @@
+{
+  "Name": "Get rabbit meat",
+  "Subtitle": "Wife wants rabbit meat",
+  "Description": "Nagging wife changed idea, we now have to hunt for rabbit meat.",
+  "Giver": "Wife",
+  "Message": "I changed my mind, I want to eat rabbit tonight.",
+  "TaskType": "GivenByStory",
+  "TaskRarity": "Any",
+  "IsPrimary": true,
+  "Global": false,
+  "ExperienceGiven": 50,
+  "SuccessSignal": "task.success.Get rabbit meat",
+  "FailedSignal": "task.failed.Get rabbit meat",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Equip the Airsoft Rifle",
+      "TriggerSignal": "item.equipped.Airsoft Rifle",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Obtain the BB Pellets",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Airsoft BB Pellets",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Go to a rabbit spawning area",
+      "SubtaskOrder": 2,
+      "TriggerSignal": "hunting_ground.entered",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "e9e64e39-d006-4141-a57d-037f95e9bbbc",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "240,64"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "464,80"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "HuntingGround",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 2,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "target"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "d541c728-3700-4103-a7f7-fea56509a428",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "224,48"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "528,80"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "HuntingGround",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "target"
+          }
+        ]
+      }
+    },
+    {
+      "Description": "Kill a rabbit and gather its meat.",
+      "SubtaskOrder": 3,
+      "TriggerSignal": "",
+      "AmountToComplete": 2,
+      "EvaluateOnTick": {
+        "Version": 5,
+        "UserData": {
+          "Title": "Evaluate On Tick",
+          "id": "1cfcd740-4413-4b80-aa76-b60505a1c050",
+          "ReferencedComponentTypes": [
+            "package.fish.sauna/Sauna.Inventory"
+          ]
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input",
+            "UserData": {
+              "Position": "-112,96"
+            }
+          },
+          {
+            "Id": 1,
+            "Type": "output",
+            "UserData": {
+              "Position": "656,80"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "scene.get",
+            "Properties": {
+              "T": "package.fish.sauna/Sauna.Inventory"
+            },
+            "UserData": {
+              "Position": "96,96"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "384,80"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 3,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "_result"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 2,
+            "DstName": "_this"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Red Meat",
+            "DstId": 3,
+            "DstName": "nameOfItem"
+          }
+        ]
+      },
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "46a2bea9-eb90-4bf7-8516-6bc9c174f7a3",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "304,-192"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "property.set",
+            "Properties": {
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
+            },
+            "UserData": {
+              "Position": "544,-192"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "304,-96"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "property.set",
+            "Properties": {
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
+            },
+            "UserData": {
+              "Position": "544,-96"
+            }
+          },
+          {
+            "Id": 5,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "304,-0"
+            }
+          },
+          {
+            "Id": 6,
+            "Type": "property.set",
+            "Properties": {
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
+            },
+            "UserData": {
+              "Position": "544,-0"
+            }
+          },
+          {
+            "Id": 7,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "304,96"
+            }
+          },
+          {
+            "Id": 8,
+            "Type": "property.set",
+            "Properties": {
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
+            },
+            "UserData": {
+              "Position": "544,96"
+            }
+          },
+          {
+            "Id": 9,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "304,192"
+            }
+          },
+          {
+            "Id": 10,
+            "Type": "property.set",
+            "Properties": {
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
+            },
+            "UserData": {
+              "Position": "544,192"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": false,
+            "DstId": 1,
+            "DstName": "enabled"
+          },
+          {
+            "Value": "TutorialRabbit1",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "_target"
+          },
+          {
+            "Value": true,
+            "DstId": 2,
+            "DstName": "_value"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": false,
+            "DstId": 3,
+            "DstName": "enabled"
+          },
+          {
+            "Value": "TutorialRabbit2",
+            "DstId": 3,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_result",
+            "DstId": 4,
+            "DstName": "_target"
+          },
+          {
+            "Value": true,
+            "DstId": 4,
+            "DstName": "_value"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 5,
+            "DstName": "_signal"
+          },
+          {
+            "Value": false,
+            "DstId": 5,
+            "DstName": "enabled"
+          },
+          {
+            "Value": "TutorialRabbit3",
+            "DstId": 5,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_signal",
+            "DstId": 6,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_result",
+            "DstId": 6,
+            "DstName": "_target"
+          },
+          {
+            "Value": true,
+            "DstId": 6,
+            "DstName": "_value"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 7,
+            "DstName": "_signal"
+          },
+          {
+            "Value": false,
+            "DstId": 7,
+            "DstName": "enabled"
+          },
+          {
+            "Value": "TutorialRabbit4",
+            "DstId": 7,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 7,
+            "SrcName": "_signal",
+            "DstId": 8,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 7,
+            "SrcName": "_result",
+            "DstId": 8,
+            "DstName": "_target"
+          },
+          {
+            "Value": true,
+            "DstId": 8,
+            "DstName": "_value"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 9,
+            "DstName": "_signal"
+          },
+          {
+            "Value": false,
+            "DstId": 9,
+            "DstName": "enabled"
+          },
+          {
+            "Value": "TutorialRabbit5",
+            "DstId": 9,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 9,
+            "SrcName": "_signal",
+            "DstId": 10,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 9,
+            "SrcName": "_result",
+            "DstId": 10,
+            "DstName": "_target"
+          },
+          {
+            "Value": true,
+            "DstId": 10,
+            "DstName": "_value"
+          }
+        ]
+      }
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

@@ -3,6 +3,7 @@ using Sandbox;
 using Sauna.Event;
 using Sauna.UI;
 using System.Threading.Tasks;
+using static Sauna.SaunaTask;
 
 namespace Sauna;
 
@@ -257,6 +258,9 @@ public class TaskMaster : Component
 	/// </summary>
 	public void SaveTasksProgression( bool print = true )
 	{
+		if ( !Connection.Local.IsHost )
+			return;
+
 		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
 
 		// If future updates contain new tasks or we're live adding newer ones, save those to the file too
@@ -405,7 +409,7 @@ public class TaskMaster : Component
 
 				foreach ( var subtask in activeSubtasks )
 				{
-					if ( subtask.TriggerSignal.Identifier == signalIdentifier ) // If the given signal is the one we're looking for, increase the subtask's progress
+					if ( subtask.TriggerSignal.Identifier == signalIdentifier || subtask != null && subtask.TriggerSignal != null && signalIdentifier.Contains( subtask.TriggerSignal.Identifier ) ) // If the given signal is the one we're looking for, increase the subtask's progress
 						subtask.CurrentAmount++;
 				}
 			}
@@ -418,14 +422,14 @@ public class TaskMaster : Component
 
 				foreach ( var scriptedEvent in allActiveScriptedEvents )
 				{
-					if ( scriptedEvent.SignalToComplete == signalIdentifier )
+					if ( scriptedEvent.SignalToComplete == signalIdentifier || scriptedEvent != null && scriptedEvent.SignalToTrigger != null && signalIdentifier.Contains( scriptedEvent.SignalToComplete ) )
 						scriptedEvent.Completed = true;
 				}
 
 				var allInactiveScriptedEvents = storyMaster.CurrentSaunaDay.ScriptedEvents.Where( x => !x.Triggered && (x.SignalToTrigger != null || x.SignalToTrigger != "" || x.SignalToTrigger != String.Empty) );
 				foreach ( var inactiveEvent in allInactiveScriptedEvents )
 				{
-					if ( inactiveEvent.SignalToTrigger == signalIdentifier )
+					if ( inactiveEvent.SignalToTrigger == signalIdentifier || inactiveEvent != null && inactiveEvent.SignalToTrigger != null && signalIdentifier.Contains( inactiveEvent.SignalToTrigger ) )
 						storyMaster.BeginScriptedEvent( inactiveEvent, inactiveEvent.TriggerDelay );
 				}
 			}

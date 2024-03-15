@@ -1,13 +1,13 @@
 {
   "RootObject": {
-    "__guid": "fe338945-94c4-4838-8acb-a3b25589d66b",
-    "Name": "aapo",
+    "__guid": "cd84d7dc-1f15-4370-9704-41740d24fce4",
+    "Name": "Aapo",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "DialogueTree",
-        "__guid": "bd13e4a8-09bd-40c4-8315-c333c78dd28d",
+        "__guid": "50e3df15-d42f-49ef-8560-212eceee5dfe",
         "DialogueStages": [
           {
             "IsInitial": true,
@@ -31,49 +31,19 @@
                       "Type": "input"
                     },
                     {
-                      "Id": 2,
-                      "Type": "scene.ref",
-                      "Properties": {
-                        "component": {
-                          "_type": "component",
-                          "component_id": "bd13e4a8-09bd-40c4-8315-c333c78dd28d",
-                          "go": "fe338945-94c4-4838-8acb-a3b25589d66b",
-                          "component_type": "DialogueTree"
-                        }
-                      },
-                      "UserData": {
-                        "Position": "-16,128"
-                      }
-                    },
-                    {
-                      "Id": 4,
-                      "Type": "property.get",
-                      "ParentId": 2,
-                      "Properties": {
-                        "_name": "Name",
-                        "_type": "package.fish.sauna/Sauna.DialogueTree"
-                      }
-                    },
-                    {
                       "Id": 5,
                       "Type": "call",
                       "Properties": {
-                        "_name": "PlaySoundWithNameAndSubtitle",
                         "_isStatic": true,
+                        "_name": "PlaySoundWithNameAndSubtitle",
                         "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                       },
                       "UserData": {
-                        "Position": "304,-16"
+                        "Position": "352,-16"
                       }
                     }
                   ],
                   "Links": [
-                    {
-                      "SrcId": 2,
-                      "SrcName": "_result",
-                      "DstId": 4,
-                      "DstName": "_target"
-                    },
                     {
                       "SrcId": 0,
                       "SrcName": "_signal",
@@ -81,8 +51,7 @@
                       "DstName": "_signal"
                     },
                     {
-                      "SrcId": 4,
-                      "SrcName": "_result",
+                      "Value": "Aapo",
                       "DstId": 5,
                       "DstName": "name"
                     },
@@ -98,13 +67,15 @@
                       "DstName": "sound"
                     },
                     {
-                      "Value": "Hello human, I am Joe, Mama.",
+                      "Value": "Hey nephew, hiding from your nagging wife again?",
                       "DstId": 5,
                       "DstName": "subtitle"
                     }
                   ]
                 },
-                "InteractDistance": 125
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
               }
             ]
           },
@@ -136,36 +107,12 @@
                       "Id": 1,
                       "Type": "call",
                       "Properties": {
-                        "_name": "PlaySoundWithNameAndSubtitle",
                         "_isStatic": true,
+                        "_name": "PlaySoundWithNameAndSubtitle",
                         "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                       },
                       "UserData": {
                         "Position": "288,-16"
-                      }
-                    },
-                    {
-                      "Id": 3,
-                      "Type": "scene.ref",
-                      "Properties": {
-                        "component": {
-                          "_type": "component",
-                          "component_id": "bd13e4a8-09bd-40c4-8315-c333c78dd28d",
-                          "go": "fe338945-94c4-4838-8acb-a3b25589d66b",
-                          "component_type": "DialogueTree"
-                        }
-                      },
-                      "UserData": {
-                        "Position": "-32,144"
-                      }
-                    },
-                    {
-                      "Id": 4,
-                      "Type": "property.get",
-                      "ParentId": 3,
-                      "Properties": {
-                        "_name": "Name",
-                        "_type": "package.fish.sauna/Sauna.DialogueTree"
                       }
                     }
                   ],
@@ -177,8 +124,7 @@
                       "DstName": "_signal"
                     },
                     {
-                      "SrcId": 4,
-                      "SrcName": "_result",
+                      "Value": "Aapo",
                       "DstId": 1,
                       "DstName": "name"
                     },
@@ -194,31 +140,237 @@
                       "DstName": "sound"
                     },
                     {
-                      "Value": "Leave me alone human, I am busy mewing.",
+                      "Value": "Nephew you need to find a new job soon.",
                       "DstId": 1,
                       "DstName": "subtitle"
-                    },
-                    {
-                      "SrcId": 3,
-                      "SrcName": "_result",
-                      "DstId": 4,
-                      "DstName": "_target"
                     }
                   ]
                 },
-                "InteractDistance": 125
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          },
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "722d989a-e2d2-4b8f-9b53-09a1593d643f",
+                    "ReferencedComponentTypes": []
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "input"
+                    },
+                    {
+                      "Id": 1,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": true,
+                        "_name": "PlaySoundWithNameAndSubtitle",
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      },
+                      "UserData": {
+                        "Position": "288,32"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_signal",
+                      "DstId": 1,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "Value": "Aapo",
+                      "DstId": 1,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_target",
+                      "DstId": 1,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "",
+                      "DstId": 1,
+                      "DstName": "sound"
+                    },
+                    {
+                      "Value": "Hey nephew we should go fishing sometimes.",
+                      "DstId": 1,
+                      "DstName": "subtitle"
+                    }
+                  ]
+                },
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          },
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "4dad0d52-b78b-47b2-b248-8e093ab3de0a",
+                    "ReferencedComponentTypes": []
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "input"
+                    },
+                    {
+                      "Id": 1,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": true,
+                        "_name": "PlaySoundWithNameAndSubtitle",
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      },
+                      "UserData": {
+                        "Position": "288,64"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_signal",
+                      "DstId": 1,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "Value": "Aapo",
+                      "DstId": 1,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_target",
+                      "DstId": 1,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "",
+                      "DstId": 1,
+                      "DstName": "sound"
+                    },
+                    {
+                      "Value": "Nephew I might have some work for you later. Ask tomorrow.",
+                      "DstId": 1,
+                      "DstName": "subtitle"
+                    }
+                  ]
+                },
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          },
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "240aa97a-60f9-4dd0-a039-362191b5e99c",
+                    "ReferencedComponentTypes": []
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "input"
+                    },
+                    {
+                      "Id": 1,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": true,
+                        "_name": "PlaySoundWithNameAndSubtitle",
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      },
+                      "UserData": {
+                        "Position": "288,64"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_signal",
+                      "DstId": 1,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "Value": "Aapo",
+                      "DstId": 1,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_target",
+                      "DstId": 1,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "",
+                      "DstId": 1,
+                      "DstName": "sound"
+                    },
+                    {
+                      "Value": "Tomorrow I might have a job for you nephew.",
+                      "DstId": 1,
+                      "DstName": "subtitle"
+                    }
+                  ]
+                },
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
               }
             ]
           }
         ],
         "HasRandomDialogues": true,
         "HostOnly": false,
-        "Name": "Joe Mama",
+        "Name": "Aaapo",
         "Networked": false
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "de6a201d-adc5-4af5-8460-e86afa3401d2",
+        "__guid": "c9e37305-e0d7-4ea2-99cf-5f74bc0229c3",
         "End": "0,0,68",
         "IsTrigger": false,
         "Radius": 12,
@@ -228,14 +380,14 @@
     ],
     "Children": [
       {
-        "__guid": "b3ede046-5950-4e3c-b6c9-c64807f09ce8",
+        "__guid": "c314e0b9-0738-4f4d-b6a4-f7d01c05e89a",
         "Name": "Model",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "Character",
-            "__guid": "c462f7f6-d3fb-4067-b3a3-e9a0b62e5440",
+            "__guid": "1d9cafbb-39d1-4bb0-a397-192a45a7a9df",
             "Clothes": [
               "models/clothes/cap/cap.vmdl",
               "models/clothes/boots/boots.vmdl",
@@ -248,7 +400,7 @@
           },
           {
             "__type": "SkinnedModelRenderer",
-            "__guid": "1dbcce4c-8691-403e-87b9-b6f06847f9be",
+            "__guid": "a6fc75b6-7789-4a66-bd59-9cde663e5df5",
             "BodyGroups": 1365,
             "CreateBoneObjects": false,
             "Model": "models/guy/guy.vmdl",

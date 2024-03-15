@@ -164,6 +164,9 @@ public class EventMaster : Component
 	/// </summary>
 	public void SaveEventsProgression( bool print = true )
 	{
+		if ( !Connection.Local.IsHost )
+			return;
+
 		var allEvents = Scene.Components.GetAll<EventDefinition>()
 				.DistinctBy( x => x.EventName ); // Avoid multiple event definitions
 

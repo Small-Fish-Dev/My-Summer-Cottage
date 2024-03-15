@@ -1,0 +1,94 @@
+{
+  "RootObject": {
+    "__guid": "dee8a5d7-be0f-4445-a18d-70908032ffbf",
+    "Name": "airsoft_rifle",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "WeaponComponent",
+        "__guid": "1f86c9ad-f27f-49dd-b453-744cfbec06a4",
+        "Ammo": 0,
+        "Ammunition": "prefabs/items/bbammo.prefab",
+        "Capacity": 5,
+        "Damage": 1,
+        "DamageType": "Mild",
+        "ExitAttachment": "rifle_end",
+        "FireSound": "sounds/rifle/airsoft_shoot.sound",
+        "FireSpeed": 1,
+        "HasRecoil": true,
+        "HitForce": 200,
+        "Mode": "Pressed",
+        "Range": 1500,
+        "ReloadCooldown": 0.5,
+        "ReloadSound": "sounds/rifle/rifle_reload.sound",
+        "StrengthRange": "10.00,25.00,1",
+        "Type": "Ranged"
+      },
+      {
+        "__type": "ItemEquipment",
+        "__guid": "57a8b656-4821-4cfc-a6a1-5c9f0a850338",
+        "Attachment": "hand_R",
+        "AttachmentTransform": {
+          "UniformScale": 1,
+          "Scale": "1,1,1",
+          "Rotation": "0,0,0,1"
+        },
+        "Count": 0,
+        "Description": "Enough to kill small animals. The pellets bounce off of bigger ones!",
+        "HideBodygroups": "None",
+        "HoldType": "Rifle",
+        "Icon": {
+          "Model": "models/rifle/bbgun.vmdl",
+          "MaterialGroup": "",
+          "Colour": "0,0,0,1",
+          "Position": "26.4,9.75,-8.85",
+          "Rotation": "-0.06089492,-0.1934283,-0.2940505,0.9340298",
+          "Guid": "c7c3be1e-fd98-49f4-8cd0-738f23b1b5b0"
+        },
+        "MaxStack": 0,
+        "Name": "Airsoft Rifle",
+        "SellPrice": -1,
+        "Slot": "Hand",
+        "UpdatePosition": false,
+        "UseSkinTint": false,
+        "WeightInGrams": 2100
+      },
+      {
+        "__type": "SkinnedModelRenderer",
+        "__guid": "f6b29354-e64c-45f0-b724-f4904e0e7c6b",
+        "BodyGroups": 3,
+        "CreateBoneObjects": false,
+        "Model": "models/rifle/bbgun.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ModelCollider",
+        "__guid": "90e3651b-c370-48e0-a53d-dd26fbb5ad57",
+        "IsTrigger": false,
+        "Model": "models/rifle/m38.vmdl",
+        "Static": false
+      },
+      {
+        "__type": "Rigidbody",
+        "__guid": "e6d160eb-6016-4311-9785-5915e4044652",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

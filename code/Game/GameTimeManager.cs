@@ -95,8 +95,8 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 
 	public float InGameHours => MathX.Remap( InGameSeconds, 0, 86400, 0f, 24f );
 
+	[HostSync] public int RandomSeed { get; private set; } // In the future we use something else, RealTimeSince doesn't sync.
 	[HostSync] public bool IsDayOver { get; private set; } = false;
-
 	[HostSync] private RealTimeSince InGameTime { get; set; }
 	[HostSync] private float? FrozenTime { get; set; }
 	private Angles _cloudAngle = new();
@@ -105,9 +105,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	{
 		if ( !Game.IsPlaying ) return;
 
-		// TODO: Load the current day from the save file
-		// NewDay();
-
+		RandomSeed = Game.Random.Int( 500 );
 		SetTimeFromSeconds( StartTime );
 		OnDayStart?.Invoke();
 
@@ -254,7 +252,6 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	/// <summary>
 	/// End the day. Freezes the time and emits the OnDayEnd event.
 	/// </summary>
-	[Broadcast( NetPermission.HostOnly )]
 	public void EndDay()
 	{
 		if ( Scene.IsEditor && !Game.IsPlaying ) return;
@@ -270,6 +267,7 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 		FreezeTime();
 
 		IsDayOver = true;
+		RandomSeed += 1;
 
 		OnDayEnd?.Invoke();
 	}
@@ -304,7 +302,6 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	/// Starts the day
 	/// Unfreezes the time if it's frozen.
 	/// </summary>
-	[Broadcast( NetPermission.HostOnly )]
 	public void StartDay()
 	{
 		SetTimeFromSeconds( StartTime );

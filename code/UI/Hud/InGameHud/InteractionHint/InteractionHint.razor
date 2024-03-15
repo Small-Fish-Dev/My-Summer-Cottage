@@ -14,7 +14,7 @@
 		<div class="interactions">
 			@foreach(var interaction in _interactions)
 			{
-				if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
+				if (interaction is null || !WithinBounds(interaction) || !IsAccessible(interaction) )
 					continue;
 
                 var coolDown = !interaction.Cooldown || interaction.CooldownTimer;
@@ -84,7 +84,7 @@
 
         foreach ( var interaction in _interactions )
         {
-            if ( !WithinBounds(interaction) || !IsAccessible(interaction) )
+            if ( interaction is null || !WithinBounds(interaction) || !IsAccessible(interaction) )
                 continue;
 
             var canInteract = !interaction.Disabled.InvokeOrDefault();

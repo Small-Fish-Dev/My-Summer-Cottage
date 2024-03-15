@@ -124,7 +124,7 @@ public class Character : Component, Component.ExecuteInEditor
 		{
 			var model = Components.GetOrCreate<SkinnedModelRenderer>();
 			model.Model = Model.Load( "models/guy/guy.vmdl" );
-			model.SceneModel.Morphs.Set( "fat", Fatness );
+			model.SceneModel?.Morphs.Set( "fat", Fatness );
 
 			foreach ( var piece in Clothes )
 			{

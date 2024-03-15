@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "__guid": "d4520984-7762-4548-98c7-0f99c8c66f97",
-    "Name": "huntershopguy",
+    "Name": "Hunting Shop Guy",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
@@ -50,20 +50,20 @@
                       "Type": "property.get",
                       "ParentId": 2,
                       "Properties": {
-                        "_name": "Name",
-                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                        "_type": "package.fish.sauna/Sauna.DialogueTree",
+                        "_name": "Name"
                       }
                     },
                     {
-                      "Id": 5,
+                      "Id": 6,
                       "Type": "call",
                       "Properties": {
-                        "_name": "PlaySoundWithNameAndSubtitle",
                         "_isStatic": true,
-                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                        "_name": "SpeakWithSubtitle"
                       },
                       "UserData": {
-                        "Position": "304,-16"
+                        "Position": "272,0"
                       }
                     }
                   ],
@@ -77,143 +77,38 @@
                     {
                       "SrcId": 0,
                       "SrcName": "_signal",
-                      "DstId": 5,
+                      "DstId": 6,
                       "DstName": "_signal"
                     },
                     {
                       "SrcId": 4,
                       "SrcName": "_result",
-                      "DstId": 5,
+                      "DstId": 6,
                       "DstName": "name"
                     },
                     {
                       "SrcId": 0,
                       "SrcName": "_target",
-                      "DstId": 5,
+                      "DstId": 6,
                       "DstName": "obj"
                     },
                     {
-                      "Value": "",
-                      "DstId": 5,
-                      "DstName": "sound"
-                    },
-                    {
-                      "Value": "Hello human, I am Joe, Mama.",
-                      "DstId": 5,
+                      "Value": "Welcome to the hunting shop. ",
+                      "DstId": 6,
                       "DstName": "subtitle"
                     }
                   ]
                 },
-                "InteractDistance": 125
-              }
-            ]
-          },
-          {
-            "IsInitial": true,
-            "AddToDialoguePool": true,
-            "DialoguePoolWeight": 1,
-            "AvailableResponses": [
-              {
-                "Keybind": "Use",
-                "Description": "Talk",
-                "Action": {
-                  "Version": 5,
-                  "UserData": {
-                    "Title": "Action",
-                    "id": "86112947-4de3-43e8-a272-c8189af6b0ae",
-                    "ReferencedComponentTypes": []
-                  },
-                  "Variables": [],
-                  "Nodes": [
-                    {
-                      "Id": 0,
-                      "Type": "input",
-                      "UserData": {
-                        "Position": "-64,0"
-                      }
-                    },
-                    {
-                      "Id": 1,
-                      "Type": "call",
-                      "Properties": {
-                        "_name": "PlaySoundWithNameAndSubtitle",
-                        "_isStatic": true,
-                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
-                      },
-                      "UserData": {
-                        "Position": "288,-16"
-                      }
-                    },
-                    {
-                      "Id": 3,
-                      "Type": "scene.ref",
-                      "Properties": {
-                        "component": {
-                          "_type": "component",
-                          "component_id": "4484269c-f845-4141-9e51-2dac9bc258a8",
-                          "go": "d4520984-7762-4548-98c7-0f99c8c66f97",
-                          "component_type": "DialogueTree"
-                        }
-                      },
-                      "UserData": {
-                        "Position": "-32,144"
-                      }
-                    },
-                    {
-                      "Id": 4,
-                      "Type": "property.get",
-                      "ParentId": 3,
-                      "Properties": {
-                        "_name": "Name",
-                        "_type": "package.fish.sauna/Sauna.DialogueTree"
-                      }
-                    }
-                  ],
-                  "Links": [
-                    {
-                      "SrcId": 0,
-                      "SrcName": "_signal",
-                      "DstId": 1,
-                      "DstName": "_signal"
-                    },
-                    {
-                      "SrcId": 4,
-                      "SrcName": "_result",
-                      "DstId": 1,
-                      "DstName": "name"
-                    },
-                    {
-                      "SrcId": 0,
-                      "SrcName": "_target",
-                      "DstId": 1,
-                      "DstName": "obj"
-                    },
-                    {
-                      "Value": "",
-                      "DstId": 1,
-                      "DstName": "sound"
-                    },
-                    {
-                      "Value": "Leave me alone human, I am busy mewing.",
-                      "DstId": 1,
-                      "DstName": "subtitle"
-                    },
-                    {
-                      "SrcId": 3,
-                      "SrcName": "_result",
-                      "DstId": 4,
-                      "DstName": "_target"
-                    }
-                  ]
-                },
-                "InteractDistance": 125
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
               }
             ]
           }
         ],
         "HasRandomDialogues": true,
         "HostOnly": false,
-        "Name": "Gas Station Guy",
+        "Name": "Hunting Shop Guy",
         "Networked": false
       },
       {
