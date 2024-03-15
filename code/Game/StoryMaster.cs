@@ -1,6 +1,7 @@
 using Editor;
 using Sandbox;
 using Sauna.Event;
+using System.Diagnostics.Metrics;
 using static Sauna.TaskMaster;
 
 namespace Sauna;
@@ -165,7 +166,12 @@ public class StoryMaster : Component
 		if ( CurrentSaunaDay == null ) return;
 
 		foreach ( var scriptedEvent in CurrentSaunaDay.ScriptedEvents )
-			scriptedEvent.TriggerTime = Game.Random.Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
+		{
+			if ( scriptedEvent.TriggerTimeslot.Range == RangedFloat.RangeType.Between )
+				scriptedEvent.TriggerTime = scriptedEvent.TriggerTimeslot.GetValue();
+			else
+				scriptedEvent.TriggerTime = scriptedEvent.TriggerTimeslot.FixedValue;
+		}
 	}
 
 	/// <summary>
@@ -362,13 +368,6 @@ public class StoryMaster : Component
 		if ( storyMaster._taskMaster != null && _instance != null )
 			storyMaster.ClearTasks();
 
-		storyMaster.StartStoryDay();
-		storyMaster._timeManager.StartDay();
-
-		storyMaster._eventMaster.UnloadAllEvents();
-		storyMaster.LoadEventPool( (int)storyMaster._timeManager.RandomSeed );
-		storyMaster.SetRandomDialogues( (int)storyMaster._timeManager.RandomSeed );
-
 		if ( Connection.Local.IsHost )
 		{
 			if ( storyMaster.CurrentSaunaDay.Completed )
@@ -378,6 +377,13 @@ public class StoryMaster : Component
 			storyMaster.LoadNPCs();
 			storyMaster.LoadItems();
 		}
+
+		storyMaster.StartStoryDay();
+		storyMaster._timeManager.StartDay();
+
+		storyMaster._eventMaster.UnloadAllEvents();
+		storyMaster.LoadEventPool( (int)storyMaster._timeManager.RandomSeed );
+		storyMaster.SetRandomDialogues( (int)storyMaster._timeManager.RandomSeed );
 
 		if ( Player.Local.IsValid() )
 			Player.Local.Respawn();
@@ -477,9 +483,13 @@ public class StoryMaster : Component
 				{
 					if ( scriptedEvent.SignalToTrigger == null || scriptedEvent.SignalToTrigger == "" || scriptedEvent.SignalToTrigger == String.Empty )
 					{
-						if ( scriptedEvent.TriggerTime <= currentHour || scriptedEvent.TriggerTimeslot.FixedValue <= currentHour )
+						if ( scriptedEvent.TriggerTime != 0 )
 						{
-							BeginScriptedEvent( scriptedEvent );
+							if ( scriptedEvent.TriggerTime <= currentHour )
+							{
+								BeginScriptedEvent( scriptedEvent );
+							}
+
 						}
 					}
 				}
