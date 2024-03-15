@@ -46,8 +46,7 @@
         if ( Input.Pressed( InputAction.LeftClick ) )
             RotateGuy( 1 );
 
-        var targetRotation = Rotation.FromYaw( 90f + rotated * 90f );
-        Model.Transform.Rotation = Rotation.Slerp( Model.Transform.Rotation, targetRotation, 4f * Time.Delta );
+        Model.Transform.Rotation *= Model.RootMotion.Rotation;
 
         var transform = Model?.GetAttachment( "mugshot_sign" ) ?? global::Transform.Zero;
         GameObject.Transform.World = transform;
