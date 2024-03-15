@@ -30,6 +30,9 @@ public partial class Player
 
 				if ( TargetedGameObject.Components.TryGet<CapsuleCollider>( out var capsule ) )
 					InteractionBounds = new BBox( capsule.Start - capsule.Radius, capsule.End + capsule.Radius );
+
+				if ( TargetedGameObject.Components.TryGet<ModelCollider>( out var model ) )
+					InteractionBounds = model.Model.PhysicsBounds;
 			}
 		}
 		else
@@ -52,6 +55,9 @@ public partial class Player
 
 				if ( TargetedGameObject.Components.TryGet<CapsuleCollider>( out var capsule ) )
 					InteractionBounds = new BBox( capsule.Start - capsule.Radius, capsule.End + capsule.Radius );
+
+				if ( TargetedGameObject.Components.TryGet<ModelCollider>( out var model ) )
+					InteractionBounds = model.Model.PhysicsBounds;
 			}
 		}
 
