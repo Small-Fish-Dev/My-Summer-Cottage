@@ -1,23 +1,23 @@
 {
   "RootObject": {
     "__guid": "dee8a5d7-be0f-4445-a18d-70908032ffbf",
-    "Name": "rifle",
+    "Name": "airsoft_rifle",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "WeaponComponent",
-        "__guid": "bd818a45-adc2-4842-aadb-d03a7b333fd1",
+        "__guid": "1f86c9ad-f27f-49dd-b453-744cfbec06a4",
         "Ammo": 0,
-        "Ammunition": "prefabs/items/762ammo.prefab",
+        "Ammunition": "prefabs/items/bbammo.prefab",
         "Capacity": 5,
-        "Damage": 10,
-        "DamageType": "Serious",
+        "Damage": 1,
+        "DamageType": "Mild",
         "ExitAttachment": "rifle_end",
-        "FireSound": "sounds/rifle/rifle-shoot.sound",
-        "FireSpeed": 2,
+        "FireSound": "sounds/rifle/rifle_reload.sound",
+        "FireSpeed": 1,
         "HasRecoil": true,
-        "HitForce": 300,
+        "HitForce": 200,
         "Mode": "Pressed",
         "Range": 1500,
         "ReloadCooldown": 0.5,
@@ -27,7 +27,7 @@
       },
       {
         "__type": "ItemEquipment",
-        "__guid": "82684b8e-db42-4593-b6fe-e49a38e7bde9",
+        "__guid": "57a8b656-4821-4cfc-a6a1-5c9f0a850338",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -35,44 +35,44 @@
           "Rotation": "0,0,0,1"
         },
         "Count": 0,
-        "Description": "Zombies? I don\u0027t think so. Two rounds with the rifle? Take em out.",
+        "Description": "Enough to kill small animals. The pellets bounce off of bigger ones!",
         "HideBodygroups": "None",
         "HoldType": "Rifle",
         "Icon": {
-          "Model": "models/rifle/m38.vmdl",
+          "Model": "models/rifle/bbgun.vmdl",
           "MaterialGroup": "",
           "Colour": "0,0,0,1",
-          "Position": "31.35,-6,-3.3",
-          "Rotation": "0.2983258,0.04915666,0.8452149,0.440678",
-          "Guid": "bf46650f-a389-46fd-9acf-4c3cfbf9c5f5"
+          "Position": "26.4,9.75,-8.85",
+          "Rotation": "-0.06089492,-0.1934283,-0.2940505,0.9340298",
+          "Guid": "c7c3be1e-fd98-49f4-8cd0-738f23b1b5b0"
         },
         "MaxStack": 0,
-        "Name": "Ukko-Pekka M/39",
+        "Name": "Airsoft Rifle",
         "SellPrice": -1,
         "Slot": "Hand",
         "UpdatePosition": false,
         "UseSkinTint": false,
-        "WeightInGrams": 4800
+        "WeightInGrams": 2100
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "d0ef558b-7f85-453c-882a-83f0e4405984",
-        "BodyGroups": 18446744073709551611,
+        "__guid": "f6b29354-e64c-45f0-b724-f4904e0e7c6b",
+        "BodyGroups": 3,
         "CreateBoneObjects": false,
-        "Model": "models/rifle/m38.vmdl",
+        "Model": "models/rifle/bbgun.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "ModelCollider",
-        "__guid": "67761245-7bf6-4add-81a2-d6adb28c9085",
+        "__guid": "90e3651b-c370-48e0-a53d-dd26fbb5ad57",
         "IsTrigger": false,
         "Model": "models/rifle/m38.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
-        "__guid": "8d24479e-36eb-4ec2-b843-69e982a0ee0f",
+        "__guid": "e6d160eb-6016-4311-9785-5915e4044652",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,

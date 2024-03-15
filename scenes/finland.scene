@@ -141,9 +141,7 @@
         {
           "__type": "TaskMaster",
           "__guid": "d2a393cf-ef36-4245-862f-f27007570807",
-          "CurrentTasks": [
-            "resources/tasks/wife_tasks/wife.catch_fish_tutorial.task"
-          ]
+          "CurrentTasks": []
         },
         {
           "__type": "EventMaster",
@@ -611,7 +609,6 @@
                   }
                 },
                 {
-                  "TriggerByTime": true,
                   "SignalToTrigger": "stove.begin_sauna",
                   "TriggerDelay": 8,
                   "TriggerTimeslot": "10.50,12.00,1",
@@ -650,8 +647,8 @@
                         "Id": 16,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "368,224"
@@ -661,9 +658,9 @@
                         "Id": 17,
                         "Type": "call",
                         "Properties": {
+                          "_name": "Receive",
                           "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_type": "package.fish.sauna/Sauna.Message"
                         },
                         "UserData": {
                           "Position": "416,-160"
@@ -695,35 +692,6 @@
                         }
                       },
                       {
-                        "Id": 22,
-                        "Type": "resource.ref",
-                        "Properties": {
-                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task",
-                          "T": "package.fish.sauna/Sauna.SaunaTask"
-                        },
-                        "UserData": {
-                          "Position": "-96,160"
-                        }
-                      },
-                      {
-                        "Id": 23,
-                        "Type": "property.get",
-                        "ParentId": 22,
-                        "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
-                        }
-                      },
-                      {
-                        "Id": 24,
-                        "Type": "property.get",
-                        "ParentId": 22,
-                        "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
-                        }
-                      },
-                      {
                         "Id": 25,
                         "Type": "call",
                         "Properties": {
@@ -742,6 +710,35 @@
                         "Properties": {
                           "_name": "GameObject",
                           "_type": "Sandbox.Game/Sandbox.Component"
+                        }
+                      },
+                      {
+                        "Id": 28,
+                        "Type": "resource.ref",
+                        "Properties": {
+                          "T": "package.fish.sauna/Sauna.SaunaTask",
+                          "value": "resources/tasks/wife_tasks/wife.catch_fish_tutorial.task"
+                        },
+                        "UserData": {
+                          "Position": "-80,224"
+                        }
+                      },
+                      {
+                        "Id": 29,
+                        "Type": "property.get",
+                        "ParentId": 28,
+                        "Properties": {
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
+                        }
+                      },
+                      {
+                        "Id": 30,
+                        "Type": "property.get",
+                        "ParentId": 28,
+                        "Properties": {
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -771,13 +768,13 @@
                         "DstName": "player"
                       },
                       {
-                        "SrcId": 22,
+                        "SrcId": 28,
                         "SrcName": "_result",
                         "DstId": 15,
                         "DstName": "taskToAdd"
                       },
                       {
-                        "SrcId": 22,
+                        "SrcId": 28,
                         "SrcName": "_result",
                         "DstId": 16,
                         "DstName": "_target"
@@ -789,13 +786,13 @@
                         "DstName": "_signal"
                       },
                       {
-                        "SrcId": 24,
+                        "SrcId": 30,
                         "SrcName": "_result",
                         "DstId": 17,
                         "DstName": "content"
                       },
                       {
-                        "SrcId": 23,
+                        "SrcId": 29,
                         "SrcName": "_result",
                         "DstId": 17,
                         "DstName": "sender"
@@ -821,18 +818,6 @@
                         "Value": 1,
                         "DstId": 21,
                         "DstName": "seconds"
-                      },
-                      {
-                        "SrcId": 22,
-                        "SrcName": "_result",
-                        "DstId": 23,
-                        "DstName": "_target"
-                      },
-                      {
-                        "SrcId": 22,
-                        "SrcName": "_result",
-                        "DstId": 24,
-                        "DstName": "_target"
                       },
                       {
                         "SrcId": 21,
@@ -861,6 +846,18 @@
                         "SrcId": 13,
                         "SrcName": "player",
                         "DstId": 26,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 28,
+                        "SrcName": "_result",
+                        "DstId": 29,
+                        "DstName": "_target"
+                      },
+                      {
+                        "SrcId": 28,
+                        "SrcName": "_result",
+                        "DstId": 30,
                         "DstName": "_target"
                       }
                     ]
@@ -993,7 +990,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.3721817,0,0.9281599",
+          "Rotation": "0,0.9184247,0,0.3955959",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1909,34 +1906,6 @@
             {
               "__type": "Seat",
               "__guid": "de4a5a1a-af32-4ba2-8373-66af1bc6668d",
-              "SeatTransform": {
-                "UniformScale": 1,
-                "Position": "14.47999,0,0",
-                "Scale": "1,1,1",
-                "Rotation": "0,0,0,1"
-              }
-            }
-          ]
-        },
-        {
-          "__guid": "6d07ed40-1c8a-40b8-8c0b-44f7687f58b4",
-          "Name": "Bench",
-          "Position": "84.97656,39.31763,16.19263",
-          "Rotation": "0,0,0.9238796,-0.3826834",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "BoxCollider",
-              "__guid": "9616dc9f-43fa-47f1-a2c8-e4ae68c260f5",
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "25,25,1",
-              "Static": false
-            },
-            {
-              "__type": "Seat",
-              "__guid": "96f5fe58-bfd4-41c6-9aad-2edb5532785a",
               "SeatTransform": {
                 "UniformScale": 1,
                 "Position": "14.47999,0,0",
@@ -3561,6 +3530,33 @@
           "TriggerSignalIdentifier": "lake.reached"
         }
       ]
+    },
+    {
+      "__guid": "dd81aec0-2325-45b0-bde8-30c21c4fe000",
+      "Name": "radio",
+      "Position": "3669.273,-3123.119,2495.689",
+      "Rotation": "0,0,-0.9659258,0.258819",
+      "Enabled": true,
+      "NetworkMode": 1,
+      "__Prefab": "prefabs/items/radio.prefab"
+    },
+    {
+      "__guid": "06739ce9-b331-4052-9a40-195abb7191ea",
+      "Name": "airsoft_rifle",
+      "Position": "3376.884,-3196.975,2447",
+      "Rotation": "-0.01672864,0.03679115,0.4135721,0.9095739",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/airsoft_rifle.prefab"
+    },
+    {
+      "__guid": "eeba89af-8acb-4c77-929f-c7a0dc9b078d",
+      "Name": "bbammo",
+      "Position": "3352.544,-3233.682,2445.098",
+      "Rotation": "0.001719078,0.02676922,-0.06406271,0.9975854",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/bbammo.prefab"
     }
   ],
   "SceneProperties": {
@@ -3586,7 +3582,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T00:51:03.1904629\u002B01:00",
+  "LastSaved": "2024-03-15T01:41:06.814893\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
