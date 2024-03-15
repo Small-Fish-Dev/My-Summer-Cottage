@@ -1,13 +1,13 @@
 {
   "RootObject": {
-    "__guid": "3997672f-0a6f-425f-be9c-42bc7ee41025",
+    "__guid": "b2dec6b0-159e-4872-9d5e-a234eee71ae3",
     "Name": "piss_tree",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "EventDefinition",
-        "__guid": "0928e5b4-3947-4443-b178-215375e196b9",
+        "__guid": "e20cffe4-49a4-486d-a0a8-7a4e0ad8aaeb",
         "AddToEventPool": true,
         "EventName": "piss_tree",
         "EventSignals": [],
@@ -18,7 +18,7 @@
       },
       {
         "__type": "EventComponent",
-        "__guid": "0cdc6190-838a-4177-82ad-d829cc211c61",
+        "__guid": "a8bc08c7-eca1-4b4a-8dae-c527a1fc10e1",
         "DisabledWhilePlaying": [],
         "DisableOnTrigger": [],
         "Event": {
@@ -47,7 +47,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "2dbf10ad-459e-428a-b2c2-c919dd88cd21"
+                  "go": "27f13105-0ea6-4ae7-b505-730c7c449c64"
                 }
               },
               "UserData": {
@@ -188,8 +188,8 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "0cdc6190-838a-4177-82ad-d829cc211c61",
-                  "go": "3997672f-0a6f-425f-be9c-42bc7ee41025",
+                  "component_id": "a8bc08c7-eca1-4b4a-8dae-c527a1fc10e1",
+                  "go": "b2dec6b0-159e-4872-9d5e-a234eee71ae3",
                   "component_type": "EventComponent"
                 }
               },
@@ -210,8 +210,8 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "0cdc6190-838a-4177-82ad-d829cc211c61",
-                  "go": "3997672f-0a6f-425f-be9c-42bc7ee41025",
+                  "component_id": "a8bc08c7-eca1-4b4a-8dae-c527a1fc10e1",
+                  "go": "b2dec6b0-159e-4872-9d5e-a234eee71ae3",
                   "component_type": "EventComponent"
                 }
               },
@@ -225,7 +225,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "51a43c2e-f9c9-4acc-b80f-5ffba381c489"
+                  "go": "c48bf71c-7b5b-4cbd-910b-7e00992d96bf"
                 }
               },
               "UserData": {
@@ -289,13 +289,37 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "0cdc6190-838a-4177-82ad-d829cc211c61",
-                  "go": "3997672f-0a6f-425f-be9c-42bc7ee41025",
+                  "component_id": "a8bc08c7-eca1-4b4a-8dae-c527a1fc10e1",
+                  "go": "b2dec6b0-159e-4872-9d5e-a234eee71ae3",
                   "component_type": "EventComponent"
                 }
               },
               "UserData": {
                 "Position": "1392,-64"
+              }
+            },
+            {
+              "Id": 36,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "ed3cf71f-033b-4950-8add-cb5b1fc359de"
+                }
+              },
+              "UserData": {
+                "Position": "-288,-336"
+              }
+            },
+            {
+              "Id": 37,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "0,-352"
               }
             }
           ],
@@ -544,6 +568,23 @@
               "SrcName": "_result",
               "DstId": 33,
               "DstName": "component"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 37,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 36,
+              "SrcName": "_result",
+              "DstId": 37,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 37,
+              "DstName": "_value"
             }
           ]
         },
@@ -553,8 +594,8 @@
         "Triggers": [
           {
             "_type": "component",
-            "component_id": "51285ed8-baa0-41a3-8feb-cc0201d43ee6",
-            "go": "0b23e077-e089-4156-ab12-f404470999f3",
+            "component_id": "a06f6faf-a6f8-4e7b-8d57-867003bff1d3",
+            "go": "7184548d-a957-4b8a-8ad7-799846841462",
             "component_type": "EventPissTrigger"
           }
         ]
@@ -562,7 +603,7 @@
     ],
     "Children": [
       {
-        "__guid": "2dbf10ad-459e-428a-b2c2-c919dd88cd21",
+        "__guid": "27f13105-0ea6-4ae7-b505-730c7c449c64",
         "Name": "tree",
         "Scale": "0.1,0.1,0.1",
         "Enabled": true,
@@ -570,7 +611,7 @@
         "Components": [
           {
             "__type": "ModelRenderer",
-            "__guid": "e6c9904e-1868-4b43-8b15-8228f02002c4",
+            "__guid": "dc896965-1000-4dfe-acd6-8e744701f847",
             "BodyGroups": 18446744073709551615,
             "Model": "models/nature/oak_tree_a/oak_tree_a.vmdl",
             "RenderType": "On",
@@ -578,7 +619,7 @@
           },
           {
             "__type": "ModelCollider",
-            "__guid": "95cad8ee-be6c-4b30-a1b8-b94a6fb3568c",
+            "__guid": "45aa08ea-42c3-41f4-8369-196040661d4b",
             "IsTrigger": false,
             "Model": "models/nature/oak_tree_a/oak_tree_a.vmdl",
             "Static": true
@@ -586,7 +627,7 @@
         ],
         "Children": [
           {
-            "__guid": "0b23e077-e089-4156-ab12-f404470999f3",
+            "__guid": "7184548d-a957-4b8a-8ad7-799846841462",
             "Name": "piss_trigger",
             "Scale": "10,10,10",
             "Enabled": true,
@@ -594,7 +635,7 @@
             "Components": [
               {
                 "__type": "EventPissTrigger",
-                "__guid": "51285ed8-baa0-41a3-8feb-cc0201d43ee6",
+                "__guid": "a06f6faf-a6f8-4e7b-8d57-867003bff1d3",
                 "Extents": "24,24,24",
                 "MaxPollingRate": 5,
                 "Offset": "0,0,12",
@@ -605,9 +646,19 @@
         ]
       },
       {
-        "__guid": "51a43c2e-f9c9-4acc-b80f-5ffba381c489",
+        "__guid": "c48bf71c-7b5b-4cbd-910b-7e00992d96bf",
         "Name": "reward given?",
         "NetworkMode": 2
+      },
+      {
+        "__guid": "ed3cf71f-033b-4950-8add-cb5b1fc359de",
+        "Name": "piss_indicator",
+        "Position": "0,0,26.72013",
+        "Rotation": "0,0.6087614,0,0.7933534",
+        "Tags": "particles",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/particles/piss_indicator.prefab"
       }
     ]
   },

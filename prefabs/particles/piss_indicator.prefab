@@ -1,0 +1,176 @@
+{
+  "RootObject": {
+    "__guid": "adb17542-2641-459c-b67f-4786e41b19b8",
+    "Name": "piss_indicator",
+    "Rotation": "0,0.7071067,0,0.7071068",
+    "Tags": "particles",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ParticleEffect",
+        "__guid": "d2652780-af3c-4098-a5cb-958935ae34a7",
+        "Alpha": {
+          "Constants": "0.8,0,0,0"
+        },
+        "ApplyColor": true,
+        "ApplyRotation": true,
+        "ApplyShape": true,
+        "Bounce": {
+          "Constants": "1,0,0,0"
+        },
+        "Brightness": {
+          "Constants": "1.2,0,0,0"
+        },
+        "Bumpiness": {},
+        "Collision": false,
+        "CollisionRadius": 1,
+        "Damping": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "Constants": "1.2,1,0,0"
+        },
+        "DieOnCollisionChance": {},
+        "Force": true,
+        "ForceDirection": "0,0,-100",
+        "ForceScale": {
+          "Constants": "1,0,0,0"
+        },
+        "Friction": {
+          "Constants": "1,0,0,0"
+        },
+        "Gradient": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "GradientA": {
+            "color": [
+              {
+                "t": 0.5,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "GradientB": {
+            "color": [
+              {
+                "t": 0.5,
+                "c": "1,1,1,1"
+              }
+            ],
+            "alpha": []
+          },
+          "ConstantA": "0.92442,1,0.09302,1",
+          "ConstantB": "0.53023,0.48551,0.19483,1"
+        },
+        "Lifetime": {
+          "Constants": "0.8,0,0,0"
+        },
+        "MaxParticles": 50,
+        "PerParticleTimeScale": {
+          "Constants": "1,0,0,0"
+        },
+        "PreWarm": 0,
+        "PushStrength": {},
+        "Roll": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "Constants": "-5,5,0,0"
+        },
+        "Scale": {
+          "Type": "Range",
+          "Evaluation": "Particle",
+          "CurveA": {
+            "rangey": "10,11",
+            "frames": [
+              {
+                "y": 0.5
+              },
+              {
+                "x": 0.2665563,
+                "y": 0.7878788
+              },
+              {
+                "x": 1,
+                "y": 0.5
+              }
+            ]
+          },
+          "CurveB": {
+            "rangey": "10,11",
+            "frames": [
+              {
+                "y": 0.34469697
+              },
+              {
+                "x": 0.79304636,
+                "y": 0.071969695
+              },
+              {
+                "x": 1,
+                "y": 0.34848484
+              }
+            ]
+          },
+          "Constants": "1,3,0,0"
+        },
+        "SequenceId": {},
+        "SequenceSpeed": {
+          "Constants": "1,0,0,0"
+        },
+        "SequenceTime": {
+          "Constants": "1,0,0,0"
+        },
+        "SheetSequence": false,
+        "Space": "World",
+        "StartVelocity": {
+          "Constants": "13.4,0,0,0"
+        },
+        "Stretch": {},
+        "TimeScale": 1,
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ParticleSpriteRenderer",
+        "__guid": "2095a426-a0c8-4076-a556-2de0c5d93e6e",
+        "Additive": false,
+        "BlurAmount": 1,
+        "BlurOpacity": 0.95,
+        "BlurSpacing": 0.81,
+        "DepthFeather": 50,
+        "FaceVelocity": true,
+        "FogStrength": 1,
+        "LeadingTrail": true,
+        "MotionBlur": true,
+        "Opaque": false,
+        "RotationOffset": 90,
+        "Scale": 0.98,
+        "Shadows": false,
+        "SortMode": "Unsorted",
+        "Texture": "textures/rain/rain_water_drop.vtex"
+      },
+      {
+        "__type": "ParticleConeEmitter",
+        "__guid": "74a85146-120d-4fd5-b6db-f36a358a68c0",
+        "Burst": 0,
+        "ConeAngle": 18.37,
+        "ConeFar": 50,
+        "ConeNear": 23.30003,
+        "Delay": 0,
+        "DestroyOnEnd": false,
+        "Duration": 10,
+        "InVolume": false,
+        "Loop": true,
+        "OnEdge": false,
+        "Rate": 10
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

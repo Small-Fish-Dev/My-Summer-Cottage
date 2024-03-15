@@ -8699,6 +8699,49 @@
 													m_flRandomTimeStart = 0.0
 													m_flRandomTimeEnd = 0.0
 												},
+												{
+													_class = "CAnimStateTransition"
+													m_conditions = 
+													[
+														{
+															_class = "CFinishedCondition"
+															m_comparisonOp = 0
+															m_option = "FinishedConditionOption_OnFinished"
+															m_bIsFinished = true
+														},
+														{
+															_class = "CParameterAnimCondition"
+															m_comparisonOp = 0
+															m_paramID = 
+															{
+																m_id = 1284611343
+															}
+															m_comparisonValue = 
+															{
+																m_nType = 1
+																m_data = true
+															}
+														},
+													]
+													m_blendDuration = 0.4
+													m_destState = 
+													{
+														m_id = 1692160238
+													}
+													m_bReset = false
+													m_resetCycleOption = "Beginning"
+													m_flFixedCycleValue = 0.0
+													m_blendCurve = 
+													{
+														m_vControlPoint1 = [ 0.266667, 0.0 ]
+														m_vControlPoint2 = [ 0.5, 1.0 ]
+													}
+													m_bForceFootPlant = false
+													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
+												},
 											]
 											m_tags = [  ]
 											m_tagBehaviors = [  ]
@@ -11295,7 +11338,7 @@
 	[
 		{
 			m_name = "models/rifle/m38.vmdl"
-			m_bEnabled = false
+			m_bEnabled = true
 		},
 		{
 			m_name = "models/fishingrod/saunarod.vmdl"
@@ -11303,7 +11346,7 @@
 		},
 		{
 			m_name = "models/saunavihta/saunavihta.vmdl"
-			m_bEnabled = true
+			m_bEnabled = false
 		},
 		{
 			m_name = "models/guy/penoid.vmdl"

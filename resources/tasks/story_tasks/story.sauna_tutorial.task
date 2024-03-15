@@ -13,7 +13,7 @@
   "FailedSignal": "task.failed.Time to relax",
   "TimeLimited": false,
   "TimeLimitInSeconds": 120,
-  "PersistThroughSessions": false,
+  "PersistThroughSessions": true,
   "RunOnStartEverySession": false,
   "OnStart": null,
   "OnSuccess": {
@@ -34,8 +34,8 @@
         "Type": "call",
         "Properties": {
           "_type": "package.fish.sauna/Sauna.Player",
-          "_name": "CaptureMemory",
-          "_isStatic": false
+          "_isStatic": false,
+          "_name": "CaptureMemory"
         },
         "UserData": {
           "Position": "416,32"

@@ -233,7 +233,7 @@ partial class Player
 		var newRot = Rotation.FromRoll( Vector3.Dot( Transform.Rotation.Right, MoveHelper.Velocity.Normal ) ) * 2f;
 		_lastRot = Rotation.Lerp( _lastRot, newRot, Time.Delta * 5f );
 		Camera.Transform.Rotation *= _lastRot;
-		Camera.FieldOfView = MathX.LerpTo( Camera.FieldOfView, Input.Down( "view" ) ? Zoom : 90f, 10f * Time.Delta );
+		Camera.FieldOfView = MathX.LerpTo( Camera.FieldOfView, Input.Down( InputAction.Zoom ) ? Zoom : 90f, 10f * Time.Delta );
 		Camera.ZNear = 2.5f;
 		UpdateHeadVisibility();
 	}

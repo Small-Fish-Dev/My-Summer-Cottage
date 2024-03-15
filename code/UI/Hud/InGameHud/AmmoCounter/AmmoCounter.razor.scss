@@ -1,0 +1,25 @@
+﻿AmmoCounter {
+    .container {
+        padding: 5px;
+        padding-right: 20px;
+        flex-direction: row;
+        gap: 10px;
+        background-image: url(ui/hud/dialogue_name.png);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        image-rendering: pixelated;
+        background-image-tint: rgba(white, 0.8);
+    }
+
+    .ammo {
+        width: 28px;
+        aspect-ratio: 1;
+        image-rendering: pixelated;
+        background-size: 100%;
+        background-image: url(ui/hud/ammo.png);
+
+        &.empty {
+            background-image: url(ui/hud/ammo_empty.png);
+        }
+    }
+}

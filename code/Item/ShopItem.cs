@@ -12,8 +12,6 @@ public class ShopItem : Component
 
 	private readonly SoundEvent _purchaseSound = ResourceLibrary.Get<SoundEvent>( "sounds/misc/purchase.sound" );
 
-	private LegacyParticles purchase;
-
 	protected override void OnStart()
 	{
 		GameObject.SetupNetworking();
@@ -34,7 +32,6 @@ public class ShopItem : Component
 			ShowWhenDisabled = () => true,
 			Sound = () => _purchaseSound,
 		} );
-		purchase = LegacyParticles.Create( "particles/purchase.vpcf", GameObject.Transform.World );
 	}
 
 	private void PurchaseItem( Player interactor, GameObject obj )
@@ -49,7 +46,7 @@ public class ShopItem : Component
 
 		interactor.Money -= Price;
 		var receivedItem = interactor.Inventory.GiveItem( purchasedItem );
-		purchase.replay();
+		LegacyParticles.Create( "particles/purchase.vpcf", GameObject.Transform.World, deleteTime: 1000 );
 		if ( !receivedItem )
 			o.Transform.Position = Transform.Position;
 	}
