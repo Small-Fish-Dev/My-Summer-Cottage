@@ -423,18 +423,6 @@
                         }
                       },
                       {
-                        "Id": 2,
-                        "Type": "call",
-                        "Properties": {
-                          "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.TaskMaster",
-                          "_name": "AssignEveryoneNewTask"
-                        },
-                        "UserData": {
-                          "Position": "240,112"
-                        }
-                      },
-                      {
                         "Id": 4,
                         "Type": "resource.ref",
                         "Properties": {
@@ -457,14 +445,10 @@
                         }
                       },
                       {
-                        "Id": 7,
-                        "Type": "property.get",
-                        "Properties": {
-                          "_type": "Sandbox.Engine/Sandbox.Resource",
-                          "_name": "ResourcePath"
-                        },
+                        "Id": 8,
+                        "Type": "event.assigntasktoeveryone",
                         "UserData": {
-                          "Position": "16,176"
+                          "Position": "224,80"
                         }
                       }
                     ],
@@ -476,22 +460,10 @@
                         "DstName": "_result"
                       },
                       {
-                        "SrcId": 2,
+                        "SrcId": 8,
                         "SrcName": "_signal",
                         "DstId": 1,
                         "DstName": "_signal"
-                      },
-                      {
-                        "SrcId": 0,
-                        "SrcName": "_signal",
-                        "DstId": 2,
-                        "DstName": "_signal"
-                      },
-                      {
-                        "SrcId": 7,
-                        "SrcName": "_result",
-                        "DstId": 2,
-                        "DstName": "filePath"
                       },
                       {
                         "SrcId": 4,
@@ -500,10 +472,16 @@
                         "DstName": "_target"
                       },
                       {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 8,
+                        "DstName": "_signal"
+                      },
+                      {
                         "SrcId": 4,
                         "SrcName": "_result",
-                        "DstId": 7,
-                        "DstName": "_target"
+                        "DstId": 8,
+                        "DstName": "taskToAdd"
                       }
                     ]
                   }
@@ -1345,7 +1323,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.977997,0,0.2086188",
+          "Rotation": "0,0.379652,0,-0.9251294",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -5923,7 +5901,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T17:00:44.2532861-04:00",
+  "LastSaved": "2024-03-15T17:50:17.0347269-04:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
