@@ -83,16 +83,19 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 			_fishesByProbability.Sum( x => x.Probability );
 	}
 
+	protected override void DrawGizmos()
+	{
+		if ( Game.IsPlaying || !Gizmo.HasSelected )
+			return;
+
+		Gizmo.Draw.Color = Color.Blue;
+		Gizmo.Draw.IgnoreDepth = true;
+		Gizmo.Draw.LineBBox( _water.Bounds + _water.Transform.Position );
+		Gizmo.Draw.IgnoreDepth = false;
+	}
+
 	protected override void OnUpdate()
 	{
-		using ( Gizmo.Scope() )
-		{
-			Gizmo.Draw.Color = Color.Blue;
-			Gizmo.Draw.IgnoreDepth = true;
-			Gizmo.Draw.LineBBox( _water.Bounds + _water.Transform.Position );
-			Gizmo.Draw.IgnoreDepth = false;
-		}
-
 		if ( !Game.IsPlaying )
 			return;
 

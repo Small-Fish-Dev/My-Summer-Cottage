@@ -79,9 +79,12 @@ public sealed class WaterComponent : Component
 
 	protected override void DrawGizmos()
 	{
+		if ( Game.IsPlaying )
+			return;
+		
 		Gizmo.Draw.Color = Color.Blue;
 		Gizmo.Draw.LineBBox( Bounds );
-
+		
 		Gizmo.Draw.Color = Color.Blue.WithAlpha( 0.15f );
 		Gizmo.Draw.SolidBox( Bounds );
 	}
