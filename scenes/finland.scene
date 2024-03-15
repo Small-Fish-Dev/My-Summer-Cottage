@@ -1,5 +1,5 @@
 {
-  "__guid": "248aeaed-e4c4-4c1f-b147-02a84f05b351",
+  "__guid": "1c52bb40-e31e-4f97-bc28-ac55b87c7f5a",
   "GameObjects": [
     {
       "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -865,6 +865,7 @@
                   }
                 },
                 {
+                  "TriggerByTime": true,
                   "SignalToTrigger": "task.success.Catch some fish",
                   "TriggerDelay": 8,
                   "TriggerTimeslot": "10.50,12.00,1",
@@ -1246,7 +1247,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.9962851,0,0.08611593",
+          "Rotation": "0,-0.1099824,0,-0.9939336",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1902,7 +1903,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "73da8896-6be3-4946-8ba1-73f007c6259e",
+                "component_id": "6f40fa6a-137d-4ed6-84e8-05e251b0edb6",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -3868,6 +3869,82 @@
       "Tags": "animal,npc,prey",
       "NetworkMode": 2,
       "__Prefab": "prefabs/npcs/rabbit.prefab"
+    },
+    {
+      "__guid": "6ec8a0e5-21d2-447d-b3fd-ff51d595b1f5",
+      "Name": "Town",
+      "Position": "-8024.961,7874.76,2443.951",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "__guid": "20cab4db-5d37-4c6a-830a-9e6e4b8c12d3",
+          "Extents": "5000,5000,500",
+          "MaxPollingRate": 20,
+          "Offset": "0,0,0",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "town.entered"
+        }
+      ]
+    },
+    {
+      "__guid": "339f64ef-ec43-46ca-9ea2-ad05192bcda2",
+      "Name": "Tavern",
+      "Position": "-8353.985,6244.288,2453.41",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "__guid": "b3d9bb6e-0f59-4c28-82d5-0c179332d09e",
+          "Extents": "300,700,500",
+          "MaxPollingRate": 15,
+          "Offset": "0,0,0",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "tavern.entered"
+        }
+      ]
+    },
+    {
+      "__guid": "43c5d134-e60a-4ef1-898d-faff01f6254c",
+      "Name": "HuntingShop",
+      "Position": "-7264.989,6145.587,2461.758",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "__guid": "fb173f6e-48da-48b7-a6c9-19ee9cbb71a3",
+          "Extents": "250,400,300",
+          "MaxPollingRate": 15,
+          "Offset": "0,0,0",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "huntingshop.entered"
+        }
+      ]
+    },
+    {
+      "__guid": "e56af707-14b8-45c3-a0d2-89158bed6692",
+      "Name": "GasStation",
+      "Position": "-5934.454,385.6001,2446.628",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "__guid": "15070510-ccae-4ea8-982a-026cc09150ef",
+          "Extents": "300,700,300",
+          "MaxPollingRate": 15,
+          "Offset": "0,0,0",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "gasstation.entered"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -3893,7 +3970,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T05:43:33.0111013\u002B01:00",
+  "LastSaved": "2024-03-15T06:39:19.0427658\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
