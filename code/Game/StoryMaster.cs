@@ -399,10 +399,14 @@ public class StoryMaster : Component
 		storyMaster.NextGameDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
-
-		storyMaster.UnloadNPCs();
-		storyMaster.UnloadItems();
 		storyMaster.ClearTriggeredEvents();
+
+		if ( Connection.Local.IsHost )
+		{
+			storyMaster.UnloadNPCs();
+			storyMaster.UnloadItems();
+		}
+
 		storyMaster.SaveGame();
 	}
 
@@ -439,10 +443,14 @@ public class StoryMaster : Component
 
 	public void SaveGame()
 	{
-		SaveStoryProgression();
-		_taskMaster.SaveTasksProgression();
-		_eventMaster.SaveEventsProgression();
 		Player.Save();
+
+		if ( Connection.Local.IsHost )
+		{
+			SaveStoryProgression();
+			_taskMaster.SaveTasksProgression();
+			_eventMaster.SaveEventsProgression();
+		}
 	}
 
 	protected override void OnStart()
@@ -502,8 +510,7 @@ public class StoryMaster : Component
 	{
 		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
 
-		if ( storyMaster != null )
-			storyMaster.SaveGame();
+		storyMaster?.SaveGame();
 	}
 
 	[ConCmd( "sauna_reset" )]
