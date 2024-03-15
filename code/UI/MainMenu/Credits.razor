@@ -92,9 +92,9 @@
 @code {
 
 	/// <summary>
-	///	Measured in pixels per second
+	///	Measured in percents of screen height per second
 	/// </summary>
-	public const float ScrollSpeed = 10;
+	public const float ScrollSpeed = 0.01f;
 
 	public const float ScrollDelay = 2;
 
@@ -112,7 +112,7 @@
 	{
 		if ( _canScroll )
 		{
-			_creditsPanel.ScrollVelocity += Vector2.Up * ScrollSpeed * RealTime.Delta;
+			_creditsPanel.ScrollVelocity += Vector2.Up * _creditsPanel.Box.Rect.Height * ScrollSpeed * RealTime.Delta;
 		}
 
 		if ( (_creditsPanel.ScrollSize.y - _creditsPanel.ScrollOffset.y).AlmostEqual( 0 ) )
