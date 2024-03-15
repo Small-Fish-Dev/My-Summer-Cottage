@@ -248,7 +248,7 @@ public class StoryMaster : Component
 	/// </summary>
 	public void SaveStoryProgression( bool print = true )
 	{
-		if ( !Player.Local.Connection.IsHost )
+		if ( !Connection.Local.IsHost )
 			return;
 
 		FileSystem.Data.WriteJson( "story.json", StoryProgression );
@@ -267,9 +267,11 @@ public class StoryMaster : Component
 		Log.Info( "Story reset!" );
 	}
 
-	public void LoadEventPool()
+	public void LoadEventPool( int randomSeed )
 	{
 		if ( CurrentSaunaDay == null ) return;
+
+		Game.SetRandomSeed( randomSeed );
 
 		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Common ) )
 		{
@@ -335,7 +337,6 @@ public class StoryMaster : Component
 		}
 	}
 
-	[ConCmd]
 	[Broadcast( NetPermission.HostOnly )]
 	public static void StartSession()
 	{
@@ -358,28 +359,30 @@ public class StoryMaster : Component
 
 		if ( storyMaster == null ) return;
 
-		if ( storyMaster.CurrentSaunaDay.Completed )
-			storyMaster.NextStoryDay();
-
-		if ( storyMaster._taskMaster != null && TaskMaster._instance != null )
+		if ( storyMaster._taskMaster != null && _instance != null )
 			storyMaster.ClearTasks();
 
-		storyMaster.LoadStoryProgression();
 		storyMaster.StartStoryDay();
 		storyMaster._timeManager.StartDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
-		storyMaster.LoadEventPool();
+		storyMaster.LoadEventPool( (int)storyMaster._timeManager.RandomSeed );
+		storyMaster.SetRandomDialogues( (int)storyMaster._timeManager.RandomSeed );
 
-		storyMaster.LoadNPCs();
-		storyMaster.LoadItems();
-		storyMaster.SetRandomDialogues();
+		if ( Connection.Local.IsHost )
+		{
+			if ( storyMaster.CurrentSaunaDay.Completed )
+				storyMaster.NextStoryDay();
+
+			storyMaster.LoadStoryProgression();
+			storyMaster.LoadNPCs();
+			storyMaster.LoadItems();
+		}
 
 		if ( Player.Local.IsValid() )
 			Player.Local.Respawn();
 	}
 
-	[ConCmd]
 	[Broadcast( NetPermission.HostOnly )]
 	public static void EndSession()
 	{
@@ -394,17 +397,23 @@ public class StoryMaster : Component
 		storyMaster.NextGameDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
-
-		storyMaster.UnloadNPCs();
-		storyMaster.UnloadItems();
 		storyMaster.ClearTriggeredEvents();
+
+		if ( Connection.Local.IsHost )
+		{
+			storyMaster.UnloadNPCs();
+			storyMaster.UnloadItems();
+		}
+
 		storyMaster.SaveGame();
 	}
 
-	public void SetRandomDialogues()
+	public void SetRandomDialogues( int randomSeed )
 	{
 		var allDialogues = Scene.GetAllComponents<DialogueTree>()
 			.Where( x => x.HasRandomDialogues );
+
+		Game.SetRandomSeed( randomSeed );
 
 		foreach ( var dialogue in allDialogues )
 			dialogue.SelectRandomDialogue();
@@ -420,7 +429,6 @@ public class StoryMaster : Component
 
 	public void ClearTasks()
 	{
-
 		foreach ( var task in ActiveTasks.ToList() )
 		{
 			if ( task.Completed || !task.PersistThroughSessions )
@@ -433,18 +441,22 @@ public class StoryMaster : Component
 
 	public void SaveGame()
 	{
-		SaveStoryProgression();
-		_taskMaster.SaveTasksProgression();
-		_eventMaster.SaveEventsProgression();
 		Player.Save();
+
+		if ( Connection.Local.IsHost )
+		{
+			SaveStoryProgression();
+			_taskMaster.SaveTasksProgression();
+			_eventMaster.SaveEventsProgression();
+		}
 	}
 
 	protected override void OnStart()
 	{
 		if ( Scene.IsEditor ) return;
-		if ( IsProxy ) return;
 
-		StartSession();
+		if ( Connection.Local.IsHost )
+			StartSession();
 	}
 
 	protected override void OnFixedUpdate()
@@ -496,8 +508,7 @@ public class StoryMaster : Component
 	{
 		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
 
-		if ( storyMaster != null )
-			storyMaster.SaveGame();
+		storyMaster?.SaveGame();
 	}
 
 	[ConCmd( "sauna_reset" )]
