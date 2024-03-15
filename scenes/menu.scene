@@ -1,8 +1,8 @@
 {
-  "Id": "77a25011-cad6-4b1b-9482-8be5d5db415b",
+  "__guid": "77a25011-cad6-4b1b-9482-8be5d5db415b",
   "GameObjects": [
     {
-      "Id": "5e37abdc-e2ff-46db-acf5-dd0014ee826c",
+      "__guid": "5e37abdc-e2ff-46db-acf5-dd0014ee826c",
       "Name": "Camera",
       "Position": "592.7048,-566.9012,125.6472",
       "Rotation": "0,0,-0.2588191,0.9659259",
@@ -12,6 +12,7 @@
       "Components": [
         {
           "__type": "CameraComponent",
+          "__guid": "f7b34dc8-677d-4363-86fa-c2b8a0e122ff",
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 87.15,
@@ -29,7 +30,7 @@
       ]
     },
     {
-      "Id": "0da95ef8-f429-4abb-9501-3de19e9c234e",
+      "__guid": "0da95ef8-f429-4abb-9501-3de19e9c234e",
       "Name": "Background",
       "Position": "-708.5555,-812.1717,356.4269",
       "Enabled": true,
@@ -37,6 +38,7 @@
       "Components": [
         {
           "__type": "MapInstance",
+          "__guid": "98a1a0f4-1de1-4980-81f4-b421820972ec",
           "MapName": "sauna_forest",
           "UseMapFromLaunch": false
         }
@@ -44,7 +46,7 @@
       "Children": []
     },
     {
-      "Id": "492c45ba-6cb7-4021-810c-a697d5055bda",
+      "__guid": "492c45ba-6cb7-4021-810c-a697d5055bda",
       "Name": "Sun",
       "Position": "268.204,-372.1999,295.3483",
       "Rotation": "-0.1830126,0.25,-0.1830127,0.9330128",
@@ -54,6 +56,7 @@
       "Components": [
         {
           "__type": "DirectionalLight",
+          "__guid": "1d9f0ef4-762b-4940-98c8-1b75be780219",
           "FogMode": "Enabled",
           "FogStrength": 1,
           "LightColor": "0.91373,0.98039,1,1",
@@ -63,7 +66,7 @@
       ]
     },
     {
-      "Id": "ff1b16c4-2f07-4b41-8d8b-08ba7bbb9b16",
+      "__guid": "ff1b16c4-2f07-4b41-8d8b-08ba7bbb9b16",
       "Name": "Hud",
       "Position": "845.0969,-692.9158,72.12822",
       "Enabled": true,
@@ -71,22 +74,15 @@
       "Components": [
         {
           "__type": "ScreenPanel",
+          "__guid": "b57504c1-cd15-4960-8843-60854d91efc2",
           "AutoScreenScale": true,
           "Opacity": 1,
           "Scale": 1,
           "ZIndex": 100
         },
         {
-          "__type": "MainMenuHud"
-        },
-        {
-          "__type": "IntroPanel",
-          "IntroSound": "sounds/ui/smallfishintro_temp_fix.sound",
-          "MainMenu": {
-            "_type": "component",
-            "go": "ff1b16c4-2f07-4b41-8d8b-08ba7bbb9b16",
-            "component_type": "MainMenuHud"
-          }
+          "__type": "MainMenuHud",
+          "__guid": "ee748200-8ae8-427a-ba2d-7357f82a1c05"
         }
       ]
     }
@@ -114,6 +110,8 @@
   },
   "Title": "menu",
   "Description": "",
-  "LastSaved": "2024-03-12T14:09:38.5923865\u002B02:00",
+  "LastSaved": "2024-03-14T21:28:55.3661644-04:00",
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

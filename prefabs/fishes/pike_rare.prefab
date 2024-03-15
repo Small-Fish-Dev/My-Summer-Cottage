@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "1144340d-028b-4220-8456-d8fe88a98504",
+    "__guid": "1144340d-028b-4220-8456-d8fe88a98504",
     "Name": "pike_rare",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "Fish",
+        "__guid": "82694fc3-54ba-488f-bcb0-e055aec4ca21",
         "CostPerKilo": 20,
         "IsTrash": false,
         "MinimumWaterDepth": 15,
@@ -14,6 +16,7 @@
       },
       {
         "__type": "ItemComponent",
+        "__guid": "6c829d75-6fce-40f7-89d6-e3852aa84ca1",
         "Count": 0,
         "Description": "A carnivorous fish species commonly found in fresh water as well as moderately salty waters.",
         "Icon": {
@@ -30,30 +33,33 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "AnimationGraph": null,
+        "__guid": "3adcdd58-946b-42ca-b3be-fe6efb9bbee1",
         "BodyGroups": 18446744073709551615,
-        "BoneMergeTarget": null,
         "CreateBoneObjects": false,
         "MaterialGroup": "rare",
-        "MaterialOverride": null,
         "Model": "models/fauna/fish/pike/pike.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "ModelCollider",
+        "__guid": "4d0956f3-7f37-4106-96e5-b37cf45be091",
         "IsTrigger": false,
         "Model": "models/fauna/fish/pike/pike.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "0b02f2ee-e050-442c-9ed4-171bebbaa20b",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
-        "Locking": {},
+        "Locking": {
+          "Pitch": true,
+          "Roll": true
+        },
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }
@@ -63,5 +69,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

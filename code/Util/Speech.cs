@@ -1,17 +1,36 @@
 ﻿namespace Sauna;
 
+public struct SpeechSettings
+{
+	public float Volume = 1;
+	public Vector3 Position = 0;
+	public Rotation Rotation = Rotation.Identity;
+	public float Pitch = 1;
+	public float Decibels = 70;
+	public bool ListenLocal = false;
+	public int Delay = 180;
+	public int Accuracy = 2;
+	public GameObject GameObject;
+
+	public SpeechSettings() { }
+}
+
 public struct Speech
 {
 	const int SOUNDS = 15;
 	private List<SoundHandle> sounds;
 
+	public SpeechSettings Settings { get; private set; }
 	public bool Stopped { get; private set; }
+	public float Duration { get; private set; }
 
-	public static Speech Create( string text, int delay = 240, SoundHandle handle = null )
+	public static Speech Create( string text, SpeechSettings settings = default )
 	{
 		var speech = new Speech()
 		{
 			sounds = new(),
+			Settings = settings,
+			Duration = (float)text.Length / settings.Accuracy * settings.Delay / 1000f
 		};
 
 		var characters = text
@@ -22,27 +41,35 @@ public struct Speech
 		// Begin generating speech.
 		new Action( async () =>
 		{
-			for ( int i = 0; i < characters.Length; i++ )
+			for ( int i = 0; i < characters.Length / settings.Accuracy; i++ )
 			{
-				var character = characters[i];
+				var character = characters[Math.Min( i * settings.Accuracy, characters.Length - 1 )];
 				if ( char.IsWhiteSpace( character ) )
 				{
-					await GameTask.Delay( delay );
+					await GameTask.Delay( settings.Delay );
 					continue;
 				}
 
 				Game.SetRandomSeed( (byte)character );
 				var index = Game.Random.Int( 1, SOUNDS );
-				var sound = Sound.PlayFile( SoundFile.Load( $"sounds/speech/{index}.sound" ) ); // Figure out something better for this cuz dis shit sucks!
-				sound.Rotation = handle?.Rotation ?? default;
-				sound.Position = handle?.Position ?? default;
-				sound.Volume = handle?.Volume ?? 1;
-				sound.Pitch = handle?.Pitch ?? 1;
-				sound.Decibels = handle?.Decibels ?? 70;
-				sound.ListenLocal = handle?.ListenLocal ?? default;
+				var soundFile = SoundFile.Load( $"sounds/speech/{index}.sound" );
+				var sound = settings.GameObject.IsValid() 
+					? settings.GameObject.PlaySound( soundFile.ResourcePath )
+					: Sound.PlayFile( soundFile );
+
+				if ( !settings.GameObject.IsValid() )
+				{
+					sound.Rotation = settings.Rotation;
+					sound.Position = settings.Position;
+				}
+
+				sound.Volume = settings.Volume;
+				sound.Pitch = settings.Pitch;
+				sound.Decibels = settings.Decibels;
+				sound.ListenLocal = settings.ListenLocal;
 
 				speech.sounds.Add( sound );
-				await GameTask.Delay( delay );
+				await GameTask.Delay( settings.Delay );
 			}
 		} ).Invoke();
 
@@ -63,9 +90,6 @@ public struct Speech
 	[ConCmd]
 	public static void TestSound( string input = "blablabla fuck you bithc!!!" )
 	{
-		var sound = Sound.PlayFile( SoundFile.Load( "sounds/speech/1.sound" ) );
-		sound.ListenLocal = true;
-		sound.Pitch = 0.6f;
-		Create( input, handle: sound );
+		Create( input, settings: new() { GameObject = Player.Local.GameObject, Pitch = 0.7f } );
 	}
 }

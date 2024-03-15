@@ -392,7 +392,120 @@
       "Description": "Go home.",
       "SubtaskOrder": 3,
       "TriggerSignal": "sauna.endsession",
-      "AmountToComplete": 1
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "a6f9382c-6ae4-4a7f-ae89-8904c3358bcd",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "416,96"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "192,128"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "target"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "GoHomeCar",
+            "DstId": 2,
+            "DstName": "name"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "7009837e-c55f-4dee-b458-d4f2e76c608c",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "240,80"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "464,96"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "GoHomeCar",
+            "DstId": 2,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "target"
+          }
+        ]
+      }
     }
   ],
   "ResourceVersion": 0,

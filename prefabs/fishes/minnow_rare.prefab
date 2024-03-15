@@ -1,12 +1,13 @@
 {
   "RootObject": {
-    "Id": "63ab4376-3345-4d5f-afaa-67d6c3981015",
+    "__guid": "63ab4376-3345-4d5f-afaa-67d6c3981015",
     "Name": "minnow_rare",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "Fish",
+        "__guid": "3b35f501-c92f-469f-85fb-55fa19f75838",
         "CostPerKilo": 45,
         "IsTrash": false,
         "MinimumWaterDepth": 15,
@@ -15,6 +16,7 @@
       },
       {
         "__type": "ItemComponent",
+        "__guid": "0ef039b1-1202-4ecb-8af7-bc0d048d9f6c",
         "Count": 0,
         "Description": "A small fresh water fish.",
         "Icon": {
@@ -30,6 +32,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
+        "__guid": "6d71e3a8-908d-4a48-8dc9-d7712270aac2",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "MaterialGroup": "rare",
@@ -39,16 +42,19 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "39defcb3-a673-437b-adfe-8ad958593359",
         "IsTrigger": false,
         "Model": "models/fauna/fish/minnow/minnow.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "9961ea00-f381-4c27-b350-ac7aa23dbd30",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {
+          "Pitch": true,
           "Roll": true
         },
         "MassOverride": 0,
@@ -62,5 +68,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

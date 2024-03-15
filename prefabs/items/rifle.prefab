@@ -1,15 +1,17 @@
 {
   "RootObject": {
-    "Id": "dee8a5d7-be0f-4445-a18d-70908032ffbf",
+    "__guid": "dee8a5d7-be0f-4445-a18d-70908032ffbf",
     "Name": "rifle",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "WeaponComponent",
+        "__guid": "bd818a45-adc2-4842-aadb-d03a7b333fd1",
         "Ammo": 0,
         "Ammunition": "prefabs/items/762ammo.prefab",
         "Capacity": 5,
-        "Damage": 100,
+        "Damage": 10,
         "DamageType": "Serious",
         "ExitAttachment": "rifle_end",
         "FireSound": "sounds/rifle/rifle-shoot.sound",
@@ -25,6 +27,7 @@
       },
       {
         "__type": "ItemEquipment",
+        "__guid": "82684b8e-db42-4593-b6fe-e49a38e7bde9",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -38,9 +41,10 @@
         "Icon": {
           "Model": "models/rifle/m38.vmdl",
           "MaterialGroup": "",
+          "Colour": "0,0,0,1",
           "Position": "31.35,-6,-3.3",
-          "Rotation": "0.2983258,0.04915657,0.8452148,0.4406781",
-          "Guid": "b33135ad-9c3d-4e6d-a25f-3562d2ba4547"
+          "Rotation": "0.2983258,0.04915666,0.8452149,0.440678",
+          "Guid": "bf46650f-a389-46fd-9acf-4c3cfbf9c5f5"
         },
         "MaxStack": 0,
         "Name": "Ukko-Pekka M/39",
@@ -52,7 +56,8 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "BodyGroups": 18446744073709551615,
+        "__guid": "d0ef558b-7f85-453c-882a-83f0e4405984",
+        "BodyGroups": 18446744073709551611,
         "CreateBoneObjects": false,
         "Model": "models/rifle/m38.vmdl",
         "RenderType": "On",
@@ -60,17 +65,20 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "67761245-7bf6-4add-81a2-d6adb28c9085",
         "IsTrigger": false,
         "Model": "models/rifle/m38.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "8d24479e-36eb-4ec2-b843-69e982a0ee0f",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }
@@ -80,5 +88,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

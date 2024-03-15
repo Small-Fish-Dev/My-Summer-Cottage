@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "6bda71a1-2762-4b22-998f-d8b7d051419e",
+    "__guid": "6bda71a1-2762-4b22-998f-d8b7d051419e",
     "Name": "banana_peel",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "EventComponent",
+        "__guid": "6e1e4dc3-e9a2-4e8f-b594-0e37b7252746",
         "DisabledWhilePlaying": [],
         "DisableOnTrigger": [],
         "Event": {
@@ -33,9 +35,9 @@
               "Type": "call",
               "Properties": {
                 "_isStatic": false,
-                "T": "package.fish.sauna/Sauna.Player",
                 "_name": "Get",
-                "_type": "Sandbox.Game/Sandbox.IComponentLister"
+                "_type": "Sandbox.Game/Sandbox.IComponentLister",
+                "T": "package.fish.sauna/Sauna.Player"
               },
               "UserData": {
                 "Position": "240,80"
@@ -115,6 +117,25 @@
               "Type": "event.triggersignal",
               "UserData": {
                 "Position": "512,208"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "1040,-160"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_name": "CaptureMemory",
+                "_type": "package.fish.sauna/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "1248,-160"
               }
             }
           ],
@@ -247,6 +268,44 @@
               "Value": "event.banana_peel_slip",
               "DstId": 12,
               "DstName": "signalIdentifier"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 13,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.6,
+              "DstId": 13,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_signal",
+              "DstId": 14,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "_target"
+            },
+            {
+              "Value": "Who the hell put this banana peel here?",
+              "DstId": 14,
+              "DstName": "caption"
+            },
+            {
+              "Value": 400,
+              "DstId": 14,
+              "DstName": "distance"
+            },
+            {
+              "Value": "banana.slip",
+              "DstId": 14,
+              "DstName": "identifier"
             }
           ]
         },
@@ -256,6 +315,7 @@
         "Triggers": [
           {
             "_type": "component",
+            "component_id": "d9c25341-fb3e-4072-85d0-34175480b5dd",
             "go": "8cd0756f-42d9-428d-a8d5-08db583e2a29",
             "component_type": "EventAreaTrigger"
           }
@@ -263,12 +323,11 @@
       },
       {
         "__type": "EventDefinition",
+        "__guid": "6169d4dd-dc2e-4972-8034-f26e6f62f32a",
         "AddToEventPool": true,
         "EventName": "Banana Peel",
         "EventSignals": [
-          {
-            "Identifier": "banana.slip"
-          }
+          "banana.slip"
         ],
         "Rarity": "Common",
         "ReinstantiateOnRestart": false,
@@ -278,17 +337,17 @@
     ],
     "Children": [
       {
-        "Id": "14ced500-a032-45af-b42e-d34891efe4fd",
+        "__guid": "14ced500-a032-45af-b42e-d34891efe4fd",
         "Name": "Model",
         "Position": "0,-0.0000008760562,4.140741",
         "Scale": "2,2,2",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "ModelRenderer",
+            "__guid": "f02091f8-203e-42fb-a64f-46813616d585",
             "BodyGroups": 18446744073709551615,
-            "MaterialGroup": null,
-            "MaterialOverride": null,
             "Model": "models/bananapeel/bananapeel.vmdl",
             "RenderType": "On",
             "Tint": "1,1,1,1"
@@ -296,12 +355,14 @@
         ]
       },
       {
-        "Id": "8cd0756f-42d9-428d-a8d5-08db583e2a29",
+        "__guid": "8cd0756f-42d9-428d-a8d5-08db583e2a29",
         "Name": "SlipTrigger",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "EventAreaTrigger",
+            "__guid": "d9c25341-fb3e-4072-85d0-34175480b5dd",
             "Extents": "20,20,30",
             "MaxPollingRate": 5,
             "Offset": "0,0,15",
@@ -316,5 +377,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

@@ -1,6 +1,7 @@
 using Editor;
 using Sandbox;
 using Sauna.Event;
+using System.Diagnostics.Metrics;
 using static Sauna.TaskMaster;
 
 namespace Sauna;
@@ -165,7 +166,12 @@ public class StoryMaster : Component
 		if ( CurrentSaunaDay == null ) return;
 
 		foreach ( var scriptedEvent in CurrentSaunaDay.ScriptedEvents )
-			scriptedEvent.TriggerTime = Game.Random.Float( scriptedEvent.TriggerTimeslot.x, scriptedEvent.TriggerTimeslot.y );
+		{
+			if ( scriptedEvent.TriggerTimeslot.Range == RangedFloat.RangeType.Between )
+				scriptedEvent.TriggerTime = scriptedEvent.TriggerTimeslot.GetValue();
+			else
+				scriptedEvent.TriggerTime = scriptedEvent.TriggerTimeslot.FixedValue;
+		}
 	}
 
 	/// <summary>
@@ -248,6 +254,9 @@ public class StoryMaster : Component
 	/// </summary>
 	public void SaveStoryProgression( bool print = true )
 	{
+		if ( !Connection.Local.IsHost )
+			return;
+
 		FileSystem.Data.WriteJson( "story.json", StoryProgression );
 
 		if ( print )
@@ -264,9 +273,11 @@ public class StoryMaster : Component
 		Log.Info( "Story reset!" );
 	}
 
-	public void LoadEventPool()
+	public void LoadEventPool( int randomSeed )
 	{
 		if ( CurrentSaunaDay == null ) return;
+
+		Game.SetRandomSeed( randomSeed );
 
 		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Common ) )
 		{
@@ -332,7 +343,6 @@ public class StoryMaster : Component
 		}
 	}
 
-	[ConCmd]
 	[Broadcast( NetPermission.HostOnly )]
 	public static void StartSession()
 	{
@@ -355,28 +365,30 @@ public class StoryMaster : Component
 
 		if ( storyMaster == null ) return;
 
-		if ( storyMaster.CurrentSaunaDay.Completed )
-			storyMaster.NextStoryDay();
-
-		if ( storyMaster._taskMaster != null && TaskMaster._instance != null )
+		if ( storyMaster._taskMaster != null && _instance != null )
 			storyMaster.ClearTasks();
 
-		storyMaster.LoadStoryProgression();
+		if ( Connection.Local.IsHost )
+		{
+			if ( storyMaster.CurrentSaunaDay.Completed )
+				storyMaster.NextStoryDay();
+
+			storyMaster.LoadStoryProgression();
+			storyMaster.LoadNPCs();
+			storyMaster.LoadItems();
+		}
+
 		storyMaster.StartStoryDay();
 		storyMaster._timeManager.StartDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
-		storyMaster.LoadEventPool();
-
-		storyMaster.LoadNPCs();
-		storyMaster.LoadItems();
-		storyMaster.SetRandomDialogues();
+		storyMaster.LoadEventPool( (int)storyMaster._timeManager.RandomSeed );
+		storyMaster.SetRandomDialogues( (int)storyMaster._timeManager.RandomSeed );
 
 		if ( Player.Local.IsValid() )
 			Player.Local.Respawn();
 	}
 
-	[ConCmd]
 	[Broadcast( NetPermission.HostOnly )]
 	public static void EndSession()
 	{
@@ -391,17 +403,23 @@ public class StoryMaster : Component
 		storyMaster.NextGameDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
-
-		storyMaster.UnloadNPCs();
-		storyMaster.UnloadItems();
 		storyMaster.ClearTriggeredEvents();
+
+		if ( Connection.Local.IsHost )
+		{
+			storyMaster.UnloadNPCs();
+			storyMaster.UnloadItems();
+		}
+
 		storyMaster.SaveGame();
 	}
 
-	public void SetRandomDialogues()
+	public void SetRandomDialogues( int randomSeed )
 	{
 		var allDialogues = Scene.GetAllComponents<DialogueTree>()
 			.Where( x => x.HasRandomDialogues );
+
+		Game.SetRandomSeed( randomSeed );
 
 		foreach ( var dialogue in allDialogues )
 			dialogue.SelectRandomDialogue();
@@ -417,7 +435,6 @@ public class StoryMaster : Component
 
 	public void ClearTasks()
 	{
-
 		foreach ( var task in ActiveTasks.ToList() )
 		{
 			if ( task.Completed || !task.PersistThroughSessions )
@@ -430,18 +447,22 @@ public class StoryMaster : Component
 
 	public void SaveGame()
 	{
-		SaveStoryProgression();
-		_taskMaster.SaveTasksProgression();
-		_eventMaster.SaveEventsProgression();
 		Player.Save();
+
+		if ( Connection.Local.IsHost )
+		{
+			SaveStoryProgression();
+			_taskMaster.SaveTasksProgression();
+			_eventMaster.SaveEventsProgression();
+		}
 	}
 
 	protected override void OnStart()
 	{
 		if ( Scene.IsEditor ) return;
-		if ( IsProxy ) return;
 
-		StartSession();
+		if ( Connection.Local.IsHost )
+			StartSession();
 	}
 
 	protected override void OnFixedUpdate()
@@ -462,9 +483,13 @@ public class StoryMaster : Component
 				{
 					if ( scriptedEvent.SignalToTrigger == null || scriptedEvent.SignalToTrigger == "" || scriptedEvent.SignalToTrigger == String.Empty )
 					{
-						if ( scriptedEvent.TriggerTime <= currentHour || scriptedEvent.TriggerTimeslot.FixedValue <= currentHour )
+						if ( scriptedEvent.TriggerTime != 0 )
 						{
-							BeginScriptedEvent( scriptedEvent );
+							if ( scriptedEvent.TriggerTime <= currentHour )
+							{
+								BeginScriptedEvent( scriptedEvent );
+							}
+
 						}
 					}
 				}
@@ -493,8 +518,7 @@ public class StoryMaster : Component
 	{
 		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
 
-		if ( storyMaster != null )
-			storyMaster.SaveGame();
+		storyMaster?.SaveGame();
 	}
 
 	[ConCmd( "sauna_reset" )]

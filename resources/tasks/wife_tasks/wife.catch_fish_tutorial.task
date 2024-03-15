@@ -1,0 +1,565 @@
+{
+  "Name": "Catch some fish",
+  "Subtitle": "Wife wants fish",
+  "Description": "The nagging wife is asking for a fish, but we can catch one instead!",
+  "Giver": "Wife",
+  "Message": "I wanna eat fish tonight, go buy one and make it quick!",
+  "TaskType": "GivenByStory",
+  "TaskRarity": "Any",
+  "IsPrimary": true,
+  "Global": false,
+  "ExperienceGiven": 50,
+  "SuccessSignal": "task.success.Catch some fish",
+  "FailedSignal": "task.failed.Catch some fish",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Equip the fishing rod",
+      "TriggerSignal": "item.equipped.Fishing Rod",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Go to the lake",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "lake.reached",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "6b7afe82-4c07-4f8a-8b95-ebd70798c944",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "512,16"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "256,64"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "target"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "FishingSpot",
+            "DstId": 2,
+            "DstName": "name"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "7ce56eef-7d31-4c15-85fd-9ccd6a70b029",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 2,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "256,96"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "560,96"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "FishingSpot",
+            "DstId": 2,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "target"
+          }
+        ]
+      }
+    },
+    {
+      "Description": "Cast your fishing hook into the lake",
+      "SubtaskOrder": 2,
+      "TriggerSignal": "item.used_1.Fishing Rod",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Catch 1 Fish (Wait for bobber to move)",
+      "SubtaskOrder": 3,
+      "TriggerSignal": "",
+      "AmountToComplete": 1,
+      "EvaluateOnTick": {
+        "Version": 5,
+        "UserData": {
+          "Title": "Evaluate On Tick",
+          "id": "1cfcd740-4413-4b80-aa76-b60505a1c050",
+          "ReferencedComponentTypes": [
+            "package.fish.sauna/Sauna.Inventory"
+          ]
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input",
+            "UserData": {
+              "Position": "-112,96"
+            }
+          },
+          {
+            "Id": 1,
+            "Type": "output",
+            "UserData": {
+              "Position": "1376,80"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "scene.get",
+            "Properties": {
+              "T": "package.fish.sauna/Sauna.Inventory"
+            },
+            "UserData": {
+              "Position": "96,96"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "416,-320"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "416,-240"
+            }
+          },
+          {
+            "Id": 5,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "416,-144"
+            }
+          },
+          {
+            "Id": 6,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "416,-64"
+            }
+          },
+          {
+            "Id": 7,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "416,32"
+            }
+          },
+          {
+            "Id": 8,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "416,112"
+            }
+          },
+          {
+            "Id": 9,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "416,208"
+            }
+          },
+          {
+            "Id": 10,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "416,288"
+            }
+          },
+          {
+            "Id": 11,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "416,384"
+            }
+          },
+          {
+            "Id": 12,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "416,464"
+            }
+          },
+          {
+            "Id": 13,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "640,-272"
+            }
+          },
+          {
+            "Id": 14,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "640,-96"
+            }
+          },
+          {
+            "Id": 15,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "640,80"
+            }
+          },
+          {
+            "Id": 16,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "640,256"
+            }
+          },
+          {
+            "Id": 17,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "640,432"
+            }
+          },
+          {
+            "Id": 18,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "832,-176"
+            }
+          },
+          {
+            "Id": 19,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "816,176"
+            }
+          },
+          {
+            "Id": 20,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "992,16"
+            }
+          },
+          {
+            "Id": 21,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "1168,96"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 21,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "_result"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 2,
+            "DstName": "_this"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Herring",
+            "DstId": 3,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 4,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Herring (rare)",
+            "DstId": 4,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 5,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Minnow",
+            "DstId": 5,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 6,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Minnow (rare)",
+            "DstId": 6,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 7,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Perch",
+            "DstId": 7,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 8,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Perch (rare)",
+            "DstId": 8,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 9,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Pike",
+            "DstId": 9,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 10,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Pike (rare)",
+            "DstId": 10,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 11,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Salmon",
+            "DstId": 11,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 12,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Salmon (rare)",
+            "DstId": 12,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_result",
+            "DstId": 13,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 4,
+            "SrcName": "_result",
+            "DstId": 13,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_result",
+            "DstId": 14,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 6,
+            "SrcName": "_result",
+            "DstId": 14,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 7,
+            "SrcName": "_result",
+            "DstId": 15,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 8,
+            "SrcName": "_result",
+            "DstId": 15,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 9,
+            "SrcName": "_result",
+            "DstId": 16,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 10,
+            "SrcName": "_result",
+            "DstId": 16,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 11,
+            "SrcName": "_result",
+            "DstId": 17,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 12,
+            "SrcName": "_result",
+            "DstId": 17,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 13,
+            "SrcName": "_result",
+            "DstId": 18,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 14,
+            "SrcName": "_result",
+            "DstId": 18,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 15,
+            "SrcName": "_result",
+            "DstId": 19,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 16,
+            "SrcName": "_result",
+            "DstId": 19,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 18,
+            "SrcName": "_result",
+            "DstId": 20,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 19,
+            "SrcName": "_result",
+            "DstId": 20,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 20,
+            "SrcName": "_result",
+            "DstId": 21,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 17,
+            "SrcName": "_result",
+            "DstId": 21,
+            "DstName": "b"
+          }
+        ]
+      }
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

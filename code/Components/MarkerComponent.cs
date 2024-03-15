@@ -22,6 +22,12 @@ public sealed class MarkerComponent : Component
 		Marker.Position = Transform.Position;
 	}
 
+	protected override void OnDisabled()
+	{
+		Marker?.Delete();
+		Marker = null;
+	}
+
 	protected override void OnDestroy()
 	{
 		Marker?.Delete();

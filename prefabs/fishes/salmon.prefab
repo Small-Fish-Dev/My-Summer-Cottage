@@ -1,12 +1,13 @@
 {
   "RootObject": {
-    "Id": "faba4ec8-eddf-46ff-9e6f-d00dd51db97c",
+    "__guid": "faba4ec8-eddf-46ff-9e6f-d00dd51db97c",
     "Name": "salmon",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "Fish",
+        "__guid": "c78dbe4a-374f-4ccb-a2ae-ee4f02018817",
         "CostPerKilo": 12,
         "IsTrash": false,
         "MinimumWaterDepth": 15,
@@ -15,6 +16,7 @@
       },
       {
         "__type": "ItemComponent",
+        "__guid": "8b179aff-e121-4fff-8a44-19b54644026b",
         "Count": 0,
         "Description": "An important and common food source around the whole world.",
         "Icon": {
@@ -31,6 +33,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
+        "__guid": "f9ba05e5-8b3f-4292-b1b4-2ea316a01437",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/fauna/fish/salmon/salmon.vmdl",
@@ -39,16 +42,19 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "9862d98e-ef33-4e63-8396-406cd9e4817c",
         "IsTrigger": false,
         "Model": "models/fauna/fish/salmon/salmon.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "5fb5aa51-cda9-4744-b296-2286a7c9f81d",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {
+          "Pitch": true,
           "Roll": true
         },
         "MassOverride": 0,
@@ -62,5 +68,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

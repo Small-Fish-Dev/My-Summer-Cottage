@@ -1,30 +1,28 @@
 {
   "RootObject": {
-    "Id": "1b3aaf26-d142-445a-a04b-59a64888e04b",
+    "__guid": "1b3aaf26-d142-445a-a04b-59a64888e04b",
     "Name": "water_bucket",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "ModelRenderer",
+        "__guid": "af3de993-3fa2-4be2-8b5d-4daebc85787f",
         "BodyGroups": 18446744073709551615,
         "Model": "models/bucket/bucket.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "WaterBucket"
+        "__type": "WaterBucket",
+        "__guid": "c49e6da8-f2d2-4bda-9ce1-72b8109a26bb"
       },
       {
         "__type": "ModelCollider",
+        "__guid": "afb507b2-1722-4dc9-9d1b-fa7ed656ef60",
         "IsTrigger": false,
         "Model": "models/bucket/bucket.vmdl",
         "Static": false
-      },
-      {
-        "__type": "Interactions",
-        "HideOnEmpty": true,
-        "ObjectInteractions": []
       }
     ],
     "Children": []
@@ -32,5 +30,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

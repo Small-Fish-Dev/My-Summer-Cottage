@@ -1,0 +1,163 @@
+{
+  "RootObject": {
+    "__guid": "d4520984-7762-4548-98c7-0f99c8c66f97",
+    "Name": "Hunting Shop Guy",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "DialogueTree",
+        "__guid": "4484269c-f845-4141-9e51-2dac9bc258a8",
+        "DialogueStages": [
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "ccf1c572-d3e0-490f-b526-8817066c0c34",
+                    "ReferencedComponentTypes": []
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "input"
+                    },
+                    {
+                      "Id": 2,
+                      "Type": "scene.ref",
+                      "Properties": {
+                        "component": {
+                          "_type": "component",
+                          "component_id": "4484269c-f845-4141-9e51-2dac9bc258a8",
+                          "go": "d4520984-7762-4548-98c7-0f99c8c66f97",
+                          "component_type": "DialogueTree"
+                        }
+                      },
+                      "UserData": {
+                        "Position": "-16,128"
+                      }
+                    },
+                    {
+                      "Id": 4,
+                      "Type": "property.get",
+                      "ParentId": 2,
+                      "Properties": {
+                        "_type": "package.fish.sauna/Sauna.DialogueTree",
+                        "_name": "Name"
+                      }
+                    },
+                    {
+                      "Id": 6,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": true,
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                        "_name": "SpeakWithSubtitle"
+                      },
+                      "UserData": {
+                        "Position": "272,0"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 2,
+                      "SrcName": "_result",
+                      "DstId": 4,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_signal",
+                      "DstId": 6,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 4,
+                      "SrcName": "_result",
+                      "DstId": 6,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_target",
+                      "DstId": 6,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "Welcome to the hunting shop. ",
+                      "DstId": 6,
+                      "DstName": "subtitle"
+                    }
+                  ]
+                },
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          }
+        ],
+        "HasRandomDialogues": true,
+        "HostOnly": false,
+        "Name": "Hunting Shop Guy",
+        "Networked": false
+      },
+      {
+        "__type": "CapsuleCollider",
+        "__guid": "e0ffd7c2-812a-4e7b-907c-66f1bbcdffab",
+        "End": "0,0,68",
+        "IsTrigger": false,
+        "Radius": 12,
+        "Start": "0,0,12",
+        "Static": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "9ba788b3-7f9d-442a-9353-38e42fc54e85",
+        "Name": "Model",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "Character",
+            "__guid": "27e23746-732e-4ecf-aef0-5848dbe0fb83",
+            "Clothes": [
+              "models/clothes/fishing_hat/fishing_hat.vmdl",
+              "models/clothes/fishing_vest/fishing_vest.vmdl",
+              "models/clothes/cargo_shorts/cargo_shorts.vmdl",
+              "models/clothes/boots/boots.vmdl"
+            ],
+            "Fatness": 0,
+            "Height": 23,
+            "HideBodyGroup": "Torso, Feet"
+          },
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "c60637f1-126b-48fa-9e62-85c219d5d4d3",
+            "BodyGroups": 1365,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

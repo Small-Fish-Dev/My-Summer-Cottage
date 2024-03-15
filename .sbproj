@@ -29,107 +29,6 @@
       "DefineConstants": "SANDBOX;ADDON;DEBUG",
       "NoWarn": "1701;1702;1591;"
     },
-    "Collision": {
-      "Defaults": {
-        "solid": "Collide",
-        "trigger": "Trigger",
-        "ladder": "Ignore",
-        "water": "Trigger",
-        "player": "Collide",
-        "npc": "Collide",
-        "bobber": "Ignore",
-        "fishing_cell": "Trigger"
-      },
-      "Pairs": [
-        {
-          "a": "solid",
-          "b": "solid",
-          "r": "Collide"
-        },
-        {
-          "a": "trigger",
-          "b": "playerclip",
-          "r": "Ignore"
-        },
-        {
-          "a": "trigger",
-          "b": "solid",
-          "r": "Trigger"
-        },
-        {
-          "a": "solid",
-          "b": "trigger",
-          "r": "Collide"
-        },
-        {
-          "a": "playerclip",
-          "b": "solid",
-          "r": "Collide"
-        },
-        {
-          "a": "trigger",
-          "b": "player",
-          "r": "Trigger"
-        },
-        {
-          "a": "npc",
-          "b": "npc",
-          "r": "Trigger"
-        },
-        {
-          "a": "player",
-          "b": "player",
-          "r": "Trigger"
-        },
-        {
-          "a": "player",
-          "b": "npc",
-          "r": "Trigger"
-        },
-        {
-          "a": "bobber",
-          "b": "fishing_cell",
-          "r": "Trigger"
-        },
-        {
-          "a": "solid",
-          "b": "fishing_cell"
-        },
-        {
-          "a": "solid",
-          "b": "bobber",
-          "r": "Collide"
-        },
-        {
-          "a": "bobber",
-          "b": "bobber"
-        },
-        {
-          "a": "player",
-          "b": "bobber",
-          "r": "Ignore"
-        },
-        {
-          "a": "water",
-          "b": "bobber",
-          "r": "Trigger"
-        },
-        {
-          "a": "water",
-          "b": "fishing_cell",
-          "r": "Ignore"
-        },
-        {
-          "a": "water",
-          "b": "player"
-        },
-        {
-          "a": "player",
-          "b": "fishing_cell",
-          "r": "Trigger"
-        }
-      ]
-    },
     "CsProjName": "",
     "Summary": "",
     "Description": "",
@@ -158,7 +57,6 @@
       }
     ],
     "StartupScene": "scenes/menu.scene",
-    "MapStartupScene": null,
     "LaunchMode": "Normal",
     "ControlModes": {},
     "InputSettings": {

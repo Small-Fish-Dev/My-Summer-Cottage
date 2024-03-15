@@ -19,12 +19,15 @@
 
 	private static void DeleteOldest()
 	{
+		if (_instance is null)
+			return;
+
 		var notifications = _instance._notifications;
 		if ( notifications.Count < MAX_AMOUNT )
 			return;
 
-		var oldest = _instance.Children?.FirstOrDefault() as Notification;
-		if ( oldest != null )
+		var oldest = _instance?.Children?.FirstOrDefault() as Notification;
+		if ( oldest is not null )
 		{
 			oldest.Delete();
 			notifications.Remove( oldest );

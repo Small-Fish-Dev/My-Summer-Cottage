@@ -174,10 +174,7 @@ public sealed class WeaponComponent : Component
 			.IgnoreGameObjectHierarchy( shooter.GameObject )
 			.Run();
 
-		// Bullet trace
-		var particle = LegacyParticles.Create( "particles/bullet_tracer.vpcf", transform, deleteTime: 1500 );
-		particle.SetVector( 0, transform.Position );
-		particle.SetVector( 1, tr.EndPosition );
+		BulletEffectBroadcast( transform, tr.EndPosition );
 
 		var target = tr.GameObject;
 		if ( target != null )
@@ -245,5 +242,21 @@ public sealed class WeaponComponent : Component
 	public void BroadcastSound( string file )
 	{
 		GameObject.PlaySound( file );
+	}
+
+	[Broadcast]
+	public void BulletEffectBroadcast( Transform transform, Vector3 endPos )
+	{
+		// Bullet trace
+		var particle = LegacyParticles.Create( "particles/bullet_tracer.vpcf", transform, deleteTime: 1500 );
+		particle.SetVector( 0, transform.Position ); // todo: this actually doesn't work, please fix...
+		particle.SetVector( 1, endPos );
+
+		// Muzzle flash
+		if ( !ResourceLibrary.TryGet<PrefabFile>( "prefabs/particles/muzzel_flash.prefab", out var prefab ) ) 
+			return;
+
+		var flash = SceneUtility.GetPrefabScene( prefab ).Clone();
+		flash.Transform.World = transform;
 	}
 }

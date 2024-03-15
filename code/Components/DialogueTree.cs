@@ -210,7 +210,7 @@ public class DialogueTree : Component
 		if ( response.Disabled is not null && response.Disabled() )
 			return true;
 
-		if ( HostOnly && !Player.Local.Connection.IsHost )
+		if ( HostOnly && !Connection.Local.IsHost )
 			return true;
 
 		return false;

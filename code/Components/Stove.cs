@@ -12,23 +12,37 @@ public sealed class Stove : Component
 	[Sync]
 	public bool HasWater { get; set; } = false;
 
+	[Sync]
+	public bool IsRunning { get; set; } = false;
+
 	[Property]
 	public EventAreaTrigger PlayersInArea { get; set; }
 
 	[Property]
 	public DoorComponent Door { get; set; }
 
-	public bool IsRunning { get; set; }
+	[Property]
+	public GameObject FloorSteam { get; set; }
+
+	[Property]
+	public GameObject Steam { get; set; }
+
+	[Property]
+	public GameObject Light { get; set; }
+
+	public TimeUntil StopWorking;
 
 	protected override void OnStart()
 	{
+		GameObject.SetupNetworking();
+
 		Model = Components.Get<SkinnedModelRenderer>( FindMode.EnabledInSelfAndChildren );
 
 		var interactions = Components.GetOrCreate<Interactions>();
 		interactions.AddInteraction( new Interaction()
 		{
 			Identifier = $"stove.wood_put_in",
-			Action = ( Player interactor, GameObject obj ) => PlaceWood( interactor.ConnectionID ),
+			Action = ( Player interactor, GameObject obj ) => PlaceWood( interactor ),
 			Keybind = "use2",
 			Description = "Insert split log",
 			Disabled = () => HasWood || !Player.Local.Inventory.BackpackItems.Any( x => x.IsValid() && x.Name == "Split Log" ),
@@ -40,7 +54,7 @@ public sealed class Stove : Component
 		interactions.AddInteraction( new Interaction()
 		{
 			Identifier = $"stove.begin_sauna",
-			Action = ( Player interactor, GameObject obj ) => BeginSauna( interactor.ConnectionID ),
+			Action = ( Player interactor, GameObject obj ) => BeginSauna(),
 			Keybind = "use",
 			Description = "Begin sauna",
 			Disabled = () => !CanSauna().Item1,
@@ -55,23 +69,32 @@ public sealed class Stove : Component
 	{
 		Model.Set( "b_open", !HasWood );
 
+		if ( Steam != null )
+			Steam.Enabled = IsRunning;
+
+		if ( Light != null )
+			Light.Enabled = IsRunning;
+
+		if ( FloorSteam != null )
+			FloorSteam.Enabled = IsRunning && (Door.IsValid() && Door.State == DoorState.Close);
+
 		GameObject.Name = $"Stove{(HasWater && HasWood && !IsRunning ? " (Ready)" : (HasWater ? "" : $" (Needs{(HasWood ? "" : " wood and")} water)"))}";
+
+		if ( StopWorking && IsRunning )
+		{
+			HasWater = false;
+			HasWood = false;
+			IsRunning = false;
+		}
 	}
 
-	[Broadcast( NetPermission.Anyone )]
-	void PlaceWood( Guid interactor )
+	void PlaceWood( Player interactor )
 	{
-		var player = Player.GetByID( interactor );
-
-		if ( player.IsValid() )
-		{
-			HasWood = true;
-
-			player.Inventory.BackpackItems
-				.Where( x => x.IsValid() && x.Name == "Split Log" )
-				.FirstOrDefault()
-				.Destroy();
-		}
+		HasWood = true;
+		interactor.Inventory.BackpackItems
+			.Where( x => x.IsValid() && x.Name == "Split Log" )
+			.FirstOrDefault()
+			.Destroy();
 	}
 
 	(bool, string) CanSauna()
@@ -106,29 +129,23 @@ public sealed class Stove : Component
 			return $"Start the sauna.";
 	}
 
-	[Broadcast( NetPermission.Anyone )]
-	void BeginSauna( Guid interactor )
+	void BeginSauna()
 	{
-		var player = Player.GetByID( interactor );
+		IsRunning = true;
+		StopWorking = 120;
 
-		if ( player.IsValid() )
-		{
-			IsRunning = true;
-
-			BeginSaunaDelay( player );
-		}
+		GiveExp();
 	}
 
-	async void BeginSaunaDelay( Player interactor )
+	[Broadcast]
+	void GiveExp()
 	{
-		await Task.Delay( 1000 );
+		_ = GiveExpDelay();
+	}
 
-		Player.Local.AddExperience( 300 );
-
-		await Task.Delay( 10000 );
-
-		IsRunning = false;
-		HasWood = false;
-		HasWood = false;
+	async Task GiveExpDelay()
+	{
+		await GameTask.DelayRealtimeSeconds( 1 );
+		Player.Local.AddExperience( 100 );
 	}
 }
