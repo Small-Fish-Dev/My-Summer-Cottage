@@ -9,9 +9,9 @@
         "__type": "NPC",
         "__guid": "817c6ef4-df7e-4420-8f22-0c6f3627d79f",
         "AlertOthers": false,
-        "AttackCooldown": 0.5,
-        "AttackRange": 100,
-        "DetectRange": 256,
+        "AttackCooldown": 2,
+        "AttackRange": 40,
+        "DetectRange": 208,
         "EnemyTags": "player",
         "FaceTowardsVelocity": true,
         "Health": {
@@ -61,7 +61,7 @@
                 "_name": "SpeakWithSubtitle"
               },
               "UserData": {
-                "Position": "480,16"
+                "Position": "528,16"
               }
             },
             {
@@ -118,7 +118,7 @@
                 "_name": "Destroy"
               },
               "UserData": {
-                "Position": "1632,-32"
+                "Position": "2160,0"
               }
             },
             {
@@ -126,6 +126,94 @@
               "Type": "sound.play",
               "UserData": {
                 "Position": "704,-64"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "log.info",
+              "UserData": {
+                "Position": "224,-96"
+              }
+            },
+            {
+              "Id": 23,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "817989a3-83f8-4b1c-9543-f224a8d1add4"
+                }
+              },
+              "UserData": {
+                "Position": "1488,-336"
+              }
+            },
+            {
+              "Id": 25,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "164f3e35-d4e3-40b2-9512-dfe778e44f3e"
+                }
+              },
+              "UserData": {
+                "Position": "1488,-272"
+              }
+            },
+            {
+              "Id": 26,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "1728,-288"
+              }
+            },
+            {
+              "Id": 27,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "1744,-160"
+              }
+            },
+            {
+              "Id": 28,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "2064,-160"
+              }
+            },
+            {
+              "Id": 30,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "817c6ef4-df7e-4420-8f22-0c6f3627d79f",
+                  "go": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "1760,-400"
+              }
+            },
+            {
+              "Id": 31,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.Component",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "1984,-368"
               }
             }
           ],
@@ -137,8 +225,7 @@
               "DstName": "_signal"
             },
             {
-              "SrcId": 3,
-              "SrcName": "_result",
+              "Value": "thinks to self...",
               "DstId": 1,
               "DstName": "name"
             },
@@ -200,7 +287,7 @@
               "DstName": "exp"
             },
             {
-              "SrcId": 9,
+              "SrcId": 28,
               "SrcName": "_signal",
               "DstId": 11,
               "DstName": "_signal"
@@ -227,6 +314,80 @@
               "Value": "sounds/wood/woodplank_step.sound",
               "DstId": 12,
               "DstName": "soundEvent"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 13,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "attacking player",
+              "DstId": 13,
+              "DstName": "args",
+              "DstIndex": 0
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_signal",
+              "DstId": 26,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "_result",
+              "DstId": 26,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 26,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 26,
+              "SrcName": "_signal",
+              "DstId": 27,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 25,
+              "SrcName": "_result",
+              "DstId": 27,
+              "DstName": "_target"
+            },
+            {
+              "Value": true,
+              "DstId": 27,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 31,
+              "SrcName": "_signal",
+              "DstId": 28,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 5,
+              "DstId": 28,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 27,
+              "SrcName": "_signal",
+              "DstId": 31,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 30,
+              "SrcName": "_result",
+              "DstId": 31,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 31,
+              "DstName": "_value"
             }
           ]
         },
@@ -244,51 +405,6 @@
               "Type": "input"
             },
             {
-              "Id": 2,
-              "Type": "scene.ref",
-              "Properties": {
-                "gameobject": {
-                  "_type": "gameobject",
-                  "go": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a"
-                }
-              },
-              "UserData": {
-                "Position": "160,80"
-              }
-            },
-            {
-              "Id": 3,
-              "Type": "property.get",
-              "ParentId": 2,
-              "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Transform"
-              }
-            },
-            {
-              "Id": 4,
-              "Type": "property.get",
-              "ParentId": 3,
-              "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameTransform",
-                "_name": "Position"
-              }
-            },
-            {
-              "Id": 5,
-              "Type": "npc.getrandomposaround",
-              "UserData": {
-                "Position": "448,144"
-              }
-            },
-            {
-              "Id": 6,
-              "Type": "npc.moveto",
-              "UserData": {
-                "Position": "768,-16"
-              }
-            },
-            {
               "Id": 8,
               "Type": "scene.ref",
               "Properties": {
@@ -304,71 +420,50 @@
               }
             },
             {
-              "Id": 9,
-              "Type": "npc.stopfollow",
+              "Id": 10,
+              "Type": "log.info",
               "UserData": {
-                "Position": "416,0"
+                "Position": "16,256"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "npc.startescaping",
+              "UserData": {
+                "Position": "352,-16"
               }
             }
           ],
           "Links": [
             {
-              "SrcId": 2,
-              "SrcName": "_result",
-              "DstId": 3,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 3,
-              "SrcName": "_result",
-              "DstId": 4,
-              "DstName": "_target"
-            },
-            {
-              "Value": 10,
-              "DstId": 5,
-              "DstName": "maxRange"
-            },
-            {
-              "Value": 5,
-              "DstId": 5,
-              "DstName": "minRange"
-            },
-            {
-              "SrcId": 4,
-              "SrcName": "_result",
-              "DstId": 5,
-              "DstName": "position"
-            },
-            {
-              "SrcId": 9,
+              "SrcId": 0,
               "SrcName": "_signal",
-              "DstId": 6,
+              "DstId": 10,
               "DstName": "_signal"
             },
             {
-              "SrcId": 8,
-              "SrcName": "_result",
-              "DstId": 6,
-              "DstName": "npc"
-            },
-            {
-              "SrcId": 5,
-              "SrcName": "_result",
-              "DstId": 6,
-              "DstName": "position"
+              "Value": "detected player",
+              "DstId": 10,
+              "DstName": "args",
+              "DstIndex": 0
             },
             {
               "SrcId": 0,
               "SrcName": "_signal",
-              "DstId": 9,
+              "DstId": 11,
               "DstName": "_signal"
             },
             {
               "SrcId": 8,
               "SrcName": "_result",
-              "DstId": 9,
+              "DstId": 11,
               "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 11,
+              "DstName": "target"
             }
           ]
         },
@@ -510,13 +605,13 @@
           ]
         },
         "RunningType": "Smart",
-        "RunSpeed": 570,
+        "RunSpeed": 220,
         "ScaleStats": true,
         "Static": false,
-        "VisionRange": 512,
+        "VisionRange": 384,
         "WalkingType": "Dumb",
-        "WalkSpeed": 540,
-        "Weight": "Middle"
+        "WalkSpeed": 190,
+        "Weight": "Light"
       },
       {
         "__type": "MoveHelper",
@@ -602,6 +697,46 @@
               {
                 "__type": "ModelRenderer",
                 "__guid": "dfd848e8-84c4-4efc-88a3-bcac59736ef1",
+                "BodyGroups": 18446744073709551615,
+                "Model": "models/props/street_name_sign/street_name_sign_top_pole.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__guid": "164f3e35-d4e3-40b2-9512-dfe778e44f3e",
+        "Name": "fake_car",
+        "Position": "0,0,10.85798",
+        "Rotation": "0.9153711,0,0,0.4026111",
+        "Scale": "0.2,0.2,0.2",
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "ff8228ff-6e06-40cc-89ac-eacc8b1ced9b",
+            "BodyGroups": 1,
+            "CreateBoneObjects": false,
+            "MaterialGroup": "normal",
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "RenderType": "On",
+            "Tint": "0.22745,0.50588,0.0902,1"
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "8baac9c7-b018-4228-9a76-477528becc5b",
+            "Name": "Object",
+            "Position": "-6.494744,-20.86741,12.66052",
+            "Rotation": "0,-0.291506,0,0.956569",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "ModelRenderer",
+                "__guid": "9590bdf6-7027-4570-ab0e-0f495355e947",
                 "BodyGroups": 18446744073709551615,
                 "Model": "models/props/street_name_sign/street_name_sign_top_pole.vmdl",
                 "RenderType": "On",
