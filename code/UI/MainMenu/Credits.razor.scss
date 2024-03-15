@@ -1,0 +1,106 @@
+﻿@import "/UI/Style.scss";
+
+Credits {
+  flex-direction: row;
+  align-items: stretch;
+
+  .horizontal {
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .vertical {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .sweet-memories {
+    flex-grow: 1;
+  }
+
+  .credits {
+    flex-shrink: 0;
+
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    overflow-x: visible;
+    overflow-y: scroll;
+    gap: 20px;
+    
+    padding: 0 30px;
+
+    color: white;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0), $black-bg);
+    
+    font-size: 20px;
+    font-family: HabboExtended;
+    
+    & > * {
+      flex-shrink: 0;
+    }
+    
+    h1, h2 {
+      font-family: BasicHandwriting;
+      text-shadow: $text-shadow-sm;
+      margin-bottom: 10px;
+    }
+    
+    h1 {
+      font-size: 60px;
+      margin-top: 40px;
+    }
+    
+    h2 {
+      font-size: 40px;
+      margin-top: 20px;
+    }
+    
+    .name, .role {
+      flex-grow: 1;
+      flex-basis: 0;
+    }
+    
+    .name {
+      flex-direction: row-reverse;
+      font-weight: bold;
+    }
+    
+    .center, h1, h2 {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+    
+    .row {
+      gap: 20px;
+    }
+    
+    .bold {
+      font-weight: bold;
+      font-size: 20px;
+      text-shadow: $text-shadow-sm;
+    }
+    
+    .link {
+      font-weight: bold;
+      color: $gold;
+      text-shadow: $text-shadow-sm;
+    }
+    
+    .title {
+      background-repeat: no-repeat;
+      background-size: contain;
+      image-rendering: pixelated;
+      width: 1200px;
+      height: 600px;
+      
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+    
+    .padding {
+      height: 100vh;
+    }
+  }
+}

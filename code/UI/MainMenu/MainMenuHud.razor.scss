@@ -2,27 +2,16 @@
 
 MainMenuHud {
     position: absolute;
-    height: 100%;
-    width: 100%;
-    z-index: 50;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     pointer-events: all;
-    background-color: $fullscreen-bg;
-    backdrop-filter: $fullscreen-blur;
-
-    .title {
-        position: absolute;
-        background-repeat: no-repeat;
-        background-size: contain;
-        image-rendering: pixelated;
-        width: 600px;
-        height: 300px;
-        margin-left: 100px;
-        margin-top: 100px;
-    }
-
-    .friendList {
-        position: absolute;
-        right: 40px;
-        bottom: 40px;
+    z-index: 50;
+    
+    align-items: stretch;
+    
+    & > * {
+        flex-grow: 1;
     }
 }

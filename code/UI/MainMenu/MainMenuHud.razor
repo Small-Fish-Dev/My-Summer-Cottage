@@ -3,44 +3,27 @@
 @inherits PanelComponent
 
 <root>
-	<img class="title" src="ui/mainmenu/title.png" />
-	<div style="flex-direction: column; justify-content: center; top: 10%; gap: 15px;">
-		@if ( !SaveData.Has )
-		{
-			<SideButton
-				ImagePath="ui/mainmenu/new_icon.png"
-				Title="New Game"
-				Subtitle="Start your own cottage story.."
-				OnClick=@(() => { SceneHandler.ChangeScene( SaunaScene.Creation, stopSound: false ); })
-			/>
-		}
-		else
-		{
-			<SideButton
-				ImagePath="ui/mainmenu/load_icon.png"
-				Title="Continue"
-				Subtitle="Get back to enjoying life at the cottage.."
-				OnClick=@(() => { SceneHandler.ChangeScene( SaunaScene.Game ); })
-			/>	
-		}
-		<SideButton
-			ImagePath="ui/mainmenu/credits_icon.png"
-			Title="Credits"
-			Subtitle="Check out the folks that created this experience!"
-		/>
-		<SideButton
-			ImagePath="ui/mainmenu/quit_icon.png"
-			Title="Quit"
-			Subtitle="Why? There aren't any other better games on s&box..."
-			OnClick=@(() => { Game.Close(); })
-		/>
-	</div>
-
-	<FriendList class="friendList" />
-	<NotificationManager />
+	@switch ( _screen )
+	{
+		case MenuScreen.MainMenu:
+			<MainMenu HasSaveData="@SaveData.Has" Screen:bind="@_screen"/>
+			break;
+		case MenuScreen.Credits:
+			<Credits Screen:bind="@_screen"/>
+			break;
+		default:
+			throw new ArgumentOutOfRangeException();
+	}
 </root>
 
 @code {
+
+	public enum MenuScreen
+	{
+		MainMenu,
+		Credits
+	}
+
 	public static float Volume { get; set; } = 0.025f;
 	public static (PlayerSave Save, bool Has) SaveData { get; private set; }
 
@@ -50,6 +33,8 @@
 	SoundHandle _loop;
 
 	RealTimeUntil _playLoop = 999;
+
+	private MenuScreen _screen;
 
 	public async void Initialize()
 	{
@@ -80,6 +65,7 @@
 
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( SaveData );
+		return HashCode.Combine( SaveData, _screen );
 	}
+
 }
