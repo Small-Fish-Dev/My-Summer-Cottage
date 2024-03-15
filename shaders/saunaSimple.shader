@@ -86,6 +86,7 @@ PS
 	StaticCombo( S_TRANSPARENCY, F_TRANSPARENCY, Sys( ALL ) );
     StaticCombo( S_ALPHA_TEST, F_ALPHA_TEST, Sys( ALL ) );
 	StaticCombo( S_DETAILED_ALPHA_SHADOWS, F_DETAILED_ALPHA_SHADOWS, Sys( ALL ) );
+	StaticCombo( S_DO_NOT_CAST_SHADOWS, F_DO_NOT_CAST_SHADOWS, Sys( ALL ) );
 	
 	#define CUSTOM_TEXTURE_FILTERING
     SamplerState Sampler < Filter( POINT ); AddressU( WRAP ); AddressV( WRAP ); >;
@@ -155,8 +156,6 @@ PS
 	//
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-		
-
 		float2 UV = i.vTextureCoords.xy;
 		float4 l_tColor = Tex2DS( g_tColor, Sampler, UV.xy ).rgba;
 		float3 colorTint = g_flColorTint * i.vVertexColor;
@@ -187,6 +186,10 @@ PS
 
 		#if( S_MODE_DEPTH )
 		{
+			#if ( S_DO_NOT_CAST_SHADOWS ) 
+			discard;
+			#endif
+
 			#if( S_DETAILED_ALPHA_SHADOWS )
 			{if ( result.a < 0.5 ) discard;}
 			#endif

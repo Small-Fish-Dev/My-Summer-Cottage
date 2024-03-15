@@ -1220,6 +1220,25 @@
       ]
     },
     {
+      "__guid": "0a072b49-e373-4560-874c-f738315fb3d8",
+      "Name": "outer_area",
+      "Position": "-6348.808,-9026.849,11772.6",
+      "Rotation": "0,0,-0.7071067,0.7071068",
+      "Scale": "2.947095,2.947095,3.401206",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "__guid": "d4b55594-5fea-41da-8fe0-8dd3a09b9581",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/terrain/outer_area.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
       "__guid": "339226ca-b793-4a15-8131-0cf90a9f4357",
       "Name": "Map",
       "Position": "155.32,241.9772,-76.84572",
@@ -1237,6 +1256,85 @@
       "Children": []
     },
     {
+      "__guid": "758a8be7-33c6-4da5-9689-1b9f0a9bca02",
+      "Name": "Map_collision_bounds",
+      "Position": "1160,-7856,1712",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Children": [
+        {
+          "__guid": "6891de28-661c-41eb-9af0-fcbca4ed3a97",
+          "Name": "Object",
+          "Position": "-1160,22156,4728",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "ebb320a6-20cd-49d1-a91e-df6986b1ecf5",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "32000,500,10000",
+              "Static": true
+            }
+          ]
+        },
+        {
+          "__guid": "935e9cb8-7c6b-4d52-89a9-d293f6074781",
+          "Name": "Object (1)",
+          "Position": "-3208,-6792,4728",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "1bbb3717-e12a-4ca3-aa86-2d32b4fd96a2",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "32000,500,10000",
+              "Static": true
+            }
+          ]
+        },
+        {
+          "__guid": "861b7d55-f57e-40ca-bd34-0a43d02e44f8",
+          "Name": "Object (2)",
+          "Position": "13216,7968,5848",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "379c4f65-9ca6-4aff-9405-164c49d663e1",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "35000,500,10000",
+              "Static": true
+            }
+          ]
+        },
+        {
+          "__guid": "906473c2-45c9-4bcc-927e-cef4dd1f3dbd",
+          "Name": "Object (3)",
+          "Position": "-15600,7968,3656",
+          "Rotation": "0,0,0.7071068,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "1c7c61c1-3a9c-4d4a-8e6d-8f086323ac5a",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "35000,500,10000",
+              "Static": true
+            }
+          ]
+        }
+      ]
+    },
+    {
       "__guid": "b60318fc-dbb8-45c3-b9d4-1347270ab4b5",
       "Name": "Ambient",
       "Position": "2158.045,-3163.895,2861.889",
@@ -1247,7 +1345,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.7915248,0,0.611137",
+          "Rotation": "0,0.6619624,0,-0.7495371",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1867,14 +1965,6 @@
       "__Prefab": "prefabs/items/axe.prefab"
     },
     {
-      "__guid": "70e11655-f958-45c7-8eaf-40c411866039",
-      "Name": "car_speeding",
-      "Position": "-7744,6640,2440",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/events/car_speeding.prefab"
-    },
-    {
       "__guid": "ce6db557-3fca-42b8-9ad8-1f079f737aef",
       "Name": "Sauna",
       "Position": "3590.354,-3156.362,2476.77",
@@ -1903,7 +1993,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "9de527e6-6e73-4708-9967-60dc4d63fa40",
+                "component_id": "0fc6ace4-d0f3-447c-bdc8-ba5e1565584f",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -2171,25 +2261,6 @@
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "__guid": "0a072b49-e373-4560-874c-f738315fb3d8",
-      "Name": "outer_area",
-      "Position": "-6348.808,-9026.849,11772.6",
-      "Rotation": "0,0,-0.7071067,0.7071068",
-      "Scale": "2.947095,2.947095,3.401206",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "Components": [
-        {
-          "__type": "ModelRenderer",
-          "__guid": "d4b55594-5fea-41da-8fe0-8dd3a09b9581",
-          "BodyGroups": 18446744073709551615,
-          "Model": "models/terrain/outer_area.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
         }
       ]
     },
@@ -3891,101 +3962,6 @@
       ]
     },
     {
-      "__guid": "6891de28-661c-41eb-9af0-fcbca4ed3a97",
-      "Name": "Object",
-      "Position": "0,14300,6440",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "Components": [
-        {
-          "__type": "BoxCollider",
-          "__guid": "ebb320a6-20cd-49d1-a91e-df6986b1ecf5",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "32000,500,10000",
-          "Static": true
-        }
-      ]
-    },
-    {
-      "__guid": "935e9cb8-7c6b-4d52-89a9-d293f6074781",
-      "Name": "Object (1)",
-      "Position": "-2048,-14648,6440",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "Components": [
-        {
-          "__type": "BoxCollider",
-          "__guid": "1bbb3717-e12a-4ca3-aa86-2d32b4fd96a2",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "32000,500,10000",
-          "Static": true
-        }
-      ]
-    },
-    {
-      "__guid": "861b7d55-f57e-40ca-bd34-0a43d02e44f8",
-      "Name": "Object (2)",
-      "Position": "14376,112,7560",
-      "Rotation": "0,0,0.7071068,0.7071068",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "Components": [
-        {
-          "__type": "BoxCollider",
-          "__guid": "379c4f65-9ca6-4aff-9405-164c49d663e1",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "35000,500,10000",
-          "Static": true
-        }
-      ]
-    },
-    {
-      "__guid": "906473c2-45c9-4bcc-927e-cef4dd1f3dbd",
-      "Name": "Object (3)",
-      "Position": "-14440,112,5368",
-      "Rotation": "0,0,0.7071068,0.7071068",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "Components": [
-        {
-          "__type": "BoxCollider",
-          "__guid": "1c7c61c1-3a9c-4d4a-8e6d-8f086323ac5a",
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "35000,500,10000",
-          "Static": true
-        }
-      ]
-    },
-    {
-      "__guid": "758a8be7-33c6-4da5-9689-1b9f0a9bca02",
-      "Name": "Object",
-      "Position": "1160,-7856,1712",
-      "Enabled": true,
-      "NetworkMode": 2
-    },
-    {
-      "__guid": "20106d14-cab8-452a-9387-b8865e9272f2",
-      "Name": "drive_car",
-      "Position": "2107.093,-1636.722,2448",
-      "Rotation": "0.002460414,0.007778124,-0.7378321,0.6749348",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/events/drive_car.prefab"
-    },
-    {
-      "__guid": "26dd6920-563e-42ad-ac7d-08273f6eaec4",
-      "Name": "crazy_attack_deer",
-      "Position": "3832,-2360,2400",
-      "Rotation": "0.01374025,0.01333649,-0.717446,0.6963509",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/events/crazy_attack_deer.prefab"
-    },
-    {
       "__guid": "8e633767-b0bd-4ecb-a3e3-36244fbfd35a",
       "Name": "GoHomeCar",
       "Position": "3131.493,-3327.159,2484.738",
@@ -4029,24 +4005,6 @@
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/items/fishing_rod.prefab"
-    },
-    {
-      "__guid": "ef58a47c-74a0-4034-ab12-79c9bb1bd4a5",
-      "Name": "banana_peel",
-      "Position": "3293.078,-3285.199,2446.688",
-      "Rotation": "0.0008235928,0.02486345,-0.03309572,0.9991425",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/events/banana_peel.prefab"
-    },
-    {
-      "__guid": "79fb0025-515d-425d-9a48-bf8aa6ed5a17",
-      "Name": "creepy_peeper",
-      "Position": "3685.735,-3230.019,2458.043",
-      "Rotation": "0.000000009260383,-0.00000007033952,0.9914448,0.1305263",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/events/creepy_peeper.prefab"
     },
     {
       "__guid": "db77ed38-605f-4114-b752-e78618fbfb30",
@@ -4580,6 +4538,1306 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "df4ddccb-37e5-41e7-a242-de7a6a7cb3c1",
+      "Name": "Events",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Children": [
+        {
+          "__guid": "26dd6920-563e-42ad-ac7d-08273f6eaec4",
+          "Name": "crazy_attack_deer",
+          "Position": "3832,-2360,2400",
+          "Rotation": "0.01374025,0.01333649,-0.717446,0.6963509",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/crazy_attack_deer.prefab"
+        },
+        {
+          "__guid": "20106d14-cab8-452a-9387-b8865e9272f2",
+          "Name": "drive_car",
+          "Position": "2107.093,-1636.722,2448",
+          "Rotation": "0.002460414,0.007778124,-0.7378321,0.6749348",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/drive_car.prefab"
+        },
+        {
+          "__guid": "70e11655-f958-45c7-8eaf-40c411866039",
+          "Name": "car_speeding",
+          "Position": "-7744,6640,2440",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "EventDefinition",
+              "__guid": "6bcfa832-8846-475d-a723-6f995741e4e3",
+              "AddToEventPool": true,
+              "EventName": "car_speeding_event",
+              "EventSignals": [
+                null
+              ],
+              "Rarity": "Common",
+              "ReinstantiateOnRestart": false,
+              "Stackable": true,
+              "Type": "Zone"
+            },
+            {
+              "__type": "EventComponent",
+              "__guid": "96783f70-9c57-480b-bf18-006636cac8a0",
+              "__enabled": false,
+              "DisabledWhilePlaying": [],
+              "DisableOnTrigger": [],
+              "Event": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Event",
+                  "id": "d149da58-b798-47a7-9087-9f5e57a4366d",
+                  "ReferencedComponentTypes": []
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input",
+                    "UserData": {
+                      "Position": "-96,-80"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "scene.ref",
+                    "Properties": {
+                      "gameobject": {
+                        "_type": "gameobject",
+                        "go": "af3badb3-0af9-413d-96b1-cefc95d4d34e"
+                      }
+                    },
+                    "UserData": {
+                      "Position": "0,96",
+                      "Labels": {
+                        "_result": "car"
+                      }
+                    }
+                  },
+                  {
+                    "Id": 4,
+                    "Type": "property.get",
+                    "ParentId": 2,
+                    "Properties": {
+                      "_name": "Transform",
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    }
+                  },
+                  {
+                    "Id": 6,
+                    "Type": "scene.ref",
+                    "Properties": {
+                      "gameobject": {
+                        "_type": "gameobject",
+                        "go": "df8573a4-17be-4780-8fc1-1071685b5751"
+                      }
+                    },
+                    "UserData": {
+                      "Position": "0,224"
+                    }
+                  },
+                  {
+                    "Id": 7,
+                    "Type": "property.get",
+                    "ParentId": 6,
+                    "Properties": {
+                      "_name": "Transform",
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    },
+                    "UserData": {
+                      "Visible": false
+                    }
+                  },
+                  {
+                    "Id": 10,
+                    "Type": "event.interpolateposition",
+                    "UserData": {
+                      "Position": "320,-0"
+                    }
+                  },
+                  {
+                    "Id": 11,
+                    "Type": "property.get",
+                    "ParentId": 4,
+                    "Properties": {
+                      "_name": "Position",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    },
+                    "UserData": {
+                      "Labels": {
+                        "_result": "car_pos"
+                      }
+                    }
+                  },
+                  {
+                    "Id": 12,
+                    "Type": "property.get",
+                    "ParentId": 6,
+                    "Properties": {
+                      "_name": "Transform",
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    },
+                    "UserData": {
+                      "Visible": false
+                    }
+                  },
+                  {
+                    "Id": 13,
+                    "Type": "property.get",
+                    "ParentId": 12,
+                    "Properties": {
+                      "_name": "Position",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    }
+                  },
+                  {
+                    "Id": 17,
+                    "Type": "scene.ref",
+                    "Properties": {
+                      "gameobject": {
+                        "_type": "gameobject",
+                        "go": "c10bf95c-5ad3-49a0-8e07-293c901d4bd4"
+                      }
+                    },
+                    "UserData": {
+                      "Position": "-0,320"
+                    }
+                  },
+                  {
+                    "Id": 22,
+                    "Type": "property.get",
+                    "ParentId": 17,
+                    "Properties": {
+                      "_name": "Transform",
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    },
+                    "UserData": {
+                      "Visible": false
+                    }
+                  },
+                  {
+                    "Id": 23,
+                    "Type": "property.get",
+                    "ParentId": 22,
+                    "Properties": {
+                      "_name": "Position",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    }
+                  },
+                  {
+                    "Id": 24,
+                    "Type": "property.get",
+                    "ParentId": 22,
+                    "Properties": {
+                      "_name": "LocalRotation",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    }
+                  },
+                  {
+                    "Id": 29,
+                    "Type": "scene.ref",
+                    "Properties": {
+                      "gameobject": {
+                        "_type": "gameobject",
+                        "go": "35f54ba5-c7a9-4f2b-8d0b-39ddc57de724"
+                      }
+                    },
+                    "UserData": {
+                      "Position": "-0,432"
+                    }
+                  },
+                  {
+                    "Id": 30,
+                    "Type": "property.get",
+                    "ParentId": 29,
+                    "Properties": {
+                      "_name": "Transform",
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    },
+                    "UserData": {
+                      "Visible": false
+                    }
+                  },
+                  {
+                    "Id": 31,
+                    "Type": "property.get",
+                    "ParentId": 30,
+                    "Properties": {
+                      "_name": "Position",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    }
+                  },
+                  {
+                    "Id": 32,
+                    "Type": "property.get",
+                    "ParentId": 30,
+                    "Properties": {
+                      "_name": "LocalRotation",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    }
+                  },
+                  {
+                    "Id": 33,
+                    "Type": "scene.ref",
+                    "Properties": {
+                      "gameobject": {
+                        "_type": "gameobject",
+                        "go": "cc4cffc2-6e85-4c4c-b619-645ea0001609"
+                      }
+                    },
+                    "UserData": {
+                      "Position": "0,544"
+                    }
+                  },
+                  {
+                    "Id": 34,
+                    "Type": "property.get",
+                    "ParentId": 33,
+                    "Properties": {
+                      "_name": "Transform",
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    },
+                    "UserData": {
+                      "Visible": false
+                    }
+                  },
+                  {
+                    "Id": 35,
+                    "Type": "property.get",
+                    "ParentId": 34,
+                    "Properties": {
+                      "_name": "Position",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    }
+                  },
+                  {
+                    "Id": 36,
+                    "Type": "property.get",
+                    "ParentId": 34,
+                    "Properties": {
+                      "_name": "LocalRotation",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    }
+                  },
+                  {
+                    "Id": 37,
+                    "Type": "scene.ref",
+                    "Properties": {
+                      "gameobject": {
+                        "_type": "gameobject",
+                        "go": "8a5298f9-a5cf-4c4f-beb6-01d29cf1b68c"
+                      }
+                    },
+                    "UserData": {
+                      "Position": "0,656"
+                    }
+                  },
+                  {
+                    "Id": 38,
+                    "Type": "property.get",
+                    "ParentId": 37,
+                    "Properties": {
+                      "_name": "Transform",
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    },
+                    "UserData": {
+                      "Visible": false
+                    }
+                  },
+                  {
+                    "Id": 39,
+                    "Type": "property.get",
+                    "ParentId": 38,
+                    "Properties": {
+                      "_name": "Position",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    }
+                  },
+                  {
+                    "Id": 40,
+                    "Type": "property.get",
+                    "ParentId": 38,
+                    "Properties": {
+                      "_name": "LocalRotation",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    }
+                  },
+                  {
+                    "Id": 47,
+                    "Type": "event.interpolateposition",
+                    "UserData": {
+                      "Position": "560,176"
+                    }
+                  },
+                  {
+                    "Id": 48,
+                    "Type": "event.interpolaterotation",
+                    "UserData": {
+                      "Position": "560,336"
+                    }
+                  },
+                  {
+                    "Id": 49,
+                    "Type": "property.get",
+                    "ParentId": 4,
+                    "Properties": {
+                      "_name": "Rotation",
+                      "_type": "Sandbox.Game/Sandbox.GameTransform"
+                    },
+                    "UserData": {
+                      "Labels": {
+                        "_result": "car_rot"
+                      }
+                    }
+                  },
+                  {
+                    "Id": 50,
+                    "Type": "event.interpolateposition",
+                    "UserData": {
+                      "Position": "816,176"
+                    }
+                  },
+                  {
+                    "Id": 51,
+                    "Type": "event.interpolaterotation",
+                    "UserData": {
+                      "Position": "816,336"
+                    }
+                  },
+                  {
+                    "Id": 52,
+                    "Type": "event.interpolateposition",
+                    "UserData": {
+                      "Position": "1056,176"
+                    }
+                  },
+                  {
+                    "Id": 53,
+                    "Type": "event.interpolaterotation",
+                    "UserData": {
+                      "Position": "1056,336"
+                    }
+                  },
+                  {
+                    "Id": 54,
+                    "Type": "event.interpolateposition",
+                    "UserData": {
+                      "Position": "1296,176"
+                    }
+                  },
+                  {
+                    "Id": 55,
+                    "Type": "event.interpolaterotation",
+                    "UserData": {
+                      "Position": "1296,336"
+                    }
+                  },
+                  {
+                    "Id": 58,
+                    "Type": "event.finished",
+                    "UserData": {
+                      "Position": "1808,240"
+                    }
+                  },
+                  {
+                    "Id": 60,
+                    "Type": "scene.ref",
+                    "Properties": {
+                      "component": {
+                        "_type": "component",
+                        "component_id": "96783f70-9c57-480b-bf18-006636cac8a0",
+                        "go": "70e11655-f958-45c7-8eaf-40c411866039",
+                        "component_type": "EventComponent"
+                      }
+                    },
+                    "UserData": {
+                      "Position": "1728,448"
+                    }
+                  },
+                  {
+                    "Id": 63,
+                    "Type": "call",
+                    "Properties": {
+                      "_name": "Destroy",
+                      "_isStatic": false,
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    },
+                    "UserData": {
+                      "Position": "1552,208"
+                    }
+                  },
+                  {
+                    "Id": 64,
+                    "Type": "property.set",
+                    "Properties": {
+                      "_name": "Enabled",
+                      "_type": "Sandbox.Game/Sandbox.GameObject"
+                    },
+                    "UserData": {
+                      "Position": "80,-80"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 4,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 6,
+                    "SrcName": "_result",
+                    "DstId": 7,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 64,
+                    "SrcName": "_signal",
+                    "DstId": 10,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 2,
+                    "DstId": 10,
+                    "DstName": "duration"
+                  },
+                  {
+                    "Value": "Linear",
+                    "DstId": 10,
+                    "DstName": "easer"
+                  },
+                  {
+                    "SrcId": 11,
+                    "SrcName": "_result",
+                    "DstId": 10,
+                    "DstName": "from"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 10,
+                    "DstName": "target"
+                  },
+                  {
+                    "SrcId": 13,
+                    "SrcName": "_result",
+                    "DstId": 10,
+                    "DstName": "to"
+                  },
+                  {
+                    "SrcId": 4,
+                    "SrcName": "_result",
+                    "DstId": 11,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 6,
+                    "SrcName": "_result",
+                    "DstId": 12,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 12,
+                    "SrcName": "_result",
+                    "DstId": 13,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 17,
+                    "SrcName": "_result",
+                    "DstId": 22,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 22,
+                    "SrcName": "_result",
+                    "DstId": 23,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 22,
+                    "SrcName": "_result",
+                    "DstId": 24,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 29,
+                    "SrcName": "_result",
+                    "DstId": 30,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 30,
+                    "SrcName": "_result",
+                    "DstId": 31,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 30,
+                    "SrcName": "_result",
+                    "DstId": 32,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 33,
+                    "SrcName": "_result",
+                    "DstId": 34,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 34,
+                    "SrcName": "_result",
+                    "DstId": 35,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 34,
+                    "SrcName": "_result",
+                    "DstId": 36,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 37,
+                    "SrcName": "_result",
+                    "DstId": 38,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 38,
+                    "SrcName": "_result",
+                    "DstId": 39,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 38,
+                    "SrcName": "_result",
+                    "DstId": 40,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 10,
+                    "SrcName": "_signal",
+                    "DstId": 47,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 0.5,
+                    "DstId": 47,
+                    "DstName": "duration"
+                  },
+                  {
+                    "Value": "Linear",
+                    "DstId": 47,
+                    "DstName": "easer"
+                  },
+                  {
+                    "SrcId": 11,
+                    "SrcName": "_result",
+                    "DstId": 47,
+                    "DstName": "from"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 47,
+                    "DstName": "target"
+                  },
+                  {
+                    "SrcId": 23,
+                    "SrcName": "_result",
+                    "DstId": 47,
+                    "DstName": "to"
+                  },
+                  {
+                    "SrcId": 10,
+                    "SrcName": "_signal",
+                    "DstId": 48,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 0.5,
+                    "DstId": 48,
+                    "DstName": "duration"
+                  },
+                  {
+                    "Value": "Linear",
+                    "DstId": 48,
+                    "DstName": "easer"
+                  },
+                  {
+                    "SrcId": 49,
+                    "SrcName": "_result",
+                    "DstId": 48,
+                    "DstName": "from"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 48,
+                    "DstName": "target"
+                  },
+                  {
+                    "SrcId": 24,
+                    "SrcName": "_result",
+                    "DstId": 48,
+                    "DstName": "to"
+                  },
+                  {
+                    "SrcId": 4,
+                    "SrcName": "_result",
+                    "DstId": 49,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 47,
+                    "SrcName": "_signal",
+                    "DstId": 50,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 0.5,
+                    "DstId": 50,
+                    "DstName": "duration"
+                  },
+                  {
+                    "Value": "Linear",
+                    "DstId": 50,
+                    "DstName": "easer"
+                  },
+                  {
+                    "SrcId": 11,
+                    "SrcName": "_result",
+                    "DstId": 50,
+                    "DstName": "from"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 50,
+                    "DstName": "target"
+                  },
+                  {
+                    "SrcId": 31,
+                    "SrcName": "_result",
+                    "DstId": 50,
+                    "DstName": "to"
+                  },
+                  {
+                    "SrcId": 48,
+                    "SrcName": "_signal",
+                    "DstId": 51,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 0.5,
+                    "DstId": 51,
+                    "DstName": "duration"
+                  },
+                  {
+                    "Value": "Linear",
+                    "DstId": 51,
+                    "DstName": "easer"
+                  },
+                  {
+                    "SrcId": 49,
+                    "SrcName": "_result",
+                    "DstId": 51,
+                    "DstName": "from"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 51,
+                    "DstName": "target"
+                  },
+                  {
+                    "SrcId": 32,
+                    "SrcName": "_result",
+                    "DstId": 51,
+                    "DstName": "to"
+                  },
+                  {
+                    "SrcId": 50,
+                    "SrcName": "_signal",
+                    "DstId": 52,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 0.8,
+                    "DstId": 52,
+                    "DstName": "duration"
+                  },
+                  {
+                    "Value": "Linear",
+                    "DstId": 52,
+                    "DstName": "easer"
+                  },
+                  {
+                    "SrcId": 11,
+                    "SrcName": "_result",
+                    "DstId": 52,
+                    "DstName": "from"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 52,
+                    "DstName": "target"
+                  },
+                  {
+                    "SrcId": 35,
+                    "SrcName": "_result",
+                    "DstId": 52,
+                    "DstName": "to"
+                  },
+                  {
+                    "SrcId": 51,
+                    "SrcName": "_signal",
+                    "DstId": 53,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 0.8,
+                    "DstId": 53,
+                    "DstName": "duration"
+                  },
+                  {
+                    "Value": "Linear",
+                    "DstId": 53,
+                    "DstName": "easer"
+                  },
+                  {
+                    "SrcId": 49,
+                    "SrcName": "_result",
+                    "DstId": 53,
+                    "DstName": "from"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 53,
+                    "DstName": "target"
+                  },
+                  {
+                    "SrcId": 36,
+                    "SrcName": "_result",
+                    "DstId": 53,
+                    "DstName": "to"
+                  },
+                  {
+                    "SrcId": 52,
+                    "SrcName": "_signal",
+                    "DstId": 54,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 3,
+                    "DstId": 54,
+                    "DstName": "duration"
+                  },
+                  {
+                    "Value": "Linear",
+                    "DstId": 54,
+                    "DstName": "easer"
+                  },
+                  {
+                    "SrcId": 11,
+                    "SrcName": "_result",
+                    "DstId": 54,
+                    "DstName": "from"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 54,
+                    "DstName": "target"
+                  },
+                  {
+                    "SrcId": 39,
+                    "SrcName": "_result",
+                    "DstId": 54,
+                    "DstName": "to"
+                  },
+                  {
+                    "SrcId": 53,
+                    "SrcName": "_signal",
+                    "DstId": 55,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 3,
+                    "DstId": 55,
+                    "DstName": "duration"
+                  },
+                  {
+                    "Value": "Linear",
+                    "DstId": 55,
+                    "DstName": "easer"
+                  },
+                  {
+                    "SrcId": 49,
+                    "SrcName": "_result",
+                    "DstId": 55,
+                    "DstName": "from"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 55,
+                    "DstName": "target"
+                  },
+                  {
+                    "SrcId": 40,
+                    "SrcName": "_result",
+                    "DstId": 55,
+                    "DstName": "to"
+                  },
+                  {
+                    "SrcId": 63,
+                    "SrcName": "_signal",
+                    "DstId": 58,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 60,
+                    "SrcName": "_result",
+                    "DstId": 58,
+                    "DstName": "component"
+                  },
+                  {
+                    "SrcId": 54,
+                    "SrcName": "_signal",
+                    "DstId": 63,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 63,
+                    "DstName": "_target"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 64,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 64,
+                    "DstName": "_target"
+                  },
+                  {
+                    "Value": true,
+                    "DstId": 64,
+                    "DstName": "_value"
+                  }
+                ]
+              },
+              "RequiredToFinish": true,
+              "TriggerCooldown": 1,
+              "TriggerOnce": true,
+              "Triggers": [
+                {
+                  "_type": "component",
+                  "component_id": "1dbb07d3-b722-4f51-96df-efdadb65be76",
+                  "go": "6561c4b6-9fa9-4c36-beb7-eb498daed307",
+                  "component_type": "EventAreaTrigger"
+                }
+              ]
+            },
+            {
+              "__type": "EventComponent",
+              "__guid": "37121943-cb6a-4d8f-acc9-dd0b972b909a",
+              "__enabled": false,
+              "DisabledWhilePlaying": [],
+              "DisableOnTrigger": [],
+              "Event": {
+                "Version": 5,
+                "UserData": {
+                  "Title": "Event",
+                  "id": "57cc7097-85d6-493a-b88c-4fcafe67244c",
+                  "ReferencedComponentTypes": [
+                    "package.fish.sauna/Sauna.Player",
+                    "package.fish.sauna/HealthComponent"
+                  ]
+                },
+                "Variables": [],
+                "Nodes": [
+                  {
+                    "Id": 0,
+                    "Type": "input"
+                  },
+                  {
+                    "Id": 1,
+                    "Type": "scene.get",
+                    "Properties": {
+                      "T": "package.fish.sauna/Sauna.Player"
+                    },
+                    "UserData": {
+                      "Position": "192,96"
+                    }
+                  },
+                  {
+                    "Id": 2,
+                    "Type": "scene.get",
+                    "Properties": {
+                      "T": "package.fish.sauna/HealthComponent"
+                    },
+                    "UserData": {
+                      "Position": "432,96"
+                    }
+                  },
+                  {
+                    "Id": 3,
+                    "Type": "call",
+                    "Properties": {
+                      "_type": "package.fish.sauna/HealthComponent",
+                      "_name": "Damage",
+                      "_isStatic": false
+                    },
+                    "UserData": {
+                      "Position": "704,16"
+                    }
+                  },
+                  {
+                    "Id": 4,
+                    "Type": "call",
+                    "Properties": {
+                      "_type": "package.fish.sauna/Sauna.Player",
+                      "_name": "CaptureMemory",
+                      "_isStatic": false
+                    },
+                    "UserData": {
+                      "Position": "1168,-16"
+                    }
+                  },
+                  {
+                    "Id": 5,
+                    "Type": "time.delay",
+                    "UserData": {
+                      "Position": "976,-112"
+                    }
+                  }
+                ],
+                "Links": [
+                  {
+                    "SrcId": 0,
+                    "SrcName": "triggerer",
+                    "DstId": 1,
+                    "DstName": "_this"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_result",
+                    "DstId": 2,
+                    "DstName": "_this"
+                  },
+                  {
+                    "SrcId": 0,
+                    "SrcName": "_signal",
+                    "DstId": 3,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 2,
+                    "SrcName": "_result",
+                    "DstId": 3,
+                    "DstName": "_target"
+                  },
+                  {
+                    "Value": 10,
+                    "DstId": 3,
+                    "DstName": "amount"
+                  },
+                  {
+                    "Value": {
+                      "_type": "gameobject",
+                      "go": "af3badb3-0af9-413d-96b1-cefc95d4d34e"
+                    },
+                    "DstId": 3,
+                    "DstName": "attacker"
+                  },
+                  {
+                    "Value": 400,
+                    "DstId": 3,
+                    "DstName": "force"
+                  },
+                  {
+                    "Value": "0,0,1",
+                    "DstId": 3,
+                    "DstName": "forceDirection"
+                  },
+                  {
+                    "Value": "Serious",
+                    "DstId": 3,
+                    "DstName": "type"
+                  },
+                  {
+                    "SrcId": 5,
+                    "SrcName": "_signal",
+                    "DstId": 4,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "SrcId": 1,
+                    "SrcName": "_result",
+                    "DstId": 4,
+                    "DstName": "_target"
+                  },
+                  {
+                    "Value": "Some idiot ran me over, luckily I\u0027m finnish.",
+                    "DstId": 4,
+                    "DstName": "caption"
+                  },
+                  {
+                    "Value": 200,
+                    "DstId": 4,
+                    "DstName": "distance"
+                  },
+                  {
+                    "Value": "car_ran_over",
+                    "DstId": 4,
+                    "DstName": "identifier"
+                  },
+                  {
+                    "SrcId": 3,
+                    "SrcName": "_signal",
+                    "DstId": 5,
+                    "DstName": "_signal"
+                  },
+                  {
+                    "Value": 0.03,
+                    "DstId": 5,
+                    "DstName": "seconds"
+                  }
+                ]
+              },
+              "RequiredToFinish": false,
+              "TriggerCooldown": 1,
+              "TriggerOnce": false,
+              "Triggers": [
+                {
+                  "_type": "component",
+                  "component_id": "0567c2e6-9ee7-43b2-a5bb-2d9a20f721fa",
+                  "go": "cb63a5ac-8388-429d-83fb-bde55b866ee5",
+                  "component_type": "EventAreaTrigger"
+                }
+              ]
+            },
+            {
+              "__type": "MarkerComponent",
+              "__guid": "eb60b24c-e76e-4164-9e55-3c14c19dbb86",
+              "__enabled": false,
+              "Icon": "Event",
+              "Networked": true,
+              "Title": "CrazyDriver"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "6561c4b6-9fa9-4c36-beb7-eb498daed307",
+              "Name": "car_speeding_trigger",
+              "Position": "0,-86.64551,64",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "Components": [
+                {
+                  "__type": "EventAreaTrigger",
+                  "__guid": "1dbb07d3-b722-4f51-96df-efdadb65be76",
+                  "__enabled": false,
+                  "Extents": "256,3000,128",
+                  "MaxPollingRate": 5,
+                  "Offset": "0,0,0",
+                  "TagSet": "player",
+                  "TriggerPrefab": [],
+                  "TriggerSignalIdentifier": null
+                }
+              ]
+            },
+            {
+              "__guid": "af3badb3-0af9-413d-96b1-cefc95d4d34e",
+              "Name": "Car",
+              "Position": "0,-3966.646,0",
+              "Rotation": "0,0,0.7071067,0.7071068",
+              "NetworkMode": 2,
+              "Components": [
+                {
+                  "__type": "ModelRenderer",
+                  "__guid": "0e39fb63-9690-4b81-9eb0-fca79bb578ba",
+                  "__enabled": false,
+                  "BodyGroups": 1,
+                  "MaterialGroup": "normal",
+                  "Model": "models/old_red_lada/old_red_lada.vmdl",
+                  "RenderType": "On",
+                  "Tint": "0.05116,0.05116,0.05116,1"
+                },
+                {
+                  "__type": "ModelCollider",
+                  "__guid": "3a0d2f3e-7c2e-47fb-ad56-b2a3cbd03352",
+                  "__enabled": false,
+                  "IsTrigger": false,
+                  "Model": "models/old_red_lada/old_red_lada.vmdl",
+                  "Static": false
+                }
+              ],
+              "Children": [
+                {
+                  "__guid": "9246f0a4-5363-4667-8ae8-b98ffd2ef7eb",
+                  "Name": "Spot Light",
+                  "Position": "80,-22.64551,24",
+                  "Rotation": "0,0,-0.07050124,0.9975117",
+                  "Tags": "light_spot,light",
+                  "Enabled": true,
+                  "NetworkMode": 2,
+                  "Components": [
+                    {
+                      "__type": "SpotLight",
+                      "__guid": "cd944ef1-e1be-4ece-a632-5d59a12400cf",
+                      "__enabled": false,
+                      "Attenuation": 0.64,
+                      "ConeInner": 36.02,
+                      "ConeOuter": 22.8,
+                      "FogMode": "Enabled",
+                      "FogStrength": 1,
+                      "LightColor": "1,0.88279,0.70698,1",
+                      "Radius": 4000,
+                      "Shadows": true
+                    }
+                  ]
+                },
+                {
+                  "__guid": "b6bf126a-901d-4ea5-867d-36c5e23ce9be",
+                  "Name": "Spot Light",
+                  "Position": "80,17.35449,24",
+                  "Rotation": "0,0,0.09230856,0.9957304",
+                  "Tags": "light_spot,light",
+                  "Enabled": true,
+                  "NetworkMode": 2,
+                  "Components": [
+                    {
+                      "__type": "SpotLight",
+                      "__guid": "c79918a2-31bd-4bff-964a-ab7647ecb779",
+                      "__enabled": false,
+                      "Attenuation": 0.64,
+                      "ConeInner": 36.02,
+                      "ConeOuter": 22.8,
+                      "FogMode": "Enabled",
+                      "FogStrength": 1,
+                      "LightColor": "1,0.88279,0.70698,1",
+                      "Radius": 4000,
+                      "Shadows": true
+                    }
+                  ]
+                },
+                {
+                  "__guid": "cb63a5ac-8388-429d-83fb-bde55b866ee5",
+                  "Name": "HitPlayer",
+                  "Position": "0,0,0",
+                  "Enabled": true,
+                  "NetworkMode": 2,
+                  "Components": [
+                    {
+                      "__type": "EventAreaTrigger",
+                      "__guid": "0567c2e6-9ee7-43b2-a5bb-2d9a20f721fa",
+                      "__enabled": false,
+                      "Extents": "191.2001,97.92001,114.4",
+                      "MaxPollingRate": 1,
+                      "Offset": "59.35998,0,30.08",
+                      "TagSet": "player",
+                      "TriggerPrefab": [],
+                      "TriggerSignalIdentifier": "cat_hit_player"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "__guid": "df8573a4-17be-4780-8fc1-1071685b5751",
+              "Name": "destination",
+              "Position": "0,2064,0",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "af332d6f-031b-4d25-bef1-769ecd218f18",
+              "Name": "destination_1",
+              "Position": "-448,2704,0",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "54b10341-64de-4325-80fc-e70f9b07e2c3",
+              "Name": "destination_1",
+              "Position": "-896,3368,336",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "f7ff4a0f-b42c-4006-9bc5-cc5318bce70a",
+              "Name": "destination_1",
+              "Position": "-1752,4376,400",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "bce7099d-9739-4cd9-8c4f-29da6d0874d6",
+              "Name": "destination_1",
+              "Position": "-2280,5176,280",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "176468f1-2324-4266-adb2-f0050d83eca6",
+              "Name": "destination_1",
+              "Position": "-2720,5864,48",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "a0a9f746-a7b7-4686-981f-0355f7ddaeeb",
+              "Name": "destination_1",
+              "Position": "-3152,6704,-64",
+              "Enabled": true,
+              "NetworkMode": 2
+            },
+            {
+              "__guid": "860222f7-e3d2-43ff-8f40-084baecdde67",
+              "Name": "destination_1",
+              "Position": "-4296,7808,-336",
+              "Enabled": true,
+              "NetworkMode": 2
+            }
+          ]
+        },
+        {
+          "__guid": "79fb0025-515d-425d-9a48-bf8aa6ed5a17",
+          "Name": "creepy_peeper",
+          "Position": "3685.735,-3230.019,2458.043",
+          "Rotation": "0.000000009260383,-0.00000007033952,0.9914448,0.1305263",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/creepy_peeper.prefab"
+        },
+        {
+          "__guid": "ef58a47c-74a0-4034-ab12-79c9bb1bd4a5",
+          "Name": "banana_peel",
+          "Position": "3293.078,-3285.199,2446.688",
+          "Rotation": "0.0008235928,0.02486345,-0.03309572,0.9991425",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/banana_peel.prefab"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -4605,7 +5863,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T07:41:56.1874477\u002B01:00",
+  "LastSaved": "2024-03-15T11:22:00.7413554\u002B00:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
