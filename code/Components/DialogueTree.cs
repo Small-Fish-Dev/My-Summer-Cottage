@@ -140,9 +140,9 @@ public class DialogueTree : Component
 		}
 	}
 
-	public void SelectRandomDialogue()
+	public void SelectRandomDialogue( bool dialoguePoolOnly = true )
 	{
-		var options = DialogueStages.Where( x => x.IsInitial && x.AddToDialoguePool );
+		var options = DialogueStages.Where( x => x.IsInitial && !dialoguePoolOnly || x.IsInitial && x.AddToDialoguePool );
 
 		var totalWeight = options?
 			.Select( x => x.DialoguePoolWeight )?
