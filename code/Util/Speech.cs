@@ -1,21 +1,19 @@
 ﻿namespace Sauna;
 
-public struct SpeechSettings
+public class SpeechSettings
 {
-	public float Volume = 1;
-	public Vector3 Position = 0;
-	public Rotation Rotation = Rotation.Identity;
-	public float Pitch = 1;
-	public float Decibels = 70;
-	public bool ListenLocal = false;
-	public int Delay = 180;
-	public int Accuracy = 2;
-	public GameObject GameObject;
-
-	public SpeechSettings() { }
+	public float Volume { get; set; } = 1;
+	public Vector3 Position { get; set; } = 0;
+	public Rotation Rotation { get; set; } = Rotation.Identity;
+	public float Pitch { get; set; } = 1;
+	public float Decibels { get; set; } = 70;
+	public bool ListenLocal { get; set; } = false;
+	public int Delay { get; set; } = 180;
+	public int Accuracy { get; set; } = 2;
+	public GameObject GameObject { get; set; }
 }
 
-public struct Speech
+public class Speech
 {
 	const int SOUNDS = 15;
 	private List<SoundHandle> sounds;
