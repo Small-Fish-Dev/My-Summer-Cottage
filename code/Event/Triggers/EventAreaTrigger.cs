@@ -45,11 +45,11 @@ public sealed class EventAreaTrigger : EventTrigger
 			?.Where( x => x.IsValid() && x.Tags != null && TagSet != null && x.Tags.HasAny( TagSet ) )
 			?.Where( x => TriggerPrefab.Count == 0 || TriggerPrefab.Any( prefab => prefab != null && x.IsValid() && x.PrefabInstanceSource != null && prefab.ResourcePath == x.PrefabInstanceSource ) );
 
-		var objs = ObjectsInside.ToList();
-		foreach ( var found in find )
+		// Need ToList() to copy otherwise we iterate through a list that is being modified.
+		foreach ( var found in find.ToList() )
 		{
-			if ( !found.IsValid() || objs == null ) continue;
-			if ( !objs.Contains( found ) ) // Has entered just now
+			if ( !found.IsValid() || ObjectsInside == null ) continue;
+			if ( !ObjectsInside.Contains( found ) ) // Has entered just now
 				CallTrigger( found );
 		}
 
