@@ -18,6 +18,7 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Parameters" )] public DamageType DamageType { get; set; } = DamageType.Average;
 	[Property, Category( "Parameters" )] public int Damage { get; set; } = 5;
 	[Property, Category( "Parameters" )] public float HitForce { get; set; } = 300;
+	[Property, Category( "Parameters" )] public bool HasMuzzleflash { get; set; } = true;
 
 	[Property, Category( "Projectile" ), Sync, TargetSave] public int Ammo { get; set; }
 	[Property, Category( "Projectile" )] public string ExitAttachment { get; set; }
@@ -161,6 +162,9 @@ public sealed class WeaponComponent : Component
 			return false;
 		}
 
+		if ( Type == WeaponType.Ranged )
+			shooter.Renderer.Set( "action", true );
+
 		// Get ray
 		var transform = string.IsNullOrWhiteSpace( ExitAttachment )
 			? new Transform( shooter.ViewRay.Position, Rotation.LookAt( shooter.ViewRay.Forward ) )
@@ -174,7 +178,8 @@ public sealed class WeaponComponent : Component
 			.IgnoreGameObjectHierarchy( shooter.GameObject )
 			.Run();
 
-		BulletEffectBroadcast( transform, tr.EndPosition );
+		if ( HasMuzzleflash )
+			BulletEffectBroadcast( transform, tr.EndPosition );
 
 		var target = tr.GameObject;
 		if ( target != null )
@@ -253,7 +258,7 @@ public sealed class WeaponComponent : Component
 		particle.SetVector( 1, endPos );
 
 		// Muzzle flash
-		if ( !ResourceLibrary.TryGet<PrefabFile>( "prefabs/particles/muzzel_flash.prefab", out var prefab ) ) 
+		if ( !ResourceLibrary.TryGet<PrefabFile>( "prefabs/particles/muzzel_flash.prefab", out var prefab ) )
 			return;
 
 		var flash = SceneUtility.GetPrefabScene( prefab ).Clone();

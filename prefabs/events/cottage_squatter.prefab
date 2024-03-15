@@ -1,0 +1,631 @@
+{
+  "RootObject": {
+    "__guid": "d5b6015d-0725-4af1-968a-d2ffbe3ed181",
+    "Name": "cottage_squatter",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "9e110b7c-daf4-4805-a972-ae89cbdd071b",
+        "__enabled": false,
+        "AddToEventPool": true,
+        "EventName": "cottage_squatter",
+        "EventSignals": [],
+        "Rarity": "Uncommon",
+        "ReinstantiateOnRestart": true,
+        "Stackable": true,
+        "Type": "Random"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "3134c8d6-d38a-43d3-994b-174cf8ce7671",
+        "Name": "Squatter",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "NPC",
+            "__guid": "4dddab1f-a5da-4be0-8139-2fd69eab2941",
+            "AlertOthers": true,
+            "AttackCooldown": 5,
+            "AttackRange": 60,
+            "DetectRange": 208,
+            "EnemyTags": "player",
+            "FaceTowardsVelocity": true,
+            "Health": {
+              "_type": "component",
+              "component_id": "537a3bd5-db19-46bd-9ffa-d2a063d6f6f8",
+              "go": "3134c8d6-d38a-43d3-994b-174cf8ce7671",
+              "component_type": "HealthComponent"
+            },
+            "Idle": true,
+            "MaximumIdleCooldown": 20,
+            "MaxRunAnimationSpeed": 150,
+            "MinimumIdleCooldown": 10,
+            "Model": {
+              "_type": "component",
+              "component_id": "b51c7b3f-5ffc-4bca-9327-b05c75579332",
+              "go": "c8652e7f-6813-4bef-9acd-8cb7cbf84be1",
+              "component_type": "SkinnedModelRenderer"
+            },
+            "MoveHelper": {
+              "_type": "component",
+              "component_id": "de84baf1-0214-4e7b-8e8d-a78615de1c98",
+              "go": "3134c8d6-d38a-43d3-994b-174cf8ce7671",
+              "component_type": "MoveHelper"
+            },
+            "Name": "Squatter",
+            "OnAttack": {
+              "Version": 5,
+              "UserData": {
+                "Title": "On Attack",
+                "id": "16b4eb6b-1d12-427d-9179-e75d9ca9e1b5",
+                "ReferencedComponentTypes": [
+                  "package.fish.sauna/HealthComponent"
+                ]
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 4,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "component": {
+                      "_type": "component",
+                      "component_id": "b51c7b3f-5ffc-4bca-9327-b05c75579332",
+                      "go": "c8652e7f-6813-4bef-9acd-8cb7cbf84be1",
+                      "component_type": "SkinnedModelRenderer"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "-80,-160"
+                  }
+                },
+                {
+                  "Id": 7,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                    "_isStatic": false,
+                    "_name": "Set"
+                  },
+                  "UserData": {
+                    "Position": "272,-0"
+                  }
+                },
+                {
+                  "Id": 8,
+                  "Type": "scene.get",
+                  "Properties": {
+                    "T": "package.fish.sauna/HealthComponent"
+                  },
+                  "UserData": {
+                    "Position": "112,160"
+                  }
+                },
+                {
+                  "Id": 9,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/HealthComponent",
+                    "_isStatic": false,
+                    "_name": "Damage"
+                  },
+                  "UserData": {
+                    "Position": "624,0"
+                  }
+                },
+                {
+                  "Id": 11,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "gameobject": {
+                      "_type": "gameobject",
+                      "go": "3134c8d6-d38a-43d3-994b-174cf8ce7671"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "-80,-224"
+                  }
+                },
+                {
+                  "Id": 12,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                    "_isStatic": true,
+                    "_name": "SpeakWithSubtitle"
+                  },
+                  "UserData": {
+                    "Position": "944,16"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 7,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 4,
+                  "SrcName": "_result",
+                  "DstId": 7,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": "action",
+                  "DstId": 7,
+                  "DstName": "v"
+                },
+                {
+                  "Value": true,
+                  "DstId": 7,
+                  "DstName": "value"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "enemy",
+                  "DstId": 8,
+                  "DstName": "_this"
+                },
+                {
+                  "SrcId": 7,
+                  "SrcName": "_signal",
+                  "DstId": 9,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 8,
+                  "SrcName": "_result",
+                  "DstId": 9,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": 2,
+                  "DstId": 9,
+                  "DstName": "amount"
+                },
+                {
+                  "SrcId": 11,
+                  "SrcName": "_result",
+                  "DstId": 9,
+                  "DstName": "attacker"
+                },
+                {
+                  "Value": 15,
+                  "DstId": 9,
+                  "DstName": "force"
+                },
+                {
+                  "Value": "Average",
+                  "DstId": 9,
+                  "DstName": "type"
+                },
+                {
+                  "SrcId": 9,
+                  "SrcName": "_signal",
+                  "DstId": 12,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": "Cottage Squatter",
+                  "DstId": 12,
+                  "DstName": "name"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_target",
+                  "DstId": 12,
+                  "DstName": "obj"
+                },
+                {
+                  "Value": "BACK OFF!!!",
+                  "DstId": 12,
+                  "DstName": "subtitle"
+                }
+              ]
+            },
+            "OnDetect": {
+              "Version": 5,
+              "UserData": {
+                "Title": "On Detect",
+                "id": "6826d28b-dd28-428f-928f-be184dc19ef6",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 2,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "component": {
+                      "_type": "component",
+                      "component_id": "4dddab1f-a5da-4be0-8139-2fd69eab2941",
+                      "go": "3134c8d6-d38a-43d3-994b-174cf8ce7671",
+                      "component_type": "NPC"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "16,-64"
+                  }
+                },
+                {
+                  "Id": 4,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "component": {
+                      "_type": "component",
+                      "component_id": "4dddab1f-a5da-4be0-8139-2fd69eab2941",
+                      "go": "3134c8d6-d38a-43d3-994b-174cf8ce7671",
+                      "component_type": "NPC"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "16,-64"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "npc.startfollowing",
+                  "UserData": {
+                    "Position": "320,16"
+                  }
+                },
+                {
+                  "Id": 6,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                    "_isStatic": true,
+                    "_name": "SpeakWithSubtitle"
+                  },
+                  "UserData": {
+                    "Position": "816,16"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 5,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 4,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "npc"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "enemy",
+                  "DstId": 5,
+                  "DstName": "target"
+                },
+                {
+                  "SrcId": 5,
+                  "SrcName": "_signal",
+                  "DstId": 6,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": "Cottage Squatter",
+                  "DstId": 6,
+                  "DstName": "name"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_target",
+                  "DstId": 6,
+                  "DstName": "obj"
+                },
+                {
+                  "Value": "Hey you! Get away from your cottage! its mine now!",
+                  "DstId": 6,
+                  "DstName": "subtitle"
+                }
+              ]
+            },
+            "OnIdle": {
+              "Version": 5,
+              "UserData": {
+                "Title": "On Idle",
+                "id": "054d00c6-c81f-4b49-843c-cb22c4571e53",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "npc.moveto",
+                  "UserData": {
+                    "Position": "368,32"
+                  }
+                },
+                {
+                  "Id": 3,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "component": {
+                      "_type": "component",
+                      "component_id": "4dddab1f-a5da-4be0-8139-2fd69eab2941",
+                      "go": "3134c8d6-d38a-43d3-994b-174cf8ce7671",
+                      "component_type": "NPC"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "160,-48"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "gameobject": {
+                      "_type": "gameobject",
+                      "go": "c9f38247-c02b-46fe-b8e0-b4e8cb5671ee"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "-48,96"
+                  }
+                },
+                {
+                  "Id": 6,
+                  "Type": "property.get",
+                  "ParentId": 5,
+                  "Properties": {
+                    "_type": "Sandbox.Game/Sandbox.GameObject",
+                    "_name": "Transform"
+                  }
+                },
+                {
+                  "Id": 7,
+                  "Type": "property.get",
+                  "ParentId": 6,
+                  "Properties": {
+                    "_type": "Sandbox.Game/Sandbox.GameTransform",
+                    "_name": "Position"
+                  }
+                },
+                {
+                  "Id": 8,
+                  "Type": "npc.getrandomposaround",
+                  "UserData": {
+                    "Position": "224,224"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 1,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 1,
+                  "DstName": "npc"
+                },
+                {
+                  "SrcId": 8,
+                  "SrcName": "_result",
+                  "DstId": 1,
+                  "DstName": "position"
+                },
+                {
+                  "SrcId": 5,
+                  "SrcName": "_result",
+                  "DstId": 6,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 6,
+                  "SrcName": "_result",
+                  "DstId": 7,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": 50,
+                  "DstId": 8,
+                  "DstName": "maxRange"
+                },
+                {
+                  "Value": 10,
+                  "DstId": 8,
+                  "DstName": "minRange"
+                },
+                {
+                  "SrcId": 7,
+                  "SrcName": "_result",
+                  "DstId": 8,
+                  "DstName": "position"
+                }
+              ]
+            },
+            "OnKilled": {
+              "Version": 5,
+              "UserData": {
+                "Title": "On Killed",
+                "id": "c2faba44-da97-44ea-af0c-aa4adf4f4df2",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                    "_isStatic": true,
+                    "_name": "SpeakWithSubtitle"
+                  },
+                  "UserData": {
+                    "Position": "288,32"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 1,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": "Cottage Squatter",
+                  "DstId": 1,
+                  "DstName": "name"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_target",
+                  "DstId": 1,
+                  "DstName": "obj"
+                },
+                {
+                  "Value": "Agh ugh, what the hell man!",
+                  "DstId": 1,
+                  "DstName": "subtitle"
+                }
+              ]
+            },
+            "RunningType": "Smart",
+            "RunSpeed": 250,
+            "ScaleStats": true,
+            "Static": false,
+            "VisionRange": 240,
+            "WalkingType": "Dumb",
+            "WalkSpeed": 160,
+            "Weight": "Middle"
+          },
+          {
+            "__type": "MoveHelper",
+            "__guid": "de84baf1-0214-4e7b-8e8d-a78615de1c98",
+            "AccelerationCurve": [
+              {
+                "x": 0.5,
+                "y": 0.5
+              }
+            ],
+            "AirAcceleration": 800,
+            "AirFriction": 1,
+            "Bounce": 0.3,
+            "EnableUnstuck": true,
+            "Gravity": "0,0,850",
+            "GroundAcceleration": 2000,
+            "GroundAngle": 45,
+            "GroundFriction": 30,
+            "IgnoreTags": "",
+            "MaxUnstuckTries": 20,
+            "StepHeight": 18,
+            "StickToGround": true,
+            "StopSpeed": 10,
+            "TraceHeight": 72,
+            "TraceRadius": 16,
+            "TraceType": "Capsule",
+            "UseCollider": false,
+            "UseSceneGravity": true
+          },
+          {
+            "__type": "HealthComponent",
+            "__guid": "537a3bd5-db19-46bd-9ffa-d2a063d6f6f8",
+            "CanRegenerate": true,
+            "DamagedBy": "Average",
+            "DropOnDeath": [
+              {
+                "_type": "gameobject",
+                "prefab": "prefabs/items/beer_bottle.prefab"
+              },
+              {
+                "_type": "gameobject",
+                "prefab": "prefabs/items/beer_bottle.prefab"
+              },
+              {
+                "_type": "gameobject",
+                "prefab": "prefabs/items/jar_mayo.prefab"
+              },
+              {
+                "_type": "gameobject",
+                "prefab": "prefabs/items/crisps_bad.prefab"
+              }
+            ],
+            "Immortal": false,
+            "MaxHealth": 50,
+            "RegenerationCooldown": 5,
+            "RegenerationTimer": 10,
+            "StunnedBy": "Mild",
+            "StunWhenDamaged": true
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "c8652e7f-6813-4bef-9acd-8cb7cbf84be1",
+            "Name": "guy",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "b51c7b3f-5ffc-4bca-9327-b05c75579332",
+                "BodyGroups": 1109,
+                "CreateBoneObjects": false,
+                "Model": "models/guy/guy.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              },
+              {
+                "__type": "Character",
+                "__guid": "7dcaf58c-c4c8-4905-95b5-9ec8fb4843f4",
+                "Clothes": [
+                  "models/clothes/underwear/underwear.vmdl",
+                  "models/clothes/socks/socks.vmdl",
+                  "models/clothes/wifebeater/wifebeater.vmdl"
+                ],
+                "Fatness": 0.5,
+                "Height": 22,
+                "HideBodyGroup": "Feet"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__guid": "c9f38247-c02b-46fe-b8e0-b4e8cb5671ee",
+        "Name": "Home_location",
+        "Position": "-126.8602,101.5076,17.22536",
+        "Enabled": true,
+        "NetworkMode": 2
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
