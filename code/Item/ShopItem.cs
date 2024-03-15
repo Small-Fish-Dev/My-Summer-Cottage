@@ -17,7 +17,7 @@ public class ShopItem : Component
 	protected override void OnStart()
 	{
 		GameObject.SetupNetworking();
-		GameObject.Name = $"Buy {PrefabLibrary.AsDefinition( Item ).GetComponent<ItemComponent>().Get<string>( "Name" )}";
+		GameObject.Name = $"Buy {PrefabLibrary.AsDefinition( Item )?.GetComponent<ItemComponent>()?.Get<string>( "Name" ) ?? "Item"}";
 
 		if ( IsParcel() )
 			CreateWorldIcon();
