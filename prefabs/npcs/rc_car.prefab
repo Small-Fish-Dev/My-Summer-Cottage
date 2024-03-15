@@ -1,0 +1,622 @@
+{
+  "RootObject": {
+    "__guid": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a",
+    "Name": "rc_car",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "NPC",
+        "__guid": "817c6ef4-df7e-4420-8f22-0c6f3627d79f",
+        "AlertOthers": true,
+        "AttackCooldown": 10,
+        "AttackRange": 50,
+        "DetectRange": 256,
+        "EnemyTags": "player",
+        "FaceTowardsVelocity": true,
+        "Health": {
+          "_type": "component",
+          "component_id": "1b88accf-f57c-473e-bd27-5ab10d752ba3",
+          "go": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a",
+          "component_type": "HealthComponent"
+        },
+        "Idle": true,
+        "MaximumIdleCooldown": 20,
+        "MaxRunAnimationSpeed": 150,
+        "MinimumIdleCooldown": 10,
+        "Model": {
+          "_type": "component",
+          "component_id": "eaff5f14-650e-4d86-978b-3055bf2477ea",
+          "go": "817989a3-83f8-4b1c-9543-f224a8d1add4",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "MoveHelper": {
+          "_type": "component",
+          "component_id": "bda42048-2e99-4c76-8c34-f86d9702c539",
+          "go": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a",
+          "component_type": "MoveHelper"
+        },
+        "Name": "rc_car",
+        "OnAttack": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Attack",
+            "id": "5ea3f1be-454b-4247-9b3d-358ca5db02ac",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/Sauna.Player"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true,
+                "_name": "SpeakWithSubtitle"
+              },
+              "UserData": {
+                "Position": "480,16"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "16,128"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "Firstname"
+              },
+              "UserData": {
+                "Position": "192,192"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_isStatic": false,
+                "_name": "GiveMoney"
+              },
+              "UserData": {
+                "Position": "1264,-96"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_isStatic": false,
+                "_name": "AddExperience"
+              },
+              "UserData": {
+                "Position": "944,-16"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_isStatic": false,
+                "_name": "Destroy"
+              },
+              "UserData": {
+                "Position": "1632,-32"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "704,-64"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "name"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 1,
+              "DstName": "obj"
+            },
+            {
+              "Value": "* STOMP * urgh i hate these things around my feet",
+              "DstId": 1,
+              "DstName": "subtitle"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 2,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_signal",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_target"
+            },
+            {
+              "Value": 5,
+              "DstId": 9,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_target"
+            },
+            {
+              "Value": 10,
+              "DstId": 10,
+              "DstName": "exp"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_signal",
+              "DstId": 11,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 11,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 12,
+              "DstName": "_this"
+            },
+            {
+              "Value": "sounds/wood/woodplank_step.sound",
+              "DstId": 12,
+              "DstName": "soundEvent"
+            }
+          ]
+        },
+        "OnDetect": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Detect",
+            "id": "6e016a78-dcbd-4ec3-bc0e-b7c5a873267f",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 2,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a"
+                }
+              },
+              "UserData": {
+                "Position": "160,80"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "property.get",
+              "ParentId": 2,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "property.get",
+              "ParentId": 3,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "448,144"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "768,-16"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "817c6ef4-df7e-4420-8f22-0c6f3627d79f",
+                  "go": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "160,-144"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "416,0"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "_target"
+            },
+            {
+              "Value": 10,
+              "DstId": 5,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 5,
+              "DstId": 5,
+              "DstName": "minRange"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_signal",
+              "DstId": 6,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "npc"
+            }
+          ]
+        },
+        "OnIdle": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Idle",
+            "id": "4349cdb5-3bc8-4fdf-86c6-171e690f762e"
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 2,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a"
+                }
+              },
+              "UserData": {
+                "Position": "-32,96"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "property.get",
+              "ParentId": 2,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "property.get",
+              "ParentId": 3,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "256,160"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "576,0"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "817c6ef4-df7e-4420-8f22-0c6f3627d79f",
+                  "go": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "112,-96"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "817c6ef4-df7e-4420-8f22-0c6f3627d79f",
+                  "go": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "112,-96"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "_target"
+            },
+            {
+              "Value": 200,
+              "DstId": 5,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 100,
+              "DstId": 5,
+              "DstName": "minRange"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 6,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "position"
+            }
+          ]
+        },
+        "RunningType": "Smart",
+        "RunSpeed": 600,
+        "ScaleStats": true,
+        "Static": false,
+        "VisionRange": 512,
+        "WalkingType": "Dumb",
+        "WalkSpeed": 600,
+        "Weight": "Middle"
+      },
+      {
+        "__type": "MoveHelper",
+        "__guid": "bda42048-2e99-4c76-8c34-f86d9702c539",
+        "AccelerationCurve": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 0.3,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 2000,
+        "GroundAngle": 45,
+        "GroundFriction": 30,
+        "IgnoreTags": "",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 18,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 15,
+        "TraceRadius": 15,
+        "TraceType": "BBox",
+        "UseCollider": false,
+        "UseSceneGravity": true
+      },
+      {
+        "__type": "CapsuleCollider",
+        "__guid": "73049fb8-953c-4909-a5bb-c473d3ec0d7d",
+        "End": "0,0,10",
+        "IsTrigger": false,
+        "Radius": 5,
+        "Start": "0,0,0",
+        "Static": false
+      },
+      {
+        "__type": "HealthComponent",
+        "__guid": "1b88accf-f57c-473e-bd27-5ab10d752ba3",
+        "CanRegenerate": false,
+        "DamagedBy": "Mild",
+        "DropOnDeath": [
+          null
+        ],
+        "Immortal": false,
+        "MaxHealth": 5,
+        "RegenerationCooldown": 2,
+        "RegenerationTimer": 5,
+        "StunnedBy": "Average",
+        "StunWhenDamaged": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "817989a3-83f8-4b1c-9543-f224a8d1add4",
+        "Name": "Object",
+        "Scale": "0.2,0.2,0.2",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "eaff5f14-650e-4d86-978b-3055bf2477ea",
+            "BodyGroups": 1,
+            "CreateBoneObjects": false,
+            "MaterialGroup": "normal",
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "RenderType": "On",
+            "Tint": "0.22745,0.50588,0.0902,1"
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "ffd82a3f-0566-47ca-acb1-72a36b8c5cd8",
+            "Name": "Object",
+            "Position": "-6.494744,-20.86741,12.66052",
+            "Rotation": "0,-0.291506,0,0.956569",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "ModelRenderer",
+                "__guid": "dfd848e8-84c4-4efc-88a3-bcac59736ef1",
+                "BodyGroups": 18446744073709551615,
+                "Model": "models/props/street_name_sign/street_name_sign_top_pole.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
