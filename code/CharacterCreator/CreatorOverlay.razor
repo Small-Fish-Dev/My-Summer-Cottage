@@ -136,8 +136,19 @@
 		string.IsNullOrEmpty( PassportPanel.Firstname ) 
 		|| string.IsNullOrEmpty( PassportPanel.Lastname );
 
+	private bool moving = false;
+
 	private async void Finish()
 	{
+		Panel.Delete();
+		MugshotPanel.Leave = true;
+		Renderer.Set( "mugshot", false );
+		Renderer.Set( "lookat", Vector3.Forward );
+
+		await GameTask.DelayRealtimeSeconds( 1 );
+
+		moving = true;
+
 		// todo @ceitine: walk off animation and fade out
 
 		var rand = new Random( (int)(Steam.SteamId % int.MaxValue) );
@@ -158,7 +169,7 @@
 			} 
 		);
 
-		await GameTask.DelayRealtimeSeconds( 1 );
+		await GameTask.DelayRealtimeSeconds( 4 );
 
 		SceneHandler.ChangeScene( SaunaScene.Game, CreatorComponent.LobbyId );
 		CreatorComponent.LobbyId = null;
@@ -210,6 +221,12 @@
 
 	protected override void OnUpdate()
 	{
+		if ( moving && Renderer != null )
+		{
+			Renderer.Set( "move_x", MathX.LerpTo( Renderer.GetFloat( "move_x" ), 0.4f, 5f * Time.Delta ) );
+			Renderer.GameObject.Transform.Position += Renderer.Transform.Rotation.Forward * 20f * Time.Delta;
+		}
+
 		if ( panels == null )
 			return;
 

@@ -1,0 +1,563 @@
+{
+  "RootObject": {
+    "__guid": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+    "Name": "arctic_hare",
+    "Tags": "animal,npc,prey",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "NPC",
+        "__guid": "68bdc5db-2975-4a28-b43e-842550e58469",
+        "AlertOthers": true,
+        "AttackCooldown": 8,
+        "AttackRange": 40,
+        "DetectRange": 300,
+        "EnemyTags": "player,human,predator",
+        "FaceTowardsVelocity": true,
+        "Health": {
+          "_type": "component",
+          "component_id": "67db706f-4f25-422b-ad5c-b6727546ff94",
+          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+          "component_type": "HealthComponent"
+        },
+        "Idle": true,
+        "MaximumIdleCooldown": 12,
+        "MaxRunAnimationSpeed": 150,
+        "MinimumIdleCooldown": 6,
+        "Model": {
+          "_type": "component",
+          "component_id": "c34b4443-f877-43d4-be1e-933dfc3ead2d",
+          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "MoveHelper": {
+          "_type": "component",
+          "component_id": "fe626525-d5c0-4562-b4d6-3b748ee5b1e4",
+          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+          "component_type": "MoveHelper"
+        },
+        "Name": "Actic Hare",
+        "OnDetect": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Detect",
+            "id": "eb215b18-ba3d-45d3-840b-2ac2f527d1dd",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/NPC",
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-288,-0",
+                "Labels": {
+                  "_signal": "signalStart"
+                }
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Position": "-288,96",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-480,-336"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              },
+              "UserData": {
+                "Position": "-240,-336",
+                "Labels": {
+                  "_result": "renderer"
+                }
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set"
+              },
+              "UserData": {
+                "Position": "144,-352"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "sound.playat",
+              "UserData": {
+                "Position": "128,-208"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "property.get",
+              "ParentId": 6,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.Component",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 19,
+              "Type": "property.get",
+              "ParentId": 17,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "npc.startescaping",
+              "UserData": {
+                "Position": "144,-16"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 3,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_target"
+            },
+            {
+              "Value": "eating",
+              "DstId": 10,
+              "DstName": "v"
+            },
+            {
+              "Value": false,
+              "DstId": 10,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 15,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 19,
+              "SrcName": "_result",
+              "DstId": 15,
+              "DstName": "position"
+            },
+            {
+              "Value": "sounds/door/door_creak.sound",
+              "DstId": 15,
+              "DstName": "soundEvent"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "_result",
+              "DstId": 19,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 21,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 21,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 21,
+              "DstName": "target"
+            }
+          ]
+        },
+        "OnEnemyEscaped": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Enemy Escaped",
+            "id": "691598ea-f02a-4a1f-ab36-a1bc91a9391a",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/NPC"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 3,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Position": "128,112"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "npc.stopescaping",
+              "UserData": {
+                "Position": "368,64"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 3,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "npc"
+            }
+          ]
+        },
+        "OnIdle": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Idle",
+            "id": "f2de72d1-71fb-4fde-9e75-7629fce59da5",
+            "ReferencedComponentTypes": [
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-496,-288"
+              }
+            },
+            {
+              "Id": 1,
+              "Type": "npc.moveto",
+              "UserData": {
+                "Position": "176,-240"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-496,-144",
+                "Labels": {
+                  "_result": "npc"
+                }
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "npc.getrandomposaround",
+              "UserData": {
+                "Position": "-176,-128"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "property.get",
+              "ParentId": 3,
+              "Properties": {
+                "_type": "package.fish.sauna/NPC",
+                "_name": "SpawnPosition"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              },
+              "UserData": {
+                "Position": "-576,-16",
+                "Labels": {
+                  "_result": "renderer"
+                }
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set"
+              },
+              "UserData": {
+                "Position": "-144,-384"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_name": "Set"
+              },
+              "UserData": {
+                "Position": "544,-224"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "position"
+            },
+            {
+              "Value": 512,
+              "DstId": 4,
+              "DstName": "maxRange"
+            },
+            {
+              "Value": 0,
+              "DstId": 4,
+              "DstName": "minRange"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "position"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 7,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "Value": "eating",
+              "DstId": 7,
+              "DstName": "v"
+            },
+            {
+              "Value": false,
+              "DstId": 7,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "reachedDestination",
+              "DstId": 8,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_target"
+            },
+            {
+              "Value": "eating",
+              "DstId": 8,
+              "DstName": "v"
+            },
+            {
+              "Value": true,
+              "DstId": 8,
+              "DstName": "value"
+            }
+          ]
+        },
+        "RunningType": "Normal",
+        "RunSpeed": 120,
+        "ScaleStats": true,
+        "Static": false,
+        "VisionRange": 900,
+        "WalkingType": "Dumb",
+        "WalkSpeed": 30,
+        "Weight": "Light"
+      },
+      {
+        "__type": "MoveHelper",
+        "__guid": "fe626525-d5c0-4562-b4d6-3b748ee5b1e4",
+        "AccelerationCurve": [
+          {
+            "y": 0.29999998
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "in": -1.7000002,
+            "out": 1.7000002
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 0,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,850",
+        "GroundAcceleration": 1800,
+        "GroundAngle": 70,
+        "GroundFriction": 30,
+        "IgnoreTags": "",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 12,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 20,
+        "TraceRadius": 6,
+        "TraceType": "BBox",
+        "UseCollider": false,
+        "UseSceneGravity": true
+      },
+      {
+        "__type": "CapsuleCollider",
+        "__guid": "fd4f8ba7-0f7e-401a-a67a-8ab1e888565b",
+        "End": "0,0,8",
+        "IsTrigger": false,
+        "Radius": 5,
+        "Start": "0,0,5",
+        "Static": false
+      },
+      {
+        "__type": "SkinnedModelRenderer",
+        "__guid": "c34b4443-f877-43d4-be1e-933dfc3ead2d",
+        "BodyGroups": 16,
+        "CreateBoneObjects": false,
+        "MaterialGroup": "white",
+        "Model": "models/fauna/hare/hare.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "HealthComponent",
+        "__guid": "67db706f-4f25-422b-ad5c-b6727546ff94",
+        "CanRegenerate": false,
+        "DamagedBy": "Mild",
+        "DropOnDeath": [
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/items/red_meat.prefab"
+          }
+        ],
+        "Immortal": false,
+        "MaxHealth": 1,
+        "RegenerationCooldown": 2,
+        "RegenerationTimer": 5,
+        "StunnedBy": "Mild",
+        "StunWhenDamaged": true
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

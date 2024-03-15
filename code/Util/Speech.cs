@@ -2,20 +2,22 @@
 
 public struct SpeechSettings
 {
-	public float Volume = 1;
-	public Vector3 Position = 0;
-	public Rotation Rotation = Rotation.Identity;
-	public float Pitch = 1;
-	public float Decibels = 70;
-	public bool ListenLocal = false;
-	public int Delay = 180;
-	public int Accuracy = 2;
-	public GameObject GameObject;
+	public static SpeechSettings Default = new SpeechSettings();
+
+	public float Volume { get; set; } = 1;
+	public Vector3 Position { get; set; } = 0;
+	public Rotation Rotation { get; set; } = Rotation.Identity;
+	public float Pitch { get; set; } = 1;
+	public float Decibels { get; set; } = 70;
+	public bool ListenLocal { get; set; } = false;
+	public int Delay { get; set; } = 180;
+	public int Accuracy { get; set; } = 2;
+	public GameObject GameObject { get; set; }
 
 	public SpeechSettings() { }
 }
 
-public struct Speech
+public class Speech
 {
 	const int SOUNDS = 15;
 	private List<SoundHandle> sounds;
@@ -24,8 +26,9 @@ public struct Speech
 	public bool Stopped { get; private set; }
 	public float Duration { get; private set; }
 
-	public static Speech Create( string text, SpeechSettings settings = default )
+	public static Speech Create( string text, SpeechSettings? nsettings = null )
 	{
+		var settings = nsettings ?? SpeechSettings.Default;
 		var speech = new Speech()
 		{
 			sounds = new(),
@@ -38,12 +41,14 @@ public struct Speech
 			.RemoveDiacritics()
 			.ToCharArray();
 
+		var accuracy = Math.Max( settings.Accuracy, 1 );
+
 		// Begin generating speech.
 		new Action( async () =>
 		{
-			for ( int i = 0; i < characters.Length / settings.Accuracy; i++ )
+			for ( int i = 0; i < characters.Length / accuracy; i++ )
 			{
-				var character = characters[Math.Min( i * settings.Accuracy, characters.Length - 1 )];
+				var character = characters[Math.Min( i * accuracy, characters.Length - 1 )];
 				if ( char.IsWhiteSpace( character ) )
 				{
 					await GameTask.Delay( settings.Delay );
@@ -90,6 +95,6 @@ public struct Speech
 	[ConCmd]
 	public static void TestSound( string input = "blablabla fuck you bithc!!!" )
 	{
-		Create( input, settings: new() { GameObject = Player.Local.GameObject, Pitch = 0.7f } );
+		Create( input, SpeechSettings.Default with { GameObject = Player.Local.GameObject } );
 	}
 }

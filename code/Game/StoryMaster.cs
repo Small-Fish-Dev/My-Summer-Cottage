@@ -224,6 +224,12 @@ public class StoryMaster : Component
 	{
 		foreach ( var spawner in Scene.GetAllComponents<NpcSpawnArea>() )
 			spawner.RemoveNPCs();
+
+		foreach ( var npc in Scene.GetAllComponents<NPC>() )
+		{
+			if ( npc.IsValid() && npc.Health != null && !npc.Health.Alive )
+				npc.Destroy();
+		}
 	}
 
 	public void LoadItems()
@@ -465,6 +471,36 @@ public class StoryMaster : Component
 			StartSession();
 	}
 
+	public List<string> RandomTips = new()
+	{
+		"Take your pants off and press P to piss.",
+		"Pissing on stuff might give different results.",
+		"Airsoft can't hurt large animals, but an Axe could!",
+		"Only a real rifle can hurt the king of the forest.",
+		"If you follow the ? on the compass you might find something...",
+		"The deeper in the forest you go, the rarer the animals.",
+		"The deeper you cast your fishing, the better the fish.",
+		"Foxes kill hares, but they might leave spoils behind!",
+		"To continue with the story you must complete all primary tasks.",
+		"Talk with folks around town, some days they might give you tasks.",
+		"Remember to have pants on in the city, or the cops will attack.",
+		"Remember to take pants off in the city, or the hobos will attack.",
+		"Some of your tasks can be completed by other players.",
+		"Press ESC for useful shortcuts such as the fish collection.",
+		"You can drag items on your character to equip them.",
+		"You can drag items off the inventory to drop them.",
+		"Some shops won't buy certain items.",
+		"You can zoom by holding the C key.",
+		"You can walk by holding the ALT key.",
+		"You can crouch by holding the CTRL key.",
+		"Don't bother shooting humans they don't drop anything.",
+		"Run.",
+		"The day will automatically end in the middle of the night.",
+		"Try to go back home before 3am, weird things happen.",
+	};
+
+	TimeSince _lastTipAttempt = 0f;
+
 	protected override void OnFixedUpdate()
 	{
 		if ( Scene.IsEditor ) return;
@@ -472,6 +508,13 @@ public class StoryMaster : Component
 		var timeManager = Scene.GetAllComponents<GameTimeManager>()?.FirstOrDefault();
 
 		if ( timeManager == null ) return;
+
+		if ( _lastTipAttempt >= 60f )
+		{
+			if ( Game.Random.Float( 100 ) <= 30f )
+				NotificationManager.Popup( "Tip:", Game.Random.FromList( RandomTips ), new Color( 207f / 255f, 124f / 255f, 23f / 255f ), "ui/hud/question_mark.png", time: 7 );
+			_lastTipAttempt = 0f;
+		}
 
 		if ( CurrentSaunaDay != null && !timeManager.IsDayOver )
 		{

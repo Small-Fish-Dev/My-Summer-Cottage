@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "de88d319-e4ad-4143-b5b4-e37ae58d16c8",
+    "__guid": "de88d319-e4ad-4143-b5b4-e37ae58d16c8",
     "Name": "experience_toilet",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "EventDefinition",
+        "__guid": "ba45ea8a-e904-4f42-9130-6c5e3454db62",
         "AddToEventPool": true,
         "EventName": "Experience Toilet",
         "EventSignals": [],
@@ -16,6 +18,7 @@
       },
       {
         "__type": "EventComponent",
+        "__guid": "39a7dd23-bbc5-47e8-9393-805e10189bd8",
         "DisabledWhilePlaying": [],
         "DisableOnTrigger": [],
         "Event": {
@@ -83,6 +86,30 @@
               "UserData": {
                 "Position": "592,240"
               }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "335781a6-c759-4db0-bce7-dd717985a84f"
+                }
+              },
+              "UserData": {
+                "Position": "0,-176"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "320,-128"
+              }
             }
           ],
           "Links": [
@@ -137,6 +164,23 @@
               "SrcName": "_result",
               "DstId": 6,
               "DstName": "player"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 9,
+              "DstName": "_value"
             }
           ]
         },
@@ -146,6 +190,7 @@
         "Triggers": [
           {
             "_type": "component",
+            "component_id": "e7898a42-5b4d-4fa3-be46-ed56b01edfa5",
             "go": "71e0a4f1-1f69-4d9b-9074-1705376b1d2a",
             "component_type": "EventPissTrigger"
           }
@@ -154,46 +199,60 @@
     ],
     "Children": [
       {
-        "Id": "65b23e98-a62a-4f12-969e-7691f33c7d6d",
+        "__guid": "65b23e98-a62a-4f12-969e-7691f33c7d6d",
         "Name": "Toilet",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "ModelRenderer",
+            "__guid": "93985f2f-0391-49fd-bc3c-2cfaf163c9d4",
             "BodyGroups": 18446744073709551615,
-            "MaterialGroup": null,
-            "MaterialOverride": null,
             "Model": "models/props/toilet/toilet.vmdl",
             "RenderType": "On",
             "Tint": "1,1,1,1"
           },
           {
             "__type": "ModelCollider",
+            "__guid": "3fdc7e98-e276-4dc4-8688-acf0384ed1a1",
             "IsTrigger": false,
             "Model": "models/props/toilet/toilet.vmdl",
-            "Static": false,
-            "Surface": null
+            "Static": false
           }
         ]
       },
       {
-        "Id": "71e0a4f1-1f69-4d9b-9074-1705376b1d2a",
+        "__guid": "71e0a4f1-1f69-4d9b-9074-1705376b1d2a",
         "Name": "Trigger",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "EventPissTrigger",
+            "__guid": "e7898a42-5b4d-4fa3-be46-ed56b01edfa5",
             "Extents": "20.95999,20.31999,16.88",
             "MaxPollingRate": 3,
             "Offset": "3.679998,0,18.88",
             "TriggerSignalIdentifier": null
           }
         ]
+      },
+      {
+        "__guid": "335781a6-c759-4db0-bce7-dd717985a84f",
+        "Name": "piss_indicator",
+        "Position": "3.24901,0,25.23175",
+        "Rotation": "0,0.7071067,0,0.7071068",
+        "Tags": "particles",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/particles/piss_indicator.prefab"
       }
     ]
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

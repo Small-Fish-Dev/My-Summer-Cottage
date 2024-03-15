@@ -4,7 +4,10 @@
 
 @* Anything that is always active and displayed to the player when ingame. *@
 <root>
-	<InteractionHint class="hold-hints" FromHands=@true />
+	<div class="hold-container">
+		<InteractionHint FromHands=@true />
+		<AmmoCounter />
+	</div>
 	<InteractionHint />
 
 	<Subtitles />

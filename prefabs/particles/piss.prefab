@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "726a9f8e-3cca-49e1-9aa6-eb5e0f1f1d7e",
+    "__guid": "726a9f8e-3cca-49e1-9aa6-eb5e0f1f1d7e",
     "Name": "piss",
     "Tags": "particles",
     "Enabled": true,
@@ -8,6 +8,7 @@
     "Components": [
       {
         "__type": "ParticleEffect",
+        "__guid": "e65c8151-26d8-4a21-bb95-2cdb83b6a9ac",
         "Alpha": {
           "Type": "Curve",
           "CurveA": {
@@ -36,7 +37,7 @@
         "ApplyShape": true,
         "Bounce": {},
         "Brightness": {
-          "Constants": "1,0,0,0"
+          "Constants": "1.2,0,0,0"
         },
         "Bumpiness": {},
         "Collision": true,
@@ -53,13 +54,28 @@
           "Constants": "100,0,0,0"
         },
         "Gradient": {
-          "Type": "Range",
+          "Type": "Gradient",
           "Evaluation": "Particle",
           "GradientA": {
             "color": [
               {
-                "t": 0.5,
-                "c": "1,1,1,1"
+                "c": "0.93023,0.85805,0.59708,1"
+              },
+              {
+                "t": 0.27991453,
+                "c": "0.96279,0.78426,0.13882,1"
+              },
+              {
+                "t": 0.27991453,
+                "c": "0.96279,0.78426,0.13882,1"
+              },
+              {
+                "t": 0.48931623,
+                "c": "0.96279,0.78426,0.13882,1"
+              },
+              {
+                "t": 1,
+                "c": "0.65116,0.34375,0.12418,1"
               }
             ],
             "alpha": []
@@ -73,8 +89,8 @@
             ],
             "alpha": []
           },
-          "ConstantA": "0.90233,0.80776,0.46585,1",
-          "ConstantB": "0.43721,0.3518,0.22369,1"
+          "ConstantA": "0.91163,0.75178,0.17385,1",
+          "ConstantB": "0.74884,0.52175,0.18111,1"
         },
         "Lifetime": {
           "Type": "Range",
@@ -97,22 +113,22 @@
         "Scale": {
           "Type": "Curve",
           "CurveA": {
-            "rangey": "0,5",
+            "rangey": "0,10",
             "frames": [
               {
-                "y": 0.35904256,
+                "y": 0.19946809,
                 "in": 0.36363655,
                 "out": -0.36363655
               },
               {
-                "x": 0.13741785,
-                "y": 0.6170213,
+                "x": 0.24158451,
+                "y": 0.36436173,
                 "in": -1.4121721,
                 "out": 1.4121721
               },
               {
-                "x": 1,
-                "y": 0.95478725,
+                "x": 0.7172619,
+                "y": 1,
                 "in": 0.038461417,
                 "out": -0.038461417
               }
@@ -140,6 +156,7 @@
       },
       {
         "__type": "ParticleSpriteRenderer",
+        "__guid": "b4b06798-79b3-4fc1-9f24-471bfe424ddd",
         "Additive": false,
         "BlurAmount": 0.38,
         "BlurOpacity": 0.53,
@@ -158,6 +175,7 @@
       },
       {
         "__type": "ParticleConeEmitter",
+        "__guid": "15f7d147-c197-422f-9281-a21476164029",
         "Burst": 0,
         "ConeAngle": 2.78,
         "ConeFar": 10.699992,
@@ -176,5 +194,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

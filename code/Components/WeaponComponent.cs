@@ -18,6 +18,7 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Parameters" )] public DamageType DamageType { get; set; } = DamageType.Average;
 	[Property, Category( "Parameters" )] public int Damage { get; set; } = 5;
 	[Property, Category( "Parameters" )] public float HitForce { get; set; } = 300;
+	[Property, Category( "Parameters" )] public bool HasMuzzleflash { get; set; } = true;
 
 	[Property, Category( "Projectile" ), Sync, TargetSave] public int Ammo { get; set; }
 	[Property, Category( "Projectile" )] public string ExitAttachment { get; set; }
@@ -33,16 +34,8 @@ public sealed class WeaponComponent : Component
 	[Property, Category( "Sounds" )] public SoundEvent PostFireSound { get; set; }
 	[Property, Category( "Sounds" )] public SoundEvent ReloadSound { get; set; }
 
-	public Player Owner => Player.All.FirstOrDefault( x => x.ConnectionID == Network.OwnerId );
-
-	private string _name;
 	private TimeUntil _canFire;
 	private TimeSince _lastReloaded;
-
-	protected override void OnAwake()
-	{
-		UpdateName();
-	}
 
 	protected override void OnStart()
 	{
@@ -57,9 +50,9 @@ public sealed class WeaponComponent : Component
 			CooldownTime = FireSpeed,
 			Action = Attack,
 			ShowWhenDisabled = () => true,
-			Disabled = () => Capacity > 0 && Ammo == 0,
+			Disabled = () => Capacity > 0 && (Ammo == 0 || !Player.Local.AimState),
 			InputMode = Mode,
-			Animation = Type == WeaponType.Ranged ? InteractAnimations.Shoot : InteractAnimations.Action
+			Animation = InteractAnimations.Action
 		} );
 
 		interactions.AddInteraction( new Interaction()
@@ -120,7 +113,6 @@ public sealed class WeaponComponent : Component
 						attacker.ApplyRecoil( new Angles( -1f, Game.Random.Float( -0.3f, 0.3f ), 0 ) * Game.Random.Float( StrengthRange.x, StrengthRange.y ) );
 				}
 
-				UpdateName();
 				break;
 
 			default:
@@ -142,7 +134,6 @@ public sealed class WeaponComponent : Component
 
 		// Reload magazine.
 		Ammo++;
-		UpdateName();
 		TryPlaySound( ReloadSound );
 		_lastReloaded = 0f;
 
@@ -174,7 +165,8 @@ public sealed class WeaponComponent : Component
 			.IgnoreGameObjectHierarchy( shooter.GameObject )
 			.Run();
 
-		BulletEffectBroadcast( transform, tr.EndPosition );
+		if ( HasMuzzleflash )
+			BulletEffectBroadcast( transform, tr.EndPosition );
 
 		var target = tr.GameObject;
 		if ( target != null )
@@ -211,25 +203,6 @@ public sealed class WeaponComponent : Component
 		return true;
 	}
 
-	private void UpdateName()
-	{
-		var item = Components.Get<ItemComponent>( true );
-		if ( item == null )
-			return;
-
-		if ( string.IsNullOrEmpty( _name ) ) _name = item.Name;
-
-		switch ( Type )
-		{
-			case WeaponType.Ranged:
-				item.Name = $"{_name} ({Ammo}/{Capacity})";
-				break;
-
-			default:
-				break;
-		}
-	}
-
 	private void TryPlaySound( SoundEvent @event )
 	{
 		if ( @event == null )
@@ -253,7 +226,7 @@ public sealed class WeaponComponent : Component
 		particle.SetVector( 1, endPos );
 
 		// Muzzle flash
-		if ( !ResourceLibrary.TryGet<PrefabFile>( "prefabs/particles/muzzel_flash.prefab", out var prefab ) ) 
+		if ( !ResourceLibrary.TryGet<PrefabFile>( "prefabs/particles/muzzel_flash.prefab", out var prefab ) )
 			return;
 
 		var flash = SceneUtility.GetPrefabScene( prefab ).Clone();

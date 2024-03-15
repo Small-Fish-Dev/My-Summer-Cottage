@@ -1,4 +1,4 @@
-﻿@using Sandbox;
+@using Sandbox;
 @using Sandbox.UI;
 
 @namespace Sauna
@@ -12,65 +12,89 @@
 </root>
 
 @code {
-    private const float ROTATE_DELAY = 3f;
+	private const float ROTATE_DELAY = 3f;
 
-    [Property] public SkinnedModelRenderer Model { get; set; }
+	public static bool Leave { get; set; }
+	[Property] public SkinnedModelRenderer Model { get; set; }
 
-    RealTimeSince lastRotated;
-    int rotated;
-    bool invert;
+	RealTimeSince lastRotated;
+	int rotated;
+	bool invert;
 
-    private int getAnim( int direction ) => direction switch
-    {
-        1 => 1,
-        -1 => 2,
-        _ => 0
-    };
+	private int getAnim( int direction ) => direction switch
+	{
+		1 => 1,
+		-1 => 2,
+		_ => 0
+	};
 
-    public void RotateGuy( int amount )
-    {
-        if ( Model.GetInt( "turn" ) != 0 )
-            return;
+	public MugshotPanel()
+	{
+		Leave = false;
+	}
 
-        rotated += amount;
-        Model.Set( "turn", getAnim( amount ) );
-        lastRotated = 0f;
-    }
+	public void RotateGuy( int amount )
+	{
+		if ( Model.GetInt( "turn" ) != 0 )
+			return;
 
-    protected override void OnUpdate()
-    {
-        var inConfirm = CreatorComponent.Current == CreatorStage.Confirmation;
-        if ( Model == null )
-            return;
+		rotated += amount;
+		Model.Set( "turn", getAnim( amount ) );
+		lastRotated = 0f;
+	}
 
-        if ( Input.Pressed( "mouse1" ) )
+	private void ResetRotation()
+	{
+		if( rotated != 0 && Model.GetInt("turn") == 0 )
+		{
+			var direction = -Math.Sign(rotated);
+			Model.Set("turn", getAnim(direction));
+			rotated = 0;
+		}
+	}
+
+	protected override void OnUpdate()
+	{
+		var inConfirm = CreatorComponent.Current == CreatorStage.Confirmation;
+		if ( Model == null )
+			return;
+
+		var targetRotation = Rotation.FromYaw( 90f + rotated * 90f );
+		Model.Transform.Rotation = Rotation.Slerp( Model.Transform.Rotation, targetRotation, 4f * Time.Delta );
+		if ( Input.Pressed( InputAction.LeftClick ) )
+			RotateGuy( 1 );
+
+		Model.Transform.Rotation *= Model.RootMotion.Rotation;
+
+		var transform = Model?.GetAttachment( "mugshot_sign" ) ?? global::Transform.Zero;
+		GameObject.Transform.World = transform;
+		GameObject.Transform.Position += transform.Rotation.Forward * 0.5f;
+
+		var mousePos = Mouse.Position;
+		var headPos = Scene.Camera.PointToScreenPixels( Model.GetAttachment("eyes").Value.Position );
+		var localPos = mousePos - headPos;
+
+		Model.Set( "weight", TabletPanel.Weight );
+
+		if ( Leave )
+		{
+			if ( rotated != 1 )
+				ResetRotation();
+
+			rotated = 1;
+			return;
+		}
+
+		Model.Set("mugshot", inConfirm);
+		Model.Set("lookat", new Vector3( 1000f, localPos.x, -localPos.y));
+
+
+		if ( Input.Pressed( InputAction.LeftClick ) )
             RotateGuy( 1 );
-
-        var targetRotation = Rotation.FromYaw( 90f + rotated * 90f );
-        Model.Transform.Rotation = Rotation.Slerp( Model.Transform.Rotation, targetRotation, 4f * Time.Delta );
-
-        var transform = Model?.GetAttachment( "mugshot_sign" ) ?? global::Transform.Zero;
-        GameObject.Transform.World = transform;
-        GameObject.Transform.Position += transform.Rotation.Forward * 0.5f;
-
-        var mousePos = Mouse.Position;
-        var headPos = Scene.Camera.PointToScreenPixels( Model.GetAttachment("eyes").Value.Position );
-        var localPos = mousePos - headPos;
-
-
-        Model.Set("lookat", new Vector3( 1000f, localPos.x, -localPos.y));
-        Model.Set( "weight", TabletPanel.Weight );
-		Model.Set( "mugshot", inConfirm );
 
 		if ( !inConfirm )
 		{
-			if ( rotated != 0 && Model.GetInt( "turn" ) == 0 )
-			{
-				var direction = -Math.Sign( rotated );
-				Model.Set( "turn", getAnim( direction ) );
-				rotated = 0;
-			}
-
+			ResetRotation();
 			lastRotated = 0f;
 
 			return;

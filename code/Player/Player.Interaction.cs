@@ -30,6 +30,9 @@ public partial class Player
 
 				if ( TargetedGameObject.Components.TryGet<CapsuleCollider>( out var capsule ) )
 					InteractionBounds = new BBox( capsule.Start - capsule.Radius, capsule.End + capsule.Radius );
+
+				if ( TargetedGameObject.Components.TryGet<ModelCollider>( out var model ) )
+					InteractionBounds = model.Model.PhysicsBounds;
 			}
 		}
 		else
@@ -52,6 +55,9 @@ public partial class Player
 
 				if ( TargetedGameObject.Components.TryGet<CapsuleCollider>( out var capsule ) )
 					InteractionBounds = new BBox( capsule.Start - capsule.Radius, capsule.End + capsule.Radius );
+
+				if ( TargetedGameObject.Components.TryGet<ModelCollider>( out var model ) )
+					InteractionBounds = model.Model.PhysicsBounds;
 			}
 		}
 
@@ -85,10 +91,6 @@ public partial class Player
 			Renderer.Set( "right_ik_pos", position );
 			Renderer.Set( "right_ik_rot", rotation );
 			Renderer.Set( "action", true );
-		}
-		else if ( animation == InteractAnimations.Shoot )
-		{
-			Renderer.Set( "shoot", true );
 		}
 		else if ( animation == InteractAnimations.Reload )
 		{

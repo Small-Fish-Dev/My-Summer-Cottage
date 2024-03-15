@@ -10,6 +10,10 @@ public static class InputAction
 	public const string Use = "Use";
 
 	public const string Voice = "Voice";
+	public const string Zoom = "View";
+
+	public const string Piss = "Piss";
+	public const string Ragdoll = "Ragdoll";
 
 	public const string Inventory = "Inventory";
 	public const string Tasks = "Tasks";
