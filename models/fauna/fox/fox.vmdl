@@ -716,6 +716,50 @@
 								root_bone_name = ""
 								motion_type = "Single"
 							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 7
+								event_keys = 
+								{
+									Attachment = "hand_L"
+									Foot = "0"
+									Volume = 0.5
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 12
+								event_keys = 
+								{
+									Attachment = "foot_R"
+									Foot = "1"
+									Volume = 0.5
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 18
+								event_keys = 
+								{
+									Attachment = "hand_R"
+									Foot = "1"
+									Volume = 0.5
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 24
+								event_keys = 
+								{
+									Attachment = "foot_L"
+									Foot = "0"
+									Volume = 0.5
+								}
+							},
 						]
 						activity_name = ""
 						activity_weight = 1
@@ -771,6 +815,50 @@
 								align_to_frame_type = "Number"
 								align_to_frame = 0
 								bone = "root"
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 2
+								event_keys = 
+								{
+									Attachment = "hand_L"
+									Foot = "0"
+									Volume = 2.0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 9
+								event_keys = 
+								{
+									Attachment = "hand_R"
+									Foot = "1"
+									Volume = 2.0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 16
+								event_keys = 
+								{
+									Attachment = "foot_L"
+									Foot = "0"
+									Volume = 2.0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_FOOTSTEP"
+								event_frame = 20
+								event_keys = 
+								{
+									Attachment = "foot_R"
+									Foot = "1"
+									Volume = 2.0
+								}
 							},
 						]
 						activity_name = ""
@@ -1020,6 +1108,48 @@
 							m_Name = ""
 						}
 						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "foot_L"
+						parent_bone = "toes_L"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "foot_R"
+						parent_bone = "toes_R"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "hand_L"
+						parent_bone = "hand_L"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "hand_R"
+						parent_bone = "hand_R"
+						relative_origin = [ 0.0, 0.0, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
 					},
 				]
 			},
