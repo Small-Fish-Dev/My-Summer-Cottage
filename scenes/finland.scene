@@ -1247,7 +1247,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,-0.1099824,0,-0.9939336",
+          "Rotation": "0,0.05170924,0,0.9986622",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1903,7 +1903,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "6f40fa6a-137d-4ed6-84e8-05e251b0edb6",
+                "component_id": "32193ec4-cee8-4524-ab98-ba93cdfb70bf",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -3590,6 +3590,52 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_cereal_daves.prefab"
+        },
+        {
+          "__guid": "672cf66a-22ab-408a-90f1-3f79c0222f7c",
+          "Name": "Spot Light",
+          "Position": "-142.0078,-45.5293,120.2776",
+          "Rotation": "0,0.7071067,0,0.7071068",
+          "Tags": "light_spot,light",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SpotLight",
+              "__guid": "56adbad7-4d2a-4728-945a-98c785a62457",
+              "Attenuation": 1.35,
+              "ConeInner": 72.59,
+              "ConeOuter": 83.1,
+              "FogMode": "Disabled",
+              "FogStrength": 1,
+              "LightColor": "0.73441,0.92092,0.96279,1",
+              "Radius": 600,
+              "Shadows": true
+            }
+          ]
+        },
+        {
+          "__guid": "7e038a90-28be-4936-bbe9-04a614d998bd",
+          "Name": "Spot Light",
+          "Position": "85.2168,-45.5293,120.2776",
+          "Rotation": "0,0.7071067,0,0.7071068",
+          "Tags": "light_spot,light",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SpotLight",
+              "__guid": "037c93a4-5429-4559-8e52-b48568db8f8b",
+              "Attenuation": 1.35,
+              "ConeInner": 72.59,
+              "ConeOuter": 83.1,
+              "FogMode": "Disabled",
+              "FogStrength": 1,
+              "LightColor": "0.73441,0.92092,0.96279,1",
+              "Radius": 600,
+              "Shadows": true
+            }
+          ]
         }
       ]
     },
@@ -3906,6 +3952,31 @@
           "TriggerPrefab": [],
           "TriggerSignalIdentifier": "tavern.entered"
         }
+      ],
+      "Children": [
+        {
+          "__guid": "58956c03-ebb4-4d7f-9bba-84f77a4bf318",
+          "Name": "Spot Light",
+          "Position": "72.38574,33.80664,122.4246",
+          "Rotation": "0,0.7071067,0,0.7071068",
+          "Tags": "light_spot,light",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SpotLight",
+              "__guid": "955acdaa-3f6e-471c-90ff-f5d70b0f056a",
+              "Attenuation": 1.35,
+              "ConeInner": 72.59,
+              "ConeOuter": 83.1,
+              "FogMode": "Disabled",
+              "FogStrength": 1,
+              "LightColor": "0.86275,0.90196,0.70588,1",
+              "Radius": 600,
+              "Shadows": true
+            }
+          ]
+        }
       ]
     },
     {
@@ -3925,6 +3996,54 @@
           "TriggerPrefab": [],
           "TriggerSignalIdentifier": "huntingshop.entered"
         }
+      ],
+      "Children": [
+        {
+          "__guid": "f9495f8f-0199-4f44-9062-86a3a870b53f",
+          "Name": "Spot Light",
+          "Position": "5.815918,-76.9917,104.6187",
+          "Rotation": "0,0.7071067,0,0.7071068",
+          "Tags": "light_spot,light",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SpotLight",
+              "__guid": "2e4082fa-be6d-45ab-ba20-891cc8de9590",
+              "Attenuation": 1.35,
+              "ConeInner": 72.59,
+              "ConeOuter": 83.1,
+              "FogMode": "Disabled",
+              "FogStrength": 1,
+              "LightColor": "0.86288,0.90233,0.70507,1",
+              "Radius": 300,
+              "Shadows": true
+            }
+          ]
+        },
+        {
+          "__guid": "43702700-7537-4385-a056-994c7a00d83b",
+          "Name": "Spot Light",
+          "Position": "5.815918,79.17725,104.6187",
+          "Rotation": "0,0.7071067,0,0.7071068",
+          "Tags": "light_spot,light",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SpotLight",
+              "__guid": "514a0914-387d-4dd9-9146-1e4a1ee33e71",
+              "Attenuation": 1.35,
+              "ConeInner": 72.59,
+              "ConeOuter": 83.1,
+              "FogMode": "Disabled",
+              "FogStrength": 1,
+              "LightColor": "0.86275,0.90196,0.70588,1",
+              "Radius": 300,
+              "Shadows": true
+            }
+          ]
+        }
       ]
     },
     {
@@ -3943,6 +4062,54 @@
           "TagSet": "player",
           "TriggerPrefab": [],
           "TriggerSignalIdentifier": "gasstation.entered"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "bdaeb8fe-19d6-4a1c-91cd-dc93b5f908d5",
+          "Name": "Spot Light",
+          "Position": "15.46191,-170.8012,108.1206",
+          "Rotation": "0,0.7071067,0,0.7071068",
+          "Tags": "light_spot,light",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SpotLight",
+              "__guid": "63e8361d-0b19-4151-b656-ec4aa1f5cbb8",
+              "Attenuation": 2.59,
+              "ConeInner": 72.59,
+              "ConeOuter": 83.1,
+              "FogMode": "Disabled",
+              "FogStrength": 1,
+              "LightColor": "0.73441,0.92092,0.96279,1",
+              "Radius": 600,
+              "Shadows": true
+            }
+          ]
+        },
+        {
+          "__guid": "dddb4c59-7f9b-418a-a1c3-3949979313c7",
+          "Name": "Spot Light",
+          "Position": "15.46191,-11.95636,108.1206",
+          "Rotation": "0,0.7071067,0,0.7071068",
+          "Tags": "light_spot,light",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SpotLight",
+              "__guid": "b99b2436-92da-4fba-b261-785d39a1a70b",
+              "Attenuation": 2.59,
+              "ConeInner": 72.59,
+              "ConeOuter": 83.1,
+              "FogMode": "Disabled",
+              "FogStrength": 1,
+              "LightColor": "0.73441,0.92092,0.96279,1",
+              "Radius": 600,
+              "Shadows": true
+            }
+          ]
         }
       ]
     }
@@ -3970,7 +4137,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T06:39:19.0427658\u002B01:00",
+  "LastSaved": "2024-03-15T06:46:16.2165718\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
