@@ -38,6 +38,7 @@
 
 	protected override void OnStart()
 	{
+		SaveData = Player.GetSave();
 		if ( !init && !MainMenu.PlayIntro ) Initialize();
 	}
 
@@ -45,8 +46,6 @@
 	{
 		if ( init )
 			return;
-
-		SaveData = Player.GetSave();
 
 		// Start music.
 		sounds.start = SoundFile.Load( "sounds/music/zakkujo-ero_vaimosta-loop_start.sound" );
