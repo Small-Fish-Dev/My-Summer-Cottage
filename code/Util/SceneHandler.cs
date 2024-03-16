@@ -22,29 +22,21 @@ public static class SceneHandler
 		if ( string.IsNullOrEmpty( path ) )
 			return;
 
-		Game.ActiveScene?.Destroy();
+		if ( !ResourceLibrary.TryGet<GameResource>( path, out var resource ) )
+			return;
 
 		if ( stopSound )
 			Sound.StopAll( 5f );
 
 		// If is game.
-		if ( scene == SaunaScene.Game )
+		if ( scene == SaunaScene.Game && lobby.HasValue )
 		{
-			// Connect to lobby.
-			if ( lobby.HasValue )
-			{
-				var connected = await GameNetworkSystem.TryConnectSteamId( lobby.Value );
-				if ( connected )
-					return;
-			}
-
-			// Connect to local.
-			Game.ActiveScene.LoadFromFile( path );
-			GameNetworkSystem.CreateLobby();
-			return;
+			var connected = await GameNetworkSystem.TryConnectSteamId( lobby.Value );
+			if ( connected )
+				return;
 		}
 
-		Game.ActiveScene.LoadFromFile( path );
+		Game.ActiveScene.Load( resource );
 		return;
 	}
 }
