@@ -14,11 +14,8 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 			return;
 		}
 
-		if ( !GameNetworkSystem.IsActive && Connection.Local.IsHost )
-		{
-			Player._internalPlayers.Clear(); // Someone report this bug, for some reason the static list doesn't get cleared on restart!
+		if ( !GameNetworkSystem.IsActive )
 			GameNetworkSystem.CreateLobby();
-		}
 	}
 
 	void INetworkListener.OnActive( Connection connection )
