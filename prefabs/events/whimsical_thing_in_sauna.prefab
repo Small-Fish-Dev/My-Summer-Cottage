@@ -1,17 +1,17 @@
 {
   "RootObject": {
-    "__guid": "ddb78607-94f6-4b18-b9a5-314b0e44875a",
+    "__guid": "b585e969-ad2b-445e-94ed-9c52b59cdb52",
     "Name": "whimsical_thing_in_sauna",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "EventDefinition",
-        "__guid": "e3bf3dc6-fa6f-4aee-ba82-0f39d5fc5a8b",
+        "__guid": "10e5e6fa-63fb-487e-b0b1-b108929b7929",
         "AddToEventPool": true,
         "EventName": "thing_in_sauna",
         "EventSignals": [],
-        "Rarity": "Common",
+        "Rarity": "Uncommon",
         "ReinstantiateOnRestart": true,
         "Stackable": true,
         "Type": "Zone"
@@ -19,15 +19,16 @@
     ],
     "Children": [
       {
-        "__guid": "b576f642-4138-4bb9-bf27-0c56351407b0",
+        "__guid": "3161c6af-91fa-4d9f-9717-d9bb6b0b48e9",
         "Name": "whimsical_thing",
         "Position": "0,0,18.85481",
         "Tags": "npc",
+        "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "NPC",
-            "__guid": "9a9c4c7a-8772-4a5a-bfec-5633f1f40776",
+            "__guid": "45b15d16-1383-48ee-9cab-167e5408da11",
             "AlertOthers": false,
             "AttackCooldown": 1,
             "AttackRange": 40,
@@ -36,8 +37,8 @@
             "FaceTowardsVelocity": true,
             "Health": {
               "_type": "component",
-              "component_id": "dbc4f9da-34b0-4666-b2ab-5715fad96051",
-              "go": "b576f642-4138-4bb9-bf27-0c56351407b0",
+              "component_id": "93b3de75-d8e0-41ab-b1da-88a8d51372e5",
+              "go": "3161c6af-91fa-4d9f-9717-d9bb6b0b48e9",
               "component_type": "HealthComponent"
             },
             "Idle": false,
@@ -46,14 +47,14 @@
             "MinimumIdleCooldown": 6,
             "Model": {
               "_type": "component",
-              "component_id": "520ebd44-cba6-4c62-a6de-120d3624bf0e",
-              "go": "47b30a53-8496-4cbd-be72-dd8fa594f98b",
+              "component_id": "9d66baf3-4a86-4400-9a19-16460b7c5ea9",
+              "go": "c21db758-9635-4571-99bd-691520fa6fa8",
               "component_type": "SkinnedModelRenderer"
             },
             "MoveHelper": {
               "_type": "component",
-              "component_id": "90aba362-1895-406d-a416-1a372f6baf99",
-              "go": "b576f642-4138-4bb9-bf27-0c56351407b0",
+              "component_id": "3fac8916-bf74-4fe3-9eb0-41d5039afbd3",
+              "go": "3161c6af-91fa-4d9f-9717-d9bb6b0b48e9",
               "component_type": "MoveHelper"
             },
             "Name": "Whimsical Thing",
@@ -122,7 +123,7 @@
                   "Properties": {
                     "gameobject": {
                       "_type": "gameobject",
-                      "go": "b576f642-4138-4bb9-bf27-0c56351407b0"
+                      "go": "3161c6af-91fa-4d9f-9717-d9bb6b0b48e9"
                     }
                   },
                   "UserData": {
@@ -389,7 +390,7 @@
                   "Properties": {
                     "component": {
                       "_type": "component",
-                      "go": "b576f642-4138-4bb9-bf27-0c56351407b0",
+                      "go": "3161c6af-91fa-4d9f-9717-d9bb6b0b48e9",
                       "component_type": "NPC"
                     }
                   },
@@ -450,7 +451,7 @@
                   "Properties": {
                     "component": {
                       "_type": "component",
-                      "go": "b576f642-4138-4bb9-bf27-0c56351407b0",
+                      "go": "3161c6af-91fa-4d9f-9717-d9bb6b0b48e9",
                       "component_type": "NPC"
                     }
                   },
@@ -638,7 +639,7 @@
                   "Properties": {
                     "gameobject": {
                       "_type": "gameobject",
-                      "go": "b576f642-4138-4bb9-bf27-0c56351407b0"
+                      "go": "3161c6af-91fa-4d9f-9717-d9bb6b0b48e9"
                     }
                   },
                   "UserData": {
@@ -690,7 +691,7 @@
           },
           {
             "__type": "MoveHelper",
-            "__guid": "90aba362-1895-406d-a416-1a372f6baf99",
+            "__guid": "3fac8916-bf74-4fe3-9eb0-41d5039afbd3",
             "AccelerationCurve": [
               {
                 "y": 0.26861703
@@ -721,7 +722,7 @@
           },
           {
             "__type": "CapsuleCollider",
-            "__guid": "828401a9-2826-4f3c-83a7-e0e750aeccb8",
+            "__guid": "d1584659-cf75-40b1-b619-18828f83c8f6",
             "End": "0,0,44.63999",
             "IsTrigger": false,
             "Radius": 6,
@@ -730,7 +731,7 @@
           },
           {
             "__type": "HealthComponent",
-            "__guid": "dbc4f9da-34b0-4666-b2ab-5715fad96051",
+            "__guid": "93b3de75-d8e0-41ab-b1da-88a8d51372e5",
             "CanRegenerate": false,
             "DamagedBy": "Mild",
             "DropOnDeath": [
@@ -808,7 +809,7 @@
         ],
         "Children": [
           {
-            "__guid": "47b30a53-8496-4cbd-be72-dd8fa594f98b",
+            "__guid": "c21db758-9635-4571-99bd-691520fa6fa8",
             "Name": "Model",
             "Position": "0,0,45.75998",
             "Enabled": true,
@@ -816,7 +817,7 @@
             "Components": [
               {
                 "__type": "SkinnedModelRenderer",
-                "__guid": "520ebd44-cba6-4c62-a6de-120d3624bf0e",
+                "__guid": "9d66baf3-4a86-4400-9a19-16460b7c5ea9",
                 "BodyGroups": 18446744073709551615,
                 "CreateBoneObjects": false,
                 "Model": "models/whimsical_thing/whimsical_thing.vmdl",
@@ -839,7 +840,7 @@
                       "Properties": {
                         "gameobject": {
                           "_type": "gameobject",
-                          "go": "47b30a53-8496-4cbd-be72-dd8fa594f98b"
+                          "go": "c21db758-9635-4571-99bd-691520fa6fa8"
                         }
                       },
                       "UserData": {
@@ -851,8 +852,8 @@
                       "Type": "call",
                       "Properties": {
                         "_isStatic": true,
-                        "_type": "Sandbox.System/Rotation",
-                        "_name": "FromYaw"
+                        "_name": "FromYaw",
+                        "_type": "Sandbox.System/Rotation"
                       },
                       "UserData": {
                         "Position": "272,176"
@@ -912,8 +913,8 @@
                       "Id": 15,
                       "Type": "property.set",
                       "Properties": {
-                        "_type": "Sandbox.Game/Sandbox.GameTransform",
-                        "_name": "LocalPosition"
+                        "_name": "LocalPosition",
+                        "_type": "Sandbox.Game/Sandbox.GameTransform"
                       },
                       "UserData": {
                         "Position": "784,288"
@@ -1125,7 +1126,7 @@
         ]
       },
       {
-        "__guid": "a2fcd6ca-75a8-492d-be12-6f75c1494035",
+        "__guid": "a7453c72-565e-43c4-b0ef-e52ce262c613",
         "Name": "TriggerArea",
         "Position": "0,0,64.17155",
         "Enabled": true,
@@ -1133,7 +1134,7 @@
         "Components": [
           {
             "__type": "EventAreaTrigger",
-            "__guid": "45898fa4-8cd9-428b-aa59-796552f1840b",
+            "__guid": "efd7f9a6-ecf6-4249-a050-9efaa486f580",
             "Extents": "508.503,542.3016,568.1002",
             "MaxPollingRate": 5,
             "Offset": "0,0,0",
@@ -1144,7 +1145,7 @@
         ]
       },
       {
-        "__guid": "d559dbae-fa5e-4d3c-bcf0-69ce77cf6dce",
+        "__guid": "575b4382-f9ff-431c-bbdf-2df2bf36642e",
         "Name": "creature_trigger",
         "Position": "22.45941,-16.71539,51.55404",
         "Enabled": true,
@@ -1152,7 +1153,7 @@
         "Components": [
           {
             "__type": "EventComponent",
-            "__guid": "fa0b42bf-c85e-47d6-9830-118a4657adb9",
+            "__guid": "aa135753-9725-4f6c-a07f-d7daaed2fd9f",
             "DisabledWhilePlaying": [],
             "DisableOnTrigger": [],
             "Event": {
@@ -1191,7 +1192,7 @@
                   "Properties": {
                     "gameobject": {
                       "_type": "gameobject",
-                      "go": "b576f642-4138-4bb9-bf27-0c56351407b0"
+                      "go": "3161c6af-91fa-4d9f-9717-d9bb6b0b48e9"
                     }
                   },
                   "UserData": {
@@ -1228,8 +1229,8 @@
             "Triggers": [
               {
                 "_type": "component",
-                "component_id": "45898fa4-8cd9-428b-aa59-796552f1840b",
-                "go": "a2fcd6ca-75a8-492d-be12-6f75c1494035",
+                "component_id": "efd7f9a6-ecf6-4249-a050-9efaa486f580",
+                "go": "a7453c72-565e-43c4-b0ef-e52ce262c613",
                 "component_type": "EventAreaTrigger"
               }
             ]
