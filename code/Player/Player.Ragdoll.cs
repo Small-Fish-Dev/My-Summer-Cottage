@@ -22,7 +22,7 @@ partial class Player
 	SkinnedModelRenderer _puppet;
 	bool _isTransitioning = false;
 	float _oldAirFriction = 1f;
-	[Sync] RealTimeUntil _unragdoll { get; set; }
+	[Sync] TimeUntil _unragdoll { get; set; }
 	bool _couldRagdoll = true;
 	Vector3 _lastPosition = Vector3.Zero;
 	float _spin = 10f;
