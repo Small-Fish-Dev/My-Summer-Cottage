@@ -8,7 +8,7 @@ using static Sauna.SaunaTask;
 namespace Sauna;
 
 [Icon( "live_help" )]
-public partial class TaskMaster : Component
+public partial class TaskMaster : Component, Component.INetworkListener
 {
 	public static TaskMaster _instance;
 
