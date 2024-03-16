@@ -6,7 +6,7 @@ public partial class NPC
 	public ModelPhysics Ragdoll => Model.Components.Get<ModelPhysics>();
 	SkinnedModelRenderer _puppet;
 	bool _isTransitioning = false;
-	[Sync] RealTimeUntil _unragdoll { get; set; }
+	[Sync] TimeUntil _unragdoll { get; set; }
 	Vector3 _lastPosition = Vector3.Zero;
 	float _spin = 0f;
 
