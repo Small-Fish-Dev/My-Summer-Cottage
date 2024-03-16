@@ -9,6 +9,14 @@ PauseMenu {
     background-color: $fullscreen-bg;
     backdrop-filter: $fullscreen-blur;
 
+    transition: opacity 0.13s ease;
+
+    opacity: 1;
+
+    &:intro {
+        opacity: 0;
+    }
+    
     .title {
         position: absolute;
         background-repeat: no-repeat;

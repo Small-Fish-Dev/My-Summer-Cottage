@@ -73,8 +73,8 @@
 
 	public override void Tick()
 	{
-		var mousePosition = Mouse.Position * ScaleFromScreen;
-		var boxRect = (Box.Rect * ScaleFromScreen).Grow( 5f );
+		var mousePosition = Mouse.Position;
+		var boxRect = Box.Rect.Grow( 25f );
 
 		if ( !boxRect.IsInside( mousePosition ) )
 			Close();

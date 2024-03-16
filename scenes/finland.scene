@@ -1,5 +1,5 @@
 {
-  "__guid": "e30fbe3d-65a7-420d-a13b-f32e53ba9c24",
+  "__guid": "25c69508-3432-4df4-a7b2-699f80b6dca7",
   "GameObjects": [
     {
       "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -4922,7 +4922,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.6164834,0,0.7873679",
+          "Rotation": "0,0.1332543,0,0.9910819",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -9705,6 +9705,7 @@
           "Name": "crazy_attack_deer",
           "Position": "2357.299,-1652.891,2400",
           "Rotation": "0.01374025,0.01333649,-0.717446,0.6963509",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/crazy_attack_deer.prefab"
         },
@@ -9713,6 +9714,7 @@
           "Name": "drive_car",
           "Position": "2107.093,-1636.722,2448",
           "Rotation": "0.002460414,0.007778124,-0.7378321,0.6749348",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/drive_car.prefab"
         },
@@ -9720,6 +9722,7 @@
           "__guid": "907db72f-e744-4ae5-90ce-86c14f65c712",
           "Name": "car_speeding",
           "Position": "-7744,6640,2440",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/car_speeding.prefab"
         },
@@ -9728,6 +9731,7 @@
           "Name": "creepy_peeper",
           "Position": "3685.735,-3230.019,2458.043",
           "Rotation": "0.000000009260383,-0.00000007033952,0.9914448,0.1305263",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/creepy_peeper.prefab"
         },
@@ -9736,6 +9740,7 @@
           "Name": "banana_peel",
           "Position": "3293.078,-3285.199,2446.688",
           "Rotation": "0.0008235928,0.02486345,-0.03309572,0.9991425",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/banana_peel.prefab"
         },
@@ -9743,6 +9748,7 @@
           "__guid": "9b18ce21-1fb6-4964-b110-61f3d3a49835",
           "Name": "mugging",
           "Position": "-7304,6616,2447.724",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/mugging.prefab"
         },
@@ -9750,6 +9756,7 @@
           "__guid": "c46d79e4-f71f-457a-adc7-136c4157b615",
           "Name": "wealthy_donation",
           "Position": "-8008,8008,2448.519",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/wealthy_donation.prefab"
         },
@@ -9757,6 +9764,7 @@
           "__guid": "9217cf40-fae3-48ac-91e2-7af5556d2635",
           "Name": "cottage_squatter",
           "Position": "2928,-2376,2456.268",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/cottage_squatter.prefab"
         },
@@ -9774,6 +9782,7 @@
           "Name": "random_dwarves",
           "Position": "-8103.875,5308.789,2446.924",
           "Rotation": "-0.01672864,0.03679115,0.4135721,0.9095739",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/random_dwarves.prefab"
         },
@@ -9782,6 +9791,7 @@
           "Name": "piss_tree",
           "Position": "2580.948,-1936.841,2457",
           "Rotation": "-0.00000002980232,0.000000103746,0.9999999,0.000000311238",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/piss_tree.prefab"
         },
@@ -9789,6 +9799,7 @@
           "__guid": "c3bfe17c-64ae-4747-9a0c-7dceca46c155",
           "Name": "rc_cars",
           "Position": "-7766.884,6623.139,2440.021",
+          "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/rc_cars.prefab"
         },
@@ -10048,6 +10059,150 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/items/bbammo.prefab"
+        },
+        {
+          "__guid": "330c1195-b80c-473a-83c4-c61c33f71687",
+          "Name": "Door",
+          "Position": "17.50537,-295.4568,1.916504",
+          "Rotation": "0,0,-0.7206539,0.6932948",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "__guid": "e25d3015-b5b6-46bf-be70-ddbf12bfaa86",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/door_big_window/door_big_window.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "DoorComponent",
+              "__guid": "250a5bc0-9d2a-4173-a816-58ef764ed7a2",
+              "Angle": 100,
+              "BothSides": true,
+              "OpenTime": 0.25,
+              "Pivot": "0.000003607557,-20.17492,0",
+              "Sound": "sounds/door/door_creak.sound",
+              "State": "Close"
+            },
+            {
+              "__type": "BoxCollider",
+              "__guid": "3829c944-3eca-4600-8c4f-511001835a36",
+              "Center": "0,0,41.76",
+              "IsTrigger": false,
+              "Scale": "3.359999,41.12,85.04002",
+              "Static": false
+            }
+          ]
+        },
+        {
+          "__guid": "8d19013c-dd2d-4017-b52d-8d5d37bfaf9d",
+          "Name": "Door",
+          "Position": "-75.20312,19.81128,1.916504",
+          "Rotation": "0,0,-0.9999866,0.005161151",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "__guid": "8aec88bf-f222-438a-8a12-f0ea7c24becc",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/door_big_window/door_big_window.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "DoorComponent",
+              "__guid": "47137351-c702-4ed1-8438-2c6dfae54fe7",
+              "Angle": 100,
+              "BothSides": true,
+              "OpenTime": 0.25,
+              "Pivot": "0.000003607557,-20.17492,0",
+              "Sound": "sounds/door/door_creak.sound",
+              "State": "Close"
+            },
+            {
+              "__type": "BoxCollider",
+              "__guid": "f1f1d381-0202-4805-8358-67d3898f3497",
+              "Center": "0,0,41.76",
+              "IsTrigger": false,
+              "Scale": "3.359999,41.12,85.04002",
+              "Static": false
+            }
+          ]
+        },
+        {
+          "__guid": "32289f7e-2442-4170-bc86-0f626afe7555",
+          "Name": "Door",
+          "Position": "56.99072,147.6633,1.916504",
+          "Rotation": "0,0,-0.9999866,0.005161151",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "__guid": "dc18169b-bb25-4075-a7d0-3d6c39d9044d",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/door_big_window/door_big_window.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "DoorComponent",
+              "__guid": "b28f78c4-6eb4-4a22-9498-d4656e1dc85d",
+              "Angle": 100,
+              "BothSides": true,
+              "OpenTime": 0.25,
+              "Pivot": "0.000003607557,-20.17492,0",
+              "Sound": "sounds/door/door_creak.sound",
+              "State": "Close"
+            },
+            {
+              "__type": "BoxCollider",
+              "__guid": "48245e0c-9544-44ee-9244-9e35a2464faa",
+              "Center": "0,0,41.76",
+              "IsTrigger": false,
+              "Scale": "3.359999,41.12,85.04002",
+              "Static": false
+            }
+          ]
+        },
+        {
+          "__guid": "7d0b2017-e1f0-4cbc-9148-27c5ffccdbf2",
+          "Name": "Door",
+          "Position": "57.9458,-52.00415,1.916504",
+          "Rotation": "0,0,-0.9999866,0.005161151",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "__guid": "22a0d158-59cc-4b00-8737-72d124c7a8d4",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/door_big_window/door_big_window.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "DoorComponent",
+              "__guid": "166f5647-86a4-4531-93ac-59fc43fa1727",
+              "Angle": 100,
+              "BothSides": true,
+              "OpenTime": 0.25,
+              "Pivot": "0.000003607557,-20.17492,0",
+              "Sound": "sounds/door/door_creak.sound",
+              "State": "Close"
+            },
+            {
+              "__type": "BoxCollider",
+              "__guid": "196e9eb3-9bd6-4b03-8a78-b87562651d08",
+              "Center": "0,0,41.76",
+              "IsTrigger": false,
+              "Scale": "3.359999,41.12,85.04002",
+              "Static": false
+            }
+          ]
         }
       ]
     }
@@ -10075,7 +10230,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-16T21:00:56.6346718\u002B01:00",
+  "LastSaved": "2024-03-16T20:31:13.2549001\u002B00:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

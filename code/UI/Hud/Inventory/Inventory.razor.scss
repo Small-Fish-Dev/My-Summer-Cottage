@@ -10,6 +10,14 @@ Inventory {
     text-shadow: 2px 2px 0px black;
     pointer-events: all;
     flex-direction: row;
+    
+    transition: opacity 0.13s ease;
+
+    opacity: 1;
+    
+    &:intro {
+        opacity: 0;
+    }
 
     .section {
         width: 50%;

@@ -38,6 +38,27 @@
 	private bool _isHoveringItem { get; set; } = false;
 	private TimeSince sinceClick;
 
+	public InventorySlot()
+	{
+		// Add random transition delay
+		Style.Transitions = new TransitionList();
+		
+		Style.Transitions.List.Add( new TransitionDesc
+		{
+			TimingFunction = "bounce", 
+			Property = "transform", 
+			Duration = 200,
+		} );
+		
+		Style.Transitions.List.Add( new TransitionDesc
+		{
+			TimingFunction = "ease", 
+			Property = "opacity", 
+			Duration = 250,
+			Delay = Random.Shared.NextSingle() * 100
+		} );
+	}
+	
 	// is-drop-target,
 	// can-drop: if the draggable is usable in this slot,
 	private string CurrentDropTargetClassSelectors
@@ -91,7 +112,7 @@
 	{
 		_isHoveringItem = true;
 
-		await GameTask.Delay( 400 );
+		await GameTask.Delay( 300 );
 
 		if ( _isHoveringItem && !ContextMenu.IsOpen() && Item is not null )
 			HoverPanel.Open( Item );

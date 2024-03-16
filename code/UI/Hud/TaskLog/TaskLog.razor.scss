@@ -13,6 +13,14 @@ TaskLog {
 
     flex-shrink: 0;
 
+    transition: opacity 0.09s ease;
+
+    opacity: 1;
+
+    &:intro {
+        opacity: 0;
+    }
+    
     .task-container {
         top: 5%;
         height: 65%;
