@@ -275,9 +275,21 @@ public class StoryMaster : Component
 	public void ResetStoryProgression()
 	{
 		StoryProgression = new();
-		SaveStoryProgression( false );
+
+		if ( FileSystem.Data.FileExists( "story.json" ) )
+			FileSystem.Data.DeleteFile( "story.json" );
+
 		Log.Info( "Story reset!" );
 	}
+
+	public void ResetPlayer()
+	{
+		if ( FileSystem.Data.FileExists( PlayerSave.FILE_PATH ) )
+			FileSystem.Data.DeleteFile( PlayerSave.FILE_PATH );
+		Log.Info( "Character reset!" );
+	}
+
+	public Dictionary<EventDefinition, float> EventsToTrigger { get; set; } = new();
 
 	public void LoadEventPool( int randomSeed )
 	{
@@ -298,7 +310,12 @@ public class StoryMaster : Component
 				if ( availableCommonEvents.Any() )
 				{
 					var chosenEvent = Game.Random.FromList( availableCommonEvents );
-					chosenEvent.Enable();
+
+					if ( chosenEvent.Type == EventType.Random )
+						EventsToTrigger.Add( chosenEvent, Game.Random.Float( 10f, 24f ) );
+					else
+						chosenEvent.Enable();
+
 					eventsPicked++;
 				}
 			}
@@ -319,7 +336,12 @@ public class StoryMaster : Component
 				if ( availableUncommonEvents.Any() )
 				{
 					var chosenEvent = Game.Random.FromList( availableUncommonEvents );
-					chosenEvent.Enable();
+
+					if ( chosenEvent.Type == EventType.Random )
+						EventsToTrigger.Add( chosenEvent, Game.Random.Float( 10f, 24f ) );
+					else
+						chosenEvent.Enable();
+
 					eventsPicked++;
 				}
 			}
@@ -337,10 +359,16 @@ public class StoryMaster : Component
 					.Where( x => !_eventMaster.CurrentEvents.Contains( x ) )
 					.ToList(); // We haven't chosen it yet
 
+
 				if ( availableRareEvents.Any() )
 				{
 					var chosenEvent = Game.Random.FromList( availableRareEvents );
-					chosenEvent.Enable();
+
+					if ( chosenEvent.Type == EventType.Random )
+						EventsToTrigger.Add( chosenEvent, Game.Random.Float( 10f, 24f ) );
+					else
+						chosenEvent.Enable();
+
 					eventsPicked++;
 				}
 			}
@@ -357,10 +385,9 @@ public class StoryMaster : Component
 
 	private static async Task PlayIntro()
 	{
-		// TODO: Uncomment this before release.
-		// Player.Local.BlackScreen( 0f, 4f, 1f );
-		// UI.Hud.Instance.Panel.PlaySound( "car_intro" );
-		// await GameTask.DelayRealtimeSeconds( 2f );
+		Player.Local.BlackScreen( 0f, 4f, 1f );
+		UI.Hud.Instance.Panel.PlaySound( "car_intro" );
+		await GameTask.DelayRealtimeSeconds( 2f );
 
 		SetupSession();
 	}
@@ -390,6 +417,7 @@ public class StoryMaster : Component
 		storyMaster._eventMaster.UnloadAllEvents();
 		storyMaster.LoadEventPool( GameTimeManager.RandomSeed );
 		storyMaster.SetRandomDialogues( GameTimeManager.RandomSeed );
+		storyMaster.RandomizeClothing();
 
 		if ( Player.Local.IsValid() )
 			Player.Local.Respawn();
@@ -409,6 +437,7 @@ public class StoryMaster : Component
 		storyMaster.NextGameDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
+		storyMaster.EventsToTrigger.Clear();
 		storyMaster.ClearTriggeredEvents();
 
 		if ( Connection.Local.IsHost )
@@ -418,6 +447,26 @@ public class StoryMaster : Component
 		}
 
 		storyMaster.SaveGame();
+	}
+
+	public void RandomizeClothing()
+	{
+		var modelToCheck = Model.Load( "models/props/clothing_parcel/clothing_parcel.vmdl" );
+		var allClothingShops = Scene.GetAllComponents<ShopItem>()
+			.Where( x => x.GameObject.Components.Get<ModelRenderer>()?.Model == modelToCheck );
+
+		var allClothingPrefabs = PrefabLibrary.FindByComponent<ItemEquipment>()
+			.Where( x => x.GetComponent<ItemEquipment>().Get<EquipSlot>( "Slot" ) != EquipSlot.Hand )
+			.ToList();
+
+		foreach ( var shop in allClothingShops )
+		{
+			var chosen = Game.Random.FromList( allClothingPrefabs ).Prefab;
+			shop.Item = chosen;
+			shop.CreateWorldIcon();
+			shop.ResetName();
+			shop.ResetPrice();
+		}
 	}
 
 	public void SetRandomDialogues( int randomSeed )
@@ -461,14 +510,6 @@ public class StoryMaster : Component
 			_taskMaster.SaveTasksProgression();
 			_eventMaster.SaveEventsProgression();
 		}
-	}
-
-	protected override void OnStart()
-	{
-		if ( Scene.IsEditor ) return;
-
-		if ( Connection.Local.IsHost )
-			StartSession();
 	}
 
 	public List<string> RandomTips = new()
@@ -537,6 +578,26 @@ public class StoryMaster : Component
 				}
 			}
 
+			var eventsToRemove = new List<EventDefinition>();
+
+			foreach ( var randomEvent in EventsToTrigger )
+			{
+				if ( !randomEvent.Key.HasBeenPlayed )
+				{
+					if ( randomEvent.Value <= currentHour )
+					{
+						randomEvent.Key.Enable();
+						eventsToRemove.Add( randomEvent.Key );
+					}
+				}
+			}
+
+			foreach ( var toRemove in eventsToRemove )
+			{
+				if ( EventsToTrigger.ContainsKey( toRemove ) )
+					EventsToTrigger.Remove( toRemove );
+			}
+
 			if ( !CurrentSaunaDay.Completed )
 				if ( CurrentSaunaDay.ScriptedEvents.All( x => x.Completed || x.Triggered && !x.CompletionNecessary ) )
 				{
@@ -571,8 +632,9 @@ public class StoryMaster : Component
 		if ( storyMaster != null )
 		{
 			storyMaster.ResetStoryProgression();
-			storyMaster._taskMaster.ResetTasksProgression( true );
+			storyMaster._taskMaster.ResetTasksProgression( false );
 			storyMaster._eventMaster.ResetEventsProgression();
+			storyMaster.ResetPlayer();
 		}
 	}
 
@@ -601,5 +663,14 @@ public class StoryMaster : Component
 
 		if ( storyMaster != null )
 			storyMaster._eventMaster.ResetEventsProgression();
+	}
+
+	[ConCmd( "sauna_reset_player" )]
+	public static void DeletePlayer()
+	{
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster != null )
+			storyMaster.ResetPlayer();
 	}
 }

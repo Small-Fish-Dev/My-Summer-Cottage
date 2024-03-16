@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "c93cd111-a34f-4aec-a030-11fffbbca4c9",
+    "__guid": "682a1cd4-ba17-4f22-a5fb-fd78332dcc24",
     "Name": "trash_crisps",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "Fish",
+        "__guid": "c27e2856-7c7c-4456-9428-25fc14cd8603",
         "CostPerKilo": -1,
         "IsTrash": true,
         "MinimumWaterDepth": 15,
@@ -14,6 +16,7 @@
       },
       {
         "__type": "ItemComponent",
+        "__guid": "1d68a07f-d9dd-4ed5-ad06-1452dd876cbf",
         "Count": 0,
         "Description": "Someone really eats these?",
         "Icon": {
@@ -30,36 +33,50 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "6694c15b-c8a2-46a6-a93f-9e4e7e14958a",
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/trash/trash_crisps.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "BoxCollider",
+        "__guid": "3002b49b-d054-4a15-9848-2e1d78eb52bd",
         "Center": "0,0.3,1.25",
         "IsTrigger": false,
         "Scale": "13.20004,10.80001,2.500013",
-        "Static": false,
-        "Surface": null
+        "Static": false
       },
       {
         "__type": "Rigidbody",
+        "__guid": "adec4480-5202-41d3-a95b-79fea59a6398",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "__guid": "e24200df-0e20-479c-852d-a4065255bbb1",
+        "Name": "stinky",
+        "Position": "0,0,0.3840964",
+        "Scale": "1.27781,1.106394,0.4558561",
+        "Tags": "particles",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/particles/stinky.prefab"
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

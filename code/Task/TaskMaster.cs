@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic;
 using Sandbox;
 using Sauna.Event;
 using Sauna.UI;
@@ -223,8 +222,10 @@ public partial class TaskMaster : Component, Component.INetworkListener
 		}
 	}
 
-	public void LoadTasksProgression()
+	public async void LoadTasksProgression()
 	{
+		await Task.Delay( 500 );
+
 		if ( FileSystem.Data.FileExists( "tasks.json" ) )
 		{
 			TasksProgression = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
@@ -307,6 +308,11 @@ public partial class TaskMaster : Component, Component.INetworkListener
 		{
 			SaveTasksProgression( false );
 			Log.Info( "Tasks reset!" );
+		}
+		else
+		{
+			if ( FileSystem.Data.FileExists( "tasks.json" ) )
+				FileSystem.Data.DeleteFile( "tasks.json" );
 		}
 	}
 

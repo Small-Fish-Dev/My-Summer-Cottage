@@ -44,21 +44,21 @@
 			<div class="description">
 				<div class="record">
 					<text class="key">Total @_displayedFishInfo.Name caught:</text>
-					<text class="value">@_selectedFishRecord.Value.Count</text>
+					<text class="value">@_selectedFishRecord.Count</text>
 				</div>
 				<div style="height: 20px;" />
 				<text class="best-catch">BEST CATCH</text>
 				<div class="record">
 					<text class="key">Caught on:</text>
-					<text class="value">@_selectedFishRecord.Value.MaxWhen.ToLongDateString()</text>
+					<text class="value">@_selectedFishRecord.MaxWhen.ToLongDateString()</text>
 				</div>
 				<div class="record">
 					<text class="key">Record weight:</text>
-					<text class="value weight">@_selectedFishRecord.Value.MaxWeight.ToKilograms() kg</text>
+					<text class="value weight">@_selectedFishRecord.MaxWeight.ToKilograms() kg</text>
 				</div>
 				<div class="record">
 					<text class="key">Record price:</text>
-					<text class="value money">@((int)(_selectedFishRecord.Value.MaxWeight / 1000.0f * _displayedFishInfo.CostPerKilo))mk</text>
+					<text class="value money">@((int)(_selectedFishRecord.MaxWeight / 1000.0f * _displayedFishInfo.CostPerKilo))mk</text>
 				</div>
 			</div>
 		}
@@ -68,7 +68,7 @@
 @code {
 	public FishLog.FishInfo SelectedFishInfo { get; set; }
 	private FishLog.FishInfo _displayedFishInfo { get; set; }
-	private FishRecord? _selectedFishRecord;
+	private FishRecord _selectedFishRecord;
 
 	private const int StarCount = 5;
 

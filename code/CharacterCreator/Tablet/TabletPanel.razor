@@ -37,7 +37,8 @@
 					class="color @(SkinColor == color ? "selected" : "")"
 					onclick=@(() => {
 						SkinColor = color;
-						CreatorOverlay.Model.Attributes.Set( "g_flColorTint", SkinColor );
+						CreatorOverlay.Renderer.Tint = SkinColor;
+						ClothingPanel.UpdateSelection();
 						CreatorOverlay.Penoid.Attributes.Set( "g_flColorTint", SkinColor );
 						PlaySound( "light_click" );
 					})

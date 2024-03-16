@@ -108,6 +108,8 @@
 </root>
 
 @code {
+	public static CreatorOverlay Instance => Game.ActiveScene.Components.GetInDescendants<CreatorOverlay>();
+
 	private static SkinnedModelRenderer renderer;
 	public static SkinnedModelRenderer Renderer
 	{

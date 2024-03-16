@@ -1,12 +1,13 @@
 {
   "RootObject": {
-    "Id": "9bcd7e68-94fd-40b1-a45d-8344045c6526",
+    "__guid": "9bcd7e68-94fd-40b1-a45d-8344045c6526",
     "Name": "sandals",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
+        "__guid": "d27526fd-f7cc-44ec-9436-23b18d1f59ed",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -29,11 +30,12 @@
         "SellPrice": -1,
         "Slot": "Feet",
         "UpdatePosition": false,
-        "UseSkinTint": false,
+        "UseSkinTint": true,
         "WeightInGrams": 120
       },
       {
         "__type": "SkinnedModelRenderer",
+        "__guid": "602bda48-4044-4725-b295-8af74d00bba6",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/clothes/sandals/sandals.vmdl",
@@ -41,10 +43,58 @@
         "Tint": "1,1,1,1"
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "__guid": "41805b0b-1704-4561-ab40-819907faa4b4",
+        "Name": "sandals",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "ItemEquipment",
+            "__guid": "d2e1a99d-003f-46ba-8c93-7e8fb2ed7378",
+            "Attachment": "hand_R",
+            "AttachmentTransform": {
+              "UniformScale": 1,
+              "Scale": "1,1,1",
+              "Rotation": "0,0,0,1"
+            },
+            "Count": 0,
+            "Description": "This definitely belonged to someones dad.",
+            "HideBodygroups": "Feet",
+            "HoldType": "Item",
+            "Icon": {
+              "Model": "models/clothes/sandals/sandals.vmdl",
+              "MaterialGroup": "",
+              "Colour": "1,1,1,1",
+              "Rotation": "-0.02063715,0.09631608,-0.3341942,0.9373428",
+              "Guid": "d9dceeb7-0d3f-4d58-89c8-9fdcb8f7d061"
+            },
+            "MaxStack": 0,
+            "Name": "Sandals",
+            "SellPrice": -1,
+            "Slot": "Feet",
+            "UpdatePosition": false,
+            "UseSkinTint": true,
+            "WeightInGrams": 120
+          },
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "e46108c3-269c-445d-9adb-2cea4a87bdc6",
+            "BodyGroups": 18446744073709551615,
+            "CreateBoneObjects": false,
+            "Model": "models/clothes/sandals/sandals.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

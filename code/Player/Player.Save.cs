@@ -178,8 +178,8 @@ partial class Player
 		// Setup basic player information.
 		var save = tuple.Save;
 
-		player.Firstname = save.Firstname.ToLower().ToTitleCase();
-		player.Lastname = save.Lastname.ToLower().ToTitleCase();
+		player.Firstname = save.Firstname?.ToLower().ToTitleCase();
+		player.Lastname = save.Lastname?.ToLower().ToTitleCase();
 		player.PenoidSize = save.PenoidSize;
 
 		player.Money = save.Money;

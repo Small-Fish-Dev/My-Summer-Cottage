@@ -23,14 +23,14 @@
 			<div>Drinking and fishing</div>
 			<div>Drinking and ... +256</div>
 		</div>
-		<div class="text">Hold the button to confirm your age.</div>
+		<div class="text">HOLD the button to confirm your age.</div>
 		<div class="confirm-button"
 		     onmousedown="@( () => ConfirmMouseDown() )"
 		     onmouseup="@( () => ConfirmMouseUp() )"
 		     onmouseleave="@( () => ConfirmMouseUp() )"
 		     style="background-color: @( (_holdingButton ? Color.Lerp( Color.Green, Color.Transparent, _confirmTimeOut / ConfirmHoldTime ) : Color.Black).Hex )">
 			<div class="inner-border">
-				I AM OVER 18
+				[HOLD] I AM OVER 18
 			</div>
 		</div>
 	</div>

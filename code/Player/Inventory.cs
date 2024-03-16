@@ -4,7 +4,7 @@ public class Inventory : Component
 {
 	[Property] public Player Player { get; set; }
 
-	public const int MAX_BACKPACK_SLOTS = 18;
+	public const int MAX_BACKPACK_SLOTS = 24;
 	public const int MAX_WEIGHT_IN_GRAMS = 30000;
 
 	public int Weight { get; private set; }
