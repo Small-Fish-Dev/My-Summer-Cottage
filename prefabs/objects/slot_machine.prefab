@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "f1bdc728-67ca-44f9-a33f-291bb5fa162e",
+    "__guid": "f1bdc728-67ca-44f9-a33f-291bb5fa162e",
     "Name": "slot_machine",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "Interactions",
+        "__guid": "038e40db-f60a-450d-90f4-73c34add8b02",
         "HideOnEmpty": true,
         "ObjectInteractions": [
           {
@@ -786,9 +788,11 @@
       },
       {
         "__type": "SlotMachine",
+        "__guid": "db872d11-55bc-4a15-adfa-8eb604efd7f3",
         "BetFlags": "None",
         "Model": {
           "_type": "component",
+          "component_id": "f7a72b70-931f-48a3-99b5-0a07d0e43b7b",
           "go": "ccc23f10-e323-4d9b-ae05-38d3d1374b6d",
           "component_type": "SkinnedModelRenderer"
         },
@@ -796,26 +800,24 @@
       },
       {
         "__type": "ModelCollider",
+        "__guid": "64aeed2b-3e95-483a-a855-072720ddffad",
         "IsTrigger": false,
         "Model": "models/slot_machine/slot_machine.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       }
     ],
     "Children": [
       {
-        "Id": "ccc23f10-e323-4d9b-ae05-38d3d1374b6d",
+        "__guid": "ccc23f10-e323-4d9b-ae05-38d3d1374b6d",
         "Name": "Model",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "SkinnedModelRenderer",
-            "AnimationGraph": null,
-            "BodyGroups": 45131246891,
-            "BoneMergeTarget": null,
+            "__guid": "f7a72b70-931f-48a3-99b5-0a07d0e43b7b",
+            "BodyGroups": 45131248939,
             "CreateBoneObjects": false,
-            "MaterialGroup": null,
-            "MaterialOverride": null,
             "Model": "models/slot_machine/slot_machine.vmdl",
             "RenderType": "On",
             "Tint": "1,1,1,1"
@@ -823,14 +825,16 @@
         ]
       },
       {
-        "Id": "e426d888-4bed-49f9-8a1c-fe825fa8dc7b",
+        "__guid": "e426d888-4bed-49f9-8a1c-fe825fa8dc7b",
         "Name": "Bet",
         "Position": "10.32875,8.282434,69.98674",
         "Rotation": "0,-0.1010562,0,0.9948807",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "WorldPanel",
+            "__guid": "f0de078f-5120-47f9-9531-d5f850fbb562",
             "HorizontalAlign": "Center",
             "LookAtCamera": false,
             "PanelSize": "85,32",
@@ -839,9 +843,11 @@
           },
           {
             "__type": "SlotsDisplay",
+            "__guid": "a3f06ef8-f25b-4ecf-9622-9e3645e8a7a6",
             "PropertyName": "Bet",
             "SlotMachine": {
               "_type": "component",
+              "component_id": "db872d11-55bc-4a15-adfa-8eb604efd7f3",
               "go": "f1bdc728-67ca-44f9-a33f-291bb5fa162e",
               "component_type": "SlotMachine"
             }
@@ -849,14 +855,16 @@
         ]
       },
       {
-        "Id": "d64a14b0-264b-4c30-bdcb-e7409f443927",
+        "__guid": "d64a14b0-264b-4c30-bdcb-e7409f443927",
         "Name": "Money",
         "Position": "10.97142,8.282434,66.8559",
         "Rotation": "0,-0.1010562,0,0.9948807",
         "Enabled": true,
+        "NetworkMode": 2,
         "Components": [
           {
             "__type": "WorldPanel",
+            "__guid": "6ea713dc-b215-4d4c-824d-36d1a84f17fd",
             "HorizontalAlign": "Center",
             "LookAtCamera": false,
             "PanelSize": "85,32",
@@ -865,9 +873,11 @@
           },
           {
             "__type": "SlotsDisplay",
+            "__guid": "488cf1f0-a045-435c-be77-fc052fd2a1c0",
             "PropertyName": "Money",
             "SlotMachine": {
               "_type": "component",
+              "component_id": "db872d11-55bc-4a15-adfa-8eb604efd7f3",
               "go": "f1bdc728-67ca-44f9-a33f-291bb5fa162e",
               "component_type": "SlotMachine"
             }
@@ -879,5 +889,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }
