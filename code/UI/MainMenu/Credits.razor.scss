@@ -35,6 +35,7 @@ Credits {
     
     font-size: 20px;
     font-family: HabboExtended;
+    text-shadow: $text-shadow-sm;
     
     & > * {
       flex-shrink: 0;
@@ -42,7 +43,6 @@ Credits {
     
     h1, h2 {
       font-family: BasicHandwriting;
-      text-shadow: $text-shadow-sm;
       margin-bottom: 10px;
     }
     
@@ -55,6 +55,10 @@ Credits {
       font-size: 40px;
       margin-top: 20px;
     }
+
+    .bold, .link, .name {
+      font-weight: bold;
+    }
     
     .name, .role {
       flex-grow: 1;
@@ -63,7 +67,6 @@ Credits {
     
     .name {
       flex-direction: row-reverse;
-      font-weight: bold;
     }
     
     .center, h1, h2 {
@@ -76,16 +79,8 @@ Credits {
       gap: 20px;
     }
     
-    .bold {
-      font-weight: bold;
-      font-size: 20px;
-      text-shadow: $text-shadow-sm;
-    }
-    
     .link {
-      font-weight: bold;
       color: $gold;
-      text-shadow: $text-shadow-sm;
     }
     
     .title {
