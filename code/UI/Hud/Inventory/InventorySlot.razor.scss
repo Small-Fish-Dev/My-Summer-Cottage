@@ -8,6 +8,14 @@ InventorySlot {
     align-items: center;
     text-shadow: 2px 2px 0px black;
 
+    opacity: 1;
+    transform: translateY(0);
+
+    &:intro {
+        transform: translateY(50);
+        opacity: 0;
+    }
+    
     .border {
         position: absolute;
         background-image: linear-gradient(#989898, #4a4a4a);
