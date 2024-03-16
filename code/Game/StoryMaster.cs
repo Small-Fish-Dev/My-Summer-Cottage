@@ -246,8 +246,8 @@ public class StoryMaster : Component
 
 	public void LoadStoryProgression()
 	{
-		if ( FileSystem.Data.FileExists( "story.json" ) )
-			StoryProgression = FileSystem.Data.ReadJsonOrDefault<SaunaStoryProgression>( "story.json" );
+		if ( FileSystem.OrganizationData.FileExists( "story.json" ) )
+			StoryProgression = FileSystem.OrganizationData.ReadJsonOrDefault<SaunaStoryProgression>( "story.json" );
 		else
 		{
 			StoryProgression = new();
@@ -263,7 +263,7 @@ public class StoryMaster : Component
 		if ( !Connection.Local.IsHost )
 			return;
 
-		FileSystem.Data.WriteJson( "story.json", StoryProgression );
+		FileSystem.OrganizationData.WriteJson( "story.json", StoryProgression );
 
 		if ( print )
 			Log.Info( "Story saved..." );
@@ -276,16 +276,16 @@ public class StoryMaster : Component
 	{
 		StoryProgression = new();
 
-		if ( FileSystem.Data.FileExists( "story.json" ) )
-			FileSystem.Data.DeleteFile( "story.json" );
+		if ( FileSystem.OrganizationData.FileExists( "story.json" ) )
+			FileSystem.OrganizationData.DeleteFile( "story.json" );
 
 		Log.Info( "Story reset!" );
 	}
 
 	public void ResetPlayer()
 	{
-		if ( FileSystem.Data.FileExists( PlayerSave.FILE_PATH ) )
-			FileSystem.Data.DeleteFile( PlayerSave.FILE_PATH );
+		if ( FileSystem.OrganizationData.FileExists( PlayerSave.FILE_PATH ) )
+			FileSystem.OrganizationData.DeleteFile( PlayerSave.FILE_PATH );
 		Log.Info( "Character reset!" );
 	}
 

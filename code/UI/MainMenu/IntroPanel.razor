@@ -50,7 +50,7 @@
 	private const float IntroTime = 4f;
 
 	private IntroState _state = IntroState.Logo;
-	private TimeUntil _introIsOver = IntroTime;
+	private RealTimeUntil _introIsOver = IntroTime;
 	private bool _confirmed;
 
 	protected override void OnAwake()
@@ -71,7 +71,7 @@
 		{
 			case IntroState.Logo:
 				if ( _introIsOver )
-					_state = FileSystem.Data.FileExists( PlayerSave.FILE_PATH ) 
+					_state = FileSystem.OrganizationData.FileExists( PlayerSave.FILE_PATH ) 
 						? IntroState.Next
 						: IntroState.Disclaimer;
 				break;

@@ -226,9 +226,9 @@ public partial class TaskMaster : Component, Component.INetworkListener
 	{
 		await Task.Delay( 500 );
 
-		if ( FileSystem.Data.FileExists( "tasks.json" ) )
+		if ( FileSystem.OrganizationData.FileExists( "tasks.json" ) )
 		{
-			TasksProgression = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
+			TasksProgression = FileSystem.OrganizationData.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
 
 			var activeTasks = TasksProgression.Tasks.Where( x => x.CurrentlyActive );
 
@@ -285,7 +285,7 @@ public partial class TaskMaster : Component, Component.INetworkListener
 		if ( print )
 			Log.Info( "Tasks saved..." );
 
-		FileSystem.Data.WriteJson( "tasks.json", TasksProgression );
+		FileSystem.OrganizationData.WriteJson( "tasks.json", TasksProgression );
 	}
 
 	/// <summary>
@@ -311,8 +311,8 @@ public partial class TaskMaster : Component, Component.INetworkListener
 		}
 		else
 		{
-			if ( FileSystem.Data.FileExists( "tasks.json" ) )
-				FileSystem.Data.DeleteFile( "tasks.json" );
+			if ( FileSystem.OrganizationData.FileExists( "tasks.json" ) )
+				FileSystem.OrganizationData.DeleteFile( "tasks.json" );
 		}
 	}
 

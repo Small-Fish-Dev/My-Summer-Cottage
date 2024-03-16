@@ -54,10 +54,10 @@ partial class Player
 		if ( _saveData.HasValue )
 			return (_saveData.Value, true);
 
-		if ( !FileSystem.Data.FileExists( PlayerSave.FILE_PATH ) )
+		if ( !FileSystem.OrganizationData.FileExists( PlayerSave.FILE_PATH ) )
 			return (default, false);
 
-		_saveData = FileSystem.Data.ReadJson<PlayerSave>( PlayerSave.FILE_PATH );
+		_saveData = FileSystem.OrganizationData.ReadJson<PlayerSave>( PlayerSave.FILE_PATH );
 
 		return (_saveData.Value, true);
 	}
@@ -67,7 +67,7 @@ partial class Player
 	/// </summary>
 	/// <param name="save"></param>
 	public static void WriteSave( PlayerSave save )
-		=> FileSystem.Data.WriteJson( PlayerSave.FILE_PATH, save );
+		=> FileSystem.OrganizationData.WriteJson( PlayerSave.FILE_PATH, save );
 
 	/// <summary>
 	/// Writes a local save based on player or local.

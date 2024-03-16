@@ -143,8 +143,8 @@ public class EventMaster : Component
 
 	public void LoadEventsProgression()
 	{
-		if ( FileSystem.Data.FileExists( "events.json" ) )
-			EventsProgression = FileSystem.Data.ReadJsonOrDefault<SaunaEventProgress>( "events.json" );
+		if ( FileSystem.OrganizationData.FileExists( "events.json" ) )
+			EventsProgression = FileSystem.OrganizationData.ReadJsonOrDefault<SaunaEventProgress>( "events.json" );
 		else
 		{
 			EventsProgression = new();
@@ -178,7 +178,7 @@ public class EventMaster : Component
 		if ( print )
 			Log.Info( "Events saved..." );
 
-		FileSystem.Data.WriteJson( "events.json", EventsProgression );
+		FileSystem.OrganizationData.WriteJson( "events.json", EventsProgression );
 	}
 
 	/// <summary>
@@ -197,8 +197,8 @@ public class EventMaster : Component
 		Log.Info( "Events reset!" );
 
 
-		if ( FileSystem.Data.FileExists( "events.json" ) )
-			FileSystem.Data.DeleteFile( "events.json" );
+		if ( FileSystem.OrganizationData.FileExists( "events.json" ) )
+			FileSystem.OrganizationData.DeleteFile( "events.json" );
 	}
 
 	public void UnloadAllEvents()
