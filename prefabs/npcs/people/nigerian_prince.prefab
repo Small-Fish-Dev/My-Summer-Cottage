@@ -1,0 +1,595 @@
+{
+  "RootObject": {
+    "__guid": "cd84d7dc-1f15-4370-9704-41740d24fce4",
+    "Name": "Nigerian Prince",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "CapsuleCollider",
+        "__guid": "c9e37305-e0d7-4ea2-99cf-5f74bc0229c3",
+        "End": "0,0,68",
+        "IsTrigger": false,
+        "Radius": 12,
+        "Start": "0,0,12",
+        "Static": false
+      },
+      {
+        "__type": "Interactions",
+        "__guid": "f605129e-5207-426d-8d65-2979dcc4b43c",
+        "HideOnEmpty": false,
+        "ObjectInteractions": [
+          {
+            "Identifier": "nigerian_prince_trade",
+            "Keybind": "Use",
+            "Description": "Give money",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "5de7b553-f329-4d9b-92d2-905580633aa6",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [
+                {
+                  "Name": "amount",
+                  "Type": "System.Private.CoreLib/System.Int32"
+                }
+              ],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input",
+                  "UserData": {
+                    "Labels": {
+                      "interactor": "player",
+                      "_signal": "signal"
+                    }
+                  }
+                },
+                {
+                  "Id": 1,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_name": "Money"
+                  },
+                  "UserData": {
+                    "Position": "224,0"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_isStatic": false,
+                    "_name": "GiveMoney"
+                  },
+                  "UserData": {
+                    "Position": "2048,16"
+                  }
+                },
+                {
+                  "Id": 7,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "component": {
+                      "_type": "component",
+                      "component_id": "f605129e-5207-426d-8d65-2979dcc4b43c",
+                      "go": "cd84d7dc-1f15-4370-9704-41740d24fce4",
+                      "component_type": "Interactions"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "176,240"
+                  }
+                },
+                {
+                  "Id": 8,
+                  "Type": "property.set",
+                  "Properties": {
+                    "_type": "Sandbox.Game/Sandbox.Component",
+                    "_name": "Enabled"
+                  },
+                  "UserData": {
+                    "Position": "432,240"
+                  }
+                },
+                {
+                  "Id": 9,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "System.Private.CoreLib/System.Int32",
+                    "_isStatic": true,
+                    "_name": "Min"
+                  },
+                  "UserData": {
+                    "Position": "432,-0",
+                    "Labels": {
+                      "_result": "amount"
+                    }
+                  }
+                },
+                {
+                  "Id": 10,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_isStatic": false,
+                    "_name": "TakeMoney"
+                  },
+                  "UserData": {
+                    "Position": "720,-96"
+                  }
+                },
+                {
+                  "Id": 12,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                    "_isStatic": true,
+                    "_name": "SpeakWithSubtitle"
+                  },
+                  "UserData": {
+                    "Position": "1184,-96"
+                  }
+                },
+                {
+                  "Id": 13,
+                  "Type": "time.delay",
+                  "UserData": {
+                    "Position": "1408,-80"
+                  }
+                },
+                {
+                  "Id": 14,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                    "_isStatic": true,
+                    "_name": "SpeakWithSubtitle"
+                  },
+                  "UserData": {
+                    "Position": "1568,48"
+                  }
+                },
+                {
+                  "Id": 15,
+                  "Type": "time.delay",
+                  "UserData": {
+                    "Position": "1808,32"
+                  }
+                },
+                {
+                  "Id": 17,
+                  "Type": "var.set",
+                  "Properties": {
+                    "_var": "amount"
+                  },
+                  "UserData": {
+                    "Position": "480,-128"
+                  }
+                },
+                {
+                  "Id": 18,
+                  "Type": "var.set",
+                  "Properties": {
+                    "_var": "amount"
+                  },
+                  "UserData": {
+                    "Position": "1088,-176"
+                  }
+                },
+                {
+                  "Id": 19,
+                  "Type": "op.multiply",
+                  "UserData": {
+                    "Position": "896,-224"
+                  }
+                },
+                {
+                  "Id": 21,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_isStatic": false,
+                    "_name": "CaptureMemory"
+                  },
+                  "UserData": {
+                    "Position": "976,-352"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 1,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 15,
+                  "SrcName": "_signal",
+                  "DstId": 5,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 5,
+                  "DstName": "_target"
+                },
+                {
+                  "VarName": "amount",
+                  "DstId": 5,
+                  "DstName": "amount"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 8,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 7,
+                  "SrcName": "_result",
+                  "DstId": 8,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": false,
+                  "DstId": 8,
+                  "DstName": "_value"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 9,
+                  "DstName": "x"
+                },
+                {
+                  "Value": 500,
+                  "DstId": 9,
+                  "DstName": "y"
+                },
+                {
+                  "SrcId": 17,
+                  "SrcName": "_signal",
+                  "DstId": 10,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 10,
+                  "DstName": "_target"
+                },
+                {
+                  "VarName": "amount",
+                  "DstId": 10,
+                  "DstName": "amount"
+                },
+                {
+                  "SrcId": 18,
+                  "SrcName": "_signal",
+                  "DstId": 12,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": "Nigerian Prince",
+                  "DstId": 12,
+                  "DstName": "name"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_target",
+                  "DstId": 12,
+                  "DstName": "obj"
+                },
+                {
+                  "Value": {
+                    "Volume": 1,
+                    "Position": "0,0,0",
+                    "Rotation": "0,0,0,1",
+                    "Pitch": 0.6,
+                    "Decibels": 70,
+                    "ListenLocal": false,
+                    "Delay": 180,
+                    "Accuracy": 2,
+                    "GameObject": {
+                      "_type": "gameobject",
+                      "go": "cd84d7dc-1f15-4370-9704-41740d24fce4"
+                    }
+                  },
+                  "DstId": 12,
+                  "DstName": "settings"
+                },
+                {
+                  "Value": "Alright a deals a deal, let me work my magic...",
+                  "DstId": 12,
+                  "DstName": "subtitle"
+                },
+                {
+                  "SrcId": 12,
+                  "SrcName": "_signal",
+                  "DstId": 13,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": 4,
+                  "DstId": 13,
+                  "DstName": "seconds"
+                },
+                {
+                  "SrcId": 13,
+                  "SrcName": "_signal",
+                  "DstId": 14,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": "Nigerian Prince",
+                  "DstId": 14,
+                  "DstName": "name"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_target",
+                  "DstId": 14,
+                  "DstName": "obj"
+                },
+                {
+                  "Value": {
+                    "Volume": 1,
+                    "Position": "0,0,0",
+                    "Rotation": "0,0,0,1",
+                    "Pitch": 0.6,
+                    "Decibels": 70,
+                    "ListenLocal": false,
+                    "Delay": 180,
+                    "Accuracy": 2,
+                    "GameObject": {
+                      "_type": "gameobject",
+                      "go": "cd84d7dc-1f15-4370-9704-41740d24fce4"
+                    }
+                  },
+                  "DstId": 14,
+                  "DstName": "settings"
+                },
+                {
+                  "Value": "BOOM! Doubled it for you, buddy!",
+                  "DstId": 14,
+                  "DstName": "subtitle"
+                },
+                {
+                  "SrcId": 14,
+                  "SrcName": "_signal",
+                  "DstId": 15,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": 1,
+                  "DstId": 15,
+                  "DstName": "seconds"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 17,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 9,
+                  "SrcName": "_result",
+                  "DstId": 17,
+                  "DstName": "_value"
+                },
+                {
+                  "SrcId": 10,
+                  "SrcName": "_signal",
+                  "DstId": 18,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 19,
+                  "SrcName": "_result",
+                  "DstId": 18,
+                  "DstName": "_value"
+                },
+                {
+                  "VarName": "amount",
+                  "DstId": 19,
+                  "DstName": "a"
+                },
+                {
+                  "Value": 2,
+                  "DstId": 19,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 10,
+                  "SrcName": "_signal",
+                  "DstId": 21,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 21,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": "Luck finally shined my way! Always take the offer!",
+                  "DstId": 21,
+                  "DstName": "caption"
+                },
+                {
+                  "Value": 150,
+                  "DstId": 21,
+                  "DstName": "distance"
+                },
+                {
+                  "Value": "nigerian.scammer",
+                  "DstId": 21,
+                  "DstName": "identifier"
+                }
+              ]
+            },
+            "InteractDistance": 120,
+            "Accessibility": "World",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
+            "DynamicText": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Dynamic Text",
+                "id": "70645176-a31c-42e6-91b4-bad4ae5d367a",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "output",
+                  "UserData": {
+                    "Position": "416,48"
+                  }
+                },
+                {
+                  "Id": 1,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_name": "Local"
+                  },
+                  "UserData": {
+                    "Position": "-304,48"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_name": "Money"
+                  },
+                  "UserData": {
+                    "Position": "-144,48"
+                  }
+                },
+                {
+                  "Id": 3,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "System.Private.CoreLib/System.String",
+                    "_isStatic": true,
+                    "_name": "Concat"
+                  },
+                  "UserData": {
+                    "Position": "224,48"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "System.Private.CoreLib/System.Int32",
+                    "_isStatic": true,
+                    "_name": "Min"
+                  },
+                  "UserData": {
+                    "Position": "48,96"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 0,
+                  "DstName": "_result"
+                },
+                {
+                  "SrcId": 1,
+                  "SrcName": "_result",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": "Give ",
+                  "DstId": 3,
+                  "DstName": "args",
+                  "DstIndex": 0
+                },
+                {
+                  "SrcId": 5,
+                  "SrcName": "_result",
+                  "DstId": 3,
+                  "DstName": "args",
+                  "DstIndex": 1
+                },
+                {
+                  "Value": "mk",
+                  "DstId": 3,
+                  "DstName": "args",
+                  "DstIndex": 2
+                },
+                {
+                  "SrcId": 2,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "x"
+                },
+                {
+                  "Value": 500,
+                  "DstId": 5,
+                  "DstName": "y"
+                }
+              ]
+            },
+            "CooldownTime": 0.5,
+            "Animation": "Interact"
+          }
+        ]
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "c314e0b9-0738-4f4d-b6a4-f7d01c05e89a",
+        "Name": "Model",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "Character",
+            "__guid": "1d9cafbb-39d1-4bb0-a397-192a45a7a9df",
+            "Clothes": [
+              "models/clothes/oxford_shoes/oxford_shoes.vmdl",
+              "models/clothes/police_trousers/police_trousers.vmdl",
+              "models/clothes/suit_jacket/suit_jacket.vmdl",
+              "models/clothes/drug_binoculars/drug_binoculars.vmdl"
+            ],
+            "Fatness": 0,
+            "Height": 100,
+            "HideBodyGroup": "Torso, Legs, Feet"
+          },
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "a6fc75b6-7789-4a66-bd59-9cde663e5df5",
+            "BodyGroups": 1365,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "0.14884,0.08861,0.08861,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
