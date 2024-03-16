@@ -23,14 +23,9 @@
 			<div>Drinking and fishing</div>
 			<div>Drinking and ... +256</div>
 		</div>
-		<div class="text">HOLD the button to confirm your age.</div>
-		<div class="confirm-button"
-		     onmousedown="@( () => ConfirmMouseDown() )"
-		     onmouseup="@( () => ConfirmMouseUp() )"
-		     onmouseleave="@( () => ConfirmMouseUp() )"
-		     style="background-color: @( (_holdingButton ? Color.Lerp( Color.Green, Color.Transparent, _confirmTimeOut / ConfirmHoldTime ) : Color.Black).Hex )">
-			<div class="inner-border">
-				[HOLD] I AM OVER 18
+		<div class="confirm-button">
+			<div class="inner-border" onclick=@(() => _confirmed = true)>
+				I AM OVER 18
 			</div>
 		</div>
 	</div>
@@ -53,12 +48,10 @@
 	[Property] public SoundEvent IntroSound { get; set; }
 
 	private const float IntroTime = 4f;
-	public const float ConfirmHoldTime = 1.5f;
 
 	private IntroState _state = IntroState.Logo;
 	private TimeUntil _introIsOver = IntroTime;
-	private TimeUntil _confirmTimeOut;
-	private bool _holdingButton;
+	private bool _confirmed;
 
 	protected override void OnAwake()
 	{
@@ -77,7 +70,7 @@
 				break;
 
 			case IntroState.Disclaimer:
-				if ( _holdingButton && _confirmTimeOut )
+				if ( _confirmed )
 					_state = IntroState.Next;
 
 				break;
@@ -96,23 +89,6 @@
 		}
 	}
 
-	private void ConfirmMouseDown()
-	{
-		if ( _state != IntroState.Disclaimer )
-			return;
-
-		_confirmTimeOut = ConfirmHoldTime;
-		_holdingButton = true;
-	}
-
-	private void ConfirmMouseUp()
-	{
-		if ( _state != IntroState.Disclaimer )
-			return;
-
-		_holdingButton = false;
-	}
-
-	protected override int BuildHash() => HashCode.Combine( _state, _holdingButton ? (float)_confirmTimeOut : 0f );
+	protected override int BuildHash() => HashCode.Combine( _state );
 
 }

@@ -289,6 +289,20 @@ public class StoryMaster : Component
 		Log.Info( "Character reset!" );
 	}
 
+	public struct TriggeringEvent
+	{
+		public EventDefinition Event;
+		public float Time;
+
+		public TriggeringEvent() { }
+		public TriggeringEvent( EventDefinition @event, float time )
+		{
+			Event = @event;
+			Time = time;
+		}
+	}
+	public List<TriggeringEvent> EventsToTrigger { get; set; } = new();
+
 	public void LoadEventPool( int randomSeed )
 	{
 		if ( CurrentSaunaDay == null ) return;
@@ -308,7 +322,12 @@ public class StoryMaster : Component
 				if ( availableCommonEvents.Any() )
 				{
 					var chosenEvent = Game.Random.FromList( availableCommonEvents );
-					chosenEvent.Enable();
+
+					if ( chosenEvent.Type == EventType.Random )
+						EventsToTrigger.Add( new TriggeringEvent( chosenEvent, Game.Random.Float( 10f, 24f ) ) );
+					else
+						chosenEvent.Enable();
+
 					eventsPicked++;
 				}
 			}
@@ -329,7 +348,12 @@ public class StoryMaster : Component
 				if ( availableUncommonEvents.Any() )
 				{
 					var chosenEvent = Game.Random.FromList( availableUncommonEvents );
-					chosenEvent.Enable();
+
+					if ( chosenEvent.Type == EventType.Random )
+						EventsToTrigger.Add( new TriggeringEvent( chosenEvent, Game.Random.Float( 10f, 24f ) ) );
+					else
+						chosenEvent.Enable();
+
 					eventsPicked++;
 				}
 			}
@@ -347,10 +371,16 @@ public class StoryMaster : Component
 					.Where( x => !_eventMaster.CurrentEvents.Contains( x ) )
 					.ToList(); // We haven't chosen it yet
 
+
 				if ( availableRareEvents.Any() )
 				{
 					var chosenEvent = Game.Random.FromList( availableRareEvents );
-					chosenEvent.Enable();
+
+					if ( chosenEvent.Type == EventType.Random )
+						EventsToTrigger.Add( new TriggeringEvent( chosenEvent, Game.Random.Float( 10f, 24f ) ) );
+					else
+						chosenEvent.Enable();
+
 					eventsPicked++;
 				}
 			}
@@ -397,8 +427,8 @@ public class StoryMaster : Component
 		storyMaster._timeManager.StartDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
-		storyMaster.LoadEventPool( (int)storyMaster._timeManager.RandomSeed );
-		storyMaster.SetRandomDialogues( (int)storyMaster._timeManager.RandomSeed );
+		storyMaster.LoadEventPool( GameTimeManager.RandomSeed );
+		storyMaster.SetRandomDialogues( GameTimeManager.RandomSeed );
 		storyMaster.RandomizeClothing();
 
 		if ( Player.Local.IsValid() )
@@ -419,6 +449,7 @@ public class StoryMaster : Component
 		storyMaster.NextGameDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
+		storyMaster.EventsToTrigger.Clear();
 		storyMaster.ClearTriggeredEvents();
 
 		if ( Connection.Local.IsHost )
@@ -557,6 +588,26 @@ public class StoryMaster : Component
 						}
 					}
 				}
+			}
+
+			var eventsToRemove = new List<TriggeringEvent>();
+
+			foreach ( var randomEvent in EventsToTrigger )
+			{
+				if ( !randomEvent.Event.HasBeenPlayed )
+				{
+					if ( randomEvent.Time <= currentHour )
+					{
+						randomEvent.Event.Enable();
+						eventsToRemove.Add( randomEvent );
+					}
+				}
+			}
+
+			foreach ( var toRemove in eventsToRemove )
+			{
+				if ( EventsToTrigger.Contains( toRemove ) )
+					EventsToTrigger.Remove( toRemove );
 			}
 
 			if ( !CurrentSaunaDay.Completed )

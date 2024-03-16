@@ -161,6 +161,9 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 			component.Enabled = true;
 
+		foreach ( var enabledTrigger in Components.GetAll<EventEnabledTrigger>( FindMode.EverythingInSelfAndDescendants ) )
+			enabledTrigger.CallTrigger( null );
+
 		_eventMaster.CurrentEvents.Add( this );
 	}
 

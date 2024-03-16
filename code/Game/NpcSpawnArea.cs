@@ -24,6 +24,12 @@ public sealed class NpcSpawnArea : Component
 	public float Height { get; set; }
 
 	[Property]
+	public float StopLogicDistance { get; set; } = 4000f;
+
+	[Property]
+	public float StopDrawingDistance { get; set; } = 7000f;
+
+	[Property]
 	[JsonInclude]
 	public List<NpcChance> NpcPool { get; set; }
 
@@ -108,14 +114,14 @@ public sealed class NpcSpawnArea : Component
 
 				if ( currentTick % 30 == component.NpcId % 30 )
 				{
-					var anyNearby = Player.All.Any( x => x.Transform.Position.Distance( npc.Transform.Position ) <= 4000f );
+					var anyNearby = Player.All.Any( x => x.Transform.Position.Distance( npc.Transform.Position ) <= StopLogicDistance );
 
 					component.Enabled = anyNearby;
 				}
 
 				if ( currentTick % 60 == component.NpcId % 60 )
 				{
-					var anyNearby = Player.All.Any( x => x.Transform.Position.Distance( npc.Transform.Position ) <= 7000f );
+					var anyNearby = Player.All.Any( x => x.Transform.Position.Distance( npc.Transform.Position ) <= StopDrawingDistance );
 
 					component.Model.Enabled = anyNearby;
 				}

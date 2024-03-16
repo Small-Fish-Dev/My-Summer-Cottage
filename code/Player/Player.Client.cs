@@ -17,11 +17,16 @@ partial class Player
 		{
 			_guid = value;
 			Connection = Connection.Find( _guid );
+			
+			if ( _guid == Connection.Local.Id )
+			{
+				Local = this;
+				if ( Connection.Local.IsHost )
+					Player._internalPlayers.Clear(); 
+			}
+
 			if ( !_internalPlayers.Contains( this ) )
 				_internalPlayers.Add( this );
-
-			if ( _guid == Connection.Local.Id )
-				Local = this;
 		}
 	}
 

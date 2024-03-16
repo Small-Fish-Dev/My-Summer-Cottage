@@ -94,7 +94,7 @@ IntroPanel {
             min-width: 200px;
             min-height: 75px;
             padding: 5px;
-            transition: transform 0.25s ease-in-out;
+            transition: transform 0.15s ease-out;
 
             .inner-border {
                 flex-grow: 1;
@@ -107,6 +107,12 @@ IntroPanel {
             &:hover {
                 cursor: pointer;
                 transform: scale(1.1);
+                sound-in: 'hover';
+            }
+
+            &:active {
+                transform: scale(1.05);
+                sound-in: 'light_click';
             }
         }
     }
