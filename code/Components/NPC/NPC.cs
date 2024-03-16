@@ -168,8 +168,6 @@ public partial class NPC : Component
 	[Range( 0.1f, 20f, 0.1f, false )]
 	public float MaximumIdleCooldown { get; set; } = 6;
 
-	public TimeUntil NextIdle { get; set; }
-
 	/// <summary>
 	/// When the NPC is first spawned in
 	/// </summary>
@@ -215,11 +213,15 @@ public partial class NPC : Component
 	[ShowIf( "Idle", true )]
 	public Action OnIdle { get; set; }
 
-	public int NpcId { get; set; }
-	public Vector3 TargetPosition { get; set; }
+	[HostSync] public int NpcId { get; set; }
+	[HostSync] public Vector3 TargetPosition { get; set; }
+	[HostSync] public bool FollowingTargetObject { get; set; } = false;
+	[HostSync] public Vector3 SpawnPosition { get; set; }
+	[HostSync] public TimeUntil NextIdle { get; set; }
+	[HostSync] public TimeUntil NextAttack { get; set; }
+
 	public GameObject TargetObject { get; private set; } = null;
-	public bool FollowingTargetObject { get; set; } = false;
-	public Vector3 SpawnPosition { get; set; }
+
 	public float ForceMultiplier
 	{
 		get
@@ -271,6 +273,12 @@ public partial class NPC : Component
 			MoveHelper.StopSpeed *= Scale;
 		}
 
+		BroadcastOnSpawn();
+	}
+
+	[Broadcast]
+	private void BroadcastOnSpawn()
+	{
 		OnSpawn?.Invoke();
 	}
 
@@ -308,7 +316,8 @@ public partial class NPC : Component
 				{
 					if ( Idle && NextIdle )
 					{
-						OnIdle?.Invoke();
+						BroadcastOnIdle();
+						Game.SetRandomSeed( GameTimeManager.RandomSeed );
 						NextIdle = Game.Random.Float( MinimumIdleCooldown, MaximumIdleCooldown );
 					}
 				}
@@ -334,6 +343,12 @@ public partial class NPC : Component
 			FollowRagdoll();
 	}
 
+	[Broadcast]
+	private void BroadcastOnIdle()
+	{
+		OnIdle?.Invoke();
+	}
+
 	protected override void OnDestroy()
 	{
 	}
@@ -343,8 +358,6 @@ public partial class NPC : Component
 	/// </summary>
 	public IEnumerable<GameObject> ProvokersInArea { get; set; }
 
-	public TimeUntil NextAttack = 0;
-
 	public void DetectAround()
 	{
 		if ( TargetObject != null )
@@ -353,7 +366,7 @@ public partial class NPC : Component
 			{
 				if ( NextAttack )
 				{
-					OnAttack?.Invoke( TargetObject );
+					BroadcastOnAttack();
 					NextAttack = AttackCooldown;
 				}
 			}
@@ -382,6 +395,13 @@ public partial class NPC : Component
 		}
 	}
 
+	[Broadcast]
+	private void BroadcastOnAttack()
+	{
+		if ( TargetObject is not null )
+			OnAttack?.Invoke( TargetObject );
+	}
+
 	public void Detected( GameObject target, bool alertOthers = false )
 	{
 		if ( target == null ) return;
@@ -389,7 +409,7 @@ public partial class NPC : Component
 		if ( target == TargetObject ) return;
 
 		SetTarget( target );
-		OnDetect?.Invoke( TargetObject );
+		BroadcastOnDetect();
 
 		if ( alertOthers && AlertOthers )
 		{
@@ -406,6 +426,13 @@ public partial class NPC : Component
 		}
 	}
 
+	[Broadcast]
+	private void BroadcastOnDetect()
+	{
+		if ( TargetObject is not null )
+			OnDetect?.Invoke( TargetObject );
+	}
+
 	public void Damaged( GameObject target )
 	{
 		if ( TargetObject == null && TargetObject != target )
@@ -414,11 +441,18 @@ public partial class NPC : Component
 
 	public void Undetected()
 	{
-		OnEnemyEscaped?.Invoke( TargetObject );
+		BroadcastOnEscape();
 
 		TargetObject = null;
 		TargetPosition = Transform.Position;
 		ReachedDestination = true;
+	}
+
+	[Broadcast]
+	private void BroadcastOnEscape()
+	{
+		if ( TargetObject is not null )
+			OnEnemyEscaped?.Invoke( TargetObject );
 	}
 
 	/// <summary>
@@ -484,6 +518,7 @@ public partial class NPC : Component
 
 		while ( hitGround == false && tries <= 10f )
 		{
+			Game.SetRandomSeed( GameTimeManager.RandomSeed );
 			var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
 			var randomDistance = Game.Random.Float( minRange, maxRange );
 			var randomPoint = position + randomDirection * randomDistance;

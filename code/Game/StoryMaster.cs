@@ -427,8 +427,8 @@ public class StoryMaster : Component
 		storyMaster._timeManager.StartDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
-		storyMaster.LoadEventPool( (int)storyMaster._timeManager.RandomSeed );
-		storyMaster.SetRandomDialogues( (int)storyMaster._timeManager.RandomSeed );
+		storyMaster.LoadEventPool( GameTimeManager.RandomSeed );
+		storyMaster.SetRandomDialogues( GameTimeManager.RandomSeed );
 		storyMaster.RandomizeClothing();
 
 		if ( Player.Local.IsValid() )
