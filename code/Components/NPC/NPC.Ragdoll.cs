@@ -69,7 +69,7 @@ public partial class NPC
 			rootPosition = (leftFoot + rightFoot) / 2f;
 		}
 
-		var frontPosition = Ragdoll.PhysicsGroup.Pos + Vector3.Forward;
+		var frontPosition = Ragdoll.PhysicsGroup.Pos + Transform.Rotation.Forward;
 
 		if ( Model.GetAttachment( "hand_L" ) != null )
 		{
