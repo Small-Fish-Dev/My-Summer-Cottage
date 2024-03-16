@@ -138,14 +138,14 @@ public sealed class BusStop : Component
 
 				var desiredDirection = (frontTrace.Hit ? frontTrace.HitPosition : frontTrace.EndPosition) - (backTrace.Hit ? backTrace.HitPosition : backTrace.EndPosition);
 				taxi.Car.Transform.Rotation = Rotation.LookAt( desiredDirection, Vector3.Up );
-				taxi.Car.Transform.Rotation = Rotation.Lerp( oldRotation, taxi.Car.Transform.Rotation, Time.Delta * 4f );
+				taxi.Car.Transform.Rotation = Rotation.Lerp( oldRotation, taxi.Car.Transform.Rotation, Time.Delta * 6f );
 
 				taxi.Car.Transform.Position += taxi.Car.Transform.Rotation.Forward * taxi.Speed * Time.Delta;
 
 				taxi.Player.Components.Get<HealthComponent>().StunnedBy = DamageType.Nothing;
 				taxi.Player.RagdollDisable = true;
 
-				if ( taxi.Car.Transform.Position.Distance( currentEndPosition ) <= 100f )
+				if ( taxi.Car.Transform.Position.Distance( currentEndPosition ) <= 150f )
 				{
 					taxi.CurrentWaypoint++;
 				}
