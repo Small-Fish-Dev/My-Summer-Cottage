@@ -52,7 +52,10 @@
                 }
               },
               "UserData": {
-                "Position": "-64,-128"
+                "Position": "-64,-128",
+                "Labels": {
+                  "_result": "bolt"
+                }
               }
             },
             {
@@ -62,7 +65,7 @@
                 "T": "package.fish.sauna/Sauna.Player"
               },
               "UserData": {
-                "Position": "-0,96",
+                "Position": "-64,-192",
                 "Labels": {
                   "_result": "player"
                 }
@@ -75,7 +78,7 @@
                 "T": "package.fish.sauna/HealthComponent"
               },
               "UserData": {
-                "Position": "0,160",
+                "Position": "-64,-256",
                 "Labels": {
                   "_result": "ply_health"
                 }
@@ -112,6 +115,11 @@
               "Properties": {
                 "_type": "Sandbox.Game/Sandbox.GameObject",
                 "_name": "Transform"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "bolt_trans"
+                }
               }
             },
             {
@@ -121,6 +129,11 @@
               "Properties": {
                 "_type": "Sandbox.Game/Sandbox.GameTransform",
                 "_name": "Position"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "bolt_pos"
+                }
               }
             },
             {
@@ -207,6 +220,18 @@
               },
               "UserData": {
                 "Position": "256,-304"
+              }
+            },
+            {
+              "Id": 18,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true,
+                "_name": "PlaySound"
+              },
+              "UserData": {
+                "Position": "160,256"
               }
             }
           ],
@@ -426,6 +451,27 @@
               "SrcName": "triggerer",
               "DstId": 17,
               "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 18,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 18,
+              "DstName": "obj"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "Sandbox.Engine/Sandbox.SoundEvent",
+                "Value": "sounds/rifle/rifle-shoot.sound"
+              },
+              "DstId": 18,
+              "DstName": "sound"
             }
           ]
         },
