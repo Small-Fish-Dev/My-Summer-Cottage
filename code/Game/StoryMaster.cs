@@ -364,10 +364,9 @@ public class StoryMaster : Component
 
 	private static async Task PlayIntro()
 	{
-		// TODO: Uncomment this before release.
-		// Player.Local.BlackScreen( 0f, 4f, 1f );
-		// UI.Hud.Instance.Panel.PlaySound( "car_intro" );
-		// await GameTask.DelayRealtimeSeconds( 2f );
+		Player.Local.BlackScreen( 0f, 4f, 1f );
+		UI.Hud.Instance.Panel.PlaySound( "car_intro" );
+		await GameTask.DelayRealtimeSeconds( 2f );
 
 		SetupSession();
 	}
