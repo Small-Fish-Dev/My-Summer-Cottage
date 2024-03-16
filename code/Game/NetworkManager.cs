@@ -33,7 +33,7 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		obj.NetworkSpawn( connection );
 		player.SetupConnection( connection );
 
-		if ( Connection.Local.IsHost )
+		if ( connection.IsHost && !IsProxy )
 			StoryMaster.StartSession();
 	}
 
