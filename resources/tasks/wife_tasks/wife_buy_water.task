@@ -1,0 +1,38 @@
+{
+  "Name": "Buy Fresh Water",
+  "Subtitle": "Wife wants some Fresh Water",
+  "Description": "The nagging wife is asking for fresh water, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "I\u0027m thirsty, go buy some fresh water.",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy Fresh Water",
+  "FailedSignal": "task.failed.Buy Fresh Water",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy some Fresh Water",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Fresh Water",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

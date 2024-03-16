@@ -1,0 +1,38 @@
+{
+  "Name": "Buy Ketchup",
+  "Subtitle": "Wife wants some Ketchup",
+  "Description": "The nagging wife is asking for Ketchup, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "We ran out of Ketchup. How will I make pasta without it?!",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy Ketchup",
+  "FailedSignal": "task.failed.Buy Ketchup",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a bottle of Tomato Ketchup",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Ketchup",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

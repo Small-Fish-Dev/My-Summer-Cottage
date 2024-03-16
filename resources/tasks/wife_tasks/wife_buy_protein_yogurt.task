@@ -1,0 +1,38 @@
+{
+  "Name": "Buy some Protein Yogurt",
+  "Subtitle": "Wife wants Yogurt, the Protein one.",
+  "Description": "The nagging wife is asking for Protein Yogurt, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "Go get me some yogurt, THE PROTEIN ONE THIS TIME.",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy some Protein Yogurt",
+  "FailedSignal": "task.failed.Buy some Protein Yogurt",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy Protein Yogurt",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Protein Yogurt",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

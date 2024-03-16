@@ -1,0 +1,38 @@
+{
+  "Name": "Buy Mustard",
+  "Subtitle": "Wife wants some Mustard",
+  "Description": "The nagging wife is asking for Mustard, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "OUT. OF. MUSTARD. How am I supposed to eat pizza without it?!",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy Mustard",
+  "FailedSignal": "task.failed.Buy Mustard",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a bottle of Mustard",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Mustard",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

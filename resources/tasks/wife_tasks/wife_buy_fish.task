@@ -1,0 +1,38 @@
+{
+  "Name": "Buy a Can of Fish",
+  "Subtitle": "Wife wants a can of Fish",
+  "Description": "The nagging wife is asking for a can of Fish, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "We are out of Small Fish (Who wrote this shit), go buy me a can now! ",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy a Can of Fish",
+  "FailedSignal": "task.failed.Buy a Can of Fish",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a can of Fish",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Can of fish",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

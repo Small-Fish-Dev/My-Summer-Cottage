@@ -1,0 +1,38 @@
+{
+  "Name": "Buy Mayo",
+  "Subtitle": "Wife wants some Mayo",
+  "Description": "The nagging wife is asking for Mayo, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "We only have 3 jars of Mayo left! Get me some before we\u0027re out!",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy Mayo",
+  "FailedSignal": "task.failed.Buy Mayo",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a jar of Mayonnaise",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Mayonnaise",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

@@ -1,0 +1,38 @@
+{
+  "Name": "Buy some Yogurt",
+  "Subtitle": "Wife wants Yogurt, the normal one.",
+  "Description": "The nagging wife is asking for normal Yogurt, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "Go get me some yogurt, THE NORMAL ONE...",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy some Yogurt",
+  "FailedSignal": "task.failed.Buy some Yogurt",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy Plain Yogurt",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Plain Yogurt",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

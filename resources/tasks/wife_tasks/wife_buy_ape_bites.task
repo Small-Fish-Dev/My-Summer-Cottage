@@ -1,0 +1,38 @@
+{
+  "Name": "Buy Ape Bites",
+  "Subtitle": "Wife wants some Ape Bites",
+  "Description": "The nagging wife is asking for a box of Ape Bites, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "I want to eat a box of Ape Bites, go get me some!",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy Ape Bites",
+  "FailedSignal": "task.failed.Buy Ape Bites",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a box of Ape Bites",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Ape Bites",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}
