@@ -37,7 +37,12 @@
 				ImagePath="ui/hud/exit.png"
 				Title="Quit"
 				Subtitle="End this session and go back to the main menu"
-				OnClick=@(() => { Game.Close(); })
+				OnClick=@(() => 
+				{ 
+					GameNetworkSystem.Disconnect(); 
+					MainMenu.PlayIntro = false; 
+					SceneHandler.ChangeScene( SaunaScene.MainMenu ); 
+				})
 			/>
 		</div>
 	</div>

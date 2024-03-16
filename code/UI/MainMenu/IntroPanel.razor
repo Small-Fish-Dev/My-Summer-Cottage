@@ -55,11 +55,18 @@
 
 	protected override void OnAwake()
 	{
-		Sound.Play( IntroSound );
+		if ( UI.MainMenu.PlayIntro )
+			Sound.Play( IntroSound );
 	}
 
 	protected override void OnUpdate()
 	{
+		if ( !UI.MainMenu.PlayIntro )
+		{
+			Panel.Delete( true );
+			UI.MainMenu.PlayIntro = true;
+		}
+
 		switch ( _state )
 		{
 			case IntroState.Logo:

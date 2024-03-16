@@ -3,7 +3,8 @@
 public enum SaunaScene
 {
 	Creation,
-	Game
+	Game,
+	MainMenu
 }
 
 public static class SceneHandler
@@ -14,11 +15,14 @@ public static class SceneHandler
 		{
 			SaunaScene.Creation => "scenes/creation_new.scene",
 			SaunaScene.Game => "scenes/finland.scene",
+			SaunaScene.MainMenu => "scenes/menu.scene",
 			_ => null
 		};
 
 		if ( string.IsNullOrEmpty( path ) )
 			return;
+
+		Game.ActiveScene?.Destroy();
 
 		if ( stopSound )
 			Sound.StopAll( 5f );
