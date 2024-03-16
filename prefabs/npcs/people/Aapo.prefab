@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "__guid": "cd84d7dc-1f15-4370-9704-41740d24fce4",
-    "Name": "Aapo",
+    "Name": "aapo",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
@@ -40,8 +40,8 @@
                       "Type": "call",
                       "Properties": {
                         "_isStatic": true,
-                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                        "_name": "SpeakWithSubtitle"
+                        "_name": "SpeakWithSubtitle",
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                       },
                       "UserData": {
                         "Position": "448,64"
@@ -54,7 +54,7 @@
                         "T": "package.fish.sauna/Sauna.DialogueTree"
                       },
                       "UserData": {
-                        "Position": "-112,176"
+                        "Position": "-144,192"
                       }
                     },
                     {
@@ -66,6 +66,18 @@
                       },
                       "UserData": {
                         "Position": "80,192"
+                      }
+                    },
+                    {
+                      "Id": 13,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": false,
+                        "_name": "SelectRandomDialogue",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "688,64"
                       }
                     }
                   ],
@@ -104,10 +116,24 @@
                       "SrcName": "_result",
                       "DstId": 12,
                       "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 6,
+                      "SrcName": "_signal",
+                      "DstId": 13,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 11,
+                      "SrcName": "_result",
+                      "DstId": 13,
+                      "DstName": "_target"
                     }
                   ]
                 },
-                "InteractDistance": 125
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
               }
             ]
           },
@@ -142,11 +168,11 @@
                       "Type": "call",
                       "Properties": {
                         "_isStatic": true,
-                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                        "_name": "SpeakWithSubtitle"
+                        "_name": "SpeakWithSubtitle",
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                       },
                       "UserData": {
-                        "Position": "416,160"
+                        "Position": "448,160"
                       }
                     },
                     {
@@ -168,6 +194,18 @@
                       },
                       "UserData": {
                         "Position": "16,192"
+                      }
+                    },
+                    {
+                      "Id": 6,
+                      "Type": "call",
+                      "Properties": {
+                        "_type": "package.fish.sauna/Sauna.DialogueTree",
+                        "_isStatic": false,
+                        "_name": "SelectRandomDialogue"
+                      },
+                      "UserData": {
+                        "Position": "736,160"
                       }
                     }
                   ],
@@ -206,10 +244,24 @@
                       "SrcName": "_result",
                       "DstId": 4,
                       "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 2,
+                      "SrcName": "_signal",
+                      "DstId": 6,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 3,
+                      "SrcName": "_result",
+                      "DstId": 6,
+                      "DstName": "_target"
                     }
                   ]
                 },
-                "InteractDistance": 125
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
               }
             ]
           },
@@ -243,8 +295,8 @@
                       "Id": 7,
                       "Type": "call",
                       "Properties": {
-                        "_isStatic": true,
                         "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                        "_isStatic": true,
                         "_name": "SpeakWithSubtitle"
                       },
                       "UserData": {
@@ -270,6 +322,18 @@
                       },
                       "UserData": {
                         "Position": "48,144"
+                      }
+                    },
+                    {
+                      "Id": 10,
+                      "Type": "call",
+                      "Properties": {
+                        "_type": "package.fish.sauna/Sauna.DialogueTree",
+                        "_isStatic": false,
+                        "_name": "SelectRandomDialogue"
+                      },
+                      "UserData": {
+                        "Position": "656,16"
                       }
                     }
                   ],
@@ -308,10 +372,152 @@
                       "SrcName": "_result",
                       "DstId": 9,
                       "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 7,
+                      "SrcName": "_signal",
+                      "DstId": 10,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 8,
+                      "SrcName": "_result",
+                      "DstId": 10,
+                      "DstName": "_target"
                     }
                   ]
                 },
-                "InteractDistance": 125
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          },
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "a58fe585-4428-4e5a-9a86-73bbdfe189c3",
+                    "ReferencedComponentTypes": [
+                      "package.fish.sauna/Sauna.DialogueTree"
+                    ]
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 1,
+                      "Type": "input",
+                      "UserData": {
+                        "Position": "-160,96"
+                      }
+                    },
+                    {
+                      "Id": 2,
+                      "Type": "call",
+                      "Properties": {
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                        "_isStatic": true,
+                        "_name": "SpeakWithSubtitle"
+                      },
+                      "UserData": {
+                        "Position": "272,144"
+                      }
+                    },
+                    {
+                      "Id": 3,
+                      "Type": "scene.get",
+                      "Properties": {
+                        "T": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "-272,288"
+                      }
+                    },
+                    {
+                      "Id": 4,
+                      "Type": "property.get",
+                      "Properties": {
+                        "_type": "package.fish.sauna/Sauna.DialogueTree",
+                        "_name": "Name"
+                      },
+                      "UserData": {
+                        "Position": "-80,288"
+                      }
+                    },
+                    {
+                      "Id": 5,
+                      "Type": "call",
+                      "Properties": {
+                        "_type": "package.fish.sauna/Sauna.DialogueTree",
+                        "_isStatic": false,
+                        "_name": "SelectRandomDialogue"
+                      },
+                      "UserData": {
+                        "Position": "608,240"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 1,
+                      "SrcName": "_signal",
+                      "DstId": 2,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 4,
+                      "SrcName": "_result",
+                      "DstId": 2,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 1,
+                      "SrcName": "_target",
+                      "DstId": 2,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "Bring me back one of your small fish sometime, nephew!",
+                      "DstId": 2,
+                      "DstName": "subtitle"
+                    },
+                    {
+                      "SrcId": 1,
+                      "SrcName": "_target",
+                      "DstId": 3,
+                      "DstName": "_this"
+                    },
+                    {
+                      "SrcId": 3,
+                      "SrcName": "_result",
+                      "DstId": 4,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 2,
+                      "SrcName": "_signal",
+                      "DstId": 5,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 3,
+                      "SrcName": "_result",
+                      "DstId": 5,
+                      "DstName": "_target"
+                    }
+                  ]
+                },
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
               }
             ]
           }

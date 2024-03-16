@@ -148,6 +148,7 @@ public class DialogueTree : Component
 			.Select( x => x.DialoguePoolWeight )?
 			.Sum() ?? 0f;
 		using var _ = Game.ActiveScene.Push();
+		Game.SetRandomSeed( (int)Time.Now );
 		var rng = Game.Random.Float( totalWeight );
 
 		DialogueStage picked = null;
