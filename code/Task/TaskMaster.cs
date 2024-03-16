@@ -92,7 +92,7 @@ public partial class TaskMaster : Component
 	{
 		_instance = this;
 
-		if ( Connection.Host.IsHost )
+		if ( Connection.Local.IsHost )
 		{
 			LoadTasksProgression();
 			DelayStart();
