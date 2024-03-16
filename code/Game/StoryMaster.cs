@@ -328,8 +328,6 @@ public class StoryMaster : Component
 					else
 						chosenEvent.Enable();
 
-					Log.Info( chosenEvent );
-
 					eventsPicked++;
 				}
 			}

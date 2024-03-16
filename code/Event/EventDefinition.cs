@@ -163,13 +163,12 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 			enabledTrigger.CallTrigger( null );
 
 		EventMaster.Instance.CurrentEvents.Add( this );
-		Log.Info( this );
 	}
 
 	public void Disable()
 	{
 		IsFinished = true;
-		Log.Info( $"{this} has been disabled" );
+
 		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
 		{
 			if ( component != this )
