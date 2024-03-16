@@ -10,7 +10,7 @@ public static class InputAction
 	public const string Use = "Use";
 
 	public const string Voice = "Voice";
-	public const string Zoom = "View";
+	public const string Zoom = "Zoom";
 
 	public const string Piss = "Piss";
 	public const string Ragdoll = "Ragdoll";
