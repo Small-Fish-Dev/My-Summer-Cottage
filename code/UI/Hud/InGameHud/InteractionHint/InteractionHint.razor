@@ -43,7 +43,8 @@
 @code {
 	public bool FromHands { get; set; }
 
-	private string DisplayName => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Name;
+	// TODO: Gamejam code.
+	private string DisplayName => _targetObject?.Components?.Get<ItemComponent>()?.Name ?? _targetObject?.Components?.Get<DialogueTree>()?.Name ?? _targetObject?.Name;
 	private GameObject _targetObject => FromHands
 		? Player.Local?.Inventory?.EquippedItems?[(int)EquipSlot.Hand]?.GameObject
 		: Player.Local?.TargetedGameObject;
