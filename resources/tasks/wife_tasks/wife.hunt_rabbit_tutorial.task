@@ -22,6 +22,7 @@
   "Subtasks": [
     {
       "Description": "Equip the Airsoft Rifle",
+      "SubtaskOrder": 1,
       "TriggerSignal": "item.equipped.Airsoft Rifle",
       "AmountToComplete": 1,
       "OnStart": {
@@ -100,7 +101,7 @@
     },
     {
       "Description": "Obtain the BB Pellets",
-      "SubtaskOrder": 1,
+      "SubtaskOrder": 2,
       "TriggerSignal": "item.received.Airsoft BB Pellets",
       "AmountToComplete": 1,
       "EvaluateOnTick": {
@@ -248,7 +249,7 @@
     },
     {
       "Description": "Go to a rabbit spawning area",
-      "SubtaskOrder": 2,
+      "SubtaskOrder": 3,
       "TriggerSignal": "hunting_ground.entered",
       "AmountToComplete": 1,
       "OnStart": {
@@ -423,7 +424,7 @@
     },
     {
       "Description": "Kill a rabbit and gather its meat.",
-      "SubtaskOrder": 3,
+      "SubtaskOrder": 4,
       "TriggerSignal": "",
       "AmountToComplete": 2,
       "EvaluateOnTick": {
@@ -894,6 +895,124 @@
             "Value": 0.1,
             "DstId": 2,
             "DstName": "seconds"
+          }
+        ]
+      }
+    },
+    {
+      "Description": "Go in your cottage",
+      "TriggerSignal": "cottage.entered",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "98e2ccdd-53a8-4e1e-bbd5-a3cd47a445df",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "256,64"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "544,96"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Cottage",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 2,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "target"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "608359f7-7bc4-4a36-861c-d614b28f365f",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "240,48"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "496,80"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Cottage",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "target"
           }
         ]
       }
