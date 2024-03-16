@@ -580,6 +580,18 @@
               "UserData": {
                 "Position": "384,80"
               }
+            },
+            {
+              "Id": 7,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "AddExperience"
+              },
+              "UserData": {
+                "Position": "384,192"
+              }
             }
           ],
           "Links": [
@@ -599,6 +611,23 @@
               "Value": 10,
               "DstId": 5,
               "DstName": "amount"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 7,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "Value": 25,
+              "DstId": 7,
+              "DstName": "exp"
             }
           ]
         },
@@ -606,7 +635,8 @@
           "Version": 5,
           "UserData": {
             "Title": "On Damaged",
-            "id": "d9536b26-7648-4704-a073-5ee103ccbe84"
+            "id": "d9536b26-7648-4704-a073-5ee103ccbe84",
+            "ReferencedComponentTypes": []
           },
           "Variables": [],
           "Nodes": [
@@ -642,7 +672,7 @@
               "DstName": "_signal"
             },
             {
-              "Value": 5,
+              "Value": 3,
               "DstId": 1,
               "DstName": "seconds"
             },
