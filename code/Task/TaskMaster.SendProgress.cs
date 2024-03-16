@@ -20,8 +20,14 @@ public partial class TaskMaster
 		public int CurrentAmount;
 	}
 
+	void INetworkListener.OnActive( Connection connection )
+	{
+		if ( Connection.Local.IsHost )
+			_instance.SendCurrentTaskProgress( PackageTaskProgress( ActiveTasks ).Serialize() );
+	}
+
 	[Broadcast( NetPermission.HostOnly )]
-	public void SendCurrentTaskProgress( byte[] data )
+	private void SendCurrentTaskProgress( byte[] data )
 	{
 		if ( Connection.Local.IsHost )
 			return;
@@ -41,7 +47,7 @@ public partial class TaskMaster
 		}
 	}
 
-	public static List<TaskProgress> PackageTaskProgress( IReadOnlyList<SaunaTask> tasks )
+	private static List<TaskProgress> PackageTaskProgress( IReadOnlyList<SaunaTask> tasks )
 	{
 		var data = new List<TaskProgress>();
 

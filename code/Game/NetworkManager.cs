@@ -32,11 +32,6 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		obj.NetworkMode = NetworkMode.Object;
 		obj.NetworkSpawn( connection );
 		player.SetupConnection( connection );
-
-		if ( Connection.Local.IsHost )
-		{
-			TaskMaster._instance.SendCurrentTaskProgress( TaskMaster.PackageTaskProgress( TaskMaster.ActiveTasks ).Serialize() );
-		}
 	}
 
 	void INetworkListener.OnDisconnected( Connection connection )
