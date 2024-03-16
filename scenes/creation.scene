@@ -1,21 +1,65 @@
 {
-  "Id": "9155ac50-6b75-4f55-ae23-c654bf42bdab",
+  "Id": "bb582f0d-97c6-4a24-8449-0f5413324c12",
   "GameObjects": [
     {
-      "Id": "aa440490-6698-4ad0-a526-2627a69bb9b1",
-      "Name": "PrefabLibrary",
-      "Position": "44.5547,373.2083,146.2368",
+      "Id": "b01f3514-9536-4424-8674-06ec00814b70",
+      "Name": "Map",
       "Enabled": true,
       "Components": [
         {
+          "__type": "MapInstance",
+          "MapName": "maps/sauna_police.vmap",
+          "OnMapLoaded": null,
+          "OnMapUnloaded": null,
+          "UseMapFromLaunch": false
+        },
+        {
           "__type": "PrefabInitializer"
+        }
+      ],
+      "Children": []
+    },
+    {
+      "Id": "cdaef7ee-f2c8-40a7-86af-bfcd10437bbe",
+      "Name": "Camera",
+      "Position": "903.8242,-862.4387,94.14466",
+      "Rotation": "-0.3105598,-0.01507103,0.9486845,0.05765311",
+      "Tags": "maincamera",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "CameraComponent",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 45,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 2000,
+          "ZNear": 2
+        },
+        {
+          "__type": "DitherHook"
+        },
+        {
+          "__type": "EyeProtector"
+        },
+        {
+          "__type": "MotionBlur",
+          "Samples": 4,
+          "Scale": 0.25
         }
       ]
     },
     {
       "Id": "4ae5b3d2-b62c-4688-911d-e1804886c39d",
       "Name": "First Stage",
-      "Position": "0,318.5648,256.7095",
+      "Position": "851.2806,-853.9232,-2.582662",
       "Enabled": true,
       "Components": [
         {
@@ -32,8 +76,8 @@
         {
           "Id": "c54d44fb-93a6-4493-8c18-5e352f062548",
           "Name": "Camera",
-          "Position": "-181.0625,77.2503,90.19873",
-          "Rotation": "0,0.3826834,0,0.9238796",
+          "Position": "-30.56458,-2.551636,50.41547",
+          "Rotation": "-0.5699275,0.08325136,0.7934575,0.1966653",
           "Tags": "maincamera",
           "Enabled": true,
           "Components": [
@@ -41,8 +85,8 @@
               "__type": "CameraComponent",
               "BackgroundColor": "0.33333,0.46275,0.52157,1",
               "ClearFlags": "All",
-              "FieldOfView": 35,
-              "IsMainCamera": true,
+              "FieldOfView": 45,
+              "IsMainCamera": false,
               "Orthographic": false,
               "OrthographicHeight": 1204,
               "Priority": 1,
@@ -50,171 +94,33 @@
               "RenderTags": "",
               "TargetEye": "None",
               "Viewport": "0,0,1,1",
-              "ZFar": 150,
+              "ZFar": 2000,
               "ZNear": 2
+            }
+          ]
+        },
+        {
+          "Id": "0cfd5487-0542-4f7e-8681-ad923820784a",
+          "Name": "Panel",
+          "Position": "-34.62659,0.9349976,35.28112",
+          "Rotation": "-0.08986445,-0.6955219,-0.0913457,0.7069863",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "WorldPanel",
+              "HorizontalAlign": "Center",
+              "LookAtCamera": false,
+              "PanelSize": "115,64",
+              "RenderScale": 0.06,
+              "VerticalAlign": "Center"
             },
             {
-              "__type": "DitherHook"
-            }
-          ]
-        },
-        {
-          "Id": "ea4d3e24-c139-4cdc-be7a-bf87c5954e7c",
-          "Name": "Table",
-          "Position": "-124.2589,75.0193,40.57894",
-          "Rotation": "0,-0,-0.08715574,0.9961947",
-          "Scale": "0.5000019,0.4000018,1",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "ModelRenderer",
-              "BodyGroups": 18446744073709551615,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/plane/plane.vmdl",
-              "RenderType": "Off",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "Id": "271e1571-5ba0-440c-a814-080931052882",
-          "Name": "Passport",
-          "Position": "-134.3698,77.94363,43.29971",
-          "Rotation": "0.1246031,0.01156326,-0.9878945,0.09167733",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "ModelRenderer",
-              "BodyGroups": 18446744073709551615,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/character_setup/sauna_passport.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ],
-          "Children": [
-            {
-              "Id": "0cfd5487-0542-4f7e-8681-ad923820784a",
-              "Name": "Panel",
-              "Position": "0,0,0.7518472",
-              "Rotation": "0.0000002831221,-0.6858191,-0.00000008568168,0.7277735",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "WorldPanel",
-                  "HorizontalAlign": "Center",
-                  "LookAtCamera": false,
-                  "PanelSize": "385,256",
-                  "RenderScale": 0.2,
-                  "VerticalAlign": "Center"
-                },
-                {
-                  "__type": "PassportPanel",
-                  "Overlay": {
-                    "_type": "component",
-                    "go": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
-                    "component_type": "CreatorOverlay"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "Id": "73a308eb-f128-4b79-a7e3-b64264e61292",
-          "Name": "Spot Light",
-          "Position": "-126.3321,-72.16833,115.8145",
-          "Rotation": "-0.08393632,0.2239016,0.6715862,0.7012809",
-          "Tags": "light_spot,light",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "SpotLight",
-              "Attenuation": 0,
-              "ConeInner": 15,
-              "ConeOuter": 45,
-              "Cookie": null,
-              "FogMode": "Enabled",
-              "FogStrength": 1,
-              "LightColor": "2.47,2.06791,1.60837,1",
-              "Radius": 250,
-              "Shadows": true
-            }
-          ]
-        },
-        {
-          "Id": "7b44a720-7db4-49e7-b459-0d500a6e8b3f",
-          "Name": "Sun",
-          "Position": "-378.0389,46.73956,263.0613",
-          "Rotation": "-0.04849726,0.2542347,0.1809942,0.9488171",
-          "Tags": "light_directional,light",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "DirectionalLight",
-              "FogMode": "Enabled",
-              "FogStrength": 1,
-              "LightColor": "0.32558,0.32558,0.32558,1",
-              "Shadows": false,
-              "SkyColor": "0,0,0,1"
-            }
-          ]
-        },
-        {
-          "Id": "2a03a262-d17c-41b4-a63c-1df2d0e06709",
-          "Name": "desk_lamp",
-          "Position": "-122.1732,49.8548,39.69479",
-          "Rotation": "0,0,0.9088724,0.4170744",
-          "Scale": "0.9081888,0.908,0.9081888",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Prop",
-              "Health": 0,
-              "IsStatic": true,
-              "Model": "models/props/desk_lamp/desk_lamp.vmdl",
-              "OnPropBreak": null,
-              "OnPropTakeDamage": null,
-              "ShowCreatedComponents": false
-            }
-          ]
-        },
-        {
-          "Id": "32f9d08d-124f-4883-932c-5e19e0e2af9a",
-          "Name": "cup",
-          "Position": "-118.3701,100.5301,40.4003",
-          "Rotation": "-0.02682466,0.003531635,0.9235415,-0.3825432",
-          "Scale": "0.7150987,0.7150987,0.7150987",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Prop",
-              "Health": 0,
-              "IsStatic": true,
-              "Model": "models/props/cup/cup.vmdl",
-              "OnPropBreak": null,
-              "OnPropTakeDamage": null,
-              "ShowCreatedComponents": false
-            }
-          ]
-        },
-        {
-          "Id": "ff2cd349-8fec-49d5-90bf-8cb778d660ea",
-          "Name": "pencil",
-          "Position": "-137.1057,62.07202,40.58508",
-          "Rotation": "-0.09678528,0.0605028,0.8602099,0.497002",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "Prop",
-              "Health": 0,
-              "IsStatic": true,
-              "Model": "models/props/pencil/pencil.vmdl",
-              "OnPropBreak": null,
-              "OnPropTakeDamage": null,
-              "ShowCreatedComponents": false
+              "__type": "PassportPanel",
+              "Overlay": {
+                "_type": "component",
+                "go": "e0e059ea-69cc-4c9b-aa05-e31ab5e2918f",
+                "component_type": "CreatorOverlay"
+              }
             }
           ]
         }
@@ -223,7 +129,7 @@
     {
       "Id": "498bf75e-5b94-44c2-8b7f-41d08d9105ea",
       "Name": "Second Stage",
-      "Position": "0,-462.7515,0",
+      "Position": "681.5797,-854.7111,0",
       "Enabled": true,
       "Components": [
         {
@@ -240,8 +146,8 @@
         {
           "Id": "72fd3ea0-f5d5-4070-9878-d7eb46a96d66",
           "Name": "Camera",
-          "Position": "-133.0954,82.71902,55.20046",
-          "Rotation": "0.005131484,0.03628263,-0.1399432,0.9894812",
+          "Position": "51.3819,189.1125,58.09797",
+          "Rotation": "0.02439861,0.02733988,-0.6653863,0.7455993",
           "Tags": "maincamera",
           "Enabled": true,
           "Components": [
@@ -249,8 +155,8 @@
               "__type": "CameraComponent",
               "BackgroundColor": "0.33333,0.46275,0.52157,1",
               "ClearFlags": "All",
-              "FieldOfView": 50,
-              "IsMainCamera": true,
+              "FieldOfView": 60,
+              "IsMainCamera": false,
               "Orthographic": false,
               "OrthographicHeight": 1204,
               "Priority": 1,
@@ -260,132 +166,6 @@
               "Viewport": "0,0,1,1",
               "ZFar": 1000,
               "ZNear": 2
-            },
-            {
-              "__type": "DitherHook"
-            },
-            {
-              "__type": "EyeProtector"
-            }
-          ]
-        },
-        {
-          "Id": "a4b0aae7-b636-4e49-9d02-fd61d2958f90",
-          "Name": "Environment",
-          "Position": "-40.15015,42.70851,0",
-          "Rotation": "0,0,-0.1555725,0.9878245",
-          "Scale": "2.800003,2.500002,1",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "ModelRenderer",
-              "BodyGroups": 18446744073709551615,
-              "MaterialGroup": null,
-              "MaterialOverride": "materials/default/white.vmat",
-              "Model": "models/plane/plane.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ],
-          "Children": [
-            {
-              "Id": "0cfdb6d2-697b-48ba-81c5-5f3cd09324ff",
-              "Name": "Wall",
-              "Position": "56.98866,-0.08845972,275",
-              "Rotation": "0.7071072,-0.0000003129244,-0.7071072,-0.0000003129244",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "ModelRenderer",
-                  "BodyGroups": 18446744073709551615,
-                  "MaterialGroup": null,
-                  "MaterialOverride": "materials/default/white.vmat",
-                  "Model": "models/plane/plane.vmdl",
-                  "RenderType": "On",
-                  "Tint": "1,1,1,1"
-                }
-              ]
-            },
-            {
-              "Id": "5db3e2e1-332a-44c5-b325-7793c3419cde",
-              "Name": "Fog",
-              "Position": "18.33334,-11.32029,5",
-              "Rotation": "0,0,0.1555725,0.9878245",
-              "Scale": "0.3571425,0.3999997,1",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "GradientFog",
-                  "Color": "0.54895,0.59506,0.94419,0.69",
-                  "EndDistance": 376.301,
-                  "FalloffExponent": 1,
-                  "Height": 323.4002,
-                  "StartDistance": 0,
-                  "VerticalFalloffExponent": 9.400015
-                }
-              ]
-            },
-            {
-              "Id": "646f53a2-1f03-4f35-bbcd-0006f80af232",
-              "Name": "Spot Light",
-              "Position": "32.87394,-9.225643,213.6355",
-              "Rotation": "-0.008042291,0.708966,0.007998899,0.7051539",
-              "Scale": "0.3571425,0.3999997,1",
-              "Tags": "light_spot,light",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "SpotLight",
-                  "Attenuation": 0,
-                  "ConeInner": 0,
-                  "ConeOuter": 13.32,
-                  "Cookie": null,
-                  "FogMode": "Enabled",
-                  "FogStrength": 1,
-                  "LightColor": "0.91373,0.98039,1,1",
-                  "Radius": 250,
-                  "Shadows": true
-                }
-              ]
-            },
-            {
-              "Id": "5fb6bf61-0c93-4776-97a5-a083317b7239",
-              "Name": "Point Light",
-              "Position": "-10.55033,-0.5691597,140.1209",
-              "Rotation": "0,0,0.1555725,0.9878245",
-              "Scale": "0.3571425,0.3999997,1",
-              "Tags": "light_point,light",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "PointLight",
-                  "Attenuation": 0.36,
-                  "FogMode": "Enabled",
-                  "FogStrength": 1,
-                  "LightColor": "0.91373,0.98039,1,1",
-                  "Radius": 290.70007,
-                  "Shadows": false
-                }
-              ]
-            },
-            {
-              "Id": "502a285c-6f7a-4cfa-86c0-c733bd89927f",
-              "Name": "Sun",
-              "Position": "-45.78915,54.21962,336.8116",
-              "Rotation": "-0.01760293,0.2582197,0.06569503,0.9636891",
-              "Scale": "0.3571425,0.3999997,1",
-              "Tags": "light_directional,light",
-              "Enabled": true,
-              "Components": [
-                {
-                  "__type": "DirectionalLight",
-                  "FogMode": "Enabled",
-                  "FogStrength": 1,
-                  "LightColor": "0.32558,0.32558,0.32558,1",
-                  "Shadows": false,
-                  "SkyColor": "0,0,0,1"
-                }
-              ]
             }
           ]
         },
@@ -393,7 +173,7 @@
           "Id": "6f3f425b-eec4-40d2-8fd6-b1524721598a",
           "Name": "Player",
           "Position": "40.896,-10.21344,0",
-          "Rotation": "0,0,0.9590671,0.2831789",
+          "Rotation": "0,0,0.7126565,0.7015132",
           "Enabled": true,
           "Components": [
             {
@@ -436,6 +216,57 @@
                   "__type": "CensorComponent"
                 }
               ]
+            },
+            {
+              "Id": "2040c609-ac53-4b7a-a9b1-0264f7f8e62a",
+              "Name": "Mugshot",
+              "Position": "0,0,0",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "SkinnedModelRenderer",
+                  "AnimationGraph": null,
+                  "BodyGroups": 18446744073709551615,
+                  "BoneMergeTarget": {
+                    "_type": "component",
+                    "go": "6f3f425b-eec4-40d2-8fd6-b1524721598a",
+                    "component_type": "SkinnedModelRenderer"
+                  },
+                  "CreateBoneObjects": false,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/character_setup/sauna_mugshot.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ],
+              "Children": [
+                {
+                  "Id": "95bbff91-458f-48dc-bb43-c55c2ebd9975",
+                  "Name": "Panel",
+                  "Position": "6.93807,-8.798965,30.09274",
+                  "Rotation": "-0.4923409,-0.7361335,-0.09136662,0.4553679",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "WorldPanel",
+                      "HorizontalAlign": "Center",
+                      "LookAtCamera": false,
+                      "PanelSize": "380,190",
+                      "RenderScale": 0.3,
+                      "VerticalAlign": "Center"
+                    },
+                    {
+                      "__type": "MugshotPanel",
+                      "Model": {
+                        "_type": "component",
+                        "go": "6f3f425b-eec4-40d2-8fd6-b1524721598a",
+                        "component_type": "SkinnedModelRenderer"
+                      }
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -444,58 +275,24 @@
     {
       "Id": "c91a005b-5b13-4ce0-b51d-92aefd46ffd6",
       "Name": "Third Stage",
-      "Position": "0,-462.752,0",
+      "Position": "719.5748,-749.2759,0",
       "Enabled": true,
       "Components": [
         {
           "__type": "CreatorComponent",
           "Camera": {
             "_type": "component",
-            "go": "47187500-6715-41a6-9313-d3bf6763dc2e",
+            "go": "72fd3ea0-f5d5-4070-9878-d7eb46a96d66",
             "component_type": "CameraComponent"
           },
           "Stage": "Dressing_up"
-        }
-      ],
-      "Children": [
-        {
-          "Id": "47187500-6715-41a6-9313-d3bf6763dc2e",
-          "Name": "Camera",
-          "Position": "-201.8314,132.3047,60.23136",
-          "Rotation": "0.005131484,0.03628263,-0.1399432,0.9894812",
-          "Tags": "maincamera",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "CameraComponent",
-              "BackgroundColor": "0.33333,0.46275,0.52157,1",
-              "ClearFlags": "All",
-              "FieldOfView": 50,
-              "IsMainCamera": true,
-              "Orthographic": false,
-              "OrthographicHeight": 1204,
-              "Priority": 1,
-              "RenderExcludeTags": "",
-              "RenderTags": "",
-              "TargetEye": "None",
-              "Viewport": "0,0,1,1",
-              "ZFar": 1000,
-              "ZNear": 2
-            },
-            {
-              "__type": "DitherHook"
-            },
-            {
-              "__type": "EyeProtector"
-            }
-          ]
         }
       ]
     },
     {
       "Id": "c63a3bfc-2074-4b84-95b6-8db77055398a",
       "Name": "Fourth Stage",
-      "Position": "-174.6382,-145.472,212.5286",
+      "Position": "709.6197,-680.3291,0",
       "Enabled": true,
       "Components": [
         {
@@ -512,8 +309,8 @@
         {
           "Id": "0a8c0886-1118-4ea2-91e0-81d22b429a13",
           "Name": "Camera",
-          "Position": "-145.4506,-206.331,-147.6715",
-          "Rotation": "0.005131484,0.03628263,-0.1399432,0.9894812",
+          "Position": "16.93011,-97.55701,67.6571",
+          "Rotation": "0.03845972,0.03845974,-0.7060601,0.7060601",
           "Tags": "maincamera",
           "Enabled": true,
           "Components": [
@@ -521,7 +318,7 @@
               "__type": "CameraComponent",
               "BackgroundColor": "0.33333,0.46275,0.52157,1",
               "ClearFlags": "All",
-              "FieldOfView": 50,
+              "FieldOfView": 80,
               "IsMainCamera": true,
               "Orthographic": false,
               "OrthographicHeight": 1204,
@@ -584,6 +381,6 @@
   },
   "Title": "creation",
   "Description": "",
-  "LastSaved": "2024-02-26T19:39:57.7541588\u002B02:00",
+  "LastSaved": "2024-03-08T04:57:23.6595659\u002B02:00",
   "__references": []
 }

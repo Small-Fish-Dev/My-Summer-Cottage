@@ -13,7 +13,7 @@ public static class SceneHandler
 	{
 		var path = scene switch
 		{
-			SaunaScene.Creation => "scenes/creation_new.scene",
+			SaunaScene.Creation => "scenes/creation.scene",
 			SaunaScene.Game => "scenes/finland.scene",
 			SaunaScene.MainMenu => "scenes/menu.scene",
 			_ => null
