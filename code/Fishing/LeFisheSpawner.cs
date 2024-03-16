@@ -13,6 +13,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 		public Bobber TargetBobber;
 	}
 
+	[Property] public GameObject WaterSplash { get; set; }
 	[Property] public List<PrefabFile> Fishes { get; set; }
 	[Property] public float MinimumDepth = 10;
 	[Property] public int FishAmount = 20;
@@ -138,7 +139,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 
 			// Remove the invalid bobbers
 			foreach ( var fish in CurrentFishes.Where( x =>
-						 !x.TargetBobber.IsValid() || !_bobbers.ContainsKey( x.TargetBobber ) ) )
+				         !x.TargetBobber.IsValid() || !_bobbers.ContainsKey( x.TargetBobber ) ) )
 			{
 				FishClearTarget( fish );
 			}
@@ -153,7 +154,12 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 					{
 						Log.Info( "pull!" );
 						// TODO: a hardcoded constant!
-						// TODO: @ubre @luke @everyone a ripple effect
+						var ws = WaterSplash.Clone();
+						ws.Transform.Position =
+							fish.TargetBobber.Transform.Position.WithZ( (_water.Bounds + _water.Transform.Position).Maxs
+								.z );
+						ws.Transform.Rotation = Rotation.LookAt( Vector3.Up );
+						ws.SetParent( GameObject );
 						fish.TargetBobber.Rigidbody.ApplyForce( Vector3.Down * fish.Weight * 10 );
 						fish.ShouldPullBobber = FishBobberPullPeriod.GetValue();
 					}
