@@ -1358,7 +1358,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.6667317,0,-0.7452978",
+          "Rotation": "0,-0.9588009,0,-0.2840791",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -2040,13 +2040,6 @@
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/policeman.prefab"
                   },
-                  "SpawnChance": 1
-                },
-                {
-                  "Npc": {
-                    "_type": "gameobject",
-                    "prefab": "prefabs/npcs/people/policeman.prefab"
-                  },
                   "SpawnChance": 0.5
                 },
                 {
@@ -2054,28 +2047,28 @@
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_01.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_02.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_03.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_04.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 }
               ],
               "Radius": 400
@@ -2106,28 +2099,28 @@
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_01.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_02.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_03.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_04.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 }
               ],
               "Radius": 400
@@ -2158,35 +2151,35 @@
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_01.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_02.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_03.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_04.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/rude_drunkman.prefab"
                   },
-                  "SpawnChance": 1
+                  "SpawnChance": 0.6
                 }
               ],
               "Radius": 400
@@ -2251,7 +2244,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "b6fdebb1-0e1f-4c88-97b8-c9c47249c838",
+                "component_id": "b4a57da0-95f3-46e8-8309-4e076f39e4fd",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -4724,6 +4717,36 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "13422354-60e5-488c-82f2-7edd9dd1495e",
+          "Name": "Speaker",
+          "Position": "0,0,101.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SoundPointComponent",
+              "__guid": "542bc493-b2be-4595-a79d-42c70996d513",
+              "DistanceAttenuation": false,
+              "DistanceAttenuationOverride": false,
+              "Force2d": false,
+              "MaxRepeatTime": 1,
+              "MinRepeatTime": 1,
+              "Occlusion": false,
+              "OcclusionOverride": false,
+              "OcclusionRadius": 32,
+              "Pitch": 1,
+              "PlayOnStart": true,
+              "ReflectionOverride": false,
+              "Reflections": false,
+              "Repeat": false,
+              "SoundEvent": "sounds/music/zakkujo-ero_vaimosta-instrumental-loop.sound",
+              "SoundOverride": true,
+              "StopOnNew": true,
+              "Volume": 0.3
+            }
+          ]
         }
       ]
     },
@@ -4969,6 +4992,36 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/objects/slot_machine.prefab"
+        },
+        {
+          "__guid": "801292c0-d90f-405b-b7f8-b1a1a22e38a1",
+          "Name": "Speaker",
+          "Position": "0,0,106.2202",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SoundPointComponent",
+              "__guid": "1aa38e8e-0ba0-40f4-926b-d98557b1e4a7",
+              "DistanceAttenuation": false,
+              "DistanceAttenuationOverride": false,
+              "Force2d": false,
+              "MaxRepeatTime": 1,
+              "MinRepeatTime": 1,
+              "Occlusion": false,
+              "OcclusionOverride": false,
+              "OcclusionRadius": 32,
+              "Pitch": 1,
+              "PlayOnStart": true,
+              "ReflectionOverride": false,
+              "Reflections": false,
+              "Repeat": false,
+              "SoundEvent": "sounds/music/dawdle-gus_and_the_ganders_-_surfin_81__loop_game.sound",
+              "SoundOverride": true,
+              "StopOnNew": true,
+              "Volume": 0.3
+            }
+          ]
         }
       ]
     },
@@ -5235,6 +5288,36 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "c739e5d5-696c-49f1-a588-a96ce277c284",
+          "Name": "Speaker",
+          "Position": "0,0,91.26465",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SoundPointComponent",
+              "__guid": "64aacddc-cda7-4ab7-b0f6-6d5bbb6f6bf3",
+              "DistanceAttenuation": false,
+              "DistanceAttenuationOverride": false,
+              "Force2d": false,
+              "MaxRepeatTime": 1,
+              "MinRepeatTime": 1,
+              "Occlusion": false,
+              "OcclusionOverride": false,
+              "OcclusionRadius": 32,
+              "Pitch": 1,
+              "PlayOnStart": true,
+              "ReflectionOverride": false,
+              "Reflections": false,
+              "Repeat": false,
+              "SoundEvent": "sounds/music/dawdle-gus_and_the_ganders_-_surfin_81__loop_game.sound",
+              "SoundOverride": true,
+              "StopOnNew": true,
+              "Volume": 0.2
+            }
+          ]
         }
       ]
     },
@@ -5717,6 +5800,36 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "a15fdf5e-9e10-4aeb-a06f-797ad81b9fb3",
+          "Name": "Speaker",
+          "Position": "0,0,92.56001",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SoundPointComponent",
+              "__guid": "fa3b6381-6151-4594-b91e-b9c5c32c79f3",
+              "DistanceAttenuation": false,
+              "DistanceAttenuationOverride": false,
+              "Force2d": false,
+              "MaxRepeatTime": 1,
+              "MinRepeatTime": 1,
+              "Occlusion": false,
+              "OcclusionOverride": false,
+              "OcclusionRadius": 32,
+              "Pitch": 1,
+              "PlayOnStart": true,
+              "ReflectionOverride": false,
+              "Reflections": false,
+              "Repeat": false,
+              "SoundEvent": "sounds/music/zakkujo-ero_vaimosta-instrumental-loop.sound",
+              "SoundOverride": true,
+              "StopOnNew": true,
+              "Volume": 0.3
+            }
+          ]
         }
       ]
     },
@@ -5855,7 +5968,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-16T04:55:01.6069688\u002B01:00",
+  "LastSaved": "2024-03-16T05:28:31.9150931\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
