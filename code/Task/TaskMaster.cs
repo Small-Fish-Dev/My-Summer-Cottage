@@ -223,8 +223,10 @@ public partial class TaskMaster : Component, Component.INetworkListener
 		}
 	}
 
-	public void LoadTasksProgression()
+	public async void LoadTasksProgression()
 	{
+		await Task.Delay( 500 );
+
 		if ( FileSystem.Data.FileExists( "tasks.json" ) )
 		{
 			TasksProgression = FileSystem.Data.ReadJsonOrDefault<SaunaTasksProgress>( "tasks.json" );
