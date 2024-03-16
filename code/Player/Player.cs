@@ -239,7 +239,8 @@ public partial class Player : Component, Component.ExecuteInEditor
 		if ( !IsProxy )
 		{
 			UpdateAngles();
-			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
+			if ( Shitting == null )
+				Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
 			HidePenoid = !ForceHidePenoid && Inventory.EquippedItems[(int)EquipSlot.Legs] != null;
 			HoldType = (Inventory.EquippedItems[(int)EquipSlot.Hand] as ItemEquipment)?.HoldType ?? HoldType.Idle;
 		}
