@@ -4,8 +4,9 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 {
 	private class VirtualFish
 	{
-		public PrefabFile Fish;
+		public PrefabFile Prefab;
 		public int Weight;
+		public float Rarity;
 		public float MinimumDepth;
 		public TimeUntil ShouldDie;
 		public TimeUntil ShouldChangeTarget;
@@ -43,12 +44,17 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 	/// </summary>
 	public static RangedFloat FishBobberPullPeriod = new RangedFloat( 0.5f, 1.5f );
 
+	/// <summary>
+	/// Minimum time in seconds for the fish to be interested in a bobber. It scales with the fish rarity.
+	/// </summary>
+	public const float FishBobberAge = 120;
+
 	private WaterComponent _water;
 
 	// private List<BBox> _debugFailedCells = new();
 	private (float minimumDepth, PrefabFile fish)[] _fishesByDepth;
 
-	private Dictionary<Bobber, VirtualFish> _bobbers = new();
+	private Dictionary<Bobber, (VirtualFish Fish, TimeSince Age)> _bobbers = new();
 	private List<VirtualFish> CurrentFishes { get; set; } = new();
 
 	private (float Probability, PrefabFile Prefab)[] _fishesByProbability;
@@ -120,12 +126,15 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 					var fishWeight = (int)fishDefinition
 						.Get<RangedFloat>( "WeightRange" )
 						.GetValue();
+					var fishRarity = fishDefinition
+						.Get<float>( "Rarity" );
 					var fishDepth = fishDefinition
 						.Get<float>( "MinimumWaterDepth" );
 					CurrentFishes.Add( new VirtualFish
 					{
-						Fish = fishPrefab,
+						Prefab = fishPrefab,
 						Weight = fishWeight,
+						Rarity = fishRarity,
 						MinimumDepth = fishDepth,
 						ShouldDie = FishTimeToLive.GetValue(),
 						ShouldChangeTarget = FishBaitChooseTime.GetValue(),
@@ -144,7 +153,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 				FishClearTarget( fish );
 			}
 
-			var freeBobbers = _bobbers.Where( kv => kv.Value is null ).Select( kv => kv.Key ).ToList();
+			var freeBobbers = _bobbers.Where( kv => kv.Value.Fish is null ).Select( kv => kv.Key ).ToList();
 			// This is where the fishes actually think
 			foreach ( var fish in CurrentFishes )
 			{
@@ -185,7 +194,9 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 					else if ( freeBobbers.Count > 0 )
 					{
 						var newTarget = freeBobbers.OrderBy( _ => Guid.NewGuid() )
-							.FirstOrDefault( bobber => BobberGetDepth( bobber ) >= fish.MinimumDepth );
+							.FirstOrDefault( bobber =>
+								BobberGetDepth( bobber ) >= fish.MinimumDepth &&
+								_bobbers[bobber].Age >= FishBobberAge * fish.Rarity );
 						if ( newTarget.IsValid() )
 						{
 							freeBobbers.Remove( newTarget );
@@ -245,7 +256,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 			return;
 
 		bobber.CurrentSpawner = this;
-		_bobbers.Add( bobber, null );
+		_bobbers.Add( bobber, (null, 0) );
 	}
 
 	private float BobberGetDepth( Bobber bobber )
@@ -260,10 +271,10 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 	{
 		var bobber = bobberGameObject.Components.Get<Bobber>();
 
-		if ( !_bobbers.TryGetValue( bobber, out var fish ) || fish?.Fish == null )
+		if ( !_bobbers.TryGetValue( bobber, out var fish ) || fish.Fish == null )
 			return;
 
-		var fishInstance = SceneUtility.GetPrefabScene( fish.Fish ).Clone();
+		var fishInstance = SceneUtility.GetPrefabScene( fish.Fish.Prefab ).Clone();
 		fishInstance.NetworkMode = NetworkMode.Object;
 		fishInstance.NetworkSpawn();
 
@@ -279,10 +290,10 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 		}
 
 		var fishComponent = fishInstance.Components.Get<Fish>();
-		fishComponent.AssignWeight( fish.Weight );
+		fishComponent.AssignWeight( fish.Fish.Weight );
 
 		if ( !IsProxy )
-			Player.Local.OnFishCaught( fish.Fish, fish.Weight );
+			Player.Local.OnFishCaught( fish.Fish.Prefab, fish.Fish.Weight );
 	}
 
 	/// <summary>
@@ -312,7 +323,10 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 
 	private void FishSetTarget( VirtualFish fish, Bobber bobber )
 	{
-		_bobbers[bobber] = fish;
+		if ( !_bobbers.TryGetValue( bobber, out var value ) )
+			return;
+
+		_bobbers[bobber] = (fish, value.Age);
 		fish.TargetBobber = bobber;
 	}
 
@@ -321,7 +335,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 		if ( !fish.TargetBobber.IsValid() )
 			return;
 
-		_bobbers[fish.TargetBobber] = null;
+		_bobbers.Remove( fish.TargetBobber );
 		fish.TargetBobber = null;
 	}
 }
