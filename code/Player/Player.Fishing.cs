@@ -1,6 +1,6 @@
 namespace Sauna;
 
-public struct FishRecord
+public class FishRecord
 {
 	/// <summary>
 	/// How many fishes of this kind have been caught
