@@ -1,12 +1,13 @@
 {
   "RootObject": {
-    "Id": "c93cd111-a34f-4aec-a030-11fffbbca4c9",
+    "__guid": "c93cd111-a34f-4aec-a030-11fffbbca4c9",
     "Name": "trash_can",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "Fish",
+        "__guid": "0ec6675e-043a-4c06-a5c1-f9b1a5d52a4f",
         "CostPerKilo": -1,
         "IsTrash": true,
         "MinimumWaterDepth": 15,
@@ -15,6 +16,7 @@
       },
       {
         "__type": "ItemComponent",
+        "__guid": "fd6327b8-07ee-4c48-9343-f01a73c6fb6f",
         "Count": 0,
         "Description": "Versatile container. Wasted.",
         "Icon": {
@@ -31,6 +33,7 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "c7f859c5-1178-4f2c-b7d8-a13ceda02fcd",
         "BodyGroups": 18446744073709551615,
         "Model": "models/trash/trash_demented_can.vmdl",
         "RenderType": "On",
@@ -38,6 +41,7 @@
       },
       {
         "__type": "HullCollider",
+        "__guid": "972b771a-9d66-4c17-86d1-32323cd8920a",
         "BoxSize": "50,50,50",
         "Center": "0,0,2.5",
         "Height": 4.99998,
@@ -50,19 +54,34 @@
       },
       {
         "__type": "Rigidbody",
+        "__guid": "37114b9c-f31f-46fa-8523-0bf42a1374a0",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "__guid": "962070c5-3646-4e19-86dd-23c14b30f7d9",
+        "Name": "stinky",
+        "Position": "0,0,2.480162",
+        "Scale": "0.5769103,0.5259924,0.6385359",
+        "Tags": "particles",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/particles/stinky.prefab"
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

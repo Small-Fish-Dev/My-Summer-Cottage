@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "e5497e1e-355c-4ea3-99d6-e626291a8b57",
+    "__guid": "54428516-4d29-42f3-8c0b-fbe6538f0d3d",
     "Name": "minnow",
     "Tags": "fish",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "Fish",
-        "__guid": "ddee18e2-5d54-4737-a281-fa0213a2b1fe",
+        "__guid": "7e225f43-86e0-4776-9e73-acebd3053efd",
         "CostPerKilo": 8,
         "IsTrash": false,
         "MinimumWaterDepth": 15,
@@ -17,7 +17,7 @@
       },
       {
         "__type": "ItemComponent",
-        "__guid": "844402fb-67b9-4daf-8ec9-99cde63ab58e",
+        "__guid": "14cd1eaf-bbda-46db-95f0-aaa0643bdf80",
         "Count": 0,
         "Description": "A small fresh water fish.",
         "Icon": {
@@ -33,7 +33,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "960d34da-c246-4e62-bc77-13902991ec82",
+        "__guid": "17788102-710b-4933-99b0-a9e2adf583cb",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/fauna/fish/minnow/minnow.vmdl",
@@ -42,14 +42,14 @@
       },
       {
         "__type": "ModelCollider",
-        "__guid": "a86264fe-3b97-4092-bfbf-8327352c7a64",
+        "__guid": "d14e4a1d-b294-4e5d-847a-ba752940bfa5",
         "IsTrigger": false,
         "Model": "models/fauna/fish/minnow/minnow.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
-        "__guid": "d2795a92-4eba-4ddf-bc61-d223728d2e9b",
+        "__guid": "a74943ad-3eb2-4933-b809-d076a32b5db3",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
@@ -63,7 +63,18 @@
         "StartAsleep": false
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "__guid": "b070a127-36bf-4f5d-9b6f-ee314a8c9354",
+        "Name": "stinky",
+        "Position": "0,0,0.403709",
+        "Scale": "0.7407773,0.1431887,0.153322",
+        "Tags": "particles",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/particles/stinky.prefab"
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,
