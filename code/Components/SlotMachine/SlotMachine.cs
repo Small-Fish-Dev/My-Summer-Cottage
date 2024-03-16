@@ -235,7 +235,7 @@ public partial class SlotMachine : Component
 			}
 
 			if ( ShowCount >= i || !Rolling )
-				Model?.SetBodyGroup( 6 + i, (Wheels[i] - 1) * 2 );
+				Model?.SetBodyGroup( 6 + i, (Wheels[i] - 1) * 2 + 1 );
 
 			var fixedRotation = Transform.Rotation
 				* Rotation.FromAxis( Vector3.Right, ANGLE_STEP / 2f + target )
