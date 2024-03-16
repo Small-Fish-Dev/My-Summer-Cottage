@@ -1,5 +1,5 @@
 {
-  "__guid": "2dd35e90-998a-4462-8cab-4c69022a45e1",
+  "__guid": "24ff110f-e2eb-4bcd-84bb-1f00fd19935f",
   "GameObjects": [
     {
       "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -1941,7 +1941,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.408585,0,-0.9127203",
+          "Rotation": "0,0.1280672,0,0.9917655",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -2039,7 +2039,11 @@
                 "prefabs/fishes/trash/trash_bottle.prefab",
                 "prefabs/fishes/trash/trash_can.prefab",
                 "prefabs/fishes/trash/trash_crisps.prefab"
-              ]
+              ],
+              "WaterSplash": {
+                "_type": "gameobject",
+                "prefab": "prefabs/particles/water_splash.prefab"
+              }
             }
           ]
         }
@@ -2857,8 +2861,8 @@
         {
           "__guid": "5fae56a0-fcc9-421d-a6cf-9dbf5ed2278d",
           "Name": "Stove",
-          "Position": "30.47339,86.6084,-15.03516",
-          "Rotation": "0,0,0.3826834,0.9238796",
+          "Position": "-85.75684,-1.39502,-15.03516",
+          "Rotation": "0,0,0.9238796,0.3826836",
           "Enabled": true,
           "NetworkMode": 1,
           "Components": [
@@ -2867,7 +2871,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "7443baf9-dc1f-447b-9808-d76decec9912",
+                "component_id": "165ca9b5-0a68-4bb3-bc7a-ab6c67f686a5",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -2919,9 +2923,9 @@
                 {
                   "__type": "EventAreaTrigger",
                   "__guid": "8d670e13-bd21-4a4d-a5ae-c89d3bcb2c89",
-                  "Extents": "219.3591,169.5199,127.76",
+                  "Extents": "183.199,281.92,127.76",
                   "MaxPollingRate": 10,
-                  "Offset": "-95.68001,-41.75999,45.52",
+                  "Offset": "-67.84001,-47.03999,45.52",
                   "TagSet": "player",
                   "TriggerPrefab": [],
                   "TriggerSignalIdentifier": "sauna.entered_sauna"
@@ -2931,8 +2935,8 @@
             {
               "__guid": "27b558b0-ebf2-4e8e-9a95-0742109e114c",
               "Name": "floor_steam (2)",
-              "Position": "-93.87774,-43.66801,0",
-              "Rotation": "0,0,0.9999999,-0.0000001192093",
+              "Position": "-80.02212,-41.73831,0",
+              "Rotation": "0,0,0.6087605,-0.7933528",
               "Tags": "particles",
               "Enabled": true,
               "NetworkMode": 2,
@@ -2973,8 +2977,8 @@
         {
           "__guid": "158291d2-adc1-4f2d-a3a4-5896684ced3f",
           "Name": "water_bucket",
-          "Position": "47.5625,50.22119,-16.03027",
-          "Rotation": "-0.01174103,0.03774813,0.2967681,0.9541309",
+          "Position": "-91.13062,-40.66943,-15.70239",
+          "Rotation": "0,0,0.7351078,0.6779503",
           "Enabled": true,
           "NetworkMode": 1,
           "__Prefab": "prefabs/objects/water_bucket.prefab"
@@ -2982,8 +2986,8 @@
         {
           "__guid": "228c1dd9-a826-45ae-8624-e85ba99407ad",
           "Name": "ladel",
-          "Position": "42.00952,37.48633,-6.53833",
-          "Rotation": "0.4829629,-0.1294095,-0.2241438,0.8365164",
+          "Position": "-74.88403,-40.36719,-6.887695",
+          "Rotation": "0.2244797,0.4878616,0.6374046,0.5525538",
           "Enabled": true,
           "NetworkMode": 1,
           "__Prefab": "prefabs/items/ladel.prefab"
@@ -2991,16 +2995,44 @@
         {
           "__guid": "ad648568-ff05-4e08-91ae-28a978624815",
           "Name": "Door",
-          "Position": "-94.10425,-98.73193,-12.89941",
+          "Position": "-94.375,-98.43359,-12.89941",
           "Rotation": "0,0,-0.9311098,0.3647387",
+          "Scale": "1,1.1,0.94",
           "Enabled": true,
           "NetworkMode": 1,
-          "__Prefab": "prefabs/objects/door.prefab"
+          "Components": [
+            {
+              "__type": "ModelRenderer",
+              "__guid": "35ffa15e-0009-4d2f-8811-e8bacdb9cc99",
+              "BodyGroups": 18446744073709551615,
+              "Model": "models/door_big_window/door_big_window.vmdl",
+              "RenderType": "On",
+              "Tint": "1,1,1,1"
+            },
+            {
+              "__type": "DoorComponent",
+              "__guid": "165ca9b5-0a68-4bb3-bc7a-ab6c67f686a5",
+              "Angle": 100,
+              "BothSides": true,
+              "OpenTime": 0.25,
+              "Pivot": "0.000003607557,-20.17492,0",
+              "Sound": "sounds/door/door_creak.sound",
+              "State": "Close"
+            },
+            {
+              "__type": "BoxCollider",
+              "__guid": "4085a200-9f43-4e69-a0a1-b9ffed38e8a5",
+              "Center": "0,0,41.76",
+              "IsTrigger": false,
+              "Scale": "3.359999,41.12,85.04002",
+              "Static": false
+            }
+          ]
         },
         {
           "__guid": "47fb30c0-a903-43d3-b87e-fe56f2b5b4d6",
           "Name": "Bench",
-          "Position": "26.24707,-76.70947,16.19263",
+          "Position": "-5.190918,-106.842,16.19263",
           "Rotation": "0,0,0.9238795,0.3826834",
           "Enabled": true,
           "NetworkMode": 1,
@@ -3026,9 +3058,37 @@
           ]
         },
         {
+          "__guid": "08f5423d-51b8-49da-a9aa-5f7c9c3fceae",
+          "Name": "Bench",
+          "Position": "25.46045,-76.19214,16.19263",
+          "Rotation": "0,0,0.9238795,0.3826834",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "dddb4ef7-9cd6-480f-a912-dd540e14f987",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "83c5f405-9de7-4f94-8a3b-c96bc49279e2",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
           "__guid": "a2fbda21-7bd6-442f-b626-c7104e198639",
           "Name": "Bench",
-          "Position": "52.25024,-50.51807,16.19263",
+          "Position": "55.47949,-47.29028,16.19263",
           "Rotation": "0,0,0.9238795,0.3826834",
           "Enabled": true,
           "NetworkMode": 1,
@@ -3054,37 +3114,9 @@
           ]
         },
         {
-          "__guid": "1fd897ed-e837-4c9b-adae-973fe3a6d751",
-          "Name": "Bench",
-          "Position": "-100.6467,-5.723389,10.51074",
-          "Rotation": "0,0,0.3826836,-0.9238795",
-          "Enabled": true,
-          "NetworkMode": 1,
-          "Components": [
-            {
-              "__type": "BoxCollider",
-              "__guid": "9d5e9f42-a440-4bd5-a88e-ce3dcdd50e7f",
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "25,25,1",
-              "Static": false
-            },
-            {
-              "__type": "Seat",
-              "__guid": "96362a58-0c35-4708-b12c-d9ebd16b89b9",
-              "SeatTransform": {
-                "UniformScale": 1,
-                "Position": "14.47999,0,0",
-                "Scale": "1,1,1",
-                "Rotation": "0,0,0,1"
-              }
-            }
-          ]
-        },
-        {
           "__guid": "af739918-cb0b-4fbc-868f-f102393a7822",
           "Name": "Bench",
-          "Position": "82.67041,-20.29126,16.96313",
+          "Position": "85.4624,-17.50073,16.96313",
           "Rotation": "0,0,0.9238795,0.3826834",
           "Enabled": true,
           "NetworkMode": 1,
@@ -3112,7 +3144,7 @@
         {
           "__guid": "00b321a4-7bad-40d0-bc66-148a26ac11eb",
           "Name": "Bench",
-          "Position": "-70.32349,24.59863,10.51074",
+          "Position": "-41.42798,49.55591,16.66772",
           "Rotation": "0,0,0.3826836,-0.9238795",
           "Enabled": true,
           "NetworkMode": 1,
@@ -3128,6 +3160,62 @@
             {
               "__type": "Seat",
               "__guid": "de4a5a1a-af32-4ba2-8373-66af1bc6668d",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "03e5acfa-7882-4a05-97ef-7396c43bbfcb",
+          "Name": "Bench",
+          "Position": "50.69556,75.37988,16.66772",
+          "Rotation": "0,0,0.9238796,-0.3826834",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "046f7456-d585-4813-a9a9-021339bbd6dc",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "ee82fd36-a916-46f1-b2e4-a34f58eaf9c7",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "a817f317-107e-4e71-996f-e065f9cf0ddd",
+          "Name": "Bench",
+          "Position": "-13.28394,77.69995,16.66772",
+          "Rotation": "0,0,0.3826836,-0.9238795",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "590135cc-1f16-4ffb-bd83-5484a218c2bc",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "7790131e-4de9-4aca-b87d-c813a25e3ef8",
               "SeatTransform": {
                 "UniformScale": 1,
                 "Position": "14.47999,0,0",
@@ -3465,7 +3553,7 @@
       "Children": [
         {
           "__guid": "c2d8fa16-dfe4-448b-b7ed-3f94ec630df1",
-          "Name": "BusStopCity",
+          "Name": "Bus Stop City",
           "Position": "54.92969,1706.512,-24.0835",
           "Rotation": "0,0,-0.7071066,0.7071068",
           "Enabled": true,
@@ -3543,7 +3631,7 @@
         },
         {
           "__guid": "d38dcda0-ffb2-4e90-a6c9-1d4c8747f5bd",
-          "Name": "BusStopSuburbs",
+          "Name": "Bus Stop Suburbs",
           "Position": "9678.743,-5333.117,-24.0835",
           "Rotation": "0,0,0.5,0.8660254",
           "Enabled": true,
@@ -6526,7 +6614,7 @@
         {
           "__guid": "cec71058-f548-49bc-953c-77794624596c",
           "Name": "Random sauna guy",
-          "Position": "3576,-3088,2461.489",
+          "Position": "3609.709,-3090.963,2461.489",
           "Rotation": "0,0,-0.6087614,0.7933534",
           "Enabled": true,
           "NetworkMode": 2,
@@ -6698,7 +6786,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-16T15:22:37.2547321\u002B01:00",
+  "LastSaved": "2024-03-16T15:43:04.9462166\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
