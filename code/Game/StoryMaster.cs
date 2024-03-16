@@ -279,6 +279,13 @@ public class StoryMaster : Component
 		Log.Info( "Story reset!" );
 	}
 
+	public void ResetPlayer()
+	{
+		if ( FileSystem.Data.FileExists( PlayerSave.FILE_PATH ) )
+			FileSystem.Data.DeleteFile( PlayerSave.FILE_PATH );
+		Log.Info( "Character reset!" );
+	}
+
 	public void LoadEventPool( int randomSeed )
 	{
 		if ( CurrentSaunaDay == null ) return;
@@ -433,10 +440,11 @@ public class StoryMaster : Component
 
 		foreach ( var shop in allClothingShops )
 		{
-			shop.Item = Game.Random.FromList( allClothingPrefabs ).Prefab;
-			shop.Price = Game.Random.Int( 10, 40 );
+			var chosen = Game.Random.FromList( allClothingPrefabs ).Prefab;
+			shop.Item = chosen;
 			shop.CreateWorldIcon();
 			shop.ResetName();
+			shop.ResetPrice();
 		}
 	}
 
@@ -593,6 +601,7 @@ public class StoryMaster : Component
 			storyMaster.ResetStoryProgression();
 			storyMaster._taskMaster.ResetTasksProgression( true );
 			storyMaster._eventMaster.ResetEventsProgression();
+			storyMaster.ResetPlayer();
 		}
 	}
 
@@ -621,5 +630,14 @@ public class StoryMaster : Component
 
 		if ( storyMaster != null )
 			storyMaster._eventMaster.ResetEventsProgression();
+	}
+
+	[ConCmd( "sauna_reset_player" )]
+	public static void DeletePlayer()
+	{
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster != null )
+			storyMaster.ResetPlayer();
 	}
 }

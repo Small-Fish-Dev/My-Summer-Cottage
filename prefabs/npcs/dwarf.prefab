@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "8ed806c9-ca30-4215-98f9-beeb1742cd95",
+    "__guid": "8ed806c9-ca30-4215-98f9-beeb1742cd95",
     "Name": "dwarf",
     "Tags": "npc",
     "Enabled": true,
@@ -8,14 +8,16 @@
     "Components": [
       {
         "__type": "NPC",
+        "__guid": "cdf5bc64-04f8-43af-a081-74702a4080a0",
         "AlertOthers": false,
-        "AttackCooldown": 5,
+        "AttackCooldown": 8,
         "AttackRange": 50,
         "DetectRange": 1024,
         "EnemyTags": "player",
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
+          "component_id": "01e29905-6b59-449c-a1f8-cc4fa897fb29",
           "go": "8ed806c9-ca30-4215-98f9-beeb1742cd95",
           "component_type": "HealthComponent"
         },
@@ -25,11 +27,13 @@
         "MinimumIdleCooldown": 4,
         "Model": {
           "_type": "component",
+          "component_id": "4ae3d8ed-7d76-4200-a098-b402fd118746",
           "go": "6f04072c-5a89-4343-a076-5f6ec6c6cdc5",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
+          "component_id": "44dcceb5-bb44-40d2-b497-73a377b26ba3",
           "go": "8ed806c9-ca30-4215-98f9-beeb1742cd95",
           "component_type": "MoveHelper"
         },
@@ -66,9 +70,9 @@
               "Id": 3,
               "Type": "call",
               "Properties": {
+                "_isStatic": false,
                 "_name": "Damage",
-                "_type": "package.fish.sauna/HealthComponent",
-                "_isStatic": false
+                "_type": "package.fish.sauna/HealthComponent"
               },
               "UserData": {
                 "Position": "448,0"
@@ -103,6 +107,28 @@
               "Properties": {
                 "_name": "Position",
                 "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "npc.startescaping",
+              "UserData": {
+                "Position": "768,48"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "cdf5bc64-04f8-43af-a081-74702a4080a0",
+                  "go": "8ed806c9-ca30-4215-98f9-beeb1742cd95",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "512,256"
               }
             }
           ],
@@ -163,6 +189,24 @@
               "SrcName": "_result",
               "DstId": 7,
               "DstName": "_target"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 8,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 8,
+              "DstName": "target"
             }
           ]
         },
@@ -286,6 +330,7 @@
       },
       {
         "__type": "MoveHelper",
+        "__guid": "44dcceb5-bb44-40d2-b497-73a377b26ba3",
         "AccelerationCurve": [
           {
             "y": 1
@@ -312,8 +357,10 @@
       },
       {
         "__type": "HealthComponent",
+        "__guid": "01e29905-6b59-449c-a1f8-cc4fa897fb29",
         "CanRegenerate": false,
         "DamagedBy": "Average",
+        "DropOnDeath": [],
         "Immortal": false,
         "MaxHealth": 10,
         "RegenerationCooldown": 2,
@@ -324,13 +371,14 @@
     ],
     "Children": [
       {
-        "Id": "6f04072c-5a89-4343-a076-5f6ec6c6cdc5",
+        "__guid": "6f04072c-5a89-4343-a076-5f6ec6c6cdc5",
         "Name": "Model",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "SkinnedModelRenderer",
+            "__guid": "4ae3d8ed-7d76-4200-a098-b402fd118746",
             "BodyGroups": 341,
             "CreateBoneObjects": false,
             "Model": "models/guy/guy.vmdl",
@@ -339,6 +387,7 @@
           },
           {
             "__type": "Character",
+            "__guid": "72445c94-948b-46ec-b158-6d3f34e21dd5",
             "Clothes": [
               "models/clothes/sauna_boss_hat/sauna_boss.vmdl"
             ],
@@ -353,5 +402,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

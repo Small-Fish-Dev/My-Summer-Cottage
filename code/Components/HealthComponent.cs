@@ -200,7 +200,7 @@ public sealed class HealthComponent : Component
 
 		if ( Health <= 0 )
 		{
-			Kill( attacker.Id );
+			Kill( attacker?.Id ?? Guid.Empty );
 			return;
 		}
 	}
