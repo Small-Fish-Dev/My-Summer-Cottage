@@ -210,7 +210,7 @@ public sealed class HealthComponent : Component
 		Alive = false;
 
 		if ( attacker.Components.TryGet<Player>( out var killer ) )
-			killer.AddExperience( Health * 10 );
+			killer.AddExperience( MaxHealth * 10 );
 
 		if ( Components.TryGet<Player>( out var player ) )
 			player.SetRagdoll( true, true, 9999999f );
