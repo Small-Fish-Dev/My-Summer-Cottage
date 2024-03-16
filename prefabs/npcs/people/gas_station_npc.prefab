@@ -1,13 +1,13 @@
 {
   "RootObject": {
-    "__guid": "328ec5d7-24c2-407b-bab7-8753e3d411b9",
+    "__guid": "9804fe05-7ccd-4c41-9ebf-26fbf56e6165",
     "Name": "gas_station_npc",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "DialogueTree",
-        "__guid": "a40169c3-65dd-4542-91ec-17ee37693617",
+        "__guid": "affa3ada-c024-41b7-af6e-b1637770da84",
         "DialogueStages": [
           {
             "IsInitial": true,
@@ -39,8 +39,8 @@
                       "Id": 9,
                       "Type": "call",
                       "Properties": {
-                        "_name": "SpeakWithSubtitle",
                         "_isStatic": true,
+                        "_name": "SpeakWithSubtitle",
                         "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                       },
                       "UserData": {
@@ -66,6 +66,18 @@
                       },
                       "UserData": {
                         "Position": "512,304"
+                      }
+                    },
+                    {
+                      "Id": 12,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": false,
+                        "_name": "SelectRandomDialogue",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "992,144"
                       }
                     }
                   ],
@@ -103,6 +115,18 @@
                       "SrcId": 10,
                       "SrcName": "_result",
                       "DstId": 11,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 9,
+                      "SrcName": "_signal",
+                      "DstId": 12,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 10,
+                      "SrcName": "_result",
+                      "DstId": 12,
                       "DstName": "_target"
                     }
                   ]
@@ -143,8 +167,8 @@
                       "Id": 8,
                       "Type": "call",
                       "Properties": {
-                        "_name": "SpeakWithSubtitle",
                         "_isStatic": true,
+                        "_name": "SpeakWithSubtitle",
                         "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                       },
                       "UserData": {
@@ -166,8 +190,8 @@
                       "Id": 10,
                       "Type": "call",
                       "Properties": {
-                        "_name": "Format",
                         "_isStatic": true,
+                        "_name": "Format",
                         "_type": "System.Private.CoreLib/System.String"
                       },
                       "UserData": {
@@ -193,6 +217,18 @@
                       },
                       "UserData": {
                         "Position": "176,576"
+                      }
+                    },
+                    {
+                      "Id": 13,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": false,
+                        "_name": "SelectRandomDialogue",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "736,368"
                       }
                     }
                   ],
@@ -235,7 +271,7 @@
                       "DstIndex": 0
                     },
                     {
-                      "Value": "Hey %s, nice to see you again.",
+                      "Value": "Hey {0}, nice to see you again.",
                       "DstId": 10,
                       "DstName": "format"
                     },
@@ -249,6 +285,146 @@
                       "SrcId": 11,
                       "SrcName": "_result",
                       "DstId": 12,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 8,
+                      "SrcName": "_signal",
+                      "DstId": 13,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 11,
+                      "SrcName": "_result",
+                      "DstId": 13,
+                      "DstName": "_target"
+                    }
+                  ]
+                },
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          },
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "93788e97-8aa2-4a61-b0ea-e34345ef9c52",
+                    "ReferencedComponentTypes": [
+                      "package.fish.sauna/Sauna.DialogueTree"
+                    ]
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 1,
+                      "Type": "input",
+                      "UserData": {
+                        "Position": "-160,-16"
+                      }
+                    },
+                    {
+                      "Id": 2,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": true,
+                        "_name": "SpeakWithSubtitle",
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      },
+                      "UserData": {
+                        "Position": "256,16"
+                      }
+                    },
+                    {
+                      "Id": 3,
+                      "Type": "scene.get",
+                      "Properties": {
+                        "T": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "-208,144"
+                      }
+                    },
+                    {
+                      "Id": 4,
+                      "Type": "property.get",
+                      "Properties": {
+                        "_name": "Name",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "16,176"
+                      }
+                    },
+                    {
+                      "Id": 5,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": false,
+                        "_name": "SelectRandomDialogue",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "544,16"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 1,
+                      "SrcName": "_signal",
+                      "DstId": 2,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 4,
+                      "SrcName": "_result",
+                      "DstId": 2,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 1,
+                      "SrcName": "_target",
+                      "DstId": 2,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "If you have any mushrooms... can I have some?",
+                      "DstId": 2,
+                      "DstName": "subtitle"
+                    },
+                    {
+                      "SrcId": 1,
+                      "SrcName": "_target",
+                      "DstId": 3,
+                      "DstName": "_this"
+                    },
+                    {
+                      "SrcId": 3,
+                      "SrcName": "_result",
+                      "DstId": 4,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 2,
+                      "SrcName": "_signal",
+                      "DstId": 5,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 3,
+                      "SrcName": "_result",
+                      "DstId": 5,
                       "DstName": "_target"
                     }
                   ]
@@ -267,7 +443,7 @@
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "f29d78e2-7146-4fc6-ab38-c99bf953d7cb",
+        "__guid": "cf39d925-2fda-4398-ae99-c26dd3e7b91f",
         "End": "0,0,68",
         "IsTrigger": false,
         "Radius": 12,
@@ -277,14 +453,14 @@
     ],
     "Children": [
       {
-        "__guid": "1e2bc178-e06d-4f0e-9ca8-7498ca36676a",
+        "__guid": "a12b3868-614c-41a7-a661-67d16bbad1b1",
         "Name": "Model",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "Character",
-            "__guid": "e41c26f7-4d7d-4f82-bcc6-6f2a87e11ec1",
+            "__guid": "205883a8-23a6-48ee-bf85-5681c23068e3",
             "Clothes": [
               "models/clothes/beanie/beanie.vmdl",
               "models/clothes/oxford_shoes/oxford_shoes.vmdl",
@@ -297,7 +473,7 @@
           },
           {
             "__type": "SkinnedModelRenderer",
-            "__guid": "a4bf1803-febc-4459-a2ef-218695789be6",
+            "__guid": "ee3de5b8-b0ed-46b4-90f1-7763d65f7cce",
             "BodyGroups": 1365,
             "CreateBoneObjects": false,
             "Model": "models/guy/guy.vmdl",
