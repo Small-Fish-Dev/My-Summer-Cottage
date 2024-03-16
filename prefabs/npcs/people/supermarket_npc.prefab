@@ -22,87 +22,288 @@
                   "UserData": {
                     "Title": "Action",
                     "id": "ccf1c572-d3e0-490f-b526-8817066c0c34",
-                    "ReferencedComponentTypes": []
+                    "ReferencedComponentTypes": [
+                      "package.fish.sauna/Sauna.DialogueTree"
+                    ]
                   },
                   "Variables": [],
                   "Nodes": [
                     {
-                      "Id": 0,
+                      "Id": 7,
                       "Type": "input",
                       "UserData": {
-                        "Position": "48,16"
+                        "Position": "16,256"
                       }
                     },
                     {
-                      "Id": 2,
-                      "Type": "scene.ref",
+                      "Id": 8,
+                      "Type": "call",
                       "Properties": {
-                        "component": {
-                          "_type": "component",
-                          "component_id": "6e44b246-0188-4d32-8592-a1da952f93b3",
-                          "go": "7c70c2c2-b59c-49ee-86cd-77a18f1cad6d",
-                          "component_type": "DialogueTree"
-                        }
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                        "_name": "SpeakWithSubtitle",
+                        "_isStatic": true
                       },
                       "UserData": {
-                        "Position": "-16,128"
+                        "Position": "400,288"
                       }
                     },
                     {
-                      "Id": 4,
+                      "Id": 9,
+                      "Type": "scene.get",
+                      "Properties": {
+                        "T": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "-32,416"
+                      }
+                    },
+                    {
+                      "Id": 10,
                       "Type": "property.get",
-                      "ParentId": 2,
                       "Properties": {
                         "_name": "Name",
                         "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "192,448"
                       }
                     },
                     {
-                      "Id": 6,
+                      "Id": 11,
                       "Type": "call",
                       "Properties": {
-                        "_name": "SpeakWithSubtitle",
-                        "_isStatic": true,
-                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                        "_isStatic": false,
+                        "_name": "SelectRandomDialogue",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
                       },
                       "UserData": {
-                        "Position": "288,16"
+                        "Position": "672,288"
                       }
                     }
                   ],
                   "Links": [
                     {
-                      "SrcId": 2,
+                      "SrcId": 7,
+                      "SrcName": "_signal",
+                      "DstId": 8,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 10,
                       "SrcName": "_result",
-                      "DstId": 4,
+                      "DstId": 8,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 7,
+                      "SrcName": "_target",
+                      "DstId": 8,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "Hey, nice to see you again.",
+                      "DstId": 8,
+                      "DstName": "subtitle"
+                    },
+                    {
+                      "SrcId": 7,
+                      "SrcName": "_target",
+                      "DstId": 9,
+                      "DstName": "_this"
+                    },
+                    {
+                      "SrcId": 9,
+                      "SrcName": "_result",
+                      "DstId": 10,
                       "DstName": "_target"
                     },
                     {
-                      "SrcId": 0,
+                      "SrcId": 8,
                       "SrcName": "_signal",
-                      "DstId": 6,
+                      "DstId": 11,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 9,
+                      "SrcName": "_result",
+                      "DstId": 11,
+                      "DstName": "_target"
+                    }
+                  ]
+                },
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          },
+          {
+            "IsInitial": true,
+            "AddToDialoguePool": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Description": "Talk",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "f6e0e6fa-802a-4ac6-8a37-2ae963595adf",
+                    "ReferencedComponentTypes": [
+                      "package.fish.sauna/Sauna.DialogueTree"
+                    ]
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 1,
+                      "Type": "input",
+                      "UserData": {
+                        "Position": "-400,32"
+                      }
+                    },
+                    {
+                      "Id": 2,
+                      "Type": "call",
+                      "Properties": {
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                        "_name": "SpeakWithSubtitle",
+                        "_isStatic": true
+                      },
+                      "UserData": {
+                        "Position": "240,96"
+                      }
+                    },
+                    {
+                      "Id": 3,
+                      "Type": "scene.get",
+                      "Properties": {
+                        "T": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "-192,224"
+                      }
+                    },
+                    {
+                      "Id": 4,
+                      "Type": "property.get",
+                      "Properties": {
+                        "_name": "Name",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "32,256"
+                      }
+                    },
+                    {
+                      "Id": 5,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": false,
+                        "_name": "SelectRandomDialogue",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "512,96"
+                      }
+                    },
+                    {
+                      "Id": 6,
+                      "Type": "property.get",
+                      "Properties": {
+                        "_type": "package.fish.sauna/Sauna.Player",
+                        "_name": "Firstname"
+                      },
+                      "UserData": {
+                        "Position": "-208,112"
+                      }
+                    },
+                    {
+                      "Id": 7,
+                      "Type": "call",
+                      "Properties": {
+                        "_type": "System.Private.CoreLib/System.String",
+                        "_name": "Format",
+                        "_isStatic": true
+                      },
+                      "UserData": {
+                        "Position": "32,128"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 1,
+                      "SrcName": "_signal",
+                      "DstId": 2,
                       "DstName": "_signal"
                     },
                     {
                       "SrcId": 4,
                       "SrcName": "_result",
-                      "DstId": 6,
+                      "DstId": 2,
                       "DstName": "name"
                     },
                     {
-                      "SrcId": 0,
+                      "SrcId": 1,
                       "SrcName": "_target",
-                      "DstId": 6,
+                      "DstId": 2,
                       "DstName": "obj"
                     },
                     {
-                      "Value": "Hey, nice to see you again.",
-                      "DstId": 6,
+                      "SrcId": 7,
+                      "SrcName": "_result",
+                      "DstId": 2,
                       "DstName": "subtitle"
+                    },
+                    {
+                      "SrcId": 1,
+                      "SrcName": "_target",
+                      "DstId": 3,
+                      "DstName": "_this"
+                    },
+                    {
+                      "SrcId": 3,
+                      "SrcName": "_result",
+                      "DstId": 4,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 2,
+                      "SrcName": "_signal",
+                      "DstId": 5,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 3,
+                      "SrcName": "_result",
+                      "DstId": 5,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 1,
+                      "SrcName": "interactor",
+                      "DstId": 6,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 6,
+                      "SrcName": "_result",
+                      "DstId": 7,
+                      "DstName": "args",
+                      "DstIndex": 0
+                    },
+                    {
+                      "Value": "Hey {0}, picking up bread again for your wife?",
+                      "DstId": 7,
+                      "DstName": "format"
                     }
                   ]
                 },
-                "InteractDistance": 125
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
               }
             ]
           }
