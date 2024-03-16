@@ -299,7 +299,7 @@ internal class SignalWidget : ControlWidget
 
 		if ( useFilter )
 		{
-			var filtered = items.Where( x => x.Identifier.Contains( filter, StringComparison.OrdinalIgnoreCase ) ).ToArray();
+			var filtered = items.Where( x => x != null && x.Identifier != null && x.Identifier.Contains( filter, StringComparison.OrdinalIgnoreCase ) ).ToArray();
 
 			if ( filtered.Length > maxFiltered + 1 )
 			{
