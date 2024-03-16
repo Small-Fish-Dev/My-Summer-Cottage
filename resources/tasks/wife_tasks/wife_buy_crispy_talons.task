@@ -1,0 +1,38 @@
+{
+  "Name": "Buy Talon Munch",
+  "Subtitle": "Wife wants some Talon Munch",
+  "Description": "The nagging wife is asking for a bag of Talon Munch, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "Get me some Talon Munch, the eagle ones not the offbrands!",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy Talon Munch",
+  "FailedSignal": "task.failed.Buy Talon Munch",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a bag of Talon Munch",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Talon Munch",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

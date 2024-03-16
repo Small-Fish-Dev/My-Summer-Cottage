@@ -1,0 +1,38 @@
+{
+  "Name": "Buy Wheatley\u0027Os",
+  "Subtitle": "Wife wants some Cereal",
+  "Description": "The nagging wife is asking for a Wheatley\u0027Os, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "I want Wheatley\u0027Os now! Not that offbrand crap!",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy Wheatley\u0027Os",
+  "FailedSignal": "task.failed.Buy Wheatley\u0027Os",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a box of Wheatley\u0027Os",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Wheatey\u0027Os",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

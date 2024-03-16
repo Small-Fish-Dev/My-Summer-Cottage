@@ -1,0 +1,38 @@
+{
+  "Name": "Buy Loaf of Bread",
+  "Subtitle": "Wife wants some Bread",
+  "Description": "The nagging wife is asking for a Loaf of Bread, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "We\u0027re out of bread, you better go grab some now!",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy Loaf of Bread",
+  "FailedSignal": "task.failed.Buy Loaf of Bread",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a Loaf of Bread",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Loaf of bread",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

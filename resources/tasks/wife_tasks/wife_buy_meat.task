@@ -1,0 +1,38 @@
+{
+  "Name": "Buy a Can of Meat",
+  "Subtitle": "Wife wants a can of Meat",
+  "Description": "The nagging wife is asking for a can of Meat, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "The meat you got spoiled, you better bring home canned meat this time!",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy a Can of Meat",
+  "FailedSignal": "task.failed.Buy a Can of Meat",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a can of Meat",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Can of meat",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

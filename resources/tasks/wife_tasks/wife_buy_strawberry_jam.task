@@ -1,0 +1,38 @@
+{
+  "Name": "Buy Strawberry Jam",
+  "Subtitle": "Wife wants a Strawberry Jam",
+  "Description": "The nagging wife is asking for Strawberry Jam, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "The jam is almost over and I have lost a lot of sleep over it!",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy Strawberry Jam",
+  "FailedSignal": "task.failed.Buy Strawberry Jam",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a jar of Strawberry Jam",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Strawberry Jam",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

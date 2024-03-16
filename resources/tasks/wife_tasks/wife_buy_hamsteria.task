@@ -1,0 +1,38 @@
+{
+  "Name": "Buy Hamsteria Chips",
+  "Subtitle": "Wife wants some Hamsteria Chips",
+  "Description": "The nagging wife is asking for a bag of Hamsteria Chips, go to the store and pick it up.",
+  "Giver": "Wife",
+  "Message": "The new Hamsteria Chips come with a hamster inside, GET ONE ASAP!!!",
+  "TaskType": "GivenByWife",
+  "TaskRarity": "Common",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 30,
+  "SuccessSignal": "task.success.Buy Hamsteria Chips",
+  "FailedSignal": "task.failed.Buy Hamsteria Chips",
+  "TimeLimited": true,
+  "TimeLimitInSeconds": 300,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the supermarket",
+      "TriggerSignal": "supermarket.entered",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Buy a bag of Hamsteria Chips",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Hamsteria Crisps",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}
