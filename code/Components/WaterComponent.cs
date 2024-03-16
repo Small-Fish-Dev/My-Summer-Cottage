@@ -80,10 +80,16 @@ public sealed class WaterComponent : Component
 		{
 			var difference = Bounds.Transform( Transform.World ).Maxs.z - player.Transform.Position.z;
 
-			if ( difference >= 48f )
+			if ( difference >= 28f )
 			{
 				player.MoveHelper.Velocity = player.MoveHelper.Velocity.WithZ( 20f );
 				player.MoveHelper.IsOnGround = false;
+				player.IsSwimming = true;
+			}
+
+			if ( difference < 18f )
+			{
+				player.IsSwimming = false;
 			}
 		}
 

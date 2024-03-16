@@ -8,6 +8,31 @@ partial class Player
 	public const float DUCK_HEIGHT = 58f;
 	public const float HEIGHT = 72f;
 
+	private bool _isSwimming = false;
+	public bool IsSwimming
+	{
+		get => _isSwimming;
+		set
+		{
+			if ( value == _isSwimming ) return;
+
+			if ( value )
+			{
+				SprintSpeed /= 2.5f;
+				MoveHelper.AirAcceleration /= 2f;
+				MoveHelper.AirFriction *= 5f;
+			}
+			else
+			{
+				SprintSpeed *= 2.5f;
+				MoveHelper.AirAcceleration *= 2f;
+				MoveHelper.AirFriction /= 5f;
+			}
+
+			_isSwimming = value;
+		}
+	}
+
 	public static bool HideHead
 	{
 		get => _hideHead;
@@ -21,7 +46,7 @@ partial class Player
 
 	private static bool _hideHead = true;
 
-	[Property] [Category( "Movement" )] public MoveHelper MoveHelper { get; set; }
+	[Property][Category( "Movement" )] public MoveHelper MoveHelper { get; set; }
 
 	/// <summary>
 	/// How fast you move when holding the sprint button
@@ -133,8 +158,8 @@ partial class Player
 		if ( !BlockInputs )
 		{
 			Ducking = (Ducking && Scene.Trace.Ray( in from, in to ).Size( Collider.Scale.WithZ( 0f ) )
-				          .IgnoreGameObjectHierarchy( GameObject ).WithoutTags( "trigger" ).Run().Hit)
-			          || Input.Down( InputAction.Duck ); // Beautiful.
+						  .IgnoreGameObjectHierarchy( GameObject ).WithoutTags( "trigger" ).Run().Hit)
+					  || Input.Down( InputAction.Duck ); // Beautiful.
 		}
 
 		MoveHelper.Move();
