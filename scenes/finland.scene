@@ -1,5 +1,5 @@
 {
-  "__guid": "bc9a6049-c8fd-4322-b3d8-8082e7e93d80",
+  "__guid": "1c52bb40-e31e-4f97-bc28-ac55b87c7f5a",
   "GameObjects": [
     {
       "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -184,11 +184,18 @@
                         }
                       },
                       {
+                        "Id": 2,
+                        "Type": "event.assigntaskto",
+                        "UserData": {
+                          "Position": "512,128"
+                        }
+                      },
+                      {
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "464,288"
@@ -199,8 +206,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_name": "Receive",
+                          "_type": "package.fish.sauna/Sauna.Message"
                         },
                         "UserData": {
                           "Position": "512,-96"
@@ -211,8 +218,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "PlaySoundWithSubtitle"
+                          "_name": "PlaySoundWithSubtitle",
+                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                         },
                         "UserData": {
                           "Position": "1072,-128"
@@ -222,8 +229,8 @@
                         "Id": 13,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "Sandbox.Engine/Sandbox.SoundEvent",
-                          "value": "sounds/speech/1.sound"
+                          "value": "sounds/speech/1.sound",
+                          "T": "Sandbox.Engine/Sandbox.SoundEvent"
                         },
                         "UserData": {
                           "Position": "864,-48"
@@ -247,8 +254,8 @@
                         "Id": 17,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task"
+                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "0,224"
@@ -259,8 +266,8 @@
                         "Type": "property.get",
                         "ParentId": 17,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -268,15 +275,8 @@
                         "Type": "property.get",
                         "ParentId": 17,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
-                        }
-                      },
-                      {
-                        "Id": 20,
-                        "Type": "event.assigntasktoeveryone",
-                        "UserData": {
-                          "Position": "496,160"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -288,10 +288,28 @@
                         "DstName": "_result"
                       },
                       {
-                        "SrcId": 20,
+                        "SrcId": 2,
                         "SrcName": "_signal",
                         "DstId": 1,
                         "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 14,
+                        "SrcName": "_signal",
+                        "DstId": 2,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "player",
+                        "DstId": 2,
+                        "DstName": "player"
+                      },
+                      {
+                        "SrcId": 17,
+                        "SrcName": "_result",
+                        "DstId": 2,
+                        "DstName": "taskToAdd"
                       },
                       {
                         "SrcId": 17,
@@ -373,18 +391,6 @@
                         "SrcName": "_result",
                         "DstId": 19,
                         "DstName": "_target"
-                      },
-                      {
-                        "SrcId": 14,
-                        "SrcName": "_signal",
-                        "DstId": 20,
-                        "DstName": "_signal"
-                      },
-                      {
-                        "SrcId": 17,
-                        "SrcName": "_result",
-                        "DstId": 20,
-                        "DstName": "taskToAdd"
                       }
                     ]
                   }
@@ -417,11 +423,23 @@
                         }
                       },
                       {
+                        "Id": 2,
+                        "Type": "call",
+                        "Properties": {
+                          "_isStatic": true,
+                          "_name": "AssignEveryoneNewTask",
+                          "_type": "package.fish.sauna/Sauna.TaskMaster"
+                        },
+                        "UserData": {
+                          "Position": "240,112"
+                        }
+                      },
+                      {
                         "Id": 4,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task"
+                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-240,192"
@@ -431,18 +449,22 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "240,304"
                         }
                       },
                       {
-                        "Id": 8,
-                        "Type": "event.assigntasktoeveryone",
+                        "Id": 7,
+                        "Type": "property.get",
+                        "Properties": {
+                          "_name": "ResourcePath",
+                          "_type": "Sandbox.Engine/Sandbox.Resource"
+                        },
                         "UserData": {
-                          "Position": "224,80"
+                          "Position": "16,176"
                         }
                       }
                     ],
@@ -454,10 +476,22 @@
                         "DstName": "_result"
                       },
                       {
-                        "SrcId": 8,
+                        "SrcId": 2,
                         "SrcName": "_signal",
                         "DstId": 1,
                         "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 0,
+                        "SrcName": "_signal",
+                        "DstId": 2,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 7,
+                        "SrcName": "_result",
+                        "DstId": 2,
+                        "DstName": "filePath"
                       },
                       {
                         "SrcId": 4,
@@ -466,16 +500,10 @@
                         "DstName": "_target"
                       },
                       {
-                        "SrcId": 0,
-                        "SrcName": "_signal",
-                        "DstId": 8,
-                        "DstName": "_signal"
-                      },
-                      {
                         "SrcId": 4,
                         "SrcName": "_result",
-                        "DstId": 8,
-                        "DstName": "taskToAdd"
+                        "DstId": 7,
+                        "DstName": "_target"
                       }
                     ]
                   }
@@ -520,8 +548,8 @@
                         "Id": 3,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task"
+                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-64,208"
@@ -538,8 +566,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "256,224"
@@ -610,11 +638,18 @@
                         }
                       },
                       {
+                        "Id": 15,
+                        "Type": "event.assigntaskto",
+                        "UserData": {
+                          "Position": "416,64"
+                        }
+                      },
+                      {
                         "Id": 16,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "368,224"
@@ -625,8 +660,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_name": "Receive",
+                          "_type": "package.fish.sauna/Sauna.Message"
                         },
                         "UserData": {
                           "Position": "416,-160"
@@ -636,8 +671,8 @@
                         "Id": 19,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "Sandbox.Engine/Sandbox.SoundEvent",
-                          "value": "sounds/speech/1.sound"
+                          "value": "sounds/speech/1.sound",
+                          "T": "Sandbox.Engine/Sandbox.SoundEvent"
                         },
                         "UserData": {
                           "Position": "768,-112"
@@ -662,8 +697,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "PlaySoundWithNameAndSubtitle"
+                          "_name": "PlaySoundWithNameAndSubtitle",
+                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                         },
                         "UserData": {
                           "Position": "976,-192"
@@ -674,16 +709,16 @@
                         "Type": "property.get",
                         "ParentId": 13,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
                         "Id": 28,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/wife_tasks/wife.catch_fish_tutorial.task"
+                          "value": "resources/tasks/wife_tasks/wife.catch_fish_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-80,224"
@@ -694,8 +729,8 @@
                         "Type": "property.get",
                         "ParentId": 28,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -703,15 +738,8 @@
                         "Type": "property.get",
                         "ParentId": 28,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
-                        }
-                      },
-                      {
-                        "Id": 31,
-                        "Type": "event.assigntasktoeveryone",
-                        "UserData": {
-                          "Position": "400,48"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -723,10 +751,28 @@
                         "DstName": "_result"
                       },
                       {
-                        "SrcId": 31,
+                        "SrcId": 15,
                         "SrcName": "_signal",
                         "DstId": 14,
                         "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 20,
+                        "SrcName": "_signal",
+                        "DstId": 15,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 13,
+                        "SrcName": "player",
+                        "DstId": 15,
+                        "DstName": "player"
+                      },
+                      {
+                        "SrcId": 28,
+                        "SrcName": "_result",
+                        "DstId": 15,
+                        "DstName": "taskToAdd"
                       },
                       {
                         "SrcId": 28,
@@ -814,18 +860,6 @@
                         "SrcName": "_result",
                         "DstId": 30,
                         "DstName": "_target"
-                      },
-                      {
-                        "SrcId": 20,
-                        "SrcName": "_signal",
-                        "DstId": 31,
-                        "DstName": "_signal"
-                      },
-                      {
-                        "SrcId": 28,
-                        "SrcName": "_result",
-                        "DstId": 31,
-                        "DstName": "taskToAdd"
                       }
                     ]
                   }
@@ -860,11 +894,18 @@
                         }
                       },
                       {
+                        "Id": 4,
+                        "Type": "event.assigntaskto",
+                        "UserData": {
+                          "Position": "176,192"
+                        }
+                      },
+                      {
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "128,352"
@@ -875,8 +916,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_name": "Receive",
+                          "_type": "package.fish.sauna/Sauna.Message"
                         },
                         "UserData": {
                           "Position": "176,-32"
@@ -886,8 +927,8 @@
                         "Id": 7,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "Sandbox.Engine/Sandbox.SoundEvent",
-                          "value": "sounds/speech/1.sound"
+                          "value": "sounds/speech/1.sound",
+                          "T": "Sandbox.Engine/Sandbox.SoundEvent"
                         },
                         "UserData": {
                           "Position": "528,16"
@@ -912,8 +953,8 @@
                         "Type": "call",
                         "Properties": {
                           "_isStatic": true,
-                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "PlaySoundWithNameAndSubtitle"
+                          "_name": "PlaySoundWithNameAndSubtitle",
+                          "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                         },
                         "UserData": {
                           "Position": "736,-64"
@@ -924,16 +965,16 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
                         "Id": 12,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/wife_tasks/wife.hunt_rabbit_tutorial.task"
+                          "value": "resources/tasks/wife_tasks/wife.hunt_rabbit_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-320,352"
@@ -944,8 +985,8 @@
                         "Type": "property.get",
                         "ParentId": 12,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -953,15 +994,8 @@
                         "Type": "property.get",
                         "ParentId": 12,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
-                        }
-                      },
-                      {
-                        "Id": 15,
-                        "Type": "event.assigntasktoeveryone",
-                        "UserData": {
-                          "Position": "160,192"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -973,10 +1007,28 @@
                         "DstName": "_result"
                       },
                       {
-                        "SrcId": 15,
+                        "SrcId": 4,
                         "SrcName": "_signal",
                         "DstId": 3,
                         "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 8,
+                        "SrcName": "_signal",
+                        "DstId": 4,
+                        "DstName": "_signal"
+                      },
+                      {
+                        "SrcId": 2,
+                        "SrcName": "player",
+                        "DstId": 4,
+                        "DstName": "player"
+                      },
+                      {
+                        "SrcId": 12,
+                        "SrcName": "_result",
+                        "DstId": 4,
+                        "DstName": "taskToAdd"
                       },
                       {
                         "SrcId": 12,
@@ -1064,18 +1116,6 @@
                         "SrcName": "_result",
                         "DstId": 14,
                         "DstName": "_target"
-                      },
-                      {
-                        "SrcId": 8,
-                        "SrcName": "_signal",
-                        "DstId": 15,
-                        "DstName": "_signal"
-                      },
-                      {
-                        "SrcId": 12,
-                        "SrcName": "_result",
-                        "DstId": 15,
-                        "DstName": "taskToAdd"
                       }
                     ]
                   }
@@ -1084,20 +1124,6 @@
               "RandomEvents": {
                 "Common": 2,
                 "Uncommon": 1
-              }
-            },
-            "3": {
-              "ScriptedEvents": [
-                {
-                  "TriggerByTime": true,
-                  "TriggerTimeslot": "10.50,12.00,1",
-                  "CompletionNecessary": true
-                }
-              ],
-              "RandomEvents": {
-                "Common": 3,
-                "Uncommon": 2,
-                "Rare": 1
               }
             }
           },
@@ -1188,6 +1214,19 @@
             {
               "__type": "PlayerSpawner",
               "__guid": "0392cf73-6c6e-4d0c-bdd5-3d50d00dcd15"
+            }
+          ]
+        },
+        {
+          "__guid": "67ec33fa-15eb-4603-9f92-6f212b16cbb7",
+          "Name": "Spawner_TOWN",
+          "Position": "-9672.363,9295.369,-16.302",
+          "Rotation": "0,0,0.1305262,0.9914449",
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "PlayerSpawner",
+              "__guid": "15786415-539a-4271-b497-c4b21df9a01a"
             }
           ]
         }
@@ -1319,7 +1358,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.458866,0,0.8885055",
+          "Rotation": "0,0.9996199,0,0.02756832",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -1488,6 +1527,251 @@
                 }
               ],
               "Radius": 2417.6008
+            }
+          ]
+        },
+        {
+          "__guid": "147c2cc7-35dd-4fbe-87d7-fba45c7e7abc",
+          "Name": "Hares",
+          "Position": "4216.357,-1766.42,2655.931",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "__guid": "187e4801-c022-45a7-a6bd-bfb6cd03bced",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/rabbit.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/arctic_hare.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/rabbit.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 2032.4812
+            }
+          ]
+        },
+        {
+          "__guid": "c3a342f0-4ce2-49ab-9e5a-b89453a36de9",
+          "Name": "Foxes",
+          "Position": "3804.575,57.91541,2655.931",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "__guid": "3fde6a0b-a7f3-4eaf-b19d-e0037009e344",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/arctic_fox.prefab"
+                  },
+                  "SpawnChance": 0.2
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/fox.prefab"
+                  },
+                  "SpawnChance": 0.2
+                }
+              ],
+              "Radius": 2032.4812
+            }
+          ]
+        },
+        {
+          "__guid": "ef8eb5ec-12f4-4f6f-a2f1-0fcce3eadf8c",
+          "Name": "Foxes",
+          "Position": "5362.262,4408.308,2655.931",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "__guid": "8e3298e0-61a2-4e33-836c-c02e65f19f48",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/arctic_fox.prefab"
+                  },
+                  "SpawnChance": 0.2
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/fox.prefab"
+                  },
+                  "SpawnChance": 0.2
+                }
+              ],
+              "Radius": 2032.4812
+            }
+          ]
+        },
+        {
+          "__guid": "ac7d0822-3a84-4e85-a766-c953ade71a43",
+          "Name": "Foxes",
+          "Position": "-5556.589,2535.364,2655.93",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "__guid": "4e74db6b-edc9-46a5-ab67-b6448b0f2a6a",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/arctic_fox.prefab"
+                  },
+                  "SpawnChance": 0.2
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/fox.prefab"
+                  },
+                  "SpawnChance": 0.2
+                }
+              ],
+              "Radius": 2032.4812
+            }
+          ]
+        },
+        {
+          "__guid": "d889a702-a29b-48c5-8c9d-42578ba1db58",
+          "Name": "Hares",
+          "Position": "-6028.426,3786.176,2655.93",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "__guid": "86e76e0f-bbd0-49ff-922a-b2efc94c50e5",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/rabbit.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/arctic_hare.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/rabbit.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 1431.361
+            }
+          ]
+        },
+        {
+          "__guid": "bf9b3259-9e21-4de1-b51a-3260a7148385",
+          "Name": "Hares",
+          "Position": "-5997.164,-3022.811,2655.93",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "__guid": "83f1d050-95bd-4814-be43-fbe981fec768",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/rabbit.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/arctic_hare.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/rabbit.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 1431.361
+            }
+          ]
+        },
+        {
+          "__guid": "038f807a-b7b5-4389-b1bc-b8aaffbff83d",
+          "Name": "Hares",
+          "Position": "3939.859,6745.378,2655.931",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "__guid": "829daa53-eb59-4d95-8f38-c5be0f815ac0",
+              "Height": 1490.9595,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/rabbit.prefab"
+                  },
+                  "SpawnChance": 0.7
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/arctic_hare.prefab"
+                  },
+                  "SpawnChance": 0.4
+                },
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/rabbit.prefab"
+                  },
+                  "SpawnChance": 0.4
+                }
+              ],
+              "Radius": 1431.361
             }
           ]
         },
@@ -1756,13 +2040,6 @@
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/policeman.prefab"
                   },
-                  "SpawnChance": 1
-                },
-                {
-                  "Npc": {
-                    "_type": "gameobject",
-                    "prefab": "prefabs/npcs/people/policeman.prefab"
-                  },
                   "SpawnChance": 0.5
                 },
                 {
@@ -1770,28 +2047,28 @@
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_01.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_02.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_03.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_04.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 }
               ],
               "Radius": 400
@@ -1822,28 +2099,28 @@
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_01.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_02.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_03.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_04.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 }
               ],
               "Radius": 400
@@ -1874,35 +2151,35 @@
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_01.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_02.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_03.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/bystander_04.prefab"
                   },
-                  "SpawnChance": 0.4
+                  "SpawnChance": 0.2
                 },
                 {
                   "Npc": {
                     "_type": "gameobject",
                     "prefab": "prefabs/npcs/people/rude_drunkman.prefab"
                   },
-                  "SpawnChance": 1
+                  "SpawnChance": 0.6
                 }
               ],
               "Radius": 400
@@ -1913,7 +2190,7 @@
     },
     {
       "__guid": "d17d8a78-2e4d-44f8-b632-9494a33981c1",
-      "Name": "Wood Pile",
+      "Name": "WoodPile",
       "Position": "3513.14,-3071.946,2433.059",
       "Rotation": "-0.005849727,0.01420882,-0.3824195,0.9238611",
       "Enabled": true,
@@ -1967,7 +2244,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "b794a18d-4b5a-4cc1-91da-c707831b3432",
+                "component_id": "b4a57da0-95f3-46e8-8309-4e076f39e4fd",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -2000,11 +2277,10 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "BoxCollider",
-              "__guid": "6164904a-329b-4d83-a411-9226652d0438",
-              "Center": "-1.759999,0,17.52",
+              "__type": "ModelCollider",
+              "__guid": "88b6286c-bb99-4ba9-a163-cee1de6ff487",
               "IsTrigger": false,
-              "Scale": "49.60001,28.87996,57.36",
+              "Model": "models/stove/stove.vmdl",
               "Static": false
             }
           ],
@@ -2128,7 +2404,7 @@
         {
           "__guid": "a2fbda21-7bd6-442f-b626-c7104e198639",
           "Name": "Bench",
-          "Position": "52.34619,-50.6123,16.19263",
+          "Position": "52.25024,-50.51807,16.19263",
           "Rotation": "0,0,0.9238795,0.3826834",
           "Enabled": true,
           "NetworkMode": 1,
@@ -2146,7 +2422,7 @@
               "__guid": "3089fe8c-4f95-4bf6-8e41-9408e09ef3f7",
               "SeatTransform": {
                 "UniformScale": 1,
-                "Position": "15.05423,0.9352537,0.00000005574547",
+                "Position": "16,0,0.000004702372",
                 "Scale": "1,1,1",
                 "Rotation": "0,0,0,1"
               }
@@ -2184,7 +2460,7 @@
         {
           "__guid": "af739918-cb0b-4fbc-868f-f102393a7822",
           "Name": "Bench",
-          "Position": "82.66992,-20.29004,16.19263",
+          "Position": "82.67041,-20.29126,16.96313",
           "Rotation": "0,0,0.9238795,0.3826834",
           "Enabled": true,
           "NetworkMode": 1,
@@ -2202,7 +2478,7 @@
               "__guid": "cdbf5b59-38e5-4047-a993-c98539dc0bfd",
               "SeatTransform": {
                 "UniformScale": 1,
-                "Position": "14.47999,0,0",
+                "Position": "16.2,0,-0.0000274567",
                 "Scale": "1,1,1",
                 "Rotation": "0,0,0,1"
               }
@@ -2823,7 +3099,7 @@
           "Extents": "642.08,341.44,155.28",
           "MaxPollingRate": 15,
           "Offset": "0,0,0",
-          "TagsToDeny": "fish,meat,mushroom",
+          "TagsToDeny": "fish,meat,clothing",
           "TriggerSignalIdentifier": "supermarket.sold"
         }
       ],
@@ -3129,7 +3405,7 @@
           "__guid": "505686d8-5945-4fd9-b100-af62afe8b730",
           "Name": "shop_cereal_ape",
           "Position": "58.53906,-195.6025,49.32373",
-          "Rotation": "0,0,0.6775844,0.735445",
+          "Rotation": "0,0,0.6891169,0.7246503",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3148,7 +3424,7 @@
           "__guid": "051e3121-c68f-494c-a65f-1d764e5c4814",
           "Name": "shop_cereal_ape",
           "Position": "14.20117,-195.6025,49.32373",
-          "Rotation": "0,0,0.608563,0.7935055",
+          "Rotation": "0,0,0.8016306,0.5978197",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3167,7 +3443,7 @@
           "__guid": "a8eb1e0a-b975-4e09-bdf3-d6e0dfc57a53",
           "Name": "shop_cereal_ape",
           "Position": "44.58105,-195.6025,49.32373",
-          "Rotation": "0,0,0.7055898,0.7086204",
+          "Rotation": "0,0,0.4607208,0.887545",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3186,7 +3462,7 @@
           "__guid": "f1de5066-31e1-477f-8b42-bf1728cd35dd",
           "Name": "shop_cereal_ape",
           "Position": "29.14453,-195.6025,49.32373",
-          "Rotation": "0,0,0.7280539,0.6855197",
+          "Rotation": "0,0,0.9051212,0.4251533",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3196,7 +3472,7 @@
           "__guid": "ca54c6c8-b660-4509-8042-5683ebef2351",
           "Name": "shop_cereal_daves (7)",
           "Position": "-16.66113,-194.0791,49.33008",
-          "Rotation": "0,0,0.6682765,0.7439128",
+          "Rotation": "0,0,0.8479911,0.5300102",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3215,7 +3491,7 @@
           "__guid": "0c674dab-7c93-47ff-84c1-b96157ca0a95",
           "Name": "shop_cereal_daves (6)",
           "Position": "-31.47363,-195.7598,49.33008",
-          "Rotation": "0,0,0.7428079,0.6695044",
+          "Rotation": "0,0,0.6020355,0.7984692",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3234,7 +3510,7 @@
           "__guid": "e00ae644-b003-49aa-9656-5a97451ffee8",
           "Name": "shop_cereal_daves (5)",
           "Position": "-48.40137,-194.0791,49.33008",
-          "Rotation": "0,0,0.7226208,0.6912445",
+          "Rotation": "0,0,0.680481,0.7327655",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3253,7 +3529,7 @@
           "__guid": "8c8a89af-acfa-4f4a-856e-02e72386eab5",
           "Name": "shop_cereal_daves (4)",
           "Position": "-64.24512,-194.0791,49.33008",
-          "Rotation": "0,0,0.6682765,0.7439128",
+          "Rotation": "0,0,0.8485997,0.5290353",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3272,7 +3548,7 @@
           "__guid": "56e659a6-5c62-456b-a9fb-ba67969c858d",
           "Name": "shop_cereal_wheatleyos (7)",
           "Position": "-169.5771,-195.6025,49.16016",
-          "Rotation": "0,0,0.6508864,0.7591751",
+          "Rotation": "0,0,0.7193758,0.694621",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3291,7 +3567,7 @@
           "__guid": "90197d20-47c4-4557-b734-f1a4d2fc5597",
           "Name": "shop_cereal_wheatleyos (4)",
           "Position": "-217.6523,-195.6025,49.16016",
-          "Rotation": "0,0,0.7287468,0.6847832",
+          "Rotation": "0,0,0.833321,0.5527893",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3310,7 +3586,7 @@
           "__guid": "68efe9cc-c9c5-48bd-b500-2be6ae11cdce",
           "Name": "shop_cereal_wheatleyos (6)",
           "Position": "-185.5762,-195.6025,49.16016",
-          "Rotation": "0,0,0.752878,0.6581602",
+          "Rotation": "0,0,0.5432922,0.8395438",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3329,7 +3605,7 @@
           "__guid": "500d6958-2343-4d3e-8d13-93952c1804df",
           "Name": "shop_cereal_wheatleyos (5)",
           "Position": "-201.2939,-195.6025,49.16016",
-          "Rotation": "0,0,0.7114403,0.7027465",
+          "Rotation": "0,0,0.8607462,0.5090343",
           "Scale": "0.9,0.9,0.9",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3339,7 +3615,7 @@
           "__guid": "a00d4e7e-2f91-4ec2-a7fb-c3fa54b7f719",
           "Name": "shop_jam",
           "Position": "-0.1503906,-39.80762,33.73413",
-          "Rotation": "0,0,0.8522843,-0.523079",
+          "Rotation": "0,0,0.9427899,-0.3333876",
           "Scale": "1.3,1.3,1.3",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3369,7 +3645,7 @@
           "__guid": "9f404aa2-8fa4-4a1a-a68a-f3cbab37e4b3",
           "Name": "shop_jam (3)",
           "Position": "-1.884766,-5.098633,33.73413",
-          "Rotation": "0,0,0.8522843,-0.523079",
+          "Rotation": "0,0,0.735665,-0.6773458",
           "Scale": "1.3,1.3,1.3",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3379,7 +3655,7 @@
           "__guid": "7a74bc41-320a-404d-9602-d89459a4a455",
           "Name": "shop_jam (4)",
           "Position": "-5.037109,-0.2822266,15.37305",
-          "Rotation": "0,0,0.8522843,-0.523079",
+          "Rotation": "0,0,0.9928172,-0.1196419",
           "Scale": "1.3,1.3,1.3",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3389,7 +3665,7 @@
           "__guid": "725e06dc-29b7-445d-9bae-92a76368de4d",
           "Name": "shop_jam (5)",
           "Position": "-1.882812,-10.13574,15.37305",
-          "Rotation": "0,0,0.8522843,-0.523079",
+          "Rotation": "0,0,0.5701452,-0.8215441",
           "Scale": "1.3,1.3,1.3",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3399,7 +3675,7 @@
           "__guid": "85e33e9c-4cfc-4377-aad4-d7c58de43a9b",
           "Name": "shop_jam (6)",
           "Position": "-7.079102,-32.45605,15.37305",
-          "Rotation": "0,0,0.8522843,-0.523079",
+          "Rotation": "0,0,0.9458822,-0.3245106",
           "Scale": "1.3,1.3,1.3",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3419,7 +3695,7 @@
           "__guid": "c656f7ab-2028-4de5-bf45-0863987c6f30",
           "Name": "shop_jam (8)",
           "Position": "-0.3310547,-42.32227,15.37305",
-          "Rotation": "0,0,0.8522843,-0.523079",
+          "Rotation": "0,0,0.5701452,-0.8215441",
           "Scale": "1.3,1.3,1.3",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3439,7 +3715,7 @@
           "__guid": "cfc1b270-79e9-424c-a24b-044dc7e02ccd",
           "Name": "shop_mayo (1)",
           "Position": "-6.779297,-72.86523,-1.609863",
-          "Rotation": "0,0,0.7722319,-0.6353406",
+          "Rotation": "0,0,0.8922536,-0.4515343",
           "Scale": "1.3,1.3,1.3",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3459,7 +3735,7 @@
           "__guid": "092c7ea4-f731-4890-8409-5da700f7fa21",
           "Name": "shop_mayo (3)",
           "Position": "-7.317383,-113.3701,-1.609863",
-          "Rotation": "0,0,0.7722319,-0.6353406",
+          "Rotation": "0,0,0.8879697,-0.4599017",
           "Scale": "1.3,1.3,1.3",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3469,7 +3745,7 @@
           "__guid": "d27c0068-99ec-444d-91a5-7a2230e676d0",
           "Name": "shop_mayo (4)",
           "Position": "-1.367188,-102.8633,-1.609863",
-          "Rotation": "0,0,0.7722319,-0.6353406",
+          "Rotation": "0,0,0.4517201,-0.8921595",
           "Scale": "1.3,1.3,1.3",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3488,6 +3764,7 @@
           "__guid": "6a3ee222-aa36-432f-b776-0cf5416db65e",
           "Name": "shop_ketchup (1)",
           "Position": "-4.207031,-70.0918,15.68408",
+          "Rotation": "0,0,0.4019581,0.9156581",
           "Scale": "1.2,1.2,1.2",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3497,6 +3774,7 @@
           "__guid": "91519f63-497e-4906-86a9-755f9fc0b691",
           "Name": "shop_ketchup (2)",
           "Position": "-4.918945,-109.8447,15.68408",
+          "Rotation": "0,0,-0.2090125,0.977913",
           "Scale": "1.2,1.2,1.2",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3506,6 +3784,7 @@
           "__guid": "36ad2439-9106-459a-a546-2fbdd97051ac",
           "Name": "shop_ketchup (3)",
           "Position": "0.953125,-97.99121,15.68408",
+          "Rotation": "0,0,-0.2181958,0.975905",
           "Scale": "1.2,1.2,1.2",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3533,6 +3812,7 @@
           "__guid": "2a6fbec7-2a36-4d70-b02c-176d8c859535",
           "Name": "shop_mustard (1)",
           "Position": "-5.072266,-98.64355,32.73413",
+          "Rotation": "0,0,0.4019581,0.9156581",
           "Scale": "1.2,1.2,1.2",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3551,6 +3831,7 @@
           "__guid": "b6e81df0-c7ac-47ee-8fda-cfa4ee3594fd",
           "Name": "shop_mustard (3)",
           "Position": "-5.787109,-63.20605,32.73413",
+          "Rotation": "0,0,0.4019581,0.9156581",
           "Scale": "1.2,1.2,1.2",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3560,6 +3841,7 @@
           "__guid": "6e681920-93e3-43d1-82e8-d62c499dfe5f",
           "Name": "shop_mustard (4)",
           "Position": "-1.046875,-70.90723,32.73413",
+          "Rotation": "0,0,-0.4173528,0.9087445",
           "Scale": "1.2,1.2,1.2",
           "Enabled": true,
           "NetworkMode": 2,
@@ -3829,7 +4111,7 @@
           "__guid": "5ea84334-5800-42f9-b803-b2ec890a82ac",
           "Name": "shop_crisps_bad",
           "Position": "58.8623,-204.999,38.89917",
-          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Rotation": "-0.407068,0.3689937,0.6213268,0.5586521",
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
@@ -3838,7 +4120,7 @@
           "__guid": "aaf935d1-6807-46d4-87de-841a64a89758",
           "Name": "shop_crisps_bad (5)",
           "Position": "53.0293,-204.999,21.98315",
-          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Rotation": "-0.3523234,0.424491,0.564097,0.6143857",
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
@@ -3846,8 +4128,17 @@
         {
           "__guid": "b50bae18-2330-4714-b289-71529e87a62d",
           "Name": "shop_crisps_bad (1)",
-          "Position": "47.43555,-204.999,38.89917",
-          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Position": "47.43555,-204.999,36.54736",
+          "Rotation": "-0.2394058,0.3062571,0.6178185,0.6835141",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
+        },
+        {
+          "__guid": "6d41dcfa-7f5c-40b2-bba8-01e49257f258",
+          "Name": "shop_crisps_bad (1)",
+          "Position": "21.39355,-204.1445,35.81592",
+          "Rotation": "-0.2393856,0.2403556,0.6665215,0.6638318",
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
@@ -3855,17 +4146,8 @@
         {
           "__guid": "3289f28b-24a4-462f-bd14-269ac33adcfb",
           "Name": "shop_crisps_bad (4)",
-          "Position": "37.3418,-204.999,21.98315",
-          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
-          "Enabled": true,
-          "NetworkMode": 2,
-          "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
-        },
-        {
-          "__guid": "3c859e0f-982e-4196-91de-cf3c5c87e467",
-          "Name": "shop_crisps_bad (2)",
-          "Position": "23.875,-204.999,38.89917",
-          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Position": "37.3418,-202.7793,17.42065",
+          "Rotation": "-0.1999008,0.1011597,0.7251894,0.651081",
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
@@ -3873,8 +4155,8 @@
         {
           "__guid": "0704148d-b4e6-44ab-8f81-dd2b17eb9d35",
           "Name": "shop_crisps_bad (3)",
-          "Position": "13.78125,-204.999,21.98315",
-          "Rotation": "-0.3877113,0.3892822,0.5920144,0.5896254",
+          "Position": "13.78125,-204.999,17.5061",
+          "Rotation": "0.03460769,0.3740487,0.9092204,0.1794662",
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_crisps_bad.prefab"
@@ -3931,6 +4213,538 @@
               "LightColor": "0.73441,0.92092,0.96279,1",
               "Radius": 600,
               "Shadows": true
+            }
+          ]
+        },
+        {
+          "__guid": "1531c409-811a-40aa-b97b-db427c122dbc",
+          "Name": "shop_crisps_hamsteria",
+          "Position": "-17.6875,-203.0889,35.68604",
+          "Rotation": "-0.2512027,0.2323689,0.6897619,0.6380675",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_hamsteria.prefab"
+        },
+        {
+          "__guid": "3a5fceb7-7391-450e-bad2-065302e7d0c2",
+          "Name": "shop_crisps_hamsteria (1)",
+          "Position": "-40.05371,-203.0889,35.68604",
+          "Rotation": "-0.2192772,0.2627082,0.6020971,0.7213742",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_hamsteria.prefab"
+        },
+        {
+          "__guid": "78ab63be-24b5-43c1-97c1-c7289044269c",
+          "Name": "shop_crisps_hamsteria (2)",
+          "Position": "-59.33301,-203.0889,35.68604",
+          "Rotation": "-0.2647253,0.2168377,0.726894,0.5954216",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_hamsteria.prefab"
+        },
+        {
+          "__guid": "1a510d34-0c6d-427f-9605-036075f27e2b",
+          "Name": "shop_crisps_hamsteria (3)",
+          "Position": "-59.33301,-203.0889,18.729",
+          "Rotation": "-0.2419735,0.2419647,0.6644193,0.6644161",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_hamsteria.prefab"
+        },
+        {
+          "__guid": "83615585-c158-452b-b21e-95ca6ba57664",
+          "Name": "shop_crisps_hamsteria (4)",
+          "Position": "-48.8457,-203.0889,18.729",
+          "Rotation": "-0.1735553,0.2949181,0.4765489,0.8098166",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_hamsteria.prefab"
+        },
+        {
+          "__guid": "23c07f72-624a-4f57-8246-7296296c16b7",
+          "Name": "shop_crisps_hamsteria (5)",
+          "Position": "-25.70215,-203.0889,18.729",
+          "Rotation": "-0.2100209,0.2701654,0.5766802,0.7418502",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_hamsteria.prefab"
+        },
+        {
+          "__guid": "3a2241d8-b3a3-4c00-80e6-6a545aa4e44f",
+          "Name": "shop_crisps_talons",
+          "Position": "-169.5771,-203.0811,36.10303",
+          "Rotation": "-0.2762268,0.234258,0.6977177,0.6180713",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_talons.prefab"
+        },
+        {
+          "__guid": "c7f31050-8c7a-4af0-ae3c-8bd152e7aa8a",
+          "Name": "shop_crisps_talons (1)",
+          "Position": "-187.8154,-203.0811,36.10303",
+          "Rotation": "-0.2311477,0.2788347,0.5792562,0.7302631",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_talons.prefab"
+        },
+        {
+          "__guid": "29a9d4d0-f672-4768-a758-9a07b283f7a8",
+          "Name": "shop_crisps_talons (4)",
+          "Position": "-195.0771,-203.0811,19.37109",
+          "Rotation": "-0.2753006,0.2353458,0.6952742,0.6208187",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_talons.prefab"
+        },
+        {
+          "__guid": "6526f815-5077-4835-b887-e26237ea607c",
+          "Name": "shop_crisps_talons (5)",
+          "Position": "-179.124,-203.0811,16.33447",
+          "Rotation": "0.08405104,0.1900799,0.9608496,0.18323",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_talons.prefab"
+        },
+        {
+          "__guid": "58d63cfb-4349-4597-b25f-14431f93370e",
+          "Name": "shop_crisps_talons (2)",
+          "Position": "-200.8799,-203.0811,36.10303",
+          "Rotation": "-0.2905551,0.2162308,0.7355846,0.5724834",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_talons.prefab"
+        },
+        {
+          "__guid": "dc504bdf-24a7-4b12-ada4-74b526d1d795",
+          "Name": "shop_crisps_talons (3)",
+          "Position": "-209.5752,-203.0811,17.33984",
+          "Rotation": "-0.07439962,0.2237629,0.5339316,0.8119804",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_crisps_talons.prefab"
+        },
+        {
+          "__guid": "0dc902c3-c8d8-4652-b81f-5005e990db7c",
+          "Name": "shop_water_fresh",
+          "Position": "282.5308,81.02441,10.41309",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_water_fresh.prefab"
+        },
+        {
+          "__guid": "f6c62780-ff68-4d09-8642-014bc9fb70ff",
+          "Name": "shop_water_fresh (1)",
+          "Position": "286.0928,73.83008,10.41309",
+          "Rotation": "0,0,0.2559239,0.9666969",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_water_fresh.prefab"
+        },
+        {
+          "__guid": "48a2a14d-fd34-438e-8973-bb5b7eb6e1ae",
+          "Name": "shop_water_fresh (2)",
+          "Position": "282.397,54.32422,10.41309",
+          "Rotation": "0,0,-0.9451104,0.3267513",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_water_fresh.prefab"
+        },
+        {
+          "__guid": "ddaa0070-5af6-43dc-bce6-15a13e78f147",
+          "Name": "shop_water_fresh (3)",
+          "Position": "285.7559,47.48926,10.41309",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_water_fresh.prefab"
+        },
+        {
+          "__guid": "58831f27-0e30-4da4-800b-d9ed4d5b3a1b",
+          "Name": "shop_water_fresh (4)",
+          "Position": "282.0239,40.27734,10.41309",
+          "Rotation": "0,0,0.4287561,0.9034203",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_water_fresh.prefab"
+        },
+        {
+          "__guid": "673b416b-5d00-49fc-9d5f-c0af2c2a65e9",
+          "Name": "shop_water_aqua",
+          "Position": "284.3589,11.08301,10.41309",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_water_aqua.prefab"
+        },
+        {
+          "__guid": "7dcba146-7521-4aa2-aa34-41d09334049c",
+          "Name": "shop_water_aqua (1)",
+          "Position": "288.8428,4.924805,10.41309",
+          "Rotation": "0,0,-0.5711997,0.8208112",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_water_aqua.prefab"
+        },
+        {
+          "__guid": "1163a504-8fbd-4528-8d04-7ee00da930c3",
+          "Name": "shop_water_aqua (2)",
+          "Position": "283.7891,-1.716797,10.41309",
+          "Rotation": "0,0,-0.3266006,0.9451624",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_water_aqua.prefab"
+        },
+        {
+          "__guid": "9fefc1ae-f9d3-479d-9433-34c3c365f185",
+          "Name": "shop_water_aqua (3)",
+          "Position": "286.4629,-30.66016,10.41309",
+          "Rotation": "0,0,-0.7180607,0.6959805",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_water_aqua.prefab"
+        },
+        {
+          "__guid": "12335ae6-3e49-4d4d-979e-6dbc06354b46",
+          "Name": "shop_water_aqua (4)",
+          "Position": "282.8267,-41.06348,10.41309",
+          "Rotation": "0,0,0.1375348,0.9904969",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_water_aqua.prefab"
+        },
+        {
+          "__guid": "875c5401-8271-4d69-96d8-a7758418279a",
+          "Name": "shop_yogurt",
+          "Position": "283.3921,11.96973,27.07104",
+          "Rotation": "0,0,0.9927685,0.120044",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_yogurt.prefab"
+        },
+        {
+          "__guid": "a7325c21-ab83-4554-901e-0046865d38dd",
+          "Name": "shop_yogurt (1)",
+          "Position": "278.4229,4.397461,27.07104",
+          "Rotation": "0,0,0.8204027,0.571786",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_yogurt.prefab"
+        },
+        {
+          "__guid": "f4fa7bdb-5229-4585-be38-5ff334dc5adc",
+          "Name": "shop_yogurt (2)",
+          "Position": "283.0381,-14.6748,27.07104",
+          "Rotation": "0,0,0.9590305,-0.2833025",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_yogurt.prefab"
+        },
+        {
+          "__guid": "8922fb64-0769-4891-a5e0-8fd4a326c735",
+          "Name": "shop_yogurt (3)",
+          "Position": "279.5737,-26.02637,27.07104",
+          "Rotation": "0,0,0.8523654,0.5229465",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_yogurt.prefab"
+        },
+        {
+          "__guid": "e908ff07-e830-4b11-b846-14a6d6fee59e",
+          "Name": "shop_yogurt (4)",
+          "Position": "283.1729,-40.72266,27.07104",
+          "Rotation": "0,0,0.2203076,0.9754304",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_yogurt.prefab"
+        },
+        {
+          "__guid": "a00728a1-19c6-49ed-bc2e-360f08a45683",
+          "Name": "shop_protein_yogurt",
+          "Position": "282.1558,83.02539,27.07104",
+          "Rotation": "0,0,0.8402145,0.542254",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_protein_yogurt.prefab"
+        },
+        {
+          "__guid": "fc686a45-dade-4372-86b8-d51113a5442c",
+          "Name": "shop_protein_yogurt (1)",
+          "Position": "282.8989,68.89648,27.07104",
+          "Rotation": "0,0,0.997554,0.06989898",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_protein_yogurt.prefab"
+        },
+        {
+          "__guid": "9a0b7d84-4982-4b21-9b4c-849f155af0ef",
+          "Name": "shop_protein_yogurt (2)",
+          "Position": "282.0679,44.74609,27.07104",
+          "Rotation": "0,0,0.9957755,-0.09182026",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_protein_yogurt.prefab"
+        },
+        {
+          "__guid": "6940d4a7-d488-4e07-9a40-b43b3c25b618",
+          "Name": "shop_orange_yogurt",
+          "Position": "281.542,81.61426,40.13501",
+          "Rotation": "0,0,0.9975377,-0.07013024",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_orange_yogurt.prefab"
+        },
+        {
+          "__guid": "e3692ede-5a1f-455d-8543-563c536fd468",
+          "Name": "shop_orange_yogurt (1)",
+          "Position": "283.271,61.96387,40.13501",
+          "Rotation": "0,0,0.7053538,0.7088554",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_orange_yogurt.prefab"
+        },
+        {
+          "__guid": "493754a0-52b9-41d6-9210-1b2f1ca671ed",
+          "Name": "shop_orange_yogurt (2)",
+          "Position": "281.3247,48.2666,40.13501",
+          "Rotation": "0,0,0.9972717,0.07381844",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_orange_yogurt.prefab"
+        },
+        {
+          "__guid": "628e4fa0-8cf3-4d6c-9d3d-7a4caf425346",
+          "Name": "shop_orange_yogurt (3)",
+          "Position": "283.333,32.87598,40.13501",
+          "Rotation": "0,0,0.9143308,0.4049681",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_orange_yogurt.prefab"
+        },
+        {
+          "__guid": "563c7508-99dc-49fd-a4ef-6c30cae50297",
+          "Name": "shop_clothing_blank",
+          "Position": "-195.7998,-23.83789,26.81616",
+          "Rotation": "0,0,-0.9999999,0.0000001490116",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_clothing_blank.prefab"
+        },
+        {
+          "__guid": "a4f1d5a9-ad5e-485c-b72c-9228991ae0c8",
+          "Name": "shop_clothing_blank (1)",
+          "Position": "-184.375,-6.588867,21.82104",
+          "Rotation": "0,0,-0.9999999,0.0000001490116",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_clothing_blank.prefab"
+        },
+        {
+          "__guid": "73e36438-aff0-42a6-9409-27702db02f19",
+          "Name": "shop_clothing_blank (2)",
+          "Position": "-195.7412,-55.49609,26.81616",
+          "Rotation": "0,0,-0.9999999,0.0000001490116",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_clothing_blank.prefab"
+        },
+        {
+          "__guid": "b71058e8-d334-4c50-ae59-1f1a4487784c",
+          "Name": "shop_clothing_blank (3)",
+          "Position": "-184.3496,-86.83984,21.82104",
+          "Rotation": "0,0,-0.9999999,0.0000001490116",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_clothing_blank.prefab"
+        },
+        {
+          "__guid": "9db1cbaa-de5d-4124-aba4-07adf694689a",
+          "Name": "shop_clothing_blank (4)",
+          "Position": "-183.6367,-104.9746,21.82104",
+          "Rotation": "0,0,-0.9999999,0.0000001490116",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_clothing_blank.prefab"
+        },
+        {
+          "__guid": "ccfe256c-a962-4302-a833-9f5c74e08a94",
+          "Name": "shop_clothing_blank (5)",
+          "Position": "-214.8115,-105.585,26.81616",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_clothing_blank.prefab"
+        },
+        {
+          "__guid": "a40a3790-a8d7-4395-9ba9-644f81358d30",
+          "Name": "shop_clothing_blank (6)",
+          "Position": "-228.6758,-60.64355,21.82104",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_clothing_blank.prefab"
+        },
+        {
+          "__guid": "018afb71-0a17-49f9-bc2f-90f5d4a9296f",
+          "Name": "shop_clothing_blank (7)",
+          "Position": "-214.7822,-21.68652,26.81616",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_clothing_blank.prefab"
+        },
+        {
+          "__guid": "4c49a193-57a8-49c5-9910-7a11aba1fbdf",
+          "Name": "shop_clothing_blank (8)",
+          "Position": "-213.9668,-47.26367,26.81616",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_clothing_blank.prefab"
+        },
+        {
+          "__guid": "b0dfe1d8-ff30-4698-aee7-5cf37c158905",
+          "Name": "shop_beer_bottle",
+          "Position": "-94.34082,-199.9619,26.07153",
+          "Rotation": "0,0,0.8785721,-0.4776096",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "9031d4ca-1db5-450b-9d5f-57f5d14bb91b",
+          "Name": "shop_beer_bottle",
+          "Position": "-102.6094,-200.9395,39.26758",
+          "Rotation": "0,0,0.8785721,-0.4776096",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "5cf74882-686d-484d-863d-e9f2eca063e0",
+          "Name": "shop_beer_bottle",
+          "Position": "-94.07617,-199.3623,39.26758",
+          "Rotation": "0,0,0.8572994,0.514818",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "587b62d9-3639-4aba-a3b6-7295e2b261a2",
+          "Name": "shop_beer_bottle (1)",
+          "Position": "-105.5771,-195.6025,26.07153",
+          "Rotation": "0,0,0.9992647,-0.0383383",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "35a2530c-42d6-416c-abac-2392035aad37",
+          "Name": "shop_beer_bottle (1)",
+          "Position": "-111.3467,-199.7559,39.26758",
+          "Rotation": "0,0,0.8595462,-0.5110579",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "fde4d91d-ae17-4758-8212-e6bf71dbfb9e",
+          "Name": "shop_beer_bottle (2)",
+          "Position": "-111.9062,-199.6992,26.07153",
+          "Rotation": "0,0,0.8273484,0.5616889",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "c32eb8b1-d243-48bf-9a0f-2e59c8d3e8ad",
+          "Name": "shop_beer_bottle (3)",
+          "Position": "-100.709,-201.6826,26.07153",
+          "Rotation": "0,0,0.9831553,-0.1827719",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "d8f0172e-653e-4aae-b228-2eac059f1f9d",
+          "Name": "shop_beer_bottle (4)",
+          "Position": "-130.123,-199.6992,26.07153",
+          "Rotation": "0,0,0.9628174,-0.2701527",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "9f5da80c-c697-413a-a518-44a9499a7c1b",
+          "Name": "shop_beer_bottle (4)",
+          "Position": "-130.123,-199.6992,39.26758",
+          "Rotation": "0,0,0.9628174,-0.2701527",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "1db0ea66-b346-42ca-b33d-65d4cfd76f47",
+          "Name": "shop_beer_bottle (4)",
+          "Position": "-141.3486,-201.9014,39.26758",
+          "Rotation": "0,0,0.91751,-0.3977126",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "97427d95-db8f-4f6f-90da-131f313ae0dc",
+          "Name": "shop_beer_bottle (4)",
+          "Position": "-123.1367,-201.8418,39.26758",
+          "Rotation": "0,0,0.9755245,0.2198902",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "13422354-60e5-488c-82f2-7edd9dd1495e",
+          "Name": "Speaker",
+          "Position": "0,0,101.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SoundPointComponent",
+              "__guid": "542bc493-b2be-4595-a79d-42c70996d513",
+              "DistanceAttenuation": false,
+              "DistanceAttenuationOverride": false,
+              "Force2d": false,
+              "MaxRepeatTime": 1,
+              "MinRepeatTime": 1,
+              "Occlusion": false,
+              "OcclusionOverride": false,
+              "OcclusionRadius": 32,
+              "Pitch": 1,
+              "PlayOnStart": true,
+              "ReflectionOverride": false,
+              "Reflections": false,
+              "Repeat": false,
+              "SoundEvent": "sounds/music/zakkujo-ero_vaimosta-instrumental-loop.sound",
+              "SoundOverride": true,
+              "StopOnNew": true,
+              "Volume": 0.3
             }
           ]
         }
@@ -4178,6 +4992,36 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/objects/slot_machine.prefab"
+        },
+        {
+          "__guid": "801292c0-d90f-405b-b7f8-b1a1a22e38a1",
+          "Name": "Speaker",
+          "Position": "0,0,106.2202",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SoundPointComponent",
+              "__guid": "1aa38e8e-0ba0-40f4-926b-d98557b1e4a7",
+              "DistanceAttenuation": false,
+              "DistanceAttenuationOverride": false,
+              "Force2d": false,
+              "MaxRepeatTime": 1,
+              "MinRepeatTime": 1,
+              "Occlusion": false,
+              "OcclusionOverride": false,
+              "OcclusionRadius": 32,
+              "Pitch": 1,
+              "PlayOnStart": true,
+              "ReflectionOverride": false,
+              "Reflections": false,
+              "Repeat": false,
+              "SoundEvent": "sounds/music/dawdle-gus_and_the_ganders_-_surfin_81__loop_game.sound",
+              "SoundOverride": true,
+              "StopOnNew": true,
+              "Volume": 0.3
+            }
+          ]
         }
       ]
     },
@@ -4204,7 +5048,7 @@
           "Extents": "250,400,300",
           "MaxPollingRate": 10,
           "Offset": "0,0,0",
-          "TagsToAccept": "meat,fish,mushroom",
+          "TagsToAccept": "meat,fish",
           "TriggerSignalIdentifier": "huntingshop_sold"
         }
       ],
@@ -4444,6 +5288,36 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_can_of_meat.prefab"
+        },
+        {
+          "__guid": "c739e5d5-696c-49f1-a588-a96ce277c284",
+          "Name": "Speaker",
+          "Position": "0,0,91.26465",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SoundPointComponent",
+              "__guid": "64aacddc-cda7-4ab7-b0f6-6d5bbb6f6bf3",
+              "DistanceAttenuation": false,
+              "DistanceAttenuationOverride": false,
+              "Force2d": false,
+              "MaxRepeatTime": 1,
+              "MinRepeatTime": 1,
+              "Occlusion": false,
+              "OcclusionOverride": false,
+              "OcclusionRadius": 32,
+              "Pitch": 1,
+              "PlayOnStart": true,
+              "ReflectionOverride": false,
+              "Reflections": false,
+              "Repeat": false,
+              "SoundEvent": "sounds/music/dawdle-gus_and_the_ganders_-_surfin_81__loop_game.sound",
+              "SoundOverride": true,
+              "StopOnNew": true,
+              "Volume": 0.2
+            }
+          ]
         }
       ]
     },
@@ -4511,6 +5385,451 @@
               "Shadows": true
             }
           ]
+        },
+        {
+          "__guid": "4d97ea9e-f361-4ed2-afa9-ea7db6aa6164",
+          "Name": "shop_bread (2)",
+          "Position": "-120.4819,121.8188,57.74609",
+          "Rotation": "0,0,0.9569823,0.2901458",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "acc92077-bc9c-447f-95e4-330f8732f9e5",
+          "Name": "shop_bread (3)",
+          "Position": "-119.7251,136.4448,57.74609",
+          "Rotation": "0,0,0.1564211,0.9876903",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "58ec3b71-5aec-47a3-8ff7-0eaa3875580d",
+          "Name": "shop_bread (1)",
+          "Position": "-119.8438,106.2436,40.4668",
+          "Rotation": "0,0,0.0375911,0.999293",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "281f5fe4-08ee-46ce-abb8-3eeea948f5fe",
+          "Name": "shop_bread",
+          "Position": "-119.5679,90.84521,57.74609",
+          "Rotation": "0,0,0.2359025,0.9717765",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_bread.prefab"
+        },
+        {
+          "__guid": "583a5f95-767c-4d3e-ab7b-834cc3f319c8",
+          "Name": "shop_ketchup",
+          "Position": "-118.4868,69.37439,6.653076",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_ketchup.prefab"
+        },
+        {
+          "__guid": "44a61462-6b23-491c-8b88-71d567620390",
+          "Name": "shop_ketchup (1)",
+          "Position": "-121.1167,58.88519,6.653076",
+          "Rotation": "0,0,0.4019581,0.9156581",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_ketchup.prefab"
+        },
+        {
+          "__guid": "c7b3d2db-bbf5-4093-9f76-a0b120c99a3e",
+          "Name": "shop_ketchup (4)",
+          "Position": "-122.7871,42.6528,6.653076",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_ketchup.prefab"
+        },
+        {
+          "__guid": "64b498d3-274d-4fad-88aa-af0e7b61f314",
+          "Name": "shop_ketchup (2)",
+          "Position": "-121.8291,19.13229,6.653076",
+          "Rotation": "0,0,-0.2090125,0.977913",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_ketchup.prefab"
+        },
+        {
+          "__guid": "3fcf81aa-3b95-40ba-a388-c2a6f49eb8a1",
+          "Name": "shop_ketchup (3)",
+          "Position": "-115.957,30.98581,6.653076",
+          "Rotation": "0,0,-0.2181958,0.975905",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_ketchup.prefab"
+        },
+        {
+          "__guid": "a3cb9088-d9b2-4dbc-8544-c673fd54f886",
+          "Name": "shop_mustard",
+          "Position": "-117.8608,17.5502,23.7041",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mustard.prefab"
+        },
+        {
+          "__guid": "71c19570-c7df-4000-906a-48833b644533",
+          "Name": "shop_mustard (1)",
+          "Position": "-121.9829,30.3334,39.97681",
+          "Rotation": "0,0,0.4019581,0.9156581",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mustard.prefab"
+        },
+        {
+          "__guid": "30c4b29d-5611-44b6-a656-438a74807bd0",
+          "Name": "shop_mustard (2)",
+          "Position": "-116.5781,38.98871,23.7041",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mustard.prefab"
+        },
+        {
+          "__guid": "4c105471-5617-4e7c-9c39-c765a17eeae1",
+          "Name": "shop_mustard (4)",
+          "Position": "-117.957,58.06979,40.41309",
+          "Rotation": "0,0,-0.4173528,0.9087445",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mustard.prefab"
+        },
+        {
+          "__guid": "fd83b9b2-d266-4694-b456-45d5ca0e765a",
+          "Name": "shop_mustard (3)",
+          "Position": "-122.6968,65.7709,23.7041",
+          "Rotation": "0,0,0.4019581,0.9156581",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_mustard.prefab"
+        },
+        {
+          "__guid": "7549d1ec-f7c5-4304-a914-3f3744016758",
+          "Name": "shop_gas_canister",
+          "Position": "70.4541,-177.6001,36.74512",
+          "Rotation": "0,0,-0.5546754,0.8320667",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_gas_canister.prefab"
+        },
+        {
+          "__guid": "eb41bd2e-53de-4b76-b2c1-ff801c5ebf21",
+          "Name": "shop_gas_canister (4)",
+          "Position": "81.79004,-215.1855,30.28711",
+          "Rotation": "0,0,0.526755,0.8500171",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_gas_canister.prefab"
+        },
+        {
+          "__guid": "c9b8320f-a0dc-4d90-9b24-64528e82d0d5",
+          "Name": "shop_gas_canister (5)",
+          "Position": "34.8623,-258.9048,30.28711",
+          "Rotation": "0,0,0.7186254,0.6953973",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_gas_canister.prefab"
+        },
+        {
+          "__guid": "bd9b9156-a9bd-41b8-b84c-d9c01fba7f99",
+          "Name": "shop_gas_canister (1)",
+          "Position": "69.86426,-253.3431,36.74512",
+          "Rotation": "0,0,-0.6124353,0.7905206",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_gas_canister.prefab"
+        },
+        {
+          "__guid": "9bef9f3a-85a0-4514-9673-25eda1269c80",
+          "Name": "shop_gas_canister (2)",
+          "Position": "50.48291,-184.177,36.74512",
+          "Rotation": "0,0,0.5526699,0.8334001",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_gas_canister.prefab"
+        },
+        {
+          "__guid": "772aa624-0697-4dbd-a521-0c8fea5cd497",
+          "Name": "shop_gas_canister (3)",
+          "Position": "49.31592,-215.8329,36.74512",
+          "Rotation": "0,0,-0.6018556,0.7986048",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_gas_canister.prefab"
+        },
+        {
+          "__guid": "0249e92b-34cb-4693-9ea7-ca95bb7f5394",
+          "Name": "shop_liqourice",
+          "Position": "-2269.217,8344.445,35.66797",
+          "Rotation": "0.1091868,0.118695,-0.7263353,0.6681515",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_liqourice.prefab"
+        },
+        {
+          "__guid": "09c48c7a-8a36-4ebf-9ddc-3d28dcf42a1d",
+          "Name": "shop_liqourice (1)",
+          "Position": "-2288.932,8341.105,35.74512",
+          "Rotation": "0,0,-0.7359698,0.6770142",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_liqourice.prefab"
+        },
+        {
+          "__guid": "fc5506bd-013d-407e-984f-59c0112b680a",
+          "Name": "shop_liqourice (2)",
+          "Position": "-2235.313,8339.818,35.74512",
+          "Rotation": "0,0,-0.5782333,0.8158713",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_liqourice.prefab"
+        },
+        {
+          "__guid": "56371ccb-67e8-405e-8bc7-528190d6438b",
+          "Name": "shop_liqourice (3)",
+          "Position": "-2273.953,8328.734,29.61499",
+          "Rotation": "0,0,-0.5900919,0.8073359",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_liqourice.prefab"
+        },
+        {
+          "__guid": "6e3d1f60-3b9f-44c3-b589-7b9caaa06828",
+          "Name": "shop_liqourice (4)",
+          "Position": "-2243.222,8328.734,29.61499",
+          "Rotation": "0,0,-0.7678357,0.6406466",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_liqourice.prefab"
+        },
+        {
+          "__guid": "910e93bb-bd38-4a57-9d1f-98e274a77e26",
+          "Name": "shop_car_wheel",
+          "Position": "80.6709,-153.5345,5.76416",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "1f616390-e0cd-42bc-b7d4-c257ffc9a6bb",
+          "Name": "shop_car_wheel (5)",
+          "Position": "81.05518,-153.5331,17.20605",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "c3ca76df-8382-4865-a189-524351789460",
+          "Name": "shop_car_wheel (8)",
+          "Position": "80.1792,-153.5363,28.66504",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "40327c96-ec9e-4d07-96ce-d58a25b56311",
+          "Name": "shop_car_wheel (11)",
+          "Position": "72.40723,-153.5324,39.75098",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "e7a932ce-1a82-428a-97ab-353e8098406e",
+          "Name": "shop_car_wheel (1)",
+          "Position": "39.56689,-151.2133,5.76416",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "a8987dde-f7e7-4682-a92e-cf8d1a37fe64",
+          "Name": "shop_car_wheel (4)",
+          "Position": "38.6333,-151.5883,17.20605",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "531940a9-cb46-4fe8-9bdf-c5ab3abf92bb",
+          "Name": "shop_car_wheel (7)",
+          "Position": "38.93213,-151.2133,28.66504",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "8fd85928-19d8-4b63-9d78-5e33b9a8a278",
+          "Name": "shop_car_wheel (2)",
+          "Position": "59.05322,-152.6743,5.76416",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "f6bd678e-c1c8-4dca-a383-b74c8c528f7b",
+          "Name": "shop_car_wheel (3)",
+          "Position": "59.4209,-153.8398,17.20605",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "c0cea38f-7882-411c-908c-7ab4ab9198d5",
+          "Name": "shop_car_wheel (6)",
+          "Position": "59.05322,-152.6743,28.66504",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "0bef3d89-ac9a-42b7-ae47-225c186f4c28",
+          "Name": "shop_car_wheel (9)",
+          "Position": "51.13428,-152.6709,39.75098",
+          "Rotation": "-0.7071067,0,0,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_car_wheel.prefab"
+        },
+        {
+          "__guid": "f8c9fe87-6ac3-4724-8225-643bd8c60d41",
+          "Name": "shop_beer_bottle (6)",
+          "Position": "-2509.241,8051.484,35.00049",
+          "Rotation": "0,0,0.9993039,0.03730021",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "1fa4052c-084b-4de3-8cdb-f6bc31cef6d9",
+          "Name": "shop_beer_bottle (5)",
+          "Position": "-2504.513,8046.901,35.00049",
+          "Rotation": "0,0,0.9831553,-0.1827719",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "1c0ad33d-ca83-4198-857d-c6b91d7aa05a",
+          "Name": "shop_beer_bottle (7)",
+          "Position": "101.394,-363.2368,47.89673",
+          "Rotation": "0,0,0.9755245,0.2198902",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "8edf6170-b202-494e-bb22-b990fbe75987",
+          "Name": "shop_beer_bottle (8)",
+          "Position": "113.1841,-361.1509,47.89673",
+          "Rotation": "0,0,0.8595462,-0.5110579",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "b4a596a9-5c2b-489d-ac09-900c6b23ddc8",
+          "Name": "shop_beer_bottle (9)",
+          "Position": "123.8218,-363.0776,34.70068",
+          "Rotation": "0,0,0.9831553,-0.1827719",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "f75320db-7e18-420f-9f7b-9799b80bfce8",
+          "Name": "shop_beer_bottle (10)",
+          "Position": "130.4546,-360.7573,47.89673",
+          "Rotation": "0,0,0.8572994,0.514818",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "18251f8d-6783-4ca8-aeb0-416cfa5bb148",
+          "Name": "shop_beer_bottle (11)",
+          "Position": "87.98682,-364.4966,34.70068",
+          "Rotation": "0,0,0.9831553,-0.1827719",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "3ab1313b-4d55-42dc-ba01-9bcd183a65fd",
+          "Name": "shop_beer_bottle (12)",
+          "Position": "83.18213,-363.2964,47.89673",
+          "Rotation": "0,0,0.91751,-0.3977126",
+          "Scale": "1.2,1.2,1.2",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "a15fdf5e-9e10-4aeb-a06f-797ad81b9fb3",
+          "Name": "Speaker",
+          "Position": "0,0,92.56001",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "SoundPointComponent",
+              "__guid": "fa3b6381-6151-4594-b91e-b9c5c32c79f3",
+              "DistanceAttenuation": false,
+              "DistanceAttenuationOverride": false,
+              "Force2d": false,
+              "MaxRepeatTime": 1,
+              "MinRepeatTime": 1,
+              "Occlusion": false,
+              "OcclusionOverride": false,
+              "OcclusionRadius": 32,
+              "Pitch": 1,
+              "PlayOnStart": true,
+              "ReflectionOverride": false,
+              "Reflections": false,
+              "Repeat": false,
+              "SoundEvent": "sounds/music/zakkujo-ero_vaimosta-instrumental-loop.sound",
+              "SoundOverride": true,
+              "StopOnNew": true,
+              "Volume": 0.3
+            }
+          ]
         }
       ]
     },
@@ -4523,7 +5842,7 @@
         {
           "__guid": "26dd6920-563e-42ad-ac7d-08273f6eaec4",
           "Name": "crazy_attack_deer",
-          "Position": "3832,-2360,2400",
+          "Position": "2357.299,-1652.891,2400",
           "Rotation": "0.01374025,0.01333649,-0.717446,0.6963509",
           "Enabled": true,
           "NetworkMode": 2,
@@ -4531,7 +5850,7 @@
         },
         {
           "__guid": "20106d14-cab8-452a-9387-b8865e9272f2",
-          "Name": "Crashed Car",
+          "Name": "drive_car",
           "Position": "2107.093,-1636.722,2448",
           "Rotation": "0.002460414,0.007778124,-0.7378321,0.6749348",
           "Enabled": true,
@@ -4539,1260 +5858,12 @@
           "__Prefab": "prefabs/events/drive_car.prefab"
         },
         {
-          "__guid": "70e11655-f958-45c7-8eaf-40c411866039",
+          "__guid": "907db72f-e744-4ae5-90ce-86c14f65c712",
           "Name": "car_speeding",
           "Position": "-7744,6640,2440",
           "Enabled": true,
           "NetworkMode": 2,
-          "Components": [
-            {
-              "__type": "EventDefinition",
-              "__guid": "6bcfa832-8846-475d-a723-6f995741e4e3",
-              "AddToEventPool": true,
-              "EventName": "car_speeding_event",
-              "EventSignals": [
-                null
-              ],
-              "Rarity": "Common",
-              "ReinstantiateOnRestart": false,
-              "Stackable": true,
-              "Type": "Zone"
-            },
-            {
-              "__type": "EventComponent",
-              "__guid": "96783f70-9c57-480b-bf18-006636cac8a0",
-              "__enabled": false,
-              "DisabledWhilePlaying": [],
-              "DisableOnTrigger": [],
-              "Event": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Event",
-                  "id": "d149da58-b798-47a7-9087-9f5e57a4366d",
-                  "ReferencedComponentTypes": []
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input",
-                    "UserData": {
-                      "Position": "-96,-80"
-                    }
-                  },
-                  {
-                    "Id": 2,
-                    "Type": "scene.ref",
-                    "Properties": {
-                      "gameobject": {
-                        "_type": "gameobject",
-                        "go": "af3badb3-0af9-413d-96b1-cefc95d4d34e"
-                      }
-                    },
-                    "UserData": {
-                      "Position": "0,96",
-                      "Labels": {
-                        "_result": "car"
-                      }
-                    }
-                  },
-                  {
-                    "Id": 4,
-                    "Type": "property.get",
-                    "ParentId": 2,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameObject",
-                      "_name": "Transform"
-                    }
-                  },
-                  {
-                    "Id": 6,
-                    "Type": "scene.ref",
-                    "Properties": {
-                      "gameobject": {
-                        "_type": "gameobject",
-                        "go": "df8573a4-17be-4780-8fc1-1071685b5751"
-                      }
-                    },
-                    "UserData": {
-                      "Position": "0,224"
-                    }
-                  },
-                  {
-                    "Id": 7,
-                    "Type": "property.get",
-                    "ParentId": 6,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameObject",
-                      "_name": "Transform"
-                    },
-                    "UserData": {
-                      "Visible": false
-                    }
-                  },
-                  {
-                    "Id": 10,
-                    "Type": "event.interpolateposition",
-                    "UserData": {
-                      "Position": "320,-0"
-                    }
-                  },
-                  {
-                    "Id": 11,
-                    "Type": "property.get",
-                    "ParentId": 4,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "Position"
-                    },
-                    "UserData": {
-                      "Labels": {
-                        "_result": "car_pos"
-                      }
-                    }
-                  },
-                  {
-                    "Id": 12,
-                    "Type": "property.get",
-                    "ParentId": 6,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameObject",
-                      "_name": "Transform"
-                    },
-                    "UserData": {
-                      "Visible": false
-                    }
-                  },
-                  {
-                    "Id": 13,
-                    "Type": "property.get",
-                    "ParentId": 12,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "Position"
-                    }
-                  },
-                  {
-                    "Id": 17,
-                    "Type": "scene.ref",
-                    "Properties": {
-                      "gameobject": {
-                        "_type": "gameobject",
-                        "go": "c10bf95c-5ad3-49a0-8e07-293c901d4bd4"
-                      }
-                    },
-                    "UserData": {
-                      "Position": "-0,320"
-                    }
-                  },
-                  {
-                    "Id": 22,
-                    "Type": "property.get",
-                    "ParentId": 17,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameObject",
-                      "_name": "Transform"
-                    },
-                    "UserData": {
-                      "Visible": false
-                    }
-                  },
-                  {
-                    "Id": 23,
-                    "Type": "property.get",
-                    "ParentId": 22,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "Position"
-                    }
-                  },
-                  {
-                    "Id": 24,
-                    "Type": "property.get",
-                    "ParentId": 22,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "LocalRotation"
-                    }
-                  },
-                  {
-                    "Id": 29,
-                    "Type": "scene.ref",
-                    "Properties": {
-                      "gameobject": {
-                        "_type": "gameobject",
-                        "go": "35f54ba5-c7a9-4f2b-8d0b-39ddc57de724"
-                      }
-                    },
-                    "UserData": {
-                      "Position": "-0,432"
-                    }
-                  },
-                  {
-                    "Id": 30,
-                    "Type": "property.get",
-                    "ParentId": 29,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameObject",
-                      "_name": "Transform"
-                    },
-                    "UserData": {
-                      "Visible": false
-                    }
-                  },
-                  {
-                    "Id": 31,
-                    "Type": "property.get",
-                    "ParentId": 30,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "Position"
-                    }
-                  },
-                  {
-                    "Id": 32,
-                    "Type": "property.get",
-                    "ParentId": 30,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "LocalRotation"
-                    }
-                  },
-                  {
-                    "Id": 33,
-                    "Type": "scene.ref",
-                    "Properties": {
-                      "gameobject": {
-                        "_type": "gameobject",
-                        "go": "cc4cffc2-6e85-4c4c-b619-645ea0001609"
-                      }
-                    },
-                    "UserData": {
-                      "Position": "0,544"
-                    }
-                  },
-                  {
-                    "Id": 34,
-                    "Type": "property.get",
-                    "ParentId": 33,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameObject",
-                      "_name": "Transform"
-                    },
-                    "UserData": {
-                      "Visible": false
-                    }
-                  },
-                  {
-                    "Id": 35,
-                    "Type": "property.get",
-                    "ParentId": 34,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "Position"
-                    }
-                  },
-                  {
-                    "Id": 36,
-                    "Type": "property.get",
-                    "ParentId": 34,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "LocalRotation"
-                    }
-                  },
-                  {
-                    "Id": 37,
-                    "Type": "scene.ref",
-                    "Properties": {
-                      "gameobject": {
-                        "_type": "gameobject",
-                        "go": "8a5298f9-a5cf-4c4f-beb6-01d29cf1b68c"
-                      }
-                    },
-                    "UserData": {
-                      "Position": "0,656"
-                    }
-                  },
-                  {
-                    "Id": 38,
-                    "Type": "property.get",
-                    "ParentId": 37,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameObject",
-                      "_name": "Transform"
-                    },
-                    "UserData": {
-                      "Visible": false
-                    }
-                  },
-                  {
-                    "Id": 39,
-                    "Type": "property.get",
-                    "ParentId": 38,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "Position"
-                    }
-                  },
-                  {
-                    "Id": 40,
-                    "Type": "property.get",
-                    "ParentId": 38,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "LocalRotation"
-                    }
-                  },
-                  {
-                    "Id": 47,
-                    "Type": "event.interpolateposition",
-                    "UserData": {
-                      "Position": "560,176"
-                    }
-                  },
-                  {
-                    "Id": 48,
-                    "Type": "event.interpolaterotation",
-                    "UserData": {
-                      "Position": "560,336"
-                    }
-                  },
-                  {
-                    "Id": 49,
-                    "Type": "property.get",
-                    "ParentId": 4,
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameTransform",
-                      "_name": "Rotation"
-                    },
-                    "UserData": {
-                      "Labels": {
-                        "_result": "car_rot"
-                      }
-                    }
-                  },
-                  {
-                    "Id": 50,
-                    "Type": "event.interpolateposition",
-                    "UserData": {
-                      "Position": "816,176"
-                    }
-                  },
-                  {
-                    "Id": 51,
-                    "Type": "event.interpolaterotation",
-                    "UserData": {
-                      "Position": "816,336"
-                    }
-                  },
-                  {
-                    "Id": 52,
-                    "Type": "event.interpolateposition",
-                    "UserData": {
-                      "Position": "1056,176"
-                    }
-                  },
-                  {
-                    "Id": 53,
-                    "Type": "event.interpolaterotation",
-                    "UserData": {
-                      "Position": "1056,336"
-                    }
-                  },
-                  {
-                    "Id": 54,
-                    "Type": "event.interpolateposition",
-                    "UserData": {
-                      "Position": "1296,176"
-                    }
-                  },
-                  {
-                    "Id": 55,
-                    "Type": "event.interpolaterotation",
-                    "UserData": {
-                      "Position": "1296,336"
-                    }
-                  },
-                  {
-                    "Id": 58,
-                    "Type": "event.finished",
-                    "UserData": {
-                      "Position": "1808,240"
-                    }
-                  },
-                  {
-                    "Id": 60,
-                    "Type": "scene.ref",
-                    "Properties": {
-                      "component": {
-                        "_type": "component",
-                        "component_id": "96783f70-9c57-480b-bf18-006636cac8a0",
-                        "go": "70e11655-f958-45c7-8eaf-40c411866039",
-                        "component_type": "EventComponent"
-                      }
-                    },
-                    "UserData": {
-                      "Position": "1728,448"
-                    }
-                  },
-                  {
-                    "Id": 63,
-                    "Type": "call",
-                    "Properties": {
-                      "_isStatic": false,
-                      "_type": "Sandbox.Game/Sandbox.GameObject",
-                      "_name": "Destroy"
-                    },
-                    "UserData": {
-                      "Position": "1552,208"
-                    }
-                  },
-                  {
-                    "Id": 64,
-                    "Type": "property.set",
-                    "Properties": {
-                      "_type": "Sandbox.Game/Sandbox.GameObject",
-                      "_name": "Enabled"
-                    },
-                    "UserData": {
-                      "Position": "80,-80"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 4,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 6,
-                    "SrcName": "_result",
-                    "DstId": 7,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 64,
-                    "SrcName": "_signal",
-                    "DstId": 10,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 2,
-                    "DstId": 10,
-                    "DstName": "duration"
-                  },
-                  {
-                    "Value": "Linear",
-                    "DstId": 10,
-                    "DstName": "easer"
-                  },
-                  {
-                    "SrcId": 11,
-                    "SrcName": "_result",
-                    "DstId": 10,
-                    "DstName": "from"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 10,
-                    "DstName": "target"
-                  },
-                  {
-                    "SrcId": 13,
-                    "SrcName": "_result",
-                    "DstId": 10,
-                    "DstName": "to"
-                  },
-                  {
-                    "SrcId": 4,
-                    "SrcName": "_result",
-                    "DstId": 11,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 6,
-                    "SrcName": "_result",
-                    "DstId": 12,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 12,
-                    "SrcName": "_result",
-                    "DstId": 13,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 17,
-                    "SrcName": "_result",
-                    "DstId": 22,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 22,
-                    "SrcName": "_result",
-                    "DstId": 23,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 22,
-                    "SrcName": "_result",
-                    "DstId": 24,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 29,
-                    "SrcName": "_result",
-                    "DstId": 30,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 30,
-                    "SrcName": "_result",
-                    "DstId": 31,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 30,
-                    "SrcName": "_result",
-                    "DstId": 32,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 33,
-                    "SrcName": "_result",
-                    "DstId": 34,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 34,
-                    "SrcName": "_result",
-                    "DstId": 35,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 34,
-                    "SrcName": "_result",
-                    "DstId": 36,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 37,
-                    "SrcName": "_result",
-                    "DstId": 38,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 38,
-                    "SrcName": "_result",
-                    "DstId": 39,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 38,
-                    "SrcName": "_result",
-                    "DstId": 40,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 10,
-                    "SrcName": "_signal",
-                    "DstId": 47,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 0.5,
-                    "DstId": 47,
-                    "DstName": "duration"
-                  },
-                  {
-                    "Value": "Linear",
-                    "DstId": 47,
-                    "DstName": "easer"
-                  },
-                  {
-                    "SrcId": 11,
-                    "SrcName": "_result",
-                    "DstId": 47,
-                    "DstName": "from"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 47,
-                    "DstName": "target"
-                  },
-                  {
-                    "SrcId": 23,
-                    "SrcName": "_result",
-                    "DstId": 47,
-                    "DstName": "to"
-                  },
-                  {
-                    "SrcId": 10,
-                    "SrcName": "_signal",
-                    "DstId": 48,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 0.5,
-                    "DstId": 48,
-                    "DstName": "duration"
-                  },
-                  {
-                    "Value": "Linear",
-                    "DstId": 48,
-                    "DstName": "easer"
-                  },
-                  {
-                    "SrcId": 49,
-                    "SrcName": "_result",
-                    "DstId": 48,
-                    "DstName": "from"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 48,
-                    "DstName": "target"
-                  },
-                  {
-                    "SrcId": 24,
-                    "SrcName": "_result",
-                    "DstId": 48,
-                    "DstName": "to"
-                  },
-                  {
-                    "SrcId": 4,
-                    "SrcName": "_result",
-                    "DstId": 49,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 47,
-                    "SrcName": "_signal",
-                    "DstId": 50,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 0.5,
-                    "DstId": 50,
-                    "DstName": "duration"
-                  },
-                  {
-                    "Value": "Linear",
-                    "DstId": 50,
-                    "DstName": "easer"
-                  },
-                  {
-                    "SrcId": 11,
-                    "SrcName": "_result",
-                    "DstId": 50,
-                    "DstName": "from"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 50,
-                    "DstName": "target"
-                  },
-                  {
-                    "SrcId": 31,
-                    "SrcName": "_result",
-                    "DstId": 50,
-                    "DstName": "to"
-                  },
-                  {
-                    "SrcId": 48,
-                    "SrcName": "_signal",
-                    "DstId": 51,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 0.5,
-                    "DstId": 51,
-                    "DstName": "duration"
-                  },
-                  {
-                    "Value": "Linear",
-                    "DstId": 51,
-                    "DstName": "easer"
-                  },
-                  {
-                    "SrcId": 49,
-                    "SrcName": "_result",
-                    "DstId": 51,
-                    "DstName": "from"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 51,
-                    "DstName": "target"
-                  },
-                  {
-                    "SrcId": 32,
-                    "SrcName": "_result",
-                    "DstId": 51,
-                    "DstName": "to"
-                  },
-                  {
-                    "SrcId": 50,
-                    "SrcName": "_signal",
-                    "DstId": 52,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 0.8,
-                    "DstId": 52,
-                    "DstName": "duration"
-                  },
-                  {
-                    "Value": "Linear",
-                    "DstId": 52,
-                    "DstName": "easer"
-                  },
-                  {
-                    "SrcId": 11,
-                    "SrcName": "_result",
-                    "DstId": 52,
-                    "DstName": "from"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 52,
-                    "DstName": "target"
-                  },
-                  {
-                    "SrcId": 35,
-                    "SrcName": "_result",
-                    "DstId": 52,
-                    "DstName": "to"
-                  },
-                  {
-                    "SrcId": 51,
-                    "SrcName": "_signal",
-                    "DstId": 53,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 0.8,
-                    "DstId": 53,
-                    "DstName": "duration"
-                  },
-                  {
-                    "Value": "Linear",
-                    "DstId": 53,
-                    "DstName": "easer"
-                  },
-                  {
-                    "SrcId": 49,
-                    "SrcName": "_result",
-                    "DstId": 53,
-                    "DstName": "from"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 53,
-                    "DstName": "target"
-                  },
-                  {
-                    "SrcId": 36,
-                    "SrcName": "_result",
-                    "DstId": 53,
-                    "DstName": "to"
-                  },
-                  {
-                    "SrcId": 52,
-                    "SrcName": "_signal",
-                    "DstId": 54,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 3,
-                    "DstId": 54,
-                    "DstName": "duration"
-                  },
-                  {
-                    "Value": "Linear",
-                    "DstId": 54,
-                    "DstName": "easer"
-                  },
-                  {
-                    "SrcId": 11,
-                    "SrcName": "_result",
-                    "DstId": 54,
-                    "DstName": "from"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 54,
-                    "DstName": "target"
-                  },
-                  {
-                    "SrcId": 39,
-                    "SrcName": "_result",
-                    "DstId": 54,
-                    "DstName": "to"
-                  },
-                  {
-                    "SrcId": 53,
-                    "SrcName": "_signal",
-                    "DstId": 55,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 3,
-                    "DstId": 55,
-                    "DstName": "duration"
-                  },
-                  {
-                    "Value": "Linear",
-                    "DstId": 55,
-                    "DstName": "easer"
-                  },
-                  {
-                    "SrcId": 49,
-                    "SrcName": "_result",
-                    "DstId": 55,
-                    "DstName": "from"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 55,
-                    "DstName": "target"
-                  },
-                  {
-                    "SrcId": 40,
-                    "SrcName": "_result",
-                    "DstId": 55,
-                    "DstName": "to"
-                  },
-                  {
-                    "SrcId": 63,
-                    "SrcName": "_signal",
-                    "DstId": 58,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 60,
-                    "SrcName": "_result",
-                    "DstId": 58,
-                    "DstName": "component"
-                  },
-                  {
-                    "SrcId": 54,
-                    "SrcName": "_signal",
-                    "DstId": 63,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 63,
-                    "DstName": "_target"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 64,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 64,
-                    "DstName": "_target"
-                  },
-                  {
-                    "Value": true,
-                    "DstId": 64,
-                    "DstName": "_value"
-                  }
-                ]
-              },
-              "RequiredToFinish": true,
-              "TriggerCooldown": 1,
-              "TriggerOnce": true,
-              "Triggers": [
-                {
-                  "_type": "component",
-                  "component_id": "1dbb07d3-b722-4f51-96df-efdadb65be76",
-                  "go": "6561c4b6-9fa9-4c36-beb7-eb498daed307",
-                  "component_type": "EventAreaTrigger"
-                }
-              ]
-            },
-            {
-              "__type": "EventComponent",
-              "__guid": "37121943-cb6a-4d8f-acc9-dd0b972b909a",
-              "__enabled": false,
-              "DisabledWhilePlaying": [],
-              "DisableOnTrigger": [],
-              "Event": {
-                "Version": 5,
-                "UserData": {
-                  "Title": "Event",
-                  "id": "57cc7097-85d6-493a-b88c-4fcafe67244c",
-                  "ReferencedComponentTypes": [
-                    "package.fish.sauna/Sauna.Player",
-                    "package.fish.sauna/HealthComponent"
-                  ]
-                },
-                "Variables": [],
-                "Nodes": [
-                  {
-                    "Id": 0,
-                    "Type": "input"
-                  },
-                  {
-                    "Id": 1,
-                    "Type": "scene.get",
-                    "Properties": {
-                      "T": "package.fish.sauna/Sauna.Player"
-                    },
-                    "UserData": {
-                      "Position": "192,96"
-                    }
-                  },
-                  {
-                    "Id": 2,
-                    "Type": "scene.get",
-                    "Properties": {
-                      "T": "package.fish.sauna/HealthComponent"
-                    },
-                    "UserData": {
-                      "Position": "432,96"
-                    }
-                  },
-                  {
-                    "Id": 3,
-                    "Type": "call",
-                    "Properties": {
-                      "_isStatic": false,
-                      "_type": "package.fish.sauna/HealthComponent",
-                      "_name": "Damage"
-                    },
-                    "UserData": {
-                      "Position": "704,16"
-                    }
-                  },
-                  {
-                    "Id": 4,
-                    "Type": "call",
-                    "Properties": {
-                      "_isStatic": false,
-                      "_type": "package.fish.sauna/Sauna.Player",
-                      "_name": "CaptureMemory"
-                    },
-                    "UserData": {
-                      "Position": "1168,-16"
-                    }
-                  },
-                  {
-                    "Id": 5,
-                    "Type": "time.delay",
-                    "UserData": {
-                      "Position": "976,-112"
-                    }
-                  }
-                ],
-                "Links": [
-                  {
-                    "SrcId": 0,
-                    "SrcName": "triggerer",
-                    "DstId": 1,
-                    "DstName": "_this"
-                  },
-                  {
-                    "SrcId": 1,
-                    "SrcName": "_result",
-                    "DstId": 2,
-                    "DstName": "_this"
-                  },
-                  {
-                    "SrcId": 0,
-                    "SrcName": "_signal",
-                    "DstId": 3,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 2,
-                    "SrcName": "_result",
-                    "DstId": 3,
-                    "DstName": "_target"
-                  },
-                  {
-                    "Value": 10,
-                    "DstId": 3,
-                    "DstName": "amount"
-                  },
-                  {
-                    "Value": {
-                      "_type": "gameobject",
-                      "go": "af3badb3-0af9-413d-96b1-cefc95d4d34e"
-                    },
-                    "DstId": 3,
-                    "DstName": "attacker"
-                  },
-                  {
-                    "Value": 400,
-                    "DstId": 3,
-                    "DstName": "force"
-                  },
-                  {
-                    "Value": "0,0,1",
-                    "DstId": 3,
-                    "DstName": "forceDirection"
-                  },
-                  {
-                    "Value": "Serious",
-                    "DstId": 3,
-                    "DstName": "type"
-                  },
-                  {
-                    "SrcId": 5,
-                    "SrcName": "_signal",
-                    "DstId": 4,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "SrcId": 1,
-                    "SrcName": "_result",
-                    "DstId": 4,
-                    "DstName": "_target"
-                  },
-                  {
-                    "Value": "Some idiot ran me over, luckily I\u0027m finnish.",
-                    "DstId": 4,
-                    "DstName": "caption"
-                  },
-                  {
-                    "Value": 200,
-                    "DstId": 4,
-                    "DstName": "distance"
-                  },
-                  {
-                    "Value": "car_ran_over",
-                    "DstId": 4,
-                    "DstName": "identifier"
-                  },
-                  {
-                    "SrcId": 3,
-                    "SrcName": "_signal",
-                    "DstId": 5,
-                    "DstName": "_signal"
-                  },
-                  {
-                    "Value": 0.03,
-                    "DstId": 5,
-                    "DstName": "seconds"
-                  }
-                ]
-              },
-              "RequiredToFinish": false,
-              "TriggerCooldown": 1,
-              "TriggerOnce": false,
-              "Triggers": [
-                {
-                  "_type": "component",
-                  "component_id": "0567c2e6-9ee7-43b2-a5bb-2d9a20f721fa",
-                  "go": "cb63a5ac-8388-429d-83fb-bde55b866ee5",
-                  "component_type": "EventAreaTrigger"
-                }
-              ]
-            },
-            {
-              "__type": "MarkerComponent",
-              "__guid": "eb60b24c-e76e-4164-9e55-3c14c19dbb86",
-              "__enabled": false,
-              "Icon": "Event",
-              "Networked": true,
-              "Title": "CrazyDriver"
-            }
-          ],
-          "Children": [
-            {
-              "__guid": "6561c4b6-9fa9-4c36-beb7-eb498daed307",
-              "Name": "car_speeding_trigger",
-              "Position": "0,-86.64551,64",
-              "Enabled": true,
-              "NetworkMode": 2,
-              "Components": [
-                {
-                  "__type": "EventAreaTrigger",
-                  "__guid": "1dbb07d3-b722-4f51-96df-efdadb65be76",
-                  "__enabled": false,
-                  "Extents": "256,3000,128",
-                  "MaxPollingRate": 5,
-                  "Offset": "0,0,0",
-                  "TagSet": "player",
-                  "TriggerPrefab": [],
-                  "TriggerSignalIdentifier": null
-                }
-              ]
-            },
-            {
-              "__guid": "af3badb3-0af9-413d-96b1-cefc95d4d34e",
-              "Name": "Car",
-              "Position": "0,-3966.646,0",
-              "Rotation": "0,0,0.7071067,0.7071068",
-              "NetworkMode": 2,
-              "Components": [
-                {
-                  "__type": "ModelRenderer",
-                  "__guid": "0e39fb63-9690-4b81-9eb0-fca79bb578ba",
-                  "__enabled": false,
-                  "BodyGroups": 1,
-                  "MaterialGroup": "normal",
-                  "Model": "models/old_red_lada/old_red_lada.vmdl",
-                  "RenderType": "On",
-                  "Tint": "0.05116,0.05116,0.05116,1"
-                },
-                {
-                  "__type": "ModelCollider",
-                  "__guid": "3a0d2f3e-7c2e-47fb-ad56-b2a3cbd03352",
-                  "__enabled": false,
-                  "IsTrigger": false,
-                  "Model": "models/old_red_lada/old_red_lada.vmdl",
-                  "Static": false
-                }
-              ],
-              "Children": [
-                {
-                  "__guid": "9246f0a4-5363-4667-8ae8-b98ffd2ef7eb",
-                  "Name": "Spot Light",
-                  "Position": "80,-22.64551,24",
-                  "Rotation": "0,0,-0.07050124,0.9975117",
-                  "Tags": "light_spot,light",
-                  "Enabled": true,
-                  "NetworkMode": 2,
-                  "Components": [
-                    {
-                      "__type": "SpotLight",
-                      "__guid": "cd944ef1-e1be-4ece-a632-5d59a12400cf",
-                      "__enabled": false,
-                      "Attenuation": 0.64,
-                      "ConeInner": 36.02,
-                      "ConeOuter": 22.8,
-                      "FogMode": "Enabled",
-                      "FogStrength": 1,
-                      "LightColor": "1,0.88279,0.70698,1",
-                      "Radius": 4000,
-                      "Shadows": true
-                    }
-                  ]
-                },
-                {
-                  "__guid": "b6bf126a-901d-4ea5-867d-36c5e23ce9be",
-                  "Name": "Spot Light",
-                  "Position": "80,17.35449,24",
-                  "Rotation": "0,0,0.09230856,0.9957304",
-                  "Tags": "light_spot,light",
-                  "Enabled": true,
-                  "NetworkMode": 2,
-                  "Components": [
-                    {
-                      "__type": "SpotLight",
-                      "__guid": "c79918a2-31bd-4bff-964a-ab7647ecb779",
-                      "__enabled": false,
-                      "Attenuation": 0.64,
-                      "ConeInner": 36.02,
-                      "ConeOuter": 22.8,
-                      "FogMode": "Enabled",
-                      "FogStrength": 1,
-                      "LightColor": "1,0.88279,0.70698,1",
-                      "Radius": 4000,
-                      "Shadows": true
-                    }
-                  ]
-                },
-                {
-                  "__guid": "cb63a5ac-8388-429d-83fb-bde55b866ee5",
-                  "Name": "HitPlayer",
-                  "Position": "0,0,0",
-                  "Enabled": true,
-                  "NetworkMode": 2,
-                  "Components": [
-                    {
-                      "__type": "EventAreaTrigger",
-                      "__guid": "0567c2e6-9ee7-43b2-a5bb-2d9a20f721fa",
-                      "__enabled": false,
-                      "Extents": "191.2001,97.92001,114.4",
-                      "MaxPollingRate": 1,
-                      "Offset": "59.35998,0,30.08",
-                      "TagSet": "player",
-                      "TriggerPrefab": [],
-                      "TriggerSignalIdentifier": "cat_hit_player"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "__guid": "df8573a4-17be-4780-8fc1-1071685b5751",
-              "Name": "destination",
-              "Position": "0,2064,0",
-              "Enabled": true,
-              "NetworkMode": 2
-            },
-            {
-              "__guid": "af332d6f-031b-4d25-bef1-769ecd218f18",
-              "Name": "destination_1",
-              "Position": "-448,2704,0",
-              "Enabled": true,
-              "NetworkMode": 2
-            },
-            {
-              "__guid": "54b10341-64de-4325-80fc-e70f9b07e2c3",
-              "Name": "destination_1",
-              "Position": "-896,3368,336",
-              "Enabled": true,
-              "NetworkMode": 2
-            },
-            {
-              "__guid": "f7ff4a0f-b42c-4006-9bc5-cc5318bce70a",
-              "Name": "destination_1",
-              "Position": "-1752,4376,400",
-              "Enabled": true,
-              "NetworkMode": 2
-            },
-            {
-              "__guid": "bce7099d-9739-4cd9-8c4f-29da6d0874d6",
-              "Name": "destination_1",
-              "Position": "-2280,5176,280",
-              "Enabled": true,
-              "NetworkMode": 2
-            },
-            {
-              "__guid": "176468f1-2324-4266-adb2-f0050d83eca6",
-              "Name": "destination_1",
-              "Position": "-2720,5864,48",
-              "Enabled": true,
-              "NetworkMode": 2
-            },
-            {
-              "__guid": "a0a9f746-a7b7-4686-981f-0355f7ddaeeb",
-              "Name": "destination_1",
-              "Position": "-3152,6704,-64",
-              "Enabled": true,
-              "NetworkMode": 2
-            },
-            {
-              "__guid": "860222f7-e3d2-43ff-8f40-084baecdde67",
-              "Name": "destination_1",
-              "Position": "-4296,7808,-336",
-              "Enabled": true,
-              "NetworkMode": 2
-            }
-          ]
+          "__Prefab": "prefabs/events/car_speeding.prefab"
         },
         {
           "__guid": "79fb0025-515d-425d-9a48-bf8aa6ed5a17",
@@ -5811,65 +5882,155 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/banana_peel.prefab"
+        },
+        {
+          "__guid": "9b18ce21-1fb6-4964-b110-61f3d3a49835",
+          "Name": "mugging",
+          "Position": "-7304,6616,2447.724",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/mugging.prefab"
+        },
+        {
+          "__guid": "c46d79e4-f71f-457a-adc7-136c4157b615",
+          "Name": "wealthy_donation",
+          "Position": "-8008,8008,2448.519",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/wealthy_donation.prefab"
+        },
+        {
+          "__guid": "9217cf40-fae3-48ac-91e2-7af5556d2635",
+          "Name": "cottage_squatter",
+          "Position": "2928,-2376,2456.268",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/cottage_squatter.prefab"
+        },
+        {
+          "__guid": "cec71058-f548-49bc-953c-77794624596c",
+          "Name": "Random sauna guy",
+          "Position": "3576,-3088,2461.489",
+          "Rotation": "0,0,-0.6087614,0.7933534",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/random_sauna_guy.prefab"
+        },
+        {
+          "__guid": "4434bf13-204a-43be-92da-e344fab645f8",
+          "Name": "random_dwarves",
+          "Position": "-8103.875,5308.789,2446.924",
+          "Rotation": "-0.01672864,0.03679115,0.4135721,0.9095739",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/random_dwarves.prefab"
+        },
+        {
+          "__guid": "98f34430-8508-4a58-879c-cf7dc927389a",
+          "Name": "piss_tree",
+          "Position": "2580.948,-1936.841,2457",
+          "Rotation": "-0.00000002980232,0.000000103746,0.9999999,0.000000311238",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/piss_tree.prefab"
+        },
+        {
+          "__guid": "c3bfe17c-64ae-4747-9a0c-7dceca46c155",
+          "Name": "rc_cars",
+          "Position": "-7766.884,6623.139,2440.021",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/rc_cars.prefab"
         }
       ]
     },
     {
-      "__guid": "84e01eaa-6bc7-4ef3-bd37-9589f27dd784",
-      "Name": "Townspeople",
-      "Position": "3879.571,-2799.708,2510.405",
+      "__guid": "bcbee9c0-94a6-4cbe-81bb-76e6dc10609d",
+      "Name": "Seats",
       "Enabled": true,
       "NetworkMode": 2,
-      "Components": [
+      "Children": [
         {
-          "__type": "NpcSpawnArea",
-          "__guid": "a6e85171-637a-4b7e-9864-3ba8373b0a51",
-          "Height": 200,
-          "NpcPool": [
+          "__guid": "588abb3f-ac79-4b25-b650-381fa4db3c90",
+          "Name": "Toilet",
+          "Position": "-6052.378,628.1444,2448.146",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
             {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/people/policeman.prefab"
-              },
-              "SpawnChance": 1
+              "__type": "Seat",
+              "__guid": "328491b9-6402-4248-b18d-c3ed0d37c79c",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "13,0,21",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
             },
             {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/people/policeman.prefab"
-              },
-              "SpawnChance": 0.5
-            },
-            {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/people/bystander_01.prefab"
-              },
-              "SpawnChance": 0.4
-            },
-            {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/people/bystander_02.prefab"
-              },
-              "SpawnChance": 0.4
-            },
-            {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/people/bystander_03.prefab"
-              },
-              "SpawnChance": 0.4
-            },
-            {
-              "Npc": {
-                "_type": "gameobject",
-                "prefab": "prefabs/npcs/people/bystander_04.prefab"
-              },
-              "SpawnChance": 0.4
+              "__type": "BoxCollider",
+              "__guid": "afe22d25-d8cd-48ed-be8a-4aed4deb383c",
+              "Center": "0,0,20",
+              "IsTrigger": false,
+              "Scale": "15,15,40",
+              "Static": true
             }
-          ],
-          "Radius": 400
+          ]
+        },
+        {
+          "__guid": "b1d35615-c3c7-4dd2-b628-0227209de371",
+          "Name": "Toilet",
+          "Position": "-8489.314,6545.197,2447.959",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "Seat",
+              "__guid": "0276e28d-83e4-43d9-a575-9d828e87ab58",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "13,0,21",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            },
+            {
+              "__type": "BoxCollider",
+              "__guid": "f2091005-cec8-4111-bcdd-647a139b2bd3",
+              "Center": "0,0,20",
+              "IsTrigger": false,
+              "Scale": "15,15,40",
+              "Static": true
+            }
+          ]
+        },
+        {
+          "__guid": "8fbef3d5-9a64-4c33-a399-5435662c61f1",
+          "Name": "Toilet",
+          "Position": "-8410.77,6545.197,2447.959",
+          "Rotation": "0,0,1,-0.00000004371139",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "Seat",
+              "__guid": "26e921d7-6ae4-439c-a3b1-f1c85b18b6c8",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "13,0,21",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            },
+            {
+              "__type": "BoxCollider",
+              "__guid": "25cd1017-7c9a-481a-bdd2-ddd4824c3bcf",
+              "Center": "0,0,20",
+              "IsTrigger": false,
+              "Scale": "15,15,40",
+              "Static": true
+            }
+          ]
         }
       ]
     }
@@ -5897,7 +6058,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-15T23:23:34.8885577\u002B01:00",
+  "LastSaved": "2024-03-16T10:34:09.4969551\u002B02:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

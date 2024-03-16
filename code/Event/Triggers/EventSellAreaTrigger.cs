@@ -39,7 +39,7 @@ public sealed class EventSellAreaTrigger : EventTrigger
 
 		foreach ( var item in items )
 		{
-			CallTrigger( item.GameObject );
+			CallTrigger( item.LastOwner.GameObject, item.GameObject );
 			item.LastOwner.Money += item.SellPrice;
 			item.GameObject.Destroy();
 		}

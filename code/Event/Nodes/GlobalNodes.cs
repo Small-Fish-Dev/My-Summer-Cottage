@@ -132,7 +132,7 @@ public static partial class GlobalNodes
 	public static GameObject FindObjectByName( string name, bool enabled = true )
 	{
 		var objectFound = Game.ActiveScene?.GetAllObjects( enabled )?
-			.Where( x => x.Name.ToLower() == name.ToLower() )?
+			.Where( x => x.Name.ToLower().Replace( " ", "" ) == name.ToLower().Replace( " ", "" ) )?
 			.FirstOrDefault() ?? null;
 
 		if ( objectFound != null )

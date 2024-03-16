@@ -542,8 +542,154 @@
         "__guid": "cf731caf-4db6-4dab-9b1b-ea3b89551ecd",
         "CanRegenerate": false,
         "DamagedBy": "Mild",
+        "DropOnDeath": [],
         "Immortal": false,
         "MaxHealth": 3,
+        "OnComponentDestroy": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Component Destroy",
+            "id": "cf67774c-838d-4164-a831-9f63b6a3937e",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 2,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "Local"
+              },
+              "UserData": {
+                "Position": "144,160"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "GiveMoney"
+              },
+              "UserData": {
+                "Position": "384,80"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "AddExperience"
+              },
+              "UserData": {
+                "Position": "384,192"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 5,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "_target"
+            },
+            {
+              "Value": 10,
+              "DstId": 5,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 7,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "Value": 25,
+              "DstId": 7,
+              "DstName": "exp"
+            }
+          ]
+        },
+        "OnDamaged": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Damaged",
+            "id": "d9536b26-7648-4704-a073-5ee103ccbe84",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "240,112"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Destroy"
+              },
+              "UserData": {
+                "Position": "496,112"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 3,
+              "DstId": 1,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 2,
+              "DstName": "_target"
+            }
+          ]
+        },
         "RegenerationCooldown": 2,
         "RegenerationTimer": 5,
         "StunnedBy": "Mild",

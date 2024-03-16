@@ -23,6 +23,13 @@ public class Marker
 		MarkerIcon.Event => "ui/hud/question_mark.png",
 		_ => "ui/hud/substory_task.png",
 	};
+	public string HexColor => Icon switch
+	{
+		MarkerIcon.Home => "#FFFFFF",
+		MarkerIcon.Primary => "#bc4d2a",
+		MarkerIcon.Event => "#FFFFFF",
+		_ => "#0e599f",
+	};
 
 	private Marker( string name, Vector3 position, MarkerIcon icon )
 	{

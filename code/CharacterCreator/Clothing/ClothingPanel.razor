@@ -21,10 +21,9 @@
 					<div class="title">
 						<img src=@slot.GetIcon() />
 						<div>@slot.ToString()</div>
-						<div class="count">@(defaultClothes[slot].Count) / @(counts[slot])</div>
+						<div class="count">@(clothes[slot].Count) / @(counts[slot])</div>
 					</div>
 					<div class="row">
-
 						@* NONE *@
 						<div class="slot @(selections[slot] == -1 ? "selected" : "")" @onclick=@( () => { selections[slot] = -1; UpdateSelection(); })>
 							<div class="border" />
@@ -33,7 +32,7 @@
 							<img src="ui/hud/blocked.png" />
 						</div>
 
-						@for ( int i = 0; i < 4; i++ )
+						@for ( int i = 0; i < Math.Max( 4, ShowAll ? clothes[slot].Count : 4 ); i++ )
 						{
 							var clothing = clothes?[slot].ElementAtOrDefault( i );
 							<div 
@@ -61,6 +60,17 @@
 </root>
 
 @code {
+	private static bool _showAll = false;
+	public static bool ShowAll
+	{
+		get => _showAll;
+		set
+		{
+			_showAll = value;
+			clothes = null;
+		}
+	}
+
 	private static readonly Dictionary<EquipSlot, List<string>> defaultClothes = new()
 	{
 		[EquipSlot.Head] = new List<string>() { "prefabs/clothes/cap.prefab", "prefabs/clothes/cap_black.prefab", "prefabs/clothes/flat_cap.prefab", "prefabs/clothes/beanie.prefab" },
@@ -79,7 +89,7 @@
 	public static Dictionary<EquipSlot, string> GetSelections() 
 		=> selections
 			.Where( x => x.Value != -1 )
-			.Select( x => (Slot: x.Key, Path: defaultClothes[x.Key][x.Value]) )
+			.Select( x => (Slot: x.Key, Path: clothes[x.Key]?.ElementAt( x.Value )?.Prefab?.Path ?? defaultClothes[x.Key].First() ) )
 			.ToDictionary( x => x.Slot, x => x.Path );
 
 	private void CreateClothing( Model model, string materialGroup = "", Color? color = null )
@@ -87,8 +97,7 @@
 		var obj = Scene.CreateObject();
 		var renderer = obj.Components.Create<SkinnedModelRenderer>();
 		renderer.Model = model;
-		renderer.Tint = color ?? Color.White;
-		renderer.Tint = renderer.Tint.WithAlpha(1);
+		renderer.Tint = (color ?? Color.White).WithAlpha( 1 );
 		renderer.MaterialGroup = materialGroup;
 		renderer.BoneMergeTarget = CreatorOverlay.Renderer;
 		obj.Parent = CreatorOverlay.Renderer.GameObject;
@@ -115,9 +124,11 @@
 			if ( component == null )
 				continue;
 
-			var icon = component.Get<IconSettings>( "Icon" );
-			var model = Sandbox.Model.Load( icon.Model );
-			CreateClothing( model, icon.MaterialGroup, icon.Colour );
+			var renderer = component.Prefab.GetComponent<ModelRenderer>();
+			var color = renderer?.Get<Color>( "Tint" ) ?? Color.White;
+			var materialGroup = renderer?.Get<string>( "MaterialGroup" );
+			var model = Sandbox.Model.Load( renderer.Get<string>( "Model" ) );
+			CreateClothing(model, materialGroup, color);
 			flags |= component.Get<HiddenBodyGroup>( "HideBodygroups" );
 		}
 
@@ -137,6 +148,7 @@
 		var values = Enum.GetValues<EquipSlot>();
 		selections = values.ToDictionary( x => x, x => -1 );
 		clothes = new();
+		counts.Clear();
 
 		var all = PrefabLibrary.FindByComponent<ItemEquipment>();
 		foreach ( var prefab in all )
@@ -148,7 +160,18 @@
 			var slot = component.Get<EquipSlot>( "Slot" );
 			if ( counts.ContainsKey( slot ) ) counts[slot]++;
 			else counts.Add( slot, 1 );
+
+			if ( ShowAll )
+			{
+				if ( !clothes.TryGetValue( slot, out var list ) )
+					clothes.Add( slot, list = new() );
+
+				list.Add( component );
+			}
 		}
+
+		if ( ShowAll )
+			return;
 
 		foreach ( var (slot, paths) in defaultClothes )
 		{
@@ -166,5 +189,11 @@
 				clothes[slot].Add( equipment );
 			}
 		}
+	}
+
+	[ConCmd( "sauna_unlock_clothing" )]
+	public static void UnlockAllClothing()
+	{
+		ShowAll = !ShowAll;
 	}
 }

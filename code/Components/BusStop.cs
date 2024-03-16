@@ -99,7 +99,7 @@ public sealed class BusStop : Component
 				var endPosition = taxi.Car.Transform.Position + Vector3.Down * 2000f;
 
 				var trace = Scene.Trace.Ray( startPosition, endPosition )
-					.Size( 50f )
+					.Size( 3f )
 					.IgnoreGameObjectHierarchy( taxi.Car )
 					.WithoutTags( "player", "trigger", "npc" )
 					.Run();
@@ -115,37 +115,37 @@ public sealed class BusStop : Component
 				endPosition = taxi.Car.Transform.Position + Vector3.Down * 2000f;
 
 				trace = Scene.Trace.Ray( startPosition, endPosition )
-					.Size( 50f )
+					.Size( 3f )
 					.IgnoreGameObjectHierarchy( taxi.Car )
 					.WithoutTags( "player", "trigger", "npc" )
 					.Run();
 
-				taxi.Car.Transform.Position = trace.Hit ? trace.HitPosition - Vector3.Up * 25f : taxi.Car.Transform.Position;
+				taxi.Car.Transform.Position = trace.Hit ? trace.HitPosition : taxi.Car.Transform.Position;
 
 				var front = taxi.Car.Transform.World.PointToWorld( Vector3.Forward * 50f );
 				var frontTrace = Scene.Trace.Ray( front + Vector3.Up * 500f, front + Vector3.Down * 500f )
-					.Size( 25f )
+					.Size( 3f )
 					.IgnoreGameObjectHierarchy( taxi.Car )
 					.WithoutTags( "player", "trigger", "npc" )
 					.Run();
 
 				var back = taxi.Car.Transform.World.PointToWorld( Vector3.Backward * 50f );
 				var backTrace = Scene.Trace.Ray( back + Vector3.Up * 500f, back + Vector3.Down * 500f )
-					.Size( 25f )
+					.Size( 3f )
 					.IgnoreGameObjectHierarchy( taxi.Car )
 					.WithoutTags( "player", "trigger", "npc" )
 					.Run();
 
 				var desiredDirection = (frontTrace.Hit ? frontTrace.HitPosition : frontTrace.EndPosition) - (backTrace.Hit ? backTrace.HitPosition : backTrace.EndPosition);
 				taxi.Car.Transform.Rotation = Rotation.LookAt( desiredDirection, Vector3.Up );
-				taxi.Car.Transform.Rotation = Rotation.Lerp( oldRotation, taxi.Car.Transform.Rotation, Time.Delta * 4f );
+				taxi.Car.Transform.Rotation = Rotation.Lerp( oldRotation, taxi.Car.Transform.Rotation, Time.Delta * 6f );
 
 				taxi.Car.Transform.Position += taxi.Car.Transform.Rotation.Forward * taxi.Speed * Time.Delta;
 
 				taxi.Player.Components.Get<HealthComponent>().StunnedBy = DamageType.Nothing;
 				taxi.Player.RagdollDisable = true;
 
-				if ( taxi.Car.Transform.Position.Distance( currentEndPosition ) <= 100f )
+				if ( taxi.Car.Transform.Position.Distance( currentEndPosition ) <= 150f )
 				{
 					taxi.CurrentWaypoint++;
 				}
@@ -157,6 +157,11 @@ public sealed class BusStop : Component
 
 					foreach ( var renderer in taxi.Player.Components.GetAll<SkinnedModelRenderer>( FindMode.EnabledInSelfAndDescendants ) )
 						renderer.Enabled = false;
+
+					foreach ( var renderer in taxi.Player.Components.GetAll<ModelRenderer>( FindMode.EnabledInSelfAndDescendants ) )
+						renderer.Enabled = false;
+
+					taxi.Player.ForceHidePenoid = true;
 
 					if ( taxi.Player.Components.TryGet<MoveHelper>( out var moveHelper ) )
 					{
@@ -174,6 +179,11 @@ public sealed class BusStop : Component
 
 				foreach ( var renderer in taxi.Player.Components.GetAll<SkinnedModelRenderer>( FindMode.DisabledInSelfAndDescendants ) )
 					renderer.Enabled = true;
+
+				foreach ( var renderer in taxi.Player.Components.GetAll<ModelRenderer>( FindMode.DisabledInSelfAndDescendants ) )
+					renderer.Enabled = true;
+
+				taxi.Player.ForceHidePenoid = false;
 
 				if ( taxi.Player.Components.TryGet<MoveHelper>( out var moveHelper, FindMode.EverythingInSelfAndChildren ) )
 				{
@@ -225,14 +235,17 @@ public sealed class BusStop : Component
 		var newTaxi = new Taxi( player, car, this, destination, timeToTravel );
 		_activeTaxis.Add( newTaxi );
 
-		if ( PrefabLibrary.TryGetByPath( "prefabs/npcs/elk_female.prefab", out var prefab ) )
+		if ( Game.Random.Float( 100 ) <= 40f )
 		{
-			var deer = SceneUtility.GetPrefabScene( prefab.Prefab ).Clone();
-
-			if ( deer != null )
+			if ( PrefabLibrary.TryGetByPath( "prefabs/npcs/elk_female_actor.prefab", out var prefab ) )
 			{
-				deer.Transform.Position = _waypoints[4];
-				deer.Components.Get<NPC>().NextIdle = 999f;
+				var deer = SceneUtility.GetPrefabScene( prefab.Prefab ).Clone();
+
+				if ( deer != null )
+				{
+					deer.Transform.Position = _waypoints[4];
+					deer.Components.Get<NPC>().NextIdle = 999f;
+				}
 			}
 		}
 

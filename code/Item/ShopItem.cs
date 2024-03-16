@@ -11,11 +11,12 @@ public class ShopItem : Component
 	public int Price { get; set; }
 
 	private readonly SoundEvent _purchaseSound = ResourceLibrary.Get<SoundEvent>( "sounds/misc/purchase.sound" );
+	private GameObject _iconWorldObject;
 
 	protected override void OnStart()
 	{
 		GameObject.SetupNetworking();
-		GameObject.Name = $"Buy {PrefabLibrary.AsDefinition( Item )?.GetComponent<ItemComponent>()?.Get<string>( "Name" ) ?? "Item"}";
+		ResetName();
 
 		if ( IsParcel() )
 			CreateWorldIcon();
@@ -56,12 +57,22 @@ public class ShopItem : Component
 		return Components.GetOrCreate<ModelRenderer>().Model.Name.Contains( "parcel" );
 	}
 
-	private void CreateWorldIcon()
+	public void CreateWorldIcon()
 	{
-		var iconWorldObject = new GameObject { Parent = GameObject };
-		iconWorldObject.Transform.LocalPosition = new Vector3( 0, 0, 5 );
-		iconWorldObject.Transform.LocalRotation = Rotation.FromPitch( 90 );
-		iconWorldObject.Components.GetOrCreate<Sandbox.WorldPanel>();
-		iconWorldObject.Components.GetOrCreate<IconWorldPanel>().Icon = Texture.Load( FileSystem.Mounted, PrefabLibrary.AsDefinition( Item ).GetComponent<ItemComponent>().Get<IconSettings>( "Icon" ).Path );
+		_iconWorldObject?.Destroy();
+		_iconWorldObject = new GameObject { Parent = GameObject };
+		_iconWorldObject.Transform.LocalPosition = new Vector3( 0, 0, 5 );
+		_iconWorldObject.Transform.LocalRotation = Rotation.FromPitch( 90 );
+		_iconWorldObject.Components.GetOrCreate<Sandbox.WorldPanel>();
+		_iconWorldObject.Components.GetOrCreate<IconWorldPanel>().Icon = Texture.Load( FileSystem.Mounted, PrefabLibrary.AsDefinition( Item ).GetComponent<ItemComponent>().Get<IconSettings>( "Icon" ).Path );
+	}
+
+	public void ResetName()
+	{
+		GameObject.Name = $"Buy {PrefabLibrary.AsDefinition( Item )?.GetComponent<ItemComponent>()?.Get<string>( "Name" ) ?? "Item"}";
+	}
+	public void ResetPrice()
+	{
+		Price = PrefabLibrary.AsDefinition( Item )?.GetComponent<ItemComponent>()?.Get<int>( "SellPrice" ) ?? Game.Random.Int( 10, 80 );
 	}
 }

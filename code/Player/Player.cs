@@ -10,12 +10,14 @@ public partial class Player : Component, Component.ExecuteInEditor
 	[Sync] public string Firstname { get; set; }
 	[Sync] public string Lastname { get; set; }
 	[Sync] public bool HidePenoid { get; set; }
+	[Sync] public bool ForceHidePenoid { get; set; } = false;
 	[Sync] public float PenoidSize { get; set; }
 
 	/// <summary>
 	/// Actually means sitting, but I thought it'd be funny if it said shitting instead.
 	/// </summary>
-	[Sync] public Transform? Shitting
+	[Sync]
+	public Transform? Shitting
 	{
 		get => _shitting;
 		set
@@ -238,7 +240,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 		{
 			UpdateAngles();
 			Transform.Rotation = new Angles( 0, EyeAngles.yaw, 0 );
-			HidePenoid = Inventory.EquippedItems[(int)EquipSlot.Legs] != null;
+			HidePenoid = !ForceHidePenoid && Inventory.EquippedItems[(int)EquipSlot.Legs] != null;
 			HoldType = (Inventory.EquippedItems[(int)EquipSlot.Hand] as ItemEquipment)?.HoldType ?? HoldType.Idle;
 		}
 
@@ -259,7 +261,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		if ( Penoid is not null )
 		{
-			Penoid.Enabled = !HidePenoid;
+			Penoid.Enabled = !ForceHidePenoid && !HidePenoid;
 		}
 
 		// todo: fix ://

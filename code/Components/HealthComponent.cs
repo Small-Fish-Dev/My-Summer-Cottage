@@ -200,7 +200,7 @@ public sealed class HealthComponent : Component
 
 		if ( Health <= 0 )
 		{
-			Kill( attacker.Id );
+			Kill( attacker?.Id ?? Guid.Empty );
 			return;
 		}
 	}
@@ -208,6 +208,9 @@ public sealed class HealthComponent : Component
 	private void InternalKill( GameObject attacker = null )
 	{
 		Alive = false;
+
+		if ( attacker.Components.TryGet<Player>( out var killer ) )
+			killer.AddExperience( Health * 10 );
 
 		if ( Components.TryGet<Player>( out var player ) )
 			player.SetRagdoll( true, true, 9999999f );

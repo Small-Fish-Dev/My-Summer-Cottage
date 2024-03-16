@@ -72,6 +72,10 @@
 		{
 			<div class="continue" onclick=@(() => { if (!_clickedContinue) StartNextDay(); _clickedContinue = true; })>CONTINUE</div>
 		}
+		else
+		{
+			<div class="waiting">Waiting for host...</div>
+		}
 	</div>
 </root>
 
@@ -86,6 +90,7 @@
 	Panel _memoryContainer;
 	MemoryPanel _currentPanel;
 	private bool _clickedContinue;
+	SoundHandle _music;
 
 	[ConCmd]
 	[Broadcast( NetPermission.HostOnly )]
@@ -103,8 +108,21 @@
 			StoryMaster.StartSession();
 	}
 
+	public override void OnDeleted()
+	{
+		base.OnDeleted();
+		_music?.Stop( 5f ); // Doesn't actually fade out :rofl:
+	}
+
 	public override void Tick()
 	{
+		if ( _music == null )
+		{
+			_music = Sound.Play( "dawdle-gus_and_the_ganders_-_surfin_81__loop_game" );
+			_music.ListenLocal = true;
+			_music.Volume = 0.5f;
+		}
+
 		if ( SweetMemories.All.Count == 0 )
 			return;
 

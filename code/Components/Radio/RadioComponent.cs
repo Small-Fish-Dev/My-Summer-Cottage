@@ -92,7 +92,7 @@ public partial class RadioComponent : Component
 		} );
 	}
 
-	private async void StartMusic()
+	private void StartMusic()
 	{
 		StopMusic();
 
@@ -105,10 +105,7 @@ public partial class RadioComponent : Component
 		}
 		else
 		{
-			var file = SoundFile.Load( Channel.URL );
-			await file.LoadAsync();
-
-			_handle = Sound.PlayFile( file );
+			_handle = Sound.Play( Channel.URL );
 			_handle.ListenLocal = false;
 			_handle.Volume = 0.05f;
 			_handle.Decibels = 50;

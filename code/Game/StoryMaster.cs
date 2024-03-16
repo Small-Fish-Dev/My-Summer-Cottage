@@ -279,6 +279,13 @@ public class StoryMaster : Component
 		Log.Info( "Story reset!" );
 	}
 
+	public void ResetPlayer()
+	{
+		if ( FileSystem.Data.FileExists( PlayerSave.FILE_PATH ) )
+			FileSystem.Data.DeleteFile( PlayerSave.FILE_PATH );
+		Log.Info( "Character reset!" );
+	}
+
 	public void LoadEventPool( int randomSeed )
 	{
 		if ( CurrentSaunaDay == null ) return;
@@ -357,10 +364,9 @@ public class StoryMaster : Component
 
 	private static async Task PlayIntro()
 	{
-		// TODO: Uncomment this before release.
-		// Player.Local.BlackScreen( 0f, 4f, 1f );
-		// UI.Hud.Instance.Panel.PlaySound( "car_intro" );
-		// await GameTask.DelayRealtimeSeconds( 2f );
+		Player.Local.BlackScreen( 0f, 4f, 1f );
+		UI.Hud.Instance.Panel.PlaySound( "car_intro" );
+		await GameTask.DelayRealtimeSeconds( 2f );
 
 		SetupSession();
 	}
@@ -390,6 +396,7 @@ public class StoryMaster : Component
 		storyMaster._eventMaster.UnloadAllEvents();
 		storyMaster.LoadEventPool( (int)storyMaster._timeManager.RandomSeed );
 		storyMaster.SetRandomDialogues( (int)storyMaster._timeManager.RandomSeed );
+		storyMaster.RandomizeClothing();
 
 		if ( Player.Local.IsValid() )
 			Player.Local.Respawn();
@@ -418,6 +425,26 @@ public class StoryMaster : Component
 		}
 
 		storyMaster.SaveGame();
+	}
+
+	public void RandomizeClothing()
+	{
+		var modelToCheck = Model.Load( "models/props/clothing_parcel/clothing_parcel.vmdl" );
+		var allClothingShops = Scene.GetAllComponents<ShopItem>()
+			.Where( x => x.GameObject.Components.Get<ModelRenderer>()?.Model == modelToCheck );
+
+		var allClothingPrefabs = PrefabLibrary.FindByComponent<ItemEquipment>()
+			.Where( x => x.GetComponent<ItemEquipment>().Get<EquipSlot>( "Slot" ) != EquipSlot.Hand )
+			.ToList();
+
+		foreach ( var shop in allClothingShops )
+		{
+			var chosen = Game.Random.FromList( allClothingPrefabs ).Prefab;
+			shop.Item = chosen;
+			shop.CreateWorldIcon();
+			shop.ResetName();
+			shop.ResetPrice();
+		}
 	}
 
 	public void SetRandomDialogues( int randomSeed )
@@ -573,6 +600,7 @@ public class StoryMaster : Component
 			storyMaster.ResetStoryProgression();
 			storyMaster._taskMaster.ResetTasksProgression( true );
 			storyMaster._eventMaster.ResetEventsProgression();
+			storyMaster.ResetPlayer();
 		}
 	}
 
@@ -601,5 +629,14 @@ public class StoryMaster : Component
 
 		if ( storyMaster != null )
 			storyMaster._eventMaster.ResetEventsProgression();
+	}
+
+	[ConCmd( "sauna_reset_player" )]
+	public static void DeletePlayer()
+	{
+		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
+
+		if ( storyMaster != null )
+			storyMaster.ResetPlayer();
 	}
 }

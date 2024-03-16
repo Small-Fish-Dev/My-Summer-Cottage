@@ -1,0 +1,107 @@
+{
+  "Name": "Time for sauna.",
+  "Subtitle": "Take a sauna",
+  "Description": "Gather your friends and take a sauna.",
+  "Giver": "",
+  "Message": "",
+  "TaskType": "GivenByStory",
+  "TaskRarity": "Any",
+  "IsPrimary": false,
+  "Global": true,
+  "ExperienceGiven": 200,
+  "SuccessSignal": "task.success.Time for sauna.",
+  "FailedSignal": "task.failed.Time for sauna.",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Start the sauna",
+      "SubtaskOrder": 9,
+      "TriggerSignal": "stove.begin_sauna",
+      "AmountToComplete": 1,
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "ff1562b3-5add-49f6-b759-8004827bc8a6",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "call",
+            "Properties": {
+              "_name": "CaptureMemory",
+              "_type": "package.fish.sauna/Sauna.Player",
+              "_isStatic": false
+            },
+            "UserData": {
+              "Position": "480,128"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "256,112"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 1,
+            "DstName": "_target"
+          },
+          {
+            "Value": "Relaxing time...",
+            "DstId": 1,
+            "DstName": "caption"
+          },
+          {
+            "Value": 150,
+            "DstId": 1,
+            "DstName": "distance"
+          },
+          {
+            "Value": "relaxintime",
+            "DstId": 1,
+            "DstName": "identifier"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 0.1,
+            "DstId": 2,
+            "DstName": "seconds"
+          }
+        ]
+      }
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

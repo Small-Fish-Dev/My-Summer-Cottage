@@ -1,0 +1,732 @@
+{
+  "Name": "Sell some mushrooms",
+  "Subtitle": "Mushrooms ready to pick and sell",
+  "Description": "The mushrooms behind the Sauna are ready to be picked and sold.",
+  "Giver": "Uncle Aapo",
+  "Message": "Hey nephew, the mushrooms behind the Sauna are ready to pick, go sell them.",
+  "TaskType": "GivenByStory",
+  "TaskRarity": "Any",
+  "IsPrimary": true,
+  "Global": false,
+  "ExperienceGiven": 50,
+  "SuccessSignal": "task.success.Sell some mushrooms",
+  "FailedSignal": "task.failed.Sell some mushrooms",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": true,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go behind the Sauna",
+      "TriggerSignal": "mushrooms_area.entered",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "8abb1bd5-3a8a-409b-b47b-6850290a80cb",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "480,16"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "192,32"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "208,192"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "448,256"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "There\u0027s a mushroom spawn behind the Sauna.",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 7,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "MushroomArea",
+            "DstId": 3,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 4,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_result",
+            "DstId": 4,
+            "DstName": "target"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "964c0cc2-c815-4492-97a8-86dbed91c3a9",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "240,48"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "576,64"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "MushroomArea",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "target"
+          }
+        ]
+      }
+    },
+    {
+      "Description": "Pick 5 mushrooms.",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "lake.reached",
+      "AmountToComplete": 5,
+      "EvaluateOnTick": {
+        "Version": 5,
+        "UserData": {
+          "Title": "Evaluate On Tick",
+          "id": "ee8e8b23-d36d-4e10-bca1-fee1d2ed7e38",
+          "ReferencedComponentTypes": [
+            "package.fish.sauna/Sauna.Inventory"
+          ]
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input",
+            "UserData": {
+              "Position": "-48,64"
+            }
+          },
+          {
+            "Id": 1,
+            "Type": "output",
+            "UserData": {
+              "Position": "560,96"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "scene.get",
+            "Properties": {
+              "T": "package.fish.sauna/Sauna.Inventory"
+            },
+            "UserData": {
+              "Position": "112,128"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "352,192"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 3,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "_result"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 2,
+            "DstName": "_this"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Chanterelle Mushroom",
+            "DstId": 3,
+            "DstName": "nameOfItem"
+          }
+        ]
+      },
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "6b7afe82-4c07-4f8a-8b95-ebd70798c944",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 3,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "544,16"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "288,16"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 4,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Look for a mushroom and pick it up.",
+            "DstId": 3,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 3,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 3,
+            "DstName": "theme"
+          },
+          {
+            "Value": 6,
+            "DstId": 3,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 3,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 4,
+            "DstName": "seconds"
+          }
+        ]
+      }
+    },
+    {
+      "Description": "Go to the Hunting Shop in the City",
+      "SubtaskOrder": 2,
+      "TriggerSignal": "huntingshop.entered",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "50bda4b5-dc8a-4d0d-9347-9fde7b183cbe",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "480,96"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "224,96"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "240,288"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "496,368"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "You can take a taxi or walk to the city.",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 6,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "HuntingShop",
+            "DstId": 3,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 4,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_result",
+            "DstId": 4,
+            "DstName": "target"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "4c29d6ea-965d-49d3-bb66-4a08ecba8d35",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "272,96"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "512,112"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "HuntingShop",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "target"
+          }
+        ]
+      }
+    },
+    {
+      "Description": "Sell to the Hunting Shop",
+      "SubtaskOrder": 3,
+      "TriggerSignal": "huntingshop_sold",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "9f1f3077-29c0-4505-8679-a9b17552639a"
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "464,48"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "208,48"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "You can sell items by dropping them on the floor.",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 10,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "f2d25cec-6f0a-4438-ae72-7a6d159021ea",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "432,0"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "176,0"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "call",
+            "Properties": {
+              "_name": "CaptureMemory",
+              "_type": "package.fish.sauna/Sauna.Player",
+              "_isStatic": false
+            },
+            "UserData": {
+              "Position": "464,240"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "240,224"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "The Hunting Shop will buy Meat, Fish, and Mushrooms.",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 7,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          },
+          {
+            "SrcId": 4,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 3,
+            "DstName": "_target"
+          },
+          {
+            "Value": "Making dough xoxoxo",
+            "DstId": 3,
+            "DstName": "caption"
+          },
+          {
+            "Value": 150,
+            "DstId": 3,
+            "DstName": "distance"
+          },
+          {
+            "Value": "sold_mushroom",
+            "DstId": 3,
+            "DstName": "identifier"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 0.1,
+            "DstId": 4,
+            "DstName": "seconds"
+          }
+        ]
+      }
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

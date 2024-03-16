@@ -23,13 +23,228 @@
     {
       "Description": "Equip the Airsoft Rifle",
       "TriggerSignal": "item.equipped.Airsoft Rifle",
-      "AmountToComplete": 1
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "d6d02e9c-97cb-437c-9074-319b09804d5e",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "448,32"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "192,32"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Free Airsoft Rifle near the Sauna.",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 5,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          }
+        ]
+      }
     },
     {
       "Description": "Obtain the BB Pellets",
       "SubtaskOrder": 1,
       "TriggerSignal": "item.received.Airsoft BB Pellets",
-      "AmountToComplete": 1
+      "AmountToComplete": 1,
+      "EvaluateOnTick": {
+        "Version": 5,
+        "UserData": {
+          "Title": "Evaluate On Tick",
+          "id": "c531ad15-a736-44f8-be12-2eaf3836aa60",
+          "ReferencedComponentTypes": [
+            "package.fish.sauna/Sauna.Inventory"
+          ]
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input",
+            "UserData": {
+              "Position": "-32,240"
+            }
+          },
+          {
+            "Id": 1,
+            "Type": "output",
+            "UserData": {
+              "Position": "752,176"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "scene.get",
+            "Properties": {
+              "T": "package.fish.sauna/Sauna.Inventory"
+            },
+            "UserData": {
+              "Position": "144,288"
+            }
+          },
+          {
+            "Id": 3,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "448,256"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 3,
+            "SrcName": "_result",
+            "DstId": 1,
+            "DstName": "_result"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 2,
+            "DstName": "_this"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Airsoft BB Pellets",
+            "DstId": 3,
+            "DstName": "nameOfItem"
+          }
+        ]
+      },
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "4ae57f09-68a9-4c8c-9092-dfc8ab466e1e",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "560,112"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "304,112"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Free pellets near the airsoft gun",
+            "DstId": 1,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 1,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 1,
+            "DstName": "theme"
+          },
+          {
+            "Value": 5,
+            "DstId": 1,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 1,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          }
+        ]
+      }
     },
     {
       "Description": "Go to a rabbit spawning area",
@@ -62,6 +277,20 @@
             "UserData": {
               "Position": "464,80"
             }
+          },
+          {
+            "Id": 3,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "480,192"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "224,192"
+            }
           }
         ],
         "Links": [
@@ -92,6 +321,48 @@
             "SrcName": "_result",
             "DstId": 2,
             "DstName": "target"
+          },
+          {
+            "SrcId": 4,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Get there before the foxes do.",
+            "DstId": 3,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 3,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 3,
+            "DstName": "theme"
+          },
+          {
+            "Value": 5,
+            "DstId": 3,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 3,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 4,
+            "DstName": "seconds"
           }
         ]
       },
@@ -248,8 +519,8 @@
             "Id": 2,
             "Type": "property.set",
             "Properties": {
-              "_type": "Sandbox.Game/Sandbox.GameObject",
-              "_name": "Enabled"
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
             },
             "UserData": {
               "Position": "544,-192"
@@ -266,8 +537,8 @@
             "Id": 4,
             "Type": "property.set",
             "Properties": {
-              "_type": "Sandbox.Game/Sandbox.GameObject",
-              "_name": "Enabled"
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
             },
             "UserData": {
               "Position": "544,-96"
@@ -284,8 +555,8 @@
             "Id": 6,
             "Type": "property.set",
             "Properties": {
-              "_type": "Sandbox.Game/Sandbox.GameObject",
-              "_name": "Enabled"
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
             },
             "UserData": {
               "Position": "544,-0"
@@ -302,8 +573,8 @@
             "Id": 8,
             "Type": "property.set",
             "Properties": {
-              "_type": "Sandbox.Game/Sandbox.GameObject",
-              "_name": "Enabled"
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
             },
             "UserData": {
               "Position": "544,96"
@@ -320,11 +591,25 @@
             "Id": 10,
             "Type": "property.set",
             "Properties": {
-              "_type": "Sandbox.Game/Sandbox.GameObject",
-              "_name": "Enabled"
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
             },
             "UserData": {
               "Position": "544,192"
+            }
+          },
+          {
+            "Id": 11,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "576,320"
+            }
+          },
+          {
+            "Id": 12,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "320,320"
             }
           }
         ],
@@ -493,6 +778,122 @@
             "Value": true,
             "DstId": 10,
             "DstName": "_value"
+          },
+          {
+            "SrcId": 12,
+            "SrcName": "_signal",
+            "DstId": 11,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Reload, take aim, and fire.",
+            "DstId": 11,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 11,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 11,
+            "DstName": "theme"
+          },
+          {
+            "Value": 5,
+            "DstId": 11,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 11,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 12,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 12,
+            "DstName": "seconds"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "8b8a5cde-d453-4a47-84f0-74905209db40",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "call",
+            "Properties": {
+              "_name": "CaptureMemory",
+              "_type": "package.fish.sauna/Sauna.Player",
+              "_isStatic": false
+            },
+            "UserData": {
+              "Position": "480,32"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "256,16"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 1,
+            "DstName": "_target"
+          },
+          {
+            "Value": "I have taken away someone\u0027s life.",
+            "DstId": 1,
+            "DstName": "caption"
+          },
+          {
+            "Value": 150,
+            "DstId": 1,
+            "DstName": "distance"
+          },
+          {
+            "Value": "killed_rabbit",
+            "DstId": 1,
+            "DstName": "identifier"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 0.1,
+            "DstId": 2,
+            "DstName": "seconds"
           }
         ]
       }
