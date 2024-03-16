@@ -1,13 +1,13 @@
 {
   "RootObject": {
-    "__guid": "d4520984-7762-4548-98c7-0f99c8c66f97",
-    "Name": "Hunting Shop Guy",
+    "__guid": "b24ce9fc-8b38-404c-8741-5e630f5dd88b",
+    "Name": "hunter_shop_npc",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "DialogueTree",
-        "__guid": "4484269c-f845-4141-9e51-2dac9bc258a8",
+        "__guid": "786ba1f1-2714-4315-bf27-9a66470310e1",
         "DialogueStages": [
           {
             "IsInitial": true,
@@ -36,8 +36,8 @@
                       "Properties": {
                         "component": {
                           "_type": "component",
-                          "component_id": "4484269c-f845-4141-9e51-2dac9bc258a8",
-                          "go": "d4520984-7762-4548-98c7-0f99c8c66f97",
+                          "component_id": "786ba1f1-2714-4315-bf27-9a66470310e1",
+                          "go": "b24ce9fc-8b38-404c-8741-5e630f5dd88b",
                           "component_type": "DialogueTree"
                         }
                       },
@@ -58,12 +58,12 @@
                       "Id": 6,
                       "Type": "call",
                       "Properties": {
+                        "_name": "SpeakWithSubtitle",
                         "_isStatic": true,
-                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                        "_name": "SpeakWithSubtitle"
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                       },
                       "UserData": {
-                        "Position": "272,0"
+                        "Position": "304,0"
                       }
                     }
                   ],
@@ -99,21 +99,19 @@
                     }
                   ]
                 },
-                "InteractDistance": 125,
-                "DynamicColor": null,
-                "Disabled": null
+                "InteractDistance": 125
               }
             ]
           }
         ],
         "HasRandomDialogues": true,
         "HostOnly": false,
-        "Name": "Hunting Shop Guy",
+        "Name": "Erkki",
         "Networked": false
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "e0ffd7c2-812a-4e7b-907c-66f1bbcdffab",
+        "__guid": "cb26a0b9-377b-4ff9-8bb8-ef1bb88e1728",
         "End": "0,0,68",
         "IsTrigger": false,
         "Radius": 12,
@@ -123,14 +121,14 @@
     ],
     "Children": [
       {
-        "__guid": "9ba788b3-7f9d-442a-9353-38e42fc54e85",
+        "__guid": "553d6f69-04df-40ba-bcbd-c4474459da52",
         "Name": "Model",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "Character",
-            "__guid": "27e23746-732e-4ecf-aef0-5848dbe0fb83",
+            "__guid": "c2bbebe7-3979-4aef-8ba7-a953adc9c3c2",
             "Clothes": [
               "models/clothes/fishing_hat/fishing_hat.vmdl",
               "models/clothes/fishing_vest/fishing_vest.vmdl",
@@ -143,7 +141,7 @@
           },
           {
             "__type": "SkinnedModelRenderer",
-            "__guid": "c60637f1-126b-48fa-9e62-85c219d5d4d3",
+            "__guid": "dfe241ca-f30e-4dc5-8b4f-d606293594dc",
             "BodyGroups": 1365,
             "CreateBoneObjects": false,
             "Model": "models/guy/guy.vmdl",

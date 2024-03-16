@@ -1,0 +1,166 @@
+{
+  "RootObject": {
+    "__guid": "26ab5b7b-7be5-44d9-8cae-ac570ce62f2b",
+    "Name": "bar_npc",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "DialogueTree",
+        "__guid": "2ac2445d-a1cc-4e84-9c87-efc9ee77958f",
+        "DialogueStages": [
+          {
+            "IsInitial": true,
+            "DialoguePoolWeight": 1,
+            "AvailableResponses": [
+              {
+                "Keybind": "Use",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "2f64091f-3304-4e3d-b52c-2e2ff6386f85",
+                    "ReferencedComponentTypes": [
+                      "package.fish.sauna/Sauna.DialogueTree"
+                    ]
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "input"
+                    },
+                    {
+                      "Id": 1,
+                      "Type": "call",
+                      "Properties": {
+                        "_name": "SpeakWithSubtitle",
+                        "_isStatic": true,
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                      },
+                      "UserData": {
+                        "Position": "368,48"
+                      }
+                    },
+                    {
+                      "Id": 2,
+                      "Type": "scene.get",
+                      "Properties": {
+                        "T": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "-64,160"
+                      }
+                    },
+                    {
+                      "Id": 3,
+                      "Type": "property.get",
+                      "Properties": {
+                        "_name": "Name",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "144,176"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_signal",
+                      "DstId": 1,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 3,
+                      "SrcName": "_result",
+                      "DstId": 1,
+                      "DstName": "name"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_target",
+                      "DstId": 1,
+                      "DstName": "obj"
+                    },
+                    {
+                      "Value": "I don\u0027t care how much you drink as long as you have the money.",
+                      "DstId": 1,
+                      "DstName": "subtitle"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_target",
+                      "DstId": 2,
+                      "DstName": "_this"
+                    },
+                    {
+                      "SrcId": 2,
+                      "SrcName": "_result",
+                      "DstId": 3,
+                      "DstName": "_target"
+                    }
+                  ]
+                },
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
+              }
+            ]
+          }
+        ],
+        "HasRandomDialogues": true,
+        "HostOnly": false,
+        "Name": "Pasi",
+        "Networked": false
+      },
+      {
+        "__type": "CapsuleCollider",
+        "__guid": "2febdfd1-d34e-498a-b6ec-5826ac8876c0",
+        "End": "0,0,68",
+        "IsTrigger": false,
+        "Radius": 12,
+        "Start": "0,0,12",
+        "Static": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "4e6d9c3c-7880-4a9b-b44c-633ae04f8947",
+        "Name": "Model",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "Character",
+            "__guid": "fd0e31f9-b0ee-4208-bbf0-a2144bcde5d9",
+            "Clothes": [
+              "models/clothes/boots/boots.vmdl",
+              "models/clothes/t-shirt/t-shirt.vmdl",
+              "models/clothes/ushanka/ushanka.vmdl",
+              "models/clothes/shorts/shorts.vmdl"
+            ],
+            "Fatness": 1,
+            "Height": -23,
+            "HideBodyGroup": "Feet"
+          },
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "0f6a5032-cbee-41c9-bff5-7d123d42c3f7",
+            "BodyGroups": 1365,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

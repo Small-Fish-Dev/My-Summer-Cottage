@@ -7,7 +7,7 @@ public struct SpeechSettings
 	public float Volume { get; set; } = 1;
 	public Vector3 Position { get; set; } = 0;
 	public Rotation Rotation { get; set; } = Rotation.Identity;
-	public float Pitch { get; set; } = 1;
+	public float Pitch { get; set; } = 0.7f;
 	public float Decibels { get; set; } = 70;
 	public bool ListenLocal { get; set; } = false;
 	public int Delay { get; set; } = 180;
@@ -58,7 +58,7 @@ public class Speech
 				Game.SetRandomSeed( (byte)character );
 				var index = Game.Random.Int( 1, SOUNDS );
 				var soundFile = SoundFile.Load( $"sounds/speech/{index}.sound" );
-				var sound = settings.GameObject.IsValid() 
+				var sound = settings.GameObject.IsValid()
 					? settings.GameObject.PlaySound( soundFile.ResourcePath )
 					: Sound.PlayFile( soundFile );
 

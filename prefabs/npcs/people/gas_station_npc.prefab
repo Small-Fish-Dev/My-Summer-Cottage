@@ -1,13 +1,13 @@
 {
   "RootObject": {
-    "__guid": "d4520984-7762-4548-98c7-0f99c8c66f97",
-    "Name": "gasstationguy",
+    "__guid": "328ec5d7-24c2-407b-bab7-8753e3d411b9",
+    "Name": "gas_station_npc",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "DialogueTree",
-        "__guid": "4484269c-f845-4141-9e51-2dac9bc258a8",
+        "__guid": "a40169c3-65dd-4542-91ec-17ee37693617",
         "DialogueStages": [
           {
             "IsInitial": true,
@@ -22,89 +22,94 @@
                   "UserData": {
                     "Title": "Action",
                     "id": "ccf1c572-d3e0-490f-b526-8817066c0c34",
-                    "ReferencedComponentTypes": []
+                    "ReferencedComponentTypes": [
+                      "package.fish.sauna/Sauna.DialogueTree"
+                    ]
                   },
                   "Variables": [],
                   "Nodes": [
                     {
-                      "Id": 0,
-                      "Type": "input"
-                    },
-                    {
-                      "Id": 2,
-                      "Type": "scene.ref",
-                      "Properties": {
-                        "component": {
-                          "_type": "component",
-                          "component_id": "4484269c-f845-4141-9e51-2dac9bc258a8",
-                          "go": "d4520984-7762-4548-98c7-0f99c8c66f97",
-                          "component_type": "DialogueTree"
-                        }
-                      },
+                      "Id": 6,
+                      "Type": "input",
                       "UserData": {
-                        "Position": "-16,128"
+                        "Position": "336,112"
                       }
                     },
                     {
-                      "Id": 4,
-                      "Type": "property.get",
-                      "ParentId": 2,
-                      "Properties": {
-                        "_name": "Name",
-                        "_type": "package.fish.sauna/Sauna.DialogueTree"
-                      }
-                    },
-                    {
-                      "Id": 5,
+                      "Id": 9,
                       "Type": "call",
                       "Properties": {
-                        "_name": "PlaySoundWithNameAndSubtitle",
+                        "_name": "SpeakWithSubtitle",
                         "_isStatic": true,
                         "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                       },
                       "UserData": {
-                        "Position": "304,-16"
+                        "Position": "752,144"
+                      }
+                    },
+                    {
+                      "Id": 10,
+                      "Type": "scene.get",
+                      "Properties": {
+                        "T": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "288,272"
+                      }
+                    },
+                    {
+                      "Id": 11,
+                      "Type": "property.get",
+                      "Properties": {
+                        "_name": "Name",
+                        "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "512,304"
                       }
                     }
                   ],
                   "Links": [
                     {
-                      "SrcId": 2,
-                      "SrcName": "_result",
-                      "DstId": 4,
-                      "DstName": "_target"
-                    },
-                    {
-                      "SrcId": 0,
+                      "SrcId": 6,
                       "SrcName": "_signal",
-                      "DstId": 5,
+                      "DstId": 9,
                       "DstName": "_signal"
                     },
                     {
-                      "SrcId": 4,
+                      "SrcId": 11,
                       "SrcName": "_result",
-                      "DstId": 5,
+                      "DstId": 9,
                       "DstName": "name"
                     },
                     {
-                      "SrcId": 0,
+                      "SrcId": 6,
                       "SrcName": "_target",
-                      "DstId": 5,
+                      "DstId": 9,
                       "DstName": "obj"
                     },
                     {
-                      "Value": "",
-                      "DstId": 5,
-                      "DstName": "sound"
+                      "Value": "Please stop looking and just buy something already.",
+                      "DstId": 9,
+                      "DstName": "subtitle"
                     },
                     {
-                      "Value": "Hello human, I am Joe, Mama.",
-                      "DstId": 5,
-                      "DstName": "subtitle"
+                      "SrcId": 6,
+                      "SrcName": "_target",
+                      "DstId": 10,
+                      "DstName": "_this"
+                    },
+                    {
+                      "SrcId": 10,
+                      "SrcName": "_result",
+                      "DstId": 11,
+                      "DstName": "_target"
                     }
                   ]
                 },
-                "InteractDistance": 125
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
               }
             ]
           },
@@ -121,104 +126,148 @@
                   "UserData": {
                     "Title": "Action",
                     "id": "86112947-4de3-43e8-a272-c8189af6b0ae",
-                    "ReferencedComponentTypes": []
+                    "ReferencedComponentTypes": [
+                      "package.fish.sauna/Sauna.DialogueTree"
+                    ]
                   },
                   "Variables": [],
                   "Nodes": [
                     {
-                      "Id": 0,
+                      "Id": 5,
                       "Type": "input",
                       "UserData": {
-                        "Position": "-64,0"
+                        "Position": "-176,336"
                       }
                     },
                     {
-                      "Id": 1,
+                      "Id": 8,
                       "Type": "call",
                       "Properties": {
-                        "_name": "PlaySoundWithNameAndSubtitle",
+                        "_name": "SpeakWithSubtitle",
                         "_isStatic": true,
                         "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
                       },
                       "UserData": {
-                        "Position": "288,-16"
+                        "Position": "480,368"
                       }
                     },
                     {
-                      "Id": 3,
-                      "Type": "scene.ref",
+                      "Id": 9,
+                      "Type": "property.get",
                       "Properties": {
-                        "component": {
-                          "_type": "component",
-                          "component_id": "4484269c-f845-4141-9e51-2dac9bc258a8",
-                          "go": "d4520984-7762-4548-98c7-0f99c8c66f97",
-                          "component_type": "DialogueTree"
-                        }
+                        "_name": "Firstname",
+                        "_type": "package.fish.sauna/Sauna.Player"
                       },
                       "UserData": {
-                        "Position": "-32,144"
+                        "Position": "-32,384"
                       }
                     },
                     {
-                      "Id": 4,
+                      "Id": 10,
+                      "Type": "call",
+                      "Properties": {
+                        "_name": "Format",
+                        "_isStatic": true,
+                        "_type": "System.Private.CoreLib/System.String"
+                      },
+                      "UserData": {
+                        "Position": "256,432"
+                      }
+                    },
+                    {
+                      "Id": 11,
+                      "Type": "scene.get",
+                      "Properties": {
+                        "T": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "-64,544"
+                      }
+                    },
+                    {
+                      "Id": 12,
                       "Type": "property.get",
-                      "ParentId": 3,
                       "Properties": {
                         "_name": "Name",
                         "_type": "package.fish.sauna/Sauna.DialogueTree"
+                      },
+                      "UserData": {
+                        "Position": "176,576"
                       }
                     }
                   ],
                   "Links": [
                     {
-                      "SrcId": 0,
+                      "SrcId": 5,
                       "SrcName": "_signal",
-                      "DstId": 1,
+                      "DstId": 8,
                       "DstName": "_signal"
                     },
                     {
-                      "SrcId": 4,
+                      "SrcId": 12,
                       "SrcName": "_result",
-                      "DstId": 1,
+                      "DstId": 8,
                       "DstName": "name"
                     },
                     {
-                      "SrcId": 0,
+                      "SrcId": 5,
                       "SrcName": "_target",
-                      "DstId": 1,
+                      "DstId": 8,
                       "DstName": "obj"
                     },
                     {
-                      "Value": "",
-                      "DstId": 1,
-                      "DstName": "sound"
-                    },
-                    {
-                      "Value": "Leave me alone human, I am busy mewing.",
-                      "DstId": 1,
+                      "SrcId": 10,
+                      "SrcName": "_result",
+                      "DstId": 8,
                       "DstName": "subtitle"
                     },
                     {
-                      "SrcId": 3,
+                      "SrcId": 5,
+                      "SrcName": "interactor",
+                      "DstId": 9,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 9,
                       "SrcName": "_result",
-                      "DstId": 4,
+                      "DstId": 10,
+                      "DstName": "args",
+                      "DstIndex": 0
+                    },
+                    {
+                      "Value": "Hey %s, nice to see you again.",
+                      "DstId": 10,
+                      "DstName": "format"
+                    },
+                    {
+                      "SrcId": 5,
+                      "SrcName": "_target",
+                      "DstId": 11,
+                      "DstName": "_this"
+                    },
+                    {
+                      "SrcId": 11,
+                      "SrcName": "_result",
+                      "DstId": 12,
                       "DstName": "_target"
                     }
                   ]
                 },
-                "InteractDistance": 125
+                "InteractDistance": 125,
+                "DynamicColor": null,
+                "Disabled": null
               }
             ]
           }
         ],
         "HasRandomDialogues": true,
         "HostOnly": false,
-        "Name": "Hunting Shop Guy",
+        "Name": "Jorma",
         "Networked": false
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "e0ffd7c2-812a-4e7b-907c-66f1bbcdffab",
+        "__guid": "f29d78e2-7146-4fc6-ab38-c99bf953d7cb",
         "End": "0,0,68",
         "IsTrigger": false,
         "Radius": 12,
@@ -228,14 +277,14 @@
     ],
     "Children": [
       {
-        "__guid": "9ba788b3-7f9d-442a-9353-38e42fc54e85",
+        "__guid": "1e2bc178-e06d-4f0e-9ca8-7498ca36676a",
         "Name": "Model",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "Character",
-            "__guid": "27e23746-732e-4ecf-aef0-5848dbe0fb83",
+            "__guid": "e41c26f7-4d7d-4f82-bcc6-6f2a87e11ec1",
             "Clothes": [
               "models/clothes/beanie/beanie.vmdl",
               "models/clothes/oxford_shoes/oxford_shoes.vmdl",
@@ -248,7 +297,7 @@
           },
           {
             "__type": "SkinnedModelRenderer",
-            "__guid": "c60637f1-126b-48fa-9e62-85c219d5d4d3",
+            "__guid": "a4bf1803-febc-4459-a2ef-218695789be6",
             "BodyGroups": 1365,
             "CreateBoneObjects": false,
             "Model": "models/guy/guy.vmdl",
