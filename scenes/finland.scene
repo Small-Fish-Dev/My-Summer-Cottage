@@ -1941,7 +1941,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.9988567,0,-0.04780429",
+          "Rotation": "0,0.6009451,0,0.7992904",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -2827,7 +2827,7 @@
               "__guid": "d9b1b60b-f47d-4df2-a4cc-7ec08ce8bed6",
               "Door": {
                 "_type": "component",
-                "component_id": "d8a199ea-4f11-4b41-9d1b-2cc35585d173",
+                "component_id": "7443baf9-dc1f-447b-9808-d76decec9912",
                 "go": "ad648568-ff05-4e08-91ae-28a978624815",
                 "component_type": "DoorComponent"
               },
@@ -2860,10 +2860,11 @@
               "Tint": "1,1,1,1"
             },
             {
-              "__type": "ModelCollider",
-              "__guid": "88b6286c-bb99-4ba9-a163-cee1de6ff487",
+              "__type": "BoxCollider",
+              "__guid": "820469a5-2603-4834-80ec-41169e157890",
+              "Center": "0,0,19.6",
               "IsTrigger": false,
-              "Model": "models/stove/stove.vmdl",
+              "Scale": "50,29.51999,50",
               "Static": false
             }
           ],
@@ -5560,7 +5561,7 @@
         },
         {
           "__guid": "aa145841-e52f-44c9-8ffa-216ea647383c",
-          "Name": "slot_machine (1)",
+          "Name": "Slot Machine",
           "Position": "66.40723,404.6719,-5.457031",
           "Rotation": "0,0,-0.7071067,0.7071068",
           "Enabled": true,
@@ -5569,7 +5570,7 @@
         },
         {
           "__guid": "6cdde554-6c51-488b-b166-041406915765",
-          "Name": "slot_machine",
+          "Name": "Slot Machine",
           "Position": "11.95703,404.6719,-5.457031",
           "Rotation": "0,0,-0.7071067,0.7071068",
           "Enabled": true,
@@ -5631,7 +5632,7 @@
           "Extents": "250,400,300",
           "MaxPollingRate": 10,
           "Offset": "0,0,0",
-          "TagsToAccept": "meat,fish",
+          "TagsToAccept": "meat,fish,mushroom",
           "TriggerSignalIdentifier": "huntingshop_sold"
         }
       ],
@@ -6612,6 +6613,26 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "018f5466-5aff-4e7d-bd76-8991fd5e4554",
+      "Name": "MushroomArea",
+      "Position": "4791.125,-1999.88,2650.894",
+      "Rotation": "0,0,0.3826834,0.9238796",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "__guid": "4f6ea60c-3c70-44b9-bbd7-4b561c569e5b",
+          "Extents": "3000,3000,500",
+          "MaxPollingRate": 15,
+          "Offset": "0,0,0",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "mushroom.enter"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -6637,7 +6658,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-16T13:39:31.2001848\u002B00:00",
+  "LastSaved": "2024-03-16T15:03:19.2799071\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
