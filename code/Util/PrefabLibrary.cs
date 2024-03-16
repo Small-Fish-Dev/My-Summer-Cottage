@@ -8,6 +8,7 @@ public class ComponentDefinition
 {
 	public TypeDescription Type;
 	public JsonObject Object;
+	public PrefabDefinition Prefab;
 
 	private static JsonSerializerOptions options = new()
 	{
@@ -89,6 +90,13 @@ public static class PrefabLibrary
 				if ( rootComponents == null )
 					return null;
 
+				var def = new PrefabDefinition
+				{
+					Name = name,
+					Prefab = prefab,
+					Components = components
+				};
+
 				foreach ( var component in rootComponents )
 				{
 					var obj = component.AsObject();
@@ -99,17 +107,13 @@ public static class PrefabLibrary
 					components.Add( new()
 					{
 						Type = GlobalGameNamespace.TypeLibrary.GetType( typeName ),
-						Object = obj
+						Object = obj,
+						Prefab = def
 					} );
 				}
 
 				// Return a PrefabDefinition with all relevant data.
-				return new PrefabDefinition
-				{
-					Name = name,
-					Prefab = prefab,
-					Components = components
-				};
+				return def;
 			} )
 			.Where( p => p != null )
 			.ToDictionary( p => p.Prefab, p => p );
