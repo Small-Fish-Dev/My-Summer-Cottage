@@ -187,10 +187,10 @@ public partial class Player : Component, Component.ExecuteInEditor
 		var morph = Penoid?.SceneModel?.Morphs.Get( "size" ) ?? 0f;
 
 		// Size of smallest possible penice.
-		var smallAttachment = GetAttachment( "penoid_min" );
+		var smallAttachment = GetAttachment( "penoid_min", false );
 
 		// Size of biggest possible penice.
-		var bigAttachment = GetAttachment( "penoid_max" );
+		var bigAttachment = GetAttachment( "penoid_max", false );
 
 		// Lerp between the two values to get actual position of penice tip.
 		return global::Transform.Lerp( smallAttachment, bigAttachment, morph, true );
@@ -274,7 +274,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 			var pissRot = EyeAngles.WithRoll( 0 ).WithYaw( 0 );
 			var pissHeightAdjust = (Height * 0.01f) * 9;
 
-			PissEmitter.GameObject.Transform.LocalRotation = pissRot.WithPitch( (pissRot.pitch - (40 + pissHeightAdjust)).Clamp( -80, 50 ) );
+			PissEmitter.GameObject.Transform.Local = new Transform( GetAttachment( "boner", false ).Position, pissRot.WithPitch( (pissRot.pitch - (40 + pissHeightAdjust)).Clamp( -80, 50 ) ) );
 
 			if ( PissParticles != null )
 			{
