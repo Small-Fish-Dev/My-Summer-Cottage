@@ -78,7 +78,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// </summary>
 	public bool IsFinished { get; set; } = false;
 
-	TaskMaster _taskMaster;
 	EventMaster _eventMaster;
 
 	bool _showToggle = false;
@@ -129,7 +128,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 				trigger.OnTrigger += HasBeenTriggered;
 		}
 
-		_taskMaster = Scene.GetAllComponents<TaskMaster>().FirstOrDefault();
 		_eventMaster = Scene.GetAllComponents<EventMaster>().FirstOrDefault();
 
 		GameObject.BreakFromPrefab();
@@ -164,7 +162,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		foreach ( var enabledTrigger in Components.GetAll<EventEnabledTrigger>( FindMode.EverythingInSelfAndDescendants ) )
 			enabledTrigger.CallTrigger( null );
 
-		_eventMaster.CurrentEvents.Add( this );
+		_eventMaster?.CurrentEvents?.Add( this );
 	}
 
 	public void Disable()
