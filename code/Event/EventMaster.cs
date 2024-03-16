@@ -7,7 +7,8 @@ public class EventMaster : Component
 {
 	[Property]
 	public List<EventDefinition> CurrentEvents { get; set; } = new();
-	public IEnumerable<EventDefinition> AllEvents => Scene.GetAllComponents<EventDefinition>();
+	public IEnumerable<EventDefinition> AllEvents { get; set; }
+	public static EventMaster Instance { get; set; }
 
 	/// <summary>
 	/// Get how many events the player has triggered so far (From 0 to 1) - Fetching this runs a check so don't overuse it
@@ -68,6 +69,9 @@ public class EventMaster : Component
 
 	protected override void OnStart()
 	{
+		Instance = this;
+		AllEvents = Scene.Components.GetAll<EventDefinition>( FindMode.EverythingInSelfAndDescendants );
+		CurrentEvents = new();
 		LoadEventsProgression();
 	}
 
@@ -149,7 +153,7 @@ public class EventMaster : Component
 		{
 			EventsProgression = new();
 
-			var allEvents = Scene.Components.GetAll<EventDefinition>()
+			var allEvents = AllEvents
 				.DistinctBy( x => x.EventName ); // Avoid multiple event definitions
 
 			foreach ( var @event in allEvents )
@@ -203,9 +207,7 @@ public class EventMaster : Component
 
 	public void UnloadAllEvents()
 	{
-		var allEvents = Scene.Components.GetAll<EventDefinition>();
-
-		foreach ( var @event in allEvents )
+		foreach ( var @event in AllEvents )
 			@event.Disable();
 
 		Log.Info( "Unloaded all events" );

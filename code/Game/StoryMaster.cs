@@ -155,7 +155,6 @@ public class StoryMaster : Component
 	public SaunaDay NextSaunaDay => StoryDays.TryGetValue( StoryProgression.StoryDay + 1, out var saunaDay ) ? saunaDay : null;
 
 	TaskMaster _taskMaster => Components.Get<TaskMaster>();
-	EventMaster _eventMaster => Components.Get<EventMaster>();
 	GameTimeManager _timeManager => Components.Get<GameTimeManager>();
 
 	/// <summary>
@@ -309,14 +308,15 @@ public class StoryMaster : Component
 
 		Game.SetRandomSeed( randomSeed );
 
+		Log.Info( randomSeed );
 		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Common ) )
 		{
 			int eventsPicked = 0;
 
 			for ( int common = 0; common < CurrentSaunaDay.RandomEvents[EventRarity.Common]; common++ )
 			{
-				var availableCommonEvents = _eventMaster.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Common )
-					.Where( x => !_eventMaster.CurrentEvents.Contains( x ) )
+				var availableCommonEvents = EventMaster.Instance.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Common )
+					.Where( x => !EventMaster.Instance.CurrentEvents.Contains( x ) )
 					.ToList(); // We haven't chosen it yet
 
 				if ( availableCommonEvents.Any() )
@@ -327,6 +327,8 @@ public class StoryMaster : Component
 						EventsToTrigger.Add( new TriggeringEvent( chosenEvent, Game.Random.Float( 10f, 24f ) ) );
 					else
 						chosenEvent.Enable();
+
+					Log.Info( chosenEvent );
 
 					eventsPicked++;
 				}
@@ -341,8 +343,8 @@ public class StoryMaster : Component
 
 			for ( int uncommon = 0; uncommon < CurrentSaunaDay.RandomEvents[EventRarity.Uncommon]; uncommon++ )
 			{
-				var availableUncommonEvents = _eventMaster.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Uncommon )
-					.Where( x => !_eventMaster.CurrentEvents.Contains( x ) )
+				var availableUncommonEvents = EventMaster.Instance.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Uncommon )
+					.Where( x => !EventMaster.Instance.CurrentEvents.Contains( x ) )
 					.ToList(); // We haven't chosen it yet
 
 				if ( availableUncommonEvents.Any() )
@@ -367,8 +369,8 @@ public class StoryMaster : Component
 
 			for ( int rare = 0; rare < CurrentSaunaDay.RandomEvents[EventRarity.Rare]; rare++ )
 			{
-				var availableRareEvents = _eventMaster.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Rare )
-					.Where( x => !_eventMaster.CurrentEvents.Contains( x ) )
+				var availableRareEvents = EventMaster.Instance.AllEvents.Where( x => x.Type != EventType.Direct && x.Rarity == EventRarity.Rare )
+					.Where( x => !EventMaster.Instance.CurrentEvents.Contains( x ) )
 					.ToList(); // We haven't chosen it yet
 
 
@@ -426,7 +428,7 @@ public class StoryMaster : Component
 		storyMaster.StartStoryDay();
 		storyMaster._timeManager.StartDay();
 
-		storyMaster._eventMaster.UnloadAllEvents();
+		EventMaster.Instance.UnloadAllEvents();
 		storyMaster.LoadEventPool( GameTimeManager.RandomSeed );
 		storyMaster.SetRandomDialogues( GameTimeManager.RandomSeed );
 		storyMaster.RandomizeClothing();
@@ -448,7 +450,7 @@ public class StoryMaster : Component
 
 		storyMaster.NextGameDay();
 
-		storyMaster._eventMaster.UnloadAllEvents();
+		EventMaster.Instance.UnloadAllEvents();
 		storyMaster.EventsToTrigger.Clear();
 		storyMaster.ClearTriggeredEvents();
 
@@ -520,7 +522,7 @@ public class StoryMaster : Component
 		{
 			SaveStoryProgression();
 			_taskMaster.SaveTasksProgression();
-			_eventMaster.SaveEventsProgression();
+			EventMaster.Instance.SaveEventsProgression();
 		}
 	}
 
@@ -645,7 +647,7 @@ public class StoryMaster : Component
 		{
 			storyMaster.ResetStoryProgression();
 			storyMaster._taskMaster.ResetTasksProgression( false );
-			storyMaster._eventMaster.ResetEventsProgression();
+			EventMaster.Instance.ResetEventsProgression();
 			storyMaster.ResetPlayer();
 		}
 	}
@@ -674,7 +676,7 @@ public class StoryMaster : Component
 		var storyMaster = Game.ActiveScene.GetAllComponents<StoryMaster>().FirstOrDefault();
 
 		if ( storyMaster != null )
-			storyMaster._eventMaster.ResetEventsProgression();
+			EventMaster.Instance.ResetEventsProgression();
 	}
 
 	[ConCmd( "sauna_reset_player" )]
