@@ -4801,7 +4801,7 @@
       "Name": "outer_area",
       "Position": "-6348.808,-9026.849,11772.6",
       "Rotation": "0,0,-0.7071067,0.7071068",
-      "Scale": "2.947095,2.947095,3.401206",
+      "Scale": "2,2,2.3",
       "Enabled": true,
       "NetworkMode": 2,
       "Components": [
@@ -4922,7 +4922,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.4935886,0,0.8696955",
+          "Rotation": "0,-0.9989722,0,0.04532597",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -9827,6 +9827,111 @@
       "Enabled": true,
       "NetworkMode": 2,
       "__Prefab": "prefabs/events/nigerian_scammer.prefab"
+    },
+    {
+      "__guid": "05df89ca-77ac-43f4-a5cd-7aa1dbc18afc",
+      "Name": "Cottage",
+      "Position": "3142.471,-2321.549,2403.289",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "__guid": "e2bee7f4-79fd-4468-ac2f-71e2352335eb",
+          "Extents": "273.6799,514.08,500",
+          "MaxPollingRate": 15,
+          "Offset": "-173.76,72.48,0",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "cottage.entered"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "6ec9766f-2304-4a79-900d-c8c9030b1381",
+          "Name": "Bench",
+          "Position": "-93.76587,-26.81689,74.86401",
+          "Rotation": "0,0,0.7071067,-0.7071068",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "cec421de-7498-42f3-a04e-295067d343be",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "62ed4af5-5c18-4cf2-bbf3-be3c2228355a",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "16,0,0.000004702372",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "2c4c1f1e-ffdf-4073-9c7f-a43f59bb36a0",
+          "Name": "Bench",
+          "Position": "-134.6409,213.302,73.43945",
+          "Rotation": "0,0,-0.7071067,-0.7071068",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "09614e66-18d9-4775-83ed-e727495af0d8",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "df4c3bec-39fc-4f8c-a0a0-d1145009b845",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "16,0,0.000004702372",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "545cd825-59eb-459e-a62b-f3e167f61463",
+          "Name": "Bench",
+          "Position": "-132.3645,-26.81738,74.86401",
+          "Rotation": "0,0,0.7071067,-0.7071068",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "3c1b3db1-bfd1-4ad4-ba9b-7fd90ce4f506",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "d0ebf418-28ea-4cce-9c68-3d0e070e2785",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "16,0,0.000004702372",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -9852,7 +9957,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-16T20:19:55.1545902\u002B01:00",
+  "LastSaved": "2024-03-16T20:28:45.4401939\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
