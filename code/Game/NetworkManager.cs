@@ -14,11 +14,11 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 			return;
 		}
 
-		// Someone report this bug, for some reason the static list doesn't get cleared on restart!
-		Player._internalPlayers.Clear();
-
 		if ( !GameNetworkSystem.IsActive && Connection.Local.IsHost )
+		{
+			Player._internalPlayers.Clear(); // Someone report this bug, for some reason the static list doesn't get cleared on restart!
 			GameNetworkSystem.CreateLobby();
+		}
 	}
 
 	void INetworkListener.OnActive( Connection connection )
