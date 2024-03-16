@@ -5,7 +5,7 @@
 <root>
 	@if ( !string.IsNullOrEmpty( Marker?.Texture ) )
 	{
-		<img class="icon" src=@Marker.Texture />
+		<img class="icon" src=@Marker.Texture style="background-image-tint: @(Marker.HexColor);" />
 	}
 
 	<p class="distance @(ShowDistance ? "show" : "")">@($"{(_distance / 39f):N0}")m</p>
