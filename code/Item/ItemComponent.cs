@@ -137,7 +137,6 @@ public class ItemComponent : Component
 		if ( IsProxy || !Game.IsPlaying )
 			return;
 
-		var inventory = Player.Local?.Inventory;
-		inventory?.ClearItem( this );
+		Player.Local?.Inventory?.ClearItem( this );
 	}
 }

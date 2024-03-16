@@ -79,7 +79,8 @@ public class ItemEquipment : ItemComponent
 	private void ToggleRenderer( bool value )
 	{
 		Renderer ??= Components.GetAll<ModelRenderer>( FindMode.InSelf ).FirstOrDefault( x => x != parcelRenderer );
-		if ( Renderer != null ) Renderer.Enabled = value;
+		if ( Renderer.IsValid() )
+			Renderer.Enabled = value;
 	}
 
 	private void UpdateParcel( bool value )

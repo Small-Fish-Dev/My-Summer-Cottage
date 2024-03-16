@@ -15,7 +15,7 @@
 	[Property] public string PropertyName { get; private set; }
 
 	public string Empty => new string( '8', MaxScreenCharacters );
-	public int Value => (int?)GlobalGameNamespace.TypeLibrary.GetPropertyValue( SlotMachine, PropertyName ) ?? 0;
+	public int Value => (int?)GlobalGameNamespace.TypeLibrary?.GetPropertyValue( SlotMachine, PropertyName ) ?? 0;
 
 	/// <summary>
 	/// Max amount of characters on screen 

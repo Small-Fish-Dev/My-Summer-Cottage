@@ -78,7 +78,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	/// </summary>
 	public bool IsFinished { get; set; } = false;
 
-	TaskMaster _taskMaster;
+	EventMaster _eventMaster;
 
 	bool _showToggle = false;
 	JsonObject _initialState;
@@ -86,7 +86,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	protected override void DrawGizmos()
 	{
 		// It's done inside of here because this is when we can detect if it's been selected
-		if ( Game.IsEditor && !Game.IsPlaying )
+		if ( Game.IsEditor )
 		{
 			var shouldShow = Game.ActiveScene == GameObject || Gizmo.IsSelected;
 			// The components inside are enabled if you're inside of the prefab or you have the prefab selected
@@ -128,7 +128,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 				trigger.OnTrigger += HasBeenTriggered;
 		}
 
-		_taskMaster = Scene.GetAllComponents<TaskMaster>().FirstOrDefault();
+		_eventMaster = Scene.GetAllComponents<EventMaster>().FirstOrDefault();
 
 		GameObject.BreakFromPrefab();
 
@@ -162,7 +162,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		foreach ( var enabledTrigger in Components.GetAll<EventEnabledTrigger>( FindMode.EverythingInSelfAndDescendants ) )
 			enabledTrigger.CallTrigger( null );
 
-		EventMaster.Instance.CurrentEvents.Add( this );
+		_eventMaster?.CurrentEvents?.Add( this );
 	}
 
 	public void Disable()
@@ -183,7 +183,7 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 			eventComponent.IsPlaying = false;
 		}
 
-		EventMaster.Instance?.CurrentEvents?.Remove( this );
+		_eventMaster?.CurrentEvents?.Remove( this );
 	}
 
 	public void Restart()
