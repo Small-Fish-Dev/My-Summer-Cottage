@@ -7,14 +7,17 @@ Subtitle {
     padding: 14px;
     transition: all 0.1s ease-out;
     background-color: rgba(0, 0, 0, 0.5);
+    max-width: 800px;
 
     .name {
         margin-right: 15px;
         color: $orange;
+        flex-grow: 1;
+        flex-shrink: 0;
     }
 
     .text {
-
+        flex-shrink: 1;
     }
 
     &:intro {
