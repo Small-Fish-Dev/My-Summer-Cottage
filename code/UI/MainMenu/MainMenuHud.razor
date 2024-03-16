@@ -34,9 +34,16 @@
 	RealTimeUntil _playLoop = 999;
 
 	private MenuScreen _screen;
+	private bool init;
+
+	protected override void OnStart()
+	{
+		if ( !init ) Initialize();
+	}
 
 	public async void Initialize()
 	{
+		init = true;
 		SaveData = Player.GetSave();
 
 		// Start music.
