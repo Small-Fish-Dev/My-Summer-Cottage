@@ -289,7 +289,19 @@ public class StoryMaster : Component
 		Log.Info( "Character reset!" );
 	}
 
-	public Dictionary<EventDefinition, float> EventsToTrigger { get; set; } = new();
+	public struct TriggeringEvent
+	{
+		public EventDefinition Event;
+		public float Time;
+
+		public TriggeringEvent() { }
+		public TriggeringEvent( EventDefinition @event, float time )
+		{
+			Event = @event;
+			Time = time;
+		}
+	}
+	public List<TriggeringEvent> EventsToTrigger { get; set; } = new();
 
 	public void LoadEventPool( int randomSeed )
 	{
@@ -312,7 +324,7 @@ public class StoryMaster : Component
 					var chosenEvent = Game.Random.FromList( availableCommonEvents );
 
 					if ( chosenEvent.Type == EventType.Random )
-						EventsToTrigger.Add( chosenEvent, Game.Random.Float( 10f, 24f ) );
+						EventsToTrigger.Add( new TriggeringEvent( chosenEvent, Game.Random.Float( 10f, 24f ) ) );
 					else
 						chosenEvent.Enable();
 
@@ -338,7 +350,7 @@ public class StoryMaster : Component
 					var chosenEvent = Game.Random.FromList( availableUncommonEvents );
 
 					if ( chosenEvent.Type == EventType.Random )
-						EventsToTrigger.Add( chosenEvent, Game.Random.Float( 10f, 24f ) );
+						EventsToTrigger.Add( new TriggeringEvent( chosenEvent, Game.Random.Float( 10f, 24f ) ) );
 					else
 						chosenEvent.Enable();
 
@@ -365,7 +377,7 @@ public class StoryMaster : Component
 					var chosenEvent = Game.Random.FromList( availableRareEvents );
 
 					if ( chosenEvent.Type == EventType.Random )
-						EventsToTrigger.Add( chosenEvent, Game.Random.Float( 10f, 24f ) );
+						EventsToTrigger.Add( new TriggeringEvent( chosenEvent, Game.Random.Float( 10f, 24f ) ) );
 					else
 						chosenEvent.Enable();
 
@@ -578,23 +590,23 @@ public class StoryMaster : Component
 				}
 			}
 
-			var eventsToRemove = new List<EventDefinition>();
+			var eventsToRemove = new List<TriggeringEvent>();
 
 			foreach ( var randomEvent in EventsToTrigger )
 			{
-				if ( !randomEvent.Key.HasBeenPlayed )
+				if ( !randomEvent.Event.HasBeenPlayed )
 				{
-					if ( randomEvent.Value <= currentHour )
+					if ( randomEvent.Time <= currentHour )
 					{
-						randomEvent.Key.Enable();
-						eventsToRemove.Add( randomEvent.Key );
+						randomEvent.Event.Enable();
+						eventsToRemove.Add( randomEvent );
 					}
 				}
 			}
 
 			foreach ( var toRemove in eventsToRemove )
 			{
-				if ( EventsToTrigger.ContainsKey( toRemove ) )
+				if ( EventsToTrigger.Contains( toRemove ) )
 					EventsToTrigger.Remove( toRemove );
 			}
 
