@@ -620,6 +620,25 @@
             "UserData": {
               "Position": "176,0"
             }
+          },
+          {
+            "Id": 3,
+            "Type": "call",
+            "Properties": {
+              "_name": "CaptureMemory",
+              "_type": "package.fish.sauna/Sauna.Player",
+              "_isStatic": false
+            },
+            "UserData": {
+              "Position": "464,240"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "240,224"
+            }
           }
         ],
         "Links": [
@@ -663,6 +682,44 @@
           {
             "Value": 1,
             "DstId": 2,
+            "DstName": "seconds"
+          },
+          {
+            "SrcId": 4,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 3,
+            "DstName": "_target"
+          },
+          {
+            "Value": "Making dough xoxoxo",
+            "DstId": 3,
+            "DstName": "caption"
+          },
+          {
+            "Value": 150,
+            "DstId": 3,
+            "DstName": "distance"
+          },
+          {
+            "Value": "sold_mushroom",
+            "DstId": 3,
+            "DstName": "identifier"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 0.1,
+            "DstId": 4,
             "DstName": "seconds"
           }
         ]

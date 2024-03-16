@@ -1,0 +1,360 @@
+{
+  "Name": "Gamble",
+  "Subtitle": "Waste your money",
+  "Description": "Jorma said the slot machine is ready to hit, time to test the theory.",
+  "Giver": "Jorma",
+  "Message": "An idiot just spent 200mk on the slot machine! Come play it looks like it\u0027s about to jackpot!",
+  "TaskType": "GivenByStory",
+  "TaskRarity": "Any",
+  "IsPrimary": true,
+  "Global": true,
+  "ExperienceGiven": 50,
+  "SuccessSignal": "task.success.Gamble",
+  "FailedSignal": "task.failed.Gamble",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": true,
+  "RunOnStartEverySession": false,
+  "OnStart": null,
+  "OnSuccess": null,
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the Tavern",
+      "TriggerSignal": "tavern.entered",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "7f14a382-bcd7-4581-9258-c4b9b9136be8",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "336,-48"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "576,-16"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "560,144"
+            }
+          },
+          {
+            "Id": 5,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "304,144"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Tavern",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 2,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "target"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "There\u0027s a slot machine at the Tavern.",
+            "DstId": 4,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 4,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 4,
+            "DstName": "theme"
+          },
+          {
+            "Value": 6,
+            "DstId": 4,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 4,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 5,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 5,
+            "DstName": "seconds"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "a1fd0f71-ba17-489e-a492-3f9ea3fffb07",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "240,48"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "560,96"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Tavern",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "target"
+          }
+        ]
+      }
+    },
+    {
+      "Description": "Insert 5 coins",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "slot.insert_coin",
+      "AmountToComplete": 5
+    },
+    {
+      "Description": "Hit play",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "slot.play",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "56eafa0e-7f43-40f6-b7f3-fd7ce0d95948",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 3,
+            "Type": "notification.popup",
+            "UserData": {
+              "Position": "448,96"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "192,96"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 4,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Select lines and bet amount.",
+            "DstId": 3,
+            "DstName": "description"
+          },
+          {
+            "Value": "ui/hud/primary_task.png",
+            "DstId": 3,
+            "DstName": "icon"
+          },
+          {
+            "Value": "0.09412,0.4549,0.66275,1",
+            "DstId": 3,
+            "DstName": "theme"
+          },
+          {
+            "Value": 6,
+            "DstId": 3,
+            "DstName": "time"
+          },
+          {
+            "Value": "Tutorial",
+            "DstId": 3,
+            "DstName": "title"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 4,
+            "DstName": "seconds"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "23b9254c-f7f2-4170-8686-ec53ff0c8e43",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "call",
+            "Properties": {
+              "_name": "CaptureMemory",
+              "_type": "package.fish.sauna/Sauna.Player",
+              "_isStatic": false
+            },
+            "UserData": {
+              "Position": "432,32"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "208,16"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 1,
+            "DstName": "_target"
+          },
+          {
+            "Value": "I\u0027m one game away from making it big!",
+            "DstId": 1,
+            "DstName": "caption"
+          },
+          {
+            "Value": 150,
+            "DstId": 1,
+            "DstName": "distance"
+          },
+          {
+            "Value": "gambling_life",
+            "DstId": 1,
+            "DstName": "identifier"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          }
+        ]
+      }
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}
