@@ -149,7 +149,7 @@ public sealed class WaterComponent : Component
 		var fraction = 0.02f;
 		var sy = (Bounds.Size.y * fraction).FloorToInt();
 		var subdivisions = (Bounds.Size.x * fraction).FloorToInt();
-		subdivisions = Math.Min( MIN_SUBDIVISIONS, sy > subdivisions ? sy : subdivisions );
+		subdivisions = Math.Max( MIN_SUBDIVISIONS, sy > subdivisions ? sy : subdivisions );
 
 		var verts = new List<SimpleVertex>();
 		var indices = new List<int>();
