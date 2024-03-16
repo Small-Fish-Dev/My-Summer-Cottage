@@ -289,6 +289,8 @@ public class StoryMaster : Component
 		Log.Info( "Character reset!" );
 	}
 
+	public Dictionary<EventDefinition, float> EventsToTrigger { get; set; } = new();
+
 	public void LoadEventPool( int randomSeed )
 	{
 		if ( CurrentSaunaDay == null ) return;
@@ -308,7 +310,12 @@ public class StoryMaster : Component
 				if ( availableCommonEvents.Any() )
 				{
 					var chosenEvent = Game.Random.FromList( availableCommonEvents );
-					chosenEvent.Enable();
+
+					if ( chosenEvent.Type == EventType.Random )
+						EventsToTrigger.Add( chosenEvent, Game.Random.Float( 10f, 24f ) );
+					else
+						chosenEvent.Enable();
+
 					eventsPicked++;
 				}
 			}
@@ -329,7 +336,12 @@ public class StoryMaster : Component
 				if ( availableUncommonEvents.Any() )
 				{
 					var chosenEvent = Game.Random.FromList( availableUncommonEvents );
-					chosenEvent.Enable();
+
+					if ( chosenEvent.Type == EventType.Random )
+						EventsToTrigger.Add( chosenEvent, Game.Random.Float( 10f, 24f ) );
+					else
+						chosenEvent.Enable();
+
 					eventsPicked++;
 				}
 			}
@@ -347,10 +359,16 @@ public class StoryMaster : Component
 					.Where( x => !_eventMaster.CurrentEvents.Contains( x ) )
 					.ToList(); // We haven't chosen it yet
 
+
 				if ( availableRareEvents.Any() )
 				{
 					var chosenEvent = Game.Random.FromList( availableRareEvents );
-					chosenEvent.Enable();
+
+					if ( chosenEvent.Type == EventType.Random )
+						EventsToTrigger.Add( chosenEvent, Game.Random.Float( 10f, 24f ) );
+					else
+						chosenEvent.Enable();
+
 					eventsPicked++;
 				}
 			}
@@ -419,6 +437,7 @@ public class StoryMaster : Component
 		storyMaster.NextGameDay();
 
 		storyMaster._eventMaster.UnloadAllEvents();
+		storyMaster.EventsToTrigger.Clear();
 		storyMaster.ClearTriggeredEvents();
 
 		if ( Connection.Local.IsHost )
@@ -557,6 +576,26 @@ public class StoryMaster : Component
 						}
 					}
 				}
+			}
+
+			var eventsToRemove = new List<EventDefinition>();
+
+			foreach ( var randomEvent in EventsToTrigger )
+			{
+				if ( !randomEvent.Key.HasBeenPlayed )
+				{
+					if ( randomEvent.Value <= currentHour )
+					{
+						randomEvent.Key.Enable();
+						eventsToRemove.Add( randomEvent.Key );
+					}
+				}
+			}
+
+			foreach ( var toRemove in eventsToRemove )
+			{
+				if ( EventsToTrigger.ContainsKey( toRemove ) )
+					EventsToTrigger.Remove( toRemove );
 			}
 
 			if ( !CurrentSaunaDay.Completed )
