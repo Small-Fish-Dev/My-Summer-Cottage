@@ -72,6 +72,10 @@
 		{
 			<div class="continue" onclick=@(() => { if (!_clickedContinue) StartNextDay(); _clickedContinue = true; })>CONTINUE</div>
 		}
+		else
+		{
+			<div class="waiting">Waiting for host...</div>
+		}
 	</div>
 </root>
 
