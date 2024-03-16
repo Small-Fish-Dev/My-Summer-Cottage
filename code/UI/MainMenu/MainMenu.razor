@@ -5,7 +5,7 @@
 <root>
 	<img class="title" src="ui/mainmenu/title.png"/>
 	<div style="flex-direction: column; justify-content: center; top: 10%; gap: 15px;">
-		@if ( !HasSaveData )
+		@if ( !MainMenuHud.SaveData.Has )
 		{
 			<SideButton
 				ImagePath="ui/mainmenu/new_icon.png"
@@ -38,7 +38,6 @@
 </root>
 
 @code {
-	public bool HasSaveData { get; set; }
 	public MainMenuHud.MenuScreen Screen { get; set; }
 	public static bool PlayIntro { get; set; } = true;
 }

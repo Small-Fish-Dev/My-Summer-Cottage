@@ -6,7 +6,7 @@
 	@switch ( _screen )
 	{
 		case MenuScreen.MainMenu:
-			<MainMenu HasSaveData="@SaveData.Has" Screen:bind="@_screen"/>
+			<MainMenu Screen:bind="@_screen"/>
 			break;
 		case MenuScreen.Credits:
 			<Credits Screen:bind="@_screen"/>
