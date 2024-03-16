@@ -74,11 +74,9 @@ public partial class SaunaTask : GameResource
 		public TaskEvent OnEnd { get; set; }
 
 		[Hide]
-		[JsonIgnore]
 		public int CurrentAmount { get; set; } = 0;
 
 		[Hide]
-		[JsonIgnore]
 		public bool Completed { get; set; } = false;
 
 		public Subtask() { }

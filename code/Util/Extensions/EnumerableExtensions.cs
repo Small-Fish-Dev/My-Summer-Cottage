@@ -11,4 +11,7 @@ public static class EnumerableExtensions
 
 		return result;
 	}
+
+	public static byte[] Serialize<T>( this T data ) => JsonSerializer.SerializeToUtf8Bytes( data );
+	public static T Deserialize<T>( this byte[] bytes ) => JsonSerializer.Deserialize<T>( bytes );
 }

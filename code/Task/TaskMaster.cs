@@ -8,7 +8,7 @@ using static Sauna.SaunaTask;
 namespace Sauna;
 
 [Icon( "live_help" )]
-public class TaskMaster : Component
+public partial class TaskMaster : Component
 {
 	public static TaskMaster _instance;
 
@@ -91,8 +91,12 @@ public class TaskMaster : Component
 	protected override void OnStart()
 	{
 		_instance = this;
-		LoadTasksProgression();
-		DelayStart();
+
+		if ( Connection.Host.IsHost )
+		{
+			LoadTasksProgression();
+			DelayStart();
+		}
 	}
 
 	async void DelayStart()
@@ -237,6 +241,9 @@ public class TaskMaster : Component
 				{
 					var relativeSubtask = activeTask.Subtasks[subtask.Description];
 					subtask.CurrentAmount = relativeSubtask;
+
+					if ( subtask.CurrentAmount >= subtask.AmountToComplete )
+						subtask.Completed = true;
 				}
 			}
 		}
