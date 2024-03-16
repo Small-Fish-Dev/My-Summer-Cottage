@@ -1,0 +1,461 @@
+{
+  "RootObject": {
+    "__guid": "5e5af172-731d-4192-9d8f-e9d5cdfabcf0",
+    "Name": "god_smiting",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "7ff333c9-b26f-48d5-9c8b-fd29da2f7ee5",
+        "AddToEventPool": true,
+        "EventName": "lightning_strike",
+        "EventSignals": [],
+        "Rarity": "Rare",
+        "ReinstantiateOnRestart": true,
+        "Stackable": true,
+        "Type": "Random"
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "dc6f8a4f-3f0f-40ac-9a7e-656869eb6c36",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "40975333-8cbe-4e37-875b-45b14b6b42b8",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/Sauna.Player",
+              "package.fish.sauna/HealthComponent"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Labels": {
+                  "triggerer": "my_trigga!"
+                }
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "fe96632e-7306-48b8-9366-69d84f7d46cd"
+                }
+              },
+              "UserData": {
+                "Position": "-64,-128"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/Sauna.Player"
+              },
+              "UserData": {
+                "Position": "-0,96",
+                "Labels": {
+                  "_result": "player"
+                }
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "0,160",
+                "Labels": {
+                  "_result": "ply_health"
+                }
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true,
+                "_name": "SpeakWithSubtitle"
+              },
+              "UserData": {
+                "Position": "304,0"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/HealthComponent",
+                "_isStatic": false,
+                "_name": "Damage"
+              },
+              "UserData": {
+                "Position": "560,0"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "property.get",
+              "ParentId": 2,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "property.get",
+              "ParentId": 7,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Position"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "816,-0"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.SweetMemories",
+                "_isStatic": true,
+                "_name": "Capture"
+              },
+              "UserData": {
+                "Position": "1072,16"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "dc6f8a4f-3f0f-40ac-9a7e-656869eb6c36",
+                  "go": "5e5af172-731d-4192-9d8f-e9d5cdfabcf0",
+                  "component_type": "EventComponent"
+                }
+              },
+              "UserData": {
+                "Position": "1104,240"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/EventComponent",
+                "_isStatic": false,
+                "_name": "Finish"
+              },
+              "UserData": {
+                "Position": "1376,16"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "240,-128"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "720,-128"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "496,-96"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "GameObject"
+              },
+              "UserData": {
+                "Position": "256,-304"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "triggerer",
+              "DstId": 3,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 5,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Booming Sky Voice",
+              "DstId": 5,
+              "DstName": "name"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 5,
+              "DstName": "obj"
+            },
+            {
+              "Value": {
+                "Volume": 1,
+                "Position": "0,0,0",
+                "Rotation": "0,0,0,1",
+                "Pitch": 0.5,
+                "Decibels": 100,
+                "ListenLocal": false,
+                "Delay": 120,
+                "Accuracy": 2
+              },
+              "DstId": 5,
+              "DstName": "settings"
+            },
+            {
+              "Value": "SCREW YOU! I SMITE YOU!",
+              "DstId": 5,
+              "DstName": "subtitle"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_signal",
+              "DstId": 6,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_target"
+            },
+            {
+              "Value": 10,
+              "DstId": 6,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 50,
+              "DstId": 6,
+              "DstName": "force"
+            },
+            {
+              "Value": "0,0,1",
+              "DstId": 6,
+              "DstName": "forceDirection"
+            },
+            {
+              "Value": "Nothing",
+              "DstId": 6,
+              "DstName": "type"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "worldHurtPosition"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_signal",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.3,
+              "DstId": 9,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "I think that was god who smited me?",
+              "DstId": 10,
+              "DstName": "caption"
+            },
+            {
+              "Value": "god_smiting",
+              "DstId": 10,
+              "DstName": "identifier"
+            },
+            {
+              "Value": "0,0,0",
+              "DstId": 10,
+              "DstName": "position"
+            },
+            {
+              "Value": "0,0,0,1",
+              "DstId": 10,
+              "DstName": "rotation"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_signal",
+              "DstId": 13,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 12,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 17,
+              "SrcName": "_signal",
+              "DstId": 14,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "_target"
+            },
+            {
+              "Value": true,
+              "DstId": 14,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_signal",
+              "DstId": 15,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 15,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 15,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_signal",
+              "DstId": 16,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.5,
+              "DstId": 16,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 17,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "triggerer",
+              "DstId": 17,
+              "DstName": "_value"
+            }
+          ]
+        },
+        "RequiredToFinish": true,
+        "TriggerCooldown": 1,
+        "TriggerOnce": true,
+        "Triggers": []
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "fe96632e-7306-48b8-9366-69d84f7d46cd",
+        "Name": "lightning_bolt",
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "Prop",
+            "__guid": "023da193-dc63-44d2-a260-6f459b7479b8",
+            "Health": 0,
+            "IsStatic": false,
+            "Model": "models/lightning_bolt/lightning_bolt.vmdl"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
