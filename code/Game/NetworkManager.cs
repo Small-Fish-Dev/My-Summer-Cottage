@@ -14,7 +14,7 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 			return;
 		}
 		
-		if ( !GameNetworkSystem.IsActive )
+		if ( !GameNetworkSystem.IsActive && !IsProxy )
 			GameNetworkSystem.CreateLobby();
 	}
 
