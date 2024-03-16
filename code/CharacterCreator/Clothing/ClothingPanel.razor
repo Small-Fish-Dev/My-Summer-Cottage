@@ -107,7 +107,10 @@
 
 	public static void UpdateSelection()
 	{
-		CreatorOverlay.Instance.Panel.PlaySound( "drop" );
+		CreatorOverlay.Instance.Panel?.PlaySound( "drop" );
+
+		if ( selections == null )
+			return;
 
 		foreach ( var obj in clothingObjects )
 			obj.Destroy();
