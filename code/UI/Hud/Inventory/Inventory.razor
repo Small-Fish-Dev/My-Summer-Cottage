@@ -2,6 +2,9 @@
 @attribute [StyleSheet]
 @inherits Panel
 
+@if (Player.Local is null)
+	return;
+
 <root>
 	<SideButton 
 		Title="Tasks" 
@@ -71,11 +74,14 @@
 
 	protected override int BuildHash()
 	{
+		if (Player.Local is null)
+			return -1;
+
 		return HashCode.Combine(
-			Player.Local?.Level,
-			Player.Local?.Experience,
-			Player.Local?.Inventory.BackpackItems.HashCombine( i => i?.GetHashCode() ?? -1 ),
-			Player.Local?.Inventory.EquippedItems.HashCombine( i => i?.GetHashCode() ?? -1 )
+			Player.Local.Level,
+			Player.Local.Experience,
+			Player.Local.Inventory.BackpackItems.HashCombine( i => i?.GetHashCode() ?? -1 ),
+			Player.Local.Inventory.EquippedItems.HashCombine( i => i?.GetHashCode() ?? -1 )
 		);
 	}
 }
