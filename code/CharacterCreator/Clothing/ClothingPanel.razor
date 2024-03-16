@@ -38,6 +38,7 @@
 							<div 
 								class="slot @(selections[slot] == i ? "selected" : "") @(clothing == null ? "disabled" : "")" 
 								onclick=@( () => { 
+									changed = slot;
 									selections[slot] = clothes[slot].IndexOf( clothing ); 
 									UpdateSelection(); 
 								})
@@ -84,6 +85,8 @@
 	private static Dictionary<EquipSlot, List<ComponentDefinition>> clothes;
 
 	private static Dictionary<EquipSlot, int> selections;
+	private static EquipSlot changed;
+
 	private static List<GameObject> clothingObjects = new();
 
 	public static Dictionary<EquipSlot, string> GetSelections() 
@@ -143,7 +146,10 @@
 		CreatorOverlay.Renderer.SetBodyGroup( "legs", flags.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
 		CreatorOverlay.Renderer.SetBodyGroup( "feet", flags.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
 
-		CreatorOverlay.Renderer.Set( "inspect", true );
+		var inspect = changed == EquipSlot.Head || changed == EquipSlot.Body || changed == EquipSlot.Face || changed == EquipSlot.Hand
+			? 1
+			: 2;
+		CreatorOverlay.Renderer.Set( "inspect", inspect );
 
 		CreatorOverlay.Penoid.RenderingEnabled = selections[EquipSlot.Legs] == -1;
 	}
