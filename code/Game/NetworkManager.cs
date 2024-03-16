@@ -1,4 +1,4 @@
-﻿namespace Sauna;
+namespace Sauna;
 
 public sealed class NetworkManager : Component, Component.INetworkListener
 {
@@ -13,7 +13,7 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 			GameNetworkSystem.Disconnect();
 			return;
 		}
-
+		
 		if ( !GameNetworkSystem.IsActive )
 			GameNetworkSystem.CreateLobby();
 	}
@@ -45,7 +45,17 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		Player._internalPlayers.RemoveAll( ( p ) => p is null || p.Connection.Id == id );
 	}
 
-	/*void INetworkListener.OnBecameHost( Connection previousHost )
+	[Broadcast( NetPermission.HostOnly )]
+	public void ServerClose()
 	{
-	}*/
+		GameNetworkSystem.Disconnect();
+		UI.MainMenu.PlayIntro = false;
+		SceneHandler.ChangeScene( SaunaScene.MainMenu );
+	}
+
+	void INetworkListener.OnBecameHost( Connection previousHost )
+	{
+		// Broadcast for everyone to leave!
+		ServerClose();
+	}
 }
