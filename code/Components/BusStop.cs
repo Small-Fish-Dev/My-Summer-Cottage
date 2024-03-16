@@ -120,7 +120,7 @@ public sealed class BusStop : Component
 					.WithoutTags( "player", "trigger", "npc" )
 					.Run();
 
-				taxi.Car.Transform.Position = trace.Hit ? trace.HitPosition - Vector3.Up * 25f : taxi.Car.Transform.Position;
+				taxi.Car.Transform.Position = trace.Hit ? trace.HitPosition : taxi.Car.Transform.Position;
 
 				var front = taxi.Car.Transform.World.PointToWorld( Vector3.Forward * 50f );
 				var frontTrace = Scene.Trace.Ray( front + Vector3.Up * 500f, front + Vector3.Down * 500f )

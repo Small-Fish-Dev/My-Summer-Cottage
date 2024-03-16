@@ -350,6 +350,80 @@
             "DstName": "seconds"
           }
         ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "9ad73a02-cd6d-42c0-8947-4cf66084d79a",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "call",
+            "Properties": {
+              "_name": "CaptureMemory",
+              "_type": "package.fish.sauna/Sauna.Player",
+              "_isStatic": false
+            },
+            "UserData": {
+              "Position": "448,80"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "224,64"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 1,
+            "DstName": "_target"
+          },
+          {
+            "Value": "About to catch something big!",
+            "DstId": 1,
+            "DstName": "caption"
+          },
+          {
+            "Value": 200,
+            "DstId": 1,
+            "DstName": "distance"
+          },
+          {
+            "Value": "casted_fish",
+            "DstId": 1,
+            "DstName": "identifier"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 1,
+            "DstId": 2,
+            "DstName": "seconds"
+          }
+        ]
       }
     },
     {

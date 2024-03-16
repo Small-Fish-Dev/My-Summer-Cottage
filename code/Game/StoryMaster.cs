@@ -390,6 +390,7 @@ public class StoryMaster : Component
 		storyMaster._eventMaster.UnloadAllEvents();
 		storyMaster.LoadEventPool( (int)storyMaster._timeManager.RandomSeed );
 		storyMaster.SetRandomDialogues( (int)storyMaster._timeManager.RandomSeed );
+		storyMaster.RandomizeClothing();
 
 		if ( Player.Local.IsValid() )
 			Player.Local.Respawn();
@@ -418,6 +419,25 @@ public class StoryMaster : Component
 		}
 
 		storyMaster.SaveGame();
+	}
+
+	public void RandomizeClothing()
+	{
+		var modelToCheck = Model.Load( "models/props/clothing_parcel/clothing_parcel.vmdl" );
+		var allClothingShops = Scene.GetAllComponents<ShopItem>()
+			.Where( x => x.GameObject.Components.Get<ModelRenderer>()?.Model == modelToCheck );
+
+		var allClothingPrefabs = PrefabLibrary.FindByComponent<ItemEquipment>()
+			.Where( x => x.GetComponent<ItemEquipment>().Get<EquipSlot>( "Slot" ) != EquipSlot.Hand )
+			.ToList();
+
+		foreach ( var shop in allClothingShops )
+		{
+			shop.Item = Game.Random.FromList( allClothingPrefabs ).Prefab;
+			shop.Price = Game.Random.Int( 10, 40 );
+			shop.CreateWorldIcon();
+			shop.ResetName();
+		}
 	}
 
 	public void SetRandomDialogues( int randomSeed )

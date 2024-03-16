@@ -519,8 +519,8 @@
             "Id": 2,
             "Type": "property.set",
             "Properties": {
-              "_type": "Sandbox.Game/Sandbox.GameObject",
-              "_name": "Enabled"
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
             },
             "UserData": {
               "Position": "544,-192"
@@ -537,8 +537,8 @@
             "Id": 4,
             "Type": "property.set",
             "Properties": {
-              "_type": "Sandbox.Game/Sandbox.GameObject",
-              "_name": "Enabled"
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
             },
             "UserData": {
               "Position": "544,-96"
@@ -555,8 +555,8 @@
             "Id": 6,
             "Type": "property.set",
             "Properties": {
-              "_type": "Sandbox.Game/Sandbox.GameObject",
-              "_name": "Enabled"
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
             },
             "UserData": {
               "Position": "544,-0"
@@ -573,8 +573,8 @@
             "Id": 8,
             "Type": "property.set",
             "Properties": {
-              "_type": "Sandbox.Game/Sandbox.GameObject",
-              "_name": "Enabled"
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
             },
             "UserData": {
               "Position": "544,96"
@@ -591,8 +591,8 @@
             "Id": 10,
             "Type": "property.set",
             "Properties": {
-              "_type": "Sandbox.Game/Sandbox.GameObject",
-              "_name": "Enabled"
+              "_name": "Enabled",
+              "_type": "Sandbox.Game/Sandbox.GameObject"
             },
             "UserData": {
               "Position": "544,192"
@@ -819,6 +819,80 @@
           {
             "Value": 1,
             "DstId": 12,
+            "DstName": "seconds"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "8b8a5cde-d453-4a47-84f0-74905209db40",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "call",
+            "Properties": {
+              "_name": "CaptureMemory",
+              "_type": "package.fish.sauna/Sauna.Player",
+              "_isStatic": false
+            },
+            "UserData": {
+              "Position": "480,32"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "time.delay",
+            "UserData": {
+              "Position": "256,16"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "player",
+            "DstId": 1,
+            "DstName": "_target"
+          },
+          {
+            "Value": "I have taken away someone\u0027s life.",
+            "DstId": 1,
+            "DstName": "caption"
+          },
+          {
+            "Value": 150,
+            "DstId": 1,
+            "DstName": "distance"
+          },
+          {
+            "Value": "killed_rabbit",
+            "DstId": 1,
+            "DstName": "identifier"
+          },
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": 0.1,
+            "DstId": 2,
             "DstName": "seconds"
           }
         ]
