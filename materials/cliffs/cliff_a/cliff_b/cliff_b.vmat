@@ -1,0 +1,47 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunacliff.shader"
+
+	//---- Cliff Settings ----
+	F_SECOND_LAYER_TEXTURE 1
+
+	//---- Cliff Model Data ----
+	CliffDirection "materials/cliffs/cliff_a/cliff_b/cliff_dir.png"
+	CliffDirt "materials/cliffs/cliff_a/cliff_b/bake_ao.png"
+	CliffPeaks "materials/cliffs/cliff_a/cliff_b/cliff_peaks.png"
+	DirtStrength "0.385"
+	PeaksStrength "0.470"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- L2 Texture ----
+	LayerTwoAmbientOcclusion "[1.000000 1.000000 1.000000 0.000000]"
+	LayerTwoColor "materials/ground/grass2/grass2_basecolor.png"
+	LayerTwoMetalness "materials/default/default.tga"
+	LayerTwoNormal "materials/ground/grass2/grass2_normal.png"
+	LayerTwoRoughness "materials/ground/grass2/grass2_roughness.png"
+
+	//---- Material ----
+	AmbientOcclusion "materials/cliffs/cliff_a/cliff_b/bake_ao.png"
+	AmbientOcclusionStrength "1.000"
+	Color "materials/nature/rock/rock3_basecolor.png"
+	ColorTintMask "materials/default/default.tga"
+	DetailNormal "materials/nature/rock/rock3_normal.png"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	GlobalNormal "materials/cliffs/cliff_a/cliff_b/cliff_normal.png"
+	GlobalNormalStrength "1.000"
+	Metalness "materials/default/default_metal.tga"
+	NormalStrength "1.000"
+	Roughness "materials/nature/rock/rock3_roughness.png"
+
+	//---- Triplanar Settings ----
+	TextureBlending "1.000"
+	TextureBlendingB "1.000"
+	TextureScale "1.000"
+	TextureScaleB "1.000"
+	TextureTiling "2.000"
+	TextureTilingB "2.000"
+}
