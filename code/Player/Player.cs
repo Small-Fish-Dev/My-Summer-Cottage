@@ -244,15 +244,10 @@ public partial class Player : Component, Component.ExecuteInEditor
 			HoldType = (Inventory.EquippedItems[(int)EquipSlot.Hand] as ItemEquipment)?.HoldType ?? HoldType.Idle;
 		}
 
-		if ( _updateSkin
-			 && Renderer != null && Renderer.SceneModel.IsValid()
-			 && Penoid != null && Penoid.SceneModel.IsValid() )
+		if ( _updateSkin && Renderer != null && Penoid != null )
 		{
-			Renderer.SceneModel.Attributes.Set( "g_flColorTint", SkinColor );
-			Renderer.SceneModel.Batchable = false;
-
-			Penoid.SceneModel.Attributes.Set( "g_flColorTint", SkinColor );
-			Penoid.SceneModel.Batchable = false;
+			Renderer.Tint = SkinColor;
+			Penoid.Tint = SkinColor;
 
 			_updateSkin = false;
 		}
