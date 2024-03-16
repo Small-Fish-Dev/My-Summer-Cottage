@@ -23,40 +23,40 @@
 
 		<h2>SMALL FISH</h2>
 		<div class="row">
-			<div class="name">ubre</div>
-			<div class="role">Project Lead, Gameplay Programmer</div>
-		</div>
-		<div class="row">
 			<div class="name">ceitine</div>
 			<div class="role">Gameplay Lead, Programmer, Shaders, Finnish Culture Сonsultant</div>
-		</div>
-		<div class="row">
-			<div class="name">Grodbert</div>
-			<div class="role">Art Lead, Character Artist, Animator</div>
-		</div>
-		<div class="row">
-			<div class="name">wheatleymf</div>
-			<div class="role">Art Direction, Ambient Artist, Foliage & Prop artist, Mapper, Ui Designs, Shaders</div>
-		</div>
-		<div class="row">
-			<div class="name">Luke</div>
-			<div class="role">Props & Items Artist, Clothing Artist, Particle Artist, Shaders, Events and Npcs</div>
 		</div>
 		<div class="row">
 			<div class="name">CyberAgent</div>
 			<div class="role">Story Lead, Producer, Modeller, Events</div>
 		</div>
 		<div class="row">
-			<div class="name">rndtrash</div>
-			<div class="role">System Programmer, NokLa Sounds</div>
-		</div>
-		<div class="row">
 			<div class="name">gio</div>
 			<div class="role">UI Programmer</div>
 		</div>
 		<div class="row">
+			<div class="name">Grodbert</div>
+			<div class="role">Art Lead, Character Artist, Animator</div>
+		</div>
+		<div class="row">
+			<div class="name">Luke</div>
+			<div class="role">Props & Items Artist, Clothing Artist, Particle Artist, Shaders, Events and Npcs</div>
+		</div>
+		<div class="row">
 			<div class="name">matek</div>
 			<div class="role">Systems Programmer, Gameplay Programmer, UI Programmer, Shaders, Sound Design</div>
+		</div>
+		<div class="row">
+			<div class="name">rndtrash</div>
+			<div class="role">System Programmer, NokLa Sounds, UI Programmer</div>
+		</div>
+		<div class="row">
+			<div class="name">ubre</div>
+			<div class="role">Project Lead, Gameplay Programmer</div>
+		</div>
+		<div class="row">
+			<div class="name">wheatleymf</div>
+			<div class="role">Art Direction, Ambient Artist, Foliage & Prop artist, Mapper, UI Designs, Shaders</div>
 		</div>
 		<div class="center">
 			<div>Visit our website</div>
@@ -115,7 +115,7 @@
 			_creditsPanel.ScrollVelocity += Vector2.Up * _creditsPanel.Box.Rect.Height * ScrollSpeed * RealTime.Delta;
 		}
 
-		if ( (_creditsPanel.ScrollSize.y - _creditsPanel.ScrollOffset.y).AlmostEqual( 0 ) )
+		if ( _creditsPanel.ScrollSize.y <= _creditsPanel.ScrollOffset.y )
 		{
 			// TODO: FUCK YOU, ALEX, FUCK YOU!!!
 			// _creditsPanel.ScrollOffset = _creditsPanel.ScrollOffset.WithY( _creditsPanel.Box.RectInner.Height );
