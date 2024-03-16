@@ -88,7 +88,7 @@ public sealed class ItemSpawnArea : Component
 					{
 						if ( Vector3.GetAngle( Vector3.Up, groundTrace.Normal ) <= 60f )
 						{
-							var clone = item.Item.Clone( groundTrace.HitPosition, Rotation.FromYaw( Game.Random.Float( 360f ) ) );
+							var clone = item.Item.Clone( groundTrace.HitPosition - Vector3.Up * 2.5f, Rotation.FromYaw( Game.Random.Float( 360f ) ) );
 							clone.NetworkMode = NetworkMode.Object;
 							clone.NetworkSpawn();
 
