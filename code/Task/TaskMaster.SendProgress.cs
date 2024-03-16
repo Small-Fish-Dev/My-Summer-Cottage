@@ -22,8 +22,10 @@ public partial class TaskMaster
 
 	void INetworkListener.OnActive( Connection connection )
 	{
+		_instance ??= this;
+
 		if ( Connection.Local.IsHost )
-			_instance.SendCurrentTaskProgress( PackageTaskProgress( ActiveTasks ).Serialize() );
+			SendCurrentTaskProgress( PackageTaskProgress( ActiveTasks ).Serialize() );
 	}
 
 	[Broadcast( NetPermission.HostOnly )]
