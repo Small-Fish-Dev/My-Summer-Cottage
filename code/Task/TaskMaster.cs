@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic;
 using Sandbox;
 using Sauna.Event;
 using Sauna.UI;
@@ -309,6 +308,11 @@ public partial class TaskMaster : Component, Component.INetworkListener
 		{
 			SaveTasksProgression( false );
 			Log.Info( "Tasks reset!" );
+		}
+		else
+		{
+			if ( FileSystem.Data.FileExists( "tasks.json" ) )
+				FileSystem.Data.DeleteFile( "tasks.json" );
 		}
 	}
 

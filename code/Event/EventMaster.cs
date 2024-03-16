@@ -196,7 +196,9 @@ public class EventMaster : Component
 
 		Log.Info( "Events reset!" );
 
-		SaveEventsProgression( false );
+
+		if ( FileSystem.Data.FileExists( "events.json" ) )
+			FileSystem.Data.DeleteFile( "events.json" );
 	}
 
 	public void UnloadAllEvents()
