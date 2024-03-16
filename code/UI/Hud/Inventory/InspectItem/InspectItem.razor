@@ -17,10 +17,11 @@
 
 @code {
 	private static InspectItem _instance;
-	
+
 	private ItemComponent _item;
 	private SceneWorld _sceneWorld;
 	private ScenePanel _scenePanel;
+	private SceneModel _child;
 	private SceneModel _model;
 	private SceneLight _sceneLight;
 	private SceneDirectionalLight _sceneDirectionalLight;
@@ -48,14 +49,37 @@
 		_sceneDirectionalLight ??= new SceneDirectionalLight( _sceneWorld, global::Rotation.From( 45, -45, 45 ), Color.White * 10f );
 
 		var renderer = _item.Components.Get<ModelRenderer>(FindMode.EverythingInSelfAndDescendants);
-		_model ??= new SceneModel( _sceneWorld, renderer.Model, new Transform(Vector3.Zero, Rotation.From(0, 0, 0)) );
-		_model.SetMaterialGroup( renderer.MaterialGroup );
+		if ( _item is ItemEquipment equipment && equipment.IsClothing )
+		{
+			_model ??= new SceneModel( _sceneWorld, "models/guy/guy.vmdl", global::Transform.Zero );
+			_child ??= new SceneModel( _sceneWorld, renderer.Model, global::Transform.Zero );
+			_model.ColorTint = Color.Gray;
+			if ( equipment.UseSkinTint )
+				_child.ColorTint = Color.Gray;
+			_child.SetMaterialGroup( renderer.MaterialGroup );
+			_model.AddChild( "cloth", _child );
+			_model.Update( Time.Delta );
+			_child.Update( Time.Delta );
+
+			var bg = equipment.HideBodygroups;
+			_model.SetBodyGroup( "head", bg.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 );
+			_model.SetBodyGroup( "torso", bg.HasFlag( HiddenBodyGroup.Torso ) ? 1 : 0 );
+			_model.SetBodyGroup( "hands", bg.HasFlag( HiddenBodyGroup.Hands ) ? 1 : 0 );
+			_model.SetBodyGroup( "legs", bg.HasFlag( HiddenBodyGroup.Legs ) ? 1 : 0 );
+			_model.SetBodyGroup( "feet", bg.HasFlag( HiddenBodyGroup.Feet ) ? 1 : 0 );
+		}
+		else
+		{
+			_model ??= new SceneModel( _sceneWorld, renderer.Model, global::Transform.Zero );
+			_model.SetMaterialGroup( renderer.MaterialGroup );
+		}
+
 		_scenePanel.World = _sceneWorld;
 		_scenePanel.Camera.FieldOfView = 120f;
-		
+
 		if (_cameraTransform.Position == Vector3.Zero)
 		{
-			_scenePanel.Camera.FitModel(_model);
+			_scenePanel.Camera.FitModel(_child ?? _model);
 			_distance = _scenePanel.Camera.Position.Distance(_model.Model.Bounds.Center);
 			_cameraTransform = new Transform(_scenePanel.Camera.Position, _scenePanel.Camera.Rotation);
 		}
@@ -70,7 +94,7 @@
 	}
 
 	public override void OnMouseWheel(Vector2 value)
-    {
+	{
 		_scrollDelta = value.y;
 
 		base.OnMouseWheel(value);
@@ -78,24 +102,25 @@
 
 	public override void Tick() 
 	{
-		if (_model is null)
+		var target = _child ?? _model;
+		if (target is null)
 			return;
 
 		if (_isDragging)
 		{
-			_cameraTransform = _cameraTransform.RotateAround(_model.Model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Up, -Mouse.Delta.x * 0.20f));
-			_cameraTransform = _cameraTransform.RotateAround(_model.Model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Right, -Mouse.Delta.y * 0.20f));
+			_cameraTransform = _cameraTransform.RotateAround(target.Model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Up, -Mouse.Delta.x * 0.20f));
+			_cameraTransform = _cameraTransform.RotateAround(target.Model.Bounds.Center, Rotation.FromAxis(_cameraTransform.Right, -Mouse.Delta.y * 0.20f));
 		}
 
 		_distance += _scrollDelta * 3f;
 		_distance = _distance.Clamp(10f, 100f);
-		_cameraTransform.Position = _model.Model.Bounds.Center - _cameraTransform.Forward * _distance;
+		_cameraTransform.Position = target.Model.Bounds.Center - _cameraTransform.Forward * _distance;
 		_scrollDelta = 0;
 
 		_scenePanel.Camera.Position = Vector3.Lerp(_scenePanel.Camera.Position, _cameraTransform.Position, RealTime.Delta * 40.0f);
 		_scenePanel.Camera.Rotation = Rotation.Lerp(_scenePanel.Camera.Rotation, _cameraTransform.Rotation, RealTime.Delta * 50.0f);
 		_sceneLight.Position = _scenePanel.Camera.Position;
 
-		_model.Update(RealTime.Delta);
+		target.Update(RealTime.Delta);
 	}
 }

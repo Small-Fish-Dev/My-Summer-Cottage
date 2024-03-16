@@ -92,9 +92,9 @@
 			.Select( x => (Slot: x.Key, Path: clothes[x.Key]?.ElementAt( x.Value )?.Prefab?.Path ?? defaultClothes[x.Key].First() ) )
 			.ToDictionary( x => x.Slot, x => x.Path );
 
-	private void CreateClothing( Model model, string materialGroup = "", Color? color = null )
+	private static void CreateClothing( Model model, string materialGroup = "", Color? color = null )
 	{
-		var obj = Scene.CreateObject();
+		var obj = Game.ActiveScene.CreateObject();
 		var renderer = obj.Components.Create<SkinnedModelRenderer>();
 		renderer.Model = model;
 		renderer.Tint = (color ?? Color.White).WithAlpha( 1 );
@@ -105,9 +105,9 @@
 		clothingObjects.Add( obj );
 	}
 
-	private void UpdateSelection()
+	public static void UpdateSelection()
 	{
-		PlaySound( "drop" );
+		CreatorOverlay.Instance.Panel.PlaySound( "drop" );
 
 		foreach ( var obj in clothingObjects )
 			obj.Destroy();
@@ -126,6 +126,8 @@
 
 			var renderer = component.Prefab.GetComponent<ModelRenderer>();
 			var color = renderer?.Get<Color>( "Tint" ) ?? Color.White;
+			var useTint = component.Get<bool>( "UseSkinTint" );
+			if ( useTint ) color = CreatorOverlay.Renderer.Tint;
 			var materialGroup = renderer?.Get<string>( "MaterialGroup" );
 			var model = Sandbox.Model.Load( renderer.Get<string>( "Model" ) );
 			CreateClothing(model, materialGroup, color);

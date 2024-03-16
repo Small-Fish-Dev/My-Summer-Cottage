@@ -275,7 +275,10 @@ public class StoryMaster : Component
 	public void ResetStoryProgression()
 	{
 		StoryProgression = new();
-		SaveStoryProgression( false );
+
+		if ( FileSystem.Data.FileExists( "story.json" ) )
+			FileSystem.Data.DeleteFile( "story.json" );
+
 		Log.Info( "Story reset!" );
 	}
 
@@ -490,14 +493,6 @@ public class StoryMaster : Component
 		}
 	}
 
-	protected override void OnStart()
-	{
-		if ( Scene.IsEditor ) return;
-
-		if ( Connection.Local.IsHost )
-			StartSession();
-	}
-
 	public List<string> RandomTips = new()
 	{
 		"Take your pants off and press P to piss.",
@@ -598,7 +593,7 @@ public class StoryMaster : Component
 		if ( storyMaster != null )
 		{
 			storyMaster.ResetStoryProgression();
-			storyMaster._taskMaster.ResetTasksProgression( true );
+			storyMaster._taskMaster.ResetTasksProgression( false );
 			storyMaster._eventMaster.ResetEventsProgression();
 			storyMaster.ResetPlayer();
 		}

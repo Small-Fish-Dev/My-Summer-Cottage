@@ -1,14 +1,13 @@
 {
   "RootObject": {
     "__guid": "2afd3107-76d5-4230-af2e-7c47b5f0594c",
-    "Name": "Crashed Car",
+    "Name": "drive_car",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "EventDefinition",
         "__guid": "9489c6fe-ca95-485d-ad35-f290d8469c05",
-        "__enabled": false,
         "AddToEventPool": true,
         "EventName": "Crashed Car",
         "EventSignals": [
@@ -18,222 +17,6 @@
         "ReinstantiateOnRestart": true,
         "Stackable": true,
         "Type": "Random"
-      },
-      {
-        "__type": "BoxCollider",
-        "__guid": "51157003-92dd-425d-9aa7-715792b908cd",
-        "Center": "101.7,0,34.50003",
-        "IsTrigger": false,
-        "Scale": "50,50,50",
-        "Static": true
-      },
-      {
-        "__type": "Interactions",
-        "__guid": "1b270aac-ded2-402d-8a48-010dfa5ced65",
-        "HideOnEmpty": true,
-        "ObjectInteractions": [
-          {
-            "Identifier": "event.steal_drive",
-            "Keybind": "Use",
-            "Description": "Steal the jacket",
-            "Action": {
-              "Version": 5,
-              "UserData": {
-                "Title": "Action",
-                "id": "e9ac7c29-ff9f-4c3c-8d9d-7228c4711248",
-                "ReferencedComponentTypes": [
-                  "package.fish.sauna/Sauna.Inventory"
-                ]
-              },
-              "Variables": [],
-              "Nodes": [
-                {
-                  "Id": 0,
-                  "Type": "input"
-                },
-                {
-                  "Id": 1,
-                  "Type": "scene.get",
-                  "Properties": {
-                    "T": "package.fish.sauna/Sauna.Inventory"
-                  },
-                  "UserData": {
-                    "Position": "192,96"
-                  }
-                },
-                {
-                  "Id": 14,
-                  "Type": "property.set",
-                  "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameObject",
-                    "_name": "Enabled"
-                  },
-                  "UserData": {
-                    "Position": "992,-32"
-                  }
-                },
-                {
-                  "Id": 18,
-                  "Type": "scene.ref",
-                  "Properties": {
-                    "gameobject": {
-                      "_type": "gameobject",
-                      "go": "916f0aa1-4274-4d0a-a2de-33aac80b502b"
-                    }
-                  },
-                  "UserData": {
-                    "Position": "544,-160"
-                  }
-                },
-                {
-                  "Id": 20,
-                  "Type": "resource.ref",
-                  "Properties": {
-                    "value": "prefabs/clothes/drive_jacket.prefab",
-                    "T": "Sandbox.Engine/Sandbox.PrefabFile"
-                  },
-                  "UserData": {
-                    "Position": "160,416"
-                  }
-                },
-                {
-                  "Id": 21,
-                  "Type": "call",
-                  "Properties": {
-                    "_isStatic": false,
-                    "_type": "package.fish.sauna/Sauna.Inventory",
-                    "_name": "GiveItem"
-                  },
-                  "UserData": {
-                    "Position": "512,80"
-                  }
-                }
-              ],
-              "Links": [
-                {
-                  "SrcId": 0,
-                  "SrcName": "interactor",
-                  "DstId": 1,
-                  "DstName": "_this"
-                },
-                {
-                  "SrcId": 21,
-                  "SrcName": "_signal",
-                  "DstId": 14,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 18,
-                  "SrcName": "_result",
-                  "DstId": 14,
-                  "DstName": "_target"
-                },
-                {
-                  "Value": false,
-                  "DstId": 14,
-                  "DstName": "_value"
-                },
-                {
-                  "SrcId": 0,
-                  "SrcName": "_signal",
-                  "DstId": 21,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 1,
-                  "SrcName": "_result",
-                  "DstId": 21,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 20,
-                  "SrcName": "_result",
-                  "DstId": 21,
-                  "DstName": "prefabFile"
-                }
-              ]
-            },
-            "InteractDistance": 200,
-            "Accessibility": "World",
-            "Disabled": {
-              "Version": 5,
-              "UserData": {
-                "Title": "Disabled",
-                "id": "74b818f9-55e8-4780-afe9-55ae19f85d9a",
-                "ReferencedComponentTypes": []
-              },
-              "Variables": [],
-              "Nodes": [
-                {
-                  "Id": 0,
-                  "Type": "output",
-                  "UserData": {
-                    "Position": "64,-32"
-                  }
-                },
-                {
-                  "Id": 4,
-                  "Type": "scene.ref",
-                  "Properties": {
-                    "gameobject": {
-                      "_type": "gameobject",
-                      "go": "916f0aa1-4274-4d0a-a2de-33aac80b502b"
-                    }
-                  },
-                  "UserData": {
-                    "Position": "-560,-32"
-                  }
-                },
-                {
-                  "Id": 8,
-                  "Type": "property.get",
-                  "Properties": {
-                    "_type": "Sandbox.Game/Sandbox.GameObject",
-                    "_name": "Enabled"
-                  },
-                  "UserData": {
-                    "Position": "-336,-32"
-                  }
-                },
-                {
-                  "Id": 9,
-                  "Type": "op.not",
-                  "UserData": {
-                    "Position": "-80,96"
-                  }
-                },
-                {
-                  "Id": 10,
-                  "Type": "input"
-                }
-              ],
-              "Links": [
-                {
-                  "SrcId": 9,
-                  "SrcName": "_result",
-                  "DstId": 0,
-                  "DstName": "_result"
-                },
-                {
-                  "SrcId": 4,
-                  "SrcName": "_result",
-                  "DstId": 8,
-                  "DstName": "_target"
-                },
-                {
-                  "SrcId": 8,
-                  "SrcName": "_result",
-                  "DstId": 9,
-                  "DstName": "a"
-                }
-              ]
-            },
-            "CooldownTime": 0.5,
-            "Position": "89.89992,0,28.70008",
-            "Extents": "105.8995,93.09996,75.59973",
-            "Animation": "Interact"
-          }
-        ]
       },
       {
         "__type": "MarkerComponent",
@@ -290,14 +73,223 @@
             "IsTrigger": false,
             "Model": "models/old_red_lada/old_red_lada.vmdl",
             "Static": true
+          },
+          {
+            "__type": "Interactions",
+            "__guid": "82ed18ae-4fd2-4023-b7b8-79ac8dd7c7fd",
+            "HideOnEmpty": true,
+            "ObjectInteractions": [
+              {
+                "Identifier": "event.steal_drive",
+                "Keybind": "Use",
+                "Description": "Steal the jacket",
+                "Action": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Action",
+                    "id": "e9ac7c29-ff9f-4c3c-8d9d-7228c4711248",
+                    "ReferencedComponentTypes": [
+                      "package.fish.sauna/Sauna.Inventory"
+                    ]
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "input"
+                    },
+                    {
+                      "Id": 1,
+                      "Type": "scene.get",
+                      "Properties": {
+                        "T": "package.fish.sauna/Sauna.Inventory"
+                      },
+                      "UserData": {
+                        "Position": "192,96"
+                      }
+                    },
+                    {
+                      "Id": 14,
+                      "Type": "property.set",
+                      "Properties": {
+                        "_type": "Sandbox.Game/Sandbox.GameObject",
+                        "_name": "Enabled"
+                      },
+                      "UserData": {
+                        "Position": "992,-32"
+                      }
+                    },
+                    {
+                      "Id": 18,
+                      "Type": "scene.ref",
+                      "Properties": {
+                        "gameobject": {
+                          "_type": "gameobject",
+                          "go": "916f0aa1-4274-4d0a-a2de-33aac80b502b"
+                        }
+                      },
+                      "UserData": {
+                        "Position": "544,-160"
+                      }
+                    },
+                    {
+                      "Id": 20,
+                      "Type": "resource.ref",
+                      "Properties": {
+                        "value": "prefabs/clothes/drive_jacket.prefab",
+                        "T": "Sandbox.Engine/Sandbox.PrefabFile"
+                      },
+                      "UserData": {
+                        "Position": "160,416"
+                      }
+                    },
+                    {
+                      "Id": 21,
+                      "Type": "call",
+                      "Properties": {
+                        "_isStatic": false,
+                        "_type": "package.fish.sauna/Sauna.Inventory",
+                        "_name": "GiveItem"
+                      },
+                      "UserData": {
+                        "Position": "512,80"
+                      }
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 0,
+                      "SrcName": "interactor",
+                      "DstId": 1,
+                      "DstName": "_this"
+                    },
+                    {
+                      "SrcId": 21,
+                      "SrcName": "_signal",
+                      "DstId": 14,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 18,
+                      "SrcName": "_result",
+                      "DstId": 14,
+                      "DstName": "_target"
+                    },
+                    {
+                      "Value": false,
+                      "DstId": 14,
+                      "DstName": "_value"
+                    },
+                    {
+                      "SrcId": 0,
+                      "SrcName": "_signal",
+                      "DstId": 21,
+                      "DstName": "_signal"
+                    },
+                    {
+                      "SrcId": 1,
+                      "SrcName": "_result",
+                      "DstId": 21,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 20,
+                      "SrcName": "_result",
+                      "DstId": 21,
+                      "DstName": "prefabFile"
+                    }
+                  ]
+                },
+                "InteractDistance": 200,
+                "Accessibility": "World",
+                "Disabled": {
+                  "Version": 5,
+                  "UserData": {
+                    "Title": "Disabled",
+                    "id": "74b818f9-55e8-4780-afe9-55ae19f85d9a",
+                    "ReferencedComponentTypes": []
+                  },
+                  "Variables": [],
+                  "Nodes": [
+                    {
+                      "Id": 0,
+                      "Type": "output",
+                      "UserData": {
+                        "Position": "64,-32"
+                      }
+                    },
+                    {
+                      "Id": 4,
+                      "Type": "scene.ref",
+                      "Properties": {
+                        "gameobject": {
+                          "_type": "gameobject",
+                          "go": "916f0aa1-4274-4d0a-a2de-33aac80b502b"
+                        }
+                      },
+                      "UserData": {
+                        "Position": "-560,-32"
+                      }
+                    },
+                    {
+                      "Id": 8,
+                      "Type": "property.get",
+                      "Properties": {
+                        "_type": "Sandbox.Game/Sandbox.GameObject",
+                        "_name": "Enabled"
+                      },
+                      "UserData": {
+                        "Position": "-336,-32"
+                      }
+                    },
+                    {
+                      "Id": 9,
+                      "Type": "op.not",
+                      "UserData": {
+                        "Position": "-80,96"
+                      }
+                    },
+                    {
+                      "Id": 10,
+                      "Type": "input"
+                    }
+                  ],
+                  "Links": [
+                    {
+                      "SrcId": 9,
+                      "SrcName": "_result",
+                      "DstId": 0,
+                      "DstName": "_result"
+                    },
+                    {
+                      "SrcId": 4,
+                      "SrcName": "_result",
+                      "DstId": 8,
+                      "DstName": "_target"
+                    },
+                    {
+                      "SrcId": 8,
+                      "SrcName": "_result",
+                      "DstId": 9,
+                      "DstName": "a"
+                    }
+                  ]
+                },
+                "ShowWhenDisabled": null,
+                "CooldownTime": 0.5,
+                "Position": "89.89992,0,28.70008",
+                "Extents": "105.8995,93.09996,75.59973",
+                "Animation": "Interact"
+              }
+            ]
           }
         ]
       },
       {
         "__guid": "bcf5f636-82be-41e6-9ee5-f8b7b2710df5",
         "Name": "DeadGuy",
-        "Position": "64,0,56",
-        "Rotation": "-0.9238796,0.00000007451121,-0.3826833,0.000000179886",
+        "Position": "-7.601271,4.031493,42.44547",
+        "Rotation": "-0.0000001402478,0.7203013,-0.0000001350608,0.6936613",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
@@ -311,19 +303,6 @@
             "Tint": "1,1,1,1"
           },
           {
-            "__type": "ModelPhysics",
-            "__guid": "ca0a81fe-d47b-4ee1-b1d5-3c3c0094ff13",
-            "Locking": {},
-            "Model": "models/guy/guy.vmdl",
-            "Renderer": {
-              "_type": "component",
-              "component_id": "b0413433-87b7-4dbc-82f8-1843882d344b",
-              "go": "bcf5f636-82be-41e6-9ee5-f8b7b2710df5",
-              "component_type": "SkinnedModelRenderer"
-            },
-            "RigidbodyFlags": 0
-          },
-          {
             "__type": "Character",
             "__guid": "13b2f7c7-d3fe-46ce-9243-b88d81a4a5b9",
             "Clothes": [
@@ -334,6 +313,13 @@
             "Fatness": 0,
             "Height": 7,
             "HideBodyGroup": "Legs, Feet"
+          },
+          {
+            "__type": "ModelCollider",
+            "__guid": "63eb5678-51d8-48c1-a763-2b810fc9f7db",
+            "IsTrigger": false,
+            "Model": "models/guy/guy.vmdl",
+            "Static": false
           }
         ],
         "Children": [

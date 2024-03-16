@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "93d71b5c-b49f-48ee-8265-88d68aed3530",
+    "__guid": "06814825-755c-475c-99df-a516ad771ba6",
     "Name": "herring",
     "Tags": "fish",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "Fish",
-        "__guid": "cb872ebf-b85b-49c0-8e8c-7179a0107c19",
+        "__guid": "f0886963-03a6-4786-bd88-3c21d2e51062",
         "CostPerKilo": 18,
         "IsTrash": false,
         "MinimumWaterDepth": 15,
@@ -17,7 +17,7 @@
       },
       {
         "__type": "ItemComponent",
-        "__guid": "ccac725f-b754-40a4-9c63-6650815f2562",
+        "__guid": "62301bcd-de73-4c9f-88a0-a09b2de38117",
         "Count": 0,
         "Description": "A small but economically important fish species.",
         "Icon": {
@@ -34,7 +34,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "4b07bf9d-bfd5-4267-8f7c-82358a18db7a",
+        "__guid": "377d15f7-9b81-4235-8e33-8865f20da780",
         "BodyGroups": 18446744073709551615,
         "CreateBoneObjects": false,
         "Model": "models/fauna/fish/herring/herring.vmdl",
@@ -43,14 +43,14 @@
       },
       {
         "__type": "ModelCollider",
-        "__guid": "7713de45-4c5a-49fe-b6a7-2a24b9184cce",
+        "__guid": "48a5c240-9898-4149-bb14-82eae90aee1b",
         "IsTrigger": false,
         "Model": "models/fauna/fish/herring/herring.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
-        "__guid": "64c4c53a-5c0f-4bfd-bea9-124283d00014",
+        "__guid": "159ba4ca-ad04-48ea-b149-b6983c5c6bd2",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
@@ -64,7 +64,18 @@
         "StartAsleep": false
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "__guid": "5840656c-0d03-4849-b7fd-23cfc6ee2aa8",
+        "Name": "stinky",
+        "Position": "0,0,2",
+        "Scale": "2.150923,0.2958689,0.4042295",
+        "Tags": "particles",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/particles/stinky.prefab"
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,

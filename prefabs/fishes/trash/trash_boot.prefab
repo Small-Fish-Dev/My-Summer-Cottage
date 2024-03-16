@@ -1,11 +1,13 @@
 {
   "RootObject": {
-    "Id": "c93cd111-a34f-4aec-a030-11fffbbca4c9",
+    "__guid": "c93cd111-a34f-4aec-a030-11fffbbca4c9",
     "Name": "trash_boot",
     "Enabled": true,
+    "NetworkMode": 2,
     "Components": [
       {
         "__type": "Fish",
+        "__guid": "cec1db1d-7191-42f8-83a3-19b17c78ddc8",
         "CostPerKilo": -1,
         "IsTrash": true,
         "MinimumWaterDepth": 15,
@@ -14,6 +16,7 @@
       },
       {
         "__type": "ItemComponent",
+        "__guid": "9babf48f-7f09-4a31-b08a-2bf5013b42e8",
         "Count": 0,
         "Description": "Looks like someone lost thier boot while fishing...",
         "Icon": {
@@ -30,35 +33,48 @@
       },
       {
         "__type": "ModelRenderer",
+        "__guid": "86b7fcb3-e5fe-4bdd-a57f-648df903e188",
         "BodyGroups": 18446744073709551615,
-        "MaterialGroup": null,
-        "MaterialOverride": null,
         "Model": "models/trash/trash_boot.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
         "__type": "Rigidbody",
+        "__guid": "8c26be02-362a-4844-a523-cd94bd8de5d6",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
         "Locking": {},
         "MassOverride": 0,
+        "MotionEnabled": true,
         "RigidbodyFlags": 0,
         "StartAsleep": false
       },
       {
         "__type": "ModelCollider",
+        "__guid": "71642b46-fb28-494f-afdb-37c22af4c144",
         "IsTrigger": false,
         "Model": "models/trash/trash_boot.vmdl",
-        "Static": false,
-        "Surface": null
+        "Static": false
       }
     ],
-    "Children": []
+    "Children": [
+      {
+        "__guid": "f8b01853-8955-485f-9fee-8d35a641b7a0",
+        "Name": "stinky",
+        "Position": "0,0,3.365355",
+        "Tags": "particles",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/particles/stinky.prefab"
+      }
+    ]
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

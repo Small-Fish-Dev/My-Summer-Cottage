@@ -5,7 +5,7 @@ public sealed class WaterComponent : Component
 	private const string MATERIAL_PATH = "materials/water/water.vmat";
 	private const int MIN_SUBDIVISIONS = 32;
 
-	[Property] [Range( 0, 1 )] public float BobberDrag { get; set; } = 0.8f;
+	[Property][Range( 0, 1 )] public float BobberDrag { get; set; } = 0.8f;
 	[Property] public Vector3 Mins { get; set; } = -25;
 	[Property] public Vector3 Maxs { get; set; } = 25;
 
@@ -70,9 +70,44 @@ public sealed class WaterComponent : Component
 				var percentInWater = depth.Clamp( 0, bobberHeight ) / bobberHeight;
 
 				other.Rigidbody.Velocity = other.Rigidbody.Velocity * BobberDrag
-				                           + Vector3.Up * other.Rigidbody.PhysicsBody.Mass * 25 * percentInWater
-				                           // Simulating the waves
-				                           * ((float)Math.Sin( Time.Now * 5 )).Remap( -1, 1, 0.5f, 1 );
+										   + Vector3.Up * other.Rigidbody.PhysicsBody.Mass * 25 * percentInWater
+										   // Simulating the waves
+										   * ((float)Math.Sin( Time.Now * 5 )).Remap( -1, 1, 0.5f, 1 );
+			}
+		}
+
+		foreach ( var player in Scene.GetAllComponents<Player>() )
+		{
+			var difference = Bounds.Transform( Transform.World ).Maxs.z - player.Transform.Position.z;
+
+			if ( difference >= 28f )
+			{
+				player.MoveHelper.Velocity = player.MoveHelper.Velocity.WithZ( 20f );
+				player.MoveHelper.IsOnGround = false;
+				player.IsSwimming = true;
+			}
+
+			if ( difference < 18f )
+			{
+				player.IsSwimming = false;
+			}
+		}
+
+		foreach ( var rigidbody in Scene.GetAllComponents<Rigidbody>() )
+		{
+			if ( rigidbody.Enabled && rigidbody.MotionEnabled )
+			{
+				var difference = Bounds.Transform( Transform.World ).Maxs.z - rigidbody.PhysicsBody.GetBounds().Center.z;
+
+				if ( difference > 0f )
+				{
+					rigidbody.Velocity = rigidbody.Velocity.WithZ( 20f );
+					rigidbody.LinearDamping = 1f;
+				}
+				else
+				{
+					rigidbody.LinearDamping = 0.01f;
+				}
 			}
 		}
 	}
@@ -81,10 +116,10 @@ public sealed class WaterComponent : Component
 	{
 		if ( Game.IsPlaying )
 			return;
-		
+
 		Gizmo.Draw.Color = Color.Blue;
 		Gizmo.Draw.LineBBox( Bounds );
-		
+
 		Gizmo.Draw.Color = Color.Blue.WithAlpha( 0.15f );
 		Gizmo.Draw.SolidBox( Bounds );
 	}
@@ -123,30 +158,30 @@ public sealed class WaterComponent : Component
 		var stepSize = new Vector2( positions[0].Abs() + positions[3].Abs() ) / subdivisions;
 
 		for ( var x = 0; x < subdivisions; x++ )
-		for ( var y = 0; y < subdivisions; y++ )
-		{
-			verts.Add( new SimpleVertex()
+			for ( var y = 0; y < subdivisions; y++ )
 			{
-				position = new Vector3( start + stepSize * new Vector2( x, y ) ),
-				normal = Vector3.Up,
-				tangent = Vector3.Cross( Vector3.Up, Vector3.Forward ),
-				texcoord = new Vector2( x, y ) / subdivisions
-			} );
-		}
+				verts.Add( new SimpleVertex()
+				{
+					position = new Vector3( start + stepSize * new Vector2( x, y ) ),
+					normal = Vector3.Up,
+					tangent = Vector3.Cross( Vector3.Up, Vector3.Forward ),
+					texcoord = new Vector2( x, y ) / subdivisions
+				} );
+			}
 
 		for ( int y = 0; y < (subdivisions - 1); y++ )
-		for ( int x = 0; x < (subdivisions - 1); x++ )
-		{
-			var quad = y * subdivisions + x;
+			for ( int x = 0; x < (subdivisions - 1); x++ )
+			{
+				var quad = y * subdivisions + x;
 
-			indices.Add( quad );
-			indices.Add( quad + subdivisions );
-			indices.Add( quad + subdivisions + 1 );
+				indices.Add( quad );
+				indices.Add( quad + subdivisions );
+				indices.Add( quad + subdivisions + 1 );
 
-			indices.Add( quad );
-			indices.Add( quad + subdivisions + 1 );
-			indices.Add( quad + 1 );
-		}
+				indices.Add( quad );
+				indices.Add( quad + subdivisions + 1 );
+				indices.Add( quad + 1 );
+			}
 
 		mesh.CreateVertexBuffer<SimpleVertex>( verts.Count, SimpleVertex.Layout, verts.ToArray() );
 		mesh.CreateIndexBuffer( indices.Count, indices.ToArray() );

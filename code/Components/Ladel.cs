@@ -47,7 +47,7 @@ public sealed class Ladel : Component
 				return toReturn;
 			},
 			Keybind = "mouse1",
-			Animation = InteractAnimations.Action
+			Animation = InteractAnimations.Interact
 		} ); ;
 	}
 

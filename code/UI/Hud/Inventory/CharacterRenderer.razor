@@ -58,8 +58,8 @@
 	public void Refresh()
 	{
 		_penoid ??= new SceneModel( _sceneWorld, "models/guy/penoid.vmdl", global::Transform.Zero );
-		_penoid.Attributes.Set( "g_flColorTint", Player.Local.SkinColor );
-		_character.Attributes.Set( "g_flColorTint", Player.Local.SkinColor );
+		_penoid.ColorTint = Player.Local.SkinColor;
+		_character.ColorTint = Player.Local.SkinColor;
 
 		if ( _penoid.Parent != _character )
 			_character.AddChild( "penoid", _penoid );
@@ -96,6 +96,8 @@
 			bodygroups |= equipment.HideBodygroups;
 
 			_character.AddChild( $"clothing_{i}_{equipment.Name}", cloth );
+			if ( equipment.UseSkinTint )
+				cloth.ColorTint = Player.Local.SkinColor;
 		}
 
 		_character.SetBodyGroup( "head", bodygroups.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 );
