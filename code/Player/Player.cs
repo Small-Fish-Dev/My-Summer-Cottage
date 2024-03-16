@@ -272,8 +272,9 @@ public partial class Player : Component, Component.ExecuteInEditor
 		{
 			PissEmitter.Enabled = IsPissing;
 			var pissRot = EyeAngles.WithRoll( 0 ).WithYaw( 0 );
+			var pissHeightAdjust = (Height * 0.01f) * 9;
 
-			PissEmitter.GameObject.Transform.LocalRotation = pissRot.WithPitch( (pissRot.pitch - 36).Clamp( -80, 50 ) );
+			PissEmitter.GameObject.Transform.LocalRotation = pissRot.WithPitch( (pissRot.pitch - (40 + pissHeightAdjust)).Clamp( -80, 50 ) );
 
 			if ( PissParticles != null )
 			{
