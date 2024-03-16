@@ -23,7 +23,6 @@
         "Name": "whimsical_thing",
         "Position": "0,0,18.85481",
         "Tags": "npc",
-        "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
@@ -851,9 +850,9 @@
                       "Id": 6,
                       "Type": "call",
                       "Properties": {
+                        "_type": "Sandbox.System/Rotation",
                         "_isStatic": true,
-                        "_name": "FromYaw",
-                        "_type": "Sandbox.System/Rotation"
+                        "_name": "FromYaw"
                       },
                       "UserData": {
                         "Position": "272,176"
@@ -913,8 +912,8 @@
                       "Id": 15,
                       "Type": "property.set",
                       "Properties": {
-                        "_name": "LocalPosition",
-                        "_type": "Sandbox.Game/Sandbox.GameTransform"
+                        "_type": "Sandbox.Game/Sandbox.GameTransform",
+                        "_name": "LocalPosition"
                       },
                       "UserData": {
                         "Position": "784,288"
