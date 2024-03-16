@@ -1,4 +1,4 @@
-﻿using Sandbox.Diagnostics;
+using Sandbox.Diagnostics;
 using Sauna.Components;
 
 namespace Sauna;
@@ -311,9 +311,10 @@ partial class Player
 		if ( Shitting != null )
 		{
 			const float rate = 0.8f;
+			var ang = (EyeAngles.ToRotation() * Transform.Rotation.Inverse).Angles();
 			Transform.Position = Transform.Position.LerpTo( Shitting.Value.Position, rate );
 			Transform.Rotation = Rotation.Slerp( Transform.Rotation, Shitting.Value.Rotation, rate );
-			Renderer.Set( "lookat", (EyeAngles.ToRotation() * Transform.Rotation.Inverse).Forward );
+			Renderer.Set( "lookat", ang.WithPitch( EyeAngles.pitch ).ToRotation().Forward );
 
 			return;
 		}
