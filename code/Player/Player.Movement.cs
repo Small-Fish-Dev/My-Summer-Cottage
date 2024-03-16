@@ -169,6 +169,7 @@ partial class Player
 		{
 			var time = MathX.Clamp( 1, 4, diff / 250f );
 			SetRagdoll( true, duration: time );
+			GameObject.PlaySound( "impact" );
 		}
 
 		/*

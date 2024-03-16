@@ -52,7 +52,7 @@ public class ItemEquipment : ItemComponent
 
 		// Use skin color as tint.
 		var player = GameObject.Parent?.Components?.Get<Player>( true );
-		if ( UseSkinTint && player != null )
+		if ( UseSkinTint && player != null && Renderer != null )
 			Renderer.Tint = player.SkinColor;
 
 		// Bonemerge
