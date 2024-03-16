@@ -30,7 +30,8 @@ public sealed class Stove : Component
 	[Property]
 	public GameObject Light { get; set; }
 
-	public TimeUntil StopWorking;
+	[Sync]
+	public TimeUntil StopWorking { get; set; }
 
 	protected override void OnStart()
 	{
@@ -45,7 +46,7 @@ public sealed class Stove : Component
 			Action = ( Player interactor, GameObject obj ) => PlaceWood( interactor ),
 			Keybind = "use2",
 			Description = "Insert split log",
-			Disabled = () => HasWood || !Player.Local.Inventory.BackpackItems.Any( x => x.IsValid() && x.Name == "Split Log" ),
+			Disabled = () => HasWood || Player.Local.Inventory.GetTotalItemCount( "Split Log" ) == 0,
 			InteractDistance = 120,
 			ShowWhenDisabled = () => false,
 			Accessibility = AccessibleFrom.World
@@ -133,10 +134,16 @@ public sealed class Stove : Component
 
 	void BeginSauna()
 	{
+		StartSauna();
+		GiveExp();
+	}
+
+	[Broadcast( NetPermission.Anyone )]
+	void StartSauna()
+	{
 		IsRunning = true;
 		StopWorking = 120;
 
-		GiveExp();
 	}
 
 	[Broadcast]
