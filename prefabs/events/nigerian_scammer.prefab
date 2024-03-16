@@ -1,0 +1,184 @@
+{
+  "RootObject": {
+    "__guid": "9b7885df-cbf5-47b8-8717-9113e30ff12a",
+    "Name": "nigerian_scammer",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "2671b908-6b8d-4ef5-9c3d-176de46e4bc3",
+        "AddToEventPool": true,
+        "EventName": "Nigerian Scammer",
+        "EventSignals": [],
+        "Rarity": "Rare",
+        "ReinstantiateOnRestart": true,
+        "Stackable": true,
+        "Type": "Interaction"
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "87bd6ca7-0b21-412a-93c2-8a93f1ca6d82",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "c63577c3-c18c-4ec5-81fe-ce9a9e9d6baa",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "224,32"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Message",
+                "_isStatic": true,
+                "_name": "Receive"
+              },
+              "UserData": {
+                "Position": "464,32"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "resource.ref",
+              "Properties": {
+                "value": "resources/tasks/event_tasks/event.nigerian_prince.task",
+                "T": "package.fish.sauna/Sauna.SaunaTask"
+              },
+              "UserData": {
+                "Position": "64,176"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "property.get",
+              "ParentId": 5,
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.SaunaTask",
+                "_name": "Giver"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "property.get",
+              "ParentId": 5,
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.SaunaTask",
+                "_name": "Message"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "event.assigntasktoeveryone",
+              "UserData": {
+                "Position": "464,192"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 40,
+              "DstId": 1,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "content"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "sender"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "taskToAdd"
+            }
+          ]
+        },
+        "RequiredToFinish": true,
+        "TriggerCooldown": 1,
+        "TriggerOnce": true,
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "70a1a83e-4cf2-4e65-aa77-14b308ef3491",
+            "go": "9b7885df-cbf5-47b8-8717-9113e30ff12a",
+            "component_type": "EventEnabledTrigger"
+          }
+        ]
+      },
+      {
+        "__type": "EventEnabledTrigger",
+        "__guid": "70a1a83e-4cf2-4e65-aa77-14b308ef3491",
+        "MaxPollingRate": 5,
+        "TriggerSignalIdentifier": null
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "500f20b4-b0c4-4431-a9de-8a463a60cbd1",
+        "Name": "Nigerian Prince",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/npcs/people/nigerian_prince.prefab"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

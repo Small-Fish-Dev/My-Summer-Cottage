@@ -1,0 +1,143 @@
+{
+  "Name": "Nigerian Prince",
+  "Subtitle": "A chance to double your money!",
+  "Description": "A nigerian prince messaged you about doubling your money, this has to be real!",
+  "Giver": "SPAM",
+  "Message": "Hello, I am a Nigerian Prince and I want to double your money. Meet me at the parking lot in front of the supermarket...",
+  "TaskType": "GivenByEvent",
+  "TaskRarity": "Any",
+  "IsPrimary": false,
+  "Global": false,
+  "ExperienceGiven": 160,
+  "SuccessSignal": "task.success.Nigerian Prince",
+  "FailedSignal": "task.failed.Nigerian Prince",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": false,
+  "OnStart": {
+    "Version": 5,
+    "UserData": {
+      "Title": "On Start",
+      "id": "25f961a0-5fdc-4c07-b212-98a7fb472f94",
+      "ReferencedComponentTypes": []
+    },
+    "Variables": [],
+    "Nodes": [
+      {
+        "Id": 0,
+        "Type": "input"
+      },
+      {
+        "Id": 1,
+        "Type": "event.findobject",
+        "UserData": {
+          "Position": "256,64"
+        }
+      },
+      {
+        "Id": 2,
+        "Type": "event.addmarker",
+        "UserData": {
+          "Position": "544,96"
+        }
+      }
+    ],
+    "Links": [
+      {
+        "SrcId": 0,
+        "SrcName": "_signal",
+        "DstId": 1,
+        "DstName": "_signal"
+      },
+      {
+        "Value": "Nigerian Prince",
+        "DstId": 1,
+        "DstName": "name"
+      },
+      {
+        "SrcId": 1,
+        "SrcName": "_signal",
+        "DstId": 2,
+        "DstName": "_signal"
+      },
+      {
+        "Value": "Sub",
+        "DstId": 2,
+        "DstName": "icon"
+      },
+      {
+        "SrcId": 1,
+        "SrcName": "_result",
+        "DstId": 2,
+        "DstName": "target"
+      }
+    ]
+  },
+  "OnSuccess": {
+    "Version": 5,
+    "UserData": {
+      "Title": "On Success",
+      "id": "247f8872-21ed-4446-97f5-c8053ef133c1",
+      "ReferencedComponentTypes": []
+    },
+    "Variables": [],
+    "Nodes": [
+      {
+        "Id": 0,
+        "Type": "input"
+      },
+      {
+        "Id": 1,
+        "Type": "event.findobject",
+        "UserData": {
+          "Position": "224,64"
+        }
+      },
+      {
+        "Id": 2,
+        "Type": "event.removemarker",
+        "UserData": {
+          "Position": "464,80"
+        }
+      }
+    ],
+    "Links": [
+      {
+        "SrcId": 0,
+        "SrcName": "_signal",
+        "DstId": 1,
+        "DstName": "_signal"
+      },
+      {
+        "Value": "Nigerian Prince",
+        "DstId": 1,
+        "DstName": "name"
+      },
+      {
+        "SrcId": 1,
+        "SrcName": "_signal",
+        "DstId": 2,
+        "DstName": "_signal"
+      },
+      {
+        "SrcId": 1,
+        "SrcName": "_result",
+        "DstId": 2,
+        "DstName": "target"
+      }
+    ]
+  },
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Give your money to the Nigerian Prince",
+      "TriggerSignal": "nigerian_prince_trade",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}
