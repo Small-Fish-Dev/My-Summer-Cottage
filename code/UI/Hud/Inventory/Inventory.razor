@@ -72,11 +72,10 @@
 	protected override int BuildHash()
 	{
 		return HashCode.Combine(
-			Player.Local.Level,
-			Player.Local.Experience,
-			Player.Local.Inventory.BackpackItems.HashCombine( i => i?.GetHashCode() ?? -1 ),
-			Player.Local.Inventory.EquippedItems.HashCombine( i => i?.GetHashCode() ?? -1 )
+			Player.Local?.Level,
+			Player.Local?.Experience,
+			Player.Local?.Inventory.BackpackItems.HashCombine( i => i?.GetHashCode() ?? -1 ),
+			Player.Local?.Inventory.EquippedItems.HashCombine( i => i?.GetHashCode() ?? -1 )
 		);
 	}
-
 }
