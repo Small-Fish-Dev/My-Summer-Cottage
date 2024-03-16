@@ -490,14 +490,6 @@ public class StoryMaster : Component
 		}
 	}
 
-	protected override void OnStart()
-	{
-		if ( Scene.IsEditor ) return;
-
-		if ( Connection.Local.IsHost )
-			StartSession();
-	}
-
 	public List<string> RandomTips = new()
 	{
 		"Take your pants off and press P to piss.",

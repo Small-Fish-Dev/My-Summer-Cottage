@@ -32,6 +32,9 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		obj.NetworkMode = NetworkMode.Object;
 		obj.NetworkSpawn( connection );
 		player.SetupConnection( connection );
+
+		if ( Connection.Local.IsHost )
+			StoryMaster.StartSession();
 	}
 
 	void INetworkListener.OnDisconnected( Connection connection )
