@@ -54,14 +54,14 @@ public sealed class FishingRod : Component
 
 	protected override void OnUpdate()
 	{
-		if ( Owner is null )
-			return;
+		if ( Owner is not null )
+		{
+			if ( IsCasted && CurrentBobber.Transform.Position.Distance( Owner.Transform.Position ) > RetractDistance )
+				RetractBobber( true );
 
-		if ( IsCasted && CurrentBobber.Transform.Position.Distance( Owner.Transform.Position ) > RetractDistance )
-			RetractBobber( true );
-
-		if ( !IsCasted )
-			return;
+			if ( !IsCasted )
+				return;
+		}
 
 		if ( CurrentBobber.IsValid() )
 			BobberPosition = CurrentBobber.Transform.Position;
