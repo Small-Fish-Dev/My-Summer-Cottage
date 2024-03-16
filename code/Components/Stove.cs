@@ -91,10 +91,12 @@ public sealed class Stove : Component
 	void PlaceWood( Player interactor )
 	{
 		HasWood = true;
-		interactor.Inventory.BackpackItems
+		var item = interactor.Inventory.BackpackItems
 			.Where( x => x.IsValid() && x.Name == "Split Log" )
-			.FirstOrDefault()
-			.Destroy();
+			.FirstOrDefault();
+
+		item.GameObject.Destroy();
+		interactor.Inventory.ClearItem( item );
 	}
 
 	(bool, string) CanSauna()
