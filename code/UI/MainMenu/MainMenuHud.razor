@@ -38,12 +38,14 @@
 
 	protected override void OnStart()
 	{
-		if ( !init ) Initialize();
+		if ( !init && !MainMenu.PlayIntro ) Initialize();
 	}
 
 	public async void Initialize()
 	{
-		init = true;
+		if ( init )
+			return;
+
 		SaveData = Player.GetSave();
 
 		// Start music.
@@ -57,6 +59,8 @@
 		_loopStart.ListenLocal = true;
 		_loopStart.Volume = Volume;
 		_playLoop = sounds.start.Duration;
+
+		init = true;
 	}
 
 	protected override void OnUpdate()
