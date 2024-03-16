@@ -165,7 +165,7 @@ partial class Player
 		MoveHelper.Move();
 
 		var diff = MathF.Abs( Velocity.z - previousFallSpeed );
-		if ( diff > 600 && previousFallSpeed < Velocity.z )
+		if ( diff > 600 && previousFallSpeed < Velocity.z && !ForceHidePenoid ) // ForceHidePenoid, hack
 		{
 			var time = MathX.Clamp( 1, 4, diff / 250f );
 			SetRagdoll( true, duration: time );
