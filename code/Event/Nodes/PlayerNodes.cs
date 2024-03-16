@@ -75,4 +75,13 @@ public static partial class PlayerNodes
 	{
 		return inventory.GetTotalItemCount( nameOfItem );
 	}
+
+	[ActionGraphNode( "player.getrandom" )]
+	[Title( "Get Random Player" ), Group( "Player" ), Icon( "escalator_warning" )]
+	public static Player GetRandomPlayer()
+	{
+		return Game.Random.FromList( Game.ActiveScene
+			.GetAllComponents<Player>()
+			.ToList() );
+	}
 }
