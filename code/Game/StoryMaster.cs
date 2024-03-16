@@ -440,10 +440,11 @@ public class StoryMaster : Component
 
 		foreach ( var shop in allClothingShops )
 		{
-			shop.Item = Game.Random.FromList( allClothingPrefabs ).Prefab;
-			shop.Price = Game.Random.Int( 10, 40 );
+			var chosen = Game.Random.FromList( allClothingPrefabs ).Prefab;
+			shop.Item = chosen;
 			shop.CreateWorldIcon();
 			shop.ResetName();
+			shop.ResetPrice();
 		}
 	}
 

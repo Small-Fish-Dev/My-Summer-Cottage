@@ -71,4 +71,8 @@ public class ShopItem : Component
 	{
 		GameObject.Name = $"Buy {PrefabLibrary.AsDefinition( Item )?.GetComponent<ItemComponent>()?.Get<string>( "Name" ) ?? "Item"}";
 	}
+	public void ResetPrice()
+	{
+		Price = PrefabLibrary.AsDefinition( Item )?.GetComponent<ItemComponent>()?.Get<int>( "SellPrice" ) ?? Game.Random.Int( 10, 80 );
+	}
 }
