@@ -99,7 +99,7 @@ public sealed class BusStop : Component
 				var endPosition = taxi.Car.Transform.Position + Vector3.Down * 2000f;
 
 				var trace = Scene.Trace.Ray( startPosition, endPosition )
-					.Size( 50f )
+					.Size( 3f )
 					.IgnoreGameObjectHierarchy( taxi.Car )
 					.WithoutTags( "player", "trigger", "npc" )
 					.Run();
@@ -115,7 +115,7 @@ public sealed class BusStop : Component
 				endPosition = taxi.Car.Transform.Position + Vector3.Down * 2000f;
 
 				trace = Scene.Trace.Ray( startPosition, endPosition )
-					.Size( 50f )
+					.Size( 3f )
 					.IgnoreGameObjectHierarchy( taxi.Car )
 					.WithoutTags( "player", "trigger", "npc" )
 					.Run();
@@ -124,14 +124,14 @@ public sealed class BusStop : Component
 
 				var front = taxi.Car.Transform.World.PointToWorld( Vector3.Forward * 50f );
 				var frontTrace = Scene.Trace.Ray( front + Vector3.Up * 500f, front + Vector3.Down * 500f )
-					.Size( 25f )
+					.Size( 3f )
 					.IgnoreGameObjectHierarchy( taxi.Car )
 					.WithoutTags( "player", "trigger", "npc" )
 					.Run();
 
 				var back = taxi.Car.Transform.World.PointToWorld( Vector3.Backward * 50f );
 				var backTrace = Scene.Trace.Ray( back + Vector3.Up * 500f, back + Vector3.Down * 500f )
-					.Size( 25f )
+					.Size( 3f )
 					.IgnoreGameObjectHierarchy( taxi.Car )
 					.WithoutTags( "player", "trigger", "npc" )
 					.Run();
