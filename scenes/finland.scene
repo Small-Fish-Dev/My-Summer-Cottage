@@ -1,5 +1,5 @@
 {
-  "__guid": "24ff110f-e2eb-4bcd-84bb-1f00fd19935f",
+  "__guid": "e30fbe3d-65a7-420d-a13b-f32e53ba9c24",
   "GameObjects": [
     {
       "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -4801,7 +4801,7 @@
       "Name": "outer_area",
       "Position": "-6348.808,-9026.849,11772.6",
       "Rotation": "0,0,-0.7071067,0.7071068",
-      "Scale": "2.947095,2.947095,3.401206",
+      "Scale": "2,2,2.3",
       "Enabled": true,
       "NetworkMode": 2,
       "Components": [
@@ -4922,7 +4922,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.7803128,0,0.6253894",
+          "Rotation": "0,0.6164834,0,0.7873679",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -8455,9 +8455,18 @@
               "SoundEvent": "sounds/music/zakkujo-ero_vaimosta-instrumental-loop.sound",
               "SoundOverride": true,
               "StopOnNew": true,
-              "Volume": 0.3
+              "Volume": 0.2
             }
           ]
+        },
+        {
+          "__guid": "01f1b415-731d-4ed1-98d5-c8591605a326",
+          "Name": "supermarket_npc",
+          "Position": "166.5557,-87.02734,-8.157959",
+          "Rotation": "0,0,0.7071067,0.7071068",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/npcs/people/supermarket_npc.prefab"
         }
       ]
     },
@@ -8532,6 +8541,82 @@
           "TriggerPrefab": [],
           "TriggerSignalIdentifier": "lake.reached"
         }
+      ],
+      "Children": [
+        {
+          "__guid": "417e6725-a84b-4663-b0fd-511ff0f008d2",
+          "Name": "Couch",
+          "Position": "229.1858,455.5458,60.62744",
+          "Rotation": "0,0,0.813282,-0.5818699",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "dfa89b33-29af-4ca1-9c47-dbe022d4529b",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "b4a0a714-e7c3-4639-a4ba-3f75e5cd2edc",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "a28ee17c-57d2-4369-9bab-d0d0a4195c92",
+          "Name": "Couch",
+          "Position": "194.4681,467.3887,60.62744",
+          "Rotation": "0,0,0.813282,-0.5818699",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "921433f2-9943-4e8a-9622-55173c0785dd",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "212ba6b6-3a32-49d5-86c2-b9b6fe52e603",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "14.47999,0,0",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "c957da53-3e72-4c25-a48c-7e6fa3b0ac91",
+          "Name": "fishing_chair",
+          "Position": "-517.2288,687.662,-2.465332",
+          "Rotation": "0,0,0.772536,0.6349709",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/objects/fishing_chair.prefab"
+        },
+        {
+          "__guid": "4d013135-b456-4be8-b3cf-b0e57ab7a7be",
+          "Name": "fishing_chair",
+          "Position": "-451.8648,767.099,-2.465332",
+          "Rotation": "0,0,0.9105552,0.4133878",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/objects/fishing_chair.prefab"
+        }
       ]
     },
     {
@@ -8542,24 +8627,6 @@
       "Enabled": true,
       "NetworkMode": 1,
       "__Prefab": "prefabs/items/radio.prefab"
-    },
-    {
-      "__guid": "06739ce9-b331-4052-9a40-195abb7191ea",
-      "Name": "airsoft_rifle",
-      "Position": "3376.884,-3196.975,2447",
-      "Rotation": "-0.01672864,0.03679115,0.4135721,0.9095739",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/items/airsoft_rifle.prefab"
-    },
-    {
-      "__guid": "eeba89af-8acb-4c77-929f-c7a0dc9b078d",
-      "Name": "bbammo",
-      "Position": "3352.544,-3233.682,2445.098",
-      "Rotation": "0.001719078,0.02676922,-0.06406271,0.9975854",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "__Prefab": "prefabs/items/bbammo.prefab"
     },
     {
       "__guid": "649b8ecd-3620-4cc6-8481-98596d295c13",
@@ -8730,9 +8797,75 @@
               "SoundEvent": "sounds/music/dawdle-gus_and_the_ganders_-_surfin_81__loop_game.sound",
               "SoundOverride": true,
               "StopOnNew": true,
-              "Volume": 0.3
+              "Volume": 0.2
             }
           ]
+        },
+        {
+          "__guid": "07b2740c-5d29-4198-af4a-3ff18473f2e1",
+          "Name": "shop_beer_bottle (4)",
+          "Position": "-79.19727,34.14844,30.59009",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "5915f42b-766e-4330-9ba2-5abbfa8168b4",
+          "Name": "shop_beer_bottle (3)",
+          "Position": "-88.79102,-140.1943,30.59009",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "0dd693a1-25f2-491b-966a-86b5c644eb93",
+          "Name": "shop_beer_bottle (2)",
+          "Position": "-84.125,-46.37012,30.59009",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "0c53706b-c576-416e-862f-e0442bb78630",
+          "Name": "shop_beer_bottle (1)",
+          "Position": "-76.95215,-60.06836,30.59009",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "f22e3761-fd9a-40f7-adf7-6b005a1ae6ad",
+          "Name": "shop_beer_bottle",
+          "Position": "-85.29297,-79.7124,30.59009",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_bottle.prefab"
+        },
+        {
+          "__guid": "da5cd1bb-5fb9-4df4-bca7-c1810b86cb3d",
+          "Name": "shop_beer_crate (1)",
+          "Position": "-84.44238,-3.500977,30.59009",
+          "Rotation": "0,0,-0.1305262,0.9914448",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_crate.prefab"
+        },
+        {
+          "__guid": "a24a157d-c9e1-4859-906e-d18e73f15e55",
+          "Name": "shop_beer_crate",
+          "Position": "-81.25488,-105.9717,30.59009",
+          "Rotation": "0,0,-0.1305262,0.9914448",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/shop/shop_beer_crate.prefab"
+        },
+        {
+          "__guid": "bd504752-da5b-4c84-8198-a30dbfa1b4b2",
+          "Name": "bar_npc",
+          "Position": "-110.5107,-24.87988,-6.042236",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/npcs/people/bar_npc.prefab"
         }
       ]
     },
@@ -9026,9 +9159,18 @@
               "SoundEvent": "sounds/music/dawdle-gus_and_the_ganders_-_surfin_81__loop_game.sound",
               "SoundOverride": true,
               "StopOnNew": true,
-              "Volume": 0.2
+              "Volume": 0.1
             }
           ]
+        },
+        {
+          "__guid": "f702093c-2b45-4eff-9c68-ac3af5e050e0",
+          "Name": "hunter_shop_npc",
+          "Position": "40.03809,80.15088,-7.178711",
+          "Rotation": "0,0,0.9914449,-0.1305261",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/npcs/people/hunter_shop_npc.prefab"
         }
       ]
     },
@@ -9538,9 +9680,17 @@
               "SoundEvent": "sounds/music/zakkujo-ero_vaimosta-instrumental-loop.sound",
               "SoundOverride": true,
               "StopOnNew": true,
-              "Volume": 0.3
+              "Volume": 0.2
             }
           ]
+        },
+        {
+          "__guid": "1f92ced7-da36-492c-af64-dbe62645ed7d",
+          "Name": "gas_station_npc",
+          "Position": "-55.57812,-119.1782,0.8325195",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/npcs/people/gas_station_npc.prefab"
         }
       ]
     },
@@ -9648,6 +9798,23 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/god_smiting.prefab"
+        },
+        {
+          "__guid": "afd3729c-7043-4372-916f-a54b7df4be46",
+          "Name": "nigerian_scammer",
+          "Position": "-8466.046,9636.06,2447.678",
+          "Rotation": "-0.0002445196,-0.000007022274,0.6667035,-0.7453231",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/nigerian_scammer.prefab"
+        },
+        {
+          "__guid": "b585e969-ad2b-445e-94ed-9c52b59cdb52",
+          "Name": "whimsical_thing_in_sauna",
+          "Position": "3599.524,-3153.443,2464",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/whimsical_thing_in_sauna.prefab"
         }
       ]
     },
@@ -9752,7 +9919,7 @@
         {
           "__type": "EventAreaTrigger",
           "__guid": "4f6ea60c-3c70-44b9-bbd7-4b561c569e5b",
-          "Extents": "3000,3000,500",
+          "Extents": "3000,3000,598.56",
           "MaxPollingRate": 15,
           "Offset": "0,0,0",
           "TagSet": "player",
@@ -9762,13 +9929,127 @@
       ]
     },
     {
-      "__guid": "afd3729c-7043-4372-916f-a54b7df4be46",
-      "Name": "nigerian_scammer",
-      "Position": "-8466.046,9636.06,2447.678",
-      "Rotation": "-0.0002445196,-0.000007022274,0.6667035,-0.7453231",
+      "__guid": "05df89ca-77ac-43f4-a5cd-7aa1dbc18afc",
+      "Name": "Cottage",
+      "Position": "2910.561,-2203.936,2455.044",
       "Enabled": true,
       "NetworkMode": 2,
-      "__Prefab": "prefabs/events/nigerian_scammer.prefab"
+      "Components": [
+        {
+          "__type": "EventAreaTrigger",
+          "__guid": "e2bee7f4-79fd-4468-ac2f-71e2352335eb",
+          "Extents": "273.6799,514.08,500",
+          "MaxPollingRate": 15,
+          "Offset": "48.96,-43.28,-111.6",
+          "TagSet": "player",
+          "TriggerPrefab": [],
+          "TriggerSignalIdentifier": "cottage.entered"
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "6ec9766f-2304-4a79-900d-c8c9030b1381",
+          "Name": "Couch",
+          "Position": "138.9497,-142.408,23.00244",
+          "Rotation": "0,0,0.7071067,-0.7071068",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "cec421de-7498-42f3-a04e-295067d343be",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "62ed4af5-5c18-4cf2-bbf3-be3c2228355a",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "16,0,0.000004702372",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "2c4c1f1e-ffdf-4073-9c7f-a43f59bb36a0",
+          "Name": "Toilet",
+          "Position": "98.07471,97.71094,21.57788",
+          "Rotation": "0,0,-0.7071067,-0.7071068",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "09614e66-18d9-4775-83ed-e727495af0d8",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "df4c3bec-39fc-4f8c-a0a0-d1145009b845",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "16,0,0.000004702372",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "545cd825-59eb-459e-a62b-f3e167f61463",
+          "Name": "Couch",
+          "Position": "100.3511,-142.4084,23.00244",
+          "Rotation": "0,0,0.7071067,-0.7071068",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "Components": [
+            {
+              "__type": "BoxCollider",
+              "__guid": "3c1b3db1-bfd1-4ad4-ba9b-7fd90ce4f506",
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Scale": "25,25,1",
+              "Static": false
+            },
+            {
+              "__type": "Seat",
+              "__guid": "d0ebf418-28ea-4cce-9c68-3d0e070e2785",
+              "SeatTransform": {
+                "UniformScale": 1,
+                "Position": "16,0,0.000004702372",
+                "Scale": "1,1,1",
+                "Rotation": "0,0,0,1"
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "06739ce9-b331-4052-9a40-195abb7191ea",
+          "Name": "airsoft_rifle",
+          "Position": "-93.59253,-157.3057,37.26196",
+          "Rotation": "-0.01672864,0.03679115,0.4135721,0.9095739",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/items/airsoft_rifle.prefab"
+        },
+        {
+          "__guid": "eeba89af-8acb-4c77-929f-c7a0dc9b078d",
+          "Name": "bbammo",
+          "Position": "-95.60254,-170.3403,34.14526",
+          "Rotation": "0.001719078,0.02676922,-0.06406271,0.9975854",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/items/bbammo.prefab"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -9794,7 +10075,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-16T19:12:36.2013865\u002B00:00",
+  "LastSaved": "2024-03-16T21:00:56.6346718\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

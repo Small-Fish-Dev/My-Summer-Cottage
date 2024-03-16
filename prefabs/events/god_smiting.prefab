@@ -88,9 +88,9 @@
               "Id": 5,
               "Type": "call",
               "Properties": {
-                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                 "_isStatic": true,
-                "_name": "SpeakWithSubtitle"
+                "_name": "SpeakWithSubtitle",
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
               },
               "UserData": {
                 "Position": "304,0"
@@ -226,9 +226,9 @@
               "Id": 18,
               "Type": "call",
               "Properties": {
-                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                 "_isStatic": true,
-                "_name": "PlaySound"
+                "_name": "PlaySound",
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
               },
               "UserData": {
                 "Position": "160,256"
@@ -478,7 +478,20 @@
         "RequiredToFinish": true,
         "TriggerCooldown": 1,
         "TriggerOnce": true,
-        "Triggers": []
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "19035a6c-5915-4707-adae-c0525c4ea721",
+            "go": "5e5af172-731d-4192-9d8f-e9d5cdfabcf0",
+            "component_type": "EventEnabledTrigger"
+          }
+        ]
+      },
+      {
+        "__type": "EventEnabledTrigger",
+        "__guid": "19035a6c-5915-4707-adae-c0525c4ea721",
+        "MaxPollingRate": 5,
+        "TriggerSignalIdentifier": null
       }
     ],
     "Children": [
@@ -488,11 +501,12 @@
         "NetworkMode": 2,
         "Components": [
           {
-            "__type": "Prop",
-            "__guid": "023da193-dc63-44d2-a260-6f459b7479b8",
-            "Health": 0,
-            "IsStatic": false,
-            "Model": "models/lightning_bolt/lightning_bolt.vmdl"
+            "__type": "ModelRenderer",
+            "__guid": "c9c6316b-953a-43a8-834b-807f6a25b4b2",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/lightning_bolt/lightning_bolt.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
           }
         ]
       }
