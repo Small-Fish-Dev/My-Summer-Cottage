@@ -1,0 +1,25 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/saunaworld.shader"
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+	F_TRANSPARENCY 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Material ----
+	Color "materials/wall_writings/bar_toilet/writing_bar_toilet.png"
+	ColorTintMask "[1.000000 1.000000 1.000000 0.000000]"
+	g_flColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	Metalness "materials/default/default_metal.tga"
+	Normal "materials/default/default_normal.tga"
+	Roughness "materials/default/default_rough.tga"
+
+	//---- Transparency ----
+	TransparencyMask "materials/wall_writings/bar_toilet/writing_bar_toilet_opacity.png"
+	TransparencyRounding "0.000"
+}
