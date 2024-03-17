@@ -50,6 +50,20 @@
             "UserData": {
               "Position": "192,32"
             }
+          },
+          {
+            "Id": 3,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "400,240"
+            }
+          },
+          {
+            "Id": 5,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "192,240"
+            }
           }
         ],
         "Links": [
@@ -94,6 +108,34 @@
             "Value": 1,
             "DstId": 2,
             "DstName": "seconds"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 3,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_result",
+            "DstId": 3,
+            "DstName": "target"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 5,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "fishing_rod",
+            "DstId": 5,
+            "DstName": "name"
           }
         ]
       }
@@ -368,9 +410,9 @@
             "Id": 1,
             "Type": "call",
             "Properties": {
+              "_isStatic": false,
               "_name": "CaptureMemory",
-              "_type": "package.fish.sauna/Sauna.Player",
-              "_isStatic": false
+              "_type": "package.fish.sauna/Sauna.Player"
             },
             "UserData": {
               "Position": "448,80"
