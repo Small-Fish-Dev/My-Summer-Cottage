@@ -101,14 +101,14 @@ public partial class RadioComponent : Component
 			_player = MusicPlayer.PlayUrl( Channel.URL );
 			_player.Repeat = true;
 			_player.ListenLocal = false;
-			_player.Volume = 0.05f;
+			_player.Volume = 0.15f;
 		}
 		else
 		{
 			_handle = Sound.Play( Channel.URL );
 			_handle.ListenLocal = false;
-			_handle.Volume = 0.05f;
-			_handle.Decibels = 50;
+			_handle.Volume = 0.15f;
+			_handle.Decibels = 60;
 			_handle.DistanceAttenuation = true;
 			_handle.Occlusion = false;
 		}
@@ -145,5 +145,18 @@ public partial class RadioComponent : Component
 			_player.Position = Transform.Position;
 		else if ( _handle != null )
 			_handle.Position = Transform.Position;
+	}
+
+	protected override void OnFixedUpdate()
+	{
+		var currentTick = (int)(Time.Now / Time.Delta);
+
+		if ( currentTick % 60 <= 1 )
+		{
+			var anyNearby = Player.All.Any( x => x.Transform.Position.Distance( Transform.Position ) <= 2000 );
+
+			if ( !anyNearby )
+				On = false;
+		}
 	}
 }
