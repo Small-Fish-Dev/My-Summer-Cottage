@@ -89,7 +89,7 @@
 				? dirtyLen % width
 				: dirtyLen + width;
 
-			var distOpacity = MathX.Clamp( marker.Position.Distance( Player.Local.Transform.Position ) / 200f - 0.75f, 0, 1 );
+			var distOpacity = MathX.Clamp( marker.Position.Distance( Player.Local.Transform.Position ) / 200f - 0.25f, 0, 1 );
 			var centerOpacity = len > ContainerWidth / 2f
 				? 1 - (len - ContainerWidth / 2f) / ContainerWidth * 2f
 				: len / ContainerWidth * 2;
@@ -106,6 +106,8 @@
 		return HashCode.Combine(
 			// Update every minute
 			GameTimeManager.InGameSeconds / 60,
-			Player.Local?.EyeAngles.yaw, Player.Local?.Transform.Position, _markers?.Count );
+			Player.Local?.EyeAngles.yaw, Player.Local?.Transform.Position, 
+			_markers?.HashCombine(m => HashCode.Combine(m?.GetHashCode())) 
+		);
 	}
 }

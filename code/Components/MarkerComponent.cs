@@ -31,5 +31,6 @@ public sealed class MarkerComponent : Component
 	protected override void OnDestroy()
 	{
 		Marker?.Delete();
+		Marker = null;
 	}
 }
