@@ -55,7 +55,6 @@ public class Speech
 					continue;
 				}
 
-				Game.SetRandomSeed( (byte)character );
 				var index = Game.Random.Int( 1, SOUNDS );
 				var soundFile = SoundFile.Load( $"sounds/speech/{index}.sound" );
 				var sound = settings.GameObject.IsValid()
