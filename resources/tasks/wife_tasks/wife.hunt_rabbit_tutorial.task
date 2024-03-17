@@ -51,6 +51,20 @@
             "UserData": {
               "Position": "192,32"
             }
+          },
+          {
+            "Id": 3,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "320,256"
+            }
+          },
+          {
+            "Id": 4,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "560,240"
+            }
           }
         ],
         "Links": [
@@ -95,6 +109,34 @@
             "Value": 1,
             "DstId": 2,
             "DstName": "seconds"
+          },
+          {
+            "SrcId": 2,
+            "SrcName": "_signal",
+            "DstId": 3,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "airsoft_rifle",
+            "DstId": 3,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_signal",
+            "DstId": 4,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 4,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 3,
+            "SrcName": "_result",
+            "DstId": 4,
+            "DstName": "target"
           }
         ]
       }
