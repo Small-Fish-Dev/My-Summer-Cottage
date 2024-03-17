@@ -221,6 +221,7 @@ public partial class NPC : Component
 	[HostSync] public TimeUntil NextAttack { get; set; }
 
 	public GameObject TargetObject { get; private set; } = null;
+	public Collider Collider { get; private set; }
 
 	public float ForceMultiplier
 	{
@@ -253,6 +254,8 @@ public partial class NPC : Component
 
 		if ( MoveHelper != null )
 			MoveHelper.AirFriction = 100f;
+
+		Collider = Components.Get<Collider>();
 	}
 
 	protected override void OnAwake()
