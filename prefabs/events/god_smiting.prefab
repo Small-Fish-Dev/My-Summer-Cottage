@@ -11,7 +11,7 @@
         "AddToEventPool": true,
         "EventName": "lightning_strike",
         "EventSignals": [],
-        "Rarity": "Rare",
+        "Rarity": "Common",
         "ReinstantiateOnRestart": true,
         "Stackable": true,
         "Type": "Random"
@@ -27,7 +27,6 @@
             "Title": "Event",
             "id": "40975333-8cbe-4e37-875b-45b14b6b42b8",
             "ReferencedComponentTypes": [
-              "package.fish.sauna/Sauna.Player",
               "package.fish.sauna/HealthComponent"
             ]
           },
@@ -37,9 +36,7 @@
               "Id": 0,
               "Type": "input",
               "UserData": {
-                "Labels": {
-                  "triggerer": "my_trigga!"
-                }
+                "Position": "-272,0"
               }
             },
             {
@@ -52,35 +49,9 @@
                 }
               },
               "UserData": {
-                "Position": "-64,-128",
+                "Position": "-128,-176",
                 "Labels": {
                   "_result": "bolt"
-                }
-              }
-            },
-            {
-              "Id": 3,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "package.fish.sauna/Sauna.Player"
-              },
-              "UserData": {
-                "Position": "-64,-192",
-                "Labels": {
-                  "_result": "player"
-                }
-              }
-            },
-            {
-              "Id": 4,
-              "Type": "scene.get",
-              "Properties": {
-                "T": "package.fish.sauna/HealthComponent"
-              },
-              "UserData": {
-                "Position": "-64,-256",
-                "Labels": {
-                  "_result": "ply_health"
                 }
               }
             },
@@ -100,9 +71,9 @@
               "Id": 6,
               "Type": "call",
               "Properties": {
-                "_type": "package.fish.sauna/HealthComponent",
                 "_isStatic": false,
-                "_name": "Damage"
+                "_name": "Damage",
+                "_type": "package.fish.sauna/HealthComponent"
               },
               "UserData": {
                 "Position": "560,0"
@@ -215,8 +186,8 @@
               "Id": 17,
               "Type": "property.set",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameTransform",
-                "_name": "GameObject"
+                "_name": "GameObject",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
               },
               "UserData": {
                 "Position": "256,-304"
@@ -231,25 +202,45 @@
                 "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
               },
               "UserData": {
-                "Position": "160,256"
+                "Position": "352,256"
+              }
+            },
+            {
+              "Id": 19,
+              "Type": "player.getrandom",
+              "UserData": {
+                "Position": "-96,0",
+                "Labels": {
+                  "_result": "player"
+                }
+              }
+            },
+            {
+              "Id": 20,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "-64,208",
+                "Labels": {
+                  "_result": "ply_health"
+                }
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "property.get",
+              "ParentId": 19,
+              "Properties": {
+                "_name": "GameObject",
+                "_type": "Sandbox.Game/Sandbox.Component"
               }
             }
           ],
           "Links": [
             {
-              "SrcId": 0,
-              "SrcName": "triggerer",
-              "DstId": 3,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 3,
-              "SrcName": "_result",
-              "DstId": 4,
-              "DstName": "_this"
-            },
-            {
-              "SrcId": 0,
+              "SrcId": 19,
               "SrcName": "_signal",
               "DstId": 5,
               "DstName": "_signal"
@@ -291,7 +282,7 @@
               "DstName": "_signal"
             },
             {
-              "SrcId": 4,
+              "SrcId": 20,
               "SrcName": "_result",
               "DstId": 6,
               "DstName": "_target"
@@ -435,7 +426,7 @@
               "DstName": "seconds"
             },
             {
-              "SrcId": 0,
+              "SrcId": 19,
               "SrcName": "_signal",
               "DstId": 17,
               "DstName": "_signal"
@@ -447,13 +438,13 @@
               "DstName": "_target"
             },
             {
-              "SrcId": 0,
-              "SrcName": "triggerer",
+              "SrcId": 21,
+              "SrcName": "_result",
               "DstId": 17,
               "DstName": "_value"
             },
             {
-              "SrcId": 0,
+              "SrcId": 19,
               "SrcName": "_signal",
               "DstId": 18,
               "DstName": "_signal"
@@ -472,6 +463,24 @@
               },
               "DstId": 18,
               "DstName": "sound"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 19,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 19,
+              "SrcName": "_result",
+              "DstId": 20,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 19,
+              "SrcName": "_result",
+              "DstId": 21,
+              "DstName": "_target"
             }
           ]
         },
