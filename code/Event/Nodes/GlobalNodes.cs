@@ -101,12 +101,8 @@ public static partial class GlobalNodes
 	{
 		if ( target == null ) return;
 
-		var currentMarker = target.Components.Get<MarkerComponent>();
-
-		if ( currentMarker != null ) return;
-
-		var newMarker = target.Components.Create<MarkerComponent>();
-		newMarker.Icon = icon;
+		var marker = target.Components.GetOrCreate<MarkerComponent>();
+		marker.Icon = icon;
 	}
 
 	/// <summary>
@@ -119,9 +115,7 @@ public static partial class GlobalNodes
 		if ( target == null ) return;
 
 		var currentMarker = target.Components.Get<MarkerComponent>();
-
-		if ( currentMarker != null )
-			currentMarker.Destroy();
+		currentMarker?.Destroy();
 	}
 
 	/// <summary>
