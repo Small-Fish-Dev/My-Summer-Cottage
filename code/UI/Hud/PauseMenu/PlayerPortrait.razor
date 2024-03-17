@@ -3,22 +3,22 @@
 @inherits Panel
 
 <root>
-	@if (Player.Connection.IsHost)
+	@if (IsHost)
 	{
 		<div class="host-title">HOST</div>
 	}
 	<div>
 		<div class="player-info">
 			<div style="flex-direction: column; margin-right: 10px;">
-				<text class="player-name">@Player.Connection.DisplayName</text>
+				<text class="player-name">@DisplayName</text>
 				<text class="player-details">@FormatDetails()</text>
 			</div>
 		</div>
-		<div class="border-img @(Player.Connection.IsHost ? "host" : "")">
-			<img src="avatar:@Player.Connection.SteamId" class="player-img" />
+		<div class="border-img @(IsHost ? "host" : "")">
+			<img src="avatar:@SteamId" class="player-img" />
 		</div>
 	</div>
-	@if (Player.Connection.IsHost)
+	@if (IsHost)
 	{
 		<div class="host-spacer" />
 	}
@@ -26,6 +26,10 @@
 
 @code {
 	public Player Player { get; set; }
+
+	public bool IsHost => Player != Player.Local ? Player.Connection.IsHost : true;
+	public string DisplayName => Player != Player.Local ? Player.Connection.DisplayName : Steam.PersonaName;
+	public ulong SteamId => Player != Player.Local ? Player.Connection.SteamId : Steam.SteamId;
 
 	private string FormatDetails()
 	{
@@ -37,6 +41,6 @@
 		if (Player is null || Player.Connection is null)
 			return -1;
 
-		return HashCode.Combine(Player.Level, Player.Connection.IsHost, Player.Firstname?.GetHashCode());
+		return HashCode.Combine(Player.Level, IsHost, Player.Firstname?.GetHashCode());
 	}
 }

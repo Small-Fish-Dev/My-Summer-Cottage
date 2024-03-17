@@ -5,21 +5,72 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 	public const int MAX_PLAYERS = 4;
 
 	[Property] public GameObject Prefab { get; set; }
+	[HostSync] public static Guid HostId { get; set; }
 
 	protected override void OnStart()
 	{
 		if ( Player.All.Count >= MAX_PLAYERS )
 		{
+			UI.MainMenu.PlayIntro = false;
+			SceneHandler.ChangeScene( SaunaScene.MainMenu );
 			GameNetworkSystem.Disconnect();
 			return;
 		}
-		
+
 		if ( !GameNetworkSystem.IsActive && !IsProxy )
+		{
+			// Spawn host player. 
+			var obj = Prefab.Clone();
+			var player = obj.Components.Get<Player>( FindMode.EverythingInSelfAndDescendants );
+			player.Respawn();
+			obj.NetworkMode = NetworkMode.Object;
+			obj.NetworkSpawn();
+			obj.Name = $"Host Player";
+
+			// Setup host stuff.
+			Player._internalPlayers?.Clear();
+			Player._internalPlayers?.Add( player );
+			Player.Local = player;
+
+			// Start story.
+			StoryMaster.StartSession();
+		}
+	}
+
+	public static void ToggleLobby()
+	{
+		if ( !Connection.Local.IsHost )
+			return;
+
+		// Start lobby.
+		if ( !GameNetworkSystem.IsActive )
+		{
 			GameNetworkSystem.CreateLobby();
+			return;
+		}
+
+		// Close lobby.
+		ServerClose( true );
+		GameNetworkSystem.Disconnect();
+
+		foreach ( var p in Player.All )
+		{
+			if ( p == Player.Local )
+				continue;
+
+			Player._internalPlayers.Remove( p );
+			p.Destroy();
+		}
 	}
 
 	void INetworkListener.OnActive( Connection connection )
 	{
+		if ( connection.IsHost )
+		{
+			HostId = connection.Id;
+			return;
+		}
+
 		if ( Player.All.Count >= MAX_PLAYERS )
 			return;
 
@@ -29,13 +80,13 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		obj.NetworkMode = NetworkMode.Object;
 		obj.NetworkSpawn( connection );
 		player.SetupConnection( connection );
-
-		if ( connection.IsHost && !IsProxy )
-			StoryMaster.StartSession();
 	}
 
 	void INetworkListener.OnDisconnected( Connection connection )
 	{
+		if ( connection.IsHost )
+			ServerClose( true );
+
 		BroadcastDisconnect( connection.Id );
 	}
 
@@ -46,8 +97,11 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 	}
 
 	[Broadcast( NetPermission.HostOnly )]
-	public void ServerClose()
+	public static void ServerClose( bool ignoreHost )
 	{
+		if ( ignoreHost && Connection.Local.Id == HostId )
+			return;
+
 		GameNetworkSystem.Disconnect();
 		UI.MainMenu.PlayIntro = false;
 		SceneHandler.ChangeScene( SaunaScene.MainMenu );
@@ -56,6 +110,6 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 	void INetworkListener.OnBecameHost( Connection previousHost )
 	{
 		// Broadcast for everyone to leave!
-		ServerClose();
+		ServerClose( false );
 	}
 }

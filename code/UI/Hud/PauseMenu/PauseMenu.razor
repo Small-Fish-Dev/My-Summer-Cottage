@@ -56,9 +56,23 @@
 					<PlayerPortrait Player=@player />
 				}
 
-				if ( players.Count() < NetworkManager.MAX_PLAYERS )
+				/*if ( players.Count() < NetworkManager.MAX_PLAYERS )
 				{
 					<div class="invite">+</div>
+				}*/
+
+				if ( Connection.Local.IsHost )
+				{
+					<div class="host-spacer" />
+					<div class="host-info">
+						<div class="text-container">
+							<div>@_lobbyHeader</div>
+							<div class="sub">@_lobbySub</div>
+						</div>
+						<div class="button" @onclick=@NetworkManager.ToggleLobby >
+							<img class="image" src=@_lobbyIcon />
+						</div>
+					</div>
 				}
 			}
 		</div>
@@ -76,8 +90,12 @@
 </root>
 
 @code {
+	private string _lobbyHeader => $"{(GameNetworkSystem.IsActive ? "Public" : "Private")} Lobby";
+	private string _lobbySub => $"Click to make {(GameNetworkSystem.IsActive ? "private" : "public")}";
+	private string _lobbyIcon => GameNetworkSystem.IsActive ? "ui/hud/lobby-public.png" : "ui/hud/lobby-closed.png";
+
 	protected override int BuildHash()
 	{
-		return HashCode.Combine(Player.All.HashCombine((p) => p.ConnectionID.GetHashCode()));
+		return HashCode.Combine(GameNetworkSystem.IsActive, Player.All.HashCombine((p) => p.ConnectionID.GetHashCode()));
 	}
 }

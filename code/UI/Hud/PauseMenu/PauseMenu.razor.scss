@@ -36,6 +36,66 @@ PauseMenu {
         width: 715px;
     }
 
+    .host-spacer {
+        align-self: flex-end;
+        margin-top: 10px;
+        height: 1px;
+        width: 75px;
+        background-image: radial-gradient(rgba(255,255,255,1) 0%, rgba(255, 255, 255, 0) 65%);
+    }
+
+    .host-info {
+        flex-direction: row;
+        gap: 20px;
+
+        .text-container {
+            font-family: HabboExtended;
+            text-shadow: $text-shadow-sm;
+            font-size: 18px;
+            color: white;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 5px;
+
+            .sub {
+                color: darken(white, 0.25);
+            }
+        }
+
+        .button {
+            pointer-events: all;
+            height: 75px;
+            width: 75px;
+            padding: 18px;
+            background-color: darken(white, 0.93);
+            box-shadow: $box-shadow-sm;
+            opacity: 0.8;
+
+            .image {
+                width: 100%;
+                height: 100%;
+                background-size: cover;
+                image-rendering: pixelated;
+                background-image-tint: darken(white, 0.25);
+            }
+
+            &:active {
+                sound-in: 'light_click';
+            }
+
+            &:hover {
+                opacity: 1;
+                cursor: pointer;
+                sound-in: 'hover';
+
+                .image {
+                    background-image-tint: white;
+                }
+            }
+        }
+    }
+
     .invite {
         height: 75px;
         width: 75px;

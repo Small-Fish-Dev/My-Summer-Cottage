@@ -5,7 +5,7 @@ partial class Player
 	public static IReadOnlyList<Player> All => _internalPlayers;
 	public static List<Player> _internalPlayers = new List<Player>();
 
-	public static Player Local { get; private set; }
+	public static Player Local { get; set; }
 
 	private Guid _guid;
 
@@ -19,11 +19,7 @@ partial class Player
 			Connection = Connection.Find( _guid );
 			
 			if ( _guid == Connection.Local.Id )
-			{
 				Local = this;
-				if ( Connection.Local.IsHost )
-					Player._internalPlayers.Clear(); 
-			}
 
 			if ( !_internalPlayers.Contains( this ) )
 				_internalPlayers.Add( this );
