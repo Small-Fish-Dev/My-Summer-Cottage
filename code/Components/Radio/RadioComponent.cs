@@ -1,4 +1,4 @@
-﻿namespace Sauna;
+namespace Sauna;
 
 public partial class RadioComponent : Component
 {
@@ -136,7 +136,7 @@ public partial class RadioComponent : Component
 
 	protected override void OnDisabled()
 	{
-		StopMusic();
+		On = false;
 	}
 
 	protected override void OnUpdate()
