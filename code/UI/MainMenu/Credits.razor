@@ -10,7 +10,9 @@
 		OnClick=@( () => { Screen = MainMenuHud.MenuScreen.MainMenu; } )
 		style="position: absolute; top: 50px;"/>
 
-	<div class="sweet-memories"></div>
+	<div class="sweet-memories">
+		<img src=@(_currentArt) style="opacity: @_imageOpacity"/>
+	</div>
 
 	<div class="credits" ondrag="@( () => StopScrolling() )" onclick="@( () => StopScrolling() )" @ref=" _creditsPanel">
 		<div class="padding"></div>
@@ -47,7 +49,7 @@
 			<div class="role">Systems Programmer, Gameplay Programmer, UI Programmer, Shaders, Sound Design</div>
 		</div>
 		<div class="row">
-			<div class="name">rndtrash</div>
+			<div class="name">rndtrash (Shlako)</div>
 			<div class="role">System Programmer, NokLa Sounds, UI Programmer</div>
 		</div>
 		<div class="row">
@@ -102,10 +104,53 @@
 
 	public const float ScrollDelay = 2;
 
+	public const float PictureDelay = 5;
+	public const float PictureFade = 1;
+
 	public MainMenuHud.MenuScreen Screen { get; set; }
 
 	private TimeUntil _canScroll;
 	private Panel _creditsPanel;
+
+	private static readonly List<string> Pictures = new()
+	{
+		"ui/credits/ceitine.png",
+		"ui/credits/cyber.png",
+		"ui/credits/gio.png",
+		"ui/credits/grodbert.png",
+		"ui/credits/luke.png",
+		"ui/credits/matek.png",
+		"ui/credits/shlako.png",
+		"ui/credits/ubre.png",
+		"ui/credits/wheatley.png"
+	};
+
+	private string _currentArt;
+
+	private int CurrentArtIndex
+	{
+		get
+		{
+			return _currentArtIndex;
+		}
+
+		set
+		{
+			_currentArtIndex = value % Pictures.Count;
+			_currentArt = Pictures[_currentArtIndex];
+			_timeSincePicture = 0;
+			_imageOpacity = 1;
+		}
+	}
+
+	private int _currentArtIndex;
+	private float _imageOpacity = 0;
+	private TimeSince _timeSincePicture = 0;
+
+	public Credits()
+	{
+		CurrentArtIndex = 0;
+	}
 
 	private void StopScrolling()
 	{
@@ -125,6 +170,16 @@
 			// _creditsPanel.ScrollOffset = _creditsPanel.ScrollOffset.WithY( _creditsPanel.Box.RectInner.Height );
 			_creditsPanel.ScrollVelocity = Vector2.Down * _creditsPanel.ScrollSize.y * 100;
 		}
+
+		if ( _timeSincePicture >= PictureDelay )
+		{
+			if ( _timeSincePicture >= PictureDelay + PictureFade )
+				_imageOpacity = 0;
+			else
+				CurrentArtIndex++;
+		}
 	}
+
+	protected override int BuildHash() => HashCode.Combine( _currentArt, _imageOpacity );
 
 }
