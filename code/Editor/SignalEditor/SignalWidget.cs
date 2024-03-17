@@ -253,7 +253,8 @@ internal class SignalWidget : ControlWidget
 						{
 							foreach ( var interaction in interactions )
 							{
-								options.Add( GetSignalOption( interaction["Identifier"].ToString(), component.Type.ToString(), prefab.Value.Name, "Interactions" ) );
+								if ( interaction != null && interaction["Identifier"] != null && component.Type != null && prefab.Value != null )
+									options.Add( GetSignalOption( interaction["Identifier"].ToString(), component.Type.ToString(), prefab.Value.Name, "Interactions" ) );
 							}
 						}
 
@@ -314,8 +315,11 @@ internal class SignalWidget : ControlWidget
 
 		menu.AddOptions( items, GetPath, x =>
 		{
-			SerializedProperty.SetValue( new Signal( x.Identifier ) );
-			SignalValuesChanged();
+			if ( x != null && x.Identifier != null )
+			{
+				SerializedProperty.SetValue( new Signal( x.Identifier ) );
+				SignalValuesChanged();
+			}
 		}, flat: useFilter );
 
 		if ( truncated > 0 )

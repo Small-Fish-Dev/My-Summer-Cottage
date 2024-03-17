@@ -1,0 +1,384 @@
+{
+  "RootObject": {
+    "__guid": "9216afec-3df1-4e22-9233-69d1d645887b",
+    "Name": "glowie",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "a58559ec-47c8-4957-8eaf-cc513cd75d2e",
+        "AddToEventPool": true,
+        "EventName": "glowie",
+        "EventSignals": [],
+        "Rarity": "None",
+        "ReinstantiateOnRestart": false,
+        "Stackable": true,
+        "Type": "Random"
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "a38e2d46-765b-4716-9c18-39e2d460fa74",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "30c82bc2-7e05-4d19-bc3a-ed9a93b7cbe4",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 2,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "e5bc5d69-acbb-4812-ba88-9e0d5a016c74"
+                }
+              },
+              "UserData": {
+                "Position": "16,-336"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "event.interpolateposition",
+              "UserData": {
+                "Position": "464,-144"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "property.get",
+              "ParentId": 2,
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "property.get",
+              "ParentId": 4,
+              "Properties": {
+                "_name": "Rotation",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              },
+              "UserData": {
+                "Visible": false
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "property.get",
+              "ParentId": 4,
+              "Properties": {
+                "_name": "World",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "property.get",
+              "ParentId": 4,
+              "Properties": {
+                "_name": "Local",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "property.get",
+              "ParentId": 10,
+              "Properties": {
+                "_name": "Rotation",
+                "_type": "Sandbox.System/Transform"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "property.get",
+              "ParentId": 10,
+              "Properties": {
+                "_name": "Scale",
+                "_type": "Sandbox.System/Transform"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "property.get",
+              "ParentId": 10,
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.System/Transform"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "glowie_pos"
+                }
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_name": "WithZ",
+                "_type": "Sandbox.System/Vector3"
+              },
+              "UserData": {
+                "Position": "320,80"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "property.get",
+              "Properties": {
+                "_name": "z",
+                "_type": "Sandbox.System/Vector3"
+              },
+              "UserData": {
+                "Position": "112,224"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "op.add",
+              "UserData": {
+                "Position": "288,256"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "event.finished",
+              "UserData": {
+                "Position": "816,-128"
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "a38e2d46-765b-4716-9c18-39e2d460fa74",
+                  "go": "9216afec-3df1-4e22-9233-69d1d645887b",
+                  "component_type": "EventComponent"
+                }
+              },
+              "UserData": {
+                "Position": "544,32"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 10,
+              "DstId": 3,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 3,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 5,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "z"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 15,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 15,
+              "SrcName": "_result",
+              "DstId": 16,
+              "DstName": "a"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "System.Private.CoreLib/System.Single",
+                "Value": 1000
+              },
+              "DstId": 16,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 17,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "component"
+            }
+          ]
+        },
+        "RequiredToFinish": true,
+        "TriggerCooldown": 1,
+        "TriggerOnce": true,
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "1b91f75c-d93b-460d-87bc-f81275f3e47d",
+            "go": "c0de9718-fd21-48a6-9fa8-1a11a1860743",
+            "component_type": "EventAreaTrigger"
+          }
+        ]
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "e5bc5d69-acbb-4812-ba88-9e0d5a016c74",
+        "Name": "glowie_model",
+        "Position": "0,-16,-24",
+        "Rotation": "0,0,-0.8871192,0.4615405",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "4137db26-4f5f-4f5d-9ef5-addffe2841da",
+            "BodyGroups": 1365,
+            "CreateBoneObjects": false,
+            "MaterialOverride": "models/lightning_bolt/lightning_bolt.vmat",
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "__guid": "c0de9718-fd21-48a6-9fa8-1a11a1860743",
+        "Name": "glowie_trigger",
+        "Position": "-32,-40,0",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "EventAreaTrigger",
+            "__guid": "1b91f75c-d93b-460d-87bc-f81275f3e47d",
+            "Extents": "1400,1400,1000",
+            "MaxPollingRate": 5,
+            "Offset": "0,0,0",
+            "TagSet": "player",
+            "TriggerPrefab": [],
+            "TriggerSignalIdentifier": null
+          }
+        ]
+      },
+      {
+        "__guid": "e7b1d890-2aa6-49a1-9d87-49087f564103",
+        "Name": "escape_event",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "EventComponent",
+            "__guid": "5d0fa01e-cd29-4049-a23f-f56c3e48dcb9",
+            "DisabledWhilePlaying": [],
+            "DisableOnTrigger": [],
+            "RequiredToFinish": true,
+            "TriggerCooldown": 1,
+            "TriggerOnce": true,
+            "Triggers": []
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

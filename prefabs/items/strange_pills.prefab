@@ -1,0 +1,161 @@
+{
+  "RootObject": {
+    "__guid": "c75ef642-4b52-4211-9e48-3ee55be5cfdb",
+    "Name": "strange_pills",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ItemEquipment",
+        "__guid": "1da1abf9-3490-46ce-a58e-aeada5b54124",
+        "Attachment": "hand_R",
+        "AttachmentTransform": {
+          "UniformScale": 1,
+          "Position": "1.27236,-2.123796,0.02152692",
+          "Scale": "1,1,1",
+          "Rotation": "-0.7194486,-0.0351869,0.03388481,0.6928256"
+        },
+        "Count": 0,
+        "Description": "These pills make me feel so funny and weird, what the deal with them?",
+        "HideBodygroups": "None",
+        "HoldType": "Item",
+        "Icon": {
+          "Model": "models/pill_bottle/pill_bottle.vmdl",
+          "MaterialGroup": "alt",
+          "Colour": "1,1,1,1",
+          "Position": "-3.15,1.35,0.3",
+          "Rotation": "0.2511626,0.005590033,0.02153749,0.9676891",
+          "Guid": "d9b7a004-93ec-4e47-b750-fff9fd24bdb9"
+        },
+        "MaxStack": 0,
+        "Name": "Strange Pills",
+        "SellPrice": -1,
+        "Slot": "Hand",
+        "UpdatePosition": true,
+        "UseSkinTint": false,
+        "WeightInGrams": 30
+      },
+      {
+        "__type": "Interactions",
+        "__guid": "02d00be6-8f0e-4c80-ba41-5e1889fe01c2",
+        "HideOnEmpty": false,
+        "ObjectInteractions": [
+          {
+            "Keybind": "Mouse1",
+            "Description": "Swallow",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "d726a813-5ad2-47e7-beb1-d022a11aa1a8",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 1,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_type": "Sandbox.Game/Sandbox.GameObject",
+                    "_name": "Destroy"
+                  },
+                  "UserData": {
+                    "Position": "224,-16"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_name": "AddExperience"
+                  },
+                  "UserData": {
+                    "Position": "224,64"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 1,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "obj",
+                  "DstId": 1,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 2,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 2,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": 100,
+                  "DstId": 2,
+                  "DstName": "exp"
+                }
+              ]
+            },
+            "InteractDistance": 75,
+            "Accessibility": "All",
+            "CooldownTime": 0.5,
+            "Animation": "Interact"
+          }
+        ]
+      },
+      {
+        "__type": "ModelRenderer",
+        "__guid": "8aba7308-5b51-4581-be42-7de952ab57a4",
+        "BodyGroups": 18446744073709551615,
+        "MaterialGroup": "alt",
+        "Model": "models/pill_bottle/pill_bottle.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "BoxCollider",
+        "__guid": "f546ee2d-bb5f-40b5-874e-bb32dba44ee6",
+        "Center": "0,0,2.56",
+        "IsTrigger": false,
+        "Scale": "2.799948,2.31993,5.119988",
+        "Static": false
+      },
+      {
+        "__type": "Rigidbody",
+        "__guid": "776d0721-c300-4e39-8817-3d2c728b35b3",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {},
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      }
+    ],
+    "Children": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

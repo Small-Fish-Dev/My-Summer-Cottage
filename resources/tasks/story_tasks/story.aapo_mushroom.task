@@ -197,7 +197,7 @@
     {
       "Description": "Pick 5 mushrooms.",
       "SubtaskOrder": 1,
-      "TriggerSignal": "lake.reached",
+      "TriggerSignal": "",
       "AmountToComplete": 5,
       "EvaluateOnTick": {
         "Version": 5,
@@ -214,57 +214,242 @@
             "Id": 0,
             "Type": "input",
             "UserData": {
-              "Position": "-48,64"
+              "Position": "-128,-96"
             }
           },
           {
-            "Id": 1,
+            "Id": 4,
             "Type": "output",
             "UserData": {
-              "Position": "560,96"
+              "Position": "1280,-272"
             }
           },
           {
-            "Id": 2,
+            "Id": 5,
             "Type": "scene.get",
             "Properties": {
               "T": "package.fish.sauna/Sauna.Inventory"
             },
             "UserData": {
-              "Position": "112,128"
+              "Position": "160,-112"
             }
           },
           {
-            "Id": 4,
-            "Type": "inventory.amountofitemwithtag",
+            "Id": 6,
+            "Type": "inventory.amountofitem",
             "UserData": {
-              "Position": "336,176"
+              "Position": "480,-528"
+            }
+          },
+          {
+            "Id": 7,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "480,-448"
+            }
+          },
+          {
+            "Id": 8,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "480,-352"
+            }
+          },
+          {
+            "Id": 9,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "480,-272"
+            }
+          },
+          {
+            "Id": 10,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "480,-176"
+            }
+          },
+          {
+            "Id": 11,
+            "Type": "inventory.amountofitem",
+            "UserData": {
+              "Position": "480,-96"
+            }
+          },
+          {
+            "Id": 16,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "704,-480"
+            }
+          },
+          {
+            "Id": 17,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "704,-304"
+            }
+          },
+          {
+            "Id": 18,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "704,-128"
+            }
+          },
+          {
+            "Id": 21,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "896,-384"
+            }
+          },
+          {
+            "Id": 23,
+            "Type": "op.add",
+            "UserData": {
+              "Position": "1056,-192"
             }
           }
         ],
         "Links": [
           {
-            "SrcId": 4,
+            "SrcId": 23,
             "SrcName": "_result",
-            "DstId": 1,
+            "DstId": 4,
             "DstName": "_result"
           },
           {
             "SrcId": 0,
             "SrcName": "player",
-            "DstId": 2,
+            "DstId": 5,
             "DstName": "_this"
           },
           {
-            "SrcId": 2,
+            "SrcId": 5,
             "SrcName": "_result",
-            "DstId": 4,
+            "DstId": 6,
             "DstName": "inventory"
           },
           {
-            "Value": "mushroom",
-            "DstId": 4,
-            "DstName": "tag"
+            "Value": "Chanterelle Mushroom",
+            "DstId": 6,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_result",
+            "DstId": 7,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Deformed Chanterelle Mushroom",
+            "DstId": 7,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_result",
+            "DstId": 8,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Normal Mushroom",
+            "DstId": 8,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_result",
+            "DstId": 9,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Deformedl Mushroom",
+            "DstId": 9,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_result",
+            "DstId": 10,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Wide Mushroom",
+            "DstId": 10,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 5,
+            "SrcName": "_result",
+            "DstId": 11,
+            "DstName": "inventory"
+          },
+          {
+            "Value": "Deformed Wide Mushroom",
+            "DstId": 11,
+            "DstName": "nameOfItem"
+          },
+          {
+            "SrcId": 6,
+            "SrcName": "_result",
+            "DstId": 16,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 7,
+            "SrcName": "_result",
+            "DstId": 16,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 8,
+            "SrcName": "_result",
+            "DstId": 17,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 9,
+            "SrcName": "_result",
+            "DstId": 17,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 10,
+            "SrcName": "_result",
+            "DstId": 18,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 11,
+            "SrcName": "_result",
+            "DstId": 18,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 16,
+            "SrcName": "_result",
+            "DstId": 21,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 17,
+            "SrcName": "_result",
+            "DstId": 21,
+            "DstName": "b"
+          },
+          {
+            "SrcId": 21,
+            "SrcName": "_result",
+            "DstId": 23,
+            "DstName": "a"
+          },
+          {
+            "SrcId": 18,
+            "SrcName": "_result",
+            "DstId": 23,
+            "DstName": "b"
           }
         ]
       },
@@ -625,9 +810,9 @@
             "Id": 3,
             "Type": "call",
             "Properties": {
+              "_type": "package.fish.sauna/Sauna.Player",
               "_isStatic": false,
-              "_name": "CaptureMemory",
-              "_type": "package.fish.sauna/Sauna.Player"
+              "_name": "CaptureMemory"
             },
             "UserData": {
               "Position": "464,240"

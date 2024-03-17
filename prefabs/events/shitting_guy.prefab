@@ -1,0 +1,872 @@
+{
+  "RootObject": {
+    "__guid": "3bcbeac4-876e-4272-8f90-509f0a15199a",
+    "Name": "traffic_jam",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "89381ccd-17fc-4fb6-8c81-b664ace79ec1",
+        "AddToEventPool": true,
+        "EventName": "traffic_jam",
+        "EventSignals": [],
+        "Rarity": "Common",
+        "ReinstantiateOnRestart": false,
+        "Stackable": true,
+        "Type": "Random"
+      },
+      {
+        "__type": "EventEnabledTrigger",
+        "__guid": "13a2cdf4-3da7-48aa-9aac-fef944d090a9",
+        "MaxPollingRate": 5,
+        "TriggerSignalIdentifier": null
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "a2221673-1371-4eb7-bee2-ffaf7cc0f970",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "11e35e59-6efe-48b4-a6b1-b900c9e4e712",
+            "ReferencedComponentTypes": [
+              "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 9,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "48c1567b-13a8-40cb-87c4-b3f2ff8832b8"
+                }
+              },
+              "UserData": {
+                "Position": "-352,192"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              },
+              "UserData": {
+                "Position": "-64,256"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_name": "Set",
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer"
+              },
+              "UserData": {
+                "Position": "384,192"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 10,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "_target"
+            },
+            {
+              "Value": "sitting",
+              "DstId": 12,
+              "DstName": "v"
+            },
+            {
+              "Value": true,
+              "DstId": 12,
+              "DstName": "value"
+            }
+          ]
+        },
+        "RequiredToFinish": true,
+        "TriggerCooldown": 1,
+        "TriggerOnce": true,
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "13a2cdf4-3da7-48aa-9aac-fef944d090a9",
+            "go": "3bcbeac4-876e-4272-8f90-509f0a15199a",
+            "component_type": "EventEnabledTrigger"
+          }
+        ]
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "df07be5c-c5cc-4348-8713-2de329b2a436",
+        "Name": "toilet",
+        "Position": "84.00977,19.85468,0",
+        "Rotation": "0,0,0.7071067,0.7071068",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__guid": "ab8bd67f-b176-4044-807e-29faecb63c40",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/props/toilet/toilet.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ],
+        "Children": [
+          {
+            "__guid": "48c1567b-13a8-40cb-87c4-b3f2ff8832b8",
+            "Name": "shitting_guy",
+            "Position": "11.72003,0.000002095705,19.65845",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "Components": [
+              {
+                "__type": "SkinnedModelRenderer",
+                "__guid": "591bf4c1-3f74-49d0-b2b5-18f84b7e5a95",
+                "AnimationGraph": "models/guy/guy.vanmgrph",
+                "BodyGroups": 1109,
+                "CreateBoneObjects": false,
+                "Model": "models/guy/guy.vmdl",
+                "RenderType": "On",
+                "Tint": "0.28372,0.24985,0.22566,1"
+              },
+              {
+                "__type": "ModelCollider",
+                "__guid": "75892692-4fa4-4e2f-b97a-419bda952396",
+                "IsTrigger": false,
+                "Model": "models/guy/guy.vmdl",
+                "Static": false
+              },
+              {
+                "__type": "DialogueTree",
+                "__guid": "2ac2445d-a1cc-4e84-9c87-efc9ee77958f",
+                "SecondsBetweenStages": 2,
+                "DialogueStages": [
+                  {
+                    "IsInitial": true,
+                    "AddToDialoguePool": true,
+                    "DialoguePoolWeight": 1,
+                    "AvailableResponses": [
+                      {
+                        "Keybind": "Use",
+                        "Description": "talk",
+                        "Action": {
+                          "Version": 5,
+                          "UserData": {
+                            "Title": "Action",
+                            "id": "2f64091f-3304-4e3d-b52c-2e2ff6386f85",
+                            "ReferencedComponentTypes": [
+                              "package.fish.sauna/Sauna.DialogueTree"
+                            ]
+                          },
+                          "Variables": [],
+                          "Nodes": [
+                            {
+                              "Id": 0,
+                              "Type": "input"
+                            },
+                            {
+                              "Id": 1,
+                              "Type": "call",
+                              "Properties": {
+                                "_isStatic": true,
+                                "_name": "SpeakWithSubtitle",
+                                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                              },
+                              "UserData": {
+                                "Position": "368,48"
+                              }
+                            },
+                            {
+                              "Id": 2,
+                              "Type": "scene.get",
+                              "Properties": {
+                                "T": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "-64,160"
+                              }
+                            },
+                            {
+                              "Id": 3,
+                              "Type": "property.get",
+                              "Properties": {
+                                "_name": "Name",
+                                "_type": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "144,176"
+                              }
+                            },
+                            {
+                              "Id": 4,
+                              "Type": "call",
+                              "Properties": {
+                                "_isStatic": false,
+                                "_name": "SelectRandomDialogue",
+                                "_type": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "592,64"
+                              }
+                            }
+                          ],
+                          "Links": [
+                            {
+                              "SrcId": 0,
+                              "SrcName": "_signal",
+                              "DstId": 1,
+                              "DstName": "_signal"
+                            },
+                            {
+                              "SrcId": 3,
+                              "SrcName": "_result",
+                              "DstId": 1,
+                              "DstName": "name"
+                            },
+                            {
+                              "SrcId": 0,
+                              "SrcName": "_target",
+                              "DstId": 1,
+                              "DstName": "obj"
+                            },
+                            {
+                              "Value": "Man... That gas station food isn\u0027t sitting right with me...",
+                              "DstId": 1,
+                              "DstName": "subtitle"
+                            },
+                            {
+                              "SrcId": 0,
+                              "SrcName": "_target",
+                              "DstId": 2,
+                              "DstName": "_this"
+                            },
+                            {
+                              "SrcId": 2,
+                              "SrcName": "_result",
+                              "DstId": 3,
+                              "DstName": "_target"
+                            },
+                            {
+                              "SrcId": 1,
+                              "SrcName": "_signal",
+                              "DstId": 4,
+                              "DstName": "_signal"
+                            },
+                            {
+                              "SrcId": 2,
+                              "SrcName": "_result",
+                              "DstId": 4,
+                              "DstName": "_target"
+                            }
+                          ]
+                        },
+                        "InteractDistance": 125,
+                        "DynamicColor": null,
+                        "Disabled": null
+                      }
+                    ]
+                  },
+                  {
+                    "IsInitial": true,
+                    "AddToDialoguePool": true,
+                    "DialoguePoolWeight": 1,
+                    "AvailableResponses": [
+                      {
+                        "Keybind": "Use",
+                        "Description": "Talk",
+                        "Action": {
+                          "Version": 5,
+                          "UserData": {
+                            "Title": "Action",
+                            "id": "7d352870-764a-4354-8c50-95c8a9c5f774",
+                            "ReferencedComponentTypes": [
+                              "package.fish.sauna/Sauna.DialogueTree"
+                            ]
+                          },
+                          "Variables": [],
+                          "Nodes": [
+                            {
+                              "Id": 1,
+                              "Type": "input",
+                              "UserData": {
+                                "Position": "-112,128"
+                              }
+                            },
+                            {
+                              "Id": 2,
+                              "Type": "call",
+                              "Properties": {
+                                "_isStatic": true,
+                                "_name": "SpeakWithSubtitle",
+                                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                              },
+                              "UserData": {
+                                "Position": "304,160"
+                              }
+                            },
+                            {
+                              "Id": 3,
+                              "Type": "scene.get",
+                              "Properties": {
+                                "T": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "-160,288"
+                              }
+                            },
+                            {
+                              "Id": 4,
+                              "Type": "property.get",
+                              "Properties": {
+                                "_name": "Name",
+                                "_type": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "64,320"
+                              }
+                            },
+                            {
+                              "Id": 5,
+                              "Type": "call",
+                              "Properties": {
+                                "_isStatic": false,
+                                "_name": "SelectRandomDialogue",
+                                "_type": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "544,160"
+                              }
+                            }
+                          ],
+                          "Links": [
+                            {
+                              "SrcId": 1,
+                              "SrcName": "_signal",
+                              "DstId": 2,
+                              "DstName": "_signal"
+                            },
+                            {
+                              "SrcId": 4,
+                              "SrcName": "_result",
+                              "DstId": 2,
+                              "DstName": "name"
+                            },
+                            {
+                              "SrcId": 1,
+                              "SrcName": "_target",
+                              "DstId": 2,
+                              "DstName": "obj"
+                            },
+                            {
+                              "Value": "Sorry this toilet will be occupied for a while....",
+                              "DstId": 2,
+                              "DstName": "subtitle"
+                            },
+                            {
+                              "SrcId": 1,
+                              "SrcName": "_target",
+                              "DstId": 3,
+                              "DstName": "_this"
+                            },
+                            {
+                              "SrcId": 3,
+                              "SrcName": "_result",
+                              "DstId": 4,
+                              "DstName": "_target"
+                            },
+                            {
+                              "SrcId": 2,
+                              "SrcName": "_signal",
+                              "DstId": 5,
+                              "DstName": "_signal"
+                            },
+                            {
+                              "SrcId": 3,
+                              "SrcName": "_result",
+                              "DstId": 5,
+                              "DstName": "_target"
+                            }
+                          ]
+                        },
+                        "InteractDistance": 125
+                      }
+                    ]
+                  },
+                  {
+                    "IsInitial": true,
+                    "AddToDialoguePool": true,
+                    "DialoguePoolWeight": 1,
+                    "AvailableResponses": [
+                      {
+                        "Keybind": "Use",
+                        "Description": "Talk",
+                        "Action": {
+                          "Version": 5,
+                          "UserData": {
+                            "Title": "Action",
+                            "id": "f48eefa9-e29e-45b1-abc9-acc530829165",
+                            "ReferencedComponentTypes": [
+                              "package.fish.sauna/Sauna.DialogueTree"
+                            ]
+                          },
+                          "Variables": [],
+                          "Nodes": [
+                            {
+                              "Id": 1,
+                              "Type": "input",
+                              "UserData": {
+                                "Position": "-192,80"
+                              }
+                            },
+                            {
+                              "Id": 2,
+                              "Type": "call",
+                              "Properties": {
+                                "_isStatic": true,
+                                "_name": "SpeakWithSubtitle",
+                                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                              },
+                              "UserData": {
+                                "Position": "224,112"
+                              }
+                            },
+                            {
+                              "Id": 3,
+                              "Type": "scene.get",
+                              "Properties": {
+                                "T": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "-256,240"
+                              }
+                            },
+                            {
+                              "Id": 4,
+                              "Type": "property.get",
+                              "Properties": {
+                                "_name": "Name",
+                                "_type": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "-32,272"
+                              }
+                            },
+                            {
+                              "Id": 5,
+                              "Type": "call",
+                              "Properties": {
+                                "_isStatic": false,
+                                "_name": "SelectRandomDialogue",
+                                "_type": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "448,112"
+                              }
+                            }
+                          ],
+                          "Links": [
+                            {
+                              "SrcId": 1,
+                              "SrcName": "_signal",
+                              "DstId": 2,
+                              "DstName": "_signal"
+                            },
+                            {
+                              "SrcId": 4,
+                              "SrcName": "_result",
+                              "DstId": 2,
+                              "DstName": "name"
+                            },
+                            {
+                              "SrcId": 1,
+                              "SrcName": "_target",
+                              "DstId": 2,
+                              "DstName": "obj"
+                            },
+                            {
+                              "Value": "Buddy... Cant you see there is already a queue for this toilet, get in line!",
+                              "DstId": 2,
+                              "DstName": "subtitle"
+                            },
+                            {
+                              "SrcId": 1,
+                              "SrcName": "_target",
+                              "DstId": 3,
+                              "DstName": "_this"
+                            },
+                            {
+                              "SrcId": 3,
+                              "SrcName": "_result",
+                              "DstId": 4,
+                              "DstName": "_target"
+                            },
+                            {
+                              "SrcId": 2,
+                              "SrcName": "_signal",
+                              "DstId": 5,
+                              "DstName": "_signal"
+                            },
+                            {
+                              "SrcId": 3,
+                              "SrcName": "_result",
+                              "DstId": 5,
+                              "DstName": "_target"
+                            }
+                          ]
+                        },
+                        "InteractDistance": 125
+                      }
+                    ]
+                  },
+                  {
+                    "IsInitial": true,
+                    "AddToDialoguePool": true,
+                    "DialoguePoolWeight": 1,
+                    "AvailableResponses": [
+                      {
+                        "Keybind": "Use",
+                        "Description": "Talk",
+                        "Action": {
+                          "Version": 5,
+                          "UserData": {
+                            "Title": "Action",
+                            "id": "10066972-bc59-4b55-a6a7-f4514dcf6fea",
+                            "ReferencedComponentTypes": [
+                              "package.fish.sauna/Sauna.DialogueTree"
+                            ]
+                          },
+                          "Variables": [],
+                          "Nodes": [
+                            {
+                              "Id": 1,
+                              "Type": "input",
+                              "UserData": {
+                                "Position": "-160,-0"
+                              }
+                            },
+                            {
+                              "Id": 2,
+                              "Type": "call",
+                              "Properties": {
+                                "_isStatic": true,
+                                "_name": "SpeakWithSubtitle",
+                                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                              },
+                              "UserData": {
+                                "Position": "256,32"
+                              }
+                            },
+                            {
+                              "Id": 3,
+                              "Type": "scene.get",
+                              "Properties": {
+                                "T": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "-224,160"
+                              }
+                            },
+                            {
+                              "Id": 4,
+                              "Type": "property.get",
+                              "Properties": {
+                                "_name": "Name",
+                                "_type": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "0,192"
+                              }
+                            },
+                            {
+                              "Id": 5,
+                              "Type": "call",
+                              "Properties": {
+                                "_isStatic": false,
+                                "_name": "SelectRandomDialogue",
+                                "_type": "package.fish.sauna/Sauna.DialogueTree"
+                              },
+                              "UserData": {
+                                "Position": "480,32"
+                              }
+                            }
+                          ],
+                          "Links": [
+                            {
+                              "SrcId": 1,
+                              "SrcName": "_signal",
+                              "DstId": 2,
+                              "DstName": "_signal"
+                            },
+                            {
+                              "SrcId": 4,
+                              "SrcName": "_result",
+                              "DstId": 2,
+                              "DstName": "name"
+                            },
+                            {
+                              "SrcId": 1,
+                              "SrcName": "_target",
+                              "DstId": 2,
+                              "DstName": "obj"
+                            },
+                            {
+                              "Value": "Oh god,my insidesi really dont feel right...",
+                              "DstId": 2,
+                              "DstName": "subtitle"
+                            },
+                            {
+                              "SrcId": 1,
+                              "SrcName": "_target",
+                              "DstId": 3,
+                              "DstName": "_this"
+                            },
+                            {
+                              "SrcId": 3,
+                              "SrcName": "_result",
+                              "DstId": 4,
+                              "DstName": "_target"
+                            },
+                            {
+                              "SrcId": 2,
+                              "SrcName": "_signal",
+                              "DstId": 5,
+                              "DstName": "_signal"
+                            },
+                            {
+                              "SrcId": 3,
+                              "SrcName": "_result",
+                              "DstId": 5,
+                              "DstName": "_target"
+                            }
+                          ]
+                        },
+                        "InteractDistance": 125
+                      }
+                    ]
+                  }
+                ],
+                "HasRandomDialogues": true,
+                "HostOnly": false,
+                "Name": "Shitting_Guy",
+                "Networked": false
+              }
+            ],
+            "Children": [
+              {
+                "__guid": "60d157fc-1424-4838-a6a8-6a15f9365a68",
+                "Name": "Object",
+                "Position": "0,0,0",
+                "Enabled": true,
+                "NetworkMode": 2,
+                "Components": [
+                  {
+                    "__type": "SkinnedModelRenderer",
+                    "__guid": "ec89558c-4611-473c-bc23-452ec2e5b83e",
+                    "BodyGroups": 18446744073709551615,
+                    "BoneMergeTarget": {
+                      "_type": "component",
+                      "component_id": "591bf4c1-3f74-49d0-b2b5-18f84b7e5a95",
+                      "go": "48c1567b-13a8-40cb-87c4-b3f2ff8832b8",
+                      "component_type": "SkinnedModelRenderer"
+                    },
+                    "CreateBoneObjects": false,
+                    "Model": "models/clothes/wifebeater/wifebeater.vmdl",
+                    "RenderType": "On",
+                    "Tint": "1,1,1,1"
+                  }
+                ]
+              },
+              {
+                "__guid": "5a3176ce-1b00-44ae-a94a-3c8996d1e0e2",
+                "Name": "Object",
+                "Position": "0,0,0",
+                "Enabled": true,
+                "NetworkMode": 2,
+                "Components": [
+                  {
+                    "__type": "SkinnedModelRenderer",
+                    "__guid": "fadea3ec-bb9e-426e-bf64-47e83339d598",
+                    "BodyGroups": 18446744073709551615,
+                    "BoneMergeTarget": {
+                      "_type": "component",
+                      "component_id": "591bf4c1-3f74-49d0-b2b5-18f84b7e5a95",
+                      "go": "48c1567b-13a8-40cb-87c4-b3f2ff8832b8",
+                      "component_type": "SkinnedModelRenderer"
+                    },
+                    "CreateBoneObjects": false,
+                    "Model": "models/clothes/fishing_hat/fishing_hat.vmdl",
+                    "RenderType": "On",
+                    "Tint": "1,1,1,1"
+                  }
+                ]
+              },
+              {
+                "__guid": "e23589f8-3881-456f-a551-b4419973903c",
+                "Name": "Object",
+                "Position": "0,0,0",
+                "Enabled": true,
+                "NetworkMode": 2,
+                "Components": [
+                  {
+                    "__type": "SkinnedModelRenderer",
+                    "__guid": "a0f2c185-dfd8-412a-b497-60b610a9387b",
+                    "BodyGroups": 18446744073709551615,
+                    "BoneMergeTarget": {
+                      "_type": "component",
+                      "component_id": "591bf4c1-3f74-49d0-b2b5-18f84b7e5a95",
+                      "go": "48c1567b-13a8-40cb-87c4-b3f2ff8832b8",
+                      "component_type": "SkinnedModelRenderer"
+                    },
+                    "CreateBoneObjects": false,
+                    "Model": "models/clothes/flip_flops/flip_flops.vmdl",
+                    "RenderType": "On",
+                    "Tint": "0.28235,0.24706,0.22353,1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__guid": "04e1eee8-2f4e-4a61-9d8c-73f97c45bcf8",
+        "Name": "Object",
+        "Position": "75.79199,-131.86,0",
+        "Rotation": "0,0,0.7071066,0.7071068",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__guid": "b5a21378-4801-43e9-8041-4b35e7d7711c",
+            "BodyGroups": 1,
+            "MaterialGroup": "normal",
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "RenderType": "On",
+            "Tint": "0.30698,0.17148,0.09852,1"
+          },
+          {
+            "__type": "ModelCollider",
+            "__guid": "1e743e47-27af-4701-b839-1836aab83be2",
+            "IsTrigger": false,
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "Static": false
+          }
+        ]
+      },
+      {
+        "__guid": "3bbe1a84-6b3f-46fe-8348-a15d211da110",
+        "Name": "Object",
+        "Position": "84.00977,-360,0",
+        "Rotation": "0,0,0.6746221,0.738163",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__guid": "017ada3b-46bf-4ecd-adcf-d3cd9d62805f",
+            "BodyGroups": 1,
+            "MaterialGroup": "normal",
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "RenderType": "On",
+            "Tint": "0.14419,0.14419,0.14419,1"
+          },
+          {
+            "__type": "ModelCollider",
+            "__guid": "74ed921a-bcff-40c5-935c-312597350cd1",
+            "IsTrigger": false,
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "Static": false
+          }
+        ]
+      },
+      {
+        "__guid": "3569faf7-7bf3-41b2-8ebb-820f25a4c056",
+        "Name": "Object",
+        "Position": "91.57129,-547.8807,0",
+        "Rotation": "0,0,0.7291722,0.6843302",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__guid": "e2499941-5084-4f08-b235-08fb60735ddf",
+            "BodyGroups": 1,
+            "MaterialGroup": "normal",
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "ModelCollider",
+            "__guid": "a9a33285-275a-4d4b-b424-9a26d221829b",
+            "IsTrigger": false,
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "Static": false
+          }
+        ]
+      },
+      {
+        "__guid": "6c2760a3-7e34-47d1-8c8d-89ef27a46aa5",
+        "Name": "Object",
+        "Position": "71.27344,-745.6524,0",
+        "Rotation": "0,0,0.6840183,0.7294647",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__guid": "e3040a1c-ea69-4e4f-9b31-b43f4f786bed",
+            "BodyGroups": 1,
+            "MaterialGroup": "normal",
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "RenderType": "On",
+            "Tint": "0.12465,0.1476,0.4,1"
+          },
+          {
+            "__type": "ModelCollider",
+            "__guid": "77395d37-bfb4-407f-9f92-e1600eff4f33",
+            "IsTrigger": false,
+            "Model": "models/old_red_lada/old_red_lada.vmdl",
+            "Static": false
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
