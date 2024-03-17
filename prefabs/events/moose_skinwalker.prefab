@@ -1,0 +1,214 @@
+{
+  "RootObject": {
+    "__guid": "9b7885df-cbf5-47b8-8717-9113e30ff12a",
+    "Name": "moose_skinwalker",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "2671b908-6b8d-4ef5-9c3d-176de46e4bc3",
+        "AddToEventPool": true,
+        "EventName": "Moose Skinwalker",
+        "EventSignals": [],
+        "Rarity": "Rare",
+        "ReinstantiateOnRestart": true,
+        "Stackable": true,
+        "Type": "Zone"
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "87bd6ca7-0b21-412a-93c2-8a93f1ca6d82",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "c63577c3-c18c-4ec5-81fe-ce9a9e9d6baa",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "224,32"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_name": "Receive",
+                "_type": "package.fish.sauna/Sauna.Message",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "464,32"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "event.addmarker",
+              "UserData": {
+                "Position": "592,256"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "c00b8703-7939-4f47-9458-3f204c700354"
+                }
+              },
+              "UserData": {
+                "Position": "320,256"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 30,
+              "DstId": 1,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Residents are advised to avoid entering the forest due to an unknown creature roaming the area.",
+              "DstId": 3,
+              "DstName": "content"
+            },
+            {
+              "Value": "textures/moose_skinwalker.vtex",
+              "DstId": 3,
+              "DstName": "embed"
+            },
+            {
+              "Value": "NEWS",
+              "DstId": 3,
+              "DstName": "sender"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 11,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Event",
+              "DstId": 11,
+              "DstName": "icon"
+            },
+            {
+              "SrcId": 15,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "target"
+            }
+          ]
+        },
+        "OnComponentDisabled": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Component Disabled",
+            "id": "9f272eec-50cd-427e-a16b-a559dd55c1ad",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 2,
+              "Type": "event.removemarker",
+              "UserData": {
+                "Position": "528,96"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "c00b8703-7939-4f47-9458-3f204c700354"
+                }
+              },
+              "UserData": {
+                "Position": "240,96"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 2,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 2,
+              "DstName": "target"
+            }
+          ]
+        },
+        "RequiredToFinish": true,
+        "TriggerCooldown": 1,
+        "TriggerOnce": true,
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "70a1a83e-4cf2-4e65-aa77-14b308ef3491",
+            "go": "9b7885df-cbf5-47b8-8717-9113e30ff12a",
+            "component_type": "EventEnabledTrigger"
+          }
+        ]
+      },
+      {
+        "__type": "EventEnabledTrigger",
+        "__guid": "70a1a83e-4cf2-4e65-aa77-14b308ef3491",
+        "MaxPollingRate": 5,
+        "TriggerSignalIdentifier": null
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "c00b8703-7939-4f47-9458-3f204c700354",
+        "Name": "moose_skinwalker",
+        "Tags": "animal,npc",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/npcs/moose_skinwalker.prefab"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}

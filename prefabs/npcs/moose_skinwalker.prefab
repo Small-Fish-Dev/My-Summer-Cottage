@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "1ab604c1-e359-4583-997d-ab4bd3f40da4",
+    "__guid": "cc320b40-2ffe-41f2-b954-75f8e4f1bc46",
     "Name": "moose_skinwalker",
     "Tags": "animal,npc",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
-        "__guid": "8471a3f4-1750-49f5-a71c-2889d3cf67cd",
+        "__guid": "1eac8fb3-7df7-46fd-8346-7df23772f035",
         "AlertOthers": true,
         "AttackCooldown": 8,
         "AttackRange": 120,
@@ -17,8 +17,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "component_id": "f7b8c319-98fc-421e-935b-b0b0827de1c6",
-          "go": "1ab604c1-e359-4583-997d-ab4bd3f40da4",
+          "component_id": "0d8620b5-29b4-42e0-9fb3-0f477f560336",
+          "go": "cc320b40-2ffe-41f2-b954-75f8e4f1bc46",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -27,14 +27,14 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "component_id": "71b11784-fd59-476c-b41b-0d8f24667f67",
-          "go": "1ab604c1-e359-4583-997d-ab4bd3f40da4",
+          "component_id": "e98cc7e7-6f53-4e1c-976a-24e25db5d749",
+          "go": "cc320b40-2ffe-41f2-b954-75f8e4f1bc46",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "component_id": "367cf0fb-f7be-4665-ac13-8ead8956f6a2",
-          "go": "1ab604c1-e359-4583-997d-ab4bd3f40da4",
+          "component_id": "80ca2977-4275-40c4-906f-f1a6cac1f279",
+          "go": "cc320b40-2ffe-41f2-b954-75f8e4f1bc46",
           "component_type": "MoveHelper"
         },
         "Name": "Moose (\u2642)",
@@ -76,7 +76,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "1ab604c1-e359-4583-997d-ab4bd3f40da4"
+                  "go": "cc320b40-2ffe-41f2-b954-75f8e4f1bc46"
                 }
               },
               "UserData": {
@@ -117,8 +117,8 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "71b11784-fd59-476c-b41b-0d8f24667f67",
-                  "go": "1ab604c1-e359-4583-997d-ab4bd3f40da4",
+                  "component_id": "e98cc7e7-6f53-4e1c-976a-24e25db5d749",
+                  "go": "cc320b40-2ffe-41f2-b954-75f8e4f1bc46",
                   "component_type": "SkinnedModelRenderer"
                 }
               },
@@ -286,7 +286,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "1ab604c1-e359-4583-997d-ab4bd3f40da4",
+                  "go": "cc320b40-2ffe-41f2-b954-75f8e4f1bc46",
                   "component_type": "NPC"
                 }
               },
@@ -372,7 +372,7 @@
                 "_isStatic": false
               },
               "UserData": {
-                "Position": "432,-272"
+                "Position": "208,336"
               }
             },
             {
@@ -380,6 +380,35 @@
               "Type": "time.delay",
               "UserData": {
                 "Position": "128,-16"
+              }
+            },
+            {
+              "Id": 24,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "RunSpeed",
+                "_type": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Position": "16,176"
+              }
+            },
+            {
+              "Id": 25,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "RunSpeed",
+                "_type": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Position": "368,176"
+              }
+            },
+            {
+              "Id": 26,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "-0,336"
               }
             }
           ],
@@ -500,7 +529,7 @@
               "DstName": "npc"
             },
             {
-              "SrcId": 23,
+              "SrcId": 26,
               "SrcName": "_signal",
               "DstId": 22,
               "DstName": "_signal"
@@ -528,8 +557,53 @@
               "DstName": "_signal"
             },
             {
-              "Value": 2,
+              "Value": 3,
               "DstId": 23,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 24,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "_target"
+            },
+            {
+              "Value": 15,
+              "DstId": 24,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "_signal",
+              "DstId": 25,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 25,
+              "DstName": "_target"
+            },
+            {
+              "Value": 470,
+              "DstId": 25,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 26,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 1,
+              "DstId": 26,
               "DstName": "seconds"
             }
           ]
@@ -598,7 +672,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "1ab604c1-e359-4583-997d-ab4bd3f40da4"
+                  "go": "cc320b40-2ffe-41f2-b954-75f8e4f1bc46"
                 }
               },
               "UserData": {
@@ -686,7 +760,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "1ab604c1-e359-4583-997d-ab4bd3f40da4",
+                  "go": "cc320b40-2ffe-41f2-b954-75f8e4f1bc46",
                   "component_type": "NPC"
                 }
               },
@@ -855,7 +929,7 @@
       },
       {
         "__type": "MoveHelper",
-        "__guid": "367cf0fb-f7be-4665-ac13-8ead8956f6a2",
+        "__guid": "80ca2977-4275-40c4-906f-f1a6cac1f279",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -888,7 +962,7 @@
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "7caee4f2-c4a0-4f02-aa98-d9d2a72a8a1f",
+        "__guid": "9f91bdd3-cdb2-4d24-8d33-6f7862073f71",
         "End": "0,0,89.68003",
         "IsTrigger": false,
         "Radius": 32,
@@ -897,7 +971,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "71b11784-fd59-476c-b41b-0d8f24667f67",
+        "__guid": "e98cc7e7-6f53-4e1c-976a-24e25db5d749",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/elk/moose.vmdl",
@@ -906,7 +980,7 @@
       },
       {
         "__type": "HealthComponent",
-        "__guid": "f7b8c319-98fc-421e-935b-b0b0827de1c6",
+        "__guid": "0d8620b5-29b4-42e0-9fb3-0f477f560336",
         "CanRegenerate": true,
         "DamagedBy": "Serious",
         "DropOnDeath": [
@@ -947,7 +1021,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "1ab604c1-e359-4583-997d-ab4bd3f40da4"
+                  "go": "cc320b40-2ffe-41f2-b954-75f8e4f1bc46"
                 }
               },
               "UserData": {

@@ -560,7 +560,7 @@
               }
             },
             {
-              "Id": 22,
+              "Id": 25,
               "Type": "call",
               "Properties": {
                 "_name": "Set",
@@ -568,7 +568,36 @@
                 "_isStatic": false
               },
               "UserData": {
-                "Position": "608,-240"
+                "Position": "80,400"
+              }
+            },
+            {
+              "Id": 26,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "RunSpeed",
+                "_type": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Position": "-112,240"
+              }
+            },
+            {
+              "Id": 27,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "RunSpeed",
+                "_type": "package.fish.sauna/NPC"
+              },
+              "UserData": {
+                "Position": "320,240"
+              }
+            },
+            {
+              "Id": 28,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "-128,400"
               }
             }
           ],
@@ -700,26 +729,71 @@
               "DstName": "npc"
             },
             {
-              "SrcId": 13,
+              "SrcId": 28,
               "SrcName": "_signal",
-              "DstId": 22,
+              "DstId": 25,
               "DstName": "_signal"
             },
             {
               "SrcId": 8,
               "SrcName": "_result",
-              "DstId": 22,
+              "DstId": 25,
               "DstName": "_target"
             },
             {
               "Value": "skinwalker",
-              "DstId": 22,
+              "DstId": 25,
               "DstName": "v"
             },
             {
               "Value": true,
-              "DstId": 22,
+              "DstId": 25,
               "DstName": "value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 26,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 26,
+              "DstName": "_target"
+            },
+            {
+              "Value": 15,
+              "DstId": 26,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_signal",
+              "DstId": 27,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 27,
+              "DstName": "_target"
+            },
+            {
+              "Value": 400,
+              "DstId": 27,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 28,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 1,
+              "DstId": 28,
+              "DstName": "seconds"
             }
           ]
         },

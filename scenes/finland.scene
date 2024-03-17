@@ -1,5 +1,5 @@
 {
-  "__guid": "6a108511-469c-4d8b-8d1e-293b6437f32b",
+  "__guid": "c11703c5-1500-4a32-ae02-fbd1da7796f8",
   "GameObjects": [
     {
       "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -186,8 +186,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "464,288"
@@ -197,9 +197,9 @@
                         "Id": 8,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "512,-96"
@@ -223,8 +223,8 @@
                         "Id": 17,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task"
+                          "value": "resources/tasks/wife_tasks/wife.buy_bread_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "0,224"
@@ -235,8 +235,8 @@
                         "Type": "property.get",
                         "ParentId": 17,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -244,8 +244,8 @@
                         "Type": "property.get",
                         "ParentId": 17,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -259,9 +259,9 @@
                         "Id": 21,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "1056,-16"
@@ -272,8 +272,8 @@
                         "Type": "property.get",
                         "ParentId": 0,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       }
                     ],
@@ -436,8 +436,8 @@
                         "Id": 4,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task"
+                          "value": "resources/tasks/story_tasks/story.sauna_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-240,192"
@@ -447,8 +447,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "240,304"
@@ -536,8 +536,8 @@
                         "Id": 3,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task"
+                          "value": "resources/tasks/story_tasks/story.sauna_shrimple.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-64,208"
@@ -554,8 +554,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "256,224"
@@ -628,8 +628,8 @@
                         "Id": 16,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "368,224"
@@ -639,9 +639,9 @@
                         "Id": 17,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "416,-160"
@@ -666,16 +666,16 @@
                         "Type": "property.get",
                         "ParentId": 13,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
                         "Id": 28,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/wife_tasks/wife.catch_fish_tutorial.task"
+                          "value": "resources/tasks/wife_tasks/wife.catch_fish_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-80,224"
@@ -686,8 +686,8 @@
                         "Type": "property.get",
                         "ParentId": 28,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -695,8 +695,8 @@
                         "Type": "property.get",
                         "ParentId": 28,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -710,9 +710,9 @@
                         "Id": 32,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "1040,-128"
@@ -879,8 +879,8 @@
                         "Id": 5,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "128,352"
@@ -890,9 +890,9 @@
                         "Id": 6,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "176,-32"
@@ -917,16 +917,16 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
                         "Id": 12,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/wife_tasks/wife.hunt_rabbit_tutorial.task"
+                          "value": "resources/tasks/wife_tasks/wife.hunt_rabbit_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-320,352"
@@ -937,8 +937,8 @@
                         "Type": "property.get",
                         "ParentId": 12,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -946,8 +946,8 @@
                         "Type": "property.get",
                         "ParentId": 12,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -961,9 +961,9 @@
                         "Id": 16,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "864,32"
@@ -1136,8 +1136,8 @@
                         "Id": 4,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/story_tasks/story.sauna_common.task"
+                          "value": "resources/tasks/story_tasks/story.sauna_common.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-80,288"
@@ -1154,8 +1154,8 @@
                         "Id": 6,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "240,304"
@@ -1227,8 +1227,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "80,368"
@@ -1238,9 +1238,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "128,-16"
@@ -1265,16 +1265,16 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
                         "Id": 11,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/story_tasks/story.aapo_mushroom.task"
+                          "value": "resources/tasks/story_tasks/story.aapo_mushroom.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-368,368"
@@ -1285,8 +1285,8 @@
                         "Type": "property.get",
                         "ParentId": 11,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -1294,8 +1294,8 @@
                         "Type": "property.get",
                         "ParentId": 11,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -1309,9 +1309,9 @@
                         "Id": 17,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "688,0"
@@ -1478,8 +1478,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "80,624"
@@ -1489,9 +1489,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "128,240"
@@ -1516,16 +1516,16 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
                         "Id": 9,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/story_tasks/story.jorma_gamble_tutorial.task"
+                          "value": "resources/tasks/story_tasks/story.jorma_gamble_tutorial.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-368,624"
@@ -1536,8 +1536,8 @@
                         "Type": "property.get",
                         "ParentId": 9,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -1545,8 +1545,8 @@
                         "Type": "property.get",
                         "ParentId": 9,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -1560,9 +1560,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "688,256"
@@ -1737,8 +1737,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -1748,9 +1748,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -1775,8 +1775,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -1790,9 +1790,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -1810,8 +1810,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -1819,8 +1819,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -1999,8 +1999,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "256,512"
@@ -2017,8 +2017,8 @@
                         "Id": 8,
                         "Type": "resource.ref",
                         "Properties": {
-                          "T": "package.fish.sauna/Sauna.SaunaTask",
-                          "value": "resources/tasks/story_tasks/story.tire_pop.task"
+                          "value": "resources/tasks/story_tasks/story.tire_pop.task",
+                          "T": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "-224,448"
@@ -2029,8 +2029,8 @@
                         "Type": "property.get",
                         "ParentId": 8,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -2038,8 +2038,8 @@
                         "Type": "property.get",
                         "ParentId": 8,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -2053,9 +2053,9 @@
                         "Id": 12,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "832,208"
@@ -2065,8 +2065,8 @@
                         "Id": 23,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         },
                         "UserData": {
                           "Position": "288,272"
@@ -2212,8 +2212,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -2223,9 +2223,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -2250,8 +2250,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -2265,9 +2265,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -2285,8 +2285,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -2294,8 +2294,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -2483,8 +2483,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -2494,9 +2494,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -2521,8 +2521,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -2536,9 +2536,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -2556,8 +2556,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -2565,8 +2565,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -2754,8 +2754,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -2765,9 +2765,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -2792,8 +2792,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -2807,9 +2807,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -2827,8 +2827,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -2836,8 +2836,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -3025,8 +3025,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -3036,9 +3036,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -3063,8 +3063,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -3078,9 +3078,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -3098,8 +3098,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -3107,8 +3107,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -3296,8 +3296,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -3307,9 +3307,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -3334,8 +3334,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -3349,9 +3349,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -3369,8 +3369,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -3378,8 +3378,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -3567,8 +3567,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -3578,9 +3578,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -3605,8 +3605,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -3620,9 +3620,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -3640,8 +3640,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -3649,8 +3649,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -3838,8 +3838,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -3849,9 +3849,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -3876,8 +3876,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -3891,9 +3891,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -3911,8 +3911,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -3920,8 +3920,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -4109,8 +4109,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -4120,9 +4120,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -4147,8 +4147,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -4162,9 +4162,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -4182,8 +4182,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -4191,8 +4191,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -4380,8 +4380,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -4391,9 +4391,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -4418,8 +4418,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -4433,9 +4433,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -4453,8 +4453,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -4462,8 +4462,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -4651,8 +4651,8 @@
                         "Id": 4,
                         "Type": "property.get",
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "SuccessSignal"
+                          "_name": "SuccessSignal",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         },
                         "UserData": {
                           "Position": "48,224"
@@ -4662,9 +4662,9 @@
                         "Id": 5,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "Receive",
                           "_type": "package.fish.sauna/Sauna.Message",
-                          "_name": "Receive"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "96,-160"
@@ -4689,8 +4689,8 @@
                         "Type": "property.get",
                         "ParentId": 2,
                         "Properties": {
-                          "_type": "Sandbox.Game/Sandbox.Component",
-                          "_name": "GameObject"
+                          "_name": "GameObject",
+                          "_type": "Sandbox.Game/Sandbox.Component"
                         }
                       },
                       {
@@ -4704,9 +4704,9 @@
                         "Id": 13,
                         "Type": "call",
                         "Properties": {
-                          "_isStatic": true,
+                          "_name": "SpeakWithSubtitle",
                           "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                          "_name": "SpeakWithSubtitle"
+                          "_isStatic": true
                         },
                         "UserData": {
                           "Position": "656,-144"
@@ -4724,8 +4724,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Giver"
+                          "_name": "Giver",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       },
                       {
@@ -4733,8 +4733,8 @@
                         "Type": "property.get",
                         "ParentId": 14,
                         "Properties": {
-                          "_type": "package.fish.sauna/Sauna.SaunaTask",
-                          "_name": "Message"
+                          "_name": "Message",
+                          "_type": "package.fish.sauna/Sauna.SaunaTask"
                         }
                       }
                     ],
@@ -5121,7 +5121,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.166466,0,0.9860472",
+          "Rotation": "0,0.4199196,0,0.9075613",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -8824,8 +8824,8 @@
                     "Id": 3,
                     "Type": "property.get",
                     "Properties": {
-                      "_type": "package.fish.sauna/EventAreaFinder",
-                      "_name": "ObjectsInside"
+                      "_name": "ObjectsInside",
+                      "_type": "package.fish.sauna/EventAreaFinder"
                     },
                     "UserData": {
                       "Position": "-64,128"
@@ -8973,8 +8973,8 @@
                     "Id": 3,
                     "Type": "property.get",
                     "Properties": {
-                      "_type": "package.fish.sauna/EventAreaFinder",
-                      "_name": "ObjectsInside"
+                      "_name": "ObjectsInside",
+                      "_type": "package.fish.sauna/EventAreaFinder"
                     },
                     "UserData": {
                       "Position": "-1040,96"
@@ -10516,6 +10516,33 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/shitting_guy.prefab"
+        },
+        {
+          "__guid": "cec841c1-ea10-4196-a126-02d5a3e33fb3",
+          "Name": "moose_skinwalker",
+          "Position": "-604.1958,110.4058,2519.979",
+          "Rotation": "-0.01412657,0.01448783,0.6979685,0.7158425",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/moose_skinwalker.prefab"
+        },
+        {
+          "__guid": "9c39a8ce-4054-43a1-8ab8-efbf36fa7578",
+          "Name": "elk_skinwalker",
+          "Position": "4326.718,-6682.09,2513.281",
+          "Rotation": "-0.02312189,0.03030682,0.6061158,0.7944624",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/elk_skinwalker.prefab"
+        },
+        {
+          "__guid": "a982a3b1-8238-471c-9fd4-0a41fb2a9de9",
+          "Name": "reindeer_skinwalker",
+          "Position": "-4857.773,2434.486,2445.549",
+          "Rotation": "-0.01189166,-0.01080754,0.7399631,-0.6724554",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/reindeer_skinwalker.prefab"
         }
       ]
     },
@@ -10936,7 +10963,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-17T18:03:55.0248651\u002B01:00",
+  "LastSaved": "2024-03-17T20:43:52.3034281\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
