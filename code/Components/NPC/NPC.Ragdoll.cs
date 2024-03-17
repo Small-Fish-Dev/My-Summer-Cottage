@@ -168,6 +168,7 @@ public partial class NPC
 
 					MoveHelper.Velocity = 0f;
 					Transform.Rotation = Rotation.LookAt( frontPosition.WithZ( 0f ) - rootPosition.WithZ( 0f ), Vector3.Up );
+					Model.Transform.LocalRotation = Rotation.Identity;
 
 					_puppet?.Destroy();
 					Ragdoll?.Destroy();
