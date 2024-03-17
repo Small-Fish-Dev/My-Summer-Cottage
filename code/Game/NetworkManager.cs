@@ -9,14 +9,6 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 	protected override void OnStart()
 	{
-		if ( Player.All.Count >= MAX_PLAYERS )
-		{
-			UI.MainMenu.PlayIntro = false;
-			SceneHandler.ChangeScene( SaunaScene.MainMenu );
-			GameNetworkSystem.Disconnect();
-			return;
-		}
-
 		if ( !GameNetworkSystem.IsActive && !IsProxy )
 		{
 			// Spawn host player. 
@@ -34,6 +26,14 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 
 			// Start story.
 			StoryMaster.StartSession();
+		}
+
+		if ( Player.All.Count >= MAX_PLAYERS )
+		{
+			UI.MainMenu.PlayIntro = false;
+			SceneHandler.ChangeScene( SaunaScene.MainMenu );
+			GameNetworkSystem.Disconnect();
+			return;
 		}
 	}
 
