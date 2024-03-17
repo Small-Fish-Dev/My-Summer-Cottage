@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "cfa0ab85-5914-4ccf-87d9-30246a714465",
+    "__guid": "84a05ca9-04fb-423b-9f54-a4074e479589",
     "Name": "reindeer_skinwalker",
     "Tags": "animal,npc",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
-        "__guid": "e05a14e9-f272-4bfd-b815-98a3e4c66d71",
+        "__guid": "3c8274ad-b0a8-46b2-9324-5dd1b8f5af0b",
         "AlertOthers": true,
         "AttackCooldown": 6,
         "AttackRange": 80,
@@ -17,8 +17,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "component_id": "62b6e574-ed3a-42f4-b184-38666facc526",
-          "go": "cfa0ab85-5914-4ccf-87d9-30246a714465",
+          "component_id": "f9a8513f-8048-44ca-a942-0aa1304baf63",
+          "go": "84a05ca9-04fb-423b-9f54-a4074e479589",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -27,14 +27,14 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "component_id": "374013ad-e43e-42e4-83d5-a1aeacb19b5a",
-          "go": "cfa0ab85-5914-4ccf-87d9-30246a714465",
+          "component_id": "8b114516-4b5c-4582-b7c8-442f8455a79a",
+          "go": "84a05ca9-04fb-423b-9f54-a4074e479589",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "component_id": "d49a0ade-8818-4b55-a6d5-f8a74de947ec",
-          "go": "cfa0ab85-5914-4ccf-87d9-30246a714465",
+          "component_id": "e8b9279e-e14c-472c-ac37-a6fc26b4287b",
+          "go": "84a05ca9-04fb-423b-9f54-a4074e479589",
           "component_type": "MoveHelper"
         },
         "Name": "Reindeer (\u2642)",
@@ -76,7 +76,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "cfa0ab85-5914-4ccf-87d9-30246a714465"
+                  "go": "84a05ca9-04fb-423b-9f54-a4074e479589"
                 }
               },
               "UserData": {
@@ -117,8 +117,8 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "374013ad-e43e-42e4-83d5-a1aeacb19b5a",
-                  "go": "cfa0ab85-5914-4ccf-87d9-30246a714465",
+                  "component_id": "8b114516-4b5c-4582-b7c8-442f8455a79a",
+                  "go": "84a05ca9-04fb-423b-9f54-a4074e479589",
                   "component_type": "SkinnedModelRenderer"
                 }
               },
@@ -136,6 +136,18 @@
               },
               "UserData": {
                 "Position": "784,-48"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "call",
+              "Properties": {
+                "_name": "CaptureMemory",
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "592,-304"
               }
             }
           ],
@@ -235,6 +247,27 @@
               "Value": true,
               "DstId": 16,
               "DstName": "value"
+            },
+            {
+              "Value": "What the hell is this spawn of Satan, I must\u0027ve angered the heavens.",
+              "DstId": 17,
+              "DstName": "caption"
+            },
+            {
+              "Value": 300,
+              "DstId": 17,
+              "DstName": "distance"
+            },
+            {
+              "Value": "reindeer.skinwalker",
+              "DstId": 17,
+              "DstName": "identifier"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "obj"
             }
           ]
         },
@@ -262,7 +295,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "cfa0ab85-5914-4ccf-87d9-30246a714465",
+                  "go": "84a05ca9-04fb-423b-9f54-a4074e479589",
                   "component_type": "NPC"
                 }
               },
@@ -316,7 +349,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "cfa0ab85-5914-4ccf-87d9-30246a714465",
+                  "go": "84a05ca9-04fb-423b-9f54-a4074e479589",
                   "component_type": "MoveHelper"
                 }
               },
@@ -475,7 +508,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "cfa0ab85-5914-4ccf-87d9-30246a714465",
+                  "go": "84a05ca9-04fb-423b-9f54-a4074e479589",
                   "component_type": "NPC"
                 }
               },
@@ -861,7 +894,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "cfa0ab85-5914-4ccf-87d9-30246a714465"
+                  "go": "84a05ca9-04fb-423b-9f54-a4074e479589"
                 }
               },
               "UserData": {
@@ -949,7 +982,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "cfa0ab85-5914-4ccf-87d9-30246a714465",
+                  "go": "84a05ca9-04fb-423b-9f54-a4074e479589",
                   "component_type": "NPC"
                 }
               },
@@ -1118,7 +1151,7 @@
       },
       {
         "__type": "MoveHelper",
-        "__guid": "d49a0ade-8818-4b55-a6d5-f8a74de947ec",
+        "__guid": "e8b9279e-e14c-472c-ac37-a6fc26b4287b",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -1151,7 +1184,7 @@
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "10a0fc2d-789f-4197-9113-0bd023f47238",
+        "__guid": "e329f446-d544-4138-8f20-872196cde872",
         "End": "0,0,73.52003",
         "IsTrigger": false,
         "Radius": 23.759998,
@@ -1160,7 +1193,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "374013ad-e43e-42e4-83d5-a1aeacb19b5a",
+        "__guid": "8b114516-4b5c-4582-b7c8-442f8455a79a",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/elk/reindeer.vmdl",
@@ -1169,7 +1202,7 @@
       },
       {
         "__type": "HealthComponent",
-        "__guid": "62b6e574-ed3a-42f4-b184-38666facc526",
+        "__guid": "f9a8513f-8048-44ca-a942-0aa1304baf63",
         "CanRegenerate": true,
         "DamagedBy": "Average",
         "DropOnDeath": [
@@ -1210,7 +1243,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "cfa0ab85-5914-4ccf-87d9-30246a714465"
+                  "go": "84a05ca9-04fb-423b-9f54-a4074e479589"
                 }
               },
               "UserData": {

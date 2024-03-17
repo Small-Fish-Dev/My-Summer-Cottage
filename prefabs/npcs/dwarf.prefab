@@ -70,9 +70,9 @@
               "Id": 3,
               "Type": "call",
               "Properties": {
-                "_isStatic": false,
                 "_name": "Damage",
-                "_type": "package.fish.sauna/HealthComponent"
+                "_type": "package.fish.sauna/HealthComponent",
+                "_isStatic": false
               },
               "UserData": {
                 "Position": "448,0"
@@ -154,6 +154,31 @@
               },
               "UserData": {
                 "Position": "1104,160"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "call",
+              "Properties": {
+                "_name": "CaptureMemory",
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "896,-96"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "8ed806c9-ca30-4215-98f9-beeb1742cd95"
+                }
+              },
+              "UserData": {
+                "Position": "528,-144"
               }
             }
           ],
@@ -244,6 +269,33 @@
               "SrcName": "_result",
               "DstId": 12,
               "DstName": "_target"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 13,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "These assholes cosplaying as dwarves attacked me and left!",
+              "DstId": 13,
+              "DstName": "caption"
+            },
+            {
+              "Value": 300,
+              "DstId": 13,
+              "DstName": "distance"
+            },
+            {
+              "Value": "dwarf.attack",
+              "DstId": 13,
+              "DstName": "identifier"
+            },
+            {
+              "SrcId": 15,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "obj"
             }
           ]
         },
