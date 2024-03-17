@@ -14,7 +14,7 @@
           "event.glowie_escape"
         ],
         "Rarity": "Common",
-        "ReinstantiateOnRestart": false,
+        "ReinstantiateOnRestart": true,
         "Stackable": true,
         "Type": "Zone"
       },
@@ -36,7 +36,7 @@
               "Id": 0,
               "Type": "input",
               "UserData": {
-                "Position": "-160,-16"
+                "Position": "-544,-64"
               }
             },
             {
@@ -49,7 +49,7 @@
                 }
               },
               "UserData": {
-                "Position": "-240,-352"
+                "Position": "-320,-400"
               }
             },
             {
@@ -64,8 +64,8 @@
               "Type": "property.get",
               "ParentId": 2,
               "Properties": {
-                "_name": "Transform",
-                "_type": "Sandbox.Game/Sandbox.GameObject"
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
               }
             },
             {
@@ -73,8 +73,8 @@
               "Type": "property.get",
               "ParentId": 4,
               "Properties": {
-                "_name": "Rotation",
-                "_type": "Sandbox.Game/Sandbox.GameTransform"
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Rotation"
               },
               "UserData": {
                 "Visible": false
@@ -85,8 +85,8 @@
               "Type": "property.get",
               "ParentId": 4,
               "Properties": {
-                "_name": "World",
-                "_type": "Sandbox.Game/Sandbox.GameTransform"
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "World"
               }
             },
             {
@@ -94,41 +94,11 @@
               "Type": "property.get",
               "ParentId": 4,
               "Properties": {
-                "_name": "Local",
-                "_type": "Sandbox.Game/Sandbox.GameTransform"
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "Local"
               },
               "UserData": {
                 "Visible": false
-              }
-            },
-            {
-              "Id": 14,
-              "Type": "call",
-              "Properties": {
-                "_isStatic": false,
-                "_name": "WithZ",
-                "_type": "Sandbox.System/Vector3"
-              },
-              "UserData": {
-                "Position": "240,96"
-              }
-            },
-            {
-              "Id": 15,
-              "Type": "property.get",
-              "Properties": {
-                "_name": "z",
-                "_type": "Sandbox.System/Vector3"
-              },
-              "UserData": {
-                "Position": "112,224"
-              }
-            },
-            {
-              "Id": 16,
-              "Type": "op.add",
-              "UserData": {
-                "Position": "288,256"
               }
             },
             {
@@ -154,30 +124,6 @@
               }
             },
             {
-              "Id": 22,
-              "Type": "call",
-              "Properties": {
-                "_isStatic": false,
-                "_name": "Destroy",
-                "_type": "Sandbox.Game/Sandbox.GameObject"
-              },
-              "UserData": {
-                "Position": "720,-256"
-              }
-            },
-            {
-              "Id": 23,
-              "Type": "call",
-              "Properties": {
-                "_isStatic": true,
-                "_name": "Capture",
-                "_type": "package.fish.sauna/Sauna.SweetMemories"
-              },
-              "UserData": {
-                "Position": "176,-64"
-              }
-            },
-            {
               "Id": 24,
               "Type": "event.interpolatescale",
               "UserData": {
@@ -189,8 +135,8 @@
               "Type": "property.get",
               "ParentId": 9,
               "Properties": {
-                "_name": "Rotation",
-                "_type": "Sandbox.System/Transform"
+                "_type": "Sandbox.System/Transform",
+                "_name": "Rotation"
               }
             },
             {
@@ -198,8 +144,8 @@
               "Type": "property.get",
               "ParentId": 9,
               "Properties": {
-                "_name": "Scale",
-                "_type": "Sandbox.System/Transform"
+                "_type": "Sandbox.System/Transform",
+                "_name": "Scale"
               }
             },
             {
@@ -207,8 +153,8 @@
               "Type": "property.get",
               "ParentId": 9,
               "Properties": {
-                "_name": "Position",
-                "_type": "Sandbox.System/Transform"
+                "_type": "Sandbox.System/Transform",
+                "_name": "Position"
               },
               "UserData": {
                 "Labels": {
@@ -221,14 +167,33 @@
               "Type": "property.get",
               "ParentId": 4,
               "Properties": {
-                "_name": "LocalPosition",
-                "_type": "Sandbox.Game/Sandbox.GameTransform"
+                "_type": "Sandbox.Game/Sandbox.GameTransform",
+                "_name": "LocalPosition"
+              }
+            },
+            {
+              "Id": 33,
+              "Type": "op.add",
+              "UserData": {
+                "Position": "272,32"
+              }
+            },
+            {
+              "Id": 36,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true,
+                "_name": "CaptureMemory"
+              },
+              "UserData": {
+                "Position": "-16,-208"
               }
             }
           ],
           "Links": [
             {
-              "SrcId": 23,
+              "SrcId": 0,
               "SrcName": "_signal",
               "DstId": 3,
               "DstName": "_signal"
@@ -239,7 +204,7 @@
               "DstName": "duration"
             },
             {
-              "Value": "Linear",
+              "Value": "EaseIn",
               "DstId": 3,
               "DstName": "easer"
             },
@@ -256,7 +221,7 @@
               "DstName": "target"
             },
             {
-              "SrcId": 14,
+              "SrcId": 33,
               "SrcName": "_result",
               "DstId": 3,
               "DstName": "to"
@@ -286,34 +251,7 @@
               "DstName": "_target"
             },
             {
-              "SrcId": 27,
-              "SrcName": "_result",
-              "DstId": 14,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 16,
-              "SrcName": "_result",
-              "DstId": 14,
-              "DstName": "z"
-            },
-            {
-              "SrcId": 15,
-              "SrcName": "_result",
-              "DstId": 16,
-              "DstName": "a"
-            },
-            {
-              "Value": {
-                "$type": "Simple",
-                "Type": "System.Private.CoreLib/System.Single",
-                "Value": 100
-              },
-              "DstId": 16,
-              "DstName": "b"
-            },
-            {
-              "SrcId": 22,
+              "SrcId": 3,
               "SrcName": "_signal",
               "DstId": 17,
               "DstName": "_signal"
@@ -325,40 +263,7 @@
               "DstName": "component"
             },
             {
-              "SrcId": 3,
-              "SrcName": "_signal",
-              "DstId": 22,
-              "DstName": "_signal"
-            },
-            {
               "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 22,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 23,
-              "DstName": "_signal"
-            },
-            {
-              "Value": "What even is that??? A glowie?",
-              "DstId": 23,
-              "DstName": "caption"
-            },
-            {
-              "Value": "0,0,0",
-              "DstId": 23,
-              "DstName": "position"
-            },
-            {
-              "Value": "0,0,0,1",
-              "DstId": 23,
-              "DstName": "rotation"
-            },
-            {
-              "SrcId": 23,
               "SrcName": "_signal",
               "DstId": 24,
               "DstName": "_signal"
@@ -369,7 +274,7 @@
               "DstName": "duration"
             },
             {
-              "Value": "Linear",
+              "Value": "EaseIn",
               "DstId": 24,
               "DstName": "easer"
             },
@@ -412,6 +317,43 @@
               "SrcName": "_result",
               "DstId": 28,
               "DstName": "_target"
+            },
+            {
+              "SrcId": 27,
+              "SrcName": "_result",
+              "DstId": 33,
+              "DstName": "a"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "Sandbox.System/Vector3",
+                "Value": "0,0,999"
+              },
+              "DstId": 33,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 36,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "What even is that??? A glowie?",
+              "DstId": 36,
+              "DstName": "caption"
+            },
+            {
+              "Value": "glowie.capture",
+              "DstId": 36,
+              "DstName": "identifier"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 36,
+              "DstName": "obj"
             }
           ]
         },
@@ -460,7 +402,7 @@
             "__type": "EventAreaTrigger",
             "__guid": "bc4df966-2b46-45f8-83ab-44e89c9622d8",
             "Extents": "1400,1400,1000",
-            "MaxPollingRate": 5,
+            "MaxPollingRate": 15,
             "Offset": "0,0,0",
             "TagSet": "player",
             "TriggerPrefab": [],
