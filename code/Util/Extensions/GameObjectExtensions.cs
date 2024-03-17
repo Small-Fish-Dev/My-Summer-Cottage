@@ -16,6 +16,35 @@ public static class GameObjectExtensions
 		obj.Network.SetOrphanedMode( orphaned );
 	}
 
+	[Icon( "camera" )]
+	public static SweetMemory CaptureMemory( this GameObject obj, string caption, string identifier = null, float distance = 100f, int maxTries = 20 )
+	{
+		var center = obj.GetBounds().Center + obj.Transform.Position + Vector3.Up * 10f;
+		var position = center + obj.Transform.Rotation.Backward * distance; // Default
+		var rotation = Rotation.FromRoll( Game.Random.Int( -15, 15 ) );
+
+		for ( int i = 0; i < maxTries; i++ )
+		{
+			var dir = Vector3.Random.Normal;
+			dir = dir.WithZ( dir.z.Clamp( 0.3f, 0.9f ) ); // Clamped on z-axis so it doesn't go too low.
+
+			var from = obj.Transform.Position + dir * distance;
+			var ray = new Ray( from, (center - from).Normal );
+
+			var tr = obj.Scene.Trace.Ray( ray, distance )
+				.WithoutTags( "trigger" )
+				.Run();
+
+			if ( tr.GameObject == obj || !tr.Hit )
+			{
+				position = ray.Position;
+				break;
+			}
+		}
+
+		return SweetMemories.Capture( caption, position, rotation, center, identifier );
+	}
+
 	public static IEnumerable<Interaction> GetInteractions( this GameObject obj )
 	{
 		return obj.Components.Get<Interactions>( FindMode.EverythingInSelf )?.AllInteractions;

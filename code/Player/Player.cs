@@ -358,7 +358,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 
 		for ( int i = 0; i < maxTries; i++ )
 		{
-			var dir = Vector3.Random;
+			var dir = Vector3.Random.Normal;
 			dir = dir.WithZ( dir.z.Clamp( 0.3f, 0.9f ) ); // Clamped on z-axis so it doesn't go too low.
 
 			var from = Transform.Position + dir * distance;
@@ -368,7 +368,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 				.WithoutTags( "trigger" )
 				.Run();
 
-			if ( tr.GameObject == GameObject )
+			if ( tr.GameObject == GameObject || !tr.Hit )
 			{
 				position = ray.Position;
 				break;
