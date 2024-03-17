@@ -13,7 +13,17 @@ public sealed class Stove : Component
 	public bool HasWater { get; set; } = false;
 
 	[Sync]
-	public bool IsRunning { get; set; } = false;
+	public bool IsRunning
+	{
+		get => _isRunning;
+		set
+		{
+			_isRunning = value;
+			TimeUntilEnd = _isRunning ? 120 : 0;
+		}
+	}
+
+	private bool _isRunning;
 
 	[Property]
 	public EventAreaTrigger PlayersInArea { get; set; }
@@ -30,8 +40,19 @@ public sealed class Stove : Component
 	[Property]
 	public GameObject Light { get; set; }
 
-	[Sync]
-	public TimeUntil StopWorking { get; set; }
+	public TimeUntil TimeUntilEnd { get; set; }
+
+	public void Start()
+	{
+		IsRunning = true;
+	}
+
+	public void Stop()
+	{
+		IsRunning = false;
+		HasWater = false;
+		HasWood = false;
+	}
 
 	protected override void OnStart()
 	{
@@ -81,12 +102,8 @@ public sealed class Stove : Component
 
 		GameObject.Name = $"Stove{(HasWater && HasWood && !IsRunning ? " (Ready)" : (HasWater ? "" : $" (Needs{(HasWood ? "" : " wood and")} water)"))}";
 
-		if ( StopWorking && IsRunning )
-		{
-			HasWater = false;
-			HasWood = false;
-			IsRunning = false;
-		}
+		if ( TimeUntilEnd && IsRunning )
+			Stop();
 	}
 
 	void PlaceWood( Player interactor )
@@ -134,16 +151,8 @@ public sealed class Stove : Component
 
 	void BeginSauna()
 	{
-		StartSauna();
+		Start();
 		GiveExp();
-	}
-
-	[Broadcast( NetPermission.Anyone )]
-	void StartSauna()
-	{
-		IsRunning = true;
-		StopWorking = 120;
-
 	}
 
 	[Broadcast]

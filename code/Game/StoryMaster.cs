@@ -455,6 +455,9 @@ public class StoryMaster : Component
 			storyMaster.UnloadItems();
 		}
 
+		var stove = Game.ActiveScene.GetAllComponents<Stove>().First();
+		stove?.Stop();
+
 		storyMaster.SaveGame();
 	}
 
