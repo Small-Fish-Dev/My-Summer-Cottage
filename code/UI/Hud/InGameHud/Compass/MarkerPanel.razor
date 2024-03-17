@@ -16,6 +16,11 @@
 	public bool ShowDistance { get; set; }
 	private float _distance => (Player.Local?.Transform.Position ?? 0).Distance( Marker?.Position ?? 1 );
 
+	public override void Tick()
+	{
+		if ( Marker == null )
+			Delete();
+	}
 
 	public override void OnParentChanged()
 	{

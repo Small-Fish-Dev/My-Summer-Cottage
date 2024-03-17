@@ -78,12 +78,6 @@
 		{
 			var panel = _markers[i];
 			var marker = panel.Marker;
-			if ( marker == null )
-			{
-				_markers.Remove( panel );
-				panel.Delete();
-				continue;
-			}
 
 			if ( panel?.Parent != _line )
 				_line.AddChild( panel );
