@@ -6,9 +6,14 @@
 @attribute [StyleSheet]
 
 <root>
-	<img src=@Icon.ResourcePath />
+	<img src=@Icon?.ResourcePath />
 </root>
 
 @code {
 	public Texture Icon { get; set; }
+
+	protected override int BuildHash()
+	{
+		return HashCode.Combine( Icon?.ResourcePath );
+	}
 }

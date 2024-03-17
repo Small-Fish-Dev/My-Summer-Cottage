@@ -4,30 +4,25 @@ using Sauna.Event;
 
 public enum EventType
 {
-	[Icon( "not_listed_location" )]
-	[Description( "This event will trigger randomly during the day" )]
+	[Icon( "not_listed_location" )] [Description( "This event will trigger randomly during the day" )]
 	Random,
-	[Icon( "view_in_ar" )]
-	[Description( "This event requires you to show up somewhere to trigger" )]
+
+	[Icon( "view_in_ar" )] [Description( "This event requires you to show up somewhere to trigger" )]
 	Zone,
-	[Icon( "touch_app" )]
-	[Description( "This event requires you interacting with something to trigger" )]
+
+	[Icon( "touch_app" )] [Description( "This event requires you interacting with something to trigger" )]
 	Interaction,
-	[Icon( "event_busy" )]
-	[Description( "This event has an external factor to trigger. (Like Story events)" )]
+
+	[Icon( "event_busy" )] [Description( "This event has an external factor to trigger. (Like Story events)" )]
 	Direct
 }
 
 public enum EventRarity
 {
-	[Icon( "grid_on" )]
-	Common,
-	[Icon( "window" )]
-	Uncommon,
-	[Icon( "check_box_outline_blank" )]
-	Rare,
-	[Icon( "grid_off" )]
-	None,
+	[Icon( "grid_on" )] Common,
+	[Icon( "window" )] Uncommon,
+	[Icon( "check_box_outline_blank" )] Rare,
+	[Icon( "grid_off" )] None,
 }
 
 [Icon( "event" )]
@@ -35,14 +30,11 @@ public enum EventRarity
 [Category( "Events" )]
 public sealed class EventDefinition : Component, Component.ExecuteInEditor
 {
-	[Property]
-	public string EventName { get; set; }
+	[Property] public string EventName { get; set; }
 
-	[Property]
-	public EventType Type { get; set; } = EventType.Random;
+	[Property] public EventType Type { get; set; } = EventType.Random;
 
-	[Property]
-	public List<Signal> EventSignals { get; set; } = new();
+	[Property] public List<Signal> EventSignals { get; set; } = new();
 
 	/// <summary>
 	/// Does this event get added to the daily event pool to enable during gameplay?
@@ -55,11 +47,13 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	public EventRarity Rarity { get; set; } = EventRarity.None;
 
 	[Property]
-	[Description( "Can this event trigger when there's another event going on? And can other events trigger whn this one is going on?" )]
+	[Description(
+		"Can this event trigger when there's another event going on? And can other events trigger whn this one is going on?" )]
 	public bool Stackable { get; set; } = true;
 
 	[Property]
-	[Description( "If your event's end state is different from the start state (Objects moved or removed), reinstantiate everything when restarting. (Only this gameobject and all children on it)" )]
+	[Description(
+		"If your event's end state is different from the start state (Objects moved or removed), reinstantiate everything when restarting. (Only this gameobject and all children on it)" )]
 	public bool ReinstantiateOnRestart { get; set; } = false;
 
 	/// <summary>
@@ -156,12 +150,22 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 		if ( HasBeenPlayed )
 			Restart();
 
-		foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
-			component.Enabled = true;
+		try
+		{
+			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ) )
+				component.Enabled = true;
+		}
+		catch ( Exception )
+		{
+			Log.Warning( "EventDefinition.Enable (1) exception! Trying again" );
+			foreach ( var component in Components.GetAll( FindMode.EverythingInSelfAndDescendants ).ToList() )
+				component.Enabled = true;
+		}
 
-		foreach ( var enabledTrigger in Components.GetAll<EventEnabledTrigger>( FindMode.EverythingInSelfAndDescendants ) )
+		foreach ( var enabledTrigger in Components.GetAll<EventEnabledTrigger>(
+			         FindMode.EverythingInSelfAndDescendants ).ToList() )
 			enabledTrigger.CallTrigger( null );
-
+		
 		_eventMaster?.CurrentEvents?.Add( this );
 	}
 
@@ -216,7 +220,8 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 					component.Enabled = true;
 			}
 
-			foreach ( var eventComponent in Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants ) )
+			foreach ( var eventComponent in
+			         Components.GetAll<EventComponent>( FindMode.EverythingInSelfAndDescendants ) )
 			{
 				if ( eventComponent.Triggered )
 					eventComponent.Triggered = false;
@@ -234,7 +239,6 @@ public sealed class EventDefinition : Component, Component.ExecuteInEditor
 	protected override void OnDisabled()
 	{
 		if ( !Game.IsPlaying ) return;
-
 	}
 
 	protected override void OnDestroy()

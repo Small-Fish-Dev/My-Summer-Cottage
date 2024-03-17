@@ -90,13 +90,4 @@ public class SweetMemories : Panel
 		_queue.Remove( item );
 		Player.HideHead = true;
 	}
-
-	[ConCmd]
-	public static void DebugMemory()
-		=> Player.Local.CaptureMemory( Game.Random.FromArray( new string[] {
-			"a day filled with joy,, NOT!",
-			"mfw i wanna kill myself", 
-			"i fucking hate this place get me out of here please",
-			"i wish my life was more of this"
-		} ), distance: 200f );
 }
