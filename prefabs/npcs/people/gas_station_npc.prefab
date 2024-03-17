@@ -8,6 +8,7 @@
       {
         "__type": "DialogueTree",
         "__guid": "affa3ada-c024-41b7-af6e-b1637770da84",
+        "SecondsBetweenStages": 2,
         "DialogueStages": [
           {
             "IsInitial": true,
@@ -39,9 +40,9 @@
                       "Id": 9,
                       "Type": "call",
                       "Properties": {
-                        "_isStatic": true,
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                         "_name": "SpeakWithSubtitle",
-                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                        "_isStatic": true
                       },
                       "UserData": {
                         "Position": "752,144"
@@ -131,9 +132,7 @@
                     }
                   ]
                 },
-                "InteractDistance": 125,
-                "DynamicColor": null,
-                "Disabled": null
+                "InteractDistance": 125
               }
             ]
           },
@@ -167,9 +166,9 @@
                       "Id": 8,
                       "Type": "call",
                       "Properties": {
-                        "_isStatic": true,
+                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
                         "_name": "SpeakWithSubtitle",
-                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                        "_isStatic": true
                       },
                       "UserData": {
                         "Position": "480,368"
@@ -301,137 +300,7 @@
                     }
                   ]
                 },
-                "InteractDistance": 125,
-                "DynamicColor": null,
-                "Disabled": null
-              }
-            ]
-          },
-          {
-            "IsInitial": true,
-            "AddToDialoguePool": true,
-            "DialoguePoolWeight": 1,
-            "AvailableResponses": [
-              {
-                "Keybind": "Use",
-                "Description": "Talk",
-                "Action": {
-                  "Version": 5,
-                  "UserData": {
-                    "Title": "Action",
-                    "id": "93788e97-8aa2-4a61-b0ea-e34345ef9c52",
-                    "ReferencedComponentTypes": [
-                      "package.fish.sauna/Sauna.DialogueTree"
-                    ]
-                  },
-                  "Variables": [],
-                  "Nodes": [
-                    {
-                      "Id": 1,
-                      "Type": "input",
-                      "UserData": {
-                        "Position": "-160,-16"
-                      }
-                    },
-                    {
-                      "Id": 2,
-                      "Type": "call",
-                      "Properties": {
-                        "_isStatic": true,
-                        "_name": "SpeakWithSubtitle",
-                        "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
-                      },
-                      "UserData": {
-                        "Position": "256,16"
-                      }
-                    },
-                    {
-                      "Id": 3,
-                      "Type": "scene.get",
-                      "Properties": {
-                        "T": "package.fish.sauna/Sauna.DialogueTree"
-                      },
-                      "UserData": {
-                        "Position": "-208,144"
-                      }
-                    },
-                    {
-                      "Id": 4,
-                      "Type": "property.get",
-                      "Properties": {
-                        "_name": "Name",
-                        "_type": "package.fish.sauna/Sauna.DialogueTree"
-                      },
-                      "UserData": {
-                        "Position": "16,176"
-                      }
-                    },
-                    {
-                      "Id": 5,
-                      "Type": "call",
-                      "Properties": {
-                        "_isStatic": false,
-                        "_name": "SelectRandomDialogue",
-                        "_type": "package.fish.sauna/Sauna.DialogueTree"
-                      },
-                      "UserData": {
-                        "Position": "544,16"
-                      }
-                    }
-                  ],
-                  "Links": [
-                    {
-                      "SrcId": 1,
-                      "SrcName": "_signal",
-                      "DstId": 2,
-                      "DstName": "_signal"
-                    },
-                    {
-                      "SrcId": 4,
-                      "SrcName": "_result",
-                      "DstId": 2,
-                      "DstName": "name"
-                    },
-                    {
-                      "SrcId": 1,
-                      "SrcName": "_target",
-                      "DstId": 2,
-                      "DstName": "obj"
-                    },
-                    {
-                      "Value": "If you have any mushrooms... can I have some?",
-                      "DstId": 2,
-                      "DstName": "subtitle"
-                    },
-                    {
-                      "SrcId": 1,
-                      "SrcName": "_target",
-                      "DstId": 3,
-                      "DstName": "_this"
-                    },
-                    {
-                      "SrcId": 3,
-                      "SrcName": "_result",
-                      "DstId": 4,
-                      "DstName": "_target"
-                    },
-                    {
-                      "SrcId": 2,
-                      "SrcName": "_signal",
-                      "DstId": 5,
-                      "DstName": "_signal"
-                    },
-                    {
-                      "SrcId": 3,
-                      "SrcName": "_result",
-                      "DstId": 5,
-                      "DstName": "_target"
-                    }
-                  ]
-                },
-                "InteractDistance": 125,
-                "DynamicColor": null,
-                "Disabled": null
+                "InteractDistance": 125
               }
             ]
           }
