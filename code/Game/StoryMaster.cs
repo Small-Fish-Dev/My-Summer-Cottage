@@ -646,6 +646,19 @@ public class StoryMaster : Component
 			EventMaster.Instance.ResetEventsProgression();
 			storyMaster.ResetPlayer();
 		}
+
+		if ( FileSystem.OrganizationData.FileExists( "story.json" ) )
+			FileSystem.OrganizationData.DeleteFile( "story.json" );
+		if ( FileSystem.OrganizationData.FileExists( "tasks.json" ) )
+			FileSystem.OrganizationData.DeleteFile( "tasks.json" );
+		if ( FileSystem.OrganizationData.FileExists( "events.json" ) )
+			FileSystem.OrganizationData.DeleteFile( "events.json" );
+		if ( FileSystem.OrganizationData.FileExists( "story.json" ) )
+			FileSystem.OrganizationData.DeleteFile( "story.json" );
+		if ( FileSystem.OrganizationData.FileExists( PlayerSave.FILE_PATH ) )
+			FileSystem.OrganizationData.DeleteFile( PlayerSave.FILE_PATH );
+
+		Game.Close();
 	}
 
 	[ConCmd( "sauna_reset_story" )]
