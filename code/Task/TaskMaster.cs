@@ -92,10 +92,9 @@ public partial class TaskMaster : Component, Component.INetworkListener
 		_instance = this;
 
 		if ( Connection.Local.IsHost )
-		{
 			LoadTasksProgression();
-			DelayStart();
-		}
+
+		DelayStart();
 	}
 
 	async void DelayStart()
