@@ -24,7 +24,7 @@
 
 		var container = _instance._container;
 		if (container.ChildrenCount > 5)
-			container.Children.FirstOrDefault()?.Delete();
+			container.Children?.FirstOrDefault()?.Delete();
 
 		_instance?._container?.AddChild(new Subtitle(){ Name = name, Text = text, SoundHandle = soundHandle });
 	}
