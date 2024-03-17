@@ -124,6 +124,9 @@ public sealed class NpcSpawnArea : Component
 					var anyNearby = Player.All.Any( x => x.Transform.Position.Distance( npc.Transform.Position ) <= StopDrawingDistance );
 
 					component.Model.Enabled = anyNearby;
+
+					if ( component.Collider != null )
+						component.Collider.Enabled = anyNearby;
 				}
 			}
 		}
