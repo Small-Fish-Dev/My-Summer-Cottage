@@ -12,7 +12,7 @@
         "AddToEventPool": true,
         "EventName": "cottage_squatter",
         "EventSignals": [],
-        "Rarity": "Common",
+        "Rarity": "Uncommon",
         "ReinstantiateOnRestart": true,
         "Stackable": true,
         "Type": "Zone"
@@ -28,7 +28,7 @@
           {
             "__type": "NPC",
             "__guid": "4dddab1f-a5da-4be0-8139-2fd69eab2941",
-            "AlertOthers": false,
+            "AlertOthers": true,
             "AttackCooldown": 5,
             "AttackRange": 60,
             "DetectRange": 208,
@@ -138,31 +138,12 @@
                   "Id": 12,
                   "Type": "call",
                   "Properties": {
-                    "_name": "SpeakWithSubtitle",
                     "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                    "_isStatic": true
+                    "_isStatic": true,
+                    "_name": "SpeakWithSubtitle"
                   },
                   "UserData": {
                     "Position": "944,16"
-                  }
-                },
-                {
-                  "Id": 13,
-                  "Type": "call",
-                  "Properties": {
-                    "_name": "SpeakWithSubtitle",
-                    "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                    "_isStatic": true
-                  },
-                  "UserData": {
-                    "Position": "1536,16"
-                  }
-                },
-                {
-                  "Id": 14,
-                  "Type": "time.delay",
-                  "UserData": {
-                    "Position": "1248,16"
                   }
                 }
               ],
@@ -246,42 +227,9 @@
                   "DstName": "obj"
                 },
                 {
-                  "Value": "DUDE BACK OFF!!!",
+                  "Value": "BACK OFF!!!",
                   "DstId": 12,
                   "DstName": "subtitle"
-                },
-                {
-                  "SrcId": 14,
-                  "SrcName": "_signal",
-                  "DstId": 13,
-                  "DstName": "_signal"
-                },
-                {
-                  "Value": "Cottage Squatter",
-                  "DstId": 13,
-                  "DstName": "name"
-                },
-                {
-                  "SrcId": 0,
-                  "SrcName": "_target",
-                  "DstId": 13,
-                  "DstName": "obj"
-                },
-                {
-                  "Value": "This is my place now, only way im leaving is in a body bag, and you dont have the balls!",
-                  "DstId": 13,
-                  "DstName": "subtitle"
-                },
-                {
-                  "SrcId": 12,
-                  "SrcName": "_signal",
-                  "DstId": 14,
-                  "DstName": "_signal"
-                },
-                {
-                  "Value": 1,
-                  "DstId": 14,
-                  "DstName": "seconds"
                 }
               ]
             },
@@ -299,26 +247,7 @@
                   "Type": "input"
                 },
                 {
-                  "Id": 6,
-                  "Type": "call",
-                  "Properties": {
-                    "_name": "SpeakWithSubtitle",
-                    "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                    "_isStatic": true
-                  },
-                  "UserData": {
-                    "Position": "384,16"
-                  }
-                },
-                {
-                  "Id": 7,
-                  "Type": "npc.stopfollow",
-                  "UserData": {
-                    "Position": "752,16"
-                  }
-                },
-                {
-                  "Id": 9,
+                  "Id": 2,
                   "Type": "scene.ref",
                   "Properties": {
                     "component": {
@@ -329,13 +258,65 @@
                     }
                   },
                   "UserData": {
-                    "Position": "576,144"
+                    "Position": "16,-64"
+                  }
+                },
+                {
+                  "Id": 4,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "component": {
+                      "_type": "component",
+                      "component_id": "4dddab1f-a5da-4be0-8139-2fd69eab2941",
+                      "go": "3134c8d6-d38a-43d3-994b-174cf8ce7671",
+                      "component_type": "NPC"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "16,-64"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "npc.startfollowing",
+                  "UserData": {
+                    "Position": "320,16"
+                  }
+                },
+                {
+                  "Id": 6,
+                  "Type": "call",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                    "_isStatic": true,
+                    "_name": "SpeakWithSubtitle"
+                  },
+                  "UserData": {
+                    "Position": "816,16"
                   }
                 }
               ],
               "Links": [
                 {
                   "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 5,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 4,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "npc"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "enemy",
+                  "DstId": 5,
+                  "DstName": "target"
+                },
+                {
+                  "SrcId": 5,
                   "SrcName": "_signal",
                   "DstId": 6,
                   "DstName": "_signal"
@@ -355,18 +336,6 @@
                   "Value": "Hey you! Get away from your cottage! its mine now!",
                   "DstId": 6,
                   "DstName": "subtitle"
-                },
-                {
-                  "SrcId": 6,
-                  "SrcName": "_signal",
-                  "DstId": 7,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 9,
-                  "SrcName": "_result",
-                  "DstId": 7,
-                  "DstName": "npc"
                 }
               ]
             },
@@ -387,7 +356,7 @@
                   "Id": 1,
                   "Type": "npc.moveto",
                   "UserData": {
-                    "Position": "496,16"
+                    "Position": "368,32"
                   }
                 },
                 {
@@ -498,68 +467,24 @@
               "UserData": {
                 "Title": "On Killed",
                 "id": "c2faba44-da97-44ea-af0c-aa4adf4f4df2",
-                "ReferencedComponentTypes": [
-                  "package.fish.sauna/Sauna.Player"
-                ]
+                "ReferencedComponentTypes": []
               },
               "Variables": [],
               "Nodes": [
                 {
                   "Id": 0,
-                  "Type": "input",
-                  "UserData": {
-                    "Labels": {
-                      "enemy": "enemy"
-                    }
-                  }
+                  "Type": "input"
                 },
                 {
                   "Id": 1,
                   "Type": "call",
                   "Properties": {
-                    "_name": "SpeakWithSubtitle",
                     "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                    "_isStatic": true
+                    "_isStatic": true,
+                    "_name": "SpeakWithSubtitle"
                   },
                   "UserData": {
                     "Position": "288,32"
-                  }
-                },
-                {
-                  "Id": 2,
-                  "Type": "scene.get",
-                  "Properties": {
-                    "T": "package.fish.sauna/Sauna.Player"
-                  },
-                  "UserData": {
-                    "Position": "0,144",
-                    "Labels": {
-                      "_result": "player"
-                    }
-                  }
-                },
-                {
-                  "Id": 3,
-                  "Type": "call",
-                  "Properties": {
-                    "_name": "GiveMoney",
-                    "_type": "package.fish.sauna/Sauna.Player",
-                    "_isStatic": false
-                  },
-                  "UserData": {
-                    "Position": "688,32"
-                  }
-                },
-                {
-                  "Id": 4,
-                  "Type": "call",
-                  "Properties": {
-                    "_name": "AddExperience",
-                    "_type": "package.fish.sauna/Sauna.Player",
-                    "_isStatic": false
-                  },
-                  "UserData": {
-                    "Position": "928,32"
                   }
                 }
               ],
@@ -582,49 +507,9 @@
                   "DstName": "obj"
                 },
                 {
-                  "Value": "AUGH!",
+                  "Value": "Agh ugh, what the hell man!",
                   "DstId": 1,
                   "DstName": "subtitle"
-                },
-                {
-                  "SrcId": 0,
-                  "SrcName": "enemy",
-                  "DstId": 2,
-                  "DstName": "_this"
-                },
-                {
-                  "SrcId": 1,
-                  "SrcName": "_signal",
-                  "DstId": 3,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_result",
-                  "DstId": 3,
-                  "DstName": "_target"
-                },
-                {
-                  "Value": 10,
-                  "DstId": 3,
-                  "DstName": "amount"
-                },
-                {
-                  "SrcId": 3,
-                  "SrcName": "_signal",
-                  "DstId": 4,
-                  "DstName": "_signal"
-                },
-                {
-                  "SrcId": 2,
-                  "SrcName": "_result",
-                  "DstId": 4,
-                  "DstName": "_target"
-                },
-                {
-                  "Value": 15,
-                  "DstId": 4,
-                  "DstName": "exp"
                 }
               ]
             },
@@ -652,15 +537,15 @@
             "EnableUnstuck": true,
             "Gravity": "0,0,850",
             "GroundAcceleration": 2000,
-            "GroundAngle": 45,
+            "GroundAngle": 60,
             "GroundFriction": 30,
             "IgnoreTags": "",
             "MaxUnstuckTries": 20,
             "StepHeight": 18,
             "StickToGround": true,
             "StopSpeed": 10,
-            "TraceHeight": 72,
-            "TraceRadius": 16,
+            "TraceHeight": 64,
+            "TraceRadius": 8,
             "TraceType": "Capsule",
             "UseCollider": false,
             "UseSceneGravity": true
@@ -668,8 +553,8 @@
           {
             "__type": "HealthComponent",
             "__guid": "537a3bd5-db19-46bd-9ffa-d2a063d6f6f8",
-            "CanRegenerate": true,
-            "DamagedBy": "Average",
+            "CanRegenerate": false,
+            "DamagedBy": "Mild",
             "DropOnDeath": [
               {
                 "_type": "gameobject",
@@ -689,7 +574,7 @@
               }
             ],
             "Immortal": false,
-            "MaxHealth": 10,
+            "MaxHealth": 1,
             "RegenerationCooldown": 5,
             "RegenerationTimer": 10,
             "StunnedBy": "Mild",
@@ -697,11 +582,11 @@
           },
           {
             "__type": "CapsuleCollider",
-            "__guid": "a94ba45f-f392-4c68-afe7-ffde5fab0499",
-            "End": "0,0,64",
+            "__guid": "1c66dfe6-2fea-43e0-b4b7-4dfca5d31ade",
+            "End": "0,0,60",
             "IsTrigger": false,
             "Radius": 12,
-            "Start": "0,0,12",
+            "Start": "0,0,16",
             "Static": false
           }
         ],
