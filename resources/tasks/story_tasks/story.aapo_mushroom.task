@@ -235,16 +235,16 @@
             }
           },
           {
-            "Id": 3,
-            "Type": "inventory.amountofitem",
+            "Id": 4,
+            "Type": "inventory.amountofitemwithtag",
             "UserData": {
-              "Position": "352,192"
+              "Position": "336,176"
             }
           }
         ],
         "Links": [
           {
-            "SrcId": 3,
+            "SrcId": 4,
             "SrcName": "_result",
             "DstId": 1,
             "DstName": "_result"
@@ -258,13 +258,13 @@
           {
             "SrcId": 2,
             "SrcName": "_result",
-            "DstId": 3,
+            "DstId": 4,
             "DstName": "inventory"
           },
           {
-            "Value": "Chanterelle Mushroom",
-            "DstId": 3,
-            "DstName": "nameOfItem"
+            "Value": "mushroom",
+            "DstId": 4,
+            "DstName": "tag"
           }
         ]
       },
@@ -625,9 +625,9 @@
             "Id": 3,
             "Type": "call",
             "Properties": {
+              "_isStatic": false,
               "_name": "CaptureMemory",
-              "_type": "package.fish.sauna/Sauna.Player",
-              "_isStatic": false
+              "_type": "package.fish.sauna/Sauna.Player"
             },
             "UserData": {
               "Position": "464,240"

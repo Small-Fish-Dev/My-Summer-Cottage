@@ -76,6 +76,13 @@ public static partial class PlayerNodes
 		return inventory.GetTotalItemCount( nameOfItem );
 	}
 
+	[ActionGraphNode( "inventory.amountofitemwithtag" ), Pure]
+	[Title( "Amount of Item in Inventory with Tag" ), Group( "Player" ), Icon( "categories" )]
+	public static int AmountInInventoryWithTag( Inventory inventory, string tag )
+	{
+		return inventory.GetTotalItemCountWithTag( tag );
+	}
+
 	[ActionGraphNode( "player.getrandom" )]
 	[Title( "Get Random Player" ), Group( "Player" ), Icon( "escalator_warning" )]
 	public static Player GetRandomPlayer()

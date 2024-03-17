@@ -472,8 +472,13 @@ public class Inventory : Component
 	public int GetTotalItemCount( string name )
 	{
 		if ( BackpackItems == null ) return 0;
-
 		return BackpackItems.Where( x => x.IsValid() && x.Name.ToLower() == name.ToLower() )?.Count() ?? 0;
+	}
+
+	public int GetTotalItemCountWithTag( string tag )
+	{
+		if ( BackpackItems == null ) return 0;
+		return BackpackItems.Where( x => x.IsValid() && x.Tags.Has( tag ) )?.Count() ?? 0;
 	}
 
 	public bool HasItem( string name )
