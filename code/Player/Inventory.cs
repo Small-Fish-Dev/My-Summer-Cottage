@@ -316,6 +316,15 @@ public class Inventory : Component
 		item.State = ItemState.Backpack;
 	}
 
+	public bool RemoveAmountEasy( string name, int count = 1, bool destroy = true )
+	{
+		foreach ( var item in _backpackItems )
+			if ( item.Name.ToLower().Replace( " ", "" ) == name.ToLower().Replace( " ", "" ) )
+				return RemoveAmount( item, count, destroy );
+
+		return false;
+	}
+
 	/// <summary>
 	/// Removes a specific amount from an item if the item is stackable and has more than the amount.
 	/// </summary>
