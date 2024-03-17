@@ -8,15 +8,13 @@ PauseMenu {
     pointer-events: all;
     background-color: $fullscreen-bg;
     backdrop-filter: $fullscreen-blur;
-
     transition: opacity 0.13s ease;
-
     opacity: 1;
 
     &:intro {
         opacity: 0;
     }
-    
+
     .title {
         position: absolute;
         background-repeat: no-repeat;
@@ -29,11 +27,13 @@ PauseMenu {
     }
 
     .disclaimer {
-        font-size: 17px;
+        font-size: 18px;
+        font-weight: bold;
         font-family: HabboExtended;
         color: darken(white, 0.3);
         padding: 15px 15px;
-        width: 515px;
+        text-shadow: $text-shadow-sm;
+        width: 715px;
     }
 
     .invite {
@@ -72,8 +72,31 @@ PauseMenu {
         align-items: flex-end;
         gap: 15px;
         right: 50px;
-        top: 75%;
+        bottom: 70px;
         justify-content: flex-end;
-        text-shadow: $text-shadow-sm;
+
+        InputHint {
+            text-shadow: $text-shadow-sm;
+        }
+
+        .rebind {
+            padding: 8px;
+            background-color: white;
+            justify-content: center;
+            color: black;
+            text-shadow: 2px 2px 0px rgba(black, 0.5);
+            align-items: center;
+            font-family: HabboExtended;
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 2px;
+            box-shadow: $box-shadow-sm;
+            pointer-events: all;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.1);
+            }
+        }
     }
 }

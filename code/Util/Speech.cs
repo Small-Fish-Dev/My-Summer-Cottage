@@ -91,10 +91,4 @@ public class Speech
 
 		Stopped = true;
 	}
-
-	[ConCmd]
-	public static void TestSound( string input = "blablabla fuck you bithc!!!" )
-	{
-		Create( input, SpeechSettings.Default with { GameObject = Player.Local.GameObject } );
-	}
 }

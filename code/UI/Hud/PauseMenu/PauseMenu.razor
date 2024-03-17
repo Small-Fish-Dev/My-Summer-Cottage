@@ -64,6 +64,8 @@
 		</div>
 
 		<div class="inputs">
+			<button class="rebind" @onclick=@(() => Game.Overlay.ShowBinds())> Rebind Keys</button>
+
 			<InputHint Hint="Task Log" Input=@InputAction.Tasks />
 			<InputHint Hint="Inventory" Input=@InputAction.Inventory />
 			<InputHint Hint="(Hold) Zoom" Input=@InputAction.Zoom />
