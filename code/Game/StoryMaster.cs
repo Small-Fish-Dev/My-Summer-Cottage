@@ -13,7 +13,7 @@ public class SaunaScriptedEvent
 	/// </summary>
 	[Property]
 	[JsonInclude]
-	public bool TriggerByTime { get; set; } = true;
+	public bool TriggerByTime { get; set; }
 
 	/// <summary>
 	/// Which signal is going to trigger this event
@@ -29,7 +29,7 @@ public class SaunaScriptedEvent
 	[Property]
 	[JsonInclude]
 	[HideIf( "TriggerByTime", true )]
-	public float TriggerDelay { get; set; } = 0f;
+	public float TriggerDelay { get; set; }
 
 	/// <summary>
 	/// When the scripted event plays in in-game hours (Ex. 7.5 = 07:30, 23.25 = 23:15, 0.5 = 00:30).
@@ -41,14 +41,14 @@ public class SaunaScriptedEvent
 
 	[Hide]
 	[JsonIgnore]
-	public float TriggerTime { get; set; } = 0f;
+	public float TriggerTime { get; set; }
 
 	/// <summary>
 	/// This scripted event needs to be completed for the story to progress
 	/// </summary>
 	[Property]
 	[JsonInclude]
-	public bool CompletionNecessary { get; set; } = true;
+	public bool CompletionNecessary { get; set; }
 
 	public delegate Task<string> ScriptedAction( Player player );
 
