@@ -27,7 +27,7 @@
 @code {
 	public Player Player { get; set; }
 
-	public bool IsHost => Player != Player.Local ? Player.Connection.IsHost : true;
+	public bool IsHost => Player != Player.Local ? Player.Connection.IsHost : Networking.IsHost;
 	public string DisplayName => Player != Player.Local ? Player.Connection.DisplayName : Steam.PersonaName;
 	public ulong SteamId => Player != Player.Local ? Player.Connection.SteamId : Steam.SteamId;
 
