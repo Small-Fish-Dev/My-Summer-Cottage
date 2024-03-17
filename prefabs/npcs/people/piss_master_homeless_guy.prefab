@@ -1,13 +1,13 @@
 {
   "RootObject": {
-    "__guid": "a6b79dba-c2c2-4694-914b-92afe5321f3e",
+    "__guid": "c84f1d5a-2354-45c4-9b95-e0a81847c852",
     "Name": "piss_master_homeless_guy",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "NPC",
-        "__guid": "4d1f4a8a-37c5-4871-a445-4b037f9a95ef",
+        "__guid": "738445a8-648c-48e6-b658-fd8274fefde1",
         "AlertOthers": true,
         "AttackCooldown": 4,
         "AttackRange": 50,
@@ -16,8 +16,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "component_id": "255a0cd2-9567-4013-abbf-3744a4df693e",
-          "go": "a6b79dba-c2c2-4694-914b-92afe5321f3e",
+          "component_id": "50315734-c4b9-4b48-a461-a3d9d2a5d5b4",
+          "go": "c84f1d5a-2354-45c4-9b95-e0a81847c852",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -26,14 +26,14 @@
         "MinimumIdleCooldown": 5,
         "Model": {
           "_type": "component",
-          "component_id": "35d6ad8c-4638-4f78-93d5-b67f22043395",
-          "go": "6d2a5f49-47d5-4377-84c7-2a4d337e6c79",
+          "component_id": "416aa18f-dbc5-4ed4-aaf1-98e6ea7b2982",
+          "go": "473412e3-7c78-47f2-b1ba-67df87d5dcf6",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "component_id": "52adad71-3609-463a-bca6-d8555b39f0f8",
-          "go": "a6b79dba-c2c2-4694-914b-92afe5321f3e",
+          "component_id": "5332bb27-5fab-44fb-aa3e-18f789e553c4",
+          "go": "c84f1d5a-2354-45c4-9b95-e0a81847c852",
           "component_type": "MoveHelper"
         },
         "Name": "Default",
@@ -98,8 +98,8 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "4d1f4a8a-37c5-4871-a445-4b037f9a95ef",
-                  "go": "a6b79dba-c2c2-4694-914b-92afe5321f3e",
+                  "component_id": "738445a8-648c-48e6-b658-fd8274fefde1",
+                  "go": "c84f1d5a-2354-45c4-9b95-e0a81847c852",
                   "component_type": "NPC"
                 }
               },
@@ -116,7 +116,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "6b8bd2f7-ed15-4f11-93f3-88037ce8d86a"
+                  "go": "a9278074-9660-4849-9af4-bc76d44d00e9"
                 }
               },
               "UserData": {
@@ -152,7 +152,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "a6b79dba-c2c2-4694-914b-92afe5321f3e"
+                  "go": "c84f1d5a-2354-45c4-9b95-e0a81847c852"
                 }
               },
               "UserData": {
@@ -416,8 +416,8 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "4d1f4a8a-37c5-4871-a445-4b037f9a95ef",
-                  "go": "a6b79dba-c2c2-4694-914b-92afe5321f3e",
+                  "component_id": "738445a8-648c-48e6-b658-fd8274fefde1",
+                  "go": "c84f1d5a-2354-45c4-9b95-e0a81847c852",
                   "component_type": "NPC"
                 }
               },
@@ -453,9 +453,9 @@
               "Id": 32,
               "Type": "call",
               "Properties": {
+                "_name": "SpeakWithSubtitle",
                 "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
-                "_isStatic": true,
-                "_name": "SpeakWithSubtitle"
+                "_isStatic": true
               },
               "UserData": {
                 "Position": "976,112"
@@ -467,7 +467,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "6b8bd2f7-ed15-4f11-93f3-88037ce8d86a"
+                  "go": "a9278074-9660-4849-9af4-bc76d44d00e9"
                 }
               },
               "UserData": {
@@ -483,6 +483,31 @@
               },
               "UserData": {
                 "Position": "848,400"
+              }
+            },
+            {
+              "Id": 36,
+              "Type": "call",
+              "Properties": {
+                "_name": "CaptureMemory",
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "736,-128"
+              }
+            },
+            {
+              "Id": 38,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "c84f1d5a-2354-45c4-9b95-e0a81847c852"
+                }
+              },
+              "UserData": {
+                "Position": "96,240"
               }
             }
           ],
@@ -605,6 +630,33 @@
               "Value": true,
               "DstId": 35,
               "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 36,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "This drunk idiot kept pestering me, I bet he would stop if I took my pants off.",
+              "DstId": 36,
+              "DstName": "caption"
+            },
+            {
+              "Value": 200,
+              "DstId": 36,
+              "DstName": "distance"
+            },
+            {
+              "Value": "drunkguy",
+              "DstId": 36,
+              "DstName": "identifier"
+            },
+            {
+              "SrcId": 38,
+              "SrcName": "_result",
+              "DstId": 36,
+              "DstName": "obj"
             }
           ]
         },
@@ -634,8 +686,8 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "4d1f4a8a-37c5-4871-a445-4b037f9a95ef",
-                  "go": "a6b79dba-c2c2-4694-914b-92afe5321f3e",
+                  "component_id": "738445a8-648c-48e6-b658-fd8274fefde1",
+                  "go": "c84f1d5a-2354-45c4-9b95-e0a81847c852",
                   "component_type": "NPC"
                 }
               },
@@ -649,7 +701,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "6b8bd2f7-ed15-4f11-93f3-88037ce8d86a"
+                  "go": "a9278074-9660-4849-9af4-bc76d44d00e9"
                 }
               },
               "UserData": {
@@ -770,8 +822,8 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "4d1f4a8a-37c5-4871-a445-4b037f9a95ef",
-                  "go": "a6b79dba-c2c2-4694-914b-92afe5321f3e",
+                  "component_id": "738445a8-648c-48e6-b658-fd8274fefde1",
+                  "go": "c84f1d5a-2354-45c4-9b95-e0a81847c852",
                   "component_type": "NPC"
                 }
               },
@@ -855,7 +907,7 @@
       },
       {
         "__type": "MoveHelper",
-        "__guid": "52adad71-3609-463a-bca6-d8555b39f0f8",
+        "__guid": "5332bb27-5fab-44fb-aa3e-18f789e553c4",
         "AccelerationCurve": [
           {
             "x": 0.5,
@@ -867,8 +919,8 @@
         "Bounce": 0.3,
         "Collider": {
           "_type": "component",
-          "component_id": "a6fa4610-b64c-4ed1-a2e7-4d5e7642ecfe",
-          "go": "a6b79dba-c2c2-4694-914b-92afe5321f3e",
+          "component_id": "7a9de5bf-a7fe-4cb8-a181-1a01ee8cf32d",
+          "go": "c84f1d5a-2354-45c4-9b95-e0a81847c852",
           "component_type": "BoxCollider"
         },
         "EnableUnstuck": true,
@@ -889,7 +941,7 @@
       },
       {
         "__type": "HealthComponent",
-        "__guid": "255a0cd2-9567-4013-abbf-3744a4df693e",
+        "__guid": "50315734-c4b9-4b48-a461-a3d9d2a5d5b4",
         "CanRegenerate": true,
         "DamagedBy": "Mild",
         "DropOnDeath": [],
@@ -902,7 +954,7 @@
       },
       {
         "__type": "BoxCollider",
-        "__guid": "a6fa4610-b64c-4ed1-a2e7-4d5e7642ecfe",
+        "__guid": "7a9de5bf-a7fe-4cb8-a181-1a01ee8cf32d",
         "Center": "0,0,32",
         "IsTrigger": false,
         "Scale": "7.400019,20,64",
@@ -911,14 +963,14 @@
     ],
     "Children": [
       {
-        "__guid": "6d2a5f49-47d5-4377-84c7-2a4d337e6c79",
+        "__guid": "473412e3-7c78-47f2-b1ba-67df87d5dcf6",
         "Name": "body",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "SkinnedModelRenderer",
-            "__guid": "35d6ad8c-4638-4f78-93d5-b67f22043395",
+            "__guid": "416aa18f-dbc5-4ed4-aaf1-98e6ea7b2982",
             "BodyGroups": 1089,
             "CreateBoneObjects": false,
             "Model": "models/guy/guy.vmdl",
@@ -927,7 +979,7 @@
           },
           {
             "__type": "Character",
-            "__guid": "e78d9059-970e-4c9f-adbb-92fc1f0f05c3",
+            "__guid": "99110225-69db-429a-8ba5-317e2c0275a5",
             "Clothes": [],
             "Fatness": 0,
             "Height": -56,
@@ -936,19 +988,19 @@
         ],
         "Children": [
           {
-            "__guid": "1b9c96a5-65f9-46ef-b61a-e9dcb12e9aaf",
+            "__guid": "67c7b14b-077f-4b26-bb2a-f4e3e26fbec8",
             "Name": "shoes",
             "Enabled": true,
             "NetworkMode": 2,
             "Components": [
               {
                 "__type": "SkinnedModelRenderer",
-                "__guid": "2f4aa733-9536-4507-9e7d-311bbcd4e1a1",
+                "__guid": "39a17e37-75f5-48f3-8e7f-be7d0e5ecc2e",
                 "BodyGroups": 18446744073709551615,
                 "BoneMergeTarget": {
                   "_type": "component",
-                  "component_id": "35d6ad8c-4638-4f78-93d5-b67f22043395",
-                  "go": "6d2a5f49-47d5-4377-84c7-2a4d337e6c79",
+                  "component_id": "416aa18f-dbc5-4ed4-aaf1-98e6ea7b2982",
+                  "go": "473412e3-7c78-47f2-b1ba-67df87d5dcf6",
                   "component_type": "SkinnedModelRenderer"
                 },
                 "CreateBoneObjects": false,
@@ -959,19 +1011,19 @@
             ]
           },
           {
-            "__guid": "c30998af-0b71-4ca8-aa93-f0bdb79ddf0e",
+            "__guid": "30b9199c-c3f6-4add-a1e0-3cfad2b3a3af",
             "Name": "shirt",
             "Enabled": true,
             "NetworkMode": 2,
             "Components": [
               {
                 "__type": "SkinnedModelRenderer",
-                "__guid": "95996f7c-acbb-4c30-a3dd-c692deca3c4c",
+                "__guid": "e7981594-3122-4370-bf3c-9c1d36c2f4f8",
                 "BodyGroups": 18446744073709551615,
                 "BoneMergeTarget": {
                   "_type": "component",
-                  "component_id": "35d6ad8c-4638-4f78-93d5-b67f22043395",
-                  "go": "6d2a5f49-47d5-4377-84c7-2a4d337e6c79",
+                  "component_id": "416aa18f-dbc5-4ed4-aaf1-98e6ea7b2982",
+                  "go": "473412e3-7c78-47f2-b1ba-67df87d5dcf6",
                   "component_type": "SkinnedModelRenderer"
                 },
                 "CreateBoneObjects": false,
@@ -982,19 +1034,19 @@
             ]
           },
           {
-            "__guid": "d4db2270-bc4c-4f0d-a88f-24beceacba78",
+            "__guid": "c72519b3-aacb-46b7-a4d0-78377d789f53",
             "Name": "shirt",
             "Enabled": true,
             "NetworkMode": 2,
             "Components": [
               {
                 "__type": "SkinnedModelRenderer",
-                "__guid": "7ca6c1f7-fc19-451a-9ecb-1a7d1267290d",
+                "__guid": "a0ce4091-b5e2-47eb-ba6a-a4f13cf041a9",
                 "BodyGroups": 18446744073709551615,
                 "BoneMergeTarget": {
                   "_type": "component",
-                  "component_id": "35d6ad8c-4638-4f78-93d5-b67f22043395",
-                  "go": "6d2a5f49-47d5-4377-84c7-2a4d337e6c79",
+                  "component_id": "416aa18f-dbc5-4ed4-aaf1-98e6ea7b2982",
+                  "go": "473412e3-7c78-47f2-b1ba-67df87d5dcf6",
                   "component_type": "SkinnedModelRenderer"
                 },
                 "CreateBoneObjects": false,
@@ -1005,19 +1057,19 @@
             ]
           },
           {
-            "__guid": "ef36b9a9-2ebe-494f-bac4-8a627bb66ef0",
+            "__guid": "07914514-4609-40f5-b237-6c52a54ed7c6",
             "Name": "hat",
             "Enabled": true,
             "NetworkMode": 2,
             "Components": [
               {
                 "__type": "SkinnedModelRenderer",
-                "__guid": "3aa9bb43-25d1-4b0d-91f6-10e827562a32",
+                "__guid": "4f1e6ce2-3175-4cfb-b07d-319fe5dd2c0b",
                 "BodyGroups": 18446744073709551615,
                 "BoneMergeTarget": {
                   "_type": "component",
-                  "component_id": "35d6ad8c-4638-4f78-93d5-b67f22043395",
-                  "go": "6d2a5f49-47d5-4377-84c7-2a4d337e6c79",
+                  "component_id": "416aa18f-dbc5-4ed4-aaf1-98e6ea7b2982",
+                  "go": "473412e3-7c78-47f2-b1ba-67df87d5dcf6",
                   "component_type": "SkinnedModelRenderer"
                 },
                 "CreateBoneObjects": false,
@@ -1029,19 +1081,19 @@
             ]
           },
           {
-            "__guid": "144d5d22-1b2c-46ed-bcac-3d63ab6fc364",
+            "__guid": "f43ecb75-3a35-44e8-a385-3b0d0110e875",
             "Name": "penoid",
             "Enabled": true,
             "NetworkMode": 2,
             "Components": [
               {
                 "__type": "SkinnedModelRenderer",
-                "__guid": "e86e03cb-6446-4176-b301-2ddaf322c3f2",
+                "__guid": "5006b359-17d0-4dd5-b8ac-de258d013180",
                 "BodyGroups": 18446744073709551615,
                 "BoneMergeTarget": {
                   "_type": "component",
-                  "component_id": "35d6ad8c-4638-4f78-93d5-b67f22043395",
-                  "go": "6d2a5f49-47d5-4377-84c7-2a4d337e6c79",
+                  "component_id": "416aa18f-dbc5-4ed4-aaf1-98e6ea7b2982",
+                  "go": "473412e3-7c78-47f2-b1ba-67df87d5dcf6",
                   "component_type": "SkinnedModelRenderer"
                 },
                 "CreateBoneObjects": false,
@@ -1052,12 +1104,12 @@
               },
               {
                 "__type": "CensorComponent",
-                "__guid": "9da37462-1684-47e6-9dd1-f66985afe84c"
+                "__guid": "40d671c8-0088-444a-909a-2bf62a90cd31"
               }
             ],
             "Children": [
               {
-                "__guid": "6b8bd2f7-ed15-4f11-93f3-88037ce8d86a",
+                "__guid": "a9278074-9660-4849-9af4-bc76d44d00e9",
                 "Name": "piss (1)",
                 "Position": "5.601646,0,32",
                 "Tags": "particles",
