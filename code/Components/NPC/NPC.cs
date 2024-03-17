@@ -317,7 +317,6 @@ public partial class NPC : Component
 					if ( Idle && NextIdle )
 					{
 						BroadcastOnIdle();
-						Game.SetRandomSeed( GameTimeManager.RandomSeed );
 						NextIdle = Game.Random.Float( MinimumIdleCooldown, MaximumIdleCooldown );
 					}
 				}
@@ -518,7 +517,6 @@ public partial class NPC : Component
 
 		while ( hitGround == false && tries <= 10f )
 		{
-			Game.SetRandomSeed( GameTimeManager.RandomSeed );
 			var randomDirection = Rotation.FromYaw( Game.Random.Float( 360f ) ).Forward;
 			var randomDistance = Game.Random.Float( minRange, maxRange );
 			var randomPoint = position + randomDirection * randomDistance;

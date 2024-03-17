@@ -302,13 +302,10 @@ public class StoryMaster : Component
 	}
 	public List<TriggeringEvent> EventsToTrigger { get; set; } = new();
 
-	public void LoadEventPool( int randomSeed )
+	public void LoadEventPool()
 	{
 		if ( CurrentSaunaDay == null ) return;
 
-		Game.SetRandomSeed( randomSeed );
-
-		Log.Info( randomSeed );
 		if ( CurrentSaunaDay.RandomEvents.ContainsKey( EventRarity.Common ) )
 		{
 			int eventsPicked = 0;
@@ -427,8 +424,8 @@ public class StoryMaster : Component
 		storyMaster._timeManager.StartDay();
 
 		EventMaster.Instance.UnloadAllEvents();
-		storyMaster.LoadEventPool( GameTimeManager.RandomSeed );
-		storyMaster.SetRandomDialogues( GameTimeManager.RandomSeed );
+		storyMaster.LoadEventPool();
+		storyMaster.SetRandomDialogues();
 		storyMaster.RandomizeClothing();
 
 		if ( Player.Local.IsValid() )
@@ -481,12 +478,10 @@ public class StoryMaster : Component
 		}
 	}
 
-	public void SetRandomDialogues( int randomSeed )
+	public void SetRandomDialogues()
 	{
 		var allDialogues = Scene.GetAllComponents<DialogueTree>()
 			.Where( x => x.HasRandomDialogues );
-
-		Game.SetRandomSeed( randomSeed );
 
 		foreach ( var dialogue in allDialogues )
 			dialogue.SelectRandomDialogue();
