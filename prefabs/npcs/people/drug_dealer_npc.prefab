@@ -1,0 +1,276 @@
+{
+  "RootObject": {
+    "__guid": "da5eb5f7-28b6-48de-8271-a11670dc156c",
+    "Name": "drug_dealer_npc",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "CapsuleCollider",
+        "__guid": "c9e37305-e0d7-4ea2-99cf-5f74bc0229c3",
+        "End": "0,0,68",
+        "IsTrigger": false,
+        "Radius": 12,
+        "Start": "0,0,12",
+        "Static": false
+      },
+      {
+        "__type": "Interactions",
+        "__guid": "01f4856c-6f16-43d9-99cb-149a95dea616",
+        "HideOnEmpty": false,
+        "ObjectInteractions": [
+          {
+            "Keybind": "Use",
+            "Description": "Talk",
+            "Action": {
+              "Version": 5,
+              "UserData": {
+                "Title": "Action",
+                "id": "462927b9-1f01-4ba8-9f6b-2e1e6a5934e4",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [
+                {
+                  "Name": "amount",
+                  "Type": "System.Private.CoreLib/System.Int32"
+                }
+              ],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input"
+                },
+                {
+                  "Id": 4,
+                  "Type": "property.set",
+                  "Properties": {
+                    "_type": "Sandbox.Game/Sandbox.Component",
+                    "_name": "Enabled"
+                  },
+                  "UserData": {
+                    "Position": "368,368"
+                  }
+                },
+                {
+                  "Id": 10,
+                  "Type": "time.delay",
+                  "UserData": {
+                    "Position": "1024,48"
+                  }
+                },
+                {
+                  "Id": 14,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_name": "CaptureMemory"
+                  },
+                  "UserData": {
+                    "Position": "912,-224"
+                  }
+                },
+                {
+                  "Id": 18,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "component": {
+                      "_type": "component",
+                      "component_id": "01f4856c-6f16-43d9-99cb-149a95dea616",
+                      "go": "da5eb5f7-28b6-48de-8271-a11670dc156c",
+                      "component_type": "Interactions"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "48,352"
+                  }
+                },
+                {
+                  "Id": 20,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": true,
+                    "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                    "_name": "SpeakWithSubtitle"
+                  },
+                  "UserData": {
+                    "Position": "640,48"
+                  }
+                },
+                {
+                  "Id": 22,
+                  "Type": "call",
+                  "Properties": {
+                    "_isStatic": false,
+                    "_type": "package.fish.sauna/Sauna.Inventory",
+                    "_name": "GiveItem"
+                  },
+                  "UserData": {
+                    "Position": "1248,48"
+                  }
+                },
+                {
+                  "Id": 23,
+                  "Type": "property.get",
+                  "Properties": {
+                    "_type": "package.fish.sauna/Sauna.Player",
+                    "_name": "Inventory"
+                  },
+                  "UserData": {
+                    "Position": "736,208"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 4,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 18,
+                  "SrcName": "_result",
+                  "DstId": 4,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": false,
+                  "DstId": 4,
+                  "DstName": "_value"
+                },
+                {
+                  "SrcId": 20,
+                  "SrcName": "_signal",
+                  "DstId": 10,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": 1,
+                  "DstId": 10,
+                  "DstName": "seconds"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 14,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 14,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": "This kind fellow gave me some interesting medication...",
+                  "DstId": 14,
+                  "DstName": "caption"
+                },
+                {
+                  "Value": 150,
+                  "DstId": 14,
+                  "DstName": "distance"
+                },
+                {
+                  "Value": "drug.dealer",
+                  "DstId": 14,
+                  "DstName": "identifier"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 20,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": "Suspicious Gentleman",
+                  "DstId": 20,
+                  "DstName": "name"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_target",
+                  "DstId": 20,
+                  "DstName": "obj"
+                },
+                {
+                  "Value": "Take these... come back to me with some money if you want more.",
+                  "DstId": 20,
+                  "DstName": "subtitle"
+                },
+                {
+                  "SrcId": 10,
+                  "SrcName": "_signal",
+                  "DstId": 22,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 23,
+                  "SrcName": "_result",
+                  "DstId": 22,
+                  "DstName": "_target"
+                },
+                {
+                  "Value": "prefabs/items/pills.prefab",
+                  "DstId": 22,
+                  "DstName": "prefabFile"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "interactor",
+                  "DstId": 23,
+                  "DstName": "_target"
+                }
+              ]
+            },
+            "InteractDistance": 75,
+            "Accessibility": "World",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
+            "CooldownTime": 0.5,
+            "Animation": "Interact"
+          }
+        ]
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "886ecd19-4e3a-4ebe-b570-1a25069b3ce1",
+        "Name": "Model",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "Character",
+            "__guid": "cfb8d2d1-de4b-4bf5-92f4-eef73603a6a0",
+            "Clothes": [
+              "models/clothes/beanie/beanie.vmdl",
+              "models/clothes/wifebeater/wifebeater.vmdl",
+              "models/clothes/wives_undies/wives_panties.vmdl",
+              "models/clothes/socks/socks.vmdl"
+            ],
+            "Fatness": 0,
+            "Height": 100,
+            "HideBodyGroup": "Torso, Legs, Feet"
+          },
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "27d07bc8-394b-4d55-87b3-0901dce05e81",
+            "BodyGroups": 1365,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "0.14884,0.08861,0.08861,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
