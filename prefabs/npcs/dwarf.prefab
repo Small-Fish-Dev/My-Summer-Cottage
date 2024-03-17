@@ -130,6 +130,31 @@
               "UserData": {
                 "Position": "512,256"
               }
+            },
+            {
+              "Id": 11,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "8ed806c9-ca30-4215-98f9-beeb1742cd95"
+                }
+              },
+              "UserData": {
+                "Position": "832,208"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "call",
+              "Properties": {
+                "_name": "Destroy",
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "1072,256"
+              }
             }
           ],
           "Links": [
@@ -207,6 +232,18 @@
               "SrcName": "enemy",
               "DstId": 8,
               "DstName": "target"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "succesfullyEscaped",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "_target"
             }
           ]
         },
