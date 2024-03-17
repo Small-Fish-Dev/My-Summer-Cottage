@@ -545,7 +545,8 @@ public class StoryMaster : Component
 		"The day will automatically end in the middle of the night.",
 		"Try to go back home before 3am, weird things happen.",
 		"Only some items can be sold at certain shops.",
-		"If you ever end up losing an item you can buy a replacement at one of the town shops."
+		"If you ever end up losing an item you can buy a replacement at one of the town shops.",
+		"You can view the sell price of an item by mousing over it in your inventory. Some items cannot be sold!"
 	};
 
 	TimeSince _lastTipAttempt = 0f;

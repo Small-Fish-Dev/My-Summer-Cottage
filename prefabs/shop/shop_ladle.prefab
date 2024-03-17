@@ -1,0 +1,45 @@
+{
+  "RootObject": {
+    "__guid": "d88ac108-da02-4fec-9564-237f2c572259",
+    "Name": "shop_ladle",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "ShopItem",
+        "__guid": "9fc8989b-e4c6-488f-9e32-893721d05de8",
+        "Item": "prefabs/items/ladel.prefab",
+        "Price": 25
+      },
+      {
+        "__type": "ModelRenderer",
+        "__guid": "f67d7b20-f59b-4536-80ed-e49bc0f6dd7d",
+        "BodyGroups": 3,
+        "Model": "models/ladel/ladel.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "ModelCollider",
+        "__guid": "3fd53677-fbc7-4d0c-af3f-1e6cf143d969",
+        "IsTrigger": false,
+        "Model": "models/ladel/ladel.vmdl",
+        "Static": false
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "596d5e13-8f7a-477a-ad1f-8b5378125177",
+        "Name": "GameObject",
+        "Enabled": true,
+        "NetworkMode": 2
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
