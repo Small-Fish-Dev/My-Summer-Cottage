@@ -544,6 +544,8 @@ public class StoryMaster : Component
 		"Run.",
 		"The day will automatically end in the middle of the night.",
 		"Try to go back home before 3am, weird things happen.",
+		"Only some items can be sold at certain shops.",
+		"If you ever end up losing an item you can buy a replacement at one of the town shops."
 	};
 
 	TimeSince _lastTipAttempt = 0f;

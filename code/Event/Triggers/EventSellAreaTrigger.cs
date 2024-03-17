@@ -1,5 +1,8 @@
 using Sauna;
 using Sauna.Event;
+using Sauna.SFX;
+
+namespace Sauna;
 
 [Icon( "highlight_alt" )]
 [Category( "Events" )]
@@ -28,6 +31,8 @@ public sealed class EventSellAreaTrigger : EventTrigger
 
 	public override bool IsPolled { get; set; } = true;
 
+	private readonly SoundEvent _sellSound = ResourceLibrary.Get<SoundEvent>( "sounds/misc/purchase.sound" );
+
 	public override void PolledMethod()
 	{
 		var items = Scene.FindInPhysics( WorldBBox )
@@ -41,6 +46,8 @@ public sealed class EventSellAreaTrigger : EventTrigger
 		{
 			CallTrigger( item.LastOwner.GameObject, item.GameObject );
 			item.LastOwner.Money += item.SellPrice;
+			item.GameObject.PlaySound( _sellSound );
+			LegacyParticles.Create( "particles/purchase.vpcf", GameObject.Transform.World, deleteTime: 1000 );
 			item.GameObject.Destroy();
 		}
 	}
