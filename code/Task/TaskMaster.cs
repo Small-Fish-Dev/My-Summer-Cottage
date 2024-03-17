@@ -614,4 +614,15 @@ public partial class TaskMaster : Component, Component.INetworkListener
 	/// <param name="taskId"></param>
 	[Broadcast( NetPermission.Anyone )]
 	public static void ResetEveryoneTask( int taskId ) => ResetTask( ResourceLibrary.Get<SaunaTask>( taskId ) );
+
+
+	[ConCmd( "sauna_givetask" )]
+	public static void GiveTask( string taskName )
+	{
+		var task = ResourceLibrary.GetAll<SaunaTask>().Where( ( t ) => t.ResourceName.ToLower().Contains( taskName.ToLower() ) ).FirstOrDefault();
+		if ( task is null )
+			return;
+
+		AssignEveryoneNewTask( task.ResourceId );
+	}
 }
