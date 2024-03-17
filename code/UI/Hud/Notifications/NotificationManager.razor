@@ -4,13 +4,18 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root />
+<root/>
 
 @code {
 	private const int MAX_AMOUNT = 4;
+	private const float RIPPLE_PERIOD = 5;
 
 	private static NotificationManager _instance;
 	private Dictionary<Notification, TimeUntil> _notifications = new();
+
+	private record SpecialNotification( Notification Notification, Func<bool> Condition );
+
+	private List<SpecialNotification> _specialNotifications = new();
 
 	public NotificationManager()
 	{
@@ -42,7 +47,7 @@
 	/// <param name="time"></param>
 	public static void Popup( string title, string description, Color theme, string icon = null, int? number = null, int time = 7, string classes = null )
 	{
-		if (_instance is null)
+		if ( _instance is null )
 			return;
 
 		DeleteOldest();
@@ -61,20 +66,52 @@
 	}
 
 	/// <summary>
+	/// Creates an unique styled notification popup that won't hide until the condition is satisfied.
+	/// </summary>
+	/// <param name="title"></param>
+	/// <param name="description"></param>
+	/// <param name="theme"></param>
+	/// <param name="condition"></param>
+	/// <param name="icon"></param>
+	/// <param name="number"></param>
+	public static void SpecialPopup( string title, string description, Color theme, Func<bool> condition, string icon = null, int? number = null, string classes = null )
+	{
+		if ( _instance is null )
+			return;
+
+		DeleteOldest();
+
+		// Create notification instance.
+		var notification = _instance.AddChild<Notification>();
+		notification.IsImportant = true;
+		notification.Title = title;
+		notification.Theme = theme;
+		notification.Description = description;
+		notification.Icon = icon;
+		notification.Number = number;
+		notification.AdditionalClasses = classes;
+
+		_instance._specialNotifications.Add( new SpecialNotification( notification, condition ) );
+	}
+
+	[ConCmd( "test_push_notification" )]
+	public static void TestPushNotification( string title, string description ) => Popup( title, description, new Color( 207f / 255f, 124f / 255f, 23f / 255f ) );
+
+	/// <summary>
 	/// Creates a notification popup for a task.
 	/// </summary>
 	/// <param name="task"></param>
 	/// <param name="completed"></param>
 	/// <param name="failed"></param>
 	public static void Popup( SaunaTask task, bool completed = false, bool failed = false )
-		=> Popup( 
-			 $"{(completed ? "Completed" : failed ? "Failed" : "New")} {(task.IsPrimary ? "story" : "side")} task",
-			 task.Subtitle,
-			 completed ? "#33cc33" : failed ? "#cc0000" : task.IsPrimary ? "#bc4d2a" : "#0e599f",
-			 task.IsPrimary ? "ui/hud/primary_task.png" : "ui/hud/substory_task.png",
-			 TaskMaster.IndexOf( task ),
-			 7,
-			 failed ? "failed" : ""
+		=> Popup(
+			$"{(completed ? "Completed" : failed ? "Failed" : "New")} {(task.IsPrimary ? "story" : "side")} task",
+			task.Subtitle,
+			completed ? "#33cc33" : failed ? "#cc0000" : task.IsPrimary ? "#bc4d2a" : "#0e599f",
+			task.IsPrimary ? "ui/hud/primary_task.png" : "ui/hud/substory_task.png",
+			TaskMaster.IndexOf( task ),
+			7,
+			failed ? "failed" : ""
 		);
 
 	public override void Tick()
@@ -93,5 +130,16 @@
 				break;
 			}
 		}
+
+		// Delete special popups.
+		foreach ( var specialNotification in new List<SpecialNotification>( _specialNotifications ).Where( specialNotification => specialNotification.Condition.Invoke() ) )
+		{
+			if ( !specialNotification.Notification.IsDeleting )
+				specialNotification.Notification.Delete();
+
+			if ( !specialNotification.Notification.IsValid() )
+				_specialNotifications.Remove( specialNotification );
+		}
 	}
+
 }

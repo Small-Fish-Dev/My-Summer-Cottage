@@ -10,6 +10,25 @@ Notification {
     transition: transform 0.5s ease-in-out;
     color: white;
     max-width: 500px;
+    
+    position: relative;
+    
+    .ripple {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        
+        background-color: rgba(255, 255, 255, 0.25);
+        
+        opacity: 0;
+        transform: scale(1);
+        
+        z-index: 0;
+
+        animation: 5s ease-out 0s infinite normal ripple;
+    }
 
     .notif-number {
         height: $header-height;
@@ -69,5 +88,27 @@ Notification {
     &:outro {
         transform: translateX(100%);
         sound-in: 'drag';
+    }
+}
+
+@keyframes ripple {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    
+    1% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    20% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+    
+    100% {
+        opacity: 0;
+        transform: scale(1.2);
     }
 }

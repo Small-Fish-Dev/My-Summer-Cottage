@@ -3,15 +3,19 @@
 @inherits Panel
 
 <root class="@AdditionalClasses">
+	@if ( IsImportant )
+	{
+		<div class="ripple" @ref= _ripple></div>
+	}
 	@if ( Number != null )
 	{
-		<div class="notif-number" style="background-color: darken(@(Hex), 0.3); color: @(Hex);">##@Number</div>
+		<div class="notif-number" style="background-color: darken(@( Hex ), 0.3); color: @( Hex );">##@Number</div>
 	}
 	<div class="notif-content">
-		<div class="notif-header" style="background-color: @(Hex);">
+		<div class="notif-header" style="background-color: @( Hex );">
 			@if ( !string.IsNullOrWhiteSpace( Icon ) )
 			{
-				<img class="notif-icon" src=@Icon />
+				<img class="notif-icon" src=@Icon/>
 			}
 			<div class="notif-title">@Title</div>
 		</div>
@@ -22,12 +26,14 @@
 @code {
 	public const string DEFAULT_THEME = "#bc4d2a";
 
+	public bool IsImportant { get; set; } = false;
 	public string Title { get; set; }
 	public string Icon { get; set; }
 	public string Description { get; set; }
 	public int? Number { get; set; }
 	public int Time { get; set; } = 7;
 	public string AdditionalClasses { get; set; }
+
 	public Color Theme
 	{
 		get => Color.Parse( Hex ) ?? Color.Gray;
@@ -39,14 +45,17 @@
 
 	public string Hex { get; set; } = DEFAULT_THEME;
 
+	private Panel _ripple;
+
 	protected override int BuildHash()
 	{
-		return HashCode.Combine( 
-			Title, 
-			Icon, 
-			Description, 
+		return HashCode.Combine(
+			Title,
+			Icon,
+			Description,
 			Hex,
-			Number 
+			Number
 		);
 	}
+
 }
