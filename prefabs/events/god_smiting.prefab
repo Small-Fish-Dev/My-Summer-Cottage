@@ -11,7 +11,7 @@
         "AddToEventPool": true,
         "EventName": "lightning_strike",
         "EventSignals": [],
-        "Rarity": "Common",
+        "Rarity": "Rare",
         "ReinstantiateOnRestart": true,
         "Stackable": true,
         "Type": "Random"
@@ -36,7 +36,7 @@
               "Id": 0,
               "Type": "input",
               "UserData": {
-                "Position": "-272,0"
+                "Position": "-768,-0"
               }
             },
             {
@@ -49,7 +49,7 @@
                 }
               },
               "UserData": {
-                "Position": "-128,-176",
+                "Position": "-384,-192",
                 "Labels": {
                   "_result": "bolt"
                 }
@@ -59,24 +59,24 @@
               "Id": 5,
               "Type": "call",
               "Properties": {
-                "_isStatic": true,
                 "_name": "SpeakWithSubtitle",
-                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true
               },
               "UserData": {
-                "Position": "304,0"
+                "Position": "-512,-0"
               }
             },
             {
               "Id": 6,
               "Type": "call",
               "Properties": {
-                "_isStatic": false,
                 "_name": "Damage",
-                "_type": "package.fish.sauna/HealthComponent"
+                "_type": "package.fish.sauna/HealthComponent",
+                "_isStatic": false
               },
               "UserData": {
-                "Position": "560,0"
+                "Position": "592,0"
               }
             },
             {
@@ -84,8 +84,8 @@
               "Type": "property.get",
               "ParentId": 2,
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Transform"
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
               },
               "UserData": {
                 "Labels": {
@@ -111,19 +111,19 @@
               "Id": 9,
               "Type": "time.delay",
               "UserData": {
-                "Position": "816,-0"
+                "Position": "848,0"
               }
             },
             {
               "Id": 10,
               "Type": "call",
               "Properties": {
+                "_name": "Capture",
                 "_type": "package.fish.sauna/Sauna.SweetMemories",
-                "_isStatic": true,
-                "_name": "Capture"
+                "_isStatic": true
               },
               "UserData": {
-                "Position": "1072,16"
+                "Position": "1104,0"
               }
             },
             {
@@ -138,7 +138,7 @@
                 }
               },
               "UserData": {
-                "Position": "1104,240"
+                "Position": "1056,208"
               }
             },
             {
@@ -150,18 +150,18 @@
                 "_name": "Finish"
               },
               "UserData": {
-                "Position": "1376,16"
+                "Position": "1376,0"
               }
             },
             {
               "Id": 14,
               "Type": "property.set",
               "Properties": {
-                "_type": "Sandbox.Game/Sandbox.GameObject",
-                "_name": "Enabled"
+                "_name": "Enabled",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
               },
               "UserData": {
-                "Position": "240,-128"
+                "Position": "336,-112"
               }
             },
             {
@@ -172,75 +172,73 @@
                 "_name": "Enabled"
               },
               "UserData": {
-                "Position": "720,-128"
+                "Position": "1200,-112"
               }
             },
             {
               "Id": 16,
               "Type": "time.delay",
               "UserData": {
-                "Position": "496,-96"
+                "Position": "960,-112"
               }
             },
             {
-              "Id": 17,
+              "Id": 21,
+              "Type": "player.getrandom",
+              "UserData": {
+                "Position": "-256,0"
+              }
+            },
+            {
+              "Id": 22,
+              "Type": "property.get",
+              "ParentId": 21,
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.Component"
+              }
+            },
+            {
+              "Id": 23,
+              "Type": "property.get",
+              "ParentId": 22,
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 24,
               "Type": "property.set",
               "Properties": {
-                "_name": "GameObject",
+                "_name": "Position",
                 "_type": "Sandbox.Game/Sandbox.GameTransform"
               },
               "UserData": {
-                "Position": "256,-304"
+                "Position": "64,-112"
               }
             },
             {
-              "Id": 18,
-              "Type": "call",
-              "Properties": {
-                "_isStatic": true,
-                "_name": "PlaySound",
-                "_type": "package.fish.sauna/Sauna.GameObjectExtensions"
-              },
-              "UserData": {
-                "Position": "352,256"
-              }
-            },
-            {
-              "Id": 19,
-              "Type": "player.getrandom",
-              "UserData": {
-                "Position": "-96,0",
-                "Labels": {
-                  "_result": "player"
-                }
-              }
-            },
-            {
-              "Id": 20,
+              "Id": 25,
               "Type": "scene.get",
               "Properties": {
                 "T": "package.fish.sauna/HealthComponent"
               },
               "UserData": {
-                "Position": "-64,208",
-                "Labels": {
-                  "_result": "ply_health"
-                }
+                "Position": "64,-0"
               }
             },
             {
-              "Id": 21,
-              "Type": "property.get",
-              "ParentId": 19,
-              "Properties": {
-                "_name": "GameObject",
-                "_type": "Sandbox.Game/Sandbox.Component"
+              "Id": 26,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "592,-240"
               }
             }
           ],
           "Links": [
             {
-              "SrcId": 19,
+              "SrcId": 0,
               "SrcName": "_signal",
               "DstId": 5,
               "DstName": "_signal"
@@ -276,13 +274,13 @@
               "DstName": "subtitle"
             },
             {
-              "SrcId": 5,
+              "SrcId": 14,
               "SrcName": "_signal",
               "DstId": 6,
               "DstName": "_signal"
             },
             {
-              "SrcId": 20,
+              "SrcId": 25,
               "SrcName": "_result",
               "DstId": 6,
               "DstName": "_target"
@@ -381,7 +379,7 @@
               "DstName": "_target"
             },
             {
-              "SrcId": 17,
+              "SrcId": 24,
               "SrcName": "_signal",
               "DstId": 14,
               "DstName": "_signal"
@@ -426,61 +424,63 @@
               "DstName": "seconds"
             },
             {
-              "SrcId": 19,
+              "SrcId": 5,
               "SrcName": "_signal",
-              "DstId": 17,
+              "DstId": 21,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_result",
+              "DstId": 22,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 22,
+              "SrcName": "_result",
+              "DstId": 23,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_signal",
+              "DstId": 24,
               "DstName": "_signal"
             },
             {
               "SrcId": 7,
               "SrcName": "_result",
-              "DstId": 17,
+              "DstId": 24,
               "DstName": "_target"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "_value"
             },
             {
               "SrcId": 21,
               "SrcName": "_result",
-              "DstId": 17,
-              "DstName": "_value"
-            },
-            {
-              "SrcId": 19,
-              "SrcName": "_signal",
-              "DstId": 18,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_target",
-              "DstId": 18,
-              "DstName": "obj"
-            },
-            {
-              "Value": {
-                "$type": "Simple",
-                "Type": "Sandbox.Engine/Sandbox.SoundEvent",
-                "Value": "sounds/rifle/rifle-shoot.sound"
-              },
-              "DstId": 18,
-              "DstName": "sound"
-            },
-            {
-              "SrcId": 0,
-              "SrcName": "_signal",
-              "DstId": 19,
-              "DstName": "_signal"
-            },
-            {
-              "SrcId": 19,
-              "SrcName": "_result",
-              "DstId": 20,
+              "DstId": 25,
               "DstName": "_this"
             },
             {
-              "SrcId": 19,
+              "SrcId": 14,
+              "SrcName": "_signal",
+              "DstId": 26,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
               "SrcName": "_result",
-              "DstId": 21,
-              "DstName": "_target"
+              "DstId": 26,
+              "DstName": "_this"
+            },
+            {
+              "Value": "sounds/rifle/rifle-shoot.sound",
+              "DstId": 26,
+              "DstName": "soundEvent"
             }
           ]
         },
@@ -507,6 +507,7 @@
       {
         "__guid": "fe96632e-7306-48b8-9366-69d84f7d46cd",
         "Name": "lightning_bolt",
+        "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
