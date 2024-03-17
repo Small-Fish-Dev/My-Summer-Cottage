@@ -1,13 +1,13 @@
 {
   "RootObject": {
-    "__guid": "da5eb5f7-28b6-48de-8271-a11670dc156c",
+    "__guid": "5e4cf611-3997-4e17-8222-30bd3fbd066a",
     "Name": "drug_dealer_npc",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "CapsuleCollider",
-        "__guid": "c9e37305-e0d7-4ea2-99cf-5f74bc0229c3",
+        "__guid": "a78900d6-2219-4ada-976c-a3c5a7295dac",
         "End": "0,0,68",
         "IsTrigger": false,
         "Radius": 12,
@@ -16,7 +16,7 @@
       },
       {
         "__type": "Interactions",
-        "__guid": "01f4856c-6f16-43d9-99cb-149a95dea616",
+        "__guid": "e08b2178-210e-4771-9bc4-6e2396e97ea3",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -76,8 +76,8 @@
                   "Properties": {
                     "component": {
                       "_type": "component",
-                      "component_id": "01f4856c-6f16-43d9-99cb-149a95dea616",
-                      "go": "da5eb5f7-28b6-48de-8271-a11670dc156c",
+                      "component_id": "e08b2178-210e-4771-9bc4-6e2396e97ea3",
+                      "go": "5e4cf611-3997-4e17-8222-30bd3fbd066a",
                       "component_type": "Interactions"
                     }
                   },
@@ -236,27 +236,28 @@
     ],
     "Children": [
       {
-        "__guid": "886ecd19-4e3a-4ebe-b570-1a25069b3ce1",
+        "__guid": "fec33636-8fe7-4a05-83c1-241513742396",
         "Name": "Model",
         "Enabled": true,
         "NetworkMode": 2,
         "Components": [
           {
             "__type": "Character",
-            "__guid": "cfb8d2d1-de4b-4bf5-92f4-eef73603a6a0",
+            "__guid": "f04e8b54-4d73-462e-893c-20320652725f",
             "Clothes": [
               "models/clothes/beanie/beanie.vmdl",
               "models/clothes/wifebeater/wifebeater.vmdl",
               "models/clothes/wives_undies/wives_panties.vmdl",
-              "models/clothes/socks/socks.vmdl"
+              "models/clothes/trainers/trainers.vmdl",
+              "models/clothes/loose_trousers/khakis.vmdl"
             ],
             "Fatness": 0,
             "Height": 100,
-            "HideBodyGroup": "Torso, Legs, Feet"
+            "HideBodyGroup": "Legs, Feet"
           },
           {
             "__type": "SkinnedModelRenderer",
-            "__guid": "27d07bc8-394b-4d55-87b3-0901dce05e81",
+            "__guid": "cf567330-f0af-4a49-a6c1-68a4967a50ec",
             "BodyGroups": 1365,
             "CreateBoneObjects": false,
             "Model": "models/guy/guy.vmdl",

@@ -1,0 +1,184 @@
+{
+  "RootObject": {
+    "__guid": "dea6beca-c444-4855-9135-b41a2b4c680e",
+    "Name": "drug_dealing",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "9487a254-0367-4615-a808-f4b39a5c2a6d",
+        "AddToEventPool": true,
+        "EventName": "Drug Dealing",
+        "EventSignals": [],
+        "Rarity": "Rare",
+        "ReinstantiateOnRestart": true,
+        "Stackable": true,
+        "Type": "Interaction"
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "c5adc82b-2aa5-4cfd-9c43-7bc203ed36c8",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "c63577c3-c18c-4ec5-81fe-ce9a9e9d6baa",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "224,32"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Message",
+                "_isStatic": true,
+                "_name": "Receive"
+              },
+              "UserData": {
+                "Position": "464,32"
+              }
+            },
+            {
+              "Id": 5,
+              "Type": "resource.ref",
+              "Properties": {
+                "value": "resources/tasks/event_tasks/event.nigerian_prince.task",
+                "T": "package.fish.sauna/Sauna.SaunaTask"
+              },
+              "UserData": {
+                "Position": "64,176"
+              }
+            },
+            {
+              "Id": 6,
+              "Type": "property.get",
+              "ParentId": 5,
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.SaunaTask",
+                "_name": "Giver"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "property.get",
+              "ParentId": 5,
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.SaunaTask",
+                "_name": "Message"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "event.assigntasktoeveryone",
+              "UserData": {
+                "Position": "464,192"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 40,
+              "DstId": 1,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "content"
+            },
+            {
+              "SrcId": 6,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "sender"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 6,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "taskToAdd"
+            }
+          ]
+        },
+        "RequiredToFinish": true,
+        "TriggerCooldown": 1,
+        "TriggerOnce": true,
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "41e616bf-1a64-476d-9e73-44431b6064d9",
+            "go": "dea6beca-c444-4855-9135-b41a2b4c680e",
+            "component_type": "EventEnabledTrigger"
+          }
+        ]
+      },
+      {
+        "__type": "EventEnabledTrigger",
+        "__guid": "41e616bf-1a64-476d-9e73-44431b6064d9",
+        "MaxPollingRate": 5,
+        "TriggerSignalIdentifier": null
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "c2ffbae0-2605-4d60-bb5c-d1d3d875a597",
+        "Name": "Suspicious Gentleman",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/npcs/people/drug_dealer_npc.prefab"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
