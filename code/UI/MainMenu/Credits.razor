@@ -11,7 +11,7 @@
 		style="position: absolute; top: 50px;"/>
 
 	<div class="sweet-memories">
-		<img src=@(_currentArt) style="opacity: @_imageOpacity"/>
+		<img src=@( _currentArt ) style="opacity: @_imageOpacity"/>
 	</div>
 
 	<div class="credits" ondrag="@( () => StopScrolling() )" onclick="@( () => StopScrolling() )" @ref=" _creditsPanel">
@@ -174,9 +174,9 @@
 		if ( _timeSincePicture >= PictureDelay )
 		{
 			if ( _timeSincePicture >= PictureDelay + PictureFade )
-				_imageOpacity = 0;
-			else
 				CurrentArtIndex++;
+			else
+				_imageOpacity = 0;
 		}
 	}
 
