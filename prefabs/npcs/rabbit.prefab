@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+    "__guid": "52308669-13ca-474a-a8f0-99cf75e89902",
     "Name": "rabbit",
     "Tags": "animal,npc,prey",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
-        "__guid": "68bdc5db-2975-4a28-b43e-842550e58469",
+        "__guid": "07b35922-5398-42ee-9c96-9a9054257f1d",
         "AlertOthers": true,
         "AttackCooldown": 8,
         "AttackRange": 40,
@@ -17,8 +17,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "component_id": "67db706f-4f25-422b-ad5c-b6727546ff94",
-          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+          "component_id": "bd757bde-7661-4ee2-a6ec-19ba1362f552",
+          "go": "52308669-13ca-474a-a8f0-99cf75e89902",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -27,14 +27,14 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "component_id": "c34b4443-f877-43d4-be1e-933dfc3ead2d",
-          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+          "component_id": "890df90b-047d-4ab2-9dbf-07f7731f034f",
+          "go": "52308669-13ca-474a-a8f0-99cf75e89902",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "component_id": "fe626525-d5c0-4562-b4d6-3b748ee5b1e4",
-          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+          "component_id": "c8b7c993-c39d-4334-90a4-c80308791a86",
+          "go": "52308669-13ca-474a-a8f0-99cf75e89902",
           "component_type": "MoveHelper"
         },
         "Name": "Hare",
@@ -79,7 +79,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+                  "go": "52308669-13ca-474a-a8f0-99cf75e89902",
                   "component_type": "NPC"
                 }
               },
@@ -314,7 +314,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+                  "go": "52308669-13ca-474a-a8f0-99cf75e89902",
                   "component_type": "NPC"
                 }
               },
@@ -473,17 +473,17 @@
           ]
         },
         "RunningType": "Normal",
-        "RunSpeed": 120,
+        "RunSpeed": 320,
         "ScaleStats": true,
         "Static": false,
         "VisionRange": 900,
         "WalkingType": "Dumb",
-        "WalkSpeed": 30,
+        "WalkSpeed": 90,
         "Weight": "Light"
       },
       {
         "__type": "MoveHelper",
-        "__guid": "fe626525-d5c0-4562-b4d6-3b748ee5b1e4",
+        "__guid": "c8b7c993-c39d-4334-90a4-c80308791a86",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -516,7 +516,7 @@
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "fd4f8ba7-0f7e-401a-a67a-8ab1e888565b",
+        "__guid": "85721edf-28c3-4577-868b-6b4357e8ec05",
         "End": "0,0,8",
         "IsTrigger": false,
         "Radius": 5,
@@ -525,7 +525,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "c34b4443-f877-43d4-be1e-933dfc3ead2d",
+        "__guid": "890df90b-047d-4ab2-9dbf-07f7731f034f",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/hare/hare.vmdl",
@@ -534,7 +534,7 @@
       },
       {
         "__type": "HealthComponent",
-        "__guid": "67db706f-4f25-422b-ad5c-b6727546ff94",
+        "__guid": "bd757bde-7661-4ee2-a6ec-19ba1362f552",
         "CanRegenerate": false,
         "DamagedBy": "Mild",
         "DropOnDeath": [
