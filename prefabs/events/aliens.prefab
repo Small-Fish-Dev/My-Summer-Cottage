@@ -1,0 +1,632 @@
+{
+  "RootObject": {
+    "__guid": "fcb84dc9-e869-448d-8a79-3fcfed8cd023",
+    "Name": "aliens",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "9da71c7b-9e39-47b5-88fa-77fb75f2e50d",
+        "AddToEventPool": true,
+        "EventName": "Aliens",
+        "EventSignals": [],
+        "Rarity": "Rare",
+        "ReinstantiateOnRestart": true,
+        "Stackable": true,
+        "Type": "Zone"
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "7748d0ec-0534-4bdb-be8e-466a30bd009c",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "30c82bc2-7e05-4d19-bc3a-ed9a93b7cbe4",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-544,-64"
+              }
+            },
+            {
+              "Id": 17,
+              "Type": "event.finished",
+              "UserData": {
+                "Position": "400,64"
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "7748d0ec-0534-4bdb-be8e-466a30bd009c",
+                  "go": "fcb84dc9-e869-448d-8a79-3fcfed8cd023",
+                  "component_type": "EventComponent"
+                }
+              },
+              "UserData": {
+                "Position": "176,112"
+              }
+            },
+            {
+              "Id": 38,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "a266b90e-23ca-48c5-9146-e63f08efbca1"
+                }
+              },
+              "UserData": {
+                "Position": "-448,128"
+              }
+            },
+            {
+              "Id": 40,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "f149dd4c-2836-47c6-a532-9591be7cafcf"
+                }
+              },
+              "UserData": {
+                "Position": "-464,224"
+              }
+            },
+            {
+              "Id": 42,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "81cea7b9-baf8-43cd-aa8d-5df7ccd8174f"
+                }
+              },
+              "UserData": {
+                "Position": "-464,320"
+              }
+            },
+            {
+              "Id": 43,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Enabled",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "-144,128"
+              }
+            },
+            {
+              "Id": 44,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Enabled",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "-144,224"
+              }
+            },
+            {
+              "Id": 45,
+              "Type": "property.set",
+              "Properties": {
+                "_name": "Enabled",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "-144,320"
+              }
+            },
+            {
+              "Id": 47,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "67c822a1-cac7-4f3b-8ed3-227d55c42083"
+                }
+              },
+              "UserData": {
+                "Position": "-544,-240"
+              }
+            },
+            {
+              "Id": 48,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "-272,-80"
+              }
+            },
+            {
+              "Id": 49,
+              "Type": "event.interpolateposition",
+              "UserData": {
+                "Position": "32,-112"
+              }
+            },
+            {
+              "Id": 50,
+              "Type": "property.get",
+              "ParentId": 47,
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              }
+            },
+            {
+              "Id": 51,
+              "Type": "property.get",
+              "ParentId": 50,
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 52,
+              "Type": "op.add",
+              "UserData": {
+                "Position": "-240,-304"
+              }
+            },
+            {
+              "Id": 53,
+              "Type": "call",
+              "Properties": {
+                "_name": "CaptureMemory",
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "176,-320"
+              }
+            },
+            {
+              "Id": 54,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "-176,16"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 49,
+              "SrcName": "_signal",
+              "DstId": 17,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_result",
+              "DstId": 17,
+              "DstName": "component"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 43,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 38,
+              "SrcName": "_result",
+              "DstId": 43,
+              "DstName": "_target"
+            },
+            {
+              "Value": true,
+              "DstId": 43,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 44,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 40,
+              "SrcName": "_result",
+              "DstId": 44,
+              "DstName": "_target"
+            },
+            {
+              "Value": true,
+              "DstId": 44,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 45,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 42,
+              "SrcName": "_result",
+              "DstId": 45,
+              "DstName": "_target"
+            },
+            {
+              "Value": true,
+              "DstId": 45,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 48,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 4,
+              "DstId": 48,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 48,
+              "SrcName": "_signal",
+              "DstId": 49,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 50,
+              "DstId": 49,
+              "DstName": "duration"
+            },
+            {
+              "Value": "EaseOut",
+              "DstId": 49,
+              "DstName": "easer"
+            },
+            {
+              "SrcId": 51,
+              "SrcName": "_result",
+              "DstId": 49,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 47,
+              "SrcName": "_result",
+              "DstId": 49,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 52,
+              "SrcName": "_result",
+              "DstId": 49,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 47,
+              "SrcName": "_result",
+              "DstId": 50,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 50,
+              "SrcName": "_result",
+              "DstId": 51,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 51,
+              "SrcName": "_result",
+              "DstId": 52,
+              "DstName": "a"
+            },
+            {
+              "Value": {
+                "$type": "Simple",
+                "Type": "Sandbox.System/Vector3",
+                "Value": "99999,0,44444"
+              },
+              "DstId": 52,
+              "DstName": "b"
+            },
+            {
+              "SrcId": 54,
+              "SrcName": "_signal",
+              "DstId": 53,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "THEY ARE ACTUALLY REAL",
+              "DstId": 53,
+              "DstName": "caption"
+            },
+            {
+              "Value": 600,
+              "DstId": 53,
+              "DstName": "distance"
+            },
+            {
+              "Value": "capture.aliens",
+              "DstId": 53,
+              "DstName": "identifier"
+            },
+            {
+              "SrcId": 47,
+              "SrcName": "_result",
+              "DstId": 53,
+              "DstName": "obj"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 54,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 0.5,
+              "DstId": 54,
+              "DstName": "seconds"
+            }
+          ]
+        },
+        "RequiredToFinish": true,
+        "TriggerCooldown": 1,
+        "TriggerOnce": true,
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "bc4df966-2b46-45f8-83ab-44e89c9622d8",
+            "go": "95e854c3-f37f-4c30-8bc2-06c894cfbe83",
+            "component_type": "EventAreaTrigger"
+          }
+        ]
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "95e854c3-f37f-4c30-8bc2-06c894cfbe83",
+        "Name": "aliens_trigger",
+        "Position": "-32,-40,0",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "EventAreaTrigger",
+            "__guid": "bc4df966-2b46-45f8-83ab-44e89c9622d8",
+            "Extents": "2500,2500,1000",
+            "MaxPollingRate": 15,
+            "Offset": "0,0,0",
+            "TagSet": "player",
+            "TriggerPrefab": [],
+            "TriggerSignalIdentifier": "event.aliens"
+          }
+        ]
+      },
+      {
+        "__guid": "67c822a1-cac7-4f3b-8ed3-227d55c42083",
+        "Name": "UFO",
+        "Position": "0,0,2000",
+        "Scale": "2,2,2",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__guid": "f008283e-74ee-44db-9f46-b9a190425907",
+            "BodyGroups": 18446744073709551615,
+            "Model": "models/ufo/ufo.vmdl",
+            "OnComponentUpdate": {
+              "Version": 5,
+              "UserData": {
+                "Title": "On Component Update",
+                "id": "6bd8c1e5-7b50-4158-b891-f5afde358bcb",
+                "ReferencedComponentTypes": []
+              },
+              "Variables": [],
+              "Nodes": [
+                {
+                  "Id": 0,
+                  "Type": "input",
+                  "UserData": {
+                    "Position": "-128,-0"
+                  }
+                },
+                {
+                  "Id": 2,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "gameobject": {
+                      "_type": "gameobject",
+                      "go": "67c822a1-cac7-4f3b-8ed3-227d55c42083"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "-192,80"
+                  }
+                },
+                {
+                  "Id": 3,
+                  "Type": "property.get",
+                  "ParentId": 2,
+                  "Properties": {
+                    "_name": "Transform",
+                    "_type": "Sandbox.Game/Sandbox.GameObject"
+                  }
+                },
+                {
+                  "Id": 5,
+                  "Type": "call",
+                  "Properties": {
+                    "_name": "FromYaw",
+                    "_type": "Sandbox.System/Rotation",
+                    "_isStatic": true
+                  },
+                  "UserData": {
+                    "Position": "112,288"
+                  }
+                },
+                {
+                  "Id": 6,
+                  "Type": "time.delta",
+                  "UserData": {
+                    "Position": "-240,368"
+                  }
+                },
+                {
+                  "Id": 7,
+                  "Type": "op.multiply",
+                  "UserData": {
+                    "Position": "-48,368"
+                  }
+                },
+                {
+                  "Id": 8,
+                  "Type": "op.multiply",
+                  "UserData": {
+                    "Position": "304,288"
+                  }
+                },
+                {
+                  "Id": 9,
+                  "Type": "property.set",
+                  "Properties": {
+                    "_name": "Rotation",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
+                  },
+                  "UserData": {
+                    "Position": "480,224"
+                  }
+                },
+                {
+                  "Id": 10,
+                  "Type": "property.get",
+                  "ParentId": 3,
+                  "Properties": {
+                    "_name": "Rotation",
+                    "_type": "Sandbox.Game/Sandbox.GameTransform"
+                  }
+                }
+              ],
+              "Links": [
+                {
+                  "SrcId": 2,
+                  "SrcName": "_result",
+                  "DstId": 3,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 5,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 7,
+                  "SrcName": "_result",
+                  "DstId": 5,
+                  "DstName": "yaw"
+                },
+                {
+                  "Value": {
+                    "$type": "Simple",
+                    "Type": "System.Private.CoreLib/System.Single",
+                    "Value": 180
+                  },
+                  "DstId": 7,
+                  "DstName": "a"
+                },
+                {
+                  "SrcId": 6,
+                  "SrcName": "_result",
+                  "DstId": 7,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 10,
+                  "SrcName": "_result",
+                  "DstId": 8,
+                  "DstName": "a"
+                },
+                {
+                  "SrcId": 5,
+                  "SrcName": "_result",
+                  "DstId": 8,
+                  "DstName": "b"
+                },
+                {
+                  "SrcId": 5,
+                  "SrcName": "_signal",
+                  "DstId": 9,
+                  "DstName": "_signal"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 9,
+                  "DstName": "_target"
+                },
+                {
+                  "SrcId": 8,
+                  "SrcName": "_result",
+                  "DstId": 9,
+                  "DstName": "_value"
+                },
+                {
+                  "SrcId": 3,
+                  "SrcName": "_result",
+                  "DstId": 10,
+                  "DstName": "_target"
+                }
+              ]
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "__guid": "a266b90e-23ca-48c5-9146-e63f08efbca1",
+        "Name": "bogos_binted",
+        "Position": "-24.31507,-23.78988,1963.121",
+        "Rotation": "0,0,-0.9659258,0.2588192",
+        "Tags": "npc",
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/npcs/bogos_binted.prefab"
+      },
+      {
+        "__guid": "f149dd4c-2836-47c6-a532-9591be7cafcf",
+        "Name": "bogos_binted (1)",
+        "Position": "15.31342,106.8406,1963.121",
+        "Rotation": "0,0,-0.9659258,0.2588192",
+        "Tags": "npc",
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/npcs/bogos_binted.prefab"
+      },
+      {
+        "__guid": "81cea7b9-baf8-43cd-aa8d-5df7ccd8174f",
+        "Name": "bogos_binted (2)",
+        "Position": "85.3474,-15.50042,1963.121",
+        "Rotation": "0,0,-0.9659258,0.2588192",
+        "Tags": "npc",
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/npcs/bogos_binted.prefab"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
