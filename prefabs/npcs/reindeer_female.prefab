@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "7313d52d-71fb-4bee-9196-a05113bb4931",
+    "__guid": "3fbc669a-8c0d-4dae-868d-e9413ed70664",
     "Name": "reindeer_female",
     "Tags": "animal,npc",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
-        "__guid": "0ef31595-5e4f-41c9-81e5-98572ae8cdef",
+        "__guid": "7fe86ecc-c8d4-46a0-a2ae-d99e0a8d071a",
         "AlertOthers": true,
         "AttackCooldown": 8,
         "AttackRange": 60,
@@ -17,8 +17,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "component_id": "8e2c3652-4cd7-41e2-9615-611861402ae6",
-          "go": "7313d52d-71fb-4bee-9196-a05113bb4931",
+          "component_id": "4df443d4-5c4e-4003-add1-1c70879933bb",
+          "go": "3fbc669a-8c0d-4dae-868d-e9413ed70664",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -27,14 +27,14 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "component_id": "0a215e06-4608-469c-9a7a-b033c81ea3a7",
-          "go": "7313d52d-71fb-4bee-9196-a05113bb4931",
+          "component_id": "fdaf7fc3-2320-40e4-a857-f555aef20b60",
+          "go": "3fbc669a-8c0d-4dae-868d-e9413ed70664",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "component_id": "16d601fe-43a6-4d19-b606-77930a29f6d2",
-          "go": "7313d52d-71fb-4bee-9196-a05113bb4931",
+          "component_id": "c9bf2bb7-2185-435a-9de4-fa86c8aeeeeb",
+          "go": "3fbc669a-8c0d-4dae-868d-e9413ed70664",
           "component_type": "MoveHelper"
         },
         "Name": "Reindeer (\u26A8)",
@@ -79,7 +79,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "7313d52d-71fb-4bee-9196-a05113bb4931",
+                  "go": "3fbc669a-8c0d-4dae-868d-e9413ed70664",
                   "component_type": "NPC"
                 }
               },
@@ -314,7 +314,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "7313d52d-71fb-4bee-9196-a05113bb4931",
+                  "go": "3fbc669a-8c0d-4dae-868d-e9413ed70664",
                   "component_type": "NPC"
                 }
               },
@@ -483,7 +483,7 @@
       },
       {
         "__type": "MoveHelper",
-        "__guid": "16d601fe-43a6-4d19-b606-77930a29f6d2",
+        "__guid": "c9bf2bb7-2185-435a-9de4-fa86c8aeeeeb",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -516,7 +516,7 @@
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "e3d7df6a-6c4e-4c03-a3e0-7ecefc94a691",
+        "__guid": "9a12651d-8707-49eb-a68c-31bcaae541cb",
         "End": "0,0,36",
         "IsTrigger": false,
         "Radius": 15,
@@ -525,7 +525,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "0a215e06-4608-469c-9a7a-b033c81ea3a7",
+        "__guid": "fdaf7fc3-2320-40e4-a857-f555aef20b60",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/elk/reindeer_female.vmdl",
@@ -534,13 +534,13 @@
       },
       {
         "__type": "HealthComponent",
-        "__guid": "8e2c3652-4cd7-41e2-9615-611861402ae6",
+        "__guid": "4df443d4-5c4e-4003-add1-1c70879933bb",
         "CanRegenerate": true,
         "DamagedBy": "Average",
         "DropOnDeath": [
           {
             "_type": "gameobject",
-            "prefab": "prefabs/items/elk_meat.prefab"
+            "prefab": "prefabs/items/reindeer_meat.prefab"
           }
         ],
         "Immortal": false,
@@ -571,7 +571,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "7313d52d-71fb-4bee-9196-a05113bb4931"
+                  "go": "3fbc669a-8c0d-4dae-868d-e9413ed70664"
                 }
               },
               "UserData": {
