@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
+    "__guid": "52899b42-d3b6-4929-88c4-c204c7033f38",
     "Name": "moose_female",
     "Tags": "animal,npc",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
-        "__guid": "5d65395b-2178-4e4a-8386-a3c03a1cb983",
+        "__guid": "59b8a630-0ce9-4436-8c11-0037f7bb50f4",
         "AlertOthers": true,
         "AttackCooldown": 8,
         "AttackRange": 120,
@@ -17,8 +17,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "component_id": "d2e67546-226d-481f-bc9d-a1323a690bd7",
-          "go": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
+          "component_id": "6f6cad45-1d61-4264-96ae-78c9957386b9",
+          "go": "52899b42-d3b6-4929-88c4-c204c7033f38",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -27,14 +27,14 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "component_id": "dcafda01-23eb-4bdf-8973-28e472d2ec0c",
-          "go": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
+          "component_id": "1a63833a-0556-43f9-a7d5-bc7db02db81c",
+          "go": "52899b42-d3b6-4929-88c4-c204c7033f38",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "component_id": "9cf97e1d-8d88-4739-9d5d-0c096c7c5555",
-          "go": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
+          "component_id": "ee6940f6-ecaf-42f2-b04d-05f5c950c3b4",
+          "go": "52899b42-d3b6-4929-88c4-c204c7033f38",
           "component_type": "MoveHelper"
         },
         "Name": "Moose (\u26A8)",
@@ -79,7 +79,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
+                  "go": "52899b42-d3b6-4929-88c4-c204c7033f38",
                   "component_type": "NPC"
                 }
               },
@@ -193,7 +193,7 @@
               "DstName": "position"
             },
             {
-              "Value": "sounds/door/door_creak.sound",
+              "Value": "sounds/fauna/elk/elk.sound",
               "DstId": 15,
               "DstName": "soundEvent"
             },
@@ -314,7 +314,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "dd10b226-4c14-4097-b6bf-2aa2f348b6ca",
+                  "go": "52899b42-d3b6-4929-88c4-c204c7033f38",
                   "component_type": "NPC"
                 }
               },
@@ -483,7 +483,7 @@
       },
       {
         "__type": "MoveHelper",
-        "__guid": "9cf97e1d-8d88-4739-9d5d-0c096c7c5555",
+        "__guid": "ee6940f6-ecaf-42f2-b04d-05f5c950c3b4",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -516,7 +516,7 @@
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "ff53e01a-b2cd-4fe8-912f-95f980749ed2",
+        "__guid": "b69bdbf6-1c9b-4506-b5e5-d14a6c8e0487",
         "End": "0,0,42",
         "IsTrigger": false,
         "Radius": 26,
@@ -525,7 +525,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "dcafda01-23eb-4bdf-8973-28e472d2ec0c",
+        "__guid": "1a63833a-0556-43f9-a7d5-bc7db02db81c",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/elk/moose_female.vmdl",
@@ -534,7 +534,7 @@
       },
       {
         "__type": "HealthComponent",
-        "__guid": "d2e67546-226d-481f-bc9d-a1323a690bd7",
+        "__guid": "6f6cad45-1d61-4264-96ae-78c9957386b9",
         "CanRegenerate": true,
         "DamagedBy": "Serious",
         "DropOnDeath": [
@@ -545,6 +545,60 @@
         ],
         "Immortal": false,
         "MaxHealth": 40,
+        "OnDamaged": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Damaged",
+            "id": "0c0bc971-4508-4a61-b6a7-59baf49ee6d6",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "320,64"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "52899b42-d3b6-4929-88c4-c204c7033f38"
+                }
+              },
+              "UserData": {
+                "Position": "48,240"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "Value": "sounds/fauna/elk/elk.sound",
+              "DstId": 1,
+              "DstName": "soundEvent"
+            }
+          ]
+        },
         "RegenerationCooldown": 2,
         "RegenerationTimer": 5,
         "StunnedBy": "Average",
