@@ -53,9 +53,10 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		ServerClose( true );
 		GameNetworkSystem.Disconnect();
 
-		foreach ( var p in Player.All )
+		for ( int i = 0; i < Player.All.Count; i++ )
 		{
-			if ( p == Player.Local )
+			var p = Player.All.ElementAtOrDefault( i );
+			if ( p is null || p == Player.Local )
 				continue;
 
 			Player._internalPlayers.Remove( p );
@@ -68,6 +69,7 @@ public sealed class NetworkManager : Component, Component.INetworkListener
 		if ( connection.IsHost )
 		{
 			HostId = connection.Id;
+			Player.Local.ConnectionID = connection.Id;
 			return;
 		}
 
