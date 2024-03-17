@@ -146,7 +146,7 @@ public sealed class WaterComponent : Component
 			new( Maxs.x, Mins.y, 0f )
 		};
 
-		var fraction = 0.02f;
+		var fraction = 0.008f;
 		var sy = (Bounds.Size.y * fraction).FloorToInt();
 		var subdivisions = (Bounds.Size.x * fraction).FloorToInt();
 		subdivisions = Math.Max( MIN_SUBDIVISIONS, sy > subdivisions ? sy : subdivisions );
