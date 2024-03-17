@@ -46,8 +46,8 @@ public sealed class EventSellAreaTrigger : EventTrigger
 		{
 			CallTrigger( item.LastOwner.GameObject, item.GameObject );
 			item.LastOwner.Money += item.SellPrice;
-			item.GameObject.PlaySound( _sellSound );
-			LegacyParticles.Create( "particles/purchase.vpcf", GameObject.Transform.World, deleteTime: 1000 );
+			GameObject.PlaySound( _sellSound );
+			LegacyParticles.Create( "particles/purchase.vpcf", item.GameObject.Transform.World, deleteTime: 1000 );
 			item.GameObject.Destroy();
 		}
 	}
