@@ -68,6 +68,9 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 
 	private float _maxFishDepth;
 
+	private readonly SoundEvent _pullSound = ResourceLibrary.Get<SoundEvent>( "sounds/fishingrod/bobber_pulled.sound" );
+	private readonly SoundEvent _fishCatchSound = ResourceLibrary.Get<SoundEvent>( "sounds/fishingrod/fishingrod_fish_pull.sound" );
+
 	protected override void OnStart()
 	{
 		_water = Components.Get<WaterComponent>();
@@ -148,7 +151,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 
 			// Remove the invalid bobbers
 			foreach ( var fish in CurrentFishes.Where( x =>
-				         !x.TargetBobber.IsValid() || !_bobbers.ContainsKey( x.TargetBobber ) ) )
+						 !x.TargetBobber.IsValid() || !_bobbers.ContainsKey( x.TargetBobber ) ) )
 			{
 				FishClearTarget( fish );
 			}
@@ -161,7 +164,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 				{
 					if ( !fish.ShouldChangeTarget && fish.ShouldPullBobber )
 					{
-						Log.Info( "pull!" );
+						fish.TargetBobber.GameObject.PlaySound( _pullSound );
 						// TODO: a hardcoded constant!
 						var ws = WaterSplash.Clone();
 						ws.Transform.Position =
@@ -291,6 +294,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 
 		var fishComponent = fishInstance.Components.Get<Fish>();
 		fishComponent.AssignWeight( fish.Fish.Weight );
+		fishComponent.GameObject.PlaySound( _fishCatchSound );
 
 		if ( !IsProxy )
 			Player.Local.OnFishCaught( fish.Fish.Prefab, fish.Fish.Weight );
