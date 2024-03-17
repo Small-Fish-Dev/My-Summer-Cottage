@@ -106,6 +106,9 @@ public class DialogueTree : Component
 	[Property]
 	public List<DialogueStage> DialogueStages { get; set; }
 
+	[Property]
+	public float SecondsBetweenStages = 2.0f;
+
 	[Sync]
 	private int NetworkedStageIndex { get; set; } = 0;
 	private int LocalStageIndex { get; set; } = 0;
@@ -134,6 +137,8 @@ public class DialogueTree : Component
 						Animation = InteractAnimations.None,
 						DynamicColor = () => response.DynamicColor?.Invoke() ?? Color.White,
 						InteractDistance = response.InteractDistance,
+						Cooldown = true,
+						CooldownTime = SecondsBetweenStages,
 					}
 				);
 			}
@@ -170,8 +175,9 @@ public class DialogueTree : Component
 		}
 	}
 
-	public void SendToDialogueStage( int index )
+	public async void SendToDialogueStage( int index )
 	{
+		await GameTask.DelayRealtimeSeconds( SecondsBetweenStages );
 		SetStageIndex( index );
 	}
 
