@@ -17,6 +17,21 @@ Credits {
 
     .sweet-memories {
         flex-grow: 1;
+        
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        img {
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+            box-shadow: $box-shadow-sm;
+            image-rendering: pixelated;
+
+            &:intro {
+                opacity: 0;
+            }
+        }
     }
 
     .credits {
@@ -84,8 +99,8 @@ Credits {
             background-repeat: no-repeat;
             background-size: contain;
             image-rendering: pixelated;
-            width: 1200px;
-            height: 600px;
+            width: 900px;
+            aspect-ratio: 1.5;
             flex-grow: 0;
             flex-shrink: 0;
         }
