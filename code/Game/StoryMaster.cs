@@ -537,7 +537,7 @@ public class StoryMaster : Component
 		"Press ESC for useful shortcuts such as the fish collection.",
 		"You can drag items on your character to equip them.",
 		"You can drag items off the inventory to drop them.",
-		"You can zoom by holding the C key.",
+		"You can zoom by holding the Middle Mouse.",
 		"You can walk by holding the ALT key.",
 		"You can crouch by holding the CTRL key.",
 		"Don't bother shooting humans they don't drop anything.",

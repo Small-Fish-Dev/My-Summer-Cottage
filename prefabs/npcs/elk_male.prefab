@@ -103,6 +103,40 @@
                 "_type": "Sandbox.Game/Sandbox.GameTransform",
                 "_name": "Position"
               }
+            },
+            {
+              "Id": 11,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "400,256"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "1f0e90ca-9f62-4413-8c2b-3eb9ee7489bd",
+                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+                  "component_type": "SkinnedModelRenderer"
+                }
+              },
+              "UserData": {
+                "Position": "480,-96"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "call",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.SkinnedModelRenderer",
+                "_isStatic": false,
+                "_name": "Set"
+              },
+              "UserData": {
+                "Position": "784,0"
+              }
             }
           ],
           "Links": [
@@ -162,6 +196,45 @@
               "SrcName": "_result",
               "DstId": 10,
               "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 11,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 11,
+              "DstName": "_this"
+            },
+            {
+              "Value": "sounds/fauna/elk/elk.sound",
+              "DstId": 11,
+              "DstName": "soundEvent"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 15,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 15,
+              "DstName": "_target"
+            },
+            {
+              "Value": "attack",
+              "DstId": 15,
+              "DstName": "v"
+            },
+            {
+              "Value": true,
+              "DstId": 15,
+              "DstName": "value"
             }
           ]
         },
@@ -586,7 +659,7 @@
               "DstName": "position"
             },
             {
-              "Value": "sounds/door/door_creak.sound",
+              "Value": "sounds/fauna/elk/elk.sound",
               "DstId": 15,
               "DstName": "soundEvent"
             },
@@ -936,6 +1009,41 @@
         ],
         "Immortal": false,
         "MaxHealth": 25,
+        "OnDamaged": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Damaged",
+            "id": "6d8cc41e-675b-4bf2-b047-292643952071",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "288,112"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "sounds/fauna/elk/elk.sound",
+              "DstId": 1,
+              "DstName": "soundEvent"
+            }
+          ]
+        },
         "RegenerationCooldown": 2,
         "RegenerationTimer": 5,
         "StunnedBy": "Mild",

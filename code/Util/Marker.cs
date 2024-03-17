@@ -5,7 +5,9 @@ public enum MarkerIcon
 	Home,
 	Sub,
 	Primary,
-	Event
+	Event,
+	Water,
+	Town
 }
 
 public class Marker
@@ -21,6 +23,8 @@ public class Marker
 		MarkerIcon.Home => "ui/hud/home.png",
 		MarkerIcon.Primary => "ui/hud/primary_task.png",
 		MarkerIcon.Event => "ui/hud/question_mark.png",
+		MarkerIcon.Water => "ui/hud/water_marker.png",
+		MarkerIcon.Town => "ui/hud/town_marker.png",
 		_ => "ui/hud/substory_task.png",
 	};
 	public string HexColor => Icon switch
@@ -28,6 +32,8 @@ public class Marker
 		MarkerIcon.Home => "#FFFFFF",
 		MarkerIcon.Primary => "#bc4d2a",
 		MarkerIcon.Event => "#FFFFFF",
+		MarkerIcon.Water => "#FFFFFF",
+		MarkerIcon.Town => "#FFFFFF",
 		_ => "#0e599f",
 	};
 
@@ -36,6 +42,7 @@ public class Marker
 		Name = name;
 		Position = position;
 		Icon = icon;
+		all.Add( this );
 	}
 
 	/// <summary>

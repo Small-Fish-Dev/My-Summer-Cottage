@@ -1,24 +1,26 @@
 {
   "RootObject": {
-    "__guid": "9216afec-3df1-4e22-9233-69d1d645887b",
+    "__guid": "fcb84dc9-e869-448d-8a79-3fcfed8cd023",
     "Name": "glowie",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "EventDefinition",
-        "__guid": "a58559ec-47c8-4957-8eaf-cc513cd75d2e",
+        "__guid": "9da71c7b-9e39-47b5-88fa-77fb75f2e50d",
         "AddToEventPool": true,
         "EventName": "glowie",
-        "EventSignals": [],
-        "Rarity": "None",
+        "EventSignals": [
+          "event.glowie_escape"
+        ],
+        "Rarity": "Common",
         "ReinstantiateOnRestart": false,
         "Stackable": true,
-        "Type": "Random"
+        "Type": "Zone"
       },
       {
         "__type": "EventComponent",
-        "__guid": "a38e2d46-765b-4716-9c18-39e2d460fa74",
+        "__guid": "7748d0ec-0534-4bdb-be8e-466a30bd009c",
         "DisabledWhilePlaying": [],
         "DisableOnTrigger": [],
         "Event": {
@@ -32,7 +34,10 @@
           "Nodes": [
             {
               "Id": 0,
-              "Type": "input"
+              "Type": "input",
+              "UserData": {
+                "Position": "-160,-16"
+              }
             },
             {
               "Id": 2,
@@ -40,18 +45,18 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "e5bc5d69-acbb-4812-ba88-9e0d5a016c74"
+                  "go": "dc618200-b6a9-456e-911c-b58176e34b29"
                 }
               },
               "UserData": {
-                "Position": "16,-336"
+                "Position": "-240,-352"
               }
             },
             {
               "Id": 3,
               "Type": "event.interpolateposition",
               "UserData": {
-                "Position": "464,-144"
+                "Position": "448,-128"
               }
             },
             {
@@ -91,38 +96,9 @@
               "Properties": {
                 "_name": "Local",
                 "_type": "Sandbox.Game/Sandbox.GameTransform"
-              }
-            },
-            {
-              "Id": 11,
-              "Type": "property.get",
-              "ParentId": 10,
-              "Properties": {
-                "_name": "Rotation",
-                "_type": "Sandbox.System/Transform"
-              }
-            },
-            {
-              "Id": 12,
-              "Type": "property.get",
-              "ParentId": 10,
-              "Properties": {
-                "_name": "Scale",
-                "_type": "Sandbox.System/Transform"
-              }
-            },
-            {
-              "Id": 13,
-              "Type": "property.get",
-              "ParentId": 10,
-              "Properties": {
-                "_name": "Position",
-                "_type": "Sandbox.System/Transform"
               },
               "UserData": {
-                "Labels": {
-                  "_result": "glowie_pos"
-                }
+                "Visible": false
               }
             },
             {
@@ -134,7 +110,7 @@
                 "_type": "Sandbox.System/Vector3"
               },
               "UserData": {
-                "Position": "320,80"
+                "Position": "240,96"
               }
             },
             {
@@ -159,7 +135,7 @@
               "Id": 17,
               "Type": "event.finished",
               "UserData": {
-                "Position": "816,-128"
+                "Position": "960,-144"
               }
             },
             {
@@ -168,19 +144,91 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "a38e2d46-765b-4716-9c18-39e2d460fa74",
-                  "go": "9216afec-3df1-4e22-9233-69d1d645887b",
+                  "component_id": "7748d0ec-0534-4bdb-be8e-466a30bd009c",
+                  "go": "fcb84dc9-e869-448d-8a79-3fcfed8cd023",
                   "component_type": "EventComponent"
                 }
               },
               "UserData": {
-                "Position": "544,32"
+                "Position": "736,-96"
+              }
+            },
+            {
+              "Id": 22,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_name": "Destroy",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              },
+              "UserData": {
+                "Position": "720,-256"
+              }
+            },
+            {
+              "Id": 23,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": true,
+                "_name": "Capture",
+                "_type": "package.fish.sauna/Sauna.SweetMemories"
+              },
+              "UserData": {
+                "Position": "176,-64"
+              }
+            },
+            {
+              "Id": 24,
+              "Type": "event.interpolatescale",
+              "UserData": {
+                "Position": "464,-288"
+              }
+            },
+            {
+              "Id": 25,
+              "Type": "property.get",
+              "ParentId": 9,
+              "Properties": {
+                "_name": "Rotation",
+                "_type": "Sandbox.System/Transform"
+              }
+            },
+            {
+              "Id": 26,
+              "Type": "property.get",
+              "ParentId": 9,
+              "Properties": {
+                "_name": "Scale",
+                "_type": "Sandbox.System/Transform"
+              }
+            },
+            {
+              "Id": 27,
+              "Type": "property.get",
+              "ParentId": 9,
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.System/Transform"
+              },
+              "UserData": {
+                "Labels": {
+                  "_result": "glowie_pos"
+                }
+              }
+            },
+            {
+              "Id": 28,
+              "Type": "property.get",
+              "ParentId": 4,
+              "Properties": {
+                "_name": "LocalPosition",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
               }
             }
           ],
           "Links": [
             {
-              "SrcId": 0,
+              "SrcId": 23,
               "SrcName": "_signal",
               "DstId": 3,
               "DstName": "_signal"
@@ -196,7 +244,7 @@
               "DstName": "easer"
             },
             {
-              "SrcId": 13,
+              "SrcId": 27,
               "SrcName": "_result",
               "DstId": 3,
               "DstName": "from"
@@ -238,25 +286,7 @@
               "DstName": "_target"
             },
             {
-              "SrcId": 10,
-              "SrcName": "_result",
-              "DstId": 11,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 10,
-              "SrcName": "_result",
-              "DstId": 12,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 10,
-              "SrcName": "_result",
-              "DstId": 13,
-              "DstName": "_target"
-            },
-            {
-              "SrcId": 13,
+              "SrcId": 27,
               "SrcName": "_result",
               "DstId": 14,
               "DstName": "_target"
@@ -268,12 +298,6 @@
               "DstName": "z"
             },
             {
-              "SrcId": 13,
-              "SrcName": "_result",
-              "DstId": 15,
-              "DstName": "_target"
-            },
-            {
               "SrcId": 15,
               "SrcName": "_result",
               "DstId": 16,
@@ -283,13 +307,13 @@
               "Value": {
                 "$type": "Simple",
                 "Type": "System.Private.CoreLib/System.Single",
-                "Value": 1000
+                "Value": 100
               },
               "DstId": 16,
               "DstName": "b"
             },
             {
-              "SrcId": 3,
+              "SrcId": 22,
               "SrcName": "_signal",
               "DstId": 17,
               "DstName": "_signal"
@@ -299,6 +323,95 @@
               "SrcName": "_result",
               "DstId": 17,
               "DstName": "component"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 22,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 22,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 23,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "What even is that??? A glowie?",
+              "DstId": 23,
+              "DstName": "caption"
+            },
+            {
+              "Value": "0,0,0",
+              "DstId": 23,
+              "DstName": "position"
+            },
+            {
+              "Value": "0,0,0,1",
+              "DstId": 23,
+              "DstName": "rotation"
+            },
+            {
+              "SrcId": 23,
+              "SrcName": "_signal",
+              "DstId": 24,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 10,
+              "DstId": 24,
+              "DstName": "duration"
+            },
+            {
+              "Value": "Linear",
+              "DstId": 24,
+              "DstName": "easer"
+            },
+            {
+              "Value": "1,1,1",
+              "DstId": 24,
+              "DstName": "from"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 24,
+              "DstName": "target"
+            },
+            {
+              "Value": "0,0,0",
+              "DstId": 24,
+              "DstName": "to"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 25,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 26,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 27,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 4,
+              "SrcName": "_result",
+              "DstId": 28,
+              "DstName": "_target"
             }
           ]
         },
@@ -308,8 +421,8 @@
         "Triggers": [
           {
             "_type": "component",
-            "component_id": "1b91f75c-d93b-460d-87bc-f81275f3e47d",
-            "go": "c0de9718-fd21-48a6-9fa8-1a11a1860743",
+            "component_id": "bc4df966-2b46-45f8-83ab-44e89c9622d8",
+            "go": "95e854c3-f37f-4c30-8bc2-06c894cfbe83",
             "component_type": "EventAreaTrigger"
           }
         ]
@@ -317,7 +430,7 @@
     ],
     "Children": [
       {
-        "__guid": "e5bc5d69-acbb-4812-ba88-9e0d5a016c74",
+        "__guid": "dc618200-b6a9-456e-911c-b58176e34b29",
         "Name": "glowie_model",
         "Position": "0,-16,-24",
         "Rotation": "0,0,-0.8871192,0.4615405",
@@ -326,7 +439,7 @@
         "Components": [
           {
             "__type": "SkinnedModelRenderer",
-            "__guid": "4137db26-4f5f-4f5d-9ef5-addffe2841da",
+            "__guid": "62c0c1eb-2299-4232-8ad6-cac730230dd1",
             "BodyGroups": 1365,
             "CreateBoneObjects": false,
             "MaterialOverride": "models/lightning_bolt/lightning_bolt.vmat",
@@ -337,7 +450,7 @@
         ]
       },
       {
-        "__guid": "c0de9718-fd21-48a6-9fa8-1a11a1860743",
+        "__guid": "95e854c3-f37f-4c30-8bc2-06c894cfbe83",
         "Name": "glowie_trigger",
         "Position": "-32,-40,0",
         "Enabled": true,
@@ -345,31 +458,13 @@
         "Components": [
           {
             "__type": "EventAreaTrigger",
-            "__guid": "1b91f75c-d93b-460d-87bc-f81275f3e47d",
+            "__guid": "bc4df966-2b46-45f8-83ab-44e89c9622d8",
             "Extents": "1400,1400,1000",
             "MaxPollingRate": 5,
             "Offset": "0,0,0",
             "TagSet": "player",
             "TriggerPrefab": [],
-            "TriggerSignalIdentifier": null
-          }
-        ]
-      },
-      {
-        "__guid": "e7b1d890-2aa6-49a1-9d87-49087f564103",
-        "Name": "escape_event",
-        "Enabled": true,
-        "NetworkMode": 2,
-        "Components": [
-          {
-            "__type": "EventComponent",
-            "__guid": "5d0fa01e-cd29-4049-a23f-f56c3e48dcb9",
-            "DisabledWhilePlaying": [],
-            "DisableOnTrigger": [],
-            "RequiredToFinish": true,
-            "TriggerCooldown": 1,
-            "TriggerOnce": true,
-            "Triggers": []
+            "TriggerSignalIdentifier": "event.glowie_escape"
           }
         ]
       }

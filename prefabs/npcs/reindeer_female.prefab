@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+    "__guid": "7313d52d-71fb-4bee-9196-a05113bb4931",
     "Name": "reindeer_female",
     "Tags": "animal,npc",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
-        "__guid": "68bdc5db-2975-4a28-b43e-842550e58469",
+        "__guid": "0ef31595-5e4f-41c9-81e5-98572ae8cdef",
         "AlertOthers": true,
         "AttackCooldown": 8,
         "AttackRange": 60,
@@ -17,8 +17,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "component_id": "67db706f-4f25-422b-ad5c-b6727546ff94",
-          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+          "component_id": "8e2c3652-4cd7-41e2-9615-611861402ae6",
+          "go": "7313d52d-71fb-4bee-9196-a05113bb4931",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -27,14 +27,14 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "component_id": "c34b4443-f877-43d4-be1e-933dfc3ead2d",
-          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+          "component_id": "0a215e06-4608-469c-9a7a-b033c81ea3a7",
+          "go": "7313d52d-71fb-4bee-9196-a05113bb4931",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "component_id": "fe626525-d5c0-4562-b4d6-3b748ee5b1e4",
-          "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+          "component_id": "16d601fe-43a6-4d19-b606-77930a29f6d2",
+          "go": "7313d52d-71fb-4bee-9196-a05113bb4931",
           "component_type": "MoveHelper"
         },
         "Name": "Reindeer (\u26A8)",
@@ -79,7 +79,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+                  "go": "7313d52d-71fb-4bee-9196-a05113bb4931",
                   "component_type": "NPC"
                 }
               },
@@ -193,7 +193,7 @@
               "DstName": "position"
             },
             {
-              "Value": "sounds/door/door_creak.sound",
+              "Value": "sounds/fauna/elk/elk.sound",
               "DstId": 15,
               "DstName": "soundEvent"
             },
@@ -314,7 +314,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "64ff80b3-97db-46c2-b40b-ecf73a9167f9",
+                  "go": "7313d52d-71fb-4bee-9196-a05113bb4931",
                   "component_type": "NPC"
                 }
               },
@@ -483,7 +483,7 @@
       },
       {
         "__type": "MoveHelper",
-        "__guid": "fe626525-d5c0-4562-b4d6-3b748ee5b1e4",
+        "__guid": "16d601fe-43a6-4d19-b606-77930a29f6d2",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -516,7 +516,7 @@
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "fd4f8ba7-0f7e-401a-a67a-8ab1e888565b",
+        "__guid": "e3d7df6a-6c4e-4c03-a3e0-7ecefc94a691",
         "End": "0,0,36",
         "IsTrigger": false,
         "Radius": 15,
@@ -525,7 +525,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "c34b4443-f877-43d4-be1e-933dfc3ead2d",
+        "__guid": "0a215e06-4608-469c-9a7a-b033c81ea3a7",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/elk/reindeer_female.vmdl",
@@ -534,7 +534,7 @@
       },
       {
         "__type": "HealthComponent",
-        "__guid": "67db706f-4f25-422b-ad5c-b6727546ff94",
+        "__guid": "8e2c3652-4cd7-41e2-9615-611861402ae6",
         "CanRegenerate": true,
         "DamagedBy": "Average",
         "DropOnDeath": [
@@ -545,6 +545,60 @@
         ],
         "Immortal": false,
         "MaxHealth": 10,
+        "OnDamaged": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Damaged",
+            "id": "0a1f9985-919f-4918-8a67-041e694007c9",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "320,0"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "7313d52d-71fb-4bee-9196-a05113bb4931"
+                }
+              },
+              "UserData": {
+                "Position": "-16,256"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "Value": "sounds/fauna/elk/elk.sound",
+              "DstId": 1,
+              "DstName": "soundEvent"
+            }
+          ]
+        },
         "RegenerationCooldown": 2,
         "RegenerationTimer": 5,
         "StunnedBy": "Mild",

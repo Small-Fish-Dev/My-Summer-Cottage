@@ -1,0 +1,414 @@
+{
+  "Name": "Change your Tire",
+  "Subtitle": "The car needs a new tire.",
+  "Description": "You popped your tire while driving. You\u0027ll need to buy a new tire from the Gas Station",
+  "Giver": "",
+  "Message": "",
+  "TaskType": "GivenByStory",
+  "TaskRarity": "Any",
+  "IsPrimary": true,
+  "Global": true,
+  "ExperienceGiven": 70,
+  "SuccessSignal": "task.success.Change your Tire",
+  "FailedSignal": "task.failed.Change your Tire",
+  "TimeLimited": false,
+  "TimeLimitInSeconds": 120,
+  "PersistThroughSessions": false,
+  "RunOnStartEverySession": true,
+  "OnStart": {
+    "Version": 5,
+    "UserData": {
+      "Title": "On Start",
+      "id": "b42082dd-e53f-4714-b921-cee306947ccd",
+      "ReferencedComponentTypes": [
+        "Sandbox.Game/Sandbox.ModelRenderer"
+      ]
+    },
+    "Variables": [],
+    "Nodes": [
+      {
+        "Id": 0,
+        "Type": "input"
+      },
+      {
+        "Id": 1,
+        "Type": "event.findobject",
+        "UserData": {
+          "Position": "304,16"
+        }
+      },
+      {
+        "Id": 3,
+        "Type": "resource.ref",
+        "Properties": {
+          "T": "Sandbox.Engine/Sandbox.SoundEvent",
+          "value": "sounds/car/tire_pop.sound"
+        },
+        "UserData": {
+          "Position": "272,176"
+        }
+      },
+      {
+        "Id": 6,
+        "Type": "sound.play",
+        "UserData": {
+          "Position": "576,64"
+        }
+      },
+      {
+        "Id": 7,
+        "Type": "scene.get",
+        "Properties": {
+          "T": "Sandbox.Game/Sandbox.ModelRenderer"
+        },
+        "UserData": {
+          "Position": "560,-160"
+        }
+      },
+      {
+        "Id": 9,
+        "Type": "call",
+        "Properties": {
+          "_isStatic": false,
+          "_type": "Sandbox.Game/Sandbox.ModelRenderer",
+          "_name": "SetBodyGroup"
+        },
+        "UserData": {
+          "Position": "896,-160"
+        }
+      }
+    ],
+    "Links": [
+      {
+        "SrcId": 0,
+        "SrcName": "_signal",
+        "DstId": 1,
+        "DstName": "_signal"
+      },
+      {
+        "Value": "GoHomeCar",
+        "DstId": 1,
+        "DstName": "name"
+      },
+      {
+        "SrcId": 1,
+        "SrcName": "_signal",
+        "DstId": 6,
+        "DstName": "_signal"
+      },
+      {
+        "SrcId": 1,
+        "SrcName": "_result",
+        "DstId": 6,
+        "DstName": "_this"
+      },
+      {
+        "SrcId": 3,
+        "SrcName": "_result",
+        "DstId": 6,
+        "DstName": "soundEvent"
+      },
+      {
+        "SrcId": 1,
+        "SrcName": "_result",
+        "DstId": 7,
+        "DstName": "_this"
+      },
+      {
+        "SrcId": 1,
+        "SrcName": "_signal",
+        "DstId": 9,
+        "DstName": "_signal"
+      },
+      {
+        "SrcId": 7,
+        "SrcName": "_result",
+        "DstId": 9,
+        "DstName": "_target"
+      },
+      {
+        "Value": "broke",
+        "DstId": 9,
+        "DstName": "name"
+      },
+      {
+        "Value": 1,
+        "DstId": 9,
+        "DstName": "value"
+      }
+    ]
+  },
+  "OnSuccess": {
+    "Version": 5,
+    "UserData": {
+      "Title": "On Success",
+      "id": "8aa6c9bd-638f-4064-9de6-5a1a6b3f1d13",
+      "ReferencedComponentTypes": [
+        "Sandbox.Game/Sandbox.ModelRenderer",
+        "package.fish.sauna/Sauna.Inventory"
+      ]
+    },
+    "Variables": [],
+    "Nodes": [
+      {
+        "Id": 0,
+        "Type": "input",
+        "UserData": {
+          "Position": "-176,64"
+        }
+      },
+      {
+        "Id": 1,
+        "Type": "event.findobject",
+        "UserData": {
+          "Position": "64,80"
+        }
+      },
+      {
+        "Id": 2,
+        "Type": "scene.get",
+        "Properties": {
+          "T": "Sandbox.Game/Sandbox.ModelRenderer"
+        },
+        "UserData": {
+          "Position": "304,-16"
+        }
+      },
+      {
+        "Id": 3,
+        "Type": "call",
+        "Properties": {
+          "_isStatic": false,
+          "_type": "Sandbox.Game/Sandbox.ModelRenderer",
+          "_name": "SetBodyGroup"
+        },
+        "UserData": {
+          "Position": "640,-16"
+        }
+      },
+      {
+        "Id": 4,
+        "Type": "scene.get",
+        "Properties": {
+          "T": "package.fish.sauna/Sauna.Inventory"
+        },
+        "UserData": {
+          "Position": "-16,208"
+        }
+      },
+      {
+        "Id": 8,
+        "Type": "call",
+        "Properties": {
+          "_isStatic": false,
+          "_type": "package.fish.sauna/Sauna.Inventory",
+          "_name": "RemoveAmountEasy"
+        },
+        "UserData": {
+          "Position": "320,208"
+        }
+      }
+    ],
+    "Links": [
+      {
+        "SrcId": 0,
+        "SrcName": "_signal",
+        "DstId": 1,
+        "DstName": "_signal"
+      },
+      {
+        "Value": "GoHomeCar",
+        "DstId": 1,
+        "DstName": "name"
+      },
+      {
+        "SrcId": 1,
+        "SrcName": "_result",
+        "DstId": 2,
+        "DstName": "_this"
+      },
+      {
+        "SrcId": 1,
+        "SrcName": "_signal",
+        "DstId": 3,
+        "DstName": "_signal"
+      },
+      {
+        "SrcId": 2,
+        "SrcName": "_result",
+        "DstId": 3,
+        "DstName": "_target"
+      },
+      {
+        "Value": "broke",
+        "DstId": 3,
+        "DstName": "name"
+      },
+      {
+        "Value": 0,
+        "DstId": 3,
+        "DstName": "value"
+      },
+      {
+        "SrcId": 0,
+        "SrcName": "player",
+        "DstId": 4,
+        "DstName": "_this"
+      },
+      {
+        "SrcId": 0,
+        "SrcName": "_signal",
+        "DstId": 8,
+        "DstName": "_signal"
+      },
+      {
+        "SrcId": 4,
+        "SrcName": "_result",
+        "DstId": 8,
+        "DstName": "_target"
+      },
+      {
+        "Value": "Car Wheel",
+        "DstId": 8,
+        "DstName": "name"
+      }
+    ]
+  },
+  "OnFail": null,
+  "FailConditionCheck": null,
+  "Subtasks": [
+    {
+      "Description": "Go to the Gas Station",
+      "TriggerSignal": "gasstation.entered",
+      "AmountToComplete": 1,
+      "OnStart": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On Start",
+          "id": "ae694968-7f08-4489-bd48-9057a23d7402",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "240,48"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.addmarker",
+            "UserData": {
+              "Position": "512,64"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Gas Station",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Primary",
+            "DstId": 2,
+            "DstName": "icon"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "target"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "e55cc0bf-ff5a-4b07-adbc-82f5888a79ea",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "256,48"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "480,64"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Gas Station",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
+            "DstName": "target"
+          }
+        ]
+      }
+    },
+    {
+      "Description": "Buy a Car Wheel",
+      "SubtaskOrder": 1,
+      "TriggerSignal": "item.received.Car Wheel",
+      "AmountToComplete": 1
+    },
+    {
+      "Description": "Bring the tire to your car",
+      "SubtaskOrder": 2,
+      "TriggerSignal": "car.nearcar",
+      "AmountToComplete": 1
+    }
+  ],
+  "ResourceVersion": 0,
+  "__version": 0,
+  "__references": []
+}

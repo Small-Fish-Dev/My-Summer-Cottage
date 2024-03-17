@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "52308669-13ca-474a-a8f0-99cf75e89902",
+    "__guid": "f1433733-c77e-4434-95da-b1fd97dad4c2",
     "Name": "rabbit",
     "Tags": "animal,npc,prey",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
-        "__guid": "07b35922-5398-42ee-9c96-9a9054257f1d",
+        "__guid": "122cf9c7-6013-4405-9add-a8645775b78f",
         "AlertOthers": true,
         "AttackCooldown": 8,
         "AttackRange": 40,
@@ -17,8 +17,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "component_id": "bd757bde-7661-4ee2-a6ec-19ba1362f552",
-          "go": "52308669-13ca-474a-a8f0-99cf75e89902",
+          "component_id": "76726fc0-9b27-4582-a8eb-9058212dbfac",
+          "go": "f1433733-c77e-4434-95da-b1fd97dad4c2",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -27,14 +27,14 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "component_id": "890df90b-047d-4ab2-9dbf-07f7731f034f",
-          "go": "52308669-13ca-474a-a8f0-99cf75e89902",
+          "component_id": "d7abf291-b747-458e-bd86-52bebf2fb7ac",
+          "go": "f1433733-c77e-4434-95da-b1fd97dad4c2",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "component_id": "c8b7c993-c39d-4334-90a4-c80308791a86",
-          "go": "52308669-13ca-474a-a8f0-99cf75e89902",
+          "component_id": "be1717a3-1b57-4067-84d9-a1b0bf0d7779",
+          "go": "f1433733-c77e-4434-95da-b1fd97dad4c2",
           "component_type": "MoveHelper"
         },
         "Name": "Hare",
@@ -79,7 +79,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "52308669-13ca-474a-a8f0-99cf75e89902",
+                  "go": "f1433733-c77e-4434-95da-b1fd97dad4c2",
                   "component_type": "NPC"
                 }
               },
@@ -193,7 +193,7 @@
               "DstName": "position"
             },
             {
-              "Value": "sounds/door/door_creak.sound",
+              "Value": "sounds/fauna/hare/hare.sound",
               "DstId": 15,
               "DstName": "soundEvent"
             },
@@ -314,7 +314,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "52308669-13ca-474a-a8f0-99cf75e89902",
+                  "go": "f1433733-c77e-4434-95da-b1fd97dad4c2",
                   "component_type": "NPC"
                 }
               },
@@ -376,6 +376,26 @@
               },
               "UserData": {
                 "Position": "544,-224"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "672,16"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "f1433733-c77e-4434-95da-b1fd97dad4c2"
+                }
+              },
+              "UserData": {
+                "Position": "256,80"
               }
             }
           ],
@@ -469,6 +489,23 @@
               "Value": true,
               "DstId": 8,
               "DstName": "value"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "reachedDestination",
+              "DstId": 9,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 9,
+              "DstName": "_this"
+            },
+            {
+              "Value": "sounds/fauna/hare/hare.sound",
+              "DstId": 9,
+              "DstName": "soundEvent"
             }
           ]
         },
@@ -483,7 +520,7 @@
       },
       {
         "__type": "MoveHelper",
-        "__guid": "c8b7c993-c39d-4334-90a4-c80308791a86",
+        "__guid": "be1717a3-1b57-4067-84d9-a1b0bf0d7779",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -516,7 +553,7 @@
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "85721edf-28c3-4577-868b-6b4357e8ec05",
+        "__guid": "c79dec07-cd5a-4c78-abe6-915311c4bd95",
         "End": "0,0,8",
         "IsTrigger": false,
         "Radius": 5,
@@ -525,7 +562,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "890df90b-047d-4ab2-9dbf-07f7731f034f",
+        "__guid": "d7abf291-b747-458e-bd86-52bebf2fb7ac",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/hare/hare.vmdl",
@@ -534,7 +571,7 @@
       },
       {
         "__type": "HealthComponent",
-        "__guid": "bd757bde-7661-4ee2-a6ec-19ba1362f552",
+        "__guid": "76726fc0-9b27-4582-a8eb-9058212dbfac",
         "CanRegenerate": false,
         "DamagedBy": "Mild",
         "DropOnDeath": [
@@ -545,6 +582,60 @@
         ],
         "Immortal": false,
         "MaxHealth": 1,
+        "OnDamaged": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Damaged",
+            "id": "1f585070-293b-4f38-bdaf-9173b47d3dc6",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "416,160"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "f1433733-c77e-4434-95da-b1fd97dad4c2"
+                }
+              },
+              "UserData": {
+                "Position": "112,272"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "_this"
+            },
+            {
+              "Value": "sounds/fauna/hare/hare_hit.sound",
+              "DstId": 1,
+              "DstName": "soundEvent"
+            }
+          ]
+        },
         "RegenerationCooldown": 2,
         "RegenerationTimer": 5,
         "StunnedBy": "Mild",

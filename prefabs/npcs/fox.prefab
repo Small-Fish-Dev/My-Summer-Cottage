@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+    "__guid": "b8337e01-82ce-414e-bc30-442ef8d45c52",
     "Name": "fox",
     "Tags": "predator,npc,animal",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
-        "__guid": "b85109e5-20d0-4b3f-ac9f-0aaf2ad87ce6",
+        "__guid": "565c6c46-917c-45fa-ab57-1628307750dd",
         "AlertOthers": true,
         "AttackCooldown": 6,
         "AttackRange": 20,
@@ -17,8 +17,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "component_id": "e4c98503-fa40-49f3-a73b-56d50d868e71",
-          "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+          "component_id": "494ca178-6b5d-480c-a48a-ae6e36d7ef0c",
+          "go": "b8337e01-82ce-414e-bc30-442ef8d45c52",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -27,14 +27,14 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "component_id": "1f0e90ca-9f62-4413-8c2b-3eb9ee7489bd",
-          "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+          "component_id": "a01e303a-79b2-4848-87d3-a2890c91ada5",
+          "go": "b8337e01-82ce-414e-bc30-442ef8d45c52",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "component_id": "800348bc-48c3-4258-9b22-926e9b165622",
-          "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+          "component_id": "bae01ac1-6d15-4117-86cb-d1d05514b946",
+          "go": "b8337e01-82ce-414e-bc30-442ef8d45c52",
           "component_type": "MoveHelper"
         },
         "Name": "Red Fox",
@@ -76,7 +76,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac"
+                  "go": "b8337e01-82ce-414e-bc30-442ef8d45c52"
                 }
               },
               "UserData": {
@@ -99,6 +99,13 @@
               "Properties": {
                 "_name": "Position",
                 "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 15,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "736,64"
               }
             }
           ],
@@ -159,6 +166,23 @@
               "SrcName": "_result",
               "DstId": 14,
               "DstName": "_target"
+            },
+            {
+              "SrcId": 1,
+              "SrcName": "_signal",
+              "DstId": 15,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 12,
+              "SrcName": "_result",
+              "DstId": 15,
+              "DstName": "_this"
+            },
+            {
+              "Value": "sounds/fauna/fox/fox.sound",
+              "DstId": 15,
+              "DstName": "soundEvent"
             }
           ]
         },
@@ -226,7 +250,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+                  "go": "b8337e01-82ce-414e-bc30-442ef8d45c52",
                   "component_type": "MoveHelper"
                 }
               },
@@ -240,7 +264,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+                  "go": "b8337e01-82ce-414e-bc30-442ef8d45c52",
                   "component_type": "NPC"
                 }
               },
@@ -399,7 +423,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+                  "go": "b8337e01-82ce-414e-bc30-442ef8d45c52",
                   "component_type": "NPC"
                 }
               },
@@ -583,7 +607,7 @@
               "DstName": "position"
             },
             {
-              "Value": "sounds/door/door_creak.sound",
+              "Value": "sounds/fauna/fox/fox.sound",
               "DstId": 15,
               "DstName": "soundEvent"
             },
@@ -698,7 +722,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+                  "go": "b8337e01-82ce-414e-bc30-442ef8d45c52",
                   "component_type": "NPC"
                 }
               },
@@ -867,7 +891,7 @@
       },
       {
         "__type": "MoveHelper",
-        "__guid": "800348bc-48c3-4258-9b22-926e9b165622",
+        "__guid": "bae01ac1-6d15-4117-86cb-d1d05514b946",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -900,7 +924,7 @@
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "1f429720-9a3e-431f-8954-21ede9e71baa",
+        "__guid": "7995cfcd-c3c5-45b4-b927-e8696f3fe964",
         "End": "0,0,14",
         "IsTrigger": false,
         "Radius": 8,
@@ -909,7 +933,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "1f0e90ca-9f62-4413-8c2b-3eb9ee7489bd",
+        "__guid": "a01e303a-79b2-4848-87d3-a2890c91ada5",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/fox/fox.vmdl",
@@ -918,7 +942,7 @@
       },
       {
         "__type": "HealthComponent",
-        "__guid": "e4c98503-fa40-49f3-a73b-56d50d868e71",
+        "__guid": "494ca178-6b5d-480c-a48a-ae6e36d7ef0c",
         "CanRegenerate": true,
         "DamagedBy": "Mild",
         "DropOnDeath": [
@@ -929,6 +953,60 @@
         ],
         "Immortal": false,
         "MaxHealth": 3,
+        "OnDamaged": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Damaged",
+            "id": "4a78abde-ec94-4c4f-86b2-f5707658baa8",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 2,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "b8337e01-82ce-414e-bc30-442ef8d45c52"
+                }
+              },
+              "UserData": {
+                "Position": "112,144"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "352,96"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_this"
+            },
+            {
+              "Value": "sounds/fauna/fox/fox_hit.sound",
+              "DstId": 3,
+              "DstName": "soundEvent"
+            }
+          ]
+        },
         "RegenerationCooldown": 2,
         "RegenerationTimer": 5,
         "StunnedBy": "Mild",
