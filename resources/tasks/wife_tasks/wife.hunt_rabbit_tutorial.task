@@ -56,14 +56,14 @@
             "Id": 3,
             "Type": "event.findobject",
             "UserData": {
-              "Position": "320,256"
+              "Position": "240,256"
             }
           },
           {
             "Id": 4,
             "Type": "event.addmarker",
             "UserData": {
-              "Position": "560,240"
+              "Position": "432,272"
             }
           }
         ],
@@ -75,7 +75,7 @@
             "DstName": "_signal"
           },
           {
-            "Value": "Free Airsoft Rifle near the Sauna.",
+            "Value": "Your rifle is inside of your cottage.",
             "DstId": 1,
             "DstName": "description"
           },
@@ -111,13 +111,13 @@
             "DstName": "seconds"
           },
           {
-            "SrcId": 2,
+            "SrcId": 0,
             "SrcName": "_signal",
             "DstId": 3,
             "DstName": "_signal"
           },
           {
-            "Value": "airsoft_rifle",
+            "Value": "Cottage",
             "DstId": 3,
             "DstName": "name"
           },
@@ -136,6 +136,60 @@
             "SrcId": 3,
             "SrcName": "_result",
             "DstId": 4,
+            "DstName": "target"
+          }
+        ]
+      },
+      "OnEnd": {
+        "Version": 5,
+        "UserData": {
+          "Title": "On End",
+          "id": "dd1189d6-04af-4892-af7f-87aa1431cd3e",
+          "ReferencedComponentTypes": []
+        },
+        "Variables": [],
+        "Nodes": [
+          {
+            "Id": 0,
+            "Type": "input"
+          },
+          {
+            "Id": 1,
+            "Type": "event.findobject",
+            "UserData": {
+              "Position": "288,64"
+            }
+          },
+          {
+            "Id": 2,
+            "Type": "event.removemarker",
+            "UserData": {
+              "Position": "528,112"
+            }
+          }
+        ],
+        "Links": [
+          {
+            "SrcId": 0,
+            "SrcName": "_signal",
+            "DstId": 1,
+            "DstName": "_signal"
+          },
+          {
+            "Value": "Cottage",
+            "DstId": 1,
+            "DstName": "name"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_signal",
+            "DstId": 2,
+            "DstName": "_signal"
+          },
+          {
+            "SrcId": 1,
+            "SrcName": "_result",
+            "DstId": 2,
             "DstName": "target"
           }
         ]
@@ -562,8 +616,8 @@
             "Id": 2,
             "Type": "property.set",
             "Properties": {
-              "_name": "Enabled",
-              "_type": "Sandbox.Game/Sandbox.GameObject"
+              "_type": "Sandbox.Game/Sandbox.GameObject",
+              "_name": "Enabled"
             },
             "UserData": {
               "Position": "544,-192"
@@ -580,8 +634,8 @@
             "Id": 4,
             "Type": "property.set",
             "Properties": {
-              "_name": "Enabled",
-              "_type": "Sandbox.Game/Sandbox.GameObject"
+              "_type": "Sandbox.Game/Sandbox.GameObject",
+              "_name": "Enabled"
             },
             "UserData": {
               "Position": "544,-96"
@@ -598,8 +652,8 @@
             "Id": 6,
             "Type": "property.set",
             "Properties": {
-              "_name": "Enabled",
-              "_type": "Sandbox.Game/Sandbox.GameObject"
+              "_type": "Sandbox.Game/Sandbox.GameObject",
+              "_name": "Enabled"
             },
             "UserData": {
               "Position": "544,-0"
@@ -616,8 +670,8 @@
             "Id": 8,
             "Type": "property.set",
             "Properties": {
-              "_name": "Enabled",
-              "_type": "Sandbox.Game/Sandbox.GameObject"
+              "_type": "Sandbox.Game/Sandbox.GameObject",
+              "_name": "Enabled"
             },
             "UserData": {
               "Position": "544,96"
@@ -634,8 +688,8 @@
             "Id": 10,
             "Type": "property.set",
             "Properties": {
-              "_name": "Enabled",
-              "_type": "Sandbox.Game/Sandbox.GameObject"
+              "_type": "Sandbox.Game/Sandbox.GameObject",
+              "_name": "Enabled"
             },
             "UserData": {
               "Position": "544,192"
@@ -883,9 +937,9 @@
             "Id": 1,
             "Type": "call",
             "Properties": {
-              "_name": "CaptureMemory",
               "_type": "package.fish.sauna/Sauna.Player",
-              "_isStatic": false
+              "_isStatic": false,
+              "_name": "CaptureMemory"
             },
             "UserData": {
               "Position": "480,32"
