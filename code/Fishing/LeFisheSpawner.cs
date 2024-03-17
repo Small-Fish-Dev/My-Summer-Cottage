@@ -122,6 +122,7 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 				for ( var i = 0; i < fishesToGenerate; i++ )
 				{
 					var fishPrefab = GetRandomFish();
+
 					if ( fishPrefab is null )
 						continue;
 
@@ -198,8 +199,8 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 					{
 						var newTarget = freeBobbers.OrderBy( _ => Guid.NewGuid() )
 							.FirstOrDefault( bobber =>
-								BobberGetDepth( bobber ) >= fish.MinimumDepth &&
-								_bobbers[bobber].Age >= FishBobberAge * fish.Rarity );
+								BobberGetDepth( bobber ) >= fish.MinimumDepth );
+
 						if ( newTarget.IsValid() )
 						{
 							freeBobbers.Remove( newTarget );
@@ -316,8 +317,8 @@ public class LeFisheSpawner : Component, Component.ITriggerListener
 		{
 			var pair = _fishesByProbability[i];
 			fish = pair.Prefab;
-
 			prob -= pair.Probability;
+
 			if ( prob <= 0 )
 				break;
 		}
