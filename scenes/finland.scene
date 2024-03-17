@@ -1,5 +1,5 @@
 {
-  "__guid": "ba26e0f3-c467-4b83-94e5-e8fc44e6b3a0",
+  "__guid": "6a108511-469c-4d8b-8d1e-293b6437f32b",
   "GameObjects": [
     {
       "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -1714,6 +1714,7 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
+                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -1984,6 +1985,7 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
+                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -2254,6 +2256,7 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
+                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -2524,6 +2527,7 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
+                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -2794,6 +2798,7 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
+                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -3064,6 +3069,7 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
+                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -3334,6 +3340,7 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
+                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -3604,6 +3611,7 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
+                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -3874,6 +3882,7 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
+                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -4144,6 +4153,7 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
+                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -4912,7 +4922,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.5128447,0,0.8584813",
+          "Rotation": "0,0.6097525,0,-0.7925919",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -5799,6 +5809,32 @@
               "Radius": 400,
               "StopDrawingDistance": 6000,
               "StopLogicDistance": 1000
+            }
+          ]
+        },
+        {
+          "__guid": "5f39599d-63b0-4d4c-a8ad-d9be745c6984",
+          "Name": "homeless_spot",
+          "Position": "6101.06,-6559.494,2476.238",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "Components": [
+            {
+              "__type": "NpcSpawnArea",
+              "__guid": "896c5722-6fdb-4b44-b44e-96375b55e0f1",
+              "Height": 10,
+              "NpcPool": [
+                {
+                  "Npc": {
+                    "_type": "gameobject",
+                    "prefab": "prefabs/npcs/people/piss_master_homeless_guy.prefab"
+                  },
+                  "SpawnChance": 1
+                }
+              ],
+              "Radius": 150,
+              "StopDrawingDistance": 5000,
+              "StopLogicDistance": 2000
             }
           ]
         }
@@ -8471,7 +8507,7 @@
           "__guid": "d42e9b8e-fb34-466b-926a-71d0c62b5596",
           "Name": "shop_ladle",
           "Position": "-125.0176,77.36719,23.82153",
-          "Rotation": "0,0,0.7071066,0.7071068",
+          "Rotation": "0,0,0.7703064,-0.6376738",
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_ladle.prefab"
@@ -8479,8 +8515,8 @@
         {
           "__guid": "477d3e45-25b3-4bcf-9b99-2ba4c67324c9",
           "Name": "shop_ladle (1)",
-          "Position": "-125.1299,89.68457,28.81592",
-          "Rotation": "0,0,0.7071066,0.7071068",
+          "Position": "-130.1309,88.48926,28.81592",
+          "Rotation": "0,0,0.6330899,0.7740781",
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/shop/shop_ladle.prefab"
@@ -10231,6 +10267,23 @@
           ]
         }
       ]
+    },
+    {
+      "__guid": "7b03b824-1181-4f36-8f08-33bfcdac6341",
+      "Name": "traffic_jam",
+      "Position": "-5403.307,640,2447.568",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/events/shitting_guy.prefab"
+    },
+    {
+      "__guid": "fcb84dc9-e869-448d-8a79-3fcfed8cd023",
+      "Name": "glowie",
+      "Position": "-842.6722,2226.505,2445.686",
+      "Rotation": "-0.03915322,0.01822902,-0.05589551,-0.9975021",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/events/glowie.prefab"
     }
   ],
   "SceneProperties": {
@@ -10256,7 +10309,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-17T10:59:49.5498602\u002B01:00",
+  "LastSaved": "2024-03-17T10:32:11.5618367\u002B00:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
