@@ -9,12 +9,18 @@
 </root>
 
 @code {
-	public static Hud Instance { get; private set; }
+    public static Hud Instance { get; private set; }
 
-	[Property] public GameTimeManager GameTimeManager;
+    [Property] public GameTimeManager GameTimeManager;
 
-	public Hud()
-	{
-		Instance = this;
-	}
+    public Hud()
+    {
+        Instance = this;
+    }
+
+    [ConCmd( "sauna_hud_toggle" )]
+    public static void ToggleHud()
+    {
+        Hud.Instance.Enabled = !Hud.Instance.Enabled;
+    }
 }
