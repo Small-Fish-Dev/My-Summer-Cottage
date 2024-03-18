@@ -41,6 +41,7 @@
 		var panel = _line.AddChild<MarkerPanel>( "marker" );
 		panel.Marker = marker;
 		_markers.Add( panel );
+		StateHasChanged();
 	}
 
 	public void RemoveMarker( Marker marker )
@@ -51,6 +52,7 @@
 
 		panel.Delete();
 		_markers.Remove( panel );
+		StateHasChanged();
 	}
 
 	protected override void OnAfterTreeRender( bool firstTime )
