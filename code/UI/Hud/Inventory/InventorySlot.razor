@@ -36,7 +36,7 @@
 
 	private Vector2 _lastMousePos;
 	private bool _isHoveringItem { get; set; } = false;
-	private TimeSince sinceClick;
+	private RealTimeSince sinceClick;
 
 	public InventorySlot()
 	{
@@ -157,7 +157,7 @@
 		if ( e.Button != "mouseleft" )
 			return;
 
-		if ( sinceClick < 0.3f && Item is ItemEquipment equipment )
+		if ( sinceClick < 0.4f && Item is ItemEquipment equipment )
 		{
 			if ( equipment.Equipped )
 				Player.Local.Inventory.UnequipItem( equipment );
