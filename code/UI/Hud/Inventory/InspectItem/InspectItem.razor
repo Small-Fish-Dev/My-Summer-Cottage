@@ -56,6 +56,9 @@
 			_model.ColorTint = Color.Gray;
 			if ( equipment.UseSkinTint )
 				_child.ColorTint = Color.Gray;
+			else
+				_child.ColorTint = renderer.Tint;
+
 			_child.SetMaterialGroup( renderer.MaterialGroup );
 			_model.AddChild( "cloth", _child );
 			_model.Update( Time.Delta );

@@ -52,13 +52,8 @@ public class ItemEquipment : ItemComponent
 
 		// Use skin color as tint.
 		var player = GameObject.Parent?.Components?.Get<Player>( true );
-		if ( Renderer != null )
-		{
-			if ( UseSkinTint && player != null )
-				Renderer.Tint = player.SkinColor;
-
-			Renderer.RenderType = ModelRenderer.ShadowRenderType.On;
-		}
+		if ( Renderer != null && UseSkinTint && player != null )
+			Renderer.Tint = player.SkinColor;
 
 		// Bonemerge
 		if ( Renderer is SkinnedModelRenderer skinned && !UpdatePosition )
@@ -151,6 +146,9 @@ public class ItemEquipment : ItemComponent
 			Accessibility = AccessibleFrom.World,
 			Sound = () => _equipSound,
 		} );
+
+		Renderer ??= Components.GetAll<ModelRenderer>( FindMode.InSelf ).FirstOrDefault( x => x != parcelRenderer );
+		if ( Renderer != null ) Renderer.RenderType = ModelRenderer.ShadowRenderType.On;
 	}
 
 	protected override void OnPreRender()

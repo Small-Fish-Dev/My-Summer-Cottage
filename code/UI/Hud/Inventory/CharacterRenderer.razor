@@ -87,7 +87,7 @@
 			if ( inventory?.EquippedItems?.ElementAtOrDefault( i ) is not ItemEquipment equipment )
 				continue;
 
-			var renderer = equipment?.Components?.Get<ModelRenderer>( FindMode.EverythingInSelfAndChildren );
+			var renderer = equipment?.Components?.Get<ModelRenderer>( FindMode.EverythingInSelfAndDescendants );
 			if ( renderer == null )
 				continue;
 
@@ -98,6 +98,8 @@
 			_character.AddChild( $"clothing_{i}_{equipment.Name}", cloth );
 			if ( equipment.UseSkinTint )
 				cloth.ColorTint = Player.Local.SkinColor;
+			else
+				cloth.ColorTint = renderer.Tint;
 		}
 
 		_character.SetBodyGroup( "head", bodygroups.HasFlag( HiddenBodyGroup.Head ) ? 1 : 0 );
