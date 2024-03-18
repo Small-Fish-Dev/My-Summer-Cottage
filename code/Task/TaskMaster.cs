@@ -745,4 +745,11 @@ public partial class TaskMaster : Component, Component.INetworkListener
 	{
 		TaskMaster.SubmitTriggerSignal( signal, Player.Local );
 	}
+
+
+	[ConCmd( "sauna_message" )]
+	public static void DebugMessage( string sender, string message )
+	{
+		Message.Receive( sender, message );
+	}
 }
