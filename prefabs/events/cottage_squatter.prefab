@@ -294,6 +294,31 @@
                   "UserData": {
                     "Position": "816,16"
                   }
+                },
+                {
+                  "Id": 7,
+                  "Type": "call",
+                  "Properties": {
+                    "_name": "CaptureMemory",
+                    "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                    "_isStatic": true
+                  },
+                  "UserData": {
+                    "Position": "464,-176"
+                  }
+                },
+                {
+                  "Id": 9,
+                  "Type": "scene.ref",
+                  "Properties": {
+                    "gameobject": {
+                      "_type": "gameobject",
+                      "go": "3134c8d6-d38a-43d3-994b-174cf8ce7671"
+                    }
+                  },
+                  "UserData": {
+                    "Position": "160,-208"
+                  }
                 }
               ],
               "Links": [
@@ -336,6 +361,33 @@
                   "Value": "Hey you! Get away from your cottage! its mine now!",
                   "DstId": 6,
                   "DstName": "subtitle"
+                },
+                {
+                  "SrcId": 0,
+                  "SrcName": "_signal",
+                  "DstId": 7,
+                  "DstName": "_signal"
+                },
+                {
+                  "Value": "This asshole thinks he can take my cottage while I\u0027m away.",
+                  "DstId": 7,
+                  "DstName": "caption"
+                },
+                {
+                  "Value": 150,
+                  "DstId": 7,
+                  "DstName": "distance"
+                },
+                {
+                  "Value": "squatter",
+                  "DstId": 7,
+                  "DstName": "identifier"
+                },
+                {
+                  "SrcId": 9,
+                  "SrcName": "_result",
+                  "DstId": 7,
+                  "DstName": "obj"
                 }
               ]
             },

@@ -553,6 +553,7 @@ public class StoryMaster : Component
 	};
 
 	TimeSince _lastTipAttempt = 0f;
+	private bool _hasShownEscTip = false;
 
 	protected override void OnFixedUpdate()
 	{
@@ -566,6 +567,19 @@ public class StoryMaster : Component
 		{
 			if ( Game.Random.Float( 100 ) <= 30f )
 				NotificationManager.Popup( "Tip:", Game.Random.FromList( RandomTips ), new Color( 207f / 255f, 124f / 255f, 23f / 255f ), "ui/hud/question_mark.png", time: 7 );
+
+			// TODO: Lets use this in the future, but instead, one the player has seen it, never show it again.
+			// if ( !_hasShownEscTip )
+			// {
+			// 	NotificationManager.SpecialPopup( "Tip:", "You can view the game controls by pressing ESC",
+			// 		new Color( 207f / 255f, 124f / 255f, 23f / 255f ), () => Input.EscapePressed, "ui/hud/question_mark.png" );
+			// 	_hasShownEscTip = true;
+			// } else if ( Game.Random.Float( 100 ) <= 30f )
+			// {
+			// 	NotificationManager.Popup( "Tip:", Game.Random.FromList( RandomTips ),
+			// 		new Color( 207f / 255f, 124f / 255f, 23f / 255f ), "ui/hud/question_mark.png", time: 7 );
+			// }
+
 			_lastTipAttempt = 0f;
 		}
 

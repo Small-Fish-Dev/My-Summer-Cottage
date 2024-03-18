@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "__guid": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+    "__guid": "28ebd5e1-a08a-4501-aaff-3a6f229686fc",
     "Name": "elk_skinwalker",
     "Tags": "animal,npc",
     "Enabled": true,
@@ -8,7 +8,7 @@
     "Components": [
       {
         "__type": "NPC",
-        "__guid": "b85109e5-20d0-4b3f-ac9f-0aaf2ad87ce6",
+        "__guid": "f16bee52-00fc-4bf6-a859-d5a6fdeca37d",
         "AlertOthers": true,
         "AttackCooldown": 5,
         "AttackRange": 100,
@@ -17,8 +17,8 @@
         "FaceTowardsVelocity": true,
         "Health": {
           "_type": "component",
-          "component_id": "e4c98503-fa40-49f3-a73b-56d50d868e71",
-          "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+          "component_id": "282b247c-220a-4a2b-a442-4df522bc78d4",
+          "go": "28ebd5e1-a08a-4501-aaff-3a6f229686fc",
           "component_type": "HealthComponent"
         },
         "Idle": true,
@@ -27,14 +27,14 @@
         "MinimumIdleCooldown": 6,
         "Model": {
           "_type": "component",
-          "component_id": "1f0e90ca-9f62-4413-8c2b-3eb9ee7489bd",
-          "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+          "component_id": "0e4ebf16-1f36-4f42-ab2a-486bb9b11801",
+          "go": "28ebd5e1-a08a-4501-aaff-3a6f229686fc",
           "component_type": "SkinnedModelRenderer"
         },
         "MoveHelper": {
           "_type": "component",
-          "component_id": "800348bc-48c3-4258-9b22-926e9b165622",
-          "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+          "component_id": "e3a0345a-3185-4cf3-a90d-938aa03bd6d8",
+          "go": "28ebd5e1-a08a-4501-aaff-3a6f229686fc",
           "component_type": "MoveHelper"
         },
         "Name": "Elk (\u2642)",
@@ -76,7 +76,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac"
+                  "go": "28ebd5e1-a08a-4501-aaff-3a6f229686fc"
                 }
               },
               "UserData": {
@@ -117,8 +117,8 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "component_id": "1f0e90ca-9f62-4413-8c2b-3eb9ee7489bd",
-                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+                  "component_id": "0e4ebf16-1f36-4f42-ab2a-486bb9b11801",
+                  "go": "28ebd5e1-a08a-4501-aaff-3a6f229686fc",
                   "component_type": "SkinnedModelRenderer"
                 }
               },
@@ -136,6 +136,18 @@
               },
               "UserData": {
                 "Position": "784,0"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "call",
+              "Properties": {
+                "_name": "CaptureMemory",
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "624,-304"
               }
             }
           ],
@@ -235,6 +247,27 @@
               "Value": true,
               "DstId": 15,
               "DstName": "value"
+            },
+            {
+              "Value": "What the hell is this spawn of Satan, I must\u0027ve angered the heavens.",
+              "DstId": 16,
+              "DstName": "caption"
+            },
+            {
+              "Value": 300,
+              "DstId": 16,
+              "DstName": "distance"
+            },
+            {
+              "Value": "elk.skinwalker",
+              "DstId": 16,
+              "DstName": "identifier"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 16,
+              "DstName": "obj"
             }
           ]
         },
@@ -286,7 +319,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+                  "go": "28ebd5e1-a08a-4501-aaff-3a6f229686fc",
                   "component_type": "NPC"
                 }
               },
@@ -672,7 +705,7 @@
               "Properties": {
                 "gameobject": {
                   "_type": "gameobject",
-                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac"
+                  "go": "28ebd5e1-a08a-4501-aaff-3a6f229686fc"
                 }
               },
               "UserData": {
@@ -760,7 +793,7 @@
               "Properties": {
                 "component": {
                   "_type": "component",
-                  "go": "875b2bfa-67f8-4ef8-9e10-427683a4b0ac",
+                  "go": "28ebd5e1-a08a-4501-aaff-3a6f229686fc",
                   "component_type": "NPC"
                 }
               },
@@ -929,7 +962,7 @@
       },
       {
         "__type": "MoveHelper",
-        "__guid": "800348bc-48c3-4258-9b22-926e9b165622",
+        "__guid": "e3a0345a-3185-4cf3-a90d-938aa03bd6d8",
         "AccelerationCurve": [
           {
             "y": 0.29999998
@@ -962,7 +995,7 @@
       },
       {
         "__type": "CapsuleCollider",
-        "__guid": "1f429720-9a3e-431f-8954-21ede9e71baa",
+        "__guid": "8f23cbc1-2767-4936-9e71-03d79a604130",
         "End": "0,0,74.32005",
         "IsTrigger": false,
         "Radius": 23.039999,
@@ -971,7 +1004,7 @@
       },
       {
         "__type": "SkinnedModelRenderer",
-        "__guid": "1f0e90ca-9f62-4413-8c2b-3eb9ee7489bd",
+        "__guid": "0e4ebf16-1f36-4f42-ab2a-486bb9b11801",
         "BodyGroups": 16,
         "CreateBoneObjects": false,
         "Model": "models/fauna/elk/elk.vmdl",
@@ -980,7 +1013,7 @@
       },
       {
         "__type": "HealthComponent",
-        "__guid": "e4c98503-fa40-49f3-a73b-56d50d868e71",
+        "__guid": "282b247c-220a-4a2b-a442-4df522bc78d4",
         "CanRegenerate": true,
         "DamagedBy": "Average",
         "DropOnDeath": [

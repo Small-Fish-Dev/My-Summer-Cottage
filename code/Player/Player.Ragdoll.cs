@@ -73,6 +73,8 @@ partial class Player
 			CanRagdoll = !forced;
 			_lastPosition = Ragdoll.Transform.World.Position;
 			_spin = spin;
+
+			GameObject.PlaySound( "sounds/slap/slap.sound" );
 		}
 		else
 		{

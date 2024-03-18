@@ -1,5 +1,5 @@
 {
-  "__guid": "c11703c5-1500-4a32-ae02-fbd1da7796f8",
+  "__guid": "a6e2e8a2-5970-4018-bfed-a1ce20603666",
   "GameObjects": [
     {
       "__guid": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
@@ -1709,7 +1709,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -2184,7 +2183,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -2455,7 +2453,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -2726,7 +2723,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -2997,7 +2993,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -3268,7 +3263,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -3539,7 +3533,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -3810,7 +3803,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -4081,7 +4073,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -4352,7 +4343,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -4623,7 +4613,6 @@
                 {
                   "TriggerByTime": true,
                   "TriggerTimeslot": "9.50,12.00,1",
-                  "CompletionNecessary": true,
                   "Setup": {
                     "Version": 5,
                     "UserData": {
@@ -4998,9 +4987,9 @@
     {
       "__guid": "0a072b49-e373-4560-874c-f738315fb3d8",
       "Name": "outer_area",
-      "Position": "-6348.808,-9026.849,11772.6",
+      "Position": "-3513.929,-9026.849,11772.6",
       "Rotation": "0,0,-0.7071067,0.7071068",
-      "Scale": "2,2,2.3",
+      "Scale": "2.3,2.3,2.3",
       "Enabled": true,
       "NetworkMode": 2,
       "Components": [
@@ -5121,7 +5110,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.4199196,0,0.9075613",
+          "Rotation": "0,0.9201839,0,0.3914865",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -9075,7 +9064,7 @@
                     "DstName": "a"
                   },
                   {
-                    "Value": "Go home",
+                    "Value": "Go home (Finish Day)",
                     "DstId": 16,
                     "DstName": "b"
                   },
@@ -10543,6 +10532,14 @@
           "Enabled": true,
           "NetworkMode": 2,
           "__Prefab": "prefabs/events/reindeer_skinwalker.prefab"
+        },
+        {
+          "__guid": "9d34b86f-d4f9-496a-8650-7c9eb8f2a1e3",
+          "Name": "aliens",
+          "Position": "-5842.613,-2485.089,2352.269",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "__Prefab": "prefabs/events/aliens.prefab"
         }
       ]
     },
@@ -10938,6 +10935,32 @@
           "Title": "Lake"
         }
       ]
+    },
+    {
+      "__guid": "3390c4db-7fe5-43f7-afbb-832938bcd4c0",
+      "Name": "flashlight",
+      "Position": "2826.398,-2367.19,2490.338",
+      "Rotation": "0,0,-0.3826834,0.9238796",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/items/flashlight.prefab"
+    },
+    {
+      "__guid": "41eb0c62-8dea-4c2d-98a0-f030b4c3c3ba",
+      "Name": "shop_flashlight",
+      "Position": "-7248.101,6250.08,2494",
+      "Rotation": "0,0,0.3826833,0.9238794",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/shop/shop_flashlight.prefab"
+    },
+    {
+      "__guid": "8519a62c-bf90-4e1d-962d-0b6963e363e5",
+      "Name": "shop_flashlight (1)",
+      "Position": "-7338.009,6016.578,2487.378",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "__Prefab": "prefabs/shop/shop_flashlight.prefab"
     }
   ],
   "SceneProperties": {
@@ -10963,7 +10986,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-17T20:43:52.3034281\u002B01:00",
+  "LastSaved": "2024-03-17T22:39:54.2231914\u002B01:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []

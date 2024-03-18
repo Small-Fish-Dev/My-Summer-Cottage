@@ -1,13 +1,13 @@
 {
   "RootObject": {
-    "Id": "394eab29-5c8e-440e-be8f-8dc8f4fa6206",
+    "__guid": "394eab29-5c8e-440e-be8f-8dc8f4fa6206",
     "Name": "beer_bottle",
     "Enabled": true,
     "NetworkMode": 2,
     "Components": [
       {
         "__type": "ItemEquipment",
-        "Id": "b37ab5c2-8f97-41bb-b43b-a8d9989fb896",
+        "__guid": "b37ab5c2-8f97-41bb-b43b-a8d9989fb896",
         "Attachment": "hand_R",
         "AttachmentTransform": {
           "UniformScale": 1,
@@ -37,7 +37,7 @@
       },
       {
         "__type": "Interactions",
-        "Id": "5f8b36a3-17a1-42f2-834f-58f4472c3d9b",
+        "__guid": "5f8b36a3-17a1-42f2-834f-58f4472c3d9b",
         "HideOnEmpty": false,
         "ObjectInteractions": [
           {
@@ -73,12 +73,19 @@
                   "Id": 2,
                   "Type": "call",
                   "Properties": {
-                    "_name": "AddExperience",
                     "_type": "package.fish.sauna/Sauna.Player",
-                    "_isStatic": false
+                    "_isStatic": false,
+                    "_name": "AddExperience"
                   },
                   "UserData": {
                     "Position": "224,48"
+                  }
+                },
+                {
+                  "Id": 3,
+                  "Type": "random.int",
+                  "UserData": {
+                    "Position": "-16,224"
                   }
                 }
               ],
@@ -108,14 +115,27 @@
                   "DstName": "_target"
                 },
                 {
-                  "Value": 20,
+                  "SrcId": 3,
+                  "SrcName": "_result",
                   "DstId": 2,
                   "DstName": "exp"
+                },
+                {
+                  "Value": 7,
+                  "DstId": 3,
+                  "DstName": "max"
+                },
+                {
+                  "Value": 3,
+                  "DstId": 3,
+                  "DstName": "min"
                 }
               ]
             },
             "InteractDistance": 75,
             "Accessibility": "All",
+            "Disabled": null,
+            "ShowWhenDisabled": null,
             "CooldownTime": 0.5,
             "Animation": "Action",
             "Sound": {
@@ -149,7 +169,7 @@
       },
       {
         "__type": "ModelRenderer",
-        "Id": "b03c6b7b-4513-48f7-844f-852ee37ccd8b",
+        "__guid": "b03c6b7b-4513-48f7-844f-852ee37ccd8b",
         "BodyGroups": 11,
         "Model": "models/beer_bottle/beer.vmdl",
         "RenderType": "On",
@@ -157,14 +177,14 @@
       },
       {
         "__type": "ModelCollider",
-        "Id": "fe8e7353-1530-4623-8d5f-7ee44b3a0dda",
+        "__guid": "fe8e7353-1530-4623-8d5f-7ee44b3a0dda",
         "IsTrigger": false,
         "Model": "models/beer_bottle/beer.vmdl",
         "Static": false
       },
       {
         "__type": "Rigidbody",
-        "Id": "4721f9df-5336-4a9f-bf18-206a5d1fe9f2",
+        "__guid": "4721f9df-5336-4a9f-bf18-206a5d1fe9f2",
         "AngularDamping": 0,
         "Gravity": true,
         "LinearDamping": 0,
@@ -180,5 +200,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

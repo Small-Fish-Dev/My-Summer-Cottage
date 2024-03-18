@@ -61,6 +61,7 @@ public sealed class Ladel : Component
 		{
 			if ( HasWater )
 			{
+				var putIn = false;
 				if ( target != null )
 					if ( target.Components.TryGet<Stove>( out var stove ) )
 						if ( !stove.HasWater && stove.HasWood )
@@ -68,9 +69,14 @@ public sealed class Ladel : Component
 							HasWater = false;
 							stove.HasWater = true;
 							TaskMaster.SubmitTriggerSignal( "item.used_2.Ladel", player );
+							player.GameObject.PlaySound( "sounds/ladle/ladle_put.sound" );
+							putIn = true;
 						}
 
 				HasWater = false;
+
+				if ( !putIn )
+					player.GameObject.PlaySound( "sounds/water/water_splash.sound" );
 			}
 			else
 			{
@@ -79,6 +85,7 @@ public sealed class Ladel : Component
 					{
 						TaskMaster.SubmitTriggerSignal( "item.used_1.Ladel", player );
 						HasWater = true;
+						player.GameObject.PlaySound( "sounds/ladle/ladle_grab.sound" );
 					}
 			}
 
@@ -87,6 +94,12 @@ public sealed class Ladel : Component
 
 			if ( target.Components.TryGet<Rigidbody>( out var body ) )
 				body.ApplyImpulseAt( player.InteractionTrace.HitPosition, player.InteractionTrace.Direction * 100f );
+		}
+		else
+		{
+			HasWater = false;
+
+			player.GameObject.PlaySound( "sounds/water/water_splash.sound" );
 		}
 	}
 

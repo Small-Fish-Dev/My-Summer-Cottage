@@ -125,7 +125,7 @@ public sealed class NpcSpawnArea : Component
 
 					component.Model.Enabled = anyNearby;
 
-					if ( component.Collider != null )
+					if ( component.Collider != null && component.Ragdoll == null || !component.Ragdoll.IsValid() )
 						component.Collider.Enabled = anyNearby;
 				}
 			}

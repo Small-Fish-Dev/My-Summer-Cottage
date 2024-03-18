@@ -432,6 +432,31 @@
               "UserData": {
                 "Position": "352,-16"
               }
+            },
+            {
+              "Id": 12,
+              "Type": "call",
+              "Properties": {
+                "_name": "CaptureMemory",
+                "_type": "package.fish.sauna/Sauna.GameObjectExtensions",
+                "_isStatic": true
+              },
+              "UserData": {
+                "Position": "288,192"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "622bc9d2-5f21-4a55-897e-2bcb0d0fbf9a"
+                }
+              },
+              "UserData": {
+                "Position": "48,176"
+              }
             }
           ],
           "Links": [
@@ -464,6 +489,33 @@
               "SrcName": "enemy",
               "DstId": 11,
               "DstName": "target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 12,
+              "DstName": "_signal"
+            },
+            {
+              "Value": "Funny little RC car some kids were playing with.",
+              "DstId": 12,
+              "DstName": "caption"
+            },
+            {
+              "Value": 150,
+              "DstId": 12,
+              "DstName": "distance"
+            },
+            {
+              "Value": "rc.car",
+              "DstId": 12,
+              "DstName": "identifier"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 12,
+              "DstName": "obj"
             }
           ]
         },

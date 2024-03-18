@@ -49,6 +49,8 @@ public partial class NPC
 			_unragdoll = duration;
 			_lastPosition = Ragdoll.Transform.World.Position;
 			_spin = spin;
+
+			GameObject.PlaySound( "sounds/slap/slap.sound" );
 		}
 		else
 		{

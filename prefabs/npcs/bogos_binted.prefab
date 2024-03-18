@@ -1,0 +1,599 @@
+{
+  "RootObject": {
+    "__guid": "a266b90e-23ca-48c5-9146-e63f08efbca1",
+    "Name": "bogos_binted",
+    "Tags": "npc",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "NPC",
+        "__guid": "5420027d-532c-4bce-ac55-ef957660acab",
+        "AlertOthers": true,
+        "AttackCooldown": 8,
+        "AttackRange": 50,
+        "DetectRange": 1024,
+        "EnemyTags": "player",
+        "FaceTowardsVelocity": true,
+        "Health": {
+          "_type": "component",
+          "component_id": "b08e8871-b00b-4ef0-b094-870250ee498e",
+          "go": "a266b90e-23ca-48c5-9146-e63f08efbca1",
+          "component_type": "HealthComponent"
+        },
+        "Idle": true,
+        "MaximumIdleCooldown": 6,
+        "MaxRunAnimationSpeed": 180,
+        "MinimumIdleCooldown": 4,
+        "Model": {
+          "_type": "component",
+          "component_id": "09e58807-2891-4c4b-b0af-a76a4b006377",
+          "go": "98e82627-5fee-4b1e-99ac-db4489c1a6c6",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "MoveHelper": {
+          "_type": "component",
+          "component_id": "c73fbd40-57b7-4b34-88d6-fdc03868ac0b",
+          "go": "a266b90e-23ca-48c5-9146-e63f08efbca1",
+          "component_type": "MoveHelper"
+        },
+        "Name": "Bogos Binted",
+        "OnAttack": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Attack",
+            "id": "5176ba41-5f39-4764-b40a-c23c298505c9",
+            "ReferencedComponentTypes": [
+              "package.fish.sauna/HealthComponent"
+            ]
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-32,16"
+              }
+            },
+            {
+              "Id": 2,
+              "Type": "scene.get",
+              "Properties": {
+                "T": "package.fish.sauna/HealthComponent"
+              },
+              "UserData": {
+                "Position": "144,80"
+              }
+            },
+            {
+              "Id": 3,
+              "Type": "call",
+              "Properties": {
+                "_name": "Damage",
+                "_type": "package.fish.sauna/HealthComponent",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "448,0"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "npc.startescaping",
+              "UserData": {
+                "Position": "768,48"
+              }
+            },
+            {
+              "Id": 12,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "a266b90e-23ca-48c5-9146-e63f08efbca1"
+                }
+              },
+              "UserData": {
+                "Position": "80,208"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "property.get",
+              "ParentId": 12,
+              "Properties": {
+                "_name": "Transform",
+                "_type": "Sandbox.Game/Sandbox.GameObject"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "property.get",
+              "ParentId": 13,
+              "Properties": {
+                "_name": "Position",
+                "_type": "Sandbox.Game/Sandbox.GameTransform"
+              }
+            },
+            {
+              "Id": 16,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "5420027d-532c-4bce-ac55-ef957660acab",
+                  "go": "a266b90e-23ca-48c5-9146-e63f08efbca1",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "528,304"
+              }
+            },
+            {
+              "Id": 18,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "a266b90e-23ca-48c5-9146-e63f08efbca1"
+                }
+              },
+              "UserData": {
+                "Position": "784,208"
+              }
+            },
+            {
+              "Id": 19,
+              "Type": "call",
+              "Properties": {
+                "_name": "Destroy",
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_isStatic": false
+              },
+              "UserData": {
+                "Position": "1072,176"
+              }
+            },
+            {
+              "Id": 20,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "a266b90e-23ca-48c5-9146-e63f08efbca1"
+                }
+              },
+              "UserData": {
+                "Position": "512,400"
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "resource.ref",
+              "Properties": {
+                "value": "sounds/voices/alien.sound",
+                "T": "Sandbox.Engine/Sandbox.SoundEvent"
+              },
+              "UserData": {
+                "Position": "560,480"
+              }
+            },
+            {
+              "Id": 22,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "800,432"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 2,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 3,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 2,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "_target"
+            },
+            {
+              "Value": 5,
+              "DstId": 3,
+              "DstName": "amount"
+            },
+            {
+              "SrcId": 12,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "attacker"
+            },
+            {
+              "Value": 400,
+              "DstId": 3,
+              "DstName": "force"
+            },
+            {
+              "Value": "Average",
+              "DstId": 3,
+              "DstName": "type"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 3,
+              "DstName": "worldHurtPosition"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 8,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 16,
+              "SrcName": "_result",
+              "DstId": 8,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 8,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 12,
+              "SrcName": "_result",
+              "DstId": 13,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "succesfullyEscaped",
+              "DstId": 19,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 18,
+              "SrcName": "_result",
+              "DstId": 19,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 3,
+              "SrcName": "_signal",
+              "DstId": 22,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 20,
+              "SrcName": "_result",
+              "DstId": 22,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_result",
+              "DstId": 22,
+              "DstName": "soundEvent"
+            }
+          ]
+        },
+        "OnDetect": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Detect",
+            "id": "0159af43-7731-416d-aac0-524974f65a63",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input",
+              "UserData": {
+                "Position": "-48,48"
+              }
+            },
+            {
+              "Id": 4,
+              "Type": "npc.startfollowing",
+              "UserData": {
+                "Position": "256,32"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "5420027d-532c-4bce-ac55-ef957660acab",
+                  "go": "a266b90e-23ca-48c5-9146-e63f08efbca1",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "-0,224"
+              }
+            },
+            {
+              "Id": 11,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "a266b90e-23ca-48c5-9146-e63f08efbca1"
+                }
+              },
+              "UserData": {
+                "Position": "-16,304"
+              }
+            },
+            {
+              "Id": 13,
+              "Type": "resource.ref",
+              "Properties": {
+                "value": "sounds/voices/alien.sound",
+                "T": "Sandbox.Engine/Sandbox.SoundEvent"
+              },
+              "UserData": {
+                "Position": "32,384"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "240,352"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 4,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 4,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "enemy",
+              "DstId": 4,
+              "DstName": "target"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 14,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 11,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 13,
+              "SrcName": "_result",
+              "DstId": 14,
+              "DstName": "soundEvent"
+            }
+          ]
+        },
+        "OnEnemyEscaped": {
+          "Version": 5,
+          "UserData": {
+            "Title": "On Enemy Escaped",
+            "id": "278f8b41-a5c2-4d93-8a1b-70a1cd8fc0a7",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 1,
+              "Type": "npc.stopfollow",
+              "UserData": {
+                "Position": "336,-0"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "5420027d-532c-4bce-ac55-ef957660acab",
+                  "go": "a266b90e-23ca-48c5-9146-e63f08efbca1",
+                  "component_type": "NPC"
+                }
+              },
+              "UserData": {
+                "Position": "96,176"
+              }
+            },
+            {
+              "Id": 8,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "a266b90e-23ca-48c5-9146-e63f08efbca1"
+                }
+              },
+              "UserData": {
+                "Position": "32,240"
+              }
+            },
+            {
+              "Id": 9,
+              "Type": "resource.ref",
+              "Properties": {
+                "value": "sounds/voices/alien.sound",
+                "T": "Sandbox.Engine/Sandbox.SoundEvent"
+              },
+              "UserData": {
+                "Position": "80,320"
+              }
+            },
+            {
+              "Id": 10,
+              "Type": "sound.play",
+              "UserData": {
+                "Position": "288,288"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 1,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 1,
+              "DstName": "npc"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 10,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 8,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "_this"
+            },
+            {
+              "SrcId": 9,
+              "SrcName": "_result",
+              "DstId": 10,
+              "DstName": "soundEvent"
+            }
+          ]
+        },
+        "RunningType": "Smart",
+        "RunSpeed": 140,
+        "ScaleStats": true,
+        "Static": false,
+        "VisionRange": 2048,
+        "WalkingType": "Dumb",
+        "WalkSpeed": 90,
+        "Weight": "Middle"
+      },
+      {
+        "__type": "MoveHelper",
+        "__guid": "c73fbd40-57b7-4b34-88d6-fdc03868ac0b",
+        "AccelerationCurve": [
+          {
+            "y": 1
+          }
+        ],
+        "AirAcceleration": 800,
+        "AirFriction": 1,
+        "Bounce": 0,
+        "EnableUnstuck": true,
+        "Gravity": "0,0,-400",
+        "GroundAcceleration": 1000,
+        "GroundAngle": 70,
+        "GroundFriction": 30,
+        "IgnoreTags": "player,npc,trigger",
+        "MaxUnstuckTries": 20,
+        "StepHeight": 18,
+        "StickToGround": true,
+        "StopSpeed": 10,
+        "TraceHeight": 50,
+        "TraceRadius": 8,
+        "TraceType": "BBox",
+        "UseCollider": false,
+        "UseSceneGravity": false
+      },
+      {
+        "__type": "HealthComponent",
+        "__guid": "b08e8871-b00b-4ef0-b094-870250ee498e",
+        "CanRegenerate": false,
+        "DamagedBy": "Mild",
+        "DropOnDeath": [
+          {
+            "_type": "gameobject",
+            "prefab": "prefabs/items/gas_canister.prefab"
+          }
+        ],
+        "Immortal": false,
+        "MaxHealth": 3,
+        "RegenerationCooldown": 2,
+        "RegenerationTimer": 5,
+        "StunnedBy": "Mild",
+        "StunWhenDamaged": true
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "98e82627-5fee-4b1e-99ac-db4489c1a6c6",
+        "Name": "Model",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "SkinnedModelRenderer",
+            "__guid": "09e58807-2891-4c4b-b0af-a76a4b006377",
+            "BodyGroups": 341,
+            "CreateBoneObjects": false,
+            "Model": "models/guy/guy.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "Character",
+            "__guid": "58ee7d7a-fe17-41b6-a707-504319d4c5ee",
+            "Clothes": [
+              "models/clothes/alien_head/alien_head.vmdl"
+            ],
+            "Fatness": 0,
+            "Height": 100,
+            "HideBodyGroup": "Head"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
