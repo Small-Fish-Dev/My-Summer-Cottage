@@ -445,4 +445,11 @@ public partial class Player : Component, Component.ExecuteInEditor
 	{
 		GameObject.PlaySound( "sounds/phone/nokla_notif.sound" );
 	}
+
+	[ConCmd( "sauna_money_add" )]
+	public static void GiveMoneyDebug( int money = 0 )
+	{
+		Player.Local.GiveMoney( money );
+		Log.Info( $"Given {money}mk" );
+	}
 }

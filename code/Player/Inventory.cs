@@ -1,3 +1,6 @@
+using Sauna.Event;
+using System.Linq;
+
 namespace Sauna;
 
 public class Inventory : Component
@@ -519,5 +522,49 @@ public class Inventory : Component
 		obj.NetworkMode = NetworkMode.Object;
 		obj.NetworkSpawn();
 		player.Inventory.GiveItem( obj );
+	}
+
+
+
+	[ConCmd( "sauna_item_give" )]
+	public static void DebugGiveItem( string name )
+	{
+		var allItems = PrefabLibrary.FindByComponent<ItemComponent>();
+		var foundItem = allItems.Where( itemPrefab =>
+		{
+			var toFind = name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var item = itemPrefab.GetComponent<ItemComponent>();
+			var itemName = item.Get<string>( "Name" ).ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var objectName = itemPrefab.Name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+
+			if ( itemName == toFind || objectName == toFind )
+				return true;
+
+			if ( itemName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) || objectName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) )
+				return true;
+
+			return false;
+		} ).FirstOrDefault();
+
+
+		if ( foundItem != null )
+		{
+			var obj = SceneUtility.GetPrefabScene( foundItem.Prefab ).Clone();
+			obj.NetworkMode = NetworkMode.Object;
+			obj.NetworkSpawn();
+			Player.Local.Inventory.GiveItem( obj );
+		}
+		else
+		{
+			Log.Info( $"The item was not found, here is a list of available items:" );
+
+			var availableItems = "";
+
+			foreach ( var availableItem in allItems )
+				availableItems += $"[{availableItem.GetComponent<ItemComponent>().Get<string>( "Name" )}], ";
+
+			Log.Info( availableItems );
+			Log.Info( "You may also use partial item names or any combination of words and letters, I'll try my best to find the item." );
+		}
 	}
 }
