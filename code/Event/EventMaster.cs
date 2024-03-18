@@ -276,4 +276,128 @@ public class EventMaster : Component
 
 		TaskMaster.SubmitTriggerSignal( interaction, playerComponent );
 	}
+
+	[ConCmd( "sauna_event_enable" )]
+	public static void DebugEnableEvent( string name )
+	{
+		var allEvents = Game.ActiveScene.GetAllComponents<EventDefinition>();
+		var foundEvent = allEvents.Where( definition =>
+		{
+			var toFind = name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var eventName = definition.EventName.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var parentName = definition.GameObject.Name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+
+			if ( eventName == toFind || parentName == toFind )
+				return true;
+
+			if ( eventName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) || parentName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) )
+				return true;
+
+			foreach ( var children in definition.GameObject.Children )
+			{
+				var childrenName = children.Name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+
+				if ( childrenName == toFind || childrenName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) )
+					return true;
+			}
+
+			return false;
+		} ).FirstOrDefault();
+
+
+		if ( foundEvent.IsValid() )
+		{
+			if ( EventMaster.Instance.CurrentEvents.Contains( foundEvent ) )
+			{
+				foundEvent.Restart();
+				foundEvent.Enable();
+
+				Log.Info( $"Event {foundEvent.EventName} was already enabled and has been restarted." );
+			}
+			else
+			{
+				foundEvent.Enable();
+				Log.Info( $"Event {foundEvent.EventName} has been enabled." );
+			}
+		}
+		else
+		{
+			Log.Info( $"The event was not found, here is a list of available events:" );
+
+			var availableEvents = "";
+
+			foreach ( var availableEvent in allEvents )
+				availableEvents += $"[{availableEvent.EventName}], ";
+
+			Log.Info( availableEvents );
+			Log.Info( "You may also use partial event names or any combination of words and letters, I'll try my best to find the event." );
+		}
+	}
+
+	[ConCmd( "sauna_event_disable" )]
+	public static void DebugDisableEvent( string name )
+	{
+		var allEvents = Game.ActiveScene.GetAllComponents<EventDefinition>();
+		var foundEvent = allEvents.Where( definition =>
+		{
+			var toFind = name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var eventName = definition.EventName.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var parentName = definition.GameObject.Name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+
+			if ( eventName == toFind || parentName == toFind )
+				return true;
+
+			if ( eventName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) || parentName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) )
+				return true;
+
+			foreach ( var children in definition.GameObject.Children )
+			{
+				var childrenName = children.Name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+
+				if ( childrenName == toFind || childrenName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) )
+					return true;
+			}
+
+			return false;
+		} ).FirstOrDefault();
+
+
+		if ( foundEvent.IsValid() )
+		{
+			if ( EventMaster.Instance.CurrentEvents.Contains( foundEvent ) )
+			{
+				foundEvent.Disable();
+
+				Log.Info( $"Event {foundEvent.EventName} was enabled and now is disabled. Some asynchronous logic may still be running." );
+			}
+			else
+			{
+				Log.Info( $"Event {foundEvent.EventName} wasn't enabled in the first place." );
+			}
+		}
+		else
+		{
+			Log.Info( $"The event was not found, here is a list of available events:" );
+
+			var availableEvents = "";
+
+			foreach ( var availableEvent in allEvents )
+				availableEvents += $"[{availableEvent.EventName}], ";
+
+			Log.Info( availableEvents );
+			Log.Info( "You may also use partial event names or any combination of words and letters, I'll try my best to find the event." );
+		}
+	}
+
+
+	[ConCmd( "sauna_event_disableall" )]
+	public static void DebugDisableAllEvent()
+	{
+		var amount = EventMaster.Instance.CurrentEvents.Count();
+
+		foreach ( var toDisable in EventMaster.Instance.CurrentEvents.ToList() )
+			toDisable.Disable();
+
+		Log.Info( $"Disable a total of {amount} events. Some asynchronous logic may still be running." );
+	}
 }
