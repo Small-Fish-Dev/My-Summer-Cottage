@@ -332,7 +332,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 			Transform.Position = Transform.Position;
 	}
 
-	[ConCmd( "Respawn" )]
+	[ConCmd( "sauna_respawn" )]
 	static void RespawnCommand()
 	{
 		Player.Local.Respawn();
