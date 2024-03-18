@@ -336,6 +336,23 @@ public partial class SaunaTask : GameResource
 		}
 	}
 
+	public void End()
+	{
+		Started = false;
+		Completed = false;
+		Successful = false;
+
+		CurrentSubtaskOrder = 0;
+
+		foreach ( var subtask in Subtasks )
+		{
+			subtask.CurrentAmount = 0;
+
+			if ( subtask.Completed )
+				subtask.SetComplete( false );
+		}
+	}
+
 	/// <summary>
 	/// Find a random task with the given parameters
 	/// </summary>

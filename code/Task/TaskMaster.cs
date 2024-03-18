@@ -1,6 +1,7 @@
 using Sandbox;
 using Sauna.Event;
 using Sauna.UI;
+using System.Linq;
 using System.Threading.Tasks;
 using static Sauna.SaunaTask;
 
@@ -615,13 +616,119 @@ public partial class TaskMaster : Component, Component.INetworkListener
 	public static void ResetEveryoneTask( int taskId ) => ResetTask( ResourceLibrary.Get<SaunaTask>( taskId ) );
 
 
-	[ConCmd( "sauna_givetask" )]
-	public static void GiveTask( string taskName )
+	[ConCmd( "sauna_task_enable" )]
+	public static void DebugEnableTask( string name )
 	{
-		var task = ResourceLibrary.GetAll<SaunaTask>().Where( ( t ) => t.ResourceName.ToLower().Contains( taskName.ToLower() ) ).FirstOrDefault();
-		if ( task is null )
-			return;
+		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
 
-		AssignEveryoneNewTask( task.ResourceId );
+		var foundTask = allTasks.Where( task =>
+		{
+			var toFind = name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var taskName = task.Name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var taskResourceName = task.ResourceName.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+
+			if ( taskName == toFind || taskResourceName == toFind )
+				return true;
+
+			if ( taskName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) || taskResourceName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) )
+				return true;
+
+			return false;
+		} ).FirstOrDefault();
+
+
+		if ( foundTask != null )
+		{
+			if ( TaskMaster._instance.CurrentTasks.Contains( foundTask ) )
+			{
+				foundTask.Reset();
+
+				Log.Info( $"Task {foundTask.Name} was already enabled and has been reset." );
+			}
+			else
+			{
+				TaskMaster.AssignEveryoneNewTask( foundTask.ResourceId );
+				Log.Info( $"Task {foundTask.Name} has been enabled." );
+			}
+		}
+		else
+		{
+			Log.Info( $"The task was not found, here is a list of available tasks:" );
+
+			var availableTasks = "";
+
+			foreach ( var availableTask in allTasks )
+				availableTasks += $"[{availableTask.Name}], ";
+
+			Log.Info( availableTasks );
+			Log.Info( "You may also use partial task names or any combination of words and letters, I'll try my best to find the task." );
+		}
+	}
+
+	[ConCmd( "sauna_task_disable" )]
+	public static void DebugDisableTask( string name )
+	{
+		var allTasks = ResourceLibrary.GetAll<SaunaTask>();
+
+		var foundTask = allTasks.Where( task =>
+		{
+			var toFind = name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var taskName = task.Name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var taskResourceName = task.ResourceName.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+
+			if ( taskName == toFind || taskResourceName == toFind )
+				return true;
+
+			if ( taskName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) || taskResourceName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) )
+				return true;
+
+			return false;
+		} ).FirstOrDefault();
+
+
+		if ( foundTask != null )
+		{
+			if ( TaskMaster._instance.CurrentTasks.Contains( foundTask ) )
+			{
+				foundTask.Reset();
+				foundTask.End();
+				TaskMaster._instance.CurrentTasks.Remove( foundTask );
+
+				Log.Info( $"Task {foundTask.Name} was enabled and now is disabled. Some asynchronous logic may still be running." );
+			}
+			else
+			{
+				Log.Info( $"Task {foundTask.Name} wasn't enabled in the first place." );
+			}
+		}
+		else
+		{
+			Log.Info( $"The task was not found, here is a list of available tasks:" );
+
+			var availableTasks = "";
+
+			foreach ( var availableTask in allTasks )
+				availableTasks += $"[{availableTask.Name}], ";
+
+			Log.Info( availableTasks );
+			Log.Info( "You may also use partial task names or any combination of words and letters, I'll try my best to find the task." );
+		}
+	}
+
+
+	[ConCmd( "sauna_task_disableall" )]
+	public static void DebugDisableAllTasks()
+	{
+		var amount = TaskMaster._instance.CurrentTasks.Count();
+
+		foreach ( var toDisable in TaskMaster._instance.CurrentTasks.ToList() )
+		{
+			toDisable.Reset();
+			toDisable.End();
+		}
+
+		TaskMaster._instance.CurrentTasks.Clear();
+
+		Log.Info( $"Disable a total of {amount} tasks. Some asynchronous logic may still be running." );
 	}
 }
