@@ -35,7 +35,7 @@ partial class Player
 
 	public static bool HideHead
 	{
-		get => _hideHead;
+		get => DebugCamera ? false : _hideHead;
 		set
 		{
 			_hideHead = value;
@@ -45,6 +45,10 @@ partial class Player
 	}
 
 	private static bool _hideHead = true;
+
+	public static bool DebugCamera { get; set; } = false;
+	public static Vector3 DebugCameraPosition { get; set; }
+	public static Angles DebugCameraAngles { get; set; }
 
 	[Property][Category( "Movement" )] public MoveHelper MoveHelper { get; set; }
 
@@ -224,6 +228,10 @@ partial class Player
 
 	protected void UpdateAngles()
 	{
+		if ( DebugCamera )
+		{
+			DebugCameraAngles += Input.AnalogLook;
+		}
 		if ( BlockMouseAim ) return;
 
 		var before = EyeAngles;
@@ -247,20 +255,31 @@ partial class Player
 		if ( Camera == null )
 			return;
 
-		var eyes = Renderer.GetAttachment( "eyes" ) ?? Transform.World;
-		var rot = Transform.Rotation;
-		var oldEyeRot = Camera.Transform.Rotation;
-		var newEyeRot = IsRagdolled ? eyes.Rotation : EyeAngles.ToRotation();
-		var oldEyePos = Camera.Transform.Position;
-		var newEyePos = eyes.Position + (IsRagdolled ? 0f : rot.Forward * 2.4f);
+		if ( DebugCamera )
+		{
+			DebugCameraPosition += Camera.Transform.Rotation * Input.AnalogMove * Time.Delta * ((Input.Down( InputAction.Sprint ) ? 1000f : (Input.Down( InputAction.Walk ) ? 150f : 400f)));
+			Camera.Transform.Position = Camera.Transform.Position.LerpTo( DebugCameraPosition, Time.Delta * 5f );
+			Camera.Transform.Rotation = Rotation.Lerp( Camera.Transform.Rotation, DebugCameraAngles, Time.Delta * 5f );
+		}
+		else
+		{
+			var eyes = Renderer.GetAttachment( "eyes" ) ?? Transform.World;
+			var rot = Transform.Rotation;
+			var oldEyeRot = Camera.Transform.Rotation;
+			var newEyeRot = IsRagdolled ? eyes.Rotation : EyeAngles.ToRotation();
+			var oldEyePos = Camera.Transform.Position;
+			var newEyePos = eyes.Position + (IsRagdolled ? 0f : rot.Forward * 2.4f);
 
-		Camera.Transform.Position = IsRagdolled ? Vector3.Lerp( oldEyePos, newEyePos, Time.Delta * 10f ) : newEyePos;
-		Camera.Transform.Rotation = IsRagdolled ? Rotation.Lerp( oldEyeRot, newEyeRot, Time.Delta * 5f ) : newEyeRot;
-		var newRot = Rotation.FromRoll( Vector3.Dot( Transform.Rotation.Right, MoveHelper.Velocity.Normal ) ) * 2f;
-		_lastRot = Rotation.Lerp( _lastRot, newRot, Time.Delta * 5f );
-		Camera.Transform.Rotation *= _lastRot;
+			Camera.Transform.Position = IsRagdolled ? Vector3.Lerp( oldEyePos, newEyePos, Time.Delta * 10f ) : newEyePos;
+			Camera.Transform.Rotation = IsRagdolled ? Rotation.Lerp( oldEyeRot, newEyeRot, Time.Delta * 5f ) : newEyeRot;
+			var newRot = Rotation.FromRoll( Vector3.Dot( Transform.Rotation.Right, MoveHelper.Velocity.Normal ) ) * 2f;
+			_lastRot = Rotation.Lerp( _lastRot, newRot, Time.Delta * 5f );
+			Camera.Transform.Rotation *= _lastRot;
+		}
+
 		Camera.FieldOfView = MathX.LerpTo( Camera.FieldOfView, Input.Down( InputAction.Zoom ) ? Zoom : 90f, 10f * Time.Delta );
 		Camera.ZNear = 2.5f;
+
 		UpdateHeadVisibility();
 	}
 
@@ -343,5 +362,13 @@ partial class Player
 	protected void JumpBroadcast()
 	{
 		Renderer?.Set( "jump", true );
+	}
+
+	[ConCmd( "sauna_debugcamera" )]
+	public static void DebugCameraToggle()
+	{
+		DebugCamera = !DebugCamera;
+		DebugCameraPosition = Player.Local.Camera.Transform.Position;
+		DebugCameraAngles = Player.Local.Camera.Transform.Rotation;
 	}
 }

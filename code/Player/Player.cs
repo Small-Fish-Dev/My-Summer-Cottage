@@ -97,11 +97,16 @@ public partial class Player : Component, Component.ExecuteInEditor
 		}
 	}
 
+	bool _blockMovements = false;
 	/// <summary>
 	/// Block both inputs and mouse aiming
 	/// </summary>
 	[Sync]
-	public bool BlockMovements { get; set; } = false;
+	public bool BlockMovements
+	{
+		get => DebugCamera ? true : _blockMovements;
+		set => _blockMovements = value;
+	}
 
 	bool _blockMouseAim = false;
 
