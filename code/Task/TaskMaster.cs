@@ -698,7 +698,14 @@ public partial class TaskMaster : Component, Component.INetworkListener
 			}
 			else
 			{
-				Log.Info( $"Task {foundTask.Name} wasn't enabled in the first place." );
+				Log.Info( $"Task {foundTask.Name} wasn't enabled in the first place. Here is a list of all active tasks:" );
+
+				var activeTasks = "";
+
+				foreach ( var activeTask in TaskMaster._instance.CurrentTasks )
+					activeTasks += $"[{activeTask.Name}], ";
+
+				Log.Info( activeTasks );
 			}
 		}
 		else

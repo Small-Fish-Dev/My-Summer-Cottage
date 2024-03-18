@@ -372,7 +372,14 @@ public class EventMaster : Component
 			}
 			else
 			{
-				Log.Info( $"Event {foundEvent.EventName} wasn't enabled in the first place." );
+				Log.Info( $"Event {foundEvent.EventName} wasn't enabled in the first place. Here is a list of all active events:" );
+
+				var activeEvents = "";
+
+				foreach ( var activeEvent in EventMaster.Instance.CurrentEvents )
+					activeEvents += $"[{activeEvent.EventName}], ";
+
+				Log.Info( activeEvents );
 			}
 		}
 		else
