@@ -162,7 +162,7 @@ public partial class Player : Component, Component.ExecuteInEditor
 	public bool IsEncumbered => Inventory.Weight > Inventory.MAX_WEIGHT_IN_GRAMS;
 
 	public Inventory Inventory { get; private set; }
-	protected CameraComponent Camera;
+	public CameraComponent Camera;
 	public SkinnedModelRenderer Renderer;
 	protected BoxCollider Collider;
 	protected ParticleConeEmitter PissEmitter;

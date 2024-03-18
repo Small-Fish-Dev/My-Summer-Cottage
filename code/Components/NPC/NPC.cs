@@ -626,4 +626,54 @@ public partial class NPC : Component
 		sound.Volume *= ForceMultiplier * 4f;
 		sound.Decibels += ForceMultiplier;
 	}
+
+
+	[ConCmd( "sauna_npc" )]
+	public static void DebugSpawnNPC( string name )
+	{
+		var allNpcs = PrefabLibrary.FindByComponent<NPC>();
+		var foundNpc = allNpcs.Where( npcPrefab =>
+		{
+			var toFind = name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var npc = npcPrefab.GetComponent<NPC>();
+			var npcName = npc.Get<string>( "Name" ).ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+			var objectName = npcPrefab.Name.ToLower().Replace( " ", "" ).Replace( "_", "" ).Replace( ".", "" );
+
+			if ( npcName == toFind || objectName == toFind )
+				return true;
+
+			if ( npcName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) || objectName.Contains( toFind, StringComparison.OrdinalIgnoreCase ) )
+				return true;
+
+			return false;
+		} ).FirstOrDefault();
+
+
+		if ( foundNpc != null )
+		{
+			var obj = SceneUtility.GetPrefabScene( foundNpc.Prefab ).Clone();
+			obj.NetworkMode = NetworkMode.Object;
+			obj.NetworkSpawn();
+			var trace = Game.ActiveScene.Trace.Ray( Player.Local.Camera.Transform.Position, Player.Local.Camera.Transform.Position + Player.Local.Camera.Transform.Rotation.Forward * 1000f )
+				.WithoutTags( "player", "npc", "trigger" )
+				.IgnoreGameObjectHierarchy( Player.Local.GameObject )
+				.Run();
+
+			obj.Transform.Position = trace.Hit ? trace.HitPosition : trace.EndPosition;
+
+			Log.Info( $"Npc {foundNpc.GetComponent<ItemComponent>().Get<string>( "Name" )} was spawned." );
+		}
+		else
+		{
+			Log.Info( $"The npc was not found, here is a list of available npcs:" );
+
+			var availableNpcs = "";
+
+			foreach ( var availabelNpc in allNpcs )
+				availableNpcs += $"[{availabelNpc.GetComponent<NPC>().Get<string>( "Name" )}], ";
+
+			Log.Info( availableNpcs );
+			Log.Info( "You may also use partial npc names or any combination of words and letters, I'll try my best to find the npc." );
+		}
+	}
 }
