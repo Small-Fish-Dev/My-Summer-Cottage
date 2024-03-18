@@ -280,6 +280,23 @@ public class GameTimeManager : Component, Component.ExecuteInEditor
 	}
 
 	/// <summary>
+	/// In seconds (8am = 28800, 3pm = 54000 10pm = 79200)
+	/// </summary>
+	/// <param name="seconds"></param>
+	[ConCmd( "sauna_time_set" )]
+	public static void DebugTimeSet( int seconds )
+	{
+		var timeManager = Game.ActiveScene.GetAllComponents<GameTimeManager>().First();
+		timeManager.SetTimeFromSeconds( seconds );
+	}
+
+	[ConCmd( "sauna_time_scale" )]
+	public static void DebugTimescale( float scale = 1f )
+	{
+		Game.ActiveScene.TimeScale = scale;
+	}
+
+	/// <summary>
 	/// Skip some time. Impacts the day count.
 	/// </summary>
 	/// <param name="seconds">Time as in-game seconds</param>
