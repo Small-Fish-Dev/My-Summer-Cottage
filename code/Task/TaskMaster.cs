@@ -738,4 +738,11 @@ public partial class TaskMaster : Component, Component.INetworkListener
 
 		Log.Info( $"Disable a total of {amount} tasks. Some asynchronous logic may still be running." );
 	}
+
+
+	[ConCmd( "sauna_signal" )]
+	public static void DebugSubmitSignal( string signal )
+	{
+		TaskMaster.SubmitTriggerSignal( signal, Player.Local );
+	}
 }
