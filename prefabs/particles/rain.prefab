@@ -1,12 +1,12 @@
 {
   "RootObject": {
-    "Id": "4ab96bb3-8534-425d-ac2f-8cab5104aa9e",
+    "__guid": "4ab96bb3-8534-425d-ac2f-8cab5104aa9e",
     "Name": "rain",
     "Enabled": true,
     "NetworkMode": 2,
     "Children": [
       {
-        "Id": "e03dd7e8-1754-4977-972c-88d661f162c5",
+        "__guid": "e03dd7e8-1754-4977-972c-88d661f162c5",
         "Name": "clouds",
         "Tags": "particles",
         "Enabled": true,
@@ -14,6 +14,7 @@
         "Components": [
           {
             "__type": "ParticleEffect",
+            "__guid": "2099f4b8-d70d-4376-b91e-28b7322122c6",
             "Alpha": {
               "Type": "Curve",
               "CurveA": [
@@ -82,15 +83,15 @@
                 ],
                 "alpha": []
               },
-              "ConstantA": "0.83256,0.83256,0.83256,1",
-              "ConstantB": "0.82791,0.82791,0.82791,1"
+              "ConstantA": "0.59535,0.59535,0.59535,1",
+              "ConstantB": "0.50233,0.50233,0.50233,1"
             },
             "Lifetime": {
               "Type": "Range",
               "Evaluation": "Particle",
               "Constants": "2,5,0,0"
             },
-            "MaxParticles": 200,
+            "MaxParticles": 50,
             "PerParticleTimeScale": {
               "Constants": "1,0.4,0,0"
             },
@@ -128,24 +129,26 @@
           },
           {
             "__type": "ParticleSpriteRenderer",
+            "__guid": "ae13805f-a733-42eb-bc27-0af9323eaf1e",
             "Additive": false,
             "BlurAmount": 0.5,
             "BlurOpacity": 0.91,
             "BlurSpacing": 0.73,
-            "DepthFeather": 9.12,
+            "DepthFeather": 12.56,
             "FaceVelocity": false,
-            "FogStrength": 0,
+            "FogStrength": 1,
             "LeadingTrail": true,
             "MotionBlur": false,
             "Opaque": false,
             "RotationOffset": 0,
-            "Scale": 3000,
+            "Scale": 5000,
             "Shadows": true,
             "SortMode": "ByDistance",
             "Texture": "textures/rain/cloud.vtex"
           },
           {
             "__type": "ParticleSphereEmitter",
+            "__guid": "42fadd1c-4963-4bf8-9343-0b13ea4c85bf",
             "Burst": 0,
             "Delay": 0,
             "DestroyOnEnd": false,
@@ -159,7 +162,7 @@
         ]
       },
       {
-        "Id": "15b03550-c98b-48b2-b3bc-d75e11b57534",
+        "__guid": "15b03550-c98b-48b2-b3bc-d75e11b57534",
         "Name": "rain_outter",
         "Position": "0,0,2000",
         "Tags": "particles",
@@ -168,6 +171,7 @@
         "Components": [
           {
             "__type": "ParticleEffect",
+            "__guid": "49398146-2dbd-4bf2-9455-0e5ec105b83f",
             "Alpha": {
               "CurveA": [
                 {
@@ -209,7 +213,7 @@
               "Constants": "1,0,0,0"
             },
             "Force": true,
-            "ForceDirection": "0,0,-900",
+            "ForceDirection": "0,0,-1100",
             "ForceScale": {
               "Type": "Range",
               "Evaluation": "Frame",
@@ -283,6 +287,7 @@
           },
           {
             "__type": "ParticleSpriteRenderer",
+            "__guid": "2f8137b3-e19c-44c1-8239-eacd80b65f3d",
             "Additive": true,
             "BlurAmount": 0.89,
             "BlurOpacity": 0.72,
@@ -295,12 +300,13 @@
             "Opaque": false,
             "RotationOffset": 0,
             "Scale": 2,
-            "Shadows": true,
+            "Shadows": false,
             "SortMode": "ByDistance",
             "Texture": "textures/rain/rain_water_drop.vtex"
           },
           {
             "__type": "ParticleSphereEmitter",
+            "__guid": "3799c6f2-68de-468d-9835-c8ebd54d34f7",
             "__enabled": false,
             "Burst": 0,
             "Delay": 0,
@@ -314,6 +320,7 @@
           },
           {
             "__type": "ParticleBoxEmitter",
+            "__guid": "5463882d-940f-4ffe-8431-34994f3fcf6f",
             "Burst": 0,
             "Delay": 0,
             "DestroyOnEnd": false,
@@ -326,7 +333,7 @@
         ]
       },
       {
-        "Id": "13876834-a356-4983-80b0-cb0948d85662",
+        "__guid": "13876834-a356-4983-80b0-cb0948d85662",
         "Name": "rain centre",
         "Position": "0,0,2000",
         "Tags": "particles",
@@ -335,6 +342,7 @@
         "Components": [
           {
             "__type": "ParticleEffect",
+            "__guid": "d6f1d502-d2ce-4289-bce8-c5c52ea86294",
             "Alpha": {
               "Type": "Range",
               "Evaluation": "Frame",
@@ -376,7 +384,7 @@
               "Constants": "1,0,0,0"
             },
             "Force": true,
-            "ForceDirection": "0,0,-900",
+            "ForceDirection": "0,0,-1100",
             "ForceScale": {
               "Type": "Range",
               "Evaluation": "Frame",
@@ -450,6 +458,7 @@
           },
           {
             "__type": "ParticleSpriteRenderer",
+            "__guid": "d88a03fb-c5a4-47e2-9c25-6d376adb9478",
             "Additive": true,
             "BlurAmount": 0.17,
             "BlurOpacity": 0.72,
@@ -462,12 +471,13 @@
             "Opaque": false,
             "RotationOffset": 0,
             "Scale": 1,
-            "Shadows": true,
+            "Shadows": false,
             "SortMode": "Unsorted",
             "Texture": "textures/rain/rain_water_drop.vtex"
           },
           {
             "__type": "ParticleSphereEmitter",
+            "__guid": "417f20af-e5d3-4adf-b3cc-a0979e58717d",
             "__enabled": false,
             "Burst": 0,
             "Delay": 0,
@@ -481,6 +491,7 @@
           },
           {
             "__type": "ParticleBoxEmitter",
+            "__guid": "5d72a7e2-fd5f-485b-a43a-e53d3ae1e286",
             "Burst": 0,
             "Delay": 0,
             "DestroyOnEnd": false,
@@ -497,5 +508,7 @@
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
   "__references": []
 }

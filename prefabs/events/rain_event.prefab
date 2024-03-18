@@ -1,0 +1,565 @@
+{
+  "RootObject": {
+    "__guid": "32873d73-bdbe-419b-8caf-356d7e6dc585",
+    "Name": "rain_event",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "Components": [
+      {
+        "__type": "EventDefinition",
+        "__guid": "3ccf74dc-8c84-4d5c-9e91-3023eded6c6b",
+        "AddToEventPool": true,
+        "EventName": "rain",
+        "EventSignals": [],
+        "Rarity": "Common",
+        "ReinstantiateOnRestart": true,
+        "Stackable": true,
+        "Type": "Random"
+      },
+      {
+        "__type": "EventComponent",
+        "__guid": "1682e2c1-5721-43bc-8953-7e8faf036385",
+        "DisabledWhilePlaying": [],
+        "DisableOnTrigger": [],
+        "Event": {
+          "Version": 5,
+          "UserData": {
+            "Title": "Event",
+            "id": "8c00c070-c0ed-4ba1-a5db-d51198f5f539",
+            "ReferencedComponentTypes": []
+          },
+          "Variables": [],
+          "Nodes": [
+            {
+              "Id": 0,
+              "Type": "input"
+            },
+            {
+              "Id": 5,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.Player",
+                "_name": "Local"
+              },
+              "UserData": {
+                "Position": "-0,-96"
+              }
+            },
+            {
+              "Id": 7,
+              "Type": "property.get",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.Component",
+                "_name": "GameObject"
+              },
+              "UserData": {
+                "Position": "160,-96"
+              }
+            },
+            {
+              "Id": 14,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "eea88315-5f1a-4da5-9dec-e35662919fd9"
+                }
+              },
+              "UserData": {
+                "Position": "-0,224",
+                "Labels": {
+                  "_result": "rain_sound"
+                }
+              }
+            },
+            {
+              "Id": 19,
+              "Type": "property.get",
+              "ParentId": 7,
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Transform"
+              }
+            },
+            {
+              "Id": 21,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "688,-0"
+              }
+            },
+            {
+              "Id": 22,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "864,-0"
+              }
+            },
+            {
+              "Id": 25,
+              "Type": "time.delay",
+              "UserData": {
+                "Position": "1136,-0"
+              }
+            },
+            {
+              "Id": 26,
+              "Type": "event.finished",
+              "UserData": {
+                "Position": "1584,-0"
+              }
+            },
+            {
+              "Id": 28,
+              "Type": "scene.ref",
+              "Properties": {
+                "component": {
+                  "_type": "component",
+                  "component_id": "1682e2c1-5721-43bc-8953-7e8faf036385",
+                  "go": "32873d73-bdbe-419b-8caf-356d7e6dc585",
+                  "component_type": "EventComponent"
+                }
+              },
+              "UserData": {
+                "Position": "1360,80"
+              }
+            },
+            {
+              "Id": 29,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Destroy"
+              },
+              "UserData": {
+                "Position": "1360,-80"
+              }
+            },
+            {
+              "Id": 30,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Destroy"
+              },
+              "UserData": {
+                "Position": "1360,-160"
+              }
+            },
+            {
+              "Id": 31,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Destroy"
+              },
+              "UserData": {
+                "Position": "1360,-0"
+              }
+            },
+            {
+              "Id": 37,
+              "Type": "scene.ref",
+              "Properties": {
+                "gameobject": {
+                  "_type": "gameobject",
+                  "go": "23156382-0e78-4e7e-9b1b-d551a46c8641"
+                }
+              },
+              "UserData": {
+                "Position": "0,144",
+                "Labels": {
+                  "_result": "rain_farticle"
+                }
+              }
+            },
+            {
+              "Id": 39,
+              "Type": "call",
+              "Properties": {
+                "_isStatic": false,
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "SetParent"
+              },
+              "UserData": {
+                "Position": "432,0"
+              }
+            },
+            {
+              "Id": 42,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "336,128"
+              }
+            },
+            {
+              "Id": 43,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "Sandbox.Game/Sandbox.GameObject",
+                "_name": "Enabled"
+              },
+              "UserData": {
+                "Position": "336,224"
+              }
+            },
+            {
+              "Id": 44,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.GameTimeManager",
+                "_name": "SkyDayColor"
+              },
+              "UserData": {
+                "Position": "560,-304"
+              }
+            },
+            {
+              "Id": 47,
+              "Type": "property.set",
+              "Properties": {
+                "_type": "package.fish.sauna/Sauna.GameTimeManager",
+                "_name": "SkyDayColor"
+              },
+              "UserData": {
+                "Position": "1696,-192"
+              }
+            }
+          ],
+          "Links": [
+            {
+              "SrcId": 5,
+              "SrcName": "_result",
+              "DstId": 7,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 19,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 39,
+              "SrcName": "_signal",
+              "DstId": 21,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 177,
+              "DstId": 21,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 21,
+              "SrcName": "_signal",
+              "DstId": 22,
+              "DstName": "_signal"
+            },
+            {
+              "Value": false,
+              "DstId": 22,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 22,
+              "SrcName": "_signal",
+              "DstId": 25,
+              "DstName": "_signal"
+            },
+            {
+              "Value": 20,
+              "DstId": 25,
+              "DstName": "seconds"
+            },
+            {
+              "SrcId": 31,
+              "SrcName": "_signal",
+              "DstId": 26,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 28,
+              "SrcName": "_result",
+              "DstId": 26,
+              "DstName": "component"
+            },
+            {
+              "SrcId": 30,
+              "SrcName": "_signal",
+              "DstId": 29,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 37,
+              "SrcName": "_result",
+              "DstId": 29,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 25,
+              "SrcName": "_signal",
+              "DstId": 30,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 30,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 29,
+              "SrcName": "_signal",
+              "DstId": 31,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_target",
+              "DstId": 31,
+              "DstName": "_target"
+            },
+            {
+              "SrcId": 42,
+              "SrcName": "_signal",
+              "DstId": 39,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 37,
+              "SrcName": "_result",
+              "DstId": 39,
+              "DstName": "_target"
+            },
+            {
+              "Value": false,
+              "DstId": 39,
+              "DstName": "keepWorldPosition"
+            },
+            {
+              "SrcId": 7,
+              "SrcName": "_result",
+              "DstId": 39,
+              "DstName": "value"
+            },
+            {
+              "SrcId": 43,
+              "SrcName": "_signal",
+              "DstId": 42,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 37,
+              "SrcName": "_result",
+              "DstId": 42,
+              "DstName": "_target"
+            },
+            {
+              "Value": true,
+              "DstId": 42,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 43,
+              "DstName": "_signal"
+            },
+            {
+              "SrcId": 14,
+              "SrcName": "_result",
+              "DstId": 43,
+              "DstName": "_target"
+            },
+            {
+              "Value": true,
+              "DstId": 43,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 0,
+              "SrcName": "_signal",
+              "DstId": 44,
+              "DstName": "_signal"
+            },
+            {
+              "Value": {
+                "_type": "component",
+                "component_id": "f817dd63-e9bb-4486-ae9b-c403e56e61fc",
+                "go": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
+                "component_type": "GameTimeManager"
+              },
+              "DstId": 44,
+              "DstName": "_target"
+            },
+            {
+              "Value": {
+                "blend": "Linear",
+                "color": [
+                  {
+                    "t": 0,
+                    "c": "0.04906,0.04906,0.08372,1"
+                  },
+                  {
+                    "t": 0.20726496,
+                    "c": "0.44491,0.44491,0.52558,1"
+                  },
+                  {
+                    "t": 0.5918803,
+                    "c": "0.43424,0.43424,0.51367,1"
+                  },
+                  {
+                    "t": 0.75427353,
+                    "c": "0.36744,0.33338,0.28883,1"
+                  },
+                  {
+                    "t": 1,
+                    "c": "0.04906,0.04906,0.08372,1"
+                  }
+                ]
+              },
+              "DstId": 44,
+              "DstName": "_value"
+            },
+            {
+              "SrcId": 31,
+              "SrcName": "_signal",
+              "DstId": 47,
+              "DstName": "_signal"
+            },
+            {
+              "Value": {
+                "_type": "component",
+                "component_id": "f817dd63-e9bb-4486-ae9b-c403e56e61fc",
+                "go": "6088a124-e75c-4c19-a438-fdcc34f01b0d",
+                "component_type": "GameTimeManager"
+              },
+              "DstId": 47,
+              "DstName": "_target"
+            },
+            {
+              "Value": {
+                "blend": "Linear",
+                "color": [
+                  {
+                    "t": 0,
+                    "c": "0.02745,0.0902,0.18431,1"
+                  },
+                  {
+                    "t": 0.06410257,
+                    "c": "0.07843,0.16078,0.28235,1"
+                  },
+                  {
+                    "t": 0.16025642,
+                    "c": "0.21961,0.34902,0.52549,1"
+                  },
+                  {
+                    "t": 0.2457265,
+                    "c": "0.82353,0.7098,0.72941,1"
+                  },
+                  {
+                    "t": 0.31623933,
+                    "c": "1,1,1,1"
+                  },
+                  {
+                    "t": 0.59615386,
+                    "c": "1,1,1,1"
+                  },
+                  {
+                    "t": 0.7051282,
+                    "c": "0.89804,0.33333,0.01961,1"
+                  },
+                  {
+                    "t": 0.8482906,
+                    "c": "0.21961,0.34902,0.52549,1"
+                  },
+                  {
+                    "t": 0.9529914,
+                    "c": "0.07843,0.16078,0.28235,1"
+                  },
+                  {
+                    "t": 1,
+                    "c": "0.02745,0.0902,0.18431,1"
+                  }
+                ]
+              },
+              "DstId": 47,
+              "DstName": "_value"
+            }
+          ]
+        },
+        "RequiredToFinish": true,
+        "TriggerCooldown": 1,
+        "TriggerOnce": true,
+        "Triggers": [
+          {
+            "_type": "component",
+            "component_id": "6c624e9b-40a0-4295-a227-6ec23b9711f0",
+            "go": "32873d73-bdbe-419b-8caf-356d7e6dc585",
+            "component_type": "EventEnabledTrigger"
+          }
+        ]
+      },
+      {
+        "__type": "EventEnabledTrigger",
+        "__guid": "6c624e9b-40a0-4295-a227-6ec23b9711f0",
+        "MaxPollingRate": 5,
+        "TriggerSignalIdentifier": null
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "23156382-0e78-4e7e-9b1b-d551a46c8641",
+        "Name": "rain (1)",
+        "NetworkMode": 2,
+        "__Prefab": "prefabs/particles/rain.prefab"
+      },
+      {
+        "__guid": "eea88315-5f1a-4da5-9dec-e35662919fd9",
+        "Name": "rain_ambience",
+        "NetworkMode": 2,
+        "Components": [
+          {
+            "__type": "SoundPointComponent",
+            "__guid": "23aa0feb-f699-498d-a15b-1356041d0f1b",
+            "DistanceAttenuation": false,
+            "DistanceAttenuationOverride": false,
+            "Force2d": false,
+            "MaxRepeatTime": 1,
+            "MinRepeatTime": 1,
+            "Occlusion": false,
+            "OcclusionOverride": false,
+            "OcclusionRadius": 32,
+            "Pitch": 1,
+            "PlayOnStart": true,
+            "ReflectionOverride": false,
+            "Reflections": false,
+            "Repeat": false,
+            "SoundEvent": "sounds/ambience/rain.sound",
+            "SoundOverride": false,
+            "StopOnNew": false,
+            "Volume": 1
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__version": 1,
+  "__references": []
+}
