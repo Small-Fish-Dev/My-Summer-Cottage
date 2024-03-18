@@ -5110,7 +5110,7 @@
           "__guid": "7f2477ff-54a5-4127-a102-c905b031713e",
           "Name": "Skybox",
           "Position": "0,0,60",
-          "Rotation": "0,0.9201839,0,0.3914865",
+          "Rotation": "0,0.6982624,0,0.7158419",
           "Tags": "skybox",
           "Enabled": true,
           "NetworkMode": 2,
@@ -10433,10 +10433,69 @@
           "__guid": "4434bf13-204a-43be-92da-e344fab645f8",
           "Name": "random_dwarves",
           "Position": "-8103.875,5308.789,2446.924",
-          "Rotation": "-0.01672864,0.03679115,0.4135721,0.9095739",
           "Enabled": true,
           "NetworkMode": 2,
-          "__Prefab": "prefabs/events/random_dwarves.prefab"
+          "Components": [
+            {
+              "__type": "EventDefinition",
+              "__guid": "dfa760b5-e2ce-4903-9313-6a87c717cc5e",
+              "__enabled": false,
+              "AddToEventPool": true,
+              "EventName": "Random Dwarves",
+              "EventSignals": [],
+              "Rarity": "Common",
+              "ReinstantiateOnRestart": true,
+              "Stackable": true,
+              "Type": "Zone"
+            }
+          ],
+          "Children": [
+            {
+              "__guid": "566e2c2a-7681-4e28-9663-52020304f08c",
+              "Name": "dwarf",
+              "Position": "1079.875,-68.78906,-0.00001953953",
+              "Tags": "npc",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "__Prefab": "prefabs/npcs/dwarf.prefab"
+            },
+            {
+              "__guid": "94e55865-7955-41c0-84e8-e016b4c5f7db",
+              "Name": "dwarf",
+              "Position": "-272.125,-644.7891,1.075745",
+              "Tags": "npc",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "__Prefab": "prefabs/npcs/dwarf.prefab"
+            },
+            {
+              "__guid": "7ac5e121-4961-4043-a736-4ab2dff028b8",
+              "Name": "dwarf",
+              "Position": "-376.125,-132.7891,1.07589",
+              "Tags": "npc",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "__Prefab": "prefabs/npcs/dwarf.prefab"
+            },
+            {
+              "__guid": "871bf8ef-39a1-43d0-a640-9ad337863d7b",
+              "Name": "dwarf",
+              "Position": "95.875,1475.211,1.076347",
+              "Tags": "npc",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "__Prefab": "prefabs/npcs/dwarf.prefab"
+            },
+            {
+              "__guid": "d7b26249-8189-4acb-9ece-5d3affe1d773",
+              "Name": "dwarf",
+              "Position": "135.875,2371.211,1.076601",
+              "Tags": "npc",
+              "Enabled": true,
+              "NetworkMode": 2,
+              "__Prefab": "prefabs/npcs/dwarf.prefab"
+            }
+          ]
         },
         {
           "__guid": "98f34430-8508-4a58-879c-cf7dc927389a",
@@ -10986,7 +11045,7 @@
   },
   "Title": "finland",
   "Description": "",
-  "LastSaved": "2024-03-17T22:39:54.2231914\u002B01:00",
+  "LastSaved": "2024-03-18T17:45:40.2258718\u002B00:00",
   "ResourceVersion": 1,
   "__version": 1,
   "__references": []
