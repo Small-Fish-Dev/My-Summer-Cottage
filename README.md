@@ -1,4 +1,6 @@
-# My Summer Cottage
+<img src="ui/github.png" alt="My Summer Cottage logo" height="200"/>
+
+# [My Summer Cottage](https://asset.party/fish/sauna)
 
 This is the submitted version of "My Summer Cottage" for the [first game jam hosted by FacePunch](https://sbox.game/news/game-contest-feb-2024). If you plan on using major parts of this repository please make sure to follow the license. Just note that the codebase contains plenty of disgusting code that was hastily written to ensure we meet the submission deadline. We have continued to work on this title but any future updates will NOT be submitted to this repository.
 
@@ -8,7 +10,7 @@ This is the submitted version of "My Summer Cottage" for the [first game jam hos
 
 [CyberAgent](https://github.com/CyberAgentz) - Story Lead, Producer, Modeller, Events
 
-[gio](https://github.com/gio3k)  - UI Programmer
+[gio](https://github.com/gio3k) - UI Programmer
 
 [Grodbert](https://github.com/Grodbert) - Art Lead, Character Artist, Animator
 
