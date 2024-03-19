@@ -1,4 +1,4 @@
-<img src="ui/github.png" alt="My Summer Cottage logo" height="200"/>
+<a href="https://asset.party/fish/sauna"><img src="ui/github.png" alt="My Summer Cottage logo" height="200"/></a>
 
 # [My Summer Cottage](https://asset.party/fish/sauna)
 
