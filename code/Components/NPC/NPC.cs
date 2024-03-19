@@ -660,8 +660,6 @@ public partial class NPC : Component
 				.Run();
 
 			obj.Transform.Position = trace.Hit ? trace.HitPosition : trace.EndPosition;
-
-			Log.Info( $"Npc {foundNpc.GetComponent<ItemComponent>().Get<string>( "Name" )} was spawned." );
 		}
 		else
 		{
