@@ -124,19 +124,13 @@ PS
     #include "common/pixel.hlsl"
     
 	#if ( S_TRANSPARENCY )
-		#if( !F_RENDER_BACKFACES && !S_ALPHA_TEST )
+		#if( !F_RENDER_BACKFACES )
 			#define BLEND_MODE_ALREADY_SET
 			RenderState( BlendEnable, true );
 			RenderState( SrcBlend, SRC_ALPHA );
 			RenderState( DstBlend, INV_SRC_ALPHA);
 			BoolAttribute( translucent, true );
 		#endif
-
-		#if(S_ALPHA_TEST && !S_MODE_DEPTH)
-			RenderState( AlphaToCoverageEnable, true );
-		#endif
-
-		
 
 		CreateInputTexture2D( TransparencyMask, Linear, 8, "", "_trans", "Transparency,10/10", Default( 1 ) );
 		CreateTexture2DWithoutSampler( g_tTransparencyMask ) < Channel( R, Box( TransparencyMask ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
