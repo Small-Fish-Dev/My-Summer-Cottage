@@ -2,7 +2,7 @@
 
 # [My Summer Cottage](https://asset.party/fish/sauna)
 
-This is the submitted version of "My Summer Cottage" for the [first game jam hosted by FacePunch](https://sbox.game/news/game-contest-feb-2024). If you plan on using major parts of this repository please make sure to follow the license. Just note that the codebase contains plenty of disgusting code that was hastily written to ensure we meet the submission deadline. We have continued to work on this title but any future updates will NOT be submitted to this repository.
+This is the submitted version of "My Summer Cottage" for the [first game jam hosted by Facepunch](https://sbox.game/news/game-contest-feb-2024). If you plan on using major parts of this repository please make sure to follow the license. Just note that the codebase contains plenty of disgusting code that was hastily written to ensure we meet the submission deadline. We have continued to work on this title but any future updates will NOT be submitted to this repository.
 
 ## Credits
 
