@@ -24,6 +24,10 @@ This is the submitted version of "My Summer Cottage" for the [first game jam hos
 
 [wheatleymf](https://github.com/WheatleyMF) - Art Direction, Ambient Artist, Foliage & Prop artist, Mapper, UI Designs, Shaders
 
+## Tutorial
+
+While developing the game, we made tutorials to keep track of how systems work. You can find it here: [My Summer Cottage Tutorials Playlist](https://www.youtube.com/playlist?list=PLIcPBTNc7_9qPXDwPnkfQ_S9avbIcVPel)
+
 ## License
 
 If you plan to use large parts of this project please abide by this license. We will find you.
